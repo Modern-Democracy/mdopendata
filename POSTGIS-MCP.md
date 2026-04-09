@@ -25,9 +25,9 @@ As of April 9, 2026, `@modelcontextprotocol/server-postgres` is deprecated on np
 - host: `127.0.0.1`
 - port: `54329`
 - database: `mdopendata`
-- user: `charlottown`
-- password: `charlottown_dev`
-- container: `charlottown-postgis`
+- user: `mdopendata`
+- password: `mdopendata_dev`
+- container: `mdopendata-postgis`
 
 ## Repository bootstrap
 
@@ -57,12 +57,12 @@ The repository root now includes `.mcp.json` with this server definition:
 ```json
 {
   "mcpServers": {
-    "charlottown-postgres": {
+    "mdopendata-postgres": {
       "command": "npx",
       "args": [
         "-y",
         "@modelcontextprotocol/server-postgres",
-        "postgresql://charlottown:charlottown_dev@127.0.0.1:54329/mdopendata?sslmode=disable"
+        "postgresql://mdopendata:mdopendata_dev@127.0.0.1:54329/mdopendata?sslmode=disable"
       ]
     }
   }
@@ -77,8 +77,8 @@ The npm database commands set `DOCKER_CONFIG` to a repository-local `.docker-loc
 
 ## First data-loading paths
 
-- SQL files: `docker exec -i charlottown-postgis psql -U charlottown -d mdopendata < file.sql`
-- GeoJSON or GeoPackage: `ogr2ogr -f PostgreSQL PG:"host=127.0.0.1 port=54329 dbname=mdopendata user=charlottown password=charlottown_dev" input.geojson`
+- SQL files: `docker exec -i mdopendata-postgis psql -U mdopendata -d mdopendata < file.sql`
+- GeoJSON or GeoPackage: `ogr2ogr -f PostgreSQL PG:"host=127.0.0.1 port=54329 dbname=mdopendata user=mdopendata password=mdopendata_dev" input.geojson`
 - Application code: use any PostgreSQL client against the same DSN
 
 ## Operational requirement

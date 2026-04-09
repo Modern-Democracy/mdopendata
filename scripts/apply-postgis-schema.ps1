@@ -1,8 +1,8 @@
 $ErrorActionPreference = 'Stop'
 
-$containerName = 'charlottown-postgis'
+$containerName = 'mdopendata-postgis'
 $database = if ($env:PGDATABASE) { $env:PGDATABASE } else { 'mdopendata' }
-$user = if ($env:PGUSER) { $env:PGUSER } else { 'charlottown' }
+$user = if ($env:PGUSER) { $env:PGUSER } else { 'mdopendata' }
 $schemaPath = Join-Path $PSScriptRoot "..\schema\postgis.sql"
 $resolvedSchemaPath = (Resolve-Path $schemaPath).Path
 
