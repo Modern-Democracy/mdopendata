@@ -1,11 +1,11 @@
 {
   "mcpServers": {
-    "charlottown-postgres": {
+    "mdopendata-postgres": {
       "command": "npx",
       "args": [
         "-y",
         "@modelcontextprotocol/server-postgres",
-        "postgresql://charlottown:charlottown_dev@127.0.0.1:54329/mdopendata?sslmode=disable"
+        "postgresql://mdopendata:mdopendata_dev@127.0.0.1:54329/mdopendata?sslmode=disable"
       ]
     }
   }

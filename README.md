@@ -1,4 +1,4 @@
-# Charlottetown Spatial Knowledge Datastore
+# mdopendata Spatial Knowledge Datastore
 
 This repository now has a concrete path toward a spatially-aware datastore for land use, development controls, and municipal business records.
 
