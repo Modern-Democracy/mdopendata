@@ -1,0 +1,14 @@
+{
+  "name": "charlottetown-spatial-knowledge",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Inventory and schema scaffolding for a Charlottetown spatial land-use and municipal-business datastore.",
+  "scripts": {
+    "inventory": "node src/build-inventory.js",
+    "db:up": "powershell -ExecutionPolicy Bypass -Command \"$env:DOCKER_CONFIG=(Join-Path (Get-Location) '.docker-local'); New-Item -ItemType Directory -Force $env:DOCKER_CONFIG | Out-Null; docker compose up -d postgis\"",
+    "db:down": "powershell -ExecutionPolicy Bypass -Command \"$env:DOCKER_CONFIG=(Join-Path (Get-Location) '.docker-local'); New-Item -ItemType Directory -Force $env:DOCKER_CONFIG | Out-Null; docker compose down\"",
+    "db:logs": "powershell -ExecutionPolicy Bypass -Command \"$env:DOCKER_CONFIG=(Join-Path (Get-Location) '.docker-local'); New-Item -ItemType Directory -Force $env:DOCKER_CONFIG | Out-Null; docker compose logs postgis\"",
+    "db:check": "powershell -ExecutionPolicy Bypass -Command \"$env:DOCKER_CONFIG=(Join-Path (Get-Location) '.docker-local'); New-Item -ItemType Directory -Force $env:DOCKER_CONFIG | Out-Null; $database=if($env:PGDATABASE){$env:PGDATABASE}else{'mdopendata'}; $user=if($env:PGUSER){$env:PGUSER}else{'charlottown'}; docker exec charlottown-postgis psql -U $user -d $database -c '\\dt'\"",
+    "db:apply-schema": "powershell -ExecutionPolicy Bypass -Command \"$env:DOCKER_CONFIG=(Join-Path (Get-Location) '.docker-local'); New-Item -ItemType Directory -Force $env:DOCKER_CONFIG | Out-Null; $database=if($env:PGDATABASE){$env:PGDATABASE}else{'mdopendata'}; $user=if($env:PGUSER){$env:PGUSER}else{'charlottown'}; Get-Content (Join-Path (Get-Location) 'schema/postgis.sql') | docker exec -i charlottown-postgis psql -U $user -d $database\""
+  }
+}
