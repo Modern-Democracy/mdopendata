@@ -216,7 +216,21 @@
         "section_path": [
           "28AP"
         ],
-        "summary": "No billboard or sign except those permitted in the R-1 zone."
+        "summary": "No billboard or sign except those permitted in the R-1 zone.",
+        "text_defined_term_refs": [
+          {
+            "source_text": "billboard",
+            "definition_key": "billboard",
+            "source_field": "summary",
+            "link_method": "reviewed_text_match"
+          },
+          {
+            "source_text": "sign",
+            "definition_key": "sign",
+            "source_field": "summary",
+            "link_method": "reviewed_text_match"
+          }
+        ]
       },
       {
         "section_label_raw": "28AQ(1)",
@@ -289,7 +303,15 @@
             "metric": "front_yard_setback_minimum",
             "value": 6,
             "unit": "m",
-            "condition_text": "where parking is provided in the front yard; may be reduced to 3 m if parking is located in the rear yard"
+            "condition_text": "where parking is provided in the front yard; may be reduced to 3 m if parking is located in the rear yard",
+            "text_defined_term_refs": [
+              {
+                "source_text": "front yard",
+                "definition_key": "front_yard",
+                "source_field": "condition_text",
+                "link_method": "reviewed_text_match"
+              }
+            ]
           },
           {
             "clause_label_raw": "28AQ(2)(f)",
@@ -427,7 +449,15 @@
             "metric": "front_yard_setback_minimum",
             "value": 6,
             "unit": "m",
-            "condition_text": "where parking is provided in the front yard; may be reduced to 3 m if parking is located in the rear yard"
+            "condition_text": "where parking is provided in the front yard; may be reduced to 3 m if parking is located in the rear yard",
+            "text_defined_term_refs": [
+              {
+                "source_text": "front yard",
+                "definition_key": "front_yard",
+                "source_field": "condition_text",
+                "link_method": "reviewed_text_match"
+              }
+            ]
           },
           {
             "clause_label_raw": "28AQ(3)(f)",

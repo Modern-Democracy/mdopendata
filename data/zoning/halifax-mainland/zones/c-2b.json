@@ -186,7 +186,15 @@
         "section_path": [
           "38AE"
         ],
-        "condition_text": "any C-1, C-2A or C-2B use in a C-2B Zone shall be set back a minimum of 20 feet from the rear lot line and 12 feet from a side lot line where the lot lines are adjacent to a residential zone"
+        "condition_text": "any C-1, C-2A or C-2B use in a C-2B Zone shall be set back a minimum of 20 feet from the rear lot line and 12 feet from a side lot line where the lot lines are adjacent to a residential zone",
+        "text_defined_term_refs": [
+          {
+            "source_text": "residential zone",
+            "definition_key": "residential_zone",
+            "source_field": "condition_text",
+            "link_method": "reviewed_text_match"
+          }
+        ]
       },
       {
         "section_label_raw": "38AF(1)",

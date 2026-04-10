@@ -6,47 +6,179 @@
     "edition": "231",
     "zone_code": "PWS",
     "zone_name": "Protected Water Supply Zone",
-    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
-    "zone_section_start": { "title_label_raw": "PWS (PROTECTED WATER SUPPLY) ZONE", "pdf_page": 137, "bylaw_page": 129 },
-    "zone_section_end_before": { "title_label_raw": "RDD ZONE: RESIDENTIAL DEVELOPMENT DISTRICT ZONE", "pdf_page": 138, "bylaw_page": 130 }
+    "zone_established_by": {
+      "clause_label_raw": "16(1)",
+      "pdf_page": 53,
+      "bylaw_page": 45
+    },
+    "zone_section_start": {
+      "title_label_raw": "PWS (PROTECTED WATER SUPPLY) ZONE",
+      "pdf_page": 137,
+      "bylaw_page": 129
+    },
+    "zone_section_end_before": {
+      "title_label_raw": "RDD ZONE: RESIDENTIAL DEVELOPMENT DISTRICT ZONE",
+      "pdf_page": 138,
+      "bylaw_page": 130
+    }
   },
   "normalization_policy": {
     "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": ["62(1)(a)", "62(5)(a)", "62(5)(b)"],
+    "approved_hierarchy_examples": [
+      "62(1)(a)",
+      "62(5)(a)",
+      "62(5)(b)"
+    ],
     "pending_review_clause_patterns": []
   },
   "general_context": {
-    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "PWS is an established class of use zone." },
-    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+    "zone_class_reference": {
+      "section_label_raw": "16(1)",
+      "summary": "PWS is an established class of use zone."
+    },
+    "general_boundary_rule_refs": [
+      "17(a)-(h)",
+      "18",
+      "19"
+    ]
   },
   "permitted_uses": [
-    { "clause_label_raw": "62(1)(a)", "clause_path": ["62", "1", "a"], "use_type": "institutional_or_open_space_use", "use_name": "municipal water distribution or purification facilities" },
-    { "clause_label_raw": "62(1)(b)", "clause_path": ["62", "1", "b"], "use_type": "institutional_or_open_space_use", "use_name": "conservation uses" },
-    { "clause_label_raw": "62(1)(c)", "clause_path": ["62", "1", "c"], "use_type": "accessory_use", "use_name": "uses accessory to the foregoing uses" }
+    {
+      "clause_label_raw": "62(1)(a)",
+      "clause_path": [
+        "62",
+        "1",
+        "a"
+      ],
+      "use_type": "institutional_or_open_space_use",
+      "use_name": "municipal water distribution or purification facilities"
+    },
+    {
+      "clause_label_raw": "62(1)(b)",
+      "clause_path": [
+        "62",
+        "1",
+        "b"
+      ],
+      "use_type": "institutional_or_open_space_use",
+      "use_name": "conservation uses"
+    },
+    {
+      "clause_label_raw": "62(1)(c)",
+      "clause_path": [
+        "62",
+        "1",
+        "c"
+      ],
+      "use_type": "accessory_use",
+      "use_name": "uses accessory to the foregoing uses"
+    }
   ],
   "prohibitions": [
-    { "clause_label_raw": "62(2)", "clause_path": ["62", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more of the uses set out in subsection 62(1)." },
-    { "clause_label_raw": "62(3)", "clause_path": ["62", "3"], "rule_type": "use_prohibition", "summary": "No land or building use in whole or in part for any purpose other than one or more of the uses set out in subsection 62(1)." }
+    {
+      "clause_label_raw": "62(2)",
+      "clause_path": [
+        "62",
+        "2"
+      ],
+      "rule_type": "development_prohibition",
+      "summary": "No development for any purpose other than one or more of the uses set out in subsection 62(1)."
+    },
+    {
+      "clause_label_raw": "62(3)",
+      "clause_path": [
+        "62",
+        "3"
+      ],
+      "rule_type": "use_prohibition",
+      "summary": "No land or building use in whole or in part for any purpose other than one or more of the uses set out in subsection 62(1)."
+    }
   ],
   "requirements": {
     "dimensional_controls": [
-      { "section_label_raw": "62(4)", "section_path": ["62", "4"], "rule_type": "front_yard_setback_minimum", "measure": { "minimum": 9.1, "unit": "m" }, "condition_text": "Minimum front or flankage yard." },
-      { "section_label_raw": "62(4)", "section_path": ["62", "4"], "rule_type": "yard_and_building_separation_bundle", "condition_text": "Minimum rear or side yard is 4.6 metres." }
+      {
+        "section_label_raw": "62(4)",
+        "section_path": [
+          "62",
+          "4"
+        ],
+        "rule_type": "front_yard_setback_minimum",
+        "measure": {
+          "minimum": 9.1,
+          "unit": "m"
+        },
+        "condition_text": "Minimum front or flankage yard."
+      },
+      {
+        "section_label_raw": "62(4)",
+        "section_path": [
+          "62",
+          "4"
+        ],
+        "rule_type": "yard_and_building_separation_bundle",
+        "condition_text": "Minimum rear or side yard is 4.6 metres."
+      }
     ],
     "other_requirements": [
-      { "clause_label_raw": "62(5)(a)", "clause_path": ["62", "5", "a"], "rule_type": "watercourse_setback_minimum", "measure": { "minimum": 30.5, "unit": "m" }, "condition_text": "No development permit shall be issued for any development within 30.5 metres of any lake or other watercourse within the PWS Zone, except for the uses permitted under Section 62(1)." },
-      { "clause_label_raw": "62(5)(b)", "clause_path": ["62", "5", "b"], "rule_type": "notwithstanding_override", "condition_text": "Notwithstanding Section 14QA(1), water distribution or purification uses may be built to the lot line where the line corresponds to the shore line." }
+      {
+        "clause_label_raw": "62(5)(a)",
+        "clause_path": [
+          "62",
+          "5",
+          "a"
+        ],
+        "rule_type": "watercourse_setback_minimum",
+        "measure": {
+          "minimum": 30.5,
+          "unit": "m"
+        },
+        "condition_text": "No development permit shall be issued for any development within 30.5 metres of any lake or other watercourse within the PWS Zone, except for the uses permitted under Section 62(1).",
+        "text_defined_term_refs": [
+          {
+            "source_text": "watercourse",
+            "definition_key": "watercourse",
+            "source_field": "condition_text",
+            "link_method": "reviewed_text_match"
+          }
+        ]
+      },
+      {
+        "clause_label_raw": "62(5)(b)",
+        "clause_path": [
+          "62",
+          "5",
+          "b"
+        ],
+        "rule_type": "notwithstanding_override",
+        "condition_text": "Notwithstanding Section 14QA(1), water distribution or purification uses may be built to the lot line where the line corresponds to the shore line."
+      }
     ]
   },
   "sign_controls": [],
   "use_specific_standards": [],
   "spatial_features_needed": [
-    { "feature_key": "pws_lakes_and_watercourses", "feature_class": "hydrography_line_or_polygon", "source_type": "external_geospatial_layer", "reason": "controls the 30.5 metre setback in clause 62(5)(a)" },
-    { "feature_key": "pws_shore_lines", "feature_class": "hydrography_line_or_polygon", "source_type": "external_geospatial_layer", "reason": "controls the shore-line lot-line build-to exception in clause 62(5)(b)" }
+    {
+      "feature_key": "pws_lakes_and_watercourses",
+      "feature_class": "hydrography_line_or_polygon",
+      "source_type": "external_geospatial_layer",
+      "reason": "controls the 30.5 metre setback in clause 62(5)(a)"
+    },
+    {
+      "feature_key": "pws_shore_lines",
+      "feature_class": "hydrography_line_or_polygon",
+      "source_type": "external_geospatial_layer",
+      "reason": "controls the shore-line lot-line build-to exception in clause 62(5)(b)"
+    }
   ],
   "open_issues": [],
   "citations": {
-    "permitted_uses": { "pdf_page": 137, "bylaw_page": 129 },
-    "requirements": { "pdf_page": 137, "bylaw_page": 129 }
+    "permitted_uses": {
+      "pdf_page": 137,
+      "bylaw_page": 129
+    },
+    "requirements": {
+      "pdf_page": 137,
+      "bylaw_page": 129
+    }
   }
 }

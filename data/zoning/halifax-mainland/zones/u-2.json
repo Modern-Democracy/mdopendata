@@ -96,7 +96,15 @@
           "minimum": 50,
           "unit": "ft"
         },
-        "condition_text": "In the area designated as Bedford Highway Area any U-2 use shall be set back a minimum of 50 feet from any property line that abuts a residential zone."
+        "condition_text": "In the area designated as Bedford Highway Area any U-2 use shall be set back a minimum of 50 feet from any property line that abuts a residential zone.",
+        "text_defined_term_refs": [
+          {
+            "source_text": "residential zone",
+            "definition_key": "residential_zone",
+            "source_field": "condition_text",
+            "link_method": "reviewed_text_match"
+          }
+        ]
       }
     ],
     "driveway_access_controls": [

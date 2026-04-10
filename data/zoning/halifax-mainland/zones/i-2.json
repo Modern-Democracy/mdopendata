@@ -6,30 +6,101 @@
     "edition": "231",
     "zone_code": "I-2",
     "zone_name": "Radio Transmitter Zone",
-    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
-    "zone_section_start": { "title_label_raw": "I-2 ZONE: RADIO TRANSMITTER ZONE", "pdf_page": 126, "bylaw_page": 118 },
-    "zone_section_end_before": { "title_label_raw": "I-3 ZONE: GENERAL INDUSTRIAL ZONE", "pdf_page": 127, "bylaw_page": 119 }
+    "zone_established_by": {
+      "clause_label_raw": "16(1)",
+      "pdf_page": 53,
+      "bylaw_page": 45
+    },
+    "zone_section_start": {
+      "title_label_raw": "I-2 ZONE: RADIO TRANSMITTER ZONE",
+      "pdf_page": 126,
+      "bylaw_page": 118
+    },
+    "zone_section_end_before": {
+      "title_label_raw": "I-3 ZONE: GENERAL INDUSTRIAL ZONE",
+      "pdf_page": 127,
+      "bylaw_page": 119
+    }
   },
   "normalization_policy": {
     "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": ["49(1)(a)", "49(2)", "50(a)"],
+    "approved_hierarchy_examples": [
+      "49(1)(a)",
+      "49(2)",
+      "50(a)"
+    ],
     "pending_review_clause_patterns": []
   },
   "general_context": {
-    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "I-2 is an established class of use zone." },
-    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+    "zone_class_reference": {
+      "section_label_raw": "16(1)",
+      "summary": "I-2 is an established class of use zone."
+    },
+    "general_boundary_rule_refs": [
+      "17(a)-(h)",
+      "18",
+      "19"
+    ]
   },
   "permitted_uses": [
-    { "clause_label_raw": "49(1)(a)", "clause_path": ["49", "1", "a"], "use_type": "industrial_use", "use_name": "radio or television transmitter station" },
-    { "clause_label_raw": "49(1)(b)", "clause_path": ["49", "1", "b"], "use_type": "accessory_use", "use_name": "uses accessory to the use set out in Section 49(1)(a)" }
+    {
+      "clause_label_raw": "49(1)(a)",
+      "clause_path": [
+        "49",
+        "1",
+        "a"
+      ],
+      "use_type": "industrial_use",
+      "use_name": "radio or television transmitter station"
+    },
+    {
+      "clause_label_raw": "49(1)(b)",
+      "clause_path": [
+        "49",
+        "1",
+        "b"
+      ],
+      "use_type": "accessory_use",
+      "use_name": "uses accessory to the use set out in Section 49(1)(a)"
+    }
   ],
   "prohibitions": [
-    { "clause_label_raw": "49(2)", "clause_path": ["49", "2"], "rule_type": "development_prohibition", "summary": "No development permit shall be issued in any I-2 Zone except for one or more of the uses listed in Section 49(1)." },
-    { "clause_label_raw": "49(3)", "clause_path": ["49", "3"], "rule_type": "use_prohibition", "summary": "No person shall in any I-2 Zone use any land or building for any purpose other than one or more of the uses listed in Section 49(1)." }
+    {
+      "clause_label_raw": "49(2)",
+      "clause_path": [
+        "49",
+        "2"
+      ],
+      "rule_type": "development_prohibition",
+      "summary": "No development permit shall be issued in any I-2 Zone except for one or more of the uses listed in Section 49(1)."
+    },
+    {
+      "clause_label_raw": "49(3)",
+      "clause_path": [
+        "49",
+        "3"
+      ],
+      "rule_type": "use_prohibition",
+      "summary": "No person shall in any I-2 Zone use any land or building for any purpose other than one or more of the uses listed in Section 49(1)."
+    }
   ],
   "requirements": {
     "general_zone_controls": [
-      { "section_label_raw": "50", "section_path": ["50"], "summary": "Buildings erected, altered or used in any I-2 Zone shall comply with the building line requirements of the R-1 Zone as detailed in Section 21(a), except where side and rear walls are made of fireproof construction, no side or rear yards shall be required where those side and rear walls abut lands in a commercial zone or industrial zone." }
+      {
+        "section_label_raw": "50",
+        "section_path": [
+          "50"
+        ],
+        "summary": "Buildings erected, altered or used in any I-2 Zone shall comply with the building line requirements of the R-1 Zone as detailed in Section 21(a), except where side and rear walls are made of fireproof construction, no side or rear yards shall be required where those side and rear walls abut lands in a commercial zone or industrial zone.",
+        "text_defined_term_refs": [
+          {
+            "source_text": "building line",
+            "definition_key": "building_line",
+            "source_field": "summary",
+            "link_method": "reviewed_text_match"
+          }
+        ]
+      }
     ]
   },
   "sign_controls": [],
@@ -37,7 +108,13 @@
   "spatial_features_needed": [],
   "open_issues": [],
   "citations": {
-    "permitted_uses": { "pdf_page": 126, "bylaw_page": 118 },
-    "requirements": { "pdf_page": 126, "bylaw_page": 118 }
+    "permitted_uses": {
+      "pdf_page": 126,
+      "bylaw_page": 118
+    },
+    "requirements": {
+      "pdf_page": 126,
+      "bylaw_page": 118
+    }
   }
 }

@@ -177,7 +177,15 @@
           "a"
         ],
         "rule_type": "yard_and_building_separation_bundle",
-        "condition_text": "Every building shall be at least 12 feet from any other building, at least 8 feet from the rear and both side lines of the lot, and at least 20 feet from any street line in front of such building."
+        "condition_text": "Every building shall be at least 12 feet from any other building, at least 8 feet from the rear and both side lines of the lot, and at least 20 feet from any street line in front of such building.",
+        "text_defined_term_refs": [
+          {
+            "source_text": "street line",
+            "definition_key": "street_line",
+            "source_field": "condition_text",
+            "link_method": "reviewed_text_match"
+          }
+        ]
       },
       {
         "clause_label_raw": "53(b)",
@@ -195,7 +203,21 @@
           "c"
         ],
         "rule_type": "corner_lot_flanking_street_setback",
-        "condition_text": "Where a building is situated on a corner lot, it shall be at least 20 feet from each street line abutting such lot."
+        "condition_text": "Where a building is situated on a corner lot, it shall be at least 20 feet from each street line abutting such lot.",
+        "text_defined_term_refs": [
+          {
+            "source_text": "street line",
+            "definition_key": "street_line",
+            "source_field": "condition_text",
+            "link_method": "reviewed_text_match"
+          },
+          {
+            "source_text": "corner lot",
+            "definition_key": "corner_lot",
+            "source_field": "condition_text",
+            "link_method": "reviewed_text_match"
+          }
+        ]
       }
     ],
     "driveway_access_controls": [
@@ -220,7 +242,15 @@
         "52",
         "a"
       ],
-      "condition_text": "One fascia sign per building elevation facing a street."
+      "condition_text": "One fascia sign per building elevation facing a street.",
+      "text_defined_term_refs": [
+        {
+          "source_text": "sign",
+          "definition_key": "sign",
+          "source_field": "condition_text",
+          "link_method": "reviewed_text_match"
+        }
+      ]
     },
     {
       "clause_label_raw": "52(b)",
@@ -228,7 +258,15 @@
         "52",
         "b"
       ],
-      "condition_text": "One fascia sign for the building elevation containing the main entrance where such entrance does not face a street."
+      "condition_text": "One fascia sign for the building elevation containing the main entrance where such entrance does not face a street.",
+      "text_defined_term_refs": [
+        {
+          "source_text": "sign",
+          "definition_key": "sign",
+          "source_field": "condition_text",
+          "link_method": "reviewed_text_match"
+        }
+      ]
     },
     {
       "clause_label_raw": "52(c)",
@@ -236,7 +274,15 @@
         "52",
         "c"
       ],
-      "condition_text": "One free standing sign not to exceed 12 feet in height and 40 square feet in area per side per vehicular entrance and pedestrian entrance where such entrance is not part of a vehicular entrance, except where the property contains more than one principal park and institutional use the sign shall not exceed 18 feet in height and an additional 10 square feet of area may be added to a maximum of 80 square feet per side for each additional park and institutional use."
+      "condition_text": "One free standing sign not to exceed 12 feet in height and 40 square feet in area per side per vehicular entrance and pedestrian entrance where such entrance is not part of a vehicular entrance, except where the property contains more than one principal park and institutional use the sign shall not exceed 18 feet in height and an additional 10 square feet of area may be added to a maximum of 80 square feet per side for each additional park and institutional use.",
+      "text_defined_term_refs": [
+        {
+          "source_text": "sign",
+          "definition_key": "sign",
+          "source_field": "condition_text",
+          "link_method": "reviewed_text_match"
+        }
+      ]
     },
     {
       "clause_label_raw": "52(d)",

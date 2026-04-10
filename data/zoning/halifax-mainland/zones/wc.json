@@ -204,7 +204,15 @@
           "metric_minimum": 91.4,
           "metric_unit": "m"
         },
-        "condition_text": "No buildings, structures or parking areas shall be located within 300 feet (91.4 metres) of any watercourse except for buildings or structures intended for conservation related uses or non-motorized water related recreation uses."
+        "condition_text": "No buildings, structures or parking areas shall be located within 300 feet (91.4 metres) of any watercourse except for buildings or structures intended for conservation related uses or non-motorized water related recreation uses.",
+        "text_defined_term_refs": [
+          {
+            "source_text": "watercourse",
+            "definition_key": "watercourse",
+            "source_field": "condition_text",
+            "link_method": "reviewed_text_match"
+          }
+        ]
       }
     ]
   },

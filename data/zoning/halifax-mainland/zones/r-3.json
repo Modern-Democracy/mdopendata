@@ -152,7 +152,21 @@
         "section_path": [
           "28CB"
         ],
-        "summary": "No billboard or sign except those permitted in R-1 Zones."
+        "summary": "No billboard or sign except those permitted in R-1 Zones.",
+        "text_defined_term_refs": [
+          {
+            "source_text": "billboard",
+            "definition_key": "billboard",
+            "source_field": "summary",
+            "link_method": "reviewed_text_match"
+          },
+          {
+            "source_text": "sign",
+            "definition_key": "sign",
+            "source_field": "summary",
+            "link_method": "reviewed_text_match"
+          }
+        ]
       },
       {
         "section_label_raw": "28CC(1)",
@@ -303,7 +317,15 @@
                   "a"
                 ],
                 "condition_text": "distance from any part of the building to any official street line shall be not less than 20 feet measured at right angles",
-                "exception_text": "may be reduced to 10 feet if the relevant part of the building is entirely contained within the arms of an 80 degree horizontal angle as determined in subsection (3)"
+                "exception_text": "may be reduced to 10 feet if the relevant part of the building is entirely contained within the arms of an 80 degree horizontal angle as determined in subsection (3)",
+                "text_defined_term_refs": [
+                  {
+                    "source_text": "street line",
+                    "definition_key": "street_line",
+                    "source_field": "condition_text",
+                    "link_method": "reviewed_text_match"
+                  }
+                ]
               },
               {
                 "clause_label_raw": "28CE(2)(b)",
@@ -312,7 +334,15 @@
                   "2",
                   "b"
                 ],
-                "condition_text": "distance from any part of the building to any lot line other than an official street line shall be not less than 10 feet measured at right angles"
+                "condition_text": "distance from any part of the building to any lot line other than an official street line shall be not less than 10 feet measured at right angles",
+                "text_defined_term_refs": [
+                  {
+                    "source_text": "street line",
+                    "definition_key": "street_line",
+                    "source_field": "condition_text",
+                    "link_method": "reviewed_text_match"
+                  }
+                ]
               },
               {
                 "clause_label_raw": "28CE(2)(c)",
@@ -383,6 +413,14 @@
                           "B"
                         ],
                         "condition_text": "the 60 degree vertical angle is constructed perpendicular to the line or tangents of the curved line"
+                      }
+                    ],
+                    "text_defined_term_refs": [
+                      {
+                        "source_text": "street line",
+                        "definition_key": "street_line",
+                        "source_field": "condition_text",
+                        "link_method": "reviewed_text_match"
                       }
                     ]
                   }
@@ -501,7 +539,15 @@
                   "5",
                   "b"
                 ],
-                "condition_text": "canopies may project to within 5 feet of the street line"
+                "condition_text": "canopies may project to within 5 feet of the street line",
+                "text_defined_term_refs": [
+                  {
+                    "source_text": "street line",
+                    "definition_key": "street_line",
+                    "source_field": "condition_text",
+                    "link_method": "reviewed_text_match"
+                  }
+                ]
               }
             ]
           }
@@ -745,7 +791,15 @@
             "c"
           ],
           "condition_text": "one sign is permitted for each commercial use, not exceeding 3 feet in height, limited to the space immediately above the ground-floor store windows",
-          "exception_text": "signs shall be non-illuminated, front illuminated, or have back-lighted lettering"
+          "exception_text": "signs shall be non-illuminated, front illuminated, or have back-lighted lettering",
+          "text_defined_term_refs": [
+            {
+              "source_text": "sign",
+              "definition_key": "sign",
+              "source_field": "condition_text",
+              "link_method": "reviewed_text_match"
+            }
+          ]
         },
         {
           "clause_label_raw": "28CK(d)",
