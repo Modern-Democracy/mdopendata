@@ -6,91 +6,437 @@
     "edition": "231",
     "zone_code": "CD-1",
     "zone_name": "C&D Materials Transfer Stations Zone",
-    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
-    "zone_section_start": { "title_label_raw": "CD-1: C&D MATERIALS TRANSFER STATIONS ZONE", "pdf_page": 145, "bylaw_page": 137 },
-    "zone_section_end_before": { "title_label_raw": "CD-2: C&D MATERIALS PROCESSING FACILITIES ZONE", "pdf_page": 148, "bylaw_page": 140 }
+    "zone_established_by": {
+      "clause_label_raw": "16(1)",
+      "pdf_page": 53,
+      "bylaw_page": 45
+    },
+    "zone_section_start": {
+      "title_label_raw": "CD-1: C&D MATERIALS TRANSFER STATIONS ZONE",
+      "pdf_page": 145,
+      "bylaw_page": 137
+    },
+    "zone_section_end_before": {
+      "title_label_raw": "CD-2: C&D MATERIALS PROCESSING FACILITIES ZONE",
+      "pdf_page": 148,
+      "bylaw_page": 140
+    }
   },
   "normalization_policy": {
     "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": ["62BA(1)(a)", "62BB(2)(a)(i)", "62BB(4)(a)"],
+    "approved_hierarchy_examples": [
+      "62BA(1)(a)",
+      "62BB(2)(a)(i)",
+      "62BB(4)(a)"
+    ],
     "pending_review_clause_patterns": []
   },
   "general_context": {
-    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "CD-1 is an established class of use zone." },
-    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+    "zone_class_reference": {
+      "section_label_raw": "16(1)",
+      "summary": "CD-1 is an established class of use zone."
+    },
+    "general_boundary_rule_refs": [
+      "17(a)-(h)",
+      "18",
+      "19"
+    ]
   },
   "permitted_uses": [
-    { "clause_label_raw": "62BA(1)(a)", "clause_path": ["62BA", "1", "a"], "use_type": "industrial_use", "use_name": "construction and demolition materials transfer stations" },
-    { "clause_label_raw": "62BA(1)(b)", "clause_path": ["62BA", "1", "b"], "use_type": "accessory_use", "use_name": "uses accessory to permitted use" }
+    {
+      "clause_label_raw": "62BA(1)(a)",
+      "clause_path": [
+        "62BA",
+        "1",
+        "a"
+      ],
+      "use_type": "industrial_use",
+      "use_name": "construction and demolition materials transfer stations",
+      "defined_term_refs": [
+        "construction_and_demolition_materials_transfer_station"
+      ],
+      "link_method": "reviewed_alias_match"
+    },
+    {
+      "clause_label_raw": "62BA(1)(b)",
+      "clause_path": [
+        "62BA",
+        "1",
+        "b"
+      ],
+      "use_type": "accessory_use",
+      "use_name": "uses accessory to permitted use"
+    }
   ],
   "prohibitions": [
-    { "clause_label_raw": "62BA(2)", "clause_path": ["62BA", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more of the uses set out in subsection 62BA(1)." },
-    { "clause_label_raw": "62BA(3)", "clause_path": ["62BA", "3"], "rule_type": "use_prohibition", "summary": "No land or building use in whole or in part for any purpose other than one or more of the uses set out in subsection 62BA(1)." }
+    {
+      "clause_label_raw": "62BA(2)",
+      "clause_path": [
+        "62BA",
+        "2"
+      ],
+      "rule_type": "development_prohibition",
+      "summary": "No development for any purpose other than one or more of the uses set out in subsection 62BA(1)."
+    },
+    {
+      "clause_label_raw": "62BA(3)",
+      "clause_path": [
+        "62BA",
+        "3"
+      ],
+      "rule_type": "use_prohibition",
+      "summary": "No land or building use in whole or in part for any purpose other than one or more of the uses set out in subsection 62BA(1)."
+    }
   ],
   "requirements": {
     "dimensional_controls": [
       {
         "section_label_raw": "62BB(1)",
-        "section_path": ["62BB", "1"],
+        "section_path": [
+          "62BB",
+          "1"
+        ],
         "use_name": "CD-1 uses",
         "controls": [
-          { "rule_type": "lot_area_minimum", "condition_text": "Minimum lot area is 3,716 square metres (40,000 square feet) with central services and 11,148 square metres (120,000 square feet) with on-site services." },
-          { "rule_type": "lot_frontage_minimum", "condition_text": "Minimum frontage is 15 metres (49.2 feet) with central services and 30 metres (98.4 feet) with on-site services." },
-          { "rule_type": "front_yard_setback_minimum", "measure": { "minimum": 25, "unit": "m", "imperial_minimum": 82.0, "imperial_unit": "ft" } },
-          { "rule_type": "side_yard_setback_minimum", "measure": { "minimum": 30, "unit": "m", "imperial_minimum": 98.4, "imperial_unit": "ft" } },
-          { "rule_type": "rear_yard_setback_minimum", "measure": { "minimum": 30, "unit": "m", "imperial_minimum": 98.4, "imperial_unit": "ft" } },
-          { "rule_type": "lot_coverage_maximum", "measure": { "maximum": 50, "unit": "percent" } },
-          { "rule_type": "building_height_maximum", "measure": { "maximum": 11, "unit": "m", "imperial_maximum": 36.0, "imperial_unit": "ft" } }
+          {
+            "rule_type": "lot_area_minimum",
+            "condition_text": "Minimum lot area is 3,716 square metres (40,000 square feet) with central services and 11,148 square metres (120,000 square feet) with on-site services."
+          },
+          {
+            "rule_type": "lot_frontage_minimum",
+            "condition_text": "Minimum frontage is 15 metres (49.2 feet) with central services and 30 metres (98.4 feet) with on-site services."
+          },
+          {
+            "rule_type": "front_yard_setback_minimum",
+            "measure": {
+              "minimum": 25,
+              "unit": "m",
+              "imperial_minimum": 82.0,
+              "imperial_unit": "ft"
+            }
+          },
+          {
+            "rule_type": "side_yard_setback_minimum",
+            "measure": {
+              "minimum": 30,
+              "unit": "m",
+              "imperial_minimum": 98.4,
+              "imperial_unit": "ft"
+            }
+          },
+          {
+            "rule_type": "rear_yard_setback_minimum",
+            "measure": {
+              "minimum": 30,
+              "unit": "m",
+              "imperial_minimum": 98.4,
+              "imperial_unit": "ft"
+            }
+          },
+          {
+            "rule_type": "lot_coverage_maximum",
+            "measure": {
+              "maximum": 50,
+              "unit": "percent"
+            }
+          },
+          {
+            "rule_type": "building_height_maximum",
+            "measure": {
+              "maximum": 11,
+              "unit": "m",
+              "imperial_maximum": 36.0,
+              "imperial_unit": "ft"
+            }
+          }
         ]
       }
     ],
     "operational_controls": [
       {
         "section_label_raw": "62BB(2)",
-        "section_path": ["62BB", "2"],
+        "section_path": [
+          "62BB",
+          "2"
+        ],
         "use_name": "C&D materials transfer station",
         "controls": [
-          { "clause_label_raw": "62BB(2)(a)(i)", "clause_path": ["62BB", "2", "a", "i"], "rule_type": "site_specific_separation_minimum", "measure": { "minimum": 30, "unit": "m", "imperial_minimum": 98.4, "imperial_unit": "ft" }, "condition_text": "Separation from any property line." },
-          { "clause_label_raw": "62BB(2)(a)(ii)", "clause_path": ["62BB", "2", "a", "ii"], "rule_type": "site_specific_separation_minimum", "measure": { "minimum": 60, "unit": "m", "imperial_minimum": 196.9, "imperial_unit": "ft" }, "condition_text": "Separation from the nearest residential dwelling or institutional use." },
-          { "clause_label_raw": "62BB(2)(a)(iii)", "clause_path": ["62BB", "2", "a", "iii"], "rule_type": "watercourse_setback_minimum", "measure": { "minimum": 30, "unit": "m", "imperial_minimum": 98.4, "imperial_unit": "ft" } },
-          { "clause_label_raw": "62BB(2)(b)", "clause_path": ["62BB", "2", "b"], "rule_type": "notwithstanding_override", "condition_text": "Where a building or structure is not to be located within 250 metres of a residential or institutional use or building, the building setback from any property line may be reduced to 10 metres (32.8 feet)." },
-          { "clause_label_raw": "62BB(2)(c)", "clause_path": ["62BB", "2", "c"], "rule_type": "notwithstanding_override", "condition_text": "Where a C&D Materials Transfer Station is totally enclosed within a building with no outdoor storage of material, product, or equipment, the building setback from any property line may be reduced to 10 metres (32.8 feet)." }
+          {
+            "clause_label_raw": "62BB(2)(a)(i)",
+            "clause_path": [
+              "62BB",
+              "2",
+              "a",
+              "i"
+            ],
+            "rule_type": "site_specific_separation_minimum",
+            "measure": {
+              "minimum": 30,
+              "unit": "m",
+              "imperial_minimum": 98.4,
+              "imperial_unit": "ft"
+            },
+            "condition_text": "Separation from any property line."
+          },
+          {
+            "clause_label_raw": "62BB(2)(a)(ii)",
+            "clause_path": [
+              "62BB",
+              "2",
+              "a",
+              "ii"
+            ],
+            "rule_type": "site_specific_separation_minimum",
+            "measure": {
+              "minimum": 60,
+              "unit": "m",
+              "imperial_minimum": 196.9,
+              "imperial_unit": "ft"
+            },
+            "condition_text": "Separation from the nearest residential dwelling or institutional use."
+          },
+          {
+            "clause_label_raw": "62BB(2)(a)(iii)",
+            "clause_path": [
+              "62BB",
+              "2",
+              "a",
+              "iii"
+            ],
+            "rule_type": "watercourse_setback_minimum",
+            "measure": {
+              "minimum": 30,
+              "unit": "m",
+              "imperial_minimum": 98.4,
+              "imperial_unit": "ft"
+            }
+          },
+          {
+            "clause_label_raw": "62BB(2)(b)",
+            "clause_path": [
+              "62BB",
+              "2",
+              "b"
+            ],
+            "rule_type": "notwithstanding_override",
+            "condition_text": "Where a building or structure is not to be located within 250 metres of a residential or institutional use or building, the building setback from any property line may be reduced to 10 metres (32.8 feet)."
+          },
+          {
+            "clause_label_raw": "62BB(2)(c)",
+            "clause_path": [
+              "62BB",
+              "2",
+              "c"
+            ],
+            "rule_type": "notwithstanding_override",
+            "condition_text": "Where a C&D Materials Transfer Station is totally enclosed within a building with no outdoor storage of material, product, or equipment, the building setback from any property line may be reduced to 10 metres (32.8 feet)."
+          }
         ]
       },
       {
         "section_label_raw": "62BB(3)",
-        "section_path": ["62BB", "3"],
+        "section_path": [
+          "62BB",
+          "3"
+        ],
         "use_name": "C&D materials operation",
         "controls": [
-          { "clause_label_raw": "62BB(3)(a)", "clause_path": ["62BB", "3", "a"], "condition_text": "No operation shall produce discernible off-site noise, smoke, fumes, gas, dust, odour, atmospheric pollutants, or unlawful waste discharge.", "subcontrols": [
-            { "clause_label_raw": "62BB(3)(a)(i)", "clause_path": ["62BB", "3", "a", "i"], "condition_text": "No obnoxious noise or sound." },
-            { "clause_label_raw": "62BB(3)(a)(ii)", "clause_path": ["62BB", "3", "a", "ii"], "condition_text": "No dissemination of smoke, fumes, gas, dust, odour, or atmospheric pollutants." },
-            { "clause_label_raw": "62BB(3)(a)(iii)", "clause_path": ["62BB", "3", "a", "iii"], "condition_text": "No discharge of waste material into a watercourse or water resource except in accordance with applicable government requirements." }
-          ] },
-          { "clause_label_raw": "62BB(3)(b)", "clause_path": ["62BB", "3", "b"], "condition_text": "A C&D Materials Operation may occur either inside or outside of a building." },
-          { "clause_label_raw": "62BB(3)(c)", "clause_path": ["62BB", "3", "c"], "condition_text": "A landscaped area at least 4.5 metres (14.8 feet) in depth shall run the length of and directly abut the front lot line, excluding driveway openings, with grass or other appropriate vegetation ground cover and trees and shrubs planted or maintained at a minimum rate of one plant per each 2 metres (6.6 feet) of frontage." },
-          { "clause_label_raw": "62BB(3)(d)", "clause_path": ["62BB", "3", "d"], "condition_text": "Where the front yard area is treed, the landscaped area is not required but all vegetation within 10 metres of the front lot line shall be retained and maintained." },
-          { "clause_label_raw": "62BB(3)(e)", "clause_path": ["62BB", "3", "e"], "condition_text": "No portion of the operation shall be located within any side, rear, or front yard setback." },
-          { "clause_label_raw": "62BB(3)(f)", "clause_path": ["62BB", "3", "f"], "condition_text": "No operation shall have direct access to either a local or subdivision road, and access shall not occur through lands zoned for residential or community use." },
-          { "clause_label_raw": "62BB(3)(g)", "clause_path": ["62BB", "3", "g"], "condition_text": "No portion of the operation shall be located within a 1:100 year floodplain." }
+          {
+            "clause_label_raw": "62BB(3)(a)",
+            "clause_path": [
+              "62BB",
+              "3",
+              "a"
+            ],
+            "condition_text": "No operation shall produce discernible off-site noise, smoke, fumes, gas, dust, odour, atmospheric pollutants, or unlawful waste discharge.",
+            "subcontrols": [
+              {
+                "clause_label_raw": "62BB(3)(a)(i)",
+                "clause_path": [
+                  "62BB",
+                  "3",
+                  "a",
+                  "i"
+                ],
+                "condition_text": "No obnoxious noise or sound."
+              },
+              {
+                "clause_label_raw": "62BB(3)(a)(ii)",
+                "clause_path": [
+                  "62BB",
+                  "3",
+                  "a",
+                  "ii"
+                ],
+                "condition_text": "No dissemination of smoke, fumes, gas, dust, odour, or atmospheric pollutants."
+              },
+              {
+                "clause_label_raw": "62BB(3)(a)(iii)",
+                "clause_path": [
+                  "62BB",
+                  "3",
+                  "a",
+                  "iii"
+                ],
+                "condition_text": "No discharge of waste material into a watercourse or water resource except in accordance with applicable government requirements."
+              }
+            ]
+          },
+          {
+            "clause_label_raw": "62BB(3)(b)",
+            "clause_path": [
+              "62BB",
+              "3",
+              "b"
+            ],
+            "condition_text": "A C&D Materials Operation may occur either inside or outside of a building."
+          },
+          {
+            "clause_label_raw": "62BB(3)(c)",
+            "clause_path": [
+              "62BB",
+              "3",
+              "c"
+            ],
+            "condition_text": "A landscaped area at least 4.5 metres (14.8 feet) in depth shall run the length of and directly abut the front lot line, excluding driveway openings, with grass or other appropriate vegetation ground cover and trees and shrubs planted or maintained at a minimum rate of one plant per each 2 metres (6.6 feet) of frontage."
+          },
+          {
+            "clause_label_raw": "62BB(3)(d)",
+            "clause_path": [
+              "62BB",
+              "3",
+              "d"
+            ],
+            "condition_text": "Where the front yard area is treed, the landscaped area is not required but all vegetation within 10 metres of the front lot line shall be retained and maintained."
+          },
+          {
+            "clause_label_raw": "62BB(3)(e)",
+            "clause_path": [
+              "62BB",
+              "3",
+              "e"
+            ],
+            "condition_text": "No portion of the operation shall be located within any side, rear, or front yard setback."
+          },
+          {
+            "clause_label_raw": "62BB(3)(f)",
+            "clause_path": [
+              "62BB",
+              "3",
+              "f"
+            ],
+            "condition_text": "No operation shall have direct access to either a local or subdivision road, and access shall not occur through lands zoned for residential or community use."
+          },
+          {
+            "clause_label_raw": "62BB(3)(g)",
+            "clause_path": [
+              "62BB",
+              "3",
+              "g"
+            ],
+            "condition_text": "No portion of the operation shall be located within a 1:100 year floodplain."
+          }
         ]
       },
       {
         "section_label_raw": "62BB(4)",
-        "section_path": ["62BB", "4"],
+        "section_path": [
+          "62BB",
+          "4"
+        ],
         "rule_type": "site_plan_approval",
         "condition_text": "All C&D Materials Operations are subject to site plan approval.",
         "controls": [
-          { "clause_label_raw": "62BB(4)(a)", "clause_path": ["62BB", "4", "a"], "condition_text": "Driveway access shall minimize land use impacts on adjacent land uses." },
-          { "clause_label_raw": "62BB(4)(b)", "clause_path": ["62BB", "4", "b"], "condition_text": "Separation distances shall protect abutting residential or community facility properties." },
-          { "clause_label_raw": "62BB(4)(c)", "clause_path": ["62BB", "4", "c"], "condition_text": "Loading, unloading, stockpiles, processing areas, and parking facilities shall be located and screened so they do not impact adjacent uses or streets." },
-          { "clause_label_raw": "62BB(4)(d)", "clause_path": ["62BB", "4", "d"], "condition_text": "A landscaping plan shall protect and minimize land use impacts on adjoining lands." },
-          { "clause_label_raw": "62BB(4)(e)", "clause_path": ["62BB", "4", "e"], "condition_text": "Existing vegetation in designated side and rear yards shall be retained unless inadequate for screening." },
-          { "clause_label_raw": "62BB(4)(f)", "clause_path": ["62BB", "4", "f"], "condition_text": "Outdoor lighting shall be directed away from adjacent properties." },
-          { "clause_label_raw": "62BB(4)(g)", "clause_path": ["62BB", "4", "g"], "condition_text": "Solid waste storage containers shall be screened from view from adjacent properties and streets." },
-          { "clause_label_raw": "62BB(4)(h)", "clause_path": ["62BB", "4", "h"], "condition_text": "The impact of the location, number and size of signs shall be addressed." },
-          { "clause_label_raw": "62BB(4)(i)", "clause_path": ["62BB", "4", "i"], "condition_text": "Stormwater and surface water management measures such as lot grading and berms shall be provided." },
-          { "clause_label_raw": "62BB(4)(j)", "clause_path": ["62BB", "4", "j"], "condition_text": "The operation and required site improvements shall be maintained to a high standard." }
+          {
+            "clause_label_raw": "62BB(4)(a)",
+            "clause_path": [
+              "62BB",
+              "4",
+              "a"
+            ],
+            "condition_text": "Driveway access shall minimize land use impacts on adjacent land uses."
+          },
+          {
+            "clause_label_raw": "62BB(4)(b)",
+            "clause_path": [
+              "62BB",
+              "4",
+              "b"
+            ],
+            "condition_text": "Separation distances shall protect abutting residential or community facility properties."
+          },
+          {
+            "clause_label_raw": "62BB(4)(c)",
+            "clause_path": [
+              "62BB",
+              "4",
+              "c"
+            ],
+            "condition_text": "Loading, unloading, stockpiles, processing areas, and parking facilities shall be located and screened so they do not impact adjacent uses or streets."
+          },
+          {
+            "clause_label_raw": "62BB(4)(d)",
+            "clause_path": [
+              "62BB",
+              "4",
+              "d"
+            ],
+            "condition_text": "A landscaping plan shall protect and minimize land use impacts on adjoining lands."
+          },
+          {
+            "clause_label_raw": "62BB(4)(e)",
+            "clause_path": [
+              "62BB",
+              "4",
+              "e"
+            ],
+            "condition_text": "Existing vegetation in designated side and rear yards shall be retained unless inadequate for screening."
+          },
+          {
+            "clause_label_raw": "62BB(4)(f)",
+            "clause_path": [
+              "62BB",
+              "4",
+              "f"
+            ],
+            "condition_text": "Outdoor lighting shall be directed away from adjacent properties."
+          },
+          {
+            "clause_label_raw": "62BB(4)(g)",
+            "clause_path": [
+              "62BB",
+              "4",
+              "g"
+            ],
+            "condition_text": "Solid waste storage containers shall be screened from view from adjacent properties and streets."
+          },
+          {
+            "clause_label_raw": "62BB(4)(h)",
+            "clause_path": [
+              "62BB",
+              "4",
+              "h"
+            ],
+            "condition_text": "The impact of the location, number and size of signs shall be addressed."
+          },
+          {
+            "clause_label_raw": "62BB(4)(i)",
+            "clause_path": [
+              "62BB",
+              "4",
+              "i"
+            ],
+            "condition_text": "Stormwater and surface water management measures such as lot grading and berms shall be provided."
+          },
+          {
+            "clause_label_raw": "62BB(4)(j)",
+            "clause_path": [
+              "62BB",
+              "4",
+              "j"
+            ],
+            "condition_text": "The operation and required site improvements shall be maintained to a high standard."
+          }
         ]
       }
     ]
@@ -98,16 +444,47 @@
   "sign_controls": [],
   "use_specific_standards": [],
   "spatial_features_needed": [
-    { "feature_key": "cd1_watercourses", "feature_class": "hydrography_line_or_polygon", "source_type": "external_geospatial_layer", "reason": "Controls 62BB(2)(a)(iii)." },
-    { "feature_key": "cd1_residential_and_institutional_uses", "feature_class": "site_specific_area", "source_type": "existing_or_derived_polygon", "reason": "Controls separation distances and 250 metre exception tests in 62BB(2)." },
-    { "feature_key": "cd1_floodplain_1_in_100", "feature_class": "site_specific_area", "source_type": "external_geospatial_layer", "reason": "Controls 62BB(3)(g)." },
-    { "feature_key": "local_and_subdivision_roads_cd1", "feature_class": "road_centerline", "source_type": "external_geospatial_layer", "reason": "Controls access restrictions in 62BB(3)(f)." }
+    {
+      "feature_key": "cd1_watercourses",
+      "feature_class": "hydrography_line_or_polygon",
+      "source_type": "external_geospatial_layer",
+      "reason": "Controls 62BB(2)(a)(iii)."
+    },
+    {
+      "feature_key": "cd1_residential_and_institutional_uses",
+      "feature_class": "site_specific_area",
+      "source_type": "existing_or_derived_polygon",
+      "reason": "Controls separation distances and 250 metre exception tests in 62BB(2)."
+    },
+    {
+      "feature_key": "cd1_floodplain_1_in_100",
+      "feature_class": "site_specific_area",
+      "source_type": "external_geospatial_layer",
+      "reason": "Controls 62BB(3)(g)."
+    },
+    {
+      "feature_key": "local_and_subdivision_roads_cd1",
+      "feature_class": "road_centerline",
+      "source_type": "external_geospatial_layer",
+      "reason": "Controls access restrictions in 62BB(3)(f)."
+    }
   ],
   "open_issues": [
-    { "issue_type": "text_quality_check", "description": "Subsections 62BA(2) and 62BA(3) refer to subsection (l) in the source; likely intended to mean subsection (1). Raw source wording was preserved in summaries." }
+    {
+      "issue_type": "text_quality_check",
+      "description": "Subsections 62BA(2) and 62BA(3) refer to subsection (l) in the source; likely intended to mean subsection (1). Raw source wording was preserved in summaries."
+    }
   ],
   "citations": {
-    "permitted_uses": { "pdf_page": 145, "bylaw_page": 137 },
-    "requirements": { "pdf_page_start": 145, "pdf_page_end": 147, "bylaw_page_start": 137, "bylaw_page_end": 139 }
+    "permitted_uses": {
+      "pdf_page": 145,
+      "bylaw_page": 137
+    },
+    "requirements": {
+      "pdf_page_start": 145,
+      "pdf_page_end": 147,
+      "bylaw_page_start": 137,
+      "bylaw_page_end": 139
+    }
   }
 }

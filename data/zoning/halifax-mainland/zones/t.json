@@ -6,44 +6,163 @@
     "edition": "231",
     "zone_code": "T",
     "zone_name": "Mobile Home Park Zone",
-    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
-    "zone_section_start": { "title_label_raw": "T ZONE: MOBILE HOME PARK ZONE", "pdf_page": 132, "bylaw_page": 124 },
-    "zone_section_end_before": { "title_label_raw": "H ZONE: HOLDING ZONE", "pdf_page": 133, "bylaw_page": 125 }
+    "zone_established_by": {
+      "clause_label_raw": "16(1)",
+      "pdf_page": 53,
+      "bylaw_page": 45
+    },
+    "zone_section_start": {
+      "title_label_raw": "T ZONE: MOBILE HOME PARK ZONE",
+      "pdf_page": 132,
+      "bylaw_page": 124
+    },
+    "zone_section_end_before": {
+      "title_label_raw": "H ZONE: HOLDING ZONE",
+      "pdf_page": 133,
+      "bylaw_page": 125
+    }
   },
   "normalization_policy": {
     "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": ["54(1)(a)", "54(1)(a.1)", "54(1)(aa)", "55"],
+    "approved_hierarchy_examples": [
+      "54(1)(a)",
+      "54(1)(a.1)",
+      "54(1)(aa)",
+      "55"
+    ],
     "pending_review_clause_patterns": []
   },
   "general_context": {
-    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "T is an established class of use zone." },
-    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+    "zone_class_reference": {
+      "section_label_raw": "16(1)",
+      "summary": "T is an established class of use zone."
+    },
+    "general_boundary_rule_refs": [
+      "17(a)-(h)",
+      "18",
+      "19"
+    ]
   },
   "permitted_uses": [
-    { "clause_label_raw": "54(1)(a)", "clause_path": ["54", "1", "a"], "use_type": "residential_use", "use_name": "mobile home park" },
-    { "clause_label_raw": "54(1)(a.1)", "clause_path": ["54", "1", "a.1"], "use_type": "site_specific_residential_use", "use_name": "semi-detached dwellings", "applicability": "urban_service_area_only" },
-    { "clause_label_raw": "54(1)(a.2)", "clause_path": ["54", "1", "a.2"], "use_type": "site_specific_residential_use", "use_name": "duplex dwelling", "applicability": "urban_service_area_only" },
-    { "clause_label_raw": "54(1)(a.3)", "clause_path": ["54", "1", "a.3"], "use_type": "site_specific_residential_use", "use_name": "apartment houses containing 3 or 4 dwelling units", "applicability": "urban_service_area_only" },
-    { "clause_label_raw": "54(1)(aa)", "clause_path": ["54", "1", "a", "a"], "use_type": "residential_use", "use_name": "shared housing use with 10 or fewer bedrooms in conjunction with a permitted dwelling unit" },
-    { "clause_label_raw": "54(1)(b)", "clause_path": ["54", "1", "b"], "use_type": "accessory_use", "use_name": "any use accessory to the uses in clauses 54(1)(a) and 54(1)(aa)" }
+    {
+      "clause_label_raw": "54(1)(a)",
+      "clause_path": [
+        "54",
+        "1",
+        "a"
+      ],
+      "use_type": "residential_use",
+      "use_name": "mobile home park"
+    },
+    {
+      "clause_label_raw": "54(1)(a.1)",
+      "clause_path": [
+        "54",
+        "1",
+        "a.1"
+      ],
+      "use_type": "site_specific_residential_use",
+      "use_name": "semi-detached dwellings",
+      "applicability": "urban_service_area_only"
+    },
+    {
+      "clause_label_raw": "54(1)(a.2)",
+      "clause_path": [
+        "54",
+        "1",
+        "a.2"
+      ],
+      "use_type": "site_specific_residential_use",
+      "use_name": "duplex dwelling",
+      "applicability": "urban_service_area_only",
+      "defined_term_refs": [
+        "duplex_dwelling"
+      ],
+      "link_method": "exact_term_match"
+    },
+    {
+      "clause_label_raw": "54(1)(a.3)",
+      "clause_path": [
+        "54",
+        "1",
+        "a.3"
+      ],
+      "use_type": "site_specific_residential_use",
+      "use_name": "apartment houses containing 3 or 4 dwelling units",
+      "applicability": "urban_service_area_only"
+    },
+    {
+      "clause_label_raw": "54(1)(aa)",
+      "clause_path": [
+        "54",
+        "1",
+        "a",
+        "a"
+      ],
+      "use_type": "residential_use",
+      "use_name": "shared housing use with 10 or fewer bedrooms in conjunction with a permitted dwelling unit"
+    },
+    {
+      "clause_label_raw": "54(1)(b)",
+      "clause_path": [
+        "54",
+        "1",
+        "b"
+      ],
+      "use_type": "accessory_use",
+      "use_name": "any use accessory to the uses in clauses 54(1)(a) and 54(1)(aa)"
+    }
   ],
   "prohibitions": [
-    { "clause_label_raw": "54(2)", "clause_path": ["54", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more of the uses set out in Section 54(1)." },
-    { "clause_label_raw": "54(3)", "clause_path": ["54", "3"], "rule_type": "use_prohibition", "summary": "No land or building use in whole or in part for any purpose other than one or more of the uses set out in Section 54(1)." }
+    {
+      "clause_label_raw": "54(2)",
+      "clause_path": [
+        "54",
+        "2"
+      ],
+      "rule_type": "development_prohibition",
+      "summary": "No development for any purpose other than one or more of the uses set out in Section 54(1)."
+    },
+    {
+      "clause_label_raw": "54(3)",
+      "clause_path": [
+        "54",
+        "3"
+      ],
+      "rule_type": "use_prohibition",
+      "summary": "No land or building use in whole or in part for any purpose other than one or more of the uses set out in Section 54(1)."
+    }
   ],
   "requirements": {
     "general_zone_controls": [
-      { "section_label_raw": "55", "section_path": ["55"], "summary": "Buildings erected, altered or used or land used for T uses in a T Zone shall comply with the provisions of the Mobile Home By-law of the Municipality of the County of Halifax as amended to the first day of January, 1969." }
+      {
+        "section_label_raw": "55",
+        "section_path": [
+          "55"
+        ],
+        "summary": "Buildings erected, altered or used or land used for T uses in a T Zone shall comply with the provisions of the Mobile Home By-law of the Municipality of the County of Halifax as amended to the first day of January, 1969."
+      }
     ]
   },
   "sign_controls": [],
   "use_specific_standards": [],
   "spatial_features_needed": [
-    { "feature_key": "urban_service_area_boundary", "feature_class": "planning_area_boundary", "source_type": "existing_or_derived_polygon", "reason": "controls the Urban Service Area limited uses in clauses 54(1)(a.1), 54(1)(a.2), and 54(1)(a.3)" }
+    {
+      "feature_key": "urban_service_area_boundary",
+      "feature_class": "planning_area_boundary",
+      "source_type": "existing_or_derived_polygon",
+      "reason": "controls the Urban Service Area limited uses in clauses 54(1)(a.1), 54(1)(a.2), and 54(1)(a.3)"
+    }
   ],
   "open_issues": [],
   "citations": {
-    "permitted_uses": { "pdf_page": 132, "bylaw_page": 124 },
-    "requirements": { "pdf_page": 132, "bylaw_page": 124 }
+    "permitted_uses": {
+      "pdf_page": 132,
+      "bylaw_page": 124
+    },
+    "requirements": {
+      "pdf_page": 132,
+      "bylaw_page": 124
+    }
   }
 }

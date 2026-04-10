@@ -63,7 +63,11 @@
         "b"
       ],
       "use_type": "principal_use",
-      "use_name": "townhouse building"
+      "use_name": "townhouse building",
+      "defined_term_refs": [
+        "townhouse_building"
+      ],
+      "link_method": "exact_term_match"
     },
     {
       "clause_label_raw": "28AO(1)(c)",
@@ -98,7 +102,11 @@
       "conditions": [
         "maximum 10 bedrooms",
         "in conjunction with a permitted dwelling unit"
-      ]
+      ],
+      "defined_term_refs": [
+        "shared_housing_use"
+      ],
+      "link_method": "exact_term_match"
     },
     {
       "clause_label_raw": "28AO(1)(e)",
@@ -138,7 +146,11 @@
             "e",
             "iii"
           ],
-          "use_name": "adult entertainment uses"
+          "use_name": "adult entertainment uses",
+          "defined_term_refs": [
+            "adult_entertainment_use"
+          ],
+          "link_method": "reviewed_alias_match"
         },
         {
           "clause_label_raw": "28AO(1)(e)(iv)",
@@ -150,7 +162,11 @@
           ],
           "use_name": "taxi dispatch"
         }
-      ]
+      ],
+      "defined_term_refs": [
+        "home_occupation"
+      ],
+      "link_method": "reviewed_alias_match"
     },
     {
       "clause_label_raw": "28AO(1)(f)",
@@ -342,7 +358,11 @@
               "all units shall have a front door that faces the street or driveway"
             ]
           }
-        ]
+        ],
+        "defined_term_refs": [
+          "townhouse_building"
+        ],
+        "link_method": "exact_term_match"
       }
     ],
     "stacked_townhouse_building_controls": [

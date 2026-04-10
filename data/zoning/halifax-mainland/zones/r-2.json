@@ -66,7 +66,11 @@
         "b"
       ],
       "use_type": "principal_use",
-      "use_name": "semi-detached dwelling"
+      "use_name": "semi-detached dwelling",
+      "defined_term_refs": [
+        "semi_detached_dwelling"
+      ],
+      "link_method": "exact_term_match"
     },
     {
       "clause_label_raw": "24(1)(c)",
@@ -76,7 +80,11 @@
         "c"
       ],
       "use_type": "principal_use",
-      "use_name": "duplex dwelling"
+      "use_name": "duplex dwelling",
+      "defined_term_refs": [
+        "duplex_dwelling"
+      ],
+      "link_method": "exact_term_match"
     },
     {
       "clause_label_raw": "24(1)(ca)",
@@ -141,7 +149,11 @@
       "conditions": [
         "maximum 10 bedrooms",
         "in conjunction with a permitted dwelling unit"
-      ]
+      ],
+      "defined_term_refs": [
+        "shared_housing_use"
+      ],
+      "link_method": "exact_term_match"
     },
     {
       "clause_label_raw": "24(1)(g)",

@@ -6,71 +6,332 @@
     "edition": "231",
     "zone_code": "C-2",
     "zone_name": "General Business Zone",
-    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
-    "zone_section_start": { "title_label_raw": "C-2 ZONE: GENERAL BUSINESS ZONE", "pdf_page": 122, "bylaw_page": 114 },
-    "zone_section_end_before": { "title_label_raw": "C-6 ZONE: ADULT ENTERTAINMENT ZONE", "pdf_page": 124, "bylaw_page": 116 }
+    "zone_established_by": {
+      "clause_label_raw": "16(1)",
+      "pdf_page": 53,
+      "bylaw_page": 45
+    },
+    "zone_section_start": {
+      "title_label_raw": "C-2 ZONE: GENERAL BUSINESS ZONE",
+      "pdf_page": 122,
+      "bylaw_page": 114
+    },
+    "zone_section_end_before": {
+      "title_label_raw": "C-6 ZONE: ADULT ENTERTAINMENT ZONE",
+      "pdf_page": 124,
+      "bylaw_page": 116
+    }
   },
   "normalization_policy": {
     "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": ["39(1)(ca)", "41A(1)(d)", "42(2)"],
+    "approved_hierarchy_examples": [
+      "39(1)(ca)",
+      "41A(1)(d)",
+      "42(2)"
+    ],
     "pending_review_clause_patterns": []
   },
   "general_context": {
-    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "C-2 is an established class of use zone." },
-    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+    "zone_class_reference": {
+      "section_label_raw": "16(1)",
+      "summary": "C-2 is an established class of use zone."
+    },
+    "general_boundary_rule_refs": [
+      "17(a)-(h)",
+      "18",
+      "19"
+    ]
   },
   "permitted_uses": [
-    { "clause_label_raw": "39(1)(a)", "clause_path": ["39", "1", "a"], "use_type": "incorporated_zone_use_set", "use_name": "C-1 and C-2A uses" },
-    { "clause_label_raw": "39(1)(b)", "clause_path": ["39", "1", "b"], "use_type": "commercial_use", "use_name": "any commercial enterprise", "conditions": ["except when the operation would cause a nuisance or a hazard to the public"], "excluded_subuses": [
-      { "use_name": "adult entertainment uses" },
-      { "use_name": "junk yards" },
-      { "use_name": "amusement centres" }
-    ] },
-    { "clause_label_raw": "39(1)(c)", "clause_path": ["39", "1", "c"], "status": "deleted" },
-    { "clause_label_raw": "39(1)(ca)", "clause_path": ["39", "1", "c", "a"], "status": "deleted" },
-    { "clause_label_raw": "39(1)(d)", "clause_path": ["39", "1", "d"], "status": "deleted" },
-    { "clause_label_raw": "39(1)(e)", "clause_path": ["39", "1", "e"], "use_type": "accessory_use", "use_name": "uses accessory to the foregoing uses" }
+    {
+      "clause_label_raw": "39(1)(a)",
+      "clause_path": [
+        "39",
+        "1",
+        "a"
+      ],
+      "use_type": "incorporated_zone_use_set",
+      "use_name": "C-1 and C-2A uses"
+    },
+    {
+      "clause_label_raw": "39(1)(b)",
+      "clause_path": [
+        "39",
+        "1",
+        "b"
+      ],
+      "use_type": "commercial_use",
+      "use_name": "any commercial enterprise",
+      "conditions": [
+        "except when the operation would cause a nuisance or a hazard to the public"
+      ],
+      "excluded_subuses": [
+        {
+          "use_name": "adult entertainment uses",
+          "defined_term_refs": [
+            "adult_entertainment_use"
+          ],
+          "link_method": "reviewed_alias_match"
+        },
+        {
+          "use_name": "junk yards"
+        },
+        {
+          "use_name": "amusement centres",
+          "defined_term_refs": [
+            "amusement_centre"
+          ],
+          "link_method": "reviewed_alias_match"
+        }
+      ]
+    },
+    {
+      "clause_label_raw": "39(1)(c)",
+      "clause_path": [
+        "39",
+        "1",
+        "c"
+      ],
+      "status": "deleted"
+    },
+    {
+      "clause_label_raw": "39(1)(ca)",
+      "clause_path": [
+        "39",
+        "1",
+        "c",
+        "a"
+      ],
+      "status": "deleted"
+    },
+    {
+      "clause_label_raw": "39(1)(d)",
+      "clause_path": [
+        "39",
+        "1",
+        "d"
+      ],
+      "status": "deleted"
+    },
+    {
+      "clause_label_raw": "39(1)(e)",
+      "clause_path": [
+        "39",
+        "1",
+        "e"
+      ],
+      "use_type": "accessory_use",
+      "use_name": "uses accessory to the foregoing uses"
+    }
   ],
   "prohibitions": [
-    { "clause_label_raw": "39(2)", "clause_path": ["39", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more uses in 39(1)." },
-    { "clause_label_raw": "39(3)", "clause_path": ["39", "3"], "rule_type": "use_prohibition", "summary": "No land or building use for any purpose other than one or more uses in 39(1)." },
-    { "section_label_raw": "40", "section_path": ["40"], "status": "deleted" }
+    {
+      "clause_label_raw": "39(2)",
+      "clause_path": [
+        "39",
+        "2"
+      ],
+      "rule_type": "development_prohibition",
+      "summary": "No development for any purpose other than one or more uses in 39(1)."
+    },
+    {
+      "clause_label_raw": "39(3)",
+      "clause_path": [
+        "39",
+        "3"
+      ],
+      "rule_type": "use_prohibition",
+      "summary": "No land or building use for any purpose other than one or more uses in 39(1)."
+    },
+    {
+      "section_label_raw": "40",
+      "section_path": [
+        "40"
+      ],
+      "status": "deleted"
+    }
   ],
   "requirements": {
     "c2_use_controls": [
-      { "section_label_raw": "41", "section_path": ["41"], "use_name": "C-1, C-2A or C-2 uses in a C-2 Zone", "controls": [
-        { "clause_label_raw": "41(a)", "clause_path": ["41", "a"], "condition_text": "maximum lot coverage is 50 percent, except motel building or buildings shall occupy not more than 30 percent of the total building lot area" },
-        { "clause_label_raw": "41(b)", "clause_path": ["41", "b"], "controls": [
-          { "clause_label_raw": "41(b)(i)", "clause_path": ["41", "b", "i"], "condition_text": "every building shall be at least 12 feet from every other building and at least 8 feet from the rear and both side lines of the lot and at least 20 feet from any street line in front of such building" },
-          { "clause_label_raw": "41(b)(ii)", "clause_path": ["41", "b", "ii"], "condition_text": "where the building is situated on a corner lot, it shall be at least 10 feet from the flanking street line abutting such lot" }
-        ] },
-        { "clause_label_raw": "41(c)", "clause_path": ["41", "c"], "condition_text": "notwithstanding clause (b), the building is exempt from side building line requirements and distance requirements from other buildings where the following apply", "subcontrols": [
-          { "clause_label_raw": "41(c)(i)", "clause_path": ["41", "c", "i"], "condition_text": "the sidewalls of the building are fireproof to comply with the Building By-law of the city" },
-          { "clause_label_raw": "41(c)(ii)", "clause_path": ["41", "c", "ii"], "condition_text": "the abutting lot is not a lot in a residential zone used for residential purposes" }
-        ] }
-      ] },
-      { "section_label_raw": "41A(1)", "section_path": ["41A", "1"], "applicability_scope": "mainland_south_area_only", "controls": [
-        { "clause_label_raw": "41A(1)(a)", "clause_path": ["41A", "1", "a"], "condition_text": "buildings, parking, service areas, and circulation lanes must be a minimum of 30 feet from any rear or side lot line abutting a residential zone", "exception_text": "except for building, such setbacks are not required where screening in the form of a solid fence or vegetative hedging is provided" },
-        { "clause_label_raw": "41A(1)(b)", "clause_path": ["41A", "1", "b"], "condition_text": "no vehicular access shall be obtained through a side or rear yard adjacent to a residential zone" },
-        { "clause_label_raw": "41A(1)(c)", "clause_path": ["41A", "1", "c"], "condition_text": "parking requirements shall be 5.5 spaces per 1,000 sq.ft. of gross floor area" },
-        { "clause_label_raw": "41A(1)(d)", "clause_path": ["41A", "1", "d"], "status": "deleted", "source_duplicate_label_sequence": 1 },
-        { "clause_label_raw": "41A(1)(d)", "clause_path": ["41A", "1", "d"], "condition_text": "lot coverage maximum is 50 percent", "source_duplicate_label_sequence": 2 }
-      ] }
+      {
+        "section_label_raw": "41",
+        "section_path": [
+          "41"
+        ],
+        "use_name": "C-1, C-2A or C-2 uses in a C-2 Zone",
+        "controls": [
+          {
+            "clause_label_raw": "41(a)",
+            "clause_path": [
+              "41",
+              "a"
+            ],
+            "condition_text": "maximum lot coverage is 50 percent, except motel building or buildings shall occupy not more than 30 percent of the total building lot area"
+          },
+          {
+            "clause_label_raw": "41(b)",
+            "clause_path": [
+              "41",
+              "b"
+            ],
+            "controls": [
+              {
+                "clause_label_raw": "41(b)(i)",
+                "clause_path": [
+                  "41",
+                  "b",
+                  "i"
+                ],
+                "condition_text": "every building shall be at least 12 feet from every other building and at least 8 feet from the rear and both side lines of the lot and at least 20 feet from any street line in front of such building"
+              },
+              {
+                "clause_label_raw": "41(b)(ii)",
+                "clause_path": [
+                  "41",
+                  "b",
+                  "ii"
+                ],
+                "condition_text": "where the building is situated on a corner lot, it shall be at least 10 feet from the flanking street line abutting such lot"
+              }
+            ]
+          },
+          {
+            "clause_label_raw": "41(c)",
+            "clause_path": [
+              "41",
+              "c"
+            ],
+            "condition_text": "notwithstanding clause (b), the building is exempt from side building line requirements and distance requirements from other buildings where the following apply",
+            "subcontrols": [
+              {
+                "clause_label_raw": "41(c)(i)",
+                "clause_path": [
+                  "41",
+                  "c",
+                  "i"
+                ],
+                "condition_text": "the sidewalls of the building are fireproof to comply with the Building By-law of the city"
+              },
+              {
+                "clause_label_raw": "41(c)(ii)",
+                "clause_path": [
+                  "41",
+                  "c",
+                  "ii"
+                ],
+                "condition_text": "the abutting lot is not a lot in a residential zone used for residential purposes"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section_label_raw": "41A(1)",
+        "section_path": [
+          "41A",
+          "1"
+        ],
+        "applicability_scope": "mainland_south_area_only",
+        "controls": [
+          {
+            "clause_label_raw": "41A(1)(a)",
+            "clause_path": [
+              "41A",
+              "1",
+              "a"
+            ],
+            "condition_text": "buildings, parking, service areas, and circulation lanes must be a minimum of 30 feet from any rear or side lot line abutting a residential zone",
+            "exception_text": "except for building, such setbacks are not required where screening in the form of a solid fence or vegetative hedging is provided"
+          },
+          {
+            "clause_label_raw": "41A(1)(b)",
+            "clause_path": [
+              "41A",
+              "1",
+              "b"
+            ],
+            "condition_text": "no vehicular access shall be obtained through a side or rear yard adjacent to a residential zone"
+          },
+          {
+            "clause_label_raw": "41A(1)(c)",
+            "clause_path": [
+              "41A",
+              "1",
+              "c"
+            ],
+            "condition_text": "parking requirements shall be 5.5 spaces per 1,000 sq.ft. of gross floor area"
+          },
+          {
+            "clause_label_raw": "41A(1)(d)",
+            "clause_path": [
+              "41A",
+              "1",
+              "d"
+            ],
+            "status": "deleted",
+            "source_duplicate_label_sequence": 1
+          },
+          {
+            "clause_label_raw": "41A(1)(d)",
+            "clause_path": [
+              "41A",
+              "1",
+              "d"
+            ],
+            "condition_text": "lot coverage maximum is 50 percent",
+            "source_duplicate_label_sequence": 2
+          }
+        ]
+      }
     ]
   },
   "use_specific_standards": [],
   "sign_controls": [
-    { "section_label_raw": "42(1)", "section_path": ["42", "1"], "summary": "Each C-1, C-2A or C-2 use is permitted one identification sign which may be illuminated." },
-    { "section_label_raw": "42(2)", "section_path": ["42", "2"], "summary": "Each property is permitted one free-standing identification sign which may be illuminated, provided it will not cause a nuisance or hazard to the public." }
+    {
+      "section_label_raw": "42(1)",
+      "section_path": [
+        "42",
+        "1"
+      ],
+      "summary": "Each C-1, C-2A or C-2 use is permitted one identification sign which may be illuminated."
+    },
+    {
+      "section_label_raw": "42(2)",
+      "section_path": [
+        "42",
+        "2"
+      ],
+      "summary": "Each property is permitted one free-standing identification sign which may be illuminated, provided it will not cause a nuisance or hazard to the public."
+    }
   ],
   "spatial_features_needed": [
-    { "feature_key": "mainland_south_area", "feature_class": "planning_area_boundary", "source_type": "existing_or_derived_polygon", "reason": "controls 41A(1)" }
+    {
+      "feature_key": "mainland_south_area",
+      "feature_class": "planning_area_boundary",
+      "source_type": "existing_or_derived_polygon",
+      "reason": "controls 41A(1)"
+    }
   ],
   "open_issues": [
-    { "issue_type": "source_duplicate_label", "raw_examples": ["41A(1)(d)", "41A(1)(d)"], "description": "The source repeats clause label 41A(1)(d) for a deleted previous section and for the active lot coverage maximum clause." }
+    {
+      "issue_type": "source_duplicate_label",
+      "raw_examples": [
+        "41A(1)(d)",
+        "41A(1)(d)"
+      ],
+      "description": "The source repeats clause label 41A(1)(d) for a deleted previous section and for the active lot coverage maximum clause."
+    }
   ],
   "citations": {
-    "permitted_uses": { "pdf_page": 122, "bylaw_page": 114 },
-    "requirements": { "pdf_page_start": 122, "pdf_page_end": 123, "bylaw_page_start": 114, "bylaw_page_end": 115 }
+    "permitted_uses": {
+      "pdf_page": 122,
+      "bylaw_page": 114
+    },
+    "requirements": {
+      "pdf_page_start": 122,
+      "pdf_page_end": 123,
+      "bylaw_page_start": 114,
+      "bylaw_page_end": 115
+    }
   }
 }

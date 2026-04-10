@@ -6,84 +6,322 @@
     "edition": "231",
     "zone_code": "CD-3",
     "zone_name": "C&D Materials Disposal Sites Zone",
-    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
-    "zone_section_start": { "title_label_raw": "CD-3: C&D MATERIALS DISPOSAL SITES ZONE", "pdf_page": 150, "bylaw_page": 142 },
-    "zone_section_end_before": { "title_label_raw": "ICH: INFRASTRUCTURE CHARGE HOLDING ZONE", "pdf_page": 152, "bylaw_page": 144 }
+    "zone_established_by": {
+      "clause_label_raw": "16(1)",
+      "pdf_page": 53,
+      "bylaw_page": 45
+    },
+    "zone_section_start": {
+      "title_label_raw": "CD-3: C&D MATERIALS DISPOSAL SITES ZONE",
+      "pdf_page": 150,
+      "bylaw_page": 142
+    },
+    "zone_section_end_before": {
+      "title_label_raw": "ICH: INFRASTRUCTURE CHARGE HOLDING ZONE",
+      "pdf_page": 152,
+      "bylaw_page": 144
+    }
   },
   "normalization_policy": {
     "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": ["62DA(1)(a)", "62DB(3)(b)(i)", "62DB(4)(a)"],
+    "approved_hierarchy_examples": [
+      "62DA(1)(a)",
+      "62DB(3)(b)(i)",
+      "62DB(4)(a)"
+    ],
     "pending_review_clause_patterns": []
   },
   "general_context": {
-    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "CD-3 is an established class of use zone." },
-    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+    "zone_class_reference": {
+      "section_label_raw": "16(1)",
+      "summary": "CD-3 is an established class of use zone."
+    },
+    "general_boundary_rule_refs": [
+      "17(a)-(h)",
+      "18",
+      "19"
+    ]
   },
   "permitted_uses": [
-    { "clause_label_raw": "62DA(1)(a)", "clause_path": ["62DA", "1", "a"], "use_type": "incorporated_zone_use_set", "use_name": "CD-1 and CD-2 uses" },
-    { "clause_label_raw": "62DA(1)(b)", "clause_path": ["62DA", "1", "b"], "use_type": "industrial_use", "use_name": "construction and demolition materials disposal sites" },
-    { "clause_label_raw": "62DA(1)(c)", "clause_path": ["62DA", "1", "c"], "use_type": "accessory_use", "use_name": "uses accessory to permitted uses" }
+    {
+      "clause_label_raw": "62DA(1)(a)",
+      "clause_path": [
+        "62DA",
+        "1",
+        "a"
+      ],
+      "use_type": "incorporated_zone_use_set",
+      "use_name": "CD-1 and CD-2 uses"
+    },
+    {
+      "clause_label_raw": "62DA(1)(b)",
+      "clause_path": [
+        "62DA",
+        "1",
+        "b"
+      ],
+      "use_type": "industrial_use",
+      "use_name": "construction and demolition materials disposal sites",
+      "defined_term_refs": [
+        "construction_and_demolition_materials_disposal_site"
+      ],
+      "link_method": "reviewed_alias_match"
+    },
+    {
+      "clause_label_raw": "62DA(1)(c)",
+      "clause_path": [
+        "62DA",
+        "1",
+        "c"
+      ],
+      "use_type": "accessory_use",
+      "use_name": "uses accessory to permitted uses"
+    }
   ],
   "prohibitions": [
-    { "clause_label_raw": "62DA(2)", "clause_path": ["62DA", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more of the uses set out in subsection 62DA(1)." },
-    { "clause_label_raw": "62DA(3)", "clause_path": ["62DA", "3"], "rule_type": "use_prohibition", "summary": "No land or building use in whole or in part for any purpose other than one or more of the uses set out in subsection 62DA(1)." }
+    {
+      "clause_label_raw": "62DA(2)",
+      "clause_path": [
+        "62DA",
+        "2"
+      ],
+      "rule_type": "development_prohibition",
+      "summary": "No development for any purpose other than one or more of the uses set out in subsection 62DA(1)."
+    },
+    {
+      "clause_label_raw": "62DA(3)",
+      "clause_path": [
+        "62DA",
+        "3"
+      ],
+      "rule_type": "use_prohibition",
+      "summary": "No land or building use in whole or in part for any purpose other than one or more of the uses set out in subsection 62DA(1)."
+    }
   ],
   "requirements": {
     "incorporated_use_requirements": [
-      { "section_label_raw": "62DB(1)", "section_path": ["62DB", "1"], "summary": "Buildings erected, altered or used for CD-1 or CD-2 uses in a CD-3 Zone shall comply with the requirements of the CD-1 or CD-2 Zones respectively." }
+      {
+        "section_label_raw": "62DB(1)",
+        "section_path": [
+          "62DB",
+          "1"
+        ],
+        "summary": "Buildings erected, altered or used for CD-1 or CD-2 uses in a CD-3 Zone shall comply with the requirements of the CD-1 or CD-2 Zones respectively."
+      }
     ],
     "dimensional_controls": [
       {
         "section_label_raw": "62DB(2)",
-        "section_path": ["62DB", "2"],
+        "section_path": [
+          "62DB",
+          "2"
+        ],
         "use_name": "CD-3 uses",
         "controls": [
-          { "rule_type": "lot_area_minimum", "measure": { "minimum": 11148, "unit": "sq_m", "imperial_minimum": 120000, "imperial_unit": "sq_ft" } },
-          { "rule_type": "lot_frontage_minimum", "condition_text": "Minimum frontage is 15 metres (49.2 feet) with central services and 30 metres (98.4 feet) with on-site services." },
-          { "rule_type": "front_yard_setback_minimum", "measure": { "minimum": 50, "unit": "m", "imperial_minimum": 164, "imperial_unit": "ft" } },
-          { "rule_type": "side_yard_setback_minimum", "measure": { "minimum": 50, "unit": "m", "imperial_minimum": 164, "imperial_unit": "ft" } },
-          { "rule_type": "rear_yard_setback_minimum", "measure": { "minimum": 50, "unit": "m", "imperial_minimum": 164, "imperial_unit": "ft" } },
-          { "rule_type": "lot_coverage_maximum", "measure": { "maximum": 50, "unit": "percent" } },
-          { "rule_type": "building_height_maximum", "measure": { "maximum": 11, "unit": "m", "imperial_maximum": 36.1, "imperial_unit": "ft" } }
+          {
+            "rule_type": "lot_area_minimum",
+            "measure": {
+              "minimum": 11148,
+              "unit": "sq_m",
+              "imperial_minimum": 120000,
+              "imperial_unit": "sq_ft"
+            }
+          },
+          {
+            "rule_type": "lot_frontage_minimum",
+            "condition_text": "Minimum frontage is 15 metres (49.2 feet) with central services and 30 metres (98.4 feet) with on-site services."
+          },
+          {
+            "rule_type": "front_yard_setback_minimum",
+            "measure": {
+              "minimum": 50,
+              "unit": "m",
+              "imperial_minimum": 164,
+              "imperial_unit": "ft"
+            }
+          },
+          {
+            "rule_type": "side_yard_setback_minimum",
+            "measure": {
+              "minimum": 50,
+              "unit": "m",
+              "imperial_minimum": 164,
+              "imperial_unit": "ft"
+            }
+          },
+          {
+            "rule_type": "rear_yard_setback_minimum",
+            "measure": {
+              "minimum": 50,
+              "unit": "m",
+              "imperial_minimum": 164,
+              "imperial_unit": "ft"
+            }
+          },
+          {
+            "rule_type": "lot_coverage_maximum",
+            "measure": {
+              "maximum": 50,
+              "unit": "percent"
+            }
+          },
+          {
+            "rule_type": "building_height_maximum",
+            "measure": {
+              "maximum": 11,
+              "unit": "m",
+              "imperial_maximum": 36.1,
+              "imperial_unit": "ft"
+            }
+          }
         ]
       }
     ],
     "operational_controls": [
       {
         "section_label_raw": "62DB(3)",
-        "section_path": ["62DB", "3"],
+        "section_path": [
+          "62DB",
+          "3"
+        ],
         "use_name": "C&D disposal site",
         "controls": [
-          { "clause_label_raw": "62DB(3)(a)", "clause_path": ["62DB", "3", "a"], "condition_text": "No portion of the operation shall be located within 60 metres (196.8 feet) of any side or rear property line abutting a residential or community facility use." },
-          { "clause_label_raw": "62DB(3)(b)(i)", "clause_path": ["62DB", "3", "b", "i"], "rule_type": "site_specific_separation_minimum", "measure": { "minimum": 50, "unit": "m", "imperial_minimum": 164, "imperial_unit": "ft" }, "condition_text": "Separation from any property line." },
-          { "clause_label_raw": "62DB(3)(b)(ii)", "clause_path": ["62DB", "3", "b", "ii"], "rule_type": "site_specific_separation_minimum", "measure": { "minimum": 90, "unit": "m", "imperial_minimum": 295.3, "imperial_unit": "ft" }, "condition_text": "Separation from the nearest residential dwelling or institutional use." },
-          { "clause_label_raw": "62DB(3)(b)(iii)", "clause_path": ["62DB", "3", "b", "iii"], "rule_type": "watercourse_setback_minimum", "measure": { "minimum": 60, "unit": "m", "imperial_minimum": 196.8, "imperial_unit": "ft" } }
+          {
+            "clause_label_raw": "62DB(3)(a)",
+            "clause_path": [
+              "62DB",
+              "3",
+              "a"
+            ],
+            "condition_text": "No portion of the operation shall be located within 60 metres (196.8 feet) of any side or rear property line abutting a residential or community facility use."
+          },
+          {
+            "clause_label_raw": "62DB(3)(b)(i)",
+            "clause_path": [
+              "62DB",
+              "3",
+              "b",
+              "i"
+            ],
+            "rule_type": "site_specific_separation_minimum",
+            "measure": {
+              "minimum": 50,
+              "unit": "m",
+              "imperial_minimum": 164,
+              "imperial_unit": "ft"
+            },
+            "condition_text": "Separation from any property line."
+          },
+          {
+            "clause_label_raw": "62DB(3)(b)(ii)",
+            "clause_path": [
+              "62DB",
+              "3",
+              "b",
+              "ii"
+            ],
+            "rule_type": "site_specific_separation_minimum",
+            "measure": {
+              "minimum": 90,
+              "unit": "m",
+              "imperial_minimum": 295.3,
+              "imperial_unit": "ft"
+            },
+            "condition_text": "Separation from the nearest residential dwelling or institutional use."
+          },
+          {
+            "clause_label_raw": "62DB(3)(b)(iii)",
+            "clause_path": [
+              "62DB",
+              "3",
+              "b",
+              "iii"
+            ],
+            "rule_type": "watercourse_setback_minimum",
+            "measure": {
+              "minimum": 60,
+              "unit": "m",
+              "imperial_minimum": 196.8,
+              "imperial_unit": "ft"
+            }
+          }
         ]
       },
       {
         "section_label_raw": "62DB(4)",
-        "section_path": ["62DB", "4"],
+        "section_path": [
+          "62DB",
+          "4"
+        ],
         "use_name": "C&D materials operation",
         "controls": [
-          { "clause_label_raw": "62DB(4)(a)", "clause_path": ["62DB", "4", "a"], "condition_text": "The operation shall comply with the general zone requirements outlined in Section 62BB(3)." },
-          { "clause_label_raw": "62DB(4)(b)", "clause_path": ["62DB", "4", "b"], "condition_text": "More than one C&D Materials operation is permitted on a site and each use is subject to applicable standards unless the uses are integrated, in which case the more stringent requirements shall apply." }
+          {
+            "clause_label_raw": "62DB(4)(a)",
+            "clause_path": [
+              "62DB",
+              "4",
+              "a"
+            ],
+            "condition_text": "The operation shall comply with the general zone requirements outlined in Section 62BB(3)."
+          },
+          {
+            "clause_label_raw": "62DB(4)(b)",
+            "clause_path": [
+              "62DB",
+              "4",
+              "b"
+            ],
+            "condition_text": "More than one C&D Materials operation is permitted on a site and each use is subject to applicable standards unless the uses are integrated, in which case the more stringent requirements shall apply."
+          }
         ]
       },
-      { "section_label_raw": "62DB(5)", "section_path": ["62DB", "5"], "rule_type": "site_plan_approval", "condition_text": "C&D Material Operations are subject to approval of a site plan for each use dealing with the matters outlined in Section 62BB(4)." }
+      {
+        "section_label_raw": "62DB(5)",
+        "section_path": [
+          "62DB",
+          "5"
+        ],
+        "rule_type": "site_plan_approval",
+        "condition_text": "C&D Material Operations are subject to approval of a site plan for each use dealing with the matters outlined in Section 62BB(4)."
+      }
     ]
   },
   "sign_controls": [],
   "use_specific_standards": [],
   "spatial_features_needed": [
-    { "feature_key": "cd3_watercourses", "feature_class": "hydrography_line_or_polygon", "source_type": "external_geospatial_layer", "reason": "Controls 62DB(3)(b)(iii)." },
-    { "feature_key": "cd3_residential_and_community_facility_uses", "feature_class": "site_specific_area", "source_type": "existing_or_derived_polygon", "reason": "Controls separation distances and abutting-property tests in 62DB(3)." }
+    {
+      "feature_key": "cd3_watercourses",
+      "feature_class": "hydrography_line_or_polygon",
+      "source_type": "external_geospatial_layer",
+      "reason": "Controls 62DB(3)(b)(iii)."
+    },
+    {
+      "feature_key": "cd3_residential_and_community_facility_uses",
+      "feature_class": "site_specific_area",
+      "source_type": "existing_or_derived_polygon",
+      "reason": "Controls separation distances and abutting-property tests in 62DB(3)."
+    }
   ],
   "open_issues": [
-    { "issue_type": "text_quality_check", "description": "Subsections 62DA(2) and 62DA(3) refer to subsection (l) in the source; likely intended to mean subsection (1). Raw source wording was preserved in summaries." },
-    { "issue_type": "text_quality_check", "description": "Section 62DB(4)(b) contains source wording 'unless the uses are integrated than the more stringent requirements shall apply'; wording should be checked against the PDF image before ingestion." }
+    {
+      "issue_type": "text_quality_check",
+      "description": "Subsections 62DA(2) and 62DA(3) refer to subsection (l) in the source; likely intended to mean subsection (1). Raw source wording was preserved in summaries."
+    },
+    {
+      "issue_type": "text_quality_check",
+      "description": "Section 62DB(4)(b) contains source wording 'unless the uses are integrated than the more stringent requirements shall apply'; wording should be checked against the PDF image before ingestion."
+    }
   ],
   "citations": {
-    "permitted_uses": { "pdf_page": 150, "bylaw_page": 142 },
-    "requirements": { "pdf_page_start": 150, "pdf_page_end": 151, "bylaw_page_start": 142, "bylaw_page_end": 143 }
+    "permitted_uses": {
+      "pdf_page": 150,
+      "bylaw_page": 142
+    },
+    "requirements": {
+      "pdf_page_start": 150,
+      "pdf_page_end": 151,
+      "bylaw_page_start": 142,
+      "bylaw_page_end": 143
+    }
   }
 }

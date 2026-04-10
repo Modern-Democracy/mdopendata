@@ -6,117 +6,706 @@
     "edition": "231",
     "zone_code": "R-4",
     "zone_name": "Multiple Dwelling Zone",
-    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
-    "zone_section_start": { "title_label_raw": "R-4 ZONE: MULTIPLE DWELLING ZONE", "pdf_page": 83, "bylaw_page": 75 },
-    "zone_section_end_before": { "title_label_raw": "R-4A ZONE: DUTCH VILLAGE ROAD MULTI UNIT ZONE", "pdf_page": 88, "bylaw_page": 80 }
+    "zone_established_by": {
+      "clause_label_raw": "16(1)",
+      "pdf_page": 53,
+      "bylaw_page": 45
+    },
+    "zone_section_start": {
+      "title_label_raw": "R-4 ZONE: MULTIPLE DWELLING ZONE",
+      "pdf_page": 83,
+      "bylaw_page": 75
+    },
+    "zone_section_end_before": {
+      "title_label_raw": "R-4A ZONE: DUTCH VILLAGE ROAD MULTI UNIT ZONE",
+      "pdf_page": 88,
+      "bylaw_page": 80
+    }
   },
   "normalization_policy": {
     "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": ["29(1)(f)", "33(1)(b)(i)", "33(3)(a)(ii)(A)", "34(2)(c)(i)"],
+    "approved_hierarchy_examples": [
+      "29(1)(f)",
+      "33(1)(b)(i)",
+      "33(3)(a)(ii)(A)",
+      "34(2)(c)(i)"
+    ],
     "pending_review_clause_patterns": []
   },
   "general_context": {
-    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "R-4 is an established class of use zone." },
-    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+    "zone_class_reference": {
+      "section_label_raw": "16(1)",
+      "summary": "R-4 is an established class of use zone."
+    },
+    "general_boundary_rule_refs": [
+      "17(a)-(h)",
+      "18",
+      "19"
+    ]
   },
   "permitted_uses": [
-    { "clause_label_raw": "29(1)(a)", "clause_path": ["29", "1", "a"], "use_type": "incorporated_zone_use_set", "use_name": "R-1, R-2 and R-2T uses" },
-    { "clause_label_raw": "29(1)(b)", "clause_path": ["29", "1", "b"], "use_type": "residential_use", "use_name": "shared housing use" },
-    { "clause_label_raw": "29(1)(c)", "clause_path": ["29", "1", "c"], "status": "deleted" },
-    { "clause_label_raw": "29(1)(d)", "clause_path": ["29", "1", "d"], "use_type": "principal_use", "use_name": "apartment house" },
-    { "clause_label_raw": "29(1)(e)", "clause_path": ["29", "1", "e"], "use_type": "accessory_use", "use_name": "uses accessory to any of the foregoing uses if not specifically prohibited" },
-    { "clause_label_raw": "29(1)(f)", "clause_path": ["29", "1", "f"], "use_type": "ancillary_nonresidential_use", "use_name": "one office for rendering professional or personal services", "conditions": ["in any one building", "net area shall not exceed 700 sq.ft."] },
-    { "clause_label_raw": "29(1)(g)", "clause_path": ["29", "1", "g"], "status": "deleted" },
-    { "clause_label_raw": "29(1)(h)", "clause_path": ["29", "1", "h"], "use_type": "ancillary_nonresidential_use", "use_name": "greenhouse" },
-    { "clause_label_raw": "29(1)(i)", "clause_path": ["29", "1", "i"], "use_type": "ancillary_nonresidential_use", "use_name": "office of a consulate", "conditions": ["located in a single-family dwelling", "the dwelling must be used by the consul as a private residence"] },
-    { "clause_label_raw": "29(1)(j)", "clause_path": ["29", "1", "j"], "use_type": "use_with_specific_standard", "use_name": "day care facility" }
+    {
+      "clause_label_raw": "29(1)(a)",
+      "clause_path": [
+        "29",
+        "1",
+        "a"
+      ],
+      "use_type": "incorporated_zone_use_set",
+      "use_name": "R-1, R-2 and R-2T uses"
+    },
+    {
+      "clause_label_raw": "29(1)(b)",
+      "clause_path": [
+        "29",
+        "1",
+        "b"
+      ],
+      "use_type": "residential_use",
+      "use_name": "shared housing use",
+      "defined_term_refs": [
+        "shared_housing_use"
+      ],
+      "link_method": "exact_term_match"
+    },
+    {
+      "clause_label_raw": "29(1)(c)",
+      "clause_path": [
+        "29",
+        "1",
+        "c"
+      ],
+      "status": "deleted"
+    },
+    {
+      "clause_label_raw": "29(1)(d)",
+      "clause_path": [
+        "29",
+        "1",
+        "d"
+      ],
+      "use_type": "principal_use",
+      "use_name": "apartment house",
+      "defined_term_refs": [
+        "apartment_house"
+      ],
+      "link_method": "exact_term_match"
+    },
+    {
+      "clause_label_raw": "29(1)(e)",
+      "clause_path": [
+        "29",
+        "1",
+        "e"
+      ],
+      "use_type": "accessory_use",
+      "use_name": "uses accessory to any of the foregoing uses if not specifically prohibited"
+    },
+    {
+      "clause_label_raw": "29(1)(f)",
+      "clause_path": [
+        "29",
+        "1",
+        "f"
+      ],
+      "use_type": "ancillary_nonresidential_use",
+      "use_name": "one office for rendering professional or personal services",
+      "conditions": [
+        "in any one building",
+        "net area shall not exceed 700 sq.ft."
+      ]
+    },
+    {
+      "clause_label_raw": "29(1)(g)",
+      "clause_path": [
+        "29",
+        "1",
+        "g"
+      ],
+      "status": "deleted"
+    },
+    {
+      "clause_label_raw": "29(1)(h)",
+      "clause_path": [
+        "29",
+        "1",
+        "h"
+      ],
+      "use_type": "ancillary_nonresidential_use",
+      "use_name": "greenhouse"
+    },
+    {
+      "clause_label_raw": "29(1)(i)",
+      "clause_path": [
+        "29",
+        "1",
+        "i"
+      ],
+      "use_type": "ancillary_nonresidential_use",
+      "use_name": "office of a consulate",
+      "conditions": [
+        "located in a single-family dwelling",
+        "the dwelling must be used by the consul as a private residence"
+      ]
+    },
+    {
+      "clause_label_raw": "29(1)(j)",
+      "clause_path": [
+        "29",
+        "1",
+        "j"
+      ],
+      "use_type": "use_with_specific_standard",
+      "use_name": "day care facility",
+      "defined_term_refs": [
+        "day_care_facility"
+      ],
+      "link_method": "exact_term_match"
+    }
   ],
   "prohibitions": [
-    { "clause_label_raw": "29(2)", "clause_path": ["29", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more uses in 29(1)." },
-    { "clause_label_raw": "29(3)", "clause_path": ["29", "3"], "rule_type": "use_prohibition", "summary": "No land or building use for any purpose other than one or more uses in 29(1)." }
+    {
+      "clause_label_raw": "29(2)",
+      "clause_path": [
+        "29",
+        "2"
+      ],
+      "rule_type": "development_prohibition",
+      "summary": "No development for any purpose other than one or more uses in 29(1)."
+    },
+    {
+      "clause_label_raw": "29(3)",
+      "clause_path": [
+        "29",
+        "3"
+      ],
+      "rule_type": "use_prohibition",
+      "summary": "No land or building use for any purpose other than one or more uses in 29(1)."
+    }
   ],
   "requirements": {
     "commercial_and_sign_controls": [
-      { "section_label_raw": "29A", "section_path": ["29A"], "use_name": "commercial uses in large apartment houses near intersections", "conditions": ["notwithstanding Sections 9(d), 14 and 29(1), an apartment house at or within 120 feet of an intersection containing 100 or more self-contained dwelling units may include commercial uses permitted in Section 38A(1), except a bowling alley, motion picture theatre, service station and billboard", "commercial uses must be located on the ground floor and separately accessible from the building exterior"] },
-      { "section_label_raw": "29B", "section_path": ["29B"], "summary": "Exterior advertising of the commercial uses described in Section 29A is permitted if not illuminated." },
-      { "section_label_raw": "30", "section_path": ["30"], "summary": "Where a building is used for Section 29(1)(f) purposes, no display window is permitted and no evidence of such use may be visible from the exterior, except a sign not exceeding one square foot bearing the name and profession of the occupant." },
-      { "section_label_raw": "31", "section_path": ["31"], "summary": "Buildings erected, altered or used for R-1, R-2 and R-2T uses in an R-4 Zone shall comply with the requirements of their respective zones." },
-      { "section_label_raw": "32(1)", "section_path": ["32", "1"], "summary": "No billboard or illuminated sign may be erected or displayed in an R-4 Zone." },
-      { "section_label_raw": "32(2)", "section_path": ["32", "2"], "summary": "A non-illuminated sign not exceeding 6 square feet may be erected if it will not cause a hazard or nuisance to the public." }
+      {
+        "section_label_raw": "29A",
+        "section_path": [
+          "29A"
+        ],
+        "use_name": "commercial uses in large apartment houses near intersections",
+        "conditions": [
+          "notwithstanding Sections 9(d), 14 and 29(1), an apartment house at or within 120 feet of an intersection containing 100 or more self-contained dwelling units may include commercial uses permitted in Section 38A(1), except a bowling alley, motion picture theatre, service station and billboard",
+          "commercial uses must be located on the ground floor and separately accessible from the building exterior"
+        ]
+      },
+      {
+        "section_label_raw": "29B",
+        "section_path": [
+          "29B"
+        ],
+        "summary": "Exterior advertising of the commercial uses described in Section 29A is permitted if not illuminated."
+      },
+      {
+        "section_label_raw": "30",
+        "section_path": [
+          "30"
+        ],
+        "summary": "Where a building is used for Section 29(1)(f) purposes, no display window is permitted and no evidence of such use may be visible from the exterior, except a sign not exceeding one square foot bearing the name and profession of the occupant."
+      },
+      {
+        "section_label_raw": "31",
+        "section_path": [
+          "31"
+        ],
+        "summary": "Buildings erected, altered or used for R-1, R-2 and R-2T uses in an R-4 Zone shall comply with the requirements of their respective zones."
+      },
+      {
+        "section_label_raw": "32(1)",
+        "section_path": [
+          "32",
+          "1"
+        ],
+        "summary": "No billboard or illuminated sign may be erected or displayed in an R-4 Zone."
+      },
+      {
+        "section_label_raw": "32(2)",
+        "section_path": [
+          "32",
+          "2"
+        ],
+        "summary": "A non-illuminated sign not exceeding 6 square feet may be erected if it will not cause a hazard or nuisance to the public."
+      }
     ],
     "r4_use_controls": [
-      { "section_label_raw": "33", "section_path": ["33"], "use_name": "R-4 uses", "controls": [
-        { "section_label_raw": "33(1)", "section_path": ["33", "1"], "metric_group": "minimum_lot_area", "controls": [
-          { "clause_label_raw": "33(1)(a)", "clause_path": ["33", "1", "a"], "condition_text": "minimum lot area is 6,000 square feet with a minimum continuous street frontage of at least 60 feet on one street", "exception_text": "where a lot faces on the outer side of a curve in the street, frontage may be reduced to 30 feet" },
-          { "clause_label_raw": "33(1)(b)", "clause_path": ["33", "1", "b"], "condition_text": "Council may permit modification of the minimum lot area and continuous street frontage after public hearing if deemed necessary", "subcontrols": [
-            { "clause_label_raw": "33(1)(b)(i)", "clause_path": ["33", "1", "b", "i"], "condition_text": "amenity, convenience, character, and value of neighbouring properties will not be adversely affected" },
-            { "clause_label_raw": "33(1)(b)(ii)", "clause_path": ["33", "1", "b", "ii"], "condition_text": "conditions necessitating modification are unique to the lot and were not created by the owner or applicant" }
-          ] }
-        ] },
-        { "section_label_raw": "33(2)", "section_path": ["33", "2"], "metric_group": "distance_from_lot_lines_80_degree_angle", "controls": [
-          { "clause_label_raw": "33(2)(a)", "clause_path": ["33", "2", "a"], "condition_text": "distance from any part of the building to any official street line shall be not less than 20 feet measured at right angles", "exception_text": "may be reduced to 10 feet if the relevant part of the building is entirely contained within the arms of an 80 degree horizontal angle as determined in subsection (3)" },
-          { "clause_label_raw": "33(2)(b)", "clause_path": ["33", "2", "b"], "condition_text": "distance from any part of the building to any lot line other than an official street line shall be not less than 10 feet measured at right angles" },
-          { "clause_label_raw": "33(2)(c)", "clause_path": ["33", "2", "c"], "condition_text": "all windows and doors serving habitable rooms shall be located not less than 10 feet from any lot line measured at right angles" },
-          { "clause_label_raw": "33(2)(d)", "clause_path": ["33", "2", "d"], "condition_text": "where a part of the building contains no windows or doors serving habitable rooms, it may be less than the required distances or may extend to the lot line", "subcontrols": [
-            { "clause_label_raw": "33(2)(d)(i)", "clause_path": ["33", "2", "d", "i"], "condition_text": "height does not exceed 5 feet above natural ground level at any official street line point extending 10 feet horizontally at right angles" },
-            { "clause_label_raw": "33(2)(d)(ii)", "clause_path": ["33", "2", "d", "ii"], "condition_text": "height does not exceed 5 feet above natural ground level at any lot line other than an official street line" },
-            { "clause_label_raw": "33(2)(d)(iii)", "clause_path": ["33", "2", "d", "iii"], "condition_text": "the building is designed so that it does not interfere with traffic safety" }
-          ] },
-          { "clause_label_raw": "33(2)(e)", "clause_path": ["33", "2", "e"], "status": "deleted" }
-        ] },
-        { "section_label_raw": "33(3)", "section_path": ["33", "3"], "metric_group": "size_of_building_60_degree_angle", "controls": [
-          { "clause_label_raw": "33(3)(a)", "clause_path": ["33", "3", "a"], "condition_text": "subject to subsection (2), the building shall not project beyond the angular planes determined over the lot", "subcontrols": [
-            { "clause_label_raw": "33(3)(a)(i)", "clause_path": ["33", "3", "a", "i"], "condition_text": "from each lot line at natural or finished ground level, whichever is lower, at a vertical angle of 60 degrees above the horizontal" },
-            { "clause_label_raw": "33(3)(a)(ii)", "clause_path": ["33", "3", "a", "ii"], "condition_text": "where a lot line coincides with an official street line, from the centre line of the street or an intervening parallel line", "subcontrols": [
-              { "clause_label_raw": "33(3)(a)(ii)(A)", "clause_path": ["33", "3", "a", "ii", "A"], "condition_text": "distance from the construction line to the lot line does not exceed 30 feet" },
-              { "clause_label_raw": "33(3)(a)(ii)(B)", "clause_path": ["33", "3", "a", "ii", "B"], "condition_text": "the vertical angle of 60 degrees is constructed perpendicular to the line or tangents of the curved line" }
-            ] }
-          ] },
-          { "clause_label_raw": "33(3)(b)", "clause_path": ["33", "3", "b"], "condition_text": "any part of the building may project beyond the prescribed 60 degree angular plane if the projection subtends a horizontal angle not exceeding 80 degrees and the projection extremities are enclosed by the arms of that angle" }
-        ] },
-        { "section_label_raw": "33(4)", "section_path": ["33", "4"], "metric_group": "distance_between_external_walls", "controls": [
-          { "clause_label_raw": "33(4)(a)", "clause_path": ["33", "4", "a"], "metric_group": "definitions", "subcontrols": [
-            { "clause_label_raw": "33(4)(a)(i)", "clause_path": ["33", "4", "a", "i"], "definition_text": "\"Base line\" means the lower of natural or finished ground adjoining the wall base, or the lowest line of a wall above ground in other cases." },
-            { "clause_label_raw": "33(4)(a)(ii)", "clause_path": ["33", "4", "a", "ii"], "definition_text": "A wall supported above posts, pillars, or other open construction is deemed to rise from the ground and its base line is the downward projection meeting the lower of natural or finished ground." },
-            { "clause_label_raw": "33(4)(a)(iii)", "clause_path": ["33", "4", "a", "iii"], "definition_text": "External walls not parallel but diverging by not more than 85 degrees are deemed to face each other." }
-          ] },
-          { "clause_label_raw": "33(4)(b)", "clause_path": ["33", "4", "b"], "condition_text": "subsection (4) applies only if part of the building is erected within the arms of horizontal angles of 65 degrees constructed outwards from the nearest extremities of external walls that face each other" },
-          { "clause_label_raw": "33(4)(c)", "clause_path": ["33", "4", "c"], "condition_text": "distance between external walls that face each other shall be not less than 50 feet, and no part of the building shall project beyond 40 degree angular planes measured from the base line of each such wall" },
-          { "clause_label_raw": "33(4)(d)", "clause_path": ["33", "4", "d"], "condition_text": "where two facing external walls contain no door or window serving a habitable room, clause (c) does not apply but the distance between such walls shall not be less than 6 feet" }
-        ] },
-        { "section_label_raw": "33(5)", "section_path": ["33", "5"], "metric_group": "balconies_cornices_eaves_canopies", "controls": [
-          { "clause_label_raw": "33(5)(a)", "clause_path": ["33", "5", "a"], "condition_text": "separate individual balconies open on three sides, cornices, eaves, and canopies may project through the angular planes, provided any part of such balcony, cornice, or eave is not less than 10 feet from any lot line" },
-          { "clause_label_raw": "33(5)(b)", "clause_path": ["33", "5", "b"], "condition_text": "canopies may project to within 5 feet of the street line" }
-        ] }
-      ] },
-      { "section_label_raw": "34", "section_path": ["34"], "use_name": "apartment house or shared housing use with greater than 10 bedrooms", "conditions": ["in addition to Section 33"], "controls": [
-        { "section_label_raw": "34(1)", "section_path": ["34", "1"], "metric": "population_density_maximum", "value": 75, "unit": "persons_per_acre" },
-        { "section_label_raw": "34(2)", "section_path": ["34", "2"], "metric_group": "open_space_requirements", "controls": [
-          { "clause_label_raw": "34(2)(a)", "clause_path": ["34", "2", "a"], "value_table": [
-            { "subject": "bachelor unit or bedroom in a shared housing use", "metric": "open_space_minimum", "value": 150, "unit": "sq_ft" },
-            { "subject": "one-bedroom unit", "metric": "open_space_minimum", "value": 275, "unit": "sq_ft" },
-            { "subject": "two-bedroom unit", "metric": "open_space_minimum", "value": 575, "unit": "sq_ft" },
-            { "subject": "three-bedroom unit", "metric": "open_space_minimum", "value": 950, "unit": "sq_ft" },
-            { "subject": "four-bedroom unit and over", "metric": "open_space_minimum", "value": 1325, "unit": "sq_ft" }
-          ] },
-          { "clause_label_raw": "34(2)(b)", "clause_path": ["34", "2", "b"], "condition_text": "at least 80 percent of the required open space shall be landscaped open space" },
-          { "clause_label_raw": "34(2)(c)", "clause_path": ["34", "2", "c"], "condition_text": "roof area with no residential accommodation below may be counted as landscaped open space", "subcontrols": [
-            { "clause_label_raw": "34(2)(c)(i)", "clause_path": ["34", "2", "c", "i"], "condition_text": "no part of such roof is more than 5 feet above the ground level of at least one lot line" },
-            { "clause_label_raw": "34(2)(c)(ii)", "clause_path": ["34", "2", "c", "ii"], "condition_text": "the roof or roof portion is capable of being used as landscaped open space" }
-          ] }
-        ] },
-        { "section_label_raw": "34(3)", "section_path": ["34", "3"], "status": "deleted" }
-      ] }
+      {
+        "section_label_raw": "33",
+        "section_path": [
+          "33"
+        ],
+        "use_name": "R-4 uses",
+        "controls": [
+          {
+            "section_label_raw": "33(1)",
+            "section_path": [
+              "33",
+              "1"
+            ],
+            "metric_group": "minimum_lot_area",
+            "controls": [
+              {
+                "clause_label_raw": "33(1)(a)",
+                "clause_path": [
+                  "33",
+                  "1",
+                  "a"
+                ],
+                "condition_text": "minimum lot area is 6,000 square feet with a minimum continuous street frontage of at least 60 feet on one street",
+                "exception_text": "where a lot faces on the outer side of a curve in the street, frontage may be reduced to 30 feet"
+              },
+              {
+                "clause_label_raw": "33(1)(b)",
+                "clause_path": [
+                  "33",
+                  "1",
+                  "b"
+                ],
+                "condition_text": "Council may permit modification of the minimum lot area and continuous street frontage after public hearing if deemed necessary",
+                "subcontrols": [
+                  {
+                    "clause_label_raw": "33(1)(b)(i)",
+                    "clause_path": [
+                      "33",
+                      "1",
+                      "b",
+                      "i"
+                    ],
+                    "condition_text": "amenity, convenience, character, and value of neighbouring properties will not be adversely affected"
+                  },
+                  {
+                    "clause_label_raw": "33(1)(b)(ii)",
+                    "clause_path": [
+                      "33",
+                      "1",
+                      "b",
+                      "ii"
+                    ],
+                    "condition_text": "conditions necessitating modification are unique to the lot and were not created by the owner or applicant"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "section_label_raw": "33(2)",
+            "section_path": [
+              "33",
+              "2"
+            ],
+            "metric_group": "distance_from_lot_lines_80_degree_angle",
+            "controls": [
+              {
+                "clause_label_raw": "33(2)(a)",
+                "clause_path": [
+                  "33",
+                  "2",
+                  "a"
+                ],
+                "condition_text": "distance from any part of the building to any official street line shall be not less than 20 feet measured at right angles",
+                "exception_text": "may be reduced to 10 feet if the relevant part of the building is entirely contained within the arms of an 80 degree horizontal angle as determined in subsection (3)"
+              },
+              {
+                "clause_label_raw": "33(2)(b)",
+                "clause_path": [
+                  "33",
+                  "2",
+                  "b"
+                ],
+                "condition_text": "distance from any part of the building to any lot line other than an official street line shall be not less than 10 feet measured at right angles"
+              },
+              {
+                "clause_label_raw": "33(2)(c)",
+                "clause_path": [
+                  "33",
+                  "2",
+                  "c"
+                ],
+                "condition_text": "all windows and doors serving habitable rooms shall be located not less than 10 feet from any lot line measured at right angles"
+              },
+              {
+                "clause_label_raw": "33(2)(d)",
+                "clause_path": [
+                  "33",
+                  "2",
+                  "d"
+                ],
+                "condition_text": "where a part of the building contains no windows or doors serving habitable rooms, it may be less than the required distances or may extend to the lot line",
+                "subcontrols": [
+                  {
+                    "clause_label_raw": "33(2)(d)(i)",
+                    "clause_path": [
+                      "33",
+                      "2",
+                      "d",
+                      "i"
+                    ],
+                    "condition_text": "height does not exceed 5 feet above natural ground level at any official street line point extending 10 feet horizontally at right angles"
+                  },
+                  {
+                    "clause_label_raw": "33(2)(d)(ii)",
+                    "clause_path": [
+                      "33",
+                      "2",
+                      "d",
+                      "ii"
+                    ],
+                    "condition_text": "height does not exceed 5 feet above natural ground level at any lot line other than an official street line"
+                  },
+                  {
+                    "clause_label_raw": "33(2)(d)(iii)",
+                    "clause_path": [
+                      "33",
+                      "2",
+                      "d",
+                      "iii"
+                    ],
+                    "condition_text": "the building is designed so that it does not interfere with traffic safety"
+                  }
+                ]
+              },
+              {
+                "clause_label_raw": "33(2)(e)",
+                "clause_path": [
+                  "33",
+                  "2",
+                  "e"
+                ],
+                "status": "deleted"
+              }
+            ]
+          },
+          {
+            "section_label_raw": "33(3)",
+            "section_path": [
+              "33",
+              "3"
+            ],
+            "metric_group": "size_of_building_60_degree_angle",
+            "controls": [
+              {
+                "clause_label_raw": "33(3)(a)",
+                "clause_path": [
+                  "33",
+                  "3",
+                  "a"
+                ],
+                "condition_text": "subject to subsection (2), the building shall not project beyond the angular planes determined over the lot",
+                "subcontrols": [
+                  {
+                    "clause_label_raw": "33(3)(a)(i)",
+                    "clause_path": [
+                      "33",
+                      "3",
+                      "a",
+                      "i"
+                    ],
+                    "condition_text": "from each lot line at natural or finished ground level, whichever is lower, at a vertical angle of 60 degrees above the horizontal"
+                  },
+                  {
+                    "clause_label_raw": "33(3)(a)(ii)",
+                    "clause_path": [
+                      "33",
+                      "3",
+                      "a",
+                      "ii"
+                    ],
+                    "condition_text": "where a lot line coincides with an official street line, from the centre line of the street or an intervening parallel line",
+                    "subcontrols": [
+                      {
+                        "clause_label_raw": "33(3)(a)(ii)(A)",
+                        "clause_path": [
+                          "33",
+                          "3",
+                          "a",
+                          "ii",
+                          "A"
+                        ],
+                        "condition_text": "distance from the construction line to the lot line does not exceed 30 feet"
+                      },
+                      {
+                        "clause_label_raw": "33(3)(a)(ii)(B)",
+                        "clause_path": [
+                          "33",
+                          "3",
+                          "a",
+                          "ii",
+                          "B"
+                        ],
+                        "condition_text": "the vertical angle of 60 degrees is constructed perpendicular to the line or tangents of the curved line"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "clause_label_raw": "33(3)(b)",
+                "clause_path": [
+                  "33",
+                  "3",
+                  "b"
+                ],
+                "condition_text": "any part of the building may project beyond the prescribed 60 degree angular plane if the projection subtends a horizontal angle not exceeding 80 degrees and the projection extremities are enclosed by the arms of that angle"
+              }
+            ]
+          },
+          {
+            "section_label_raw": "33(4)",
+            "section_path": [
+              "33",
+              "4"
+            ],
+            "metric_group": "distance_between_external_walls",
+            "controls": [
+              {
+                "clause_label_raw": "33(4)(a)",
+                "clause_path": [
+                  "33",
+                  "4",
+                  "a"
+                ],
+                "metric_group": "definitions",
+                "subcontrols": [
+                  {
+                    "clause_label_raw": "33(4)(a)(i)",
+                    "clause_path": [
+                      "33",
+                      "4",
+                      "a",
+                      "i"
+                    ],
+                    "definition_text": "\"Base line\" means the lower of natural or finished ground adjoining the wall base, or the lowest line of a wall above ground in other cases."
+                  },
+                  {
+                    "clause_label_raw": "33(4)(a)(ii)",
+                    "clause_path": [
+                      "33",
+                      "4",
+                      "a",
+                      "ii"
+                    ],
+                    "definition_text": "A wall supported above posts, pillars, or other open construction is deemed to rise from the ground and its base line is the downward projection meeting the lower of natural or finished ground."
+                  },
+                  {
+                    "clause_label_raw": "33(4)(a)(iii)",
+                    "clause_path": [
+                      "33",
+                      "4",
+                      "a",
+                      "iii"
+                    ],
+                    "definition_text": "External walls not parallel but diverging by not more than 85 degrees are deemed to face each other."
+                  }
+                ]
+              },
+              {
+                "clause_label_raw": "33(4)(b)",
+                "clause_path": [
+                  "33",
+                  "4",
+                  "b"
+                ],
+                "condition_text": "subsection (4) applies only if part of the building is erected within the arms of horizontal angles of 65 degrees constructed outwards from the nearest extremities of external walls that face each other"
+              },
+              {
+                "clause_label_raw": "33(4)(c)",
+                "clause_path": [
+                  "33",
+                  "4",
+                  "c"
+                ],
+                "condition_text": "distance between external walls that face each other shall be not less than 50 feet, and no part of the building shall project beyond 40 degree angular planes measured from the base line of each such wall"
+              },
+              {
+                "clause_label_raw": "33(4)(d)",
+                "clause_path": [
+                  "33",
+                  "4",
+                  "d"
+                ],
+                "condition_text": "where two facing external walls contain no door or window serving a habitable room, clause (c) does not apply but the distance between such walls shall not be less than 6 feet"
+              }
+            ]
+          },
+          {
+            "section_label_raw": "33(5)",
+            "section_path": [
+              "33",
+              "5"
+            ],
+            "metric_group": "balconies_cornices_eaves_canopies",
+            "controls": [
+              {
+                "clause_label_raw": "33(5)(a)",
+                "clause_path": [
+                  "33",
+                  "5",
+                  "a"
+                ],
+                "condition_text": "separate individual balconies open on three sides, cornices, eaves, and canopies may project through the angular planes, provided any part of such balcony, cornice, or eave is not less than 10 feet from any lot line"
+              },
+              {
+                "clause_label_raw": "33(5)(b)",
+                "clause_path": [
+                  "33",
+                  "5",
+                  "b"
+                ],
+                "condition_text": "canopies may project to within 5 feet of the street line"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "section_label_raw": "34",
+        "section_path": [
+          "34"
+        ],
+        "use_name": "apartment house or shared housing use with greater than 10 bedrooms",
+        "conditions": [
+          "in addition to Section 33"
+        ],
+        "controls": [
+          {
+            "section_label_raw": "34(1)",
+            "section_path": [
+              "34",
+              "1"
+            ],
+            "metric": "population_density_maximum",
+            "value": 75,
+            "unit": "persons_per_acre"
+          },
+          {
+            "section_label_raw": "34(2)",
+            "section_path": [
+              "34",
+              "2"
+            ],
+            "metric_group": "open_space_requirements",
+            "controls": [
+              {
+                "clause_label_raw": "34(2)(a)",
+                "clause_path": [
+                  "34",
+                  "2",
+                  "a"
+                ],
+                "value_table": [
+                  {
+                    "subject": "bachelor unit or bedroom in a shared housing use",
+                    "metric": "open_space_minimum",
+                    "value": 150,
+                    "unit": "sq_ft"
+                  },
+                  {
+                    "subject": "one-bedroom unit",
+                    "metric": "open_space_minimum",
+                    "value": 275,
+                    "unit": "sq_ft"
+                  },
+                  {
+                    "subject": "two-bedroom unit",
+                    "metric": "open_space_minimum",
+                    "value": 575,
+                    "unit": "sq_ft"
+                  },
+                  {
+                    "subject": "three-bedroom unit",
+                    "metric": "open_space_minimum",
+                    "value": 950,
+                    "unit": "sq_ft"
+                  },
+                  {
+                    "subject": "four-bedroom unit and over",
+                    "metric": "open_space_minimum",
+                    "value": 1325,
+                    "unit": "sq_ft"
+                  }
+                ]
+              },
+              {
+                "clause_label_raw": "34(2)(b)",
+                "clause_path": [
+                  "34",
+                  "2",
+                  "b"
+                ],
+                "condition_text": "at least 80 percent of the required open space shall be landscaped open space"
+              },
+              {
+                "clause_label_raw": "34(2)(c)",
+                "clause_path": [
+                  "34",
+                  "2",
+                  "c"
+                ],
+                "condition_text": "roof area with no residential accommodation below may be counted as landscaped open space",
+                "subcontrols": [
+                  {
+                    "clause_label_raw": "34(2)(c)(i)",
+                    "clause_path": [
+                      "34",
+                      "2",
+                      "c",
+                      "i"
+                    ],
+                    "condition_text": "no part of such roof is more than 5 feet above the ground level of at least one lot line"
+                  },
+                  {
+                    "clause_label_raw": "34(2)(c)(ii)",
+                    "clause_path": [
+                      "34",
+                      "2",
+                      "c",
+                      "ii"
+                    ],
+                    "condition_text": "the roof or roof portion is capable of being used as landscaped open space"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "section_label_raw": "34(3)",
+            "section_path": [
+              "34",
+              "3"
+            ],
+            "status": "deleted"
+          }
+        ]
+      }
     ]
   },
   "use_specific_standards": [],
   "sign_controls": [],
   "spatial_features_needed": [
-    { "feature_key": "intersection_buffer_120ft", "feature_class": "site_specific_area", "source_type": "derived_buffer_rule", "reason": "controls Section 29A commercial-use eligibility" }
+    {
+      "feature_key": "intersection_buffer_120ft",
+      "feature_class": "site_specific_area",
+      "source_type": "derived_buffer_rule",
+      "reason": "controls Section 29A commercial-use eligibility"
+    }
   ],
   "open_issues": [],
   "citations": {
-    "permitted_uses": { "pdf_page": 83, "bylaw_page": 75 },
-    "requirements": { "pdf_page_start": 83, "pdf_page_end": 87, "bylaw_page_start": 75, "bylaw_page_end": 79 }
+    "permitted_uses": {
+      "pdf_page": 83,
+      "bylaw_page": 75
+    },
+    "requirements": {
+      "pdf_page_start": 83,
+      "pdf_page_end": 87,
+      "bylaw_page_start": 75,
+      "bylaw_page_end": 79
+    }
   }
 }
