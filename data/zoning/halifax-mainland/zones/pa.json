@@ -1,0 +1,55 @@
+{
+  "document_metadata": {
+    "jurisdiction": "Halifax Regional Municipality",
+    "bylaw_name": "Halifax Mainland Land Use By-law",
+    "source_document_path": "docs/halifaxmainlandlanduseby-law-edition231-eff-26feb02-minorrev2025-02922-toclinked_1.pdf",
+    "edition": "231",
+    "zone_code": "PA",
+    "zone_name": "Protected Area Zone",
+    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
+    "zone_section_start": { "title_label_raw": "PA (PROTECTED AREA) ZONE", "pdf_page": 154, "bylaw_page": 146 },
+    "zone_section_end_before": { "title_label_raw": "WA (WATER ACCESS) ZONE", "pdf_page": 155, "bylaw_page": 147 }
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": ["62ED(1)(a)", "62ED(5)"],
+    "pending_review_clause_patterns": []
+  },
+  "general_context": {
+    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "PA is an established class of use zone." },
+    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+  },
+  "permitted_uses": [
+    { "clause_label_raw": "62ED(1)(a)", "clause_path": ["62ED", "1", "a"], "use_type": "institutional_or_open_space_use", "use_name": "scientific study and education", "conditions": ["involving no buildings"] },
+    { "clause_label_raw": "62ED(1)(b)", "clause_path": ["62ED", "1", "b"], "use_type": "recreation_use", "use_name": "trails, boardwalks or walkways" },
+    { "clause_label_raw": "62ED(1)(c)", "clause_path": ["62ED", "1", "c"], "use_type": "institutional_or_open_space_use", "use_name": "conservation uses" },
+    { "clause_label_raw": "62ED(1)(d)", "clause_path": ["62ED", "1", "d"], "use_type": "accessory_use", "use_name": "uses accessory to the foregoing uses" }
+  ],
+  "prohibitions": [
+    { "clause_label_raw": "62ED(2)", "clause_path": ["62ED", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more of the uses set out in subsection 62ED(1)." },
+    { "clause_label_raw": "62ED(3)", "clause_path": ["62ED", "3"], "rule_type": "use_prohibition", "summary": "No land or building use in whole or in part for any purpose other than one or more of the uses set out in subsection 62ED(1)." }
+  ],
+  "requirements": {
+    "dimensional_controls": [
+      {
+        "section_label_raw": "62ED(4)",
+        "section_path": ["62ED", "4"],
+        "controls": [
+          { "rule_type": "lot_area_minimum", "measure": { "minimum": 930, "unit": "sq_m" } },
+          { "rule_type": "lot_frontage_minimum", "measure": { "minimum": 30.5, "unit": "m" } },
+          { "rule_type": "front_yard_setback_minimum", "measure": { "minimum": 20, "unit": "m" }, "condition_text": "Minimum front or flankage yard." },
+          { "rule_type": "yard_and_building_separation_bundle", "condition_text": "Minimum side or rear yard is 20 metres." }
+        ]
+      },
+      { "section_label_raw": "62ED(5)", "section_path": ["62ED", "5"], "condition_text": "Within any PA Zone, no infilling, excavation, alteration of grade or removal of vegetation shall be permitted. Boardwalks, walkways or trails are permitted provided that no infilling or alteration of grade occurs other than the placement of piles or the placement of trails on top of the existing grade." }
+    ]
+  },
+  "sign_controls": [],
+  "use_specific_standards": [],
+  "spatial_features_needed": [],
+  "open_issues": [],
+  "citations": {
+    "permitted_uses": { "pdf_page": 154, "bylaw_page": 146 },
+    "requirements": { "pdf_page": 154, "bylaw_page": 146 }
+  }
+}

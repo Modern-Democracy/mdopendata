@@ -1,0 +1,53 @@
+{
+  "document_metadata": {
+    "jurisdiction": "Halifax Regional Municipality",
+    "bylaw_name": "Halifax Mainland Land Use By-law",
+    "source_document_path": "docs/halifaxmainlandlanduseby-law-edition231-eff-26feb02-minorrev2025-02922-toclinked_1.pdf",
+    "edition": "231",
+    "zone_code": "WA",
+    "zone_name": "Water Access Zone",
+    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
+    "zone_section_start": { "title_label_raw": "WA (WATER ACCESS) ZONE", "pdf_page": 155, "bylaw_page": 147 },
+    "zone_section_end_before": { "title_label_raw": "PERMITS", "pdf_page": 155, "bylaw_page": 147 }
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": ["62EE (1)(a)", "62EE (5)", "62EE (7)"],
+    "pending_review_clause_patterns": []
+  },
+  "general_context": {
+    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "WA is an established class of use zone." },
+    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+  },
+  "permitted_uses": [
+    { "clause_label_raw": "62EE (1)(a)", "clause_path": ["62EE", "1", "a"], "use_type": "institutional_or_open_space_use", "use_name": "wharves and docks" },
+    { "clause_label_raw": "62EE (1)(b)", "clause_path": ["62EE", "1", "b"], "use_type": "institutional_or_open_space_use", "use_name": "municipal, provincial and national historic sites and monuments" },
+    { "clause_label_raw": "62EE (1)(c)", "clause_path": ["62EE", "1", "c"], "use_type": "recreation_use", "use_name": "passive recreation uses" },
+    { "clause_label_raw": "62EE (1)(d)", "clause_path": ["62EE", "1", "d"], "use_type": "institutional_or_open_space_use", "use_name": "public works and utilities" },
+    { "section_label_raw": "62EE (5)", "section_path": ["62EE", "5"], "use_type": "institutional_or_open_space_use", "use_name": "ferry terminal facilities", "applicability_scope": "northwest_arm_water_access_zone_only" },
+    { "section_label_raw": "62EE (6)", "section_path": ["62EE", "6"], "use_type": "recreation_use", "use_name": "multi-use trail system and associated parking facilities", "applicability_scope": "western_shore_bedford_basin_water_access_zone_only" },
+    { "section_label_raw": "62EE (7)", "section_path": ["62EE", "7"], "use_type": "site_specific_residential_use", "use_name": "existing single family dwelling", "applicability_scope": "pid_00633511_water_lot_portion_only", "conditions": ["pursuant to subsection 61(5)", "shown on Map ZM-27"] }
+  ],
+  "prohibitions": [
+    { "clause_label_raw": "62EE (2)", "clause_path": ["62EE", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more of the uses set out in subsections 62EE(1), 62EE(5) or 62EE(6)." },
+    { "clause_label_raw": "62EE (3)", "clause_path": ["62EE", "3"], "rule_type": "use_prohibition", "summary": "No land or building use in whole or in part for any purpose other than one or more of the uses set out in subsections 62EE(1), 62EE(5) or 62EE(6)." }
+  ],
+  "requirements": {
+    "general_zone_controls": [
+      { "section_label_raw": "62EE (4)", "section_path": ["62EE", "4"], "condition_text": "No person shall construct or erect a building, except public works, public utilities, a multi-use trail system and associated facilities, and ferry terminal facilities, on a wharf, on pillars, on piles, or on any other type of structural support located on or over a water lot." }
+    ]
+  },
+  "sign_controls": [],
+  "use_specific_standards": [],
+  "spatial_features_needed": [
+    { "feature_key": "northwest_arm_water_access_zone", "feature_class": "site_specific_area", "source_type": "schedule_digitization", "reason": "Controls the ferry terminal facility permission in subsection 62EE(5)." },
+    { "feature_key": "western_shore_bedford_basin_water_access_zone", "feature_class": "site_specific_area", "source_type": "schedule_digitization", "reason": "Controls the multi-use trail system permission in subsection 62EE(6)." },
+    { "feature_key": "pid_00633511", "feature_class": "address_or_parcel_exception", "source_type": "parcel_or_address_lookup", "reason": "Identifies the water lot portion in subsection 62EE(7)." },
+    { "feature_key": "zm_27_348_purcells_cove_road_area", "feature_class": "site_specific_area", "source_type": "schedule_digitization", "reason": "Controls the site-specific existing dwelling permission in subsection 62EE(7)." }
+  ],
+  "open_issues": [],
+  "citations": {
+    "permitted_uses": { "pdf_page": 155, "bylaw_page": 147 },
+    "requirements": { "pdf_page": 155, "bylaw_page": 147 }
+  }
+}

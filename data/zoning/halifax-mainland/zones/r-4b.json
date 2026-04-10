@@ -6,172 +6,1099 @@
     "edition": "231",
     "zone_code": "R-4B",
     "zone_name": "Dunbrack Multi Unit Zone",
-    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 54, "bylaw_page": 46 },
-    "zone_section_start": { "title_label_raw": "R-4B ZONE: DUNBRACK MULTI UNIT ZONE", "pdf_page": 95, "bylaw_page": 87 },
-    "zone_section_end_before": { "title_label_raw": "C-1 ZONE: LOCAL BUSINESS ZONE", "pdf_page": 102, "bylaw_page": 94 }
+    "zone_established_by": {
+      "clause_label_raw": "16(1)",
+      "pdf_page": 54,
+      "bylaw_page": 46
+    },
+    "zone_section_start": {
+      "title_label_raw": "R-4B ZONE: DUNBRACK MULTI UNIT ZONE",
+      "pdf_page": 95,
+      "bylaw_page": 87
+    },
+    "zone_section_end_before": {
+      "title_label_raw": "C-1 ZONE: LOCAL BUSINESS ZONE",
+      "pdf_page": 102,
+      "bylaw_page": 94
+    }
   },
   "normalization_policy": {
     "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": ["34B1(a.)", "34B1(ea.)", "34B16(a)", "34B38"],
+    "approved_hierarchy_examples": [
+      "34B1(a.)",
+      "34B1(ea.)",
+      "34B16(a)",
+      "34B38"
+    ],
     "pending_review_clause_patterns": []
   },
   "general_context": {
-    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "R-4B is an established class of use zone." },
-    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+    "zone_class_reference": {
+      "section_label_raw": "16(1)",
+      "summary": "R-4B is an established class of use zone."
+    },
+    "general_boundary_rule_refs": [
+      "17(a)-(h)",
+      "18",
+      "19"
+    ]
   },
   "permitted_uses": [
-    { "clause_label_raw": "34B1(a.)", "clause_path": ["34", "B", "1", "a"], "use_type": "principal_use", "use_name": "apartment houses" },
-    { "clause_label_raw": "34B1(b.)", "clause_path": ["34", "B", "1", "b"], "use_type": "principal_use", "use_name": "townhouses" },
-    { "clause_label_raw": "34B1(c.)", "clause_path": ["34", "B", "1", "c"], "use_type": "ancillary_nonresidential_use", "use_name": "home occupation uses" },
-    { "clause_label_raw": "34B1(d.)", "clause_path": ["34", "B", "1", "d"], "use_type": "use_with_specific_standard", "use_name": "daycares" },
-    { "clause_label_raw": "34B1(e.)", "clause_path": ["34", "B", "1", "e"], "use_type": "mixed_use", "use_name": "work-live units" },
-    { "clause_label_raw": "34B1(ea.)", "clause_path": ["34", "B", "1", "ea"], "use_type": "residential_use", "use_name": "shared housing use" },
-    { "clause_label_raw": "34B1(f.)", "clause_path": ["34", "B", "1", "f"], "use_type": "institutional_or_open_space_use", "use_name": "public parks and community facilities" },
-    { "clause_label_raw": "34B1(g.)", "clause_path": ["34", "B", "1", "g"], "use_type": "incorporated_zone_use_set", "use_name": "uses permitted in the C-2C Zone", "excluded_subuses": [
-      { "clause_label_raw": "34B1(g.)(i.)", "clause_path": ["34", "B", "1", "g", "i"], "use_name": "lounges" },
-      { "clause_label_raw": "34B1(g.)(ii.)", "clause_path": ["34", "B", "1", "g", "ii"], "use_name": "gas stations or service stations" }
-    ] },
-    { "clause_label_raw": "34B1(h.)", "clause_path": ["34", "B", "1", "h"], "use_type": "accessory_use", "use_name": "any use accessory to any of the foregoing uses" }
+    {
+      "clause_label_raw": "34B1(a.)",
+      "clause_path": [
+        "34B",
+        "1",
+        "a"
+      ],
+      "use_type": "principal_use",
+      "use_name": "apartment houses"
+    },
+    {
+      "clause_label_raw": "34B1(b.)",
+      "clause_path": [
+        "34B",
+        "1",
+        "b"
+      ],
+      "use_type": "principal_use",
+      "use_name": "townhouses"
+    },
+    {
+      "clause_label_raw": "34B1(c.)",
+      "clause_path": [
+        "34B",
+        "1",
+        "c"
+      ],
+      "use_type": "ancillary_nonresidential_use",
+      "use_name": "home occupation uses"
+    },
+    {
+      "clause_label_raw": "34B1(d.)",
+      "clause_path": [
+        "34B",
+        "1",
+        "d"
+      ],
+      "use_type": "use_with_specific_standard",
+      "use_name": "daycares"
+    },
+    {
+      "clause_label_raw": "34B1(e.)",
+      "clause_path": [
+        "34B",
+        "1",
+        "e"
+      ],
+      "use_type": "mixed_use",
+      "use_name": "work-live units"
+    },
+    {
+      "clause_label_raw": "34B1(ea.)",
+      "clause_path": [
+        "34B",
+        "1",
+        "ea"
+      ],
+      "use_type": "residential_use",
+      "use_name": "shared housing use"
+    },
+    {
+      "clause_label_raw": "34B1(f.)",
+      "clause_path": [
+        "34B",
+        "1",
+        "f"
+      ],
+      "use_type": "institutional_or_open_space_use",
+      "use_name": "public parks and community facilities"
+    },
+    {
+      "clause_label_raw": "34B1(g.)",
+      "clause_path": [
+        "34B",
+        "1",
+        "g"
+      ],
+      "use_type": "incorporated_zone_use_set",
+      "use_name": "uses permitted in the C-2C Zone",
+      "excluded_subuses": [
+        {
+          "clause_label_raw": "34B1(g.)(i.)",
+          "clause_path": [
+            "34B",
+            "1",
+            "g",
+            "i"
+          ],
+          "use_name": "lounges"
+        },
+        {
+          "clause_label_raw": "34B1(g.)(ii.)",
+          "clause_path": [
+            "34B",
+            "1",
+            "g",
+            "ii"
+          ],
+          "use_name": "gas stations or service stations"
+        }
+      ]
+    },
+    {
+      "clause_label_raw": "34B1(h.)",
+      "clause_path": [
+        "34B",
+        "1",
+        "h"
+      ],
+      "use_type": "accessory_use",
+      "use_name": "any use accessory to any of the foregoing uses"
+    }
   ],
   "prohibitions": [
-    { "section_label_raw": "34B2", "section_path": ["34", "B", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more uses set out in Section 34B1." }
+    {
+      "section_label_raw": "34B2",
+      "section_path": [
+        "34B",
+        "2"
+      ],
+      "rule_type": "development_prohibition",
+      "summary": "No development for any purpose other than one or more uses set out in Section 34B1."
+    }
   ],
   "requirements": {
     "incorporated_use_requirements": [
-      { "section_label_raw": "34B3", "section_path": ["34", "B", "3"], "summary": "Townhouses shall comply with the requirements of the R-2T Zone." },
-      { "section_label_raw": "34B4", "section_path": ["34", "B", "4"], "metric": "c2c_uses_floor_area_maximum_per_lot", "value": 4000, "unit": "sq_m" },
-      { "section_label_raw": "34B5", "section_path": ["34", "B", "5"], "metric": "apartment_house_density_maximum", "value": 325, "unit": "units_per_hectare" }
+      {
+        "section_label_raw": "34B3",
+        "section_path": [
+          "34B",
+          "3"
+        ],
+        "summary": "Townhouses shall comply with the requirements of the R-2T Zone."
+      },
+      {
+        "section_label_raw": "34B4",
+        "section_path": [
+          "34B",
+          "4"
+        ],
+        "metric": "c2c_uses_floor_area_maximum_per_lot",
+        "value": 4000,
+        "unit": "sq_m"
+      },
+      {
+        "section_label_raw": "34B5",
+        "section_path": [
+          "34B",
+          "5"
+        ],
+        "metric": "apartment_house_density_maximum",
+        "value": 325,
+        "unit": "units_per_hectare"
+      }
     ],
     "height_and_form_controls": [
-      { "section_label_raw": "34B6", "section_path": ["34", "B", "6"], "metric": "building_height_maximum", "value_text": "As shown on Map ZM-34, Maximum Height in the Dunbrack Multi Unit Zone", "controls": [
-        { "clause_label_raw": "34B6(a)", "clause_path": ["34", "B", "6", "a"], "condition_text": "elevator enclosures and mechanical penthouse are set back from the roof edge a minimum of 5 metres" },
-        { "clause_label_raw": "34B6(b)", "clause_path": ["34", "B", "6", "b"], "condition_text": "elevator enclosures and mechanical penthouse do not exceed 5.5 metres above the maximum building height" },
-        { "clause_label_raw": "34B6(c)", "clause_path": ["34", "B", "6", "c"], "condition_text": "elevator enclosures and mechanical penthouse are limited to a maximum area of 30 percent of the total roof area on which they are located" }
-      ] },
-      { "section_label_raw": "34B7", "section_path": ["34", "B", "7"], "metric": "lot_coverage_maximum", "value": 75, "unit": "percent" },
-      { "section_label_raw": "34B8", "section_path": ["34", "B", "8"], "use_name": "tower portion of a building", "controls": [
-        { "clause_label_raw": "34B8(a)", "clause_path": ["34", "B", "8", "a"], "condition_text": "tower portion shall not exceed a building depth or building width of 35.0 metres" },
-        { "clause_label_raw": "34B8(b)", "clause_path": ["34", "B", "8", "b"], "condition_text": "tower portion shall not exceed a floor area of 750 square metres per floor" }
-      ] },
-      { "section_label_raw": "34B9", "section_path": ["34", "B", "9"], "metric": "tower_separation_minimum", "value": 25, "unit": "m" },
-      { "section_label_raw": "34B10", "section_path": ["34", "B", "10"], "metric_group": "tower_portion_setbacks", "controls": [
-        { "metric": "rear_yard_setback_minimum", "value": 12.5, "unit": "m" },
-        { "metric": "side_yard_setback_minimum", "value": 12.5, "unit": "m" }
-      ] },
-      { "section_label_raw": "34B11", "section_path": ["34", "B", "11"], "metric": "streetwall_height_maximum", "value": 3, "unit": "storey", "condition_text": "for buildings with a streetwall width no greater than 8 metres" },
-      { "section_label_raw": "34B12", "section_path": ["34", "B", "12"], "metric": "streetwall_height_maximum", "value": 3, "unit": "storey", "condition_text": "for buildings with a streetwall width greater than 8 metres, measured in streetwall portions no wider than 8 metres" },
-      { "section_label_raw": "34B13", "section_path": ["34", "B", "13"], "conditions": ["subject to Section 34B15"], "controls": [
-        { "clause_label_raw": "34B13(a)", "clause_path": ["34", "B", "13", "a"], "condition_text": "any mid-rise portion of a building shall have a streetwall stepback above its maximum streetwall height of at least 3 metres" },
-        { "clause_label_raw": "34B13(b)", "clause_path": ["34", "B", "13", "b"], "condition_text": "any tower portion of a building shall have a streetwall stepback above its maximum streetwall height of at least 4.5 metres" }
-      ] },
-      { "section_label_raw": "34B14", "section_path": ["34", "B", "14"], "condition_text": "subject to Section 34B15, a building shall have a stepback above its maximum streetwall height of at least 3 metres for building walls that face a property zoned R-1 or R-2 Zones" },
-      { "section_label_raw": "34B15", "section_path": ["34", "B", "15"], "condition_text": "no streetwall stepback is required for up to 20 percent of the building width along either a front or flanking lot line" }
+      {
+        "section_label_raw": "34B6",
+        "section_path": [
+          "34B",
+          "6"
+        ],
+        "metric": "building_height_maximum",
+        "value_text": "As shown on Map ZM-34, Maximum Height in the Dunbrack Multi Unit Zone",
+        "controls": [
+          {
+            "clause_label_raw": "34B6(a)",
+            "clause_path": [
+              "34B",
+              "6",
+              "a"
+            ],
+            "condition_text": "elevator enclosures and mechanical penthouse are set back from the roof edge a minimum of 5 metres"
+          },
+          {
+            "clause_label_raw": "34B6(b)",
+            "clause_path": [
+              "34B",
+              "6",
+              "b"
+            ],
+            "condition_text": "elevator enclosures and mechanical penthouse do not exceed 5.5 metres above the maximum building height"
+          },
+          {
+            "clause_label_raw": "34B6(c)",
+            "clause_path": [
+              "34B",
+              "6",
+              "c"
+            ],
+            "condition_text": "elevator enclosures and mechanical penthouse are limited to a maximum area of 30 percent of the total roof area on which they are located"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "34B7",
+        "section_path": [
+          "34B",
+          "7"
+        ],
+        "metric": "lot_coverage_maximum",
+        "value": 75,
+        "unit": "percent"
+      },
+      {
+        "section_label_raw": "34B8",
+        "section_path": [
+          "34B",
+          "8"
+        ],
+        "use_name": "tower portion of a building",
+        "controls": [
+          {
+            "clause_label_raw": "34B8(a)",
+            "clause_path": [
+              "34B",
+              "8",
+              "a"
+            ],
+            "condition_text": "tower portion shall not exceed a building depth or building width of 35.0 metres"
+          },
+          {
+            "clause_label_raw": "34B8(b)",
+            "clause_path": [
+              "34B",
+              "8",
+              "b"
+            ],
+            "condition_text": "tower portion shall not exceed a floor area of 750 square metres per floor"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "34B9",
+        "section_path": [
+          "34B",
+          "9"
+        ],
+        "metric": "tower_separation_minimum",
+        "value": 25,
+        "unit": "m"
+      },
+      {
+        "section_label_raw": "34B10",
+        "section_path": [
+          "34B",
+          "10"
+        ],
+        "metric_group": "tower_portion_setbacks",
+        "controls": [
+          {
+            "metric": "rear_yard_setback_minimum",
+            "value": 12.5,
+            "unit": "m"
+          },
+          {
+            "metric": "side_yard_setback_minimum",
+            "value": 12.5,
+            "unit": "m"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "34B11",
+        "section_path": [
+          "34B",
+          "11"
+        ],
+        "metric": "streetwall_height_maximum",
+        "value": 3,
+        "unit": "storey",
+        "condition_text": "for buildings with a streetwall width no greater than 8 metres"
+      },
+      {
+        "section_label_raw": "34B12",
+        "section_path": [
+          "34B",
+          "12"
+        ],
+        "metric": "streetwall_height_maximum",
+        "value": 3,
+        "unit": "storey",
+        "condition_text": "for buildings with a streetwall width greater than 8 metres, measured in streetwall portions no wider than 8 metres"
+      },
+      {
+        "section_label_raw": "34B13",
+        "section_path": [
+          "34B",
+          "13"
+        ],
+        "conditions": [
+          "subject to Section 34B15"
+        ],
+        "controls": [
+          {
+            "clause_label_raw": "34B13(a)",
+            "clause_path": [
+              "34B",
+              "13",
+              "a"
+            ],
+            "condition_text": "any mid-rise portion of a building shall have a streetwall stepback above its maximum streetwall height of at least 3 metres"
+          },
+          {
+            "clause_label_raw": "34B13(b)",
+            "clause_path": [
+              "34B",
+              "13",
+              "b"
+            ],
+            "condition_text": "any tower portion of a building shall have a streetwall stepback above its maximum streetwall height of at least 4.5 metres"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "34B14",
+        "section_path": [
+          "34B",
+          "14"
+        ],
+        "condition_text": "subject to Section 34B15, a building shall have a stepback above its maximum streetwall height of at least 3 metres for building walls that face a property zoned R-1 or R-2 Zones"
+      },
+      {
+        "section_label_raw": "34B15",
+        "section_path": [
+          "34B",
+          "15"
+        ],
+        "condition_text": "no streetwall stepback is required for up to 20 percent of the building width along either a front or flanking lot line"
+      }
     ],
     "site_layout_and_setback_controls": [
-      { "section_label_raw": "34B16", "section_path": ["34", "B", "16"], "use_name": "site layout", "controls": [
-        { "clause_label_raw": "34B16(a)", "clause_path": ["34", "B", "16", "a"], "condition_text": "surface parking lots or above ground parking structures shall only be placed in rear yards or side yards", "exception_text": "subject to Section 34B38, parking in a side yard shall be at least 9 metres from the public street and shall have a maximum width of 12 metres" },
-        { "clause_label_raw": "34B16(b)", "clause_path": ["34", "B", "16", "b"], "condition_text": "walkways shall connect all building entrances to a public sidewalk or to a public street" },
-        { "clause_label_raw": "34B16(c)", "clause_path": ["34", "B", "16", "c"], "condition_text": "where buildings abut a public street, the main building entrance shall face the street and be visible from the street" }
-      ] },
-      { "section_label_raw": "34B17", "section_path": ["34", "B", "17"], "controls": [
-        { "clause_label_raw": "34B17(a)", "clause_path": ["34", "B", "17", "a"], "metric": "front_or_flanking_setback_minimum", "value": 5, "unit": "m" },
-        { "clause_label_raw": "34B17(b)", "clause_path": ["34", "B", "17", "b"], "metric": "front_or_flanking_setback_maximum", "value": 9, "unit": "m" },
-        { "clause_label_raw": "34B17(c)", "clause_path": ["34", "B", "17", "c"], "metric_group": "minimum_side_and_rear_setbacks", "controls": [
-          { "metric": "side_yard_setback_minimum", "value": 5, "unit": "m" },
-          { "metric": "rear_yard_setback_minimum", "value": 5, "unit": "m" }
-        ] },
-        { "clause_label_raw": "34B17(d)", "clause_path": ["34", "B", "17", "d"], "condition_text": "subject to 34B17(e), apartment houses on lots abutting any R-1 or R-2 Zones shall have a minimum rear or side setback of at least 10 metres" },
-        { "clause_label_raw": "34B17(e)", "clause_path": ["34", "B", "17", "e"], "condition_text": "setback of at least 18 metres from properties zoned R-2T" },
-        { "clause_label_raw": "34B17(f)", "clause_path": ["34", "B", "17", "f"], "condition_text": "setback of at least 30 metres from properties zoned R-2T for any portion of a main building within 100 metres of Willett Street" }
-      ] },
-      { "section_label_raw": "34B18", "section_path": ["34", "B", "18"], "condition_text": "subject to Section 34B17, below the height of the streetwall, no streetwall may be more than 64 metres wide along any streetline for portions of a main building at least 0.6 metres above average finished grade" },
-      { "section_label_raw": "34B19", "section_path": ["34", "B", "19"], "condition_text": "below the height of the streetwall, the streetwall may exceed 64 metres up to 88 metres along one streetline where the following apply", "controls": [
-        { "clause_label_raw": "34B19(a)", "clause_path": ["34", "B", "19", "a"], "condition_text": "all setbacks, separation distances, and stepbacks are met" },
-        { "clause_label_raw": "34B19(b)", "clause_path": ["34", "B", "19", "b"], "condition_text": "no more than two towers are placed on the same podium" },
-        { "clause_label_raw": "34B19(c)", "clause_path": ["34", "B", "19", "c"], "condition_text": "above the streetwall, no dimension of a tower exceeds a width of 21.5 metres facing one streetline" },
-        { "clause_label_raw": "34B19(d)", "clause_path": ["34", "B", "19", "d"], "condition_text": "a section of the streetwall at least 16 metres in length and extending the full height of the streetwall shall be recessed at least 6 metres" }
-      ] }
+      {
+        "section_label_raw": "34B16",
+        "section_path": [
+          "34B",
+          "16"
+        ],
+        "use_name": "site layout",
+        "controls": [
+          {
+            "clause_label_raw": "34B16(a)",
+            "clause_path": [
+              "34B",
+              "16",
+              "a"
+            ],
+            "condition_text": "surface parking lots or above ground parking structures shall only be placed in rear yards or side yards",
+            "exception_text": "subject to Section 34B38, parking in a side yard shall be at least 9 metres from the public street and shall have a maximum width of 12 metres"
+          },
+          {
+            "clause_label_raw": "34B16(b)",
+            "clause_path": [
+              "34B",
+              "16",
+              "b"
+            ],
+            "condition_text": "walkways shall connect all building entrances to a public sidewalk or to a public street"
+          },
+          {
+            "clause_label_raw": "34B16(c)",
+            "clause_path": [
+              "34B",
+              "16",
+              "c"
+            ],
+            "condition_text": "where buildings abut a public street, the main building entrance shall face the street and be visible from the street"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "34B17",
+        "section_path": [
+          "34B",
+          "17"
+        ],
+        "controls": [
+          {
+            "clause_label_raw": "34B17(a)",
+            "clause_path": [
+              "34B",
+              "17",
+              "a"
+            ],
+            "metric": "front_or_flanking_setback_minimum",
+            "value": 5,
+            "unit": "m"
+          },
+          {
+            "clause_label_raw": "34B17(b)",
+            "clause_path": [
+              "34B",
+              "17",
+              "b"
+            ],
+            "metric": "front_or_flanking_setback_maximum",
+            "value": 9,
+            "unit": "m"
+          },
+          {
+            "clause_label_raw": "34B17(c)",
+            "clause_path": [
+              "34B",
+              "17",
+              "c"
+            ],
+            "metric_group": "minimum_side_and_rear_setbacks",
+            "controls": [
+              {
+                "metric": "side_yard_setback_minimum",
+                "value": 5,
+                "unit": "m"
+              },
+              {
+                "metric": "rear_yard_setback_minimum",
+                "value": 5,
+                "unit": "m"
+              }
+            ]
+          },
+          {
+            "clause_label_raw": "34B17(d)",
+            "clause_path": [
+              "34B",
+              "17",
+              "d"
+            ],
+            "condition_text": "subject to 34B17(e), apartment houses on lots abutting any R-1 or R-2 Zones shall have a minimum rear or side setback of at least 10 metres"
+          },
+          {
+            "clause_label_raw": "34B17(e)",
+            "clause_path": [
+              "34B",
+              "17",
+              "e"
+            ],
+            "condition_text": "setback of at least 18 metres from properties zoned R-2T"
+          },
+          {
+            "clause_label_raw": "34B17(f)",
+            "clause_path": [
+              "34B",
+              "17",
+              "f"
+            ],
+            "condition_text": "setback of at least 30 metres from properties zoned R-2T for any portion of a main building within 100 metres of Willett Street"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "34B18",
+        "section_path": [
+          "34B",
+          "18"
+        ],
+        "condition_text": "subject to Section 34B17, below the height of the streetwall, no streetwall may be more than 64 metres wide along any streetline for portions of a main building at least 0.6 metres above average finished grade"
+      },
+      {
+        "section_label_raw": "34B19",
+        "section_path": [
+          "34B",
+          "19"
+        ],
+        "condition_text": "below the height of the streetwall, the streetwall may exceed 64 metres up to 88 metres along one streetline where the following apply",
+        "controls": [
+          {
+            "clause_label_raw": "34B19(a)",
+            "clause_path": [
+              "34B",
+              "19",
+              "a"
+            ],
+            "condition_text": "all setbacks, separation distances, and stepbacks are met"
+          },
+          {
+            "clause_label_raw": "34B19(b)",
+            "clause_path": [
+              "34B",
+              "19",
+              "b"
+            ],
+            "condition_text": "no more than two towers are placed on the same podium"
+          },
+          {
+            "clause_label_raw": "34B19(c)",
+            "clause_path": [
+              "34B",
+              "19",
+              "c"
+            ],
+            "condition_text": "above the streetwall, no dimension of a tower exceeds a width of 21.5 metres facing one streetline"
+          },
+          {
+            "clause_label_raw": "34B19(d)",
+            "clause_path": [
+              "34B",
+              "19",
+              "d"
+            ],
+            "condition_text": "a section of the streetwall at least 16 metres in length and extending the full height of the streetwall shall be recessed at least 6 metres"
+          }
+        ]
+      }
     ],
     "landscaping_signs_balconies_and_design": [
-      { "section_label_raw": "34B20", "section_path": ["34", "B", "20"], "use_name": "apartment house or shared housing uses", "controls": [
-        { "clause_label_raw": "34B20(a)", "clause_path": ["34", "B", "20", "a"], "condition_text": "where a rear or side yard abuts any R-1 or R-2 Zone, the required yard shall be landscaped and a 1.9-metre-high wooden or stone fence or opaque hedge shall be provided along the abutting property line" },
-        { "clause_label_raw": "34B20(b)", "clause_path": ["34", "B", "20", "b"], "condition_text": "the landscaped area shall be grassed or may use water features or natural ground covers", "exception_text": "trees, planters, and shrubs shall be planted at a rate of one tree and three shrubs per 4.5 metres of property line next to the yard" },
-        { "clause_label_raw": "34B20(c)", "clause_path": ["34", "B", "20", "c"], "condition_text": "any existing tree in a required landscaped buffer may be counted as 2 trees toward clause 34B20(b)" }
-      ] },
-      { "section_label_raw": "34B21", "section_path": ["34", "B", "21"], "condition_text": "landscaping is required for alteration of an existing building where the alteration increases the ground floor area by at least 20 percent" },
-      { "section_label_raw": "34B22(1)", "section_path": ["34", "B", "22", "1"], "condition_text": "at least 25 percent of all dwelling units in a new apartment house use, rounded up to the nearest whole number, shall contain at least two bedrooms" },
-      { "section_label_raw": "34B22(2)", "section_path": ["34", "B", "22", "2"], "condition_text": "notwithstanding 34B22(1), bedroom-count requirements do not apply for residential multi-unit dwelling use beginning construction before 2028-04-01" },
-      { "section_label_raw": "34B23", "section_path": ["34", "B", "23"], "use_name": "signs for commercial uses", "controls": [
-        { "clause_label_raw": "34B23(a)", "clause_path": ["34", "B", "23", "a"], "condition_text": "illuminated signs shall not cause a glare or hazard" },
-        { "clause_label_raw": "34B23(b)", "clause_path": ["34", "B", "23", "b"], "condition_text": "fascia signs shall not extend beyond the extremities of a wall on which they are affixed" },
-        { "clause_label_raw": "34B23(c)", "clause_path": ["34", "B", "23", "c"], "condition_text": "maximum combined size of fascia signs shall be no greater than 10 percent of the total area of the wall to which they are affixed" },
-        { "clause_label_raw": "34B23(d)", "clause_path": ["34", "B", "23", "d"], "condition_text": "aggregate area of all window signs shall not exceed 25 percent of the window or glass area of a door" },
-        { "clause_label_raw": "34B23(e)", "clause_path": ["34", "B", "23", "e"], "condition_text": "signs on awnings shall not cover more than 25 percent of the awning area and text length shall not exceed 80 percent of the front valance length" },
-        { "clause_label_raw": "34B23(f)", "clause_path": ["34", "B", "23", "f"], "condition_text": "no signs shall be permitted on the roof of a building" }
-      ] },
-      { "section_label_raw": "34B24", "section_path": ["34", "B", "24"], "use_name": "balconies for apartment house and shared housing uses", "controls": [
-        { "clause_label_raw": "34B24(a)", "clause_path": ["34", "B", "24", "a"], "condition_text": "no balcony shall be built closer than 2 metres to a side or rear property line, excluding patios for dwelling units located at grade" }
-      ] },
-      { "section_label_raw": "34B25", "section_path": ["34", "B", "25"], "controls": [
-        { "clause_label_raw": "34B25(a)", "clause_path": ["34", "B", "25", "a"], "condition_text": "balconies, unenclosed porches, verandas, canopies, and awnings may project up to 1.5 metres from any exterior wall at the ground floor" },
-        { "clause_label_raw": "34B25(b)", "clause_path": ["34", "B", "25", "b"], "condition_text": "the same elements may project up to 2.0 metres from any exterior wall at the second storey or above, provided total balcony width on one storey is not more than 40 percent of the building wall width" }
-      ] },
-      { "section_label_raw": "34B26", "section_path": ["34", "B", "26"], "use_name": "external building materials", "controls": [
-        { "clause_label_raw": "34B26(a)", "clause_path": ["34", "B", "26", "a"], "condition_text": "vinyl is prohibited" },
-        { "clause_label_raw": "34B26(b)", "clause_path": ["34", "B", "26", "b"], "condition_text": "plywood is prohibited" },
-        { "clause_label_raw": "34B26(c)", "clause_path": ["34", "B", "26", "c"], "condition_text": "concrete block is prohibited" },
-        { "clause_label_raw": "34B26(d)", "clause_path": ["34", "B", "26", "d"], "condition_text": "exterior insulation and finish systems where stucco is applied to rigid insulation are prohibited" },
-        { "clause_label_raw": "34B26(e)", "clause_path": ["34", "B", "26", "e"], "condition_text": "darkly tinted or mirrored glass on the ground floor is prohibited, excluding spandrel panels" }
-      ] },
-      { "section_label_raw": "34B27", "section_path": ["34", "B", "27"], "condition_text": "grade-related units, work-live units, or a combination of the two are required on the ground floor of building walls that face a public street when the wall is within 9 metres of the public street and residential uses make up more than 50 percent of the width of the ground floor wall" },
-      { "section_label_raw": "34B28", "section_path": ["34", "B", "28"], "controls": [
-        { "clause_label_raw": "34B28(a)", "clause_path": ["34", "B", "28", "a"], "condition_text": "at least 70 percent of the ground floor of a building facing a streetline shall commence no lower than 1.5 metres below the streetline grade" },
-        { "clause_label_raw": "34B28(b)", "clause_path": ["34", "B", "28", "b"], "condition_text": "at least 70 percent of the ground floor of a building facing a streetline shall not commence any higher than 1.5 metres above the streetline grade" }
-      ] },
-      { "section_label_raw": "34B29", "section_path": ["34", "B", "29"], "condition_text": "for grade-related unit uses in the streetwall, between 25 percent and 80 percent of each unit's ground floor facade shall consist of clear glass glazing" },
-      { "section_label_raw": "34B30", "section_path": ["34", "B", "30"], "condition_text": "for at-grade commercial uses in the streetwall, between 50 percent and 80 percent of the ground floor facade dedicated to commercial uses shall consist of clear glass glazing" },
-      { "section_label_raw": "34B31", "section_path": ["34", "B", "31"], "use_name": "work-live units", "controls": [
-        { "clause_label_raw": "34B31(a)", "clause_path": ["34", "B", "31", "a"], "condition_text": "only the listed commercial uses are permitted", "subcontrols": [
-          { "clause_label_raw": "34B31(a)(i)", "clause_path": ["34", "B", "31", "a", "i"], "use_name": "studio uses" },
-          { "clause_label_raw": "34B31(a)(ii)", "clause_path": ["34", "B", "31", "a", "ii"], "use_name": "office uses" },
-          { "clause_label_raw": "34B31(a)(iii)", "clause_path": ["34", "B", "31", "a", "iii"], "use_name": "medical clinic uses" },
-          { "clause_label_raw": "34B31(a)(iv)", "clause_path": ["34", "B", "31", "a", "iv"], "use_name": "personal service uses" },
-          { "clause_label_raw": "34B31(a)(v)", "clause_path": ["34", "B", "31", "a", "v"], "use_name": "retail of products produced on the premises or associated with a service provided on the premises" }
-        ] },
-        { "clause_label_raw": "34B31(b)", "clause_path": ["34", "B", "31", "b"], "condition_text": "commercial use may occupy a maximum of 50 percent of the total floor area up to a maximum of 140 square metres" },
-        { "clause_label_raw": "34B31(c)", "clause_path": ["34", "B", "31", "c"], "condition_text": "the commercial use shall be located on a ground floor" }
-      ] },
-      { "section_label_raw": "34B32", "section_path": ["34", "B", "32"], "condition_text": "the principal operator of a business within a work-live unit shall reside in the unit and may have up to three non-resident employees" },
-      { "section_label_raw": "34B33", "section_path": ["34", "B", "33"], "use_name": "amenity space", "condition_text": "apartment house uses shall provide 5 square metres per unit and shared housing uses shall provide 5 square metres per bedroom", "controls": [
-        { "clause_label_raw": "34B33(a)", "clause_path": ["34", "B", "33", "a"], "condition_text": "interior amenity space shall include a fitness room or community room of a minimum size of 40 square metres" },
-        { "clause_label_raw": "34B33(b)", "clause_path": ["34", "B", "33", "b"], "condition_text": "outdoor amenity space shall include a rooftop patio or deck of a minimum size of 40 square metres or an at grade private open space of a minimum size of 40 square metres" }
-      ] },
-      { "section_label_raw": "34B34", "section_path": ["34", "B", "34"], "condition_text": "at-grade private open spaces with a contiguous area of 15 square metres or greater shall provide barrier-free access and permanent seating" },
-      { "section_label_raw": "34B35", "section_path": ["34", "B", "35"], "condition_text": "at-grade private open spaces with a contiguous area of 15 square metres or greater shall provide one or more listed materials for groundcover", "controls": [
-        { "clause_label_raw": "34B35(a)", "clause_path": ["34", "B", "35", "a"], "use_name": "vegetation" },
-        { "clause_label_raw": "34B35(b)", "clause_path": ["34", "B", "35", "b"], "use_name": "brick pavers, stone pavers, or concrete pavers" },
-        { "clause_label_raw": "34B35(c)", "clause_path": ["34", "B", "35", "c"], "use_name": "wood or wood-like materials" }
-      ] },
-      { "section_label_raw": "34B36", "section_path": ["34", "B", "36"], "condition_text": "at-grade private open spaces abutting public sidewalks shall provide at least one contiguous pedestrian connection of not less than 2.0 metres wide to the public sidewalk" },
-      { "section_label_raw": "34B37", "section_path": ["34", "B", "37"], "use_name": "parking", "controls": [
-        { "clause_label_raw": "34B37(a)", "clause_path": ["34", "B", "37", "a"], "condition_text": "notwithstanding subsection 9(d), no minimum parking requirements apply to retail, service, office and restaurant uses" },
-        { "clause_label_raw": "34B37(b)", "clause_path": ["34", "B", "37", "b"], "status": "repealed" },
-        { "clause_label_raw": "34B37(c)", "clause_path": ["34", "B", "37", "c"], "condition_text": "where parking requirements result in a fraction, the requirement shall be rounded down to the nearest whole number" }
-      ] },
-      { "section_label_raw": "34B38", "section_path": ["34", "B", "38"], "condition_text": "parking lots or parking structures in a side yard shall be screened from view by a 1 metre to 1.5 metre high wooden or stone fence, or row of shrubs parallel to the street", "exception_text": "gaps in the fence or row of shrubs are permitted for driveways or walkways" },
-      { "section_label_raw": "34B39", "section_path": ["34", "B", "39"], "condition_text": "all outdoor lighting shall be oriented away from adjacent properties and public rights of way" },
-      { "section_label_raw": "34B40", "section_path": ["34", "B", "40"], "condition_text": "all outdoor lighting, other than ground level lighting for pathways, shall be equipped with full cut-off light fixtures" }
+      {
+        "section_label_raw": "34B20",
+        "section_path": [
+          "34B",
+          "20"
+        ],
+        "use_name": "apartment house or shared housing uses",
+        "controls": [
+          {
+            "clause_label_raw": "34B20(a)",
+            "clause_path": [
+              "34B",
+              "20",
+              "a"
+            ],
+            "condition_text": "where a rear or side yard abuts any R-1 or R-2 Zone, the required yard shall be landscaped and a 1.9-metre-high wooden or stone fence or opaque hedge shall be provided along the abutting property line"
+          },
+          {
+            "clause_label_raw": "34B20(b)",
+            "clause_path": [
+              "34B",
+              "20",
+              "b"
+            ],
+            "condition_text": "the landscaped area shall be grassed or may use water features or natural ground covers",
+            "exception_text": "trees, planters, and shrubs shall be planted at a rate of one tree and three shrubs per 4.5 metres of property line next to the yard"
+          },
+          {
+            "clause_label_raw": "34B20(c)",
+            "clause_path": [
+              "34B",
+              "20",
+              "c"
+            ],
+            "condition_text": "any existing tree in a required landscaped buffer may be counted as 2 trees toward clause 34B20(b)"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "34B21",
+        "section_path": [
+          "34B",
+          "21"
+        ],
+        "condition_text": "landscaping is required for alteration of an existing building where the alteration increases the ground floor area by at least 20 percent"
+      },
+      {
+        "section_label_raw": "34B22(1)",
+        "section_path": [
+          "34B",
+          "22",
+          "1"
+        ],
+        "condition_text": "at least 25 percent of all dwelling units in a new apartment house use, rounded up to the nearest whole number, shall contain at least two bedrooms"
+      },
+      {
+        "section_label_raw": "34B22(2)",
+        "section_path": [
+          "34B",
+          "22",
+          "2"
+        ],
+        "condition_text": "notwithstanding 34B22(1), bedroom-count requirements do not apply for residential multi-unit dwelling use beginning construction before 2028-04-01"
+      },
+      {
+        "section_label_raw": "34B23",
+        "section_path": [
+          "34B",
+          "23"
+        ],
+        "use_name": "signs for commercial uses",
+        "controls": [
+          {
+            "clause_label_raw": "34B23(a)",
+            "clause_path": [
+              "34B",
+              "23",
+              "a"
+            ],
+            "condition_text": "illuminated signs shall not cause a glare or hazard"
+          },
+          {
+            "clause_label_raw": "34B23(b)",
+            "clause_path": [
+              "34B",
+              "23",
+              "b"
+            ],
+            "condition_text": "fascia signs shall not extend beyond the extremities of a wall on which they are affixed"
+          },
+          {
+            "clause_label_raw": "34B23(c)",
+            "clause_path": [
+              "34B",
+              "23",
+              "c"
+            ],
+            "condition_text": "maximum combined size of fascia signs shall be no greater than 10 percent of the total area of the wall to which they are affixed"
+          },
+          {
+            "clause_label_raw": "34B23(d)",
+            "clause_path": [
+              "34B",
+              "23",
+              "d"
+            ],
+            "condition_text": "aggregate area of all window signs shall not exceed 25 percent of the window or glass area of a door"
+          },
+          {
+            "clause_label_raw": "34B23(e)",
+            "clause_path": [
+              "34B",
+              "23",
+              "e"
+            ],
+            "condition_text": "signs on awnings shall not cover more than 25 percent of the awning area and text length shall not exceed 80 percent of the front valance length"
+          },
+          {
+            "clause_label_raw": "34B23(f)",
+            "clause_path": [
+              "34B",
+              "23",
+              "f"
+            ],
+            "condition_text": "no signs shall be permitted on the roof of a building"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "34B24",
+        "section_path": [
+          "34B",
+          "24"
+        ],
+        "use_name": "balconies for apartment house and shared housing uses",
+        "controls": [
+          {
+            "clause_label_raw": "34B24(a)",
+            "clause_path": [
+              "34B",
+              "24",
+              "a"
+            ],
+            "condition_text": "no balcony shall be built closer than 2 metres to a side or rear property line, excluding patios for dwelling units located at grade"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "34B25",
+        "section_path": [
+          "34B",
+          "25"
+        ],
+        "controls": [
+          {
+            "clause_label_raw": "34B25(a)",
+            "clause_path": [
+              "34B",
+              "25",
+              "a"
+            ],
+            "condition_text": "balconies, unenclosed porches, verandas, canopies, and awnings may project up to 1.5 metres from any exterior wall at the ground floor"
+          },
+          {
+            "clause_label_raw": "34B25(b)",
+            "clause_path": [
+              "34B",
+              "25",
+              "b"
+            ],
+            "condition_text": "the same elements may project up to 2.0 metres from any exterior wall at the second storey or above, provided total balcony width on one storey is not more than 40 percent of the building wall width"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "34B26",
+        "section_path": [
+          "34B",
+          "26"
+        ],
+        "use_name": "external building materials",
+        "controls": [
+          {
+            "clause_label_raw": "34B26(a)",
+            "clause_path": [
+              "34B",
+              "26",
+              "a"
+            ],
+            "condition_text": "vinyl is prohibited"
+          },
+          {
+            "clause_label_raw": "34B26(b)",
+            "clause_path": [
+              "34B",
+              "26",
+              "b"
+            ],
+            "condition_text": "plywood is prohibited"
+          },
+          {
+            "clause_label_raw": "34B26(c)",
+            "clause_path": [
+              "34B",
+              "26",
+              "c"
+            ],
+            "condition_text": "concrete block is prohibited"
+          },
+          {
+            "clause_label_raw": "34B26(d)",
+            "clause_path": [
+              "34B",
+              "26",
+              "d"
+            ],
+            "condition_text": "exterior insulation and finish systems where stucco is applied to rigid insulation are prohibited"
+          },
+          {
+            "clause_label_raw": "34B26(e)",
+            "clause_path": [
+              "34B",
+              "26",
+              "e"
+            ],
+            "condition_text": "darkly tinted or mirrored glass on the ground floor is prohibited, excluding spandrel panels"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "34B27",
+        "section_path": [
+          "34B",
+          "27"
+        ],
+        "condition_text": "grade-related units, work-live units, or a combination of the two are required on the ground floor of building walls that face a public street when the wall is within 9 metres of the public street and residential uses make up more than 50 percent of the width of the ground floor wall"
+      },
+      {
+        "section_label_raw": "34B28",
+        "section_path": [
+          "34B",
+          "28"
+        ],
+        "controls": [
+          {
+            "clause_label_raw": "34B28(a)",
+            "clause_path": [
+              "34B",
+              "28",
+              "a"
+            ],
+            "condition_text": "at least 70 percent of the ground floor of a building facing a streetline shall commence no lower than 1.5 metres below the streetline grade"
+          },
+          {
+            "clause_label_raw": "34B28(b)",
+            "clause_path": [
+              "34B",
+              "28",
+              "b"
+            ],
+            "condition_text": "at least 70 percent of the ground floor of a building facing a streetline shall not commence any higher than 1.5 metres above the streetline grade"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "34B29",
+        "section_path": [
+          "34B",
+          "29"
+        ],
+        "condition_text": "for grade-related unit uses in the streetwall, between 25 percent and 80 percent of each unit's ground floor facade shall consist of clear glass glazing"
+      },
+      {
+        "section_label_raw": "34B30",
+        "section_path": [
+          "34B",
+          "30"
+        ],
+        "condition_text": "for at-grade commercial uses in the streetwall, between 50 percent and 80 percent of the ground floor facade dedicated to commercial uses shall consist of clear glass glazing"
+      },
+      {
+        "section_label_raw": "34B31",
+        "section_path": [
+          "34B",
+          "31"
+        ],
+        "use_name": "work-live units",
+        "controls": [
+          {
+            "clause_label_raw": "34B31(a)",
+            "clause_path": [
+              "34B",
+              "31",
+              "a"
+            ],
+            "condition_text": "only the listed commercial uses are permitted",
+            "subcontrols": [
+              {
+                "clause_label_raw": "34B31(a)(i)",
+                "clause_path": [
+                  "34B",
+                  "31",
+                  "a",
+                  "i"
+                ],
+                "use_name": "studio uses"
+              },
+              {
+                "clause_label_raw": "34B31(a)(ii)",
+                "clause_path": [
+                  "34B",
+                  "31",
+                  "a",
+                  "ii"
+                ],
+                "use_name": "office uses"
+              },
+              {
+                "clause_label_raw": "34B31(a)(iii)",
+                "clause_path": [
+                  "34B",
+                  "31",
+                  "a",
+                  "iii"
+                ],
+                "use_name": "medical clinic uses"
+              },
+              {
+                "clause_label_raw": "34B31(a)(iv)",
+                "clause_path": [
+                  "34B",
+                  "31",
+                  "a",
+                  "iv"
+                ],
+                "use_name": "personal service uses"
+              },
+              {
+                "clause_label_raw": "34B31(a)(v)",
+                "clause_path": [
+                  "34B",
+                  "31",
+                  "a",
+                  "v"
+                ],
+                "use_name": "retail of products produced on the premises or associated with a service provided on the premises"
+              }
+            ]
+          },
+          {
+            "clause_label_raw": "34B31(b)",
+            "clause_path": [
+              "34B",
+              "31",
+              "b"
+            ],
+            "condition_text": "commercial use may occupy a maximum of 50 percent of the total floor area up to a maximum of 140 square metres"
+          },
+          {
+            "clause_label_raw": "34B31(c)",
+            "clause_path": [
+              "34B",
+              "31",
+              "c"
+            ],
+            "condition_text": "the commercial use shall be located on a ground floor"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "34B32",
+        "section_path": [
+          "34B",
+          "32"
+        ],
+        "condition_text": "the principal operator of a business within a work-live unit shall reside in the unit and may have up to three non-resident employees"
+      },
+      {
+        "section_label_raw": "34B33",
+        "section_path": [
+          "34B",
+          "33"
+        ],
+        "use_name": "amenity space",
+        "condition_text": "apartment house uses shall provide 5 square metres per unit and shared housing uses shall provide 5 square metres per bedroom",
+        "controls": [
+          {
+            "clause_label_raw": "34B33(a)",
+            "clause_path": [
+              "34B",
+              "33",
+              "a"
+            ],
+            "condition_text": "interior amenity space shall include a fitness room or community room of a minimum size of 40 square metres"
+          },
+          {
+            "clause_label_raw": "34B33(b)",
+            "clause_path": [
+              "34B",
+              "33",
+              "b"
+            ],
+            "condition_text": "outdoor amenity space shall include a rooftop patio or deck of a minimum size of 40 square metres or an at grade private open space of a minimum size of 40 square metres"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "34B34",
+        "section_path": [
+          "34B",
+          "34"
+        ],
+        "condition_text": "at-grade private open spaces with a contiguous area of 15 square metres or greater shall provide barrier-free access and permanent seating"
+      },
+      {
+        "section_label_raw": "34B35",
+        "section_path": [
+          "34B",
+          "35"
+        ],
+        "condition_text": "at-grade private open spaces with a contiguous area of 15 square metres or greater shall provide one or more listed materials for groundcover",
+        "controls": [
+          {
+            "clause_label_raw": "34B35(a)",
+            "clause_path": [
+              "34B",
+              "35",
+              "a"
+            ],
+            "use_name": "vegetation"
+          },
+          {
+            "clause_label_raw": "34B35(b)",
+            "clause_path": [
+              "34B",
+              "35",
+              "b"
+            ],
+            "use_name": "brick pavers, stone pavers, or concrete pavers"
+          },
+          {
+            "clause_label_raw": "34B35(c)",
+            "clause_path": [
+              "34B",
+              "35",
+              "c"
+            ],
+            "use_name": "wood or wood-like materials"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "34B36",
+        "section_path": [
+          "34B",
+          "36"
+        ],
+        "condition_text": "at-grade private open spaces abutting public sidewalks shall provide at least one contiguous pedestrian connection of not less than 2.0 metres wide to the public sidewalk"
+      },
+      {
+        "section_label_raw": "34B37",
+        "section_path": [
+          "34B",
+          "37"
+        ],
+        "use_name": "parking",
+        "controls": [
+          {
+            "clause_label_raw": "34B37(a)",
+            "clause_path": [
+              "34B",
+              "37",
+              "a"
+            ],
+            "condition_text": "notwithstanding subsection 9(d), no minimum parking requirements apply to retail, service, office and restaurant uses"
+          },
+          {
+            "clause_label_raw": "34B37(b)",
+            "clause_path": [
+              "34B",
+              "37",
+              "b"
+            ],
+            "status": "repealed"
+          },
+          {
+            "clause_label_raw": "34B37(c)",
+            "clause_path": [
+              "34B",
+              "37",
+              "c"
+            ],
+            "condition_text": "where parking requirements result in a fraction, the requirement shall be rounded down to the nearest whole number"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "34B38",
+        "section_path": [
+          "34B",
+          "38"
+        ],
+        "condition_text": "parking lots or parking structures in a side yard shall be screened from view by a 1 metre to 1.5 metre high wooden or stone fence, or row of shrubs parallel to the street",
+        "exception_text": "gaps in the fence or row of shrubs are permitted for driveways or walkways"
+      },
+      {
+        "section_label_raw": "34B39",
+        "section_path": [
+          "34B",
+          "39"
+        ],
+        "condition_text": "all outdoor lighting shall be oriented away from adjacent properties and public rights of way"
+      },
+      {
+        "section_label_raw": "34B40",
+        "section_path": [
+          "34B",
+          "40"
+        ],
+        "condition_text": "all outdoor lighting, other than ground level lighting for pathways, shall be equipped with full cut-off light fixtures"
+      }
     ]
   },
   "use_specific_standards": [],
   "sign_controls": [],
   "spatial_features_needed": [
-    { "feature_key": "zm_34_dunbrack_maximum_height_map", "feature_class": "site_specific_area", "source_type": "polygon_from_zm_34", "reason": "controls 34B6" },
-    { "feature_key": "willett_street_buffer_100m", "feature_class": "road_centerline", "source_type": "derived_buffer_rule", "reason": "controls 34B17(f)" }
+    {
+      "feature_key": "zm_34_dunbrack_maximum_height_map",
+      "feature_class": "site_specific_area",
+      "source_type": "polygon_from_zm_34",
+      "reason": "controls 34B6"
+    },
+    {
+      "feature_key": "willett_street_buffer_100m",
+      "feature_class": "road_centerline",
+      "source_type": "derived_buffer_rule",
+      "reason": "controls 34B17(f)"
+    }
   ],
   "open_issues": [],
   "citations": {
-    "permitted_uses": { "pdf_page": 95, "bylaw_page": 87 },
-    "requirements": { "pdf_page_start": 95, "pdf_page_end": 101, "bylaw_page_start": 87, "bylaw_page_end": 93 }
+    "permitted_uses": {
+      "pdf_page": 95,
+      "bylaw_page": 87
+    },
+    "requirements": {
+      "pdf_page_start": 95,
+      "pdf_page_end": 101,
+      "bylaw_page_start": 87,
+      "bylaw_page_end": 93
+    }
   }
 }

@@ -1,0 +1,52 @@
+{
+  "document_metadata": {
+    "jurisdiction": "Halifax Regional Municipality",
+    "bylaw_name": "Halifax Mainland Land Use By-law",
+    "source_document_path": "docs/halifaxmainlandlanduseby-law-edition231-eff-26feb02-minorrev2025-02922-toclinked_1.pdf",
+    "edition": "231",
+    "zone_code": "RPK",
+    "zone_name": "Regional Park Zone",
+    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
+    "zone_section_start": { "title_label_raw": "RPK (REGIONAL PARK) ZONE", "pdf_page": 153, "bylaw_page": 145 },
+    "zone_section_end_before": { "title_label_raw": "PA (PROTECTED AREA) ZONE", "pdf_page": 154, "bylaw_page": 146 }
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": ["62EC(1)(a)", "62EC(4)"],
+    "pending_review_clause_patterns": []
+  },
+  "general_context": {
+    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "RPK is an established class of use zone." },
+    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+  },
+  "permitted_uses": [
+    { "clause_label_raw": "62EC(1)(a)", "clause_path": ["62EC", "1", "a"], "use_type": "recreation_use", "use_name": "recreation uses" },
+    { "clause_label_raw": "62EC(1)(b)", "clause_path": ["62EC", "1", "b"], "use_type": "institutional_or_open_space_use", "use_name": "conservation uses" },
+    { "clause_label_raw": "62EC(1)(c)", "clause_path": ["62EC", "1", "c"], "use_type": "accessory_use", "use_name": "uses accessory to the foregoing uses" }
+  ],
+  "prohibitions": [
+    { "clause_label_raw": "62EC(2)", "clause_path": ["62EC", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more of the uses set out in subsection 62EC(1)." },
+    { "clause_label_raw": "62EC(3)", "clause_path": ["62EC", "3"], "rule_type": "use_prohibition", "summary": "No land or building use in whole or in part for any purpose other than one or more of the uses set out in subsection 62EC(1)." }
+  ],
+  "requirements": {
+    "dimensional_controls": [
+      {
+        "section_label_raw": "62EC(4)",
+        "section_path": ["62EC", "4"],
+        "controls": [
+          { "rule_type": "front_yard_setback_minimum", "measure": { "minimum": 20, "unit": "m" }, "condition_text": "Minimum front or flankage yard." },
+          { "rule_type": "yard_and_building_separation_bundle", "condition_text": "Minimum side or rear yard is 20 metres." },
+          { "rule_type": "lot_coverage_maximum", "condition_text": "Maximum lot coverage is 50 percent for lots less than 4 hectares in area, or 5 percent for lots 4 hectares or more in area." }
+        ]
+      }
+    ]
+  },
+  "sign_controls": [],
+  "use_specific_standards": [],
+  "spatial_features_needed": [],
+  "open_issues": [],
+  "citations": {
+    "permitted_uses": { "pdf_page": 153, "bylaw_page": 145 },
+    "requirements": { "pdf_page": 153, "bylaw_page": 145 }
+  }
+}

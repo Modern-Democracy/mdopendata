@@ -1,0 +1,232 @@
+{
+  "document_metadata": {
+    "jurisdiction": "Halifax Regional Municipality",
+    "bylaw_name": "Halifax Mainland Land Use By-law",
+    "source_document_path": "docs/halifaxmainlandlanduseby-law-edition231-eff-26feb02-minorrev2025-02922-toclinked_1.pdf",
+    "edition": "231",
+    "zone_code": "WC",
+    "zone_name": "Western Common Zone",
+    "zone_established_by": {
+      "clause_label_raw": "16(1)",
+      "pdf_page": 53,
+      "bylaw_page": 45
+    },
+    "zone_section_start": {
+      "title_label_raw": "WC ZONE: WESTERN COMMON ZONE",
+      "pdf_page": 140,
+      "bylaw_page": 132
+    },
+    "zone_section_end_before": {
+      "title_label_raw": "WCDD ZONE: WENTWORTH COMPREHENSIVE DEVELOPMENT DISTRICT",
+      "pdf_page": 141,
+      "bylaw_page": 133
+    }
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": [
+      "62AA(1)(c)",
+      "62AA(4)(a)"
+    ],
+    "pending_review_clause_patterns": []
+  },
+  "general_context": {
+    "zone_class_reference": {
+      "section_label_raw": "16(1)",
+      "summary": "WC is an established class of use zone."
+    },
+    "general_boundary_rule_refs": [
+      "17(a)-(h)",
+      "18",
+      "19"
+    ]
+  },
+  "permitted_uses": [
+    {
+      "clause_label_raw": "62AA(1)(c)",
+      "clause_path": [
+        "62AA",
+        "1",
+        "c"
+      ],
+      "use_type": "institutional_or_open_space_use",
+      "use_name": "conservation related uses"
+    },
+    {
+      "clause_label_raw": "62AA(1)(d)",
+      "clause_path": [
+        "62AA",
+        "1",
+        "d"
+      ],
+      "use_type": "recreation_use",
+      "use_name": "trails, picnic areas and wilderness campsites"
+    },
+    {
+      "clause_label_raw": "62AA(1)(e)",
+      "clause_path": [
+        "62AA",
+        "1",
+        "e"
+      ],
+      "use_type": "institutional_or_open_space_use",
+      "use_name": "public and private parks and playgrounds"
+    },
+    {
+      "clause_label_raw": "62AA(1)(f)",
+      "clause_path": [
+        "62AA",
+        "1",
+        "f"
+      ],
+      "use_type": "recreation_use",
+      "use_name": "recreation uses",
+      "conditions": [
+        "excluding golf courses"
+      ]
+    },
+    {
+      "clause_label_raw": "62AA(1)(g)",
+      "clause_path": [
+        "62AA",
+        "1",
+        "g"
+      ],
+      "use_type": "institutional_or_open_space_use",
+      "use_name": "historic sites and monuments"
+    },
+    {
+      "clause_label_raw": "62AA(1)(h)",
+      "clause_path": [
+        "62AA",
+        "1",
+        "h"
+      ],
+      "use_type": "institutional_or_open_space_use",
+      "use_name": "churches and cemeteries"
+    },
+    {
+      "clause_label_raw": "62AA(1)(i)",
+      "clause_path": [
+        "62AA",
+        "1",
+        "i"
+      ],
+      "use_type": "accessory_use",
+      "use_name": "uses accessory to the foregoing"
+    }
+  ],
+  "prohibitions": [
+    {
+      "clause_label_raw": "62AA(2)",
+      "clause_path": [
+        "62AA",
+        "2"
+      ],
+      "rule_type": "development_prohibition",
+      "summary": "No development for any purpose other than one or more of the uses set out in subsection 62AA(1)."
+    },
+    {
+      "clause_label_raw": "62AA(3)",
+      "clause_path": [
+        "62AA",
+        "3"
+      ],
+      "rule_type": "use_prohibition",
+      "summary": "No land or building use in whole or in part for any purpose other than one or more of the uses set out in subsection 62AA(1)."
+    }
+  ],
+  "requirements": {
+    "dimensional_controls": [
+      {
+        "clause_label_raw": "62AA(4)(a)",
+        "clause_path": [
+          "62AA",
+          "4",
+          "a"
+        ],
+        "rule_type": "lot_area_minimum",
+        "measure": {
+          "minimum": 100000,
+          "unit": "sq_ft",
+          "metric_minimum": 9289,
+          "metric_unit": "sq_m"
+        }
+      },
+      {
+        "clause_label_raw": "62AA(4)(b)",
+        "clause_path": [
+          "62AA",
+          "4",
+          "b"
+        ],
+        "rule_type": "yard_and_building_separation_bundle",
+        "condition_text": "Minimum building setback from any property line is 30 feet (9.1 metres)."
+      },
+      {
+        "clause_label_raw": "62AA(4)(c)",
+        "clause_path": [
+          "62AA",
+          "4",
+          "c"
+        ],
+        "rule_type": "lot_coverage_maximum",
+        "measure": {
+          "maximum": 35,
+          "unit": "percent"
+        }
+      },
+      {
+        "clause_label_raw": "62AA(4)(d)",
+        "clause_path": [
+          "62AA",
+          "4",
+          "d"
+        ],
+        "rule_type": "building_height_maximum",
+        "measure": {
+          "maximum": 35,
+          "unit": "ft"
+        },
+        "condition_text": "Maximum height of main building."
+      },
+      {
+        "clause_label_raw": "62AA(4)(e)",
+        "clause_path": [
+          "62AA",
+          "4",
+          "e"
+        ],
+        "rule_type": "watercourse_setback_minimum",
+        "measure": {
+          "minimum": 300,
+          "unit": "ft",
+          "metric_minimum": 91.4,
+          "metric_unit": "m"
+        },
+        "condition_text": "No buildings, structures or parking areas shall be located within 300 feet (91.4 metres) of any watercourse except for buildings or structures intended for conservation related uses or non-motorized water related recreation uses."
+      }
+    ]
+  },
+  "sign_controls": [],
+  "use_specific_standards": [],
+  "spatial_features_needed": [
+    {
+      "feature_key": "wc_watercourses",
+      "feature_class": "hydrography_line_or_polygon",
+      "source_type": "external_geospatial_layer",
+      "reason": "Controls the 300 foot watercourse setback in clause 62AA(4)(e)."
+    }
+  ],
+  "open_issues": [],
+  "citations": {
+    "permitted_uses": {
+      "pdf_page": 140,
+      "bylaw_page": 132
+    },
+    "requirements": {
+      "pdf_page": 140,
+      "bylaw_page": 132
+    }
+  }
+}

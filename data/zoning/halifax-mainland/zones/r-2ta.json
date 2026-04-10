@@ -6,120 +6,817 @@
     "edition": "231",
     "zone_code": "R-2TA",
     "zone_name": "Dutch Village Road Townhouse Zone",
-    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 54, "bylaw_page": 46 },
-    "zone_section_start": { "title_label_raw": "R-2TA ZONE: DUTCH VILLAGE ROAD TOWNHOUSE ZONE", "pdf_page": 70, "bylaw_page": 62 },
-    "zone_section_end_before": { "title_label_raw": "R-2AM ZONE: GENERAL RESIDENTIAL CONVERSION ZONE", "pdf_page": 74, "bylaw_page": 66 }
+    "zone_established_by": {
+      "clause_label_raw": "16(1)",
+      "pdf_page": 54,
+      "bylaw_page": 46
+    },
+    "zone_section_start": {
+      "title_label_raw": "R-2TA ZONE: DUTCH VILLAGE ROAD TOWNHOUSE ZONE",
+      "pdf_page": 70,
+      "bylaw_page": 62
+    },
+    "zone_section_end_before": {
+      "title_label_raw": "R-2AM ZONE: GENERAL RESIDENTIAL CONVERSION ZONE",
+      "pdf_page": 74,
+      "bylaw_page": 66
+    }
   },
   "normalization_policy": {
     "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": ["28AO(1)(e)(i)", "28AT(1)", "28AQ(2)(a)", "28AR(1)", "28AS(1)"],
+    "approved_hierarchy_examples": [
+      "28AO(1)(e)(i)",
+      "28AT(1)",
+      "28AQ(2)(a)",
+      "28AR(1)",
+      "28AS(1)"
+    ],
     "pending_review_clause_patterns": []
   },
   "general_context": {
-    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "R-2TA is an established class of use zone." },
-    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+    "zone_class_reference": {
+      "section_label_raw": "16(1)",
+      "summary": "R-2TA is an established class of use zone."
+    },
+    "general_boundary_rule_refs": [
+      "17(a)-(h)",
+      "18",
+      "19"
+    ]
   },
   "permitted_uses": [
-    { "clause_label_raw": "28AO(1)(a)", "clause_path": ["28", "AO", "1", "a"], "use_type": "incorporated_zone_use_set", "use_name": "R-1 and R-2 uses" },
-    { "clause_label_raw": "28AO(1)(b)", "clause_path": ["28", "AO", "1", "b"], "use_type": "principal_use", "use_name": "townhouse building" },
-    { "clause_label_raw": "28AO(1)(c)", "clause_path": ["28", "AO", "1", "c"], "use_type": "principal_use", "use_name": "stacked townhouse building" },
-    { "clause_label_raw": "28AO(1)(d)", "clause_path": ["28", "AO", "1", "d"], "use_type": "existing_use_recognition", "use_name": "existing apartment house buildings" },
-    { "clause_label_raw": "28AO(1)(da)", "clause_path": ["28", "AO", "1", "d", "a"], "use_type": "residential_use", "use_name": "shared housing use", "conditions": ["maximum 10 bedrooms", "in conjunction with a permitted dwelling unit"] },
-    { "clause_label_raw": "28AO(1)(e)", "clause_path": ["28", "AO", "1", "e"], "use_type": "ancillary_nonresidential_use", "use_name": "home occupation uses", "prohibited_subuses": [
-      { "clause_label_raw": "28AO(1)(e)(i)", "clause_path": ["28", "AO", "1", "e", "i"], "use_name": "preparation and sale of food" },
-      { "clause_label_raw": "28AO(1)(e)(ii)", "clause_path": ["28", "AO", "1", "e", "ii"], "use_name": "keeping of animals" },
-      { "clause_label_raw": "28AO(1)(e)(iii)", "clause_path": ["28", "AO", "1", "e", "iii"], "use_name": "adult entertainment uses" },
-      { "clause_label_raw": "28AO(1)(e)(iv)", "clause_path": ["28", "AO", "1", "e", "iv"], "use_name": "taxi dispatch" }
-    ] },
-    { "clause_label_raw": "28AO(1)(f)", "clause_path": ["28", "AO", "1", "f"], "use_type": "use_with_specific_standard", "use_name": "daycare facilities" },
-    { "clause_label_raw": "28AO(1)(g)", "clause_path": ["28", "AO", "1", "g"], "use_type": "accessory_use", "use_name": "uses accessory to any of the foregoing uses" }
+    {
+      "clause_label_raw": "28AO(1)(a)",
+      "clause_path": [
+        "28AO",
+        "1",
+        "a"
+      ],
+      "use_type": "incorporated_zone_use_set",
+      "use_name": "R-1 and R-2 uses"
+    },
+    {
+      "clause_label_raw": "28AO(1)(b)",
+      "clause_path": [
+        "28AO",
+        "1",
+        "b"
+      ],
+      "use_type": "principal_use",
+      "use_name": "townhouse building"
+    },
+    {
+      "clause_label_raw": "28AO(1)(c)",
+      "clause_path": [
+        "28AO",
+        "1",
+        "c"
+      ],
+      "use_type": "principal_use",
+      "use_name": "stacked townhouse building"
+    },
+    {
+      "clause_label_raw": "28AO(1)(d)",
+      "clause_path": [
+        "28AO",
+        "1",
+        "d"
+      ],
+      "use_type": "existing_use_recognition",
+      "use_name": "existing apartment house buildings"
+    },
+    {
+      "clause_label_raw": "28AO(1)(da)",
+      "clause_path": [
+        "28AO",
+        "1",
+        "d",
+        "a"
+      ],
+      "use_type": "residential_use",
+      "use_name": "shared housing use",
+      "conditions": [
+        "maximum 10 bedrooms",
+        "in conjunction with a permitted dwelling unit"
+      ]
+    },
+    {
+      "clause_label_raw": "28AO(1)(e)",
+      "clause_path": [
+        "28AO",
+        "1",
+        "e"
+      ],
+      "use_type": "ancillary_nonresidential_use",
+      "use_name": "home occupation uses",
+      "prohibited_subuses": [
+        {
+          "clause_label_raw": "28AO(1)(e)(i)",
+          "clause_path": [
+            "28AO",
+            "1",
+            "e",
+            "i"
+          ],
+          "use_name": "preparation and sale of food"
+        },
+        {
+          "clause_label_raw": "28AO(1)(e)(ii)",
+          "clause_path": [
+            "28AO",
+            "1",
+            "e",
+            "ii"
+          ],
+          "use_name": "keeping of animals"
+        },
+        {
+          "clause_label_raw": "28AO(1)(e)(iii)",
+          "clause_path": [
+            "28AO",
+            "1",
+            "e",
+            "iii"
+          ],
+          "use_name": "adult entertainment uses"
+        },
+        {
+          "clause_label_raw": "28AO(1)(e)(iv)",
+          "clause_path": [
+            "28AO",
+            "1",
+            "e",
+            "iv"
+          ],
+          "use_name": "taxi dispatch"
+        }
+      ]
+    },
+    {
+      "clause_label_raw": "28AO(1)(f)",
+      "clause_path": [
+        "28AO",
+        "1",
+        "f"
+      ],
+      "use_type": "use_with_specific_standard",
+      "use_name": "daycare facilities"
+    },
+    {
+      "clause_label_raw": "28AO(1)(g)",
+      "clause_path": [
+        "28AO",
+        "1",
+        "g"
+      ],
+      "use_type": "accessory_use",
+      "use_name": "uses accessory to any of the foregoing uses"
+    }
   ],
   "prohibitions": [
-    { "clause_label_raw": "28AO(2)", "clause_path": ["28", "AO", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more uses in 28AO(1)." },
-    { "clause_label_raw": "28AO(3)", "clause_path": ["28", "AO", "3"], "rule_type": "use_prohibition", "summary": "No land or building use for any purpose other than one or more uses in 28AO(1)." }
+    {
+      "clause_label_raw": "28AO(2)",
+      "clause_path": [
+        "28AO",
+        "2"
+      ],
+      "rule_type": "development_prohibition",
+      "summary": "No development for any purpose other than one or more uses in 28AO(1)."
+    },
+    {
+      "clause_label_raw": "28AO(3)",
+      "clause_path": [
+        "28AO",
+        "3"
+      ],
+      "rule_type": "use_prohibition",
+      "summary": "No land or building use for any purpose other than one or more uses in 28AO(1)."
+    }
   ],
   "requirements": {
     "incorporated_use_requirements": [
-      { "section_label_raw": "28AP", "section_path": ["28", "AP"], "summary": "No billboard or sign except those permitted in the R-1 zone." },
-      { "section_label_raw": "28AQ(1)", "section_path": ["28", "AQ", "1"], "summary": "Buildings erected, altered or used for R-1 or R-2 uses in an R-2TA zone shall comply with the requirements of the R-1 and R-2 zones respectively." }
+      {
+        "section_label_raw": "28AP",
+        "section_path": [
+          "28AP"
+        ],
+        "summary": "No billboard or sign except those permitted in the R-1 zone."
+      },
+      {
+        "section_label_raw": "28AQ(1)",
+        "section_path": [
+          "28AQ",
+          "1"
+        ],
+        "summary": "Buildings erected, altered or used for R-1 or R-2 uses in an R-2TA zone shall comply with the requirements of the R-1 and R-2 zones respectively."
+      }
     ],
     "townhouse_building_controls": [
-      { "section_label_raw": "28AQ(2)", "section_path": ["28", "AQ", "2"], "use_name": "townhouse building", "controls": [
-        { "clause_label_raw": "28AQ(2)(a)", "clause_path": ["28", "AQ", "2", "a"], "metric": "lot_frontage_minimum_per_unit", "value": 6, "unit": "m_per_unit" },
-        { "clause_label_raw": "28AQ(2)(b)", "clause_path": ["28", "AQ", "2", "b"], "metric": "lot_area_minimum_per_unit", "value": 150, "unit": "m2_per_unit" },
-        { "clause_label_raw": "28AQ(2)(c)", "clause_path": ["28", "AQ", "2", "c"], "metric": "building_height_maximum", "value_text": "As shown on ZM-32, Plan Dutch Village Road Height Map" },
-        { "clause_label_raw": "28AQ(2)(d)", "clause_path": ["28", "AQ", "2", "d"], "metric": "lot_coverage_maximum", "value": 40, "unit": "percent" },
-        { "clause_label_raw": "28AQ(2)(e)", "clause_path": ["28", "AQ", "2", "e"], "metric": "front_yard_setback_minimum", "value": 6, "unit": "m", "condition_text": "where parking is provided in the front yard; may be reduced to 3 m if parking is located in the rear yard" },
-        { "clause_label_raw": "28AQ(2)(f)", "clause_path": ["28", "AQ", "2", "f"], "metric": "rear_yard_setback_minimum", "value": 7.5, "unit": "m", "condition_text": "where parking is located in the rear yard, the minimum rear yard setback is 9 m" },
-        { "clause_label_raw": "28AQ(2)(g)", "clause_path": ["28", "AQ", "2", "g"], "metric": "side_yard_setback_minimum", "value": 3, "unit": "m", "condition_text": "for end units" },
-        { "clause_label_raw": "28AQ(2)(h)", "clause_path": ["28", "AQ", "2", "h"], "metric": "units_minimum", "value": 3, "unit": "unit" },
-        { "clause_label_raw": "28AQ(2)(i)", "clause_path": ["28", "AQ", "2", "i"], "metric": "units_maximum", "value": 8, "unit": "unit" },
-        { "clause_label_raw": "28AQ(2)(j)", "clause_path": ["28", "AQ", "2", "j"], "status": "deleted" },
-        { "clause_label_raw": "28AQ(2)(k)", "clause_path": ["28", "AQ", "2", "k"], "metric_group": "unit_entry_orientation", "conditions": ["all units shall have a front door that faces the street or driveway"] }
-      ] }
+      {
+        "section_label_raw": "28AQ(2)",
+        "section_path": [
+          "28AQ",
+          "2"
+        ],
+        "use_name": "townhouse building",
+        "controls": [
+          {
+            "clause_label_raw": "28AQ(2)(a)",
+            "clause_path": [
+              "28AQ",
+              "2",
+              "a"
+            ],
+            "metric": "lot_frontage_minimum_per_unit",
+            "value": 6,
+            "unit": "m_per_unit"
+          },
+          {
+            "clause_label_raw": "28AQ(2)(b)",
+            "clause_path": [
+              "28AQ",
+              "2",
+              "b"
+            ],
+            "metric": "lot_area_minimum_per_unit",
+            "value": 150,
+            "unit": "m2_per_unit"
+          },
+          {
+            "clause_label_raw": "28AQ(2)(c)",
+            "clause_path": [
+              "28AQ",
+              "2",
+              "c"
+            ],
+            "metric": "building_height_maximum",
+            "value_text": "As shown on ZM-32, Plan Dutch Village Road Height Map"
+          },
+          {
+            "clause_label_raw": "28AQ(2)(d)",
+            "clause_path": [
+              "28AQ",
+              "2",
+              "d"
+            ],
+            "metric": "lot_coverage_maximum",
+            "value": 40,
+            "unit": "percent"
+          },
+          {
+            "clause_label_raw": "28AQ(2)(e)",
+            "clause_path": [
+              "28AQ",
+              "2",
+              "e"
+            ],
+            "metric": "front_yard_setback_minimum",
+            "value": 6,
+            "unit": "m",
+            "condition_text": "where parking is provided in the front yard; may be reduced to 3 m if parking is located in the rear yard"
+          },
+          {
+            "clause_label_raw": "28AQ(2)(f)",
+            "clause_path": [
+              "28AQ",
+              "2",
+              "f"
+            ],
+            "metric": "rear_yard_setback_minimum",
+            "value": 7.5,
+            "unit": "m",
+            "condition_text": "where parking is located in the rear yard, the minimum rear yard setback is 9 m"
+          },
+          {
+            "clause_label_raw": "28AQ(2)(g)",
+            "clause_path": [
+              "28AQ",
+              "2",
+              "g"
+            ],
+            "metric": "side_yard_setback_minimum",
+            "value": 3,
+            "unit": "m",
+            "condition_text": "for end units"
+          },
+          {
+            "clause_label_raw": "28AQ(2)(h)",
+            "clause_path": [
+              "28AQ",
+              "2",
+              "h"
+            ],
+            "metric": "units_minimum",
+            "value": 3,
+            "unit": "unit"
+          },
+          {
+            "clause_label_raw": "28AQ(2)(i)",
+            "clause_path": [
+              "28AQ",
+              "2",
+              "i"
+            ],
+            "metric": "units_maximum",
+            "value": 8,
+            "unit": "unit"
+          },
+          {
+            "clause_label_raw": "28AQ(2)(j)",
+            "clause_path": [
+              "28AQ",
+              "2",
+              "j"
+            ],
+            "status": "deleted"
+          },
+          {
+            "clause_label_raw": "28AQ(2)(k)",
+            "clause_path": [
+              "28AQ",
+              "2",
+              "k"
+            ],
+            "metric_group": "unit_entry_orientation",
+            "conditions": [
+              "all units shall have a front door that faces the street or driveway"
+            ]
+          }
+        ]
+      }
     ],
     "stacked_townhouse_building_controls": [
-      { "section_label_raw": "28AQ(3)", "section_path": ["28", "AQ", "3"], "use_name": "stacked townhouse building", "controls": [
-        { "clause_label_raw": "28AQ(3)(a)", "clause_path": ["28", "AQ", "3", "a"], "metric": "lot_frontage_minimum_per_unit", "value": 4.5, "unit": "m_per_unit" },
-        { "clause_label_raw": "28AQ(3)(b)", "clause_path": ["28", "AQ", "3", "b"], "metric": "lot_area_minimum_per_unit", "value": 100, "unit": "m2_per_unit" },
-        { "clause_label_raw": "28AQ(3)(c)", "clause_path": ["28", "AQ", "3", "c"], "metric": "building_height_maximum", "value_text": "As shown on ZM-32, Plan Dutch Village Road Height Map" },
-        { "clause_label_raw": "28AQ(3)(d)", "clause_path": ["28", "AQ", "3", "d"], "metric": "lot_coverage_maximum", "value": 40, "unit": "percent" },
-        { "clause_label_raw": "28AQ(3)(e)", "clause_path": ["28", "AQ", "3", "e"], "metric": "front_yard_setback_minimum", "value": 6, "unit": "m", "condition_text": "where parking is provided in the front yard; may be reduced to 3 m if parking is located in the rear yard" },
-        { "clause_label_raw": "28AQ(3)(f)", "clause_path": ["28", "AQ", "3", "f"], "metric": "rear_yard_setback_minimum", "value": 7.5, "unit": "m", "condition_text": "where parking is located in the rear yard, the minimum rear yard setback is 9 m" },
-        { "clause_label_raw": "28AQ(3)(g)", "clause_path": ["28", "AQ", "3", "g"], "metric": "side_yard_setback_minimum", "value": 4.5, "unit": "m", "condition_text": "for end units" },
-        { "clause_label_raw": "28AQ(3)(h)", "clause_path": ["28", "AQ", "3", "h"], "metric": "units_minimum", "value": 6, "unit": "unit" },
-        { "clause_label_raw": "28AQ(3)(i)", "clause_path": ["28", "AQ", "3", "i"], "metric": "units_maximum", "value": 16, "unit": "unit" },
-        { "clause_label_raw": "28AQ(3)(j)", "clause_path": ["28", "AQ", "3", "j"], "metric_group": "unit_entry_orientation", "conditions": ["all units shall have a front door that faces the street or driveway"] }
-      ] }
+      {
+        "section_label_raw": "28AQ(3)",
+        "section_path": [
+          "28AQ",
+          "3"
+        ],
+        "use_name": "stacked townhouse building",
+        "controls": [
+          {
+            "clause_label_raw": "28AQ(3)(a)",
+            "clause_path": [
+              "28AQ",
+              "3",
+              "a"
+            ],
+            "metric": "lot_frontage_minimum_per_unit",
+            "value": 4.5,
+            "unit": "m_per_unit"
+          },
+          {
+            "clause_label_raw": "28AQ(3)(b)",
+            "clause_path": [
+              "28AQ",
+              "3",
+              "b"
+            ],
+            "metric": "lot_area_minimum_per_unit",
+            "value": 100,
+            "unit": "m2_per_unit"
+          },
+          {
+            "clause_label_raw": "28AQ(3)(c)",
+            "clause_path": [
+              "28AQ",
+              "3",
+              "c"
+            ],
+            "metric": "building_height_maximum",
+            "value_text": "As shown on ZM-32, Plan Dutch Village Road Height Map"
+          },
+          {
+            "clause_label_raw": "28AQ(3)(d)",
+            "clause_path": [
+              "28AQ",
+              "3",
+              "d"
+            ],
+            "metric": "lot_coverage_maximum",
+            "value": 40,
+            "unit": "percent"
+          },
+          {
+            "clause_label_raw": "28AQ(3)(e)",
+            "clause_path": [
+              "28AQ",
+              "3",
+              "e"
+            ],
+            "metric": "front_yard_setback_minimum",
+            "value": 6,
+            "unit": "m",
+            "condition_text": "where parking is provided in the front yard; may be reduced to 3 m if parking is located in the rear yard"
+          },
+          {
+            "clause_label_raw": "28AQ(3)(f)",
+            "clause_path": [
+              "28AQ",
+              "3",
+              "f"
+            ],
+            "metric": "rear_yard_setback_minimum",
+            "value": 7.5,
+            "unit": "m",
+            "condition_text": "where parking is located in the rear yard, the minimum rear yard setback is 9 m"
+          },
+          {
+            "clause_label_raw": "28AQ(3)(g)",
+            "clause_path": [
+              "28AQ",
+              "3",
+              "g"
+            ],
+            "metric": "side_yard_setback_minimum",
+            "value": 4.5,
+            "unit": "m",
+            "condition_text": "for end units"
+          },
+          {
+            "clause_label_raw": "28AQ(3)(h)",
+            "clause_path": [
+              "28AQ",
+              "3",
+              "h"
+            ],
+            "metric": "units_minimum",
+            "value": 6,
+            "unit": "unit"
+          },
+          {
+            "clause_label_raw": "28AQ(3)(i)",
+            "clause_path": [
+              "28AQ",
+              "3",
+              "i"
+            ],
+            "metric": "units_maximum",
+            "value": 16,
+            "unit": "unit"
+          },
+          {
+            "clause_label_raw": "28AQ(3)(j)",
+            "clause_path": [
+              "28AQ",
+              "3",
+              "j"
+            ],
+            "metric_group": "unit_entry_orientation",
+            "conditions": [
+              "all units shall have a front door that faces the street or driveway"
+            ]
+          }
+        ]
+      }
     ]
   },
   "use_specific_standards": [
-    { "section_label_raw": "28AR(1)", "section_path": ["28", "AR", "1"], "use_name": "subdivision of townhouse building", "conditions": ["a townhouse building may be subdivided so that each townhouse is on its own lot if the minimum requirements of 28AQ(2) are met", "no side yard is required along the common lot boundary dividing the townhouse building"] },
-    { "section_label_raw": "28AR(2)", "section_path": ["28", "AR", "2"], "use_name": "subdivision of existing townhouse building", "conditions": ["notwithstanding 28AQ(2)(a) and 28AQ(2)(e), townhouse buildings existing on the date of adoption of this provision may be subdivided so that each townhouse is on its own lot if each lot has at least 3 m of frontage on a street", "no side yard is required along the common boundary dividing the townhouse building"] },
-    { "section_label_raw": "28AS(1)", "section_path": ["28", "AS", "1"], "use_name": "accessory building rear yard exemption", "conditions": ["any accessory building shall not require any side yard or rear yard if located entirely within the rear yard of the lot on which it is located"] },
-    { "section_label_raw": "28AS(2)", "section_path": ["28", "AS", "2"], "use_name": "accessory building on corner lot", "controls": [
-      { "metric": "flanking_street_setback_minimum", "value": 3, "unit": "m" }
-    ] },
-    { "section_label_raw": "28AS(3)", "section_path": ["28", "AS", "3"], "use_name": "front yard prohibition for accessory building", "conditions": ["no accessory building shall be located within the front yard"] },
-    { "section_label_raw": "28AT(1)", "section_path": ["28", "AT", "1"], "use_name": "building facades for townhouse and stacked townhouse buildings", "controls": [
-      { "metric": "front_wall_windows_or_doors_minimum", "value": 30, "unit": "percent" }
-    ] },
-    { "section_label_raw": "28AT(2)", "section_path": ["28", "AT", "2"], "use_name": "townhouse facade variation", "controls": [
-      { "clause_label_raw": "28AT(2)(a)", "clause_path": ["28", "AT", "2", "a"], "metric_group": "horizontal_variation", "conditions": ["horizontal variation between dwelling units through devices such as changes in colour, material, projections and recesses of 0.5 m"] },
-      { "clause_label_raw": "28AT(2)(b)", "clause_path": ["28", "AT", "2", "b"], "metric_group": "vertical_variation", "conditions": ["vertical variation between dwelling units through devices such as changes in colour, material, projections and recesses of 0.5 m"] }
-    ] },
-    { "section_label_raw": "28AT(3)", "section_path": ["28", "AT", "3"], "use_name": "projection effect on setback requirements", "conditions": ["variations that project less than 0.75 m will not affect setback requirements", "an addition beyond 0.75 m requires an equal addition to setback requirements"] },
-    { "section_label_raw": "28AU(1)", "section_path": ["28", "AU", "1"], "use_name": "landscaped open space and amenity space", "controls": [
-      { "metric": "landscaped_open_space_minimum", "value": 35, "unit": "percent_per_site" },
-      { "metric": "outdoor_amenity_space_minimum_per_unit", "value": 14, "unit": "m2_per_unit" }
-    ] },
-    { "section_label_raw": "28AU(2)", "section_path": ["28", "AU", "2"], "use_name": "outdoor amenity space forms", "conditions": ["outdoor amenity space may be in the form of, or any combination of, any front yard, rear yard, side yard, deck, balcony, terrace or patio"] },
-    { "section_label_raw": "28AV", "section_path": ["28", "AV"], "use_name": "utilities, servicing and accessory buildings", "conditions": ["utility connections, fill pipes, exhaust vents, central air conditioning units and water meters located in the front yard shall be screened from the street by landscaping, solid board fencing, a decorative wall or an architectural feature", "fuel tanks shall be located within the front yard"] },
-    { "section_label_raw": "28AW", "section_path": ["28", "AW"], "use_name": "home occupations", "conditions": ["notwithstanding clause 14B, where home occupations are permitted in the R-2TA Zone, such home occupation shall comply with the following"], "controls": [
-      { "clause_label_raw": "28AW(a)", "clause_path": ["28", "AW", "a"], "conditions": ["no person who is not a resident of the dwelling unit shall be the proprietor of a home occupation"] },
-      { "clause_label_raw": "28AW(b)", "clause_path": ["28", "AW", "b"], "controls": [{ "metric": "home_occupations_per_dwelling_unit_maximum", "value": 1, "unit": "use" }] },
-      { "clause_label_raw": "28AW(c)", "clause_path": ["28", "AW", "c"], "controls": [{ "metric": "home_occupation_floor_area_maximum", "value": 50, "unit": "percent_of_dwelling_unit_floor_area" }] },
-      { "clause_label_raw": "28AW(d)", "clause_path": ["28", "AW", "d"], "conditions": ["no interior or exterior alterations or additions shall be permitted not normally associated with a dwelling"] },
-      { "clause_label_raw": "28AW(e)", "clause_path": ["28", "AW", "e"], "conditions": ["except for goods manufactured on the premises, no goods shall be displayed or sold on the premises"] },
-      { "clause_label_raw": "28AW(f)", "clause_path": ["28", "AW", "f"], "conditions": ["the home occupation shall be conducted so that it is not apparent from the outside of the dwelling that it is used for anything other than a residence"] },
-      { "clause_label_raw": "28AW(g)", "clause_path": ["28", "AW", "g"], "conditions": ["there shall be no display of goods visible from the outside, or outside storage of equipment or material"] },
-      { "clause_label_raw": "28AW(h)", "clause_path": ["28", "AW", "h"], "controls": [{ "metric": "commercial_vehicles_maximum", "value": 1, "unit": "vehicle" }, { "metric": "commercial_vehicle_gvw_maximum", "value": 2722, "unit": "kg" }] },
-      { "clause_label_raw": "28AW(i)", "clause_path": ["28", "AW", "i"], "conditions": ["the commercial vehicle permitted under clause (h) may contain the name, address, telephone number and occupation, profession or trade of the proprietor of the home occupation, which information shall be non-illuminated"] },
-      { "clause_label_raw": "28AW(j)", "clause_path": ["28", "AW", "j"], "conditions": ["the home occupation shall not create any noise, dust, vibration, smell, smoke, glare, electrical interference, fire hazard, traffic, or similar nuisance not normally associated with a dwelling"] },
-      { "clause_label_raw": "28AW(k)", "clause_path": ["28", "AW", "k"], "status": "deleted" },
-      { "clause_label_raw": "28AW(l)", "clause_path": ["28", "AW", "l"], "status": "deleted" }
-    ] },
-    { "section_label_raw": "28AX", "section_path": ["28", "AX"], "use_name": "existing apartment house buildings", "conditions": ["permitted subject to the provisions of the R-2AM Zone"] }
+    {
+      "section_label_raw": "28AR(1)",
+      "section_path": [
+        "28AR",
+        "1"
+      ],
+      "use_name": "subdivision of townhouse building",
+      "conditions": [
+        "a townhouse building may be subdivided so that each townhouse is on its own lot if the minimum requirements of 28AQ(2) are met",
+        "no side yard is required along the common lot boundary dividing the townhouse building"
+      ]
+    },
+    {
+      "section_label_raw": "28AR(2)",
+      "section_path": [
+        "28AR",
+        "2"
+      ],
+      "use_name": "subdivision of existing townhouse building",
+      "conditions": [
+        "notwithstanding 28AQ(2)(a) and 28AQ(2)(e), townhouse buildings existing on the date of adoption of this provision may be subdivided so that each townhouse is on its own lot if each lot has at least 3 m of frontage on a street",
+        "no side yard is required along the common boundary dividing the townhouse building"
+      ]
+    },
+    {
+      "section_label_raw": "28AS(1)",
+      "section_path": [
+        "28AS",
+        "1"
+      ],
+      "use_name": "accessory building rear yard exemption",
+      "conditions": [
+        "any accessory building shall not require any side yard or rear yard if located entirely within the rear yard of the lot on which it is located"
+      ]
+    },
+    {
+      "section_label_raw": "28AS(2)",
+      "section_path": [
+        "28AS",
+        "2"
+      ],
+      "use_name": "accessory building on corner lot",
+      "controls": [
+        {
+          "metric": "flanking_street_setback_minimum",
+          "value": 3,
+          "unit": "m"
+        }
+      ]
+    },
+    {
+      "section_label_raw": "28AS(3)",
+      "section_path": [
+        "28AS",
+        "3"
+      ],
+      "use_name": "front yard prohibition for accessory building",
+      "conditions": [
+        "no accessory building shall be located within the front yard"
+      ]
+    },
+    {
+      "section_label_raw": "28AT(1)",
+      "section_path": [
+        "28AT",
+        "1"
+      ],
+      "use_name": "building facades for townhouse and stacked townhouse buildings",
+      "controls": [
+        {
+          "metric": "front_wall_windows_or_doors_minimum",
+          "value": 30,
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "section_label_raw": "28AT(2)",
+      "section_path": [
+        "28AT",
+        "2"
+      ],
+      "use_name": "townhouse facade variation",
+      "controls": [
+        {
+          "clause_label_raw": "28AT(2)(a)",
+          "clause_path": [
+            "28AT",
+            "2",
+            "a"
+          ],
+          "metric_group": "horizontal_variation",
+          "conditions": [
+            "horizontal variation between dwelling units through devices such as changes in colour, material, projections and recesses of 0.5 m"
+          ]
+        },
+        {
+          "clause_label_raw": "28AT(2)(b)",
+          "clause_path": [
+            "28AT",
+            "2",
+            "b"
+          ],
+          "metric_group": "vertical_variation",
+          "conditions": [
+            "vertical variation between dwelling units through devices such as changes in colour, material, projections and recesses of 0.5 m"
+          ]
+        }
+      ]
+    },
+    {
+      "section_label_raw": "28AT(3)",
+      "section_path": [
+        "28AT",
+        "3"
+      ],
+      "use_name": "projection effect on setback requirements",
+      "conditions": [
+        "variations that project less than 0.75 m will not affect setback requirements",
+        "an addition beyond 0.75 m requires an equal addition to setback requirements"
+      ]
+    },
+    {
+      "section_label_raw": "28AU(1)",
+      "section_path": [
+        "28AU",
+        "1"
+      ],
+      "use_name": "landscaped open space and amenity space",
+      "controls": [
+        {
+          "metric": "landscaped_open_space_minimum",
+          "value": 35,
+          "unit": "percent_per_site"
+        },
+        {
+          "metric": "outdoor_amenity_space_minimum_per_unit",
+          "value": 14,
+          "unit": "m2_per_unit"
+        }
+      ]
+    },
+    {
+      "section_label_raw": "28AU(2)",
+      "section_path": [
+        "28AU",
+        "2"
+      ],
+      "use_name": "outdoor amenity space forms",
+      "conditions": [
+        "outdoor amenity space may be in the form of, or any combination of, any front yard, rear yard, side yard, deck, balcony, terrace or patio"
+      ]
+    },
+    {
+      "section_label_raw": "28AV",
+      "section_path": [
+        "28AV"
+      ],
+      "use_name": "utilities, servicing and accessory buildings",
+      "conditions": [
+        "utility connections, fill pipes, exhaust vents, central air conditioning units and water meters located in the front yard shall be screened from the street by landscaping, solid board fencing, a decorative wall or an architectural feature",
+        "fuel tanks shall be located within the front yard"
+      ]
+    },
+    {
+      "section_label_raw": "28AW",
+      "section_path": [
+        "28AW"
+      ],
+      "use_name": "home occupations",
+      "conditions": [
+        "notwithstanding clause 14B, where home occupations are permitted in the R-2TA Zone, such home occupation shall comply with the following"
+      ],
+      "controls": [
+        {
+          "clause_label_raw": "28AW(a)",
+          "clause_path": [
+            "28AW",
+            "a"
+          ],
+          "conditions": [
+            "no person who is not a resident of the dwelling unit shall be the proprietor of a home occupation"
+          ]
+        },
+        {
+          "clause_label_raw": "28AW(b)",
+          "clause_path": [
+            "28AW",
+            "b"
+          ],
+          "controls": [
+            {
+              "metric": "home_occupations_per_dwelling_unit_maximum",
+              "value": 1,
+              "unit": "use"
+            }
+          ]
+        },
+        {
+          "clause_label_raw": "28AW(c)",
+          "clause_path": [
+            "28AW",
+            "c"
+          ],
+          "controls": [
+            {
+              "metric": "home_occupation_floor_area_maximum",
+              "value": 50,
+              "unit": "percent_of_dwelling_unit_floor_area"
+            }
+          ]
+        },
+        {
+          "clause_label_raw": "28AW(d)",
+          "clause_path": [
+            "28AW",
+            "d"
+          ],
+          "conditions": [
+            "no interior or exterior alterations or additions shall be permitted not normally associated with a dwelling"
+          ]
+        },
+        {
+          "clause_label_raw": "28AW(e)",
+          "clause_path": [
+            "28AW",
+            "e"
+          ],
+          "conditions": [
+            "except for goods manufactured on the premises, no goods shall be displayed or sold on the premises"
+          ]
+        },
+        {
+          "clause_label_raw": "28AW(f)",
+          "clause_path": [
+            "28AW",
+            "f"
+          ],
+          "conditions": [
+            "the home occupation shall be conducted so that it is not apparent from the outside of the dwelling that it is used for anything other than a residence"
+          ]
+        },
+        {
+          "clause_label_raw": "28AW(g)",
+          "clause_path": [
+            "28AW",
+            "g"
+          ],
+          "conditions": [
+            "there shall be no display of goods visible from the outside, or outside storage of equipment or material"
+          ]
+        },
+        {
+          "clause_label_raw": "28AW(h)",
+          "clause_path": [
+            "28AW",
+            "h"
+          ],
+          "controls": [
+            {
+              "metric": "commercial_vehicles_maximum",
+              "value": 1,
+              "unit": "vehicle"
+            },
+            {
+              "metric": "commercial_vehicle_gvw_maximum",
+              "value": 2722,
+              "unit": "kg"
+            }
+          ]
+        },
+        {
+          "clause_label_raw": "28AW(i)",
+          "clause_path": [
+            "28AW",
+            "i"
+          ],
+          "conditions": [
+            "the commercial vehicle permitted under clause (h) may contain the name, address, telephone number and occupation, profession or trade of the proprietor of the home occupation, which information shall be non-illuminated"
+          ]
+        },
+        {
+          "clause_label_raw": "28AW(j)",
+          "clause_path": [
+            "28AW",
+            "j"
+          ],
+          "conditions": [
+            "the home occupation shall not create any noise, dust, vibration, smell, smoke, glare, electrical interference, fire hazard, traffic, or similar nuisance not normally associated with a dwelling"
+          ]
+        },
+        {
+          "clause_label_raw": "28AW(k)",
+          "clause_path": [
+            "28AW",
+            "k"
+          ],
+          "status": "deleted"
+        },
+        {
+          "clause_label_raw": "28AW(l)",
+          "clause_path": [
+            "28AW",
+            "l"
+          ],
+          "status": "deleted"
+        }
+      ]
+    },
+    {
+      "section_label_raw": "28AX",
+      "section_path": [
+        "28AX"
+      ],
+      "use_name": "existing apartment house buildings",
+      "conditions": [
+        "permitted subject to the provisions of the R-2AM Zone"
+      ]
+    }
   ],
   "sign_controls": [],
   "spatial_features_needed": [
-    { "feature_key": "zm_32_dutch_village_road_height_map", "feature_class": "site_specific_area", "source_type": "polygon_from_zm_32", "reason": "controls maximum height under 28AQ(2)(c) and 28AQ(3)(c)" }
+    {
+      "feature_key": "zm_32_dutch_village_road_height_map",
+      "feature_class": "site_specific_area",
+      "source_type": "polygon_from_zm_32",
+      "reason": "controls maximum height under 28AQ(2)(c) and 28AQ(3)(c)"
+    }
   ],
   "open_issues": [
-    { "issue_type": "text_quality_check", "description": "Section 28AV states that fuel tanks shall be located within the front yard. The extracted wording should be checked against the PDF image before database ingestion." }
+    {
+      "issue_type": "text_quality_check",
+      "description": "Section 28AV states that fuel tanks shall be located within the front yard. The extracted wording should be checked against the PDF image before database ingestion."
+    }
   ],
   "citations": {
-    "permitted_uses": { "pdf_page": 70, "bylaw_page": 62 },
-    "requirements": { "pdf_page_start": 70, "pdf_page_end": 73, "bylaw_page_start": 62, "bylaw_page_end": 65 }
+    "permitted_uses": {
+      "pdf_page": 70,
+      "bylaw_page": 62
+    },
+    "requirements": {
+      "pdf_page_start": 70,
+      "pdf_page_end": 73,
+      "bylaw_page_start": 62,
+      "bylaw_page_end": 65
+    }
   }
 }
