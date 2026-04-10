@@ -1,0 +1,51 @@
+{
+  "document_metadata": {
+    "jurisdiction": "Halifax Regional Municipality",
+    "bylaw_name": "Halifax Mainland Land Use By-law",
+    "source_document_path": "docs/halifaxmainlandlanduseby-law-edition231-eff-26feb02-minorrev2025-02922-toclinked_1.pdf",
+    "edition": "231",
+    "zone_code": "UR",
+    "zone_name": "Urban Reserve Zone",
+    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
+    "zone_section_start": { "title_label_raw": "UR (URBAN RESERVE) ZONE", "pdf_page": 136, "bylaw_page": 128 },
+    "zone_section_end_before": { "title_label_raw": "PWS (PROTECTED WATER SUPPLY) ZONE", "pdf_page": 137, "bylaw_page": 129 }
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": ["61AA(1)(a)"],
+    "pending_review_clause_patterns": []
+  },
+  "general_context": {
+    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "UR is an established class of use zone." },
+    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+  },
+  "permitted_uses": [
+    { "clause_label_raw": "61AA(1)(a)", "clause_path": ["61AA", "1", "a"], "use_type": "residential_use", "use_name": "single family dwellings", "condition_text": "on existing lots or lots approved pursuant to Section 38 of the Subdivision By-law provided that a private on-site sewage disposal system and well are provided on the lot" },
+    { "clause_label_raw": "61AA(1)(aa)", "clause_path": ["61AA", "1", "a", "a"], "use_type": "residential_use", "use_name": "shared housing use with 10 or fewer bedrooms in conjunction with a permitted dwelling unit" },
+    { "clause_label_raw": "61AA(1)(b)", "clause_path": ["61AA", "1", "b"], "use_type": "recreation_use", "use_name": "passive recreation uses" },
+    { "clause_label_raw": "61AA(1)(c)", "clause_path": ["61AA", "1", "c"], "use_type": "accessory_use", "use_name": "uses accessory to the foregoing uses" }
+  ],
+  "prohibitions": [
+    { "section_label_raw": "61AA(2)", "section_path": ["61AA", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more of the uses set out in subsection 61AA(1)." },
+    { "section_label_raw": "61AA(3)", "section_path": ["61AA", "3"], "rule_type": "use_prohibition", "summary": "No land or building use in whole or in part for any purpose other than one or more of the uses set out in subsection 61AA(1)." }
+  ],
+  "requirements": {
+    "dimensional_controls": [
+      { "section_label_raw": "61AA(4)", "section_path": ["61AA", "4"], "rule_type": "front_yard_setback_minimum", "measure": { "minimum": 9.1, "unit": "m" }, "condition_text": "Minimum front or flankage yard." },
+      { "section_label_raw": "61AA(4)", "section_path": ["61AA", "4"], "rule_type": "side_yard_setback_minimum", "measure": { "minimum": 2.5, "unit": "m" } },
+      { "section_label_raw": "61AA(4)", "section_path": ["61AA", "4"], "rule_type": "rear_yard_setback_minimum", "measure": { "minimum": 2.5, "unit": "m" } },
+      { "section_label_raw": "61AA(4)", "section_path": ["61AA", "4"], "rule_type": "lot_coverage_maximum", "measure": { "maximum": 35, "unit": "percent" } },
+      { "section_label_raw": "61AA(4)", "section_path": ["61AA", "4"], "rule_type": "building_height_maximum", "measure": { "maximum": 11, "unit": "m" }, "condition_text": "Maximum height of main building." }
+    ]
+  },
+  "sign_controls": [],
+  "use_specific_standards": [],
+  "spatial_features_needed": [
+    { "feature_key": "section_38_subdivision_bylaw_approved_lots", "feature_class": "site_specific_area", "source_type": "base_map_reference", "reason": "controls single family dwelling eligibility in clause 61AA(1)(a)" }
+  ],
+  "open_issues": [],
+  "citations": {
+    "permitted_uses": { "pdf_page": 136, "bylaw_page": 128 },
+    "requirements": { "pdf_page": 136, "bylaw_page": 128 }
+  }
+}

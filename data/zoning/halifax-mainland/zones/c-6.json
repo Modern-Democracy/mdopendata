@@ -1,0 +1,55 @@
+{
+  "document_metadata": {
+    "jurisdiction": "Halifax Regional Municipality",
+    "bylaw_name": "Halifax Mainland Land Use By-law",
+    "source_document_path": "docs/halifaxmainlandlanduseby-law-edition231-eff-26feb02-minorrev2025-02922-toclinked_1.pdf",
+    "edition": "231",
+    "zone_code": "C-6",
+    "zone_name": "Adult Entertainment Zone",
+    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
+    "zone_section_start": { "title_label_raw": "C-6 ZONE: ADULT ENTERTAINMENT ZONE", "pdf_page": 124, "bylaw_page": 116 },
+    "zone_section_end_before": { "title_label_raw": "I-1 ZONE: GENERAL INDUSTRIAL ZONE", "pdf_page": 125, "bylaw_page": 117 }
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": ["42A(1)", "42D(a)", "42F"],
+    "pending_review_clause_patterns": []
+  },
+  "general_context": {
+    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "C-6 is an established class of use zone." },
+    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+  },
+  "permitted_uses": [
+    { "clause_label_raw": "42A(1)(a)", "clause_path": ["42A", "1", "a"], "use_type": "incorporated_zone_use_set", "use_name": "C-2 uses as hereinbefore set out" },
+    { "clause_label_raw": "42A(1)(b)", "clause_path": ["42A", "1", "b"], "use_type": "commercial_use", "use_name": "adult entertainment use" }
+  ],
+  "prohibitions": [
+    { "clause_label_raw": "42A(2)", "clause_path": ["42A", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more uses in 42A(1)." },
+    { "clause_label_raw": "42A(3)", "clause_path": ["42A", "3"], "rule_type": "use_prohibition", "summary": "No land or building use for any purpose other than one or more uses in 42A(1), and in any one building only one adult entertainment use shall be permitted." }
+  ],
+  "requirements": {
+    "c6_use_controls": [
+      { "section_label_raw": "42B", "section_path": ["42B"], "condition_text": "no front, side or rear yards are required for C-6 uses in C-6 Zones" },
+      { "section_label_raw": "42C", "section_path": ["42C"], "condition_text": "no development permit shall be issued for an adult entertainment use within 300 ft. of the nearest property line of any land in any residential zone, or any school, library, park, playground or other recreational facility, any church, convent, synagogue or similar place of worship, or another adult entertainment use" },
+      { "section_label_raw": "42D", "section_path": ["42D"], "use_name": "signs advertising an adult entertainment use", "controls": [
+        { "clause_label_raw": "42D(a)", "clause_path": ["42D", "a"], "condition_text": "limited to one sign for each adult entertainment use" },
+        { "clause_label_raw": "42D(b)", "clause_path": ["42D", "b"], "condition_text": "may advertise only the name of the adult entertainment use" },
+        { "clause_label_raw": "42D(c)", "clause_path": ["42D", "c"], "condition_text": "not larger than 12 square feet" },
+        { "clause_label_raw": "42D(d)", "clause_path": ["42D", "d"], "condition_text": "attached upon and parallel to the front of the building in which the use is being carried on" },
+        { "clause_label_raw": "42D(e)", "clause_path": ["42D", "e"], "condition_text": "the only advertising visible or audible from the outside of the building" }
+      ] },
+      { "section_label_raw": "42E", "section_path": ["42E"], "condition_text": "a sign permitted under Section 42D may be illuminated, provided it does not constitute a nuisance or hazard to the public" },
+      { "section_label_raw": "42F", "section_path": ["42F"], "summary": "Buildings erected, altered or used for C-2 uses in a C-6 Zone shall comply with the requirements of the C-2 Zone as detailed in Sections 39 to 42 inclusive." }
+    ]
+  },
+  "use_specific_standards": [],
+  "sign_controls": [],
+  "spatial_features_needed": [
+    { "feature_key": "adult_entertainment_buffer_300ft", "feature_class": "site_specific_area", "source_type": "derived_buffer_rule", "reason": "controls 42C" }
+  ],
+  "open_issues": [],
+  "citations": {
+    "permitted_uses": { "pdf_page": 124, "bylaw_page": 116 },
+    "requirements": { "pdf_page": 124, "bylaw_page": 116 }
+  }
+}

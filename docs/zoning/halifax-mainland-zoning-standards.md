@@ -36,14 +36,23 @@ The currently approved hierarchy interpretation is:
 - `23E(1)` -> `["23","E","1"]`
 - `23E(1)(a)` -> `["23","E","1","a"]`
 - `26(i)(2A)` -> `["26","i","2A"]`
+- `28AO(1)(e)(i)` -> `["28","AO","1","e","i"]`
+- `28AT(1)` -> `["28","AT","1"]`
+- `34B1(a.)` -> `["34","B","1","a"]`
+- `34B1(ea.)` -> `["34","B","1","ea"]`
+- `34B38` -> `["34","B","38"]`
+- `53AA(1)(a)` -> `["53","AA","1","a"]`
+- `53AB` -> `["53","AB"]`
+- `53AC(1)` -> `["53","AC","1"]`
+- `61(5)(b)(i)(A)` -> `["61","5","b","i","A"]`
+- `61A(1)` -> `["61A","1"]`
+- `61AA(1)(a)` -> `["61AA","1","a"]`
 
 This same pattern is safe for similar letter-pair subsection labels such as `20(1)(ba)`, `20(1)(ja)`, and `21(ca)`.
 
 ### Preserve raw and mark pending review
 
 The following patterns must remain raw until explicitly reviewed:
-
-- Any future pattern equivalent to `34B38`
 
 For those cases:
 
@@ -249,7 +258,6 @@ These raw clause formats still require explicit repository review before broader
 
 - any future dotted subtype outside the approved `a.1` style handling
 - any future alphanumeric section-style identifier outside the approved `23A` and `23E(1)` style handling
-- any future pattern equivalent to `34B38`
 
 ## Next conversion workflow
 

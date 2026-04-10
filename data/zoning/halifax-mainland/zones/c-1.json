@@ -1,0 +1,68 @@
+{
+  "document_metadata": {
+    "jurisdiction": "Halifax Regional Municipality",
+    "bylaw_name": "Halifax Mainland Land Use By-law",
+    "source_document_path": "docs/halifaxmainlandlanduseby-law-edition231-eff-26feb02-minorrev2025-02922-toclinked_1.pdf",
+    "edition": "231",
+    "zone_code": "C-1",
+    "zone_name": "Local Business Zone",
+    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
+    "zone_section_start": { "title_label_raw": "C-1 ZONE: LOCAL BUSINESS ZONE", "pdf_page": 102, "bylaw_page": 94 },
+    "zone_section_end_before": { "title_label_raw": "C-2A ZONE: MINOR COMMERCIAL ZONE", "pdf_page": 104, "bylaw_page": 96 }
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": ["35(1)(b)(i)", "37(c)(i)", "38(1)"],
+    "pending_review_clause_patterns": []
+  },
+  "general_context": {
+    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "C-1 is an established class of use zone." },
+    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+  },
+  "permitted_uses": [
+    { "clause_label_raw": "35(1)(a)", "clause_path": ["35", "1", "a"], "use_type": "incorporated_zone_use_set", "use_name": "all R-1, R-2, R-2T and R-4 Zone uses" },
+    { "clause_label_raw": "35(1)(b)", "clause_path": ["35", "1", "b"], "use_type": "commercial_use", "use_name": "store for retail trade, rental and services only", "excluded_subuses": [
+      { "clause_label_raw": "35(1)(b)(i)", "clause_path": ["35", "1", "b", "i"], "use_name": "motor vehicle dealers" },
+      { "clause_label_raw": "35(1)(b)(ii)", "clause_path": ["35", "1", "b", "ii"], "use_name": "motor vehicle repair shops not primarily engaged in providing service station facilities" },
+      { "clause_label_raw": "35(1)(b)(iii)", "clause_path": ["35", "1", "b", "iii"], "use_name": "adult entertainment uses" },
+      { "clause_label_raw": "35(1)(b)(iv)", "clause_path": ["35", "1", "b", "iv"], "use_name": "amusement centres" }
+    ] },
+    { "clause_label_raw": "35(1)(c)", "clause_path": ["35", "1", "c"], "use_type": "commercial_use", "use_name": "service station" },
+    { "clause_label_raw": "35(1)(d)", "clause_path": ["35", "1", "d"], "use_type": "commercial_use", "use_name": "bank, public hall, office, municipal building, hairdresser, beauty parlour, restaurant, receiving office of a dry cleaner or dyer" },
+    { "clause_label_raw": "35(1)(e)", "clause_path": ["35", "1", "e"], "use_type": "accessory_use", "use_name": "any use accessory to any of the foregoing uses" }
+  ],
+  "prohibitions": [
+    { "clause_label_raw": "35(2)", "clause_path": ["35", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more uses in 35(1)." },
+    { "clause_label_raw": "35(3)", "clause_path": ["35", "3"], "rule_type": "use_prohibition", "summary": "No land or building use for any purpose other than one or more uses in 35(1)." }
+  ],
+  "requirements": {
+    "incorporated_use_requirements": [
+      { "section_label_raw": "36", "section_path": ["36"], "summary": "Buildings erected, altered or used for R-1, R-2, R-2T and R-4 uses in a C-1 Zone shall comply with the requirements of their respective zones." }
+    ],
+    "c1_use_controls": [
+      { "section_label_raw": "37", "section_path": ["37"], "use_name": "C-1 uses", "controls": [
+        { "clause_label_raw": "37(a)", "clause_path": ["37", "a"], "metric": "lot_coverage_maximum", "value": 50, "unit": "percent" },
+        { "clause_label_raw": "37(b)", "clause_path": ["37", "b"], "metric": "building_height_maximum", "value": 35, "unit": "ft" },
+        { "clause_label_raw": "37(c)", "clause_path": ["37", "c"], "metric_group": "building_separation_and_setbacks", "controls": [
+          { "clause_label_raw": "37(c)(i)", "clause_path": ["37", "c", "i"], "condition_text": "every building shall be at least 12 feet from any other building and at least 8 feet from the rear and both side lines of the lot and at least 20 feet from any street line in front of such building" },
+          { "clause_label_raw": "37(c)(ii)", "clause_path": ["37", "c", "ii"], "condition_text": "where a building is situated on a corner lot, it shall be at least 10 feet from the flanking street line abutting such lot" }
+        ] },
+        { "clause_label_raw": "37(d)", "clause_path": ["37", "d"], "condition_text": "notwithstanding clause (c), a building is exempt from the side building line requirements and the distance requirements from any other building where the sidewalls are fireproof to comply with the Building By-law of the city and the abutting lot is not a residential lot used for residential purposes", "subcontrols": [
+          { "clause_label_raw": "37(d)(i)", "clause_path": ["37", "d", "i"], "condition_text": "the sidewalls of the building are fireproof to comply with the Building By-law of the city" },
+          { "clause_label_raw": "37(d)(ii)", "clause_path": ["37", "d", "ii"], "condition_text": "the abutting lot is not in a residential zone used for residential purposes" }
+        ] }
+      ] }
+    ]
+  },
+  "use_specific_standards": [],
+  "sign_controls": [
+    { "section_label_raw": "38(1)", "section_path": ["38", "1"], "summary": "Each C-1 use is permitted one identification sign which may be illuminated." },
+    { "section_label_raw": "38(2)", "section_path": ["38", "2"], "summary": "Each property is permitted one free-standing identification sign which may be illuminated, provided it will not cause a hazard or nuisance to the public." }
+  ],
+  "spatial_features_needed": [],
+  "open_issues": [],
+  "citations": {
+    "permitted_uses": { "pdf_page": 102, "bylaw_page": 94 },
+    "requirements": { "pdf_page_start": 102, "pdf_page_end": 103, "bylaw_page_start": 94, "bylaw_page_end": 95 }
+  }
+}

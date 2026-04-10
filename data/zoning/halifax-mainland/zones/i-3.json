@@ -1,0 +1,105 @@
+{
+  "document_metadata": {
+    "jurisdiction": "Halifax Regional Municipality",
+    "bylaw_name": "Halifax Mainland Land Use By-law",
+    "source_document_path": "docs/halifaxmainlandlanduseby-law-edition231-eff-26feb02-minorrev2025-02922-toclinked_1.pdf",
+    "edition": "231",
+    "zone_code": "I-3",
+    "zone_name": "General Industrial Zone",
+    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
+    "zone_section_start": { "title_label_raw": "I-3 ZONE: GENERAL INDUSTRIAL ZONE", "pdf_page": 127, "bylaw_page": 119 },
+    "zone_section_end_before": { "title_label_raw": "P ZONE: PARK AND INSTITUTIONAL ZONE", "pdf_page": 129, "bylaw_page": 121 }
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": ["50A(1)(a)", "50A(4)(c)", "50A(7)", "50A(8)", "50A(9)"],
+    "pending_review_clause_patterns": []
+  },
+  "general_context": {
+    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "I-3 is an established class of use zone." },
+    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+  },
+  "permitted_uses": [
+    {
+      "clause_label_raw": "50A(1)(a)",
+      "clause_path": ["50A", "1", "a"],
+      "use_type": "industrial_or_commercial_use",
+      "use_name": "industrial or commercial enterprise",
+      "condition_text": "except an industrial or commercial enterprise likely to cause a nuisance or hazard and except billboards, adult entertainment uses, and amusement centres"
+    },
+    { "clause_label_raw": "50A(1)(b)", "clause_path": ["50A", "1", "b"], "use_type": "institutional_or_open_space_use", "use_name": "public park" },
+    { "clause_label_raw": "50A(1)(c)", "clause_path": ["50A", "1", "c"], "use_type": "use_with_specific_standard", "use_name": "cannabis production facility" }
+  ],
+  "prohibitions": [
+    { "clause_label_raw": "50A(2)", "clause_path": ["50A", "2"], "rule_type": "development_prohibition", "summary": "No development permit shall be issued in any I-3 Zone except for one or more of the uses listed in Section 50A(1)." },
+    { "clause_label_raw": "50A(3)", "clause_path": ["50A", "3"], "rule_type": "use_prohibition", "summary": "No person shall in any I-3 Zone use any land or building for any purpose other than one or more of the uses listed in Section 50A(1)." }
+  ],
+  "requirements": {
+    "general_zone_controls": [
+      { "clause_label_raw": "50A(4)(a)", "clause_path": ["50A", "4", "a"], "rule_type": "yard_and_building_separation_bundle", "condition_text": "No front, side or rear yards are required." },
+      { "clause_label_raw": "50A(4)(b)", "clause_path": ["50A", "4", "b"], "rule_type": "watercourse_setback_minimum", "measure": { "minimum": 200, "unit": "ft" }, "condition_text": "On-site sewage disposal and on-site water serviced developments shall be set back a minimum distance of 200 feet from the ordinary high water mark of any lake or watercourse." },
+      { "clause_label_raw": "50A(4)(c)", "clause_path": ["50A", "4", "c"], "rule_type": "cross_reference_requirement", "condition_text": "City sewer and water serviced developments shall meet the watercourse setback and buffer requirements of Section 14QA." },
+      { "clause_label_raw": "50A(4)(d)", "clause_path": ["50A", "4", "d"], "rule_type": "roadway_setback_bundle", "measures": [
+        { "minimum": 30, "unit": "ft", "applies_to": "collector roadway" },
+        { "minimum": 10, "unit": "ft", "applies_to": "all other roadways" }
+      ], "condition_text": "Any use permitted in this zone shall be set back a minimum distance of 30 feet from a collector roadway and 10 feet from all other roadways." },
+      { "section_label_raw": "50A(5)", "section_path": ["50A", "5"], "rule_type": "servicing_requirement", "condition_text": "Sewer and water service for developments in this zone may be provided by either on-site or off-site systems meeting the requirements of the Province of Nova Scotia, except that on-site sewer and water shall not be permitted for lands within the Development Boundary, as shown on Map II in Appendix C of the Metropolitan Regional Development Plan." },
+      { "section_label_raw": "50A(6)", "section_path": ["50A", "6"], "rule_type": "notwithstanding_override", "condition_text": "Accessory buildings in the I-3 Zone shall have no maximum height requirement." }
+    ],
+    "parking_and_loading_controls": [
+      {
+        "section_label_raw": "50A(7)",
+        "section_path": ["50A", "7"],
+        "applicability": "lots_greater_than_2_acres",
+        "condition_text": "Parking requirements apply to lots over 2 acres in area.",
+        "parking_rates": [
+          { "use_name": "office", "minimum": 3, "unit": "space_per_1000_sq_ft_gfa" },
+          { "use_name": "retail or service", "minimum": 4, "unit": "space_per_1000_sq_ft_gfa" },
+          { "use_name": "restaurant", "minimum": 8, "unit": "space_per_1000_sq_ft_gfa" }
+        ],
+        "additional_controls": [
+          "All loading and unloading areas shall be located in the sides and rear of the building where the property abuts a collector roadway, except where a five-foot high berm or screening suitable to the Development Officer is provided.",
+          "Driveways, parking areas and loading areas shall be maintained to provide a stable surface.",
+          "Any part of the lot not used for structures, driveways, loading areas, parking or storage shall be landscaped."
+        ]
+      }
+    ]
+  },
+  "sign_controls": [
+    {
+      "section_label_raw": "50A(8)",
+      "section_path": ["50A", "8"],
+      "condition_text": "Each use in an I-3 Zone shall be permitted signs identifying such use attached to the building in which the use is carried on and one freestanding sign; such signs may be illuminated.",
+      "prohibition_text": "No sign or any part thereof shall be erected within 100 feet of the street line of Highway No. 102 and Highway No. 103 between the Highway No. 102 interchange and the Halifax pumping station at 120 Chain Lake Drive."
+    }
+  ],
+  "use_specific_standards": [
+    {
+      "use_name": "cannabis production facility",
+      "standards": [
+        {
+          "section_label_raw": "50A(9)",
+          "section_path": ["50A", "9"],
+          "rule_type": "site_specific_separation_minimum",
+          "measure": { "minimum": 230, "unit": "ft", "metric_minimum": 70, "metric_unit": "m" },
+          "condition_text": "Where a lot containing a cannabis production facility abuts a residential use or a use containing a day care facility, community centre, school, religious institution, public park or playground, every cannabis production facility and every building or outdoor area used for cannabis production shall be no less than 230 ft. (70 m) from the abutting lot line."
+        }
+      ]
+    }
+  ],
+  "spatial_features_needed": [
+    { "feature_key": "development_boundary_map_ii_appendix_c", "feature_class": "planning_area_boundary", "source_type": "base_map_reference", "reason": "controls the prohibition on on-site sewer and water systems in Section 50A(5)" },
+    { "feature_key": "ordinary_high_water_mark_lakes_watercourses_i3", "feature_class": "hydrography_line_or_polygon", "source_type": "external_geospatial_layer", "reason": "controls the 200 ft watercourse setback in Section 50A(4)(b)" },
+    { "feature_key": "collector_roadways_i3", "feature_class": "road_centerline", "source_type": "external_geospatial_layer", "reason": "controls roadway setbacks and loading area orientation in Sections 50A(4)(d) and 50A(7)" },
+    { "feature_key": "highway_102_103_chain_lake_sign_corridor", "feature_class": "road_centerline", "source_type": "base_map_reference", "reason": "controls the 100 ft sign prohibition corridor in Section 50A(8)" },
+    { "feature_key": "halifax_pumping_station_120_chain_lake_drive", "feature_class": "address_or_parcel_exception", "source_type": "parcel_or_address_lookup", "reason": "anchors the sign prohibition segment in Section 50A(8)" },
+    { "feature_key": "cannabis_abutting_sensitive_use_lots", "feature_class": "site_specific_area", "source_type": "existing_or_derived_polygon", "reason": "controls Section 50A(9) setback applicability where the lot abuts listed residential or community-sensitive uses" }
+  ],
+  "open_issues": [],
+  "citations": {
+    "permitted_uses": { "pdf_page": 127, "bylaw_page": 119 },
+    "requirements": { "pdf_page_start": 127, "pdf_page_end": 128, "bylaw_page_start": 119, "bylaw_page_end": 120 },
+    "sign_controls": { "pdf_page": 128, "bylaw_page": 120 },
+    "use_specific_standards": { "pdf_page": 128, "bylaw_page": 120 }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "document_metadata": {
+    "jurisdiction": "Halifax Regional Municipality",
+    "bylaw_name": "Halifax Mainland Land Use By-law",
+    "source_document_path": "docs/halifaxmainlandlanduseby-law-edition231-eff-26feb02-minorrev2025-02922-toclinked_1.pdf",
+    "edition": "231",
+    "zone_code": "RC-1",
+    "zone_name": "Neighbourhood Commercial Zone",
+    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
+    "zone_section_start": { "title_label_raw": "RC-1 ZONE: NEIGHBOURHOOD COMMERCIAL ZONE", "pdf_page": 93, "bylaw_page": 85 },
+    "zone_section_end_before": { "title_label_raw": "R-4B ZONE: DUNBRACK MULTI UNIT ZONE", "pdf_page": 95, "bylaw_page": 87 }
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": ["34AA(1)(c)", "34AB", "34AF(c)"],
+    "pending_review_clause_patterns": []
+  },
+  "general_context": {
+    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "RC-1 is an established class of use zone." },
+    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+  },
+  "permitted_uses": [
+    { "clause_label_raw": "34AA(1)(a)", "clause_path": ["34", "AA", "1", "a"], "use_type": "incorporated_zone_use_set", "use_name": "R-1, R-2 and R-2P uses" },
+    { "clause_label_raw": "34AA(1)(b)", "clause_path": ["34", "AA", "1", "b"], "use_type": "commercial_use", "use_name": "grocery store or drug store" },
+    { "clause_label_raw": "34AA(1)(c)", "clause_path": ["34", "AA", "1", "c"], "use_type": "commercial_use", "use_name": "grocery store, drug store, laundromat, dry cleaners, tailor, dressmaker, beauty shop or barber shop", "applicability_scope": "mainland_south_area_only" },
+    { "clause_label_raw": "34AA(1)(d)", "clause_path": ["34", "AA", "1", "d"], "use_type": "accessory_use", "use_name": "any use accessory to any of the foregoing uses" }
+  ],
+  "prohibitions": [
+    { "clause_label_raw": "34AA(2)", "clause_path": ["34", "AA", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more uses in 34AA(1)." },
+    { "clause_label_raw": "34AA(3)", "clause_path": ["34", "AA", "3"], "rule_type": "use_prohibition", "summary": "No land or building use for any purpose other than one or more uses in 34AA(1)." }
+  ],
+  "requirements": {
+    "residential_use_requirements": [
+      { "section_label_raw": "34AB", "section_path": ["34", "AB"], "use_name": "R-2P uses in an RC-1 Zone", "controls": [
+        { "clause_label_raw": "34AB(a)", "clause_path": ["34", "AB", "a"], "metric": "lot_frontage_minimum", "value": 50, "unit": "ft" },
+        { "clause_label_raw": "34AB(b)", "clause_path": ["34", "AB", "b"], "metric": "lot_area_minimum", "value": 5000, "unit": "sq_ft" },
+        { "clause_label_raw": "34AB(c)", "clause_path": ["34", "AB", "c"], "metric": "side_yard_setback_minimum", "value": 8, "unit": "ft" },
+        { "clause_label_raw": "34AB(d)", "clause_path": ["34", "AB", "d"], "metric": "building_height_maximum", "value": 35, "unit": "ft" },
+        { "clause_label_raw": "34AB(e)", "clause_path": ["34", "AB", "e"], "metric": "lot_coverage_maximum", "value": 35, "unit": "percent" }
+      ] },
+      { "section_label_raw": "34AE", "section_path": ["34", "AE"], "summary": "Buildings erected, altered or used for R-1 and R-2 uses in an RC-1 Zone shall comply with the requirements of the R-1 and R-2 Zones respectively." }
+    ],
+    "commercial_use_requirements": [
+      { "section_label_raw": "34AC", "section_path": ["34", "AC"], "summary": "Any person carrying on a business may place a non-illuminated sign board upon and parallel to the front of the building not exceeding 3 feet in height, limited to the space immediately above the ground floor store windows and pertaining solely to the business conducted therein." },
+      { "section_label_raw": "34AD", "section_path": ["34", "AD"], "summary": "A building line laid down for adjacent residential buildings shall also apply to buildings erected or altered to RC-1 uses." },
+      { "section_label_raw": "34AF", "section_path": ["34", "AF"], "use_name": "commercial uses", "controls": [
+        { "clause_label_raw": "34AF(a)", "clause_path": ["34", "AF", "a"], "condition_text": "commercial uses shall be restricted to the ground floor" },
+        { "clause_label_raw": "34AF(b)", "clause_path": ["34", "AF", "b"], "metric": "gross_commercial_floor_area_maximum", "value": 1000, "unit": "sq_ft" },
+        { "clause_label_raw": "34AF(c)", "clause_path": ["34", "AF", "c"], "condition_text": "commercial uses shall have separate exterior access from any access to R-1, R-2 or R-2P uses" }
+      ] }
+    ]
+  },
+  "use_specific_standards": [],
+  "sign_controls": [],
+  "spatial_features_needed": [
+    { "feature_key": "mainland_south_area", "feature_class": "planning_area_boundary", "source_type": "existing_or_derived_polygon", "reason": "controls 34AA(1)(c)" }
+  ],
+  "open_issues": [],
+  "citations": {
+    "permitted_uses": { "pdf_page": 93, "bylaw_page": 85 },
+    "requirements": { "pdf_page_start": 93, "pdf_page_end": 94, "bylaw_page_start": 85, "bylaw_page_end": 86 }
+  }
+}
