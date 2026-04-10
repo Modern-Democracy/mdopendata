@@ -322,6 +322,18 @@
               "definition_key": "dwelling_unit",
               "source_field": "text",
               "link_method": "reviewed_text_match"
+            },
+            {
+              "source_text": "street line",
+              "definition_key": "street_line",
+              "source_field": "text",
+              "link_method": "reviewed_text_match"
+            },
+            {
+              "source_text": "front yard",
+              "definition_key": "front_yard",
+              "source_field": "text",
+              "link_method": "reviewed_text_match"
             }
           ]
         },
@@ -359,7 +371,15 @@
             "pdf_page_end": 27,
             "bylaw_page_start": 18,
             "bylaw_page_end": 19
-          }
+          },
+          "text_defined_term_refs": [
+            {
+              "source_text": "street line",
+              "definition_key": "street_line",
+              "source_field": "text",
+              "link_method": "reviewed_text_match"
+            }
+          ]
         },
         {
           "provision_label_raw": "9(e)",
@@ -511,7 +531,15 @@
             "pdf_page_end": 27,
             "bylaw_page_start": 19,
             "bylaw_page_end": 19
-          }
+          },
+          "text_defined_term_refs": [
+            {
+              "source_text": "front yard",
+              "definition_key": "front_yard",
+              "source_field": "text",
+              "link_method": "reviewed_text_match"
+            }
+          ]
         },
         {
           "provision_label_raw": "11(4)",
@@ -1007,6 +1035,12 @@
             {
               "source_text": "billboards",
               "definition_key": "billboard",
+              "source_field": "text",
+              "link_method": "reviewed_text_match"
+            },
+            {
+              "source_text": "street line",
+              "definition_key": "street_line",
               "source_field": "text",
               "link_method": "reviewed_text_match"
             }
@@ -1641,6 +1675,12 @@
               "definition_key": "apartment_house",
               "source_field": "text",
               "link_method": "reviewed_text_match"
+            },
+            {
+              "source_text": "street line",
+              "definition_key": "street_line",
+              "source_field": "text",
+              "link_method": "reviewed_text_match"
             }
           ]
         },
@@ -2252,6 +2292,12 @@
             {
               "source_text": "dwelling unit",
               "definition_key": "dwelling_unit",
+              "source_field": "text",
+              "link_method": "reviewed_text_match"
+            },
+            {
+              "source_text": "accessory use",
+              "definition_key": "accessory_use",
               "source_field": "text",
               "link_method": "reviewed_text_match"
             }
