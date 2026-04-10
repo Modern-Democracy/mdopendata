@@ -6,61 +6,294 @@
     "edition": "231",
     "zone_code": "R-2T",
     "zone_name": "Townhouse Zone",
-    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
-    "zone_section_start": { "title_label_raw": "R-2T ZONE: TOWNHOUSE ZONE", "pdf_page": 68, "bylaw_page": 60 },
-    "zone_section_end_before": { "title_label_raw": "R-2TA ZONE: DUTCH VILLAGE ROAD TOWNHOUSE ZONE", "pdf_page": 70, "bylaw_page": 62 }
+    "zone_established_by": {
+      "clause_label_raw": "16(1)",
+      "pdf_page": 53,
+      "bylaw_page": 45
+    },
+    "zone_section_start": {
+      "title_label_raw": "R-2T ZONE: TOWNHOUSE ZONE",
+      "pdf_page": 68,
+      "bylaw_page": 60
+    },
+    "zone_section_end_before": {
+      "title_label_raw": "R-2TA ZONE: DUTCH VILLAGE ROAD TOWNHOUSE ZONE",
+      "pdf_page": 70,
+      "bylaw_page": 62
+    }
   },
   "normalization_policy": {
     "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": ["28AJ(1)", "28AL(2)(a)", "28AM(a)", "28AN(a)"],
+    "approved_hierarchy_examples": [
+      "28AJ(1)",
+      "28AL(2)(a)",
+      "28AM(a)",
+      "28AN(a)"
+    ],
     "pending_review_clause_patterns": []
   },
   "general_context": {
-    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "R-2T is an established class of use zone." },
-    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+    "zone_class_reference": {
+      "section_label_raw": "16(1)",
+      "summary": "R-2T is an established class of use zone."
+    },
+    "general_boundary_rule_refs": [
+      "17(a)-(h)",
+      "18",
+      "19"
+    ]
   },
   "permitted_uses": [
-    { "clause_label_raw": "28AJ(1)(a)", "clause_path": ["28", "AJ", "1", "a"], "use_type": "incorporated_zone_use_set", "use_name": "R-1 and R-2 uses" },
-    { "clause_label_raw": "28AJ(1)(b)", "clause_path": ["28", "AJ", "1", "b"], "use_type": "principal_use", "use_name": "townhouse building" },
-    { "clause_label_raw": "28AJ(1)(ba)", "clause_path": ["28", "AJ", "1", "b", "a"], "use_type": "residential_use", "use_name": "shared housing use", "conditions": ["maximum 10 bedrooms", "in conjunction with a permitted dwelling unit"] },
-    { "clause_label_raw": "28AJ(1)(c)", "clause_path": ["28", "AJ", "1", "c"], "use_type": "accessory_use", "use_name": "uses accessory to any of the foregoing uses" }
+    {
+      "clause_label_raw": "28AJ(1)(a)",
+      "clause_path": [
+        "28AJ",
+        "1",
+        "a"
+      ],
+      "use_type": "incorporated_zone_use_set",
+      "use_name": "R-1 and R-2 uses"
+    },
+    {
+      "clause_label_raw": "28AJ(1)(b)",
+      "clause_path": [
+        "28AJ",
+        "1",
+        "b"
+      ],
+      "use_type": "principal_use",
+      "use_name": "townhouse building"
+    },
+    {
+      "clause_label_raw": "28AJ(1)(ba)",
+      "clause_path": [
+        "28AJ",
+        "1",
+        "b",
+        "a"
+      ],
+      "use_type": "residential_use",
+      "use_name": "shared housing use",
+      "conditions": [
+        "maximum 10 bedrooms",
+        "in conjunction with a permitted dwelling unit"
+      ]
+    },
+    {
+      "clause_label_raw": "28AJ(1)(c)",
+      "clause_path": [
+        "28AJ",
+        "1",
+        "c"
+      ],
+      "use_type": "accessory_use",
+      "use_name": "uses accessory to any of the foregoing uses"
+    }
   ],
   "prohibitions": [
-    { "clause_label_raw": "28AJ(2)", "clause_path": ["28", "AJ", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more uses in 28AJ(1)." },
-    { "clause_label_raw": "28AJ(3)", "clause_path": ["28", "AJ", "3"], "rule_type": "use_prohibition", "summary": "No land or building use for any purpose other than one or more uses in 28AJ(1)." }
+    {
+      "clause_label_raw": "28AJ(2)",
+      "clause_path": [
+        "28AJ",
+        "2"
+      ],
+      "rule_type": "development_prohibition",
+      "summary": "No development for any purpose other than one or more uses in 28AJ(1)."
+    },
+    {
+      "clause_label_raw": "28AJ(3)",
+      "clause_path": [
+        "28AJ",
+        "3"
+      ],
+      "rule_type": "use_prohibition",
+      "summary": "No land or building use for any purpose other than one or more uses in 28AJ(1)."
+    }
   ],
   "requirements": {
     "incorporated_use_requirements": [
-      { "section_label_raw": "28AL(1)", "section_path": ["28", "AL", "1"], "summary": "Buildings erected, altered or used for R-1 or R-2 uses in an R-2T zone shall comply with the requirements of the R-1 and R-2 zones respectively." }
+      {
+        "section_label_raw": "28AL(1)",
+        "section_path": [
+          "28AL",
+          "1"
+        ],
+        "summary": "Buildings erected, altered or used for R-1 or R-2 uses in an R-2T zone shall comply with the requirements of the R-1 and R-2 zones respectively."
+      }
     ],
     "townhouse_building_controls": [
-      { "section_label_raw": "28AL(2)", "section_path": ["28", "AL", "2"], "controls": [
-        { "clause_label_raw": "28AL(2)(a)", "clause_path": ["28", "AL", "2", "a"], "metric": "lot_frontage_minimum", "value_text": "18 feet per townhouse, plus 20 feet" },
-        { "clause_label_raw": "28AL(2)(b)", "clause_path": ["28", "AL", "2", "b"], "metric": "lot_area_minimum", "value_text": "1,800 sq.ft. per townhouse plus 2,000 sq.ft." },
-        { "clause_label_raw": "28AL(2)(c)", "clause_path": ["28", "AL", "2", "c"], "metric": "building_height_maximum", "value": 35, "unit": "ft" },
-        { "clause_label_raw": "28AL(2)(d)", "clause_path": ["28", "AL", "2", "d"], "metric": "lot_coverage_maximum", "value": 40, "unit": "percent", "condition_text": "applied as if the lot was subdivided into as many lots as townhouses" },
-        { "clause_label_raw": "28AL(2)(e)", "clause_path": ["28", "AL", "2", "e"], "metric": "front_yard_setback_minimum", "value": 15, "unit": "ft" },
-        { "clause_label_raw": "28AL(2)(f)", "clause_path": ["28", "AL", "2", "f"], "metric": "rear_yard_setback_mean", "value": 20, "unit": "ft" },
-        { "clause_label_raw": "28AL(2)(g)", "clause_path": ["28", "AL", "2", "g"], "metric": "side_yard_setback_minimum", "value": 10, "unit": "ft" }
-      ] }
+      {
+        "section_label_raw": "28AL(2)",
+        "section_path": [
+          "28AL",
+          "2"
+        ],
+        "controls": [
+          {
+            "clause_label_raw": "28AL(2)(a)",
+            "clause_path": [
+              "28AL",
+              "2",
+              "a"
+            ],
+            "metric": "lot_frontage_minimum",
+            "value_text": "18 feet per townhouse, plus 20 feet"
+          },
+          {
+            "clause_label_raw": "28AL(2)(b)",
+            "clause_path": [
+              "28AL",
+              "2",
+              "b"
+            ],
+            "metric": "lot_area_minimum",
+            "value_text": "1,800 sq.ft. per townhouse plus 2,000 sq.ft."
+          },
+          {
+            "clause_label_raw": "28AL(2)(c)",
+            "clause_path": [
+              "28AL",
+              "2",
+              "c"
+            ],
+            "metric": "building_height_maximum",
+            "value": 35,
+            "unit": "ft"
+          },
+          {
+            "clause_label_raw": "28AL(2)(d)",
+            "clause_path": [
+              "28AL",
+              "2",
+              "d"
+            ],
+            "metric": "lot_coverage_maximum",
+            "value": 40,
+            "unit": "percent",
+            "condition_text": "applied as if the lot was subdivided into as many lots as townhouses"
+          },
+          {
+            "clause_label_raw": "28AL(2)(e)",
+            "clause_path": [
+              "28AL",
+              "2",
+              "e"
+            ],
+            "metric": "front_yard_setback_minimum",
+            "value": 15,
+            "unit": "ft"
+          },
+          {
+            "clause_label_raw": "28AL(2)(f)",
+            "clause_path": [
+              "28AL",
+              "2",
+              "f"
+            ],
+            "metric": "rear_yard_setback_mean",
+            "value": 20,
+            "unit": "ft"
+          },
+          {
+            "clause_label_raw": "28AL(2)(g)",
+            "clause_path": [
+              "28AL",
+              "2",
+              "g"
+            ],
+            "metric": "side_yard_setback_minimum",
+            "value": 10,
+            "unit": "ft"
+          }
+        ]
+      }
     ]
   },
   "use_specific_standards": [
-    { "section_label_raw": "28AK", "section_path": ["28", "AK"], "summary": "No billboard or sign except those permitted in R-1 zones." },
-    { "section_label_raw": "28AM", "section_path": ["28", "AM"], "use_name": "subdivision of townhouse building", "controls": [
-      { "clause_label_raw": "28AM(a)", "clause_path": ["28", "AM", "a"], "conditions": ["a townhouse building may be subdivided so each townhouse is on its own lot if the minimum requirements of 28AL(2) are met", "no side yard is required along the common lot boundary dividing the townhouse building"] },
-      { "clause_label_raw": "28AM(b)", "clause_path": ["28", "AM", "b"], "conditions": ["notwithstanding 28AL(2)(a), townhouse buildings existing on the date of adoption of this provision may be subdivided so each townhouse is on its own lot if each lot has at least 10 feet of frontage on a street", "no side yard is required along the common boundary dividing the townhouse building"] }
-    ] },
-    { "section_label_raw": "28AN", "section_path": ["28", "AN"], "use_name": "accessory buildings", "controls": [
-      { "clause_label_raw": "28AN(a)", "clause_path": ["28", "AN", "a"], "conditions": ["any accessory building does not require any side yard or rear yard if located entirely within the rear yard of the lot"] },
-      { "clause_label_raw": "28AN(b)", "clause_path": ["28", "AN", "b"], "metric": "flanking_street_setback_minimum", "value": 10, "unit": "ft", "conditions": ["applies where an accessory building is situated on a corner lot"] }
-    ] }
+    {
+      "section_label_raw": "28AK",
+      "section_path": [
+        "28AK"
+      ],
+      "summary": "No billboard or sign except those permitted in R-1 zones."
+    },
+    {
+      "section_label_raw": "28AM",
+      "section_path": [
+        "28AM"
+      ],
+      "use_name": "subdivision of townhouse building",
+      "controls": [
+        {
+          "clause_label_raw": "28AM(a)",
+          "clause_path": [
+            "28AM",
+            "a"
+          ],
+          "conditions": [
+            "a townhouse building may be subdivided so each townhouse is on its own lot if the minimum requirements of 28AL(2) are met",
+            "no side yard is required along the common lot boundary dividing the townhouse building"
+          ]
+        },
+        {
+          "clause_label_raw": "28AM(b)",
+          "clause_path": [
+            "28AM",
+            "b"
+          ],
+          "conditions": [
+            "notwithstanding 28AL(2)(a), townhouse buildings existing on the date of adoption of this provision may be subdivided so each townhouse is on its own lot if each lot has at least 10 feet of frontage on a street",
+            "no side yard is required along the common boundary dividing the townhouse building"
+          ]
+        }
+      ]
+    },
+    {
+      "section_label_raw": "28AN",
+      "section_path": [
+        "28AN"
+      ],
+      "use_name": "accessory buildings",
+      "controls": [
+        {
+          "clause_label_raw": "28AN(a)",
+          "clause_path": [
+            "28AN",
+            "a"
+          ],
+          "conditions": [
+            "any accessory building does not require any side yard or rear yard if located entirely within the rear yard of the lot"
+          ]
+        },
+        {
+          "clause_label_raw": "28AN(b)",
+          "clause_path": [
+            "28AN",
+            "b"
+          ],
+          "metric": "flanking_street_setback_minimum",
+          "value": 10,
+          "unit": "ft",
+          "conditions": [
+            "applies where an accessory building is situated on a corner lot"
+          ]
+        }
+      ]
+    }
   ],
   "sign_controls": [],
   "spatial_features_needed": [],
   "open_issues": [],
   "citations": {
-    "permitted_uses": { "pdf_page": 68, "bylaw_page": 60 },
-    "requirements": { "pdf_page_start": 68, "pdf_page_end": 69, "bylaw_page_start": 60, "bylaw_page_end": 61 }
+    "permitted_uses": {
+      "pdf_page": 68,
+      "bylaw_page": 60
+    },
+    "requirements": {
+      "pdf_page_start": 68,
+      "pdf_page_end": 69,
+      "bylaw_page_start": 60,
+      "bylaw_page_end": 61
+    }
   }
 }

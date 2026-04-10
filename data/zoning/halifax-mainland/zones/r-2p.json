@@ -6,78 +6,403 @@
     "edition": "231",
     "zone_code": "R-2P",
     "zone_name": "General Residential Zone",
-    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
-    "zone_section_start": { "title_label_raw": "R-2P ZONE: GENERAL RESIDENTIAL ZONE", "pdf_page": 66, "bylaw_page": 58 },
-    "zone_section_end_before": { "title_label_raw": "R-2T ZONE: TOWNHOUSE ZONE", "pdf_page": 68, "bylaw_page": 60 }
+    "zone_established_by": {
+      "clause_label_raw": "16(1)",
+      "pdf_page": 53,
+      "bylaw_page": 45
+    },
+    "zone_section_start": {
+      "title_label_raw": "R-2P ZONE: GENERAL RESIDENTIAL ZONE",
+      "pdf_page": 66,
+      "bylaw_page": 58
+    },
+    "zone_section_end_before": {
+      "title_label_raw": "R-2T ZONE: TOWNHOUSE ZONE",
+      "pdf_page": 68,
+      "bylaw_page": 60
+    }
   },
   "normalization_policy": {
     "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": ["28AA(1)", "28AB(5)(1)", "28AC", "28AE"],
+    "approved_hierarchy_examples": [
+      "28AA(1)",
+      "28AB(5)(1)",
+      "28AC",
+      "28AE"
+    ],
     "pending_review_clause_patterns": []
   },
   "general_context": {
-    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "R-2P is an established class of use zone." },
-    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+    "zone_class_reference": {
+      "section_label_raw": "16(1)",
+      "summary": "R-2P is an established class of use zone."
+    },
+    "general_boundary_rule_refs": [
+      "17(a)-(h)",
+      "18",
+      "19"
+    ]
   },
   "permitted_uses": [
-    { "clause_label_raw": "28AA(1)(a)", "clause_path": ["28", "AA", "1", "a"], "use_type": "incorporated_zone_use_set", "use_name": "all R-1 and R-2 uses" },
-    { "clause_label_raw": "28AA(1)(b)", "clause_path": ["28", "AA", "1", "b"], "use_type": "principal_use", "use_name": "building containing not more than 4 apartments", "conditions": ["also note Section 28AE"] },
-    { "clause_label_raw": "28AA(1)(ba)", "clause_path": ["28", "AA", "1", "b", "a"], "use_type": "residential_use", "use_name": "shared housing use", "conditions": ["maximum 10 bedrooms", "in conjunction with a permitted dwelling unit"] },
-    { "clause_label_raw": "28AA(1)(c)", "clause_path": ["28", "AA", "1", "c"], "use_type": "accessory_use", "use_name": "uses accessory to any of the foregoing uses" }
+    {
+      "clause_label_raw": "28AA(1)(a)",
+      "clause_path": [
+        "28AA",
+        "1",
+        "a"
+      ],
+      "use_type": "incorporated_zone_use_set",
+      "use_name": "all R-1 and R-2 uses"
+    },
+    {
+      "clause_label_raw": "28AA(1)(b)",
+      "clause_path": [
+        "28AA",
+        "1",
+        "b"
+      ],
+      "use_type": "principal_use",
+      "use_name": "building containing not more than 4 apartments",
+      "conditions": [
+        "also note Section 28AE"
+      ]
+    },
+    {
+      "clause_label_raw": "28AA(1)(ba)",
+      "clause_path": [
+        "28AA",
+        "1",
+        "b",
+        "a"
+      ],
+      "use_type": "residential_use",
+      "use_name": "shared housing use",
+      "conditions": [
+        "maximum 10 bedrooms",
+        "in conjunction with a permitted dwelling unit"
+      ]
+    },
+    {
+      "clause_label_raw": "28AA(1)(c)",
+      "clause_path": [
+        "28AA",
+        "1",
+        "c"
+      ],
+      "use_type": "accessory_use",
+      "use_name": "uses accessory to any of the foregoing uses"
+    }
   ],
   "prohibitions": [
-    { "clause_label_raw": "28AA(2)", "clause_path": ["28", "AA", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more uses in 28AA(1)." },
-    { "clause_label_raw": "28AA(3)", "clause_path": ["28", "AA", "3"], "rule_type": "use_prohibition", "summary": "No land or building use for any purpose other than one or more uses in 28AA(1)." }
+    {
+      "clause_label_raw": "28AA(2)",
+      "clause_path": [
+        "28AA",
+        "2"
+      ],
+      "rule_type": "development_prohibition",
+      "summary": "No development for any purpose other than one or more uses in 28AA(1)."
+    },
+    {
+      "clause_label_raw": "28AA(3)",
+      "clause_path": [
+        "28AA",
+        "3"
+      ],
+      "rule_type": "use_prohibition",
+      "summary": "No land or building use for any purpose other than one or more uses in 28AA(1)."
+    }
   ],
   "requirements": {
     "base_dimensional_controls": [
-      { "section_label_raw": "28AB(1)", "section_path": ["28", "AB", "1"], "metric_group": "minimum_lot_frontage_area_side_yard_by_use", "rows": [
-        { "use_reference": "R-1 Use", "lot_frontage_minimum": { "value": 40, "unit": "ft" }, "lot_area_minimum": { "value": 4000, "unit": "sq_ft" }, "side_yard_minimum": { "value": 4, "unit": "ft" } },
-        { "use_reference": "Duplex", "lot_frontage_minimum": { "value": 50, "unit": "ft" }, "lot_area_minimum": { "value": 5000, "unit": "sq_ft" }, "side_yard_minimum": { "value": 5, "unit": "ft" } },
-        { "use_reference": "Semi-detached Dwelling", "lot_frontage_minimum": { "value": 50, "unit": "ft" }, "lot_area_minimum": { "value": 5000, "unit": "sq_ft" }, "side_yard_minimum": { "value": 5, "unit": "ft" } },
-        { "use_reference": "3 and 4 Unit Apt Building", "lot_frontage_minimum": { "value": 60, "unit": "ft" }, "lot_area_minimum": { "value": 6000, "unit": "sq_ft" }, "side_yard_minimum": { "value": 6, "unit": "ft" } }
-      ] },
-      { "section_label_raw": "28AB(2)", "section_path": ["28", "AB", "2"], "controls": [
-        { "metric": "front_yard_setback_minimum", "value": 15, "unit": "ft" },
-        { "metric": "rear_yard_setback_minimum", "value": 20, "unit": "ft" }
-      ] },
-      { "section_label_raw": "28AB(3)", "section_path": ["28", "AB", "3"], "metric": "lot_coverage_maximum", "value": 35, "unit": "percent" },
-      { "section_label_raw": "28AB(4)", "section_path": ["28", "AB", "4"], "metric": "building_height_maximum", "value": 35, "unit": "ft" }
+      {
+        "section_label_raw": "28AB(1)",
+        "section_path": [
+          "28AB",
+          "1"
+        ],
+        "metric_group": "minimum_lot_frontage_area_side_yard_by_use",
+        "rows": [
+          {
+            "use_reference": "R-1 Use",
+            "lot_frontage_minimum": {
+              "value": 40,
+              "unit": "ft"
+            },
+            "lot_area_minimum": {
+              "value": 4000,
+              "unit": "sq_ft"
+            },
+            "side_yard_minimum": {
+              "value": 4,
+              "unit": "ft"
+            }
+          },
+          {
+            "use_reference": "Duplex",
+            "lot_frontage_minimum": {
+              "value": 50,
+              "unit": "ft"
+            },
+            "lot_area_minimum": {
+              "value": 5000,
+              "unit": "sq_ft"
+            },
+            "side_yard_minimum": {
+              "value": 5,
+              "unit": "ft"
+            }
+          },
+          {
+            "use_reference": "Semi-detached Dwelling",
+            "lot_frontage_minimum": {
+              "value": 50,
+              "unit": "ft"
+            },
+            "lot_area_minimum": {
+              "value": 5000,
+              "unit": "sq_ft"
+            },
+            "side_yard_minimum": {
+              "value": 5,
+              "unit": "ft"
+            }
+          },
+          {
+            "use_reference": "3 and 4 Unit Apt Building",
+            "lot_frontage_minimum": {
+              "value": 60,
+              "unit": "ft"
+            },
+            "lot_area_minimum": {
+              "value": 6000,
+              "unit": "sq_ft"
+            },
+            "side_yard_minimum": {
+              "value": 6,
+              "unit": "ft"
+            }
+          }
+        ]
+      },
+      {
+        "section_label_raw": "28AB(2)",
+        "section_path": [
+          "28AB",
+          "2"
+        ],
+        "controls": [
+          {
+            "metric": "front_yard_setback_minimum",
+            "value": 15,
+            "unit": "ft"
+          },
+          {
+            "metric": "rear_yard_setback_minimum",
+            "value": 20,
+            "unit": "ft"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "28AB(3)",
+        "section_path": [
+          "28AB",
+          "3"
+        ],
+        "metric": "lot_coverage_maximum",
+        "value": 35,
+        "unit": "percent"
+      },
+      {
+        "section_label_raw": "28AB(4)",
+        "section_path": [
+          "28AB",
+          "4"
+        ],
+        "metric": "building_height_maximum",
+        "value": 35,
+        "unit": "ft"
+      }
     ],
     "semi_detached_dwelling_controls": [
-      { "section_label_raw": "28AB(5)", "section_path": ["28", "AB", "5"], "controls": [
-        { "clause_label_raw": "28AB(5)(1)", "clause_path": ["28", "AB", "5", "1"], "metric_group": "semi_detached_lot_metrics", "controls": [
-          { "metric": "lot_frontage_minimum_per_unit", "value": 25, "unit": "ft_per_unit" },
-          { "metric": "lot_area_minimum_per_unit", "value": 2500, "unit": "sq_ft_per_unit" },
-          { "metric": "lot_coverage_maximum", "value": 35, "unit": "percent" }
-        ] },
-        { "clause_label_raw": "28AB(5)(2)", "clause_path": ["28", "AB", "5", "2"], "metric_group": "semi_detached_setbacks", "controls": [
-          { "metric": "rear_yard_setback_minimum", "value": 8, "unit": "ft" },
-          { "metric": "front_yard_setback_minimum", "value": 20, "unit": "ft" }
-        ], "conditions": ["notwithstanding Section 28AB(2)"] },
-        { "clause_label_raw": "28AB(5)(3)", "clause_path": ["28", "AB", "5", "3"], "metric_group": "corner_lot_rule", "controls": [
-          { "metric": "flanking_street_setback_minimum", "value": 10, "unit": "ft" }
-        ], "conditions": ["applies to semi-detached dwellings and accessory buildings or uses on corner lots"] },
-        { "clause_label_raw": "28AB(5)(4)", "clause_path": ["28", "AB", "5", "4"], "metric_group": "subdivision_common_boundary_rule", "conditions": ["where a lot containing a semi-detached dwelling is to be or has been subdivided so each unit is on its own lot, no setback is required from the common lot boundary"] }
-      ] }
+      {
+        "section_label_raw": "28AB(5)",
+        "section_path": [
+          "28AB",
+          "5"
+        ],
+        "controls": [
+          {
+            "clause_label_raw": "28AB(5)(1)",
+            "clause_path": [
+              "28AB",
+              "5",
+              "1"
+            ],
+            "metric_group": "semi_detached_lot_metrics",
+            "controls": [
+              {
+                "metric": "lot_frontage_minimum_per_unit",
+                "value": 25,
+                "unit": "ft_per_unit"
+              },
+              {
+                "metric": "lot_area_minimum_per_unit",
+                "value": 2500,
+                "unit": "sq_ft_per_unit"
+              },
+              {
+                "metric": "lot_coverage_maximum",
+                "value": 35,
+                "unit": "percent"
+              }
+            ]
+          },
+          {
+            "clause_label_raw": "28AB(5)(2)",
+            "clause_path": [
+              "28AB",
+              "5",
+              "2"
+            ],
+            "metric_group": "semi_detached_setbacks",
+            "controls": [
+              {
+                "metric": "rear_yard_setback_minimum",
+                "value": 8,
+                "unit": "ft"
+              },
+              {
+                "metric": "front_yard_setback_minimum",
+                "value": 20,
+                "unit": "ft"
+              }
+            ],
+            "conditions": [
+              "notwithstanding Section 28AB(2)"
+            ]
+          },
+          {
+            "clause_label_raw": "28AB(5)(3)",
+            "clause_path": [
+              "28AB",
+              "5",
+              "3"
+            ],
+            "metric_group": "corner_lot_rule",
+            "controls": [
+              {
+                "metric": "flanking_street_setback_minimum",
+                "value": 10,
+                "unit": "ft"
+              }
+            ],
+            "conditions": [
+              "applies to semi-detached dwellings and accessory buildings or uses on corner lots"
+            ]
+          },
+          {
+            "clause_label_raw": "28AB(5)(4)",
+            "clause_path": [
+              "28AB",
+              "5",
+              "4"
+            ],
+            "metric_group": "subdivision_common_boundary_rule",
+            "conditions": [
+              "where a lot containing a semi-detached dwelling is to be or has been subdivided so each unit is on its own lot, no setback is required from the common lot boundary"
+            ]
+          }
+        ]
+      }
     ]
   },
   "use_specific_standards": [
-    { "section_label_raw": "28AC", "section_path": ["28", "AC"], "use_name": "internal conversion to duplex", "conditions": ["building must have been in existence on or before 1950-05-11"], "controls": [
-      { "clause_label_raw": "28AC(a)", "clause_path": ["28", "AC", "a"], "metric": "lot_area_minimum", "value": 3300, "unit": "sq_ft", "condition_text": "applies to duplex dwelling containing up to and including five habitable rooms" },
-      { "clause_label_raw": "28AC(b)", "clause_path": ["28", "AC", "b"], "metric": "lot_area_minimum", "value": 4000, "unit": "sq_ft", "condition_text": "applies to duplex dwelling containing six to eight habitable rooms" },
-      { "clause_label_raw": "28AC(c)", "clause_path": ["28", "AC", "c"], "metric": "lot_coverage_maximum", "value": 35, "unit": "percent" }
-    ] },
-    { "section_label_raw": "28AD", "section_path": ["28", "AD"], "summary": "Notwithstanding Section 28AB, the requirements of Sections 26(f) and (g), 27 and 28 apply." },
-    { "section_label_raw": "28AE", "section_path": ["28", "AE"], "use_name": "apartments containing a maximum of four units in the Mainland South Area", "applicability_scope": "mainland_south_area_only", "conditions": ["notwithstanding Section 28AA(1)(b)", "of the total number of dwelling units in the building, there is a minimum of one two-bedroom unit for each bachelor or one-bedroom unit"] }
+    {
+      "section_label_raw": "28AC",
+      "section_path": [
+        "28AC"
+      ],
+      "use_name": "internal conversion to duplex",
+      "conditions": [
+        "building must have been in existence on or before 1950-05-11"
+      ],
+      "controls": [
+        {
+          "clause_label_raw": "28AC(a)",
+          "clause_path": [
+            "28AC",
+            "a"
+          ],
+          "metric": "lot_area_minimum",
+          "value": 3300,
+          "unit": "sq_ft",
+          "condition_text": "applies to duplex dwelling containing up to and including five habitable rooms"
+        },
+        {
+          "clause_label_raw": "28AC(b)",
+          "clause_path": [
+            "28AC",
+            "b"
+          ],
+          "metric": "lot_area_minimum",
+          "value": 4000,
+          "unit": "sq_ft",
+          "condition_text": "applies to duplex dwelling containing six to eight habitable rooms"
+        },
+        {
+          "clause_label_raw": "28AC(c)",
+          "clause_path": [
+            "28AC",
+            "c"
+          ],
+          "metric": "lot_coverage_maximum",
+          "value": 35,
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "section_label_raw": "28AD",
+      "section_path": [
+        "28AD"
+      ],
+      "summary": "Notwithstanding Section 28AB, the requirements of Sections 26(f) and (g), 27 and 28 apply."
+    },
+    {
+      "section_label_raw": "28AE",
+      "section_path": [
+        "28AE"
+      ],
+      "use_name": "apartments containing a maximum of four units in the Mainland South Area",
+      "applicability_scope": "mainland_south_area_only",
+      "conditions": [
+        "notwithstanding Section 28AA(1)(b)",
+        "of the total number of dwelling units in the building, there is a minimum of one two-bedroom unit for each bachelor or one-bedroom unit"
+      ]
+    }
   ],
   "sign_controls": [],
   "spatial_features_needed": [
-    { "feature_key": "mainland_south_area", "feature_class": "planning_area_boundary", "source_type": "existing_or_derived_polygon", "reason": "controls 28AE" }
+    {
+      "feature_key": "mainland_south_area",
+      "feature_class": "planning_area_boundary",
+      "source_type": "existing_or_derived_polygon",
+      "reason": "controls 28AE"
+    }
   ],
   "open_issues": [],
   "citations": {
-    "permitted_uses": { "pdf_page": 66, "bylaw_page": 58 },
-    "requirements": { "pdf_page_start": 66, "pdf_page_end": 67, "bylaw_page_start": 58, "bylaw_page_end": 59 }
+    "permitted_uses": {
+      "pdf_page": 66,
+      "bylaw_page": 58
+    },
+    "requirements": {
+      "pdf_page_start": 66,
+      "pdf_page_end": 67,
+      "bylaw_page_start": 58,
+      "bylaw_page_end": 59
+    }
   }
 }

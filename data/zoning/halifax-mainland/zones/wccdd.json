@@ -1,0 +1,150 @@
+{
+  "document_metadata": {
+    "jurisdiction": "Halifax Regional Municipality",
+    "bylaw_name": "Halifax Mainland Land Use By-law",
+    "source_document_path": "docs/halifaxmainlandlanduseby-law-edition231-eff-26feb02-minorrev2025-02922-toclinked_1.pdf",
+    "edition": "231",
+    "zone_code": "WCCDD",
+    "zone_name": "Western Common Comprehensive Development District",
+    "zone_established_by": {
+      "clause_label_raw": "16(1)",
+      "pdf_page": 53,
+      "bylaw_page": 45
+    },
+    "zone_section_start": {
+      "title_label_raw": "WCCDD ZONE: WESTERN COMMON COMPREHENSIVE DEVELOPMENT DISTRICT",
+      "pdf_page": 144,
+      "bylaw_page": 136
+    },
+    "zone_section_end_before": {
+      "title_label_raw": "CD-1: C&D MATERIALS TRANSFER STATIONS ZONE",
+      "pdf_page": 145,
+      "bylaw_page": 137
+    }
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": [
+      "62AB(1)",
+      "62AB(2)(i)"
+    ],
+    "pending_review_clause_patterns": []
+  },
+  "general_context": {
+    "zone_class_reference": {
+      "section_label_raw": "16(1)",
+      "summary": "WCCDD is an established class of use zone."
+    },
+    "general_boundary_rule_refs": [
+      "17(a)-(h)",
+      "18",
+      "19"
+    ]
+  },
+  "permitted_uses": [],
+  "prohibitions": [
+    {
+      "clause_label_raw": "62AB(1)",
+      "clause_path": [
+        "62AB",
+        "1"
+      ],
+      "rule_type": "development_prohibition",
+      "summary": "No municipal development permit shall be granted except in accordance with the terms and conditions of a development agreement approved by Council and in effect."
+    }
+  ],
+  "requirements": {
+    "development_agreement_controls": [
+      {
+        "section_label_raw": "62AB(1)",
+        "section_path": [
+          "62AB",
+          "1"
+        ],
+        "rule_type": "development_agreement_requirement",
+        "condition_text": "Municipal development permits require an approved development agreement in effect."
+      },
+      {
+        "section_label_raw": "62AB(2)",
+        "section_path": [
+          "62AB",
+          "2"
+        ],
+        "rule_type": "application_submission_requirements",
+        "controls": [
+          {
+            "clause_label_raw": "62AB(2)(i)",
+            "clause_path": [
+              "62AB",
+              "2",
+              "i"
+            ],
+            "condition_text": "A legal description of the total site proposed for development, including present and proposed ownership."
+          },
+          {
+            "clause_label_raw": "62AB(2)(ii)",
+            "clause_path": [
+              "62AB",
+              "2",
+              "ii"
+            ],
+            "condition_text": "A development schedule to indicate the stages or phases of development from the beginning to completion."
+          },
+          {
+            "clause_label_raw": "62AB(2)(iii)",
+            "clause_path": [
+              "62AB",
+              "2",
+              "iii"
+            ],
+            "condition_text": "Total number and type of dwelling units, lot size, proposed lot coverages, approximate gross and net population densities, total amount of open space and useable open space, and total amount of commercial and, where applicable, institutional facilities."
+          },
+          {
+            "clause_label_raw": "62AB(2)(iv)",
+            "clause_path": [
+              "62AB",
+              "2",
+              "iv"
+            ],
+            "condition_text": "Site plan and supporting maps describing existing topographic conditions including contours at 5 foot intervals, water courses or bodies, flood plains, wetlands, significant natural features and forest cover including the general location of trees 6 inches in diameter or greater, proposed lot lines, and the location and size of all existing and proposed buildings and structures including maximum heights, dwelling unit types, density per type and non-residential structures."
+          },
+          {
+            "clause_label_raw": "62AB(2)(v)",
+            "clause_path": [
+              "62AB",
+              "2",
+              "v"
+            ],
+            "condition_text": "The location and size of all areas to be dedicated or reserved as common open spaces, public parks, recreation areas, and other public uses; existing and proposed street circulation systems including parking and serviced areas and major points of ingress and egress; existing and proposed pedestrian circulation systems; existing and proposed public utility systems and, where applicable, sanitary and water systems on and adjacent to the development site; and a general schematic landscape plan with adjacent-area context information."
+          },
+          {
+            "clause_label_raw": "62AB(2)(vi)",
+            "clause_path": [
+              "62AB",
+              "2",
+              "vi"
+            ],
+            "condition_text": "Any other information which may be required to evaluate the impact of the proposed development."
+          }
+        ]
+      }
+    ]
+  },
+  "sign_controls": [],
+  "use_specific_standards": [],
+  "spatial_features_needed": [
+    {
+      "feature_key": "wccdd_development_application_site",
+      "feature_class": "site_specific_area",
+      "source_type": "existing_or_derived_polygon",
+      "reason": "Defines the total site proposed for development under subsection 62AB(2)."
+    }
+  ],
+  "open_issues": [],
+  "citations": {
+    "requirements": {
+      "pdf_page": 144,
+      "bylaw_page": 136
+    }
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "document_metadata": {
+    "jurisdiction": "Halifax Regional Municipality",
+    "bylaw_name": "Halifax Mainland Land Use By-law",
+    "source_document_path": "docs/halifaxmainlandlanduseby-law-edition231-eff-26feb02-minorrev2025-02922-toclinked_1.pdf",
+    "edition": "231",
+    "zone_code": "BWCDD",
+    "zone_name": "Bedford West Comprehensive Development District Zone",
+    "zone_established_by": {
+      "clause_label_raw": "16(1)",
+      "pdf_page": 53,
+      "bylaw_page": 45
+    },
+    "zone_section_start": {
+      "title_label_raw": "BWCDD ZONE: BEDFORD WEST COMPREHENSIVE DEVELOPMENT DISTRICT ZONE",
+      "pdf_page": 142,
+      "bylaw_page": 134
+    },
+    "zone_section_end_before": {
+      "title_label_raw": "SRCDD ZONE: SETON RIDGE COMPRENSIVE DEVELOPMENT DISTRICT ZONE",
+      "pdf_page": 143,
+      "bylaw_page": 135
+    }
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": [
+      "62AD(1)",
+      "62AD(3)"
+    ],
+    "pending_review_clause_patterns": []
+  },
+  "general_context": {
+    "zone_class_reference": {
+      "section_label_raw": "16(1)",
+      "summary": "BWCDD is an established class of use zone."
+    },
+    "general_boundary_rule_refs": [
+      "17(a)-(h)",
+      "18",
+      "19"
+    ]
+  },
+  "permitted_uses": [
+    {
+      "clause_label_raw": "62AD(2)",
+      "clause_path": [
+        "62AD",
+        "2"
+      ],
+      "use_type": "institutional_or_open_space_use",
+      "use_name": "utility uses",
+      "applicability_scope": "pid_40379257_and_pid_00289215_only"
+    }
+  ],
+  "prohibitions": [
+    {
+      "clause_label_raw": "62AD(1)",
+      "clause_path": [
+        "62AD",
+        "1"
+      ],
+      "rule_type": "development_prohibition",
+      "summary": "No development permit shall be issued for a development within a BWCDD Zone except in accordance with a development agreement approved pursuant to policies contained in the Bedford West Secondary Planning Strategy."
+    }
+  ],
+  "requirements": {
+    "development_agreement_controls": [
+      {
+        "section_label_raw": "62AD(1)",
+        "section_path": [
+          "62AD",
+          "1"
+        ],
+        "rule_type": "development_agreement_requirement",
+        "condition_text": "Development in the BWCDD Zone requires a development agreement approved pursuant to the Bedford West Secondary Planning Strategy."
+      }
+    ],
+    "utility_use_controls": [
+      {
+        "section_label_raw": "62AD(3)",
+        "section_path": [
+          "62AD",
+          "3"
+        ],
+        "use_name": "utility use",
+        "controls": [
+          {
+            "rule_type": "lot_area_minimum",
+            "measure": {
+              "minimum": 6000,
+              "unit": "sq_ft"
+            }
+          },
+          {
+            "rule_type": "lot_frontage_minimum",
+            "measure": {
+              "minimum": 60,
+              "unit": "ft"
+            }
+          },
+          {
+            "rule_type": "front_yard_setback_minimum",
+            "condition_text": "Minimum front yard is 20 ft on a local street and 30 ft on a collector or arterial street."
+          },
+          {
+            "rule_type": "rear_yard_setback_minimum",
+            "measure": {
+              "minimum": 20,
+              "unit": "ft"
+            }
+          },
+          {
+            "rule_type": "side_yard_setback_minimum",
+            "measure": {
+              "minimum": 8,
+              "unit": "ft"
+            }
+          },
+          {
+            "rule_type": "front_yard_setback_minimum",
+            "condition_text": "Minimum flankage yard is 20 ft on a local street and 30 ft on a collector or arterial street."
+          },
+          {
+            "rule_type": "building_height_maximum",
+            "measure": {
+              "maximum": 35,
+              "unit": "ft"
+            }
+          },
+          {
+            "rule_type": "lot_coverage_maximum",
+            "measure": {
+              "maximum": 35,
+              "unit": "percent"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "sign_controls": [],
+  "use_specific_standards": [],
+  "spatial_features_needed": [
+    {
+      "feature_key": "pid_40379257",
+      "feature_class": "address_or_parcel_exception",
+      "source_type": "parcel_or_address_lookup",
+      "reason": "Identifies one parcel where utility uses are permitted under subsection 62AD(2)."
+    },
+    {
+      "feature_key": "pid_00289215",
+      "feature_class": "address_or_parcel_exception",
+      "source_type": "parcel_or_address_lookup",
+      "reason": "Identifies one parcel where utility uses are permitted under subsection 62AD(2)."
+    }
+  ],
+  "open_issues": [],
+  "citations": {
+    "permitted_uses": {
+      "pdf_page": 142,
+      "bylaw_page": 134
+    },
+    "requirements": {
+      "pdf_page": 142,
+      "bylaw_page": 134
+    }
+  }
+}

@@ -30,20 +30,20 @@ The currently approved hierarchy interpretation is:
 
 - `20(1)(a.1)` -> `["20","1","a.1"]`
 - `21(e)` -> `["21","e"]`
-- `21(ea)` -> `["21","e","a"]`
-- `21(ea)(1)` -> `["21","e","a","1"]`
-- `23A` -> `["23","A"]`
-- `23E(1)` -> `["23","E","1"]`
-- `23E(1)(a)` -> `["23","E","1","a"]`
+- `21(ea)` -> `["21","ea"]`
+- `21(ea)(1)` -> `["21","ea","1"]`
+- `23A` -> `["23A"]`
+- `23E(1)` -> `["23E","1"]`
+- `23E(1)(a)` -> `["23E","1","a"]`
 - `26(i)(2A)` -> `["26","i","2A"]`
-- `28AO(1)(e)(i)` -> `["28","AO","1","e","i"]`
-- `28AT(1)` -> `["28","AT","1"]`
-- `34B1(a.)` -> `["34","B","1","a"]`
-- `34B1(ea.)` -> `["34","B","1","ea"]`
-- `34B38` -> `["34","B","38"]`
-- `53AA(1)(a)` -> `["53","AA","1","a"]`
-- `53AB` -> `["53","AB"]`
-- `53AC(1)` -> `["53","AC","1"]`
+- `28AO(1)(e)(i)` -> `["28AO","1","e","i"]`
+- `28AT(1)` -> `["28AT","1"]`
+- `34B1(a.)` -> `["34B","1","a"]`
+- `34B1(ea.)` -> `["34B","1","ea"]`
+- `34B38` -> `["34B","38"]`
+- `53AA(1)(a)` -> `["53AA","1","a"]`
+- `53AB` -> `["53AB"]`
+- `53AC(1)` -> `["53AC","1"]`
 - `61(5)(b)(i)(A)` -> `["61","5","b","i","A"]`
 - `61A(1)` -> `["61A","1"]`
 - `61AA(1)(a)` -> `["61AA","1","a"]`
@@ -257,7 +257,7 @@ The zone JSON is therefore the intermediate canonical representation, not the fi
 These raw clause formats still require explicit repository review before broader rollout:
 
 - any future dotted subtype outside the approved `a.1` style handling
-- any future alphanumeric section-style identifier outside the approved `23A` and `23E(1)` style handling
+- any future number-plus-uppercase-letter section token pattern outside the approved examples listed above
 
 ## Next conversion workflow
 

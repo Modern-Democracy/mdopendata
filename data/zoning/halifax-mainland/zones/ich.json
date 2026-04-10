@@ -1,0 +1,49 @@
+{
+  "document_metadata": {
+    "jurisdiction": "Halifax Regional Municipality",
+    "bylaw_name": "Halifax Mainland Land Use By-law",
+    "source_document_path": "docs/halifaxmainlandlanduseby-law-edition231-eff-26feb02-minorrev2025-02922-toclinked_1.pdf",
+    "edition": "231",
+    "zone_code": "ICH",
+    "zone_name": "Infrastructure Charge Holding Zone",
+    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
+    "zone_section_start": { "title_label_raw": "ICH: INFRASTRUCTURE CHARGE HOLDING ZONE", "pdf_page": 152, "bylaw_page": 144 },
+    "zone_section_end_before": { "title_label_raw": "RPK (REGIONAL PARK) ZONE", "pdf_page": 153, "bylaw_page": 145 }
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": ["62EA(1)", "62EB(1)"],
+    "pending_review_clause_patterns": []
+  },
+  "general_context": {
+    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "ICH is an established class of use zone." },
+    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+  },
+  "permitted_uses": [
+    { "section_label_raw": "62EA(1)", "section_path": ["62EA", "1"], "item_index": "1", "use_type": "residential_use", "use_name": "single unit dwellings" },
+    { "section_label_raw": "62EA(1)", "section_path": ["62EA", "1"], "item_index": "1.5", "use_type": "residential_use", "use_name": "shared housing use with 10 or fewer bedrooms in conjunction with a permitted dwelling unit" },
+    { "section_label_raw": "62EA(1)", "section_path": ["62EA", "1"], "item_index": "2", "use_type": "institutional_or_open_space_use", "use_name": "open space uses" }
+  ],
+  "prohibitions": [
+    { "clause_label_raw": "62EA(2)", "clause_path": ["62EA", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more of the uses set out in subsection 62EA(1)." },
+    { "clause_label_raw": "62EA(3)", "clause_path": ["62EA", "3"], "rule_type": "use_prohibition", "summary": "No land or building use in whole or in part for any purpose other than one or more of the uses set out in subsection 62EA(1)." }
+  ],
+  "requirements": {
+    "general_zone_controls": [
+      { "section_label_raw": "62EB(1)", "section_path": ["62EB", "1"], "condition_text": "Buildings erected, altered, or used for ICH uses in an ICH Zone shall only be permitted on lots in existence on July 2, 2002 and shall comply with the requirements of the R-1 Zone." }
+    ]
+  },
+  "sign_controls": [],
+  "use_specific_standards": [],
+  "spatial_features_needed": [
+    { "feature_key": "ich_lots_existing_2002_07_02", "feature_class": "site_specific_area", "source_type": "existing_or_derived_polygon", "reason": "Controls lot eligibility under subsection 62EB(1)." }
+  ],
+  "open_issues": [
+    { "issue_type": "source_format_variation", "raw_example": "62EA(1)", "reason": "Permitted uses are presented as a numbered list with items 1, 1.5, and 2 rather than lettered clauses." },
+    { "issue_type": "text_quality_check", "description": "Section 62EB(1) refers to compliance with the requirements of the R-1 Zone (Section 28) in the source text. The cross-reference should be checked against the PDF image before ingestion." }
+  ],
+  "citations": {
+    "permitted_uses": { "pdf_page": 152, "bylaw_page": 144 },
+    "requirements": { "pdf_page": 152, "bylaw_page": 144 }
+  }
+}
