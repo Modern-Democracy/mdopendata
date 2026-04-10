@@ -67,7 +67,11 @@
       ],
       "use_type": "principal_use",
       "use_name": "semi-detached dwelling",
-      "applicability_scope": "urban_service_area_only"
+      "applicability_scope": "urban_service_area_only",
+      "defined_term_refs": [
+        "semi_detached_dwelling"
+      ],
+      "link_method": "exact_term_match"
     },
     {
       "clause_label_raw": "20(1)(a.2)",
@@ -78,7 +82,11 @@
       ],
       "use_type": "principal_use",
       "use_name": "duplex dwelling",
-      "applicability_scope": "urban_service_area_only"
+      "applicability_scope": "urban_service_area_only",
+      "defined_term_refs": [
+        "duplex_dwelling"
+      ],
+      "link_method": "exact_term_match"
     },
     {
       "clause_label_raw": "20(1)(a.3)",
@@ -92,7 +100,11 @@
       "applicability_scope": "urban_service_area_only",
       "conditions": [
         "maximum 4 dwelling units"
-      ]
+      ],
+      "defined_term_refs": [
+        "apartment_house"
+      ],
+      "link_method": "exact_term_match"
     },
     {
       "clause_label_raw": "20(1)(b)",
@@ -117,7 +129,11 @@
         "a"
       ],
       "use_type": "ancillary_nonresidential_use",
-      "use_name": "home occupation"
+      "use_name": "home occupation",
+      "defined_term_refs": [
+        "home_occupation"
+      ],
+      "link_method": "exact_term_match"
     },
     {
       "clause_label_raw": "20(1)(c)",
@@ -195,7 +211,11 @@
       "linked_sections": [
         "23A",
         "23B"
-      ]
+      ],
+      "defined_term_refs": [
+        "day_care_facility"
+      ],
+      "link_method": "exact_term_match"
     },
     {
       "clause_label_raw": "20(1)(j)",
@@ -209,7 +229,11 @@
       "conditions": [
         "maximum 10 bedrooms",
         "in conjunction with a permitted dwelling unit"
-      ]
+      ],
+      "defined_term_refs": [
+        "shared_housing_use"
+      ],
+      "link_method": "exact_term_match"
     },
     {
       "clause_label_raw": "20(1)(ja)",
@@ -225,7 +249,11 @@
       "conditions": [
         "lands identified as Townhouse Building on ZM-33",
         "subject to Section 23E"
-      ]
+      ],
+      "defined_term_refs": [
+        "townhouse_building"
+      ],
+      "link_method": "exact_term_match"
     },
     {
       "clause_label_raw": "20(1)(k)",
@@ -691,7 +719,11 @@
           "value": 1,
           "unit": "facility"
         }
-      ]
+      ],
+      "defined_term_refs": [
+        "day_care_facility"
+      ],
+      "link_method": "exact_term_match"
     },
     {
       "section_label_raw": "23B",

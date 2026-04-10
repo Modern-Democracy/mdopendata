@@ -6,119 +6,756 @@
     "edition": "231",
     "zone_code": "C-2A",
     "zone_name": "Minor Commercial Zone",
-    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
-    "zone_section_start": { "title_label_raw": "C-2A ZONE: MINOR COMMERCIAL ZONE", "pdf_page": 104, "bylaw_page": 96 },
-    "zone_section_end_before": { "title_label_raw": "C-2B ZONE: HIGHWAY COMMERCIAL ZONE", "pdf_page": 109, "bylaw_page": 101 }
+    "zone_established_by": {
+      "clause_label_raw": "16(1)",
+      "pdf_page": 53,
+      "bylaw_page": 45
+    },
+    "zone_section_start": {
+      "title_label_raw": "C-2A ZONE: MINOR COMMERCIAL ZONE",
+      "pdf_page": 104,
+      "bylaw_page": 96
+    },
+    "zone_section_end_before": {
+      "title_label_raw": "C-2B ZONE: HIGHWAY COMMERCIAL ZONE",
+      "pdf_page": 109,
+      "bylaw_page": 101
+    }
   },
   "normalization_policy": {
     "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": ["38A(1)(la)", "38D(1)(a)", "38H(1)(iv)", "38K"],
+    "approved_hierarchy_examples": [
+      "38A(1)(la)",
+      "38D(1)(a)",
+      "38H(1)(iv)",
+      "38K"
+    ],
     "pending_review_clause_patterns": []
   },
   "general_context": {
-    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "C-2A is an established class of use zone." },
-    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+    "zone_class_reference": {
+      "section_label_raw": "16(1)",
+      "summary": "C-2A is an established class of use zone."
+    },
+    "general_boundary_rule_refs": [
+      "17(a)-(h)",
+      "18",
+      "19"
+    ]
   },
   "permitted_uses": [
-    { "clause_label_raw": "38A(1)(a)", "clause_path": ["38A", "1", "a"], "use_type": "incorporated_zone_use_set", "use_name": "R-1, R-2, R-2P, R-2T, R-2AM, R-3 and C-1 uses" },
-    { "clause_label_raw": "38A(1)(b)", "clause_path": ["38A", "1", "b"], "use_type": "commercial_use", "use_name": "stores for the purpose of retail trade and rental", "excluded_subuses": [
-      { "clause_label_raw": "38A(1)(b)(i)", "clause_path": ["38A", "1", "b", "i"], "use_name": "motor vehicle dealers" },
-      { "clause_label_raw": "38A(1)(b)(ii)", "clause_path": ["38A", "1", "b", "ii"], "use_name": "motor vehicle repair shops not primarily engaged in providing service station facilities" },
-      { "clause_label_raw": "38A(1)(b)(iii)", "clause_path": ["38A", "1", "b", "iii"], "use_name": "adult entertainment uses" }
-    ] },
-    { "clause_label_raw": "38A(1)(c)", "clause_path": ["38A", "1", "c"], "use_type": "commercial_use", "use_name": "radio, television, and electrical appliance repair shops" },
-    { "clause_label_raw": "38A(1)(d)", "clause_path": ["38A", "1", "d"], "use_type": "commercial_use", "use_name": "watch and jewellery repair shops" },
-    { "clause_label_raw": "38A(1)(e)", "clause_path": ["38A", "1", "e"], "use_type": "commercial_use", "use_name": "personal service store", "conditions": ["may include shoe repair shops, barber and beauty shops, dry cleaners, self-service laundries, and funeral services"], "excluded_subuses": [
-      { "use_name": "massage parlours" },
-      { "use_name": "adult entertainment uses" },
-      { "use_name": "amusement centres" }
-    ] },
-    { "clause_label_raw": "38A(1)(f)", "clause_path": ["38A", "1", "f"], "status": "deleted" },
-    { "clause_label_raw": "38A(1)(g)", "clause_path": ["38A", "1", "g"], "use_type": "commercial_use", "use_name": "motion picture theatre" },
-    { "clause_label_raw": "38A(1)(h)", "clause_path": ["38A", "1", "h"], "use_type": "commercial_use", "use_name": "service station" },
-    { "clause_label_raw": "38A(1)(i)", "clause_path": ["38A", "1", "i"], "use_type": "commercial_use", "use_name": "offices" },
-    { "clause_label_raw": "38A(1)(j)", "clause_path": ["38A", "1", "j"], "use_type": "commercial_use", "use_name": "bank and other financial institutions" },
-    { "clause_label_raw": "38A(1)(k)", "clause_path": ["38A", "1", "k"], "use_type": "commercial_use", "use_name": "restaurant" },
-    { "clause_label_raw": "38A(1)(l)", "clause_path": ["38A", "1", "l"], "use_type": "institutional_or_open_space_use", "use_name": "community facilities" },
-    { "clause_label_raw": "38A(1)(la)", "clause_path": ["38A", "1", "l", "a"], "use_type": "commercial_use", "use_name": "billboards", "conditions": ["maximum area 28 square metres", "shall not extend more than 8 metres above mean grade"] },
-    { "clause_label_raw": "38A(1)(lb)", "clause_path": ["38A", "1", "l", "b"], "use_type": "commercial_use", "use_name": "commercial recreation use" },
-    { "clause_label_raw": "38A(1)(lc)", "clause_path": ["38A", "1", "l", "c"], "use_type": "commercial_use", "use_name": "recycling depots, bingo hall, pool hall and motor vehicle repair shops", "applicability_scope": "mainland_south_area_only", "excluded_subuses": [
-      { "clause_label_raw": "38A(1)(lc)(i)", "clause_path": ["38A", "1", "l", "c", "i"], "use_name": "auto body shops" },
-      { "clause_label_raw": "38A(1)(lc)(ii)", "clause_path": ["38A", "1", "l", "c", "ii"], "use_name": "repair of trucks or other vehicles in excess of a gross weight of 6,000 pounds" }
-    ] },
-    { "clause_label_raw": "38A(1)(ld)", "clause_path": ["38A", "1", "l", "d"], "use_type": "commercial_use", "use_name": "motor vehicle sales", "applicability_scope": "bedford_highway_area_only", "source_duplicate_label_sequence": 1 },
-    { "clause_label_raw": "38A(1)(ld)", "clause_path": ["38A", "1", "l", "d"], "use_type": "use_with_specific_standard", "use_name": "day care facility", "source_duplicate_label_sequence": 2 },
-    { "clause_label_raw": "38A(1)(m)", "clause_path": ["38A", "1", "m"], "use_type": "accessory_use", "use_name": "any use accessory to any of the foregoing uses" }
+    {
+      "clause_label_raw": "38A(1)(a)",
+      "clause_path": [
+        "38A",
+        "1",
+        "a"
+      ],
+      "use_type": "incorporated_zone_use_set",
+      "use_name": "R-1, R-2, R-2P, R-2T, R-2AM, R-3 and C-1 uses"
+    },
+    {
+      "clause_label_raw": "38A(1)(b)",
+      "clause_path": [
+        "38A",
+        "1",
+        "b"
+      ],
+      "use_type": "commercial_use",
+      "use_name": "stores for the purpose of retail trade and rental",
+      "excluded_subuses": [
+        {
+          "clause_label_raw": "38A(1)(b)(i)",
+          "clause_path": [
+            "38A",
+            "1",
+            "b",
+            "i"
+          ],
+          "use_name": "motor vehicle dealers"
+        },
+        {
+          "clause_label_raw": "38A(1)(b)(ii)",
+          "clause_path": [
+            "38A",
+            "1",
+            "b",
+            "ii"
+          ],
+          "use_name": "motor vehicle repair shops not primarily engaged in providing service station facilities"
+        },
+        {
+          "clause_label_raw": "38A(1)(b)(iii)",
+          "clause_path": [
+            "38A",
+            "1",
+            "b",
+            "iii"
+          ],
+          "use_name": "adult entertainment uses",
+          "defined_term_refs": [
+            "adult_entertainment_use"
+          ],
+          "link_method": "reviewed_alias_match"
+        }
+      ]
+    },
+    {
+      "clause_label_raw": "38A(1)(c)",
+      "clause_path": [
+        "38A",
+        "1",
+        "c"
+      ],
+      "use_type": "commercial_use",
+      "use_name": "radio, television, and electrical appliance repair shops"
+    },
+    {
+      "clause_label_raw": "38A(1)(d)",
+      "clause_path": [
+        "38A",
+        "1",
+        "d"
+      ],
+      "use_type": "commercial_use",
+      "use_name": "watch and jewellery repair shops"
+    },
+    {
+      "clause_label_raw": "38A(1)(e)",
+      "clause_path": [
+        "38A",
+        "1",
+        "e"
+      ],
+      "use_type": "commercial_use",
+      "use_name": "personal service store",
+      "conditions": [
+        "may include shoe repair shops, barber and beauty shops, dry cleaners, self-service laundries, and funeral services"
+      ],
+      "excluded_subuses": [
+        {
+          "use_name": "massage parlours"
+        },
+        {
+          "use_name": "adult entertainment uses",
+          "defined_term_refs": [
+            "adult_entertainment_use"
+          ],
+          "link_method": "reviewed_alias_match"
+        },
+        {
+          "use_name": "amusement centres",
+          "defined_term_refs": [
+            "amusement_centre"
+          ],
+          "link_method": "reviewed_alias_match"
+        }
+      ]
+    },
+    {
+      "clause_label_raw": "38A(1)(f)",
+      "clause_path": [
+        "38A",
+        "1",
+        "f"
+      ],
+      "status": "deleted"
+    },
+    {
+      "clause_label_raw": "38A(1)(g)",
+      "clause_path": [
+        "38A",
+        "1",
+        "g"
+      ],
+      "use_type": "commercial_use",
+      "use_name": "motion picture theatre"
+    },
+    {
+      "clause_label_raw": "38A(1)(h)",
+      "clause_path": [
+        "38A",
+        "1",
+        "h"
+      ],
+      "use_type": "commercial_use",
+      "use_name": "service station"
+    },
+    {
+      "clause_label_raw": "38A(1)(i)",
+      "clause_path": [
+        "38A",
+        "1",
+        "i"
+      ],
+      "use_type": "commercial_use",
+      "use_name": "offices"
+    },
+    {
+      "clause_label_raw": "38A(1)(j)",
+      "clause_path": [
+        "38A",
+        "1",
+        "j"
+      ],
+      "use_type": "commercial_use",
+      "use_name": "bank and other financial institutions"
+    },
+    {
+      "clause_label_raw": "38A(1)(k)",
+      "clause_path": [
+        "38A",
+        "1",
+        "k"
+      ],
+      "use_type": "commercial_use",
+      "use_name": "restaurant"
+    },
+    {
+      "clause_label_raw": "38A(1)(l)",
+      "clause_path": [
+        "38A",
+        "1",
+        "l"
+      ],
+      "use_type": "institutional_or_open_space_use",
+      "use_name": "community facilities",
+      "defined_term_refs": [
+        "community_facility"
+      ],
+      "link_method": "reviewed_alias_match"
+    },
+    {
+      "clause_label_raw": "38A(1)(la)",
+      "clause_path": [
+        "38A",
+        "1",
+        "l",
+        "a"
+      ],
+      "use_type": "commercial_use",
+      "use_name": "billboards",
+      "conditions": [
+        "maximum area 28 square metres",
+        "shall not extend more than 8 metres above mean grade"
+      ]
+    },
+    {
+      "clause_label_raw": "38A(1)(lb)",
+      "clause_path": [
+        "38A",
+        "1",
+        "l",
+        "b"
+      ],
+      "use_type": "commercial_use",
+      "use_name": "commercial recreation use",
+      "defined_term_refs": [
+        "commercial_recreation_use"
+      ],
+      "link_method": "exact_term_match"
+    },
+    {
+      "clause_label_raw": "38A(1)(lc)",
+      "clause_path": [
+        "38A",
+        "1",
+        "l",
+        "c"
+      ],
+      "use_type": "commercial_use",
+      "use_name": "recycling depots, bingo hall, pool hall and motor vehicle repair shops",
+      "applicability_scope": "mainland_south_area_only",
+      "excluded_subuses": [
+        {
+          "clause_label_raw": "38A(1)(lc)(i)",
+          "clause_path": [
+            "38A",
+            "1",
+            "l",
+            "c",
+            "i"
+          ],
+          "use_name": "auto body shops"
+        },
+        {
+          "clause_label_raw": "38A(1)(lc)(ii)",
+          "clause_path": [
+            "38A",
+            "1",
+            "l",
+            "c",
+            "ii"
+          ],
+          "use_name": "repair of trucks or other vehicles in excess of a gross weight of 6,000 pounds"
+        }
+      ]
+    },
+    {
+      "clause_label_raw": "38A(1)(ld)",
+      "clause_path": [
+        "38A",
+        "1",
+        "l",
+        "d"
+      ],
+      "use_type": "commercial_use",
+      "use_name": "motor vehicle sales",
+      "applicability_scope": "bedford_highway_area_only",
+      "source_duplicate_label_sequence": 1,
+      "defined_term_refs": [
+        "motor_vehicle_sales"
+      ],
+      "link_method": "exact_term_match"
+    },
+    {
+      "clause_label_raw": "38A(1)(ld)",
+      "clause_path": [
+        "38A",
+        "1",
+        "l",
+        "d"
+      ],
+      "use_type": "use_with_specific_standard",
+      "use_name": "day care facility",
+      "source_duplicate_label_sequence": 2,
+      "defined_term_refs": [
+        "day_care_facility"
+      ],
+      "link_method": "exact_term_match"
+    },
+    {
+      "clause_label_raw": "38A(1)(m)",
+      "clause_path": [
+        "38A",
+        "1",
+        "m"
+      ],
+      "use_type": "accessory_use",
+      "use_name": "any use accessory to any of the foregoing uses"
+    }
   ],
   "prohibitions": [
-    { "clause_label_raw": "38A(2)", "clause_path": ["38A", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more uses in 38A(1)." },
-    { "clause_label_raw": "38A(3)", "clause_path": ["38A", "3"], "rule_type": "use_prohibition", "summary": "No land or building use for any purpose other than one or more uses in 38A(1)." }
+    {
+      "clause_label_raw": "38A(2)",
+      "clause_path": [
+        "38A",
+        "2"
+      ],
+      "rule_type": "development_prohibition",
+      "summary": "No development for any purpose other than one or more uses in 38A(1)."
+    },
+    {
+      "clause_label_raw": "38A(3)",
+      "clause_path": [
+        "38A",
+        "3"
+      ],
+      "rule_type": "use_prohibition",
+      "summary": "No land or building use for any purpose other than one or more uses in 38A(1)."
+    }
   ],
   "requirements": {
     "incorporated_use_requirements": [
-      { "section_label_raw": "38B(2)", "section_path": ["38B", "2"], "summary": "Buildings erected, altered or used for R-1, R-2, R-2P, R-2T, R-2AM and R-3 uses in a C-2A Zone shall comply with the requirements of their respective zones." }
+      {
+        "section_label_raw": "38B(2)",
+        "section_path": [
+          "38B",
+          "2"
+        ],
+        "summary": "Buildings erected, altered or used for R-1, R-2, R-2P, R-2T, R-2AM and R-3 uses in a C-2A Zone shall comply with the requirements of their respective zones."
+      }
     ],
     "height_and_sign_controls": [
-      { "section_label_raw": "38C(1)", "section_path": ["38C", "1"], "condition_text": "height of any building shall not exceed 35 feet, except apartment buildings with more than four units which shall have a maximum height of 3 storeys" },
-      { "section_label_raw": "38C(2)", "section_path": ["38C", "2"], "status": "repealed" },
-      { "section_label_raw": "38C(3)", "section_path": ["38C", "3"], "condition_text": "in the Bedford Highway Secondary Plan, where commercial uses occupy the full ground floor of a mixed commercial and multiple unit residential development, inclusive of a residential entrance, the residential portion shall be subject to the requirements of the R-3 Zone" },
-      { "section_label_raw": "38C(4)", "section_path": ["38C", "4"], "condition_text": "for the property at 522 Bedford Highway, no building or use shall exceed the height of 35 feet" },
-      { "section_label_raw": "38D(1)", "section_path": ["38D", "1"], "use_name": "signs", "controls": [
-        { "clause_label_raw": "38D(1)(a)", "clause_path": ["38D", "1", "a"], "condition_text": "non-illuminated signboard on and parallel to the front of the building not exceeding 3 feet in height, immediately above the ground floor store windows and pertaining solely to the business", "exception_text": "for each foot the building face is set back from the street line, 0.5 feet may be added to sign height to a maximum of 8 feet; in no case shall the sign exceed 300 square feet" },
-        { "clause_label_raw": "38D(1)(b)", "clause_path": ["38D", "1", "b"], "condition_text": "one non-illuminated signboard not exceeding 3 feet in height and 300 square feet in area or two such signboards with a total of 300 square feet may be placed upon the building" }
-      ] },
-      { "section_label_raw": "38D(2)", "section_path": ["38D", "2"], "condition_text": "illuminated signs may be erected if they do not constitute a nuisance or hazard to the public" },
-      { "section_label_raw": "38D(3)", "section_path": ["38D", "3"], "condition_text": "a single signboard may be placed perpendicular to the front of a building to identify the proprietor or nature of the business, immediately above ground floor windows, not exceeding 12 square feet on a single surface, with a maximum of two such signboards per building" }
+      {
+        "section_label_raw": "38C(1)",
+        "section_path": [
+          "38C",
+          "1"
+        ],
+        "condition_text": "height of any building shall not exceed 35 feet, except apartment buildings with more than four units which shall have a maximum height of 3 storeys"
+      },
+      {
+        "section_label_raw": "38C(2)",
+        "section_path": [
+          "38C",
+          "2"
+        ],
+        "status": "repealed"
+      },
+      {
+        "section_label_raw": "38C(3)",
+        "section_path": [
+          "38C",
+          "3"
+        ],
+        "condition_text": "in the Bedford Highway Secondary Plan, where commercial uses occupy the full ground floor of a mixed commercial and multiple unit residential development, inclusive of a residential entrance, the residential portion shall be subject to the requirements of the R-3 Zone"
+      },
+      {
+        "section_label_raw": "38C(4)",
+        "section_path": [
+          "38C",
+          "4"
+        ],
+        "condition_text": "for the property at 522 Bedford Highway, no building or use shall exceed the height of 35 feet"
+      },
+      {
+        "section_label_raw": "38D(1)",
+        "section_path": [
+          "38D",
+          "1"
+        ],
+        "use_name": "signs",
+        "controls": [
+          {
+            "clause_label_raw": "38D(1)(a)",
+            "clause_path": [
+              "38D",
+              "1",
+              "a"
+            ],
+            "condition_text": "non-illuminated signboard on and parallel to the front of the building not exceeding 3 feet in height, immediately above the ground floor store windows and pertaining solely to the business",
+            "exception_text": "for each foot the building face is set back from the street line, 0.5 feet may be added to sign height to a maximum of 8 feet; in no case shall the sign exceed 300 square feet"
+          },
+          {
+            "clause_label_raw": "38D(1)(b)",
+            "clause_path": [
+              "38D",
+              "1",
+              "b"
+            ],
+            "condition_text": "one non-illuminated signboard not exceeding 3 feet in height and 300 square feet in area or two such signboards with a total of 300 square feet may be placed upon the building"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "38D(2)",
+        "section_path": [
+          "38D",
+          "2"
+        ],
+        "condition_text": "illuminated signs may be erected if they do not constitute a nuisance or hazard to the public"
+      },
+      {
+        "section_label_raw": "38D(3)",
+        "section_path": [
+          "38D",
+          "3"
+        ],
+        "condition_text": "a single signboard may be placed perpendicular to the front of a building to identify the proprietor or nature of the business, immediately above ground floor windows, not exceeding 12 square feet on a single surface, with a maximum of two such signboards per building"
+      }
     ],
     "setback_access_and_parking_controls": [
-      { "section_label_raw": "38E(1)", "section_path": ["38E", "1"], "condition_text": "any building used for C-1 or C-2A purposes shall be set back a minimum of 20 feet from a rear lot line and 12 feet from a side lot line where such lot line abuts a residential zone" },
-      { "section_label_raw": "38E(2)", "section_path": ["38E", "2"], "condition_text": "any C-1 or C-2A use shall provide a minimum 4 foot strip of landscaped open space along that part of the street line not required for the curb cut or pedestrian entrance" },
-      { "section_label_raw": "38F(1)", "section_path": ["38F", "1"], "condition_text": "in the Bedford Highway Area, one vehicle access point is permitted for each lot with 100 feet of frontage or less and two for lots with frontage greater than 100 feet" },
-      { "section_label_raw": "38F(2)", "section_path": ["38F", "2"], "condition_text": "vehicle access point shall not exceed 35 feet in width and shall be defined by curbing, planting, or a similar device that will not obstruct the view of traffic" },
-      { "section_label_raw": "38G(1)", "section_path": ["38G", "1"], "condition_text": "stores shall front on Dutch Village Road, Titus Street or Alma Crescent only, and there shall be no commercial display of goods for sale on the side or rear of any buildings" },
-      { "section_label_raw": "38G(2)", "section_path": ["38G", "2"], "condition_text": "vehicular access to commercial uses and parking areas shall be from Dutch Village Road, Titus Street or Alma Crescent", "exception_text": "access from side streets is permitted if the minimum distance from an abutting residential zone to the point of access is 5 feet" },
-      { "section_label_raw": "38G(3)", "section_path": ["38G", "3"], "condition_text": "driveways and parking areas for C-1 or C-2A uses shall be set back a minimum of 5 feet from rear and side lot lines adjacent to a residential zone and screened by a fence at least 5 feet high", "exception_text": "the 5 foot setback area shall be landscaped and a transparent fence requires year-round solid visual screening to a minimum height of 5 feet at maturity" },
-      { "section_label_raw": "38H(1)", "section_path": ["38H", "1"], "applicability_scope": "mainland_south_area_only", "controls": [
-        { "clause_label_raw": "38H(1)(i)", "clause_path": ["38H", "1", "i"], "condition_text": "3 spaces per 1,000 sq.ft. of office space" },
-        { "clause_label_raw": "38H(1)(ii)", "clause_path": ["38H", "1", "ii"], "condition_text": "4 spaces per 1,000 sq.ft. of retail/service store space" },
-        { "clause_label_raw": "38H(1)(iii)", "clause_path": ["38H", "1", "iii"], "condition_text": "8 spaces per 1,000 sq.ft. of restaurant space" },
-        { "clause_label_raw": "38H(1)(iv)", "clause_path": ["38H", "1", "iv"], "condition_text": "parking shall not be permitted within 3 feet of the street line and parking areas for commercial uses must be paved" }
-      ] },
-      { "section_label_raw": "38H(2)", "section_path": ["38H", "2"], "applicability_scope": "mainland_south_area_only", "condition_text": "no vehicular access shall be obtained through a side or rear yard adjacent to a residential zone" },
-      { "section_label_raw": "38H(3)", "section_path": ["38H", "3"], "condition_text": "commercial buildings shall be set back a minimum of 20 feet from a rear lot line and 12 feet from a side lot line adjacent to a residential zone" },
-      { "section_label_raw": "38H(4)", "section_path": ["38H", "4"], "condition_text": "yard areas required pursuant to 38H(3) shall be landscaped" },
-      { "section_label_raw": "38I", "section_path": ["38I"], "use_name": "motor vehicle repair shop in Mainland South Area", "controls": [
-        { "clause_label_raw": "38I(a)", "clause_path": ["38I", "a"], "condition_text": "have an opaque fence a minimum of five feet in height abutting any residential zones" },
-        { "clause_label_raw": "38I(b)", "clause_path": ["38I", "b"], "condition_text": "have lighting facilities, if provided, directed away from any abutting residential zones" },
-        { "clause_label_raw": "38I(c)", "clause_path": ["38I", "c"], "condition_text": "have any commercial refuse container enclosed in a structure which screens it from the street and abutting residential zones" },
-        { "clause_label_raw": "38I(d)", "clause_path": ["38I", "d"], "condition_text": "not have outdoor storage of inoperative motor vehicles, boxes, crates or other materials" },
-        { "clause_label_raw": "38I(e)", "clause_path": ["38I", "e"], "condition_text": "provide a minimum 6 foot strip of landscaped open space along that part of the street line not required for the curb cut or pedestrian entrance" }
-      ] },
-      { "section_label_raw": "38J", "section_path": ["38J"], "use_name": "motor vehicle sales", "condition_text": "no area of the lot greater than 10,000 square feet shall be used for the parking and display of motor vehicles including manoeuvring areas" },
-      { "section_label_raw": "38J", "section_path_duplicate": ["38J", "motor_vehicle_repair_shops"], "use_name": "motor vehicle repair shops", "conditions": ["notwithstanding 38A(1)(b)(ii), motor vehicle repair shops excluding those servicing vehicles in excess of 6000 pounds and excluding auto body or auto paint shops may be permitted"], "controls": [
-        { "clause_label_raw": "38J(a)", "clause_path": ["38J", "a"], "condition_text": "must be located on a site which has a valid occupancy permit for a service station or whose most recent valid occupancy permit is for a service station" },
-        { "clause_label_raw": "38J(b)", "clause_path": ["38J", "b"], "condition_text": "an opaque fence having a minimum height of five feet is constructed abutting any residential zone" },
-        { "clause_label_raw": "38J(c)", "clause_path": ["38J", "c"], "condition_text": "lighting facilities, if provided, are directed away from any abutting residential zone" },
-        { "clause_label_raw": "38J(d)", "clause_path": ["38J", "d"], "condition_text": "any commercial refuse container is enclosed in a structure which screens it from the street and abutting residential zones" },
-        { "clause_label_raw": "38J(e)", "clause_path": ["38J", "e"], "condition_text": "there is no outdoor storage of inoperative motor vehicles, boxes, crates or other materials" },
-        { "clause_label_raw": "38J(f)", "clause_path": ["38J", "f"], "condition_text": "there is landscaped open space having a minimum width of six feet along that part of the street line not required for the curb cut or pedestrian entrance" }
-      ] },
-      { "section_label_raw": "38K", "section_path": ["38K"], "condition_text": "notwithstanding 38A(1), service stations, recycling depots, motor vehicle repair, billboards, and residential uses shall not be permitted at the site identified as 264 Herring Cove Road on ZM-26" }
+      {
+        "section_label_raw": "38E(1)",
+        "section_path": [
+          "38E",
+          "1"
+        ],
+        "condition_text": "any building used for C-1 or C-2A purposes shall be set back a minimum of 20 feet from a rear lot line and 12 feet from a side lot line where such lot line abuts a residential zone"
+      },
+      {
+        "section_label_raw": "38E(2)",
+        "section_path": [
+          "38E",
+          "2"
+        ],
+        "condition_text": "any C-1 or C-2A use shall provide a minimum 4 foot strip of landscaped open space along that part of the street line not required for the curb cut or pedestrian entrance"
+      },
+      {
+        "section_label_raw": "38F(1)",
+        "section_path": [
+          "38F",
+          "1"
+        ],
+        "condition_text": "in the Bedford Highway Area, one vehicle access point is permitted for each lot with 100 feet of frontage or less and two for lots with frontage greater than 100 feet"
+      },
+      {
+        "section_label_raw": "38F(2)",
+        "section_path": [
+          "38F",
+          "2"
+        ],
+        "condition_text": "vehicle access point shall not exceed 35 feet in width and shall be defined by curbing, planting, or a similar device that will not obstruct the view of traffic"
+      },
+      {
+        "section_label_raw": "38G(1)",
+        "section_path": [
+          "38G",
+          "1"
+        ],
+        "condition_text": "stores shall front on Dutch Village Road, Titus Street or Alma Crescent only, and there shall be no commercial display of goods for sale on the side or rear of any buildings"
+      },
+      {
+        "section_label_raw": "38G(2)",
+        "section_path": [
+          "38G",
+          "2"
+        ],
+        "condition_text": "vehicular access to commercial uses and parking areas shall be from Dutch Village Road, Titus Street or Alma Crescent",
+        "exception_text": "access from side streets is permitted if the minimum distance from an abutting residential zone to the point of access is 5 feet"
+      },
+      {
+        "section_label_raw": "38G(3)",
+        "section_path": [
+          "38G",
+          "3"
+        ],
+        "condition_text": "driveways and parking areas for C-1 or C-2A uses shall be set back a minimum of 5 feet from rear and side lot lines adjacent to a residential zone and screened by a fence at least 5 feet high",
+        "exception_text": "the 5 foot setback area shall be landscaped and a transparent fence requires year-round solid visual screening to a minimum height of 5 feet at maturity"
+      },
+      {
+        "section_label_raw": "38H(1)",
+        "section_path": [
+          "38H",
+          "1"
+        ],
+        "applicability_scope": "mainland_south_area_only",
+        "controls": [
+          {
+            "clause_label_raw": "38H(1)(i)",
+            "clause_path": [
+              "38H",
+              "1",
+              "i"
+            ],
+            "condition_text": "3 spaces per 1,000 sq.ft. of office space"
+          },
+          {
+            "clause_label_raw": "38H(1)(ii)",
+            "clause_path": [
+              "38H",
+              "1",
+              "ii"
+            ],
+            "condition_text": "4 spaces per 1,000 sq.ft. of retail/service store space"
+          },
+          {
+            "clause_label_raw": "38H(1)(iii)",
+            "clause_path": [
+              "38H",
+              "1",
+              "iii"
+            ],
+            "condition_text": "8 spaces per 1,000 sq.ft. of restaurant space"
+          },
+          {
+            "clause_label_raw": "38H(1)(iv)",
+            "clause_path": [
+              "38H",
+              "1",
+              "iv"
+            ],
+            "condition_text": "parking shall not be permitted within 3 feet of the street line and parking areas for commercial uses must be paved"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "38H(2)",
+        "section_path": [
+          "38H",
+          "2"
+        ],
+        "applicability_scope": "mainland_south_area_only",
+        "condition_text": "no vehicular access shall be obtained through a side or rear yard adjacent to a residential zone"
+      },
+      {
+        "section_label_raw": "38H(3)",
+        "section_path": [
+          "38H",
+          "3"
+        ],
+        "condition_text": "commercial buildings shall be set back a minimum of 20 feet from a rear lot line and 12 feet from a side lot line adjacent to a residential zone"
+      },
+      {
+        "section_label_raw": "38H(4)",
+        "section_path": [
+          "38H",
+          "4"
+        ],
+        "condition_text": "yard areas required pursuant to 38H(3) shall be landscaped"
+      },
+      {
+        "section_label_raw": "38I",
+        "section_path": [
+          "38I"
+        ],
+        "use_name": "motor vehicle repair shop in Mainland South Area",
+        "controls": [
+          {
+            "clause_label_raw": "38I(a)",
+            "clause_path": [
+              "38I",
+              "a"
+            ],
+            "condition_text": "have an opaque fence a minimum of five feet in height abutting any residential zones"
+          },
+          {
+            "clause_label_raw": "38I(b)",
+            "clause_path": [
+              "38I",
+              "b"
+            ],
+            "condition_text": "have lighting facilities, if provided, directed away from any abutting residential zones"
+          },
+          {
+            "clause_label_raw": "38I(c)",
+            "clause_path": [
+              "38I",
+              "c"
+            ],
+            "condition_text": "have any commercial refuse container enclosed in a structure which screens it from the street and abutting residential zones"
+          },
+          {
+            "clause_label_raw": "38I(d)",
+            "clause_path": [
+              "38I",
+              "d"
+            ],
+            "condition_text": "not have outdoor storage of inoperative motor vehicles, boxes, crates or other materials"
+          },
+          {
+            "clause_label_raw": "38I(e)",
+            "clause_path": [
+              "38I",
+              "e"
+            ],
+            "condition_text": "provide a minimum 6 foot strip of landscaped open space along that part of the street line not required for the curb cut or pedestrian entrance"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "38J",
+        "section_path": [
+          "38J"
+        ],
+        "use_name": "motor vehicle sales",
+        "condition_text": "no area of the lot greater than 10,000 square feet shall be used for the parking and display of motor vehicles including manoeuvring areas",
+        "defined_term_refs": [
+          "motor_vehicle_sales"
+        ],
+        "link_method": "exact_term_match"
+      },
+      {
+        "section_label_raw": "38J",
+        "section_path_duplicate": [
+          "38J",
+          "motor_vehicle_repair_shops"
+        ],
+        "use_name": "motor vehicle repair shops",
+        "conditions": [
+          "notwithstanding 38A(1)(b)(ii), motor vehicle repair shops excluding those servicing vehicles in excess of 6000 pounds and excluding auto body or auto paint shops may be permitted"
+        ],
+        "controls": [
+          {
+            "clause_label_raw": "38J(a)",
+            "clause_path": [
+              "38J",
+              "a"
+            ],
+            "condition_text": "must be located on a site which has a valid occupancy permit for a service station or whose most recent valid occupancy permit is for a service station"
+          },
+          {
+            "clause_label_raw": "38J(b)",
+            "clause_path": [
+              "38J",
+              "b"
+            ],
+            "condition_text": "an opaque fence having a minimum height of five feet is constructed abutting any residential zone"
+          },
+          {
+            "clause_label_raw": "38J(c)",
+            "clause_path": [
+              "38J",
+              "c"
+            ],
+            "condition_text": "lighting facilities, if provided, are directed away from any abutting residential zone"
+          },
+          {
+            "clause_label_raw": "38J(d)",
+            "clause_path": [
+              "38J",
+              "d"
+            ],
+            "condition_text": "any commercial refuse container is enclosed in a structure which screens it from the street and abutting residential zones"
+          },
+          {
+            "clause_label_raw": "38J(e)",
+            "clause_path": [
+              "38J",
+              "e"
+            ],
+            "condition_text": "there is no outdoor storage of inoperative motor vehicles, boxes, crates or other materials"
+          },
+          {
+            "clause_label_raw": "38J(f)",
+            "clause_path": [
+              "38J",
+              "f"
+            ],
+            "condition_text": "there is landscaped open space having a minimum width of six feet along that part of the street line not required for the curb cut or pedestrian entrance"
+          }
+        ]
+      },
+      {
+        "section_label_raw": "38K",
+        "section_path": [
+          "38K"
+        ],
+        "condition_text": "notwithstanding 38A(1), service stations, recycling depots, motor vehicle repair, billboards, and residential uses shall not be permitted at the site identified as 264 Herring Cove Road on ZM-26"
+      }
     ]
   },
   "use_specific_standards": [],
   "sign_controls": [],
   "spatial_features_needed": [
-    { "feature_key": "mainland_south_area", "feature_class": "planning_area_boundary", "source_type": "existing_or_derived_polygon", "reason": "controls 38A(1)(lc), 38H, and 38I" },
-    { "feature_key": "bedford_highway_area", "feature_class": "planning_area_boundary", "source_type": "existing_or_derived_polygon", "reason": "controls 38A(1)(ld) motor vehicle sales and 38F" },
-    { "feature_key": "site_264_herring_cove_road_zm26", "feature_class": "site_specific_area", "source_type": "polygon_from_zm_26", "reason": "controls 38K" }
+    {
+      "feature_key": "mainland_south_area",
+      "feature_class": "planning_area_boundary",
+      "source_type": "existing_or_derived_polygon",
+      "reason": "controls 38A(1)(lc), 38H, and 38I"
+    },
+    {
+      "feature_key": "bedford_highway_area",
+      "feature_class": "planning_area_boundary",
+      "source_type": "existing_or_derived_polygon",
+      "reason": "controls 38A(1)(ld) motor vehicle sales and 38F"
+    },
+    {
+      "feature_key": "site_264_herring_cove_road_zm26",
+      "feature_class": "site_specific_area",
+      "source_type": "polygon_from_zm_26",
+      "reason": "controls 38K"
+    }
   ],
   "open_issues": [
-    { "issue_type": "source_duplicate_label", "raw_examples": ["38A(1)(ld)", "38A(1)(ld)"], "description": "The source repeats clause label 38A(1)(ld) for two distinct uses: Motor Vehicle Sales in the Bedford Highway area and day care facility." },
-    { "issue_type": "source_duplicate_section_label", "raw_examples": ["38J", "38J"], "description": "The source uses section label 38J twice for distinct provisions: motor vehicle sales and motor vehicle repair shops." }
+    {
+      "issue_type": "source_duplicate_label",
+      "raw_examples": [
+        "38A(1)(ld)",
+        "38A(1)(ld)"
+      ],
+      "description": "The source repeats clause label 38A(1)(ld) for two distinct uses: Motor Vehicle Sales in the Bedford Highway area and day care facility."
+    },
+    {
+      "issue_type": "source_duplicate_section_label",
+      "raw_examples": [
+        "38J",
+        "38J"
+      ],
+      "description": "The source uses section label 38J twice for distinct provisions: motor vehicle sales and motor vehicle repair shops."
+    }
   ],
   "citations": {
-    "permitted_uses": { "pdf_page": 104, "bylaw_page": 96 },
-    "requirements": { "pdf_page_start": 105, "pdf_page_end": 108, "bylaw_page_start": 97, "bylaw_page_end": 100 }
+    "permitted_uses": {
+      "pdf_page": 104,
+      "bylaw_page": 96
+    },
+    "requirements": {
+      "pdf_page_start": 105,
+      "pdf_page_end": 108,
+      "bylaw_page_start": 97,
+      "bylaw_page_end": 100
+    }
   }
 }

@@ -75,7 +75,11 @@
       "use_name": "apartment house",
       "conditions": [
         "four storeys or less"
-      ]
+      ],
+      "defined_term_refs": [
+        "apartment_house"
+      ],
+      "link_method": "exact_term_match"
     },
     {
       "clause_label_raw": "28CA(1)(ca)",
@@ -86,7 +90,11 @@
         "a"
       ],
       "use_type": "use_with_specific_standard",
-      "use_name": "day care facility"
+      "use_name": "day care facility",
+      "defined_term_refs": [
+        "day_care_facility"
+      ],
+      "link_method": "exact_term_match"
     },
     {
       "clause_label_raw": "28CA(1)(cb)",
@@ -100,7 +108,11 @@
       "use_name": "shared housing use",
       "conditions": [
         "four storeys or less"
-      ]
+      ],
+      "defined_term_refs": [
+        "shared_housing_use"
+      ],
+      "link_method": "exact_term_match"
     },
     {
       "clause_label_raw": "28CA(1)(d)",
@@ -237,7 +249,11 @@
             "value": 15,
             "unit": "ft"
           }
-        ]
+        ],
+        "defined_term_refs": [
+          "stacked_attached_housing"
+        ],
+        "link_method": "exact_term_match"
       }
     ],
     "four_storey_apartment_controls": [

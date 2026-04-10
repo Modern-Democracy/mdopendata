@@ -62,7 +62,11 @@
         "b"
       ],
       "use_type": "principal_use",
-      "use_name": "townhouse building"
+      "use_name": "townhouse building",
+      "defined_term_refs": [
+        "townhouse_building"
+      ],
+      "link_method": "exact_term_match"
     },
     {
       "clause_label_raw": "28AJ(1)(ba)",
@@ -77,7 +81,11 @@
       "conditions": [
         "maximum 10 bedrooms",
         "in conjunction with a permitted dwelling unit"
-      ]
+      ],
+      "defined_term_refs": [
+        "shared_housing_use"
+      ],
+      "link_method": "exact_term_match"
     },
     {
       "clause_label_raw": "28AJ(1)(c)",
@@ -278,7 +286,11 @@
             "applies where an accessory building is situated on a corner lot"
           ]
         }
-      ]
+      ],
+      "defined_term_refs": [
+        "accessory_building"
+      ],
+      "link_method": "reviewed_alias_match"
     }
   ],
   "sign_controls": [],

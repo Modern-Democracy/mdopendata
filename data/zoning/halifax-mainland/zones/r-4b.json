@@ -52,7 +52,11 @@
         "a"
       ],
       "use_type": "principal_use",
-      "use_name": "apartment houses"
+      "use_name": "apartment houses",
+      "defined_term_refs": [
+        "apartment_house"
+      ],
+      "link_method": "reviewed_alias_match"
     },
     {
       "clause_label_raw": "34B1(b.)",
@@ -72,7 +76,11 @@
         "c"
       ],
       "use_type": "ancillary_nonresidential_use",
-      "use_name": "home occupation uses"
+      "use_name": "home occupation uses",
+      "defined_term_refs": [
+        "home_occupation"
+      ],
+      "link_method": "reviewed_alias_match"
     },
     {
       "clause_label_raw": "34B1(d.)",
@@ -92,7 +100,11 @@
         "e"
       ],
       "use_type": "mixed_use",
-      "use_name": "work-live units"
+      "use_name": "work-live units",
+      "defined_term_refs": [
+        "work_live_unit"
+      ],
+      "link_method": "reviewed_alias_match"
     },
     {
       "clause_label_raw": "34B1(ea.)",
@@ -102,7 +114,11 @@
         "ea"
       ],
       "use_type": "residential_use",
-      "use_name": "shared housing use"
+      "use_name": "shared housing use",
+      "defined_term_refs": [
+        "shared_housing_use"
+      ],
+      "link_method": "exact_term_match"
     },
     {
       "clause_label_raw": "34B1(f.)",
@@ -916,7 +932,11 @@
             ],
             "condition_text": "the commercial use shall be located on a ground floor"
           }
-        ]
+        ],
+        "defined_term_refs": [
+          "work_live_unit"
+        ],
+        "link_method": "reviewed_alias_match"
       },
       {
         "section_label_raw": "34B32",
