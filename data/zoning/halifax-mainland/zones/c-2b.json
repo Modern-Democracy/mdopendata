@@ -1,0 +1,58 @@
+{
+  "document_metadata": {
+    "jurisdiction": "Halifax Regional Municipality",
+    "bylaw_name": "Halifax Mainland Land Use By-law",
+    "source_document_path": "docs/halifaxmainlandlanduseby-law-edition231-eff-26feb02-minorrev2025-02922-toclinked_1.pdf",
+    "edition": "231",
+    "zone_code": "C-2B",
+    "zone_name": "Highway Commercial Zone",
+    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
+    "zone_section_start": { "title_label_raw": "C-2B ZONE: HIGHWAY COMMERCIAL ZONE", "pdf_page": 109, "bylaw_page": 101 },
+    "zone_section_end_before": { "title_label_raw": "C-2C ZONE: DUTCH VILLAGE ROAD MIXED USE ZONE", "pdf_page": 110, "bylaw_page": 102 }
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": ["38AA(1)(ea)", "38AF(1)"],
+    "pending_review_clause_patterns": []
+  },
+  "general_context": {
+    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "C-2B is an established class of use zone." },
+    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+  },
+  "permitted_uses": [
+    { "clause_label_raw": "38AA(1)(a)", "clause_path": ["38AA", "1", "a"], "use_type": "incorporated_zone_use_set", "use_name": "R-1, R-2, R-2P, R-2T, R-2AM, R-3, C-1 and C-2A uses" },
+    { "clause_label_raw": "38AA(1)(b)", "clause_path": ["38AA", "1", "b"], "use_type": "commercial_use", "use_name": "motel" },
+    { "clause_label_raw": "38AA(1)(c)", "clause_path": ["38AA", "1", "c"], "use_type": "commercial_use", "use_name": "motor vehicle dealer" },
+    { "clause_label_raw": "38AA(1)(d)", "clause_path": ["38AA", "1", "d"], "use_type": "commercial_use", "use_name": "motor vehicle repair shop" },
+    { "clause_label_raw": "38AA(1)(e)", "clause_path": ["38AA", "1", "e"], "status": "deleted" },
+    { "clause_label_raw": "38AA(1)(ea)", "clause_path": ["38AA", "1", "e", "a"], "use_type": "commercial_use", "use_name": "short-term rental" },
+    { "clause_label_raw": "38AA(1)(eb)", "clause_path": ["38AA", "1", "e", "b"], "use_type": "commercial_use", "use_name": "short-term bedroom rental" },
+    { "clause_label_raw": "38AA(1)(f)", "clause_path": ["38AA", "1", "f"], "use_type": "accessory_use", "use_name": "any use accessory to the foregoing uses" }
+  ],
+  "prohibitions": [
+    { "clause_label_raw": "38AA(2)", "clause_path": ["38AA", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more uses in 38AA(1)." },
+    { "clause_label_raw": "38AA(3)", "clause_path": ["38AA", "3"], "rule_type": "use_prohibition", "summary": "No land or building use for any purpose other than one or more uses in 38AA(1)." }
+  ],
+  "requirements": {
+    "incorporated_use_requirements": [
+      { "section_label_raw": "38AB", "section_path": ["38AB"], "summary": "Buildings erected, altered or used for R-1, R-2, R-2P, R-2T, R-2AM and R-3 uses in a C-2B Zone shall comply with the requirements of their respective zones." }
+    ],
+    "c2b_use_controls": [
+      { "section_label_raw": "38AC", "section_path": ["38AC"], "condition_text": "height of any building shall not exceed 35 feet; in the Bedford Highway Area, notwithstanding Section 38AB, no uses shall exceed 35 feet in height" },
+      { "section_label_raw": "38AD", "section_path": ["38AD"], "condition_text": "any C-2B use shall be set back a minimum of 20 feet from the front lot line" },
+      { "section_label_raw": "38AE", "section_path": ["38AE"], "condition_text": "any C-1, C-2A or C-2B use in a C-2B Zone shall be set back a minimum of 20 feet from the rear lot line and 12 feet from a side lot line where the lot lines are adjacent to a residential zone" },
+      { "section_label_raw": "38AF(1)", "section_path": ["38AF", "1"], "condition_text": "in the Bedford Highway Area, one vehicle access point is permitted from each lot with 100 feet of frontage or less and two vehicle access points for each lot with frontage greater than 100 feet" },
+      { "section_label_raw": "38AF(2)", "section_path": ["38AF", "2"], "condition_text": "vehicle access point shall not exceed 35 feet in width and shall be defined by curbing, planting, or a similar device that will not obstruct the view of traffic" }
+    ]
+  },
+  "use_specific_standards": [],
+  "sign_controls": [],
+  "spatial_features_needed": [
+    { "feature_key": "bedford_highway_area", "feature_class": "planning_area_boundary", "source_type": "existing_or_derived_polygon", "reason": "controls 38AC and 38AF" }
+  ],
+  "open_issues": [],
+  "citations": {
+    "permitted_uses": { "pdf_page": 109, "bylaw_page": 101 },
+    "requirements": { "pdf_page": 109, "bylaw_page": 101 }
+  }
+}

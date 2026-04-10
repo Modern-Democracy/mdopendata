@@ -1,0 +1,81 @@
+{
+  "document_metadata": {
+    "jurisdiction": "Halifax Regional Municipality",
+    "bylaw_name": "Halifax Mainland Land Use By-law",
+    "source_document_path": "docs/halifaxmainlandlanduseby-law-edition231-eff-26feb02-minorrev2025-02922-toclinked_1.pdf",
+    "edition": "231",
+    "zone_code": "R-2AM",
+    "zone_name": "General Residential Conversion Zone",
+    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
+    "zone_section_start": { "title_label_raw": "R-2AM ZONE: GENERAL RESIDENTIAL CONVERSION ZONE", "pdf_page": 74, "bylaw_page": 66 },
+    "zone_section_end_before": { "title_label_raw": "R-3 ZONE: GENERAL RESIDENTIAL AND LOW-RISE APARTMENT", "pdf_page": 77, "bylaw_page": 69 }
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": ["28BA(1)", "28BC(1)(a)", "28BD(2)", "28BF(1)(b)"],
+    "pending_review_clause_patterns": []
+  },
+  "general_context": {
+    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "R-2AM is an established class of use zone." },
+    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+  },
+  "permitted_uses": [
+    { "clause_label_raw": "28BA(1)(a)", "clause_path": ["28", "BA", "1", "a"], "use_type": "incorporated_zone_use_set", "use_name": "R-1, R-2, R-2P and R-2T uses" },
+    { "clause_label_raw": "28BA(1)(b)", "clause_path": ["28", "BA", "1", "b"], "use_type": "principal_use", "use_name": "stacked attached housing", "conditions": ["maximum 14 units"] },
+    { "clause_label_raw": "28BA(1)(c)", "clause_path": ["28", "BA", "1", "c"], "use_type": "principal_use", "use_name": "apartment house", "conditions": ["maximum 14 units"] },
+    { "clause_label_raw": "28BA(1)(ca)", "clause_path": ["28", "BA", "1", "c", "a"], "use_type": "residential_use", "use_name": "shared housing use", "conditions": ["35 or fewer bedrooms"] },
+    { "clause_label_raw": "28BA(1)(d)", "clause_path": ["28", "BA", "1", "d"], "use_type": "building_addition_use", "use_name": "additions to existing buildings", "conditions": ["building must have existed on 1987-09-17", "maximum 14 units or 35 bedrooms", "ground area covered by the addition must not be greater than the area covered by the existing building", "lot coverage must not be greater than 40 percent"] },
+    { "clause_label_raw": "28BA(1)(e)", "clause_path": ["28", "BA", "1", "e"], "use_type": "accessory_use", "use_name": "uses accessory to any of the foregoing uses" }
+  ],
+  "prohibitions": [
+    { "clause_label_raw": "28BA(2)", "clause_path": ["28", "BA", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more uses in 28BA(1)." },
+    { "clause_label_raw": "28BA(3)", "clause_path": ["28", "BA", "3"], "rule_type": "use_prohibition", "summary": "No land or building use for any purpose other than one or more uses in 28BA(1)." }
+  ],
+  "requirements": {
+    "incorporated_use_requirements": [
+      { "section_label_raw": "28BB", "section_path": ["28", "BB"], "summary": "No billboard or sign except those permitted in R-1 Zones or in accordance with Section 30 below." },
+      { "section_label_raw": "28BC(1)", "section_path": ["28", "BC", "1"], "use_name": "R-1 uses in R-2AM Zone", "controls": [
+        { "clause_label_raw": "28BC(1)(a)", "clause_path": ["28", "BC", "1", "a"], "metric": "lot_area_minimum", "value": 4000, "unit": "sq_ft" },
+        { "clause_label_raw": "28BC(1)(b)", "clause_path": ["28", "BC", "1", "b"], "metric": "lot_frontage_minimum", "value": 40, "unit": "ft", "condition_text": "outer side of street curve may reduce minimum to 30 feet" },
+        { "clause_label_raw": "28BC(1)(c)", "clause_path": ["28", "BC", "1", "c"], "metric": "side_yard_setback_minimum", "value": 4, "unit": "ft" }
+      ], "conditions": ["otherwise comply with the requirements of the R-1 zone"] },
+      { "section_label_raw": "28BC(2)", "section_path": ["28", "BC", "2"], "summary": "Buildings erected, altered or used for R-2, R-2P or R-2T uses in an R-2AM Zone shall comply with the requirements of their respective zones." },
+      { "section_label_raw": "28BC(3)", "section_path": ["28", "BC", "3"], "use_name": "R-2AM uses", "controls": [
+        { "clause_label_raw": "28BC(3)(a)", "clause_path": ["28", "BC", "3", "a"], "metric": "lot_frontage_minimum", "value": 75, "unit": "ft" },
+        { "clause_label_raw": "28BC(3)(b)", "clause_path": ["28", "BC", "3", "b"], "metric": "lot_area_minimum", "value": 7500, "unit": "sq_ft" },
+        { "clause_label_raw": "28BC(3)(c)", "clause_path": ["28", "BC", "3", "c"], "metric": "side_yard_setback_minimum", "value": 12, "unit": "ft" },
+        { "clause_label_raw": "28BC(3)(d)", "clause_path": ["28", "BC", "3", "d"], "metric": "front_yard_setback_minimum", "value": 15, "unit": "ft" },
+        { "clause_label_raw": "28BC(3)(e)", "clause_path": ["28", "BC", "3", "e"], "metric": "rear_yard_setback_minimum", "value": 20, "unit": "ft" }
+      ] },
+      { "section_label_raw": "28BD(1)", "section_path": ["28", "BD", "1"], "metric": "building_height_maximum", "value": 35, "unit": "ft", "conditions": ["maximum height of additions shall be 35 feet", "under no circumstances shall a permitted addition exceed the established height of the existing building"] },
+      { "section_label_raw": "28BD(2)", "section_path": ["28", "BD", "2"], "metric_group": "apartment_storey_height_exception", "conditions": ["applies to an apartment with a minimum of 5 units and a maximum of 14 units", "maximum height is three storeys", "maximum height of additions shall be three storeys", "under no circumstances shall a permitted addition exceed the established height of the existing building"] },
+      { "section_label_raw": "28BE", "section_path": ["28", "BE"], "summary": "Additions and structural changes to existing buildings are not permitted on any front or side portion of a building facing a street and are limited to the rear and rear two-thirds of the side of the building." }
+    ],
+    "special_infill_conditions": [
+      { "section_label_raw": "28BF(1)", "section_path": ["28", "BF", "1"], "summary": "The city may permit infill development otherwise not permitted under the by-law if the following special conditions are satisfied.", "conditions": [
+        { "clause_label_raw": "28BF(1)(a)", "clause_path": ["28", "BF", "1", "a"], "status": "repealed" },
+        { "clause_label_raw": "28BF(1)(b)", "clause_path": ["28", "BF", "1", "b"], "condition_text": "if the area of ground covered by an existing building is less than 60 percent of the average area of ground covered by existing residential buildings in the immediate neighbourhood", "result_text": "the total area of ground covered by the existing building may be increased to twice the average area of ground covered by existing residential buildings in the immediate neighbourhood, provided that the lot coverage does not exceed 40 percent" },
+        { "clause_label_raw": "28BF(1)(c)", "clause_path": ["28", "BF", "1", "c"], "condition_text": "if the existing building setback is greater than half the lot depth", "result_text": "additions may be constructed to the front of an existing building as outlined in Section 43AF" },
+        { "clause_label_raw": "28BF(1)(d)", "clause_path": ["28", "BF", "1", "d"], "condition_text": "if an existing building on a corner lot is greater in height at the front of the building than at the rear of the building", "result_text": "additions to the top rear portion of the building may be constructed provided the addition does not exceed the height of the front of the building or a maximum height of three storeys" }
+      ] },
+      { "section_label_raw": "28BF(2)", "section_path": ["28", "BF", "2"], "metric_group": "immediate_neighbourhood_definition", "controls": [
+        { "clause_label_raw": "28BF(2)(a)", "clause_path": ["28", "BF", "2", "a"], "condition_text": "if the building is located at mid-block", "definition_text": "all existing residential buildings located on the four lots on each side, the lots in the rear which share the same lot line, and the corresponding lots on the opposite side of the street" },
+        { "clause_label_raw": "28BF(2)(b)", "clause_path": ["28", "BF", "2", "b"], "condition_text": "if the building is located on a corner lot", "definition_text": "all existing residential buildings located on the four lots immediately adjacent, the lots in the rear which share the same lot line, and the corresponding lots on the opposite side of the abutting streets" }
+      ] },
+      { "section_label_raw": "28BF(3)", "section_path": ["28", "BF", "3"], "summary": "The applicant must provide drawings, figures, calculations and other information deemed necessary by the city to demonstrate that the building is anomalous and deserves consideration under this section." }
+    ]
+  },
+  "use_specific_standards": [
+    { "section_label_raw": "28BG", "section_path": ["28", "BG"], "summary": "R-2AM uses permitted in the R-3, C-2A and C-2B Zones shall comply with the requirements of the R-2AM Zone except Section 28BE." },
+    { "section_label_raw": "28BH", "section_path": ["28", "BH"], "use_name": "existing 21 unit apartment at 9 and 11 Alma Crescent", "conditions": ["notwithstanding Section 28BA(1), the property at civic number 9 Alma Crescent may be consolidated with 11 Alma Crescent", "the existing 21 unit apartment is recognized as a permitted use", "the use must comply with all requirements of the R-3 Zone"] }
+  ],
+  "sign_controls": [],
+  "spatial_features_needed": [
+    { "feature_key": "alma_crescent_9_and_11", "feature_class": "address_or_parcel_exception", "source_type": "parcel_or_address_lookup", "reason": "needed for 28BH" }
+  ],
+  "open_issues": [],
+  "citations": {
+    "permitted_uses": { "pdf_page": 74, "bylaw_page": 66 },
+    "requirements": { "pdf_page_start": 74, "pdf_page_end": 76, "bylaw_page_start": 66, "bylaw_page_end": 68 }
+  }
+}

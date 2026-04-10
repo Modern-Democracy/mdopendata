@@ -1,0 +1,95 @@
+{
+  "document_metadata": {
+    "jurisdiction": "Halifax Regional Municipality",
+    "bylaw_name": "Halifax Mainland Land Use By-law",
+    "source_document_path": "docs/halifaxmainlandlanduseby-law-edition231-eff-26feb02-minorrev2025-02922-toclinked_1.pdf",
+    "edition": "231",
+    "zone_code": "P",
+    "zone_name": "Park and Institutional Zone",
+    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
+    "zone_section_start": { "title_label_raw": "P ZONE: PARK AND INSTITUTIONAL ZONE", "pdf_page": 129, "bylaw_page": 121 },
+    "zone_section_end_before": { "title_label_raw": "U-2 ZONE: HIGH DENSITY UNIVERSITY", "pdf_page": 131, "bylaw_page": 123 }
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": ["51(1)(a)", "52(a)", "53(a)"],
+    "pending_review_clause_patterns": ["53A(1)", "53A(2)", "53A(3)"]
+  },
+  "general_context": {
+    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "P is an established class of use zone." },
+    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+  },
+  "permitted_uses": [
+    { "clause_label_raw": "51(1)(a)", "clause_path": ["51", "1", "a"], "use_type": "institutional_or_open_space_use", "use_name": "public park" },
+    { "clause_label_raw": "51(1)(b)", "clause_path": ["51", "1", "b"], "use_type": "recreation_use", "use_name": "recreation field, sports club, and community facilities" },
+    { "clause_label_raw": "51(1)(c)", "clause_path": ["51", "1", "c"], "use_type": "institutional_or_open_space_use", "use_name": "cemetery" },
+    { "clause_label_raw": "51(1)(d)", "clause_path": ["51", "1", "d"], "use_type": "institutional_or_open_space_use", "use_name": "hospital, public school, university, monastery, church, library, court of law, or other institution of a similar type, either public or private" },
+    { "clause_label_raw": "51(1)(da)", "clause_path": ["51", "1", "d", "a"], "use_type": "residential_use", "use_name": "shared housing with special care" },
+    { "clause_label_raw": "51(1)(db)", "clause_path": ["51", "1", "d", "b"], "use_type": "residential_use", "use_name": "shared housing use with 10 or fewer bedrooms" },
+    { "clause_label_raw": "51(1)(e)", "clause_path": ["51", "1", "e"], "use_type": "institutional_or_open_space_use", "use_name": "institution used for the advancement of public school education services" },
+    { "clause_label_raw": "51(1)(f)", "clause_path": ["51", "1", "f"], "use_type": "accessory_use", "use_name": "uses accessory to the uses in clauses 51(1)(a), (b), (c), (d), (da), (db), and (e)" },
+    { "clause_label_raw": "51(1)(g)", "clause_path": ["51", "1", "g"], "use_type": "institutional_or_open_space_use", "use_name": "day care facility" }
+  ],
+  "prohibitions": [
+    { "clause_label_raw": "51(2)", "clause_path": ["51", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more of the uses set out in Section 51(1)." },
+    { "clause_label_raw": "51(3)", "clause_path": ["51", "3"], "rule_type": "use_prohibition", "summary": "No land or building use in whole or in part for any purpose other than one or more of the uses set out in Section 51(1)." }
+  ],
+  "requirements": {
+    "general_zone_controls": [
+      { "clause_label_raw": "53(a)", "clause_path": ["53", "a"], "rule_type": "yard_and_building_separation_bundle", "condition_text": "Every building shall be at least 12 feet from any other building, at least 8 feet from the rear and both side lines of the lot, and at least 20 feet from any street line in front of such building." },
+      { "clause_label_raw": "53(b)", "clause_path": ["53", "b"], "rule_type": "accessory_building_setbacks", "condition_text": "Notwithstanding clause 53(a), a carport or detached or attached non-commercial garage shall be located not less than 4 feet from the rear and both side lines of the lot and shall be located 8 feet from any other building." },
+      { "clause_label_raw": "53(c)", "clause_path": ["53", "c"], "rule_type": "corner_lot_flanking_street_setback", "condition_text": "Where a building is situated on a corner lot, it shall be at least 20 feet from each street line abutting such lot." }
+    ],
+    "driveway_access_controls": [
+      {
+        "section_label_raw": "53A(1)",
+        "section_path": null,
+        "status": "pending_review_alphanumeric_section",
+        "condition_text": "In the Bedford Highway Area, one vehicle access point shall be permitted to the Highway from each lot with 100 feet of frontage or less and two vehicle access points shall be permitted for each lot with frontage greater than 100 feet."
+      },
+      {
+        "section_label_raw": "53A(2)",
+        "section_path": null,
+        "status": "pending_review_alphanumeric_section",
+        "condition_text": "For the purposes of Subsection 53A(1), the vehicle access point shall not exceed 35 feet in width and shall be defined by curbing, planting or a similar device that will not obstruct the view of traffic."
+      }
+    ]
+  },
+  "sign_controls": [
+    { "clause_label_raw": "52(a)", "clause_path": ["52", "a"], "condition_text": "One fascia sign per building elevation facing a street." },
+    { "clause_label_raw": "52(b)", "clause_path": ["52", "b"], "condition_text": "One fascia sign for the building elevation containing the main entrance where such entrance does not face a street." },
+    { "clause_label_raw": "52(c)", "clause_path": ["52", "c"], "condition_text": "One free standing sign not to exceed 12 feet in height and 40 square feet in area per side per vehicular entrance and pedestrian entrance where such entrance is not part of a vehicular entrance, except where the property contains more than one principal park and institutional use the sign shall not exceed 18 feet in height and an additional 10 square feet of area may be added to a maximum of 80 square feet per side for each additional park and institutional use." },
+    { "clause_label_raw": "52(d)", "clause_path": ["52", "d"], "condition_text": "The signs permitted by clauses 52(a), 52(b), and 52(c) may be illuminated." },
+    { "clause_label_raw": "52(e)", "clause_path": ["52", "e"], "condition_text": "The signs permitted by clauses 52(a), 52(b), and 52(c) shall be limited to indicating the name of the building or site and civic address of the property on which it is located, and the logo, slogan or motto of the occupant of such building or site." },
+    { "clause_label_raw": "52(f)", "clause_path": ["52", "f"], "condition_text": "The signs permitted by clauses 52(a), 52(b), and 52(c) may also contain a changeable message area limited to indicating the name, date and time of an event taking place on the site." }
+  ],
+  "use_specific_standards": [
+    {
+      "use_name": "Pocket Park site on ZM-26",
+      "standards": [
+        {
+          "section_label_raw": "53A(3)",
+          "section_path": null,
+          "status": "pending_review_alphanumeric_section",
+          "rule_type": "notwithstanding_override",
+          "condition_text": "Notwithstanding subsection 51(1), uses permitted by clauses 51(1)(b), 51(1)(c), 51(1)(d), 51(1)(e), and 51(1)(g) shall not be permitted at the site identified as Pocket Park on ZM-26."
+        }
+      ]
+    }
+  ],
+  "spatial_features_needed": [
+    { "feature_key": "bedford_highway_area", "feature_class": "planning_area_boundary", "source_type": "base_map_reference", "reason": "controls driveway access rules in Sections 53A(1) and 53A(2)" },
+    { "feature_key": "zm_26_pocket_park_site", "feature_class": "site_specific_area", "source_type": "schedule_digitization", "reason": "controls the site-specific use prohibition in Section 53A(3)" }
+  ],
+  "open_issues": [
+    { "issue_type": "clause_normalization_review", "raw_example": "53A(1)", "reason": "Alphanumeric section-style identifier not yet explicitly approved for normalization." },
+    { "issue_type": "clause_normalization_review", "raw_example": "53A(2)", "reason": "Alphanumeric section-style identifier not yet explicitly approved for normalization." },
+    { "issue_type": "clause_normalization_review", "raw_example": "53A(3)", "reason": "Alphanumeric section-style identifier not yet explicitly approved for normalization." }
+  ],
+  "citations": {
+    "permitted_uses": { "pdf_page": 129, "bylaw_page": 121 },
+    "sign_controls": { "pdf_page": 129, "bylaw_page": 121 },
+    "requirements": { "pdf_page": 130, "bylaw_page": 122 },
+    "use_specific_standards": { "pdf_page": 130, "bylaw_page": 122 }
+  }
+}

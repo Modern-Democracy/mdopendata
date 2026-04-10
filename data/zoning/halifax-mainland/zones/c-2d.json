@@ -1,0 +1,149 @@
+{
+  "document_metadata": {
+    "jurisdiction": "Halifax Regional Municipality",
+    "bylaw_name": "Halifax Mainland Land Use By-law",
+    "source_document_path": "docs/halifaxmainlandlanduseby-law-edition231-eff-26feb02-minorrev2025-02922-toclinked_1.pdf",
+    "edition": "231",
+    "zone_code": "C-2D",
+    "zone_name": "Herring Cove Road Residential/Minor Commercial Zone",
+    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 54, "bylaw_page": 46 },
+    "zone_section_start": { "title_label_raw": "C-2D ZONE : HERRING COVE ROAD RESIDENTIAL/MINOR COMMERCIAL ZONE", "pdf_page": 117, "bylaw_page": 109 },
+    "zone_section_end_before": { "title_label_raw": "C-2 ZONE: GENERAL BUSINESS ZONE", "pdf_page": 122, "bylaw_page": 114 }
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": ["38CA(1)(aa)", "38CC(1)(g)(ii)", "38CJ(1)(c)(iii)"],
+    "pending_review_clause_patterns": []
+  },
+  "general_context": {
+    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "C-2D is an established class of use zone." },
+    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+  },
+  "permitted_uses": [
+    { "clause_label_raw": "38CA(1)(a)", "clause_path": ["38CA", "1", "a"], "use_type": "principal_use", "use_name": "apartment houses" },
+    { "clause_label_raw": "38CA(1)(aa)", "clause_path": ["38CA", "1", "aa"], "use_type": "residential_use", "use_name": "shared housing use" },
+    { "clause_label_raw": "38CA(1)(b)", "clause_path": ["38CA", "1", "b"], "use_type": "ancillary_nonresidential_use", "use_name": "home occupations" },
+    { "clause_label_raw": "38CA(1)(c)", "clause_path": ["38CA", "1", "c"], "use_type": "commercial_use", "use_name": "retail and rental stores", "excluded_subuses": [
+      { "clause_label_raw": "38CA(1)(c)(i)", "clause_path": ["38CA", "1", "c", "i"], "use_name": "motor vehicle dealers" },
+      { "clause_label_raw": "38CA(1)(c)(ii)", "clause_path": ["38CA", "1", "c", "ii"], "use_name": "motor vehicle repair shops" },
+      { "clause_label_raw": "38CA(1)(c)(ii)", "clause_path": ["38CA", "1", "c", "ii"], "use_name": "service stations", "source_duplicate_label_sequence": 2 },
+      { "clause_label_raw": "38CA(1)(c)(iii)", "clause_path": ["38CA", "1", "c", "iii"], "use_name": "adult entertainment uses" }
+    ] },
+    { "clause_label_raw": "38CA(1)(d)", "clause_path": ["38CA", "1", "d"], "use_type": "commercial_use", "use_name": "health clinics" },
+    { "clause_label_raw": "38CA(1)(e)", "clause_path": ["38CA", "1", "e"], "use_type": "commercial_use", "use_name": "appliance and small-scale electronics repair shops, including shoe and clothing repair" },
+    { "clause_label_raw": "38CA(1)(f)", "clause_path": ["38CA", "1", "f"], "use_type": "commercial_use", "use_name": "personal service uses including barber and beauty shops, self-service laundries and funeral services" },
+    { "clause_label_raw": "38CA(1)(g)", "clause_path": ["38CA", "1", "g"], "use_type": "commercial_use", "use_name": "theatres" },
+    { "clause_label_raw": "38CA(1)(h)", "clause_path": ["38CA", "1", "h"], "use_type": "commercial_use", "use_name": "offices" },
+    { "clause_label_raw": "38CA(1)(i)", "clause_path": ["38CA", "1", "i"], "use_type": "commercial_use", "use_name": "banks and other financial institutions" },
+    { "clause_label_raw": "38CA(1)(j)", "clause_path": ["38CA", "1", "j"], "use_type": "commercial_use", "use_name": "restaurants" },
+    { "clause_label_raw": "38CA(1)(k)", "clause_path": ["38CA", "1", "k"], "use_type": "institutional_or_open_space_use", "use_name": "community facilities" },
+    { "clause_label_raw": "38CA(1)(l)", "clause_path": ["38CA", "1", "l"], "use_type": "commercial_use", "use_name": "commercial recreation uses" },
+    { "clause_label_raw": "38CA(1)(m)", "clause_path": ["38CA", "1", "m"], "use_type": "use_with_specific_standard", "use_name": "day care facilities" },
+    { "clause_label_raw": "38CA(1)(n)", "clause_path": ["38CA", "1", "n"], "use_type": "institutional_or_open_space_use", "use_name": "institutional uses" },
+    { "clause_label_raw": "38CA(1)(o)", "clause_path": ["38CA", "1", "o"], "use_type": "accessory_use", "use_name": "uses accessory to any of the foregoing uses" }
+  ],
+  "prohibitions": [
+    { "clause_label_raw": "38CA(2)", "clause_path": ["38CA", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more uses set out in 38CA(1)." },
+    { "clause_label_raw": "38CA(3)", "clause_path": ["38CA", "3"], "rule_type": "use_prohibition", "summary": "No land or building use for any purpose other than one or more uses set out in 38CA(1)." }
+  ],
+  "requirements": {
+    "lot_frontage_area_and_built_form": [
+      { "section_label_raw": "38CB(1)", "section_path": ["38CB", "1"], "controls": [
+        { "clause_label_raw": "38CB(1)(a)", "clause_path": ["38CB", "1", "a"], "metric": "lot_frontage_minimum", "value": 70, "unit": "m", "value_text": "230 feet" },
+        { "clause_label_raw": "38CB(1)(b)", "clause_path": ["38CB", "1", "b"], "metric": "lot_area_minimum", "value": 2000, "unit": "sq_m", "value_text": "21,529 square feet" }
+      ] },
+      { "section_label_raw": "38CC(1)", "section_path": ["38CC", "1"], "use_name": "built form requirements", "controls": [
+        { "clause_label_raw": "38CC(1)(a)", "clause_path": ["38CC", "1", "a"], "condition_text": "streetwall shall be set back from the streetline a minimum of 1.5 metres and a maximum of 6.5 metres" },
+        { "clause_label_raw": "38CC(1)(b)", "clause_path": ["38CC", "1", "b"], "condition_text": "maximum streetwall height shall be 3 storeys from street line grade", "subcontrols": [
+          { "clause_label_raw": "38CC(1)(b)(i)", "clause_path": ["38CC", "1", "b", "i"], "condition_text": "maximum streetwall height may be exceeded by a clear uncoloured glass guard and railing system to allow safe use of podiums and rooftops by occupants" }
+        ] },
+        { "clause_label_raw": "38CC(1)(c)", "clause_path": ["38CC", "1", "c"], "condition_text": "for a building located on Herring Cove Road, the streetwall length on Herring Cove Road shall extend a minimum of 65 percent of the lot frontage" },
+        { "clause_label_raw": "38CC(1)(d)", "clause_path": ["38CC", "1", "d"], "condition_text": "a minimum setback of 6 metres shall be provided between side and rear lot lines and the portion of the building above parking structures" },
+        { "clause_label_raw": "38CC(1)(e)", "clause_path": ["38CC", "1", "e"], "condition_text": "above the streetwall, the building shall be stepped back a minimum of 3 metres for all portions above the streetwall height facing street lines" },
+        { "clause_label_raw": "38CC(1)(f)", "clause_path": ["38CC", "1", "f"], "condition_text": "the overall building shall not exceed seven storeys" },
+        { "clause_label_raw": "38CC(1)(g)", "clause_path": ["38CC", "1", "g"], "condition_text": "the maximum height requirement in 38CC(1)(f) does not apply to the listed rooftop and similar features, provided:", "subcontrols": [
+          { "clause_label_raw": "38CC(1)(g)(i)", "clause_path": ["38CC", "1", "g", "i"], "condition_text": "the total of all such features shall occupy in the aggregate less than 30 percent of the roof area" },
+          { "clause_label_raw": "38CC(1)(g)(ii)", "clause_path": ["38CC", "1", "g", "ii"], "condition_text": "such features shall be setback no less than 3 metres from the outermost edge of the roof, except no setback is required for clock towers, parapets, cornices and similar architectural features" }
+        ] },
+        { "clause_label_raw": "38CC(1)(h)", "clause_path": ["38CC", "1", "h"], "condition_text": "above a height of 3 storeys, the building depth shall not exceed 25 metres; for a corner lot with frontage on Herring Cove Road, the front lot line is considered the street line with Herring Cove Road" }
+      ] },
+      { "section_label_raw": "38CD(1)", "section_path": ["38CD", "1"], "controls": [
+        { "clause_label_raw": "38CD(1)(a)", "clause_path": ["38CD", "1", "a"], "condition_text": "maximum lot coverage shall be 75 percent, except that parking structures below grade or extending no more than an average of 1 metre above grade may cover 100 percent of the lot area" }
+      ] }
+    ],
+    "commercial_frontage_materials_and_unit_mix": [
+      { "section_label_raw": "38CE(1)", "section_path": ["38CE", "1"], "controls": [
+        { "clause_label_raw": "38CE(1)(a)", "clause_path": ["38CE", "1", "a"], "condition_text": "no dwelling unit shall be located on the ground level facing Herring Cove Road" },
+        { "clause_label_raw": "38CE(1)(b)", "clause_path": ["38CE", "1", "b"], "condition_text": "entrances to commercial uses shall be located facing public streets" },
+        { "clause_label_raw": "38CE(1)(c)", "clause_path": ["38CE", "1", "c"], "condition_text": "the ground floor of the streetwall on Herring Cove Road shall be comprised of 60 percent glazing and shall have a minimum height of 3.7 metres" }
+      ] },
+      { "section_label_raw": "38CF(1)", "section_path": ["38CF", "1"], "controls": [
+        { "clause_label_raw": "38CF(1)(a)", "clause_path": ["38CF", "1", "a"], "condition_text": "vinyl is prohibited, except for vinyl windows" },
+        { "clause_label_raw": "38CF(1)(b)", "clause_path": ["38CF", "1", "b"], "condition_text": "plastic is prohibited, except for architectural laminate panels" },
+        { "clause_label_raw": "38CF(1)(c)", "clause_path": ["38CF", "1", "c"], "condition_text": "bare or painted plywood is prohibited" },
+        { "clause_label_raw": "38CF(1)(d)", "clause_path": ["38CF", "1", "d"], "condition_text": "standard concrete blocks are prohibited, however architectural concrete products are permitted" },
+        { "clause_label_raw": "38CF(1)(e)", "clause_path": ["38CF", "1", "e"], "condition_text": "EIFS where stucco is applied to rigid insulation as primary weather protection is prohibited" },
+        { "clause_label_raw": "38CF(1)(f)", "clause_path": ["38CF", "1", "f"], "condition_text": "mirrored glass in spandrel panels or vision glass panels is prohibited" },
+        { "clause_label_raw": "38CF(1)(g)", "clause_path": ["38CF", "1", "g"], "condition_text": "darkly tinted glass is prohibited, excepting spandrel glass panels" }
+      ] },
+      { "section_label_raw": "38CF(2)", "section_path": ["38CF", "2"], "condition_text": "any exposed foundation wall or parking structure taller than 0.6 metres shall be architecturally detailed or clad in a manner complementary to the main building exterior materials" },
+      { "section_label_raw": "38CG(1)", "section_path": ["38CG", "1"], "condition_text": "apartment houses shall contain a minimum of 30 percent of dwelling units which are 2 bedrooms or greater" },
+      { "section_label_raw": "38CG(2)", "section_path": ["38CG", "2"], "condition_text": "bedroom-count requirements do not apply for any residential multi-unit dwelling use that begins construction before 2028-04-01" }
+    ],
+    "landscaping_amenity_parking_and_signs": [
+      { "section_label_raw": "38CH(1)", "section_path": ["38CH", "1"], "controls": [
+        { "clause_label_raw": "38CH(1)(a)", "clause_path": ["38CH", "1", "a"], "condition_text": "all yards shall be landscaped open space" },
+        { "clause_label_raw": "38CH(1)(b)", "clause_path": ["38CH", "1", "b"], "status": "repealed" },
+        { "clause_label_raw": "38CH(1)(c)", "clause_path": ["38CH", "1", "c"], "condition_text": "landscaped open space shall include soft landscaping" },
+        { "clause_label_raw": "38CH(1)(d)", "clause_path": ["38CH", "1", "d"], "condition_text": "landscaped open space may include hard landscaping" }
+      ] },
+      { "section_label_raw": "38CH(2)", "section_path": ["38CH", "2"], "condition_text": "where the lands abut a residentially zoned or used property:", "controls": [
+        { "clause_label_raw": "38CH(2)(a)", "clause_path": ["38CH", "2", "a"], "condition_text": "the whole landscaped open space shall be soft landscaping" },
+        { "clause_label_raw": "38CH(2)(b)", "clause_path": ["38CH", "2", "b"], "condition_text": "trees and shrubs shall be planted at a rate of one tree and three shrubs per 4.6 metres of required landscaping measured along the property line" },
+        { "clause_label_raw": "38CH(2)(c)", "clause_path": ["38CH", "2", "c"], "condition_text": "required soft landscaping may be reduced to a minimum width of 1 metre if a 2 metre opaque fence is provided and hard landscaping materials are provided in the remainder of the yard", "subcontrols": [
+          { "clause_label_raw": "38CH(2)(c)(i)", "clause_path": ["38CH", "2", "c", "i"], "condition_text": "a 2 metre wooden, stone or acceptable equivalent opaque fence is provided along the abutting residential property line" },
+          { "clause_label_raw": "38CH(2)(c)(ii)", "clause_path": ["38CH", "2", "c", "ii"], "condition_text": "hard landscaping materials are provided in the remainder of the yard" }
+        ] }
+      ] },
+      { "section_label_raw": "38Cl(1)", "section_path": null, "label_status": "source_text_ambiguous_lettercase", "use_name": "amenity space", "condition_text": "apartment house buildings shall provide amenity space at a rate of 10 square metres per unit, and shared housing uses at a rate of 5 square metres per bedroom in a shared housing use, in the form of unit patios, unit balconies or terraces, and interior amenity space", "controls": [
+        { "clause_label_raw": "38Cl(1)(a)", "clause_path": null, "label_status": "source_text_ambiguous_lettercase", "condition_text": "fitness room of a minimum size of 40 square metres" },
+        { "clause_label_raw": "38Cl(1)(b)", "clause_path": null, "label_status": "source_text_ambiguous_lettercase", "condition_text": "community room of a minimum size of 40 square metres" }
+      ] },
+      { "section_label_raw": "38CJ(1)", "section_path": ["38CJ", "1"], "use_name": "parking", "controls": [
+        { "clause_label_raw": "38CJ(1)(a)", "clause_path": ["38CJ", "1", "a"], "condition_text": "vehicle parking shall be enclosed in a building, or located in the rear or side yard of the building and not visible from the public street" },
+        { "clause_label_raw": "38CJ(1)(b)", "clause_path": ["38CJ", "1", "b"], "condition_text": "off street parking for residential uses shall be provided as follows", "subcontrols": [
+          { "clause_label_raw": "38CJ(1)(b)(i)", "clause_path": ["38CJ", "1", "b", "i"], "condition_text": "0.9 spaces for every unit of two or more bedrooms" },
+          { "clause_label_raw": "38CJ(1)(b)(ii)", "clause_path": ["38CJ", "1", "b", "ii"], "condition_text": "0.5 spaces for every bachelor unit or one-bedroom unit" },
+          { "clause_label_raw": "38CJ(1)(b)(iii)", "clause_path": ["38CJ", "1", "b", "iii"], "condition_text": "0 spaces for shared housing uses" }
+        ] },
+        { "clause_label_raw": "38CJ(1)(c)", "clause_path": ["38CJ", "1", "c"], "condition_text": "off-street parking for the following commercial uses shall be provided at the following ratios", "subcontrols": [
+          { "clause_label_raw": "38CJ(1)(c)(i)", "clause_path": ["38CJ", "1", "c", "i"], "condition_text": "1.8 spaces per 100 square metres of gross floor area of office space" },
+          { "clause_label_raw": "38CJ(1)(c)(ii)", "clause_path": ["38CJ", "1", "c", "ii"], "condition_text": "2.5 spaces per 100 square metres of gross floor area of retail/service store space" },
+          { "clause_label_raw": "38CJ(1)(c)(iii)", "clause_path": ["38CJ", "1", "c", "iii"], "condition_text": "3 spaces per 100 square metres of gross floor area of restaurant space" }
+        ] }
+      ] },
+      { "section_label_raw": "38CK(f)", "section_path": null, "label_status": "source_text_suspected_section_typo", "use_name": "signs", "controls": [
+        { "clause_label_raw": "38CK(f)(a)", "clause_path": null, "label_status": "source_text_suspected_section_typo", "condition_text": "illuminated signs shall not cause a glare or hazard to motorists, pedestrians or neighbouring premises" },
+        { "clause_label_raw": "38CK(f)(b)", "clause_path": null, "label_status": "source_text_suspected_section_typo", "condition_text": "fascia signs shall not extend beyond the extremity of a wall on which they are affixed" },
+        { "clause_label_raw": "38CK(f)(c)", "clause_path": null, "label_status": "source_text_suspected_section_typo", "condition_text": "maximum combined size of fascia signs on the wall of a building shall be no greater than 10 percent of the total area of said wall" },
+        { "clause_label_raw": "38CK(f)(d)", "clause_path": null, "label_status": "source_text_suspected_section_typo", "condition_text": "one projecting sign per business premise, maximum 1.9 square metres in size, shall be permitted" },
+        { "clause_label_raw": "38CK(f)(e)", "clause_path": null, "label_status": "source_text_suspected_section_typo", "condition_text": "aggregate area of all window signs shall not exceed 25 percent of the window or glass area of a door" },
+        { "clause_label_raw": "38CK(f)(f)", "clause_path": null, "label_status": "source_text_suspected_section_typo", "condition_text": "signs on awnings shall not cover more than 25 percent of the awning area and text length shall not exceed 80 percent of the front valance length" },
+        { "clause_label_raw": "38CK(f)(g)", "clause_path": null, "label_status": "source_text_suspected_section_typo", "condition_text": "no signs shall be permitted on the roof of a building" }
+      ] }
+    ]
+  },
+  "use_specific_standards": [],
+  "sign_controls": [],
+  "spatial_features_needed": [
+    { "feature_key": "herring_cove_road", "feature_class": "road_centerline", "source_type": "base_map_reference", "reason": "controls 38CC(1)(c) and 38CE(1)(a)(c)" }
+  ],
+  "open_issues": [
+    { "issue_type": "source_duplicate_label", "raw_examples": ["38CA(1)(c)(ii)", "38CA(1)(c)(ii)"], "description": "The source repeats clause label 38CA(1)(c)(ii) for two distinct excluded uses: motor vehicle repair shops and service stations." },
+    { "issue_type": "text_quality_check", "raw_examples": ["38CK(f)", "38Cl(1)"], "description": "The source appears to contain ambiguous or erroneous section labels in the signs section and amenity-space section. These should be checked against the PDF image before database ingestion." }
+  ],
+  "citations": {
+    "permitted_uses": { "pdf_page": 117, "bylaw_page": 109 },
+    "requirements": { "pdf_page_start": 117, "pdf_page_end": 121, "bylaw_page_start": 109, "bylaw_page_end": 113 }
+  }
+}

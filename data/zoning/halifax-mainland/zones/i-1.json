@@ -1,0 +1,61 @@
+{
+  "document_metadata": {
+    "jurisdiction": "Halifax Regional Municipality",
+    "bylaw_name": "Halifax Mainland Land Use By-law",
+    "source_document_path": "docs/halifaxmainlandlanduseby-law-edition231-eff-26feb02-minorrev2025-02922-toclinked_1.pdf",
+    "edition": "231",
+    "zone_code": "I-1",
+    "zone_name": "General Industrial Zone",
+    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
+    "zone_section_start": { "title_label_raw": "I-1 ZONE: GENERAL INDUSTRIAL ZONE", "pdf_page": 125, "bylaw_page": 117 },
+    "zone_section_end_before": { "title_label_raw": "I-2 ZONE: RADIO TRANSMITTER ZONE", "pdf_page": 126, "bylaw_page": 118 }
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": ["43(1)(a)", "43(2)", "45(a)", "46"],
+    "pending_review_clause_patterns": []
+  },
+  "general_context": {
+    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "I-1 is an established class of use zone." },
+    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+  },
+  "permitted_uses": [
+    { "clause_label_raw": "43(1)(a)", "clause_path": ["43", "1", "a"], "use_type": "incorporated_zone_use_set", "use_name": "C-2 uses as hereinbefore set out" },
+    { "clause_label_raw": "43(1)(b)", "clause_path": ["43", "1", "b"], "use_type": "industrial_use", "use_name": "industrial enterprise", "condition_text": "except an industrial enterprise likely to cause a nuisance or hazard and except junk yards" },
+    { "clause_label_raw": "43(1)(c)", "clause_path": ["43", "1", "c"], "use_type": "use_with_specific_standard", "use_name": "cannabis production facilities" }
+  ],
+  "prohibitions": [
+    { "clause_label_raw": "43(2)", "clause_path": ["43", "2"], "rule_type": "development_prohibition", "summary": "No development permit shall be issued in any I-1 Zone except for one or more of the uses listed in Section 43(1)." },
+    { "clause_label_raw": "43(3)", "clause_path": ["43", "3"], "rule_type": "use_prohibition", "summary": "No person shall in any I-1 Zone use any land or building for any purpose other than one or more of the uses listed in Section 43(1)." }
+  ],
+  "requirements": {
+    "general_zone_controls": [
+      { "section_label_raw": "44", "section_path": ["44"], "summary": "Buildings erected, altered or used for C-2 uses in an I-1 Zone shall comply with the requirements of the C-2 Zone as detailed in Sections 39 to 42 inclusive." },
+      { "section_label_raw": "45", "section_path": ["45"], "summary": "Buildings erected, altered or used in an I-1 Zone shall comply with the building line requirements of the R-1 Zone as detailed in Section 21(a), except where side and rear walls are made of fireproof construction, no side and rear yards shall be required." }
+    ]
+  },
+  "sign_controls": [],
+  "use_specific_standards": [
+    {
+      "use_name": "cannabis production facilities",
+      "standards": [
+        {
+          "section_label_raw": "46",
+          "section_path": ["46"],
+          "rule_type": "site_specific_separation_minimum",
+          "measure": { "minimum": 230, "unit": "ft", "metric_minimum": 70, "metric_unit": "m" },
+          "condition_text": "Where a lot containing a cannabis production facility abuts a residential use or a use containing a day care facility, community centre, school, religious institution, public park or playground, every cannabis production facility and every building or outdoor area used for cannabis production shall be no less than 230 ft. (70 m) from the abutting lot line."
+        }
+      ]
+    }
+  ],
+  "spatial_features_needed": [
+    { "feature_key": "cannabis_abutting_sensitive_use_lots", "feature_class": "site_specific_area", "source_type": "existing_or_derived_polygon", "reason": "controls Section 46 setback applicability where the lot abuts listed residential or community-sensitive uses" }
+  ],
+  "open_issues": [],
+  "citations": {
+    "permitted_uses": { "pdf_page": 125, "bylaw_page": 117 },
+    "requirements": { "pdf_page": 125, "bylaw_page": 117 },
+    "use_specific_standards": { "pdf_page": 125, "bylaw_page": 117 }
+  }
+}
