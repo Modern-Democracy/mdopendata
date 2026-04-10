@@ -160,7 +160,21 @@
         "section_path": [
           "28BB"
         ],
-        "summary": "No billboard or sign except those permitted in R-1 Zones or in accordance with Section 30 below."
+        "summary": "No billboard or sign except those permitted in R-1 Zones or in accordance with Section 30 below.",
+        "text_defined_term_refs": [
+          {
+            "source_text": "billboard",
+            "definition_key": "billboard",
+            "source_field": "summary",
+            "link_method": "reviewed_text_match"
+          },
+          {
+            "source_text": "sign",
+            "definition_key": "sign",
+            "source_field": "summary",
+            "link_method": "reviewed_text_match"
+          }
+        ]
       },
       {
         "section_label_raw": "28BC(1)",
@@ -364,7 +378,15 @@
               "d"
             ],
             "condition_text": "if an existing building on a corner lot is greater in height at the front of the building than at the rear of the building",
-            "result_text": "additions to the top rear portion of the building may be constructed provided the addition does not exceed the height of the front of the building or a maximum height of three storeys"
+            "result_text": "additions to the top rear portion of the building may be constructed provided the addition does not exceed the height of the front of the building or a maximum height of three storeys",
+            "text_defined_term_refs": [
+              {
+                "source_text": "corner lot",
+                "definition_key": "corner_lot",
+                "source_field": "condition_text",
+                "link_method": "reviewed_text_match"
+              }
+            ]
           }
         ]
       },
@@ -394,7 +416,15 @@
               "b"
             ],
             "condition_text": "if the building is located on a corner lot",
-            "definition_text": "all existing residential buildings located on the four lots immediately adjacent, the lots in the rear which share the same lot line, and the corresponding lots on the opposite side of the abutting streets"
+            "definition_text": "all existing residential buildings located on the four lots immediately adjacent, the lots in the rear which share the same lot line, and the corresponding lots on the opposite side of the abutting streets",
+            "text_defined_term_refs": [
+              {
+                "source_text": "corner lot",
+                "definition_key": "corner_lot",
+                "source_field": "condition_text",
+                "link_method": "reviewed_text_match"
+              }
+            ]
           }
         ]
       },

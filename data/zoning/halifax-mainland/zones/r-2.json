@@ -347,6 +347,14 @@
         "conditions": [
           "must be entirely within rear yard",
           "must not be closer than 15 ft to any street line"
+        ],
+        "text_defined_term_refs": [
+          {
+            "source_text": "accessory building",
+            "definition_key": "accessory_building",
+            "source_field": "summary",
+            "link_method": "reviewed_text_match"
+          }
         ]
       },
       {
@@ -522,7 +530,21 @@
       "section_path": [
         "28"
       ],
-      "summary": "The exterior of any building in an R-2 Zone shall not be used for advertising or for erecting or maintaining any billboard or sign except the listed signs."
+      "summary": "The exterior of any building in an R-2 Zone shall not be used for advertising or for erecting or maintaining any billboard or sign except the listed signs.",
+      "text_defined_term_refs": [
+        {
+          "source_text": "billboard",
+          "definition_key": "billboard",
+          "source_field": "summary",
+          "link_method": "reviewed_text_match"
+        },
+        {
+          "source_text": "sign",
+          "definition_key": "sign",
+          "source_field": "summary",
+          "link_method": "reviewed_text_match"
+        }
+      ]
     },
     {
       "clause_label_raw": "28(a)",
@@ -536,6 +558,14 @@
       "conditions": [
         "one sign board",
         "must pertain to sale or rent of the building or lot"
+      ],
+      "sign_type_defined_term_refs": [
+        {
+          "source_text": "sale_or_rent_sign",
+          "definition_key": "sign",
+          "source_field": "sign_type",
+          "link_method": "reviewed_category_match"
+        }
       ]
     },
     {
@@ -550,6 +580,14 @@
       "conditions": [
         "one sign",
         "non-illuminated"
+      ],
+      "sign_type_defined_term_refs": [
+        {
+          "source_text": "no_trespassing_safety_or_caution_sign",
+          "definition_key": "sign",
+          "source_field": "sign_type",
+          "link_method": "reviewed_category_match"
+        }
       ]
     },
     {
@@ -564,6 +602,14 @@
       "conditions": [
         "one sign",
         "non-illuminated"
+      ],
+      "sign_type_defined_term_refs": [
+        {
+          "source_text": "occupant_name_profession_sign",
+          "definition_key": "sign",
+          "source_field": "sign_type",
+          "link_method": "reviewed_category_match"
+        }
       ]
     },
     {
@@ -572,7 +618,15 @@
         "28",
         "d"
       ],
-      "sign_type": "church_bulletin_board"
+      "sign_type": "church_bulletin_board",
+      "sign_type_defined_term_refs": [
+        {
+          "source_text": "church_bulletin_board",
+          "definition_key": "sign",
+          "source_field": "sign_type",
+          "link_method": "reviewed_category_match"
+        }
+      ]
     },
     {
       "clause_label_raw": "28(e)",
@@ -582,7 +636,15 @@
       ],
       "sign_type": "day_care_facility_sign",
       "max_area": 2,
-      "unit": "sq_ft"
+      "unit": "sq_ft",
+      "sign_type_defined_term_refs": [
+        {
+          "source_text": "day_care_facility_sign",
+          "definition_key": "sign",
+          "source_field": "sign_type",
+          "link_method": "reviewed_category_match"
+        }
+      ]
     }
   ],
   "use_specific_standards": [

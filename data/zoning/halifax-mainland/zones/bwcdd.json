@@ -101,7 +101,15 @@
           },
           {
             "rule_type": "front_yard_setback_minimum",
-            "condition_text": "Minimum front yard is 20 ft on a local street and 30 ft on a collector or arterial street."
+            "condition_text": "Minimum front yard is 20 ft on a local street and 30 ft on a collector or arterial street.",
+            "text_defined_term_refs": [
+              {
+                "source_text": "front yard",
+                "definition_key": "front_yard",
+                "source_field": "condition_text",
+                "link_method": "reviewed_text_match"
+              }
+            ]
           },
           {
             "rule_type": "rear_yard_setback_minimum",

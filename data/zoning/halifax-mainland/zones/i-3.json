@@ -54,7 +54,15 @@
       ],
       "use_type": "industrial_or_commercial_use",
       "use_name": "industrial or commercial enterprise",
-      "condition_text": "except an industrial or commercial enterprise likely to cause a nuisance or hazard and except billboards, adult entertainment uses, and amusement centres"
+      "condition_text": "except an industrial or commercial enterprise likely to cause a nuisance or hazard and except billboards, adult entertainment uses, and amusement centres",
+      "text_defined_term_refs": [
+        {
+          "source_text": "adult entertainment uses",
+          "definition_key": "adult_entertainment_use",
+          "source_field": "condition_text",
+          "link_method": "reviewed_text_match"
+        }
+      ]
     },
     {
       "clause_label_raw": "50A(1)(b)",
@@ -125,7 +133,15 @@
           "minimum": 200,
           "unit": "ft"
         },
-        "condition_text": "On-site sewage disposal and on-site water serviced developments shall be set back a minimum distance of 200 feet from the ordinary high water mark of any lake or watercourse."
+        "condition_text": "On-site sewage disposal and on-site water serviced developments shall be set back a minimum distance of 200 feet from the ordinary high water mark of any lake or watercourse.",
+        "text_defined_term_refs": [
+          {
+            "source_text": "watercourse",
+            "definition_key": "watercourse",
+            "source_field": "condition_text",
+            "link_method": "reviewed_text_match"
+          }
+        ]
       },
       {
         "clause_label_raw": "50A(4)(c)",
@@ -135,7 +151,15 @@
           "c"
         ],
         "rule_type": "cross_reference_requirement",
-        "condition_text": "City sewer and water serviced developments shall meet the watercourse setback and buffer requirements of Section 14QA."
+        "condition_text": "City sewer and water serviced developments shall meet the watercourse setback and buffer requirements of Section 14QA.",
+        "text_defined_term_refs": [
+          {
+            "source_text": "watercourse",
+            "definition_key": "watercourse",
+            "source_field": "condition_text",
+            "link_method": "reviewed_text_match"
+          }
+        ]
       },
       {
         "clause_label_raw": "50A(4)(d)",
@@ -166,7 +190,15 @@
           "5"
         ],
         "rule_type": "servicing_requirement",
-        "condition_text": "Sewer and water service for developments in this zone may be provided by either on-site or off-site systems meeting the requirements of the Province of Nova Scotia, except that on-site sewer and water shall not be permitted for lands within the Development Boundary, as shown on Map II in Appendix C of the Metropolitan Regional Development Plan."
+        "condition_text": "Sewer and water service for developments in this zone may be provided by either on-site or off-site systems meeting the requirements of the Province of Nova Scotia, except that on-site sewer and water shall not be permitted for lands within the Development Boundary, as shown on Map II in Appendix C of the Metropolitan Regional Development Plan.",
+        "text_defined_term_refs": [
+          {
+            "source_text": "water service",
+            "definition_key": "water_service",
+            "source_field": "condition_text",
+            "link_method": "reviewed_text_match"
+          }
+        ]
       },
       {
         "section_label_raw": "50A(6)",
@@ -220,7 +252,15 @@
         "8"
       ],
       "condition_text": "Each use in an I-3 Zone shall be permitted signs identifying such use attached to the building in which the use is carried on and one freestanding sign; such signs may be illuminated.",
-      "prohibition_text": "No sign or any part thereof shall be erected within 100 feet of the street line of Highway No. 102 and Highway No. 103 between the Highway No. 102 interchange and the Halifax pumping station at 120 Chain Lake Drive."
+      "prohibition_text": "No sign or any part thereof shall be erected within 100 feet of the street line of Highway No. 102 and Highway No. 103 between the Highway No. 102 interchange and the Halifax pumping station at 120 Chain Lake Drive.",
+      "text_defined_term_refs": [
+        {
+          "source_text": "sign",
+          "definition_key": "sign",
+          "source_field": "condition_text",
+          "link_method": "reviewed_text_match"
+        }
+      ]
     }
   ],
   "use_specific_standards": [
@@ -240,7 +280,21 @@
             "metric_minimum": 70,
             "metric_unit": "m"
           },
-          "condition_text": "Where a lot containing a cannabis production facility abuts a residential use or a use containing a day care facility, community centre, school, religious institution, public park or playground, every cannabis production facility and every building or outdoor area used for cannabis production shall be no less than 230 ft. (70 m) from the abutting lot line."
+          "condition_text": "Where a lot containing a cannabis production facility abuts a residential use or a use containing a day care facility, community centre, school, religious institution, public park or playground, every cannabis production facility and every building or outdoor area used for cannabis production shall be no less than 230 ft. (70 m) from the abutting lot line.",
+          "text_defined_term_refs": [
+            {
+              "source_text": "cannabis production facility",
+              "definition_key": "cannabis_production_facility",
+              "source_field": "condition_text",
+              "link_method": "reviewed_text_match"
+            },
+            {
+              "source_text": "day care facility",
+              "definition_key": "day_care_facility",
+              "source_field": "condition_text",
+              "link_method": "reviewed_text_match"
+            }
+          ]
         }
       ],
       "defined_term_refs": [

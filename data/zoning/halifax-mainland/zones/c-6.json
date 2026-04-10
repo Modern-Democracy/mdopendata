@@ -85,7 +85,15 @@
         "3"
       ],
       "rule_type": "use_prohibition",
-      "summary": "No land or building use for any purpose other than one or more uses in 42A(1), and in any one building only one adult entertainment use shall be permitted."
+      "summary": "No land or building use for any purpose other than one or more uses in 42A(1), and in any one building only one adult entertainment use shall be permitted.",
+      "text_defined_term_refs": [
+        {
+          "source_text": "adult entertainment use",
+          "definition_key": "adult_entertainment_use",
+          "source_field": "summary",
+          "link_method": "reviewed_text_match"
+        }
+      ]
     }
   ],
   "requirements": {
@@ -102,7 +110,21 @@
         "section_path": [
           "42C"
         ],
-        "condition_text": "no development permit shall be issued for an adult entertainment use within 300 ft. of the nearest property line of any land in any residential zone, or any school, library, park, playground or other recreational facility, any church, convent, synagogue or similar place of worship, or another adult entertainment use"
+        "condition_text": "no development permit shall be issued for an adult entertainment use within 300 ft. of the nearest property line of any land in any residential zone, or any school, library, park, playground or other recreational facility, any church, convent, synagogue or similar place of worship, or another adult entertainment use",
+        "text_defined_term_refs": [
+          {
+            "source_text": "adult entertainment use",
+            "definition_key": "adult_entertainment_use",
+            "source_field": "condition_text",
+            "link_method": "reviewed_text_match"
+          },
+          {
+            "source_text": "residential zone",
+            "definition_key": "residential_zone",
+            "source_field": "condition_text",
+            "link_method": "reviewed_text_match"
+          }
+        ]
       },
       {
         "section_label_raw": "42D",
@@ -117,7 +139,21 @@
               "42D",
               "a"
             ],
-            "condition_text": "limited to one sign for each adult entertainment use"
+            "condition_text": "limited to one sign for each adult entertainment use",
+            "text_defined_term_refs": [
+              {
+                "source_text": "adult entertainment use",
+                "definition_key": "adult_entertainment_use",
+                "source_field": "condition_text",
+                "link_method": "reviewed_text_match"
+              },
+              {
+                "source_text": "sign",
+                "definition_key": "sign",
+                "source_field": "condition_text",
+                "link_method": "reviewed_text_match"
+              }
+            ]
           },
           {
             "clause_label_raw": "42D(b)",
@@ -125,7 +161,15 @@
               "42D",
               "b"
             ],
-            "condition_text": "may advertise only the name of the adult entertainment use"
+            "condition_text": "may advertise only the name of the adult entertainment use",
+            "text_defined_term_refs": [
+              {
+                "source_text": "adult entertainment use",
+                "definition_key": "adult_entertainment_use",
+                "source_field": "condition_text",
+                "link_method": "reviewed_text_match"
+              }
+            ]
           },
           {
             "clause_label_raw": "42D(c)",
@@ -158,7 +202,15 @@
         "section_path": [
           "42E"
         ],
-        "condition_text": "a sign permitted under Section 42D may be illuminated, provided it does not constitute a nuisance or hazard to the public"
+        "condition_text": "a sign permitted under Section 42D may be illuminated, provided it does not constitute a nuisance or hazard to the public",
+        "text_defined_term_refs": [
+          {
+            "source_text": "sign",
+            "definition_key": "sign",
+            "source_field": "condition_text",
+            "link_method": "reviewed_text_match"
+          }
+        ]
       },
       {
         "section_label_raw": "42F",

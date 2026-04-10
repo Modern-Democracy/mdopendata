@@ -358,6 +358,14 @@
                 ],
                 "condition_text": "maximum streetwall height may be exceeded by a clear uncoloured glass guard and railing system to allow safe use of podiums and rooftops by occupants"
               }
+            ],
+            "text_defined_term_refs": [
+              {
+                "source_text": "street line",
+                "definition_key": "street_line",
+                "source_field": "condition_text",
+                "link_method": "reviewed_text_match"
+              }
             ]
           },
           {
@@ -434,7 +442,21 @@
               "1",
               "h"
             ],
-            "condition_text": "above a height of 3 storeys, the building depth shall not exceed 25 metres; for a corner lot with frontage on Herring Cove Road, the front lot line is considered the street line with Herring Cove Road"
+            "condition_text": "above a height of 3 storeys, the building depth shall not exceed 25 metres; for a corner lot with frontage on Herring Cove Road, the front lot line is considered the street line with Herring Cove Road",
+            "text_defined_term_refs": [
+              {
+                "source_text": "street line",
+                "definition_key": "street_line",
+                "source_field": "condition_text",
+                "link_method": "reviewed_text_match"
+              },
+              {
+                "source_text": "corner lot",
+                "definition_key": "corner_lot",
+                "source_field": "condition_text",
+                "link_method": "reviewed_text_match"
+              }
+            ]
           }
         ]
       },
@@ -715,6 +737,14 @@
             "label_status": "source_text_ambiguous_lettercase",
             "condition_text": "community room of a minimum size of 40 square metres"
           }
+        ],
+        "text_defined_term_refs": [
+          {
+            "source_text": "shared housing use",
+            "definition_key": "shared_housing_use",
+            "source_field": "condition_text",
+            "link_method": "reviewed_text_match"
+          }
         ]
       },
       {
@@ -846,7 +876,15 @@
             "clause_label_raw": "38CK(f)(d)",
             "clause_path": null,
             "label_status": "source_text_suspected_section_typo",
-            "condition_text": "one projecting sign per business premise, maximum 1.9 square metres in size, shall be permitted"
+            "condition_text": "one projecting sign per business premise, maximum 1.9 square metres in size, shall be permitted",
+            "text_defined_term_refs": [
+              {
+                "source_text": "sign",
+                "definition_key": "sign",
+                "source_field": "condition_text",
+                "link_method": "reviewed_text_match"
+              }
+            ]
           },
           {
             "clause_label_raw": "38CK(f)(e)",

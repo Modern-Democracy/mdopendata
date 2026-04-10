@@ -217,7 +217,15 @@
                   "c",
                   "i"
                 ],
-                "condition_text": "every building shall be at least 12 feet from any other building and at least 8 feet from the rear and both side lines of the lot and at least 20 feet from any street line in front of such building"
+                "condition_text": "every building shall be at least 12 feet from any other building and at least 8 feet from the rear and both side lines of the lot and at least 20 feet from any street line in front of such building",
+                "text_defined_term_refs": [
+                  {
+                    "source_text": "street line",
+                    "definition_key": "street_line",
+                    "source_field": "condition_text",
+                    "link_method": "reviewed_text_match"
+                  }
+                ]
               },
               {
                 "clause_label_raw": "37(c)(ii)",
@@ -226,7 +234,21 @@
                   "c",
                   "ii"
                 ],
-                "condition_text": "where a building is situated on a corner lot, it shall be at least 10 feet from the flanking street line abutting such lot"
+                "condition_text": "where a building is situated on a corner lot, it shall be at least 10 feet from the flanking street line abutting such lot",
+                "text_defined_term_refs": [
+                  {
+                    "source_text": "street line",
+                    "definition_key": "street_line",
+                    "source_field": "condition_text",
+                    "link_method": "reviewed_text_match"
+                  },
+                  {
+                    "source_text": "corner lot",
+                    "definition_key": "corner_lot",
+                    "source_field": "condition_text",
+                    "link_method": "reviewed_text_match"
+                  }
+                ]
               }
             ]
           },
@@ -254,7 +276,23 @@
                   "d",
                   "ii"
                 ],
-                "condition_text": "the abutting lot is not in a residential zone used for residential purposes"
+                "condition_text": "the abutting lot is not in a residential zone used for residential purposes",
+                "text_defined_term_refs": [
+                  {
+                    "source_text": "residential zone",
+                    "definition_key": "residential_zone",
+                    "source_field": "condition_text",
+                    "link_method": "reviewed_text_match"
+                  }
+                ]
+              }
+            ],
+            "text_defined_term_refs": [
+              {
+                "source_text": "building line",
+                "definition_key": "building_line",
+                "source_field": "condition_text",
+                "link_method": "reviewed_text_match"
               }
             ]
           }
@@ -270,7 +308,15 @@
         "38",
         "1"
       ],
-      "summary": "Each C-1 use is permitted one identification sign which may be illuminated."
+      "summary": "Each C-1 use is permitted one identification sign which may be illuminated.",
+      "text_defined_term_refs": [
+        {
+          "source_text": "sign",
+          "definition_key": "sign",
+          "source_field": "summary",
+          "link_method": "reviewed_text_match"
+        }
+      ]
     },
     {
       "section_label_raw": "38(2)",
@@ -278,7 +324,15 @@
         "38",
         "2"
       ],
-      "summary": "Each property is permitted one free-standing identification sign which may be illuminated, provided it will not cause a hazard or nuisance to the public."
+      "summary": "Each property is permitted one free-standing identification sign which may be illuminated, provided it will not cause a hazard or nuisance to the public.",
+      "text_defined_term_refs": [
+        {
+          "source_text": "sign",
+          "definition_key": "sign",
+          "source_field": "summary",
+          "link_method": "reviewed_text_match"
+        }
+      ]
     }
   ],
   "spatial_features_needed": [],
