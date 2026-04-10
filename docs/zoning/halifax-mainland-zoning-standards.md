@@ -35,6 +35,7 @@ The currently approved hierarchy interpretation is:
 - `23A` -> `["23","A"]`
 - `23E(1)` -> `["23","E","1"]`
 - `23E(1)(a)` -> `["23","E","1","a"]`
+- `26(i)(2A)` -> `["26","i","2A"]`
 
 This same pattern is safe for similar letter-pair subsection labels such as `20(1)(ba)`, `20(1)(ja)`, and `21(ca)`.
 

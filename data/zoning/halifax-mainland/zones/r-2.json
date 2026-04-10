@@ -1,0 +1,131 @@
+{
+  "document_metadata": {
+    "jurisdiction": "Halifax Regional Municipality",
+    "bylaw_name": "Halifax Mainland Land Use By-law",
+    "source_document_path": "docs/halifaxmainlandlanduseby-law-edition231-eff-26feb02-minorrev2025-02922-toclinked_1.pdf",
+    "edition": "231",
+    "zone_code": "R-2",
+    "zone_name": "Two-Family Dwelling Zone",
+    "zone_established_by": { "clause_label_raw": "16(1)", "pdf_page": 53, "bylaw_page": 45 },
+    "zone_section_start": { "title_label_raw": "R-2 ZONE: TWO-FAMILY DWELLING ZONE", "pdf_page": 62, "bylaw_page": 54 },
+    "zone_section_end_before": { "title_label_raw": "R-2P ZONE: GENERAL RESIDENTIAL ZONE", "pdf_page": 66, "bylaw_page": 58 }
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": ["24(1)(ca)", "25A", "26(i)(2A)", "28A", "28C"],
+    "pending_review_clause_patterns": []
+  },
+  "general_context": {
+    "zone_class_reference": { "section_label_raw": "16(1)", "summary": "R-2 is an established class of use zone." },
+    "general_boundary_rule_refs": ["17(a)-(h)", "18", "19"]
+  },
+  "permitted_uses": [
+    { "clause_label_raw": "24(1)(a)", "clause_path": ["24", "1", "a"], "use_type": "incorporated_zone_use_set", "use_name": "all R-1 Zone uses", "conditions": ["subject to Section 25 for R-1 use requirements in an R-2 Zone"] },
+    { "clause_label_raw": "24(1)(b)", "clause_path": ["24", "1", "b"], "use_type": "principal_use", "use_name": "semi-detached dwelling" },
+    { "clause_label_raw": "24(1)(c)", "clause_path": ["24", "1", "c"], "use_type": "principal_use", "use_name": "duplex dwelling" },
+    { "clause_label_raw": "24(1)(ca)", "clause_path": ["24", "1", "c", "a"], "use_type": "site_specific_residential_use", "use_name": "building containing not more than 3 apartments", "applicability_scope": "zm_26_three_unit_dwelling_site_only", "conditions": ["applies only on the 3-unit Dwelling Site identified on ZM-26", "subject to the requirements of Section 28C"] },
+    { "clause_label_raw": "24(1)(d)", "clause_path": ["24", "1", "d"], "status": "deleted" },
+    { "clause_label_raw": "24(1)(e)", "clause_path": ["24", "1", "e"], "status": "deleted" },
+    { "clause_label_raw": "24(1)(f)", "clause_path": ["24", "1", "f"], "use_type": "area_specific_conversion_use", "use_name": "conversion of existing institutional building to residential units", "applicability_scope": "fairview_area_only", "conditions": ["building must be existing and used for institutional purposes", "maximum 4 units", "height and floor area must not be increased"] },
+    { "clause_label_raw": "24(1)(fa)", "clause_path": ["24", "1", "f", "a"], "use_type": "residential_use", "use_name": "shared housing use", "conditions": ["maximum 10 bedrooms", "in conjunction with a permitted dwelling unit"] },
+    { "clause_label_raw": "24(1)(g)", "clause_path": ["24", "1", "g"], "use_type": "accessory_use", "use_name": "uses accessory to any of the foregoing uses" }
+  ],
+  "prohibitions": [
+    { "clause_label_raw": "24(2)", "clause_path": ["24", "2"], "rule_type": "development_prohibition", "summary": "No development for any purpose other than one or more uses in 24(1)." },
+    { "clause_label_raw": "24(3)", "clause_path": ["24", "3"], "rule_type": "use_prohibition", "summary": "No land or building use for any purpose other than one or more uses in 24(1)." },
+    { "clause_label_raw": "24(4)", "clause_path": ["24", "4"], "status": "deleted" }
+  ],
+  "requirements": {
+    "incorporated_use_requirements": [
+      { "section_label_raw": "25", "section_path": ["25"], "use_name": "R-1 uses in R-2 Zone", "summary": "Buildings erected, altered or used for R-1 uses in an R-2 Zone shall comply with the requirements of an R-1 Zone." },
+      { "section_label_raw": "25A", "section_path": ["25", "A"], "status": "deleted" }
+    ],
+    "base_dimensional_controls": [
+      { "clause_label_raw": "26(a)", "clause_path": ["26", "a"], "metric": "lot_frontage_minimum", "value": 50, "unit": "ft", "condition_text": "outer side of street curve may reduce minimum to 30 ft" },
+      { "clause_label_raw": "26(b)", "clause_path": ["26", "b"], "metric": "lot_area_minimum", "value": 5000, "unit": "sq_ft" },
+      { "clause_label_raw": "26(ba)", "clause_path": ["26", "b", "a"], "metric": "lot_area_minimum", "value": 6000, "unit": "sq_ft", "scope_override": "mainland_south_area_inland_watercourse_lots_only" },
+      { "clause_label_raw": "26(c)", "clause_path": ["26", "c"], "metric": "lot_coverage_maximum", "value": 35, "unit": "percent" },
+      { "clause_label_raw": "26(ca)", "clause_path": ["26", "c", "a"], "metric": "building_height_maximum", "value": 35, "unit": "ft" },
+      { "clause_label_raw": "26(d)", "clause_path": ["26", "d"], "metric": "repealed", "status": "repealed" },
+      { "clause_label_raw": "26(e)", "clause_path": ["26", "e"], "metric": "yard_and_building_separation_bundle", "controls": [
+        { "metric": "building_separation_minimum", "value": 12, "unit": "ft" },
+        { "metric": "rear_yard_setback_minimum", "value": 8, "unit": "ft" },
+        { "metric": "side_yard_setback_minimum", "value": 8, "unit": "ft" },
+        { "metric": "front_yard_setback_minimum", "value": 20, "unit": "ft" }
+      ] }
+    ],
+    "accessory_building_controls": [
+      { "clause_label_raw": "26(f)", "clause_path": ["26", "f"], "building_types": ["carport", "detached non-commercial garage", "attached non-commercial garage"], "controls": [
+        { "metric": "rear_yard_setback_minimum", "value": 4, "unit": "ft" },
+        { "metric": "side_yard_setback_minimum", "value": 4, "unit": "ft" },
+        { "metric": "building_separation_minimum", "value": 8, "unit": "ft" }
+      ] },
+      { "clause_label_raw": "26(g)", "clause_path": ["26", "g"], "summary": "Accessory building located entirely within the rear yard requires no side yard, rear yard, or setback from any other building.", "conditions": ["must be entirely within rear yard", "must not be closer than 15 ft to any street line"] },
+      { "clause_label_raw": "26(ga)", "clause_path": ["26", "g", "a"], "summary": "Backyard Suites are not subject to a minimum floor coverage of living space.", "notes": ["text cross-references 26(d), which is repealed in the current source"] }
+    ],
+    "corner_lot_controls": [
+      { "clause_label_raw": "26(h)", "clause_path": ["26", "h"], "metric": "flanking_street_setback_minimum", "value": 10, "unit": "ft" }
+    ],
+    "semi_detached_dwelling_controls": [
+      { "clause_label_raw": "26(i)", "clause_path": ["26", "i"], "summary": "Semi-detached dwellings in the R-2 Zone are subject to the following special requirements.", "controls": [
+        { "clause_label_raw": "26(i)(1)", "clause_path": ["26", "i", "1"], "metric_group": "semi_detached_lot_metrics", "controls": [
+          { "metric": "lot_frontage_minimum_per_unit", "value": 25, "unit": "ft_per_unit" },
+          { "metric": "lot_area_minimum_per_unit", "value": 2500, "unit": "sq_ft_per_unit" },
+          { "metric": "lot_coverage_maximum", "value": 35, "unit": "percent" }
+        ] },
+        { "clause_label_raw": "26(i)(2)", "clause_path": ["26", "i", "2"], "metric_group": "semi_detached_setbacks", "controls": [
+          { "metric": "building_separation_minimum", "value": 12, "unit": "ft" },
+          { "metric": "rear_yard_setback_minimum", "value": 8, "unit": "ft" },
+          { "metric": "side_yard_setback_minimum", "value": 8, "unit": "ft" },
+          { "metric": "front_yard_setback_minimum", "value": 20, "unit": "ft" }
+        ], "conditions": ["subject to 26(i)(2A)"] },
+        { "clause_label_raw": "26(i)(2A)", "clause_path": ["26", "i", "2A"], "metric_group": "mainland_south_semi_detached_exception", "applicability_scope": "mainland_south_area_only", "controls": [
+          { "metric": "building_separation_minimum", "value": 8, "unit": "ft" },
+          { "metric": "side_yard_setback_minimum", "value": 4, "unit": "ft" }
+        ] },
+        { "clause_label_raw": "26(i)(3)", "clause_path": ["26", "i", "3"], "metric_group": "corner_lot_rule", "controls": [
+          { "metric": "flanking_street_setback_minimum", "value": 10, "unit": "ft" }
+        ], "conditions": ["applies to semi-detached dwellings and accessory buildings or uses on corner lots"] },
+        { "clause_label_raw": "26(i)(4)", "clause_path": ["26", "i", "4"], "metric_group": "subdivision_common_boundary_rule", "conditions": ["where a lot containing a semi-detached dwelling is to be or has been subdivided so each unit is on its own lot, no setback is required from the common lot boundary"] }
+      ] },
+      { "clause_label_raw": "26(j)", "clause_path": ["26", "j"], "status": "deleted" },
+      { "clause_label_raw": "26(k)", "clause_path": ["26", "k"], "status": "deleted" }
+    ]
+  },
+  "sign_controls": [
+    { "section_label_raw": "28", "section_path": ["28"], "summary": "The exterior of any building in an R-2 Zone shall not be used for advertising or for erecting or maintaining any billboard or sign except the listed signs." },
+    { "clause_label_raw": "28(a)", "clause_path": ["28", "a"], "sign_type": "sale_or_rent_sign", "max_area": 6, "unit": "sq_ft", "conditions": ["one sign board", "must pertain to sale or rent of the building or lot"] },
+    { "clause_label_raw": "28(b)", "clause_path": ["28", "b"], "sign_type": "no_trespassing_safety_or_caution_sign", "max_area": 1, "unit": "sq_ft", "conditions": ["one sign", "non-illuminated"] },
+    { "clause_label_raw": "28(c)", "clause_path": ["28", "c"], "sign_type": "occupant_name_profession_sign", "max_area": 1, "unit": "sq_ft", "conditions": ["one sign", "non-illuminated"] },
+    { "clause_label_raw": "28(d)", "clause_path": ["28", "d"], "sign_type": "church_bulletin_board" },
+    { "clause_label_raw": "28(e)", "clause_path": ["28", "e"], "sign_type": "day_care_facility_sign", "max_area": 2, "unit": "sq_ft" }
+  ],
+  "use_specific_standards": [
+    { "section_label_raw": "28A", "section_path": ["28", "A"], "status": "deleted" },
+    { "section_label_raw": "28B", "section_path": ["28", "B"], "status": "deleted" },
+    { "section_label_raw": "28C", "section_path": ["28", "C"], "use_name": "building permitted by 24(1)(ca)", "applicability_scope": "zm_26_three_unit_dwelling_site_only", "controls": [
+      { "clause_label_raw": "28C(a)", "clause_path": ["28", "C", "a"], "metric": "lot_frontage_minimum", "value": 45, "unit": "ft" },
+      { "clause_label_raw": "28C(b)", "clause_path": ["28", "C", "b"], "metric": "lot_area_minimum", "value": 4500, "unit": "sq_ft" },
+      { "clause_label_raw": "28C(c)", "clause_path": ["28", "C", "c"], "metric": "lot_coverage_maximum", "value": 35, "unit": "percent" },
+      { "clause_label_raw": "28C(d)", "clause_path": ["28", "C", "d"], "metric": "building_height_maximum", "value": 30, "unit": "ft" },
+      { "clause_label_raw": "28C(e)", "clause_path": ["28", "C", "e"], "metric": "storeys_maximum", "value": 2, "unit": "storey" },
+      { "clause_label_raw": "28C(f)", "clause_path": ["28", "C", "f"], "metric": "front_yard_setback_minimum", "value": 15, "unit": "ft" },
+      { "clause_label_raw": "28C(g)", "clause_path": ["28", "C", "g"], "metric": "side_yard_setback_minimum", "value": 10, "unit": "ft" },
+      { "clause_label_raw": "28C(h)", "clause_path": ["28", "C", "h"], "metric": "rear_yard_setback_minimum", "value": 20, "unit": "ft" }
+    ] }
+  ],
+  "spatial_features_needed": [
+    { "feature_key": "mainland_south_area", "feature_class": "planning_area_boundary", "source_type": "existing_or_derived_polygon", "reason": "controls 26(ba) and 26(i)(2A)" },
+    { "feature_key": "inland_watercourses", "feature_class": "hydrography_line_or_polygon", "source_type": "external_geospatial_layer", "reason": "needed for inland watercourse lot tests under 26(ba)" },
+    { "feature_key": "fairview_area", "feature_class": "planning_area_boundary", "source_type": "existing_or_derived_polygon", "reason": "controls 24(1)(f)" },
+    { "feature_key": "zm_26_three_unit_dwelling_site", "feature_class": "site_specific_area", "source_type": "polygon_from_zm_26", "reason": "needed for 24(1)(ca) and 28C" }
+  ],
+  "open_issues": [
+    { "issue_type": "source_dependency", "description": "ZM-26 geometry is not yet extracted into repository spatial layers." }
+  ],
+  "citations": {
+    "permitted_uses": { "pdf_page": 62, "bylaw_page": 54 },
+    "requirements": { "pdf_page_start": 62, "pdf_page_end": 64, "bylaw_page_start": 54, "bylaw_page_end": 56 },
+    "site_specific_standard": { "pdf_page": 64, "bylaw_page": 56 }
+  }
+}
