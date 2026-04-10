@@ -29,3 +29,14 @@
   workflow change, or architectural refactor that the user did not explicitly
   request, obtain approval before implementation.
 - After any implementation task, finish in `QA Reviewer`.
+- When parsing by-law zones or clauses, preserve each raw clause label exactly
+  as written in the source.
+- For clause hierarchy normalization, the currently approved interpretation is
+  hierarchical addressing such as `21(e)` -> `21 -> e`, `21(ea)` -> `21 -> e ->
+  a`, and `21(ea)(1)` -> `21 -> e -> a -> 1`.
+- Do not apply hierarchy normalization to a clause syntax pattern that has not
+  already been explicitly reviewed in this repository context.
+- If a new clause syntax appears, stop and surface the exact raw examples for
+  review before normalizing them. Examples already identified for review
+  include dotted subclauses like `20(1)(a.1)` and alphanumeric section-style
+  identifiers like `34B38`.
