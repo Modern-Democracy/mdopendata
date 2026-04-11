@@ -3,7 +3,16 @@ const path = require("path");
 
 const root = process.cwd();
 const includeExt = new Set([".pdf", ".gif", ".png", ".jpg", ".jpeg", ".tif", ".tiff"]);
-const skipDirs = new Set([".git", "node_modules", "data"]);
+const skipDirs = new Set([
+  ".git",
+  "node_modules",
+  "data",
+  ".python",
+  ".venv",
+  ".qgis-mcp-packages",
+  "qgis_mcp_vendor",
+  ".docker-local"
+]);
 
 function classify(relPath) {
   const normalized = relPath.replace(/\\/g, "/").toLowerCase();
@@ -15,6 +24,12 @@ function classify(relPath) {
     return { domain: "land_use_regulation", kind: "zoning_map" };
   }
   if (normalized.includes("/official plan")) {
+    return { domain: "policy", kind: "official_plan_text" };
+  }
+  if (
+    normalized.includes("municipal planning strategy") ||
+    normalized.includes("/halifaxmps")
+  ) {
     return { domain: "policy", kind: "official_plan_text" };
   }
   if (normalized.includes("/future land use map")) {
@@ -77,8 +92,12 @@ function walk(dir, results = []) {
     const fullPath = path.join(dir, entry.name);
     const relPath = path.relative(root, fullPath);
     const ext = path.extname(entry.name).toLowerCase();
+    const normalizedRelPath = relPath.replace(/\\/g, "/").toLowerCase();
 
     if (!includeExt.has(ext)) {
+      continue;
+    }
+    if (normalizedRelPath.startsWith("maps/qgis-")) {
       continue;
     }
 

@@ -5,6 +5,7 @@
   "description": "Inventory and schema scaffolding for an mdopendata spatial land-use and municipal-business datastore.",
   "scripts": {
     "inventory": "node src/build-inventory.js",
+    "extract:halifax-mainland-mps": "powershell -ExecutionPolicy Bypass -Command \"& .\\scripts\\python.ps1 .\\scripts\\extract-halifax-mainland-mps.py\"",
     "db:up": "powershell -ExecutionPolicy Bypass -Command \"$env:DOCKER_CONFIG=(Join-Path (Get-Location) '.docker-local'); New-Item -ItemType Directory -Force $env:DOCKER_CONFIG | Out-Null; docker compose up -d postgis\"",
     "db:down": "powershell -ExecutionPolicy Bypass -Command \"$env:DOCKER_CONFIG=(Join-Path (Get-Location) '.docker-local'); New-Item -ItemType Directory -Force $env:DOCKER_CONFIG | Out-Null; docker compose down\"",
     "db:logs": "powershell -ExecutionPolicy Bypass -Command \"$env:DOCKER_CONFIG=(Join-Path (Get-Location) '.docker-local'); New-Item -ItemType Directory -Force $env:DOCKER_CONFIG | Out-Null; docker compose logs postgis\"",
