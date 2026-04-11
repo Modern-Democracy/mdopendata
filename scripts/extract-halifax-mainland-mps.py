@@ -143,7 +143,7 @@ SECTION_SPECS = [
         "IMPLEMENTATION POLICIES",
         "IMPLEMENTATION POLICIES",
         194,
-        217,
+        202,
         "implementation",
     ),
 ]
@@ -174,15 +174,19 @@ HEADING_PREFIXES = (
 )
 
 
-POLICY_LABEL_RE = re.compile(r"^((?:\d+[A-Z]?)(?:\.\d+[A-Z]?)*\.?[A-Z]?)\s+(.*)$")
+POLICY_LABEL_RE = re.compile(r"^((?:\d+[A-Z]?)(?:\.\d+[A-Z]?)*\.?[A-Z]?)[.)]?\s+(.*)$")
 POLICY_NAMED_RE = re.compile(
-    r"^(Policy\s+[A-Z0-9]+(?:\.\d+[A-Z]?)*(?:\s*-\s*[A-Z0-9]+)?)\s*:?\s*(.*)$"
+    r"^(Policy\s+(?=[A-Z0-9/.-]*[A-Z])[A-Z0-9/.-]+(?:\([0-9A-Za-z.]+\))?(?:\s*-\s*[A-Z0-9]+)?)\s*:?\s*(.*)$"
 )
 LIST_POLICY_RE = re.compile(r"^([0-9A-Z.,\sand()]+?)\s+[.-]\s+(Repealed.*|Deleted.*)$", re.IGNORECASE)
-SUBCLAUSE_RE = re.compile(r"^(\([A-Za-z0-9.]+\)|[A-Za-z0-9.]+\))\s+(.*)$")
+SUBCLAUSE_RE = re.compile(r"^(-|\([A-Za-z0-9.]+\)|[A-Za-z0-9.]+\)|[0-9]+[.)])\s+(.*)$")
 MAP_CAPTION_RE = re.compile(r"^(Map|Schedule)\s+[A-Za-z0-9() -]+\s*:")
 TOPIC_HEADING_RE = re.compile(r"^\d+[A-Z]?\.\s+[A-Z][A-Z0-9 ,&'()/.-]+$")
 UPPERCASE_HEADING_RE = re.compile(r"^[A-Z][A-Z0-9 /&,'()-]+$")
+TITLE_HEADING_RE = re.compile(r"^(?:[A-Z][A-Za-z0-9'/-]*)(?:\s+[A-Z][A-Za-z0-9'/-]*){0,7}:?$")
+FOOTNOTE_START_RE = re.compile(r"^\d+\s+\d+\s+Report to Mayor Fitzgerald and Members of Halifax Regional Council\b")
+GENERIC_FOOTNOTE_START_RE = re.compile(r"^\d+\s{2,}[A-Z]")
+INLINE_SUBCLAUSE_RE = re.compile(r"(?:(?<=^)|(?<=\s)|(?<=;))(\([A-Za-z0-9.]+\)|[A-Za-z0-9.]+\)|[0-9]+[.)])\s+")
 
 
 def slugify(value: str) -> str:
@@ -210,6 +214,7 @@ def extract_lines(reader: PdfReader) -> list[dict]:
     rows: list[dict] = []
     for pdf_page, page in enumerate(reader.pages, start=1):
         raw_text = page.extract_text() or ""
+        skip_footnote = False
         for raw_line in raw_text.splitlines():
             line = normalize_line(raw_line).strip()
             if not line:
@@ -217,6 +222,13 @@ def extract_lines(reader: PdfReader) -> list[dict]:
             if re.match(r"^Halifax Municipal Planning Strategy\s+Page \d+$", line):
                 continue
             if re.fullmatch(r"Page \d+", line):
+                continue
+            if skip_footnote:
+                if line.startswith("Dated ") or " Dated " in line or re.search(r"\b\d{4}\.$", line):
+                    skip_footnote = False
+                continue
+            if FOOTNOTE_START_RE.match(line) or GENERIC_FOOTNOTE_START_RE.match(line):
+                skip_footnote = True
                 continue
             rows.append(
                 {
@@ -268,6 +280,87 @@ def feature_class_for_label(label: str) -> str:
         if any(needle in normalized for needle in needles):
             return feature_class
     return "policy_map_reference"
+
+
+def has_modality_or_status(text: str) -> bool:
+    normalized = text.lower()
+    return any(token in normalized for token in (" shall ", " should ", " may ", "repealed", "deleted"))
+
+
+def looks_like_table_row(body: str) -> bool:
+    compact = compact_space(body)
+    if len(compact) > 60:
+        return False
+    if has_modality_or_status(f" {compact} "):
+        return False
+    return bool(re.fullmatch(r"[A-Z][A-Za-z /-]*\d+", compact))
+
+
+def looks_like_title_heading(text: str) -> bool:
+    compact = compact_space(text)
+    if len(compact) > 90 or not TITLE_HEADING_RE.match(compact):
+        return False
+    if has_modality_or_status(f" {compact.lower()} "):
+        return False
+    return True
+
+
+def is_reference_continuation(body: str) -> bool:
+    compact = compact_space(body)
+    return bool(re.match(r"^(and|or)\b", compact.lower()))
+
+
+def is_short_noun_phrase(body: str) -> bool:
+    compact = compact_space(body).rstrip(".:;")
+    if not compact or len(compact.split()) > 5 or has_modality_or_status(f" {compact.lower()} "):
+        return False
+    return compact == compact.title() or looks_like_title_heading(compact)
+
+
+def should_promote_short_heading(label: str, body: str, next_text: str | None) -> bool:
+    if "." in label or not next_text:
+        return False
+    if not (looks_like_title_heading(body) or is_short_noun_phrase(body)):
+        return False
+    next_compact = compact_space(next_text)
+    if next_compact.startswith("-"):
+        return True
+    return bool(SUBCLAUSE_RE.match(next_compact))
+
+
+def extract_inline_subclauses(text: str) -> list[tuple[str, str]]:
+    matches = list(INLINE_SUBCLAUSE_RE.finditer(text))
+    subclauses: list[tuple[str, str]] = []
+    for index, match in enumerate(matches):
+        label = match.group(1)
+        start = match.end()
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
+        clause_text = compact_space(text[start:end].strip(" ;"))
+        if clause_text:
+            subclauses.append((label, clause_text))
+    return subclauses
+
+
+def should_start_new_policy(label: str, body: str, current_record: dict | None, next_text: str | None) -> bool:
+    compact = compact_space(body)
+    dotted = "." in label
+    if current_record and is_reference_continuation(compact):
+        return False
+    if current_record:
+        if not dotted and should_promote_short_heading(label, compact, next_text):
+            return True
+        if not dotted and (looks_like_table_row(compact) or looks_like_title_heading(compact)):
+            return False
+        if not dotted and current_record["label_raw"].startswith("Policy "):
+            return False
+        if not dotted and len(compact) < 80 and not has_modality_or_status(f" {compact.lower()} "):
+            return False
+    else:
+        if not dotted and looks_like_title_heading(compact) and not should_promote_short_heading(label, compact, next_text):
+            return False
+        if not dotted and is_short_noun_phrase(compact) and not should_promote_short_heading(label, compact, next_text):
+            return False
+    return True
 
 
 def planned_postgis_target(feature_class: str) -> str:
@@ -409,12 +502,14 @@ def parse_section_content(spec: SectionSpec, rows: list[dict]) -> dict:
                 "citations": citations,
             }
             policies.append(policy)
+            seen_subclauses: set[tuple[str, str]] = set()
             for line in current_record["lines"]:
                 match = SUBCLAUSE_RE.match(line["text"])
                 if not match:
                     continue
                 clause_label_raw = match.group(1)
                 clause_text = match.group(2)
+                seen_subclauses.add((clause_label_raw, compact_space(clause_text)))
                 policy_subclauses.append(
                     {
                         "parent_policy_label_raw": current_record["label_raw"],
@@ -431,10 +526,27 @@ def parse_section_content(spec: SectionSpec, rows: list[dict]) -> dict:
                         },
                     }
                 )
+            for clause_label_raw, clause_text in extract_inline_subclauses(text):
+                key = (clause_label_raw, clause_text)
+                if key in seen_subclauses:
+                    continue
+                seen_subclauses.add(key)
+                policy_subclauses.append(
+                    {
+                        "parent_policy_label_raw": current_record["label_raw"],
+                        "clause_label_raw": clause_label_raw,
+                        "normalized_path": None,
+                        "normalization_status": "pending_review_mps_dotted_identifier",
+                        "text": clause_text,
+                        "modality": extract_modality(clause_text),
+                        "citations": citations,
+                    }
+                )
         current_record = None
 
-    for row in rows:
+    for index, row in enumerate(rows):
         text = row["text"]
+        next_text = rows[index + 1]["text"] if index + 1 < len(rows) else None
         if MAP_CAPTION_RE.match(text):
             if current_record:
                 flush_record()
@@ -447,6 +559,16 @@ def parse_section_content(spec: SectionSpec, rows: list[dict]) -> dict:
         if text.startswith(spec.section_label_raw) or text == spec.title_label_raw:
             current_context.append(row)
             continue
+        if POLICY_NAMED_RE.match(text):
+            flush_context()
+            flush_record()
+            match = POLICY_NAMED_RE.match(text)
+            assert match is not None
+            label = match.group(1)
+            rest = match.group(2).strip()
+            lines = [{**row, "text": rest}] if rest else []
+            current_record = {"record_kind": "policy", "label_raw": label, "lines": lines}
+            continue
         if (
             UPPERCASE_HEADING_RE.match(text)
             and text not in {"OBJECTIVE", "OBJECTIVES"}
@@ -457,6 +579,11 @@ def parse_section_content(spec: SectionSpec, rows: list[dict]) -> dict:
             current_context.append(row)
             continue
         if TOPIC_HEADING_RE.match(text):
+            if current_record:
+                flush_record()
+            current_context.append(row)
+            continue
+        if looks_like_title_heading(text):
             if current_record:
                 flush_record()
             current_context.append(row)
@@ -475,16 +602,6 @@ def parse_section_content(spec: SectionSpec, rows: list[dict]) -> dict:
                 "lines": [row],
             }
             continue
-        if POLICY_NAMED_RE.match(text):
-            flush_context()
-            flush_record()
-            match = POLICY_NAMED_RE.match(text)
-            assert match is not None
-            label = match.group(1)
-            rest = match.group(2).strip()
-            first_line = {**row, "text": rest} if rest else row
-            current_record = {"record_kind": "policy", "label_raw": label, "lines": [first_line]}
-            continue
         if LIST_POLICY_RE.match(text):
             flush_context()
             flush_record()
@@ -498,10 +615,16 @@ def parse_section_content(spec: SectionSpec, rows: list[dict]) -> dict:
             continue
         match = POLICY_LABEL_RE.match(text)
         if match and not text.startswith("Map "):
-            flush_context()
-            flush_record()
             label = match.group(1).rstrip(".")
             body = match.group(2)
+            if not should_start_new_policy(label, body, current_record, next_text):
+                if current_record:
+                    current_record["lines"].append(row)
+                else:
+                    current_context.append(row)
+                continue
+            flush_context()
+            flush_record()
             current_record = {
                 "record_kind": "policy",
                 "label_raw": label,

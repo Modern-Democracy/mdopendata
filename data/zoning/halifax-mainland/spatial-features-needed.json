@@ -1,0 +1,193 @@
+{
+  "document_name": "Halifax Mainland Land Use By-law",
+  "source_document_path": "docs/halifaxmainlandlanduseby-law-edition231-eff-26feb02-minorrev2025-02922-toclinked_1.pdf",
+  "spatial_features_needed": [
+    {
+      "feature_key": "zm-19-mcintosh-run-flood-plain",
+      "feature_class": "flood_plain_area",
+      "source_document_page": 173,
+      "source_label_raw": "ZM-19: McIntosh Run Flood Plain",
+      "reason": "Schedule map plate in the Halifax Mainland Land Use By-law that should be reproduced in QGIS and stored as a PostGIS flood plain geometry for zoning rule linkage.",
+      "planned_postgis_target": "spatial_features.geom",
+      "section_label_raw": "SCHEDULES",
+      "schedule_file": "schedules/zm-19.json",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "zm-22-areas-of-elevated-archaeological-potential",
+      "feature_class": "archaeological_constraint_area",
+      "source_document_page": 174,
+      "source_label_raw": "ZM-22: Areas of Elevated Archaeological Potential (RC-Jun 25/14;E-Oct 18/14) (RC-Mar 18/25; EFF Apr 23/25)",
+      "reason": "Schedule map plate in the Halifax Mainland Land Use By-law that should be reproduced in QGIS and stored as a PostGIS archaeological constraint geometry for zoning rule linkage.",
+      "planned_postgis_target": "spatial_features.geom",
+      "section_label_raw": "SCHEDULES",
+      "schedule_file": "schedules/zm-22.json",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "zm-23-wetlands",
+      "feature_class": "wetland_area",
+      "source_document_page": 175,
+      "source_label_raw": "ZM-23: Wetlands (RC-Jun 25/14;E-Oct 18/14) (RC-Mar 18/25; EFF Apr 23/25)",
+      "reason": "Schedule map plate in the Halifax Mainland Land Use By-law that should be reproduced in QGIS and stored as a PostGIS wetland geometry for zoning rule linkage.",
+      "planned_postgis_target": "spatial_features.geom",
+      "section_label_raw": "SCHEDULES",
+      "schedule_file": "schedules/zm-23.json",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "zm-24-northwest-arm",
+      "feature_class": "coastal_area",
+      "source_document_page": 176,
+      "source_label_raw": "ZM-24: Northwest Arm",
+      "reason": "Schedule map plate in the Halifax Mainland Land Use By-law that should be reproduced in QGIS and stored as a PostGIS coastal-area geometry for zoning rule linkage.",
+      "planned_postgis_target": "spatial_features.geom",
+      "section_label_raw": "SCHEDULES",
+      "schedule_file": "schedules/zm-24.json",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "zm-25-wind-energy-zoning",
+      "feature_class": "wind_energy_zone_area",
+      "source_document_page": 177,
+      "source_label_raw": "ZM-25: Wind Energy Zoning (RC-Jun 25/14;E-Oct 18/14) (RC-Mar 18/25; EFF Apr 23/25)",
+      "reason": "Schedule map plate in the Halifax Mainland Land Use By-law that should be reproduced in QGIS and stored as a PostGIS wind-energy zoning geometry for zoning rule linkage.",
+      "planned_postgis_target": "spatial_features.geom",
+      "section_label_raw": "SCHEDULES",
+      "schedule_file": "schedules/zm-25.json",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "zm-26-herring-cove-road",
+      "feature_class": "site_specific_plan_area",
+      "source_document_page": 178,
+      "source_label_raw": "ZM-26: Herring Cove Road (RC-Jun 10/14;E-Jul 26/14)",
+      "reason": "Schedule map plate in the Halifax Mainland Land Use By-law that should be reproduced in QGIS and stored as a PostGIS site-specific area geometry for zoning rule linkage.",
+      "planned_postgis_target": "spatial_features.geom",
+      "section_label_raw": "SCHEDULES",
+      "schedule_file": "schedules/zm-26.json",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "zm-27-348-purcells-cove-road",
+      "feature_class": "site_specific_plan_area",
+      "source_document_page": 179,
+      "source_label_raw": "ZM-27: 348 Purcells Cove Road (RC-Aug 2/16;E-Sep 3/16)",
+      "reason": "Schedule map plate in the Halifax Mainland Land Use By-law that should be reproduced in QGIS and stored as a PostGIS site-specific area geometry for zoning rule linkage.",
+      "planned_postgis_target": "spatial_features.geom",
+      "section_label_raw": "SCHEDULES",
+      "schedule_file": "schedules/zm-27.json",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "zm-28-plan-dutch-village-road-overview-map",
+      "feature_class": "site_specific_plan_area",
+      "source_document_page": 180,
+      "source_label_raw": "ZM-28: Plan Dutch Village Road Overview Map (RC-Feb 12/19; E-Apr 13/19) (RC-Apr 4/23;E-May 19/23) (RC-May 23/24;E-Jun 13/24) (RC-May 23/24;E-Jun 13/24) (RC-Dec 11/25;E-Feb 2/26)",
+      "reason": "Schedule map plate in the Halifax Mainland Land Use By-law that should be reproduced in QGIS and stored as a PostGIS site-specific area geometry for zoning rule linkage.",
+      "planned_postgis_target": "spatial_features.geom",
+      "section_label_raw": "SCHEDULES",
+      "schedule_file": "schedules/zm-28.json",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "zm-29-plan-dutch-village-road-buildings-may-exceed-maximum-building-depth-map",
+      "feature_class": "building_depth_exception_area",
+      "source_document_page": 181,
+      "source_label_raw": "ZM-29: Plan Dutch Village Road Buildings May Exceed Maximum Building Depth Map (RC-Oct 4/16;E-Nov 26/16) (RC-Apr 4/23;E-May 19/23) (RC-May 23/24;E-Jun 13/24) (RC-May 23/24;E-Jun 13/24)",
+      "reason": "Schedule map plate in the Halifax Mainland Land Use By-law that should be reproduced in QGIS and stored as a PostGIS building-depth exception geometry for zoning rule linkage.",
+      "planned_postgis_target": "spatial_features.geom",
+      "section_label_raw": "SCHEDULES",
+      "schedule_file": "schedules/zm-29.json",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "zm-30-plan-dutch-village-road-area-exempt-from-front-yard-setback-map",
+      "feature_class": "front_yard_setback_exception_area",
+      "source_document_page": 182,
+      "source_label_raw": "ZM-30: Plan Dutch Village Road Area Exempt from Front Yard Setback Map (RC-Feb 12/19; E-Apr 13/19) (RC-May 23/24;E-Jun 13/24) (RC-May 23/24;E-Jun 13/24)",
+      "reason": "Schedule map plate in the Halifax Mainland Land Use By-law that should be reproduced in QGIS and stored as a PostGIS front-yard setback exception geometry for zoning rule linkage.",
+      "planned_postgis_target": "spatial_features.geom",
+      "section_label_raw": "SCHEDULES",
+      "schedule_file": "schedules/zm-30.json",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "zm-31-plan-dutch-village-road-street-wall-height-map",
+      "feature_class": "streetwall_height_area",
+      "source_document_page": 183,
+      "source_label_raw": "ZM-31: Plan Dutch Village Road Street Wall Height Map (RC-Feb 12/19; E-Apr 13/19) (RC-Jul 7/20;E-Aug 22/20) (RC-Apr 4/23;E-May 19/23) (RC-May 23/24;E-Jun 13/24) (RC-May 23/24;E-Jun 13/24) (RC-Dec 11/25;E-Feb 2/26)",
+      "reason": "Schedule map plate in the Halifax Mainland Land Use By-law that should be reproduced in QGIS and stored as a PostGIS streetwall-height geometry for zoning rule linkage.",
+      "planned_postgis_target": "spatial_features.geom",
+      "section_label_raw": "SCHEDULES",
+      "schedule_file": "schedules/zm-31.json",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "zm-32-plan-dutch-village-road-height-map",
+      "feature_class": "maximum_height_area",
+      "source_document_page": 184,
+      "source_label_raw": "ZM-32: Plan Dutch Village Road Height Map (RC-Feb 12/19; E-Apr 13/19) (RC-Apr 4/23;E-May 19/23) (RC-May 23/24;E-Jun 13/24) (RC-May 23/24;E-Jun 13/24) (RC-Mar 18/25; EFF Apr 23/25) (RC-Dec 11/25;E-Feb 2/26)",
+      "reason": "Schedule map plate in the Halifax Mainland Land Use By-law that should be reproduced in QGIS and stored as a PostGIS maximum-height geometry for zoning rule linkage.",
+      "planned_postgis_target": "spatial_features.geom",
+      "section_label_raw": "SCHEDULES",
+      "schedule_file": "schedules/zm-32.json",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "zm-33-parkmoor-ridge-subdivision",
+      "feature_class": "subdivision_plan_area",
+      "source_document_page": 185,
+      "source_label_raw": "ZM-33: Parkmoor Ridge Subdivision (RC-Sep 29-30/20; E-Dec 05/20)",
+      "reason": "Schedule map plate in the Halifax Mainland Land Use By-law that should be reproduced in QGIS and stored as a PostGIS subdivision-plan geometry for zoning rule linkage.",
+      "planned_postgis_target": "spatial_features.geom",
+      "section_label_raw": "SCHEDULES",
+      "schedule_file": "schedules/zm-33.json",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "zm-34-maximum-height-in-the-dubrack-multi-unit-zone",
+      "feature_class": "maximum_height_area",
+      "source_document_page": 186,
+      "source_label_raw": "ZM-34: Maximum Height in the Dubrack Multi Unit Zone (RC-Feb 23/21; E-Mar 8/21) (RC-Dec 11/25;E-Feb 2/26)",
+      "reason": "Schedule map plate in the Halifax Mainland Land Use By-law that should be reproduced in QGIS and stored as a PostGIS maximum-height geometry for zoning rule linkage.",
+      "planned_postgis_target": "spatial_features.geom",
+      "section_label_raw": "SCHEDULES",
+      "schedule_file": "schedules/zm-34.json",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "zm-35-kearney-lake-area",
+      "feature_class": "water_service_exception_area",
+      "source_document_page": 187,
+      "source_label_raw": "ZM-35: Kearney Lake Area (HWCC-Mar 27/23;E-Apr 12/23)",
+      "reason": "Schedule map plate in the Halifax Mainland Land Use By-law that should be reproduced in QGIS and stored as a PostGIS water-service exception geometry for zoning rule linkage.",
+      "planned_postgis_target": "spatial_features.geom",
+      "section_label_raw": "SCHEDULES",
+      "schedule_file": "schedules/zm-35.json",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "zm-36-section-14a-water-sewer-exception-purcells-cove",
+      "feature_class": "water_service_exception_area",
+      "source_document_page": 188,
+      "source_label_raw": "ZM-36: Section 14A Water/Sewer Exception Purcell's Cove (RC-Dec 11/25;E-Feb 2/26)",
+      "reason": "Schedule map plate in the Halifax Mainland Land Use By-law that should be reproduced in QGIS and stored as a PostGIS water-service exception geometry for zoning rule linkage.",
+      "planned_postgis_target": "spatial_features.geom",
+      "section_label_raw": "SCHEDULES",
+      "schedule_file": "schedules/zm-36.json",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "schedule-a-lands-subject-to-interim-bonus-zoning-requirements",
+      "feature_class": "bonus_zoning_applicability_area",
+      "source_document_page": 189,
+      "source_label_raw": "Schedule A: Lands Subject to Interim Bonus Zoning Requirements (RC-Mar 21/23;E-Apr 19/23) (RC-Mar 18/25;E-Apr 23/25)",
+      "reason": "Schedule map plate in the Halifax Mainland Land Use By-law that should be reproduced in QGIS and stored as a PostGIS bonus-zoning applicability geometry for later permit and plan-amendment linkage.",
+      "planned_postgis_target": "spatial_features.geom",
+      "section_label_raw": "SCHEDULES",
+      "schedule_file": "schedules/schedule-a.json",
+      "source_type": "manual_or_vector_digitization_backlog"
+    }
+  ]
+}
