@@ -445,26 +445,62 @@ def parse_section_content(spec: SectionSpec, rows: list[dict]) -> dict:
 
     current_context: list[dict] = []
     current_record: dict | None = None
+    current_topic: dict | None = None
+    topic_index = 0
     objective_index = 0
     policy_index = 0
+
+    def topic_ref() -> dict | None:
+        if not current_topic:
+            return None
+        return {
+            "topic_index": current_topic["topic_index"],
+            "topic_label_raw": current_topic["topic_label_raw"],
+        }
 
     def flush_context() -> None:
         nonlocal current_context
         if not current_context:
             return
+        block = {
+            "block_type": "narrative_context",
+            "text": compact_space(" ".join(item["text"] for item in current_context)),
+            "citations": {
+                "pdf_page_start": current_context[0]["pdf_page"],
+                "pdf_page_end": current_context[-1]["pdf_page"],
+                "mps_page_start": current_context[0]["mps_page"],
+                "mps_page_end": current_context[-1]["mps_page"],
+            },
+        }
+        if topic_ref():
+            block.update(topic_ref())
+        context_blocks.append(block)
+        current_context = []
+
+    def set_topic(row: dict) -> None:
+        nonlocal current_topic, topic_index
+        flush_context()
+        if current_record:
+            flush_record()
+        topic_index += 1
+        current_topic = {
+            "topic_index": topic_index,
+            "topic_label_raw": row["text"],
+        }
         context_blocks.append(
             {
-                "block_type": "narrative_context",
-                "text": compact_space(" ".join(item["text"] for item in current_context)),
+                "block_type": "topic_heading",
+                "topic_index": topic_index,
+                "topic_label_raw": row["text"],
+                "text": row["text"],
                 "citations": {
-                    "pdf_page_start": current_context[0]["pdf_page"],
-                    "pdf_page_end": current_context[-1]["pdf_page"],
-                    "mps_page_start": current_context[0]["mps_page"],
-                    "mps_page_end": current_context[-1]["mps_page"],
+                    "pdf_page_start": row["pdf_page"],
+                    "pdf_page_end": row["pdf_page"],
+                    "mps_page_start": row["mps_page"],
+                    "mps_page_end": row["mps_page"],
                 },
             }
         )
-        current_context = []
 
     def flush_record() -> None:
         nonlocal current_record, objective_index, policy_index
@@ -486,6 +522,8 @@ def parse_section_content(spec: SectionSpec, rows: list[dict]) -> dict:
                 "status": "active",
                 "citations": citations,
             }
+            if topic_ref():
+                objective.update(topic_ref())
             objectives.append(objective)
         else:
             policy_index += 1
@@ -501,6 +539,8 @@ def parse_section_content(spec: SectionSpec, rows: list[dict]) -> dict:
                 "text": text,
                 "citations": citations,
             }
+            if topic_ref():
+                policy.update(topic_ref())
             policies.append(policy)
             seen_subclauses: set[tuple[str, str]] = set()
             for line in current_record["lines"]:
@@ -526,22 +566,25 @@ def parse_section_content(spec: SectionSpec, rows: list[dict]) -> dict:
                         },
                     }
                 )
+                if topic_ref():
+                    policy_subclauses[-1].update(topic_ref())
             for clause_label_raw, clause_text in extract_inline_subclauses(text):
                 key = (clause_label_raw, clause_text)
                 if key in seen_subclauses:
                     continue
                 seen_subclauses.add(key)
-                policy_subclauses.append(
-                    {
-                        "parent_policy_label_raw": current_record["label_raw"],
-                        "clause_label_raw": clause_label_raw,
-                        "normalized_path": None,
-                        "normalization_status": "pending_review_mps_dotted_identifier",
-                        "text": clause_text,
-                        "modality": extract_modality(clause_text),
-                        "citations": citations,
-                    }
-                )
+                inline_clause = {
+                    "parent_policy_label_raw": current_record["label_raw"],
+                    "clause_label_raw": clause_label_raw,
+                    "normalized_path": None,
+                    "normalization_status": "pending_review_mps_dotted_identifier",
+                    "text": clause_text,
+                    "modality": extract_modality(clause_text),
+                    "citations": citations,
+                }
+                if topic_ref():
+                    inline_clause.update(topic_ref())
+                policy_subclauses.append(inline_clause)
         current_record = None
 
     for index, row in enumerate(rows):
@@ -579,9 +622,7 @@ def parse_section_content(spec: SectionSpec, rows: list[dict]) -> dict:
             current_context.append(row)
             continue
         if TOPIC_HEADING_RE.match(text):
-            if current_record:
-                flush_record()
-            current_context.append(row)
+            set_topic(row)
             continue
         if looks_like_title_heading(text):
             if current_record:
