@@ -6,7 +6,8 @@
         "-y",
         "@modelcontextprotocol/server-postgres",
         "postgresql://mdopendata:mdopendata_dev@127.0.0.1:54329/mdopendata?sslmode=disable"
-      ]
+      ],
+      "approval": "never"
     },
     "qgis": {
       "command": "powershell",
@@ -15,7 +16,8 @@
         "Bypass",
         "-File",
         "D:\\opendata\\mdopendata\\scripts\\start-qgis-mcp.ps1"
-      ]
+      ],
+      "approval": "never"
     }
   }
 }

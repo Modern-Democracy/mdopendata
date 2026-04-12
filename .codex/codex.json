@@ -1,0 +1,26 @@
+{
+  "workspace": {
+    "write": "allow",
+    "execute": "allow",
+    "paths": [
+      "./",
+      "./data",
+      "./scripts"
+    ]
+  },
+  "tools": {
+    "shell": {
+      "approval": "never",
+      "cwd": "/workspace",
+      "allowedCommands": [
+        "python",
+        "node",
+        "npm",
+        "pip",
+        "bash",
+        "make",
+        "pytest"
+      ]
+    }
+  }
+}
