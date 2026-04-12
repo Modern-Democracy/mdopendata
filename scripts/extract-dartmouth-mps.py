@@ -1,0 +1,893 @@
+from __future__ import annotations
+
+import json
+import re
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Iterable
+
+from pypdf import PdfReader
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SOURCE_PDF = ROOT / "docs" / "dartmouth-municipal-planning-strategy.pdf"
+OUTPUT_ROOT = ROOT / "data" / "municipal-planning-strategy" / "dartmouth"
+SECTION_DIR = OUTPUT_ROOT / "sections"
+PDF_TO_MPS_PAGE_OFFSET = 10
+
+
+@dataclass(frozen=True)
+class SectionSpec:
+    slug: str
+    section_label_raw: str
+    title_label_raw: str
+    pdf_page_start: int
+    pdf_page_end: int
+    section_type: str
+    status: str = "active"
+
+
+SECTION_SPECS = [
+    SectionSpec("introduction", "INTRODUCTION", "INTRODUCTION", 11, 15, "introduction"),
+    SectionSpec(
+        "population-projections-and-analysis-1976-1996",
+        "POPULATION PROJECTIONS & ANALYSIS 1976 - 1996",
+        "POPULATION PROJECTIONS & ANALYSIS 1976 - 1996",
+        16,
+        24,
+        "citywide",
+    ),
+    SectionSpec(
+        "directions-for-growth",
+        "DIRECTIONS FOR GROWTH",
+        "DIRECTIONS FOR GROWTH",
+        25,
+        32,
+        "citywide",
+    ),
+    SectionSpec("housing", "HOUSING", "HOUSING", 33, 66, "citywide"),
+    SectionSpec(
+        "pinecrest-highfield-park-secondary-planning-strategy",
+        "PINECREST - HIGHFIELD PARK SECONDARY PLANNING STRATEGY",
+        "PINECREST - HIGHFIELD PARK SECONDARY PLANNING STRATEGY",
+        67,
+        67,
+        "repealed_section",
+        "repealed",
+    ),
+    SectionSpec(
+        "port-wallace-secondary-planning-strategy",
+        "PORT WALLACE SECONDARY PLANNING STRATEGY",
+        "PORT WALLACE SECONDARY PLANNING STRATEGY",
+        68,
+        78,
+        "secondary_planning_strategy",
+    ),
+    SectionSpec("commercial", "COMMERCIAL", "COMMERCIAL", 79, 108, "citywide"),
+    SectionSpec("industrial", "INDUSTRIAL", "INDUSTRIAL", 109, 127, "citywide"),
+    SectionSpec("transportation", "TRANSPORTATION", "TRANSPORTATION", 128, 135, "citywide"),
+    SectionSpec(
+        "open-space-recreation-and-environment",
+        "OPEN SPACE RECREATION & ENVIRONMENT",
+        "OPEN SPACE RECREATION & ENVIRONMENT",
+        136,
+        144,
+        "citywide",
+    ),
+    SectionSpec(
+        "environmental-concerns",
+        "ENVIRONMENTAL CONCERNS",
+        "ENVIRONMENTAL CONCERNS",
+        145,
+        149,
+        "citywide",
+    ),
+    SectionSpec(
+        "downtown-please-refer-to-downtown-dartmouth-secondary-planning-strategy",
+        "DOWNTOWN - PLEASE REFER TO DOWNTOWN DARTMOUTH SECONDARY PLANNING STRATEGY",
+        "DOWNTOWN - PLEASE REFER TO DOWNTOWN DARTMOUTH SECONDARY PLANNING STRATEGY",
+        150,
+        150,
+        "repealed_section",
+        "repealed",
+    ),
+    SectionSpec(
+        "construction-and-demolition-waste-management-strategy",
+        "CONSTRUCTION AND DEMOLITION WASTE MANAGEMENT STRATEGY",
+        "CONSTRUCTION AND DEMOLITION WASTE MANAGEMENT STRATEGY",
+        151,
+        157,
+        "citywide",
+    ),
+    SectionSpec("implementation", "IMPLEMENTATION", "IMPLEMENTATION", 158, 175, "implementation"),
+    SectionSpec("bibliography", "BIBLIOGRAPHY", "BIBLIOGRAPHY", 176, 192, "appendix"),
+]
+
+
+MAP_FEATURE_CLASS_RULES = [
+    ("future_land_use_area", ["generalized future land use"]),
+    ("planning_area_boundary", ["planning areas", "area plan boundary", "study area"]),
+    ("site_specific_plan_area", ["overview map", "neighbourhood plan", "interchange node"]),
+    ("environmental_constraint_area", ["environmental sensitivity"]),
+    ("flood_plain_area", ["flood plain"]),
+    ("watershed_area", ["watershed"]),
+    ("transportation_corridor", ["principal streets", "street hierarchy", "transportation system"]),
+    ("development_sub_area", ["development areas", "development boundary"]),
+    ("municipal_service_area", ["water service", "sanitary sewer", "sewersheds"]),
+    ("community_concept_plan_area", ["community concept plan"]),
+    ("density_allocation_area", ["density allocations"]),
+]
+
+
+HEADING_PREFIXES = (
+    "SECTION ",
+    "Map ",
+    "Schedule ",
+    "Objective",
+    "Objectives",
+    "Policy ",
+)
+
+
+POLICY_LABEL_RE = re.compile(r"^((?:\d+[A-Z]?)(?:\.\d+[A-Z]?)*\.?[A-Z]?)[.)]?\s+(.*)$")
+POLICY_NAMED_RE = re.compile(
+    r"^(Policy\s+(?=[A-Z0-9/.-]*[A-Z])[A-Z0-9/.-]+(?:\([0-9A-Za-z.]+\))?(?:\s*-\s*[A-Z0-9]+)?)\s*:?\s*(.*)$"
+)
+POLICY_CODE_RE = re.compile(r"^([A-Z]{1,4}-\d+[A-Z]*(?:\([A-Za-z0-9.]+\))*)(?:\s+(.*))?$")
+INLINE_POLICY_CODE_RE = re.compile(r"([A-Z]{1,4}-\d+[A-Z]*(?:\([A-Za-z0-9.]+\))*)\s+")
+LIST_POLICY_RE = re.compile(r"^([0-9A-Z.,\sand()/-]+?)\s+[.-]\s+(Repealed.*|Deleted.*)$", re.IGNORECASE)
+SUBCLAUSE_RE = re.compile(r"^(-|\([A-Za-z0-9.]+\)|[A-Za-z0-9.]+\)|[0-9]+[.)])\s+(.*)$")
+MAP_CAPTION_RE = re.compile(r"^(Map|Schedule)\s+[A-Za-z0-9() -]+\s*:|^MAP\s+[A-Za-z0-9() -]+\s*:")
+TOPIC_HEADING_RE = re.compile(r"^\d+[A-Z]?\.\s+[A-Z][A-Z0-9 ,&'()/.-]+$")
+UPPERCASE_HEADING_RE = re.compile(r"^[A-Z][A-Z0-9 /&,'()-.]+$")
+TITLE_HEADING_RE = re.compile(r"^(?:[A-Z][A-Za-z0-9'&/-]*)(?:\s+[A-Z][A-Za-z0-9'&/-]*){0,10}:?$")
+FOOTNOTE_START_RE = re.compile(r"^\d+\s+\d+\s+Report to Mayor Fitzgerald and Members of Halifax Regional Council\b")
+GENERIC_FOOTNOTE_START_RE = re.compile(r"^\d+\s{2,}[A-Z]")
+INLINE_SUBCLAUSE_RE = re.compile(r"(?:(?<=^)|(?<=\s)|(?<=;))(\([A-Za-z0-9.]+\)|[A-Za-z0-9.]+\)|[0-9]+[.)])\s+")
+
+
+def slugify(value: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+    return re.sub(r"-{2,}", "-", slug)
+
+
+def compact_space(value: str) -> str:
+    return re.sub(r"\s+", " ", value).strip()
+
+
+def normalize_line(value: str) -> str:
+    cleaned = value.replace("\u2013", "-").replace("\u2014", "-").replace("\u2019", "'")
+    cleaned = cleaned.replace("\u00a0", " ")
+    return cleaned.rstrip()
+
+
+def canonicalize_section_label(value: str) -> str:
+    return compact_space(normalize_line(value)).replace("&", "AND")
+
+
+def split_embedded_policy_code_lines(line: str) -> list[str]:
+    starts: list[int] = []
+    for match in INLINE_POLICY_CODE_RE.finditer(line):
+        prefix = line[max(0, match.start() - 10) : match.start()]
+        if prefix.endswith(("Map ", "MAP ", "Policy ", "Policies ")):
+            continue
+        if match.start() != 0:
+            prev = line[match.start() - 1]
+            if prev not in {" ", ";", ":"}:
+                continue
+        starts.append(match.start())
+    if not starts:
+        return [line]
+    segments: list[str] = []
+    if starts[0] > 0:
+        prefix = compact_space(line[: starts[0]])
+        if prefix:
+            segments.append(prefix)
+    for index, start in enumerate(starts):
+        end = starts[index + 1] if index + 1 < len(starts) else len(line)
+        segment = compact_space(line[start:end])
+        if segment:
+            segments.append(segment)
+    return segments
+
+
+def mps_page_from_pdf_page(pdf_page: int) -> int | None:
+    if pdf_page <= PDF_TO_MPS_PAGE_OFFSET:
+        return None
+    return pdf_page - PDF_TO_MPS_PAGE_OFFSET
+
+
+def extract_lines(reader: PdfReader) -> list[dict]:
+    rows: list[dict] = []
+    for pdf_page, page in enumerate(reader.pages, start=1):
+        raw_text = page.extract_text() or ""
+        skip_footnote = False
+        for raw_line in raw_text.splitlines():
+            line = normalize_line(raw_line).strip()
+            if not line:
+                continue
+            if re.match(r"^[A-Za-z ]+Municipal Planning Strategy\s+Page \d+$", line):
+                continue
+            if re.fullmatch(r"Page \d+", line):
+                continue
+            if skip_footnote:
+                if line.startswith("Dated ") or " Dated " in line or re.search(r"\b\d{4}\.$", line):
+                    skip_footnote = False
+                continue
+            if FOOTNOTE_START_RE.match(line) or GENERIC_FOOTNOTE_START_RE.match(line):
+                skip_footnote = True
+                continue
+            for segment in split_embedded_policy_code_lines(line):
+                rows.append(
+                    {
+                        "pdf_page": pdf_page,
+                        "mps_page": mps_page_from_pdf_page(pdf_page),
+                        "text": segment,
+                    }
+                )
+    return rows
+
+
+def section_rows(lines: list[dict], spec: SectionSpec) -> list[dict]:
+    return [row for row in lines if spec.pdf_page_start <= row["pdf_page"] <= spec.pdf_page_end]
+
+
+def classify_policy_type(section_type: str, text: str) -> str:
+    normalized = text.lower()
+    if "repealed" in normalized:
+        return "repealed"
+    if "deleted" in normalized:
+        return "deleted"
+    if section_type == "implementation":
+        return "implementation_policy"
+    if "generalized future land use map" in normalized or "map " in normalized:
+        return "map_interpretation_policy"
+    if "designation" in normalized or "designated" in normalized:
+        return "designation_policy"
+    if "development agreement" in normalized and "shall consider" in normalized:
+        return "development_agreement_criteria"
+    return "policy_statement"
+
+
+def extract_modality(text: str) -> str | None:
+    normalized = text.lower()
+    for token in ("shall", "should", "may"):
+        if re.search(rf"\b{token}\b", normalized):
+            return token
+    return None
+
+
+def feature_class_for_label(label: str) -> str:
+    normalized = label.lower()
+    for feature_class, needles in MAP_FEATURE_CLASS_RULES:
+        if any(needle in normalized for needle in needles):
+            return feature_class
+    return "policy_map_reference"
+
+
+def has_modality_or_status(text: str) -> bool:
+    normalized = text.lower()
+    return any(token in normalized for token in (" shall ", " should ", " may ", "repealed", "deleted"))
+
+
+def looks_like_table_row(body: str) -> bool:
+    compact = compact_space(body)
+    if len(compact) > 60:
+        return False
+    if has_modality_or_status(f" {compact} "):
+        return False
+    return bool(re.fullmatch(r"[A-Z][A-Za-z /-]*\d+", compact))
+
+
+def looks_like_title_heading(text: str) -> bool:
+    compact = compact_space(text)
+    if len(compact) > 90 or not TITLE_HEADING_RE.match(compact):
+        return False
+    if has_modality_or_status(f" {compact.lower()} "):
+        return False
+    return True
+
+
+def is_reference_continuation(body: str) -> bool:
+    compact = compact_space(body)
+    return bool(re.match(r"^(and|or)\b", compact.lower()))
+
+
+def is_short_noun_phrase(body: str) -> bool:
+    compact = compact_space(body).rstrip(".:;")
+    if not compact or len(compact.split()) > 5 or has_modality_or_status(f" {compact.lower()} "):
+        return False
+    return compact == compact.title() or looks_like_title_heading(compact)
+
+
+def should_promote_short_heading(label: str, body: str, next_text: str | None) -> bool:
+    if "." in label or not next_text:
+        return False
+    if not (looks_like_title_heading(body) or is_short_noun_phrase(body)):
+        return False
+    next_compact = compact_space(next_text)
+    if next_compact.startswith("-"):
+        return True
+    return bool(SUBCLAUSE_RE.match(next_compact))
+
+
+def extract_inline_subclauses(text: str) -> list[tuple[str, str]]:
+    matches = list(INLINE_SUBCLAUSE_RE.finditer(text))
+    subclauses: list[tuple[str, str]] = []
+    for index, match in enumerate(matches):
+        label = match.group(1)
+        start = match.end()
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
+        clause_text = compact_space(text[start:end].strip(" ;"))
+        if clause_text:
+            subclauses.append((label, clause_text))
+    return subclauses
+
+
+def should_start_new_policy(label: str, body: str, current_record: dict | None, next_text: str | None) -> bool:
+    compact = compact_space(body)
+    dotted = "." in label
+    if current_record and is_reference_continuation(compact):
+        return False
+    if current_record:
+        if not dotted and should_promote_short_heading(label, compact, next_text):
+            return True
+        if not dotted and (looks_like_table_row(compact) or looks_like_title_heading(compact)):
+            return False
+        if not dotted and current_record["label_raw"].startswith("Policy "):
+            return False
+        if not dotted and len(compact) < 80 and not has_modality_or_status(f" {compact.lower()} "):
+            return False
+    else:
+        if not dotted and looks_like_title_heading(compact) and not should_promote_short_heading(label, compact, next_text):
+            return False
+        if not dotted and is_short_noun_phrase(compact) and not should_promote_short_heading(label, compact, next_text):
+            return False
+    return True
+
+
+def planned_postgis_target(feature_class: str) -> str:
+    if feature_class.endswith("_area") or feature_class.endswith("_boundary") or feature_class in {
+        "development_sub_area",
+        "community_concept_plan_area",
+        "density_allocation_area",
+    }:
+        return "spatial_features.geom"
+    if feature_class == "transportation_corridor":
+        return "spatial_features.geom"
+    return "spatial_features.attributes"
+
+
+def gather_map_refs(lines: Iterable[dict], section_slug: str | None = None) -> list[dict]:
+    refs: list[dict] = []
+    seen: set[tuple[str, int]] = set()
+    for row in lines:
+        text = row["text"]
+        if not MAP_CAPTION_RE.match(text):
+            continue
+        key = (text, row["pdf_page"])
+        if key in seen:
+            continue
+        seen.add(key)
+        ref_type = "map" if text.startswith(("Map ", "MAP ")) else "schedule"
+        refs.append(
+            {
+                "reference_type": ref_type,
+                "source_label_raw": text,
+                "feature_key": slugify(text),
+                "feature_class": feature_class_for_label(text),
+                "pdf_page_start": row["pdf_page"],
+                "pdf_page_end": row["pdf_page"],
+                "mps_page_start": row["mps_page"],
+                "mps_page_end": row["mps_page"],
+                "planned_postgis_target": planned_postgis_target(feature_class_for_label(text)),
+                "section_slug": section_slug,
+            }
+        )
+    return refs
+
+
+def parse_section_content(spec: SectionSpec, rows: list[dict]) -> dict:
+    maps = gather_map_refs(rows, spec.slug)
+    objectives: list[dict] = []
+    policies: list[dict] = []
+    policy_subclauses: list[dict] = []
+    context_blocks: list[dict] = []
+    open_issues: list[dict] = []
+
+    if spec.section_type == "appendix":
+        context_text = compact_space(" ".join(row["text"] for row in rows))
+        if context_text:
+            context_blocks.append(
+                {
+                    "block_type": "narrative_context",
+                    "text": context_text,
+                    "citations": {
+                        "pdf_page_start": spec.pdf_page_start,
+                        "pdf_page_end": spec.pdf_page_end,
+                        "mps_page_start": mps_page_from_pdf_page(spec.pdf_page_start),
+                        "mps_page_end": mps_page_from_pdf_page(spec.pdf_page_end),
+                    },
+                }
+            )
+        return {
+            "context_blocks": context_blocks,
+            "objectives": objectives,
+            "policies": policies,
+            "policy_subclauses": policy_subclauses,
+            "map_references": [ref for ref in maps if ref["reference_type"] == "map"],
+            "schedule_references": [ref for ref in maps if ref["reference_type"] == "schedule"],
+            "spatial_features_needed": spatial_backlog_entries(maps, spec),
+            "open_issues": open_issues,
+            "citations": {
+                "pdf_page_start": spec.pdf_page_start,
+                "pdf_page_end": spec.pdf_page_end,
+                "mps_page_start": mps_page_from_pdf_page(spec.pdf_page_start),
+                "mps_page_end": mps_page_from_pdf_page(spec.pdf_page_end),
+            },
+        }
+
+    if spec.status != "active" and spec.section_type == "repealed_section":
+        text = " ".join(row["text"] for row in rows)
+        context_blocks.append(
+            {
+                "block_type": "section_status",
+                "text": compact_space(text),
+                "citations": {
+                    "pdf_page_start": spec.pdf_page_start,
+                    "pdf_page_end": spec.pdf_page_end,
+                    "mps_page_start": mps_page_from_pdf_page(spec.pdf_page_start),
+                    "mps_page_end": mps_page_from_pdf_page(spec.pdf_page_end),
+                },
+            }
+        )
+        return {
+            "context_blocks": context_blocks,
+            "objectives": objectives,
+            "policies": policies,
+            "policy_subclauses": policy_subclauses,
+            "map_references": [ref for ref in maps if ref["reference_type"] == "map"],
+            "schedule_references": [ref for ref in maps if ref["reference_type"] == "schedule"],
+            "spatial_features_needed": spatial_backlog_entries(maps, spec),
+            "open_issues": open_issues,
+            "citations": {
+                "pdf_page_start": spec.pdf_page_start,
+                "pdf_page_end": spec.pdf_page_end,
+                "mps_page_start": mps_page_from_pdf_page(spec.pdf_page_start),
+                "mps_page_end": mps_page_from_pdf_page(spec.pdf_page_end),
+            },
+        }
+
+    current_context: list[dict] = []
+    current_record: dict | None = None
+    current_topic: dict | None = None
+    topic_index = 0
+    objective_index = 0
+    policy_index = 0
+    section_label_canonical = canonicalize_section_label(spec.section_label_raw)
+    title_label_canonical = canonicalize_section_label(spec.title_label_raw)
+
+    def topic_ref() -> dict | None:
+        if not current_topic:
+            return None
+        return {
+            "topic_index": current_topic["topic_index"],
+            "topic_label_raw": current_topic["topic_label_raw"],
+        }
+
+    def flush_context() -> None:
+        nonlocal current_context
+        if not current_context:
+            return
+        block = {
+            "block_type": "narrative_context",
+            "text": compact_space(" ".join(item["text"] for item in current_context)),
+            "citations": {
+                "pdf_page_start": current_context[0]["pdf_page"],
+                "pdf_page_end": current_context[-1]["pdf_page"],
+                "mps_page_start": current_context[0]["mps_page"],
+                "mps_page_end": current_context[-1]["mps_page"],
+            },
+        }
+        if topic_ref():
+            block.update(topic_ref())
+        context_blocks.append(block)
+        current_context = []
+
+    def set_topic(row: dict) -> None:
+        nonlocal current_topic, topic_index
+        flush_context()
+        if current_record:
+            flush_record()
+        topic_index += 1
+        current_topic = {
+            "topic_index": topic_index,
+            "topic_label_raw": row["text"],
+        }
+        context_blocks.append(
+            {
+                "block_type": "topic_heading",
+                "topic_index": topic_index,
+                "topic_label_raw": row["text"],
+                "text": row["text"],
+                "citations": {
+                    "pdf_page_start": row["pdf_page"],
+                    "pdf_page_end": row["pdf_page"],
+                    "mps_page_start": row["mps_page"],
+                    "mps_page_end": row["mps_page"],
+                },
+            }
+        )
+
+    def flush_record() -> None:
+        nonlocal current_record, objective_index, policy_index
+        if not current_record:
+            return
+        text = compact_space(" ".join(line["text"] for line in current_record["lines"]))
+        citations = {
+            "pdf_page_start": current_record["lines"][0]["pdf_page"],
+            "pdf_page_end": current_record["lines"][-1]["pdf_page"],
+            "mps_page_start": current_record["lines"][0]["mps_page"],
+            "mps_page_end": current_record["lines"][-1]["mps_page"],
+        }
+        if current_record["record_kind"] == "objective":
+            objective_index += 1
+            objective = {
+                "objective_index": objective_index,
+                "objective_label_raw": current_record["label_raw"],
+                "text": text,
+                "status": "active",
+                "citations": citations,
+            }
+            if topic_ref():
+                objective.update(topic_ref())
+            objectives.append(objective)
+        else:
+            policy_index += 1
+            policy_type = classify_policy_type(spec.section_type, text)
+            policy = {
+                "policy_index": policy_index,
+                "policy_label_raw": current_record["label_raw"],
+                "normalized_path": None,
+                "normalization_status": "pending_review_mps_dotted_identifier",
+                "policy_type": policy_type,
+                "status": "active" if policy_type not in {"repealed", "deleted"} else policy_type,
+                "modality": extract_modality(text),
+                "text": text,
+                "citations": citations,
+            }
+            if topic_ref():
+                policy.update(topic_ref())
+            policies.append(policy)
+            seen_subclauses: set[tuple[str, str]] = set()
+            for line in current_record["lines"]:
+                match = SUBCLAUSE_RE.match(line["text"])
+                if not match:
+                    continue
+                clause_label_raw = match.group(1)
+                clause_text = match.group(2)
+                seen_subclauses.add((clause_label_raw, compact_space(clause_text)))
+                policy_subclauses.append(
+                    {
+                        "parent_policy_label_raw": current_record["label_raw"],
+                        "clause_label_raw": clause_label_raw,
+                        "normalized_path": None,
+                        "normalization_status": "pending_review_mps_dotted_identifier",
+                        "text": compact_space(clause_text),
+                        "modality": extract_modality(clause_text),
+                        "citations": {
+                            "pdf_page_start": line["pdf_page"],
+                            "pdf_page_end": line["pdf_page"],
+                            "mps_page_start": line["mps_page"],
+                            "mps_page_end": line["mps_page"],
+                        },
+                    }
+                )
+                if topic_ref():
+                    policy_subclauses[-1].update(topic_ref())
+            for clause_label_raw, clause_text in extract_inline_subclauses(text):
+                key = (clause_label_raw, clause_text)
+                if key in seen_subclauses:
+                    continue
+                seen_subclauses.add(key)
+                inline_clause = {
+                    "parent_policy_label_raw": current_record["label_raw"],
+                    "clause_label_raw": clause_label_raw,
+                    "normalized_path": None,
+                    "normalization_status": "pending_review_mps_dotted_identifier",
+                    "text": clause_text,
+                    "modality": extract_modality(clause_text),
+                    "citations": citations,
+                }
+                if topic_ref():
+                    inline_clause.update(topic_ref())
+                policy_subclauses.append(inline_clause)
+        current_record = None
+
+    for index, row in enumerate(rows):
+        text = row["text"]
+        next_text = rows[index + 1]["text"] if index + 1 < len(rows) else None
+        canonical_text = canonicalize_section_label(text)
+        if MAP_CAPTION_RE.match(text):
+            if current_record:
+                flush_record()
+            current_context.append(row)
+            continue
+        if text.startswith("SECTION ") and text != spec.section_label_raw and spec.section_type != "repealed_section":
+            if current_record:
+                flush_record()
+            continue
+        if canonical_text == section_label_canonical or canonical_text == title_label_canonical:
+            current_context.append(row)
+            continue
+        if POLICY_NAMED_RE.match(text):
+            flush_context()
+            flush_record()
+            match = POLICY_NAMED_RE.match(text)
+            assert match is not None
+            label = match.group(1)
+            rest = match.group(2).strip()
+            lines = [{**row, "text": rest}] if rest else [{**row, "text": ""}]
+            current_record = {"record_kind": "policy", "label_raw": label, "lines": lines}
+            continue
+        if POLICY_CODE_RE.match(text):
+            flush_context()
+            flush_record()
+            match = POLICY_CODE_RE.match(text)
+            assert match is not None
+            label = match.group(1)
+            rest = (match.group(2) or "").strip()
+            lines = [{**row, "text": rest}] if rest else [{**row, "text": ""}]
+            current_record = {"record_kind": "policy", "label_raw": label, "lines": lines}
+            continue
+        if (
+            UPPERCASE_HEADING_RE.match(text)
+            and text not in {"OBJECTIVE", "OBJECTIVES"}
+            and len(text) <= 90
+        ):
+            if current_record:
+                flush_record()
+            current_context.append(row)
+            continue
+        if TOPIC_HEADING_RE.match(text):
+            set_topic(row)
+            continue
+        if looks_like_title_heading(text):
+            if current_record:
+                flush_record()
+            current_context.append(row)
+            continue
+        if text == "Policy Statements":
+            if current_record:
+                flush_record()
+            current_context.append(row)
+            continue
+        if text.startswith("Objective") or text.startswith("Objectives"):
+            flush_context()
+            flush_record()
+            current_record = {
+                "record_kind": "objective",
+                "label_raw": "Objective" if text.startswith("Objective") else "Objectives",
+                "lines": [row],
+            }
+            continue
+        if LIST_POLICY_RE.match(text):
+            flush_context()
+            flush_record()
+            match = LIST_POLICY_RE.match(text)
+            assert match is not None
+            current_record = {
+                "record_kind": "policy",
+                "label_raw": compact_space(match.group(1)),
+                "lines": [{**row, "text": match.group(2)}],
+            }
+            continue
+        match = POLICY_LABEL_RE.match(text)
+        if match and not text.startswith(("Map ", "MAP ")):
+            label = match.group(1).rstrip(".")
+            body = match.group(2)
+            if not should_start_new_policy(label, body, current_record, next_text):
+                if current_record:
+                    current_record["lines"].append(row)
+                else:
+                    current_context.append(row)
+                continue
+            flush_context()
+            flush_record()
+            current_record = {
+                "record_kind": "policy",
+                "label_raw": label,
+                "lines": [{**row, "text": body}],
+            }
+            continue
+        if current_record:
+            current_record["lines"].append(row)
+            continue
+        current_context.append(row)
+
+    flush_record()
+    flush_context()
+
+    for policy in policies:
+        if re.search(r"\b\d+[A-Z]?(?:\.\d+[A-Z]?)+\b", policy["policy_label_raw"]):
+            open_issues.append(
+                {
+                    "issue_type": "identifier_normalization_pending_review",
+                    "section_label_raw": spec.section_label_raw,
+                    "example_label_raw": policy["policy_label_raw"],
+                    "reason": "MPS dotted policy identifiers are preserved raw in v1.",
+                }
+            )
+            break
+
+    return {
+        "context_blocks": context_blocks,
+        "objectives": objectives,
+        "policies": policies,
+        "policy_subclauses": policy_subclauses,
+        "map_references": [ref for ref in maps if ref["reference_type"] == "map"],
+        "schedule_references": [ref for ref in maps if ref["reference_type"] == "schedule"],
+        "spatial_features_needed": spatial_backlog_entries(maps, spec),
+        "open_issues": open_issues,
+        "citations": {
+            "pdf_page_start": spec.pdf_page_start,
+            "pdf_page_end": spec.pdf_page_end,
+            "mps_page_start": mps_page_from_pdf_page(spec.pdf_page_start),
+            "mps_page_end": mps_page_from_pdf_page(spec.pdf_page_end),
+        },
+    }
+
+
+def spatial_backlog_entries(refs: list[dict], spec: SectionSpec) -> list[dict]:
+    entries = []
+    for ref in refs:
+        reason = (
+            "Referenced by the Dartmouth Municipal Planning Strategy and required for "
+            "later PostGIS linkage between policy text and mapped planning areas."
+        )
+        entries.append(
+            {
+                "feature_key": ref["feature_key"],
+                "feature_class": ref["feature_class"],
+                "source_document_page": ref["pdf_page_start"],
+                "source_label_raw": ref["source_label_raw"],
+                "reason": reason,
+                "planned_postgis_target": ref["planned_postgis_target"],
+                "section_label_raw": spec.section_label_raw,
+                "section_slug": spec.slug,
+                "source_type": "manual_or_vector_digitization_backlog",
+            }
+        )
+    return entries
+
+
+def section_payload(spec: SectionSpec, parsed: dict) -> dict:
+    return {
+        "section_metadata": {
+            "jurisdiction": "Halifax Regional Municipality",
+            "document_name": "Dartmouth Municipal Planning Strategy",
+            "source_document_path": str(SOURCE_PDF.relative_to(ROOT)).replace("\\", "/"),
+            "section_label_raw": spec.section_label_raw,
+            "title_label_raw": spec.title_label_raw,
+            "section_slug": spec.slug,
+            "section_type": spec.section_type,
+            "status": spec.status,
+            "pdf_page_start": spec.pdf_page_start,
+            "pdf_page_end": spec.pdf_page_end,
+            "mps_page_start": mps_page_from_pdf_page(spec.pdf_page_start),
+            "mps_page_end": mps_page_from_pdf_page(spec.pdf_page_end),
+        },
+        "normalization_policy": {
+            "policy_identifiers_preserved_raw": True,
+            "normalized_paths_applied": False,
+            "reason": "Dotted and mixed-format MPS policy identifiers have not been approved for hierarchy normalization in this repository context.",
+        },
+        **parsed,
+    }
+
+
+def document_payload(reader: PdfReader, sections: list[dict], maps: list[dict], backlog: list[dict]) -> dict:
+    return {
+        "document_metadata": {
+            "jurisdiction": "Halifax Regional Municipality",
+            "document_name": "Dartmouth Municipal Planning Strategy",
+            "source_document_path": str(SOURCE_PDF.relative_to(ROOT)).replace("\\", "/"),
+            "document_type": "official_plan_text",
+            "effective_through": "2026-02-02",
+            "page_count_pdf": len(reader.pages),
+            "mps_page_offset_from_pdf": PDF_TO_MPS_PAGE_OFFSET,
+            "metadata": {key.lstrip("/"): value for key, value in (reader.metadata or {}).items()},
+        },
+        "normalization_policy": {
+            "policy_identifiers_preserved_raw": True,
+            "normalized_paths_applied": False,
+            "status": "pending_review_mps_dotted_identifier",
+            "reason": "The repository has approved zoning clause normalization only. MPS dotted policy identifiers remain raw in v1.",
+        },
+        "ingestion_mapping": {
+            "document_json_to_documents": "documents",
+            "page_citations_to_document_pages": "document_pages",
+            "extracted_policy_text_to_text_spans": "text_spans",
+            "atomic_policy_controls_to_land_use_rules": "land_use_rules",
+            "citywide_or_area_specific_links_to_rule_applicability": "rule_applicability",
+            "digitized_map_features_to_spatial_features": "spatial_features",
+        },
+        "section_inventory": sections,
+        "map_reference_count": len(maps),
+        "spatial_feature_backlog_count": len(backlog),
+    }
+
+
+def write_json(path: Path, payload: dict | list) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2, ensure_ascii=True) + "\n", encoding="utf-8")
+
+
+def main() -> None:
+    reader = PdfReader(str(SOURCE_PDF))
+    lines = extract_lines(reader)
+
+    SECTION_DIR.mkdir(parents=True, exist_ok=True)
+
+    section_inventory = []
+    all_maps: list[dict] = []
+    all_backlog: list[dict] = []
+    all_open_issues: list[dict] = [
+        {
+            "issue_type": "identifier_normalization_pending_review",
+            "example_labels_raw": ["1.2.7", "2A.2.1", "2.12A", "2.1 (a)", "Policy I-1"],
+            "reason": "MPS dotted and mixed-format policy identifiers are not approved for normalized hierarchy handling in this repository.",
+        },
+        {
+            "issue_type": "table_of_contents_outline_absent",
+            "reason": "The PDF does not expose bookmark outline entries through PyPDF2, so section ranges are seeded from the text table of contents and page inspection.",
+        },
+    ]
+
+    for spec in SECTION_SPECS:
+        parsed = parse_section_content(spec, section_rows(lines, spec))
+        payload = section_payload(spec, parsed)
+        output_path = SECTION_DIR / f"{spec.slug}.json"
+        write_json(output_path, payload)
+        section_inventory.append(
+            {
+                "section_label_raw": spec.section_label_raw,
+                "title_label_raw": spec.title_label_raw,
+                "section_slug": spec.slug,
+                "section_type": spec.section_type,
+                "status": spec.status,
+                "pdf_page_start": spec.pdf_page_start,
+                "pdf_page_end": spec.pdf_page_end,
+                "mps_page_start": mps_page_from_pdf_page(spec.pdf_page_start),
+                "mps_page_end": mps_page_from_pdf_page(spec.pdf_page_end),
+                "section_file": f"sections/{spec.slug}.json",
+                "objective_count": len(payload["objectives"]),
+                "policy_count": len(payload["policies"]),
+                "policy_subclause_count": len(payload["policy_subclauses"]),
+            }
+        )
+        all_maps.extend(payload["map_references"])
+        all_maps.extend(payload["schedule_references"])
+        all_backlog.extend(payload["spatial_features_needed"])
+        all_open_issues.extend(payload["open_issues"])
+
+    map_payload = {
+        "document_name": "Dartmouth Municipal Planning Strategy",
+        "source_document_path": str(SOURCE_PDF.relative_to(ROOT)).replace("\\", "/"),
+        "references": all_maps,
+    }
+    spatial_payload = {
+        "document_name": "Dartmouth Municipal Planning Strategy",
+        "source_document_path": str(SOURCE_PDF.relative_to(ROOT)).replace("\\", "/"),
+        "spatial_features_needed": all_backlog,
+    }
+    document = document_payload(reader, section_inventory, all_maps, all_backlog)
+
+    write_json(OUTPUT_ROOT / "document.json", document)
+    write_json(OUTPUT_ROOT / "maps.json", map_payload)
+    write_json(OUTPUT_ROOT / "spatial-features-needed.json", spatial_payload)
+    write_json(OUTPUT_ROOT / "open-issues.json", {"open_issues": all_open_issues})
+
+
+if __name__ == "__main__":
+    main()
