@@ -161,3 +161,40 @@ CREATE TABLE IF NOT EXISTS hrm.zone_spatial_match (
 
 CREATE INDEX IF NOT EXISTS idx_hrm_zone_spatial_match_zone
   ON hrm.zone_spatial_match(zone_pk);
+
+CREATE TABLE IF NOT EXISTS hrm.geometry_registry (
+  geometry_registry_pk bigserial PRIMARY KEY,
+  source_schema text NOT NULL,
+  source_table text NOT NULL,
+  source_identifier text NOT NULL,
+  feature_class text,
+  feature_key text,
+  feature_name text,
+  bylaw_slug text,
+  jurisdiction text,
+  source_label_raw text,
+  match_method text,
+  confidence numeric,
+  status text NOT NULL DEFAULT 'active',
+  attributes jsonb NOT NULL DEFAULT '{}'::jsonb,
+  geom geometry(Geometry, 4326) NOT NULL,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  updated_at timestamptz NOT NULL DEFAULT now(),
+  CONSTRAINT uq_hrm_geometry_registry_source
+    UNIQUE (source_schema, source_table, source_identifier),
+  CONSTRAINT ck_hrm_geometry_registry_status
+    CHECK (status IN ('active', 'derived', 'backlog', 'retired'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_hrm_geometry_registry_geom
+  ON hrm.geometry_registry
+  USING gist (geom);
+
+CREATE INDEX IF NOT EXISTS idx_hrm_geometry_registry_class
+  ON hrm.geometry_registry(feature_class);
+
+CREATE INDEX IF NOT EXISTS idx_hrm_geometry_registry_bylaw_feature_key
+  ON hrm.geometry_registry(bylaw_slug, feature_key);
+
+CREATE INDEX IF NOT EXISTS idx_hrm_geometry_registry_source_lookup
+  ON hrm.geometry_registry(source_schema, source_table, source_identifier);
