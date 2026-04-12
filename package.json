@@ -10,6 +10,9 @@
     "db:down": "powershell -ExecutionPolicy Bypass -Command \"$env:DOCKER_CONFIG=(Join-Path (Get-Location) '.docker-local'); New-Item -ItemType Directory -Force $env:DOCKER_CONFIG | Out-Null; docker compose down\"",
     "db:logs": "powershell -ExecutionPolicy Bypass -Command \"$env:DOCKER_CONFIG=(Join-Path (Get-Location) '.docker-local'); New-Item -ItemType Directory -Force $env:DOCKER_CONFIG | Out-Null; docker compose logs postgis\"",
     "db:check": "powershell -ExecutionPolicy Bypass -Command \"$env:DOCKER_CONFIG=(Join-Path (Get-Location) '.docker-local'); New-Item -ItemType Directory -Force $env:DOCKER_CONFIG | Out-Null; $database=if($env:PGDATABASE){$env:PGDATABASE}else{'mdopendata'}; $user=if($env:PGUSER){$env:PGUSER}else{'mdopendata'}; docker exec mdopendata-postgis psql -U $user -d $database -c '\\dt'\"",
-    "db:apply-schema": "powershell -ExecutionPolicy Bypass -Command \"$env:DOCKER_CONFIG=(Join-Path (Get-Location) '.docker-local'); New-Item -ItemType Directory -Force $env:DOCKER_CONFIG | Out-Null; $database=if($env:PGDATABASE){$env:PGDATABASE}else{'mdopendata'}; $user=if($env:PGUSER){$env:PGUSER}else{'mdopendata'}; Get-Content (Join-Path (Get-Location) 'schema/postgis.sql') | docker exec -i mdopendata-postgis psql -U $user -d $database\""
+    "db:apply-schema": "powershell -ExecutionPolicy Bypass -Command \"$env:DOCKER_CONFIG=(Join-Path (Get-Location) '.docker-local'); New-Item -ItemType Directory -Force $env:DOCKER_CONFIG | Out-Null; $database=if($env:PGDATABASE){$env:PGDATABASE}else{'mdopendata'}; $user=if($env:PGUSER){$env:PGUSER}else{'mdopendata'}; Get-Content (Join-Path (Get-Location) 'schema/postgis.sql') | docker exec -i mdopendata-postgis psql -U $user -d $database\"",
+    "db:migrate": "powershell -ExecutionPolicy Bypass -Command \"& .\\scripts\\python.ps1 .\\scripts\\run-migrations.py\"",
+    "db:import:zoning": "powershell -ExecutionPolicy Bypass -Command \"& .\\scripts\\python.ps1 .\\scripts\\import-zoning.py\"",
+    "db:import:zoning:dry-run": "powershell -ExecutionPolicy Bypass -Command \"& .\\scripts\\python.ps1 .\\scripts\\import-zoning.py --dry-run\""
   }
 }
