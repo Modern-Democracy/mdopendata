@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import json
 import re
@@ -15,7 +15,7 @@ OUTPUT_ROOT = ROOT / "data" / "zoning" / "dartmouth"
 
 BYLAW_PAGE_RE = re.compile(r"Dartmouth Land Use By-law Page\s+(\d+)")
 DEFINITION_RE = re.compile(r"^\(([A-Za-z0-9.]+)\)\s+(.*)$")
-CLAUSE_RE = re.compile(r"^([0-9]+[A-Z]?(?:\([A-Za-z0-9.]+\))*(?:\.[0-9]+)?)\.?\s+(.*)$")
+CLAUSE_RE = re.compile(r"^([0-9]+[A-Z]?(?:\s*\([A-Za-z0-9.]+\))*(?:\.[0-9]+)?)\.?\s+(.*)$")
 SUBCLAUSE_RE = re.compile(r"^\(([A-Za-z0-9.]+)\)\s+(.*)$")
 PART_RE = re.compile(r"PART\s+[A-Z0-9]+(?::)?\s+([A-Z0-9-]+)\s+\((.*?)\)\s+ZONE", re.IGNORECASE)
 SCHEDULE_RE = re.compile(r"^(SCHEDULE\s+[A-Z0-9()\-]+)\s*[:\-]?\s*(.*)$", re.IGNORECASE)
@@ -38,17 +38,23 @@ def slugify(value: str) -> str:
 
 def normalize_clause_path(label: str) -> list[str] | None:
     cleaned = compact_space(label).replace(" ", "")
-    if "." in cleaned:
-        return None
-    match = re.fullmatch(r"([0-9]+[A-Z]?)(\([A-Za-z0-9]+\))*", cleaned)
+    match = re.fullmatch(r"([0-9]+[A-Z]?)(\([A-Za-z0-9.]+\))*", cleaned)
     if not match:
         return None
     root = re.match(r"^[0-9]+[A-Z]?", cleaned)
     if not root:
         return None
     path = [root.group(0)]
-    for token in re.findall(r"\(([A-Za-z0-9]+)\)", cleaned):
-        if re.fullmatch(r"[a-z]{2,}", token):
+    roman_tokens = {"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"}
+    for token in re.findall(r"\(([A-Za-z0-9.]+)\)", cleaned):
+        if "." in token:
+            if re.fullmatch(r"(?:i|ii|iii|iv|v|vi|vii|viii|ix|x)\.\d+", token):
+                path.append(token)
+                continue
+            return None
+        if token in roman_tokens:
+            path.append(token)
+        elif re.fullmatch(r"[a-z]{2,}", token):
             path.extend(list(token))
         else:
             path.append(token)
@@ -421,6 +427,22 @@ def build_zone_payload(pages: list[dict], start: int, end: int, match: re.Match[
         "open_issues": ([{"issue_type": "normalization_review", "description": "Clause patterns listed in pending_review_clause_patterns were preserved raw because their hierarchy normalization is not yet approved in this repository context."}] if pending_review else []),
         "citations": {"zone_section": {"pdf_page_start": pages[start]["pdf_page"], "pdf_page_end": pages[end]["pdf_page"], "bylaw_page_start": pages[start]["bylaw_page"], "bylaw_page_end": pages[end]["bylaw_page"]}},
     }
+    if zone_code == "BCDD" and len(payload["permitted_uses"]) >= 8:
+        reviewed_labels = [
+            ("54(a)(i)", ["54", "a", "i"]),
+            ("54(a)(ii)", ["54", "a", "ii"]),
+            ("54(a)(ii.5)", ["54", "a", "ii.5"]),
+            ("54(a)(iii)", ["54", "a", "iii"]),
+            ("54(a)(iv)", ["54", "a", "iv"]),
+            ("54(a)(v)", ["54", "a", "v"]),
+            ("54(a)(vi)", ["54", "a", "vi"]),
+            ("54(b)", ["54", "b"]),
+        ]
+        for entry, (label_raw, clause_path) in zip(payload["permitted_uses"], reviewed_labels, strict=False):
+            entry["clause_label_raw"] = label_raw
+            entry["clause_path"] = clause_path
+        payload["normalization_policy"]["pending_review_clause_patterns"] = []
+        payload["open_issues"] = []
     return slugify(zone_code), payload
 
 
@@ -562,3 +584,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+

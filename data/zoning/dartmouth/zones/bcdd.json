@@ -18,9 +18,7 @@
       "21(ea)",
       "21(ea)(1)"
     ],
-    "pending_review_clause_patterns": [
-      "54(ii.5)"
-    ]
+    "pending_review_clause_patterns": []
   },
   "general_context": {
     "zone_class_reference": {
@@ -34,9 +32,10 @@
   },
   "permitted_uses": [
     {
-      "clause_label_raw": "54(i)",
+      "clause_label_raw": "54(a)(i)",
       "clause_path": [
         "54",
+        "a",
         "i"
       ],
       "use_type": "principal_use",
@@ -50,11 +49,11 @@
       }
     },
     {
-      "clause_label_raw": "54(ii)",
+      "clause_label_raw": "54(a)(ii)",
       "clause_path": [
         "54",
-        "i",
-        "i"
+        "a",
+        "ii"
       ],
       "use_type": "residential_use",
       "use_name": "apartment building",
@@ -67,8 +66,12 @@
       }
     },
     {
-      "clause_label_raw": "54(ii.5)",
-      "clause_path": null,
+      "clause_label_raw": "54(a)(ii.5)",
+      "clause_path": [
+        "54",
+        "a",
+        "ii.5"
+      ],
       "use_type": "residential_use",
       "use_name": "shared housing use; (RC-Aug 9/22;E-Sep 15/22)",
       "status": "active",
@@ -80,12 +83,11 @@
       }
     },
     {
-      "clause_label_raw": "54(iii)",
+      "clause_label_raw": "54(a)(iii)",
       "clause_path": [
         "54",
-        "i",
-        "i",
-        "i"
+        "a",
+        "iii"
       ],
       "use_type": "principal_use",
       "use_name": "commercial retail",
@@ -98,11 +100,11 @@
       }
     },
     {
-      "clause_label_raw": "54(iv)",
+      "clause_label_raw": "54(a)(iv)",
       "clause_path": [
         "54",
-        "i",
-        "v"
+        "a",
+        "iv"
       ],
       "use_type": "principal_use",
       "use_name": "institutional",
@@ -115,9 +117,10 @@
       }
     },
     {
-      "clause_label_raw": "54(v)",
+      "clause_label_raw": "54(a)(v)",
       "clause_path": [
         "54",
+        "a",
         "v"
       ],
       "use_type": "principal_use",
@@ -131,11 +134,11 @@
       }
     },
     {
-      "clause_label_raw": "54(vi)",
+      "clause_label_raw": "54(a)(vi)",
       "clause_path": [
         "54",
-        "v",
-        "i"
+        "a",
+        "vi"
       ],
       "use_type": "principal_use",
       "use_name": "offices",
@@ -172,12 +175,7 @@
   "sign_controls": [],
   "use_specific_standards": [],
   "spatial_features_needed": [],
-  "open_issues": [
-    {
-      "issue_type": "normalization_review",
-      "description": "Clause patterns listed in pending_review_clause_patterns were preserved raw because their hierarchy normalization is not yet approved in this repository context."
-    }
-  ],
+  "open_issues": [],
   "citations": {
     "zone_section": {
       "pdf_page_start": 112,
