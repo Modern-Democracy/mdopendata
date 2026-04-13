@@ -1,0 +1,226 @@
+{
+  "document_name": "Bedford Municipal Planning Strategy",
+  "source_document_path": "docs/bedford-municipal-planning-strategy.pdf",
+  "spatial_features_needed": [
+    {
+      "feature_key": "map-1-proposed-street-network",
+      "feature_class": "transportation_corridor",
+      "source_document_page": 44,
+      "source_label_raw": "Map 1:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "TRANSPORTATION",
+      "section_slug": "transportation",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "map-2-mainstreet-commercial-core",
+      "feature_class": "plan_reference_map",
+      "source_document_page": 62,
+      "source_label_raw": "Map 2:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "COMMERCIAL",
+      "section_slug": "commercial",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "map-3-mainstreet-improvement-district-ccdd-location",
+      "feature_class": "plan_reference_map",
+      "source_document_page": 63,
+      "source_label_raw": "Map 3:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "COMMERCIAL",
+      "section_slug": "commercial",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "map-4-bedford-waterfront-development",
+      "feature_class": "plan_reference_map",
+      "source_document_page": 72,
+      "source_label_raw": "Map 4:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "WATERFRONT DEVELOPMENT",
+      "section_slug": "waterfront-development",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "schedule-i-bedford-south-land-use-designation",
+      "feature_class": "future_land_use_area",
+      "source_document_page": 99,
+      "source_label_raw": "Schedule I:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "THE BEDFORD SOUTH SECONDARY PLANNING STRATEGY (RC-Ju 9/09;E-Aug 31/09)",
+      "section_slug": "the-bedford-south-secondary-planning-strategy",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "schedule-ii-bedford-south-street-hierarchy",
+      "feature_class": "transportation_corridor",
+      "source_document_page": 100,
+      "source_label_raw": "Schedule II:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "THE BEDFORD SOUTH SECONDARY PLANNING STRATEGY (RC-Ju 9/09;E-Aug 31/09)",
+      "section_slug": "the-bedford-south-secondary-planning-strategy",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "schedule-iii-bedford-south-density-allocations",
+      "feature_class": "development_sub_area",
+      "source_document_page": 101,
+      "source_label_raw": "Schedule III:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "THE BEDFORD SOUTH SECONDARY PLANNING STRATEGY (RC-Ju 9/09;E-Aug 31/09)",
+      "section_slug": "the-bedford-south-secondary-planning-strategy",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "schedule-iv-bedford-south-sewersheds",
+      "feature_class": "municipal_service_area",
+      "source_document_page": 102,
+      "source_label_raw": "Schedule IV:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "THE BEDFORD SOUTH SECONDARY PLANNING STRATEGY (RC-Ju 9/09;E-Aug 31/09)",
+      "section_slug": "the-bedford-south-secondary-planning-strategy",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "schedule-v-larry-uteck-interchange-node-rc-nov-18-14-e-jan-10-15",
+      "feature_class": "site_specific_plan_area",
+      "source_document_page": 103,
+      "source_label_raw": "Schedule V:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "THE BEDFORD SOUTH SECONDARY PLANNING STRATEGY (RC-Ju 9/09;E-Aug 31/09)",
+      "section_slug": "the-bedford-south-secondary-planning-strategy",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "schedule-bw-1-bedford-west-study-area",
+      "feature_class": "planning_area_boundary",
+      "source_document_page": 138,
+      "source_label_raw": "Schedule BW-1:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "THE BEDFORD WEST SECONDARY PLANNING STRATEGY (RC-Jun 2/09;E-Jun 27/09)",
+      "section_slug": "the-bedford-west-secondary-planning-strategy",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "schedule-bw-2-bedford-west-paper-mill-lake-watershed",
+      "feature_class": "watershed_area",
+      "source_document_page": 139,
+      "source_label_raw": "Schedule BW-2:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "THE BEDFORD WEST SECONDARY PLANNING STRATEGY (RC-Jun 2/09;E-Jun 27/09)",
+      "section_slug": "the-bedford-west-secondary-planning-strategy",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "schedule-bw-3-bedford-west-water-service-system",
+      "feature_class": "municipal_service_area",
+      "source_document_page": 140,
+      "source_label_raw": "Schedule BW-3:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "THE BEDFORD WEST SECONDARY PLANNING STRATEGY (RC-Jun 2/09;E-Jun 27/09)",
+      "section_slug": "the-bedford-west-secondary-planning-strategy",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "schedule-bw-4-bedford-west-sanitary-sewer-servicing",
+      "feature_class": "municipal_service_area",
+      "source_document_page": 141,
+      "source_label_raw": "Schedule BW-4:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "THE BEDFORD WEST SECONDARY PLANNING STRATEGY (RC-Jun 2/09;E-Jun 27/09)",
+      "section_slug": "the-bedford-west-secondary-planning-strategy",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "schedule-bw-5-bedford-west-transportation-system-rc-dec-14-21-e-feb-12-22",
+      "feature_class": "transportation_corridor",
+      "source_document_page": 142,
+      "source_label_raw": "Schedule BW-5:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "THE BEDFORD WEST SECONDARY PLANNING STRATEGY (RC-Jun 2/09;E-Jun 27/09)",
+      "section_slug": "the-bedford-west-secondary-planning-strategy",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "schedule-bw-6-bedford-west-development-sub-areas",
+      "feature_class": "development_sub_area",
+      "source_document_page": 143,
+      "source_label_raw": "Schedule BW-6:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "THE BEDFORD WEST SECONDARY PLANNING STRATEGY (RC-Jun 2/09;E-Jun 27/09)",
+      "section_slug": "the-bedford-west-secondary-planning-strategy",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "schedule-bw-7-bedford-west-community-concept-plan",
+      "feature_class": "community_concept_plan_area",
+      "source_document_page": 144,
+      "source_label_raw": "Schedule BW-7:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "THE BEDFORD WEST SECONDARY PLANNING STRATEGY (RC-Jun 2/09;E-Jun 27/09)",
+      "section_slug": "the-bedford-west-secondary-planning-strategy",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "schedule-bw-7a-community-concept-plan-rc-dec-14-21-e-feb-12-22-mah-nov",
+      "feature_class": "community_concept_plan_area",
+      "source_document_page": 145,
+      "source_label_raw": "Schedule BW-7A:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "THE BEDFORD WEST SECONDARY PLANNING STRATEGY (RC-Jun 2/09;E-Jun 27/09)",
+      "section_slug": "the-bedford-west-secondary-planning-strategy",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "schedule-bw-8-larry-uteck-interchange-node-rc-nov-18-14-e-jan-10-15",
+      "feature_class": "site_specific_plan_area",
+      "source_document_page": 146,
+      "source_label_raw": "Schedule BW-8:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "THE BEDFORD WEST SECONDARY PLANNING STRATEGY (RC-Jun 2/09;E-Jun 27/09)",
+      "section_slug": "the-bedford-west-secondary-planning-strategy",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "schedule-bw-9-bedford-west-sub-area-1-and-12-community-concept-plan",
+      "feature_class": "community_concept_plan_area",
+      "source_document_page": 147,
+      "source_label_raw": "Schedule BW-9:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "THE BEDFORD WEST SECONDARY PLANNING STRATEGY (RC-Jun 2/09;E-Jun 27/09)",
+      "section_slug": "the-bedford-west-secondary-planning-strategy",
+      "source_type": "manual_or_vector_digitization_backlog"
+    },
+    {
+      "feature_key": "schedule-bw-10-bedford-west-local-improvement-charge-area-municipal",
+      "feature_class": "plan_reference_map",
+      "source_document_page": 148,
+      "source_label_raw": "Schedule BW-10:",
+      "reason": "Referenced by the Bedford Municipal Planning Strategy and required for later PostGIS linkage between policy text and mapped planning areas.",
+      "planned_postgis_target": "spatial_features",
+      "section_label_raw": "THE BEDFORD WEST SECONDARY PLANNING STRATEGY (RC-Jun 2/09;E-Jun 27/09)",
+      "section_slug": "the-bedford-west-secondary-planning-strategy",
+      "source_type": "manual_or_vector_digitization_backlog"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "open_issues": [
+    {
+      "issue_type": "identifier_normalization_pending_review",
+      "example_labels_raw": [
+        "1.2.7",
+        "2A.2.1",
+        "2.12A",
+        "2.1 (a)",
+        "Policy BW-41A(A)"
+      ],
+      "reason": "MPS dotted and mixed-format policy identifiers are not approved for normalized hierarchy handling in this repository."
+    },
+    {
+      "issue_type": "table_of_contents_outline_absent",
+      "reason": "The PDF does not expose bookmark outline entries through PyPDF2, so section ranges are seeded from the text table of contents and page inspection."
+    }
+  ]
+}
