@@ -1,0 +1,54 @@
+{
+  "document_name": "Land Use By-law for Cole Harbour/Westphal",
+  "source_document_path": "docs/cole-harbour-westphal-land-use-bylaw.pdf",
+  "spatial_features_needed": [
+    {
+      "feature_key": "schedule-a-cole-harbour-westphal-zoning-map",
+      "feature_class": "zoning_boundary",
+      "source_type": "schedule_digitization",
+      "reason": "Derived from SCHEDULE A: Cole Harbour/Westphal Zoning Map."
+    },
+    {
+      "feature_key": "appendix-f-lands-of-the-former-a-r-hemmings-building-systems-limited-industrial-site",
+      "feature_class": "site_specific_area",
+      "source_type": "schedule_digitization",
+      "reason": "Derived from APPENDIX F: LANDS OF THE FORMER A.R. HEMMINGS BUILDING SYSTEMS LIMITED INDUSTRIAL SITE."
+    },
+    {
+      "feature_key": "schedule-a-1-wind-energy-zoning-rc-feb-15-22-e-apr-9-22-special-area-task-force-jan-26-23-e-feb-3-23-rc-mar-18-25-eff-apr-23-25",
+      "feature_class": "wind_energy_area",
+      "source_type": "schedule_digitization",
+      "reason": "Derived from Schedule A-1: Wind Energy Zoning (RC-Feb 15/22; E-Apr 9/22) (Special Area Task Force-Jan 26/23;E-Feb 3/23) (RC-Mar 18/25; EFF Apr 23/25)."
+    },
+    {
+      "feature_key": "schedule-b-areas-of-elevated-archaeological-potential-rc-jun-25-14-e-oct-18-14-special-area-task-force-jan-26-23-e-feb-3-23-rc-mar-18-25-eff-apr-23-25",
+      "feature_class": "archaeological_constraint_area",
+      "source_type": "schedule_digitization",
+      "reason": "Derived from Schedule B: Areas of Elevated Archaeological Potential (RC-Jun 25/14;E-Oct 18/14) (Special Area Task Force-Jan 26/23;E-Feb 3/23) (RC-Mar 18/25; EFF Apr 23/25)."
+    },
+    {
+      "feature_key": "schedule-c-wetlands-rc-jun-25-14-e-oct-18-14-special-area-task-force-jan-26-23-e-feb-3-23-rc-mar-18-25-eff-apr-23-25",
+      "feature_class": "wetland_area",
+      "source_type": "schedule_digitization",
+      "reason": "Derived from Schedule C: Wetlands (RC-Jun 25/14;E-Oct 18/14) (Special Area Task Force-Jan 26/23;E-Feb 3/23) (RC-Mar 18/25; EFF Apr 23/25)."
+    },
+    {
+      "feature_key": "schedule-d-mixed-form-residential-development-in-the-c-4-highway-commercial-zone-rc-oct-7-14-e-nov-8-14",
+      "feature_class": "site_specific_area",
+      "source_type": "schedule_digitization",
+      "reason": "Derived from Schedule D: Mixed Form Residential Development in the C-4 (Highway Commercial) Zone (RC-Oct 7/14;E-Nov 8/14)."
+    },
+    {
+      "feature_key": "schedule-e-sub-areas-of-mod-mixed-opportunity-district-zone",
+      "feature_class": "subarea_boundary",
+      "source_type": "schedule_digitization",
+      "reason": "Derived from SCHEDULE E: SUB AREAS OF MOD (MIXED OPPORTUNITY DISTRICT) ZONE."
+    },
+    {
+      "feature_key": "schedule-f-lands-subject-to-bonus-zoning-requirements-rc-mar-21-23-e-apr-19-23-rc-mar-18-25-eff-apr-23-25",
+      "feature_class": "bonus_zoning_area",
+      "source_type": "schedule_digitization",
+      "reason": "Derived from SCHEDULE F: LANDS SUBJECT TO BONUS ZONING REQUIREMENTS (RC-MAR 21/23;E-APR 19/23) (RC-Mar 18/25; EFF Apr 23/25)."
+    }
+  ]
+}
