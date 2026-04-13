@@ -11,7 +11,10 @@ from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DATA_ROOT = REPO_ROOT / "data" / "zoning"
+DATA_ROOTS = (
+    REPO_ROOT / "data" / "zoning",
+    REPO_ROOT / "data" / "municipal-planning-strategy",
+)
 
 BYLAW_CROSSWALK = {
     "dartmouth": {
@@ -107,9 +110,15 @@ def infer_section_kind(relpath: str) -> str:
 
 
 def infer_bylaw_metadata(payload: dict[str, Any], slug: str) -> dict[str, Any]:
-    metadata = payload.get("document_metadata") or payload.get("schedule_metadata") or {}
+    metadata = (
+        payload.get("document_metadata")
+        or payload.get("section_metadata")
+        or payload.get("schedule_metadata")
+        or {}
+    )
     bylaw_name = (
         metadata.get("bylaw_name")
+        or metadata.get("document_name")
         or payload.get("document_name")
         or slug.replace("-", " ").title()
     )
@@ -130,7 +139,13 @@ def infer_bylaw_metadata(payload: dict[str, Any], slug: str) -> dict[str, Any]:
 
 
 def pages_json(payload: dict[str, Any]) -> dict[str, Any]:
-    source = payload.get("source_section") or payload.get("document_metadata") or payload.get("schedule_metadata") or {}
+    source = (
+        payload.get("source_section")
+        or payload.get("section_metadata")
+        or payload.get("document_metadata")
+        or payload.get("schedule_metadata")
+        or {}
+    )
     result: dict[str, Any] = {}
     for key in (
         "pdf_page",
@@ -139,6 +154,8 @@ def pages_json(payload: dict[str, Any]) -> dict[str, Any]:
         "bylaw_page",
         "bylaw_page_start",
         "bylaw_page_end",
+        "mps_page_start",
+        "mps_page_end",
         "section_range_raw",
     ):
         if key in source:
@@ -506,6 +523,125 @@ def insert_zone_rules(
             )
 
 
+def insert_mps_content(
+    *,
+    bylaw_slug: str,
+    relpath: str,
+    payload: dict[str, Any],
+    provisions: list[dict[str, Any]],
+    rules: list[dict[str, Any]],
+) -> None:
+    section_metadata = payload.get("section_metadata") or {}
+    section_label_raw = section_metadata.get("section_label_raw")
+    title_label_raw = section_metadata.get("title_label_raw")
+    section_slug = section_metadata.get("section_slug")
+    section_type = section_metadata.get("section_type")
+    section_status = section_metadata.get("status") or payload.get("status")
+
+    for index, block in enumerate(payload.get("context_blocks", []), start=1):
+        add_provision(
+            provisions,
+            source_key=make_source_key(relpath, "context_block", index),
+            section_relpath=relpath,
+            zone_code=None,
+            provision_kind="mps_context_block",
+            section_label_raw=section_label_raw,
+            clause_label_raw=None,
+            clause_path=None,
+            parent_clause_label_raw=None,
+            text_value=block.get("text"),
+            status=section_status,
+            citations_json={
+                key: block.get(key)
+                for key in ("pdf_page_start", "pdf_page_end", "mps_page_start", "mps_page_end")
+                if block.get(key) is not None
+            },
+            metadata={
+                "title_label_raw": title_label_raw,
+                "section_slug": section_slug,
+                "section_type": section_type,
+                "topic": block.get("topic"),
+            },
+        )
+
+    for index, objective in enumerate(payload.get("objectives", []), start=1):
+        add_provision(
+            provisions,
+            source_key=make_source_key(relpath, "objective", objective.get("label_raw"), index),
+            section_relpath=relpath,
+            zone_code=None,
+            provision_kind="mps_objective",
+            section_label_raw=section_label_raw,
+            clause_label_raw=objective.get("label_raw"),
+            clause_path=None,
+            parent_clause_label_raw=None,
+            text_value=objective.get("text"),
+            status=section_status,
+            citations_json={
+                key: objective.get(key)
+                for key in ("pdf_page_start", "pdf_page_end", "mps_page_start", "mps_page_end")
+                if objective.get(key) is not None
+            },
+            metadata={
+                "title_label_raw": title_label_raw,
+                "section_slug": section_slug,
+                "section_type": section_type,
+                "topic": objective.get("topic"),
+            },
+        )
+
+    for index, policy in enumerate(payload.get("policies", []), start=1):
+        provision_key = make_source_key(relpath, "policy", policy.get("policy_label_raw"), index)
+        add_provision(
+            provisions,
+            source_key=provision_key,
+            section_relpath=relpath,
+            zone_code=None,
+            provision_kind="mps_policy",
+            section_label_raw=section_label_raw,
+            clause_label_raw=policy.get("policy_label_raw") or policy.get("label_raw"),
+            clause_path=None,
+            parent_clause_label_raw=None,
+            text_value=policy.get("text"),
+            status=section_status,
+            citations_json={
+                key: policy.get(key)
+                for key in ("pdf_page_start", "pdf_page_end", "mps_page_start", "mps_page_end")
+                if policy.get(key) is not None
+            },
+            metadata={
+                "title_label_raw": title_label_raw,
+                "section_slug": section_slug,
+                "section_type": section_type,
+                "policy_type": policy.get("policy_type"),
+                "modality": policy.get("modality"),
+                "topic": policy.get("topic"),
+                "label_raw": policy.get("label_raw"),
+            },
+        )
+        add_rule(
+            rules,
+            source_key=make_source_key(provision_key, "rule"),
+            provision_source_key=provision_key,
+            bylaw_slug=bylaw_slug,
+            zone_code=None,
+            rule_type=policy.get("policy_type") or "mps_policy",
+            value_text=policy.get("text"),
+            condition_text=policy.get("text"),
+            applicability_scope=section_label_raw,
+            status=section_status,
+            metadata={
+                "policy_label_raw": policy.get("policy_label_raw"),
+                "label_raw": policy.get("label_raw"),
+                "modality": policy.get("modality"),
+                "section_slug": section_slug,
+                "section_type": section_type,
+                "title_label_raw": title_label_raw,
+                "topic": policy.get("topic"),
+            },
+        )
+
+
 def build_dataset() -> dict[str, Any]:
     bylaws: dict[str, dict[str, Any]] = {}
     section_files: list[dict[str, Any]] = []
@@ -518,9 +654,19 @@ def build_dataset() -> dict[str, Any]:
     spatial_links: list[dict[str, str]] = []
     spatial_refs_by_bylaw: dict[str, list[dict[str, Any]]] = {}
 
-    for path in sorted(DATA_ROOT.glob("*/*.json")) + sorted(DATA_ROOT.glob("*/*/*.json")):
+    json_paths: list[Path] = []
+    for data_root in DATA_ROOTS:
+        json_paths.extend(sorted(data_root.glob("*/*.json")))
+        json_paths.extend(sorted(data_root.glob("*/*/*.json")))
+
+    for path in json_paths:
         payload = json.loads(path.read_text(encoding="utf-8"))
-        slug = path.relative_to(DATA_ROOT).parts[0]
+        root_kind = "municipal-planning-strategy" if path.is_relative_to(DATA_ROOTS[1]) else "zoning"
+        if path.is_relative_to(DATA_ROOTS[0]):
+            area_slug = path.relative_to(DATA_ROOTS[0]).parts[0]
+        else:
+            area_slug = path.relative_to(DATA_ROOTS[1]).parts[0]
+        slug = f"{area_slug}-mps" if root_kind == "municipal-planning-strategy" else area_slug
         relpath = normalize_relpath(path)
 
         if slug not in bylaws:
@@ -530,7 +676,12 @@ def build_dataset() -> dict[str, Any]:
             if not bylaws[slug].get("source_document_path") and inferred.get("source_document_path"):
                 bylaws[slug]["source_document_path"] = inferred["source_document_path"]
 
-        document_metadata = payload.get("document_metadata") or payload.get("schedule_metadata") or {}
+        document_metadata = (
+            payload.get("document_metadata")
+            or payload.get("section_metadata")
+            or payload.get("schedule_metadata")
+            or {}
+        )
         section_files.append(
             {
                 "bylaw_slug": slug,
@@ -646,6 +797,11 @@ def build_dataset() -> dict[str, Any]:
                         "pdf_page_end": reference.get("pdf_page_end"),
                         "bylaw_page_start": reference.get("bylaw_page_start"),
                         "bylaw_page_end": reference.get("bylaw_page_end"),
+                        "mps_page_start": reference.get("mps_page_start"),
+                        "mps_page_end": reference.get("mps_page_end"),
+                        "title_text": reference.get("title_text"),
+                        "section_label_raw": reference.get("section_label_raw"),
+                        "section_slug": reference.get("section_slug"),
                     },
                 }
                 spatial_refs.append(record)
@@ -673,6 +829,7 @@ def build_dataset() -> dict[str, Any]:
                         "reason": feature.get("reason"),
                         "source_document_page": feature.get("source_document_page"),
                         "section_label_raw": feature.get("section_label_raw"),
+                        "section_slug": feature.get("section_slug"),
                     },
                 }
                 spatial_refs.append(record)
@@ -688,6 +845,14 @@ def build_dataset() -> dict[str, Any]:
                 rules=rules,
                 spatial_links=spatial_links,
                 spatial_refs_by_bylaw=spatial_refs_by_bylaw,
+            )
+        elif payload.get("section_metadata"):
+            insert_mps_content(
+                bylaw_slug=slug,
+                relpath=relpath,
+                payload=payload,
+                provisions=provisions,
+                rules=rules,
             )
 
     return {
