@@ -1,0 +1,728 @@
+{
+  "converter": {
+    "arguments": {
+      "checksum": false,
+      "force": false,
+      "inputs": [
+        "data/zoning/bedford"
+      ],
+      "run_id": "20260417T010000Z"
+    },
+    "command": "D:\\opendata\\mdopendata\\.python\\python.exe .\\scripts\\normalize-land-use.py --run-id 20260417T010000Z",
+    "name": "normalize-land-use",
+    "version": "0.1.0",
+    "working_directory": "D:\\opendata\\mdopendata"
+  },
+  "generated_at": "2026-04-17T16:18:56.857962Z",
+  "git": {
+    "branch": "main",
+    "commit": "1b27007f6eeba2085f76b3513833ffbf8da5d672",
+    "dirty": true,
+    "root": "D:\\opendata\\mdopendata",
+    "status_short": [
+      "M data/normalized/runs/20260417T000000Z/bundle.json",
+      " M data/normalized/runs/20260417T000000Z/bundle.validation.json",
+      " M data/normalized/runs/20260417T000000Z/manifest.json",
+      " m qgis_mcp_vendor",
+      " M scripts/normalize-land-use.py",
+      "?? data/normalized/runs/20260417T010000Z/"
+    ]
+  },
+  "inputs_filter": {
+    "communities": [
+      "bedford"
+    ],
+    "document_types": [
+      "land_use_bylaw"
+    ],
+    "paths": [
+      "data/zoning/bedford"
+    ]
+  },
+  "output_inventory": [
+    {
+      "bytes": 24890,
+      "checksum_sha256": null,
+      "output_type": "manifest",
+      "path": "data/normalized/runs/20260417T010000Z/manifest.json",
+      "record_counts": {}
+    },
+    {
+      "bytes": 950092,
+      "checksum_sha256": null,
+      "output_type": "bundle",
+      "path": "data/normalized/runs/20260417T010000Z/bundle.json",
+      "record_counts": {}
+    },
+    {
+      "bytes": 242,
+      "checksum_sha256": null,
+      "output_type": "validation",
+      "path": "data/normalized/runs/20260417T010000Z/bundle.validation.json",
+      "record_counts": {}
+    },
+    {
+      "bytes": 27099,
+      "checksum_sha256": null,
+      "output_type": "review_items",
+      "path": "data/normalized/runs/20260417T010000Z/review-items.json",
+      "record_counts": {}
+    },
+    {
+      "bytes": 283,
+      "checksum_sha256": null,
+      "output_type": "stats",
+      "path": "data/normalized/runs/20260417T010000Z/stats.json",
+      "record_counts": {}
+    }
+  ],
+  "qa_summary": {
+    "blocked_normalizations": 37,
+    "review_items": 37,
+    "unresolved_relationships": 0,
+    "warnings": 0
+  },
+  "review_policy": {
+    "approved_hierarchy_examples": [
+      "21(e)",
+      "21(ea)",
+      "21(ea)(1)",
+      "20(1)(a.1)"
+    ],
+    "clause_labels_preserved_raw": true,
+    "unknown_clause_syntax_action": "emit_review_item_without_normalizing"
+  },
+  "run_id": "20260417T010000Z",
+  "schema_path": "schema/normalized_land_use_bundle.schema.json",
+  "source_inventory": [
+    {
+      "bytes": 1415,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.041053Z",
+      "path": "data/zoning/bedford/appendix-a.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/appendix-a.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 1268,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.041053Z",
+      "path": "data/zoning/bedford/appendix-b.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/appendix-b.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 563,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.042154Z",
+      "path": "data/zoning/bedford/appendix-c.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/appendix-c.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 521,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.042154Z",
+      "path": "data/zoning/bedford/appendix-d.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/appendix-d.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 537,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.042154Z",
+      "path": "data/zoning/bedford/appendix-e.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/appendix-e.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 529,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.043150Z",
+      "path": "data/zoning/bedford/appendix-f.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/appendix-f.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 17261,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.044152Z",
+      "path": "data/zoning/bedford/appendix-g.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/appendix-g.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 5728,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.069174Z",
+      "path": "data/zoning/bedford/appendix-pg-1.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/appendix-pg-1.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 1379,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.069174Z",
+      "path": "data/zoning/bedford/appendix-pg-2.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/appendix-pg-2.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 102596,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:18.989645Z",
+      "path": "data/zoning/bedford/definitions.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/definitions.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 156215,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:18.996153Z",
+      "path": "data/zoning/bedford/general-provisions.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/general-provisions.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 7137,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.072685Z",
+      "path": "data/zoning/bedford/maps.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/maps.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 3539,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.049150Z",
+      "path": "data/zoning/bedford/planned-growth-schedule.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/planned-growth-schedule.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 457,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.044152Z",
+      "path": "data/zoning/bedford/schedule-pg.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/schedule-pg.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 986,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.071679Z",
+      "path": "data/zoning/bedford/schedules/schedule-b.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/schedules/schedule-b.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 1029,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.036545Z",
+      "path": "data/zoning/bedford/schedules/schedule-c-1.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/schedules/schedule-c-1.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 1029,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.037050Z",
+      "path": "data/zoning/bedford/schedules/schedule-c-2.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/schedules/schedule-c-2.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 55688,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.040051Z",
+      "path": "data/zoning/bedford/schedules/schedule-c-3.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/schedules/schedule-c-3.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 966,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.072685Z",
+      "path": "data/zoning/bedford/schedules/schedule-c.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/schedules/schedule-c.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 1033,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.040051Z",
+      "path": "data/zoning/bedford/schedules/schedule-i.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/schedules/schedule-i.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 970,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.070174Z",
+      "path": "data/zoning/bedford/schedules/schedule-pg-2.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/schedules/schedule-pg-2.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 966,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.070174Z",
+      "path": "data/zoning/bedford/schedules/schedule-pg-3.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/schedules/schedule-pg-3.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 997,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.071174Z",
+      "path": "data/zoning/bedford/schedules/schedule-pg-4.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/schedules/schedule-pg-4.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 978,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.071174Z",
+      "path": "data/zoning/bedford/schedules/schedule-pg-5.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/schedules/schedule-pg-5.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 982,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.071679Z",
+      "path": "data/zoning/bedford/schedules/schedule-pg-6.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/schedules/schedule-pg-6.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 4083,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.072685Z",
+      "path": "data/zoning/bedford/spatial-features-needed.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/spatial-features-needed.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 1281,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.005373Z",
+      "path": "data/zoning/bedford/zones/bedford-south-comprehensive-development.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/bedford-south-comprehensive-development.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 1276,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.006377Z",
+      "path": "data/zoning/bedford/zones/bedford-west-comprehensive-development.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/bedford-west-comprehensive-development.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 102235,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.061168Z",
+      "path": "data/zoning/bedford/zones/bw-cdd1.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/bw-cdd1.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 114526,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.059664Z",
+      "path": "data/zoning/bedford/zones/bw-cdd2.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/bw-cdd2.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 130310,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.062174Z",
+      "path": "data/zoning/bedford/zones/bw-cen.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/bw-cen.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 101260,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.066174Z",
+      "path": "data/zoning/bedford/zones/bw-ch.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/bw-ch.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 87317,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.068174Z",
+      "path": "data/zoning/bedford/zones/bw-con.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/bw-con.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 124808,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.064172Z",
+      "path": "data/zoning/bedford/zones/bw-hr1.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/bw-hr1.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 127175,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.063172Z",
+      "path": "data/zoning/bedford/zones/bw-hr2.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/bw-hr2.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 105431,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.065173Z",
+      "path": "data/zoning/bedford/zones/bw-ldr.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/bw-ldr.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 90727,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.067173Z",
+      "path": "data/zoning/bedford/zones/bw-pcf.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/bw-pcf.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 51591,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.022035Z",
+      "path": "data/zoning/bedford/zones/bwbc.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/bwbc.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 21100,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.031540Z",
+      "path": "data/zoning/bedford/zones/cd-1.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/cd-1.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 12883,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.032543Z",
+      "path": "data/zoning/bedford/zones/cd-2.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/cd-2.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 12251,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.033542Z",
+      "path": "data/zoning/bedford/zones/cd-3.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/cd-3.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 9272,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.012890Z",
+      "path": "data/zoning/bedford/zones/chc.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/chc.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 28723,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.002664Z",
+      "path": "data/zoning/bedford/zones/chr.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/chr.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 7315,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.011886Z",
+      "path": "data/zoning/bedford/zones/chwy.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/chwy.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 25255,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.010377Z",
+      "path": "data/zoning/bedford/zones/cmc.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/cmc.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 10861,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.013887Z",
+      "path": "data/zoning/bedford/zones/commercial-comprehensive-development.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/commercial-comprehensive-development.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 7137,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.008377Z",
+      "path": "data/zoning/bedford/zones/csc.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/csc.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 12694,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.029036Z",
+      "path": "data/zoning/bedford/zones/ffo.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/ffo.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 8088,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.026036Z",
+      "path": "data/zoning/bedford/zones/fw.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/fw.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 19066,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.028036Z",
+      "path": "data/zoning/bedford/zones/fwo.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/fwo.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 7675,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.007377Z",
+      "path": "data/zoning/bedford/zones/general-business.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/general-business.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 3364,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.034543Z",
+      "path": "data/zoning/bedford/zones/ich.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/ich.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 6786,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.017889Z",
+      "path": "data/zoning/bedford/zones/ihi.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/ihi.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 4964,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.015887Z",
+      "path": "data/zoning/bedford/zones/iho.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/iho.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 9998,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.014887Z",
+      "path": "data/zoning/bedford/zones/ili.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/ili.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 2579,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.024037Z",
+      "path": "data/zoning/bedford/zones/p.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/p.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 3521,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.025036Z",
+      "path": "data/zoning/bedford/zones/pos.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/pos.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 3897,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.005373Z",
+      "path": "data/zoning/bedford/zones/residential-comprehensive-development.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/residential-comprehensive-development.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 3546,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:18.999152Z",
+      "path": "data/zoning/bedford/zones/rmu.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/rmu.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 3834,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.025036Z",
+      "path": "data/zoning/bedford/zones/rpk.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/rpk.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 4323,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.006377Z",
+      "path": "data/zoning/bedford/zones/rr.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/rr.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 4129,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:18.998152Z",
+      "path": "data/zoning/bedford/zones/rsu.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/rsu.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 4367,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.000154Z",
+      "path": "data/zoning/bedford/zones/rth.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/rth.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 4265,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:18.999152Z",
+      "path": "data/zoning/bedford/zones/rtu.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/rtu.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 5922,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.023035Z",
+      "path": "data/zoning/bedford/zones/si.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/si.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 2654,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.023035Z",
+      "path": "data/zoning/bedford/zones/su.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/su.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 3932,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.035546Z",
+      "path": "data/zoning/bedford/zones/ur.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/ur.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 4081,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.035546Z",
+      "path": "data/zoning/bedford/zones/us.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/us.json",
+      "source_type": "extracted_json"
+    },
+    {
+      "bytes": 3506,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-13T12:27:19.030036Z",
+      "path": "data/zoning/bedford/zones/waterfront-comprehensive-development.json",
+      "role": "source_extract",
+      "source_id": "data/zoning/bedford/zones/waterfront-comprehensive-development.json",
+      "source_type": "extracted_json"
+    }
+  ],
+  "standard_doc_path": "docs/normalized-land-use-standard.md",
+  "standard_version": "0.1.0",
+  "validation": {
+    "conversion_warning_count": 0,
+    "relationship_unresolved_count": 0,
+    "review_blocked_count": 37,
+    "schema_valid": true
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "converter": {
+    "arguments": {
+      "checksum": false,
+      "force": true,
+      "inputs": [
+        "data\\normalized\\land-use-standard-version.json"
+      ],
+      "run_id": "20260417T000000Z"
+    },
+    "command": "D:\\opendata\\mdopendata\\.python\\python.exe .\\scripts\\normalize-land-use.py --input data\\normalized\\land-use-standard-version.json --run-id 20260417T000000Z --force",
+    "name": "normalize-land-use",
+    "version": "0.1.0",
+    "working_directory": "D:\\opendata\\mdopendata"
+  },
+  "generated_at": "2026-04-17T16:15:00.879505Z",
+  "git": {
+    "branch": "main",
+    "commit": "1b27007f6eeba2085f76b3513833ffbf8da5d672",
+    "dirty": true,
+    "root": "D:\\opendata\\mdopendata",
+    "status_short": [
+      "M data/normalized/runs/20260417T000000Z/bundle.json",
+      " M data/normalized/runs/20260417T000000Z/bundle.validation.json",
+      " m qgis_mcp_vendor",
+      " M scripts/__pycache__/normalize-land-use.cpython-314.pyc",
+      " M scripts/normalize-land-use.py"
+    ]
+  },
+  "inputs_filter": {
+    "communities": [],
+    "document_types": [],
+    "paths": [
+      "data\\normalized\\land-use-standard-version.json"
+    ]
+  },
+  "output_inventory": [
+    {
+      "bytes": 3359,
+      "checksum_sha256": null,
+      "output_type": "manifest",
+      "path": "data/normalized/runs/20260417T000000Z/manifest.json",
+      "record_counts": {}
+    },
+    {
+      "bytes": 376,
+      "checksum_sha256": null,
+      "output_type": "bundle",
+      "path": "data/normalized/runs/20260417T000000Z/bundle.json",
+      "record_counts": {}
+    },
+    {
+      "bytes": 242,
+      "checksum_sha256": null,
+      "output_type": "validation",
+      "path": "data/normalized/runs/20260417T000000Z/bundle.validation.json",
+      "record_counts": {}
+    },
+    {
+      "bytes": 4,
+      "checksum_sha256": null,
+      "output_type": "review_items",
+      "path": "data/normalized/runs/20260417T000000Z/review-items.json",
+      "record_counts": {}
+    },
+    {
+      "bytes": 145,
+      "checksum_sha256": null,
+      "output_type": "stats",
+      "path": "data/normalized/runs/20260417T000000Z/stats.json",
+      "record_counts": {}
+    }
+  ],
+  "qa_summary": {
+    "blocked_normalizations": 0,
+    "review_items": 0,
+    "unresolved_relationships": 0,
+    "warnings": 0
+  },
+  "review_policy": {
+    "approved_hierarchy_examples": [
+      "21(e)",
+      "21(ea)",
+      "21(ea)(1)",
+      "20(1)(a.1)"
+    ],
+    "clause_labels_preserved_raw": true,
+    "unknown_clause_syntax_action": "emit_review_item_without_normalizing"
+  },
+  "run_id": "20260417T000000Z",
+  "schema_path": "schema/normalized_land_use_bundle.schema.json",
+  "source_inventory": [
+    {
+      "bytes": 163,
+      "checksum_sha256": null,
+      "modified_at": "2026-04-17T15:10:35.665884Z",
+      "path": "data/normalized/land-use-standard-version.json",
+      "role": "source_extract",
+      "source_id": "data/normalized/land-use-standard-version.json",
+      "source_type": "extracted_json"
+    }
+  ],
+  "standard_doc_path": "docs/normalized-land-use-standard.md",
+  "standard_version": "0.1.0",
+  "validation": {
+    "conversion_warning_count": 0,
+    "relationship_unresolved_count": 0,
+    "review_blocked_count": 0,
+    "schema_valid": true
+  }
+}

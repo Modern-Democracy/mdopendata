@@ -1,0 +1,39 @@
+{
+  "open_issues": [
+    {
+      "issue_type": "identifier_normalization_pending_review",
+      "example_labels_raw": [
+        "P-47(c)",
+        "P-79A.8",
+        "P-79B.18",
+        "BW-31A",
+        "SW-6"
+      ],
+      "reason": "MPS dotted and mixed-format policy identifiers are not approved for normalized hierarchy handling in this repository."
+    },
+    {
+      "issue_type": "table_of_contents_outline_absent",
+      "reason": "The PDF does not expose bookmark outline entries through PyPDF, so section ranges are seeded from the text table of contents and page inspection."
+    },
+    {
+      "issue_type": "primary-maps-not-embedded-in-source-pdf",
+      "example_labels_raw": [
+        "MAP 1A, 1B, 1C, 1D, 1E, 1F - Generalized Future Land Use",
+        "MAP 2 - Transportation"
+      ],
+      "reason": "The main generalized future land use maps and transportation map are referenced as separate map files and are not embedded as caption pages in this PDF."
+    },
+    {
+      "issue_type": "identifier_normalization_pending_review",
+      "section_label_raw": "INFRASTRUCTURE CHARGES (RC-Jul 2/02;E-Aug 17/02)",
+      "example_label_raw": "P-79A.1",
+      "reason": "MPS dotted policy identifiers are preserved raw in v1."
+    },
+    {
+      "issue_type": "identifier_normalization_pending_review",
+      "section_label_raw": "INTERIM GROWTH MANAGEMENT (RC-Apr 13/04;E-Apr 22/04)",
+      "example_label_raw": "P-79B.3",
+      "reason": "MPS dotted policy identifiers are preserved raw in v1."
+    }
+  ]
+}

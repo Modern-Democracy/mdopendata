@@ -1,0 +1,673 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/hrm/normalized_land_use_bundle.schema.json",
+  "title": "HRM Normalized Land Use Bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "standard_version",
+    "bundle_id",
+    "generated_at",
+    "sources",
+    "documents",
+    "jurisdictions",
+    "planning_areas",
+    "zones",
+    "spatial_features",
+    "definitions",
+    "regulations",
+    "policies",
+    "relationships",
+    "review_items"
+  ],
+  "properties": {
+    "standard_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "bundle_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/document"
+      }
+    },
+    "jurisdictions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/jurisdiction"
+      }
+    },
+    "planning_areas": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/planning_area"
+      }
+    },
+    "zones": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/zone"
+      }
+    },
+    "spatial_features": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/spatial_feature"
+      }
+    },
+    "definitions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/definition"
+      }
+    },
+    "regulations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/regulation"
+      }
+    },
+    "policies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/policy"
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/relationship"
+      }
+    },
+    "review_items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/review_item"
+      }
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "source_type",
+        "path",
+        "official_status"
+      ],
+      "properties": {
+        "source_id": { "type": "string", "minLength": 1 },
+        "source_type": {
+          "enum": [
+            "pdf",
+            "image",
+            "extracted_json",
+            "gis_layer",
+            "database_table"
+          ]
+        },
+        "path": { "type": "string", "minLength": 1 },
+        "official_status": {
+          "enum": [
+            "official",
+            "derived",
+            "unknown"
+          ]
+        },
+        "checksum": { "type": ["string", "null"] },
+        "metadata": { "$ref": "#/$defs/free_object" }
+      }
+    },
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "document_id",
+        "jurisdiction_id",
+        "document_type",
+        "title_raw",
+        "source_ids",
+        "raw_tree_ref"
+      ],
+      "properties": {
+        "document_id": { "type": "string", "minLength": 1 },
+        "jurisdiction_id": { "type": "string", "minLength": 1 },
+        "document_type": {
+          "enum": [
+            "land_use_bylaw",
+            "zoning_bylaw",
+            "municipal_planning_strategy",
+            "secondary_planning_strategy",
+            "map",
+            "schedule",
+            "appendix",
+            "definitions",
+            "general_provisions",
+            "unknown"
+          ]
+        },
+        "title_raw": { "type": "string" },
+        "source_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "effective_date": { "type": ["string", "null"], "format": "date" },
+        "revision_date": { "type": ["string", "null"], "format": "date" },
+        "raw_tree_ref": { "$ref": "#/$defs/ref" },
+        "metadata": { "$ref": "#/$defs/free_object" }
+      }
+    },
+    "jurisdiction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "jurisdiction_id",
+        "name_raw"
+      ],
+      "properties": {
+        "jurisdiction_id": { "type": "string", "minLength": 1 },
+        "name_raw": { "type": "string" },
+        "name_normalized": { "type": ["string", "null"] },
+        "metadata": { "$ref": "#/$defs/free_object" }
+      }
+    },
+    "planning_area": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "planning_area_id",
+        "jurisdiction_id",
+        "name_raw"
+      ],
+      "properties": {
+        "planning_area_id": { "type": "string", "minLength": 1 },
+        "jurisdiction_id": { "type": "string", "minLength": 1 },
+        "name_raw": { "type": "string" },
+        "source_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "metadata": { "$ref": "#/$defs/free_object" }
+      }
+    },
+    "zone": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "zone_id",
+        "jurisdiction_id",
+        "document_id",
+        "zone_code_raw",
+        "zone_code_normalized",
+        "zone_kind",
+        "classification",
+        "mapped_status",
+        "citations",
+        "raw_tree_ref"
+      ],
+      "properties": {
+        "zone_id": { "type": "string", "minLength": 1 },
+        "jurisdiction_id": { "type": "string", "minLength": 1 },
+        "document_id": { "type": "string", "minLength": 1 },
+        "zone_code_raw": { "type": "string" },
+        "zone_code_normalized": { "type": "string" },
+        "zone_name_raw": { "type": ["string", "null"] },
+        "zone_kind": {
+          "enum": [
+            "base",
+            "overlay",
+            "schedule_zone",
+            "planned_development",
+            "text_only",
+            "unknown"
+          ]
+        },
+        "classification": {
+          "enum": [
+            "primarily_residential",
+            "mixed_with_residential",
+            "nonresidential",
+            "special",
+            "planned",
+            "overlay",
+            "unknown"
+          ]
+        },
+        "mapped_status": {
+          "enum": [
+            "mapped",
+            "unmapped",
+            "partially_mapped",
+            "unknown"
+          ]
+        },
+        "citations": { "$ref": "#/$defs/citations" },
+        "raw_tree_ref": { "$ref": "#/$defs/ref" },
+        "metadata": { "$ref": "#/$defs/free_object" }
+      }
+    },
+    "spatial_feature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "feature_id",
+        "feature_type",
+        "name_raw",
+        "mapped_status"
+      ],
+      "properties": {
+        "feature_id": { "type": "string", "minLength": 1 },
+        "feature_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name_raw": { "type": ["string", "null"] },
+        "source_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "mapped_status": {
+          "enum": [
+            "mapped",
+            "unmapped",
+            "partially_mapped",
+            "unknown"
+          ]
+        },
+        "geometry_ref": { "$ref": "#/$defs/ref" },
+        "metadata": { "$ref": "#/$defs/free_object" }
+      }
+    },
+    "definition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "definition_id",
+        "document_id",
+        "term_raw",
+        "definition_text_raw",
+        "citations"
+      ],
+      "properties": {
+        "definition_id": { "type": "string", "minLength": 1 },
+        "document_id": { "type": "string", "minLength": 1 },
+        "term_raw": { "type": "string" },
+        "term_normalized": { "type": ["string", "null"] },
+        "definition_text_raw": { "type": "string" },
+        "citations": { "$ref": "#/$defs/citations" },
+        "metadata": { "$ref": "#/$defs/free_object" }
+      }
+    },
+    "regulation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "regulation_id",
+        "document_id",
+        "applies_to",
+        "regulation_type",
+        "subject",
+        "conditions",
+        "source_clause",
+        "citations",
+        "normalization_status"
+      ],
+      "properties": {
+        "regulation_id": { "type": "string", "minLength": 1 },
+        "document_id": { "type": "string", "minLength": 1 },
+        "applies_to": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/applicability_target" }
+        },
+        "regulation_type": {
+          "enum": [
+            "use_permission",
+            "dimensional_standard",
+            "parking",
+            "signage",
+            "procedure",
+            "definition",
+            "policy",
+            "prohibition",
+            "exception",
+            "bonus",
+            "reference"
+          ]
+        },
+        "subject": { "type": "string", "minLength": 1 },
+        "permission_status": {
+          "type": ["string", "null"],
+          "enum": [
+            "permitted",
+            "permitted_with_conditions",
+            "conditional",
+            "development_agreement",
+            "site_plan_approval",
+            "prohibited",
+            "not_specified",
+            "unknown",
+            null
+          ]
+        },
+        "value": {
+          "anyOf": [
+            { "$ref": "#/$defs/value" },
+            { "type": "null" }
+          ]
+        },
+        "conditions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/condition" }
+        },
+        "source_clause": { "$ref": "#/$defs/source_clause" },
+        "citations": { "$ref": "#/$defs/citations" },
+        "normalization_status": {
+          "enum": [
+            "normalized",
+            "partial",
+            "raw_only",
+            "needs_review"
+          ]
+        },
+        "metadata": { "$ref": "#/$defs/free_object" }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policy_id",
+        "document_id",
+        "policy_label_raw",
+        "text_raw",
+        "citations"
+      ],
+      "properties": {
+        "policy_id": { "type": "string", "minLength": 1 },
+        "document_id": { "type": "string", "minLength": 1 },
+        "policy_label_raw": { "type": "string" },
+        "policy_path": {
+          "type": ["array", "null"],
+          "items": { "type": "string" }
+        },
+        "text_raw": { "type": "string" },
+        "citations": { "$ref": "#/$defs/citations" },
+        "metadata": { "$ref": "#/$defs/free_object" }
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relationship_id",
+        "from_type",
+        "from_id",
+        "relationship_type",
+        "to_type",
+        "to_id",
+        "resolution_status",
+        "source_text",
+        "citations"
+      ],
+      "properties": {
+        "relationship_id": { "type": "string", "minLength": 1 },
+        "from_type": { "type": "string", "minLength": 1 },
+        "from_id": { "type": "string", "minLength": 1 },
+        "relationship_type": {
+          "enum": [
+            "includes_uses_from",
+            "subject_to_requirements_of",
+            "overrides",
+            "modifies",
+            "references",
+            "implements_policy",
+            "requires_development_agreement_under_policy",
+            "applies_within_spatial_feature",
+            "has_definition"
+          ]
+        },
+        "to_type": { "type": "string", "minLength": 1 },
+        "to_id": { "type": "string", "minLength": 1 },
+        "resolution_status": {
+          "enum": [
+            "resolved",
+            "unresolved",
+            "cycle_detected",
+            "blocked_by_review"
+          ]
+        },
+        "source_text": { "type": ["string", "null"] },
+        "citations": { "$ref": "#/$defs/citations" },
+        "metadata": { "$ref": "#/$defs/free_object" }
+      }
+    },
+    "review_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "review_item_id",
+        "review_type",
+        "status",
+        "source_text",
+        "citations"
+      ],
+      "properties": {
+        "review_item_id": { "type": "string", "minLength": 1 },
+        "review_type": {
+          "enum": [
+            "clause_syntax",
+            "unit_parse",
+            "condition_parse",
+            "relationship_resolution",
+            "classification",
+            "spatial_match",
+            "source_quality",
+            "other"
+          ]
+        },
+        "status": {
+          "enum": [
+            "open",
+            "approved",
+            "rejected",
+            "deferred"
+          ]
+        },
+        "source_text": { "type": ["string", "null"] },
+        "citations": { "$ref": "#/$defs/citations" },
+        "metadata": { "$ref": "#/$defs/free_object" }
+      }
+    },
+    "applicability_target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_type",
+        "target_id"
+      ],
+      "properties": {
+        "target_type": {
+          "enum": [
+            "jurisdiction",
+            "planning_area",
+            "document",
+            "zone",
+            "spatial_feature",
+            "policy",
+            "definition",
+            "global"
+          ]
+        },
+        "target_id": { "type": "string", "minLength": 1 }
+      }
+    },
+    "value": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "quantity",
+            "percentage",
+            "ratio",
+            "range",
+            "text",
+            "formula",
+            "boolean",
+            "list",
+            "reference"
+          ]
+        },
+        "comparator": {
+          "type": ["string", "null"],
+          "enum": [
+            "minimum",
+            "maximum",
+            "equal",
+            "less_than",
+            "less_than_or_equal",
+            "greater_than",
+            "greater_than_or_equal",
+            "between",
+            "varies",
+            "not_applicable",
+            "unknown",
+            null
+          ]
+        },
+        "original": { "$ref": "#/$defs/measured_value" },
+        "normalized": { "$ref": "#/$defs/measured_value" },
+        "text": { "type": ["string", "null"] },
+        "items": {
+          "type": "array",
+          "items": {}
+        },
+        "metadata": { "$ref": "#/$defs/free_object" }
+      }
+    },
+    "measured_value": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "amount": { "type": ["number", "null"] },
+        "unit": { "type": ["string", "null"] },
+        "text": { "type": ["string", "null"] },
+        "precision": {
+          "type": ["string", "null"],
+          "enum": [
+            "exact",
+            "converted",
+            "rounded",
+            "estimated",
+            "unknown",
+            null
+          ]
+        },
+        "conversion_factor": { "type": ["number", "null"] }
+      }
+    },
+    "condition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "condition_id",
+        "condition_type",
+        "operator",
+        "value",
+        "source_text"
+      ],
+      "properties": {
+        "condition_id": { "type": "string", "minLength": 1 },
+        "condition_type": { "type": "string", "minLength": 1 },
+        "operator": {
+          "enum": [
+            "equals",
+            "not_equals",
+            "in",
+            "not_in",
+            "contains",
+            "intersects",
+            "within",
+            "greater_than",
+            "less_than",
+            "exists",
+            "unknown"
+          ]
+        },
+        "value": {},
+        "source_text": { "type": ["string", "null"] },
+        "source_authority": { "type": ["string", "null"] },
+        "metadata": { "$ref": "#/$defs/free_object" }
+      }
+    },
+    "source_clause": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "clause_label_raw",
+        "clause_path",
+        "text_raw"
+      ],
+      "properties": {
+        "section_label_raw": { "type": ["string", "null"] },
+        "clause_label_raw": { "type": ["string", "null"] },
+        "clause_path": {
+          "type": ["array", "null"],
+          "items": { "type": "string" }
+        },
+        "text_raw": { "type": ["string", "null"] },
+        "raw_symbols": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "normalization_review_required": { "type": "boolean" }
+      }
+    },
+    "citations": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "source_id": { "type": ["string", "null"] },
+        "pdf_page_start": { "type": ["integer", "null"], "minimum": 1 },
+        "pdf_page_end": { "type": ["integer", "null"], "minimum": 1 },
+        "bylaw_page_start": { "type": ["integer", "null"], "minimum": 1 },
+        "bylaw_page_end": { "type": ["integer", "null"], "minimum": 1 },
+        "source_path": { "type": ["string", "null"] },
+        "source_json_pointer": { "type": ["string", "null"] }
+      }
+    },
+    "ref": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "source_id": { "type": ["string", "null"] },
+        "path": { "type": ["string", "null"] },
+        "json_pointer": { "type": ["string", "null"] },
+        "table": { "type": ["string", "null"] },
+        "identifier": { "type": ["string", "null"] }
+      }
+    },
+    "free_object": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

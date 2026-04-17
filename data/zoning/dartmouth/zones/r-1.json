@@ -16,12 +16,11 @@
     "approved_hierarchy_examples": [
       "21(e)",
       "21(ea)",
-      "21(ea)(1)"
-    ],
-    "pending_review_clause_patterns": [
+      "21(ea)(1)",
       "32(1)(a.1)",
       "32(1)(a.2)"
-    ]
+    ],
+    "pending_review_clause_patterns": []
   },
   "general_context": {
     "zone_class_reference": {
@@ -53,7 +52,11 @@
     },
     {
       "clause_label_raw": "32(1)(a.1)",
-      "clause_path": null,
+      "clause_path": [
+        "32",
+        "1",
+        "a.1"
+      ],
       "use_type": "residential_use",
       "use_name": "Two-family dwellings within the Urban Service Area; (RC-May 23/24;E-Jun 13/24)",
       "status": "active",
@@ -66,7 +69,11 @@
     },
     {
       "clause_label_raw": "32(1)(a.2)",
-      "clause_path": null,
+      "clause_path": [
+        "32",
+        "1",
+        "a.2"
+      ],
       "use_type": "residential_use",
       "use_name": "Apartment building containing 3 or 4 dwelling units within the Urban Service Area; (RC-May 23/24;E-Jun 13/24)",
       "status": "active",
@@ -82,8 +89,7 @@
       "clause_path": [
         "32",
         "1",
-        "a",
-        "a"
+        "aa"
       ],
       "use_type": "residential_use",
       "use_name": "Shared housing use with 10 or fewer bedrooms in conjunction with a permitted dwelling unit; (RC-Aug 9/22;E-Sep 15/22)",

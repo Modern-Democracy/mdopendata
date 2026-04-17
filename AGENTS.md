@@ -32,11 +32,10 @@
 - When parsing by-law zones or clauses, preserve each raw clause label exactly
   as written in the source.
 - For clause hierarchy normalization, the currently approved interpretation is
-  hierarchical addressing such as `21(e)` -> `21 -> e`, `21(ea)` -> `21 -> e ->
-  a`, and `21(ea)(1)` -> `21 -> e -> a -> 1`.
+  hierarchical addressing such as  `20(1)(a.1)` -> `20 -> 1 -> a.1`,
+  `21(e)` -> `21 -> e`, `21(ea)` -> `21 -> ea`, and `21(ea)(1)` -> `21 -> ea -> 1`.
 - Do not apply hierarchy normalization to a clause syntax pattern that has not
   already been explicitly reviewed in this repository context.
 - If a new clause syntax appears, stop and surface the exact raw examples for
   review before normalizing them. Examples already identified for review
-  include dotted subclauses like `20(1)(a.1)` and alphanumeric section-style
-  identifiers like `34B38`.
+  include alphanumeric section-style identifiers like `34B38`.

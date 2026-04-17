@@ -1,0 +1,78 @@
+{
+  "document_name": "Land Use By-law for Eastern Passage/Cow Bay",
+  "source_document_path": "docs/eastern-passage-cow-bay-land-use-bylaw.pdf",
+  "references": [
+    {
+      "reference_type": "schedule_map",
+      "source_label_raw": "Schedule A: Eastern Passage / Cow Bay Zoning Map",
+      "feature_key": "schedule-a-eastern-passage-cow-bay-zoning-map",
+      "feature_class": "zoning_boundary",
+      "pdf_page_start": 7,
+      "pdf_page_end": 7,
+      "bylaw_page_start": null,
+      "bylaw_page_end": null,
+      "planned_postgis_target": "spatial_features.geom",
+      "schedule_file": "schedules/schedule-a.json"
+    },
+    {
+      "reference_type": "schedule_map",
+      "source_label_raw": "SCHEDULE A-1: Heritage Hills",
+      "feature_key": "schedule-a-1-heritage-hills",
+      "feature_class": "site_specific_area",
+      "pdf_page_start": 128,
+      "pdf_page_end": 128,
+      "bylaw_page_start": 121,
+      "bylaw_page_end": 121,
+      "planned_postgis_target": "spatial_features.geom",
+      "schedule_file": "schedules/schedule-a-1.json"
+    },
+    {
+      "reference_type": "schedule_map",
+      "source_label_raw": "Schedule A-2: Wind Energy Zoning (RC-Jun 25/14;E-Oct 18/14)",
+      "feature_key": "schedule-a-2-wind-energy-zoning-rc-jun-25-14-e-oct-18-14",
+      "feature_class": "wind_energy_area",
+      "pdf_page_start": 129,
+      "pdf_page_end": 129,
+      "bylaw_page_start": 122,
+      "bylaw_page_end": 122,
+      "planned_postgis_target": "spatial_features.geom",
+      "schedule_file": "schedules/schedule-a-2.json"
+    },
+    {
+      "reference_type": "schedule_map",
+      "source_label_raw": "Schedule B: Areas of Elevated Archaeological Potential (RC-Jun",
+      "feature_key": "schedule-b-areas-of-elevated-archaeological-potential-rc-jun",
+      "feature_class": "archaeological_constraint_area",
+      "pdf_page_start": 130,
+      "pdf_page_end": 130,
+      "bylaw_page_start": 123,
+      "bylaw_page_end": 123,
+      "planned_postgis_target": "spatial_features.geom",
+      "schedule_file": "schedules/schedule-b.json"
+    },
+    {
+      "reference_type": "schedule_map",
+      "source_label_raw": "Schedule C: Wetlands (RC-Jun 25/14;E-Oct 18/14)",
+      "feature_key": "schedule-c-wetlands-rc-jun-25-14-e-oct-18-14",
+      "feature_class": "wetland_area",
+      "pdf_page_start": 131,
+      "pdf_page_end": 131,
+      "bylaw_page_start": 124,
+      "bylaw_page_end": 124,
+      "planned_postgis_target": "spatial_features.geom",
+      "schedule_file": "schedules/schedule-c.json"
+    },
+    {
+      "reference_type": "schedule_map",
+      "source_label_raw": "Schedule D: Developments Subject to Interim Bonus Zoning",
+      "feature_key": "schedule-d-developments-subject-to-interim-bonus-zoning",
+      "feature_class": "bonus_zoning_area",
+      "pdf_page_start": 132,
+      "pdf_page_end": 133,
+      "bylaw_page_start": 125,
+      "bylaw_page_end": 126,
+      "planned_postgis_target": "spatial_features.geom",
+      "schedule_file": "schedules/schedule-d.json"
+    }
+  ]
+}
