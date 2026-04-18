@@ -18,6 +18,27 @@ OUTPUT_ROOT = Path("data/normalized")
 BEDFORD_ZONES_PATH = Path("data/zoning/bedford/zones")
 BEDFORD_DOCUMENT_ID = "document:bedford-land-use-bylaw"
 HRM_JURISDICTION_ID = "jurisdiction:halifax-regional-municipality"
+DIMENSIONAL_KEYWORDS = [
+    "lot area",
+    "lot frontage",
+    "frontage",
+    "front yard",
+    "flankage yard",
+    "rear yard",
+    "side yard",
+    "height",
+    "lot coverage",
+    "floor area",
+    "gross floor area",
+    "separation distance",
+    "landscaped open space",
+    "parking",
+]
+DIMENSIONAL_PATTERN = re.compile(
+    r"(?P<amount>\d+(?:,\d{3})*(?:\.\d+)?)\s*"
+    r"(?P<unit>square metres|square meters|sq\.?\s*ft\.?|square feet|metres|meters|m2|m|ft\.?|feet|ha|%)",
+    re.IGNORECASE,
+)
 
 
 def utc_now():
@@ -297,6 +318,254 @@ def permission_status(use):
     return "permitted"
 
 
+def clean_number(value):
+    return float(value.replace(",", ""))
+
+
+def normalize_unit(unit):
+    if unit == "M":
+        return "unknown"
+    normalized = unit.lower().replace(".", "").strip()
+    normalized = re.sub(r"\s+", " ", normalized)
+    if normalized in {"ft", "feet"}:
+        return "ft"
+    if normalized in {"m", "metres", "meters"}:
+        return "m"
+    if normalized in {"sq ft", "square feet"}:
+        return "sq ft"
+    if normalized in {"square metres", "square meters", "m2"}:
+        return "m2"
+    if normalized == "%":
+        return "percent"
+    if normalized == "ha":
+        return "ha"
+    return normalized
+
+
+def converted_value(amount, unit):
+    if unit == "ft":
+        return amount * 0.3048, "m", 0.3048, "converted"
+    if unit == "sq ft":
+        return amount * 0.09290304, "m2", 0.09290304, "converted"
+    if unit in {"m", "m2", "ha", "percent"}:
+        return amount, unit, None, "exact"
+    return amount, unit, None, "unknown"
+
+
+def comparator_for_text(text):
+    lowered = text.lower()
+    if "minimum" in lowered or "at least" in lowered:
+        return "minimum"
+    if "maximum" in lowered or "not exceed" in lowered or "no more than" in lowered:
+        return "maximum"
+    return "unknown"
+
+
+def dimensional_subject(context):
+    lowered = context.lower()
+    for keyword in DIMENSIONAL_KEYWORDS:
+        if keyword in lowered:
+            return slugify(keyword)
+    return "dimensional-standard"
+
+
+def metric_context(text, start):
+    context = text[max(0, start - 120) : start]
+    sentence_start = max(context.rfind("."), context.rfind(";"), context.rfind(":"))
+    if sentence_start >= 0:
+        context = context[sentence_start + 1 :]
+    return " ".join(context.split())
+
+
+def dimensional_value(amount, unit, source_text):
+    normalized_amount, normalized_unit, factor, precision = converted_value(amount, unit)
+    return {
+        "kind": "percentage" if normalized_unit == "percent" else "quantity",
+        "comparator": comparator_for_text(source_text),
+        "original": {
+            "amount": amount,
+            "unit": unit,
+            "text": source_text,
+            "precision": "exact",
+            "conversion_factor": None,
+        },
+        "normalized": {
+            "amount": round(normalized_amount, 6),
+            "unit": normalized_unit,
+            "text": f"{round(normalized_amount, 6)} {normalized_unit}",
+            "precision": precision,
+            "conversion_factor": factor,
+        },
+        "text": source_text,
+        "items": [],
+        "metadata": {},
+    }
+
+
+def dimensional_conditions(context, zone_id, regulation_index):
+    conditions = []
+    lowered = context.lower()
+    road_classes = [
+        ("local", "local"),
+        ("collector", "collector"),
+        ("arterial", "arterial"),
+    ]
+    for raw, value in road_classes:
+        if raw in lowered:
+            conditions.append(
+                {
+                    "condition_id": stable_id(zone_id, "dimensional-condition", regulation_index, value),
+                    "condition_type": "road_class",
+                    "operator": "equals",
+                    "value": value,
+                    "source_text": context,
+                    "source_authority": "bylaw_text",
+                    "metadata": {},
+                }
+            )
+    return conditions
+
+
+def has_dimensional_signal(text):
+    lowered = text.lower()
+    return any(keyword in lowered for keyword in DIMENSIONAL_KEYWORDS) and DIMENSIONAL_PATTERN.search(text)
+
+
+def dimensional_regulations_from_text(
+    zone_id,
+    zone_code,
+    source_path,
+    text,
+    citations,
+    section_label_raw,
+    clause_label_raw,
+    source_kind,
+    start_index,
+):
+    regulations = []
+    if not text or not has_dimensional_signal(text):
+        return regulations
+
+    for local_index, match in enumerate(DIMENSIONAL_PATTERN.finditer(text), start=1):
+        context = metric_context(text, match.start())
+        sample = f"{context} {match.group(0)}".strip()
+        if not has_dimensional_signal(sample):
+            continue
+        amount = clean_number(match.group("amount"))
+        unit = normalize_unit(match.group("unit"))
+        if unit == "unknown":
+            continue
+        regulation_index = start_index + len(regulations) + 1
+        subject = dimensional_subject(sample)
+        regulations.append(
+            {
+                "regulation_id": stable_id(
+                    "regulation",
+                    "bedford",
+                    zone_code,
+                    source_kind,
+                    section_label_raw,
+                    clause_label_raw,
+                    local_index,
+                ),
+                "document_id": BEDFORD_DOCUMENT_ID,
+                "applies_to": [
+                    {
+                        "target_type": "zone",
+                        "target_id": zone_id,
+                    }
+                ],
+                "regulation_type": "dimensional_standard",
+                "subject": subject,
+                "permission_status": None,
+                "value": dimensional_value(amount, unit, sample),
+                "conditions": dimensional_conditions(sample, zone_id, regulation_index),
+                "source_clause": {
+                    "section_label_raw": section_label_raw,
+                    "clause_label_raw": clause_label_raw,
+                    "clause_path": None,
+                    "text_raw": text,
+                    "raw_symbols": [],
+                    "normalization_review_required": False,
+                },
+                "citations": citations,
+                "normalization_status": "partial",
+                "metadata": {
+                    "source_kind": source_kind,
+                    "source_text_sample": sample,
+                },
+            }
+        )
+    return regulations
+
+
+def dimensional_regulations_for_zone(zone_id, zone_code, source_path, document, start_index):
+    regulations = []
+
+    for section in document.get("requirement_sections", []):
+        section_label = section.get("section_label_raw")
+        for provision in section.get("provisions", []):
+            text = provision.get("text", "")
+            citations = citations_for(source_path, provision.get("citations") or section.get("citations"))
+            regulations.extend(
+                dimensional_regulations_from_text(
+                    zone_id,
+                    zone_code,
+                    source_path,
+                    text,
+                    citations,
+                    section_label,
+                    provision.get("provision_label_raw"),
+                    "requirement_sections",
+                    start_index + len(regulations),
+                )
+            )
+
+    for chapter in document.get("zone_specific_requirements", []):
+        chapter_title = chapter.get("chapter_title_raw")
+        for section in chapter.get("sections", []):
+            section_label = section.get("section_label_raw")
+            for provision in section.get("provisions", []):
+                text = provision.get("text", "")
+                citations = citations_for(source_path, provision.get("citations") or section.get("citations"))
+                regulations.extend(
+                    dimensional_regulations_from_text(
+                        zone_id,
+                        zone_code,
+                        source_path,
+                        text,
+                        citations,
+                        section_label,
+                        provision.get("provision_label_raw"),
+                        f"zone_specific_requirements:{chapter_title}",
+                        start_index + len(regulations),
+                    )
+                )
+
+    if not document.get("requirement_sections") and not document.get("zone_specific_requirements"):
+        for block_index, block in enumerate(document.get("content_blocks", []), start=1):
+            text = " ".join(
+                item
+                for item in [block.get("heading_context_raw"), block.get("text")]
+                if item
+            )
+            citations = zone_citations(source_path, document)
+            regulations.extend(
+                dimensional_regulations_from_text(
+                    zone_id,
+                    zone_code,
+                    source_path,
+                    text,
+                    citations,
+                    block.get("heading_context_raw"),
+                    f"content_block_{block_index}",
+                    "content_blocks",
+                    start_index + len(regulations),
+                )
+            )
+    return regulations
+
+
 def use_conditions(zone_id, regulation_index, conditions):
     normalized = []
     for index, condition in enumerate(conditions or [], start=1):
@@ -362,6 +631,122 @@ def review_items_for_zone(zone_id, source_path, document):
     return review_items
 
 
+def relationship_target_for_shared_requirement(reference):
+    title = (
+        reference.get("chapter_title_raw")
+        or reference.get("title_label_raw")
+        or reference.get("part_label_raw")
+    )
+    slug = reference.get("chapter_slug") or slugify(title or reference.get("part_label_raw") or "unknown")
+    return {
+        "to_type": "regulation",
+        "to_id": stable_id("regulation", "bedford", "requirement-reference", slug),
+        "source_text": title or reference.get("part_label_raw") or slug,
+        "metadata": {
+            "chapter_slug": reference.get("chapter_slug"),
+            "chapter_title_raw": reference.get("chapter_title_raw"),
+            "part_label_raw": reference.get("part_label_raw"),
+            "title_label_raw": reference.get("title_label_raw"),
+        },
+    }
+
+
+def shared_requirement_relationships_for_zone(zone_id, zone_code, source_path, document):
+    relationships = []
+    for index, reference in enumerate(document.get("shared_requirement_references", []), start=1):
+        target = relationship_target_for_shared_requirement(reference)
+        relationships.append(
+            {
+                "relationship_id": stable_id(
+                    "relationship",
+                    "bedford",
+                    zone_code,
+                    "shared-requirement",
+                    index,
+                ),
+                "from_type": "zone",
+                "from_id": zone_id,
+                "relationship_type": "subject_to_requirements_of",
+                "to_type": target["to_type"],
+                "to_id": target["to_id"],
+                "resolution_status": "resolved",
+                "source_text": target["source_text"],
+                "citations": citations_for(source_path, reference.get("citations")),
+                "metadata": {
+                    "source_path": source_path,
+                    **target["metadata"],
+                },
+            }
+        )
+    return relationships
+
+
+def requirement_reference_regulations_for_bedford(root):
+    targets = {}
+    zones_dir = root / BEDFORD_ZONES_PATH
+    for path in sorted(zones_dir.glob("*.json")):
+        source_path = relpath(path, root)
+        document = read_json(path)
+        for reference in document.get("shared_requirement_references", []):
+            target = relationship_target_for_shared_requirement(reference)
+            existing = targets.setdefault(
+                target["to_id"],
+                {
+                    "target": target,
+                    "source_paths": [],
+                    "citations": citations_for(source_path, reference.get("citations")),
+                },
+            )
+            existing["source_paths"].append(source_path)
+
+    regulations = []
+    for target_id, item in sorted(targets.items()):
+        target = item["target"]
+        regulations.append(
+            {
+                "regulation_id": target_id,
+                "document_id": BEDFORD_DOCUMENT_ID,
+                "applies_to": [
+                    {
+                        "target_type": "document",
+                        "target_id": BEDFORD_DOCUMENT_ID,
+                    }
+                ],
+                "regulation_type": "reference",
+                "subject": slugify(target["source_text"]),
+                "permission_status": None,
+                "value": {
+                    "kind": "reference",
+                    "comparator": None,
+                    "original": None,
+                    "normalized": None,
+                    "text": target["source_text"],
+                    "items": [],
+                    "metadata": {
+                        "target_id": target_id,
+                    },
+                },
+                "conditions": [],
+                "source_clause": {
+                    "section_label_raw": item["target"]["metadata"].get("part_label_raw"),
+                    "clause_label_raw": item["target"]["metadata"].get("chapter_slug"),
+                    "clause_path": None,
+                    "text_raw": target["source_text"],
+                    "raw_symbols": [],
+                    "normalization_review_required": False,
+                },
+                "citations": item["citations"],
+                "normalization_status": "partial",
+                "metadata": {
+                    **target["metadata"],
+                    "source_paths": sorted(set(item["source_paths"])),
+                    "source_reference_count": len(item["source_paths"]),
+                },
+            }
+        )
+    return regulations
+
+
 def normalize_bedford_bundle(root, generated_at, source_inventory):
     zones_dir = root / BEDFORD_ZONES_PATH
     bundle = empty_bundle(generated_at)
@@ -393,6 +778,7 @@ def normalize_bedford_bundle(root, generated_at, source_inventory):
             "metadata": {},
         }
     ]
+    bundle["regulations"].extend(requirement_reference_regulations_for_bedford(root))
 
     regulation_index = 0
     for path in sorted(zones_dir.glob("*.json")):
@@ -430,6 +816,9 @@ def normalize_bedford_bundle(root, generated_at, source_inventory):
             }
         )
         bundle["review_items"].extend(review_items_for_zone(zone_id, source_path, document))
+        bundle["relationships"].extend(
+            shared_requirement_relationships_for_zone(zone_id, zone_code, source_path, document)
+        )
 
         for use_index, use in enumerate(permitted_uses, start=1):
             regulation_index += 1
@@ -461,6 +850,15 @@ def normalize_bedford_bundle(root, generated_at, source_inventory):
                     },
                 }
             )
+        dimensional_regulations = dimensional_regulations_for_zone(
+            zone_id,
+            zone_code,
+            source_path,
+            document,
+            regulation_index,
+        )
+        regulation_index += len(dimensional_regulations)
+        bundle["regulations"].extend(dimensional_regulations)
     return bundle
 
 
@@ -745,6 +1143,11 @@ def main():
 
     bundle = normalize_bedford_bundle(root, generated_at, source_inventory)
     stats = bundle_stats(bundle, source_inventory)
+    unresolved_relationship_count = sum(
+        1
+        for relationship in bundle["relationships"]
+        if relationship.get("resolution_status") == "unresolved"
+    )
     write_json(bundle_path, bundle)
     validation_result = validate_bundle(bundle_path, root / SCHEMA_PATH)
     write_json(validation_path, validation_result)
@@ -780,13 +1183,13 @@ def main():
         "validation": {
             "schema_valid": validation_result["schema_valid"],
             "review_blocked_count": len(bundle["review_items"]),
-            "relationship_unresolved_count": 0,
+            "relationship_unresolved_count": unresolved_relationship_count,
             "conversion_warning_count": 0,
         },
         "qa_summary": {
             "warnings": 0,
             "review_items": len(bundle["review_items"]),
-            "unresolved_relationships": 0,
+            "unresolved_relationships": unresolved_relationship_count,
             "blocked_normalizations": len(bundle["review_items"]),
         },
         "review_policy": {
