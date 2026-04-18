@@ -23,6 +23,7 @@ DIMENSIONAL_KEYWORDS = [
     "lot frontage",
     "frontage",
     "front yard",
+    "minimum yard",
     "flankage yard",
     "rear yard",
     "side yard",
@@ -33,12 +34,24 @@ DIMENSIONAL_KEYWORDS = [
     "separation distance",
     "landscaped open space",
     "parking",
+    "number of units",
+    "dwelling units",
+    "distance between",
 ]
 DIMENSIONAL_PATTERN = re.compile(
-    r"(?P<amount>\d+(?:,\d{3})*(?:\.\d+)?)\s*"
-    r"(?P<unit>square metres|square meters|sq\.?\s*ft\.?|square feet|metres|meters|m2|m|ft\.?|feet|ha|%)",
+    r"(?<![\d.])(?P<amount>\d+(?:,\d{3})*(?:\.\d+)?)\s*"
+    r"(?P<unit>square metres|square meters|sq\.?\s*ft\.?|sq\.?\s*m\.?|square feet|metres|meters|percent|units|unit|m2|m|ft\.?|feet|ha|%)",
     re.IGNORECASE,
 )
+APPROVED_SINGLE_SECTION_CODES_BY_ZONE = {
+    "CD-1": {"26.1", "26.2", "26.3", "26.4", "26.5"},
+    "CD-2": {"27.1", "27.2", "27.3", "27.4", "27.5", "27.6"},
+    "CD-3": {"28.1", "28.2", "28.3", "28.4", "28.5", "28.6"},
+    "ICH": {"29.1", "29.2"},
+    "RPK": {"23A.1", "23A.2"},
+    "UR": {"30.1", "30.2"},
+    "US": {"31.1", "31.2"},
+}
 
 
 def utc_now():
@@ -214,6 +227,41 @@ def stable_id(*parts):
     return ":".join(slugify(str(part)) for part in parts if part is not None and str(part) != "")
 
 
+def normalized_clause_path(zone_code, label):
+    approved = APPROVED_SINGLE_SECTION_CODES_BY_ZONE.get(zone_code, set())
+    if label in approved:
+        return [label]
+    return None
+
+
+def source_clause_path(zone_code, section_label_raw, clause_label_raw):
+    direct = normalized_clause_path(zone_code, clause_label_raw) or normalized_clause_path(
+        zone_code, section_label_raw
+    )
+    if direct:
+        return direct
+    if (
+        section_label_raw
+        and clause_label_raw
+        and clause_label_raw != "section"
+        and clause_label_raw != section_label_raw
+        and re.fullmatch(r"[A-Za-z]+|[ivxlcdm]+|\d+", str(clause_label_raw), re.IGNORECASE)
+    ):
+        return [str(section_label_raw), str(clause_label_raw)]
+    if section_label_raw and clause_label_raw == "section":
+        return [str(section_label_raw)]
+    return None
+
+
+def unresolved_pending_patterns(zone_code, document):
+    policy = document.get("normalization_policy", {})
+    return [
+        pattern
+        for pattern in policy.get("pending_review_clause_patterns", [])
+        if not normalized_clause_path(zone_code, pattern)
+    ]
+
+
 def source_record(source_id, source_type, path, official_status, metadata=None):
     return {
         "source_id": source_id,
@@ -333,10 +381,12 @@ def normalize_unit(unit):
         return "m"
     if normalized in {"sq ft", "square feet"}:
         return "sq ft"
-    if normalized in {"square metres", "square meters", "m2"}:
+    if normalized in {"square metres", "square meters", "sq m", "m2"}:
         return "m2"
-    if normalized == "%":
+    if normalized in {"%", "percent"}:
         return "percent"
+    if normalized in {"unit", "units"}:
+        return "unit"
     if normalized == "ha":
         return "ha"
     return normalized
@@ -347,7 +397,9 @@ def converted_value(amount, unit):
         return amount * 0.3048, "m", 0.3048, "converted"
     if unit == "sq ft":
         return amount * 0.09290304, "m2", 0.09290304, "converted"
-    if unit in {"m", "m2", "ha", "percent"}:
+    if unit == "unit":
+        return amount, "unit", None, "exact"
+    if unit in {"m", "m2", "ha", "percent", "unit"}:
         return amount, unit, None, "exact"
     return amount, unit, None, "unknown"
 
@@ -369,12 +421,30 @@ def dimensional_subject(context):
     return "dimensional-standard"
 
 
-def metric_context(text, start):
-    context = text[max(0, start - 120) : start]
-    sentence_start = max(context.rfind("."), context.rfind(";"), context.rfind(":"))
-    if sentence_start >= 0:
-        context = context[sentence_start + 1 :]
+def metric_context(text, start, preserve_clause_context=False):
+    context = text[max(0, start - (320 if preserve_clause_context else 120)) : start]
+    if not preserve_clause_context:
+        sentence_start = max(context.rfind("."), context.rfind(";"), context.rfind(":"))
+        if sentence_start >= 0:
+            context = context[sentence_start + 1 :]
     return " ".join(context.split())
+
+
+def is_parenthetical_imperial_equivalent(text, start, unit):
+    if unit not in {"ft", "sq ft"}:
+        return False
+    open_position = text.rfind("(", 0, start)
+    close_position = text.rfind(")", 0, start)
+    if open_position <= close_position:
+        return False
+    prior = text[max(0, open_position - 100) : open_position].lower()
+    return bool(
+        re.search(
+            r"\d+(?:,\d{3})*(?:\.\d+)?\s*"
+            r"(?:square metres|square meters|sq\.?\s*m\.?|metres|meters|m2|m)\b",
+            prior,
+        )
+    )
 
 
 def dimensional_value(amount, unit, source_text):
@@ -447,13 +517,19 @@ def dimensional_regulations_from_text(
         return regulations
 
     for local_index, match in enumerate(DIMENSIONAL_PATTERN.finditer(text), start=1):
-        context = metric_context(text, match.start())
-        sample = f"{context} {match.group(0)}".strip()
-        if not has_dimensional_signal(sample):
-            continue
+        context = metric_context(
+            text,
+            match.start(),
+            preserve_clause_context=source_kind == "requirement_sections",
+        )
         amount = clean_number(match.group("amount"))
         unit = normalize_unit(match.group("unit"))
         if unit == "unknown":
+            continue
+        if is_parenthetical_imperial_equivalent(text, match.start(), unit):
+            continue
+        sample = f"{context} {match.group(0)}".strip()
+        if not has_dimensional_signal(sample):
             continue
         regulation_index = start_index + len(regulations) + 1
         subject = dimensional_subject(sample)
@@ -483,7 +559,7 @@ def dimensional_regulations_from_text(
                 "source_clause": {
                     "section_label_raw": section_label_raw,
                     "clause_label_raw": clause_label_raw,
-                    "clause_path": None,
+                    "clause_path": source_clause_path(zone_code, section_label_raw, clause_label_raw),
                     "text_raw": text,
                     "raw_symbols": [],
                     "normalization_review_required": False,
@@ -583,22 +659,23 @@ def use_conditions(zone_id, regulation_index, conditions):
     return normalized
 
 
-def source_clause_for(use):
+def source_clause_for(use, zone_code):
     symbols = use.get("permission_symbols") or []
+    clause_path = use.get("clause_path")
     return {
         "section_label_raw": use.get("table_label_raw"),
         "clause_label_raw": use.get("clause_label_raw"),
-        "clause_path": use.get("clause_path"),
+        "clause_path": clause_path,
         "text_raw": use.get("use_name"),
         "raw_symbols": symbols,
         "normalization_review_required": False,
     }
 
 
-def review_items_for_zone(zone_id, source_path, document):
+def review_items_for_zone(zone_id, zone_code, source_path, document):
     review_items = []
-    policy = document.get("normalization_policy", {})
-    for index, pattern in enumerate(policy.get("pending_review_clause_patterns", []), start=1):
+    unresolved_patterns = unresolved_pending_patterns(zone_code, document)
+    for index, pattern in enumerate(unresolved_patterns, start=1):
         review_items.append(
             {
                 "review_item_id": stable_id(zone_id, "clause-syntax", index),
@@ -614,6 +691,12 @@ def review_items_for_zone(zone_id, source_path, document):
             }
         )
     for index, issue in enumerate(document.get("open_issues", []), start=1):
+        if (
+            isinstance(issue, dict)
+            and issue.get("issue_type") == "normalization_review"
+            and not unresolved_patterns
+        ):
+            continue
         review_items.append(
             {
                 "review_item_id": stable_id(zone_id, "open-issue", index),
@@ -815,7 +898,7 @@ def normalize_bedford_bundle(root, generated_at, source_inventory):
                 },
             }
         )
-        bundle["review_items"].extend(review_items_for_zone(zone_id, source_path, document))
+        bundle["review_items"].extend(review_items_for_zone(zone_id, zone_code, source_path, document))
         bundle["relationships"].extend(
             shared_requirement_relationships_for_zone(zone_id, zone_code, source_path, document)
         )
@@ -839,7 +922,7 @@ def normalize_bedford_bundle(root, generated_at, source_inventory):
                     "permission_status": permission_status(use),
                     "value": None,
                     "conditions": use_conditions(zone_id, use_index, use.get("conditions")),
-                    "source_clause": source_clause_for(use),
+                    "source_clause": source_clause_for(use, zone_code),
                     "citations": citations,
                     "normalization_status": "partial",
                     "metadata": {

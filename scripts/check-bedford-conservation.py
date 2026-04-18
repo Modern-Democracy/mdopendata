@@ -6,6 +6,15 @@ from pathlib import Path
 
 DEFAULT_SOURCE_DIR = Path("data/zoning/bedford/zones")
 DEFAULT_BUNDLE_PATH = Path("data/normalized/runs/20260417T010000Z/bundle.json")
+APPROVED_SINGLE_SECTION_CODES_BY_ZONE = {
+    "CD-1": {"26.1", "26.2", "26.3", "26.4", "26.5"},
+    "CD-2": {"27.1", "27.2", "27.3", "27.4", "27.5", "27.6"},
+    "CD-3": {"28.1", "28.2", "28.3", "28.4", "28.5", "28.6"},
+    "ICH": {"29.1", "29.2"},
+    "RPK": {"23A.1", "23A.2"},
+    "UR": {"30.1", "30.2"},
+    "US": {"31.1", "31.2"},
+}
 
 
 def read_json(path):
@@ -17,10 +26,23 @@ def source_zone_code(path, document):
 
 
 def source_review_count(document):
+    zone_code = document.get("document_metadata", {}).get("zone_code")
     policy = document.get("normalization_policy", {})
-    return len(policy.get("pending_review_clause_patterns", [])) + len(
-        document.get("open_issues", [])
-    )
+    unresolved_patterns = [
+        pattern
+        for pattern in policy.get("pending_review_clause_patterns", [])
+        if pattern not in APPROVED_SINGLE_SECTION_CODES_BY_ZONE.get(zone_code, set())
+    ]
+    open_issues = [
+        issue
+        for issue in document.get("open_issues", [])
+        if not (
+            isinstance(issue, dict)
+            and issue.get("issue_type") == "normalization_review"
+            and not unresolved_patterns
+        )
+    ]
+    return len(unresolved_patterns) + len(open_issues)
 
 
 def populated_unmapped_sections(document):

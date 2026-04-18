@@ -13,20 +13,27 @@
     "version": "0.1.0",
     "working_directory": "D:\\opendata\\mdopendata"
   },
-  "generated_at": "2026-04-18T20:56:24.976339Z",
+  "generated_at": "2026-04-18T21:42:46.364652Z",
   "git": {
     "branch": "main",
-    "commit": "0e4b3eab38f08dae4fe7311d2d0e66fe0523677b",
+    "commit": "cce4dacf365b5d59ae7545f2e150771d1dcba79d",
     "dirty": true,
     "root": "D:\\opendata\\mdopendata",
     "status_short": [
       "M data/normalized/runs/20260417T010000Z/bundle.json",
-      " M data/normalized/runs/20260417T010000Z/bundle.validation.json",
       " M data/normalized/runs/20260417T010000Z/manifest.json",
       " M data/normalized/runs/20260417T010000Z/review-items.json",
       " M data/normalized/runs/20260417T010000Z/stats.json",
-      " M scripts/normalize-land-use.py",
-      "?? scripts/check-bedford-conservation.py"
+      " M data/zoning/bedford/zones/cd-1.json",
+      " M data/zoning/bedford/zones/cd-2.json",
+      " M data/zoning/bedford/zones/cd-3.json",
+      " M data/zoning/bedford/zones/chr.json",
+      " M data/zoning/bedford/zones/ich.json",
+      " M data/zoning/bedford/zones/rpk.json",
+      " M data/zoning/bedford/zones/ur.json",
+      " M data/zoning/bedford/zones/us.json",
+      " M scripts/check-bedford-conservation.py",
+      " M scripts/normalize-land-use.py"
     ]
   },
   "inputs_filter": {
@@ -42,14 +49,14 @@
   },
   "output_inventory": [
     {
-      "bytes": 24999,
+      "bytes": 25303,
       "checksum_sha256": null,
       "output_type": "manifest",
       "path": "data/normalized/runs/20260417T010000Z/manifest.json",
       "record_counts": {}
     },
     {
-      "bytes": 1735868,
+      "bytes": 1786849,
       "checksum_sha256": null,
       "output_type": "bundle",
       "path": "data/normalized/runs/20260417T010000Z/bundle.json",
@@ -63,14 +70,14 @@
       "record_counts": {}
     },
     {
-      "bytes": 27099,
+      "bytes": 4,
       "checksum_sha256": null,
       "output_type": "review_items",
       "path": "data/normalized/runs/20260417T010000Z/review-items.json",
       "record_counts": {}
     },
     {
-      "bytes": 384,
+      "bytes": 363,
       "checksum_sha256": null,
       "output_type": "stats",
       "path": "data/normalized/runs/20260417T010000Z/stats.json",
@@ -78,8 +85,8 @@
     }
   ],
   "qa_summary": {
-    "blocked_normalizations": 37,
-    "review_items": 37,
+    "blocked_normalizations": 0,
+    "review_items": 0,
     "unresolved_relationships": 0,
     "warnings": 0
   },
@@ -439,27 +446,27 @@
       "source_type": "extracted_json"
     },
     {
-      "bytes": 21100,
+      "bytes": 20769,
       "checksum_sha256": null,
-      "modified_at": "2026-04-13T12:27:19.031540Z",
+      "modified_at": "2026-04-18T21:36:04.445538Z",
       "path": "data/zoning/bedford/zones/cd-1.json",
       "role": "source_extract",
       "source_id": "data/zoning/bedford/zones/cd-1.json",
       "source_type": "extracted_json"
     },
     {
-      "bytes": 12883,
+      "bytes": 12537,
       "checksum_sha256": null,
-      "modified_at": "2026-04-13T12:27:19.032543Z",
+      "modified_at": "2026-04-18T21:36:10.522577Z",
       "path": "data/zoning/bedford/zones/cd-2.json",
       "role": "source_extract",
       "source_id": "data/zoning/bedford/zones/cd-2.json",
       "source_type": "extracted_json"
     },
     {
-      "bytes": 12251,
+      "bytes": 11905,
       "checksum_sha256": null,
-      "modified_at": "2026-04-13T12:27:19.033542Z",
+      "modified_at": "2026-04-18T21:36:16.148066Z",
       "path": "data/zoning/bedford/zones/cd-3.json",
       "role": "source_extract",
       "source_id": "data/zoning/bedford/zones/cd-3.json",
@@ -475,9 +482,9 @@
       "source_type": "extracted_json"
     },
     {
-      "bytes": 28723,
+      "bytes": 35817,
       "checksum_sha256": null,
-      "modified_at": "2026-04-13T12:27:19.002664Z",
+      "modified_at": "2026-04-18T21:35:58.838794Z",
       "path": "data/zoning/bedford/zones/chr.json",
       "role": "source_extract",
       "source_id": "data/zoning/bedford/zones/chr.json",
@@ -556,9 +563,9 @@
       "source_type": "extracted_json"
     },
     {
-      "bytes": 3364,
+      "bytes": 3078,
       "checksum_sha256": null,
-      "modified_at": "2026-04-13T12:27:19.034543Z",
+      "modified_at": "2026-04-18T21:42:03.842577Z",
       "path": "data/zoning/bedford/zones/ich.json",
       "role": "source_extract",
       "source_id": "data/zoning/bedford/zones/ich.json",
@@ -628,9 +635,9 @@
       "source_type": "extracted_json"
     },
     {
-      "bytes": 3834,
+      "bytes": 3546,
       "checksum_sha256": null,
-      "modified_at": "2026-04-13T12:27:19.025036Z",
+      "modified_at": "2026-04-18T21:42:08.023075Z",
       "path": "data/zoning/bedford/zones/rpk.json",
       "role": "source_extract",
       "source_id": "data/zoning/bedford/zones/rpk.json",
@@ -691,18 +698,18 @@
       "source_type": "extracted_json"
     },
     {
-      "bytes": 3932,
+      "bytes": 3646,
       "checksum_sha256": null,
-      "modified_at": "2026-04-13T12:27:19.035546Z",
+      "modified_at": "2026-04-18T21:42:12.192735Z",
       "path": "data/zoning/bedford/zones/ur.json",
       "role": "source_extract",
       "source_id": "data/zoning/bedford/zones/ur.json",
       "source_type": "extracted_json"
     },
     {
-      "bytes": 4081,
+      "bytes": 3795,
       "checksum_sha256": null,
-      "modified_at": "2026-04-13T12:27:19.035546Z",
+      "modified_at": "2026-04-18T21:42:18.142716Z",
       "path": "data/zoning/bedford/zones/us.json",
       "role": "source_extract",
       "source_id": "data/zoning/bedford/zones/us.json",
@@ -723,7 +730,7 @@
   "validation": {
     "conversion_warning_count": 0,
     "relationship_unresolved_count": 0,
-    "review_blocked_count": 37,
+    "review_blocked_count": 0,
     "schema_valid": true
   }
 }
