@@ -19,8 +19,8 @@ SOURCE_DOCUMENT_PATH = "docs/bedford-land-use-bylaw.pdf"
 BYLAW_PAGE_RE = re.compile(r"Bedford Land Use By-law Page\s+(\d+)", re.IGNORECASE)
 MAIN_DEFINITION_RE = re.compile(r"^(.+?)\s+-\s+(means|includes)\s+(.*)$", re.IGNORECASE)
 FALLBACK_DEFINITION_RE = re.compile(r"^([A-Z][A-Za-z0-9/,'(). \-]+?)\s+(means|includes)\s+(.*)$", re.IGNORECASE)
-SECTION_RE = re.compile(r"^([A-Z]{0,4}-?\d+[A-Z]?(?:\.\d+)?)\.?\s+(.*)$")
-SUBCLAUSE_RE = re.compile(r"^(?:\(([A-Za-z0-9.]+)\)|([A-Za-z0-9.]+))[\).]\s+(.*)$")
+SECTION_RE = re.compile(r"^([A-Z]{0,4}-?\d+(?:\s*[A-Z]\d*)?(?:\.\d+)?)\.?\s+(.*)$")
+SUBCLAUSE_RE = re.compile(r"^(?:\(([A-Za-z0-9.]+)\)|([A-Za-z0-9.]+)[\).])\s+(.*)$")
 MAIN_ZONE_HEADER_RE = re.compile(r"PART\s+([0-9A-Z.]+):\s+(.+?)\s+(ZONE|DISTRICT)\b", re.IGNORECASE)
 PART_RE = re.compile(r"^PART\s+([0-9A-Z.]+):\s*(.*)$", re.IGNORECASE)
 SCHEDULE_RE = re.compile(r"^(SCHEDULE\s+[A-Z0-9-]+|Schedule\s+[A-Z0-9-]+)\s*:\s*(.*)$")
@@ -41,6 +41,33 @@ PG_ZONE_LABELS = {
     "BW-CON": "Bedford West Conservation",
 }
 PG_TABLE_SYMBOLS = set("①②③④⑤⑥⑦")
+
+ROMAN_TOKENS = {
+    "i",
+    "ii",
+    "iii",
+    "iv",
+    "v",
+    "vi",
+    "vii",
+    "viii",
+    "ix",
+    "x",
+    "xi",
+    "xii",
+    "xiii",
+    "xiv",
+    "xv",
+    "xvi",
+    "xvii",
+    "xviii",
+    "xix",
+    "xx",
+}
+MEASUREMENT_START_RE = re.compile(
+    r"^(metres?|meters?|feet|foot|square\s+(?:metres?|meters?|feet|foot)|per\s+|percent|%)\b",
+    re.IGNORECASE,
+)
 
 
 def compact_space(value: str) -> str:
@@ -68,23 +95,44 @@ def repair_split_uppercase_words(value: str) -> str:
     return repaired
 
 
+def normalize_section_label(label: str) -> str:
+    cleaned = compact_space(label)
+    if re.fullmatch(r"\d+\s+[A-Z]\d+", cleaned):
+        return cleaned.replace(" ", "")
+    return cleaned
+
+
+def is_label_token(label: str, *, allow_section_space: bool = False) -> bool:
+    cleaned = normalize_section_label(label) if allow_section_space else label.strip()
+    if not cleaned or re.search(r"\s", cleaned):
+        return False
+    if cleaned.lower() in ROMAN_TOKENS:
+        return True
+    return bool(
+        re.fullmatch(
+            r"[A-Za-z]+|\d+|[A-Za-z]?\d+\.\d+|[A-Za-z]+\.\d+|[A-Za-z]+-?\d+|\d+[A-Za-z]+\d*",
+            cleaned,
+        )
+    )
+
+
+def is_likely_measurement_fragment(label: str, text: str) -> bool:
+    return bool(re.fullmatch(r"\d+\.\d+", label) and MEASUREMENT_START_RE.match(compact_space(text)))
+
+
 def normalize_clause_path(label: str) -> list[str] | None:
-    cleaned = compact_space(label).replace(" ", "")
-    match = re.fullmatch(r"([A-Z]{0,4}-?\d+[A-Z]?)(\([A-Za-z0-9.]+\))*", cleaned)
+    cleaned = compact_space(label)
+    match = re.fullmatch(r"([A-Z]{0,4}-?\d+(?:[A-Z]\d*)?(?:\.\d+)?)(\([A-Za-z0-9.]+\))*", cleaned)
     if not match:
         return None
-    root = re.match(r"^[A-Z]{0,4}-?\d+[A-Z]?", cleaned)
+    root = re.match(r"^[A-Z]{0,4}-?\d+(?:[A-Z]\d*)?(?:\.\d+)?", cleaned)
     if not root:
         return None
     path = [root.group(0)]
-    roman_tokens = {"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"}
     for token in re.findall(r"\(([A-Za-z0-9.]+)\)", cleaned):
-        if "." in token:
+        if not is_label_token(token):
             return None
-        if token in roman_tokens:
-            path.append(token)
-        else:
-            path.append(token)
+        path.append(token)
     return path
 
 
@@ -135,6 +183,12 @@ def is_heading_like(line: str) -> bool:
     if cleaned.endswith(":"):
         return True
     return cleaned == cleaned.upper()
+
+
+def is_section_heading_context(line: str) -> bool:
+    cleaned = compact_space(line)
+    letters = re.sub(r"[^A-Za-z]", "", cleaned)
+    return len(letters) >= 4 and cleaned == cleaned.upper()
 
 
 def body_lines(pages: list[dict], start: int, end: int, header_prefixes: tuple[str, ...] = ()) -> list[str]:
@@ -238,49 +292,95 @@ def parse_numbered_sections(lines: list[str], citations: dict) -> tuple[list[dic
     sections: list[dict] = []
     current: dict | None = None
     pending_review: set[str] = set()
+    pending_heading: list[str] = []
     for line in lines:
         match = SECTION_RE.match(line)
         if match and not line.startswith("("):
+            section_label = normalize_section_label(match.group(1))
+            section_title = compact_space(match.group(2))
+            if not is_label_token(section_label, allow_section_space=True) or is_likely_measurement_fragment(section_label, section_title):
+                if current is not None:
+                    if current["provisions"]:
+                        last = current["provisions"][-1]
+                        last["text"] = compact_space(f"{last['text']} {line}")
+                        if "repealed" in last["text"].lower():
+                            last["status"] = "repealed"
+                    else:
+                        current["text_parts"].append(line)
+                continue
             if current is not None:
                 sections.append(current)
+            heading_title = compact_space(" ".join(pending_heading))
             current = {
-                "section_label_raw": match.group(1),
-                "title_label_raw": match.group(2),
-                "text_parts": [match.group(2)],
+                "section_label_raw": section_label,
+                "title_label_raw": heading_title or section_title,
+                "text_parts": [section_title],
                 "provisions": [],
                 "citations": dict(citations),
             }
-            if normalize_clause_path(match.group(1)) is None:
-                pending_review.add(match.group(1))
+            pending_heading = []
+            if normalize_clause_path(section_label) is None:
+                pending_review.add(section_label)
+            continue
+        if is_section_heading_context(line):
+            pending_heading.append(line)
             continue
         if current is None:
+            pending_heading = []
             continue
         submatch = SUBCLAUSE_RE.match(line)
         if submatch:
             provision_label = submatch.group(1) or submatch.group(2)
+            provision_text = compact_space(submatch.group(3))
+            if not is_label_token(provision_label) or is_likely_measurement_fragment(provision_label, provision_text):
+                if current["provisions"]:
+                    last = current["provisions"][-1]
+                    last["text"] = compact_space(f"{last['text']} {line}")
+                    if "repealed" in last["text"].lower():
+                        last["status"] = "repealed"
+                else:
+                    current["text_parts"].append(line)
+                continue
             current["provisions"].append(
                 {
                     "provision_label_raw": provision_label,
-                    "text": compact_space(submatch.group(3)),
-                    "status": "repealed" if "repealed" in submatch.group(3).lower() else "active",
+                    "text": provision_text,
+                    "status": "repealed" if "repealed" in provision_text.lower() else "active",
                     "citations": dict(citations),
                 }
             )
         else:
-            current["text_parts"].append(line)
+            if current["provisions"]:
+                last = current["provisions"][-1]
+                last["text"] = compact_space(f"{last['text']} {line}")
+                if "repealed" in last["text"].lower():
+                    last["status"] = "repealed"
+            else:
+                current["text_parts"].append(line)
     if current is not None:
         sections.append(current)
 
     payload = []
     for order_index, section in enumerate(sections, start=1):
         section_text = compact_space(" ".join(section["text_parts"]))
+        provisions = list(section["provisions"])
+        if section_text and provisions:
+            provisions.insert(
+                0,
+                {
+                    "provision_label_raw": "section",
+                    "text": section_text,
+                    "status": "repealed" if "repealed" in section_text.lower() else "active",
+                    "citations": section["citations"],
+                },
+            )
         payload.append(
             {
                 "order_index": order_index,
                 "section_label_raw": section["section_label_raw"],
                 "title_label_raw": section["title_label_raw"],
                 "citations": section["citations"],
-                "provisions": section["provisions"]
+                "provisions": provisions
                 or [
                     {
                         "provision_label_raw": section["section_label_raw"],
@@ -324,6 +424,9 @@ def split_zone_intro(lines: list[str]) -> tuple[list[dict], list[str]]:
             if match:
                 label = match.group(1) or match.group(2)
                 text = compact_space(match.group(3))
+                if not is_label_token(label) or is_likely_measurement_fragment(label, text):
+                    remainder.append(line)
+                    continue
                 permitted.append(
                     {
                         "clause_label_raw": label,
