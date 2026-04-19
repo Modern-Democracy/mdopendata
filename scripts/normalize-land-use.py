@@ -496,6 +496,302 @@ def dimensional_conditions(context, zone_id, regulation_index):
     return conditions
 
 
+CHR_SCOPED_DIMENSIONAL_CLAUSES = {
+    ("1", "a"): {
+        "subject": "lot-frontage",
+        "comparator": "minimum",
+        "alternatives": [
+            {
+                "source_text": "9.75 metres (32 feet) for Apartment, single unit dwellings and duplexes",
+                "amount": 9.75,
+                "unit": "m",
+                "imperial_amount": 32.0,
+                "imperial_unit": "ft",
+                "applicability": [
+                    ("construction_type", "apartment", "Apartment"),
+                    ("construction_type", "single_unit_dwelling", "single unit dwellings"),
+                    ("construction_type", "duplex", "duplexes"),
+                ],
+                "qualifiers": [],
+            },
+            {
+                "source_text": "7.62 metres (25 feet) per unit for semi-detached",
+                "amount": 7.62,
+                "unit": "m",
+                "imperial_amount": 25.0,
+                "imperial_unit": "ft",
+                "applicability": [
+                    ("construction_type", "semi_detached", "semi-detached"),
+                ],
+                "qualifiers": [
+                    ("rate_basis", "per_unit", "per unit"),
+                ],
+            },
+        ],
+    },
+    ("1", "b"): {
+        "subject": "lot-area",
+        "comparator": "minimum",
+        "alternatives": [
+            {
+                "source_text": "315.9 square metres (3,400 square feet) for single unit dwellings and duplexes",
+                "amount": 315.9,
+                "unit": "m2",
+                "imperial_amount": 3400.0,
+                "imperial_unit": "sq ft",
+                "applicability": [
+                    ("construction_type", "single_unit_dwelling", "single unit dwellings"),
+                    ("construction_type", "duplex", "duplexes"),
+                ],
+                "qualifiers": [],
+            },
+            {
+                "source_text": "232.3 square metres (2,500 square feet) per unit for a semi-detached dwelling",
+                "amount": 232.3,
+                "unit": "m2",
+                "imperial_amount": 2500.0,
+                "imperial_unit": "sq ft",
+                "applicability": [
+                    ("construction_type", "semi_detached", "semi-detached dwelling"),
+                ],
+                "qualifiers": [
+                    ("rate_basis", "per_unit", "per unit"),
+                ],
+            },
+        ],
+    },
+    ("1", "f"): {
+        "subject": "rear-yard",
+        "comparator": "minimum",
+        "alternatives": [
+            {
+                "source_text": "Minimum rear yard 6.1 metres (20 feet)",
+                "amount": 6.1,
+                "unit": "m",
+                "imperial_amount": 20.0,
+                "imperial_unit": "ft",
+                "applicability": [
+                    ("yard_context", "rear_yard", "rear yard"),
+                ],
+                "qualifiers": [],
+                "conditions": [],
+            },
+            {
+                "source_text": "Where parking is located in the rear yard, the minimum rear yard setback shall be 9.14 metres (30 feet)",
+                "amount": 9.14,
+                "unit": "m",
+                "imperial_amount": 30.0,
+                "imperial_unit": "ft",
+                "applicability": [
+                    ("yard_context", "rear_yard", "rear yard"),
+                ],
+                "qualifiers": [],
+                "conditions": [
+                    ("parking_location", "rear_yard", "Where parking is located in the rear yard"),
+                ],
+            },
+        ],
+    },
+    ("1", "g"): {
+        "subject": "side-yard",
+        "comparator": "minimum",
+        "alternatives": [
+            {
+                "source_text": "Minimum side yard 1.22 metres (4 feet)",
+                "amount": 1.22,
+                "unit": "m",
+                "imperial_amount": 4.0,
+                "imperial_unit": "ft",
+                "applicability": [
+                    ("yard_context", "side_yard", "side yard"),
+                ],
+                "qualifiers": [],
+                "conditions": [],
+            },
+            {
+                "source_text": "0 metres for the common lot line between semi-detached dwellings units",
+                "amount": 0.0,
+                "unit": "m",
+                "imperial_amount": None,
+                "imperial_unit": None,
+                "applicability": [
+                    ("yard_context", "common_lot_line", "common lot line"),
+                    ("construction_type", "semi_detached", "semi-detached dwellings units"),
+                ],
+                "qualifiers": [],
+                "conditions": [],
+            },
+        ],
+    },
+    ("3", "c"): {
+        "subject": "lot-area",
+        "comparator": "minimum",
+        "alternatives": [
+            {
+                "source_text": "Minimum Lot Area Per Dwelling Unit Single Detached 315.9 square metres (3400 square feet)",
+                "amount": 315.9,
+                "unit": "m2",
+                "imperial_amount": 3400.0,
+                "imperial_unit": "sq ft",
+                "applicability": [
+                    ("construction_type", "single_detached", "Single Detached"),
+                ],
+                "qualifiers": [
+                    ("rate_basis", "per_dwelling_unit", "Per Dwelling Unit"),
+                ],
+            },
+            {
+                "source_text": "Semi Detached/Duplex 232.3 square metres (2,500 square feet)",
+                "amount": 232.3,
+                "unit": "m2",
+                "imperial_amount": 2500.0,
+                "imperial_unit": "sq ft",
+                "applicability": [
+                    ("construction_type", "semi_detached", "Semi Detached"),
+                    ("construction_type", "duplex", "Duplex"),
+                ],
+                "qualifiers": [
+                    ("rate_basis", "per_dwelling_unit", "Per Dwelling Unit"),
+                ],
+            },
+            {
+                "source_text": "Rowhouse/Townhouse 167.2 square metres (1800 square feet)",
+                "amount": 167.2,
+                "unit": "m2",
+                "imperial_amount": 1800.0,
+                "imperial_unit": "sq ft",
+                "applicability": [
+                    ("construction_type", "rowhouse", "Rowhouse"),
+                    ("construction_type", "townhouse", "Townhouse"),
+                ],
+                "qualifiers": [
+                    ("rate_basis", "per_dwelling_unit", "Per Dwelling Unit"),
+                ],
+            },
+        ],
+    },
+}
+
+
+def scoped_condition(condition_id, condition_type, value, source_text):
+    return {
+        "condition_id": condition_id,
+        "condition_type": condition_type,
+        "operator": "equals",
+        "value": value,
+        "source_text": source_text,
+        "source_authority": "bylaw_text",
+        "metadata": {},
+    }
+
+
+def scoped_dimensional_regulation(
+    zone_id,
+    zone_code,
+    text,
+    citations,
+    section_label_raw,
+    clause_label_raw,
+    source_kind,
+):
+    if zone_code != "CHR" or source_kind != "requirement_sections":
+        return None
+    scoped = CHR_SCOPED_DIMENSIONAL_CLAUSES.get((section_label_raw, clause_label_raw))
+    if not scoped:
+        return None
+
+    regulation_id = stable_id(
+        "regulation",
+        "bedford",
+        zone_code,
+        source_kind,
+        section_label_raw,
+        clause_label_raw,
+    )
+    alternatives = []
+    for index, item in enumerate(scoped["alternatives"], start=1):
+        alternative_id = stable_id(regulation_id, "alternative", index)
+        value = dimensional_value(item["amount"], item["unit"], item["source_text"])
+        value["comparator"] = scoped["comparator"]
+        if item.get("imperial_amount") is not None and item.get("imperial_unit"):
+            value["metadata"]["original_equivalents"] = [
+                {
+                    "amount": item["imperial_amount"],
+                    "unit": item["imperial_unit"],
+                    "text": f"{item['imperial_amount']:g} {item['imperial_unit']}",
+                }
+            ]
+        else:
+            value["metadata"]["original_equivalents"] = []
+        alternatives.append(
+            {
+                "alternative_id": alternative_id,
+                "label_raw": None,
+                "value": value,
+                "applicability": [
+                    scoped_condition(
+                        stable_id(alternative_id, applicability_value),
+                        condition_type,
+                        applicability_value,
+                        source_text,
+                    )
+                    for condition_type, applicability_value, source_text in item["applicability"]
+                ],
+                "qualifiers": [
+                    {
+                        "qualifier_type": qualifier_type,
+                        "value": qualifier_value,
+                        "source_text": source_text,
+                        "metadata": {},
+                    }
+                    for qualifier_type, qualifier_value, source_text in item["qualifiers"]
+                ],
+                "conditions": [
+                    scoped_condition(
+                        stable_id(alternative_id, condition_type, condition_value),
+                        condition_type,
+                        condition_value,
+                        source_text,
+                    )
+                    for condition_type, condition_value, source_text in item.get("conditions", [])
+                ],
+                "source_text": item["source_text"],
+                "metadata": {},
+            }
+        )
+
+    return {
+        "regulation_id": regulation_id,
+        "document_id": BEDFORD_DOCUMENT_ID,
+        "applies_to": [
+            {
+                "target_type": "zone",
+                "target_id": zone_id,
+            }
+        ],
+        "regulation_type": "dimensional_standard",
+        "subject": scoped["subject"],
+        "permission_status": None,
+        "value": None,
+        "value_alternatives": alternatives,
+        "conditions": [],
+        "source_clause": {
+            "section_label_raw": section_label_raw,
+            "clause_label_raw": clause_label_raw,
+            "clause_path": source_clause_path(zone_code, section_label_raw, clause_label_raw),
+            "text_raw": text,
+            "raw_symbols": [],
+            "normalization_review_required": False,
+        },
+        "citations": citations,
+        "normalization_status": "partial",
+        "metadata": {
+            "source_kind": source_kind,
+            "scoped_alternatives": True,
+        },
+    }
+
+
 def has_dimensional_signal(text):
     lowered = text.lower()
     return any(keyword in lowered for keyword in DIMENSIONAL_KEYWORDS) and DIMENSIONAL_PATTERN.search(text)
@@ -515,6 +811,18 @@ def dimensional_regulations_from_text(
     regulations = []
     if not text or not has_dimensional_signal(text):
         return regulations
+
+    scoped_regulation = scoped_dimensional_regulation(
+        zone_id,
+        zone_code,
+        text,
+        citations,
+        section_label_raw,
+        clause_label_raw,
+        source_kind,
+    )
+    if scoped_regulation:
+        return [scoped_regulation]
 
     for local_index, match in enumerate(DIMENSIONAL_PATTERN.finditer(text), start=1):
         context = metric_context(

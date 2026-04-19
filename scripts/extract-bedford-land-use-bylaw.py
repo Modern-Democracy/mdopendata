@@ -83,8 +83,6 @@ def normalize_clause_path(label: str) -> list[str] | None:
             return None
         if token in roman_tokens:
             path.append(token)
-        elif re.fullmatch(r"[a-z]{2,}", token):
-            path.extend(list(token))
         else:
             path.append(token)
     return path

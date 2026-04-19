@@ -370,6 +370,10 @@
             { "type": "null" }
           ]
         },
+        "value_alternatives": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/value_alternative" }
+        },
         "conditions": {
           "type": "array",
           "items": { "$ref": "#/$defs/condition" }
@@ -560,6 +564,52 @@
           "type": "array",
           "items": {}
         },
+        "metadata": { "$ref": "#/$defs/free_object" }
+      }
+    },
+    "value_alternative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "alternative_id",
+        "value",
+        "applicability",
+        "qualifiers",
+        "conditions",
+        "source_text"
+      ],
+      "properties": {
+        "alternative_id": { "type": "string", "minLength": 1 },
+        "label_raw": { "type": ["string", "null"] },
+        "value": { "$ref": "#/$defs/value" },
+        "applicability": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/condition" }
+        },
+        "qualifiers": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/qualifier" }
+        },
+        "conditions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/condition" }
+        },
+        "source_text": { "type": ["string", "null"] },
+        "metadata": { "$ref": "#/$defs/free_object" }
+      }
+    },
+    "qualifier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "qualifier_type",
+        "value",
+        "source_text"
+      ],
+      "properties": {
+        "qualifier_type": { "type": "string", "minLength": 1 },
+        "value": {},
+        "source_text": { "type": ["string", "null"] },
         "metadata": { "$ref": "#/$defs/free_object" }
       }
     },

@@ -116,10 +116,13 @@ Required fields:
 - `subject`: normalized subject such as `front_yard_setback`, `lot_area`, `building_height`, `retail_use`, or `policy_im-43`.
 - `permission_status`: nullable enum `permitted`, `permitted_with_conditions`, `conditional`, `development_agreement`, `site_plan_approval`, `prohibited`, `not_specified`, `unknown`.
 - `value`: nullable value object.
+- `value_alternatives`: optional array of scoped values when one source clause gives different values for different construction types, dwelling types, road classes, frontage contexts, or other applicability groups.
 - `conditions`: array of condition objects.
 - `source_clause`: raw clause object.
 - `citations`
 - `normalization_status`: `normalized`, `partial`, `raw_only`, `needs_review`.
+
+For simple dimensional standards, use `value` and leave `value_alternatives` absent or empty. For compound clauses, preserve one regulation per source clause and place each scoped value in `value_alternatives`; `value` may be `null` or may hold a summary value only if the summary is explicitly marked in metadata.
 
 ### Value
 
@@ -153,6 +156,129 @@ Allowed `kind` values:
 - `boolean`
 - `list`
 - `reference`
+
+### Scoped Value Alternatives
+
+`value_alternatives` stores multiple queryable values from one source clause without losing the shared clause text. Each alternative carries the value plus its own applicability and qualifiers.
+
+Example for CHR `1(a)`:
+
+```json
+{
+  "regulation_type": "dimensional_standard",
+  "subject": "minimum_lot_frontage",
+  "value": null,
+  "value_alternatives": [
+    {
+      "alternative_id": "regulation:bedford:chr:1:a:alt:1",
+      "label_raw": null,
+      "value": {
+        "kind": "quantity",
+        "comparator": "minimum",
+        "original": {
+          "amount": 9.75,
+          "unit": "m",
+          "text": "9.75 metres (32 feet)",
+          "precision": "exact",
+          "conversion_factor": null
+        },
+        "normalized": {
+          "amount": 9.75,
+          "unit": "m",
+          "text": "9.75 m",
+          "precision": "exact",
+          "conversion_factor": null
+        },
+        "text": "Minimum lot frontage 9.75 metres (32 feet) for Apartment, single unit dwellings and duplexes",
+        "items": [],
+        "metadata": {}
+      },
+      "applicability": [
+        {
+          "condition_id": "regulation:bedford:chr:1:a:alt:1:apartment",
+          "condition_type": "construction_type",
+          "operator": "equals",
+          "value": "apartment",
+          "source_text": "Apartment",
+          "source_authority": "bylaw_text",
+          "metadata": {}
+        },
+        {
+          "condition_id": "regulation:bedford:chr:1:a:alt:1:single-unit-dwelling",
+          "condition_type": "construction_type",
+          "operator": "equals",
+          "value": "single_unit_dwelling",
+          "source_text": "single unit dwellings",
+          "source_authority": "bylaw_text",
+          "metadata": {}
+        },
+        {
+          "condition_id": "regulation:bedford:chr:1:a:alt:1:duplex",
+          "condition_type": "construction_type",
+          "operator": "equals",
+          "value": "duplex",
+          "source_text": "duplexes",
+          "source_authority": "bylaw_text",
+          "metadata": {}
+        }
+      ],
+      "qualifiers": [],
+      "conditions": [],
+      "source_text": "9.75 metres (32 feet) for Apartment, single unit dwellings and duplexes",
+      "metadata": {}
+    },
+    {
+      "alternative_id": "regulation:bedford:chr:1:a:alt:2",
+      "label_raw": null,
+      "value": {
+        "kind": "quantity",
+        "comparator": "minimum",
+        "original": {
+          "amount": 7.62,
+          "unit": "m",
+          "text": "7.62 metres (25 feet)",
+          "precision": "exact",
+          "conversion_factor": null
+        },
+        "normalized": {
+          "amount": 7.62,
+          "unit": "m",
+          "text": "7.62 m",
+          "precision": "exact",
+          "conversion_factor": null
+        },
+        "text": "7.62 metres (25 feet) per unit for semi-detached",
+        "items": [],
+        "metadata": {}
+      },
+      "applicability": [
+        {
+          "condition_id": "regulation:bedford:chr:1:a:alt:2:semi-detached",
+          "condition_type": "construction_type",
+          "operator": "equals",
+          "value": "semi_detached",
+          "source_text": "semi-detached",
+          "source_authority": "bylaw_text",
+          "metadata": {}
+        }
+      ],
+      "qualifiers": [
+        {
+          "qualifier_type": "rate_basis",
+          "value": "per_unit",
+          "source_text": "per unit",
+          "metadata": {}
+        }
+      ],
+      "conditions": [],
+      "source_text": "7.62 metres (25 feet) per unit for semi-detached",
+      "metadata": {}
+    }
+  ]
+}
+```
+
+Use `applicability` for the thing the alternative applies to, such as `construction_type`, `dwelling_type`, `use_type`, or `lot_context`. Use `conditions` for contextual predicates that must also be true, such as `road_class`, `adjacent_feature`, or `overlay_presence`. Use `qualifiers` for modifiers of the measurement itself, such as `per_unit`, `per_dwelling_unit`, `combined_total`, or `not_including_secondary_or_backyard_suites`.
 
 ### Condition
 

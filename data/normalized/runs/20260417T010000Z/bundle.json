@@ -1,5 +1,5 @@
 {
-  "bundle_id": "hrm-land-use-20260418T214246Z",
+  "bundle_id": "hrm-land-use-20260418T220119Z",
   "definitions": [],
   "documents": [
     {
@@ -22,7 +22,7 @@
       "title_raw": "Bedford Land Use By-law"
     }
   ],
-  "generated_at": "2026-04-18T21:42:46.364652Z",
+  "generated_at": "2026-04-18T22:01:19.541675Z",
   "jurisdictions": [
     {
       "jurisdiction_id": "jurisdiction:halifax-regional-municipality",
@@ -26337,12 +26337,12 @@
       "conditions": [],
       "document_id": "document:bedford-land-use-bylaw",
       "metadata": {
-        "source_kind": "requirement_sections",
-        "source_text_sample": "Minimum lot frontage 9.75 metres"
+        "scoped_alternatives": true,
+        "source_kind": "requirement_sections"
       },
       "normalization_status": "partial",
       "permission_status": null,
-      "regulation_id": "regulation:bedford:chr:requirement-sections:1:a:1",
+      "regulation_id": "regulation:bedford:chr:requirement-sections:1:a",
       "regulation_type": "dimensional_standard",
       "source_clause": {
         "clause_label_raw": "a",
@@ -26356,27 +26356,130 @@
         "text_raw": "Minimum lot frontage 9.75 metres (32 feet) for Apartment, (RC-may 23/24;E-June 13/24) single unit dwellings and duplexes 7.62 metres (25 feet) per unit for semi-detached"
       },
       "subject": "lot-frontage",
-      "value": {
-        "comparator": "minimum",
-        "items": [],
-        "kind": "quantity",
-        "metadata": {},
-        "normalized": {
-          "amount": 9.75,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "9.75 m",
-          "unit": "m"
+      "value": null,
+      "value_alternatives": [
+        {
+          "alternative_id": "regulation-bedford-chr-requirement-sections-1-a:alternative:1",
+          "applicability": [
+            {
+              "condition_id": "regulation-bedford-chr-requirement-sections-1-a-alternative-1:apartment",
+              "condition_type": "construction_type",
+              "metadata": {},
+              "operator": "equals",
+              "source_authority": "bylaw_text",
+              "source_text": "Apartment",
+              "value": "apartment"
+            },
+            {
+              "condition_id": "regulation-bedford-chr-requirement-sections-1-a-alternative-1:single-unit-dwelling",
+              "condition_type": "construction_type",
+              "metadata": {},
+              "operator": "equals",
+              "source_authority": "bylaw_text",
+              "source_text": "single unit dwellings",
+              "value": "single_unit_dwelling"
+            },
+            {
+              "condition_id": "regulation-bedford-chr-requirement-sections-1-a-alternative-1:duplex",
+              "condition_type": "construction_type",
+              "metadata": {},
+              "operator": "equals",
+              "source_authority": "bylaw_text",
+              "source_text": "duplexes",
+              "value": "duplex"
+            }
+          ],
+          "conditions": [],
+          "label_raw": null,
+          "metadata": {},
+          "qualifiers": [],
+          "source_text": "9.75 metres (32 feet) for Apartment, single unit dwellings and duplexes",
+          "value": {
+            "comparator": "minimum",
+            "items": [],
+            "kind": "quantity",
+            "metadata": {
+              "original_equivalents": [
+                {
+                  "amount": 32.0,
+                  "text": "32 ft",
+                  "unit": "ft"
+                }
+              ]
+            },
+            "normalized": {
+              "amount": 9.75,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "9.75 m",
+              "unit": "m"
+            },
+            "original": {
+              "amount": 9.75,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "9.75 metres (32 feet) for Apartment, single unit dwellings and duplexes",
+              "unit": "m"
+            },
+            "text": "9.75 metres (32 feet) for Apartment, single unit dwellings and duplexes"
+          }
         },
-        "original": {
-          "amount": 9.75,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "Minimum lot frontage 9.75 metres",
-          "unit": "m"
-        },
-        "text": "Minimum lot frontage 9.75 metres"
-      }
+        {
+          "alternative_id": "regulation-bedford-chr-requirement-sections-1-a:alternative:2",
+          "applicability": [
+            {
+              "condition_id": "regulation-bedford-chr-requirement-sections-1-a-alternative-2:semi-detached",
+              "condition_type": "construction_type",
+              "metadata": {},
+              "operator": "equals",
+              "source_authority": "bylaw_text",
+              "source_text": "semi-detached",
+              "value": "semi_detached"
+            }
+          ],
+          "conditions": [],
+          "label_raw": null,
+          "metadata": {},
+          "qualifiers": [
+            {
+              "metadata": {},
+              "qualifier_type": "rate_basis",
+              "source_text": "per unit",
+              "value": "per_unit"
+            }
+          ],
+          "source_text": "7.62 metres (25 feet) per unit for semi-detached",
+          "value": {
+            "comparator": "minimum",
+            "items": [],
+            "kind": "quantity",
+            "metadata": {
+              "original_equivalents": [
+                {
+                  "amount": 25.0,
+                  "text": "25 ft",
+                  "unit": "ft"
+                }
+              ]
+            },
+            "normalized": {
+              "amount": 7.62,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "7.62 m",
+              "unit": "m"
+            },
+            "original": {
+              "amount": 7.62,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "7.62 metres (25 feet) per unit for semi-detached",
+              "unit": "m"
+            },
+            "text": "7.62 metres (25 feet) per unit for semi-detached"
+          }
+        }
+      ]
     },
     {
       "applies_to": [
@@ -26397,132 +26500,12 @@
       "conditions": [],
       "document_id": "document:bedford-land-use-bylaw",
       "metadata": {
-        "source_kind": "requirement_sections",
-        "source_text_sample": "Minimum lot frontage 9.75 metres (32 feet) for Apartment, (RC-may 23/24;E-June 13/24) single unit dwellings and duplexes 7.62 metres"
+        "scoped_alternatives": true,
+        "source_kind": "requirement_sections"
       },
       "normalization_status": "partial",
       "permission_status": null,
-      "regulation_id": "regulation:bedford:chr:requirement-sections:1:a:3",
-      "regulation_type": "dimensional_standard",
-      "source_clause": {
-        "clause_label_raw": "a",
-        "clause_path": [
-          "1",
-          "a"
-        ],
-        "normalization_review_required": false,
-        "raw_symbols": [],
-        "section_label_raw": "1",
-        "text_raw": "Minimum lot frontage 9.75 metres (32 feet) for Apartment, (RC-may 23/24;E-June 13/24) single unit dwellings and duplexes 7.62 metres (25 feet) per unit for semi-detached"
-      },
-      "subject": "lot-frontage",
-      "value": {
-        "comparator": "minimum",
-        "items": [],
-        "kind": "quantity",
-        "metadata": {},
-        "normalized": {
-          "amount": 7.62,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "7.62 m",
-          "unit": "m"
-        },
-        "original": {
-          "amount": 7.62,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "Minimum lot frontage 9.75 metres (32 feet) for Apartment, (RC-may 23/24;E-June 13/24) single unit dwellings and duplexes 7.62 metres",
-          "unit": "m"
-        },
-        "text": "Minimum lot frontage 9.75 metres (32 feet) for Apartment, (RC-may 23/24;E-June 13/24) single unit dwellings and duplexes 7.62 metres"
-      }
-    },
-    {
-      "applies_to": [
-        {
-          "target_id": "zone:bedford:chr",
-          "target_type": "zone"
-        }
-      ],
-      "citations": {
-        "bylaw_page_end": 66,
-        "bylaw_page_start": 63,
-        "pdf_page_end": 83,
-        "pdf_page_start": 80,
-        "source_id": "data/zoning/bedford/zones/chr.json",
-        "source_json_pointer": null,
-        "source_path": "data/zoning/bedford/zones/chr.json"
-      },
-      "conditions": [],
-      "document_id": "document:bedford-land-use-bylaw",
-      "metadata": {
-        "source_kind": "requirement_sections",
-        "source_text_sample": "Minimum lot area 315.9 square metres"
-      },
-      "normalization_status": "partial",
-      "permission_status": null,
-      "regulation_id": "regulation:bedford:chr:requirement-sections:1:b:1",
-      "regulation_type": "dimensional_standard",
-      "source_clause": {
-        "clause_label_raw": "b",
-        "clause_path": [
-          "1",
-          "b"
-        ],
-        "normalization_review_required": false,
-        "raw_symbols": [],
-        "section_label_raw": "1",
-        "text_raw": "Minimum lot area 315.9 square metres (3,400 square feet) for single unit dwellings and duplexes 232.3 square metres (2,500 square feet) per unit for a semi-detached dwelling"
-      },
-      "subject": "lot-area",
-      "value": {
-        "comparator": "minimum",
-        "items": [],
-        "kind": "quantity",
-        "metadata": {},
-        "normalized": {
-          "amount": 315.9,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "315.9 m2",
-          "unit": "m2"
-        },
-        "original": {
-          "amount": 315.9,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "Minimum lot area 315.9 square metres",
-          "unit": "m2"
-        },
-        "text": "Minimum lot area 315.9 square metres"
-      }
-    },
-    {
-      "applies_to": [
-        {
-          "target_id": "zone:bedford:chr",
-          "target_type": "zone"
-        }
-      ],
-      "citations": {
-        "bylaw_page_end": 66,
-        "bylaw_page_start": 63,
-        "pdf_page_end": 83,
-        "pdf_page_start": 80,
-        "source_id": "data/zoning/bedford/zones/chr.json",
-        "source_json_pointer": null,
-        "source_path": "data/zoning/bedford/zones/chr.json"
-      },
-      "conditions": [],
-      "document_id": "document:bedford-land-use-bylaw",
-      "metadata": {
-        "source_kind": "requirement_sections",
-        "source_text_sample": "Minimum lot area 315.9 square metres (3,400 square feet) for single unit dwellings and duplexes 232.3 square metres"
-      },
-      "normalization_status": "partial",
-      "permission_status": null,
-      "regulation_id": "regulation:bedford:chr:requirement-sections:1:b:3",
+      "regulation_id": "regulation:bedford:chr:requirement-sections:1:b",
       "regulation_type": "dimensional_standard",
       "source_clause": {
         "clause_label_raw": "b",
@@ -26536,27 +26519,121 @@
         "text_raw": "Minimum lot area 315.9 square metres (3,400 square feet) for single unit dwellings and duplexes 232.3 square metres (2,500 square feet) per unit for a semi-detached dwelling"
       },
       "subject": "lot-area",
-      "value": {
-        "comparator": "minimum",
-        "items": [],
-        "kind": "quantity",
-        "metadata": {},
-        "normalized": {
-          "amount": 232.3,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "232.3 m2",
-          "unit": "m2"
+      "value": null,
+      "value_alternatives": [
+        {
+          "alternative_id": "regulation-bedford-chr-requirement-sections-1-b:alternative:1",
+          "applicability": [
+            {
+              "condition_id": "regulation-bedford-chr-requirement-sections-1-b-alternative-1:single-unit-dwelling",
+              "condition_type": "construction_type",
+              "metadata": {},
+              "operator": "equals",
+              "source_authority": "bylaw_text",
+              "source_text": "single unit dwellings",
+              "value": "single_unit_dwelling"
+            },
+            {
+              "condition_id": "regulation-bedford-chr-requirement-sections-1-b-alternative-1:duplex",
+              "condition_type": "construction_type",
+              "metadata": {},
+              "operator": "equals",
+              "source_authority": "bylaw_text",
+              "source_text": "duplexes",
+              "value": "duplex"
+            }
+          ],
+          "conditions": [],
+          "label_raw": null,
+          "metadata": {},
+          "qualifiers": [],
+          "source_text": "315.9 square metres (3,400 square feet) for single unit dwellings and duplexes",
+          "value": {
+            "comparator": "minimum",
+            "items": [],
+            "kind": "quantity",
+            "metadata": {
+              "original_equivalents": [
+                {
+                  "amount": 3400.0,
+                  "text": "3400 sq ft",
+                  "unit": "sq ft"
+                }
+              ]
+            },
+            "normalized": {
+              "amount": 315.9,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "315.9 m2",
+              "unit": "m2"
+            },
+            "original": {
+              "amount": 315.9,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "315.9 square metres (3,400 square feet) for single unit dwellings and duplexes",
+              "unit": "m2"
+            },
+            "text": "315.9 square metres (3,400 square feet) for single unit dwellings and duplexes"
+          }
         },
-        "original": {
-          "amount": 232.3,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "Minimum lot area 315.9 square metres (3,400 square feet) for single unit dwellings and duplexes 232.3 square metres",
-          "unit": "m2"
-        },
-        "text": "Minimum lot area 315.9 square metres (3,400 square feet) for single unit dwellings and duplexes 232.3 square metres"
-      }
+        {
+          "alternative_id": "regulation-bedford-chr-requirement-sections-1-b:alternative:2",
+          "applicability": [
+            {
+              "condition_id": "regulation-bedford-chr-requirement-sections-1-b-alternative-2:semi-detached",
+              "condition_type": "construction_type",
+              "metadata": {},
+              "operator": "equals",
+              "source_authority": "bylaw_text",
+              "source_text": "semi-detached dwelling",
+              "value": "semi_detached"
+            }
+          ],
+          "conditions": [],
+          "label_raw": null,
+          "metadata": {},
+          "qualifiers": [
+            {
+              "metadata": {},
+              "qualifier_type": "rate_basis",
+              "source_text": "per unit",
+              "value": "per_unit"
+            }
+          ],
+          "source_text": "232.3 square metres (2,500 square feet) per unit for a semi-detached dwelling",
+          "value": {
+            "comparator": "minimum",
+            "items": [],
+            "kind": "quantity",
+            "metadata": {
+              "original_equivalents": [
+                {
+                  "amount": 2500.0,
+                  "text": "2500 sq ft",
+                  "unit": "sq ft"
+                }
+              ]
+            },
+            "normalized": {
+              "amount": 232.3,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "232.3 m2",
+              "unit": "m2"
+            },
+            "original": {
+              "amount": 232.3,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "232.3 square metres (2,500 square feet) per unit for a semi-detached dwelling",
+              "unit": "m2"
+            },
+            "text": "232.3 square metres (2,500 square feet) per unit for a semi-detached dwelling"
+          }
+        }
+      ]
     },
     {
       "applies_to": [
@@ -26757,12 +26834,12 @@
       "conditions": [],
       "document_id": "document:bedford-land-use-bylaw",
       "metadata": {
-        "source_kind": "requirement_sections",
-        "source_text_sample": "Minimum rear yard 6.1 metres"
+        "scoped_alternatives": true,
+        "source_kind": "requirement_sections"
       },
       "normalization_status": "partial",
       "permission_status": null,
-      "regulation_id": "regulation:bedford:chr:requirement-sections:1:f:1",
+      "regulation_id": "regulation:bedford:chr:requirement-sections:1:f",
       "regulation_type": "dimensional_standard",
       "source_clause": {
         "clause_label_raw": "f",
@@ -26776,27 +26853,115 @@
         "text_raw": "Minimum rear yard 6.1 metres (20 feet) Where parking is located in the rear yard, the minimum rear yard setback shall be 9.14 metres (30 feet)"
       },
       "subject": "rear-yard",
-      "value": {
-        "comparator": "minimum",
-        "items": [],
-        "kind": "quantity",
-        "metadata": {},
-        "normalized": {
-          "amount": 6.1,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "6.1 m",
-          "unit": "m"
+      "value": null,
+      "value_alternatives": [
+        {
+          "alternative_id": "regulation-bedford-chr-requirement-sections-1-f:alternative:1",
+          "applicability": [
+            {
+              "condition_id": "regulation-bedford-chr-requirement-sections-1-f-alternative-1:rear-yard",
+              "condition_type": "yard_context",
+              "metadata": {},
+              "operator": "equals",
+              "source_authority": "bylaw_text",
+              "source_text": "rear yard",
+              "value": "rear_yard"
+            }
+          ],
+          "conditions": [],
+          "label_raw": null,
+          "metadata": {},
+          "qualifiers": [],
+          "source_text": "Minimum rear yard 6.1 metres (20 feet)",
+          "value": {
+            "comparator": "minimum",
+            "items": [],
+            "kind": "quantity",
+            "metadata": {
+              "original_equivalents": [
+                {
+                  "amount": 20.0,
+                  "text": "20 ft",
+                  "unit": "ft"
+                }
+              ]
+            },
+            "normalized": {
+              "amount": 6.1,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "6.1 m",
+              "unit": "m"
+            },
+            "original": {
+              "amount": 6.1,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "Minimum rear yard 6.1 metres (20 feet)",
+              "unit": "m"
+            },
+            "text": "Minimum rear yard 6.1 metres (20 feet)"
+          }
         },
-        "original": {
-          "amount": 6.1,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "Minimum rear yard 6.1 metres",
-          "unit": "m"
-        },
-        "text": "Minimum rear yard 6.1 metres"
-      }
+        {
+          "alternative_id": "regulation-bedford-chr-requirement-sections-1-f:alternative:2",
+          "applicability": [
+            {
+              "condition_id": "regulation-bedford-chr-requirement-sections-1-f-alternative-2:rear-yard",
+              "condition_type": "yard_context",
+              "metadata": {},
+              "operator": "equals",
+              "source_authority": "bylaw_text",
+              "source_text": "rear yard",
+              "value": "rear_yard"
+            }
+          ],
+          "conditions": [
+            {
+              "condition_id": "regulation-bedford-chr-requirement-sections-1-f-alternative-2:parking-location:rear-yard",
+              "condition_type": "parking_location",
+              "metadata": {},
+              "operator": "equals",
+              "source_authority": "bylaw_text",
+              "source_text": "Where parking is located in the rear yard",
+              "value": "rear_yard"
+            }
+          ],
+          "label_raw": null,
+          "metadata": {},
+          "qualifiers": [],
+          "source_text": "Where parking is located in the rear yard, the minimum rear yard setback shall be 9.14 metres (30 feet)",
+          "value": {
+            "comparator": "minimum",
+            "items": [],
+            "kind": "quantity",
+            "metadata": {
+              "original_equivalents": [
+                {
+                  "amount": 30.0,
+                  "text": "30 ft",
+                  "unit": "ft"
+                }
+              ]
+            },
+            "normalized": {
+              "amount": 9.14,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "9.14 m",
+              "unit": "m"
+            },
+            "original": {
+              "amount": 9.14,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "Where parking is located in the rear yard, the minimum rear yard setback shall be 9.14 metres (30 feet)",
+              "unit": "m"
+            },
+            "text": "Where parking is located in the rear yard, the minimum rear yard setback shall be 9.14 metres (30 feet)"
+          }
+        }
+      ]
     },
     {
       "applies_to": [
@@ -26817,132 +26982,12 @@
       "conditions": [],
       "document_id": "document:bedford-land-use-bylaw",
       "metadata": {
-        "source_kind": "requirement_sections",
-        "source_text_sample": "Minimum rear yard 6.1 metres (20 feet) Where parking is located in the rear yard, the minimum rear yard setback shall be 9.14 metres"
+        "scoped_alternatives": true,
+        "source_kind": "requirement_sections"
       },
       "normalization_status": "partial",
       "permission_status": null,
-      "regulation_id": "regulation:bedford:chr:requirement-sections:1:f:3",
-      "regulation_type": "dimensional_standard",
-      "source_clause": {
-        "clause_label_raw": "f",
-        "clause_path": [
-          "1",
-          "f"
-        ],
-        "normalization_review_required": false,
-        "raw_symbols": [],
-        "section_label_raw": "1",
-        "text_raw": "Minimum rear yard 6.1 metres (20 feet) Where parking is located in the rear yard, the minimum rear yard setback shall be 9.14 metres (30 feet)"
-      },
-      "subject": "rear-yard",
-      "value": {
-        "comparator": "minimum",
-        "items": [],
-        "kind": "quantity",
-        "metadata": {},
-        "normalized": {
-          "amount": 9.14,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "9.14 m",
-          "unit": "m"
-        },
-        "original": {
-          "amount": 9.14,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "Minimum rear yard 6.1 metres (20 feet) Where parking is located in the rear yard, the minimum rear yard setback shall be 9.14 metres",
-          "unit": "m"
-        },
-        "text": "Minimum rear yard 6.1 metres (20 feet) Where parking is located in the rear yard, the minimum rear yard setback shall be 9.14 metres"
-      }
-    },
-    {
-      "applies_to": [
-        {
-          "target_id": "zone:bedford:chr",
-          "target_type": "zone"
-        }
-      ],
-      "citations": {
-        "bylaw_page_end": 66,
-        "bylaw_page_start": 63,
-        "pdf_page_end": 83,
-        "pdf_page_start": 80,
-        "source_id": "data/zoning/bedford/zones/chr.json",
-        "source_json_pointer": null,
-        "source_path": "data/zoning/bedford/zones/chr.json"
-      },
-      "conditions": [],
-      "document_id": "document:bedford-land-use-bylaw",
-      "metadata": {
-        "source_kind": "requirement_sections",
-        "source_text_sample": "Minimum side yard 1.22 metres"
-      },
-      "normalization_status": "partial",
-      "permission_status": null,
-      "regulation_id": "regulation:bedford:chr:requirement-sections:1:g:1",
-      "regulation_type": "dimensional_standard",
-      "source_clause": {
-        "clause_label_raw": "g",
-        "clause_path": [
-          "1",
-          "g"
-        ],
-        "normalization_review_required": false,
-        "raw_symbols": [],
-        "section_label_raw": "1",
-        "text_raw": "Minimum side yard 1.22 metres (4 feet) or 0 metres for the common lot line between semi-detached dwellings units"
-      },
-      "subject": "side-yard",
-      "value": {
-        "comparator": "minimum",
-        "items": [],
-        "kind": "quantity",
-        "metadata": {},
-        "normalized": {
-          "amount": 1.22,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "1.22 m",
-          "unit": "m"
-        },
-        "original": {
-          "amount": 1.22,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "Minimum side yard 1.22 metres",
-          "unit": "m"
-        },
-        "text": "Minimum side yard 1.22 metres"
-      }
-    },
-    {
-      "applies_to": [
-        {
-          "target_id": "zone:bedford:chr",
-          "target_type": "zone"
-        }
-      ],
-      "citations": {
-        "bylaw_page_end": 66,
-        "bylaw_page_start": 63,
-        "pdf_page_end": 83,
-        "pdf_page_start": 80,
-        "source_id": "data/zoning/bedford/zones/chr.json",
-        "source_json_pointer": null,
-        "source_path": "data/zoning/bedford/zones/chr.json"
-      },
-      "conditions": [],
-      "document_id": "document:bedford-land-use-bylaw",
-      "metadata": {
-        "source_kind": "requirement_sections",
-        "source_text_sample": "Minimum side yard 1.22 metres (4 feet) or 0 metres"
-      },
-      "normalization_status": "partial",
-      "permission_status": null,
-      "regulation_id": "regulation:bedford:chr:requirement-sections:1:g:3",
+      "regulation_id": "regulation:bedford:chr:requirement-sections:1:g",
       "regulation_type": "dimensional_standard",
       "source_clause": {
         "clause_label_raw": "g",
@@ -26956,27 +27001,108 @@
         "text_raw": "Minimum side yard 1.22 metres (4 feet) or 0 metres for the common lot line between semi-detached dwellings units"
       },
       "subject": "side-yard",
-      "value": {
-        "comparator": "minimum",
-        "items": [],
-        "kind": "quantity",
-        "metadata": {},
-        "normalized": {
-          "amount": 0.0,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "0.0 m",
-          "unit": "m"
+      "value": null,
+      "value_alternatives": [
+        {
+          "alternative_id": "regulation-bedford-chr-requirement-sections-1-g:alternative:1",
+          "applicability": [
+            {
+              "condition_id": "regulation-bedford-chr-requirement-sections-1-g-alternative-1:side-yard",
+              "condition_type": "yard_context",
+              "metadata": {},
+              "operator": "equals",
+              "source_authority": "bylaw_text",
+              "source_text": "side yard",
+              "value": "side_yard"
+            }
+          ],
+          "conditions": [],
+          "label_raw": null,
+          "metadata": {},
+          "qualifiers": [],
+          "source_text": "Minimum side yard 1.22 metres (4 feet)",
+          "value": {
+            "comparator": "minimum",
+            "items": [],
+            "kind": "quantity",
+            "metadata": {
+              "original_equivalents": [
+                {
+                  "amount": 4.0,
+                  "text": "4 ft",
+                  "unit": "ft"
+                }
+              ]
+            },
+            "normalized": {
+              "amount": 1.22,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "1.22 m",
+              "unit": "m"
+            },
+            "original": {
+              "amount": 1.22,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "Minimum side yard 1.22 metres (4 feet)",
+              "unit": "m"
+            },
+            "text": "Minimum side yard 1.22 metres (4 feet)"
+          }
         },
-        "original": {
-          "amount": 0.0,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "Minimum side yard 1.22 metres (4 feet) or 0 metres",
-          "unit": "m"
-        },
-        "text": "Minimum side yard 1.22 metres (4 feet) or 0 metres"
-      }
+        {
+          "alternative_id": "regulation-bedford-chr-requirement-sections-1-g:alternative:2",
+          "applicability": [
+            {
+              "condition_id": "regulation-bedford-chr-requirement-sections-1-g-alternative-2:common-lot-line",
+              "condition_type": "yard_context",
+              "metadata": {},
+              "operator": "equals",
+              "source_authority": "bylaw_text",
+              "source_text": "common lot line",
+              "value": "common_lot_line"
+            },
+            {
+              "condition_id": "regulation-bedford-chr-requirement-sections-1-g-alternative-2:semi-detached",
+              "condition_type": "construction_type",
+              "metadata": {},
+              "operator": "equals",
+              "source_authority": "bylaw_text",
+              "source_text": "semi-detached dwellings units",
+              "value": "semi_detached"
+            }
+          ],
+          "conditions": [],
+          "label_raw": null,
+          "metadata": {},
+          "qualifiers": [],
+          "source_text": "0 metres for the common lot line between semi-detached dwellings units",
+          "value": {
+            "comparator": "minimum",
+            "items": [],
+            "kind": "quantity",
+            "metadata": {
+              "original_equivalents": []
+            },
+            "normalized": {
+              "amount": 0.0,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "0.0 m",
+              "unit": "m"
+            },
+            "original": {
+              "amount": 0.0,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "0 metres for the common lot line between semi-detached dwellings units",
+              "unit": "m"
+            },
+            "text": "0 metres for the common lot line between semi-detached dwellings units"
+          }
+        }
+      ]
     },
     {
       "applies_to": [
@@ -27717,12 +27843,12 @@
       "conditions": [],
       "document_id": "document:bedford-land-use-bylaw",
       "metadata": {
-        "source_kind": "requirement_sections",
-        "source_text_sample": "Minimum Lot Area Per Dwelling Unit Single Detached 315.9 square metres"
+        "scoped_alternatives": true,
+        "source_kind": "requirement_sections"
       },
       "normalization_status": "partial",
       "permission_status": null,
-      "regulation_id": "regulation:bedford:chr:requirement-sections:3:c:1",
+      "regulation_id": "regulation:bedford:chr:requirement-sections:3:c",
       "regulation_type": "dimensional_standard",
       "source_clause": {
         "clause_label_raw": "c",
@@ -27736,147 +27862,192 @@
         "text_raw": "Minimum Lot Area Per Dwelling Unit Single Detached 315.9 square metres (3400 square feet) Semi Detached/Duplex 232.3 square metres (2,500 square feet) Rowhouse/Townhouse 167.2 square metres (1800 square feet)"
       },
       "subject": "lot-area",
-      "value": {
-        "comparator": "minimum",
-        "items": [],
-        "kind": "quantity",
-        "metadata": {},
-        "normalized": {
-          "amount": 315.9,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "315.9 m2",
-          "unit": "m2"
-        },
-        "original": {
-          "amount": 315.9,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "Minimum Lot Area Per Dwelling Unit Single Detached 315.9 square metres",
-          "unit": "m2"
-        },
-        "text": "Minimum Lot Area Per Dwelling Unit Single Detached 315.9 square metres"
-      }
-    },
-    {
-      "applies_to": [
+      "value": null,
+      "value_alternatives": [
         {
-          "target_id": "zone:bedford:chr",
-          "target_type": "zone"
-        }
-      ],
-      "citations": {
-        "bylaw_page_end": 66,
-        "bylaw_page_start": 63,
-        "pdf_page_end": 83,
-        "pdf_page_start": 80,
-        "source_id": "data/zoning/bedford/zones/chr.json",
-        "source_json_pointer": null,
-        "source_path": "data/zoning/bedford/zones/chr.json"
-      },
-      "conditions": [],
-      "document_id": "document:bedford-land-use-bylaw",
-      "metadata": {
-        "source_kind": "requirement_sections",
-        "source_text_sample": "Minimum Lot Area Per Dwelling Unit Single Detached 315.9 square metres (3400 square feet) Semi Detached/Duplex 232.3 square metres"
-      },
-      "normalization_status": "partial",
-      "permission_status": null,
-      "regulation_id": "regulation:bedford:chr:requirement-sections:3:c:3",
-      "regulation_type": "dimensional_standard",
-      "source_clause": {
-        "clause_label_raw": "c",
-        "clause_path": [
-          "3",
-          "c"
-        ],
-        "normalization_review_required": false,
-        "raw_symbols": [],
-        "section_label_raw": "3",
-        "text_raw": "Minimum Lot Area Per Dwelling Unit Single Detached 315.9 square metres (3400 square feet) Semi Detached/Duplex 232.3 square metres (2,500 square feet) Rowhouse/Townhouse 167.2 square metres (1800 square feet)"
-      },
-      "subject": "lot-area",
-      "value": {
-        "comparator": "minimum",
-        "items": [],
-        "kind": "quantity",
-        "metadata": {},
-        "normalized": {
-          "amount": 232.3,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "232.3 m2",
-          "unit": "m2"
+          "alternative_id": "regulation-bedford-chr-requirement-sections-3-c:alternative:1",
+          "applicability": [
+            {
+              "condition_id": "regulation-bedford-chr-requirement-sections-3-c-alternative-1:single-detached",
+              "condition_type": "construction_type",
+              "metadata": {},
+              "operator": "equals",
+              "source_authority": "bylaw_text",
+              "source_text": "Single Detached",
+              "value": "single_detached"
+            }
+          ],
+          "conditions": [],
+          "label_raw": null,
+          "metadata": {},
+          "qualifiers": [
+            {
+              "metadata": {},
+              "qualifier_type": "rate_basis",
+              "source_text": "Per Dwelling Unit",
+              "value": "per_dwelling_unit"
+            }
+          ],
+          "source_text": "Minimum Lot Area Per Dwelling Unit Single Detached 315.9 square metres (3400 square feet)",
+          "value": {
+            "comparator": "minimum",
+            "items": [],
+            "kind": "quantity",
+            "metadata": {
+              "original_equivalents": [
+                {
+                  "amount": 3400.0,
+                  "text": "3400 sq ft",
+                  "unit": "sq ft"
+                }
+              ]
+            },
+            "normalized": {
+              "amount": 315.9,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "315.9 m2",
+              "unit": "m2"
+            },
+            "original": {
+              "amount": 315.9,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "Minimum Lot Area Per Dwelling Unit Single Detached 315.9 square metres (3400 square feet)",
+              "unit": "m2"
+            },
+            "text": "Minimum Lot Area Per Dwelling Unit Single Detached 315.9 square metres (3400 square feet)"
+          }
         },
-        "original": {
-          "amount": 232.3,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "Minimum Lot Area Per Dwelling Unit Single Detached 315.9 square metres (3400 square feet) Semi Detached/Duplex 232.3 square metres",
-          "unit": "m2"
-        },
-        "text": "Minimum Lot Area Per Dwelling Unit Single Detached 315.9 square metres (3400 square feet) Semi Detached/Duplex 232.3 square metres"
-      }
-    },
-    {
-      "applies_to": [
         {
-          "target_id": "zone:bedford:chr",
-          "target_type": "zone"
+          "alternative_id": "regulation-bedford-chr-requirement-sections-3-c:alternative:2",
+          "applicability": [
+            {
+              "condition_id": "regulation-bedford-chr-requirement-sections-3-c-alternative-2:semi-detached",
+              "condition_type": "construction_type",
+              "metadata": {},
+              "operator": "equals",
+              "source_authority": "bylaw_text",
+              "source_text": "Semi Detached",
+              "value": "semi_detached"
+            },
+            {
+              "condition_id": "regulation-bedford-chr-requirement-sections-3-c-alternative-2:duplex",
+              "condition_type": "construction_type",
+              "metadata": {},
+              "operator": "equals",
+              "source_authority": "bylaw_text",
+              "source_text": "Duplex",
+              "value": "duplex"
+            }
+          ],
+          "conditions": [],
+          "label_raw": null,
+          "metadata": {},
+          "qualifiers": [
+            {
+              "metadata": {},
+              "qualifier_type": "rate_basis",
+              "source_text": "Per Dwelling Unit",
+              "value": "per_dwelling_unit"
+            }
+          ],
+          "source_text": "Semi Detached/Duplex 232.3 square metres (2,500 square feet)",
+          "value": {
+            "comparator": "minimum",
+            "items": [],
+            "kind": "quantity",
+            "metadata": {
+              "original_equivalents": [
+                {
+                  "amount": 2500.0,
+                  "text": "2500 sq ft",
+                  "unit": "sq ft"
+                }
+              ]
+            },
+            "normalized": {
+              "amount": 232.3,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "232.3 m2",
+              "unit": "m2"
+            },
+            "original": {
+              "amount": 232.3,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "Semi Detached/Duplex 232.3 square metres (2,500 square feet)",
+              "unit": "m2"
+            },
+            "text": "Semi Detached/Duplex 232.3 square metres (2,500 square feet)"
+          }
+        },
+        {
+          "alternative_id": "regulation-bedford-chr-requirement-sections-3-c:alternative:3",
+          "applicability": [
+            {
+              "condition_id": "regulation-bedford-chr-requirement-sections-3-c-alternative-3:rowhouse",
+              "condition_type": "construction_type",
+              "metadata": {},
+              "operator": "equals",
+              "source_authority": "bylaw_text",
+              "source_text": "Rowhouse",
+              "value": "rowhouse"
+            },
+            {
+              "condition_id": "regulation-bedford-chr-requirement-sections-3-c-alternative-3:townhouse",
+              "condition_type": "construction_type",
+              "metadata": {},
+              "operator": "equals",
+              "source_authority": "bylaw_text",
+              "source_text": "Townhouse",
+              "value": "townhouse"
+            }
+          ],
+          "conditions": [],
+          "label_raw": null,
+          "metadata": {},
+          "qualifiers": [
+            {
+              "metadata": {},
+              "qualifier_type": "rate_basis",
+              "source_text": "Per Dwelling Unit",
+              "value": "per_dwelling_unit"
+            }
+          ],
+          "source_text": "Rowhouse/Townhouse 167.2 square metres (1800 square feet)",
+          "value": {
+            "comparator": "minimum",
+            "items": [],
+            "kind": "quantity",
+            "metadata": {
+              "original_equivalents": [
+                {
+                  "amount": 1800.0,
+                  "text": "1800 sq ft",
+                  "unit": "sq ft"
+                }
+              ]
+            },
+            "normalized": {
+              "amount": 167.2,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "167.2 m2",
+              "unit": "m2"
+            },
+            "original": {
+              "amount": 167.2,
+              "conversion_factor": null,
+              "precision": "exact",
+              "text": "Rowhouse/Townhouse 167.2 square metres (1800 square feet)",
+              "unit": "m2"
+            },
+            "text": "Rowhouse/Townhouse 167.2 square metres (1800 square feet)"
+          }
         }
-      ],
-      "citations": {
-        "bylaw_page_end": 66,
-        "bylaw_page_start": 63,
-        "pdf_page_end": 83,
-        "pdf_page_start": 80,
-        "source_id": "data/zoning/bedford/zones/chr.json",
-        "source_json_pointer": null,
-        "source_path": "data/zoning/bedford/zones/chr.json"
-      },
-      "conditions": [],
-      "document_id": "document:bedford-land-use-bylaw",
-      "metadata": {
-        "source_kind": "requirement_sections",
-        "source_text_sample": "Minimum Lot Area Per Dwelling Unit Single Detached 315.9 square metres (3400 square feet) Semi Detached/Duplex 232.3 square metres (2,500 square feet) Rowhouse/Townhouse 167.2 square metres"
-      },
-      "normalization_status": "partial",
-      "permission_status": null,
-      "regulation_id": "regulation:bedford:chr:requirement-sections:3:c:5",
-      "regulation_type": "dimensional_standard",
-      "source_clause": {
-        "clause_label_raw": "c",
-        "clause_path": [
-          "3",
-          "c"
-        ],
-        "normalization_review_required": false,
-        "raw_symbols": [],
-        "section_label_raw": "3",
-        "text_raw": "Minimum Lot Area Per Dwelling Unit Single Detached 315.9 square metres (3400 square feet) Semi Detached/Duplex 232.3 square metres (2,500 square feet) Rowhouse/Townhouse 167.2 square metres (1800 square feet)"
-      },
-      "subject": "lot-area",
-      "value": {
-        "comparator": "minimum",
-        "items": [],
-        "kind": "quantity",
-        "metadata": {},
-        "normalized": {
-          "amount": 167.2,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "167.2 m2",
-          "unit": "m2"
-        },
-        "original": {
-          "amount": 167.2,
-          "conversion_factor": null,
-          "precision": "exact",
-          "text": "Minimum Lot Area Per Dwelling Unit Single Detached 315.9 square metres (3400 square feet) Semi Detached/Duplex 232.3 square metres (2,500 square feet) Rowhouse/Townhouse 167.2 square metres",
-          "unit": "m2"
-        },
-        "text": "Minimum Lot Area Per Dwelling Unit Single Detached 315.9 square metres (3400 square feet) Semi Detached/Duplex 232.3 square metres (2,500 square feet) Rowhouse/Townhouse 167.2 square metres"
-      }
+      ]
     },
     {
       "applies_to": [
@@ -38743,7 +38914,7 @@
       },
       "conditions": [
         {
-          "condition_id": "zone-bedford-rth:dimensional-condition:788:arterial",
+          "condition_id": "zone-bedford-rth:dimensional-condition:782:arterial",
           "condition_type": "road_class",
           "metadata": {},
           "operator": "equals",
@@ -38810,7 +38981,7 @@
       },
       "conditions": [
         {
-          "condition_id": "zone-bedford-rth:dimensional-condition:789:arterial",
+          "condition_id": "zone-bedford-rth:dimensional-condition:783:arterial",
           "condition_type": "road_class",
           "metadata": {},
           "operator": "equals",
@@ -38877,7 +39048,7 @@
       },
       "conditions": [
         {
-          "condition_id": "zone-bedford-rth:dimensional-condition:790:arterial",
+          "condition_id": "zone-bedford-rth:dimensional-condition:784:arterial",
           "condition_type": "road_class",
           "metadata": {},
           "operator": "equals",
@@ -39512,7 +39683,7 @@
       },
       "conditions": [
         {
-          "condition_id": "zone-bedford-rtu:dimensional-condition:803:arterial",
+          "condition_id": "zone-bedford-rtu:dimensional-condition:797:arterial",
           "condition_type": "road_class",
           "metadata": {},
           "operator": "equals",
@@ -39750,7 +39921,7 @@
       },
       "conditions": [
         {
-          "condition_id": "zone-bedford-rtu:dimensional-condition:807:arterial",
+          "condition_id": "zone-bedford-rtu:dimensional-condition:801:arterial",
           "condition_type": "road_class",
           "metadata": {},
           "operator": "equals",
