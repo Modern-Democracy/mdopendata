@@ -43,6 +43,120 @@ ZONES = [
     {"part": 29, "code": "UE", "name": "Urban Expansion", "bylaw_start": 161},
 ]
 
+SUPPORTING_PARTS = [
+    {
+        "part": 1,
+        "slug": "administration",
+        "document_type": "administration",
+        "title": "Administration & Operation",
+        "bylaw_start": 1,
+        "bylaw_end": 4,
+    },
+    {
+        "part": 2,
+        "slug": "permit-applications-processes",
+        "document_type": "permit_applications_processes",
+        "title": "Permit Applications & Processes",
+        "bylaw_start": 5,
+        "bylaw_end": 15,
+    },
+    {
+        "part": 3,
+        "slug": "general-provisions-buildings-structures",
+        "document_type": "general_provisions",
+        "title": "General Provisions for Buildings & Structures",
+        "bylaw_start": 16,
+        "bylaw_end": 26,
+    },
+    {
+        "part": 4,
+        "slug": "general-provisions-land-use",
+        "document_type": "general_provisions",
+        "title": "General Provisions for Land Use",
+        "bylaw_start": 27,
+        "bylaw_end": 36,
+    },
+    {
+        "part": 5,
+        "slug": "general-provisions-lots-site-design",
+        "document_type": "general_provisions",
+        "title": "General Provisions for Lots & Site Design",
+        "bylaw_start": 37,
+        "bylaw_end": 42,
+    },
+    {
+        "part": 6,
+        "slug": "design-standards-500-lot-area",
+        "document_type": "design_standards",
+        "title": "Design Standards for 500 Lot Area",
+        "bylaw_start": 43,
+        "bylaw_end": 46,
+    },
+    {
+        "part": 7,
+        "slug": "general-provisions-subdividing-land",
+        "document_type": "general_provisions",
+        "title": "General Provisions Subdividing Land",
+        "bylaw_start": 47,
+        "bylaw_end": 60,
+    },
+    {
+        "part": 8,
+        "slug": "general-provisions-parking",
+        "document_type": "general_provisions",
+        "title": "General Provisions for Parking",
+        "bylaw_start": 61,
+        "bylaw_end": 70,
+    },
+    {
+        "part": 9,
+        "slug": "general-provisions-signage",
+        "document_type": "general_provisions",
+        "title": "General Provisions For Signage",
+        "bylaw_start": 71,
+        "bylaw_end": 86,
+    },
+]
+
+SCHEDULES = [
+    {
+        "label": "Schedule A",
+        "slug": "schedule-a-land-use-zoning-map",
+        "title": "Land Use Zoning Map",
+        "reference_type": "schedule_map",
+        "feature_class": "zoning_map",
+        "bylaw_start": 193,
+        "bylaw_end": 193,
+    },
+    {
+        "label": "Schedule B",
+        "slug": "schedule-b-downtown-height-schedule",
+        "title": "Downtown Height Schedule",
+        "reference_type": "schedule_map",
+        "feature_class": "height_schedule",
+        "bylaw_start": 194,
+        "bylaw_end": 194,
+    },
+    {
+        "label": "Schedule C",
+        "slug": "schedule-c-street-hierarchy-schedule",
+        "title": "Street Hierarchy Schedule",
+        "reference_type": "schedule_map",
+        "feature_class": "street_hierarchy_schedule",
+        "bylaw_start": 195,
+        "bylaw_end": 195,
+    },
+    {
+        "label": "Schedule D",
+        "slug": "schedule-d-hillsborough-height-schedule",
+        "title": "Hillsborough Height Schedule",
+        "reference_type": "schedule_map",
+        "feature_class": "height_schedule",
+        "bylaw_start": 196,
+        "bylaw_end": 196,
+    },
+]
+
 
 def pdf_page_for_bylaw_page(bylaw_page: int) -> int:
     return bylaw_page + 4
@@ -95,6 +209,15 @@ def zone_pages(zone: dict, next_bylaw_start: int | None) -> tuple[int, int, int,
     return pdf_page_for_bylaw_page(bylaw_start), pdf_page_for_bylaw_page(bylaw_end), bylaw_start, bylaw_end
 
 
+def citation_for_range(bylaw_start: int, bylaw_end: int) -> dict:
+    return {
+        "pdf_page_start": pdf_page_for_bylaw_page(bylaw_start),
+        "pdf_page_end": pdf_page_for_bylaw_page(bylaw_end),
+        "bylaw_page_start": bylaw_start,
+        "bylaw_page_end": bylaw_end,
+    }
+
+
 def extract_zone_lines(reader: PdfReader, zone: dict, next_bylaw_start: int | None) -> tuple[list[dict], str]:
     pdf_start, pdf_end, _, _ = zone_pages(zone, next_bylaw_start)
     page_texts = []
@@ -106,6 +229,29 @@ def extract_zone_lines(reader: PdfReader, zone: dict, next_bylaw_start: int | No
         page_texts.append({"pdf_page": pdf_page, "text": "\n".join(kept)})
     combined = "\n".join(page["text"] for page in page_texts if page["text"])
     return page_texts, combined
+
+
+def extract_page_texts(reader: PdfReader, bylaw_start: int, bylaw_end: int) -> list[dict]:
+    page_texts = []
+    for bylaw_page in range(bylaw_start, bylaw_end + 1):
+        pdf_page = pdf_page_for_bylaw_page(bylaw_page)
+        text = clean_text(reader.pages[pdf_page - 1].extract_text() or "")
+        lines = [line.strip() for line in text.splitlines() if line.strip()]
+        kept = []
+        for line in lines:
+            if line == "CITY OF CHARLOTTETOWN":
+                continue
+            if line.startswith("ZONING & DEVELOPMENT BYLAW"):
+                continue
+            if line.startswith("Draft in progress"):
+                continue
+            if re.fullmatch(r"\d+", line):
+                continue
+            if re.fullmatch(r"\d+\s+\|\s+.*", line):
+                continue
+            kept.append(line)
+        page_texts.append({"pdf_page": pdf_page, "bylaw_page": bylaw_page, "text": "\n".join(kept)})
+    return page_texts
 
 
 SECTION_RE = re.compile(r"^(?P<label>\d+\.\d+)\s+(?P<title>[A-Z][A-Z0-9 '&/\-]+)$")
@@ -165,11 +311,15 @@ def split_sections(page_texts: list[dict], zone: dict, next_bylaw_start: int | N
     ordered = sorted(sections.values(), key=sort_key)
     content_blocks = []
     if unassigned:
+        if "bylaw_end" in zone:
+            block_citation = citation_for_range(zone["bylaw_start"], zone["bylaw_end"])
+        else:
+            block_citation = citation_for_zone(zone, next_bylaw_start)
         content_blocks.append(
             {
                 "heading_context_raw": f"PART {zone['part']} {zone['code']} - unassigned extracted text",
                 "text": " ".join(unassigned),
-                "citations": citation_for_zone(zone, next_bylaw_start),
+                "citations": block_citation,
             }
         )
     return ordered, content_blocks
@@ -205,6 +355,15 @@ def citation_for_page(pdf_page: int) -> dict:
         "pdf_page_end": pdf_page,
         "bylaw_page_start": bylaw_page,
         "bylaw_page_end": bylaw_page,
+    }
+
+
+def source_section_for_part(part: dict) -> dict:
+    citation = citation_for_range(part["bylaw_start"], part["bylaw_end"])
+    return {
+        "section_range_raw": f"PART {part['part']}",
+        "title_label_raw": part["title"],
+        **citation,
     }
 
 
@@ -334,6 +493,205 @@ def extract_shared_references(requirement_sections: list[dict]) -> list[dict]:
     return references
 
 
+def build_supporting_part_doc(reader: PdfReader, part: dict) -> dict:
+    page_texts = extract_page_texts(reader, part["bylaw_start"], part["bylaw_end"])
+    raw_sections, content_blocks = split_sections(
+        page_texts,
+        {
+            "part": part["part"],
+            "code": part["slug"],
+            "name": part["title"],
+            "bylaw_start": part["bylaw_start"],
+            "bylaw_end": part["bylaw_end"],
+        },
+        None,
+    )
+    sections = []
+    pending_patterns: set[str] = set()
+    for index, section in enumerate(raw_sections, start=1):
+        page = section_page_lookup(
+            page_texts,
+            section["section_label_raw"],
+            section["title_label_raw"],
+            {"bylaw_start": part["bylaw_start"]},
+            None,
+        )
+        section_citation = citation_for_page(page)
+        provisions, patterns = parse_provisions(section["lines"], section_citation)
+        pending_patterns.update(patterns)
+        sections.append(
+            {
+                "order_index": index,
+                "section_label_raw": section["section_label_raw"],
+                "title_label_raw": section["title_label_raw"],
+                "citations": section_citation,
+                "provisions": provisions,
+            }
+        )
+
+    open_issues = [
+        {
+            "issue_type": "extraction_review",
+            "description": "PDF text order was extracted with pypdf; verify section order, column flow, and table layout before normalization.",
+        }
+    ]
+    if content_blocks:
+        open_issues.append(
+            {
+                "issue_type": "section_assignment_review",
+                "description": "Some extracted text was not safely assigned to a labeled section and is preserved in content_blocks.",
+            }
+        )
+    if any(re.search(r"\b(Table|Figure|Schedule)\b", page["text"]) for page in page_texts):
+        open_issues.append(
+            {
+                "issue_type": "table_parsing_review",
+                "description": "The source section contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization.",
+            }
+        )
+
+    return {
+        "document_metadata": {
+            "jurisdiction": "City of Charlottetown",
+            "bylaw_name": "Draft Zoning & Development Bylaw",
+            "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+            "document_type": part["document_type"],
+            "draft_date_raw": "April 7, 2026",
+        },
+        "source_section": source_section_for_part(part),
+        "normalization_policy": {
+            "clause_labels_preserved_raw": True,
+            "normalized_paths_applied": False,
+            "pending_review_clause_patterns": sorted(pending_patterns),
+        },
+        "sections": sections,
+        "shared_requirement_references": extract_shared_references(sections),
+        "content_blocks": content_blocks,
+        "open_issues": open_issues,
+    }
+
+
+def definition_key(term: str) -> str:
+    key = re.sub(r"[^A-Za-z0-9]+", "_", term.strip().lower()).strip("_")
+    return re.sub(r"_+", "_", key)
+
+
+def build_definitions_doc(reader: PdfReader) -> dict:
+    bylaw_start = 163
+    bylaw_end = 192
+    page_texts = extract_page_texts(reader, bylaw_start, bylaw_end)
+    raw_pages = []
+    definitions = []
+    candidate_re = re.compile(r"(?P<term>[A-Z][A-Za-z0-9 '&/(),\-]{1,90}?)\s+means\s+", re.MULTILINE)
+
+    for page in page_texts:
+        text = page["text"]
+        raw_pages.append(
+            {
+                "heading_context_raw": "PART 30 DEFINITIONS",
+                "text": text,
+                "citations": citation_for_page(page["pdf_page"]),
+            }
+        )
+        matches = list(candidate_re.finditer(text))
+        for index, match in enumerate(matches):
+            start = match.end()
+            end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
+            term = " ".join(match.group("term").split())
+            definition_text = " ".join(text[start:end].split())
+            if len(term) > 80 or len(definition_text) < 8:
+                continue
+            definitions.append(
+                {
+                    "entry_index": len(definitions) + 1,
+                    "term_raw": term,
+                    "definition_text": definition_text,
+                    "status": "active",
+                    "definition_key": definition_key(term),
+                    "citations": citation_for_page(page["pdf_page"]),
+                }
+            )
+
+    return {
+        "document_metadata": {
+            "jurisdiction": "City of Charlottetown",
+            "bylaw_name": "Draft Zoning & Development Bylaw",
+            "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+            "document_type": "definitions",
+            "draft_date_raw": "April 7, 2026",
+        },
+        "source_section": {
+            "section_range_raw": "PART 30",
+            "title_label_raw": "DEFINITIONS",
+            **citation_for_range(bylaw_start, bylaw_end),
+        },
+        "definitions": definitions,
+        "content_blocks": raw_pages,
+        "open_issues": [
+            {
+                "issue_type": "definition_parsing_review",
+                "description": "Definitions were parsed from pypdf text using term-plus-means patterns and are also preserved by page in content_blocks for QA.",
+            }
+        ],
+    }
+
+
+def build_schedule_doc(reader: PdfReader, schedule: dict) -> dict:
+    page_texts = extract_page_texts(reader, schedule["bylaw_start"], schedule["bylaw_end"])
+    blocks = [
+        {
+            "heading_context_raw": f"{schedule['label']}: {schedule['title']}",
+            "text": page["text"],
+            "citations": citation_for_page(page["pdf_page"]),
+        }
+        for page in page_texts
+    ]
+    return {
+        "document_metadata": {
+            "jurisdiction": "City of Charlottetown",
+            "bylaw_name": "Draft Zoning & Development Bylaw",
+            "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+            "document_type": "schedule",
+            "schedule_label_raw": schedule["label"],
+            "draft_date_raw": "April 7, 2026",
+        },
+        "source_section": {
+            "section_label_raw": schedule["label"],
+            "title_label_raw": schedule["title"],
+            **citation_for_range(schedule["bylaw_start"], schedule["bylaw_end"]),
+        },
+        "content_blocks": blocks,
+        "open_issues": [
+            {
+                "issue_type": "spatial_extraction_review",
+                "description": "Schedule map text was extracted from the PDF, but map geometry and cartographic symbols were not vectorized in this source JSON pass.",
+            }
+        ],
+    }
+
+
+def build_maps_doc() -> dict:
+    references = []
+    for schedule in SCHEDULES:
+        citation = citation_for_range(schedule["bylaw_start"], schedule["bylaw_end"])
+        references.append(
+            {
+                "reference_type": schedule["reference_type"],
+                "source_label_raw": f"{schedule['label']}: {schedule['title']}",
+                "feature_key": schedule["slug"],
+                "feature_class": schedule["feature_class"],
+                **citation,
+                "planned_postgis_target": "spatial_features.geom",
+                "schedule_file": f"schedules/{schedule['slug']}.json",
+            }
+        )
+    return {
+        "document_name": "Draft Zoning & Development Bylaw",
+        "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+        "references": references,
+    }
+
+
 def build_zone_doc(reader: PdfReader, zone: dict, next_bylaw_start: int | None) -> dict:
     page_texts, text = extract_zone_lines(reader, zone, next_bylaw_start)
     raw_sections, content_blocks = split_sections(page_texts, zone, next_bylaw_start)
@@ -433,12 +791,15 @@ This folder contains a non-normalized source extraction for the City of Charlott
 ## Organization
 
 - `zones/*.json`: one file per zone or zoning district from Parts 10 through 29.
+- Top-level supporting files: administration, permit applications, general provisions, design standards, definitions, and maps.
+- `schedules/*.json`: one file per extracted schedule map from Schedules A-D.
 - `source-manifest.json`: inventory of extracted zones, source pages, and known limits.
 - `extraction-notes.md`: reproducibility notes and QA guidance.
 
 ## Extraction status
 
 - Zone part scope: Parts 10-29, bylaw pages 87-162.
+- Supporting part scope: Parts 1-9 and Part 30, plus Schedules A-D.
 - Zone count: {manifest["zone_count"]}.
 - PDF page numbers and visible bylaw page numbers are recorded separately.
 - Dimensional requirements are preserved as text in `requirement_sections`. They are not normalized into database-ready dimensional records.
@@ -462,6 +823,7 @@ Method:
 
 - Uses `pypdf` text extraction against the draft PDF.
 - Uses the table of contents page ranges to split zone parts.
+- Uses the table of contents page ranges to split supporting Parts 1-9, Part 30, and Schedules A-D.
 - Parses labeled sections such as `10.3 PERMITTED USES`.
 - Parses raw provision labels that appear at line starts: `.1`, `(a)`, and roman labels such as `i)`.
 - Extracts permitted uses only from sections whose titles contain `PERMITTED USE`.
@@ -472,6 +834,8 @@ QA checks recommended before normalization:
 - Verify that table/figure text has not shifted between adjacent provisions.
 - Verify unassigned text in `content_blocks` for RN, RM, and any other zone with `zone_boundary_review`.
 - Confirm whether raw label patterns `.1`, `(a)`, and `i)` should be added to the approved hierarchy policy for this bylaw.
+- Review definition entries against `definitions.json` content blocks before relying on term boundaries.
+- Review schedule files against the PDF maps before any spatial normalization.
 """
     (OUT / "extraction-notes.md").write_text(notes, encoding="utf-8")
 
@@ -479,6 +843,7 @@ QA checks recommended before normalization:
 def main() -> None:
     reader = PdfReader(str(SOURCE))
     ZONES_OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / "schedules").mkdir(parents=True, exist_ok=True)
     zone_entries = []
     for idx, zone in enumerate(ZONES):
         next_start = ZONES[idx + 1]["bylaw_start"] if idx + 1 < len(ZONES) else None
@@ -501,6 +866,61 @@ def main() -> None:
             }
         )
 
+    supporting_entries = []
+    for part in SUPPORTING_PARTS:
+        doc = build_supporting_part_doc(reader, part)
+        filename = f"{part['slug']}.json"
+        (OUT / filename).write_text(json.dumps(doc, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        citation = doc["source_section"]
+        supporting_entries.append(
+            {
+                "part": part["part"],
+                "document_type": part["document_type"],
+                "title": part["title"],
+                "file": filename,
+                "pdf_page_start": citation["pdf_page_start"],
+                "pdf_page_end": citation["pdf_page_end"],
+                "bylaw_page_start": citation["bylaw_page_start"],
+                "bylaw_page_end": citation["bylaw_page_end"],
+                "section_count": len(doc["sections"]),
+            }
+        )
+
+    definitions_doc = build_definitions_doc(reader)
+    (OUT / "definitions.json").write_text(json.dumps(definitions_doc, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    supporting_entries.append(
+        {
+            "part": 30,
+            "document_type": "definitions",
+            "title": "DEFINITIONS",
+            "file": "definitions.json",
+            "pdf_page_start": definitions_doc["source_section"]["pdf_page_start"],
+            "pdf_page_end": definitions_doc["source_section"]["pdf_page_end"],
+            "bylaw_page_start": definitions_doc["source_section"]["bylaw_page_start"],
+            "bylaw_page_end": definitions_doc["source_section"]["bylaw_page_end"],
+            "definition_count": len(definitions_doc["definitions"]),
+        }
+    )
+
+    schedule_entries = []
+    for schedule in SCHEDULES:
+        doc = build_schedule_doc(reader, schedule)
+        filename = f"schedules/{schedule['slug']}.json"
+        (OUT / filename).write_text(json.dumps(doc, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        citation = doc["source_section"]
+        schedule_entries.append(
+            {
+                "schedule_label_raw": schedule["label"],
+                "title": schedule["title"],
+                "file": filename,
+                "pdf_page_start": citation["pdf_page_start"],
+                "pdf_page_end": citation["pdf_page_end"],
+                "bylaw_page_start": citation["bylaw_page_start"],
+                "bylaw_page_end": citation["bylaw_page_end"],
+            }
+        )
+    (OUT / "maps.json").write_text(json.dumps(build_maps_doc(), indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
     manifest = {
         "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
         "extracted_at_local": datetime.now().replace(microsecond=0).isoformat(),
@@ -511,6 +931,8 @@ def main() -> None:
         "source_page_count": len(reader.pages),
         "zone_count": len(zone_entries),
         "zones": zone_entries,
+        "supporting_documents": supporting_entries,
+        "schedules": schedule_entries,
         "known_limits": [
             "pypdf text order can differ from visual PDF order around columns, tables, figures, and schedules.",
             "Tables, figures, and dimensional requirements are preserved as source text and require QA before normalization.",

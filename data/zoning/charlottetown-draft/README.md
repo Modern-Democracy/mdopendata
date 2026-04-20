@@ -7,12 +7,15 @@ This folder contains a non-normalized source extraction for the City of Charlott
 ## Organization
 
 - `zones/*.json`: one file per zone or zoning district from Parts 10 through 29.
+- Top-level supporting files: administration, permit applications, general provisions, design standards, definitions, and maps.
+- `schedules/*.json`: one file per extracted schedule map from Schedules A-D.
 - `source-manifest.json`: inventory of extracted zones, source pages, and known limits.
 - `extraction-notes.md`: reproducibility notes and QA guidance.
 
 ## Extraction status
 
 - Zone part scope: Parts 10-29, bylaw pages 87-162.
+- Supporting part scope: Parts 1-9 and Part 30, plus Schedules A-D.
 - Zone count: 20.
 - PDF page numbers and visible bylaw page numbers are recorded separately.
 - Dimensional requirements are preserved as text in `requirement_sections`. They are not normalized into database-ready dimensional records.
