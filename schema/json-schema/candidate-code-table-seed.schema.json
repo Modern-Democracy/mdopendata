@@ -1,0 +1,326 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/mdopendata/candidate-code-table-seed.schema.json",
+  "title": "Candidate Code Table Seed",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "candidate_table",
+    "description",
+    "jurisdiction",
+    "source_document",
+    "version",
+    "generated_at",
+    "status",
+    "entries"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "candidate_table": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "jurisdiction": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_document": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "const": "candidate"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/candidate_entry"
+      }
+    }
+  },
+  "$defs": {
+    "candidate_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_id",
+        "canonical_candidate",
+        "suggested_code",
+        "candidate_table",
+        "category",
+        "status",
+        "aliases",
+        "occurrence_count",
+        "confidence",
+        "match_basis",
+        "existing_code_match",
+        "source_refs",
+        "examples",
+        "review_flags",
+        "review_decision"
+      ],
+      "properties": {
+        "candidate_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]*$"
+        },
+        "canonical_candidate": {
+          "type": "string",
+          "minLength": 1
+        },
+        "suggested_code": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "candidate_table": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "category": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "status": {
+          "const": "candidate"
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "occurrence_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "match_basis": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "uniqueItems": true
+        },
+        "existing_code_match": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/existing_code_match"
+            }
+          ]
+        },
+        "default_join_behavior": {
+          "enum": [
+            "include_target_values",
+            "reference_only",
+            "override_target_values",
+            "exclude_target_values"
+          ]
+        },
+        "source_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/source_ref"
+          }
+        },
+        "examples": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/example"
+          }
+        },
+        "review_flags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/review_flag"
+          }
+        },
+        "review_decision": {
+          "$ref": "#/$defs/review_decision"
+        }
+      }
+    },
+    "existing_code_match": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code_table",
+        "code",
+        "label",
+        "match_type"
+      ],
+      "properties": {
+        "code_table": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "code": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "match_type": {
+          "enum": [
+            "code",
+            "label",
+            "symbol",
+            "alias"
+          ]
+        }
+      }
+    },
+    "source_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_document",
+        "page",
+        "section",
+        "clause",
+        "context"
+      ],
+      "properties": {
+        "source_document": {
+          "type": "string",
+          "minLength": 1
+        },
+        "page": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "section": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "clause": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "context": {
+          "type": "string"
+        }
+      }
+    },
+    "example": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "page",
+        "section",
+        "clause"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "page": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "section": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "clause": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "review_flag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "review_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "approved_code",
+        "review_notes"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "unreviewed",
+            "approved",
+            "rejected",
+            "merged",
+            "deferred"
+          ]
+        },
+        "approved_code": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "review_notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

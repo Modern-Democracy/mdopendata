@@ -96,6 +96,78 @@
       "status": "active"
     },
     {
+      "code": "notwithstanding",
+      "label": "Notwithstanding",
+      "description": "The source item creates a notwithstanding relationship that may exclude or override an otherwise applicable target item.",
+      "default_join_behavior": "exclude_target_values",
+      "status": "active",
+      "metadata": {
+        "source_jurisdiction": "Charlottetown",
+        "source_document": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+        "candidate_occurrence_count": 28
+      }
+    },
+    {
+      "code": "does_not_apply",
+      "label": "Does not apply",
+      "description": "The source item states that a target item does not apply.",
+      "default_join_behavior": "exclude_target_values",
+      "status": "active",
+      "metadata": {
+        "source_jurisdiction": "Charlottetown",
+        "source_document": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+        "candidate_occurrence_count": 4
+      }
+    },
+    {
+      "code": "as_shown_on",
+      "label": "As shown on",
+      "description": "The source item references a target shown on a plan, map, schedule, drawing, or other source.",
+      "default_join_behavior": "reference_only",
+      "status": "active",
+      "metadata": {
+        "source_jurisdiction": "Charlottetown",
+        "source_document": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+        "candidate_occurrence_count": 3
+      }
+    },
+    {
+      "code": "except_as_provided",
+      "label": "Except as provided",
+      "description": "The source item creates an exception to an otherwise applicable target item.",
+      "default_join_behavior": "exclude_target_values",
+      "status": "active",
+      "metadata": {
+        "source_jurisdiction": "Charlottetown",
+        "source_document": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+        "candidate_occurrence_count": 2
+      }
+    },
+    {
+      "code": "referred_to_in",
+      "label": "Referred to in",
+      "description": "The source item references a target item identified elsewhere.",
+      "default_join_behavior": "reference_only",
+      "status": "active",
+      "metadata": {
+        "source_jurisdiction": "Charlottetown",
+        "source_document": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+        "candidate_occurrence_count": 1
+      }
+    },
+    {
+      "code": "where_permitted_in",
+      "label": "Where permitted in",
+      "description": "The source item references another context where a use or condition is permitted.",
+      "default_join_behavior": "reference_only",
+      "status": "active",
+      "metadata": {
+        "source_jurisdiction": "Charlottetown",
+        "source_document": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+        "candidate_occurrence_count": 1
+      }
+    },
+    {
       "code": "unknown",
       "label": "Unknown",
       "description": "The relationship type has not yet been classified.",
