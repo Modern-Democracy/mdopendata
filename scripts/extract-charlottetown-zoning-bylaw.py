@@ -368,6 +368,40 @@ def rebuild_schema_tables_from_pdf(doc: Any, data: dict[str, Any]) -> bool:
     return changed
 
 
+def rebuild_clause_refs(data: dict[str, Any]) -> dict[str, Any]:
+    raw_data = data.get("raw_data") or {}
+    refs = []
+    for section in raw_data.get("sections_raw") or []:
+        section_id_value = section.get("section_id") or ""
+        for clause in section.get("clauses_raw") or []:
+            refs.append(
+                {
+                    "clause_id": clause["clause_id"],
+                    "section_id": section_id_value,
+                    "source_order": len(refs) + 1,
+                }
+            )
+    raw_data.pop("clauses_index", None)
+    raw_data["clause_refs"] = refs
+    return data
+
+
+def refresh_schema_numeric_values(data: dict[str, Any]) -> dict[str, Any]:
+    sections = (data.get("raw_data") or {}).get("sections_raw") or []
+    if not sections:
+        return data
+    prefix = ((data.get("raw_data") or {}).get("source_units") or [{}])[0].get("source_unit_id") or "document"
+    review_flags = data.setdefault("review_flags", [])
+    numeric_values, requirements, other_requirements = build_numeric_and_requirements(sections, prefix, review_flags)
+    structured = data.setdefault("structured_data", base_structured_data())
+    structured["numeric_values"] = numeric_values
+    structured["requirements"] = requirements
+    structured["other_requirements"] = other_requirements
+    for group in structured.get("regulation_groups") or []:
+        group["requirement_refs"] = [req["requirement_id"] for req in requirements]
+    return data
+
+
 def split_table_values(text: str, count: int) -> tuple[str, list[str]]:
     text = clean_text(text)
     matches = list(MEASUREMENT_RE.finditer(text))
@@ -418,7 +452,7 @@ def build_table_raw(prefix: str, section: dict[str, Any], sec_id: str, source_or
 
 def build_raw_sections(prefix: str, sections: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
     raw_sections = []
-    clauses_index = []
+    clause_refs = []
     table_refs = []
     for sec_order, section in enumerate(sections, start=1):
         label = section.get("section_label_raw")
@@ -453,18 +487,15 @@ def build_raw_sections(prefix: str, sections: list[dict[str, Any]]) -> tuple[lis
                     "citations": citation(provision.get("citations") or section.get("citations")),
                 }
                 raw_section["clauses_raw"].append(raw_clause)
-                clauses_index.append(
+                clause_refs.append(
                     {
                         "clause_id": cid,
                         "section_id": sec_id,
-                        "clause_label_raw": raw_clause["clause_label_raw"],
-                        "clause_text_raw": raw_clause["clause_text_raw"],
-                        "source_order": len(clauses_index) + 1,
-                        "citations": raw_clause["citations"],
+                        "source_order": len(clause_refs) + 1,
                     }
                 )
         raw_sections.append(raw_section)
-    return raw_sections, clauses_index, table_refs
+    return raw_sections, clause_refs, table_refs
 
 
 def flatten_table_cells(raw_sections: list[dict[str, Any]]) -> list[tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, Any]]]:
@@ -541,6 +572,81 @@ def requirement_category(text: str) -> str:
     return code_key(text)[:80] or "other"
 
 
+def compatible_alternative_units(primary_unit: str, alternative_unit: str) -> bool:
+    return (primary_unit, alternative_unit) in {("m", "ft"), ("sq_m", "sq_ft"), ("ha", "acre")}
+
+
+def numeric_record_from_match(
+    numeric_id: str,
+    match: re.Match[str],
+    context_text: str,
+    source_text: str,
+    ref: dict[str, str],
+    alternative_match: re.Match[str] | None = None,
+) -> dict[str, Any]:
+    unit = unit_code(match.group("unit"))
+    value_raw = match.group(0)
+    alternative_values = []
+    if alternative_match is not None:
+        alternative_unit = unit_code(alternative_match.group("unit"))
+        end = alternative_match.end()
+        if source_text[end : end + 1] == ")":
+            end += 1
+        value_raw = clean_text(source_text[match.start() : end])
+        alternative_values.append(
+            {
+                "value_raw": alternative_match.group(0),
+                "value": parse_number(alternative_match.group("value")),
+                "unit": alternative_unit,
+                "measure_type": measure_type_for_unit(alternative_unit, context_text),
+            }
+        )
+    return {
+        "numeric_value_id": numeric_id,
+        "value_raw": value_raw,
+        "value": parse_number(match.group("value")),
+        "unit": unit,
+        "measure_type": measure_type_for_unit(unit, context_text),
+        "comparator": comparator_from_text(context_text),
+        "alternative_values": alternative_values,
+        "source_refs": [ref],
+        "confidence": "medium",
+    }
+
+
+def grouped_numeric_records(
+    matches: list[re.Match[str]],
+    id_base: str,
+    context_text: str,
+    source_text: str,
+    ref: dict[str, str],
+) -> list[dict[str, Any]]:
+    records = []
+    index = 0
+    record_index = 1
+    while index < len(matches):
+        match = matches[index]
+        next_match = matches[index + 1] if index + 1 < len(matches) else None
+        alternative = None
+        if next_match and compatible_alternative_units(unit_code(match.group("unit")), unit_code(next_match.group("unit"))):
+            alternative = next_match
+            index += 2
+        else:
+            index += 1
+        records.append(
+            numeric_record_from_match(
+                f"{id_base}-{record_index}",
+                match,
+                context_text,
+                source_text,
+                ref,
+                alternative,
+            )
+        )
+        record_index += 1
+    return records
+
+
 def build_numeric_and_requirements(
     raw_sections: list[dict[str, Any]],
     prefix: str,
@@ -557,26 +663,15 @@ def build_numeric_and_requirements(
         row_label = next((c["cell_text_raw"] for c in row["cells_raw"] if c["column_id"] == "requirement"), "")
         context_text = clean_text(f"{row_label} {column.get('column_label_raw', '')} {cell['cell_text_raw']}")
         matches = list(MEASUREMENT_RE.finditer(cell["cell_text_raw"]))
-        numeric_refs = []
-        for match_index, match in enumerate(matches, start=1):
-            unit = unit_code(match.group("unit"))
-            measure_type = measure_type_for_unit(unit, context_text)
-            value_raw = match.group(0)
-            numeric_id = f"{prefix}-num-{slugify(row['row_id'])}-{slugify(cell['column_id'])}-{match_index}"
-            numeric_values.append(
-                {
-                    "numeric_value_id": numeric_id,
-                    "value_raw": value_raw,
-                    "value": parse_number(match.group("value")),
-                    "unit": unit,
-                    "measure_type": measure_type,
-                    "comparator": comparator_from_text(context_text),
-                    "alternative_values": [],
-                    "source_refs": [source_ref("table_cell", cell["cell_id"])],
-                    "confidence": "medium",
-                }
-            )
-            numeric_refs.append(numeric_id)
+        records = grouped_numeric_records(
+            matches,
+            f"{prefix}-num-{slugify(row['row_id'])}-{slugify(cell['column_id'])}",
+            context_text,
+            cell["cell_text_raw"],
+            source_ref("table_cell", cell["cell_id"]),
+        )
+        numeric_values.extend(records)
+        numeric_refs = [record["numeric_value_id"] for record in records]
         if numeric_refs:
             req_id = f"{prefix}-req-{slugify(row['row_id'])}-{slugify(cell['column_id'])}"
             requirements.append(
@@ -614,24 +709,15 @@ def build_numeric_and_requirements(
             matches = list(MEASUREMENT_RE.finditer(text))
             if not matches:
                 continue
-            numeric_refs = []
-            for match_index, match in enumerate(matches, start=1):
-                unit = unit_code(match.group("unit"))
-                numeric_id = f"{prefix}-num-{slugify(clause['clause_id'])}-{match_index}"
-                numeric_values.append(
-                    {
-                        "numeric_value_id": numeric_id,
-                        "value_raw": match.group(0),
-                        "value": parse_number(match.group("value")),
-                        "unit": unit,
-                        "measure_type": measure_type_for_unit(unit, text),
-                        "comparator": comparator_from_text(text),
-                        "alternative_values": [],
-                        "source_refs": [source_ref("clause", clause["clause_id"])],
-                        "confidence": "medium",
-                    }
-                )
-                numeric_refs.append(numeric_id)
+            records = grouped_numeric_records(
+                matches,
+                f"{prefix}-num-{slugify(clause['clause_id'])}",
+                text,
+                text,
+                source_ref("clause", clause["clause_id"]),
+            )
+            numeric_values.extend(records)
+            numeric_refs = [record["numeric_value_id"] for record in records]
             key = clause["clause_id"]
             if key in seen_requirement_text:
                 continue
@@ -724,7 +810,7 @@ def build_terms_and_uses(
             )
 
         use_type = item.get("use_type") or ""
-        use_status = "accessory" if use_type == "accessory_or_secondary_use" else "permitted"
+        use_status = "accessory_or_secondary" if use_type == "accessory_or_secondary_use" else "permitted"
         uses.append(
             {
                 "use_id": f"{prefix}-use-{slugify(raw_name)}-{index}",
@@ -799,7 +885,7 @@ def map_refs(prefix: str, citation_value: dict[str, Any], zone_code: str | None 
 def transform_zone(normalizer: Normalizer, legacy: dict[str, Any]) -> dict[str, Any]:
     metadata = legacy.get("document_metadata") or {}
     prefix = f"zone-{slugify(metadata.get('zone_code'))}"
-    raw_sections, clauses_index, table_refs = build_raw_sections(prefix, legacy.get("requirement_sections") or [])
+    raw_sections, clause_refs, table_refs = build_raw_sections(prefix, legacy.get("requirement_sections") or [])
     review_flags: list[dict[str, Any]] = []
     clause_lookup = clause_lookup_from_raw(raw_sections)
     terms, uses = build_terms_and_uses(normalizer, legacy.get("permitted_uses") or [], prefix, clause_lookup, review_flags)
@@ -869,7 +955,7 @@ def transform_zone(normalizer: Normalizer, legacy: dict[str, Any]) -> dict[str, 
                 }
             ],
             "sections_raw": raw_sections,
-            "clauses_index": clauses_index,
+            "clause_refs": clause_refs,
             "tables_raw": table_refs,
             "map_references_raw": raw_map_refs,
         },
@@ -882,7 +968,7 @@ def transform_sections_doc(normalizer: Normalizer, legacy: dict[str, Any], docum
     metadata = legacy.get("document_metadata") or {}
     source = legacy.get("source_section") or {}
     prefix = f"doc-{slugify(document_type)}"
-    raw_sections, clauses_index, table_refs = build_raw_sections(prefix, legacy.get("sections") or [])
+    raw_sections, clause_refs, table_refs = build_raw_sections(prefix, legacy.get("sections") or [])
     review_flags: list[dict[str, Any]] = []
     numeric_values, requirements, other_requirements = build_numeric_and_requirements(raw_sections, prefix, review_flags)
     raw_map_refs, structured_map_refs = map_refs(prefix, citation(source))
@@ -941,7 +1027,7 @@ def transform_sections_doc(normalizer: Normalizer, legacy: dict[str, Any], docum
                 }
             ],
             "sections_raw": raw_sections,
-            "clauses_index": clauses_index,
+            "clause_refs": clause_refs,
             "tables_raw": table_refs,
             "map_references_raw": raw_map_refs,
         },
@@ -1027,7 +1113,7 @@ def transform_definitions(normalizer: Normalizer, legacy: dict[str, Any]) -> dic
                 }
             ],
             "entries_raw": entries_raw,
-            "clauses_index": [],
+            "clause_refs": [],
             "tables_raw": [],
             "map_references_raw": [],
         },
@@ -1094,7 +1180,7 @@ def transform_appendix(normalizer: Normalizer, legacy: dict[str, Any], filename:
                 }
             ],
             "pages_raw": pages_raw,
-            "clauses_index": [],
+            "clause_refs": [],
             "tables_raw": [],
             "map_references_raw": raw_map_refs,
         },
@@ -1166,6 +1252,8 @@ def refresh_schema_terms(normalizer: Normalizer, data: dict[str, Any]) -> dict[s
             seen_ids.add(term["term_id"])
     structured["terms"] = refreshed_terms
     for use in structured.get("uses") or []:
+        if use.get("use_status") == "accessory":
+            use["use_status"] = "accessory_or_secondary"
         if use.get("use_term_id") in id_changes:
             use["use_term_id"] = id_changes[use["use_term_id"]]
     return data
@@ -1185,7 +1273,9 @@ def main() -> None:
         path = OUT / zone["file"]
         data = read_json(path)
         if {"raw_data", "structured_data", "review_flags"}.issubset(data):
+            rebuild_clause_refs(data)
             rebuild_schema_tables_from_pdf(pdf_doc, data)
+            refresh_schema_numeric_values(data)
             write_json(path, refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data)))
             continue
         transformed = transform_zone(normalizer, data)
@@ -1198,7 +1288,9 @@ def main() -> None:
             continue
         data = read_json(path)
         if {"raw_data", "structured_data", "review_flags"}.issubset(data):
+            rebuild_clause_refs(data)
             rebuild_schema_tables_from_pdf(pdf_doc, data)
+            refresh_schema_numeric_values(data)
             write_json(path, refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data)))
             continue
         document_type = item.get("document_type") or (data.get("document_metadata") or {}).get("document_type")
@@ -1213,7 +1305,9 @@ def main() -> None:
             continue
         data = read_json(path)
         if {"raw_data", "structured_data", "review_flags"}.issubset(data):
+            rebuild_clause_refs(data)
             rebuild_schema_tables_from_pdf(pdf_doc, data)
+            refresh_schema_numeric_values(data)
             write_json(path, refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data)))
             continue
         write_json(path, transform_appendix(normalizer, data, item["file"]))

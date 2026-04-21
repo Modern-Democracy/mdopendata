@@ -62,7 +62,7 @@
             "required": [
               "source_units",
               "sections_raw",
-              "clauses_index",
+              "clause_refs",
               "tables_raw",
               "map_references_raw"
             ]
@@ -102,7 +102,7 @@
             "required": [
               "source_units",
               "sections_raw",
-              "clauses_index",
+              "clause_refs",
               "tables_raw",
               "map_references_raw"
             ]
@@ -139,7 +139,7 @@
             "required": [
               "source_units",
               "entries_raw",
-              "clauses_index",
+              "clause_refs",
               "tables_raw",
               "map_references_raw"
             ]
@@ -176,7 +176,7 @@
             "required": [
               "source_units",
               "pages_raw",
-              "clauses_index",
+              "clause_refs",
               "tables_raw",
               "map_references_raw"
             ]
@@ -251,7 +251,7 @@
       "additionalProperties": false,
       "required": [
         "source_units",
-        "clauses_index",
+        "clause_refs",
         "tables_raw",
         "map_references_raw"
       ],
@@ -268,10 +268,10 @@
             "$ref": "#/$defs/section_raw"
           }
         },
-        "clauses_index": {
+        "clause_refs": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/clause_index_item"
+            "$ref": "#/$defs/clause_ref"
           }
         },
         "tables_raw": {
@@ -859,7 +859,7 @@
         "use_status": {
           "enum": [
             "permitted",
-            "accessory",
+            "accessory_or_secondary",
             "secondary",
             "conditional",
             "site_specific",
@@ -867,7 +867,7 @@
             "inherited",
             "unknown"
           ],
-          "description": "Examples: permitted, accessory, secondary, conditional, site_specific, prohibited, inherited, unknown."
+          "description": "Examples: permitted, accessory_or_secondary, secondary, conditional, site_specific, prohibited, inherited, unknown."
         },
         "source_clause_ref": {
           "type": "string"
@@ -1095,15 +1095,13 @@
         }
       }
     },
-    "clause_index_item": {
+    "clause_ref": {
       "type": "object",
       "additionalProperties": false,
       "required": [
         "clause_id",
-        "clause_label_raw",
-        "clause_text_raw",
-        "source_order",
-        "citations"
+        "section_id",
+        "source_order"
       ],
       "properties": {
         "clause_id": {
@@ -1112,17 +1110,8 @@
         "section_id": {
           "type": "string"
         },
-        "clause_label_raw": {
-          "type": "string"
-        },
-        "clause_text_raw": {
-          "type": "string"
-        },
         "source_order": {
           "type": "integer"
-        },
-        "citations": {
-          "$ref": "#/$defs/citation"
         }
       }
     },
