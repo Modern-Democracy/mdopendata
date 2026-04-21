@@ -101,18 +101,22 @@
                 "source_order": 1,
                 "cells_raw": [
                   {
+                    "cell_id": "zone-r-1l-table-9-2-1-row-1-row_number",
                     "column_id": "row_number",
                     "cell_text_raw": "1"
                   },
                   {
+                    "cell_id": "zone-r-1l-table-9-2-1-row-1-requirement",
                     "column_id": "requirement",
                     "cell_text_raw": "Lot Area (Minimum)"
                   },
                   {
+                    "cell_id": "zone-r-1l-table-9-2-1-row-1-interior_lot",
                     "column_id": "interior_lot",
                     "cell_text_raw": "540 sq. m (5,812.5 sq ft)"
                   },
                   {
+                    "cell_id": "zone-r-1l-table-9-2-1-row-1-corner_lot",
                     "column_id": "corner_lot",
                     "cell_text_raw": "686 sq. m (7,384.0 sq ft)"
                   }
@@ -229,33 +233,36 @@
           ],
           "conditions": []
         },
-        "requirements": [
-          {
-            "requirement_id": "zone-r-1l-req-lot-area-min-interior",
-            "requirement_type": "dimensional_standard",
-            "requirement_category": "lot_area",
-            "requirement_label_raw": "Lot Area (Minimum)",
-            "requirement_text_raw": "Lot Area (Minimum): Interior Lot 540 sq. m (5,812.5 sq ft)",
-            "applicability": {
-              "applies_to_lot_contexts": [
-                "interior_lot"
-              ],
-              "conditions": []
-            },
-            "numeric_value_refs": [
-              "zone-r-1l-lot-area-min-interior"
-            ],
-            "term_refs": [],
-            "source_refs": [
-              {
-                "source_ref_type": "table_row",
-                "source_ref_id": "zone-r-1l-table-9-2-1-row-1"
-              }
-            ],
-            "confidence": "high"
-          }
+        "requirement_refs": [
+          "zone-r-1l-req-lot-area-min-interior"
         ],
         "source_section_ref": "zone-r-1l-section-9-2",
+        "confidence": "high"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-r-1l-req-lot-area-min-interior",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum): Interior Lot 540 sq. m (5,812.5 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-1l-lot-area-min-interior"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-1l-table-9-2-1-row-1"
+          }
+        ],
         "confidence": "high"
       }
     ],

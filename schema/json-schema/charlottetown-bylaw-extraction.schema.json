@@ -30,15 +30,171 @@
       }
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "document_metadata": {
+            "properties": {
+              "document_type": {
+                "const": "zone"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "document_metadata": {
+            "required": [
+              "jurisdiction",
+              "bylaw_name",
+              "source_document_path",
+              "document_type",
+              "zone_code",
+              "zone_name",
+              "zone_label_raw",
+              "zone_title_raw",
+              "citations"
+            ]
+          },
+          "raw_data": {
+            "required": [
+              "source_units",
+              "sections_raw",
+              "clauses_index",
+              "tables_raw",
+              "map_references_raw"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_metadata": {
+            "properties": {
+              "document_type": {
+                "enum": [
+                  "general_provisions",
+                  "design_standards"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "document_metadata": {
+            "required": [
+              "jurisdiction",
+              "bylaw_name",
+              "source_document_path",
+              "document_type",
+              "document_label_raw",
+              "document_title_raw",
+              "citations"
+            ]
+          },
+          "raw_data": {
+            "required": [
+              "source_units",
+              "sections_raw",
+              "clauses_index",
+              "tables_raw",
+              "map_references_raw"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_metadata": {
+            "properties": {
+              "document_type": {
+                "const": "definitions"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "document_metadata": {
+            "required": [
+              "jurisdiction",
+              "bylaw_name",
+              "source_document_path",
+              "document_type",
+              "document_label_raw",
+              "document_title_raw",
+              "citations"
+            ]
+          },
+          "raw_data": {
+            "required": [
+              "source_units",
+              "entries_raw",
+              "clauses_index",
+              "tables_raw",
+              "map_references_raw"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_metadata": {
+            "properties": {
+              "document_type": {
+                "const": "appendix_table"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "document_metadata": {
+            "required": [
+              "jurisdiction",
+              "bylaw_name",
+              "source_document_path",
+              "document_type",
+              "appendix_label_raw",
+              "appendix_title_raw",
+              "citations"
+            ]
+          },
+          "raw_data": {
+            "required": [
+              "source_units",
+              "pages_raw",
+              "clauses_index",
+              "tables_raw",
+              "map_references_raw"
+            ]
+          }
+        }
+      }
+    }
+  ],
   "$defs": {
     "document_metadata": {
       "type": "object",
-      "additionalProperties": true,
+      "additionalProperties": false,
       "required": [
         "jurisdiction",
         "bylaw_name",
         "source_document_path",
-        "document_type"
+        "document_type",
+        "citations"
       ],
       "properties": {
         "jurisdiction": {
@@ -92,7 +248,13 @@
     },
     "raw_data": {
       "type": "object",
-      "additionalProperties": true,
+      "additionalProperties": false,
+      "required": [
+        "source_units",
+        "clauses_index",
+        "tables_raw",
+        "map_references_raw"
+      ],
       "properties": {
         "source_units": {
           "type": "array",
@@ -141,6 +303,16 @@
     "structured_data": {
       "type": "object",
       "additionalProperties": false,
+      "required": [
+        "terms",
+        "numeric_values",
+        "requirements",
+        "regulation_groups",
+        "conditional_rule_groups",
+        "zone_relationships",
+        "map_layer_references",
+        "other_requirements"
+      ],
       "properties": {
         "terms": {
           "type": "array",
@@ -243,7 +415,21 @@
           "type": "string"
         },
         "term_category": {
-          "type": "string",
+          "enum": [
+            "dwelling_type",
+            "use_type",
+            "lot_context",
+            "yard_type",
+            "building_element",
+            "approval_process",
+            "map_feature",
+            "document_reference",
+            "zone",
+            "parking_loading",
+            "signage",
+            "environmental_feature",
+            "unknown"
+          ],
           "description": "Stable category intended to become a code table, such as dwelling_type, use_type, lot_context, yard_type, building_element, approval_process, map_feature, or document_reference."
         },
         "code_table": {
@@ -289,18 +475,59 @@
           ]
         },
         "unit": {
-          "type": [
-            "string",
-            "null"
+          "enum": [
+            "m",
+            "ft",
+            "sq_m",
+            "sq_ft",
+            "ha",
+            "acre",
+            "percent",
+            "storey",
+            "bedroom",
+            "dwelling_unit",
+            "unit",
+            "parking_space",
+            "seat",
+            "room",
+            "sign",
+            "per_ha",
+            "cad",
+            "none",
+            null
           ],
           "description": "Use canonical unit codes such as m, ft, sq_m, sq_ft, percent, storey, bedroom, unit, parking_space."
         },
         "measure_type": {
-          "type": "string",
+          "enum": [
+            "length",
+            "area",
+            "height",
+            "density",
+            "count",
+            "ratio",
+            "percentage",
+            "time",
+            "currency",
+            "angle",
+            "unknown"
+          ],
           "description": "Stable measure category intended for code tables, such as length, area, height, density, count, ratio, percentage, time, or currency."
         },
         "comparator": {
-          "type": "string",
+          "enum": [
+            "minimum",
+            "maximum",
+            "exact",
+            "range_min",
+            "range_max",
+            "less_than",
+            "greater_than",
+            "at_least",
+            "at_most",
+            "not_applicable",
+            "unknown"
+          ],
           "description": "Standard comparison operator such as minimum, maximum, exact, range_min, range_max, less_than, greater_than, at_least, at_most, not_applicable, or unknown."
         },
         "alternative_values": {
@@ -335,7 +562,20 @@
           "type": "string"
         },
         "requirement_type": {
-          "type": "string",
+          "enum": [
+            "dimensional_standard",
+            "permitted_use_rule",
+            "prohibited_use_rule",
+            "design_standard",
+            "process_requirement",
+            "agreement_requirement",
+            "map_applicability_rule",
+            "parking_requirement",
+            "signage_requirement",
+            "environmental_requirement",
+            "relationship_rule",
+            "other"
+          ],
           "description": "Stable type intended for code tables, such as dimensional_standard, permitted_use_rule, prohibited_use_rule, design_standard, process_requirement, agreement_requirement, map_applicability_rule, parking_requirement, signage_requirement, environmental_requirement, or other."
         },
         "requirement_category": {
@@ -380,7 +620,7 @@
       "required": [
         "regulation_group_id",
         "group_title_raw",
-        "requirements",
+        "requirement_refs",
         "confidence"
       ],
       "properties": {
@@ -402,10 +642,10 @@
         "applicability": {
           "$ref": "#/$defs/applicability"
         },
-        "requirements": {
+        "requirement_refs": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/requirement"
+            "type": "string"
           }
         },
         "source_section_ref": {
@@ -422,7 +662,7 @@
       "required": [
         "conditional_rule_group_id",
         "rule_group_type",
-        "requirements",
+        "requirement_refs",
         "confidence"
       ],
       "properties": {
@@ -442,10 +682,10 @@
             "$ref": "#/$defs/condition"
           }
         },
-        "requirements": {
+        "requirement_refs": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/requirement"
+            "type": "string"
           }
         },
         "source_refs": {
@@ -474,7 +714,22 @@
           "type": "string"
         },
         "relationship_type": {
-          "type": "string",
+          "enum": [
+            "inherits_uses",
+            "inherits_regulations",
+            "references_section",
+            "references_clause",
+            "references_table",
+            "references_definition",
+            "references_zone",
+            "references_map_layer",
+            "applies_to_parcel",
+            "supersedes",
+            "exception_to",
+            "modifies",
+            "implements",
+            "unknown"
+          ],
           "description": "Examples: inherits_uses, inherits_regulations, references_section, references_table, references_definition, references_zone, references_map_layer, applies_to_parcel, supersedes, exception_to."
         },
         "source_ref": {
@@ -490,7 +745,12 @@
           "type": "string"
         },
         "join_behavior": {
-          "type": "string",
+          "enum": [
+            "include_target_values",
+            "reference_only",
+            "override_target_values",
+            "exclude_target_values"
+          ],
           "description": "How query logic should traverse this relationship, such as include_target_values, reference_only, override_target_values, or exclude_target_values."
         },
         "confidence": {
@@ -518,7 +778,15 @@
           "type": "string"
         },
         "map_reference_type": {
-          "type": "string",
+          "enum": [
+            "zoning_map",
+            "height_schedule",
+            "street_hierarchy",
+            "walkable_street_map",
+            "site_specific_map",
+            "appendix_map",
+            "other"
+          ],
           "description": "Examples: zoning_map, height_schedule, street_hierarchy, walkable_street_map, site_specific_map, appendix_map."
         },
         "postgis_schema": {
@@ -564,7 +832,16 @@
           "type": "string"
         },
         "use_status": {
-          "type": "string",
+          "enum": [
+            "permitted",
+            "accessory",
+            "secondary",
+            "conditional",
+            "site_specific",
+            "prohibited",
+            "inherited",
+            "unknown"
+          ],
           "description": "Examples: permitted, accessory, secondary, conditional, site_specific, prohibited, inherited, unknown."
         },
         "source_clause_ref": {
@@ -686,7 +963,8 @@
       "required": [
         "source_unit_id",
         "source_unit_type",
-        "source_order"
+        "source_order",
+        "citations"
       ],
       "properties": {
         "source_unit_id": {
@@ -719,7 +997,8 @@
         "section_id",
         "section_label_raw",
         "section_title_raw",
-        "source_order"
+        "source_order",
+        "citations"
       ],
       "properties": {
         "section_id": {
@@ -758,7 +1037,8 @@
         "clause_id",
         "clause_label_raw",
         "clause_text_raw",
-        "source_order"
+        "source_order",
+        "citations"
       ],
       "properties": {
         "clause_id": {
@@ -797,7 +1077,8 @@
         "clause_id",
         "clause_label_raw",
         "clause_text_raw",
-        "source_order"
+        "source_order",
+        "citations"
       ],
       "properties": {
         "clause_id": {
@@ -849,7 +1130,8 @@
         "table_id",
         "source_order",
         "columns_raw",
-        "rows_raw"
+        "rows_raw",
+        "citations"
       ],
       "properties": {
         "table_id": {
@@ -925,10 +1207,14 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
+        "cell_id",
         "column_id",
         "cell_text_raw"
       ],
       "properties": {
+        "cell_id": {
+          "type": "string"
+        },
         "column_id": {
           "type": "string"
         },
@@ -949,7 +1235,8 @@
       "required": [
         "map_reference_id",
         "map_label_raw",
-        "map_title_raw"
+        "map_title_raw",
+        "citations"
       ],
       "properties": {
         "map_reference_id": {
@@ -976,7 +1263,8 @@
         "definition_entry_id",
         "term_raw",
         "definition_text_raw",
-        "source_order"
+        "source_order",
+        "citations"
       ],
       "properties": {
         "definition_entry_id": {
@@ -1001,7 +1289,8 @@
       "additionalProperties": false,
       "required": [
         "page_id",
-        "source_order"
+        "source_order",
+        "text_raw"
       ],
       "properties": {
         "page_id": {
@@ -1036,7 +1325,19 @@
       ],
       "properties": {
         "source_ref_type": {
-          "type": "string"
+          "enum": [
+            "document",
+            "source_unit",
+            "section",
+            "clause",
+            "table",
+            "table_row",
+            "table_cell",
+            "definition",
+            "map_reference",
+            "zone",
+            "external_source"
+          ]
         },
         "source_ref_id": {
           "type": "string"
@@ -1063,31 +1364,78 @@
           ]
         },
         "unit": {
-          "type": [
-            "string",
-            "null"
+          "enum": [
+            "m",
+            "ft",
+            "sq_m",
+            "sq_ft",
+            "ha",
+            "acre",
+            "percent",
+            "storey",
+            "bedroom",
+            "dwelling_unit",
+            "unit",
+            "parking_space",
+            "seat",
+            "room",
+            "sign",
+            "per_ha",
+            "cad",
+            "none",
+            null
           ]
         },
         "measure_type": {
-          "type": "string"
+          "enum": [
+            "length",
+            "area",
+            "height",
+            "density",
+            "count",
+            "ratio",
+            "percentage",
+            "time",
+            "currency",
+            "angle",
+            "unknown"
+          ]
         }
       }
     },
     "citation": {
       "type": "object",
       "additionalProperties": false,
+      "required": [
+        "pdf_page_start",
+        "pdf_page_end",
+        "bylaw_page_start",
+        "bylaw_page_end"
+      ],
       "properties": {
         "pdf_page_start": {
-          "type": "integer"
+          "type": [
+            "integer",
+            "null"
+          ]
         },
         "pdf_page_end": {
-          "type": "integer"
+          "type": [
+            "integer",
+            "null"
+          ]
         },
         "bylaw_page_start": {
-          "type": "integer"
+          "type": [
+            "integer",
+            "null"
+          ]
         },
         "bylaw_page_end": {
-          "type": "integer"
+          "type": [
+            "integer",
+            "null"
+          ]
         }
       }
     },
