@@ -19,6 +19,9 @@
   workflow change, or architectural refactor that the user did not explicitly
   request, obtain approval before implementation.
 - After any implementation task, finish in `QA Reviewer`.
+- When asked to prepare a prompt for a new conversation, do not include
+  instructions that already appear in `AGENTS.md` or role skill `SKILL.md`
+  files. Reference those files instead of restating their contents.
 - When parsing by-law zones or clauses, preserve each raw clause label exactly
   as written in the source.
 - For clause hierarchy normalization, the currently approved interpretation is
