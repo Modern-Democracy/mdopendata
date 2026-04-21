@@ -1,0 +1,59 @@
+{
+  "output": "data/spatial/charlottetown/charlottetown-draft-map-layers-2026-04-09-municipal-fit.gpkg",
+  "target_crs": "EPSG:2954",
+  "source_pdf": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+  "municipal_boundary_layer": "PEI_Municipal_Zones",
+  "municipal_boundary_attribute": "MUNICIPAL1",
+  "municipal_boundary_value": "City of Charlottetown",
+  "map_fit_bounds_pdf": {
+    "schedule_a": [
+      126.04969787597656,
+      37.92487716674805,
+      841.349609375,
+      751.2247924804688
+    ]
+  },
+  "schedule_c_to_schedule_a_pdf_affine": {
+    "sx": 1.0,
+    "sy": 1.0,
+    "tx": 0.019,
+    "ty": 1.235,
+    "basis": "distance-transform fit of Schedule C black parcel-line vectors onto Schedule A black parcel-line vectors in PDF coordinates"
+  },
+  "layers": {
+    "schedule_a_zoning_areas_municipal_fit": 20,
+    "schedule_a_parcel_candidates_municipal_fit": 14256,
+    "schedule_a_linework_municipal_fit": 16432,
+    "schedule_c_parcel_candidates_municipal_fit": 13833,
+    "schedule_c_linework_municipal_fit": 14536,
+    "schedule_a_wetlands_excluded_from_parcels": 64,
+    "municipal_boundary_reference": 1
+  },
+  "zone_area_m2": {
+    "AP": 3137368.3848073715,
+    "BP": 1897451.0053869705,
+    "C": 4837866.849975527,
+    "DC": 104298.9856635543,
+    "DMS": 192492.7218780085,
+    "DMU": 182664.81959324758,
+    "DN": 197189.7918227147,
+    "DW": 96427.40256441881,
+    "EG": 495762.44829982234,
+    "GC": 2134348.925782451,
+    "GN": 763709.069627915,
+    "HI": 862545.8779095295,
+    "I": 2993344.2533372208,
+    "P": 41640.16005858876,
+    "POS": 562988.7781101894,
+    "PPS": 1416374.8247619262,
+    "RH": 133800.06623228904,
+    "RM": 1442139.8545689485,
+    "RN": 12407393.500255074,
+    "UE": 5560283.398468143
+  },
+  "qa_notes": [
+    "Schedule A parcel candidates dissolve Conservation zones instead of subdividing by internal lines.",
+    "Light grey wetland/waterbody cartographic fills are written as a reference layer and excluded from parcel candidates.",
+    "Schedule C parcel candidates are derived from internal black linework and municipal boundary only; road arrows and street names may still obscure local parcel detail."
+  ]
+}

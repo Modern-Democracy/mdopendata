@@ -1,0 +1,376 @@
+{
+  "metadata": {
+    "jurisdiction": "City of Charlottetown",
+    "source_map": "maps/Charlottetown Zoning Map - March 9, 2026.pdf",
+    "source_bylaw": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+    "source_bylaw_data_dir": "data/zoning/charlottetown/zones",
+    "purpose": "Lookup from raster map legend codes to current Charlottetown bylaw zoning codes for parcel-level zoning attribution.",
+    "notes": [
+      "ZONING NOT ASSIGNED and INFILL AREA are map classes, not bylaw zoning codes.",
+      "Raster sampling should assign map_legend_code first, then derive zoning_code from this lookup.",
+      "Map classes with null zoning_code must remain separate final dissolve classes."
+    ]
+  },
+  "fields": {
+    "zoning_code": "Current bylaw zoning code. Null for pseudo-zone map classes.",
+    "zone_name": "Current bylaw zone name or pseudo-zone map class name.",
+    "map_legend_code": "Code printed in the March 9, 2026 zoning map legend.",
+    "zone_file": "Relative path to extracted current bylaw zone JSON, where applicable.",
+    "is_bylaw_zone": "True when the class has an actual zoning code in the current bylaw.",
+    "is_pseudo_zone": "True for map legend classes that are not assigned actual zoning codes.",
+    "final_class_code": "Stable class code to use for parcel attribution and dissolve."
+  },
+  "zones": [
+    {
+      "zoning_code": "A",
+      "zone_name": "AIRPORT ZONE",
+      "map_legend_code": "A",
+      "zone_file": "data/zoning/charlottetown/zones/a.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "A"
+    },
+    {
+      "zoning_code": "C-1",
+      "zone_name": "BUSINESS OFFICE COMMERCIAL ZONE",
+      "map_legend_code": "C1",
+      "zone_file": "data/zoning/charlottetown/zones/c-1.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "C-1"
+    },
+    {
+      "zoning_code": "C-2",
+      "zone_name": "HIGHWAY COMMERCIAL ZONE",
+      "map_legend_code": "C2",
+      "zone_file": "data/zoning/charlottetown/zones/c-2.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "C-2"
+    },
+    {
+      "zoning_code": "C-3",
+      "zone_name": "SHOPPING CENTRE COMMERCIAL ZONE",
+      "map_legend_code": "C3",
+      "zone_file": "data/zoning/charlottetown/zones/c-3.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "C-3"
+    },
+    {
+      "zoning_code": "CDA",
+      "zone_name": "COMPREHENSIVE DEVELOPMENT AREA",
+      "map_legend_code": "CDA",
+      "zone_file": "data/zoning/charlottetown/zones/cda.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "CDA"
+    },
+    {
+      "zoning_code": "DC",
+      "zone_name": "DOWNTOWN CORE",
+      "map_legend_code": "DC",
+      "zone_file": "data/zoning/charlottetown/zones/dc.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "DC"
+    },
+    {
+      "zoning_code": "DMS",
+      "zone_name": "DOWNTOWN MAIN STREET",
+      "map_legend_code": "DMS",
+      "zone_file": "data/zoning/charlottetown/zones/dms.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "DMS"
+    },
+    {
+      "zoning_code": "DMU",
+      "zone_name": "DOWNTOWN MIXED-USE ZONE",
+      "map_legend_code": "DMU",
+      "zone_file": "data/zoning/charlottetown/zones/dmu.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "DMU"
+    },
+    {
+      "zoning_code": "DMUN",
+      "zone_name": "DOWNTOWN MIXED USE NEIGHBOURHOOD",
+      "map_legend_code": "DMUN",
+      "zone_file": "data/zoning/charlottetown/zones/dmun.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "DMUN"
+    },
+    {
+      "zoning_code": "DN",
+      "zone_name": "DOWNTOWN NARROW ZONE",
+      "map_legend_code": "DN",
+      "zone_file": "data/zoning/charlottetown/zones/dn.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "DN"
+    },
+    {
+      "zoning_code": "ER-MUVC",
+      "zone_name": "EAST ROYALTY MIXED USE VILLAGE CENTRE ZONE",
+      "map_legend_code": "ERMUVC",
+      "zone_file": "data/zoning/charlottetown/zones/er-muvc.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "ER-MUVC"
+    },
+    {
+      "zoning_code": "FD",
+      "zone_name": "FUTURE DEVELOPMENT ZONE",
+      "map_legend_code": "FDA",
+      "zone_file": "data/zoning/charlottetown/zones/fd.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "FD"
+    },
+    {
+      "zoning_code": "I",
+      "zone_name": "INSTITUTIONAL ZONE",
+      "map_legend_code": "I",
+      "zone_file": "data/zoning/charlottetown/zones/i.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "I"
+    },
+    {
+      "zoning_code": "M-1",
+      "zone_name": "LIGHT INDUSTRIAL ZONE",
+      "map_legend_code": "M1",
+      "zone_file": "data/zoning/charlottetown/zones/m-1.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "M-1"
+    },
+    {
+      "zoning_code": "M-2",
+      "zone_name": "HEAVY INDUSTRIAL ZONE",
+      "map_legend_code": "M2",
+      "zone_file": "data/zoning/charlottetown/zones/m-2.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "M-2"
+    },
+    {
+      "zoning_code": "M-3",
+      "zone_name": "BUSINESS PARK INDUSTRIAL ZONE",
+      "map_legend_code": "M3",
+      "zone_file": "data/zoning/charlottetown/zones/m-3.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "M-3"
+    },
+    {
+      "zoning_code": "MH",
+      "zone_name": "MANUFACTURED HOUSING ZONE",
+      "map_legend_code": "MH",
+      "zone_file": "data/zoning/charlottetown/zones/mh.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "MH"
+    },
+    {
+      "zoning_code": "MHR",
+      "zone_name": "MANUFACTURED HOUSING RESIDENTIAL ZONE",
+      "map_legend_code": "MHR",
+      "zone_file": "data/zoning/charlottetown/zones/mhr.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "MHR"
+    },
+    {
+      "zoning_code": "MUC",
+      "zone_name": "MIXED-USE CORRIDOR ZONE",
+      "map_legend_code": "MUC",
+      "zone_file": "data/zoning/charlottetown/zones/muc.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "MUC"
+    },
+    {
+      "zoning_code": "MUR",
+      "zone_name": "MEDIUM DENSITY MIXED USE RESIDENTIAL ZONE",
+      "map_legend_code": "MUR",
+      "zone_file": "data/zoning/charlottetown/zones/mur.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "MUR"
+    },
+    {
+      "zoning_code": "OS",
+      "zone_name": "OPEN SPACE ZONE",
+      "map_legend_code": "OS",
+      "zone_file": "data/zoning/charlottetown/zones/os.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "OS"
+    },
+    {
+      "zoning_code": "P",
+      "zone_name": "PARKING ZONE",
+      "map_legend_code": "P",
+      "zone_file": "data/zoning/charlottetown/zones/p.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "P"
+    },
+    {
+      "zoning_code": "PC",
+      "zone_name": "PARK/ CULTURAL ZONE",
+      "map_legend_code": "PC",
+      "zone_file": "data/zoning/charlottetown/zones/pc.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "PC"
+    },
+    {
+      "zoning_code": "PZ",
+      "zone_name": "PORT ZONE",
+      "map_legend_code": "PZ",
+      "zone_file": "data/zoning/charlottetown/zones/pz.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "PZ"
+    },
+    {
+      "zoning_code": "R-1L",
+      "zone_name": "SINGLE DETACHED RESIDENTIAL ZONE",
+      "map_legend_code": "R1L",
+      "zone_file": "data/zoning/charlottetown/zones/r-1l.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "R-1L"
+    },
+    {
+      "zoning_code": "R-1N",
+      "zone_name": "NARROW SINGLE DETACHED RESIDENTIAL ZONE",
+      "map_legend_code": "R1N",
+      "zone_file": "data/zoning/charlottetown/zones/r-1n.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "R-1N"
+    },
+    {
+      "zoning_code": "R-1S",
+      "zone_name": "SINGLE DETACHED RESIDENTIAL ZONE",
+      "map_legend_code": "R1S",
+      "zone_file": "data/zoning/charlottetown/zones/r-1s.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "R-1S"
+    },
+    {
+      "zoning_code": "R-2",
+      "zone_name": "LOW DENSITY RESIDENTIAL ZONE",
+      "map_legend_code": "R2",
+      "zone_file": "data/zoning/charlottetown/zones/r-2.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "R-2"
+    },
+    {
+      "zoning_code": "R-2S",
+      "zone_name": "LOW DENSITY RESIDENTIAL SINGLE ZONE",
+      "map_legend_code": "R2S",
+      "zone_file": "data/zoning/charlottetown/zones/r-2s.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "R-2S"
+    },
+    {
+      "zoning_code": "R-3",
+      "zone_name": "MEDIUM DENSITY RESIDENTIAL ZONE",
+      "map_legend_code": "R3",
+      "zone_file": "data/zoning/charlottetown/zones/r-3.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "R-3"
+    },
+    {
+      "zoning_code": "R-3T",
+      "zone_name": "MEDIUM DENSITY RESIDENTIAL TOWNHOUSE ZONE",
+      "map_legend_code": "R3T",
+      "zone_file": "data/zoning/charlottetown/zones/r-3t.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "R-3T"
+    },
+    {
+      "zoning_code": "R-4",
+      "zone_name": "APARTMENT RESIDENTIAL ZONE",
+      "map_legend_code": "R4",
+      "zone_file": "data/zoning/charlottetown/zones/r-4.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "R-4"
+    },
+    {
+      "zoning_code": "R-4A",
+      "zone_name": "APARTMENT RESIDENTIAL ZONE",
+      "map_legend_code": "R4A",
+      "zone_file": "data/zoning/charlottetown/zones/r-4a.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "R-4A"
+    },
+    {
+      "zoning_code": "R-4B",
+      "zone_name": "APARTMENT RESIDENTIAL ZONE",
+      "map_legend_code": "R4B",
+      "zone_file": "data/zoning/charlottetown/zones/r-4b.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "R-4B"
+    },
+    {
+      "zoning_code": "WF",
+      "zone_name": "WATERFRONT ZONE",
+      "map_legend_code": "WF",
+      "zone_file": "data/zoning/charlottetown/zones/wf.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "WF"
+    },
+    {
+      "zoning_code": "WL-OS",
+      "zone_name": "WATER LOT ZONE - OPEN SPACE",
+      "map_legend_code": "WLOS",
+      "zone_file": "data/zoning/charlottetown/zones/wl-os.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "WL-OS"
+    },
+    {
+      "zoning_code": "WLC",
+      "zone_name": "WATER LOT ZONE COMMERCIAL",
+      "map_legend_code": "WLC",
+      "zone_file": "data/zoning/charlottetown/zones/wlc.json",
+      "is_bylaw_zone": true,
+      "is_pseudo_zone": false,
+      "final_class_code": "WLC"
+    },
+    {
+      "zoning_code": null,
+      "zone_name": "ZONING NOT ASSIGNED",
+      "map_legend_code": "NA",
+      "zone_file": null,
+      "is_bylaw_zone": false,
+      "is_pseudo_zone": true,
+      "final_class_code": "NA"
+    },
+    {
+      "zoning_code": null,
+      "zone_name": "INFILL AREA",
+      "map_legend_code": "U",
+      "zone_file": null,
+      "is_bylaw_zone": false,
+      "is_pseudo_zone": true,
+      "final_class_code": "U"
+    }
+  ]
+}

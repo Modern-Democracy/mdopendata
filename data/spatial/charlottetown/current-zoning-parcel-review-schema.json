@@ -1,0 +1,306 @@
+{
+  "metadata": {
+    "jurisdiction": "City of Charlottetown",
+    "proposed_table": "public.CHTWN_Current_Zoning_Parcel_Review",
+    "base_geometry_table": "public.CHTWN_Parcel_Map",
+    "base_geometry_column": "geom",
+    "base_geometry_srid": 2954,
+    "source_raster": "data/spatial/charlottetown/charlottetown-zoning-map-2026-raster.gpkg",
+    "source_raster_layer": "charlottetown_zoning_map_2026_raster",
+    "legend_lookup": "data/spatial/charlottetown/current-zoning-map-legend-2026-03-09.json",
+    "purpose": "Parcel-level review layer for attributing current Charlottetown zoning from raster samples before dissolving parcels into final zone multipolygons.",
+    "status": "design_only"
+  },
+  "review_status_values": [
+    "auto_assigned",
+    "needs_review",
+    "reviewed",
+    "defer",
+    "exclude"
+  ],
+  "confidence_values": [
+    "high",
+    "medium",
+    "low",
+    "manual"
+  ],
+  "method_values": [
+    "solid_fill_raster_sample",
+    "pattern_raster_sample",
+    "draft_context_assist",
+    "manual_qgis_review",
+    "legacy_or_pseudo_zone"
+  ],
+  "fields": [
+    {
+      "name": "fid",
+      "type": "bigint",
+      "nullable": false,
+      "source": "public.CHTWN_Parcel_Map.fid",
+      "description": "Primary parcel feature id."
+    },
+    {
+      "name": "parcel_candidate_id",
+      "type": "bigint",
+      "nullable": true,
+      "source": "public.CHTWN_Parcel_Map.parcel_candidate_id",
+      "description": "Existing parcel candidate id from the source parcel layer."
+    },
+    {
+      "name": "source_map",
+      "type": "varchar",
+      "nullable": true,
+      "source": "public.CHTWN_Parcel_Map.source_map",
+      "description": "Existing parcel source map label."
+    },
+    {
+      "name": "parcel_area_m2",
+      "type": "double precision",
+      "nullable": false,
+      "source": "ST_Area(geom)",
+      "description": "Area of the parcel geometry in EPSG:2954 square metres."
+    },
+    {
+      "name": "draft_zone_code",
+      "type": "text",
+      "nullable": true,
+      "source": "Largest intersection with public.CHTWN_Draft_Zoning_Boundaries",
+      "description": "Draft zoning code used only as QA context."
+    },
+    {
+      "name": "draft_zone_name",
+      "type": "text",
+      "nullable": true,
+      "source": "Largest intersection with public.CHTWN_Draft_Zoning_Boundaries",
+      "description": "Draft zoning name used only as QA context."
+    },
+    {
+      "name": "draft_match_fraction",
+      "type": "double precision",
+      "nullable": true,
+      "source": "Intersection area divided by parcel area",
+      "description": "Share of the parcel covered by the dominant draft zone."
+    },
+    {
+      "name": "map_legend_code_guess",
+      "type": "text",
+      "nullable": true,
+      "source": "Raster sampling",
+      "description": "Predicted current zoning map legend code before review."
+    },
+    {
+      "name": "zoning_code_guess",
+      "type": "text",
+      "nullable": true,
+      "source": "Legend lookup",
+      "description": "Predicted current bylaw zoning code; null for pseudo-zone map classes."
+    },
+    {
+      "name": "final_class_code_guess",
+      "type": "text",
+      "nullable": true,
+      "source": "Legend lookup",
+      "description": "Predicted final dissolve class. Equals zoning code for bylaw zones and map legend code for pseudo-zones."
+    },
+    {
+      "name": "zone_name_guess",
+      "type": "text",
+      "nullable": true,
+      "source": "Legend lookup",
+      "description": "Predicted zone or pseudo-zone name."
+    },
+    {
+      "name": "sample_count",
+      "type": "integer",
+      "nullable": false,
+      "source": "Raster sampling",
+      "description": "Number of interior raster sample points used for the parcel."
+    },
+    {
+      "name": "matched_sample_count",
+      "type": "integer",
+      "nullable": false,
+      "source": "Raster sampling",
+      "description": "Number of sample points matched to the winning map legend code."
+    },
+    {
+      "name": "sample_match_fraction",
+      "type": "double precision",
+      "nullable": true,
+      "source": "Raster sampling",
+      "description": "Matched sample count divided by total usable samples."
+    },
+    {
+      "name": "mean_rgb",
+      "type": "text",
+      "nullable": true,
+      "source": "Raster sampling",
+      "description": "Mean sampled RGB value as #rrggbb for diagnostics."
+    },
+    {
+      "name": "dominant_rgb",
+      "type": "text",
+      "nullable": true,
+      "source": "Raster sampling",
+      "description": "Dominant sampled RGB value or colour-cluster centre as #rrggbb."
+    },
+    {
+      "name": "rgb_distance",
+      "type": "double precision",
+      "nullable": true,
+      "source": "Raster sampling",
+      "description": "Distance from dominant sampled colour to the matched legend colour, where available."
+    },
+    {
+      "name": "pattern_detected",
+      "type": "boolean",
+      "nullable": false,
+      "source": "Raster sampling",
+      "description": "True when samples indicate hatch or pattern variation rather than a solid fill."
+    },
+    {
+      "name": "ambiguous_group",
+      "type": "text",
+      "nullable": true,
+      "source": "Raster sampling and legend rules",
+      "description": "Known ambiguity group such as I_OR_P or DMU_OR_MHR."
+    },
+    {
+      "name": "assignment_method",
+      "type": "text",
+      "nullable": false,
+      "source": "Attribution workflow",
+      "description": "Controlled method value describing how the guess was assigned."
+    },
+    {
+      "name": "confidence",
+      "type": "text",
+      "nullable": false,
+      "source": "Attribution workflow",
+      "description": "Controlled confidence value for the current guess."
+    },
+    {
+      "name": "review_status",
+      "type": "text",
+      "nullable": false,
+      "source": "Attribution workflow",
+      "description": "Controlled review status for QGIS review."
+    },
+    {
+      "name": "review_priority",
+      "type": "integer",
+      "nullable": false,
+      "source": "Attribution workflow",
+      "description": "Suggested review ordering. Lower values are reviewed first."
+    },
+    {
+      "name": "final_map_legend_code",
+      "type": "text",
+      "nullable": true,
+      "source": "Manual review or accepted guess",
+      "description": "Accepted current zoning map legend code."
+    },
+    {
+      "name": "final_zoning_code",
+      "type": "text",
+      "nullable": true,
+      "source": "Legend lookup",
+      "description": "Accepted current bylaw zoning code. Null for pseudo-zone map classes."
+    },
+    {
+      "name": "final_class_code",
+      "type": "text",
+      "nullable": true,
+      "source": "Legend lookup",
+      "description": "Accepted dissolve class. Required before final dissolve."
+    },
+    {
+      "name": "final_zone_name",
+      "type": "text",
+      "nullable": true,
+      "source": "Legend lookup",
+      "description": "Accepted zone or pseudo-zone name."
+    },
+    {
+      "name": "review_notes",
+      "type": "text",
+      "nullable": true,
+      "source": "Manual review",
+      "description": "Reviewer notes from QGIS."
+    },
+    {
+      "name": "source_pdf",
+      "type": "text",
+      "nullable": false,
+      "source": "Constant",
+      "description": "Source zoning map PDF path."
+    },
+    {
+      "name": "source_raster",
+      "type": "text",
+      "nullable": false,
+      "source": "Constant",
+      "description": "Source raster GeoPackage path."
+    },
+    {
+      "name": "created_at",
+      "type": "timestamptz",
+      "nullable": false,
+      "source": "now()",
+      "description": "Layer creation timestamp."
+    },
+    {
+      "name": "updated_at",
+      "type": "timestamptz",
+      "nullable": true,
+      "source": "Manual review or update script",
+      "description": "Last update timestamp for reviewed fields."
+    },
+    {
+      "name": "geom",
+      "type": "geometry(MultiPolygon,2954)",
+      "nullable": false,
+      "source": "public.CHTWN_Parcel_Map.geom",
+      "description": "Parcel geometry retained for review and later dissolve."
+    }
+  ],
+  "recommended_indexes": [
+    {
+      "name": "CHTWN_Current_Zoning_Parcel_Review_pkey",
+      "columns": [
+        "fid"
+      ],
+      "type": "primary_key"
+    },
+    {
+      "name": "CHTWN_Current_Zoning_Parcel_Review_geom_idx",
+      "columns": [
+        "geom"
+      ],
+      "type": "gist"
+    },
+    {
+      "name": "CHTWN_Current_Zoning_Parcel_Review_status_idx",
+      "columns": [
+        "review_status",
+        "review_priority"
+      ],
+      "type": "btree"
+    },
+    {
+      "name": "CHTWN_Current_Zoning_Parcel_Review_final_class_idx",
+      "columns": [
+        "final_class_code"
+      ],
+      "type": "btree"
+    }
+  ],
+  "acceptance_rules": [
+    "final_class_code must be populated before dissolving parcels into current zoning multipolygons.",
+    "final_zoning_code may be null only when final_class_code is NA or U.",
+    "draft_zone_code must not overwrite or normalize current zoning codes.",
+    "I and P must remain distinct final classes even if raster colour sampling cannot separate them reliably.",
+    "DMU and MHR must remain distinct final classes even if raster pattern sampling cannot separate them reliably.",
+    "Patterned classes and low sample_match_fraction records should default to needs_review."
+  ]
+}
