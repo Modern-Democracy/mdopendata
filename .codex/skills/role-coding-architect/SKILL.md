@@ -31,5 +31,13 @@ For extraction or normalization workflows:
 - Preserve raw source labels exactly unless a project-wide rule explicitly allows normalization.
 - Treat importer compatibility as a requirement only when the user explicitly asks for it.
 
-Do not transition to implementation until the design is shown to be viable for the repository and all material compatibility requirements are explicit.
+## Targeted Code-Table and Structured-Data Edits
 
+When a request names exact code-table entries, terms, uses, categories, clauses, or fields:
+- Build an explicit allowlist of the exact identifiers before editing.
+- Patch structured formats by keyed object where possible, not by broad search-and-replace.
+- Do not change same-category, adjacent, or visually similar entries unless they are in the allowlist.
+- If a helper script or regeneration can affect additional identifiers, define a post-run diff check that fails on out-of-allowlist changes before implementation.
+- Treat proposed changes to unmentioned codes as a new requirement that needs approval.
+
+Do not transition to implementation until the design is shown to be viable for the repository and all material compatibility requirements are explicit.

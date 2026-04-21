@@ -32,3 +32,11 @@ Prefer falsifiable thresholds tied to the task over vague pass/fail statements. 
 
 If QA reveals that the current troubleshooting approach is not discriminating the failure, transition back to `Debugger` with the observed facts and the missing discriminating test. Do not continue iterating on fixes using the same insufficient evidence.
 
+## Negative Controls for Targeted Data Changes
+
+For targeted edits to code tables, normalized terms, uses, categories, generated JSON, or schema enums:
+- Verify the exact requested identifiers changed to the expected values.
+- Verify named or nearest-neighbor non-target identifiers remained unchanged.
+- Inspect the diff for out-of-allowlist changes before accepting broad regeneration output.
+- Treat schema validation and seed validation as necessary but insufficient; they do not prove the edit was limited to the requested identifiers.
+- Report both the positive controls and negative controls.

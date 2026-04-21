@@ -31,5 +31,12 @@ For template-based extraction or transformation, clarify:
 - what counts as light variation versus material variation
 - whether normalized query fields should be generated only from directly supported source patterns
 
-Do not transition to implementation until requirements, scenarios, and edge cases are explicit enough to code safely.
+## Code-Table and Category Questions
 
+For code-table, term, use, category, schema enum, or normalized assignment changes:
+- Identify the exact codes or identifiers that are in scope.
+- Identify similar or adjacent codes that are explicitly out of scope when they could be affected by the same text pattern.
+- Clarify whether new codes should be `active` or `review`.
+- Do not infer that a category change for one code applies to related codes.
+
+Do not transition to implementation until requirements, scenarios, and edge cases are explicit enough to code safely.

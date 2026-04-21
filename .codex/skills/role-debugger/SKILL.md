@@ -28,3 +28,11 @@ Prefer raw source data, protocol messages, parser inputs, database records, or c
 
 If the current troubleshooting check can pass while the reported problem remains present, it is not discriminating. Replace it before continuing.
 
+## Unintended Structured-Data Changes
+
+When debugging a reported unintended code-table, term, use, category, or schema change:
+- Identify the exact affected identifier and the expected value before editing.
+- Compare the current diff against the intended allowlist.
+- Revert or patch only the affected identifier unless the user names additional identifiers.
+- Do not repair a class of similar entries by global replacement.
+- Before closing, run a negative-control check proving that at least the nearest similar unmentioned identifiers did not change.

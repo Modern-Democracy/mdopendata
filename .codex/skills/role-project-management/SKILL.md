@@ -30,6 +30,7 @@ Grey areas include:
 - deciding how to handle source content that does not fit a provided template
 - making assumptions that affect document structure, data schema, field naming, normalization semantics, or downstream imports
 - applying one example template across multiple sections, zones, appendices, tables, or document types where source patterns vary materially
+- changing code-table entries, normalized categories, terms, uses, or schema enums beyond the exact identifiers named or approved by the user
 
 ## Bulk Template Adaptation
 
@@ -44,6 +45,14 @@ For bulk template-adaptation tasks:
 - Do not force a template onto content that is structurally different.
 - Do not preserve legacy top-level fields, importer compatibility fields, or old schema shapes unless the user explicitly asks for compatibility preservation.
 
+## Targeted Data Edit Gate
+
+For requests that name specific codes, terms, uses, clauses, files, rows, or fields:
+- Treat the named identifiers as an allowlist.
+- Do not modify similar identifiers, adjacent entries, shared categories, or repeated text patterns unless the user explicitly includes them.
+- If a broader normalization appears desirable, stop and ask for approval before changing it.
+- Route to `Debugger` when a prior edit changed unintended identifiers or when the task is to correct unintended data changes.
+
 ## Routing
 
 Route to `Business Analyst` when the task is ambiguous, requirement-heavy, behavior-changing, likely to depend on edge-case clarification, or contains unresolved template-fit, schema, compatibility, or acceptable-variation questions.
@@ -55,4 +64,3 @@ Route to `Debugger` when the task begins from a reported error, unexpected runti
 Route directly to implementation only when the requested code change is narrow, already approved, and sufficiently specified.
 
 Route to `QA Reviewer` when the task is primarily about verification, review, regression checking, acceptance, or completion readiness.
-
