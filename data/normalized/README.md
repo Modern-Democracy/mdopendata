@@ -54,7 +54,7 @@ Example:
 ## Required Run Files
 
 - `manifest.json`: source paths, source checksums if available, converter version, standard version, git commit, run command, run timestamp, and output file inventory.
-- `bundle.json`: combined normalized bundle conforming to `schema/normalized_land_use_bundle.schema.json`.
+- `bundle.json`: combined normalized bundle conforming to `schema/json-schema/normalized_land_use_bundle.schema.json`.
 - `bundle.validation.json`: schema validation result and any validation errors.
 - `review-items.json`: unresolved clause syntax, unit parsing, condition parsing, spatial matching, relationship resolution, and classification review items.
 - `stats.json`: counts by source, document, zone, regulation type, policy type, relationship type, and review status.

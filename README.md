@@ -33,7 +33,7 @@ Reasons:
 - Full-text search can coexist with structured land-use rules
 - Easy to add embeddings later without changing the core schema
 
-The repository includes a starter schema at [schema/postgis.sql](/D:/opendata/charlottown/schema/postgis.sql).
+The repository includes a starter schema at [schema/sql/postgis.sql](/D:/opendata/mdopendata/schema/sql/postgis.sql).
 
 ## Local database and MCP
 
@@ -104,7 +104,7 @@ Link:
 Added in this repository:
 
 - Source inventory builder: [src/build-inventory.js](/D:/opendata/charlottown/src/build-inventory.js)
-- PostGIS starter schema: [schema/postgis.sql](/D:/opendata/charlottown/schema/postgis.sql)
+- PostGIS starter schema: [schema/sql/postgis.sql](/D:/opendata/mdopendata/schema/sql/postgis.sql)
 - Detailed design notes: [docs/architecture.md](/D:/opendata/charlottown/docs/architecture.md)
 
 ## Known gaps

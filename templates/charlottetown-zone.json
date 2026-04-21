@@ -1,302 +1,268 @@
 {
-    "document_metadata": {
-        "jurisdiction": "City of Charlottetown",
-        "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
-        "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
-        "zone_code": "R-1L",
-        "zone_name": "SINGLE DETACHED RESIDENTIAL ZONE",
-        "part_label_raw": "9",
-        "chapter_heading_raw": "9 SINGLE DETACHED RESIDENTIAL ZONE (R-1L)"
-    },
-    "raw_data": {
-        "zone_label_raw": "9",
-        "zone_title_raw": "SINGLE DETACHED RESIDENTIAL ZONE (R-1L)",
-        "sections_raw": [ {
-            "section_label_raw": "9.1",
-            "section_title_raw": "PERMITTED USES",
-            "clauses_raw": [ {
-                "clause_label_raw": "9.1.1",
-                "clause_text_raw": "Single-detached Dwelling; and "
-            },
-            {
-                "clause_label_raw": "9.1.2",
-                "clause_text_raw": "Modular Dwelling "
-            } ]
-        },
-        {
-            "section_label_raw": "9.2",
-            "section_title_raw": "REGULATIONS FOR PERMITTED USES",
-            "clause_table_raw": {
-                "clause_columns_raw": [ {
-                    "column_label_raw": ""
-                },
-                {
-                    "column_label_raw": ""
-                },
-                {
-                    "column_label_raw": "Interior Lot"
-                },
-                {
-                    "column_label_raw": "Corner Lot"
-                } ],
-                "clause_rows_raw": [ {
-                    "cells_raw": [
-                        {
-                            "cell_text_raw": "1"
-                        },
-                        {
-                            "cell_text_raw": "Lot Area (Minimum)"
-                        },
-                        {
-                            "cell_text_raw": "540 sq. m (5,812.5 sq ft)"
-                        },
-                        {
-                            "cell_text_raw": "686 sq. m (7,384.0 sq ft)"
-                        }
-                    ]
-                },
-                {
-                    "cells_raw": [
-                        {
-                            "cell_text_raw": "2"
-                        },
-                        {
-                            "cell_text_raw": "Lot Frontage (Minimum)"
-                        },
-                        {
-                            "cell_text_raw": "18 m (59.1 ft)"
-                        },
-                        {
-                            "cell_text_raw": "22 m (72.2 ft)"
-                        }
-                    ]
-                },
-                {
-                    "cells_raw": [
-                        {
-                            "cell_text_raw": "3"
-                        },
-                        {
-                            "cell_text_raw": "Front Yard (Minimum)"
-                        },
-                        {
-                            "cell_text_raw": "6.0 m (19.7 ft)"
-                        },
-                        {
-                            "cell_text_raw": "6.0 m (19.7 ft)"
-                        }
-                    ]
-                },
-                {
-                    "cells_raw": [
-                        {
-                            "cell_text_raw": "4"
-                        },
-                        {
-                            "cell_text_raw": "Rear Yard (Minimum)"
-                        },
-                        {
-                            "cell_text_raw": "7.5 m (24.6 ft)"
-                        },
-                        {
-                            "cell_text_raw": "7.5 m (24.6 ft)"
-                        }
-                    ]
-                },
-                {
-                    "cells_raw": [
-                        {
-                            "cell_text_raw": "5"
-                        },
-                        {
-                            "cell_text_raw": "Side Yard (Minimum)"
-                        },
-                        {
-                            "cell_text_raw": "1.83 m (6 ft)"
-                        },
-                        {
-                            "cell_text_raw": "1.83 m (6 ft)"
-                        }
-                    ]
-                },
-                {
-                    "cells_raw": [
-                        {
-                            "cell_text_raw": "6"
-                        },
-                        {
-                            "cell_text_raw": "Flankage Yard (Minimum)"
-                        },
-                        {
-                            "cell_text_raw": ""
-                        },
-                        {
-                            "cell_text_raw": "6.0 m (19.7 ft)"
-                        }
-                    ]
-                },
-                {
-                    "cells_raw": [
-                        {
-                            "cell_text_raw": "7"
-                        },
-                        {
-                            "cell_text_raw": "Height (Maximum)"
-                        },
-                        {
-                            "cell_text_raw": "11.0 m (36.1 ft)"
-                        },
-                        {
-                            "cell_text_raw": "11.0 m (36.1 ft)"
-                        }
-                    ]
-                } ]
-            }
-        },
-        {
-            "section_label_raw": "9.3",
-            "section_title_raw": "ACCESSORY AND SECONDARY USES",
-            "clauses_raw": [
-            {
-                "clause_label_raw": "9.3.1",
-                "clause_text_raw": "Notwithstanding the requirements, the following are permitted as accessory or secondary uses:",
-                "clauses_raw": [
-                    {
-                        "clause_label_raw": "a.",
-                        "clause_text_raw": "Secondary Suite;"
-                    },
-                    {
-                        "clause_label_raw": "b.",
-                        "clause_text_raw": "Accessory Building;"
-                    },
-                    {
-                        "clause_label_raw": "c.",
-                        "clause_text_raw": "Garden Suite;"
-                    },
-                    {
-                        "clause_label_raw": "d.",
-                        "clause_text_raw": "Home Occupation;"
-                    },
-                    {
-                        "clause_label_raw": "e.",
-                        "clause_text_raw": "Tourist Accommodations; and"
-                    },
-                    {
-                        "clause_label_raw": "f.",
-                        "clause_text_raw": "Home Daycare"
-                    }
-                ]
-            } ]
-        } ]
-    },
-    "structured_data": {
-        "zone_code": "R-1L",
-        "zone_name": "SINGLE DETACHED RESIDENTIAL ZONE (R-1L)",
-        "permitted_uses": [ {
-            "use_name": "Single-detached Dwelling",
-            "use_status": "permitted"
-        },
-        {
-            "use_name": "Modular Dwelling",
-            "use_status": "permitted"
-        } ],
-        "regulations_for_permitted_uses": {
-            "interior_lot": {
-                "lot_area_minimum": {
-                    "value": 540,
-                    "unit": "sq. m",
-                    "alternative_value": 5812.5,
-                    "alternative_unit": "sq ft"
-                },
-                "lot_frontage_minimum": {
-                    "value": 18,
-                    "unit": "m",
-                    "alternative_value": 59.1,
-                    "alternative_unit": "ft"
-                },
-                "front_yard_minimum": {
-                    "value": 6.0,
-                    "unit": "m",
-                    "alternative_value": 19.7,
-                    "alternative_unit": "ft"
-                },
-                "rear_yard_minimum": {
-                    "value": 7.5,
-                    "unit": "m",
-                    "alternative_value": 24.6,
-                    "alternative_unit": "ft"
-                },
-                "side_yard_minimum": {
-                    "value": 1.83,
-                    "unit": "m",
-                    "alternative_value": 6,
-                    "alternative_unit": "ft"
-                },
-                "flankage_yard_minimum": {
-                    "value": null,
-                    "unit": null,
-                    "alternative_value": null,
-                    "alternative_unit": null
-                },
-                "height_maximum": {
-                    "value": 11.0,
-                    "unit": "m",
-                    "alternative_value": 36.1,
-                    "alternative_unit": "ft"
-                }
-            },
-            "corner_lot": {
-                "lot_area_minimum": {
-                    "value": 686,
-                    "unit": "sq. m",
-                    "alternative_value": 7384.0,
-                    "alternative_unit": "sq ft"
-                },
-                "lot_frontage_minimum": {
-                    "value": 22,
-                    "unit": "m",
-                    "alternative_value": 72.2,
-                    "alternative_unit": "ft"
-                },
-                "front_yard_minimum": {
-                    "value": 6.0,
-                    "unit": "m",
-                    "alternative_value": 19.7,
-                    "alternative_unit": "ft"
-                },
-                "rear_yard_minimum": {
-                    "value": 7.5,
-                    "unit": "m",
-                    "alternative_value": 24.6,
-                    "alternative_unit": "ft"
-                },
-                "side_yard_minimum": {
-                    "value": 1.83,
-                    "unit": "m",
-                    "alternative_value": 6,
-                    "alternative_unit": "ft"
-                },
-                "flankage_yard_minimum": {
-                    "value": 6.0,
-                    "unit": "m",
-                    "alternative_value": 19.7,
-                    "alternative_unit": "ft"
-                },
-                "height_maximum": {
-                    "value": 11.0,
-                    "unit": "m",
-                    "alternative_value": 36.1,
-                    "alternative_unit": "ft"
-                }
-            }
-        },
-        "accessory_and_secondary_uses": [
-            "Secondary Suite",
-            "Accessory Building",
-            "Garden Suite",
-            "Home Occupation",
-            "Tourist Accommodations",
-            "Home Daycare"
-        ]
+  "$schema": "../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
+  "document_metadata": {
+    "jurisdiction": "City of Charlottetown",
+    "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
+    "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+    "document_type": "zone",
+    "zone_code": "R-1L",
+    "zone_name": "SINGLE DETACHED RESIDENTIAL ZONE",
+    "zone_label_raw": "9",
+    "zone_title_raw": "SINGLE DETACHED RESIDENTIAL ZONE (R-1L)",
+    "citations": {
+      "pdf_page_start": 61,
+      "pdf_page_end": 61,
+      "bylaw_page_start": 61,
+      "bylaw_page_end": 61
     }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-r-1l",
+        "source_unit_type": "zone",
+        "label_raw": "9",
+        "title_raw": "SINGLE DETACHED RESIDENTIAL ZONE (R-1L)",
+        "text_raw": "",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 61,
+          "pdf_page_end": 61,
+          "bylaw_page_start": 61,
+          "bylaw_page_end": 61
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-r-1l-section-9-1",
+        "section_label_raw": "9.1",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-r-1l-clause-9-1-1",
+            "clause_label_raw": "9.1.1",
+            "clause_text_raw": "Single-detached Dwelling; and",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 61,
+              "pdf_page_end": 61,
+              "bylaw_page_start": 61,
+              "bylaw_page_end": 61
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 61,
+          "pdf_page_end": 61,
+          "bylaw_page_start": 61,
+          "bylaw_page_end": 61
+        }
+      },
+      {
+        "section_id": "zone-r-1l-section-9-2",
+        "section_label_raw": "9.2",
+        "section_title_raw": "REGULATIONS FOR PERMITTED USES",
+        "source_order": 2,
+        "clauses_raw": [],
+        "tables_raw": [
+          {
+            "table_id": "zone-r-1l-table-9-2-1",
+            "table_title_raw": "REGULATIONS FOR PERMITTED USES",
+            "source_order": 1,
+            "columns_raw": [
+              {
+                "column_id": "row_number",
+                "column_label_raw": "",
+                "source_order": 1
+              },
+              {
+                "column_id": "requirement",
+                "column_label_raw": "",
+                "source_order": 2
+              },
+              {
+                "column_id": "interior_lot",
+                "column_label_raw": "Interior Lot",
+                "source_order": 3
+              },
+              {
+                "column_id": "corner_lot",
+                "column_label_raw": "Corner Lot",
+                "source_order": 4
+              }
+            ],
+            "rows_raw": [
+              {
+                "row_id": "zone-r-1l-table-9-2-1-row-1",
+                "source_order": 1,
+                "cells_raw": [
+                  {
+                    "column_id": "row_number",
+                    "cell_text_raw": "1"
+                  },
+                  {
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Area (Minimum)"
+                  },
+                  {
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "540 sq. m (5,812.5 sq ft)"
+                  },
+                  {
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "686 sq. m (7,384.0 sq ft)"
+                  }
+                ]
+              }
+            ],
+            "citations": {
+              "pdf_page_start": 61,
+              "pdf_page_end": 61,
+              "bylaw_page_start": 61,
+              "bylaw_page_end": 61
+            }
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 61,
+          "pdf_page_end": 61,
+          "bylaw_page_start": 61,
+          "bylaw_page_end": 61
+        }
+      }
+    ],
+    "clauses_index": [
+      {
+        "clause_id": "zone-r-1l-clause-9-1-1",
+        "section_id": "zone-r-1l-section-9-1",
+        "clause_label_raw": "9.1.1",
+        "clause_text_raw": "Single-detached Dwelling; and",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 61,
+          "pdf_page_end": 61,
+          "bylaw_page_start": 61,
+          "bylaw_page_end": 61
+        }
+      }
+    ],
+    "tables_raw": [
+      {
+        "table_id": "zone-r-1l-table-9-2-1",
+        "section_id": "zone-r-1l-section-9-2"
+      }
+    ],
+    "map_references_raw": []
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "term-single-detached-dwelling",
+        "term_raw": "Single-detached Dwelling",
+        "term_normalized": "single_detached_dwelling",
+        "term_category": "dwelling_type",
+        "code_table": "zoning_term",
+        "code": "single_detached_dwelling",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-1l-clause-9-1-1"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-r-1l-use-single-detached-dwelling",
+        "use_name_raw": "Single-detached Dwelling",
+        "use_term_id": "term-single-detached-dwelling",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-r-1l-clause-9-1-1",
+        "confidence": "high"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-r-1l-lot-area-min-interior",
+        "value_raw": "540 sq. m (5,812.5 sq ft)",
+        "value": 540,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "5,812.5 sq ft",
+            "value": 5812.5,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-1l-table-9-2-1-row-1-interior_lot"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-r-1l-regulations-permitted-uses",
+        "group_label_raw": "9.2",
+        "group_title_raw": "REGULATIONS FOR PERMITTED USES",
+        "regulated_use_terms": [
+          "term-single-detached-dwelling"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "R-1L"
+          ],
+          "applies_to_lot_contexts": [
+            "interior_lot",
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "requirements": [
+          {
+            "requirement_id": "zone-r-1l-req-lot-area-min-interior",
+            "requirement_type": "dimensional_standard",
+            "requirement_category": "lot_area",
+            "requirement_label_raw": "Lot Area (Minimum)",
+            "requirement_text_raw": "Lot Area (Minimum): Interior Lot 540 sq. m (5,812.5 sq ft)",
+            "applicability": {
+              "applies_to_lot_contexts": [
+                "interior_lot"
+              ],
+              "conditions": []
+            },
+            "numeric_value_refs": [
+              "zone-r-1l-lot-area-min-interior"
+            ],
+            "term_refs": [],
+            "source_refs": [
+              {
+                "source_ref_type": "table_row",
+                "source_ref_id": "zone-r-1l-table-9-2-1-row-1"
+              }
+            ],
+            "confidence": "high"
+          }
+        ],
+        "source_section_ref": "zone-r-1l-section-9-2",
+        "confidence": "high"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [],
+    "other_requirements": []
+  },
+  "review_flags": []
 }

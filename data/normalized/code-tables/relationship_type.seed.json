@@ -1,0 +1,106 @@
+{
+  "code_table": "relationship_type",
+  "description": "Relationship types for cross-references, inheritance, applicability, and exceptions.",
+  "version": "0.1.0",
+  "seeded_at": "2026-04-21",
+  "entries": [
+    {
+      "code": "inherits_uses",
+      "label": "Inherits uses",
+      "description": "The source zone or provision inherits permitted, accessory, secondary, conditional, or prohibited uses from the target zone or provision.",
+      "default_join_behavior": "include_target_values",
+      "status": "active"
+    },
+    {
+      "code": "inherits_regulations",
+      "label": "Inherits regulations",
+      "description": "The source zone or provision inherits dimensional standards, requirements, or regulation groups from the target zone or provision.",
+      "default_join_behavior": "include_target_values",
+      "status": "active"
+    },
+    {
+      "code": "references_section",
+      "label": "References section",
+      "description": "The source item references another section.",
+      "default_join_behavior": "reference_only",
+      "status": "active"
+    },
+    {
+      "code": "references_clause",
+      "label": "References clause",
+      "description": "The source item references another clause.",
+      "default_join_behavior": "reference_only",
+      "status": "active"
+    },
+    {
+      "code": "references_table",
+      "label": "References table",
+      "description": "The source item references a table.",
+      "default_join_behavior": "reference_only",
+      "status": "active"
+    },
+    {
+      "code": "references_definition",
+      "label": "References definition",
+      "description": "The source item references a defined term or definition entry.",
+      "default_join_behavior": "reference_only",
+      "status": "active"
+    },
+    {
+      "code": "references_zone",
+      "label": "References zone",
+      "description": "The source item references another zone without explicit inheritance.",
+      "default_join_behavior": "reference_only",
+      "status": "active"
+    },
+    {
+      "code": "references_map_layer",
+      "label": "References map layer",
+      "description": "The source item references a map, schedule, mapped feature, or spatial layer.",
+      "default_join_behavior": "reference_only",
+      "status": "active"
+    },
+    {
+      "code": "applies_to_parcel",
+      "label": "Applies to parcel",
+      "description": "The source item applies to a parcel, PID, civic address, lot, or site-specific geography.",
+      "default_join_behavior": "include_target_values",
+      "status": "active"
+    },
+    {
+      "code": "supersedes",
+      "label": "Supersedes",
+      "description": "The source item replaces, repeals, or supersedes the target item.",
+      "default_join_behavior": "override_target_values",
+      "status": "active"
+    },
+    {
+      "code": "exception_to",
+      "label": "Exception to",
+      "description": "The source item creates an exception to the target item.",
+      "default_join_behavior": "exclude_target_values",
+      "status": "active"
+    },
+    {
+      "code": "modifies",
+      "label": "Modifies",
+      "description": "The source item modifies, qualifies, or conditions the target item.",
+      "default_join_behavior": "reference_only",
+      "status": "active"
+    },
+    {
+      "code": "implements",
+      "label": "Implements",
+      "description": "The source item implements a plan, schedule, agreement, policy, or other target item.",
+      "default_join_behavior": "reference_only",
+      "status": "active"
+    },
+    {
+      "code": "unknown",
+      "label": "Unknown",
+      "description": "The relationship type has not yet been classified.",
+      "default_join_behavior": "reference_only",
+      "status": "active"
+    }
+  ]
+}

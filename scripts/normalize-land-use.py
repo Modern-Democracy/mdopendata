@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 STANDARD_VERSION = "0.1.0"
-SCHEMA_PATH = "schema/normalized_land_use_bundle.schema.json"
+SCHEMA_PATH = "schema/json-schema/normalized_land_use_bundle.schema.json"
 STANDARD_DOC_PATH = "docs/normalized-land-use-standard.md"
 DEFAULT_INPUT_PATHS = [
     "data/zoning/bedford",

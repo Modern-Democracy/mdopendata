@@ -471,7 +471,7 @@ The manifest should also include optional `inputs_filter` fields when a run inte
 
 Validation summaries must distinguish:
 
-- `schema_valid`: whether `bundle.json` conforms to `schema/normalized_land_use_bundle.schema.json`.
+- `schema_valid`: whether `bundle.json` conforms to `schema/json-schema/normalized_land_use_bundle.schema.json`.
 - `review_blocked_count`: records intentionally not normalized because review is required.
 - `relationship_unresolved_count`: references that could not be resolved to a known record.
 - `conversion_warning_count`: non-fatal parser or source-quality warnings.

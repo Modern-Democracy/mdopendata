@@ -9,10 +9,10 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 MIGRATIONS = (
-    REPO_ROOT / "schema" / "001_zoning_schema.sql",
-    REPO_ROOT / "schema" / "002_zoning_views.sql",
-    REPO_ROOT / "schema" / "003_rename_zoning_schema_to_hrm.sql",
-    REPO_ROOT / "schema" / "004_geometry_registry.sql",
+    REPO_ROOT / "schema" / "sql" / "001_zoning_schema.sql",
+    REPO_ROOT / "schema" / "sql" / "002_zoning_views.sql",
+    REPO_ROOT / "schema" / "sql" / "003_rename_zoning_schema_to_hrm.sql",
+    REPO_ROOT / "schema" / "sql" / "004_geometry_registry.sql",
 )
 
 
