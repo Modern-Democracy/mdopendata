@@ -514,17 +514,19 @@
   "structured_data": {
     "terms": [
       {
-        "term_id": "zone-c-1-term-term-convenience_store",
+        "term_id": "zone-c-1-term-use-convenience_store",
         "term_raw": "Convenience Store",
         "term_normalized": "convenience_store",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-c-1-clause-25-1-2"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "convenience_store"
       },
       {
         "term_id": "zone-c-1-term-use-educational_institution",
@@ -542,30 +544,34 @@
         "code": "educational_institution"
       },
       {
-        "term_id": "zone-c-1-term-term-funeral_establishment",
+        "term_id": "zone-c-1-term-use-funeral_establishment",
         "term_raw": "Funeral Establishment",
         "term_normalized": "funeral_establishment",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-c-1-clause-25-1-4"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "funeral_establishment"
       },
       {
-        "term_id": "zone-c-1-term-term-laundromat",
+        "term_id": "zone-c-1-term-use-laundromat",
         "term_raw": "Laundromat",
         "term_normalized": "laundromat",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-c-1-clause-25-1-5"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "laundromat"
       },
       {
         "term_id": "zone-c-1-term-use-medical_health_and_dental_office",
@@ -613,17 +619,19 @@
         "code": "parking_lot"
       },
       {
-        "term_id": "zone-c-1-term-term-personal_service_shop",
+        "term_id": "zone-c-1-term-use-personal_service_shop",
         "term_raw": "Personal Service Shop",
         "term_normalized": "personal_service_shop",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-c-1-clause-25-1-9"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "personal_service_shop"
       },
       {
         "term_id": "zone-c-1-term-use-retail_store",
@@ -658,10 +666,10 @@
       {
         "use_id": "zone-c-1-use-convenience-store-2",
         "use_name_raw": "Convenience Store",
-        "use_term_id": "zone-c-1-term-term-convenience_store",
+        "use_term_id": "zone-c-1-term-use-convenience_store",
         "use_status": "permitted",
         "source_clause_ref": "zone-c-1-clause-25-1-2",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-c-1-use-educational-institution-3",
@@ -674,18 +682,18 @@
       {
         "use_id": "zone-c-1-use-funeral-establishment-4",
         "use_name_raw": "Funeral Establishment",
-        "use_term_id": "zone-c-1-term-term-funeral_establishment",
+        "use_term_id": "zone-c-1-term-use-funeral_establishment",
         "use_status": "permitted",
         "source_clause_ref": "zone-c-1-clause-25-1-4",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-c-1-use-laundromat-5",
         "use_name_raw": "Laundromat",
-        "use_term_id": "zone-c-1-term-term-laundromat",
+        "use_term_id": "zone-c-1-term-use-laundromat",
         "use_status": "permitted",
         "source_clause_ref": "zone-c-1-clause-25-1-5",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-c-1-use-medical-health-and-dental-office-6",
@@ -714,10 +722,10 @@
       {
         "use_id": "zone-c-1-use-personal-service-shop-9",
         "use_name_raw": "Personal Service Shop",
-        "use_term_id": "zone-c-1-term-term-personal_service_shop",
+        "use_term_id": "zone-c-1-term-use-personal_service_shop",
         "use_status": "permitted",
         "source_clause_ref": "zone-c-1-clause-25-1-9",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-c-1-use-retail-store-10",
@@ -1443,14 +1451,14 @@
         "group_label_raw": "25",
         "group_title_raw": "BUSINESS OFFICE COMMERCIAL ZONE (C-1)",
         "regulated_use_terms": [
-          "zone-c-1-term-term-convenience_store",
+          "zone-c-1-term-use-convenience_store",
           "zone-c-1-term-use-educational_institution",
-          "zone-c-1-term-term-funeral_establishment",
-          "zone-c-1-term-term-laundromat",
+          "zone-c-1-term-use-funeral_establishment",
+          "zone-c-1-term-use-laundromat",
           "zone-c-1-term-use-medical_health_and_dental_office",
           "zone-c-1-term-use-office",
           "zone-c-1-term-use-parking_lot",
-          "zone-c-1-term-term-personal_service_shop",
+          "zone-c-1-term-use-personal_service_shop",
           "zone-c-1-term-use-retail_store"
         ],
         "applicability": {
@@ -1554,58 +1562,5 @@
       }
     ]
   },
-  "review_flags": [
-    {
-      "review_flag_id": "zone-c-1-flag-unmatched-term-convenience-store",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Convenience Store",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-c-1-clause-25-1-2"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-c-1-flag-unmatched-term-funeral-establishment",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Funeral Establishment",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-c-1-clause-25-1-4"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-c-1-flag-unmatched-term-laundromat",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Laundromat",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-c-1-clause-25-1-5"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-c-1-flag-unmatched-term-personal-service-shop",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Personal Service Shop",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-c-1-clause-25-1-9"
-        }
-      ]
-    }
-  ]
+  "review_flags": []
 }

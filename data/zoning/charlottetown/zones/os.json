@@ -416,69 +416,79 @@
   "structured_data": {
     "terms": [
       {
-        "term_id": "zone-os-term-term-active_recreation",
+        "term_id": "zone-os-term-use-active_recreation",
         "term_raw": "Active Recreation",
         "term_normalized": "active_recreation",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-os-clause-42-1-1"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "active_recreation"
       },
       {
-        "term_id": "zone-os-term-term-cemetery",
+        "term_id": "zone-os-term-use-cemetery",
         "term_raw": "Cemetery",
         "term_normalized": "cemetery",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-os-clause-42-1-2"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "cemetery"
       },
       {
-        "term_id": "zone-os-term-term-community_gardens",
+        "term_id": "zone-os-term-use-community_gardens",
         "term_raw": "Community Gardens",
         "term_normalized": "community_gardens",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-os-clause-42-1-3"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "community_gardens"
       },
       {
-        "term_id": "zone-os-term-term-golf_course",
+        "term_id": "zone-os-term-use-golf_course",
         "term_raw": "Golf Course",
         "term_normalized": "golf_course",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-os-clause-42-1-4"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "golf_course"
       },
       {
-        "term_id": "zone-os-term-term-trail_system",
+        "term_id": "zone-os-term-use-trail_system",
         "term_raw": "Trail System",
         "term_normalized": "trail_system",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-os-clause-42-1-5"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "trail_system"
       },
       {
         "term_id": "zone-os-term-term-ancillary_uses_to_the_foregoing",
@@ -498,42 +508,42 @@
       {
         "use_id": "zone-os-use-active-recreation-1",
         "use_name_raw": "Active Recreation",
-        "use_term_id": "zone-os-term-term-active_recreation",
+        "use_term_id": "zone-os-term-use-active_recreation",
         "use_status": "permitted",
         "source_clause_ref": "zone-os-clause-42-1-1",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-os-use-cemetery-2",
         "use_name_raw": "Cemetery",
-        "use_term_id": "zone-os-term-term-cemetery",
+        "use_term_id": "zone-os-term-use-cemetery",
         "use_status": "permitted",
         "source_clause_ref": "zone-os-clause-42-1-2",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-os-use-community-gardens-3",
         "use_name_raw": "Community Gardens",
-        "use_term_id": "zone-os-term-term-community_gardens",
+        "use_term_id": "zone-os-term-use-community_gardens",
         "use_status": "permitted",
         "source_clause_ref": "zone-os-clause-42-1-3",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-os-use-golf-course-4",
         "use_name_raw": "Golf Course",
-        "use_term_id": "zone-os-term-term-golf_course",
+        "use_term_id": "zone-os-term-use-golf_course",
         "use_status": "permitted",
         "source_clause_ref": "zone-os-clause-42-1-4",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-os-use-trail-system-5",
         "use_name_raw": "Trail System",
-        "use_term_id": "zone-os-term-term-trail_system",
+        "use_term_id": "zone-os-term-use-trail_system",
         "use_status": "permitted",
         "source_clause_ref": "zone-os-clause-42-1-5",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-os-use-ancillary-uses-to-the-foregoing-6",
@@ -1165,11 +1175,11 @@
         "group_label_raw": "42",
         "group_title_raw": "OPEN SPACE ZONE (OS)",
         "regulated_use_terms": [
-          "zone-os-term-term-active_recreation",
-          "zone-os-term-term-cemetery",
-          "zone-os-term-term-community_gardens",
-          "zone-os-term-term-golf_course",
-          "zone-os-term-term-trail_system",
+          "zone-os-term-use-active_recreation",
+          "zone-os-term-use-cemetery",
+          "zone-os-term-use-community_gardens",
+          "zone-os-term-use-golf_course",
+          "zone-os-term-use-trail_system",
           "zone-os-term-term-ancillary_uses_to_the_foregoing"
         ],
         "applicability": {
@@ -1222,71 +1232,6 @@
     "cross_references": []
   },
   "review_flags": [
-    {
-      "review_flag_id": "zone-os-flag-unmatched-term-active-recreation",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Active Recreation",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-os-clause-42-1-1"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-os-flag-unmatched-term-cemetery",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Cemetery",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-os-clause-42-1-2"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-os-flag-unmatched-term-community-gardens",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Community Gardens",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-os-clause-42-1-3"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-os-flag-unmatched-term-golf-course",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Golf Course",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-os-clause-42-1-4"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-os-flag-unmatched-term-trail-system",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Trail System",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-os-clause-42-1-5"
-        }
-      ]
-    },
     {
       "review_flag_id": "zone-os-flag-unmatched-term-ancillary-uses-to-the-foregoing",
       "severity": "warning",

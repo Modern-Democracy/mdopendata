@@ -933,17 +933,19 @@
         "code": "educational_institution"
       },
       {
-        "term_id": "zone-dms-term-term-entertainment_establishment",
+        "term_id": "zone-dms-term-use-entertainment_establishment",
         "term_raw": "Entertainment Establishment",
         "term_normalized": "entertainment_establishment",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-dms-clause-31-1-6"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "entertainment_establishment"
       },
       {
         "term_id": "zone-dms-term-use-fire_station",
@@ -961,30 +963,34 @@
         "code": "fire_station"
       },
       {
-        "term_id": "zone-dms-term-term-grocery_store",
+        "term_id": "zone-dms-term-use-grocery_store",
         "term_raw": "Grocery Store",
         "term_normalized": "grocery_store",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-dms-clause-31-1-8"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "grocery_store"
       },
       {
-        "term_id": "zone-dms-term-term-hostel",
+        "term_id": "zone-dms-term-use-hostel",
         "term_raw": "Hostel",
         "term_normalized": "hostel",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-dms-clause-31-1-9"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "hostel"
       },
       {
         "term_id": "zone-dms-term-use-hotel",
@@ -1032,30 +1038,34 @@
         "code": "service_repair_establishment"
       },
       {
-        "term_id": "zone-dms-term-term-shopping_center",
+        "term_id": "zone-dms-term-use-shopping_centre",
         "term_raw": "Shopping Center",
-        "term_normalized": "shopping_center",
-        "term_category": "unknown",
+        "term_normalized": "shopping_centre",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-dms-clause-31-1-13"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "shopping_centre"
       },
       {
-        "term_id": "zone-dms-term-term-theatre",
+        "term_id": "zone-dms-term-use-theatre",
         "term_raw": "Theatre",
         "term_normalized": "theatre",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-dms-clause-31-1-14"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "theatre"
       },
       {
         "term_id": "zone-dms-term-use-veterinary_services",
@@ -1127,10 +1137,10 @@
       {
         "use_id": "zone-dms-use-entertainment-establishment-6",
         "use_name_raw": "Entertainment Establishment",
-        "use_term_id": "zone-dms-term-term-entertainment_establishment",
+        "use_term_id": "zone-dms-term-use-entertainment_establishment",
         "use_status": "permitted",
         "source_clause_ref": "zone-dms-clause-31-1-6",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-dms-use-fire-station-7",
@@ -1143,18 +1153,18 @@
       {
         "use_id": "zone-dms-use-grocery-store-8",
         "use_name_raw": "Grocery Store",
-        "use_term_id": "zone-dms-term-term-grocery_store",
+        "use_term_id": "zone-dms-term-use-grocery_store",
         "use_status": "permitted",
         "source_clause_ref": "zone-dms-clause-31-1-8",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-dms-use-hostel-9",
         "use_name_raw": "Hostel",
-        "use_term_id": "zone-dms-term-term-hostel",
+        "use_term_id": "zone-dms-term-use-hostel",
         "use_status": "permitted",
         "source_clause_ref": "zone-dms-clause-31-1-9",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-dms-use-hotel-10",
@@ -1183,18 +1193,18 @@
       {
         "use_id": "zone-dms-use-shopping-center-13",
         "use_name_raw": "Shopping Center",
-        "use_term_id": "zone-dms-term-term-shopping_center",
+        "use_term_id": "zone-dms-term-use-shopping_centre",
         "use_status": "permitted",
         "source_clause_ref": "zone-dms-clause-31-1-13",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-dms-use-theatre-14",
         "use_name_raw": "Theatre",
-        "use_term_id": "zone-dms-term-term-theatre",
+        "use_term_id": "zone-dms-term-use-theatre",
         "use_status": "permitted",
         "source_clause_ref": "zone-dms-clause-31-1-14",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-dms-use-veterinary-services-15",
@@ -2142,15 +2152,15 @@
           "zone-dms-term-term-apartment_dwellings",
           "zone-dms-term-term-converted_dwellings",
           "zone-dms-term-use-educational_institution",
-          "zone-dms-term-term-entertainment_establishment",
+          "zone-dms-term-use-entertainment_establishment",
           "zone-dms-term-use-fire_station",
-          "zone-dms-term-term-grocery_store",
-          "zone-dms-term-term-hostel",
+          "zone-dms-term-use-grocery_store",
+          "zone-dms-term-use-hostel",
           "zone-dms-term-use-hotel",
           "zone-dms-term-use-police_station",
           "zone-dms-term-use-service_repair_establishment",
-          "zone-dms-term-term-shopping_center",
-          "zone-dms-term-term-theatre",
+          "zone-dms-term-use-shopping_centre",
+          "zone-dms-term-use-theatre",
           "zone-dms-term-use-veterinary_services"
         ],
         "applicability": {
@@ -2358,71 +2368,6 @@
         {
           "source_ref_type": "clause",
           "source_ref_id": "zone-dms-clause-31-1-4"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-dms-flag-unmatched-term-entertainment-establishment",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Entertainment Establishment",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-dms-clause-31-1-6"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-dms-flag-unmatched-term-grocery-store",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Grocery Store",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-dms-clause-31-1-8"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-dms-flag-unmatched-term-hostel",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Hostel",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-dms-clause-31-1-9"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-dms-flag-unmatched-term-shopping-center",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Shopping Center",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-dms-clause-31-1-13"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-dms-flag-unmatched-term-theatre",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Theatre",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-dms-clause-31-1-14"
         }
       ]
     }

@@ -452,95 +452,109 @@
   "structured_data": {
     "terms": [
       {
-        "term_id": "zone-a-term-term-airport",
+        "term_id": "zone-a-term-use-airport",
         "term_raw": "Airport",
         "term_normalized": "airport",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-a-clause-41-1-2"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "airport"
       },
       {
-        "term_id": "zone-a-term-term-agricultural_and_resource_land_uses",
+        "term_id": "zone-a-term-use-agricultural_and_resource_land_uses",
         "term_raw": "Agricultural and Resource Land Uses",
         "term_normalized": "agricultural_and_resource_land_uses",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-a-clause-41-1-3"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "agricultural_and_resource_land_uses"
       },
       {
-        "term_id": "zone-a-term-term-bulk_fuel_station",
+        "term_id": "zone-a-term-use-bulk_fuel_station",
         "term_raw": "Bulk Fuel Station",
         "term_normalized": "bulk_fuel_station",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-a-clause-41-1-4"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "bulk_fuel_station"
       },
       {
-        "term_id": "zone-a-term-term-forestry_related",
+        "term_id": "zone-a-term-use-forestry_related",
         "term_raw": "Forestry Related",
         "term_normalized": "forestry_related",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-a-clause-41-1-5"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "forestry_related"
       },
       {
-        "term_id": "zone-a-term-term-government_offices",
+        "term_id": "zone-a-term-use-government_office",
         "term_raw": "Government Offices",
-        "term_normalized": "government_offices",
-        "term_category": "unknown",
+        "term_normalized": "government_office",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-a-clause-41-1-6"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "government_office"
       },
       {
-        "term_id": "zone-a-term-term-heavy_equipment_repair",
+        "term_id": "zone-a-term-use-heavy_equipment_repair",
         "term_raw": "Heavy Equipment Repair",
         "term_normalized": "heavy_equipment_repair",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-a-clause-41-1-7"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "heavy_equipment_repair"
       },
       {
-        "term_id": "zone-a-term-term-manufacturing_heavy",
+        "term_id": "zone-a-term-use-manufacturing_heavy",
         "term_raw": "Manufacturing, Heavy",
         "term_normalized": "manufacturing_heavy",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-a-clause-41-1-8"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "manufacturing_heavy"
       },
       {
         "term_id": "zone-a-term-reference-zone-a-clause-41-1-1",
@@ -560,58 +574,58 @@
       {
         "use_id": "zone-a-use-airport-2",
         "use_name_raw": "Airport",
-        "use_term_id": "zone-a-term-term-airport",
+        "use_term_id": "zone-a-term-use-airport",
         "use_status": "permitted",
         "source_clause_ref": "zone-a-clause-41-1-2",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-a-use-agricultural-and-resource-land-uses-3",
         "use_name_raw": "Agricultural and Resource Land Uses",
-        "use_term_id": "zone-a-term-term-agricultural_and_resource_land_uses",
+        "use_term_id": "zone-a-term-use-agricultural_and_resource_land_uses",
         "use_status": "permitted",
         "source_clause_ref": "zone-a-clause-41-1-3",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-a-use-bulk-fuel-station-4",
         "use_name_raw": "Bulk Fuel Station",
-        "use_term_id": "zone-a-term-term-bulk_fuel_station",
+        "use_term_id": "zone-a-term-use-bulk_fuel_station",
         "use_status": "permitted",
         "source_clause_ref": "zone-a-clause-41-1-4",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-a-use-forestry-related-5",
         "use_name_raw": "Forestry Related",
-        "use_term_id": "zone-a-term-term-forestry_related",
+        "use_term_id": "zone-a-term-use-forestry_related",
         "use_status": "permitted",
         "source_clause_ref": "zone-a-clause-41-1-5",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-a-use-government-offices-6",
         "use_name_raw": "Government Offices",
-        "use_term_id": "zone-a-term-term-government_offices",
+        "use_term_id": "zone-a-term-use-government_office",
         "use_status": "permitted",
         "source_clause_ref": "zone-a-clause-41-1-6",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-a-use-heavy-equipment-repair-7",
         "use_name_raw": "Heavy Equipment Repair",
-        "use_term_id": "zone-a-term-term-heavy_equipment_repair",
+        "use_term_id": "zone-a-term-use-heavy_equipment_repair",
         "use_status": "permitted",
         "source_clause_ref": "zone-a-clause-41-1-7",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-a-use-manufacturing-heavy-8",
         "use_name_raw": "Manufacturing, Heavy",
-        "use_term_id": "zone-a-term-term-manufacturing_heavy",
+        "use_term_id": "zone-a-term-use-manufacturing_heavy",
         "use_status": "permitted",
         "source_clause_ref": "zone-a-clause-41-1-8",
-        "confidence": "needs_review"
+        "confidence": "high"
       }
     ],
     "numeric_values": [
@@ -1235,13 +1249,13 @@
         "group_label_raw": "41",
         "group_title_raw": "AIRPORT ZONE (A)",
         "regulated_use_terms": [
-          "zone-a-term-term-airport",
-          "zone-a-term-term-agricultural_and_resource_land_uses",
-          "zone-a-term-term-bulk_fuel_station",
-          "zone-a-term-term-forestry_related",
-          "zone-a-term-term-government_offices",
-          "zone-a-term-term-heavy_equipment_repair",
-          "zone-a-term-term-manufacturing_heavy"
+          "zone-a-term-use-airport",
+          "zone-a-term-use-agricultural_and_resource_land_uses",
+          "zone-a-term-use-bulk_fuel_station",
+          "zone-a-term-use-forestry_related",
+          "zone-a-term-use-government_office",
+          "zone-a-term-use-heavy_equipment_repair",
+          "zone-a-term-use-manufacturing_heavy"
         ],
         "applicability": {
           "applies_to_zone_codes": [
@@ -1342,97 +1356,5 @@
       }
     ]
   },
-  "review_flags": [
-    {
-      "review_flag_id": "zone-a-flag-unmatched-term-airport",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Airport",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-a-clause-41-1-2"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-a-flag-unmatched-term-agricultural-and-resource-land-uses",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Agricultural and Resource Land Uses",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-a-clause-41-1-3"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-a-flag-unmatched-term-bulk-fuel-station",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Bulk Fuel Station",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-a-clause-41-1-4"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-a-flag-unmatched-term-forestry-related",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Forestry Related",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-a-clause-41-1-5"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-a-flag-unmatched-term-government-offices",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Government Offices",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-a-clause-41-1-6"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-a-flag-unmatched-term-heavy-equipment-repair",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Heavy Equipment Repair",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-a-clause-41-1-7"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-a-flag-unmatched-term-manufacturing-heavy",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Manufacturing, Heavy",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-a-clause-41-1-8"
-        }
-      ]
-    }
-  ]
+  "review_flags": []
 }

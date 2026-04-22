@@ -142,6 +142,34 @@ def build_lookup(entries: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
     return lookup
 
 
+USE_TERM_SPLITS = {
+    "retail_store_with_connected_retail_warehouse_light_manufacturing_or_assembly_facility": [
+        "retail_store",
+        "retail_warehouse",
+        "light_manufacturing",
+        "assembly_facility",
+    ],
+    "warehouse_and_or_distribution_centre": ["warehouse", "distribution_centre"],
+    "warehouse_and_or_distribution_center": ["warehouse", "distribution_centre"],
+}
+
+USE_TERM_ALIASES = {
+    "agriculture_and_resource_land_uses": "agricultural_and_resource_land_uses",
+    "docking_for_private_boats_and_watercraft_subject_to_provincial_and_federal_approvals": (
+        "docking_for_private_boats_and_watercraft"
+    ),
+    "manufacturing_light": "light_manufacturing",
+    "offices": "office",
+    "commercial_daycare": "commercial_daycare_centre",
+    "government_offices": "government_office",
+    "public_utility_service_operations": "public_utility_service_operation",
+    "recreation_or_fitness_center_indoors": "recreation_or_fitness_centre_indoors",
+    "shopping_center": "shopping_centre",
+    "transportation_services": "transportation_service",
+    "automobile_sales_and_services": "automobile_sales_and_service",
+}
+
+
 class Normalizer:
     def __init__(self) -> None:
         self.term_lookup = build_lookup(load_seed_entries("term"))
@@ -152,11 +180,34 @@ class Normalizer:
 
     def match_term(self, raw: str) -> tuple[str, dict[str, Any] | None]:
         key = code_key(strip_list_punctuation(raw))
+        key = USE_TERM_ALIASES.get(key, key)
         if key in self.use_lookup:
             return "use", self.use_lookup[key]
         if key in self.term_lookup:
             return "term", self.term_lookup[key]
         return "term", None
+
+    def match_term_components(self, raw: str) -> list[dict[str, Any]]:
+        raw = strip_list_punctuation(raw)
+        key = code_key(raw)
+        component_codes = USE_TERM_SPLITS.get(key)
+        if component_codes:
+            components = []
+            for code in component_codes:
+                entry = self.use_lookup.get(code) or self.term_lookup.get(code)
+                components.append(
+                    {
+                        "raw": entry.get("label") if entry else code.replace("_", " ").title(),
+                        "table": "use" if code in self.use_lookup else "term",
+                        "entry": entry,
+                        "normalized": code,
+                    }
+                )
+            return components
+
+        table, entry = self.match_term(raw)
+        normalized = entry["code"] if entry else code_key(raw)
+        return [{"raw": raw, "table": table, "entry": entry, "normalized": normalized}]
 
 
 def strip_list_punctuation(text: str | None) -> str:
@@ -1213,62 +1264,67 @@ def build_terms_and_uses(
         raw_name = strip_list_punctuation(item.get("use_name"))
         if not raw_name:
             continue
-        table, entry = normalizer.match_term(raw_name)
-        normalized = entry["code"] if entry else code_key(raw_name)
-        category = term_category_from_entry(table, entry)
-        term_key = (table if entry else "unmatched", normalized)
-        term_id = f"{prefix}-term-{term_key[0]}-{normalized}"
         path = tuple(str(part) for part in (item.get("clause_path") or []))
         src_clause = clause_lookup.get(path)
         refs = [source_ref("clause", src_clause)] if src_clause else []
         if src_clause and is_zone_reference_clause(raw_name):
             continue
-        if term_key not in terms_by_key:
-            term = {
-                "term_id": term_id,
-                "term_raw": raw_name,
-                "term_normalized": normalized,
-                "term_category": category,
-                "source_refs": refs,
-                "confidence": confidence_from_entry(entry),
-            }
-            if entry:
-                term["code_table"] = table
-                term["code"] = normalized
-            terms_by_key[term_key] = term
-        elif refs:
-            existing_refs = terms_by_key[term_key].setdefault("source_refs", [])
-            if refs[0] not in existing_refs:
-                existing_refs.append(refs[0])
+        components = normalizer.match_term_components(raw_name)
+        for component_index, component in enumerate(components, start=1):
+            table = component["table"]
+            entry = component["entry"]
+            normalized = component["normalized"]
+            component_raw = component["raw"]
+            category = term_category_from_entry(table, entry)
+            term_key = (table if entry else "unmatched", normalized)
+            term_id = f"{prefix}-term-{term_key[0]}-{normalized}"
+            if term_key not in terms_by_key:
+                term = {
+                    "term_id": term_id,
+                    "term_raw": component_raw,
+                    "term_normalized": normalized,
+                    "term_category": category,
+                    "source_refs": refs,
+                    "confidence": confidence_from_entry(entry),
+                }
+                if entry:
+                    term["code_table"] = table
+                    term["code"] = normalized
+                terms_by_key[term_key] = term
+            elif refs:
+                existing_refs = terms_by_key[term_key].setdefault("source_refs", [])
+                if refs[0] not in existing_refs:
+                    existing_refs.append(refs[0])
 
-        if not entry or entry.get("status") == "review":
-            review_type = "code_table_review" if entry else "code_table_match_review"
-            description = (
-                f"Use phrase matched a review-status code table entry: {raw_name}"
-                if entry
-                else f"Use phrase was preserved but did not match reviewed term/use code tables: {raw_name}"
-            )
-            review_flags.append(
-                make_review_flag(
-                    f"{prefix}-flag-unmatched-use-{slugify(raw_name)}-{index}",
-                    review_type,
-                    description,
-                    refs,
+            if not entry or entry.get("status") == "review":
+                review_type = "code_table_review" if entry else "code_table_match_review"
+                description = (
+                    f"Use phrase matched a review-status code table entry: {component_raw}"
+                    if entry
+                    else f"Use phrase was preserved but did not match reviewed term/use code tables: {component_raw}"
                 )
-            )
+                review_flags.append(
+                    make_review_flag(
+                        f"{prefix}-flag-unmatched-use-{slugify(component_raw)}-{index}-{component_index}",
+                        review_type,
+                        description,
+                        refs,
+                    )
+                )
 
-        use_type = item.get("use_type") or ""
-        use_status = "accessory_or_secondary" if use_type == "accessory_or_secondary_use" else "permitted"
-        uses.append(
-            {
-                "use_id": f"{prefix}-use-{slugify(raw_name)}-{index}",
-                "use_name_raw": raw_name,
-                "use_term_id": term_id,
-                "use_status": use_status,
-                "source_clause_ref": src_clause or "",
-                "confidence": confidence_from_entry(entry),
-            }
-        )
+            use_type = item.get("use_type") or ""
+            use_status = "accessory_or_secondary" if use_type == "accessory_or_secondary_use" else "permitted"
+            use_id_suffix = slugify(component_raw if len(components) > 1 else raw_name)
+            uses.append(
+                {
+                    "use_id": f"{prefix}-use-{use_id_suffix}-{index}-{component_index}",
+                    "use_name_raw": component_raw,
+                    "use_term_id": term_id,
+                    "use_status": use_status,
+                    "source_clause_ref": src_clause or "",
+                    "confidence": confidence_from_entry(entry),
+                }
+            )
     return list(terms_by_key.values()), uses
 
 
@@ -1664,72 +1720,112 @@ def strip_unreviewed_term_codes(data: dict[str, Any]) -> dict[str, Any]:
 def refresh_schema_terms(normalizer: Normalizer, data: dict[str, Any]) -> dict[str, Any]:
     structured = data.get("structured_data") or {}
     prefix = ((data.get("raw_data") or {}).get("source_units") or [{}])[0].get("source_unit_id") or "document"
-    id_changes: dict[str, str] = {}
+    id_changes: dict[str, list[str]] = {}
     review_flags = data.setdefault("review_flags", [])
     existing_flag_ids = {flag.get("review_flag_id") for flag in review_flags}
     refreshed_terms = []
     seen_ids: set[str] = set()
     for term in structured.get("terms") or []:
         old_id = term["term_id"]
-        table, entry = normalizer.match_term(term.get("term_raw") or term.get("term_normalized") or "")
-        if entry:
-            normalized = entry["code"]
+        components = normalizer.match_term_components(term.get("term_raw") or term.get("term_normalized") or "")
+        new_ids = []
+        for component in components:
+            table = component["table"]
+            entry = component["entry"]
+            normalized = component["normalized"]
             new_id = f"{prefix}-term-{table}-{normalized}"
-            term["term_id"] = new_id
-            term["term_normalized"] = normalized
-            term["term_category"] = term_category_from_entry(table, entry)
-            term["code_table"] = table
-            term["code"] = normalized
-            term["confidence"] = confidence_from_entry(entry)
-            id_changes[old_id] = new_id
-            id_changes[f"{prefix}-term-term-{normalized}"] = new_id
-            id_changes[f"{prefix}-term-unmatched-{normalized}"] = new_id
-            if entry.get("status") == "review":
-                flag_id = f"{prefix}-flag-review-code-{slugify(normalized)}"
+            new_ids.append(new_id)
+            refreshed = dict(term)
+            if entry:
+                refreshed["term_id"] = new_id
+                refreshed["term_raw"] = component["raw"]
+                refreshed["term_normalized"] = normalized
+                refreshed["term_category"] = term_category_from_entry(table, entry)
+                refreshed["code_table"] = table
+                refreshed["code"] = normalized
+                refreshed["confidence"] = confidence_from_entry(entry)
+                id_changes[f"{prefix}-term-term-{normalized}"] = [new_id]
+                id_changes[f"{prefix}-term-unmatched-{normalized}"] = [new_id]
+                if entry.get("status") == "review":
+                    flag_id = f"{prefix}-flag-review-code-{slugify(normalized)}"
+                    if flag_id not in existing_flag_ids:
+                        review_flags.append(
+                            make_review_flag(
+                                flag_id,
+                                "code_table_review",
+                                f"Term matched a review-status code table entry: {component['raw'] or normalized}",
+                                refreshed.get("source_refs") or [],
+                            )
+                        )
+                        existing_flag_ids.add(flag_id)
+            else:
+                refreshed["term_id"] = new_id
+                refreshed["term_raw"] = component["raw"]
+                refreshed["term_normalized"] = normalized
+                refreshed["term_category"] = "unknown"
+                refreshed["confidence"] = "needs_review"
+                refreshed.pop("code_table", None)
+                refreshed.pop("code", None)
+                flag_id = f"{prefix}-flag-unmatched-term-{slugify(component['raw'] or normalized or old_id)}"
                 if flag_id not in existing_flag_ids:
                     review_flags.append(
                         make_review_flag(
                             flag_id,
-                            "code_table_review",
-                            f"Term matched a review-status code table entry: {term.get('term_raw') or normalized}",
-                            term.get("source_refs") or [],
+                            "code_table_match_review",
+                            f"Term was preserved but did not match reviewed term/use code tables: {component['raw'] or normalized}",
+                            refreshed.get("source_refs") or [],
                         )
                     )
                     existing_flag_ids.add(flag_id)
-        else:
-            term["term_category"] = "unknown"
-            term["confidence"] = "needs_review"
-            term.pop("code_table", None)
-            term.pop("code", None)
-            flag_id = f"{prefix}-flag-unmatched-term-{slugify(term.get('term_raw') or term.get('term_normalized') or old_id)}"
-            if flag_id not in existing_flag_ids:
-                review_flags.append(
-                    make_review_flag(
-                        flag_id,
-                        "code_table_match_review",
-                        f"Term was preserved but did not match reviewed term/use code tables: {term.get('term_raw') or term.get('term_normalized')}",
-                        term.get("source_refs") or [],
-                    )
-                )
-                existing_flag_ids.add(flag_id)
-        if term["term_id"] not in seen_ids:
-            refreshed_terms.append(term)
-            seen_ids.add(term["term_id"])
+            if refreshed["term_id"] not in seen_ids:
+                refreshed_terms.append(refreshed)
+                seen_ids.add(refreshed["term_id"])
+        id_changes[old_id] = new_ids
     structured["terms"] = refreshed_terms
     term_confidence_by_id = {term["term_id"]: term.get("confidence", "needs_review") for term in refreshed_terms}
+    refreshed_uses = []
+    seen_use_ids: set[str] = set()
     for use in structured.get("uses") or []:
         if use.get("use_status") == "accessory":
             use["use_status"] = "accessory_or_secondary"
-        if use.get("use_term_id") in id_changes:
-            use["use_term_id"] = id_changes[use["use_term_id"]]
+        components = normalizer.match_term_components(use.get("use_name_raw") or "")
+        if len(components) > 1:
+            for index, component in enumerate(components, start=1):
+                table = component["table"]
+                normalized = component["normalized"]
+                new_use = dict(use)
+                new_use["use_id"] = f"{use['use_id']}-{slugify(normalized)}"
+                new_use["use_name_raw"] = component["raw"]
+                new_use["use_term_id"] = f"{prefix}-term-{table}-{normalized}"
+                new_use["confidence"] = term_confidence_by_id.get(new_use["use_term_id"], "needs_review")
+                if new_use["use_id"] not in seen_use_ids:
+                    refreshed_uses.append(new_use)
+                    seen_use_ids.add(new_use["use_id"])
+            continue
+        if use.get("use_term_id") in id_changes and id_changes[use["use_term_id"]]:
+            use["use_term_id"] = id_changes[use["use_term_id"]][0]
         if use.get("use_term_id") in term_confidence_by_id:
             use["confidence"] = term_confidence_by_id[use["use_term_id"]]
+        if use["use_id"] not in seen_use_ids:
+            refreshed_uses.append(use)
+            seen_use_ids.add(use["use_id"])
+    structured["uses"] = refreshed_uses
+
+    def expand_refs(term_ids: list[str]) -> list[str]:
+        expanded = []
+        seen = set()
+        for term_id in term_ids:
+            replacements = id_changes.get(term_id, [term_id])
+            for replacement in replacements:
+                if replacement not in seen:
+                    expanded.append(replacement)
+                    seen.add(replacement)
+        return expanded
+
     for requirement in structured.get("requirements") or []:
-        requirement["term_refs"] = [id_changes.get(term_id, term_id) for term_id in requirement.get("term_refs") or []]
+        requirement["term_refs"] = expand_refs(requirement.get("term_refs") or [])
     for group in structured.get("regulation_groups") or []:
-        group["regulated_use_terms"] = [
-            id_changes.get(term_id, term_id) for term_id in group.get("regulated_use_terms") or []
-        ]
+        group["regulated_use_terms"] = expand_refs(group.get("regulated_use_terms") or [])
     return data
 
 

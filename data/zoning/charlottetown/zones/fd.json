@@ -898,30 +898,34 @@
   "structured_data": {
     "terms": [
       {
-        "term_id": "zone-fd-term-term-agriculture_and_resource_land_uses",
+        "term_id": "zone-fd-term-use-agricultural_and_resource_land_uses",
         "term_raw": "Agriculture and Resource Land Uses",
-        "term_normalized": "agriculture_and_resource_land_uses",
-        "term_category": "unknown",
+        "term_normalized": "agricultural_and_resource_land_uses",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-fd-clause-45-1-1"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "agricultural_and_resource_land_uses"
       },
       {
-        "term_id": "zone-fd-term-term-forestry_related",
+        "term_id": "zone-fd-term-use-forestry_related",
         "term_raw": "Forestry Related",
         "term_normalized": "forestry_related",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-fd-clause-45-1-2"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "forestry_related"
       },
       {
         "term_id": "zone-fd-term-term-one_single_detached_dwelling_per_lot_with_serviced_lot_frontage",
@@ -1029,18 +1033,18 @@
       {
         "use_id": "zone-fd-use-agriculture-and-resource-land-uses-1",
         "use_name_raw": "Agriculture and Resource Land Uses",
-        "use_term_id": "zone-fd-term-term-agriculture_and_resource_land_uses",
+        "use_term_id": "zone-fd-term-use-agricultural_and_resource_land_uses",
         "use_status": "permitted",
         "source_clause_ref": "zone-fd-clause-45-1-1",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-fd-use-forestry-related-2",
         "use_name_raw": "Forestry Related",
-        "use_term_id": "zone-fd-term-term-forestry_related",
+        "use_term_id": "zone-fd-term-use-forestry_related",
         "use_status": "permitted",
         "source_clause_ref": "zone-fd-clause-45-1-2",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-fd-use-one-single-detached-dwelling-per-lot-with-serviced-lot-frontage-3",
@@ -2303,8 +2307,8 @@
         "group_label_raw": "45",
         "group_title_raw": "FUTURE DEVELOPMENT ZONE (FD)",
         "regulated_use_terms": [
-          "zone-fd-term-term-agriculture_and_resource_land_uses",
-          "zone-fd-term-term-forestry_related",
+          "zone-fd-term-use-agricultural_and_resource_land_uses",
+          "zone-fd-term-use-forestry_related",
           "zone-fd-term-term-one_single_detached_dwelling_per_lot_with_serviced_lot_frontage"
         ],
         "applicability": {
@@ -2370,32 +2374,6 @@
     "cross_references": []
   },
   "review_flags": [
-    {
-      "review_flag_id": "zone-fd-flag-unmatched-term-agriculture-and-resource-land-uses",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Agriculture and Resource Land Uses",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-fd-clause-45-1-1"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-fd-flag-unmatched-term-forestry-related",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Forestry Related",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-fd-clause-45-1-2"
-        }
-      ]
-    },
     {
       "review_flag_id": "zone-fd-flag-unmatched-term-one-single-detached-dwelling-per-lot-with-serviced-lot-frontage",
       "severity": "warning",

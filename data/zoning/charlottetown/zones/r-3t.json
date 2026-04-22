@@ -1027,17 +1027,19 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-r-3t-term-term-lodging_house_limited",
+        "term_id": "zone-r-3t-term-use-lodging_house_limited",
         "term_raw": "Lodging House Limited",
         "term_normalized": "lodging_house_limited",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-r-3t-clause-17-1-5"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "lodging_house_limited"
       },
       {
         "term_id": "zone-r-3t-term-term-stacked_townhouse_dwelling",
@@ -1098,30 +1100,34 @@
         "code": "community_care_facility"
       },
       {
-        "term_id": "zone-r-3t-term-term-community_institutional",
+        "term_id": "zone-r-3t-term-use-community_institutional",
         "term_raw": "Community Institutional",
         "term_normalized": "community_institutional",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-r-3t-clause-17-1-8-c"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "community_institutional"
       },
       {
-        "term_id": "zone-r-3t-term-term-commercial_daycare_centre",
+        "term_id": "zone-r-3t-term-use-commercial_daycare_centre",
         "term_raw": "Commercial Daycare Centre",
         "term_normalized": "commercial_daycare_centre",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-r-3t-clause-17-1-8-d"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "commercial_daycare_centre"
       },
       {
         "term_id": "zone-r-3t-term-use-nursing_home",
@@ -1243,10 +1249,10 @@
       {
         "use_id": "zone-r-3t-use-lodging-house-limited-5",
         "use_name_raw": "Lodging House Limited",
-        "use_term_id": "zone-r-3t-term-term-lodging_house_limited",
+        "use_term_id": "zone-r-3t-term-use-lodging_house_limited",
         "use_status": "permitted",
         "source_clause_ref": "zone-r-3t-clause-17-1-5",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-r-3t-use-stacked-townhouse-dwelling-6",
@@ -1283,18 +1289,18 @@
       {
         "use_id": "zone-r-3t-use-community-institutional-11",
         "use_name_raw": "Community Institutional",
-        "use_term_id": "zone-r-3t-term-term-community_institutional",
+        "use_term_id": "zone-r-3t-term-use-community_institutional",
         "use_status": "permitted",
         "source_clause_ref": "zone-r-3t-clause-17-1-8-c",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-r-3t-use-commercial-daycare-centre-12",
         "use_name_raw": "Commercial Daycare Centre",
-        "use_term_id": "zone-r-3t-term-term-commercial_daycare_centre",
+        "use_term_id": "zone-r-3t-term-use-commercial_daycare_centre",
         "use_status": "permitted",
         "source_clause_ref": "zone-r-3t-clause-17-1-8-d",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-r-3t-use-nursing-home-13",
@@ -2752,13 +2758,13 @@
         "regulated_use_terms": [
           "zone-r-3t-term-term-block_townhouse_dwelling",
           "zone-r-3t-term-term-converted_dwelling",
-          "zone-r-3t-term-term-lodging_house_limited",
+          "zone-r-3t-term-use-lodging_house_limited",
           "zone-r-3t-term-term-stacked_townhouse_dwelling",
           "zone-r-3t-term-use-townhouse_dwelling",
           "zone-r-3t-term-use-community_building",
           "zone-r-3t-term-use-community_care_facility",
-          "zone-r-3t-term-term-community_institutional",
-          "zone-r-3t-term-term-commercial_daycare_centre",
+          "zone-r-3t-term-use-community_institutional",
+          "zone-r-3t-term-use-commercial_daycare_centre",
           "zone-r-3t-term-use-nursing_home"
         ],
         "applicability": {
@@ -3014,19 +3020,6 @@
       ]
     },
     {
-      "review_flag_id": "zone-r-3t-flag-unmatched-term-lodging-house-limited",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Lodging House Limited",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-r-3t-clause-17-1-5"
-        }
-      ]
-    },
-    {
       "review_flag_id": "zone-r-3t-flag-unmatched-term-stacked-townhouse-dwelling",
       "severity": "warning",
       "blocking": false,
@@ -3036,32 +3029,6 @@
         {
           "source_ref_type": "clause",
           "source_ref_id": "zone-r-3t-clause-17-1-6"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-r-3t-flag-unmatched-term-community-institutional",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Community Institutional",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-r-3t-clause-17-1-8-c"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-r-3t-flag-unmatched-term-commercial-daycare-centre",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Commercial Daycare Centre",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-r-3t-clause-17-1-8-d"
         }
       ]
     }

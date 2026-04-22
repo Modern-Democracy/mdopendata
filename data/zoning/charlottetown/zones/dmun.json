@@ -710,30 +710,34 @@
   "structured_data": {
     "terms": [
       {
-        "term_id": "zone-dmun-term-term-eating_and_drinking_establishment",
+        "term_id": "zone-dmun-term-use-eating_and_drinking_establishment",
         "term_raw": "Eating and Drinking Establishment",
         "term_normalized": "eating_and_drinking_establishment",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-dmun-clause-30-1-3"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "eating_and_drinking_establishment"
       },
       {
-        "term_id": "zone-dmun-term-term-funeral_establishment",
+        "term_id": "zone-dmun-term-use-funeral_establishment",
         "term_raw": "Funeral Establishment",
         "term_normalized": "funeral_establishment",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-dmun-clause-30-1-4"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "funeral_establishment"
       },
       {
         "term_id": "zone-dmun-term-use-medical_health_and_dental_office",
@@ -766,30 +770,34 @@
         "code": "office"
       },
       {
-        "term_id": "zone-dmun-term-term-parking_structure",
+        "term_id": "zone-dmun-term-use-parking_structure",
         "term_raw": "Parking Structure",
         "term_normalized": "parking_structure",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-dmun-clause-30-1-7"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "parking_structure"
       },
       {
-        "term_id": "zone-dmun-term-term-personal_service_shop",
+        "term_id": "zone-dmun-term-use-personal_service_shop",
         "term_raw": "Personal Service Shop",
         "term_normalized": "personal_service_shop",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-dmun-clause-30-1-8"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "personal_service_shop"
       },
       {
         "term_id": "zone-dmun-term-use-retail_store",
@@ -837,18 +845,18 @@
       {
         "use_id": "zone-dmun-use-eating-and-drinking-establishment-3",
         "use_name_raw": "Eating and Drinking Establishment",
-        "use_term_id": "zone-dmun-term-term-eating_and_drinking_establishment",
+        "use_term_id": "zone-dmun-term-use-eating_and_drinking_establishment",
         "use_status": "permitted",
         "source_clause_ref": "zone-dmun-clause-30-1-3",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-dmun-use-funeral-establishment-4",
         "use_name_raw": "Funeral Establishment",
-        "use_term_id": "zone-dmun-term-term-funeral_establishment",
+        "use_term_id": "zone-dmun-term-use-funeral_establishment",
         "use_status": "permitted",
         "source_clause_ref": "zone-dmun-clause-30-1-4",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-dmun-use-medical-health-and-dental-office-5",
@@ -869,18 +877,18 @@
       {
         "use_id": "zone-dmun-use-parking-structure-7",
         "use_name_raw": "Parking Structure",
-        "use_term_id": "zone-dmun-term-term-parking_structure",
+        "use_term_id": "zone-dmun-term-use-parking_structure",
         "use_status": "permitted",
         "source_clause_ref": "zone-dmun-clause-30-1-7",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-dmun-use-personal-service-shop-8",
         "use_name_raw": "Personal Service Shop",
-        "use_term_id": "zone-dmun-term-term-personal_service_shop",
+        "use_term_id": "zone-dmun-term-use-personal_service_shop",
         "use_status": "permitted",
         "source_clause_ref": "zone-dmun-clause-30-1-8",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-dmun-use-retail-store-9",
@@ -1571,12 +1579,12 @@
         "group_label_raw": "30",
         "group_title_raw": "DOWNTOWN MIXED USE NEIGHBOURHOOD (DMUN)",
         "regulated_use_terms": [
-          "zone-dmun-term-term-eating_and_drinking_establishment",
-          "zone-dmun-term-term-funeral_establishment",
+          "zone-dmun-term-use-eating_and_drinking_establishment",
+          "zone-dmun-term-use-funeral_establishment",
           "zone-dmun-term-use-medical_health_and_dental_office",
           "zone-dmun-term-use-office",
-          "zone-dmun-term-term-parking_structure",
-          "zone-dmun-term-term-personal_service_shop",
+          "zone-dmun-term-use-parking_structure",
+          "zone-dmun-term-use-personal_service_shop",
           "zone-dmun-term-use-retail_store"
         ],
         "applicability": {
@@ -1693,58 +1701,5 @@
       }
     ]
   },
-  "review_flags": [
-    {
-      "review_flag_id": "zone-dmun-flag-unmatched-term-eating-and-drinking-establishment",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Eating and Drinking Establishment",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-dmun-clause-30-1-3"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-dmun-flag-unmatched-term-funeral-establishment",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Funeral Establishment",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-dmun-clause-30-1-4"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-dmun-flag-unmatched-term-parking-structure",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Parking Structure",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-dmun-clause-30-1-7"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-dmun-flag-unmatched-term-personal-service-shop",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Personal Service Shop",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-dmun-clause-30-1-8"
-        }
-      ]
-    }
-  ]
+  "review_flags": []
 }

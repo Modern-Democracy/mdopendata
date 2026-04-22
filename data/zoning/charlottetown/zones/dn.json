@@ -389,17 +389,19 @@
   "structured_data": {
     "terms": [
       {
-        "term_id": "zone-dn-term-term-convenience_store",
+        "term_id": "zone-dn-term-use-convenience_store",
         "term_raw": "Convenience Store",
         "term_normalized": "convenience_store",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-dn-clause-29-1-3"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "convenience_store"
       },
       {
         "term_id": "zone-dn-term-reference-zone-dn-clause-29-1-1",
@@ -432,10 +434,10 @@
       {
         "use_id": "zone-dn-use-convenience-store-3",
         "use_name_raw": "Convenience Store",
-        "use_term_id": "zone-dn-term-term-convenience_store",
+        "use_term_id": "zone-dn-term-use-convenience_store",
         "use_status": "permitted",
         "source_clause_ref": "zone-dn-clause-29-1-3",
-        "confidence": "needs_review"
+        "confidence": "high"
       }
     ],
     "numeric_values": [
@@ -963,7 +965,7 @@
         "group_label_raw": "29",
         "group_title_raw": "DOWNTOWN NEIGHBOURHOOD (DN)",
         "regulated_use_terms": [
-          "zone-dn-term-term-convenience_store"
+          "zone-dn-term-use-convenience_store"
         ],
         "applicability": {
           "applies_to_zone_codes": [
@@ -1076,19 +1078,5 @@
       }
     ]
   },
-  "review_flags": [
-    {
-      "review_flag_id": "zone-dn-flag-unmatched-term-convenience-store",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Convenience Store",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-dn-clause-29-1-3"
-        }
-      ]
-    }
-  ]
+  "review_flags": []
 }

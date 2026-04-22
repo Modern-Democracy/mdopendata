@@ -578,69 +578,79 @@
   "structured_data": {
     "terms": [
       {
-        "term_id": "zone-muc-term-term-automobile_sales_and_services",
+        "term_id": "zone-muc-term-use-automobile_sales_and_service",
         "term_raw": "Automobile Sales and Services",
-        "term_normalized": "automobile_sales_and_services",
-        "term_category": "unknown",
+        "term_normalized": "automobile_sales_and_service",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-muc-clause-24-1-4"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "automobile_sales_and_service"
       },
       {
-        "term_id": "zone-muc-term-term-cannabis_retail_store",
+        "term_id": "zone-muc-term-use-cannabis_retail_store",
         "term_raw": "Cannabis Retail Store",
         "term_normalized": "cannabis_retail_store",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-muc-clause-24-1-5"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "cannabis_retail_store"
       },
       {
-        "term_id": "zone-muc-term-term-equipment_sales_rental_service",
+        "term_id": "zone-muc-term-use-equipment_sales_rental_service",
         "term_raw": "Equipment Sales, Rental Service",
         "term_normalized": "equipment_sales_rental_service",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-muc-clause-24-1-6"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "equipment_sales_rental_service"
       },
       {
-        "term_id": "zone-muc-term-term-greenhouse_nursery_retail",
+        "term_id": "zone-muc-term-use-greenhouse_nursery_retail",
         "term_raw": "Greenhouse (nursery retail)",
         "term_normalized": "greenhouse_nursery_retail",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-muc-clause-24-1-7"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "greenhouse_nursery_retail"
       },
       {
-        "term_id": "zone-muc-term-term-outdoor_retail_display",
+        "term_id": "zone-muc-term-use-outdoor_retail_display",
         "term_raw": "Outdoor Retail Display",
         "term_normalized": "outdoor_retail_display",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-muc-clause-24-1-8"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "outdoor_retail_display"
       },
       {
         "term_id": "zone-muc-term-use-parking_lot",
@@ -658,30 +668,64 @@
         "code": "parking_lot"
       },
       {
-        "term_id": "zone-muc-term-term-retail_store_with_connected_retail_warehouse_light_manufacturing_or_assembly_facility",
-        "term_raw": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility",
-        "term_normalized": "retail_store_with_connected_retail_warehouse_light_manufacturing_or_assembly_facility",
-        "term_category": "unknown",
+        "term_id": "zone-muc-term-use-retail_store",
+        "term_raw": "Retail store",
+        "term_normalized": "retail_store",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-muc-clause-24-1-10"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "retail_store"
       },
       {
-        "term_id": "zone-muc-term-term-retail_warehouse",
-        "term_raw": "Retail Warehouse",
+        "term_id": "zone-muc-term-use-retail_warehouse",
+        "term_raw": "Retail warehouse",
         "term_normalized": "retail_warehouse",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
-            "source_ref_id": "zone-muc-clause-24-1-11"
+            "source_ref_id": "zone-muc-clause-24-1-10"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "retail_warehouse"
+      },
+      {
+        "term_id": "zone-muc-term-use-light_manufacturing",
+        "term_raw": "Light manufacturing",
+        "term_normalized": "light_manufacturing",
+        "term_category": "use_type",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-10"
+          }
+        ],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "light_manufacturing"
+      },
+      {
+        "term_id": "zone-muc-term-use-assembly_facility",
+        "term_raw": "Assembly facility",
+        "term_normalized": "assembly_facility",
+        "term_category": "use_type",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-10"
+          }
+        ],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "assembly_facility"
       },
       {
         "term_id": "zone-muc-term-use-service_repair_establishment",
@@ -699,43 +743,64 @@
         "code": "service_repair_establishment"
       },
       {
-        "term_id": "zone-muc-term-term-storage_facility",
+        "term_id": "zone-muc-term-use-storage_facility",
         "term_raw": "Storage Facility",
         "term_normalized": "storage_facility",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-muc-clause-24-1-13"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "storage_facility"
       },
       {
-        "term_id": "zone-muc-term-term-transport_terminal",
+        "term_id": "zone-muc-term-use-transport_terminal",
         "term_raw": "Transport Terminal",
         "term_normalized": "transport_terminal",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-muc-clause-24-1-14"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "transport_terminal"
       },
       {
-        "term_id": "zone-muc-term-term-warehouse_and_or_distribution_centre",
-        "term_raw": "Warehouse and/or Distribution Centre",
-        "term_normalized": "warehouse_and_or_distribution_centre",
-        "term_category": "unknown",
+        "term_id": "zone-muc-term-use-warehouse",
+        "term_raw": "Warehouse",
+        "term_normalized": "warehouse",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-muc-clause-24-1-15"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "warehouse"
+      },
+      {
+        "term_id": "zone-muc-term-use-distribution_centre",
+        "term_raw": "Distribution centre",
+        "term_normalized": "distribution_centre",
+        "term_category": "use_type",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-15"
+          }
+        ],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "distribution_centre"
       },
       {
         "term_id": "zone-muc-term-reference-zone-muc-clause-24-1-1",
@@ -781,42 +846,42 @@
       {
         "use_id": "zone-muc-use-automobile-sales-and-services-4",
         "use_name_raw": "Automobile Sales and Services",
-        "use_term_id": "zone-muc-term-term-automobile_sales_and_services",
+        "use_term_id": "zone-muc-term-use-automobile_sales_and_service",
         "use_status": "permitted",
         "source_clause_ref": "zone-muc-clause-24-1-4",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-muc-use-cannabis-retail-store-5",
         "use_name_raw": "Cannabis Retail Store",
-        "use_term_id": "zone-muc-term-term-cannabis_retail_store",
+        "use_term_id": "zone-muc-term-use-cannabis_retail_store",
         "use_status": "permitted",
         "source_clause_ref": "zone-muc-clause-24-1-5",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-muc-use-equipment-sales-rental-service-6",
         "use_name_raw": "Equipment Sales, Rental Service",
-        "use_term_id": "zone-muc-term-term-equipment_sales_rental_service",
+        "use_term_id": "zone-muc-term-use-equipment_sales_rental_service",
         "use_status": "permitted",
         "source_clause_ref": "zone-muc-clause-24-1-6",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-muc-use-greenhouse-nursery-retail-7",
         "use_name_raw": "Greenhouse (nursery retail)",
-        "use_term_id": "zone-muc-term-term-greenhouse_nursery_retail",
+        "use_term_id": "zone-muc-term-use-greenhouse_nursery_retail",
         "use_status": "permitted",
         "source_clause_ref": "zone-muc-clause-24-1-7",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-muc-use-outdoor-retail-display-8",
         "use_name_raw": "Outdoor Retail Display",
-        "use_term_id": "zone-muc-term-term-outdoor_retail_display",
+        "use_term_id": "zone-muc-term-use-outdoor_retail_display",
         "use_status": "permitted",
         "source_clause_ref": "zone-muc-clause-24-1-8",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-muc-use-parking-lot-9",
@@ -827,20 +892,44 @@
         "confidence": "high"
       },
       {
-        "use_id": "zone-muc-use-retail-store-with-connected-retail-warehouse-light-manufacturing-or-assembly-facility-10",
-        "use_name_raw": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility",
-        "use_term_id": "zone-muc-term-term-retail_store_with_connected_retail_warehouse_light_manufacturing_or_assembly_facility",
+        "use_id": "zone-muc-use-retail-store-with-connected-retail-warehouse-light-manufacturing-or-assembly-facility-10-retail-store",
+        "use_name_raw": "Retail store",
+        "use_term_id": "zone-muc-term-use-retail_store",
         "use_status": "permitted",
         "source_clause_ref": "zone-muc-clause-24-1-10",
-        "confidence": "needs_review"
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-muc-use-retail-store-with-connected-retail-warehouse-light-manufacturing-or-assembly-facility-10-retail-warehouse",
+        "use_name_raw": "Retail warehouse",
+        "use_term_id": "zone-muc-term-use-retail_warehouse",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-muc-clause-24-1-10",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-muc-use-retail-store-with-connected-retail-warehouse-light-manufacturing-or-assembly-facility-10-light-manufacturing",
+        "use_name_raw": "Light manufacturing",
+        "use_term_id": "zone-muc-term-use-light_manufacturing",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-muc-clause-24-1-10",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-muc-use-retail-store-with-connected-retail-warehouse-light-manufacturing-or-assembly-facility-10-assembly-facility",
+        "use_name_raw": "Assembly facility",
+        "use_term_id": "zone-muc-term-use-assembly_facility",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-muc-clause-24-1-10",
+        "confidence": "high"
       },
       {
         "use_id": "zone-muc-use-retail-warehouse-11",
         "use_name_raw": "Retail Warehouse",
-        "use_term_id": "zone-muc-term-term-retail_warehouse",
+        "use_term_id": "zone-muc-term-use-retail_warehouse",
         "use_status": "permitted",
         "source_clause_ref": "zone-muc-clause-24-1-11",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-muc-use-service-repair-establishment-12",
@@ -853,26 +942,34 @@
       {
         "use_id": "zone-muc-use-storage-facility-13",
         "use_name_raw": "Storage Facility",
-        "use_term_id": "zone-muc-term-term-storage_facility",
+        "use_term_id": "zone-muc-term-use-storage_facility",
         "use_status": "permitted",
         "source_clause_ref": "zone-muc-clause-24-1-13",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-muc-use-transport-terminal-14",
         "use_name_raw": "Transport Terminal",
-        "use_term_id": "zone-muc-term-term-transport_terminal",
+        "use_term_id": "zone-muc-term-use-transport_terminal",
         "use_status": "permitted",
         "source_clause_ref": "zone-muc-clause-24-1-14",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
-        "use_id": "zone-muc-use-warehouse-and-or-distribution-centre-15",
-        "use_name_raw": "Warehouse and/or Distribution Centre",
-        "use_term_id": "zone-muc-term-term-warehouse_and_or_distribution_centre",
+        "use_id": "zone-muc-use-warehouse-and-or-distribution-centre-15-warehouse",
+        "use_name_raw": "Warehouse",
+        "use_term_id": "zone-muc-term-use-warehouse",
         "use_status": "permitted",
         "source_clause_ref": "zone-muc-clause-24-1-15",
-        "confidence": "needs_review"
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-muc-use-warehouse-and-or-distribution-centre-15-distribution-centre",
+        "use_name_raw": "Distribution centre",
+        "use_term_id": "zone-muc-term-use-distribution_centre",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-muc-clause-24-1-15",
+        "confidence": "high"
       }
     ],
     "numeric_values": [
@@ -1496,18 +1593,21 @@
         "group_label_raw": "24",
         "group_title_raw": "MIXED-USE CORRIDOR ZONE (MUC)",
         "regulated_use_terms": [
-          "zone-muc-term-term-automobile_sales_and_services",
-          "zone-muc-term-term-cannabis_retail_store",
-          "zone-muc-term-term-equipment_sales_rental_service",
-          "zone-muc-term-term-greenhouse_nursery_retail",
-          "zone-muc-term-term-outdoor_retail_display",
+          "zone-muc-term-use-automobile_sales_and_service",
+          "zone-muc-term-use-cannabis_retail_store",
+          "zone-muc-term-use-equipment_sales_rental_service",
+          "zone-muc-term-use-greenhouse_nursery_retail",
+          "zone-muc-term-use-outdoor_retail_display",
           "zone-muc-term-use-parking_lot",
-          "zone-muc-term-term-retail_store_with_connected_retail_warehouse_light_manufacturing_or_assembly_facility",
-          "zone-muc-term-term-retail_warehouse",
+          "zone-muc-term-use-retail_store",
+          "zone-muc-term-use-retail_warehouse",
+          "zone-muc-term-use-light_manufacturing",
+          "zone-muc-term-use-assembly_facility",
           "zone-muc-term-use-service_repair_establishment",
-          "zone-muc-term-term-storage_facility",
-          "zone-muc-term-term-transport_terminal",
-          "zone-muc-term-term-warehouse_and_or_distribution_centre"
+          "zone-muc-term-use-storage_facility",
+          "zone-muc-term-use-transport_terminal",
+          "zone-muc-term-use-warehouse",
+          "zone-muc-term-use-distribution_centre"
         ],
         "applicability": {
           "applies_to_zone_codes": [
@@ -1688,136 +1788,5 @@
       }
     ]
   },
-  "review_flags": [
-    {
-      "review_flag_id": "zone-muc-flag-unmatched-term-automobile-sales-and-services",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Automobile Sales and Services",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-muc-clause-24-1-4"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-muc-flag-unmatched-term-cannabis-retail-store",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Cannabis Retail Store",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-muc-clause-24-1-5"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-muc-flag-unmatched-term-equipment-sales-rental-service",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Equipment Sales, Rental Service",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-muc-clause-24-1-6"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-muc-flag-unmatched-term-greenhouse-nursery-retail",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Greenhouse (nursery retail)",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-muc-clause-24-1-7"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-muc-flag-unmatched-term-outdoor-retail-display",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Outdoor Retail Display",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-muc-clause-24-1-8"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-muc-flag-unmatched-term-retail-store-with-connected-retail-warehouse-light-manufacturing-or-assembly-facility",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-muc-clause-24-1-10"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-muc-flag-unmatched-term-retail-warehouse",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Retail Warehouse",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-muc-clause-24-1-11"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-muc-flag-unmatched-term-storage-facility",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Storage Facility",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-muc-clause-24-1-13"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-muc-flag-unmatched-term-transport-terminal",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Transport Terminal",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-muc-clause-24-1-14"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-muc-flag-unmatched-term-warehouse-and-or-distribution-centre",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Warehouse and/or Distribution Centre",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-muc-clause-24-1-15"
-        }
-      ]
-    }
-  ]
+  "review_flags": []
 }
