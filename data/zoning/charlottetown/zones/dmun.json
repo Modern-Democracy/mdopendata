@@ -710,32 +710,6 @@
   "structured_data": {
     "terms": [
       {
-        "term_id": "zone-dmun-term-term-uses_permitted_in_the_downtown_neighbourhood_dn_zone",
-        "term_raw": "Uses permitted in the Downtown Neighbourhood (DN) Zone",
-        "term_normalized": "uses_permitted_in_the_downtown_neighbourhood_dn_zone",
-        "term_category": "unknown",
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dmun-clause-30-1-1"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
-        "term_id": "zone-dmun-term-term-uses_permitted_in_the_park_cultural_zone",
-        "term_raw": "Uses permitted in the Park/Cultural Zone",
-        "term_normalized": "uses_permitted_in_the_park_cultural_zone",
-        "term_category": "unknown",
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dmun-clause-30-1-2"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
         "term_id": "zone-dmun-term-term-eating_and_drinking_establishment",
         "term_raw": "Eating and Drinking Establishment",
         "term_normalized": "eating_and_drinking_establishment",
@@ -825,25 +799,35 @@
           }
         ],
         "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-dmun-term-reference-zone-dmun-clause-30-1-1",
+        "term_raw": "Uses permitted in the Downtown Neighbourhood (DN) Zone",
+        "term_normalized": "zone_reference_dn",
+        "term_category": "document_reference",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmun-clause-30-1-1"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "term_id": "zone-dmun-term-reference-zone-dmun-clause-30-1-2",
+        "term_raw": "Uses permitted in the Park/Cultural Zone",
+        "term_normalized": "zone_reference_pc",
+        "term_category": "document_reference",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmun-clause-30-1-2"
+          }
+        ],
+        "confidence": "high"
       }
     ],
     "uses": [
-      {
-        "use_id": "zone-dmun-use-uses-permitted-in-the-downtown-neighbourhood-dn-zone-1",
-        "use_name_raw": "Uses permitted in the Downtown Neighbourhood (DN) Zone",
-        "use_term_id": "zone-dmun-term-term-uses_permitted_in_the_downtown_neighbourhood_dn_zone",
-        "use_status": "permitted",
-        "source_clause_ref": "zone-dmun-clause-30-1-1",
-        "confidence": "needs_review"
-      },
-      {
-        "use_id": "zone-dmun-use-uses-permitted-in-the-park-cultural-zone-2",
-        "use_name_raw": "Uses permitted in the Park/Cultural Zone",
-        "use_term_id": "zone-dmun-term-term-uses_permitted_in_the_park_cultural_zone",
-        "use_status": "permitted",
-        "source_clause_ref": "zone-dmun-clause-30-1-2",
-        "confidence": "needs_review"
-      },
       {
         "use_id": "zone-dmun-use-eating-and-drinking-establishment-3",
         "use_name_raw": "Eating and Drinking Establishment",
@@ -1581,8 +1565,6 @@
         "group_label_raw": "30",
         "group_title_raw": "DOWNTOWN MIXED USE NEIGHBOURHOOD (DMUN)",
         "regulated_use_terms": [
-          "zone-dmun-term-term-uses_permitted_in_the_downtown_neighbourhood_dn_zone",
-          "zone-dmun-term-term-uses_permitted_in_the_park_cultural_zone",
           "zone-dmun-term-term-eating_and_drinking_establishment",
           "zone-dmun-term-term-funeral_establishment",
           "zone-dmun-term-term-medical_health_and_dental_office",
@@ -1616,7 +1598,40 @@
       }
     ],
     "conditional_rule_groups": [],
-    "zone_relationships": [],
+    "zone_relationships": [
+      {
+        "relationship_id": "zone-dmun-relationship-inherits_uses-dn-zone-dmun-clause-30-1-1",
+        "relationship_type": "inherits_uses",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "DMUN"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "DN"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-dmun-clause-30-1-1",
+        "join_behavior": "include_target_values",
+        "confidence": "high"
+      },
+      {
+        "relationship_id": "zone-dmun-relationship-inherits_uses-pc-zone-dmun-clause-30-1-2",
+        "relationship_type": "inherits_uses",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "DMUN"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "PC"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-dmun-clause-30-1-2",
+        "join_behavior": "include_target_values",
+        "confidence": "high"
+      }
+    ],
     "map_layer_references": [
       {
         "map_reference_id": "zone-dmun-map-zoning-map",
@@ -1637,35 +1652,42 @@
       }
     ],
     "other_requirements": [],
-    "cross_references": []
+    "cross_references": [
+      {
+        "relationship_id": "zone-dmun-cross-reference-references-zone-dn-zone-dmun-clause-30-1-1",
+        "relationship_type": "references_zone",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "DMUN"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "DN"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-dmun-clause-30-1-1",
+        "join_behavior": "reference_only",
+        "confidence": "high"
+      },
+      {
+        "relationship_id": "zone-dmun-cross-reference-references-zone-pc-zone-dmun-clause-30-1-2",
+        "relationship_type": "references_zone",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "DMUN"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "PC"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-dmun-clause-30-1-2",
+        "join_behavior": "reference_only",
+        "confidence": "high"
+      }
+    ]
   },
   "review_flags": [
-    {
-      "review_flag_id": "zone-dmun-flag-unmatched-term-uses-permitted-in-the-downtown-neighbourhood-dn-zone",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Uses permitted in the Downtown Neighbourhood (DN) Zone",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-dmun-clause-30-1-1"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-dmun-flag-unmatched-term-uses-permitted-in-the-park-cultural-zone",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Uses permitted in the Park/Cultural Zone",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-dmun-clause-30-1-2"
-        }
-      ]
-    },
     {
       "review_flag_id": "zone-dmun-flag-unmatched-term-eating-and-drinking-establishment",
       "severity": "warning",

@@ -722,19 +722,6 @@
   "structured_data": {
     "terms": [
       {
-        "term_id": "zone-m-1-term-term-uses_permitted_in_the_muc_zone_subject_to_the_regulations_for_permitted_uses_for_the_muc_zone_and_excluding_residential_uses_and_institutional_uses_permitted_in_the_muc_zone",
-        "term_raw": "Uses permitted in the MUC Zone, subject to the Regulations for Permitted Uses for the MUC Zone, and excluding residential uses and institutional uses permitted in the MUC Zone",
-        "term_normalized": "uses_permitted_in_the_muc_zone_subject_to_the_regulations_for_permitted_uses_for_the_muc_zone_and_excluding_residential_uses_and_institutional_uses_permitted_in_the_muc_zone",
-        "term_category": "unknown",
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-m-1-clause-38-1-1"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
         "term_id": "zone-m-1-term-term-animal_shelter",
         "term_raw": "Animal Shelter",
         "term_normalized": "animal_shelter",
@@ -1021,17 +1008,22 @@
           }
         ],
         "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-1-term-reference-zone-m-1-clause-38-1-1",
+        "term_raw": "Uses permitted in the MUC Zone, subject to the Regulations for Permitted Uses for the MUC Zone, and excluding residential uses and institutional uses permitted in the MUC Zone",
+        "term_normalized": "zone_reference_muc",
+        "term_category": "document_reference",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-1-clause-38-1-1"
+          }
+        ],
+        "confidence": "high"
       }
     ],
     "uses": [
-      {
-        "use_id": "zone-m-1-use-uses-permitted-in-the-muc-zone-subject-to-the-regulations-for-permitted-uses-for-the-muc-zone-and-excluding-residential-uses-and-institutional-uses-permitted-in-the-muc-zone-1",
-        "use_name_raw": "Uses permitted in the MUC Zone, subject to the Regulations for Permitted Uses for the MUC Zone, and excluding residential uses and institutional uses permitted in the MUC Zone",
-        "use_term_id": "zone-m-1-term-term-uses_permitted_in_the_muc_zone_subject_to_the_regulations_for_permitted_uses_for_the_muc_zone_and_excluding_residential_uses_and_institutional_uses_permitted_in_the_muc_zone",
-        "use_status": "permitted",
-        "source_clause_ref": "zone-m-1-clause-38-1-1",
-        "confidence": "needs_review"
-      },
       {
         "use_id": "zone-m-1-use-animal-shelter-2",
         "use_name_raw": "Animal Shelter",
@@ -1830,7 +1822,6 @@
         "group_label_raw": "38",
         "group_title_raw": "LIGHT INDUSTRIAL ZONE (M-1)",
         "regulated_use_terms": [
-          "zone-m-1-term-term-uses_permitted_in_the_muc_zone_subject_to_the_regulations_for_permitted_uses_for_the_muc_zone_and_excluding_residential_uses_and_institutional_uses_permitted_in_the_muc_zone",
           "zone-m-1-term-term-animal_shelter",
           "zone-m-1-term-term-automobile_body_shop",
           "zone-m-1-term-term-club",
@@ -1880,7 +1871,40 @@
       }
     ],
     "conditional_rule_groups": [],
-    "zone_relationships": [],
+    "zone_relationships": [
+      {
+        "relationship_id": "zone-m-1-relationship-inherits_uses-muc-zone-m-1-clause-38-1-1",
+        "relationship_type": "inherits_uses",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "M-1"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "MUC"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-m-1-clause-38-1-1",
+        "join_behavior": "include_target_values",
+        "confidence": "high"
+      },
+      {
+        "relationship_id": "zone-m-1-relationship-inherits_regulations-muc-zone-m-1-clause-38-1-1",
+        "relationship_type": "inherits_regulations",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "M-1"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "MUC"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-m-1-clause-38-1-1",
+        "join_behavior": "include_target_values",
+        "confidence": "high"
+      }
+    ],
     "map_layer_references": [
       {
         "map_reference_id": "zone-m-1-map-zoning-map",
@@ -1901,22 +1925,26 @@
       }
     ],
     "other_requirements": [],
-    "cross_references": []
+    "cross_references": [
+      {
+        "relationship_id": "zone-m-1-cross-reference-references-zone-muc-zone-m-1-clause-38-1-1",
+        "relationship_type": "references_zone",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "M-1"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "MUC"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-m-1-clause-38-1-1",
+        "join_behavior": "reference_only",
+        "confidence": "high"
+      }
+    ]
   },
   "review_flags": [
-    {
-      "review_flag_id": "zone-m-1-flag-unmatched-term-uses-permitted-in-the-muc-zone-subject-to-the-regulations-for-permitted-uses-for-the-muc-zone-and-excluding-residential-uses-and-institutional-uses-permitted-in-the-muc-zone",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Uses permitted in the MUC Zone, subject to the Regulations for Permitted Uses for the MUC Zone, and excluding residential uses and institutional uses permitted in the MUC Zone",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-m-1-clause-38-1-1"
-        }
-      ]
-    },
     {
       "review_flag_id": "zone-m-1-flag-unmatched-term-animal-shelter",
       "severity": "warning",

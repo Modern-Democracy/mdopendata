@@ -957,6 +957,249 @@ def confidence_from_entry(entry: dict[str, Any] | None) -> str:
     return "needs_review" if entry.get("status") == "review" else "high"
 
 
+KNOWN_ZONE_CODES = [
+    "ER-MUVC",
+    "DMUN",
+    "R-4A",
+    "R-4B",
+    "R-3T",
+    "R-1S",
+    "R-1L",
+    "R-1N",
+    "MUC",
+    "CDA",
+    "DMS",
+    "DMU",
+    "DN",
+    "DC",
+    "WF",
+    "WLC",
+    "PZ",
+    "PC",
+    "MH",
+    "MHR",
+    "M-1",
+    "M-2",
+    "M-3",
+    "R-2S",
+    "R-2",
+    "R-3",
+    "R-4",
+    "C-1",
+    "C-2",
+    "C-3",
+    "FD",
+    "OS",
+    "P",
+    "I",
+    "A",
+]
+
+ZONE_NAME_CODES = {
+    "airport": "A",
+    "business park industrial": "M-3",
+    "downtown mixed use neighbourhood": "DMUN",
+    "downtown neighbourhood": "DN",
+    "downtown core": "DC",
+    "downtown mixed use": "DMU",
+    "er-mixed use village centre": "ER-MUVC",
+    "institutional": "I",
+    "park/cultural": "PC",
+    "parks/cultural": "PC",
+    "port": "PZ",
+    "waterfront": "WF",
+}
+
+
+def referenced_zone_codes(text: str) -> list[str]:
+    found: list[str] = []
+    normalized = clean_text(text)
+    for code in KNOWN_ZONE_CODES:
+        code_pattern = re.escape(code).replace("\\-", r"[- ]?")
+        if re.search(rf"\b{code_pattern}\b(?:\s+Zone)?", normalized, flags=re.IGNORECASE) and code not in found:
+            found.append(code)
+    lowered = normalized.lower()
+    for name, code in ZONE_NAME_CODES.items():
+        if f"{name} zone" in lowered and code not in found:
+            found.append(code)
+    return found
+
+
+def zone_reference_relationship_types(text: str) -> list[str]:
+    lowered = text.lower()
+    types = []
+    if "uses permitted in" in lowered or "uses as permitted in" in lowered or "uses permitted" in lowered:
+        types.append("inherits_uses")
+    if "regulations" in lowered or "subject to" in lowered:
+        types.append("inherits_regulations")
+    return types or ["references_zone"]
+
+
+def is_zone_reference_clause(text: str) -> bool:
+    lowered = text.lower()
+    return bool(referenced_zone_codes(text)) and (
+        "uses permitted" in lowered
+        or "uses as permitted" in lowered
+        or "subject to the regulations" in lowered
+        or "subject to regulations" in lowered
+        or "regulations for permitted uses" in lowered
+    )
+
+
+def raw_clause_lookup(raw_sections: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    clauses = {}
+    for section in raw_sections:
+        for clause in section.get("clauses_raw") or []:
+            clauses[clause["clause_id"]] = clause
+    return clauses
+
+
+def build_zone_reference_structures(
+    data: dict[str, Any],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], set[str]]:
+    metadata = data.get("document_metadata") or {}
+    prefix = ((data.get("raw_data") or {}).get("source_units") or [{}])[0].get("source_unit_id") or f"zone-{slugify(metadata.get('zone_code'))}"
+    source_zone_code = metadata.get("zone_code") or prefix.replace("zone-", "").upper()
+    clauses = raw_clause_lookup((data.get("raw_data") or {}).get("sections_raw") or [])
+    terms = []
+    relationships = []
+    reference_clause_ids: set[str] = set()
+    relationship_keys: set[tuple[str, str, str]] = set()
+    for clause_id, clause in clauses.items():
+        raw_text = strip_list_punctuation(clause.get("clause_text_raw") or "")
+        target_zone_codes = referenced_zone_codes(raw_text)
+        if not is_zone_reference_clause(raw_text) or not target_zone_codes:
+            continue
+        reference_clause_ids.add(clause_id)
+        normalized_targets = "_".join(code_key(code) for code in target_zone_codes)
+        terms.append(
+            {
+                "term_id": f"{prefix}-term-reference-{slugify(clause_id)}",
+                "term_raw": raw_text,
+                "term_normalized": f"zone_reference_{normalized_targets}",
+                "term_category": "document_reference",
+                "source_refs": [source_ref("clause", clause_id)],
+                "confidence": "high",
+            }
+        )
+        for target_zone_code in target_zone_codes:
+            for relationship_type in zone_reference_relationship_types(raw_text):
+                key = (relationship_type, clause_id, target_zone_code)
+                if key in relationship_keys:
+                    continue
+                relationship_keys.add(key)
+                relationships.append(
+                    {
+                        "relationship_id": f"{prefix}-relationship-{relationship_type}-{slugify(target_zone_code)}-{slugify(clause_id)}",
+                        "relationship_type": relationship_type,
+                        "source_ref": source_ref("zone", source_zone_code),
+                        "target_ref": source_ref("zone", target_zone_code),
+                        "scope": "zone_reference_clause",
+                        "source_clause_ref": clause_id,
+                        "join_behavior": "include_target_values" if relationship_type.startswith("inherits_") else "reference_only",
+                        "confidence": "high",
+                    }
+                )
+    return terms, relationships, reference_clause_ids
+
+
+def apply_zone_reference_model(data: dict[str, Any]) -> dict[str, Any]:
+    if (data.get("document_metadata") or {}).get("document_type") != "zone":
+        structured = data.get("structured_data") or {}
+        structured["zone_relationships"] = [
+            relationship
+            for relationship in structured.get("zone_relationships") or []
+            if relationship.get("scope") != "zone_reference_clause"
+        ]
+        structured["cross_references"] = [
+            relationship
+            for relationship in structured.get("cross_references") or []
+            if relationship.get("scope") != "zone_reference_clause"
+        ]
+        return data
+    structured = data.setdefault("structured_data", base_structured_data())
+    reference_terms, relationships, reference_clause_ids = build_zone_reference_structures(data)
+    if not reference_clause_ids:
+        return data
+    reference_clause_term_ids = {term["term_id"] for term in reference_terms}
+    removed_use_term_ids = {
+        use.get("use_term_id")
+        for use in structured.get("uses") or []
+        if use.get("source_clause_ref") in reference_clause_ids
+    }
+    structured["uses"] = [
+        use for use in structured.get("uses") or [] if use.get("source_clause_ref") not in reference_clause_ids
+    ]
+    filtered_terms = []
+    for term in structured.get("terms") or []:
+        source_clause_ids = {
+            ref.get("source_ref_id")
+            for ref in term.get("source_refs") or []
+            if ref.get("source_ref_type") == "clause"
+        }
+        if term.get("term_id") in removed_use_term_ids or source_clause_ids <= reference_clause_ids and source_clause_ids:
+            continue
+        filtered_terms.append(term)
+    existing_term_ids = {term["term_id"] for term in filtered_terms}
+    for term in reference_terms:
+        if term["term_id"] not in existing_term_ids:
+            filtered_terms.append(term)
+            existing_term_ids.add(term["term_id"])
+    structured["terms"] = filtered_terms
+    structured["zone_relationships"] = [
+        relationship
+        for relationship in structured.get("zone_relationships") or []
+        if relationship.get("source_clause_ref") not in reference_clause_ids
+    ]
+    structured["cross_references"] = [
+        relationship
+        for relationship in structured.get("cross_references") or []
+        if relationship.get("source_clause_ref") not in reference_clause_ids
+    ]
+    existing_relationship_ids = {
+        relationship.get("relationship_id")
+        for relationship in (structured.get("zone_relationships") or []) + (structured.get("cross_references") or [])
+    }
+    for relationship in relationships:
+        if relationship["relationship_id"] not in existing_relationship_ids:
+            structured["zone_relationships"].append(relationship)
+            existing_relationship_ids.add(relationship["relationship_id"])
+    cross_reference_keys: set[tuple[str, str]] = set()
+    for relationship in relationships:
+        key = (relationship["source_clause_ref"], relationship["target_ref"]["source_ref_id"])
+        if key in cross_reference_keys:
+            continue
+        cross_reference_keys.add(key)
+        cross_reference = {
+            **relationship,
+            "relationship_id": f"{relationship['source_ref']['source_ref_id'].lower().replace('-', '_')}-cross-reference",
+            "relationship_type": "references_zone",
+            "join_behavior": "reference_only",
+        }
+        cross_reference["relationship_id"] = (
+            f"{((data.get('raw_data') or {}).get('source_units') or [{}])[0].get('source_unit_id')}"
+            f"-cross-reference-references-zone-{slugify(relationship['target_ref']['source_ref_id'])}-{slugify(relationship['source_clause_ref'])}"
+        )
+        if cross_reference["relationship_id"] not in existing_relationship_ids:
+            structured["cross_references"].append(cross_reference)
+            existing_relationship_ids.add(cross_reference["relationship_id"])
+    for group in structured.get("regulation_groups") or []:
+        group["regulated_use_terms"] = [
+            term_id
+            for term_id in group.get("regulated_use_terms") or []
+            if term_id not in removed_use_term_ids and term_id not in reference_clause_term_ids
+        ]
+    data["review_flags"] = [
+        flag
+        for flag in data.get("review_flags") or []
+        if not any(
+            ref.get("source_ref_type") == "clause" and ref.get("source_ref_id") in reference_clause_ids
+            for ref in flag.get("source_refs") or []
+        )
+    ]
+    return data
+
+
 def build_terms_and_uses(
     normalizer: Normalizer,
     legacy_uses: list[dict[str, Any]],
@@ -978,6 +1221,8 @@ def build_terms_and_uses(
         path = tuple(str(part) for part in (item.get("clause_path") or []))
         src_clause = clause_lookup.get(path)
         refs = [source_ref("clause", src_clause)] if src_clause else []
+        if src_clause and is_zone_reference_clause(raw_name):
+            continue
         if term_key not in terms_by_key:
             term = {
                 "term_id": term_id,
@@ -1119,6 +1364,10 @@ def transform_zone(normalizer: Normalizer, legacy: dict[str, Any]) -> dict[str, 
             "other_requirements": other_requirements,
         }
     )
+    data_for_references = {"document_metadata": {**metadata, "document_type": "zone"}, "raw_data": {"source_units": [{"source_unit_id": prefix}], "sections_raw": raw_sections}, "structured_data": structured, "review_flags": review_flags}
+    apply_zone_reference_model(data_for_references)
+    structured = data_for_references["structured_data"]
+    review_flags = data_for_references["review_flags"]
     for issue_index, issue in enumerate(legacy.get("open_issues") or [], start=1):
         review_flags.append(
             make_review_flag(
@@ -1502,7 +1751,7 @@ def main() -> None:
             rebuild_schema_tables_from_pdf(pdf_doc, data)
             reset_review_flags(data)
             refresh_schema_numeric_values(data)
-            write_json(path, refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data)))
+            write_json(path, apply_zone_reference_model(refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data))))
             continue
         transformed = transform_zone(normalizer, data)
         rebuild_schema_tables_from_pdf(pdf_doc, transformed)
@@ -1518,7 +1767,7 @@ def main() -> None:
             rebuild_schema_tables_from_pdf(pdf_doc, data)
             reset_review_flags(data)
             refresh_schema_numeric_values(data)
-            write_json(path, refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data)))
+            write_json(path, apply_zone_reference_model(refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data))))
             continue
         document_type = item.get("document_type") or (data.get("document_metadata") or {}).get("document_type")
         if document_type == "definitions":
@@ -1536,7 +1785,7 @@ def main() -> None:
             rebuild_schema_tables_from_pdf(pdf_doc, data)
             reset_review_flags(data)
             refresh_schema_numeric_values(data)
-            write_json(path, refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data)))
+            write_json(path, apply_zone_reference_model(refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data))))
             continue
         write_json(path, transform_appendix(normalizer, data, item["file"]))
 

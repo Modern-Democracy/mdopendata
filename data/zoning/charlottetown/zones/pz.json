@@ -437,6 +437,19 @@
           }
         ],
         "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-pz-term-reference-zone-pz-clause-37-3-1",
+        "term_raw": "Any new Building or Development proposed in the Port Zone (PZ) is subject to the Regulations for Permitted Uses for the Waterfront (WF) Zone",
+        "term_normalized": "zone_reference_wf_pz",
+        "term_category": "document_reference",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pz-clause-37-3-1"
+          }
+        ],
+        "confidence": "high"
       }
     ],
     "uses": [
@@ -581,7 +594,40 @@
       }
     ],
     "conditional_rule_groups": [],
-    "zone_relationships": [],
+    "zone_relationships": [
+      {
+        "relationship_id": "zone-pz-relationship-inherits_regulations-wf-zone-pz-clause-37-3-1",
+        "relationship_type": "inherits_regulations",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "PZ"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "WF"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-pz-clause-37-3-1",
+        "join_behavior": "include_target_values",
+        "confidence": "high"
+      },
+      {
+        "relationship_id": "zone-pz-relationship-inherits_regulations-pz-zone-pz-clause-37-3-1",
+        "relationship_type": "inherits_regulations",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "PZ"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "PZ"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-pz-clause-37-3-1",
+        "join_behavior": "include_target_values",
+        "confidence": "high"
+      }
+    ],
     "map_layer_references": [
       {
         "map_reference_id": "zone-pz-map-zoning-map",
@@ -645,7 +691,40 @@
         "confidence": "needs_review"
       }
     ],
-    "cross_references": []
+    "cross_references": [
+      {
+        "relationship_id": "zone-pz-cross-reference-references-zone-wf-zone-pz-clause-37-3-1",
+        "relationship_type": "references_zone",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "PZ"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "WF"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-pz-clause-37-3-1",
+        "join_behavior": "reference_only",
+        "confidence": "high"
+      },
+      {
+        "relationship_id": "zone-pz-cross-reference-references-zone-pz-zone-pz-clause-37-3-1",
+        "relationship_type": "references_zone",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "PZ"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "PZ"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-pz-clause-37-3-1",
+        "join_behavior": "reference_only",
+        "confidence": "high"
+      }
+    ]
   },
   "review_flags": [
     {

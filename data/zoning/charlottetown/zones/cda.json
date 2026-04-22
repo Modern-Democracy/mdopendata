@@ -476,19 +476,6 @@
   "structured_data": {
     "terms": [
       {
-        "term_id": "zone-cda-term-term-uses_permitted_in_a_cda_zone_shall_be_those_approved_by_council_and_may_include_any_uses_or_mix_of_uses_permitted_in_any_zone_of_this_by_law_and_innovative_mixed_use_developments",
-        "term_raw": "Uses permitted in a CDA Zone shall be those approved by Council and may include any uses or mix of uses permitted in any Zone of this by-law and innovative mixed-use Developments",
-        "term_normalized": "uses_permitted_in_a_cda_zone_shall_be_those_approved_by_council_and_may_include_any_uses_or_mix_of_uses_permitted_in_any_zone_of_this_by_law_and_innovative_mixed_use_developments",
-        "term_category": "unknown",
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-cda-clause-44-1-1"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
         "term_id": "zone-cda-term-term-council_shall_give_due_consideration_to_other_sections_of_this_by_law_but_council_may_approve_any_use_or_development_in_a_cda_zone_which_it_deems_to_be_in_the_public_interest_notwithstanding_all_other_sections_of_this_by_law_but_only_after_following_the_procedures_set_out_in_this_section",
         "term_raw": "Council shall give due consideration to other sections of this by-law, but Council may approve any use or Development in a CDA Zone which it deems to be in the public interest notwithstanding all other sections of this by-law but only after following the procedures set out in this section",
         "term_normalized": "council_shall_give_due_consideration_to_other_sections_of_this_by_law_but_council_may_approve_any_use_or_development_in_a_cda_zone_which_it_deems_to_be_in_the_public_interest_notwithstanding_all_other_sections_of_this_by_law_but_only_after_following_the_procedures_set_out_in_this_section",
@@ -500,17 +487,22 @@
           }
         ],
         "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-cda-term-reference-zone-cda-clause-44-1-1",
+        "term_raw": "Uses permitted in a CDA Zone shall be those approved by Council and may include any uses or mix of uses permitted in any Zone of this by-law and innovative mixed-use Developments",
+        "term_normalized": "zone_reference_cda_a",
+        "term_category": "document_reference",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-cda-clause-44-1-1"
+          }
+        ],
+        "confidence": "high"
       }
     ],
     "uses": [
-      {
-        "use_id": "zone-cda-use-uses-permitted-in-a-cda-zone-shall-be-those-approved-by-council-and-may-include-any-uses-or-mix-of-uses-permitted-in-any-zone-of-this-by-law-and-innovative-mixed-use-developments-1",
-        "use_name_raw": "Uses permitted in a CDA Zone shall be those approved by Council and may include any uses or mix of uses permitted in any Zone of this by-law and innovative mixed-use Developments",
-        "use_term_id": "zone-cda-term-term-uses_permitted_in_a_cda_zone_shall_be_those_approved_by_council_and_may_include_any_uses_or_mix_of_uses_permitted_in_any_zone_of_this_by_law_and_innovative_mixed_use_developments",
-        "use_status": "permitted",
-        "source_clause_ref": "zone-cda-clause-44-1-1",
-        "confidence": "needs_review"
-      },
       {
         "use_id": "zone-cda-use-council-shall-give-due-consideration-to-other-sections-of-this-by-law-but-council-may-approve-any-use-or-development-in-a-cda-zone-which-it-deems-to-be-in-the-public-interest-notwithstanding-all-other-sections-of-this-by-law-but-only-after-following-the-procedures-set-out-in-this-section-2",
         "use_name_raw": "Council shall give due consideration to other sections of this by-law, but Council may approve any use or Development in a CDA Zone which it deems to be in the public interest notwithstanding all other sections of this by-law but only after following the procedures set out in this section",
@@ -583,7 +575,6 @@
         "group_label_raw": "44",
         "group_title_raw": "COMPREHENSIVE DEVELOPMENT AREA (CDA)",
         "regulated_use_terms": [
-          "zone-cda-term-term-uses_permitted_in_a_cda_zone_shall_be_those_approved_by_council_and_may_include_any_uses_or_mix_of_uses_permitted_in_any_zone_of_this_by_law_and_innovative_mixed_use_developments",
           "zone-cda-term-term-council_shall_give_due_consideration_to_other_sections_of_this_by_law_but_council_may_approve_any_use_or_development_in_a_cda_zone_which_it_deems_to_be_in_the_public_interest_notwithstanding_all_other_sections_of_this_by_law_but_only_after_following_the_procedures_set_out_in_this_section"
         ],
         "applicability": {
@@ -600,7 +591,40 @@
       }
     ],
     "conditional_rule_groups": [],
-    "zone_relationships": [],
+    "zone_relationships": [
+      {
+        "relationship_id": "zone-cda-relationship-inherits_uses-cda-zone-cda-clause-44-1-1",
+        "relationship_type": "inherits_uses",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "CDA"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "CDA"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-cda-clause-44-1-1",
+        "join_behavior": "include_target_values",
+        "confidence": "high"
+      },
+      {
+        "relationship_id": "zone-cda-relationship-inherits_uses-a-zone-cda-clause-44-1-1",
+        "relationship_type": "inherits_uses",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "CDA"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "A"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-cda-clause-44-1-1",
+        "join_behavior": "include_target_values",
+        "confidence": "high"
+      }
+    ],
     "map_layer_references": [
       {
         "map_reference_id": "zone-cda-map-zoning-map",
@@ -643,22 +667,42 @@
         "confidence": "needs_review"
       }
     ],
-    "cross_references": []
+    "cross_references": [
+      {
+        "relationship_id": "zone-cda-cross-reference-references-zone-cda-zone-cda-clause-44-1-1",
+        "relationship_type": "references_zone",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "CDA"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "CDA"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-cda-clause-44-1-1",
+        "join_behavior": "reference_only",
+        "confidence": "high"
+      },
+      {
+        "relationship_id": "zone-cda-cross-reference-references-zone-a-zone-cda-clause-44-1-1",
+        "relationship_type": "references_zone",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "CDA"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "A"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-cda-clause-44-1-1",
+        "join_behavior": "reference_only",
+        "confidence": "high"
+      }
+    ]
   },
   "review_flags": [
-    {
-      "review_flag_id": "zone-cda-flag-unmatched-term-uses-permitted-in-a-cda-zone-shall-be-those-approved-by-council-and-may-include-any-uses-or-mix-of-uses-permitted-in-any-zone-of-this-by-law-and-innovative-mixed-use-developments",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Uses permitted in a CDA Zone shall be those approved by Council and may include any uses or mix of uses permitted in any Zone of this by-law and innovative mixed-use Developments",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-cda-clause-44-1-1"
-        }
-      ]
-    },
     {
       "review_flag_id": "zone-cda-flag-unmatched-term-council-shall-give-due-consideration-to-other-sections-of-this-by-law-but-council-may-approve-any-use-or-development-in-a-cda-zone-which-it-deems-to-be-in-the-public-interest-notwithstanding-all-other-sections-of-this-by-law-but-only-after-following-the-procedures-set-out-in-this-section",
       "severity": "warning",

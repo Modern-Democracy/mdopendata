@@ -578,45 +578,6 @@
   "structured_data": {
     "terms": [
       {
-        "term_id": "zone-muc-term-term-uses_permitted_in_the_r_4_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_4_zone",
-        "term_raw": "Uses permitted in the R-4 Zone, subject to the Regulations for Permitted Uses for the R-4 Zone",
-        "term_normalized": "uses_permitted_in_the_r_4_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_4_zone",
-        "term_category": "unknown",
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-muc-clause-24-1-1"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
-        "term_id": "zone-muc-term-term-uses_permitted_in_the_institutional_i_zone_subject_to_the_regulations_for_permitted_uses_for_the_i_zone",
-        "term_raw": "Uses permitted in the Institutional (I) Zone, subject to the Regulations for permitted uses for the I Zone",
-        "term_normalized": "uses_permitted_in_the_institutional_i_zone_subject_to_the_regulations_for_permitted_uses_for_the_i_zone",
-        "term_category": "unknown",
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-muc-clause-24-1-2"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
-        "term_id": "zone-muc-term-term-commercial_uses_permitted_in_the_er_mixed_use_village_centre_zone_er_muvc",
-        "term_raw": "Commercial Uses permitted in the ER-Mixed Use Village Centre Zone (ER-MUVC)",
-        "term_normalized": "commercial_uses_permitted_in_the_er_mixed_use_village_centre_zone_er_muvc",
-        "term_category": "unknown",
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-muc-clause-24-1-3"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
         "term_id": "zone-muc-term-term-automobile_sales_and_services",
         "term_raw": "Automobile Sales and Services",
         "term_normalized": "automobile_sales_and_services",
@@ -771,33 +732,48 @@
           }
         ],
         "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-muc-term-reference-zone-muc-clause-24-1-1",
+        "term_raw": "Uses permitted in the R-4 Zone, subject to the Regulations for Permitted Uses for the R-4 Zone",
+        "term_normalized": "zone_reference_r_4",
+        "term_category": "document_reference",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-1"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "term_id": "zone-muc-term-reference-zone-muc-clause-24-1-2",
+        "term_raw": "Uses permitted in the Institutional (I) Zone, subject to the Regulations for permitted uses for the I Zone",
+        "term_normalized": "zone_reference_i",
+        "term_category": "document_reference",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-2"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "term_id": "zone-muc-term-reference-zone-muc-clause-24-1-3",
+        "term_raw": "Commercial Uses permitted in the ER-Mixed Use Village Centre Zone (ER-MUVC)",
+        "term_normalized": "zone_reference_er_muvc",
+        "term_category": "document_reference",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-3"
+          }
+        ],
+        "confidence": "high"
       }
     ],
     "uses": [
-      {
-        "use_id": "zone-muc-use-uses-permitted-in-the-r-4-zone-subject-to-the-regulations-for-permitted-uses-for-the-r-4-zone-1",
-        "use_name_raw": "Uses permitted in the R-4 Zone, subject to the Regulations for Permitted Uses for the R-4 Zone",
-        "use_term_id": "zone-muc-term-term-uses_permitted_in_the_r_4_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_4_zone",
-        "use_status": "permitted",
-        "source_clause_ref": "zone-muc-clause-24-1-1",
-        "confidence": "needs_review"
-      },
-      {
-        "use_id": "zone-muc-use-uses-permitted-in-the-institutional-i-zone-subject-to-the-regulations-for-permitted-uses-for-the-i-zone-2",
-        "use_name_raw": "Uses permitted in the Institutional (I) Zone, subject to the Regulations for permitted uses for the I Zone",
-        "use_term_id": "zone-muc-term-term-uses_permitted_in_the_institutional_i_zone_subject_to_the_regulations_for_permitted_uses_for_the_i_zone",
-        "use_status": "permitted",
-        "source_clause_ref": "zone-muc-clause-24-1-2",
-        "confidence": "needs_review"
-      },
-      {
-        "use_id": "zone-muc-use-commercial-uses-permitted-in-the-er-mixed-use-village-centre-zone-er-muvc-3",
-        "use_name_raw": "Commercial Uses permitted in the ER-Mixed Use Village Centre Zone (ER-MUVC)",
-        "use_term_id": "zone-muc-term-term-commercial_uses_permitted_in_the_er_mixed_use_village_centre_zone_er_muvc",
-        "use_status": "permitted",
-        "source_clause_ref": "zone-muc-clause-24-1-3",
-        "confidence": "needs_review"
-      },
       {
         "use_id": "zone-muc-use-automobile-sales-and-services-4",
         "use_name_raw": "Automobile Sales and Services",
@@ -1516,9 +1492,6 @@
         "group_label_raw": "24",
         "group_title_raw": "MIXED-USE CORRIDOR ZONE (MUC)",
         "regulated_use_terms": [
-          "zone-muc-term-term-uses_permitted_in_the_r_4_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_4_zone",
-          "zone-muc-term-term-uses_permitted_in_the_institutional_i_zone_subject_to_the_regulations_for_permitted_uses_for_the_i_zone",
-          "zone-muc-term-term-commercial_uses_permitted_in_the_er_mixed_use_village_centre_zone_er_muvc",
           "zone-muc-term-term-automobile_sales_and_services",
           "zone-muc-term-term-cannabis_retail_store",
           "zone-muc-term-term-equipment_sales_rental_service",
@@ -1558,7 +1531,88 @@
       }
     ],
     "conditional_rule_groups": [],
-    "zone_relationships": [],
+    "zone_relationships": [
+      {
+        "relationship_id": "zone-muc-relationship-inherits_uses-r-4-zone-muc-clause-24-1-1",
+        "relationship_type": "inherits_uses",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "MUC"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "R-4"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-muc-clause-24-1-1",
+        "join_behavior": "include_target_values",
+        "confidence": "high"
+      },
+      {
+        "relationship_id": "zone-muc-relationship-inherits_regulations-r-4-zone-muc-clause-24-1-1",
+        "relationship_type": "inherits_regulations",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "MUC"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "R-4"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-muc-clause-24-1-1",
+        "join_behavior": "include_target_values",
+        "confidence": "high"
+      },
+      {
+        "relationship_id": "zone-muc-relationship-inherits_uses-i-zone-muc-clause-24-1-2",
+        "relationship_type": "inherits_uses",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "MUC"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "I"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-muc-clause-24-1-2",
+        "join_behavior": "include_target_values",
+        "confidence": "high"
+      },
+      {
+        "relationship_id": "zone-muc-relationship-inherits_regulations-i-zone-muc-clause-24-1-2",
+        "relationship_type": "inherits_regulations",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "MUC"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "I"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-muc-clause-24-1-2",
+        "join_behavior": "include_target_values",
+        "confidence": "high"
+      },
+      {
+        "relationship_id": "zone-muc-relationship-inherits_uses-er-muvc-zone-muc-clause-24-1-3",
+        "relationship_type": "inherits_uses",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "MUC"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "ER-MUVC"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-muc-clause-24-1-3",
+        "join_behavior": "include_target_values",
+        "confidence": "high"
+      }
+    ],
     "map_layer_references": [
       {
         "map_reference_id": "zone-muc-map-zoning-map",
@@ -1579,48 +1633,58 @@
       }
     ],
     "other_requirements": [],
-    "cross_references": []
+    "cross_references": [
+      {
+        "relationship_id": "zone-muc-cross-reference-references-zone-r-4-zone-muc-clause-24-1-1",
+        "relationship_type": "references_zone",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "MUC"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "R-4"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-muc-clause-24-1-1",
+        "join_behavior": "reference_only",
+        "confidence": "high"
+      },
+      {
+        "relationship_id": "zone-muc-cross-reference-references-zone-i-zone-muc-clause-24-1-2",
+        "relationship_type": "references_zone",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "MUC"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "I"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-muc-clause-24-1-2",
+        "join_behavior": "reference_only",
+        "confidence": "high"
+      },
+      {
+        "relationship_id": "zone-muc-cross-reference-references-zone-er-muvc-zone-muc-clause-24-1-3",
+        "relationship_type": "references_zone",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "MUC"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "ER-MUVC"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-muc-clause-24-1-3",
+        "join_behavior": "reference_only",
+        "confidence": "high"
+      }
+    ]
   },
   "review_flags": [
-    {
-      "review_flag_id": "zone-muc-flag-unmatched-term-uses-permitted-in-the-r-4-zone-subject-to-the-regulations-for-permitted-uses-for-the-r-4-zone",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Uses permitted in the R-4 Zone, subject to the Regulations for Permitted Uses for the R-4 Zone",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-muc-clause-24-1-1"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-muc-flag-unmatched-term-uses-permitted-in-the-institutional-i-zone-subject-to-the-regulations-for-permitted-uses-for-the-i-zone",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Uses permitted in the Institutional (I) Zone, subject to the Regulations for permitted uses for the I Zone",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-muc-clause-24-1-2"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-muc-flag-unmatched-term-commercial-uses-permitted-in-the-er-mixed-use-village-centre-zone-er-muvc",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Commercial Uses permitted in the ER-Mixed Use Village Centre Zone (ER-MUVC)",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-muc-clause-24-1-3"
-        }
-      ]
-    },
     {
       "review_flag_id": "zone-muc-flag-unmatched-term-automobile-sales-and-services",
       "severity": "warning",

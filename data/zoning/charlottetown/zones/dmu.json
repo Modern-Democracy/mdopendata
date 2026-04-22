@@ -496,32 +496,6 @@
   "structured_data": {
     "terms": [
       {
-        "term_id": "zone-dmu-term-term-uses_permitted_in_the_r_4_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_4_zone",
-        "term_raw": "Uses permitted in the R-4 Zone, subject to the Regulations for Permitted Uses for the R-4 Zone",
-        "term_normalized": "uses_permitted_in_the_r_4_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_4_zone",
-        "term_category": "unknown",
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dmu-clause-28-1-1"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
-        "term_id": "zone-dmu-term-term-commercial_and_institutional_uses_permitted_in_the_dmun_zone",
-        "term_raw": "Commercial and Institutional Uses permitted in the DMUN Zone",
-        "term_normalized": "commercial_and_institutional_uses_permitted_in_the_dmun_zone",
-        "term_category": "unknown",
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dmu-clause-28-1-2"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
         "term_id": "zone-dmu-term-term-club",
         "term_raw": "Club",
         "term_normalized": "club",
@@ -689,25 +663,35 @@
           }
         ],
         "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-dmu-term-reference-zone-dmu-clause-28-1-1",
+        "term_raw": "Uses permitted in the R-4 Zone, subject to the Regulations for Permitted Uses for the R-4 Zone",
+        "term_normalized": "zone_reference_r_4",
+        "term_category": "document_reference",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmu-clause-28-1-1"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "term_id": "zone-dmu-term-reference-zone-dmu-clause-28-1-2",
+        "term_raw": "Commercial and Institutional Uses permitted in the DMUN Zone",
+        "term_normalized": "zone_reference_dmun",
+        "term_category": "document_reference",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmu-clause-28-1-2"
+          }
+        ],
+        "confidence": "high"
       }
     ],
     "uses": [
-      {
-        "use_id": "zone-dmu-use-uses-permitted-in-the-r-4-zone-subject-to-the-regulations-for-permitted-uses-for-the-r-4-zone-1",
-        "use_name_raw": "Uses permitted in the R-4 Zone, subject to the Regulations for Permitted Uses for the R-4 Zone",
-        "use_term_id": "zone-dmu-term-term-uses_permitted_in_the_r_4_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_4_zone",
-        "use_status": "permitted",
-        "source_clause_ref": "zone-dmu-clause-28-1-1",
-        "confidence": "needs_review"
-      },
-      {
-        "use_id": "zone-dmu-use-commercial-and-institutional-uses-permitted-in-the-dmun-zone-2",
-        "use_name_raw": "Commercial and Institutional Uses permitted in the DMUN Zone",
-        "use_term_id": "zone-dmu-term-term-commercial_and_institutional_uses_permitted_in_the_dmun_zone",
-        "use_status": "permitted",
-        "source_clause_ref": "zone-dmu-clause-28-1-2",
-        "confidence": "needs_review"
-      },
       {
         "use_id": "zone-dmu-use-club-3",
         "use_name_raw": "Club",
@@ -1058,8 +1042,6 @@
         "group_label_raw": "28",
         "group_title_raw": "DOWNTOWN MIXED-USE ZONE (DMU)",
         "regulated_use_terms": [
-          "zone-dmu-term-term-uses_permitted_in_the_r_4_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_4_zone",
-          "zone-dmu-term-term-commercial_and_institutional_uses_permitted_in_the_dmun_zone",
           "zone-dmu-term-term-club",
           "zone-dmu-term-term-educational_institution",
           "zone-dmu-term-term-entertainment_establishment",
@@ -1092,7 +1074,56 @@
       }
     ],
     "conditional_rule_groups": [],
-    "zone_relationships": [],
+    "zone_relationships": [
+      {
+        "relationship_id": "zone-dmu-relationship-inherits_uses-r-4-zone-dmu-clause-28-1-1",
+        "relationship_type": "inherits_uses",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "DMU"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "R-4"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-dmu-clause-28-1-1",
+        "join_behavior": "include_target_values",
+        "confidence": "high"
+      },
+      {
+        "relationship_id": "zone-dmu-relationship-inherits_regulations-r-4-zone-dmu-clause-28-1-1",
+        "relationship_type": "inherits_regulations",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "DMU"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "R-4"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-dmu-clause-28-1-1",
+        "join_behavior": "include_target_values",
+        "confidence": "high"
+      },
+      {
+        "relationship_id": "zone-dmu-relationship-inherits_uses-dmun-zone-dmu-clause-28-1-2",
+        "relationship_type": "inherits_uses",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "DMU"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "DMUN"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-dmu-clause-28-1-2",
+        "join_behavior": "include_target_values",
+        "confidence": "high"
+      }
+    ],
     "map_layer_references": [
       {
         "map_reference_id": "zone-dmu-map-zoning-map",
@@ -1113,35 +1144,42 @@
       }
     ],
     "other_requirements": [],
-    "cross_references": []
+    "cross_references": [
+      {
+        "relationship_id": "zone-dmu-cross-reference-references-zone-r-4-zone-dmu-clause-28-1-1",
+        "relationship_type": "references_zone",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "DMU"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "R-4"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-dmu-clause-28-1-1",
+        "join_behavior": "reference_only",
+        "confidence": "high"
+      },
+      {
+        "relationship_id": "zone-dmu-cross-reference-references-zone-dmun-zone-dmu-clause-28-1-2",
+        "relationship_type": "references_zone",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "DMU"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "DMUN"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-dmu-clause-28-1-2",
+        "join_behavior": "reference_only",
+        "confidence": "high"
+      }
+    ]
   },
   "review_flags": [
-    {
-      "review_flag_id": "zone-dmu-flag-unmatched-term-uses-permitted-in-the-r-4-zone-subject-to-the-regulations-for-permitted-uses-for-the-r-4-zone",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Uses permitted in the R-4 Zone, subject to the Regulations for Permitted Uses for the R-4 Zone",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-dmu-clause-28-1-1"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-dmu-flag-unmatched-term-commercial-and-institutional-uses-permitted-in-the-dmun-zone",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Commercial and Institutional Uses permitted in the DMUN Zone",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-dmu-clause-28-1-2"
-        }
-      ]
-    },
     {
       "review_flag_id": "zone-dmu-flag-unmatched-term-club",
       "severity": "warning",
