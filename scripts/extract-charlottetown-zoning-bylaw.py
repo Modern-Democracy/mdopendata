@@ -167,6 +167,22 @@ USE_TERM_ALIASES = {
     "shopping_center": "shopping_centre",
     "transportation_services": "transportation_service",
     "automobile_sales_and_services": "automobile_sales_and_service",
+    "apartment_building": "apartment_dwelling",
+    "apartment_dwellings": "apartment_dwelling",
+    "apartments": "apartment_dwelling",
+    "duplex_dwellings": "duplex_dwelling",
+    "semi_detached_dwellings": "semi_detached_dwelling",
+    "stacked_townhouse": "stacked_townhouse_dwelling",
+    "converted_dwellings": "converted_dwelling",
+    "one_single_detached_dwelling_per_lot_with_serviced_lot_frontage": "single_detached_dwelling",
+    "home_daycare_home": "home_daycare",
+}
+
+NON_QUERYABLE_USE_TERMS = {
+    "ancillary_uses_to_the_foregoing",
+    "council_shall_give_due_consideration_to_other_sections_of_this_by_law_but_council_may_approve_any_use_or_development_in_a_cda_zone_which_it_deems_to_be_in_the_public_interest_notwithstanding_all_other_sections_of_this_by_law_but_only_after_following_the_procedures_set_out_in_this_section",
+    "subject_to_sections_35_inclusive_the_water_lots_shall_remain_as_a_water_lot_open_space_zone_in_which_no_development_may_occur_other_than_navigation_and_required_infrastructure_related_to_navigation",
+    "existing_uses_such_as_navigation_and_docking_for_commercial_e_g_petroleum_aggregate_and_cruise_ships_vessels_and_navigation_docking_and_marinas_related_to_the_port_authority",
 }
 
 
@@ -1274,6 +1290,8 @@ def build_terms_and_uses(
             table = component["table"]
             entry = component["entry"]
             normalized = component["normalized"]
+            if normalized in NON_QUERYABLE_USE_TERMS:
+                continue
             component_raw = component["raw"]
             category = term_category_from_entry(table, entry)
             term_key = (table if entry else "unmatched", normalized)
@@ -1733,6 +1751,9 @@ def refresh_schema_terms(normalizer: Normalizer, data: dict[str, Any]) -> dict[s
             table = component["table"]
             entry = component["entry"]
             normalized = component["normalized"]
+            if normalized in NON_QUERYABLE_USE_TERMS:
+                id_changes[old_id] = []
+                continue
             new_id = f"{prefix}-term-{table}-{normalized}"
             new_ids.append(new_id)
             refreshed = dict(term)
@@ -1789,10 +1810,14 @@ def refresh_schema_terms(normalizer: Normalizer, data: dict[str, Any]) -> dict[s
         if use.get("use_status") == "accessory":
             use["use_status"] = "accessory_or_secondary"
         components = normalizer.match_term_components(use.get("use_name_raw") or "")
+        if all(component["normalized"] in NON_QUERYABLE_USE_TERMS for component in components):
+            continue
         if len(components) > 1:
             for index, component in enumerate(components, start=1):
                 table = component["table"]
                 normalized = component["normalized"]
+                if normalized in NON_QUERYABLE_USE_TERMS:
+                    continue
                 new_use = dict(use)
                 new_use["use_id"] = f"{use['use_id']}-{slugify(normalized)}"
                 new_use["use_name_raw"] = component["raw"]

@@ -814,19 +814,6 @@
   "structured_data": {
     "terms": [
       {
-        "term_id": "zone-wlc-term-term-existing_uses_such_as_navigation_and_docking_for_commercial_e_g_petroleum_aggregate_and_cruise_ships_vessels_and_navigation_docking_and_marinas_related_to_the_port_authority",
-        "term_raw": "Existing uses such as navigation and docking for commercial (e.g. petroleum, aggregate and cruise ships) vessels and navigation, docking and marinas related to the Port Authority",
-        "term_normalized": "existing_uses_such_as_navigation_and_docking_for_commercial_e_g_petroleum_aggregate_and_cruise_ships_vessels_and_navigation_docking_and_marinas_related_to_the_port_authority",
-        "term_category": "unknown",
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-wlc-clause-35-1-1"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
         "term_id": "zone-wlc-term-use-commercial_marina",
         "term_raw": "Commercial Marina",
         "term_normalized": "commercial_marina",
@@ -858,14 +845,6 @@
       }
     ],
     "uses": [
-      {
-        "use_id": "zone-wlc-use-existing-uses-such-as-navigation-and-docking-for-commercial-e-g-petroleum-aggregate-and-cruise-ships-vessels-and-navigation-docking-and-marinas-related-to-the-port-authority-1",
-        "use_name_raw": "Existing uses such as navigation and docking for commercial (e.g. petroleum, aggregate and cruise ships) vessels and navigation, docking and marinas related to the Port Authority",
-        "use_term_id": "zone-wlc-term-term-existing_uses_such_as_navigation_and_docking_for_commercial_e_g_petroleum_aggregate_and_cruise_ships_vessels_and_navigation_docking_and_marinas_related_to_the_port_authority",
-        "use_status": "permitted",
-        "source_clause_ref": "zone-wlc-clause-35-1-1",
-        "confidence": "needs_review"
-      },
       {
         "use_id": "zone-wlc-use-commercial-marina-2",
         "use_name_raw": "Commercial Marina",
@@ -981,7 +960,6 @@
         "group_label_raw": "35",
         "group_title_raw": "WATER LOT ZONE COMMERCIAL (WLC)",
         "regulated_use_terms": [
-          "zone-wlc-term-term-existing_uses_such_as_navigation_and_docking_for_commercial_e_g_petroleum_aggregate_and_cruise_ships_vessels_and_navigation_docking_and_marinas_related_to_the_port_authority",
           "zone-wlc-term-use-commercial_marina",
           "zone-wlc-term-use-private_marina"
         ],
@@ -1023,19 +1001,5 @@
     "other_requirements": [],
     "cross_references": []
   },
-  "review_flags": [
-    {
-      "review_flag_id": "zone-wlc-flag-unmatched-term-existing-uses-such-as-navigation-and-docking-for-commercial-e-g-petroleum-aggregate-and-cruise-ships-vessels-and-navigation-docking-and-marinas-related-to-the-port-authority",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Existing uses such as navigation and docking for commercial (e.g. petroleum, aggregate and cruise ships) vessels and navigation, docking and marinas related to the Port Authority",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-wlc-clause-35-1-1"
-        }
-      ]
-    }
-  ]
+  "review_flags": []
 }

@@ -928,17 +928,19 @@
         "code": "forestry_related"
       },
       {
-        "term_id": "zone-fd-term-term-one_single_detached_dwelling_per_lot_with_serviced_lot_frontage",
+        "term_id": "zone-fd-term-use-single_detached_dwelling",
         "term_raw": "One Single-detached Dwelling per Lot with serviced Lot Frontage",
-        "term_normalized": "one_single_detached_dwelling_per_lot_with_serviced_lot_frontage",
-        "term_category": "unknown",
+        "term_normalized": "single_detached_dwelling",
+        "term_category": "dwelling_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-fd-clause-45-1-3"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "single_detached_dwelling"
       },
       {
         "term_id": "zone-fd-term-use-secondary_suite",
@@ -1001,17 +1003,19 @@
         "code": "tourist_accommodations"
       },
       {
-        "term_id": "zone-fd-term-term-home_daycare_home",
+        "term_id": "zone-fd-term-use-home_daycare",
         "term_raw": "Home Daycare Home",
-        "term_normalized": "home_daycare_home",
-        "term_category": "unknown",
+        "term_normalized": "home_daycare",
+        "term_category": "accessory_or_secondary_use",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-fd-clause-45-5-1-e"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "home_daycare"
       },
       {
         "term_id": "zone-fd-term-use-garden_suite",
@@ -1049,10 +1053,10 @@
       {
         "use_id": "zone-fd-use-one-single-detached-dwelling-per-lot-with-serviced-lot-frontage-3",
         "use_name_raw": "One Single-detached Dwelling per Lot with serviced Lot Frontage",
-        "use_term_id": "zone-fd-term-term-one_single_detached_dwelling_per_lot_with_serviced_lot_frontage",
+        "use_term_id": "zone-fd-term-use-single_detached_dwelling",
         "use_status": "permitted",
         "source_clause_ref": "zone-fd-clause-45-1-3",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-fd-use-secondary-suite-4",
@@ -1089,10 +1093,10 @@
       {
         "use_id": "zone-fd-use-home-daycare-home-8",
         "use_name_raw": "Home Daycare Home",
-        "use_term_id": "zone-fd-term-term-home_daycare_home",
+        "use_term_id": "zone-fd-term-use-home_daycare",
         "use_status": "accessory_or_secondary",
         "source_clause_ref": "zone-fd-clause-45-5-1-e",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-fd-use-garden-suite-9",
@@ -2309,7 +2313,7 @@
         "regulated_use_terms": [
           "zone-fd-term-use-agricultural_and_resource_land_uses",
           "zone-fd-term-use-forestry_related",
-          "zone-fd-term-term-one_single_detached_dwelling_per_lot_with_serviced_lot_frontage"
+          "zone-fd-term-use-single_detached_dwelling"
         ],
         "applicability": {
           "applies_to_zone_codes": [
@@ -2373,32 +2377,5 @@
     "other_requirements": [],
     "cross_references": []
   },
-  "review_flags": [
-    {
-      "review_flag_id": "zone-fd-flag-unmatched-term-one-single-detached-dwelling-per-lot-with-serviced-lot-frontage",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: One Single-detached Dwelling per Lot with serviced Lot Frontage",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-fd-clause-45-1-3"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-fd-flag-unmatched-term-home-daycare-home",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Home Daycare Home",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-fd-clause-45-5-1-e"
-        }
-      ]
-    }
-  ]
+  "review_flags": []
 }

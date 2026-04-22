@@ -508,17 +508,19 @@
   "structured_data": {
     "terms": [
       {
-        "term_id": "zone-r-4a-term-term-apartments",
+        "term_id": "zone-r-4a-term-use-apartment_dwelling",
         "term_raw": "Apartments",
-        "term_normalized": "apartments",
-        "term_category": "unknown",
+        "term_normalized": "apartment_dwelling",
+        "term_category": "dwelling_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-r-4a-clause-19-1-1"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "apartment_dwelling"
       },
       {
         "term_id": "zone-r-4a-term-use-single_detached_dwelling",
@@ -613,10 +615,10 @@
       {
         "use_id": "zone-r-4a-use-apartments-1",
         "use_name_raw": "Apartments",
-        "use_term_id": "zone-r-4a-term-term-apartments",
+        "use_term_id": "zone-r-4a-term-use-apartment_dwelling",
         "use_status": "permitted",
         "source_clause_ref": "zone-r-4a-clause-19-1-1",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-r-4a-use-single-detached-dwelling-3",
@@ -1394,7 +1396,7 @@
         "group_label_raw": "19",
         "group_title_raw": "APARTMENT RESIDENTIAL ZONE (R-4A)",
         "regulated_use_terms": [
-          "zone-r-4a-term-term-apartments",
+          "zone-r-4a-term-use-apartment_dwelling",
           "zone-r-4a-term-use-single_detached_dwelling",
           "zone-r-4a-term-use-modular_dwelling"
         ],
@@ -1499,19 +1501,5 @@
       }
     ]
   },
-  "review_flags": [
-    {
-      "review_flag_id": "zone-r-4a-flag-unmatched-term-apartments",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Apartments",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-r-4a-clause-19-1-1"
-        }
-      ]
-    }
-  ]
+  "review_flags": []
 }

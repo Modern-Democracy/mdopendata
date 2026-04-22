@@ -489,19 +489,6 @@
         "confidence": "high",
         "code_table": "use",
         "code": "trail_system"
-      },
-      {
-        "term_id": "zone-os-term-term-ancillary_uses_to_the_foregoing",
-        "term_raw": "Ancillary uses to the foregoing",
-        "term_normalized": "ancillary_uses_to_the_foregoing",
-        "term_category": "unknown",
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-os-clause-42-1-6"
-          }
-        ],
-        "confidence": "needs_review"
       }
     ],
     "uses": [
@@ -544,14 +531,6 @@
         "use_status": "permitted",
         "source_clause_ref": "zone-os-clause-42-1-5",
         "confidence": "high"
-      },
-      {
-        "use_id": "zone-os-use-ancillary-uses-to-the-foregoing-6",
-        "use_name_raw": "Ancillary uses to the foregoing",
-        "use_term_id": "zone-os-term-term-ancillary_uses_to_the_foregoing",
-        "use_status": "permitted",
-        "source_clause_ref": "zone-os-clause-42-1-6",
-        "confidence": "needs_review"
       }
     ],
     "numeric_values": [
@@ -1179,8 +1158,7 @@
           "zone-os-term-use-cemetery",
           "zone-os-term-use-community_gardens",
           "zone-os-term-use-golf_course",
-          "zone-os-term-use-trail_system",
-          "zone-os-term-term-ancillary_uses_to_the_foregoing"
+          "zone-os-term-use-trail_system"
         ],
         "applicability": {
           "applies_to_zone_codes": [
@@ -1231,19 +1209,5 @@
     "other_requirements": [],
     "cross_references": []
   },
-  "review_flags": [
-    {
-      "review_flag_id": "zone-os-flag-unmatched-term-ancillary-uses-to-the-foregoing",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Ancillary uses to the foregoing",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-os-clause-42-1-6"
-        }
-      ]
-    }
-  ]
+  "review_flags": []
 }

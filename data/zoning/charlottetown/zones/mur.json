@@ -532,30 +532,34 @@
         "confidence": "high"
       },
       {
-        "term_id": "zone-mur-term-term-stacked_townhouse_dwelling",
+        "term_id": "zone-mur-term-use-stacked_townhouse_dwelling",
         "term_raw": "Stacked Townhouse Dwelling",
         "term_normalized": "stacked_townhouse_dwelling",
-        "term_category": "unknown",
+        "term_category": "dwelling_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-mur-clause-21-1-6"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "stacked_townhouse_dwelling"
       },
       {
-        "term_id": "zone-mur-term-term-block_townhouse_dwelling",
+        "term_id": "zone-mur-term-use-block_townhouse_dwelling",
         "term_raw": "Block Townhouse Dwelling",
         "term_normalized": "block_townhouse_dwelling",
-        "term_category": "unknown",
+        "term_category": "dwelling_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-mur-clause-21-1-7"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "block_townhouse_dwelling"
       },
       {
         "term_id": "zone-mur-term-use-nursing_home",
@@ -637,18 +641,18 @@
       {
         "use_id": "zone-mur-use-stacked-townhouse-dwelling-6",
         "use_name_raw": "Stacked Townhouse Dwelling",
-        "use_term_id": "zone-mur-term-term-stacked_townhouse_dwelling",
+        "use_term_id": "zone-mur-term-use-stacked_townhouse_dwelling",
         "use_status": "permitted",
         "source_clause_ref": "zone-mur-clause-21-1-6",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-mur-use-block-townhouse-dwelling-7",
         "use_name_raw": "Block Townhouse Dwelling",
-        "use_term_id": "zone-mur-term-term-block_townhouse_dwelling",
+        "use_term_id": "zone-mur-term-use-block_townhouse_dwelling",
         "use_status": "permitted",
         "source_clause_ref": "zone-mur-clause-21-1-7",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-mur-use-nursing-home-8",
@@ -679,8 +683,8 @@
           "zone-mur-term-use-semi_detached_dwelling",
           "zone-mur-term-use-duplex_dwelling",
           "zone-mur-term-use-townhouse_dwelling",
-          "zone-mur-term-term-stacked_townhouse_dwelling",
-          "zone-mur-term-term-block_townhouse_dwelling",
+          "zone-mur-term-use-stacked_townhouse_dwelling",
+          "zone-mur-term-use-block_townhouse_dwelling",
           "zone-mur-term-use-nursing_home",
           "zone-mur-term-use-community_care_facility"
         ],
@@ -868,32 +872,6 @@
         {
           "source_ref_type": "table_cell",
           "source_ref_id": "zone-mur-table-21-2-row-9-density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-mur-flag-unmatched-term-stacked-townhouse-dwelling",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Stacked Townhouse Dwelling",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-mur-clause-21-1-6"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-mur-flag-unmatched-term-block-townhouse-dwelling",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Block Townhouse Dwelling",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-mur-clause-21-1-7"
         }
       ]
     }
