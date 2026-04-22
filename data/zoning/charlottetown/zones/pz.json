@@ -541,7 +541,7 @@
         "value": 5,
         "unit": "m",
         "measure_type": "length",
-        "comparator": "less_than",
+        "comparator": "at_least",
         "alternative_values": [
           {
             "value_raw": "16.4 ft",
@@ -556,11 +556,11 @@
             "source_ref_id": "zone-pz-clause-37-2-2"
           }
         ],
-        "confidence": "medium"
+        "confidence": "high"
       },
       {
         "numeric_value_id": "zone-pz-num-zone-pz-clause-37-2-4-1",
-        "value_raw": "8m 26.2 ft)",
+        "value_raw": "8m (26.2 ft)",
         "value": 8,
         "unit": "m",
         "measure_type": "length",
@@ -579,10 +579,64 @@
             "source_ref_id": "zone-pz-clause-37-2-4"
           }
         ],
-        "confidence": "medium"
+        "confidence": "high"
       }
     ],
-    "requirements": [],
+    "requirements": [
+      {
+        "requirement_id": "zone-pz-req-zone-pz-clause-37-2-2",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "land_use_buffer_width",
+        "requirement_label_raw": "37.2.2",
+        "requirement_text_raw": "Development within the Port Zone shall require a Land Use Buffer from adjacent Buildings of no less than 5m (16.4 ft) in width.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-pz-num-zone-pz-clause-37-2-2-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pz-clause-37-2-2"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "requirement_id": "zone-pz-req-zone-pz-clause-37-2-4",
+        "requirement_type": "environmental_requirement",
+        "requirement_category": "land_use_buffer_planting_frequency",
+        "requirement_label_raw": "37.2.4",
+        "requirement_text_raw": "The Land Use Buffer shall be planted with street trees and shrubs at a frequency of one tree for every 8m 26.2 ft) of length along the boundary line.",
+        "applicability": {
+          "conditions": [
+            {
+              "condition_type": "source_typo_interpretation",
+              "condition_text_raw": "The source text `8m 26.2 ft)` is interpreted as `8m (26.2 ft)`.",
+              "source_refs": [
+                {
+                  "source_ref_type": "clause",
+                  "source_ref_id": "zone-pz-clause-37-2-4"
+                }
+              ]
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-pz-num-zone-pz-clause-37-2-4-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pz-clause-37-2-4"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
     "regulation_groups": [
       {
         "regulation_group_id": "zone-pz-regulation-group-zone",
@@ -604,7 +658,10 @@
           ],
           "conditions": []
         },
-        "requirement_refs": [],
+        "requirement_refs": [
+          "zone-pz-req-zone-pz-clause-37-2-4",
+          "zone-pz-req-zone-pz-clause-37-2-2"
+        ],
         "source_section_ref": "zone-pz-section-37-1",
         "confidence": "medium"
       }
@@ -663,50 +720,7 @@
         "confidence": "medium"
       }
     ],
-    "other_requirements": [
-      {
-        "requirement_id": "zone-pz-req-zone-pz-clause-37-2-2",
-        "requirement_type": "other",
-        "requirement_category": "development_within_the_port_zone_shall_require_a_land_use_buffer_from_adjacent_b",
-        "requirement_label_raw": "37.2.2",
-        "requirement_text_raw": "Development within the Port Zone shall require a Land Use Buffer from adjacent Buildings of no less than 5m (16.4 ft) in width.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-pz-num-zone-pz-clause-37-2-2-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-pz-clause-37-2-2"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
-        "requirement_id": "zone-pz-req-zone-pz-clause-37-2-4",
-        "requirement_type": "other",
-        "requirement_category": "the_land_use_buffer_shall_be_planted_with_street_trees_and_shrubs_at_a_frequency",
-        "requirement_label_raw": "37.2.4",
-        "requirement_text_raw": "The Land Use Buffer shall be planted with street trees and shrubs at a frequency of one tree for every 8m 26.2 ft) of length along the boundary line.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-pz-num-zone-pz-clause-37-2-4-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-pz-clause-37-2-4"
-          }
-        ],
-        "confidence": "needs_review"
-      }
-    ],
+    "other_requirements": [],
     "cross_references": [
       {
         "relationship_id": "zone-pz-cross-reference-references-zone-wf-zone-pz-clause-37-3-1",

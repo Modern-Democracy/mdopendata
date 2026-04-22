@@ -23,7 +23,7 @@
         "source_unit_type": "zone",
         "label_raw": "16",
         "title_raw": "MEDIUM DENSITY RESIDENTIAL ZONE (R-3)",
-        "text_raw": "Uses permitted in the R-1N Zone subject to the Regulations for Permitted Uses for the R-1N Zone;\nUses permitted in the R-2 Zone subject to the Regulations for the Permitted Uses for the R-2 Zone;\nApartment Dwelling;\nBlock Townhouse Dwelling;\nConverted Dwelling;\nLodging House Limited;\nStacked Townhouse Dwelling;\nTownhouse Dwelling;\nThe following Institutional uses, subject to the Regulations for Permitted Uses for the Institutional (I) Zone\nCommunity Building;\nCommunity Care Facility;\nCommunity Institutional;\nCommercial Daycare Centre; and\nNursing Home\nAn existing Dwelling may be Altered and used as a Duplex, Semi-detached or a Multi-unit Dwelling provided that:\nThe Building is structurally sound and the conversion satisfies the requirements under the City of Charlottetown Building Code By-law.\nThe conversion can be undertaken without extreme Alterations or Additions excepting the construction or addition of new windows, fire escapes and outside stairways;\nThe number of Dwelling Units permitted shall be consistent with that which is permitted for an Apartment Dwelling.\nNotwithstanding the requirements, the following are permitted as accessory or secondary uses:\nAccessory Building;\nHome Occupation; and\nHome Daycare",
+        "text_raw": "Uses permitted in the R-1N Zone subject to the Regulations for Permitted Uses for the R-1N Zone;\nUses permitted in the R-2 Zone subject to the Regulations for the Permitted Uses for the R-2 Zone;\nApartment Dwelling;\nBlock Townhouse Dwelling;\nConverted Dwelling;\nLodging House Limited;\nStacked Townhouse Dwelling;\nTownhouse Dwelling;\nThe following Institutional uses, subject to the Regulations for Permitted Uses for the Institutional (I) Zone\nCommunity Building;\nCommunity Care Facility;\nCommunity Institutional;\nCommercial Daycare Centre; and\nNursing Home\nThe number of rooms is determined by the following:\nFor the first 325 sq. m (3,498.3 sq. ft.) for an interior lot and 395 sq. m (4,251.7 sq. ft.) for a corner lot of Lot Area, four (4) bedrooms are permitted;\nFor every additional bedroom or lodging room over four (4) bedrooms or lodging rooms, the Lot area must be increased by 90 sq. m (968.7 sq. ft.) thereof.\nAn existing Dwelling may be Altered and used as a Duplex, Semi-detached or a Multi-unit Dwelling provided that:\nThe Building is structurally sound and the conversion satisfies the requirements under the City of Charlottetown Building Code By-law.\nThe conversion can be undertaken without extreme Alterations or Additions excepting the construction or addition of new windows, fire escapes and outside stairways;\nThe number of Dwelling Units permitted shall be consistent with that which is permitted for an Apartment Dwelling.\nNotwithstanding the requirements, the following are permitted as accessory or secondary uses:\nAccessory Building;\nHome Occupation; and\nHome Daycare",
         "source_order": 1,
         "citations": {
           "pdf_page_start": 71,
@@ -868,7 +868,47 @@
         "section_label_raw": "",
         "section_title_raw": "REGULATIONS FOR LODGING HOUSES AND GROUP HOMES",
         "source_order": 5,
-        "clauses_raw": [],
+        "clauses_raw": [
+          {
+            "clause_id": "zone-r-3-clause-16-4-room-count",
+            "clause_label_raw": "",
+            "clause_text_raw": "The number of rooms is determined by the following:",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 73,
+              "pdf_page_end": 73,
+              "bylaw_page_start": 73,
+              "bylaw_page_end": 73
+            }
+          },
+          {
+            "clause_id": "zone-r-3-clause-16-4-room-count-a",
+            "clause_label_raw": "a",
+            "clause_text_raw": "For the first 325 sq. m (3,498.3 sq. ft.) for an interior lot and 395 sq. m (4,251.7 sq. ft.) for a corner lot of Lot Area, four (4) bedrooms are permitted;",
+            "parent_clause_id": "zone-r-3-clause-16-4-room-count",
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 73,
+              "pdf_page_end": 73,
+              "bylaw_page_start": 73,
+              "bylaw_page_end": 73
+            }
+          },
+          {
+            "clause_id": "zone-r-3-clause-16-4-room-count-b",
+            "clause_label_raw": "b",
+            "clause_text_raw": "For every additional bedroom or lodging room over four (4) bedrooms or lodging rooms, the Lot area must be increased by 90 sq. m (968.7 sq. ft.) thereof.",
+            "parent_clause_id": "zone-r-3-clause-16-4-room-count",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 73,
+              "pdf_page_end": 73,
+              "bylaw_page_start": 73,
+              "bylaw_page_end": 73
+            }
+          }
+        ],
         "tables_raw": [
           {
             "table_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes",
@@ -909,7 +949,7 @@
                   {
                     "cell_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-1-requirement",
                     "column_id": "requirement",
-                    "cell_text_raw": "Area (Minimum)"
+                    "cell_text_raw": "Lot Area (Minimum)"
                   },
                   {
                     "cell_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-1-interior_lot",
@@ -935,7 +975,7 @@
                   {
                     "cell_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-2-requirement",
                     "column_id": "requirement",
-                    "cell_text_raw": "Frontage (Minimum)"
+                    "cell_text_raw": "Lot Frontage (Minimum)"
                   },
                   {
                     "cell_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-2-interior_lot",
@@ -961,7 +1001,7 @@
                   {
                     "cell_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-3-requirement",
                     "column_id": "requirement",
-                    "cell_text_raw": "Yard (Minimum)"
+                    "cell_text_raw": "Front Yard (Minimum)"
                   },
                   {
                     "cell_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-3-interior_lot",
@@ -987,7 +1027,7 @@
                   {
                     "cell_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-4-requirement",
                     "column_id": "requirement",
-                    "cell_text_raw": "Yard (Minimum)"
+                    "cell_text_raw": "Rear Yard (Minimum)"
                   },
                   {
                     "cell_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-4-interior_lot",
@@ -1013,17 +1053,17 @@
                   {
                     "cell_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-5-requirement",
                     "column_id": "requirement",
-                    "cell_text_raw": "Yard (Minimum)"
+                    "cell_text_raw": "Side Yard (Minimum)"
                   },
                   {
                     "cell_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-5-interior_lot",
                     "column_id": "interior_lot",
-                    "cell_text_raw": "1.8 m (6 ft) 1.83"
+                    "cell_text_raw": "1.8 m (6 ft)"
                   },
                   {
                     "cell_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-5-corner_lot",
                     "column_id": "corner_lot",
-                    "cell_text_raw": "m (6 ft)"
+                    "cell_text_raw": "1.83 m (6 ft)"
                   }
                 ]
               },
@@ -1039,17 +1079,17 @@
                   {
                     "cell_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-6-requirement",
                     "column_id": "requirement",
-                    "cell_text_raw": "Yard (Minimum)"
+                    "cell_text_raw": "Flankage Yard (Minimum)"
                   },
                   {
                     "cell_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-6-interior_lot",
                     "column_id": "interior_lot",
-                    "cell_text_raw": "6.0"
+                    "cell_text_raw": ""
                   },
                   {
                     "cell_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-6-corner_lot",
                     "column_id": "corner_lot",
-                    "cell_text_raw": "m (19.7 ft)"
+                    "cell_text_raw": "6.0 m (19.7 ft)"
                   }
                 ]
               },
@@ -1065,17 +1105,17 @@
                   {
                     "cell_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7-requirement",
                     "column_id": "requirement",
-                    "cell_text_raw": "(Maximum) of rooms is determined by the For the first 325 sq. m (3,498.3 sq. ft.) a corner lot of Lot Area, four (4) bedrooms For every additional bedroom or lodging the Lot area must be increased by 90"
+                    "cell_text_raw": "Height (Maximum)"
                   },
                   {
                     "cell_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7-interior_lot",
                     "column_id": "interior_lot",
-                    "cell_text_raw": "12.0 m (39.4 ft) 12.0 following: for an interior lot and 395 are permitted; room over four (4) bedrooms sq. m (968.7 sq. ft.) thereof."
+                    "cell_text_raw": "12.0 m (39.4 ft)"
                   },
                   {
                     "cell_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7-corner_lot",
                     "column_id": "corner_lot",
-                    "cell_text_raw": "m (39.4 ft) sq. m (4,251.7 sq. ft.) for or lodging rooms,"
+                    "cell_text_raw": "12.0 m (39.4 ft)"
                   }
                 ]
               }
@@ -1330,44 +1370,59 @@
         "source_order": 14
       },
       {
-        "clause_id": "zone-r-3-clause-16-5-1",
-        "section_id": "zone-r-3-section-16-5",
+        "clause_id": "zone-r-3-clause-16-4-room-count",
+        "section_id": "zone-r-3-section-5",
         "source_order": 15
       },
       {
-        "clause_id": "zone-r-3-clause-16-5-1-a",
-        "section_id": "zone-r-3-section-16-5",
+        "clause_id": "zone-r-3-clause-16-4-room-count-a",
+        "section_id": "zone-r-3-section-5",
         "source_order": 16
       },
       {
-        "clause_id": "zone-r-3-clause-16-5-1-b",
-        "section_id": "zone-r-3-section-16-5",
+        "clause_id": "zone-r-3-clause-16-4-room-count-b",
+        "section_id": "zone-r-3-section-5",
         "source_order": 17
       },
       {
-        "clause_id": "zone-r-3-clause-16-5-1-c",
+        "clause_id": "zone-r-3-clause-16-5-1",
         "section_id": "zone-r-3-section-16-5",
         "source_order": 18
       },
       {
+        "clause_id": "zone-r-3-clause-16-5-1-a",
+        "section_id": "zone-r-3-section-16-5",
+        "source_order": 19
+      },
+      {
+        "clause_id": "zone-r-3-clause-16-5-1-b",
+        "section_id": "zone-r-3-section-16-5",
+        "source_order": 20
+      },
+      {
+        "clause_id": "zone-r-3-clause-16-5-1-c",
+        "section_id": "zone-r-3-section-16-5",
+        "source_order": 21
+      },
+      {
         "clause_id": "zone-r-3-clause-16-6-1",
         "section_id": "zone-r-3-section-16-6",
-        "source_order": 19
+        "source_order": 22
       },
       {
         "clause_id": "zone-r-3-clause-16-6-1-a",
         "section_id": "zone-r-3-section-16-6",
-        "source_order": 20
+        "source_order": 23
       },
       {
         "clause_id": "zone-r-3-clause-16-6-1-b",
         "section_id": "zone-r-3-section-16-6",
-        "source_order": 21
+        "source_order": 24
       },
       {
         "clause_id": "zone-r-3-clause-16-6-1-c",
         "section_id": "zone-r-3-section-16-6",
-        "source_order": 22
+        "source_order": 25
       }
     ]
   },
@@ -2775,12 +2830,19 @@
       },
       {
         "numeric_value_id": "zone-r-3-num-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-5-corner-lot-1",
-        "value_raw": "6 ft",
-        "value": 6,
-        "unit": "ft",
+        "value_raw": "1.83 m (6 ft)",
+        "value": 1.83,
+        "unit": "m",
         "measure_type": "length",
         "comparator": "minimum",
-        "alternative_values": [],
+        "alternative_values": [
+          {
+            "value_raw": "6 ft",
+            "value": 6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
         "source_refs": [
           {
             "source_ref_type": "table_cell",
@@ -2791,12 +2853,19 @@
       },
       {
         "numeric_value_id": "zone-r-3-num-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-6-corner-lot-1",
-        "value_raw": "19.7 ft",
-        "value": 19.7,
-        "unit": "ft",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
         "measure_type": "length",
         "comparator": "minimum",
-        "alternative_values": [],
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
         "source_refs": [
           {
             "source_ref_type": "table_cell",
@@ -2810,32 +2879,16 @@
         "value_raw": "12.0 m (39.4 ft)",
         "value": 12,
         "unit": "m",
-        "measure_type": "length",
+        "measure_type": "height",
         "comparator": "maximum",
         "alternative_values": [
           {
             "value_raw": "39.4 ft",
             "value": 39.4,
             "unit": "ft",
-            "measure_type": "length"
+            "measure_type": "height"
           }
         ],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7-interior_lot"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-r-3-num-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7-interior-lot-2",
-        "value_raw": "968.7 sq. ft",
-        "value": 968.7,
-        "unit": "sq_ft",
-        "measure_type": "area",
-        "comparator": "maximum",
-        "alternative_values": [],
         "source_refs": [
           {
             "source_ref_type": "table_cell",
@@ -2846,12 +2899,19 @@
       },
       {
         "numeric_value_id": "zone-r-3-num-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7-corner-lot-1",
-        "value_raw": "39.4 ft",
-        "value": 39.4,
-        "unit": "ft",
-        "measure_type": "length",
+        "value_raw": "12.0 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "height",
         "comparator": "maximum",
-        "alternative_values": [],
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
         "source_refs": [
           {
             "source_ref_type": "table_cell",
@@ -2861,17 +2921,70 @@
         "confidence": "medium"
       },
       {
-        "numeric_value_id": "zone-r-3-num-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7-corner-lot-2",
-        "value_raw": "4,251.7 sq. ft",
-        "value": 4251.7,
-        "unit": "sq_ft",
+        "numeric_value_id": "zone-r-3-num-zone-r-3-clause-16-4-room-count-a-1",
+        "value_raw": "325 sq. m (3,498.3 sq. ft",
+        "value": 325,
+        "unit": "sq_m",
         "measure_type": "area",
-        "comparator": "maximum",
-        "alternative_values": [],
+        "comparator": "exact",
+        "alternative_values": [
+          {
+            "value_raw": "3,498.3 sq. ft",
+            "value": 3498.3,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
         "source_refs": [
           {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7-corner_lot"
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3-clause-16-4-room-count-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3-num-zone-r-3-clause-16-4-room-count-a-2",
+        "value_raw": "395 sq. m (4,251.7 sq. ft",
+        "value": 395,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "exact",
+        "alternative_values": [
+          {
+            "value_raw": "4,251.7 sq. ft",
+            "value": 4251.7,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3-clause-16-4-room-count-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3-num-zone-r-3-clause-16-4-room-count-b-1",
+        "value_raw": "90 sq. m (968.7 sq. ft",
+        "value": 90,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "exact",
+        "alternative_values": [
+          {
+            "value_raw": "968.7 sq. ft",
+            "value": 968.7,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3-clause-16-4-room-count-b"
           }
         ],
         "confidence": "medium"
@@ -3779,9 +3892,9 @@
       {
         "requirement_id": "zone-r-3-req-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-1-interior-lot",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "area_minimum",
-        "requirement_label_raw": "Area (Minimum)",
-        "requirement_text_raw": "Area (Minimum) Interior Lot 325 sq. m (3,498.3 sq. ft)",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Interior Lot 325 sq. m (3,498.3 sq. ft)",
         "applicability": {
           "applies_to_lot_contexts": [
             "interior_lot"
@@ -3803,9 +3916,9 @@
       {
         "requirement_id": "zone-r-3-req-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-1-corner-lot",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "area_minimum",
-        "requirement_label_raw": "Area (Minimum)",
-        "requirement_text_raw": "Area (Minimum) Corner Lot 395 sq. m (4,251.9 sq. ft)",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Corner Lot 395 sq. m (4,251.9 sq. ft)",
         "applicability": {
           "applies_to_lot_contexts": [
             "corner_lot"
@@ -3828,8 +3941,8 @@
         "requirement_id": "zone-r-3-req-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-2-interior-lot",
         "requirement_type": "dimensional_standard",
         "requirement_category": "lot_frontage",
-        "requirement_label_raw": "Frontage (Minimum)",
-        "requirement_text_raw": "Frontage (Minimum) Interior Lot 10.6 m (34.8 ft)",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Interior Lot 10.6 m (34.8 ft)",
         "applicability": {
           "applies_to_lot_contexts": [
             "interior_lot"
@@ -3852,8 +3965,8 @@
         "requirement_id": "zone-r-3-req-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-2-corner-lot",
         "requirement_type": "dimensional_standard",
         "requirement_category": "lot_frontage",
-        "requirement_label_raw": "Frontage (Minimum)",
-        "requirement_text_raw": "Frontage (Minimum) Corner Lot 15 m (49.2 ft)",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Corner Lot 15 m (49.2 ft)",
         "applicability": {
           "applies_to_lot_contexts": [
             "corner_lot"
@@ -3875,9 +3988,9 @@
       {
         "requirement_id": "zone-r-3-req-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-3-interior-lot",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "yard_minimum",
-        "requirement_label_raw": "Yard (Minimum)",
-        "requirement_text_raw": "Yard (Minimum) Interior Lot 6.0 m (19.7 ft)",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Interior Lot 6.0 m (19.7 ft)",
         "applicability": {
           "applies_to_lot_contexts": [
             "interior_lot"
@@ -3899,9 +4012,9 @@
       {
         "requirement_id": "zone-r-3-req-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-3-corner-lot",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "yard_minimum",
-        "requirement_label_raw": "Yard (Minimum)",
-        "requirement_text_raw": "Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
         "applicability": {
           "applies_to_lot_contexts": [
             "corner_lot"
@@ -3923,9 +4036,9 @@
       {
         "requirement_id": "zone-r-3-req-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-4-interior-lot",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "yard_minimum",
-        "requirement_label_raw": "Yard (Minimum)",
-        "requirement_text_raw": "Yard (Minimum) Interior Lot 6.0 m (19.7 ft)",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Interior Lot 6.0 m (19.7 ft)",
         "applicability": {
           "applies_to_lot_contexts": [
             "interior_lot"
@@ -3947,9 +4060,9 @@
       {
         "requirement_id": "zone-r-3-req-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-4-corner-lot",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "yard_minimum",
-        "requirement_label_raw": "Yard (Minimum)",
-        "requirement_text_raw": "Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
         "applicability": {
           "applies_to_lot_contexts": [
             "corner_lot"
@@ -3971,9 +4084,9 @@
       {
         "requirement_id": "zone-r-3-req-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-5-interior-lot",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "yard_minimum",
-        "requirement_label_raw": "Yard (Minimum)",
-        "requirement_text_raw": "Yard (Minimum) Interior Lot 1.8 m (6 ft) 1.83",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Interior Lot 1.8 m (6 ft)",
         "applicability": {
           "applies_to_lot_contexts": [
             "interior_lot"
@@ -3995,9 +4108,9 @@
       {
         "requirement_id": "zone-r-3-req-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-5-corner-lot",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "yard_minimum",
-        "requirement_label_raw": "Yard (Minimum)",
-        "requirement_text_raw": "Yard (Minimum) Corner Lot m (6 ft)",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Corner Lot 1.83 m (6 ft)",
         "applicability": {
           "applies_to_lot_contexts": [
             "corner_lot"
@@ -4019,9 +4132,9 @@
       {
         "requirement_id": "zone-r-3-req-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-6-corner-lot",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "yard_minimum",
-        "requirement_label_raw": "Yard (Minimum)",
-        "requirement_text_raw": "Yard (Minimum) Corner Lot m (19.7 ft)",
+        "requirement_category": "flankage_yard",
+        "requirement_label_raw": "Flankage Yard (Minimum)",
+        "requirement_text_raw": "Flankage Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
         "applicability": {
           "applies_to_lot_contexts": [
             "corner_lot"
@@ -4043,9 +4156,9 @@
       {
         "requirement_id": "zone-r-3-req-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7-interior-lot",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "lot_area",
-        "requirement_label_raw": "(Maximum) of rooms is determined by the For the first 325 sq. m (3,498.3 sq. ft.) a corner lot of Lot Area, four (4) bedrooms For every additional bedroom or lodging the Lot area must be increased by 90",
-        "requirement_text_raw": "(Maximum) of rooms is determined by the For the first 325 sq. m (3,498.3 sq. ft.) a corner lot of Lot Area, four (4) bedrooms For every additional bedroom or lodging the Lot area must be increased by 90 Interior Lot 12.0 m (39.4 ft) 12.0 following: for an interior lot and 395 are permitted; room over four (4) bedrooms sq. m (968.7 sq. ft.) thereof.",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Interior Lot 12.0 m (39.4 ft)",
         "applicability": {
           "applies_to_lot_contexts": [
             "interior_lot"
@@ -4053,8 +4166,7 @@
           "conditions": []
         },
         "numeric_value_refs": [
-          "zone-r-3-num-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7-interior-lot-1",
-          "zone-r-3-num-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7-interior-lot-2"
+          "zone-r-3-num-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7-interior-lot-1"
         ],
         "term_refs": [],
         "source_refs": [
@@ -4068,9 +4180,9 @@
       {
         "requirement_id": "zone-r-3-req-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7-corner-lot",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "lot_area",
-        "requirement_label_raw": "(Maximum) of rooms is determined by the For the first 325 sq. m (3,498.3 sq. ft.) a corner lot of Lot Area, four (4) bedrooms For every additional bedroom or lodging the Lot area must be increased by 90",
-        "requirement_text_raw": "(Maximum) of rooms is determined by the For the first 325 sq. m (3,498.3 sq. ft.) a corner lot of Lot Area, four (4) bedrooms For every additional bedroom or lodging the Lot area must be increased by 90 Corner Lot m (39.4 ft) sq. m (4,251.7 sq. ft.) for or lodging rooms,",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Corner Lot 12.0 m (39.4 ft)",
         "applicability": {
           "applies_to_lot_contexts": [
             "corner_lot"
@@ -4078,14 +4190,56 @@
           "conditions": []
         },
         "numeric_value_refs": [
-          "zone-r-3-num-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7-corner-lot-1",
-          "zone-r-3-num-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7-corner-lot-2"
+          "zone-r-3-num-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7-corner-lot-1"
         ],
         "term_refs": [],
         "source_refs": [
           {
             "source_ref_type": "table_row",
             "source_ref_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3-req-zone-r-3-clause-16-4-room-count-a",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "a",
+        "requirement_text_raw": "For the first 325 sq. m (3,498.3 sq. ft.) for an interior lot and 395 sq. m (4,251.7 sq. ft.) for a corner lot of Lot Area, four (4) bedrooms are permitted;",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-3-num-zone-r-3-clause-16-4-room-count-a-1",
+          "zone-r-3-num-zone-r-3-clause-16-4-room-count-a-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3-clause-16-4-room-count-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3-req-zone-r-3-clause-16-4-room-count-b",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "b",
+        "requirement_text_raw": "For every additional bedroom or lodging room over four (4) bedrooms or lodging rooms, the Lot area must be increased by 90 sq. m (968.7 sq. ft.) thereof.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-3-num-zone-r-3-clause-16-4-room-count-b-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3-clause-16-4-room-count-b"
           }
         ],
         "confidence": "medium"
@@ -4162,7 +4316,9 @@
           "zone-r-3-req-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-5-corner-lot",
           "zone-r-3-req-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-6-corner-lot",
           "zone-r-3-req-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7-interior-lot",
-          "zone-r-3-req-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7-corner-lot"
+          "zone-r-3-req-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-7-corner-lot",
+          "zone-r-3-req-zone-r-3-clause-16-4-room-count-a",
+          "zone-r-3-req-zone-r-3-clause-16-4-room-count-b"
         ],
         "source_section_ref": "zone-r-3-section-16-1",
         "confidence": "medium"
@@ -4322,19 +4478,5 @@
       }
     ]
   },
-  "review_flags": [
-    {
-      "review_flag_id": "zone-r-3-flag-unparsed-table-value-zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-6-interior-lot",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: 6.0",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-r-3-table-regulations-for-lodging-houses-and-group-homes-row-6-interior_lot"
-        }
-      ]
-    }
-  ]
+  "review_flags": []
 }

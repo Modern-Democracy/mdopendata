@@ -509,19 +509,26 @@
       },
       {
         "numeric_value_id": "zone-cda-num-zone-cda-clause-44-3-2-1",
-        "value_raw": "3 acres",
-        "value": 3,
-        "unit": "acre",
+        "value_raw": "1.2 hectares (3 acres)",
+        "value": 1.2,
+        "unit": "ha",
         "measure_type": "area",
         "comparator": "less_than",
-        "alternative_values": [],
+        "alternative_values": [
+          {
+            "value_raw": "3 acres",
+            "value": 3,
+            "unit": "acre",
+            "measure_type": "area"
+          }
+        ],
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-cda-clause-44-3-2"
           }
         ],
-        "confidence": "medium"
+        "confidence": "high"
       }
     ],
     "requirements": [
@@ -545,6 +552,38 @@
           }
         ],
         "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-cda-req-zone-cda-clause-44-3-2",
+        "requirement_type": "process_requirement",
+        "requirement_category": "development_concept_plan_eligibility",
+        "requirement_label_raw": "44.3.2",
+        "requirement_text_raw": "A Lot that is less than 1.2 hectares (3 acres) and existed prior to the effective date of this by-law may submit a Development Concept Plan.",
+        "applicability": {
+          "conditions": [
+            {
+              "condition_type": "pre_existing_lot",
+              "condition_text_raw": "existed prior to the effective date of this by-law",
+              "source_refs": [
+                {
+                  "source_ref_type": "clause",
+                  "source_ref_id": "zone-cda-clause-44-3-2"
+                }
+              ]
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-cda-num-zone-cda-clause-44-3-2-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-cda-clause-44-3-2"
+          }
+        ],
+        "confidence": "high"
       }
     ],
     "regulation_groups": [
@@ -560,7 +599,8 @@
           "conditions": []
         },
         "requirement_refs": [
-          "zone-cda-req-zone-cda-clause-44-3-1"
+          "zone-cda-req-zone-cda-clause-44-3-1",
+          "zone-cda-req-zone-cda-clause-44-3-2"
         ],
         "source_section_ref": "zone-cda-section-44-1",
         "confidence": "medium"
@@ -620,29 +660,7 @@
         "confidence": "medium"
       }
     ],
-    "other_requirements": [
-      {
-        "requirement_id": "zone-cda-req-zone-cda-clause-44-3-2",
-        "requirement_type": "other",
-        "requirement_category": "a_lot_that_is_less_than_1_2_hectares_3_acres_and_existed_prior_to_the_effective_",
-        "requirement_label_raw": "44.3.2",
-        "requirement_text_raw": "A Lot that is less than 1.2 hectares (3 acres) and existed prior to the effective date of this by-law may submit a Development Concept Plan.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-cda-num-zone-cda-clause-44-3-2-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-cda-clause-44-3-2"
-          }
-        ],
-        "confidence": "needs_review"
-      }
-    ],
+    "other_requirements": [],
     "cross_references": [
       {
         "relationship_id": "zone-cda-cross-reference-references-zone-cda-zone-cda-clause-44-1-1",

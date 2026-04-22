@@ -528,7 +528,13 @@ def rebuild_table_from_pdf(doc: Any, section: dict[str, Any], next_section: dict
 
     rows_out = []
     row_order = 0
+    current: dict[str, Any] | None = None
+    previous_requirement_right: float | None = None
+    previous_value_bounds: list[tuple[float, float]] | None = None
+    carry_across_pages = first_table.get("table_id") == "zone-dc-table-regulations-for-permitted-uses"
     for pdf_page in range(int(pdf_start), int(pdf_end) + 1):
+        if not carry_across_pages:
+            current = None
         words = [(w[0], w[1], w[2], w[3], w[4]) for w in doc[pdf_page - 1].get_text("words")]
         y_start = find_heading_y(words, section.get("section_title_raw") or "")
         if y_start is None:
@@ -545,7 +551,17 @@ def rebuild_table_from_pdf(doc: Any, section: dict[str, Any], next_section: dict
         ]
         lines = group_words_into_lines(table_words)
         requirement_right, value_bounds = infer_table_column_bounds(lines, value_columns)
-        current: dict[str, Any] | None = None
+        if (
+            carry_across_pages
+            and pdf_page != int(pdf_start)
+            and previous_requirement_right is not None
+            and previous_value_bounds is not None
+        ):
+            requirement_right = previous_requirement_right
+            value_bounds = previous_value_bounds
+        elif carry_across_pages:
+            previous_requirement_right = requirement_right
+            previous_value_bounds = value_bounds
         for line in lines:
             line_text = clean_text(" ".join(word for _x, word in sorted(line)))
             if not line_text:
@@ -628,6 +644,408 @@ def rebuild_schema_tables_from_pdf(doc: Any, data: dict[str, Any]) -> bool:
     return changed
 
 
+def repair_mur_mixed_density_section(data: dict[str, Any]) -> bool:
+    metadata = data.get("document_metadata") or {}
+    if metadata.get("zone_code") != "MUR":
+        return False
+    raw_data = data.get("raw_data") or {}
+    sections = raw_data.get("sections_raw") or []
+    section = next((item for item in sections if item.get("section_id") == "zone-mur-section-21-2"), None)
+    if not section or not section.get("tables_raw"):
+        return False
+    parent_id = "zone-mur-clause-21-2-2"
+    page_80 = {"pdf_page_start": 80, "pdf_page_end": 80, "bylaw_page_start": 80, "bylaw_page_end": 80}
+    page_81 = {"pdf_page_start": 81, "pdf_page_end": 81, "bylaw_page_start": 81, "bylaw_page_end": 81}
+    clauses = [
+        (
+            "zone-mur-clause-21-2-1",
+            "21.2.1",
+            "Development within the MUR Zone is meant to be of a mixed variety of building forms and density. Building forms within this Zone shall consist of a combination of Townhouse Dwellings, Semi-detached or Duplex Dwellings, Single-detached Dwellings, Nursing Homes and Community Care Facilities.",
+            None,
+            page_80,
+        ),
+        (
+            parent_id,
+            "21.2.2",
+            "Within the MUR Zone the following Building forms shall be permitted on any Block in the percentages indicated:",
+            None,
+            page_80,
+        ),
+        (
+            "zone-mur-clause-21-2-2-a",
+            "a",
+            "Semi-detached and Duplex Dwellings shall be permitted on up to 25% of the Lots;",
+            parent_id,
+            page_80,
+        ),
+        (
+            "zone-mur-clause-21-2-2-b",
+            "b",
+            "Townhouses/Stacked Townhouses/Block Townhouse Dwellings shall be permitted on up to 25% of the Lots;",
+            parent_id,
+            page_80,
+        ),
+        (
+            "zone-mur-clause-21-2-2-c",
+            "c",
+            "Single-detached Dwellings shall be permitted on up to 35% of the Lots; and",
+            parent_id,
+            page_80,
+        ),
+        (
+            "zone-mur-clause-21-2-2-d",
+            "d",
+            "Institutional Uses as permitted in the R-3 Zone shall be permitted on up to 15% of the Lots. However, if the percentage for Institutional Uses is not used than the percentage allocated to this use can be allocated in 1/3 increments for the remaining uses as stipulated in this section or the remaining portion can be allocated in whole to Single-detached Dwellings.",
+            parent_id,
+            page_80,
+        ),
+        (
+            "zone-mur-clause-21-2-3",
+            "21.2.3",
+            "Single-detached, Semi-detached and Duplex Dwellings shall be permitted on adjoining Lots on the same side of the street adjacent to townhouse Dwellings. At least one side of a run of semi-detached or duplex Dwelling must be flanked by a Single-detached Dwelling.",
+            None,
+            page_80,
+        ),
+        (
+            "zone-mur-clause-21-2-4",
+            "21.2.4",
+            "No more than three (3) Townhouse Dwellings with a maximum of twelve (12) units total on all three (3) lots shall be permitted to be constructed on adjoining Lots on the same side of the street.",
+            None,
+            page_80,
+        ),
+        (
+            "zone-mur-clause-21-2-5",
+            "21.2.5",
+            "At no time shall more than two (2) Townhouse Dwelling consisting of more than six (6) Dwelling Units be permitted to be constructed on adjoining Lots.",
+            None,
+            page_81,
+        ),
+        (
+            "zone-mur-clause-21-2-6",
+            "21.2.6",
+            "Subdivision of land within the MUR Zone shall be undertaken in Phases. Prior to approval of a Subdivision within the MUR Zone a concept plan shall be submitted for the overall parcel. The concept plan shall indicate the Phases of Development and shall ensure the mixed density formula has been satisfied for the overall parcel of land.",
+            None,
+            page_81,
+        ),
+    ]
+    section["clauses_raw"] = [
+        {
+            "clause_id": clause_id_value,
+            "clause_label_raw": label,
+            "clause_text_raw": text,
+            "parent_clause_id": parent_clause_id,
+            "source_order": order,
+            "citations": cite,
+        }
+        for order, (clause_id_value, label, text, parent_clause_id, cite) in enumerate(clauses, start=1)
+    ]
+    section["tables_raw"] = []
+    raw_data["tables_raw"] = [
+        table_ref for table_ref in raw_data.get("tables_raw") or [] if table_ref.get("section_id") != section["section_id"]
+    ]
+    source_units = raw_data.get("source_units") or []
+    if source_units:
+        source_units[0]["text_raw"] = "\n".join(
+            clause["clause_text_raw"]
+            for raw_section in sections
+            for clause in raw_section.get("clauses_raw") or []
+        )
+    rebuild_clause_refs(data)
+    return True
+
+
+def make_table_row(table_id_value: str, row_order: int, row_number: str, requirement: str, values: dict[str, str]) -> dict[str, Any]:
+    row_id = f"{table_id_value}-row-{row_order}"
+    cells = [
+        {"cell_id": f"{row_id}-row-number", "column_id": "row_number", "cell_text_raw": row_number},
+        {"cell_id": f"{row_id}-requirement", "column_id": "requirement", "cell_text_raw": requirement},
+    ]
+    for column_id, value in values.items():
+        cells.append({"cell_id": f"{row_id}-{column_id}", "column_id": column_id, "cell_text_raw": value})
+    return {"row_id": row_id, "source_order": row_order, "cells_raw": cells}
+
+
+def repair_r3_lodging_houses_table(data: dict[str, Any]) -> bool:
+    metadata = data.get("document_metadata") or {}
+    if metadata.get("zone_code") != "R-3":
+        return False
+    raw_data = data.get("raw_data") or {}
+    sections = raw_data.get("sections_raw") or []
+    section = next(
+        (
+            item
+            for item in sections
+            if item.get("section_title_raw") == "REGULATIONS FOR LODGING HOUSES AND GROUP HOMES"
+        ),
+        None,
+    )
+    if not section or not section.get("tables_raw"):
+        return False
+    table = section["tables_raw"][0]
+    if table.get("table_id") != "zone-r-3-table-regulations-for-lodging-houses-and-group-homes":
+        return False
+    table_id_value = table["table_id"]
+    table["rows_raw"] = [
+        make_table_row(
+            table_id_value,
+            1,
+            "1",
+            "Lot Area (Minimum)",
+            {"interior_lot": "325 sq. m (3,498.3 sq. ft)", "corner_lot": "395 sq. m (4,251.9 sq. ft)"},
+        ),
+        make_table_row(
+            table_id_value,
+            2,
+            "2",
+            "Lot Frontage (Minimum)",
+            {"interior_lot": "10.6 m (34.8 ft)", "corner_lot": "15 m (49.2 ft)"},
+        ),
+        make_table_row(
+            table_id_value,
+            3,
+            "3",
+            "Front Yard (Minimum)",
+            {"interior_lot": "6.0 m (19.7 ft)", "corner_lot": "6.0 m (19.7 ft)"},
+        ),
+        make_table_row(
+            table_id_value,
+            4,
+            "4",
+            "Rear Yard (Minimum)",
+            {"interior_lot": "6.0 m (19.7 ft)", "corner_lot": "6.0 m (19.7 ft)"},
+        ),
+        make_table_row(
+            table_id_value,
+            5,
+            "5",
+            "Side Yard (Minimum)",
+            {"interior_lot": "1.8 m (6 ft)", "corner_lot": "1.83 m (6 ft)"},
+        ),
+        make_table_row(
+            table_id_value,
+            6,
+            "6",
+            "Flankage Yard (Minimum)",
+            {"interior_lot": "", "corner_lot": "6.0 m (19.7 ft)"},
+        ),
+        make_table_row(
+            table_id_value,
+            7,
+            "7",
+            "Height (Maximum)",
+            {"interior_lot": "12.0 m (39.4 ft)", "corner_lot": "12.0 m (39.4 ft)"},
+        ),
+    ]
+    parent_clause_id_value = "zone-r-3-clause-16-4-room-count"
+    room_clauses = [
+        {
+            "clause_id": parent_clause_id_value,
+            "clause_label_raw": "",
+            "clause_text_raw": "The number of rooms is determined by the following:",
+            "parent_clause_id": None,
+            "source_order": 1,
+            "citations": {"pdf_page_start": 73, "pdf_page_end": 73, "bylaw_page_start": 73, "bylaw_page_end": 73},
+        },
+        {
+            "clause_id": "zone-r-3-clause-16-4-room-count-a",
+            "clause_label_raw": "a",
+            "clause_text_raw": "For the first 325 sq. m (3,498.3 sq. ft.) for an interior lot and 395 sq. m (4,251.7 sq. ft.) for a corner lot of Lot Area, four (4) bedrooms are permitted;",
+            "parent_clause_id": parent_clause_id_value,
+            "source_order": 2,
+            "citations": {"pdf_page_start": 73, "pdf_page_end": 73, "bylaw_page_start": 73, "bylaw_page_end": 73},
+        },
+        {
+            "clause_id": "zone-r-3-clause-16-4-room-count-b",
+            "clause_label_raw": "b",
+            "clause_text_raw": "For every additional bedroom or lodging room over four (4) bedrooms or lodging rooms, the Lot area must be increased by 90 sq. m (968.7 sq. ft.) thereof.",
+            "parent_clause_id": parent_clause_id_value,
+            "source_order": 3,
+            "citations": {"pdf_page_start": 73, "pdf_page_end": 73, "bylaw_page_start": 73, "bylaw_page_end": 73},
+        },
+    ]
+    existing = [
+        clause
+        for clause in section.get("clauses_raw") or []
+        if not str(clause.get("clause_id") or "").startswith(parent_clause_id_value)
+    ]
+    section["clauses_raw"] = [*existing, *room_clauses]
+    source_units = raw_data.get("source_units") or []
+    if source_units:
+        source_units[0]["text_raw"] = "\n".join(
+            clause["clause_text_raw"]
+            for raw_section in sections
+            for clause in raw_section.get("clauses_raw") or []
+        )
+    rebuild_clause_refs(data)
+    return True
+
+
+def repair_dc_bonus_height_section(data: dict[str, Any]) -> bool:
+    metadata = data.get("document_metadata") or {}
+    if metadata.get("zone_code") != "DC":
+        return False
+    raw_data = data.get("raw_data") or {}
+    sections = raw_data.get("sections_raw") or []
+    section = next((item for item in sections if item.get("section_id") == "zone-dc-section-32-3"), None)
+    if not section:
+        return False
+    page_97 = {"pdf_page_start": 97, "pdf_page_end": 97, "bylaw_page_start": 97, "bylaw_page_end": 97}
+    page_98 = {"pdf_page_start": 98, "pdf_page_end": 98, "bylaw_page_start": 98, "bylaw_page_end": 98}
+    clauses = [
+        ("zone-dc-clause-32-3-1", "32.3.1", "Properties in the DC Zone are eligible for a Bonus Height subject to the following regulations:", None, page_97),
+        ("zone-dc-clause-32-3-1-a", "a", "A bonus of up to a maximum Building Height of 32.5m (106.6ft).", "zone-dc-clause-32-3-1", page_97),
+        ("zone-dc-clause-32-3-1-b", "b", "Lot dimensions:", "zone-dc-clause-32-3-1", page_97),
+        ("zone-dc-clause-32-3-1-b-i", "i", "Minimum Lot Frontage of 18.3 m (60 ft) and minimum Lot Depth of 30.m (98.4ft) for a Building Height up to 21.3 m (69.9 ft).", "zone-dc-clause-32-3-1-b", page_97),
+        ("zone-dc-clause-32-3-1-b-ii", "ii", "Minimum Lot Frontage of 41 m (135 ft) and minimum Lot Depth of 36m (118ft) for Buildings taller than 21.3 m (69.9 ft).", "zone-dc-clause-32-3-1-b", page_97),
+        ("zone-dc-clause-32-3-1-c", "c", "Parking Structures are ineligible for a Bonus Height.", "zone-dc-clause-32-3-1", page_97),
+        ("zone-dc-clause-32-3-2", "32.3.2", "Massing for Buildings up to 21.3 m (69.9 ft):", None, page_97),
+        ("zone-dc-clause-32-3-2-a", "a", "The components above the base Building that are a bonus in Height shall be subject to:", "zone-dc-clause-32-3-2", page_97),
+        ("zone-dc-clause-32-3-2-a-i", "i", "A minimum 3.0m (9.8ft) Stepback from the base Building on the front façade.", "zone-dc-clause-32-3-2-a", page_97),
+        ("zone-dc-clause-32-3-2-a-ii", "ii", "A minimum 5.5m (18ft) Side Yard Setback or Stepback to ensure adequate separation distances of the upper levels from adjacent properties that may also be eligible for a Height bonus.", "zone-dc-clause-32-3-2-a", page_97),
+        ("zone-dc-clause-32-3-2-a-iii", "iii", "A 45-degree angular planes originating from the top of the flank or rear façade of the base Building that faces abutting properties.", "zone-dc-clause-32-3-2-a", page_97),
+        ("zone-dc-clause-32-3-3", "32.3.3", "Massing for buildings greater than 21.3 m (69.9 ft):", None, page_97),
+        ("zone-dc-clause-32-3-3-a", "a", "The components above the base Building that are a bonus in Height shall be subject to:", "zone-dc-clause-32-3-3", page_97),
+        ("zone-dc-clause-32-3-3-a-i", "i", "A minimum 6.0m (19.7ft) Stepback above the base Building or above that portion of the Building that is taller than 21.3 m (69.9 ft) on the front façade.", "zone-dc-clause-32-3-3-a", page_97),
+        ("zone-dc-clause-32-3-3-b", "b", "The portion of the Building above 21.3 m (70 ft) shall have:", "zone-dc-clause-32-3-3", page_97),
+        ("zone-dc-clause-32-3-3-b-i", "i", "A maximum gross floor plate size of 750 sq m (8,072.9 sq ft);", "zone-dc-clause-32-3-3-b", page_97),
+        ("zone-dc-clause-32-3-3-b-ii", "ii", "A minimum 10m (32.8ft) interior Yard Setbacks; and", "zone-dc-clause-32-3-3-b", page_97),
+        ("zone-dc-clause-32-3-3-b-iii", "iii", "A maximum 25.0m (82ft) Building width addressing the Street.", "zone-dc-clause-32-3-3-b", page_97),
+        ("zone-dc-clause-32-3-4", "32.3.4", "Where bonus heights are considered on properties subject to a Landmark View Plane as identified in the Official Plan, the additional heights shall not be visible over Province House from the vantage of a pedestrian (1.7m or 5.8ft) facing north on Great George Street at any point between Richmond Street and Dorchester Street.", None, page_98),
+        ("zone-dc-clause-32-3-5", "32.3.5", "Bonus Height applications are subject to the provisions in the Bonus Height Applications Section of this by-law.", None, page_98),
+    ]
+    section["clauses_raw"] = [
+        {
+            "clause_id": clause_id_value,
+            "clause_label_raw": label,
+            "clause_text_raw": text,
+            "parent_clause_id": parent_clause_id,
+            "source_order": order,
+            "citations": cite,
+        }
+        for order, (clause_id_value, label, text, parent_clause_id, cite) in enumerate(clauses, start=1)
+    ]
+    source_units = raw_data.get("source_units") or []
+    if source_units:
+        source_units[0]["text_raw"] = "\n".join(
+            clause["clause_text_raw"]
+            for raw_section in sections
+            for clause in raw_section.get("clauses_raw") or []
+        )
+    rebuild_clause_refs(data)
+    return True
+
+
+def repair_dms_bonus_height_section(data: dict[str, Any]) -> bool:
+    metadata = data.get("document_metadata") or {}
+    if metadata.get("zone_code") != "DMS":
+        return False
+    raw_data = data.get("raw_data") or {}
+    sections = raw_data.get("sections_raw") or []
+    section = next((item for item in sections if item.get("section_id") == "zone-dms-section-31-3"), None)
+    if not section:
+        return False
+    page_95 = {"pdf_page_start": 95, "pdf_page_end": 95, "bylaw_page_start": 95, "bylaw_page_end": 95}
+    clauses = [
+        ("zone-dms-clause-31-3-1", "31.3.1", "Properties in the DC Zone are eligible for a Bonus Height subject to the following regulations:", None, page_95),
+        ("zone-dms-clause-31-3-1-a", "a", "A bonus of up to a maximum Building Height of 32.5m (106.6ft).", "zone-dms-clause-31-3-1", page_95),
+        ("zone-dms-clause-31-3-1-b", "b", "Lot dimensions:", "zone-dms-clause-31-3-1", page_95),
+        ("zone-dms-clause-31-3-1-b-i", "i", "Minimum Lot Frontage of 18.3 m (60 ft) and minimum Lot Depth of 30.m (98.4ft) for a Building Height up to 21.3 m (69.9 ft).", "zone-dms-clause-31-3-1-b", page_95),
+        ("zone-dms-clause-31-3-1-b-ii", "ii", "Minimum Lot Frontage of 41 m (135 ft) and minimum Lot Depth of 36m (118ft) for Buildings taller than 21.3 m (69.9 ft).", "zone-dms-clause-31-3-1-b", page_95),
+        ("zone-dms-clause-31-3-1-c", "c", "Parking Structures are ineligible for a Bonus Height.", "zone-dms-clause-31-3-1", page_95),
+        ("zone-dms-clause-31-3-2", "31.3.2", "Massing for Buildings up to 21.3 m (69.9 ft):", None, page_95),
+        ("zone-dms-clause-31-3-2-a", "a", "The components above the base Building that are a bonus in Height shall be subject to:", "zone-dms-clause-31-3-2", page_95),
+        ("zone-dms-clause-31-3-2-a-i", "i", "A minimum 3.0m (9.8ft) Stepback from the base Building on the front façade.", "zone-dms-clause-31-3-2-a", page_95),
+        ("zone-dms-clause-31-3-2-a-ii", "ii", "A minimum 5.5m (18ft) Side Yard Setback or Stepback to ensure adequate separation distances of the upper levels from adjacent properties that may also be eligible for a Height bonus.", "zone-dms-clause-31-3-2-a", page_95),
+        ("zone-dms-clause-31-3-2-a-iii", "iii", "A 45-degree angular planes originating from the top of the flank or rear façade of the base Building that faces abutting properties.", "zone-dms-clause-31-3-2-a", page_95),
+        ("zone-dms-clause-31-3-3", "31.3.3", "Massing for buildings greater than 21.3 m (69.9 ft):", None, page_95),
+        ("zone-dms-clause-31-3-3-a", "a", "The components above the base Building that are a bonus in Height shall be subject to:", "zone-dms-clause-31-3-3", page_95),
+        ("zone-dms-clause-31-3-3-a-i", "i", "A minimum 6.0m (19.7ft) Stepback above the base Building or above that portion of the Building that is taller than 21.3 m (69.9 ft) on the front façade.", "zone-dms-clause-31-3-3-a", page_95),
+        ("zone-dms-clause-31-3-3-b", "b", "The portion of the Building above 21.3 m (70 ft) shall have:", "zone-dms-clause-31-3-3", page_95),
+        ("zone-dms-clause-31-3-3-b-i", "i", "A maximum gross floor plate size of 750 sq m (8,072.9 sq ft);", "zone-dms-clause-31-3-3-b", page_95),
+        ("zone-dms-clause-31-3-3-b-ii", "ii", "A minimum 10m (32.8ft) interior Yard Setbacks; and", "zone-dms-clause-31-3-3-b", page_95),
+        ("zone-dms-clause-31-3-3-b-iii", "iii", "A maximum 25.0m (82ft) Building width addressing the Street.", "zone-dms-clause-31-3-3-b", page_95),
+        ("zone-dms-clause-31-3-4", "31.3.4", "Where bonus heights are considered on properties subject to a Landmark View Plane as identified in the Official Plan, the additional heights shall not be visible over Province House from the vantage of a pedestrian (1.7m or 5.8ft) facing north on Great George Street at any point between Richmond Street and Dorchester Street.", None, page_95),
+        ("zone-dms-clause-31-3-5", "31.3.5", "Bonus Height applications are subject to the provisions in the Bonus Height Applications Section of this by-law.", None, page_95),
+    ]
+    section["clauses_raw"] = [
+        {
+            "clause_id": clause_id_value,
+            "clause_label_raw": label,
+            "clause_text_raw": text,
+            "parent_clause_id": parent_clause_id,
+            "source_order": order,
+            "citations": cite,
+        }
+        for order, (clause_id_value, label, text, parent_clause_id, cite) in enumerate(clauses, start=1)
+    ]
+    source_units = raw_data.get("source_units") or []
+    if source_units:
+        source_units[0]["text_raw"] = "\n".join(
+            clause["clause_text_raw"]
+            for raw_section in sections
+            for clause in raw_section.get("clauses_raw") or []
+        )
+    rebuild_clause_refs(data)
+    return True
+
+
+def repair_wf_bonus_height_section(data: dict[str, Any]) -> bool:
+    metadata = data.get("document_metadata") or {}
+    if metadata.get("zone_code") != "WF":
+        return False
+    raw_data = data.get("raw_data") or {}
+    sections = raw_data.get("sections_raw") or []
+    section = next((item for item in sections if item.get("section_id") == "zone-wf-section-34-4"), None)
+    if not section:
+        return False
+    page_102 = {"pdf_page_start": 102, "pdf_page_end": 102, "bylaw_page_start": 102, "bylaw_page_end": 102}
+    page_103 = {"pdf_page_start": 103, "pdf_page_end": 103, "bylaw_page_start": 103, "bylaw_page_end": 103}
+    page_104 = {"pdf_page_start": 104, "pdf_page_end": 104, "bylaw_page_start": 104, "bylaw_page_end": 104}
+    clauses = [
+        ("zone-wf-clause-34-4-1", "34.4.1", "Properties in the DWF Zone are eligible for a Bonus Height subject to the following regulations.", None, page_102),
+        ("zone-wf-clause-34-4-1-a", "a", "The maximum Height as specified on Map D may be exceeded to the maximum bonus Height as specified on Map E.", "zone-wf-clause-34-4-1", page_102),
+        ("zone-wf-clause-34-4-1-a-i", "i", "A bonus of up to a maximum Building Height of 24.5m (80.4 ft) for properties fronting on Water St.", "zone-wf-clause-34-4-1-a", page_102),
+        ("zone-wf-clause-34-4-1-a-ii", "ii", "A bonus of up to a maximum Building Height of 32.5m (106.6 ft) for all other properties.", "zone-wf-clause-34-4-1-a", page_103),
+        ("zone-wf-clause-34-4-1-b", "b", "Parking Structures are ineligible for a Bonus Height.", "zone-wf-clause-34-4-1", page_103),
+        ("zone-wf-clause-34-4-2", "34.4.2", "Massing for buildings up to 21.3 m (69.9 ft):", None, page_103),
+        ("zone-wf-clause-34-4-2-a", "a", "The components above the base Building that are a bonus in Height shall be subject to:", "zone-wf-clause-34-4-2", page_103),
+        ("zone-wf-clause-34-4-2-a-i", "i", "A minimum 3.0m (9.8ft) Stepback from the base Building on the front façade.", "zone-wf-clause-34-4-2-a", page_103),
+        ("zone-wf-clause-34-4-2-a-ii", "ii", "A minimum 5.5m (18ft) Side Yard Setback or Stepback to ensure adequate separation distances of the upper levels from adjacent properties that may also be eligible for a Height bonus.", "zone-wf-clause-34-4-2-a", page_103),
+        ("zone-wf-clause-34-4-2-a-iii", "iii", "A 45-degree angular planes originating from the top of the flank or rear façade of the base Building that faces abutting properties.", "zone-wf-clause-34-4-2-a", page_103),
+        ("zone-wf-clause-34-4-3", "34.4.3", "Massing for Buildings greater than 21.3 m (69.9 ft):", None, page_103),
+        ("zone-wf-clause-34-4-3-a", "a", "The components above the base Building that are a bonus in Height shall be subject to:", "zone-wf-clause-34-4-3", page_103),
+        ("zone-wf-clause-34-4-3-a-i", "i", "A minimum 6.0m (19.7ft) Stepback above the base Building or above that portion of the Building that is taller than 21.3 m (69.9 ft) on the front façade.", "zone-wf-clause-34-4-3-a", page_103),
+        ("zone-wf-clause-34-4-3-b", "b", "The portion of the Building above 21.3 m (69.9 ft) shall have:", "zone-wf-clause-34-4-3", page_103),
+        ("zone-wf-clause-34-4-3-b-i", "i", "A maximum gross floor plate size of 750 sq m (8,072.9 sq ft);", "zone-wf-clause-34-4-3-b", page_103),
+        ("zone-wf-clause-34-4-3-b-ii", "ii", "A minimum 10m (32.8 ft) interior Yard Setbacks; and", "zone-wf-clause-34-4-3-b", page_103),
+        ("zone-wf-clause-34-4-3-b-iii", "iii", "A maximum 25.0m (82 ft) Building width addressing the Street.", "zone-wf-clause-34-4-3-b", page_103),
+        ("zone-wf-clause-34-4-4", "34.4.4", "Bonus Height applications are subject to the provisions in the Bonus Height Applications Section of this by-law.", None, page_103),
+        ("zone-wf-clause-34-4-5", "34.4.5", "Map D: Maximum Height", None, page_103),
+        ("zone-wf-clause-34-4-6", "34.4.6", "16.5 m (54.1 ft) 24.5 m (80.4 ft)", None, page_103),
+        ("zone-wf-clause-34-4-7", "34.4.7", "Map E: Maximum Bonus Height", None, page_104),
+    ]
+    section["clauses_raw"] = [
+        {
+            "clause_id": clause_id_value,
+            "clause_label_raw": label,
+            "clause_text_raw": text,
+            "parent_clause_id": parent_clause_id,
+            "source_order": order,
+            "citations": cite,
+        }
+        for order, (clause_id_value, label, text, parent_clause_id, cite) in enumerate(clauses, start=1)
+    ]
+    source_units = raw_data.get("source_units") or []
+    if source_units:
+        source_units[0]["text_raw"] = "\n".join(
+            clause["clause_text_raw"]
+            for raw_section in sections
+            for clause in raw_section.get("clauses_raw") or []
+        )
+    rebuild_clause_refs(data)
+    return True
+
+
 def rebuild_clause_refs(data: dict[str, Any]) -> dict[str, Any]:
     raw_data = data.get("raw_data") or {}
     refs = []
@@ -664,6 +1082,443 @@ def refresh_schema_numeric_values(data: dict[str, Any]) -> dict[str, Any]:
     structured["other_requirements"] = other_requirements
     for group in structured.get("regulation_groups") or []:
         group["requirement_refs"] = [req["requirement_id"] for req in requirements]
+    return data
+
+
+def apply_dc_bonus_height_context(data: dict[str, Any]) -> dict[str, Any]:
+    metadata = data.get("document_metadata") or {}
+    if metadata.get("zone_code") != "DC":
+        return data
+    structured = data.get("structured_data") or {}
+    contextual_clause_ids = {
+        "zone-dc-clause-32-3-2",
+        "zone-dc-clause-32-3-3",
+        "zone-dc-clause-32-3-3-b",
+    }
+
+    def sourced_from(req: dict[str, Any], clause_id_value: str) -> bool:
+        return any(
+            ref.get("source_ref_type") == "clause" and ref.get("source_ref_id") == clause_id_value
+            for ref in req.get("source_refs") or []
+        )
+
+    structured["other_requirements"] = [
+        req
+        for req in structured.get("other_requirements") or []
+        if not any(sourced_from(req, clause_id_value) for clause_id_value in contextual_clause_ids)
+    ]
+    structured["numeric_values"] = [
+        value
+        for value in structured.get("numeric_values") or []
+        if not any(
+            ref.get("source_ref_type") == "clause" and ref.get("source_ref_id") in contextual_clause_ids
+            for ref in value.get("source_refs") or []
+        )
+    ]
+    conditions_by_clause = {
+        "zone-dc-clause-32-3-2-a-i": [
+            ("building_height_range", "Massing for Buildings up to 21.3 m (69.9 ft):", "zone-dc-clause-32-3-2"),
+            ("bonus_height_component", "The components above the base Building that are a bonus in Height shall be subject to:", "zone-dc-clause-32-3-2-a"),
+        ],
+        "zone-dc-clause-32-3-2-a-ii": [
+            ("building_height_range", "Massing for Buildings up to 21.3 m (69.9 ft):", "zone-dc-clause-32-3-2"),
+            ("bonus_height_component", "The components above the base Building that are a bonus in Height shall be subject to:", "zone-dc-clause-32-3-2-a"),
+        ],
+        "zone-dc-clause-32-3-2-a-iii": [
+            ("building_height_range", "Massing for Buildings up to 21.3 m (69.9 ft):", "zone-dc-clause-32-3-2"),
+            ("bonus_height_component", "The components above the base Building that are a bonus in Height shall be subject to:", "zone-dc-clause-32-3-2-a"),
+        ],
+        "zone-dc-clause-32-3-3-a-i": [
+            ("building_height_range", "Massing for buildings greater than 21.3 m (69.9 ft):", "zone-dc-clause-32-3-3"),
+            ("bonus_height_component", "The components above the base Building that are a bonus in Height shall be subject to:", "zone-dc-clause-32-3-3-a"),
+        ],
+        "zone-dc-clause-32-3-3-b-i": [
+            ("building_height_range", "Massing for buildings greater than 21.3 m (69.9 ft):", "zone-dc-clause-32-3-3"),
+            ("building_portion", "The portion of the Building above 21.3 m (70 ft) shall have:", "zone-dc-clause-32-3-3-b"),
+        ],
+        "zone-dc-clause-32-3-3-b-ii": [
+            ("building_height_range", "Massing for buildings greater than 21.3 m (69.9 ft):", "zone-dc-clause-32-3-3"),
+            ("building_portion", "The portion of the Building above 21.3 m (70 ft) shall have:", "zone-dc-clause-32-3-3-b"),
+        ],
+        "zone-dc-clause-32-3-3-b-iii": [
+            ("building_height_range", "Massing for buildings greater than 21.3 m (69.9 ft):", "zone-dc-clause-32-3-3"),
+            ("building_portion", "The portion of the Building above 21.3 m (70 ft) shall have:", "zone-dc-clause-32-3-3-b"),
+        ],
+    }
+    for req in structured.get("requirements") or []:
+        clause_id_value = next(
+            (
+                ref.get("source_ref_id")
+                for ref in req.get("source_refs") or []
+                if ref.get("source_ref_type") == "clause"
+            ),
+            None,
+        )
+        if clause_id_value not in conditions_by_clause:
+            continue
+        req.setdefault("applicability", {})["conditions"] = [
+            {
+                "condition_type": condition_type,
+                "condition_text_raw": condition_text,
+                "source_refs": [source_ref("clause", source_clause_id)],
+            }
+            for condition_type, condition_text, source_clause_id in conditions_by_clause[clause_id_value]
+        ]
+    return data
+
+
+def apply_dms_bonus_height_context(data: dict[str, Any]) -> dict[str, Any]:
+    metadata = data.get("document_metadata") or {}
+    if metadata.get("zone_code") != "DMS":
+        return data
+    structured = data.get("structured_data") or {}
+    contextual_clause_ids = {
+        "zone-dms-clause-31-3-2",
+        "zone-dms-clause-31-3-3",
+        "zone-dms-clause-31-3-3-b",
+    }
+
+    def sourced_from(req: dict[str, Any], clause_id_value: str) -> bool:
+        return any(
+            ref.get("source_ref_type") == "clause" and ref.get("source_ref_id") == clause_id_value
+            for ref in req.get("source_refs") or []
+        )
+
+    structured["other_requirements"] = [
+        req
+        for req in structured.get("other_requirements") or []
+        if not any(sourced_from(req, clause_id_value) for clause_id_value in contextual_clause_ids)
+    ]
+    structured["numeric_values"] = [
+        value
+        for value in structured.get("numeric_values") or []
+        if not any(
+            ref.get("source_ref_type") == "clause" and ref.get("source_ref_id") in contextual_clause_ids
+            for ref in value.get("source_refs") or []
+        )
+    ]
+    conditions_by_clause = {
+        "zone-dms-clause-31-3-2-a-i": [
+            ("building_height_range", "Massing for Buildings up to 21.3 m (69.9 ft):", "zone-dms-clause-31-3-2"),
+            ("bonus_height_component", "The components above the base Building that are a bonus in Height shall be subject to:", "zone-dms-clause-31-3-2-a"),
+        ],
+        "zone-dms-clause-31-3-2-a-ii": [
+            ("building_height_range", "Massing for Buildings up to 21.3 m (69.9 ft):", "zone-dms-clause-31-3-2"),
+            ("bonus_height_component", "The components above the base Building that are a bonus in Height shall be subject to:", "zone-dms-clause-31-3-2-a"),
+        ],
+        "zone-dms-clause-31-3-2-a-iii": [
+            ("building_height_range", "Massing for Buildings up to 21.3 m (69.9 ft):", "zone-dms-clause-31-3-2"),
+            ("bonus_height_component", "The components above the base Building that are a bonus in Height shall be subject to:", "zone-dms-clause-31-3-2-a"),
+        ],
+        "zone-dms-clause-31-3-3-a-i": [
+            ("building_height_range", "Massing for buildings greater than 21.3 m (69.9 ft):", "zone-dms-clause-31-3-3"),
+            ("bonus_height_component", "The components above the base Building that are a bonus in Height shall be subject to:", "zone-dms-clause-31-3-3-a"),
+        ],
+        "zone-dms-clause-31-3-3-b-i": [
+            ("building_height_range", "Massing for buildings greater than 21.3 m (69.9 ft):", "zone-dms-clause-31-3-3"),
+            ("building_portion", "The portion of the Building above 21.3 m (70 ft) shall have:", "zone-dms-clause-31-3-3-b"),
+        ],
+        "zone-dms-clause-31-3-3-b-ii": [
+            ("building_height_range", "Massing for buildings greater than 21.3 m (69.9 ft):", "zone-dms-clause-31-3-3"),
+            ("building_portion", "The portion of the Building above 21.3 m (70 ft) shall have:", "zone-dms-clause-31-3-3-b"),
+        ],
+        "zone-dms-clause-31-3-3-b-iii": [
+            ("building_height_range", "Massing for buildings greater than 21.3 m (69.9 ft):", "zone-dms-clause-31-3-3"),
+            ("building_portion", "The portion of the Building above 21.3 m (70 ft) shall have:", "zone-dms-clause-31-3-3-b"),
+        ],
+    }
+    for req in structured.get("requirements") or []:
+        clause_id_value = next(
+            (
+                ref.get("source_ref_id")
+                for ref in req.get("source_refs") or []
+                if ref.get("source_ref_type") == "clause"
+            ),
+            None,
+        )
+        if clause_id_value not in conditions_by_clause:
+            continue
+        req.setdefault("applicability", {})["conditions"] = [
+            {
+                "condition_type": condition_type,
+                "condition_text_raw": condition_text,
+                "source_refs": [source_ref("clause", source_clause_id)],
+            }
+            for condition_type, condition_text, source_clause_id in conditions_by_clause[clause_id_value]
+        ]
+    return data
+
+
+def apply_wf_bonus_height_context(data: dict[str, Any]) -> dict[str, Any]:
+    metadata = data.get("document_metadata") or {}
+    if metadata.get("zone_code") != "WF":
+        return data
+    structured = data.get("structured_data") or {}
+    contextual_clause_ids = {
+        "zone-wf-clause-34-4-2",
+        "zone-wf-clause-34-4-3",
+        "zone-wf-clause-34-4-3-b",
+        "zone-wf-clause-34-4-5",
+        "zone-wf-clause-34-4-6",
+        "zone-wf-clause-34-4-7",
+    }
+
+    def sourced_from(req: dict[str, Any], clause_id_value: str) -> bool:
+        return any(
+            ref.get("source_ref_type") == "clause" and ref.get("source_ref_id") == clause_id_value
+            for ref in req.get("source_refs") or []
+        )
+
+    structured["other_requirements"] = [
+        req
+        for req in structured.get("other_requirements") or []
+        if not any(sourced_from(req, clause_id_value) for clause_id_value in contextual_clause_ids)
+    ]
+    structured["numeric_values"] = [
+        value
+        for value in structured.get("numeric_values") or []
+        if not any(
+            ref.get("source_ref_type") == "clause" and ref.get("source_ref_id") in contextual_clause_ids
+            for ref in value.get("source_refs") or []
+        )
+    ]
+    conditions_by_clause = {
+        "zone-wf-clause-34-4-2-a-i": [
+            ("building_height_range", "Massing for buildings up to 21.3 m (69.9 ft):", "zone-wf-clause-34-4-2"),
+            ("bonus_height_component", "The components above the base Building that are a bonus in Height shall be subject to:", "zone-wf-clause-34-4-2-a"),
+        ],
+        "zone-wf-clause-34-4-2-a-ii": [
+            ("building_height_range", "Massing for buildings up to 21.3 m (69.9 ft):", "zone-wf-clause-34-4-2"),
+            ("bonus_height_component", "The components above the base Building that are a bonus in Height shall be subject to:", "zone-wf-clause-34-4-2-a"),
+        ],
+        "zone-wf-clause-34-4-2-a-iii": [
+            ("building_height_range", "Massing for buildings up to 21.3 m (69.9 ft):", "zone-wf-clause-34-4-2"),
+            ("bonus_height_component", "The components above the base Building that are a bonus in Height shall be subject to:", "zone-wf-clause-34-4-2-a"),
+        ],
+        "zone-wf-clause-34-4-3-a-i": [
+            ("building_height_range", "Massing for Buildings greater than 21.3 m (69.9 ft):", "zone-wf-clause-34-4-3"),
+            ("bonus_height_component", "The components above the base Building that are a bonus in Height shall be subject to:", "zone-wf-clause-34-4-3-a"),
+        ],
+        "zone-wf-clause-34-4-3-b-i": [
+            ("building_height_range", "Massing for Buildings greater than 21.3 m (69.9 ft):", "zone-wf-clause-34-4-3"),
+            ("building_portion", "The portion of the Building above 21.3 m (69.9 ft) shall have:", "zone-wf-clause-34-4-3-b"),
+        ],
+        "zone-wf-clause-34-4-3-b-ii": [
+            ("building_height_range", "Massing for Buildings greater than 21.3 m (69.9 ft):", "zone-wf-clause-34-4-3"),
+            ("building_portion", "The portion of the Building above 21.3 m (69.9 ft) shall have:", "zone-wf-clause-34-4-3-b"),
+        ],
+        "zone-wf-clause-34-4-3-b-iii": [
+            ("building_height_range", "Massing for Buildings greater than 21.3 m (69.9 ft):", "zone-wf-clause-34-4-3"),
+            ("building_portion", "The portion of the Building above 21.3 m (69.9 ft) shall have:", "zone-wf-clause-34-4-3-b"),
+        ],
+    }
+    for req in structured.get("requirements") or []:
+        clause_id_value = next(
+            (
+                ref.get("source_ref_id")
+                for ref in req.get("source_refs") or []
+                if ref.get("source_ref_type") == "clause"
+            ),
+            None,
+        )
+        if clause_id_value not in conditions_by_clause:
+            continue
+        req.setdefault("applicability", {})["conditions"] = [
+            {
+                "condition_type": condition_type,
+                "condition_text_raw": condition_text,
+                "source_refs": [source_ref("clause", source_clause_id)],
+            }
+            for condition_type, condition_text, source_clause_id in conditions_by_clause[clause_id_value]
+        ]
+    return data
+
+
+def apply_cda_development_concept_plan_context(data: dict[str, Any]) -> dict[str, Any]:
+    metadata = data.get("document_metadata") or {}
+    if metadata.get("zone_code") != "CDA":
+        return data
+    structured = data.get("structured_data") or {}
+    clause_id_value = "zone-cda-clause-44-3-2"
+    requirement_id = "zone-cda-req-zone-cda-clause-44-3-2"
+    numeric_id = "zone-cda-num-zone-cda-clause-44-3-2-1"
+    text = (
+        "A Lot that is less than 1.2 hectares (3 acres) and existed prior to the effective date of "
+        "this by-law may submit a Development Concept Plan."
+    )
+    structured["numeric_values"] = [
+        value
+        for value in structured.get("numeric_values") or []
+        if value.get("numeric_value_id") != numeric_id
+    ]
+    structured["numeric_values"].append(
+        {
+            "numeric_value_id": numeric_id,
+            "value_raw": "1.2 hectares (3 acres)",
+            "value": 1.2,
+            "unit": "ha",
+            "measure_type": "area",
+            "comparator": "less_than",
+            "alternative_values": [
+                {
+                    "value_raw": "3 acres",
+                    "value": 3,
+                    "unit": "acre",
+                    "measure_type": "area",
+                }
+            ],
+            "source_refs": [source_ref("clause", clause_id_value)],
+            "confidence": "high",
+        }
+    )
+    structured["other_requirements"] = [
+        req
+        for req in structured.get("other_requirements") or []
+        if req.get("requirement_id") != requirement_id
+    ]
+    structured["requirements"] = [
+        req
+        for req in structured.get("requirements") or []
+        if req.get("requirement_id") != requirement_id
+    ]
+    structured["requirements"].append(
+        {
+            "requirement_id": requirement_id,
+            "requirement_type": "process_requirement",
+            "requirement_category": "development_concept_plan_eligibility",
+            "requirement_label_raw": "44.3.2",
+            "requirement_text_raw": text,
+            "applicability": {
+                "conditions": [
+                    {
+                        "condition_type": "pre_existing_lot",
+                        "condition_text_raw": "existed prior to the effective date of this by-law",
+                        "source_refs": [source_ref("clause", clause_id_value)],
+                    }
+                ]
+            },
+            "numeric_value_refs": [numeric_id],
+            "term_refs": [],
+            "source_refs": [source_ref("clause", clause_id_value)],
+            "confidence": "high",
+        }
+    )
+    for group in structured.get("regulation_groups") or []:
+        refs = group.setdefault("requirement_refs", [])
+        if requirement_id not in refs:
+            refs.append(requirement_id)
+    return data
+
+
+def apply_pz_land_use_buffer_context(data: dict[str, Any]) -> dict[str, Any]:
+    metadata = data.get("document_metadata") or {}
+    if metadata.get("zone_code") != "PZ":
+        return data
+    structured = data.get("structured_data") or {}
+    numeric_ids = {
+        "zone-pz-num-zone-pz-clause-37-2-2-1",
+        "zone-pz-num-zone-pz-clause-37-2-4-1",
+    }
+    requirement_ids = {
+        "zone-pz-req-zone-pz-clause-37-2-2",
+        "zone-pz-req-zone-pz-clause-37-2-4",
+    }
+    structured["numeric_values"] = [
+        value
+        for value in structured.get("numeric_values") or []
+        if value.get("numeric_value_id") not in numeric_ids
+    ]
+    structured["numeric_values"].extend(
+        [
+            {
+                "numeric_value_id": "zone-pz-num-zone-pz-clause-37-2-2-1",
+                "value_raw": "5m (16.4 ft)",
+                "value": 5,
+                "unit": "m",
+                "measure_type": "length",
+                "comparator": "at_least",
+                "alternative_values": [
+                    {
+                        "value_raw": "16.4 ft",
+                        "value": 16.4,
+                        "unit": "ft",
+                        "measure_type": "length",
+                    }
+                ],
+                "source_refs": [source_ref("clause", "zone-pz-clause-37-2-2")],
+                "confidence": "high",
+            },
+            {
+                "numeric_value_id": "zone-pz-num-zone-pz-clause-37-2-4-1",
+                "value_raw": "8m (26.2 ft)",
+                "value": 8,
+                "unit": "m",
+                "measure_type": "length",
+                "comparator": "exact",
+                "alternative_values": [
+                    {
+                        "value_raw": "26.2 ft",
+                        "value": 26.2,
+                        "unit": "ft",
+                        "measure_type": "length",
+                    }
+                ],
+                "source_refs": [source_ref("clause", "zone-pz-clause-37-2-4")],
+                "confidence": "high",
+            },
+        ]
+    )
+    structured["other_requirements"] = [
+        req
+        for req in structured.get("other_requirements") or []
+        if req.get("requirement_id") not in requirement_ids
+    ]
+    structured["requirements"] = [
+        req
+        for req in structured.get("requirements") or []
+        if req.get("requirement_id") not in requirement_ids
+    ]
+    structured["requirements"].extend(
+        [
+            {
+                "requirement_id": "zone-pz-req-zone-pz-clause-37-2-2",
+                "requirement_type": "dimensional_standard",
+                "requirement_category": "land_use_buffer_width",
+                "requirement_label_raw": "37.2.2",
+                "requirement_text_raw": "Development within the Port Zone shall require a Land Use Buffer from adjacent Buildings of no less than 5m (16.4 ft) in width.",
+                "applicability": {"conditions": []},
+                "numeric_value_refs": ["zone-pz-num-zone-pz-clause-37-2-2-1"],
+                "term_refs": [],
+                "source_refs": [source_ref("clause", "zone-pz-clause-37-2-2")],
+                "confidence": "high",
+            },
+            {
+                "requirement_id": "zone-pz-req-zone-pz-clause-37-2-4",
+                "requirement_type": "environmental_requirement",
+                "requirement_category": "land_use_buffer_planting_frequency",
+                "requirement_label_raw": "37.2.4",
+                "requirement_text_raw": "The Land Use Buffer shall be planted with street trees and shrubs at a frequency of one tree for every 8m 26.2 ft) of length along the boundary line.",
+                "applicability": {
+                    "conditions": [
+                        {
+                            "condition_type": "source_typo_interpretation",
+                            "condition_text_raw": "The source text `8m 26.2 ft)` is interpreted as `8m (26.2 ft)`.",
+                            "source_refs": [source_ref("clause", "zone-pz-clause-37-2-4")],
+                        }
+                    ]
+                },
+                "numeric_value_refs": ["zone-pz-num-zone-pz-clause-37-2-4-1"],
+                "term_refs": [],
+                "source_refs": [source_ref("clause", "zone-pz-clause-37-2-4")],
+                "confidence": "high",
+            },
+        ]
+    )
+    for group in structured.get("regulation_groups") or []:
+        refs = group.setdefault("requirement_refs", [])
+        for requirement_id in requirement_ids:
+            if requirement_id not in refs:
+                refs.append(requirement_id)
     return data
 
 
@@ -781,6 +1636,13 @@ def parse_number(value: str) -> float | int:
 
 def unit_code(raw: str) -> str:
     return UNIT_MAP.get(clean_text(raw).lower().rstrip("."), "none")
+
+
+def area_unit_code(raw: str) -> str:
+    normalized = clean_text(raw).lower().rstrip(".")
+    if normalized in {"hectare", "hectares"}:
+        return "ha"
+    return unit_code(raw)
 
 
 def measure_type_for_unit(unit: str, text: str) -> str:
@@ -1870,12 +2732,33 @@ def main() -> None:
         if {"raw_data", "structured_data", "review_flags"}.issubset(data):
             rebuild_clause_refs(data)
             rebuild_schema_tables_from_pdf(pdf_doc, data)
+            repair_dc_bonus_height_section(data)
+            repair_dms_bonus_height_section(data)
+            repair_wf_bonus_height_section(data)
+            repair_mur_mixed_density_section(data)
+            repair_r3_lodging_houses_table(data)
             reset_review_flags(data)
             refresh_schema_numeric_values(data)
+            apply_dc_bonus_height_context(data)
+            apply_dms_bonus_height_context(data)
+            apply_wf_bonus_height_context(data)
+            apply_cda_development_concept_plan_context(data)
+            apply_pz_land_use_buffer_context(data)
             write_json(path, apply_zone_reference_model(refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data))))
             continue
         transformed = transform_zone(normalizer, data)
         rebuild_schema_tables_from_pdf(pdf_doc, transformed)
+        repair_dc_bonus_height_section(transformed)
+        repair_dms_bonus_height_section(transformed)
+        repair_wf_bonus_height_section(transformed)
+        repair_mur_mixed_density_section(transformed)
+        repair_r3_lodging_houses_table(transformed)
+        refresh_schema_numeric_values(transformed)
+        apply_dc_bonus_height_context(transformed)
+        apply_dms_bonus_height_context(transformed)
+        apply_wf_bonus_height_context(transformed)
+        apply_cda_development_concept_plan_context(transformed)
+        apply_pz_land_use_buffer_context(transformed)
         write_json(path, transformed)
 
     for item in manifest.get("document_files", []):
@@ -1886,8 +2769,18 @@ def main() -> None:
         if {"raw_data", "structured_data", "review_flags"}.issubset(data):
             rebuild_clause_refs(data)
             rebuild_schema_tables_from_pdf(pdf_doc, data)
+            repair_dc_bonus_height_section(data)
+            repair_dms_bonus_height_section(data)
+            repair_wf_bonus_height_section(data)
+            repair_mur_mixed_density_section(data)
+            repair_r3_lodging_houses_table(data)
             reset_review_flags(data)
             refresh_schema_numeric_values(data)
+            apply_dc_bonus_height_context(data)
+            apply_dms_bonus_height_context(data)
+            apply_wf_bonus_height_context(data)
+            apply_cda_development_concept_plan_context(data)
+            apply_pz_land_use_buffer_context(data)
             write_json(path, apply_zone_reference_model(refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data))))
             continue
         document_type = item.get("document_type") or (data.get("document_metadata") or {}).get("document_type")
@@ -1904,8 +2797,18 @@ def main() -> None:
         if {"raw_data", "structured_data", "review_flags"}.issubset(data):
             rebuild_clause_refs(data)
             rebuild_schema_tables_from_pdf(pdf_doc, data)
+            repair_dc_bonus_height_section(data)
+            repair_dms_bonus_height_section(data)
+            repair_wf_bonus_height_section(data)
+            repair_mur_mixed_density_section(data)
+            repair_r3_lodging_houses_table(data)
             reset_review_flags(data)
             refresh_schema_numeric_values(data)
+            apply_dc_bonus_height_context(data)
+            apply_dms_bonus_height_context(data)
+            apply_wf_bonus_height_context(data)
+            apply_cda_development_concept_plan_context(data)
+            apply_pz_land_use_buffer_context(data)
             write_json(path, apply_zone_reference_model(refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data))))
             continue
         write_json(path, transform_appendix(normalizer, data, item["file"]))
