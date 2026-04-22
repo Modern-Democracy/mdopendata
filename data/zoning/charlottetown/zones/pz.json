@@ -1,383 +1,756 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+    "document_type": "zone",
     "zone_code": "PZ",
     "zone_name": "PORT ZONE",
-    "part_label_raw": "37",
-    "chapter_heading_raw": "37 PORT ZONE (PZ)"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": []
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "37.1.1",
-      "use_type": "principal_use",
-      "use_name": "Marina",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 109,
-        "pdf_page_end": 109,
-        "bylaw_page_start": 109,
-        "bylaw_page_end": 109
-      },
-      "clause_path": [
-        "37.1.1"
-      ]
-    },
-    {
-      "clause_label_raw": "37.1.2",
-      "use_type": "principal_use",
-      "use_name": "Offices",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 109,
-        "pdf_page_end": 109,
-        "bylaw_page_start": 109,
-        "bylaw_page_end": 109
-      },
-      "clause_path": [
-        "37.1.2"
-      ]
-    },
-    {
-      "clause_label_raw": "37.1.3",
-      "use_type": "principal_use",
-      "use_name": "Outdoor Storage",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 109,
-        "pdf_page_end": 109,
-        "bylaw_page_start": 109,
-        "bylaw_page_end": 109
-      },
-      "clause_path": [
-        "37.1.3"
-      ]
-    },
-    {
-      "clause_label_raw": "37.1.4",
-      "use_type": "principal_use",
-      "use_name": "Port Land Uses",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 109,
-        "pdf_page_end": 109,
-        "bylaw_page_start": 109,
-        "bylaw_page_end": 109
-      },
-      "clause_path": [
-        "37.1.4"
-      ]
-    },
-    {
-      "clause_label_raw": "37.1.5",
-      "use_type": "principal_use",
-      "use_name": "Retail Store",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 109,
-        "pdf_page_end": 109,
-        "bylaw_page_start": 109,
-        "bylaw_page_end": 109
-      },
-      "clause_path": [
-        "37.1.5"
-      ]
-    },
-    {
-      "clause_label_raw": "37.1.6",
-      "use_type": "principal_use",
-      "use_name": "Transport Terminal",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 109,
-        "pdf_page_end": 109,
-        "bylaw_page_start": 109,
-        "bylaw_page_end": 109
-      },
-      "clause_path": [
-        "37.1.6"
-      ]
-    },
-    {
-      "clause_label_raw": "37.1.7",
-      "use_type": "principal_use",
-      "use_name": "Transportation Service",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 109,
-        "pdf_page_end": 109,
-        "bylaw_page_start": 109,
-        "bylaw_page_end": 109
-      },
-      "clause_path": [
-        "37.1.7"
-      ]
-    },
-    {
-      "clause_label_raw": "37.1.8",
-      "use_type": "principal_use",
-      "use_name": "Events Hosting",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 109,
-        "pdf_page_end": 109,
-        "bylaw_page_start": 109,
-        "bylaw_page_end": 109
-      },
-      "clause_path": [
-        "37.1.8"
-      ]
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "37.1",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 109,
-        "pdf_page_end": 109,
-        "bylaw_page_start": 109,
-        "bylaw_page_end": 109
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "37.1.1",
-          "clause_path": [
-            "37.1.1"
-          ],
-          "text": "Marina;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 109,
-            "pdf_page_end": 109,
-            "bylaw_page_start": 109,
-            "bylaw_page_end": 109
-          }
-        },
-        {
-          "provision_label_raw": "37.1.2",
-          "clause_path": [
-            "37.1.2"
-          ],
-          "text": "Offices;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 109,
-            "pdf_page_end": 109,
-            "bylaw_page_start": 109,
-            "bylaw_page_end": 109
-          }
-        },
-        {
-          "provision_label_raw": "37.1.3",
-          "clause_path": [
-            "37.1.3"
-          ],
-          "text": "Outdoor Storage;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 109,
-            "pdf_page_end": 109,
-            "bylaw_page_start": 109,
-            "bylaw_page_end": 109
-          }
-        },
-        {
-          "provision_label_raw": "37.1.4",
-          "clause_path": [
-            "37.1.4"
-          ],
-          "text": "Port Land Uses;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 109,
-            "pdf_page_end": 109,
-            "bylaw_page_start": 109,
-            "bylaw_page_end": 109
-          }
-        },
-        {
-          "provision_label_raw": "37.1.5",
-          "clause_path": [
-            "37.1.5"
-          ],
-          "text": "Retail Store;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 109,
-            "pdf_page_end": 109,
-            "bylaw_page_start": 109,
-            "bylaw_page_end": 109
-          }
-        },
-        {
-          "provision_label_raw": "37.1.6",
-          "clause_path": [
-            "37.1.6"
-          ],
-          "text": "Transport Terminal;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 109,
-            "pdf_page_end": 109,
-            "bylaw_page_start": 109,
-            "bylaw_page_end": 109
-          }
-        },
-        {
-          "provision_label_raw": "37.1.7",
-          "clause_path": [
-            "37.1.7"
-          ],
-          "text": "Transportation Service; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 109,
-            "pdf_page_end": 109,
-            "bylaw_page_start": 109,
-            "bylaw_page_end": 109
-          }
-        },
-        {
-          "provision_label_raw": "37.1.8",
-          "clause_path": [
-            "37.1.8"
-          ],
-          "text": "Events Hosting",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 109,
-            "pdf_page_end": 109,
-            "bylaw_page_start": 109,
-            "bylaw_page_end": 109
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": "37.2",
-      "title_label_raw": "BUFFER ZONE REQUIREMENTS",
-      "citations": {
-        "pdf_page_start": 109,
-        "pdf_page_end": 109,
-        "bylaw_page_start": 109,
-        "bylaw_page_end": 109
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "37.2.1",
-          "clause_path": [
-            "37.2.1"
-          ],
-          "text": "A continuous linear boardwalk connection shall be provided along the waterfront, excluding wharfs and piers.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 109,
-            "pdf_page_end": 109,
-            "bylaw_page_start": 109,
-            "bylaw_page_end": 109
-          }
-        },
-        {
-          "provision_label_raw": "37.2.2",
-          "clause_path": [
-            "37.2.2"
-          ],
-          "text": "Development within the Port Zone shall require a Land Use Buffer from adjacent Buildings of no less than 5m (16.4 ft) in width.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 109,
-            "pdf_page_end": 109,
-            "bylaw_page_start": 109,
-            "bylaw_page_end": 109
-          }
-        },
-        {
-          "provision_label_raw": "37.2.3",
-          "clause_path": [
-            "37.2.3"
-          ],
-          "text": "Acceptable uses for the Land Use Buffer include boardwalk, linear trail, greenway, or Landscaped Area.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 109,
-            "pdf_page_end": 109,
-            "bylaw_page_start": 109,
-            "bylaw_page_end": 109
-          }
-        },
-        {
-          "provision_label_raw": "37.2.4",
-          "clause_path": [
-            "37.2.4"
-          ],
-          "text": "The Land Use Buffer shall be planted with street trees and shrubs at a frequency of one tree for every 8m 26.2 ft) of length along the boundary line.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 109,
-            "pdf_page_end": 109,
-            "bylaw_page_start": 109,
-            "bylaw_page_end": 109
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 3,
-      "section_label_raw": "37.3",
-      "title_label_raw": "REGULATIONS FOR NEW DEVELOPMENT",
-      "citations": {
-        "pdf_page_start": 109,
-        "pdf_page_end": 109,
-        "bylaw_page_start": 109,
-        "bylaw_page_end": 109
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "37.3.1",
-          "clause_path": [
-            "37.3.1"
-          ],
-          "text": "Any new Building or Development proposed in the Port Zone (PZ) is subject to the Regulations for Permitted Uses for the Waterfront (WF) Zone.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 109,
-            "pdf_page_end": 109,
-            "bylaw_page_start": 109,
-            "bylaw_page_end": 109
-          }
-        }
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [],
-  "content_blocks": [],
-  "open_issues": [
-    {
-      "issue_type": "source_revision_review",
-      "description": "Source PDF cover identifies rev 049 updated March 9, 2026, but this zone page header may display rev 048 updated October 24, 2025; verify source revision during QA."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "37",
+    "zone_title_raw": "PORT ZONE (PZ)",
+    "citations": {
       "pdf_page_start": 109,
       "pdf_page_end": 109,
       "bylaw_page_start": 109,
       "bylaw_page_end": 109
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-pz",
+        "source_unit_type": "zone",
+        "label_raw": "37",
+        "title_raw": "PORT ZONE (PZ)",
+        "text_raw": "Marina;\nOffices;\nOutdoor Storage;\nPort Land Uses;\nRetail Store;\nTransport Terminal;\nTransportation Service; and\nEvents Hosting\nA continuous linear boardwalk connection shall be provided along the waterfront, excluding wharfs and piers.\nDevelopment within the Port Zone shall require a Land Use Buffer from adjacent Buildings of no less than 5m (16.4 ft) in width.\nAcceptable uses for the Land Use Buffer include boardwalk, linear trail, greenway, or Landscaped Area.\nThe Land Use Buffer shall be planted with street trees and shrubs at a frequency of one tree for every 8m 26.2 ft) of length along the boundary line.\nAny new Building or Development proposed in the Port Zone (PZ) is subject to the Regulations for Permitted Uses for the Waterfront (WF) Zone.",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 109,
+          "pdf_page_end": 109,
+          "bylaw_page_start": 109,
+          "bylaw_page_end": 109
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-pz-section-37-1",
+        "section_label_raw": "37.1",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-pz-clause-37-1-1",
+            "clause_label_raw": "37.1.1",
+            "clause_text_raw": "Marina;",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 109,
+              "pdf_page_end": 109,
+              "bylaw_page_start": 109,
+              "bylaw_page_end": 109
+            }
+          },
+          {
+            "clause_id": "zone-pz-clause-37-1-2",
+            "clause_label_raw": "37.1.2",
+            "clause_text_raw": "Offices;",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 109,
+              "pdf_page_end": 109,
+              "bylaw_page_start": 109,
+              "bylaw_page_end": 109
+            }
+          },
+          {
+            "clause_id": "zone-pz-clause-37-1-3",
+            "clause_label_raw": "37.1.3",
+            "clause_text_raw": "Outdoor Storage;",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 109,
+              "pdf_page_end": 109,
+              "bylaw_page_start": 109,
+              "bylaw_page_end": 109
+            }
+          },
+          {
+            "clause_id": "zone-pz-clause-37-1-4",
+            "clause_label_raw": "37.1.4",
+            "clause_text_raw": "Port Land Uses;",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 109,
+              "pdf_page_end": 109,
+              "bylaw_page_start": 109,
+              "bylaw_page_end": 109
+            }
+          },
+          {
+            "clause_id": "zone-pz-clause-37-1-5",
+            "clause_label_raw": "37.1.5",
+            "clause_text_raw": "Retail Store;",
+            "parent_clause_id": null,
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 109,
+              "pdf_page_end": 109,
+              "bylaw_page_start": 109,
+              "bylaw_page_end": 109
+            }
+          },
+          {
+            "clause_id": "zone-pz-clause-37-1-6",
+            "clause_label_raw": "37.1.6",
+            "clause_text_raw": "Transport Terminal;",
+            "parent_clause_id": null,
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 109,
+              "pdf_page_end": 109,
+              "bylaw_page_start": 109,
+              "bylaw_page_end": 109
+            }
+          },
+          {
+            "clause_id": "zone-pz-clause-37-1-7",
+            "clause_label_raw": "37.1.7",
+            "clause_text_raw": "Transportation Service; and",
+            "parent_clause_id": null,
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 109,
+              "pdf_page_end": 109,
+              "bylaw_page_start": 109,
+              "bylaw_page_end": 109
+            }
+          },
+          {
+            "clause_id": "zone-pz-clause-37-1-8",
+            "clause_label_raw": "37.1.8",
+            "clause_text_raw": "Events Hosting",
+            "parent_clause_id": null,
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 109,
+              "pdf_page_end": 109,
+              "bylaw_page_start": 109,
+              "bylaw_page_end": 109
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 109,
+          "pdf_page_end": 109,
+          "bylaw_page_start": 109,
+          "bylaw_page_end": 109
+        }
+      },
+      {
+        "section_id": "zone-pz-section-37-2",
+        "section_label_raw": "37.2",
+        "section_title_raw": "BUFFER ZONE REQUIREMENTS",
+        "source_order": 2,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-pz-clause-37-2-1",
+            "clause_label_raw": "37.2.1",
+            "clause_text_raw": "A continuous linear boardwalk connection shall be provided along the waterfront, excluding wharfs and piers.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 109,
+              "pdf_page_end": 109,
+              "bylaw_page_start": 109,
+              "bylaw_page_end": 109
+            }
+          },
+          {
+            "clause_id": "zone-pz-clause-37-2-2",
+            "clause_label_raw": "37.2.2",
+            "clause_text_raw": "Development within the Port Zone shall require a Land Use Buffer from adjacent Buildings of no less than 5m (16.4 ft) in width.",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 109,
+              "pdf_page_end": 109,
+              "bylaw_page_start": 109,
+              "bylaw_page_end": 109
+            }
+          },
+          {
+            "clause_id": "zone-pz-clause-37-2-3",
+            "clause_label_raw": "37.2.3",
+            "clause_text_raw": "Acceptable uses for the Land Use Buffer include boardwalk, linear trail, greenway, or Landscaped Area.",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 109,
+              "pdf_page_end": 109,
+              "bylaw_page_start": 109,
+              "bylaw_page_end": 109
+            }
+          },
+          {
+            "clause_id": "zone-pz-clause-37-2-4",
+            "clause_label_raw": "37.2.4",
+            "clause_text_raw": "The Land Use Buffer shall be planted with street trees and shrubs at a frequency of one tree for every 8m 26.2 ft) of length along the boundary line.",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 109,
+              "pdf_page_end": 109,
+              "bylaw_page_start": 109,
+              "bylaw_page_end": 109
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 109,
+          "pdf_page_end": 109,
+          "bylaw_page_start": 109,
+          "bylaw_page_end": 109
+        }
+      },
+      {
+        "section_id": "zone-pz-section-37-3",
+        "section_label_raw": "37.3",
+        "section_title_raw": "REGULATIONS FOR NEW DEVELOPMENT",
+        "source_order": 3,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-pz-clause-37-3-1",
+            "clause_label_raw": "37.3.1",
+            "clause_text_raw": "Any new Building or Development proposed in the Port Zone (PZ) is subject to the Regulations for Permitted Uses for the Waterfront (WF) Zone.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 109,
+              "pdf_page_end": 109,
+              "bylaw_page_start": 109,
+              "bylaw_page_end": 109
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 109,
+          "pdf_page_end": 109,
+          "bylaw_page_start": 109,
+          "bylaw_page_end": 109
+        }
+      }
+    ],
+    "tables_raw": [],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-pz-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 109,
+          "pdf_page_end": 109,
+          "bylaw_page_start": 109,
+          "bylaw_page_end": 109
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-pz-clause-37-1-1",
+        "section_id": "zone-pz-section-37-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-pz-clause-37-1-2",
+        "section_id": "zone-pz-section-37-1",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-pz-clause-37-1-3",
+        "section_id": "zone-pz-section-37-1",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-pz-clause-37-1-4",
+        "section_id": "zone-pz-section-37-1",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-pz-clause-37-1-5",
+        "section_id": "zone-pz-section-37-1",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-pz-clause-37-1-6",
+        "section_id": "zone-pz-section-37-1",
+        "source_order": 6
+      },
+      {
+        "clause_id": "zone-pz-clause-37-1-7",
+        "section_id": "zone-pz-section-37-1",
+        "source_order": 7
+      },
+      {
+        "clause_id": "zone-pz-clause-37-1-8",
+        "section_id": "zone-pz-section-37-1",
+        "source_order": 8
+      },
+      {
+        "clause_id": "zone-pz-clause-37-2-1",
+        "section_id": "zone-pz-section-37-2",
+        "source_order": 9
+      },
+      {
+        "clause_id": "zone-pz-clause-37-2-2",
+        "section_id": "zone-pz-section-37-2",
+        "source_order": 10
+      },
+      {
+        "clause_id": "zone-pz-clause-37-2-3",
+        "section_id": "zone-pz-section-37-2",
+        "source_order": 11
+      },
+      {
+        "clause_id": "zone-pz-clause-37-2-4",
+        "section_id": "zone-pz-section-37-2",
+        "source_order": 12
+      },
+      {
+        "clause_id": "zone-pz-clause-37-3-1",
+        "section_id": "zone-pz-section-37-3",
+        "source_order": 13
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-pz-term-term-marina",
+        "term_raw": "Marina",
+        "term_normalized": "marina",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pz-clause-37-1-1"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-pz-term-term-offices",
+        "term_raw": "Offices",
+        "term_normalized": "offices",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pz-clause-37-1-2"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-pz-term-term-outdoor_storage",
+        "term_raw": "Outdoor Storage",
+        "term_normalized": "outdoor_storage",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pz-clause-37-1-3"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-pz-term-term-port_land_uses",
+        "term_raw": "Port Land Uses",
+        "term_normalized": "port_land_uses",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pz-clause-37-1-4"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-pz-term-term-retail_store",
+        "term_raw": "Retail Store",
+        "term_normalized": "retail_store",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pz-clause-37-1-5"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-pz-term-term-transport_terminal",
+        "term_raw": "Transport Terminal",
+        "term_normalized": "transport_terminal",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pz-clause-37-1-6"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-pz-term-term-transportation_service",
+        "term_raw": "Transportation Service",
+        "term_normalized": "transportation_service",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pz-clause-37-1-7"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-pz-term-term-events_hosting",
+        "term_raw": "Events Hosting",
+        "term_normalized": "events_hosting",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pz-clause-37-1-8"
+          }
+        ],
+        "confidence": "needs_review"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-pz-use-marina-1",
+        "use_name_raw": "Marina",
+        "use_term_id": "zone-pz-term-term-marina",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-pz-clause-37-1-1",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-pz-use-offices-2",
+        "use_name_raw": "Offices",
+        "use_term_id": "zone-pz-term-term-offices",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-pz-clause-37-1-2",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-pz-use-outdoor-storage-3",
+        "use_name_raw": "Outdoor Storage",
+        "use_term_id": "zone-pz-term-term-outdoor_storage",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-pz-clause-37-1-3",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-pz-use-port-land-uses-4",
+        "use_name_raw": "Port Land Uses",
+        "use_term_id": "zone-pz-term-term-port_land_uses",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-pz-clause-37-1-4",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-pz-use-retail-store-5",
+        "use_name_raw": "Retail Store",
+        "use_term_id": "zone-pz-term-term-retail_store",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-pz-clause-37-1-5",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-pz-use-transport-terminal-6",
+        "use_name_raw": "Transport Terminal",
+        "use_term_id": "zone-pz-term-term-transport_terminal",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-pz-clause-37-1-6",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-pz-use-transportation-service-7",
+        "use_name_raw": "Transportation Service",
+        "use_term_id": "zone-pz-term-term-transportation_service",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-pz-clause-37-1-7",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-pz-use-events-hosting-8",
+        "use_name_raw": "Events Hosting",
+        "use_term_id": "zone-pz-term-term-events_hosting",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-pz-clause-37-1-8",
+        "confidence": "needs_review"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-pz-num-zone-pz-clause-37-2-2-1",
+        "value_raw": "5m (16.4 ft)",
+        "value": 5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "less_than",
+        "alternative_values": [
+          {
+            "value_raw": "16.4 ft",
+            "value": 16.4,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pz-clause-37-2-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-pz-num-zone-pz-clause-37-2-4-1",
+        "value_raw": "8m 26.2 ft)",
+        "value": 8,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [
+          {
+            "value_raw": "26.2 ft",
+            "value": 26.2,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pz-clause-37-2-4"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-pz-regulation-group-zone",
+        "group_label_raw": "37",
+        "group_title_raw": "PORT ZONE (PZ)",
+        "regulated_use_terms": [
+          "zone-pz-term-term-marina",
+          "zone-pz-term-term-offices",
+          "zone-pz-term-term-outdoor_storage",
+          "zone-pz-term-term-port_land_uses",
+          "zone-pz-term-term-retail_store",
+          "zone-pz-term-term-transport_terminal",
+          "zone-pz-term-term-transportation_service",
+          "zone-pz-term-term-events_hosting"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "PZ"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [],
+        "source_section_ref": "zone-pz-section-37-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-pz-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "PZ",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-pz-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [
+      {
+        "requirement_id": "zone-pz-req-zone-pz-clause-37-2-2",
+        "requirement_type": "other",
+        "requirement_category": "development_within_the_port_zone_shall_require_a_land_use_buffer_from_adjacent_b",
+        "requirement_label_raw": "37.2.2",
+        "requirement_text_raw": "Development within the Port Zone shall require a Land Use Buffer from adjacent Buildings of no less than 5m (16.4 ft) in width.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-pz-num-zone-pz-clause-37-2-2-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pz-clause-37-2-2"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "requirement_id": "zone-pz-req-zone-pz-clause-37-2-4",
+        "requirement_type": "other",
+        "requirement_category": "the_land_use_buffer_shall_be_planted_with_street_trees_and_shrubs_at_a_frequency",
+        "requirement_label_raw": "37.2.4",
+        "requirement_text_raw": "The Land Use Buffer shall be planted with street trees and shrubs at a frequency of one tree for every 8m 26.2 ft) of length along the boundary line.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-pz-num-zone-pz-clause-37-2-4-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pz-clause-37-2-4"
+          }
+        ],
+        "confidence": "needs_review"
+      }
+    ],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-pz-flag-unmatched-term-marina",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Marina",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-pz-clause-37-1-1"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-pz-flag-unmatched-term-offices",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Offices",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-pz-clause-37-1-2"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-pz-flag-unmatched-term-outdoor-storage",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Outdoor Storage",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-pz-clause-37-1-3"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-pz-flag-unmatched-term-port-land-uses",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Port Land Uses",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-pz-clause-37-1-4"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-pz-flag-unmatched-term-retail-store",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Retail Store",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-pz-clause-37-1-5"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-pz-flag-unmatched-term-transport-terminal",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Transport Terminal",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-pz-clause-37-1-6"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-pz-flag-unmatched-term-transportation-service",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Transportation Service",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-pz-clause-37-1-7"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-pz-flag-unmatched-term-events-hosting",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Events Hosting",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-pz-clause-37-1-8"
+        }
+      ]
+    }
+  ]
 }

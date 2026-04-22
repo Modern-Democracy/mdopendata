@@ -1,7 +1,7 @@
 {
   "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
-  "extracted_at_local": "2026-04-19T17:53:37",
-  "extractor": "pypdf text extraction with chapter and provision parsing",
+  "extracted_at_local": "2026-04-21T21:06:55",
+  "extractor": "scripts/extract-charlottetown-zoning-bylaw.py; approved schema extraction",
   "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
   "jurisdiction": "City of Charlottetown",
   "source_page_count": 223,
@@ -321,7 +321,10 @@
     "Appendix B and Appendix C are preserved by page, not row-normalized.",
     "PDF revision headers vary between rev 049 and rev 048 in the source document.",
     "General provisions and design standards preserve table-derived text but require PDF QA for column alignment.",
-    "Definitions are split heuristically on term-plus-means patterns and require QA for nested definition blocks."
+    "Definitions are split heuristically on term-plus-means patterns and require QA for nested definition blocks.",
+    "Generated JSON files use the approved extraction schema and omit legacy importer compatibility fields.",
+    "Reviewed term and use code tables are matched through structured_data.terms and linked from uses.use_term_id.",
+    "Unmatched normalized terms, use phrases, table cells, and layout-sensitive content are preserved with review_flags."
   ],
   "document_files": [
     {

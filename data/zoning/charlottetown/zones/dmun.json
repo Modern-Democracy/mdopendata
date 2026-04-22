@@ -1,567 +1,1761 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+    "document_type": "zone",
     "zone_code": "DMUN",
     "zone_name": "DOWNTOWN MIXED USE NEIGHBOURHOOD",
-    "part_label_raw": "30",
-    "chapter_heading_raw": "30 DOWNTOWN MIXED USE NEIGHBOURHOOD (DMUN)"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": []
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "30.1.1",
-      "use_type": "inherited_principal_use",
-      "use_name": "Uses permitted in the Downtown Neighbourhood (DN) Zone",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 92,
-        "pdf_page_end": 92,
-        "bylaw_page_start": 92,
-        "bylaw_page_end": 92
-      },
-      "clause_path": [
-        "30.1.1"
-      ]
-    },
-    {
-      "clause_label_raw": "30.1.2",
-      "use_type": "inherited_principal_use",
-      "use_name": "Uses permitted in the Park/Cultural Zone",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 92,
-        "pdf_page_end": 92,
-        "bylaw_page_start": 92,
-        "bylaw_page_end": 92
-      },
-      "clause_path": [
-        "30.1.2"
-      ]
-    },
-    {
-      "clause_label_raw": "30.1.3",
-      "use_type": "principal_use",
-      "use_name": "Eating and Drinking Establishment",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 92,
-        "pdf_page_end": 92,
-        "bylaw_page_start": 92,
-        "bylaw_page_end": 92
-      },
-      "clause_path": [
-        "30.1.3"
-      ]
-    },
-    {
-      "clause_label_raw": "30.1.4",
-      "use_type": "principal_use",
-      "use_name": "Funeral Establishment",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 92,
-        "pdf_page_end": 92,
-        "bylaw_page_start": 92,
-        "bylaw_page_end": 92
-      },
-      "clause_path": [
-        "30.1.4"
-      ]
-    },
-    {
-      "clause_label_raw": "30.1.5",
-      "use_type": "principal_use",
-      "use_name": "Medical, Health and Dental Office",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 92,
-        "pdf_page_end": 92,
-        "bylaw_page_start": 92,
-        "bylaw_page_end": 92
-      },
-      "clause_path": [
-        "30.1.5"
-      ]
-    },
-    {
-      "clause_label_raw": "30.1.6",
-      "use_type": "principal_use",
-      "use_name": "Office",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 92,
-        "pdf_page_end": 92,
-        "bylaw_page_start": 92,
-        "bylaw_page_end": 92
-      },
-      "clause_path": [
-        "30.1.6"
-      ]
-    },
-    {
-      "clause_label_raw": "30.1.7",
-      "use_type": "institutional_or_open_space_use",
-      "use_name": "Parking Structure",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 92,
-        "pdf_page_end": 92,
-        "bylaw_page_start": 92,
-        "bylaw_page_end": 92
-      },
-      "clause_path": [
-        "30.1.7"
-      ]
-    },
-    {
-      "clause_label_raw": "30.1.8",
-      "use_type": "principal_use",
-      "use_name": "Personal Service Shop",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 92,
-        "pdf_page_end": 92,
-        "bylaw_page_start": 92,
-        "bylaw_page_end": 92
-      },
-      "clause_path": [
-        "30.1.8"
-      ]
-    },
-    {
-      "clause_label_raw": "30.1.9",
-      "use_type": "principal_use",
-      "use_name": "Retail Store.",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 92,
-        "pdf_page_end": 92,
-        "bylaw_page_start": 92,
-        "bylaw_page_end": 92
-      },
-      "clause_path": [
-        "30.1.9"
-      ]
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "30.1",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 92,
-        "pdf_page_end": 92,
-        "bylaw_page_start": 92,
-        "bylaw_page_end": 92
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "30.1.1",
-          "clause_path": [
-            "30.1.1"
-          ],
-          "text": "Uses permitted in the Downtown Neighbourhood (DN) Zone;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 92,
-            "pdf_page_end": 92,
-            "bylaw_page_start": 92,
-            "bylaw_page_end": 92
-          }
-        },
-        {
-          "provision_label_raw": "30.1.2",
-          "clause_path": [
-            "30.1.2"
-          ],
-          "text": "Uses permitted in the Park/Cultural Zone;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 92,
-            "pdf_page_end": 92,
-            "bylaw_page_start": 92,
-            "bylaw_page_end": 92
-          }
-        },
-        {
-          "provision_label_raw": "30.1.3",
-          "clause_path": [
-            "30.1.3"
-          ],
-          "text": "Eating and Drinking Establishment;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 92,
-            "pdf_page_end": 92,
-            "bylaw_page_start": 92,
-            "bylaw_page_end": 92
-          }
-        },
-        {
-          "provision_label_raw": "30.1.4",
-          "clause_path": [
-            "30.1.4"
-          ],
-          "text": "Funeral Establishment;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 92,
-            "pdf_page_end": 92,
-            "bylaw_page_start": 92,
-            "bylaw_page_end": 92
-          }
-        },
-        {
-          "provision_label_raw": "30.1.5",
-          "clause_path": [
-            "30.1.5"
-          ],
-          "text": "Medical, Health and Dental Office;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 92,
-            "pdf_page_end": 92,
-            "bylaw_page_start": 92,
-            "bylaw_page_end": 92
-          }
-        },
-        {
-          "provision_label_raw": "30.1.6",
-          "clause_path": [
-            "30.1.6"
-          ],
-          "text": "Office;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 92,
-            "pdf_page_end": 92,
-            "bylaw_page_start": 92,
-            "bylaw_page_end": 92
-          }
-        },
-        {
-          "provision_label_raw": "30.1.7",
-          "clause_path": [
-            "30.1.7"
-          ],
-          "text": "Parking Structure;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 92,
-            "pdf_page_end": 92,
-            "bylaw_page_start": 92,
-            "bylaw_page_end": 92
-          }
-        },
-        {
-          "provision_label_raw": "30.1.8",
-          "clause_path": [
-            "30.1.8"
-          ],
-          "text": "Personal Service Shop; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 92,
-            "pdf_page_end": 92,
-            "bylaw_page_start": 92,
-            "bylaw_page_end": 92
-          }
-        },
-        {
-          "provision_label_raw": "30.1.9",
-          "clause_path": [
-            "30.1.9"
-          ],
-          "text": "Retail Store.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 92,
-            "pdf_page_end": 92,
-            "bylaw_page_start": 92,
-            "bylaw_page_end": 92
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": null,
-      "title_label_raw": "REGULATIONS FOR PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 92,
-        "pdf_page_end": 92,
-        "bylaw_page_start": 92,
-        "bylaw_page_end": 92
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "section",
-          "text": "All permitted uses in the DMUN Zone are subject to the following regulations: Any Building type, 3 units or less Apartment Dwelling: 4 units or more Any other permitted Use 10.6 m (34.8 ft) 6.0 m (19.7 ft) per unit wide 20.0 m (65.6 ft) 20.0 m (65.6 ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 92,
-            "pdf_page_end": 92,
-            "bylaw_page_start": 92,
-            "bylaw_page_end": 92
-          }
-        },
-        {
-          "provision_label_raw": "2",
-          "text": "Front and Flankage Yard (Minimum) Minimum 2.4 m (7.9 ft) and Maximum 4.9m (16.1 ft); OR, Within the minimum and maximum range of the existing Buildings on the Block.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 92,
-            "pdf_page_end": 92,
-            "bylaw_page_start": 92,
-            "bylaw_page_end": 92
-          }
-        },
-        {
-          "provision_label_raw": "3",
-          "text": "Front Yard Projections Minimum 1.2 m (3.9ft) from street line, and Maximum 2.4m (7.9ft) projection; OR Within the minimum and maximum range of the existing Buildings on the Block.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 92,
-            "pdf_page_end": 92,
-            "bylaw_page_start": 92,
-            "bylaw_page_end": 92
-          }
-        },
-        {
-          "provision_label_raw": "4",
-          "text": "Rear Yard (Minimum) 6.0 m (19.7 ft); OR Within the minimum and maximum range of the existing Buildings on the Block. 1.83 m (6.0 ft); OR Equal to the Side Yard Setback of the existing Building on the abutting property, whichever is less.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 92,
-            "pdf_page_end": 92,
-            "bylaw_page_start": 92,
-            "bylaw_page_end": 92
-          }
-        },
-        {
-          "provision_label_raw": "6",
-          "text": "Height Minimum 7.5 m (24.6ft) Maximum 12.0 m (39.4 ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 92,
-            "pdf_page_end": 92,
-            "bylaw_page_start": 92,
-            "bylaw_page_end": 92
-          }
-        }
-      ],
-      "table_column_headings_raw": [
-        "Interior/Corner Lots",
-        "Townhouse Dwelling: 4 units or more"
-      ]
-    },
-    {
-      "order_index": 3,
-      "section_label_raw": "30.3",
-      "title_label_raw": "BONUS HEIGHT DEVELOPMENT STANDARDS",
-      "citations": {
-        "pdf_page_start": 93,
-        "pdf_page_end": 93,
-        "bylaw_page_start": 93,
-        "bylaw_page_end": 93
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "30.3.1",
-          "clause_path": [
-            "30.3.1"
-          ],
-          "text": "Development applications in the DMUN Zone are eligible for a Bonus Height.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 93,
-            "pdf_page_end": 93,
-            "bylaw_page_start": 93,
-            "bylaw_page_end": 93
-          }
-        },
-        {
-          "provision_label_raw": "30.3.2",
-          "clause_path": [
-            "30.3.2"
-          ],
-          "text": "Applications for a Bonus Height are subject to the following regulations:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 93,
-            "pdf_page_end": 93,
-            "bylaw_page_start": 93,
-            "bylaw_page_end": 93
-          }
-        },
-        {
-          "provision_label_raw": "a",
-          "clause_path": [
-            "30.3.2",
-            "a"
-          ],
-          "text": "A bonus of up to a maximum Building Height of 18.5m (60.7ft).",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 93,
-            "pdf_page_end": 93,
-            "bylaw_page_start": 93,
-            "bylaw_page_end": 93
-          }
-        },
-        {
-          "provision_label_raw": "b",
-          "clause_path": [
-            "30.3.2",
-            "b"
-          ],
-          "text": "Lot Dimension Requirements:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 93,
-            "pdf_page_end": 93,
-            "bylaw_page_start": 93,
-            "bylaw_page_end": 93
-          }
-        },
-        {
-          "provision_label_raw": "i",
-          "clause_path": [
-            "30.3.2",
-            "i"
-          ],
-          "text": "Minimum Lot Frontage of 30.0m (98.4ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 93,
-            "pdf_page_end": 93,
-            "bylaw_page_start": 93,
-            "bylaw_page_end": 93
-          }
-        },
-        {
-          "provision_label_raw": "c",
-          "clause_path": [
-            "30.3.2",
-            "c"
-          ],
-          "text": "The portion above the base Building that is a bonus in Height shall be:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 93,
-            "pdf_page_end": 93,
-            "bylaw_page_start": 93,
-            "bylaw_page_end": 93
-          }
-        },
-        {
-          "provision_label_raw": "i",
-          "clause_path": [
-            "30.3.2",
-            "i"
-          ],
-          "text": "A minimum 3.0m (9.8ft) Stepback from the base Building.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 93,
-            "pdf_page_end": 93,
-            "bylaw_page_start": 93,
-            "bylaw_page_end": 93
-          }
-        },
-        {
-          "provision_label_raw": "ii",
-          "clause_path": [
-            "30.3.2",
-            "ii"
-          ],
-          "text": "A minimum 5.5m (18ft) Side Yard Setback or Stepback to ensure adequate separation distances of the upper levels from adjacent properties that may also be eligible for a Height bonus.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 93,
-            "pdf_page_end": 93,
-            "bylaw_page_start": 93,
-            "bylaw_page_end": 93
-          }
-        },
-        {
-          "provision_label_raw": "iii",
-          "clause_path": [
-            "30.3.2",
-            "iii"
-          ],
-          "text": "A 45-degree angular planes originating from the top of the flank or rear façade of the base Building that faces abutting residential dwellings or within a Downtown Neighbourhood (DN) Zone.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 93,
-            "pdf_page_end": 93,
-            "bylaw_page_start": 93,
-            "bylaw_page_end": 93
-          }
-        },
-        {
-          "provision_label_raw": "d",
-          "clause_path": [
-            "30.3.2",
-            "d"
-          ],
-          "text": "Parking Structures are not eligible for a Bonus Height.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 93,
-            "pdf_page_end": 93,
-            "bylaw_page_start": 93,
-            "bylaw_page_end": 93
-          }
-        },
-        {
-          "provision_label_raw": "30.3.3",
-          "clause_path": [
-            "30.3.3"
-          ],
-          "text": "Bonus Height applications are subject to the provisions in the Bonus Height Applications Section of this by-law.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 93,
-            "pdf_page_end": 93,
-            "bylaw_page_start": 93,
-            "bylaw_page_end": 93
-          }
-        }
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [],
-  "content_blocks": [],
-  "open_issues": [
-    {
-      "issue_type": "table_parsing_review",
-      "description": "Section 'REGULATIONS FOR PERMITTED USES' contains table-derived provisions extracted from PDF text; verify column alignment against the source PDF before normalization."
-    },
-    {
-      "issue_type": "source_revision_review",
-      "description": "Source PDF cover identifies rev 049 updated March 9, 2026, but this zone page header may display rev 048 updated October 24, 2025; verify source revision during QA."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "30",
+    "zone_title_raw": "DOWNTOWN MIXED USE NEIGHBOURHOOD (DMUN)",
+    "citations": {
       "pdf_page_start": 92,
       "pdf_page_end": 93,
       "bylaw_page_start": 92,
       "bylaw_page_end": 93
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-dmun",
+        "source_unit_type": "zone",
+        "label_raw": "30",
+        "title_raw": "DOWNTOWN MIXED USE NEIGHBOURHOOD (DMUN)",
+        "text_raw": "Uses permitted in the Downtown Neighbourhood (DN) Zone;\nUses permitted in the Park/Cultural Zone;\nEating and Drinking Establishment;\nFuneral Establishment;\nMedical, Health and Dental Office;\nOffice;\nParking Structure;\nPersonal Service Shop; and\nRetail Store.\nDevelopment applications in the DMUN Zone are eligible for a Bonus Height.\nApplications for a Bonus Height are subject to the following regulations:\nA bonus of up to a maximum Building Height of 18.5m (60.7ft).\nLot Dimension Requirements:\nMinimum Lot Frontage of 30.0m (98.4ft)\nThe portion above the base Building that is a bonus in Height shall be:\nA minimum 3.0m (9.8ft) Stepback from the base Building.\nA minimum 5.5m (18ft) Side Yard Setback or Stepback to ensure adequate separation distances of the upper levels from adjacent properties that may also be eligible for a Height bonus.\nA 45-degree angular planes originating from the top of the flank or rear façade of the base Building that faces abutting residential dwellings or within a Downtown Neighbourhood (DN) Zone.\nParking Structures are not eligible for a Bonus Height.\nBonus Height applications are subject to the provisions in the Bonus Height Applications Section of this by-law.",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 92,
+          "pdf_page_end": 93,
+          "bylaw_page_start": 92,
+          "bylaw_page_end": 93
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-dmun-section-30-1",
+        "section_label_raw": "30.1",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-dmun-clause-30-1-1",
+            "clause_label_raw": "30.1.1",
+            "clause_text_raw": "Uses permitted in the Downtown Neighbourhood (DN) Zone;",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 92,
+              "pdf_page_end": 92,
+              "bylaw_page_start": 92,
+              "bylaw_page_end": 92
+            }
+          },
+          {
+            "clause_id": "zone-dmun-clause-30-1-2",
+            "clause_label_raw": "30.1.2",
+            "clause_text_raw": "Uses permitted in the Park/Cultural Zone;",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 92,
+              "pdf_page_end": 92,
+              "bylaw_page_start": 92,
+              "bylaw_page_end": 92
+            }
+          },
+          {
+            "clause_id": "zone-dmun-clause-30-1-3",
+            "clause_label_raw": "30.1.3",
+            "clause_text_raw": "Eating and Drinking Establishment;",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 92,
+              "pdf_page_end": 92,
+              "bylaw_page_start": 92,
+              "bylaw_page_end": 92
+            }
+          },
+          {
+            "clause_id": "zone-dmun-clause-30-1-4",
+            "clause_label_raw": "30.1.4",
+            "clause_text_raw": "Funeral Establishment;",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 92,
+              "pdf_page_end": 92,
+              "bylaw_page_start": 92,
+              "bylaw_page_end": 92
+            }
+          },
+          {
+            "clause_id": "zone-dmun-clause-30-1-5",
+            "clause_label_raw": "30.1.5",
+            "clause_text_raw": "Medical, Health and Dental Office;",
+            "parent_clause_id": null,
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 92,
+              "pdf_page_end": 92,
+              "bylaw_page_start": 92,
+              "bylaw_page_end": 92
+            }
+          },
+          {
+            "clause_id": "zone-dmun-clause-30-1-6",
+            "clause_label_raw": "30.1.6",
+            "clause_text_raw": "Office;",
+            "parent_clause_id": null,
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 92,
+              "pdf_page_end": 92,
+              "bylaw_page_start": 92,
+              "bylaw_page_end": 92
+            }
+          },
+          {
+            "clause_id": "zone-dmun-clause-30-1-7",
+            "clause_label_raw": "30.1.7",
+            "clause_text_raw": "Parking Structure;",
+            "parent_clause_id": null,
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 92,
+              "pdf_page_end": 92,
+              "bylaw_page_start": 92,
+              "bylaw_page_end": 92
+            }
+          },
+          {
+            "clause_id": "zone-dmun-clause-30-1-8",
+            "clause_label_raw": "30.1.8",
+            "clause_text_raw": "Personal Service Shop; and",
+            "parent_clause_id": null,
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 92,
+              "pdf_page_end": 92,
+              "bylaw_page_start": 92,
+              "bylaw_page_end": 92
+            }
+          },
+          {
+            "clause_id": "zone-dmun-clause-30-1-9",
+            "clause_label_raw": "30.1.9",
+            "clause_text_raw": "Retail Store.",
+            "parent_clause_id": null,
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 92,
+              "pdf_page_end": 92,
+              "bylaw_page_start": 92,
+              "bylaw_page_end": 92
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 92,
+          "pdf_page_end": 92,
+          "bylaw_page_start": 92,
+          "bylaw_page_end": 92
+        }
+      },
+      {
+        "section_id": "zone-dmun-section-2",
+        "section_label_raw": "",
+        "section_title_raw": "REGULATIONS FOR PERMITTED USES",
+        "source_order": 2,
+        "clauses_raw": [],
+        "tables_raw": [
+          {
+            "table_id": "zone-dmun-table-regulations-for-permitted-uses",
+            "table_title_raw": "REGULATIONS FOR PERMITTED USES",
+            "source_order": 1,
+            "columns_raw": [
+              {
+                "column_id": "row_number",
+                "column_label_raw": "",
+                "source_order": 1
+              },
+              {
+                "column_id": "requirement",
+                "column_label_raw": "",
+                "source_order": 2
+              },
+              {
+                "column_id": "condition",
+                "column_label_raw": "",
+                "source_order": 3
+              },
+              {
+                "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                "column_label_raw": "Interior/Corner Lots Townhouse Dwelling: 4 units or more",
+                "source_order": 4
+              }
+            ],
+            "rows_raw": [
+              {
+                "row_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less",
+                "source_order": 1,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "1"
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Any Building type, 3 units or less"
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less-interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "cell_text_raw": "10.6 m (34.8 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Townhouse Dwelling: 4 units or more"
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more-interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Apartment Dwelling: 4 units or more"
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more-interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "cell_text_raw": "20.0 m (65.6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-any-other-permitted-use",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-any-other-permitted-use-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-any-other-permitted-use-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-any-other-permitted-use-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Any other permitted Use"
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-any-other-permitted-use-interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "cell_text_raw": "20.0 m (65.6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-dmun-table-regulations-for-permitted-uses-row-2",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-2-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "2"
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-2-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "and Flankage Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-2-interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "cell_text_raw": "Minimum 2.4 m (7.9 ft) and Maximum 4.9m (16.1 ft); OR, Within the minimum and maximum range of the existing Buildings on the Block."
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-dmun-table-regulations-for-permitted-uses-row-3",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-3-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "3"
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-3-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Yard Projections"
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-3-interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "cell_text_raw": "Minimum 1.2 m (3.9ft) from street line, and Maximum 2.4m (7.9ft) projection; OR Within the minimum and maximum range of the existing Buildings on the Block."
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-dmun-table-regulations-for-permitted-uses-row-4",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-4-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "4"
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-4-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-4-interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "cell_text_raw": "6.0 m (19.7 ft); OR Within the minimum and maximum range of the existing Buildings on the Block."
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-dmun-table-regulations-for-permitted-uses-row-5",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-5-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "5"
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-5-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-5-interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "cell_text_raw": "1.83 m (6.0 ft); OR Equal to the Side Yard Setback of the existing Building on the abutting property, whichever is less."
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-dmun-table-regulations-for-permitted-uses-row-6",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-6-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "6"
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-6-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-dmun-table-regulations-for-permitted-uses-row-6-interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "cell_text_raw": "Minimum 7.5 m (24.6ft) Maximum 12.0 m (39.4 ft)"
+                  }
+                ]
+              }
+            ],
+            "citations": {
+              "pdf_page_start": 92,
+              "pdf_page_end": 92,
+              "bylaw_page_start": 92,
+              "bylaw_page_end": 92
+            }
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 92,
+          "pdf_page_end": 92,
+          "bylaw_page_start": 92,
+          "bylaw_page_end": 92
+        }
+      },
+      {
+        "section_id": "zone-dmun-section-30-3",
+        "section_label_raw": "30.3",
+        "section_title_raw": "BONUS HEIGHT DEVELOPMENT STANDARDS",
+        "source_order": 3,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-dmun-clause-30-3-1",
+            "clause_label_raw": "30.3.1",
+            "clause_text_raw": "Development applications in the DMUN Zone are eligible for a Bonus Height.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 93,
+              "pdf_page_end": 93,
+              "bylaw_page_start": 93,
+              "bylaw_page_end": 93
+            }
+          },
+          {
+            "clause_id": "zone-dmun-clause-30-3-2",
+            "clause_label_raw": "30.3.2",
+            "clause_text_raw": "Applications for a Bonus Height are subject to the following regulations:",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 93,
+              "pdf_page_end": 93,
+              "bylaw_page_start": 93,
+              "bylaw_page_end": 93
+            }
+          },
+          {
+            "clause_id": "zone-dmun-clause-30-3-2-a",
+            "clause_label_raw": "a",
+            "clause_text_raw": "A bonus of up to a maximum Building Height of 18.5m (60.7ft).",
+            "parent_clause_id": "zone-dmun-clause-30-3-2",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 93,
+              "pdf_page_end": 93,
+              "bylaw_page_start": 93,
+              "bylaw_page_end": 93
+            }
+          },
+          {
+            "clause_id": "zone-dmun-clause-30-3-2-b",
+            "clause_label_raw": "b",
+            "clause_text_raw": "Lot Dimension Requirements:",
+            "parent_clause_id": "zone-dmun-clause-30-3-2",
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 93,
+              "pdf_page_end": 93,
+              "bylaw_page_start": 93,
+              "bylaw_page_end": 93
+            }
+          },
+          {
+            "clause_id": "zone-dmun-clause-30-3-2-i",
+            "clause_label_raw": "i",
+            "clause_text_raw": "Minimum Lot Frontage of 30.0m (98.4ft)",
+            "parent_clause_id": "zone-dmun-clause-30-3-2",
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 93,
+              "pdf_page_end": 93,
+              "bylaw_page_start": 93,
+              "bylaw_page_end": 93
+            }
+          },
+          {
+            "clause_id": "zone-dmun-clause-30-3-2-c",
+            "clause_label_raw": "c",
+            "clause_text_raw": "The portion above the base Building that is a bonus in Height shall be:",
+            "parent_clause_id": "zone-dmun-clause-30-3-2",
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 93,
+              "pdf_page_end": 93,
+              "bylaw_page_start": 93,
+              "bylaw_page_end": 93
+            }
+          },
+          {
+            "clause_id": "zone-dmun-clause-30-3-2-i",
+            "clause_label_raw": "i",
+            "clause_text_raw": "A minimum 3.0m (9.8ft) Stepback from the base Building.",
+            "parent_clause_id": "zone-dmun-clause-30-3-2",
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 93,
+              "pdf_page_end": 93,
+              "bylaw_page_start": 93,
+              "bylaw_page_end": 93
+            }
+          },
+          {
+            "clause_id": "zone-dmun-clause-30-3-2-ii",
+            "clause_label_raw": "ii",
+            "clause_text_raw": "A minimum 5.5m (18ft) Side Yard Setback or Stepback to ensure adequate separation distances of the upper levels from adjacent properties that may also be eligible for a Height bonus.",
+            "parent_clause_id": "zone-dmun-clause-30-3-2",
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 93,
+              "pdf_page_end": 93,
+              "bylaw_page_start": 93,
+              "bylaw_page_end": 93
+            }
+          },
+          {
+            "clause_id": "zone-dmun-clause-30-3-2-iii",
+            "clause_label_raw": "iii",
+            "clause_text_raw": "A 45-degree angular planes originating from the top of the flank or rear façade of the base Building that faces abutting residential dwellings or within a Downtown Neighbourhood (DN) Zone.",
+            "parent_clause_id": "zone-dmun-clause-30-3-2",
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 93,
+              "pdf_page_end": 93,
+              "bylaw_page_start": 93,
+              "bylaw_page_end": 93
+            }
+          },
+          {
+            "clause_id": "zone-dmun-clause-30-3-2-d",
+            "clause_label_raw": "d",
+            "clause_text_raw": "Parking Structures are not eligible for a Bonus Height.",
+            "parent_clause_id": "zone-dmun-clause-30-3-2",
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 93,
+              "pdf_page_end": 93,
+              "bylaw_page_start": 93,
+              "bylaw_page_end": 93
+            }
+          },
+          {
+            "clause_id": "zone-dmun-clause-30-3-3",
+            "clause_label_raw": "30.3.3",
+            "clause_text_raw": "Bonus Height applications are subject to the provisions in the Bonus Height Applications Section of this by-law.",
+            "parent_clause_id": null,
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 93,
+              "pdf_page_end": 93,
+              "bylaw_page_start": 93,
+              "bylaw_page_end": 93
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 93,
+          "pdf_page_end": 93,
+          "bylaw_page_start": 93,
+          "bylaw_page_end": 93
+        }
+      }
+    ],
+    "tables_raw": [
+      {
+        "table_id": "zone-dmun-table-regulations-for-permitted-uses",
+        "section_id": "zone-dmun-section-2"
+      }
+    ],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-dmun-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 92,
+          "pdf_page_end": 93,
+          "bylaw_page_start": 92,
+          "bylaw_page_end": 93
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-dmun-clause-30-1-1",
+        "section_id": "zone-dmun-section-30-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-dmun-clause-30-1-2",
+        "section_id": "zone-dmun-section-30-1",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-dmun-clause-30-1-3",
+        "section_id": "zone-dmun-section-30-1",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-dmun-clause-30-1-4",
+        "section_id": "zone-dmun-section-30-1",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-dmun-clause-30-1-5",
+        "section_id": "zone-dmun-section-30-1",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-dmun-clause-30-1-6",
+        "section_id": "zone-dmun-section-30-1",
+        "source_order": 6
+      },
+      {
+        "clause_id": "zone-dmun-clause-30-1-7",
+        "section_id": "zone-dmun-section-30-1",
+        "source_order": 7
+      },
+      {
+        "clause_id": "zone-dmun-clause-30-1-8",
+        "section_id": "zone-dmun-section-30-1",
+        "source_order": 8
+      },
+      {
+        "clause_id": "zone-dmun-clause-30-1-9",
+        "section_id": "zone-dmun-section-30-1",
+        "source_order": 9
+      },
+      {
+        "clause_id": "zone-dmun-clause-30-3-1",
+        "section_id": "zone-dmun-section-30-3",
+        "source_order": 10
+      },
+      {
+        "clause_id": "zone-dmun-clause-30-3-2",
+        "section_id": "zone-dmun-section-30-3",
+        "source_order": 11
+      },
+      {
+        "clause_id": "zone-dmun-clause-30-3-2-a",
+        "section_id": "zone-dmun-section-30-3",
+        "source_order": 12
+      },
+      {
+        "clause_id": "zone-dmun-clause-30-3-2-b",
+        "section_id": "zone-dmun-section-30-3",
+        "source_order": 13
+      },
+      {
+        "clause_id": "zone-dmun-clause-30-3-2-i",
+        "section_id": "zone-dmun-section-30-3",
+        "source_order": 14
+      },
+      {
+        "clause_id": "zone-dmun-clause-30-3-2-c",
+        "section_id": "zone-dmun-section-30-3",
+        "source_order": 15
+      },
+      {
+        "clause_id": "zone-dmun-clause-30-3-2-i",
+        "section_id": "zone-dmun-section-30-3",
+        "source_order": 16
+      },
+      {
+        "clause_id": "zone-dmun-clause-30-3-2-ii",
+        "section_id": "zone-dmun-section-30-3",
+        "source_order": 17
+      },
+      {
+        "clause_id": "zone-dmun-clause-30-3-2-iii",
+        "section_id": "zone-dmun-section-30-3",
+        "source_order": 18
+      },
+      {
+        "clause_id": "zone-dmun-clause-30-3-2-d",
+        "section_id": "zone-dmun-section-30-3",
+        "source_order": 19
+      },
+      {
+        "clause_id": "zone-dmun-clause-30-3-3",
+        "section_id": "zone-dmun-section-30-3",
+        "source_order": 20
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-dmun-term-term-uses_permitted_in_the_downtown_neighbourhood_dn_zone",
+        "term_raw": "Uses permitted in the Downtown Neighbourhood (DN) Zone",
+        "term_normalized": "uses_permitted_in_the_downtown_neighbourhood_dn_zone",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmun-clause-30-1-1"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-dmun-term-term-uses_permitted_in_the_park_cultural_zone",
+        "term_raw": "Uses permitted in the Park/Cultural Zone",
+        "term_normalized": "uses_permitted_in_the_park_cultural_zone",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmun-clause-30-1-2"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-dmun-term-term-eating_and_drinking_establishment",
+        "term_raw": "Eating and Drinking Establishment",
+        "term_normalized": "eating_and_drinking_establishment",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmun-clause-30-1-3"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-dmun-term-term-funeral_establishment",
+        "term_raw": "Funeral Establishment",
+        "term_normalized": "funeral_establishment",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmun-clause-30-1-4"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-dmun-term-term-medical_health_and_dental_office",
+        "term_raw": "Medical, Health and Dental Office",
+        "term_normalized": "medical_health_and_dental_office",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmun-clause-30-1-5"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-dmun-term-term-office",
+        "term_raw": "Office",
+        "term_normalized": "office",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmun-clause-30-1-6"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-dmun-term-term-parking_structure",
+        "term_raw": "Parking Structure",
+        "term_normalized": "parking_structure",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmun-clause-30-1-7"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-dmun-term-term-personal_service_shop",
+        "term_raw": "Personal Service Shop",
+        "term_normalized": "personal_service_shop",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmun-clause-30-1-8"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-dmun-term-term-retail_store",
+        "term_raw": "Retail Store",
+        "term_normalized": "retail_store",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmun-clause-30-1-9"
+          }
+        ],
+        "confidence": "needs_review"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-dmun-use-uses-permitted-in-the-downtown-neighbourhood-dn-zone-1",
+        "use_name_raw": "Uses permitted in the Downtown Neighbourhood (DN) Zone",
+        "use_term_id": "zone-dmun-term-term-uses_permitted_in_the_downtown_neighbourhood_dn_zone",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-dmun-clause-30-1-1",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-dmun-use-uses-permitted-in-the-park-cultural-zone-2",
+        "use_name_raw": "Uses permitted in the Park/Cultural Zone",
+        "use_term_id": "zone-dmun-term-term-uses_permitted_in_the_park_cultural_zone",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-dmun-clause-30-1-2",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-dmun-use-eating-and-drinking-establishment-3",
+        "use_name_raw": "Eating and Drinking Establishment",
+        "use_term_id": "zone-dmun-term-term-eating_and_drinking_establishment",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-dmun-clause-30-1-3",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-dmun-use-funeral-establishment-4",
+        "use_name_raw": "Funeral Establishment",
+        "use_term_id": "zone-dmun-term-term-funeral_establishment",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-dmun-clause-30-1-4",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-dmun-use-medical-health-and-dental-office-5",
+        "use_name_raw": "Medical, Health and Dental Office",
+        "use_term_id": "zone-dmun-term-term-medical_health_and_dental_office",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-dmun-clause-30-1-5",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-dmun-use-office-6",
+        "use_name_raw": "Office",
+        "use_term_id": "zone-dmun-term-term-office",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-dmun-clause-30-1-6",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-dmun-use-parking-structure-7",
+        "use_name_raw": "Parking Structure",
+        "use_term_id": "zone-dmun-term-term-parking_structure",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-dmun-clause-30-1-7",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-dmun-use-personal-service-shop-8",
+        "use_name_raw": "Personal Service Shop",
+        "use_term_id": "zone-dmun-term-term-personal_service_shop",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-dmun-clause-30-1-8",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-dmun-use-retail-store-9",
+        "use_name_raw": "Retail Store",
+        "use_term_id": "zone-dmun-term-term-retail_store",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-dmun-clause-30-1-9",
+        "confidence": "needs_review"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+        "value_raw": "10.6 m (34.8 ft)",
+        "value": 10.6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "34.8 ft",
+            "value": 34.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+        "value_raw": "20.0 m (65.6 ft)",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "65.6 ft",
+            "value": 65.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-1-any-other-permitted-use-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+        "value_raw": "20.0 m (65.6 ft)",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "65.6 ft",
+            "value": 65.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-any-other-permitted-use-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-2-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+        "value_raw": "2.4 m (7.9 ft)",
+        "value": 2.4,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "7.9 ft",
+            "value": 7.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-2-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-2-interior-corner-lots-townhouse-dwelling-4-units-or-more-2",
+        "value_raw": "4.9m (16.1 ft)",
+        "value": 4.9,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "16.1 ft",
+            "value": 16.1,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-2-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-3-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+        "value_raw": "1.2 m (3.9ft)",
+        "value": 1.2,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "3.9ft",
+            "value": 3.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-3-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-3-interior-corner-lots-townhouse-dwelling-4-units-or-more-2",
+        "value_raw": "2.4m (7.9ft)",
+        "value": 2.4,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "7.9ft",
+            "value": 7.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-3-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-4-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-4-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-5-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+        "value_raw": "1.83 m (6.0 ft)",
+        "value": 1.83,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "6.0 ft",
+            "value": 6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-5-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-6-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+        "value_raw": "7.5 m (24.6ft)",
+        "value": 7.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.6ft",
+            "value": 24.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-6-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-6-interior-corner-lots-townhouse-dwelling-4-units-or-more-2",
+        "value_raw": "12.0 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-6-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dmun-num-zone-dmun-clause-30-3-2-a-1",
+        "value_raw": "18.5m (60.7ft)",
+        "value": 18.5,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "60.7ft",
+            "value": 60.7,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmun-clause-30-3-2-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dmun-num-zone-dmun-clause-30-3-2-i-1",
+        "value_raw": "30.0m (98.4ft)",
+        "value": 30,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "98.4ft",
+            "value": 98.4,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmun-clause-30-3-2-i"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dmun-num-zone-dmun-clause-30-3-2-i-1",
+        "value_raw": "3.0m (9.8ft)",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "9.8ft",
+            "value": 9.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmun-clause-30-3-2-i"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dmun-num-zone-dmun-clause-30-3-2-ii-1",
+        "value_raw": "5.5m (18ft)",
+        "value": 5.5,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "18ft",
+            "value": 18,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmun-clause-30-3-2-ii"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-dmun-req-zone-dmun-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Frontage (Minimum)",
+        "requirement_text_raw": "Frontage (Minimum) Any Building type, 3 units or less Interior/Corner Lots Townhouse Dwelling: 4 units or more 10.6 m (34.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Any Building type, 3 units or less"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less-interior-corner-lots-townhouse-dwelling-4-units-or-more-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-dmun-req-zone-dmun-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Frontage (Minimum)",
+        "requirement_text_raw": "Frontage (Minimum) Townhouse Dwelling: 4 units or more Interior/Corner Lots Townhouse Dwelling: 4 units or more 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Townhouse Dwelling: 4 units or more"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more-interior-corner-lots-townhouse-dwelling-4-units-or-more-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-dmun-req-zone-dmun-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Frontage (Minimum)",
+        "requirement_text_raw": "Frontage (Minimum) Apartment Dwelling: 4 units or more Interior/Corner Lots Townhouse Dwelling: 4 units or more 20.0 m (65.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Apartment Dwelling: 4 units or more"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more-interior-corner-lots-townhouse-dwelling-4-units-or-more-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-dmun-req-zone-dmun-table-regulations-for-permitted-uses-row-1-any-other-permitted-use-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Frontage (Minimum)",
+        "requirement_text_raw": "Frontage (Minimum) Any other permitted Use Interior/Corner Lots Townhouse Dwelling: 4 units or more 20.0 m (65.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Any other permitted Use"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-1-any-other-permitted-use-interior-corner-lots-townhouse-dwelling-4-units-or-more-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-1-any-other-permitted-use"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-dmun-req-zone-dmun-table-regulations-for-permitted-uses-row-2-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "flankage_yard",
+        "requirement_label_raw": "and Flankage Yard (Minimum)",
+        "requirement_text_raw": "and Flankage Yard (Minimum) Interior/Corner Lots Townhouse Dwelling: 4 units or more Minimum 2.4 m (7.9 ft) and Maximum 4.9m (16.1 ft); OR, Within the minimum and maximum range of the existing Buildings on the Block.",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-2-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+          "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-2-interior-corner-lots-townhouse-dwelling-4-units-or-more-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-dmun-req-zone-dmun-table-regulations-for-permitted-uses-row-3-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_projections",
+        "requirement_label_raw": "Yard Projections",
+        "requirement_text_raw": "Yard Projections Interior/Corner Lots Townhouse Dwelling: 4 units or more Minimum 1.2 m (3.9ft) from street line, and Maximum 2.4m (7.9ft) projection; OR Within the minimum and maximum range of the existing Buildings on the Block.",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-3-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+          "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-3-interior-corner-lots-townhouse-dwelling-4-units-or-more-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-dmun-req-zone-dmun-table-regulations-for-permitted-uses-row-4-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Interior/Corner Lots Townhouse Dwelling: 4 units or more 6.0 m (19.7 ft); OR Within the minimum and maximum range of the existing Buildings on the Block.",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-4-interior-corner-lots-townhouse-dwelling-4-units-or-more-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-dmun-req-zone-dmun-table-regulations-for-permitted-uses-row-5-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Interior/Corner Lots Townhouse Dwelling: 4 units or more 1.83 m (6.0 ft); OR Equal to the Side Yard Setback of the existing Building on the abutting property, whichever is less.",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-5-interior-corner-lots-townhouse-dwelling-4-units-or-more-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-dmun-req-zone-dmun-table-regulations-for-permitted-uses-row-6-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "other",
+        "requirement_label_raw": "",
+        "requirement_text_raw": "Interior/Corner Lots Townhouse Dwelling: 4 units or more Minimum 7.5 m (24.6ft) Maximum 12.0 m (39.4 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-6-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+          "zone-dmun-num-zone-dmun-table-regulations-for-permitted-uses-row-6-interior-corner-lots-townhouse-dwelling-4-units-or-more-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-dmun-table-regulations-for-permitted-uses-row-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-dmun-req-zone-dmun-clause-30-3-2-a",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "a",
+        "requirement_text_raw": "A bonus of up to a maximum Building Height of 18.5m (60.7ft).",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-dmun-num-zone-dmun-clause-30-3-2-a-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmun-clause-30-3-2-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-dmun-req-zone-dmun-clause-30-3-2-i",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "i",
+        "requirement_text_raw": "Minimum Lot Frontage of 30.0m (98.4ft)",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-dmun-num-zone-dmun-clause-30-3-2-i-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmun-clause-30-3-2-i"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-dmun-req-zone-dmun-clause-30-3-2-ii",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "ii",
+        "requirement_text_raw": "A minimum 5.5m (18ft) Side Yard Setback or Stepback to ensure adequate separation distances of the upper levels from adjacent properties that may also be eligible for a Height bonus.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-dmun-num-zone-dmun-clause-30-3-2-ii-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dmun-clause-30-3-2-ii"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-dmun-regulation-group-zone",
+        "group_label_raw": "30",
+        "group_title_raw": "DOWNTOWN MIXED USE NEIGHBOURHOOD (DMUN)",
+        "regulated_use_terms": [
+          "zone-dmun-term-term-uses_permitted_in_the_downtown_neighbourhood_dn_zone",
+          "zone-dmun-term-term-uses_permitted_in_the_park_cultural_zone",
+          "zone-dmun-term-term-eating_and_drinking_establishment",
+          "zone-dmun-term-term-funeral_establishment",
+          "zone-dmun-term-term-medical_health_and_dental_office",
+          "zone-dmun-term-term-office",
+          "zone-dmun-term-term-parking_structure",
+          "zone-dmun-term-term-personal_service_shop",
+          "zone-dmun-term-term-retail_store"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "DMUN"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-dmun-req-zone-dmun-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+          "zone-dmun-req-zone-dmun-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+          "zone-dmun-req-zone-dmun-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+          "zone-dmun-req-zone-dmun-table-regulations-for-permitted-uses-row-1-any-other-permitted-use-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+          "zone-dmun-req-zone-dmun-table-regulations-for-permitted-uses-row-2-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+          "zone-dmun-req-zone-dmun-table-regulations-for-permitted-uses-row-3-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+          "zone-dmun-req-zone-dmun-table-regulations-for-permitted-uses-row-4-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+          "zone-dmun-req-zone-dmun-table-regulations-for-permitted-uses-row-5-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+          "zone-dmun-req-zone-dmun-table-regulations-for-permitted-uses-row-6-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+          "zone-dmun-req-zone-dmun-clause-30-3-2-a",
+          "zone-dmun-req-zone-dmun-clause-30-3-2-i",
+          "zone-dmun-req-zone-dmun-clause-30-3-2-ii"
+        ],
+        "source_section_ref": "zone-dmun-section-30-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-dmun-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "DMUN",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-dmun-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-dmun-flag-unmatched-term-uses-permitted-in-the-downtown-neighbourhood-dn-zone",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Uses permitted in the Downtown Neighbourhood (DN) Zone",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-dmun-clause-30-1-1"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-dmun-flag-unmatched-term-uses-permitted-in-the-park-cultural-zone",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Uses permitted in the Park/Cultural Zone",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-dmun-clause-30-1-2"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-dmun-flag-unmatched-term-eating-and-drinking-establishment",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Eating and Drinking Establishment",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-dmun-clause-30-1-3"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-dmun-flag-unmatched-term-funeral-establishment",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Funeral Establishment",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-dmun-clause-30-1-4"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-dmun-flag-unmatched-term-medical-health-and-dental-office",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Medical, Health and Dental Office",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-dmun-clause-30-1-5"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-dmun-flag-unmatched-term-office",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Office",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-dmun-clause-30-1-6"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-dmun-flag-unmatched-term-parking-structure",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Parking Structure",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-dmun-clause-30-1-7"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-dmun-flag-unmatched-term-personal-service-shop",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Personal Service Shop",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-dmun-clause-30-1-8"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-dmun-flag-unmatched-term-retail-store",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Retail Store",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-dmun-clause-30-1-9"
+        }
+      ]
+    }
+  ]
 }

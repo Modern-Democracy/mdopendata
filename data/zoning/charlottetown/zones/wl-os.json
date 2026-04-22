@@ -1,141 +1,261 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+    "document_type": "zone",
     "zone_code": "WL-OS",
     "zone_name": "WATER LOT ZONE - OPEN SPACE",
-    "part_label_raw": "36",
-    "chapter_heading_raw": "36 WATER LOT ZONE - OPEN SPACE (WL-OS)"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": []
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "36.1.1",
-      "use_type": "principal_use",
-      "use_name": "Docking for private boats and watercraft subject to provincial and federal approvals.",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 108,
-        "pdf_page_end": 108,
-        "bylaw_page_start": 108,
-        "bylaw_page_end": 108
-      },
-      "clause_path": [
-        "36.1.1"
-      ]
-    },
-    {
-      "clause_label_raw": "36.1.2",
-      "use_type": "institutional_or_open_space_use",
-      "use_name": "Subject to sections 35 inclusive, the water lots shall remain as a Water Lot- Open Space Zone in which no development may occur other than navigation and required infrastructure related to navigation.",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 108,
-        "pdf_page_end": 108,
-        "bylaw_page_start": 108,
-        "bylaw_page_end": 108
-      },
-      "clause_path": [
-        "36.1.2"
-      ]
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "36.1",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 108,
-        "pdf_page_end": 108,
-        "bylaw_page_start": 108,
-        "bylaw_page_end": 108
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "36.1.1",
-          "clause_path": [
-            "36.1.1"
-          ],
-          "text": "Docking for private boats and watercraft subject to provincial and federal approvals.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 108,
-            "pdf_page_end": 108,
-            "bylaw_page_start": 108,
-            "bylaw_page_end": 108
-          }
-        },
-        {
-          "provision_label_raw": "36.1.2",
-          "clause_path": [
-            "36.1.2"
-          ],
-          "text": "Subject to sections 35 inclusive, the water lots shall remain as a Water Lot- Open Space Zone in which no development may occur other than navigation and required infrastructure related to navigation.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 108,
-            "pdf_page_end": 108,
-            "bylaw_page_start": 108,
-            "bylaw_page_end": 108
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": null,
-      "title_label_raw": "DEVELOPMENT STANDARDS",
-      "citations": {
-        "pdf_page_start": 108,
-        "pdf_page_end": 108,
-        "bylaw_page_start": 108,
-        "bylaw_page_end": 108
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "section",
-          "text": "There are no development standards contemplated in the WLOS zone unless a site-specific exemption amendment application is made to rezone to another zone in which case the requested zone standards would apply.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 108,
-            "pdf_page_end": 108,
-            "bylaw_page_start": 108,
-            "bylaw_page_end": 108
-          }
-        }
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [],
-  "content_blocks": [],
-  "open_issues": [
-    {
-      "issue_type": "normalization_review",
-      "description": "Zone symbol appears as WLOS in section 1.4.2 and as WL-OS in the chapter heading; preserve the chapter heading code until reviewed."
-    },
-    {
-      "issue_type": "source_revision_review",
-      "description": "Source PDF cover identifies rev 049 updated March 9, 2026, but this zone page header may display rev 048 updated October 24, 2025; verify source revision during QA."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "36",
+    "zone_title_raw": "WATER LOT ZONE - OPEN SPACE (WL-OS)",
+    "citations": {
       "pdf_page_start": 108,
       "pdf_page_end": 108,
       "bylaw_page_start": 108,
       "bylaw_page_end": 108
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-wl-os",
+        "source_unit_type": "zone",
+        "label_raw": "36",
+        "title_raw": "WATER LOT ZONE - OPEN SPACE (WL-OS)",
+        "text_raw": "Docking for private boats and watercraft subject to provincial and federal approvals.\nSubject to sections 35 inclusive, the water lots shall remain as a Water Lot- Open Space Zone in which no development may occur other than navigation and required infrastructure related to navigation.\nThere are no development standards contemplated in the WLOS zone unless a site-specific exemption amendment application is made to rezone to another zone in which case the requested zone standards would apply.",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 108,
+          "pdf_page_end": 108,
+          "bylaw_page_start": 108,
+          "bylaw_page_end": 108
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-wl-os-section-36-1",
+        "section_label_raw": "36.1",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-wl-os-clause-36-1-1",
+            "clause_label_raw": "36.1.1",
+            "clause_text_raw": "Docking for private boats and watercraft subject to provincial and federal approvals.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 108,
+              "pdf_page_end": 108,
+              "bylaw_page_start": 108,
+              "bylaw_page_end": 108
+            }
+          },
+          {
+            "clause_id": "zone-wl-os-clause-36-1-2",
+            "clause_label_raw": "36.1.2",
+            "clause_text_raw": "Subject to sections 35 inclusive, the water lots shall remain as a Water Lot- Open Space Zone in which no development may occur other than navigation and required infrastructure related to navigation.",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 108,
+              "pdf_page_end": 108,
+              "bylaw_page_start": 108,
+              "bylaw_page_end": 108
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 108,
+          "pdf_page_end": 108,
+          "bylaw_page_start": 108,
+          "bylaw_page_end": 108
+        }
+      },
+      {
+        "section_id": "zone-wl-os-section-2",
+        "section_label_raw": "",
+        "section_title_raw": "DEVELOPMENT STANDARDS",
+        "source_order": 2,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-wl-os-clause-section",
+            "clause_label_raw": "section",
+            "clause_text_raw": "There are no development standards contemplated in the WLOS zone unless a site-specific exemption amendment application is made to rezone to another zone in which case the requested zone standards would apply.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 108,
+              "pdf_page_end": 108,
+              "bylaw_page_start": 108,
+              "bylaw_page_end": 108
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 108,
+          "pdf_page_end": 108,
+          "bylaw_page_start": 108,
+          "bylaw_page_end": 108
+        }
+      }
+    ],
+    "tables_raw": [],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-wl-os-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 108,
+          "pdf_page_end": 108,
+          "bylaw_page_start": 108,
+          "bylaw_page_end": 108
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-wl-os-clause-36-1-1",
+        "section_id": "zone-wl-os-section-36-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-wl-os-clause-36-1-2",
+        "section_id": "zone-wl-os-section-36-1",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-wl-os-clause-section",
+        "section_id": "zone-wl-os-section-2",
+        "source_order": 3
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-wl-os-term-term-docking_for_private_boats_and_watercraft_subject_to_provincial_and_federal_approvals",
+        "term_raw": "Docking for private boats and watercraft subject to provincial and federal approvals",
+        "term_normalized": "docking_for_private_boats_and_watercraft_subject_to_provincial_and_federal_approvals",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wl-os-clause-36-1-1"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-wl-os-term-term-subject_to_sections_35_inclusive_the_water_lots_shall_remain_as_a_water_lot_open_space_zone_in_which_no_development_may_occur_other_than_navigation_and_required_infrastructure_related_to_navigation",
+        "term_raw": "Subject to sections 35 inclusive, the water lots shall remain as a Water Lot- Open Space Zone in which no development may occur other than navigation and required infrastructure related to navigation",
+        "term_normalized": "subject_to_sections_35_inclusive_the_water_lots_shall_remain_as_a_water_lot_open_space_zone_in_which_no_development_may_occur_other_than_navigation_and_required_infrastructure_related_to_navigation",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wl-os-clause-36-1-2"
+          }
+        ],
+        "confidence": "needs_review"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-wl-os-use-docking-for-private-boats-and-watercraft-subject-to-provincial-and-federal-approvals-1",
+        "use_name_raw": "Docking for private boats and watercraft subject to provincial and federal approvals",
+        "use_term_id": "zone-wl-os-term-term-docking_for_private_boats_and_watercraft_subject_to_provincial_and_federal_approvals",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-wl-os-clause-36-1-1",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-wl-os-use-subject-to-sections-35-inclusive-the-water-lots-shall-remain-as-a-water-lot-open-space-zone-in-which-no-development-may-occur-other-than-navigation-and-required-infrastructure-related-to-navigation-2",
+        "use_name_raw": "Subject to sections 35 inclusive, the water lots shall remain as a Water Lot- Open Space Zone in which no development may occur other than navigation and required infrastructure related to navigation",
+        "use_term_id": "zone-wl-os-term-term-subject_to_sections_35_inclusive_the_water_lots_shall_remain_as_a_water_lot_open_space_zone_in_which_no_development_may_occur_other_than_navigation_and_required_infrastructure_related_to_navigation",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-wl-os-clause-36-1-2",
+        "confidence": "needs_review"
+      }
+    ],
+    "numeric_values": [],
+    "requirements": [],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-wl-os-regulation-group-zone",
+        "group_label_raw": "36",
+        "group_title_raw": "WATER LOT ZONE - OPEN SPACE (WL-OS)",
+        "regulated_use_terms": [
+          "zone-wl-os-term-term-docking_for_private_boats_and_watercraft_subject_to_provincial_and_federal_approvals",
+          "zone-wl-os-term-term-subject_to_sections_35_inclusive_the_water_lots_shall_remain_as_a_water_lot_open_space_zone_in_which_no_development_may_occur_other_than_navigation_and_required_infrastructure_related_to_navigation"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "WL-OS"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [],
+        "source_section_ref": "zone-wl-os-section-36-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-wl-os-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "WL-OS",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-wl-os-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-wl-os-flag-unmatched-term-docking-for-private-boats-and-watercraft-subject-to-provincial-and-federal-approvals",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Docking for private boats and watercraft subject to provincial and federal approvals",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-wl-os-clause-36-1-1"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-wl-os-flag-unmatched-term-subject-to-sections-35-inclusive-the-water-lots-shall-remain-as-a-water-lot-open-space-zone-in-which-no-development-may-occur-other-than-navigation-and-required-infrastructure-related-to-navigation",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Subject to sections 35 inclusive, the water lots shall remain as a Water Lot- Open Space Zone in which no development may occur other than navigation and required infrastructure related to navigation",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-wl-os-clause-36-1-2"
+        }
+      ]
+    }
+  ]
 }

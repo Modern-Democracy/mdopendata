@@ -1,387 +1,1638 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+    "document_type": "zone",
     "zone_code": "C-1",
     "zone_name": "BUSINESS OFFICE COMMERCIAL ZONE",
-    "part_label_raw": "25",
-    "chapter_heading_raw": "25 BUSINESS OFFICE COMMERCIAL ZONE (C-1)"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": []
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "25.1.1",
-      "use_type": "inherited_principal_use",
-      "use_name": "Uses as permitted in the R-3 Zone subject to the Regulations for Permitted Uses for the R-3 Zone",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 87,
-        "pdf_page_end": 87,
-        "bylaw_page_start": 87,
-        "bylaw_page_end": 87
-      },
-      "clause_path": [
-        "25.1.1"
-      ]
-    },
-    {
-      "clause_label_raw": "25.1.2",
-      "use_type": "principal_use",
-      "use_name": "Convenience Store",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 87,
-        "pdf_page_end": 87,
-        "bylaw_page_start": 87,
-        "bylaw_page_end": 87
-      },
-      "clause_path": [
-        "25.1.2"
-      ]
-    },
-    {
-      "clause_label_raw": "25.1.3",
-      "use_type": "principal_use",
-      "use_name": "Educational Institution",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 87,
-        "pdf_page_end": 87,
-        "bylaw_page_start": 87,
-        "bylaw_page_end": 87
-      },
-      "clause_path": [
-        "25.1.3"
-      ]
-    },
-    {
-      "clause_label_raw": "25.1.4",
-      "use_type": "principal_use",
-      "use_name": "Funeral Establishment",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 87,
-        "pdf_page_end": 87,
-        "bylaw_page_start": 87,
-        "bylaw_page_end": 87
-      },
-      "clause_path": [
-        "25.1.4"
-      ]
-    },
-    {
-      "clause_label_raw": "25.1.5",
-      "use_type": "principal_use",
-      "use_name": "Laundromat",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 87,
-        "pdf_page_end": 87,
-        "bylaw_page_start": 87,
-        "bylaw_page_end": 87
-      },
-      "clause_path": [
-        "25.1.5"
-      ]
-    },
-    {
-      "clause_label_raw": "25.1.6",
-      "use_type": "principal_use",
-      "use_name": "Medical, Health and Dental Office",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 87,
-        "pdf_page_end": 87,
-        "bylaw_page_start": 87,
-        "bylaw_page_end": 87
-      },
-      "clause_path": [
-        "25.1.6"
-      ]
-    },
-    {
-      "clause_label_raw": "25.1.7",
-      "use_type": "principal_use",
-      "use_name": "Office",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 87,
-        "pdf_page_end": 87,
-        "bylaw_page_start": 87,
-        "bylaw_page_end": 87
-      },
-      "clause_path": [
-        "25.1.7"
-      ]
-    },
-    {
-      "clause_label_raw": "25.1.8",
-      "use_type": "institutional_or_open_space_use",
-      "use_name": "Parking Lot",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 87,
-        "pdf_page_end": 87,
-        "bylaw_page_start": 87,
-        "bylaw_page_end": 87
-      },
-      "clause_path": [
-        "25.1.8"
-      ]
-    },
-    {
-      "clause_label_raw": "25.1.9",
-      "use_type": "principal_use",
-      "use_name": "Personal Service Shop",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 87,
-        "pdf_page_end": 87,
-        "bylaw_page_start": 87,
-        "bylaw_page_end": 87
-      },
-      "clause_path": [
-        "25.1.9"
-      ]
-    },
-    {
-      "clause_label_raw": "25.1.10",
-      "use_type": "principal_use",
-      "use_name": "Retail Store",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 87,
-        "pdf_page_end": 87,
-        "bylaw_page_start": 87,
-        "bylaw_page_end": 87
-      },
-      "clause_path": [
-        "25.1.10"
-      ]
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "25.1",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 87,
-        "pdf_page_end": 87,
-        "bylaw_page_start": 87,
-        "bylaw_page_end": 87
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "25.1.1",
-          "clause_path": [
-            "25.1.1"
-          ],
-          "text": "Uses as permitted in the R-3 Zone subject to the Regulations for Permitted Uses for the R-3 Zone;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 87,
-            "pdf_page_end": 87,
-            "bylaw_page_start": 87,
-            "bylaw_page_end": 87
-          }
-        },
-        {
-          "provision_label_raw": "25.1.2",
-          "clause_path": [
-            "25.1.2"
-          ],
-          "text": "Convenience Store;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 87,
-            "pdf_page_end": 87,
-            "bylaw_page_start": 87,
-            "bylaw_page_end": 87
-          }
-        },
-        {
-          "provision_label_raw": "25.1.3",
-          "clause_path": [
-            "25.1.3"
-          ],
-          "text": "Educational Institution;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 87,
-            "pdf_page_end": 87,
-            "bylaw_page_start": 87,
-            "bylaw_page_end": 87
-          }
-        },
-        {
-          "provision_label_raw": "25.1.4",
-          "clause_path": [
-            "25.1.4"
-          ],
-          "text": "Funeral Establishment",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 87,
-            "pdf_page_end": 87,
-            "bylaw_page_start": 87,
-            "bylaw_page_end": 87
-          }
-        },
-        {
-          "provision_label_raw": "25.1.5",
-          "clause_path": [
-            "25.1.5"
-          ],
-          "text": "Laundromat;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 87,
-            "pdf_page_end": 87,
-            "bylaw_page_start": 87,
-            "bylaw_page_end": 87
-          }
-        },
-        {
-          "provision_label_raw": "25.1.6",
-          "clause_path": [
-            "25.1.6"
-          ],
-          "text": "Medical, Health and Dental Office",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 87,
-            "pdf_page_end": 87,
-            "bylaw_page_start": 87,
-            "bylaw_page_end": 87
-          }
-        },
-        {
-          "provision_label_raw": "25.1.7",
-          "clause_path": [
-            "25.1.7"
-          ],
-          "text": "Office;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 87,
-            "pdf_page_end": 87,
-            "bylaw_page_start": 87,
-            "bylaw_page_end": 87
-          }
-        },
-        {
-          "provision_label_raw": "25.1.8",
-          "clause_path": [
-            "25.1.8"
-          ],
-          "text": "Parking Lot;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 87,
-            "pdf_page_end": 87,
-            "bylaw_page_start": 87,
-            "bylaw_page_end": 87
-          }
-        },
-        {
-          "provision_label_raw": "25.1.9",
-          "clause_path": [
-            "25.1.9"
-          ],
-          "text": "Personal Service Shop; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 87,
-            "pdf_page_end": 87,
-            "bylaw_page_start": 87,
-            "bylaw_page_end": 87
-          }
-        },
-        {
-          "provision_label_raw": "25.1.10",
-          "clause_path": [
-            "25.1.10"
-          ],
-          "text": "Retail Store",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 87,
-            "pdf_page_end": 87,
-            "bylaw_page_start": 87,
-            "bylaw_page_end": 87
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": null,
-      "title_label_raw": "REGULATIONS FOR PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 87,
-        "pdf_page_end": 87,
-        "bylaw_page_start": 87,
-        "bylaw_page_end": 87
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "1",
-          "text": "Lot Area (Minimum) 600 sq. m (6,458.4 sq ft) 700 sq. m (7,534.7 sq ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 87,
-            "pdf_page_end": 87,
-            "bylaw_page_start": 87,
-            "bylaw_page_end": 87
-          }
-        },
-        {
-          "provision_label_raw": "8",
-          "text": "Floor Area (Maximum) 310 sq m (3,336.9 sq ft) 310 sq m (3,336.9 sq ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 87,
-            "pdf_page_end": 87,
-            "bylaw_page_start": 87,
-            "bylaw_page_end": 87
-          }
-        }
-      ],
-      "table_column_headings_raw": [
-        "Interior Lot Corner Lot"
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [],
-  "content_blocks": [],
-  "open_issues": [
-    {
-      "issue_type": "table_parsing_review",
-      "description": "Section 'REGULATIONS FOR PERMITTED USES' contains table-derived provisions extracted from PDF text; verify column alignment against the source PDF before normalization."
-    },
-    {
-      "issue_type": "source_revision_review",
-      "description": "Source PDF cover identifies rev 049 updated March 9, 2026, but this zone page header may display rev 048 updated October 24, 2025; verify source revision during QA."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "25",
+    "zone_title_raw": "BUSINESS OFFICE COMMERCIAL ZONE (C-1)",
+    "citations": {
       "pdf_page_start": 87,
       "pdf_page_end": 87,
       "bylaw_page_start": 87,
       "bylaw_page_end": 87
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-c-1",
+        "source_unit_type": "zone",
+        "label_raw": "25",
+        "title_raw": "BUSINESS OFFICE COMMERCIAL ZONE (C-1)",
+        "text_raw": "Uses as permitted in the R-3 Zone subject to the Regulations for Permitted Uses for the R-3 Zone;\nConvenience Store;\nEducational Institution;\nFuneral Establishment\nLaundromat;\nMedical, Health and Dental Office\nOffice;\nParking Lot;\nPersonal Service Shop; and\nRetail Store",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 87,
+          "pdf_page_end": 87,
+          "bylaw_page_start": 87,
+          "bylaw_page_end": 87
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-c-1-section-25-1",
+        "section_label_raw": "25.1",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-c-1-clause-25-1-1",
+            "clause_label_raw": "25.1.1",
+            "clause_text_raw": "Uses as permitted in the R-3 Zone subject to the Regulations for Permitted Uses for the R-3 Zone;",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 87,
+              "pdf_page_end": 87,
+              "bylaw_page_start": 87,
+              "bylaw_page_end": 87
+            }
+          },
+          {
+            "clause_id": "zone-c-1-clause-25-1-2",
+            "clause_label_raw": "25.1.2",
+            "clause_text_raw": "Convenience Store;",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 87,
+              "pdf_page_end": 87,
+              "bylaw_page_start": 87,
+              "bylaw_page_end": 87
+            }
+          },
+          {
+            "clause_id": "zone-c-1-clause-25-1-3",
+            "clause_label_raw": "25.1.3",
+            "clause_text_raw": "Educational Institution;",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 87,
+              "pdf_page_end": 87,
+              "bylaw_page_start": 87,
+              "bylaw_page_end": 87
+            }
+          },
+          {
+            "clause_id": "zone-c-1-clause-25-1-4",
+            "clause_label_raw": "25.1.4",
+            "clause_text_raw": "Funeral Establishment",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 87,
+              "pdf_page_end": 87,
+              "bylaw_page_start": 87,
+              "bylaw_page_end": 87
+            }
+          },
+          {
+            "clause_id": "zone-c-1-clause-25-1-5",
+            "clause_label_raw": "25.1.5",
+            "clause_text_raw": "Laundromat;",
+            "parent_clause_id": null,
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 87,
+              "pdf_page_end": 87,
+              "bylaw_page_start": 87,
+              "bylaw_page_end": 87
+            }
+          },
+          {
+            "clause_id": "zone-c-1-clause-25-1-6",
+            "clause_label_raw": "25.1.6",
+            "clause_text_raw": "Medical, Health and Dental Office",
+            "parent_clause_id": null,
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 87,
+              "pdf_page_end": 87,
+              "bylaw_page_start": 87,
+              "bylaw_page_end": 87
+            }
+          },
+          {
+            "clause_id": "zone-c-1-clause-25-1-7",
+            "clause_label_raw": "25.1.7",
+            "clause_text_raw": "Office;",
+            "parent_clause_id": null,
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 87,
+              "pdf_page_end": 87,
+              "bylaw_page_start": 87,
+              "bylaw_page_end": 87
+            }
+          },
+          {
+            "clause_id": "zone-c-1-clause-25-1-8",
+            "clause_label_raw": "25.1.8",
+            "clause_text_raw": "Parking Lot;",
+            "parent_clause_id": null,
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 87,
+              "pdf_page_end": 87,
+              "bylaw_page_start": 87,
+              "bylaw_page_end": 87
+            }
+          },
+          {
+            "clause_id": "zone-c-1-clause-25-1-9",
+            "clause_label_raw": "25.1.9",
+            "clause_text_raw": "Personal Service Shop; and",
+            "parent_clause_id": null,
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 87,
+              "pdf_page_end": 87,
+              "bylaw_page_start": 87,
+              "bylaw_page_end": 87
+            }
+          },
+          {
+            "clause_id": "zone-c-1-clause-25-1-10",
+            "clause_label_raw": "25.1.10",
+            "clause_text_raw": "Retail Store",
+            "parent_clause_id": null,
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 87,
+              "pdf_page_end": 87,
+              "bylaw_page_start": 87,
+              "bylaw_page_end": 87
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 87,
+          "pdf_page_end": 87,
+          "bylaw_page_start": 87,
+          "bylaw_page_end": 87
+        }
+      },
+      {
+        "section_id": "zone-c-1-section-2",
+        "section_label_raw": "",
+        "section_title_raw": "REGULATIONS FOR PERMITTED USES",
+        "source_order": 2,
+        "clauses_raw": [],
+        "tables_raw": [
+          {
+            "table_id": "zone-c-1-table-regulations-for-permitted-uses",
+            "table_title_raw": "REGULATIONS FOR PERMITTED USES",
+            "source_order": 1,
+            "columns_raw": [
+              {
+                "column_id": "row_number",
+                "column_label_raw": "",
+                "source_order": 1
+              },
+              {
+                "column_id": "requirement",
+                "column_label_raw": "",
+                "source_order": 2
+              },
+              {
+                "column_id": "interior_lot",
+                "column_label_raw": "Interior Lot",
+                "source_order": 3
+              },
+              {
+                "column_id": "corner_lot",
+                "column_label_raw": "Corner Lot",
+                "source_order": 4
+              }
+            ],
+            "rows_raw": [
+              {
+                "row_id": "zone-c-1-table-regulations-for-permitted-uses-row-1",
+                "source_order": 1,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-1-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "1"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-1-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Area (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-1-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "600 sq. m (6,458.4 sq ft)"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-1-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "700 sq. m (7,534.7 sq ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-c-1-table-regulations-for-permitted-uses-row-2",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-2-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "2"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-2-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-2-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "18 m (59.1 ft)"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-2-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "18 m (59.1 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-c-1-table-regulations-for-permitted-uses-row-3",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-3-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "3"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-3-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Front Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-3-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-3-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-c-1-table-regulations-for-permitted-uses-row-4",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-4-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "4"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-4-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Rear Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-4-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-4-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-c-1-table-regulations-for-permitted-uses-row-5",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-5-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "5"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-5-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Side Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-5-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "1.83 m (6 ft)"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-5-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "1.83 m (6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-c-1-table-regulations-for-permitted-uses-row-6",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-6-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "6"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-6-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Flankage Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-6-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-6-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-c-1-table-regulations-for-permitted-uses-row-7",
+                "source_order": 7,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-7-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "7"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-7-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Height (Maximum)"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-7-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "12.0 m (39.4 ft)"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-7-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "12.0 m (39.4 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-c-1-table-regulations-for-permitted-uses-row-8",
+                "source_order": 8,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-8-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "8"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-8-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Floor Area (Maximum)"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-8-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "310 sq m (3,336.9 sq ft)"
+                  },
+                  {
+                    "cell_id": "zone-c-1-table-regulations-for-permitted-uses-row-8-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "310 sq m (3,336.9 sq ft)"
+                  }
+                ]
+              }
+            ],
+            "citations": {
+              "pdf_page_start": 87,
+              "pdf_page_end": 87,
+              "bylaw_page_start": 87,
+              "bylaw_page_end": 87
+            }
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 87,
+          "pdf_page_end": 87,
+          "bylaw_page_start": 87,
+          "bylaw_page_end": 87
+        }
+      }
+    ],
+    "tables_raw": [
+      {
+        "table_id": "zone-c-1-table-regulations-for-permitted-uses",
+        "section_id": "zone-c-1-section-2"
+      }
+    ],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-c-1-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 87,
+          "pdf_page_end": 87,
+          "bylaw_page_start": 87,
+          "bylaw_page_end": 87
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-c-1-clause-25-1-1",
+        "section_id": "zone-c-1-section-25-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-c-1-clause-25-1-2",
+        "section_id": "zone-c-1-section-25-1",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-c-1-clause-25-1-3",
+        "section_id": "zone-c-1-section-25-1",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-c-1-clause-25-1-4",
+        "section_id": "zone-c-1-section-25-1",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-c-1-clause-25-1-5",
+        "section_id": "zone-c-1-section-25-1",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-c-1-clause-25-1-6",
+        "section_id": "zone-c-1-section-25-1",
+        "source_order": 6
+      },
+      {
+        "clause_id": "zone-c-1-clause-25-1-7",
+        "section_id": "zone-c-1-section-25-1",
+        "source_order": 7
+      },
+      {
+        "clause_id": "zone-c-1-clause-25-1-8",
+        "section_id": "zone-c-1-section-25-1",
+        "source_order": 8
+      },
+      {
+        "clause_id": "zone-c-1-clause-25-1-9",
+        "section_id": "zone-c-1-section-25-1",
+        "source_order": 9
+      },
+      {
+        "clause_id": "zone-c-1-clause-25-1-10",
+        "section_id": "zone-c-1-section-25-1",
+        "source_order": 10
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-c-1-term-term-uses_as_permitted_in_the_r_3_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_3_zone",
+        "term_raw": "Uses as permitted in the R-3 Zone subject to the Regulations for Permitted Uses for the R-3 Zone",
+        "term_normalized": "uses_as_permitted_in_the_r_3_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_3_zone",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-c-1-clause-25-1-1"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-c-1-term-term-convenience_store",
+        "term_raw": "Convenience Store",
+        "term_normalized": "convenience_store",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-c-1-clause-25-1-2"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-c-1-term-term-educational_institution",
+        "term_raw": "Educational Institution",
+        "term_normalized": "educational_institution",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-c-1-clause-25-1-3"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-c-1-term-term-funeral_establishment",
+        "term_raw": "Funeral Establishment",
+        "term_normalized": "funeral_establishment",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-c-1-clause-25-1-4"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-c-1-term-term-laundromat",
+        "term_raw": "Laundromat",
+        "term_normalized": "laundromat",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-c-1-clause-25-1-5"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-c-1-term-term-medical_health_and_dental_office",
+        "term_raw": "Medical, Health and Dental Office",
+        "term_normalized": "medical_health_and_dental_office",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-c-1-clause-25-1-6"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-c-1-term-term-office",
+        "term_raw": "Office",
+        "term_normalized": "office",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-c-1-clause-25-1-7"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-c-1-term-term-parking_lot",
+        "term_raw": "Parking Lot",
+        "term_normalized": "parking_lot",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-c-1-clause-25-1-8"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-c-1-term-term-personal_service_shop",
+        "term_raw": "Personal Service Shop",
+        "term_normalized": "personal_service_shop",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-c-1-clause-25-1-9"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-c-1-term-term-retail_store",
+        "term_raw": "Retail Store",
+        "term_normalized": "retail_store",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-c-1-clause-25-1-10"
+          }
+        ],
+        "confidence": "needs_review"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-c-1-use-uses-as-permitted-in-the-r-3-zone-subject-to-the-regulations-for-permitted-uses-for-the-r-3-zone-1",
+        "use_name_raw": "Uses as permitted in the R-3 Zone subject to the Regulations for Permitted Uses for the R-3 Zone",
+        "use_term_id": "zone-c-1-term-term-uses_as_permitted_in_the_r_3_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_3_zone",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-c-1-clause-25-1-1",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-c-1-use-convenience-store-2",
+        "use_name_raw": "Convenience Store",
+        "use_term_id": "zone-c-1-term-term-convenience_store",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-c-1-clause-25-1-2",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-c-1-use-educational-institution-3",
+        "use_name_raw": "Educational Institution",
+        "use_term_id": "zone-c-1-term-term-educational_institution",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-c-1-clause-25-1-3",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-c-1-use-funeral-establishment-4",
+        "use_name_raw": "Funeral Establishment",
+        "use_term_id": "zone-c-1-term-term-funeral_establishment",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-c-1-clause-25-1-4",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-c-1-use-laundromat-5",
+        "use_name_raw": "Laundromat",
+        "use_term_id": "zone-c-1-term-term-laundromat",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-c-1-clause-25-1-5",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-c-1-use-medical-health-and-dental-office-6",
+        "use_name_raw": "Medical, Health and Dental Office",
+        "use_term_id": "zone-c-1-term-term-medical_health_and_dental_office",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-c-1-clause-25-1-6",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-c-1-use-office-7",
+        "use_name_raw": "Office",
+        "use_term_id": "zone-c-1-term-term-office",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-c-1-clause-25-1-7",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-c-1-use-parking-lot-8",
+        "use_name_raw": "Parking Lot",
+        "use_term_id": "zone-c-1-term-term-parking_lot",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-c-1-clause-25-1-8",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-c-1-use-personal-service-shop-9",
+        "use_name_raw": "Personal Service Shop",
+        "use_term_id": "zone-c-1-term-term-personal_service_shop",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-c-1-clause-25-1-9",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-c-1-use-retail-store-10",
+        "use_name_raw": "Retail Store",
+        "use_term_id": "zone-c-1-term-term-retail_store",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-c-1-clause-25-1-10",
+        "confidence": "needs_review"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-1-interior-lot-1",
+        "value_raw": "600 sq. m (6,458.4 sq ft)",
+        "value": 600,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "6,458.4 sq ft",
+            "value": 6458.4,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-1-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-1-corner-lot-1",
+        "value_raw": "700 sq. m (7,534.7 sq ft)",
+        "value": 700,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "7,534.7 sq ft",
+            "value": 7534.7,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-1-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-2-interior-lot-1",
+        "value_raw": "18 m (59.1 ft)",
+        "value": 18,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "59.1 ft",
+            "value": 59.1,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-2-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-2-corner-lot-1",
+        "value_raw": "18 m (59.1 ft)",
+        "value": 18,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "59.1 ft",
+            "value": 59.1,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-2-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-3-interior-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-3-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-3-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-3-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-4-interior-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-4-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-4-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-4-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-5-interior-lot-1",
+        "value_raw": "1.83 m (6 ft)",
+        "value": 1.83,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "6 ft",
+            "value": 6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-5-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-5-corner-lot-1",
+        "value_raw": "1.83 m (6 ft)",
+        "value": 1.83,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "6 ft",
+            "value": 6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-5-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-6-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-6-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-7-interior-lot-1",
+        "value_raw": "12.0 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-7-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-7-corner-lot-1",
+        "value_raw": "12.0 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-7-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-8-interior-lot-1",
+        "value_raw": "310 sq m (3,336.9 sq ft)",
+        "value": 310,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "3,336.9 sq ft",
+            "value": 3336.9,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-8-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-8-corner-lot-1",
+        "value_raw": "310 sq m (3,336.9 sq ft)",
+        "value": 310,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "3,336.9 sq ft",
+            "value": 3336.9,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-8-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-1-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Interior Lot 600 sq. m (6,458.4 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-1-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-1-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Corner Lot 700 sq. m (7,534.7 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-1-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-2-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Interior Lot 18 m (59.1 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-2-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-2-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Corner Lot 18 m (59.1 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-2-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-3-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Interior Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-3-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-3-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-3-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-4-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Interior Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-4-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-4-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-4-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-5-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Interior Lot 1.83 m (6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-5-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-5-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Corner Lot 1.83 m (6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-5-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-6-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "flankage_yard",
+        "requirement_label_raw": "Flankage Yard (Minimum)",
+        "requirement_text_raw": "Flankage Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-6-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-7-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Interior Lot 12.0 m (39.4 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-7-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-7-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Corner Lot 12.0 m (39.4 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-7-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-8-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "floor_area",
+        "requirement_label_raw": "Floor Area (Maximum)",
+        "requirement_text_raw": "Floor Area (Maximum) Interior Lot 310 sq m (3,336.9 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-8-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-8"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-8-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "floor_area",
+        "requirement_label_raw": "Floor Area (Maximum)",
+        "requirement_text_raw": "Floor Area (Maximum) Corner Lot 310 sq m (3,336.9 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-1-num-zone-c-1-table-regulations-for-permitted-uses-row-8-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-1-table-regulations-for-permitted-uses-row-8"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-c-1-regulation-group-zone",
+        "group_label_raw": "25",
+        "group_title_raw": "BUSINESS OFFICE COMMERCIAL ZONE (C-1)",
+        "regulated_use_terms": [
+          "zone-c-1-term-term-uses_as_permitted_in_the_r_3_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_3_zone",
+          "zone-c-1-term-term-convenience_store",
+          "zone-c-1-term-term-educational_institution",
+          "zone-c-1-term-term-funeral_establishment",
+          "zone-c-1-term-term-laundromat",
+          "zone-c-1-term-term-medical_health_and_dental_office",
+          "zone-c-1-term-term-office",
+          "zone-c-1-term-term-parking_lot",
+          "zone-c-1-term-term-personal_service_shop",
+          "zone-c-1-term-term-retail_store"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "C-1"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-1-interior-lot",
+          "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-1-corner-lot",
+          "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-2-interior-lot",
+          "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-2-corner-lot",
+          "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-3-interior-lot",
+          "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-3-corner-lot",
+          "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-4-interior-lot",
+          "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-4-corner-lot",
+          "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-5-interior-lot",
+          "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-5-corner-lot",
+          "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-6-corner-lot",
+          "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-7-interior-lot",
+          "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-7-corner-lot",
+          "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-8-interior-lot",
+          "zone-c-1-req-zone-c-1-table-regulations-for-permitted-uses-row-8-corner-lot"
+        ],
+        "source_section_ref": "zone-c-1-section-25-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-c-1-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "C-1",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-c-1-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-c-1-flag-unmatched-term-uses-as-permitted-in-the-r-3-zone-subject-to-the-regulations-for-permitted-uses-for-the-r-3-zone",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Uses as permitted in the R-3 Zone subject to the Regulations for Permitted Uses for the R-3 Zone",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-c-1-clause-25-1-1"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-c-1-flag-unmatched-term-convenience-store",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Convenience Store",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-c-1-clause-25-1-2"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-c-1-flag-unmatched-term-educational-institution",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Educational Institution",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-c-1-clause-25-1-3"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-c-1-flag-unmatched-term-funeral-establishment",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Funeral Establishment",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-c-1-clause-25-1-4"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-c-1-flag-unmatched-term-laundromat",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Laundromat",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-c-1-clause-25-1-5"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-c-1-flag-unmatched-term-medical-health-and-dental-office",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Medical, Health and Dental Office",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-c-1-clause-25-1-6"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-c-1-flag-unmatched-term-office",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Office",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-c-1-clause-25-1-7"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-c-1-flag-unmatched-term-parking-lot",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Parking Lot",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-c-1-clause-25-1-8"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-c-1-flag-unmatched-term-personal-service-shop",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Personal Service Shop",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-c-1-clause-25-1-9"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-c-1-flag-unmatched-term-retail-store",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Retail Store",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-c-1-clause-25-1-10"
+        }
+      ]
+    }
+  ]
 }

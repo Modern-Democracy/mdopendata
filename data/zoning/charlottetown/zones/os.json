@@ -1,260 +1,1304 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+    "document_type": "zone",
     "zone_code": "OS",
     "zone_name": "OPEN SPACE ZONE",
-    "part_label_raw": "42",
-    "chapter_heading_raw": "42 OPEN SPACE ZONE (OS)"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": []
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "42.1.1",
-      "use_type": "principal_use",
-      "use_name": "Active Recreation",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 117,
-        "pdf_page_end": 117,
-        "bylaw_page_start": 117,
-        "bylaw_page_end": 117
-      },
-      "clause_path": [
-        "42.1.1"
-      ]
-    },
-    {
-      "clause_label_raw": "42.1.2",
-      "use_type": "principal_use",
-      "use_name": "Cemetery",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 117,
-        "pdf_page_end": 117,
-        "bylaw_page_start": 117,
-        "bylaw_page_end": 117
-      },
-      "clause_path": [
-        "42.1.2"
-      ]
-    },
-    {
-      "clause_label_raw": "42.1.3",
-      "use_type": "principal_use",
-      "use_name": "Community Gardens",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 117,
-        "pdf_page_end": 117,
-        "bylaw_page_start": 117,
-        "bylaw_page_end": 117
-      },
-      "clause_path": [
-        "42.1.3"
-      ]
-    },
-    {
-      "clause_label_raw": "42.1.4",
-      "use_type": "principal_use",
-      "use_name": "Golf Course",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 117,
-        "pdf_page_end": 117,
-        "bylaw_page_start": 117,
-        "bylaw_page_end": 117
-      },
-      "clause_path": [
-        "42.1.4"
-      ]
-    },
-    {
-      "clause_label_raw": "42.1.5",
-      "use_type": "principal_use",
-      "use_name": "Trail System",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 117,
-        "pdf_page_end": 117,
-        "bylaw_page_start": 117,
-        "bylaw_page_end": 117
-      },
-      "clause_path": [
-        "42.1.5"
-      ]
-    },
-    {
-      "clause_label_raw": "42.1.6",
-      "use_type": "principal_use",
-      "use_name": "Ancillary uses to the foregoing",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 117,
-        "pdf_page_end": 117,
-        "bylaw_page_start": 117,
-        "bylaw_page_end": 117
-      },
-      "clause_path": [
-        "42.1.6"
-      ]
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "42.1",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 117,
-        "pdf_page_end": 117,
-        "bylaw_page_start": 117,
-        "bylaw_page_end": 117
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "42.1.1",
-          "clause_path": [
-            "42.1.1"
-          ],
-          "text": "Active Recreation;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 117,
-            "pdf_page_end": 117,
-            "bylaw_page_start": 117,
-            "bylaw_page_end": 117
-          }
-        },
-        {
-          "provision_label_raw": "42.1.2",
-          "clause_path": [
-            "42.1.2"
-          ],
-          "text": "Cemetery;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 117,
-            "pdf_page_end": 117,
-            "bylaw_page_start": 117,
-            "bylaw_page_end": 117
-          }
-        },
-        {
-          "provision_label_raw": "42.1.3",
-          "clause_path": [
-            "42.1.3"
-          ],
-          "text": "Community Gardens;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 117,
-            "pdf_page_end": 117,
-            "bylaw_page_start": 117,
-            "bylaw_page_end": 117
-          }
-        },
-        {
-          "provision_label_raw": "42.1.4",
-          "clause_path": [
-            "42.1.4"
-          ],
-          "text": "Golf Course;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 117,
-            "pdf_page_end": 117,
-            "bylaw_page_start": 117,
-            "bylaw_page_end": 117
-          }
-        },
-        {
-          "provision_label_raw": "42.1.5",
-          "clause_path": [
-            "42.1.5"
-          ],
-          "text": "Trail System; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 117,
-            "pdf_page_end": 117,
-            "bylaw_page_start": 117,
-            "bylaw_page_end": 117
-          }
-        },
-        {
-          "provision_label_raw": "42.1.6",
-          "clause_path": [
-            "42.1.6"
-          ],
-          "text": "Ancillary uses to the foregoing",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 117,
-            "pdf_page_end": 117,
-            "bylaw_page_start": 117,
-            "bylaw_page_end": 117
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": null,
-      "title_label_raw": "REGULATIONS FOR PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 117,
-        "pdf_page_end": 117,
-        "bylaw_page_start": 117,
-        "bylaw_page_end": 117
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "1",
-          "text": "Lot Area (Minimum) 790 sq. m (8,503.5 sq ft) 790 sq. m (8,503.5 sq ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 117,
-            "pdf_page_end": 117,
-            "bylaw_page_start": 117,
-            "bylaw_page_end": 117
-          }
-        }
-      ],
-      "table_column_headings_raw": [
-        "Interior Lot Corner Lot"
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [],
-  "content_blocks": [],
-  "open_issues": [
-    {
-      "issue_type": "table_parsing_review",
-      "description": "Section 'REGULATIONS FOR PERMITTED USES' contains table-derived provisions extracted from PDF text; verify column alignment against the source PDF before normalization."
-    },
-    {
-      "issue_type": "source_revision_review",
-      "description": "Source PDF cover identifies rev 049 updated March 9, 2026, but this zone page header may display rev 048 updated October 24, 2025; verify source revision during QA."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "42",
+    "zone_title_raw": "OPEN SPACE ZONE (OS)",
+    "citations": {
       "pdf_page_start": 117,
       "pdf_page_end": 117,
       "bylaw_page_start": 117,
       "bylaw_page_end": 117
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-os",
+        "source_unit_type": "zone",
+        "label_raw": "42",
+        "title_raw": "OPEN SPACE ZONE (OS)",
+        "text_raw": "Active Recreation;\nCemetery;\nCommunity Gardens;\nGolf Course;\nTrail System; and\nAncillary uses to the foregoing",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 117,
+          "pdf_page_end": 117,
+          "bylaw_page_start": 117,
+          "bylaw_page_end": 117
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-os-section-42-1",
+        "section_label_raw": "42.1",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-os-clause-42-1-1",
+            "clause_label_raw": "42.1.1",
+            "clause_text_raw": "Active Recreation;",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 117,
+              "pdf_page_end": 117,
+              "bylaw_page_start": 117,
+              "bylaw_page_end": 117
+            }
+          },
+          {
+            "clause_id": "zone-os-clause-42-1-2",
+            "clause_label_raw": "42.1.2",
+            "clause_text_raw": "Cemetery;",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 117,
+              "pdf_page_end": 117,
+              "bylaw_page_start": 117,
+              "bylaw_page_end": 117
+            }
+          },
+          {
+            "clause_id": "zone-os-clause-42-1-3",
+            "clause_label_raw": "42.1.3",
+            "clause_text_raw": "Community Gardens;",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 117,
+              "pdf_page_end": 117,
+              "bylaw_page_start": 117,
+              "bylaw_page_end": 117
+            }
+          },
+          {
+            "clause_id": "zone-os-clause-42-1-4",
+            "clause_label_raw": "42.1.4",
+            "clause_text_raw": "Golf Course;",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 117,
+              "pdf_page_end": 117,
+              "bylaw_page_start": 117,
+              "bylaw_page_end": 117
+            }
+          },
+          {
+            "clause_id": "zone-os-clause-42-1-5",
+            "clause_label_raw": "42.1.5",
+            "clause_text_raw": "Trail System; and",
+            "parent_clause_id": null,
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 117,
+              "pdf_page_end": 117,
+              "bylaw_page_start": 117,
+              "bylaw_page_end": 117
+            }
+          },
+          {
+            "clause_id": "zone-os-clause-42-1-6",
+            "clause_label_raw": "42.1.6",
+            "clause_text_raw": "Ancillary uses to the foregoing",
+            "parent_clause_id": null,
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 117,
+              "pdf_page_end": 117,
+              "bylaw_page_start": 117,
+              "bylaw_page_end": 117
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 117,
+          "pdf_page_end": 117,
+          "bylaw_page_start": 117,
+          "bylaw_page_end": 117
+        }
+      },
+      {
+        "section_id": "zone-os-section-2",
+        "section_label_raw": "",
+        "section_title_raw": "REGULATIONS FOR PERMITTED USES",
+        "source_order": 2,
+        "clauses_raw": [],
+        "tables_raw": [
+          {
+            "table_id": "zone-os-table-regulations-for-permitted-uses",
+            "table_title_raw": "REGULATIONS FOR PERMITTED USES",
+            "source_order": 1,
+            "columns_raw": [
+              {
+                "column_id": "row_number",
+                "column_label_raw": "",
+                "source_order": 1
+              },
+              {
+                "column_id": "requirement",
+                "column_label_raw": "",
+                "source_order": 2
+              },
+              {
+                "column_id": "interior_lot",
+                "column_label_raw": "Interior Lot",
+                "source_order": 3
+              },
+              {
+                "column_id": "corner_lot",
+                "column_label_raw": "Corner Lot",
+                "source_order": 4
+              }
+            ],
+            "rows_raw": [
+              {
+                "row_id": "zone-os-table-regulations-for-permitted-uses-row-1",
+                "source_order": 1,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-1-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "1"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-1-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Area (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-1-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "790 sq. m (8,503.5 sq ft)"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-1-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "790 sq. m (8,503.5 sq ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-os-table-regulations-for-permitted-uses-row-2",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-2-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "2"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-2-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-2-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "7.6 m (24.9 ft)"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-2-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "7.6 m (24.9 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-os-table-regulations-for-permitted-uses-row-3",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-3-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "3"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-3-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Front Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-3-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "7.6 m (24.9 ft)"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-3-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "7.6 m (24.9 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-os-table-regulations-for-permitted-uses-row-4",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-4-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "4"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-4-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Rear Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-4-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "7.6 m (24.9 ft)"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-4-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "7.6 m (24.9 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-os-table-regulations-for-permitted-uses-row-5",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-5-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "5"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-5-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Side Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-5-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "3.0 m (9.8 ft)"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-5-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "3.0 m (9.8 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-os-table-regulations-for-permitted-uses-row-6",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-6-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "6"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-6-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Flankage Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-6-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-6-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "7.6 m (24.9 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-os-table-regulations-for-permitted-uses-row-7",
+                "source_order": 7,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-7-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "7"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-7-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Height (Maximum)"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-7-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "11.0 m (36.1 ft)"
+                  },
+                  {
+                    "cell_id": "zone-os-table-regulations-for-permitted-uses-row-7-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "11.0 m (36.1 ft)"
+                  }
+                ]
+              }
+            ],
+            "citations": {
+              "pdf_page_start": 117,
+              "pdf_page_end": 117,
+              "bylaw_page_start": 117,
+              "bylaw_page_end": 117
+            }
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 117,
+          "pdf_page_end": 117,
+          "bylaw_page_start": 117,
+          "bylaw_page_end": 117
+        }
+      }
+    ],
+    "tables_raw": [
+      {
+        "table_id": "zone-os-table-regulations-for-permitted-uses",
+        "section_id": "zone-os-section-2"
+      }
+    ],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-os-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 117,
+          "pdf_page_end": 117,
+          "bylaw_page_start": 117,
+          "bylaw_page_end": 117
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-os-clause-42-1-1",
+        "section_id": "zone-os-section-42-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-os-clause-42-1-2",
+        "section_id": "zone-os-section-42-1",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-os-clause-42-1-3",
+        "section_id": "zone-os-section-42-1",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-os-clause-42-1-4",
+        "section_id": "zone-os-section-42-1",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-os-clause-42-1-5",
+        "section_id": "zone-os-section-42-1",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-os-clause-42-1-6",
+        "section_id": "zone-os-section-42-1",
+        "source_order": 6
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-os-term-term-active_recreation",
+        "term_raw": "Active Recreation",
+        "term_normalized": "active_recreation",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-os-clause-42-1-1"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-os-term-term-cemetery",
+        "term_raw": "Cemetery",
+        "term_normalized": "cemetery",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-os-clause-42-1-2"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-os-term-term-community_gardens",
+        "term_raw": "Community Gardens",
+        "term_normalized": "community_gardens",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-os-clause-42-1-3"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-os-term-term-golf_course",
+        "term_raw": "Golf Course",
+        "term_normalized": "golf_course",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-os-clause-42-1-4"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-os-term-term-trail_system",
+        "term_raw": "Trail System",
+        "term_normalized": "trail_system",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-os-clause-42-1-5"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-os-term-term-ancillary_uses_to_the_foregoing",
+        "term_raw": "Ancillary uses to the foregoing",
+        "term_normalized": "ancillary_uses_to_the_foregoing",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-os-clause-42-1-6"
+          }
+        ],
+        "confidence": "needs_review"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-os-use-active-recreation-1",
+        "use_name_raw": "Active Recreation",
+        "use_term_id": "zone-os-term-term-active_recreation",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-os-clause-42-1-1",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-os-use-cemetery-2",
+        "use_name_raw": "Cemetery",
+        "use_term_id": "zone-os-term-term-cemetery",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-os-clause-42-1-2",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-os-use-community-gardens-3",
+        "use_name_raw": "Community Gardens",
+        "use_term_id": "zone-os-term-term-community_gardens",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-os-clause-42-1-3",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-os-use-golf-course-4",
+        "use_name_raw": "Golf Course",
+        "use_term_id": "zone-os-term-term-golf_course",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-os-clause-42-1-4",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-os-use-trail-system-5",
+        "use_name_raw": "Trail System",
+        "use_term_id": "zone-os-term-term-trail_system",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-os-clause-42-1-5",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-os-use-ancillary-uses-to-the-foregoing-6",
+        "use_name_raw": "Ancillary uses to the foregoing",
+        "use_term_id": "zone-os-term-term-ancillary_uses_to_the_foregoing",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-os-clause-42-1-6",
+        "confidence": "needs_review"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-1-interior-lot-1",
+        "value_raw": "790 sq. m (8,503.5 sq ft)",
+        "value": 790,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "8,503.5 sq ft",
+            "value": 8503.5,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-1-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-1-corner-lot-1",
+        "value_raw": "790 sq. m (8,503.5 sq ft)",
+        "value": 790,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "8,503.5 sq ft",
+            "value": 8503.5,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-1-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-2-interior-lot-1",
+        "value_raw": "7.6 m (24.9 ft)",
+        "value": 7.6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.9 ft",
+            "value": 24.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-2-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-2-corner-lot-1",
+        "value_raw": "7.6 m (24.9 ft)",
+        "value": 7.6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.9 ft",
+            "value": 24.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-2-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-3-interior-lot-1",
+        "value_raw": "7.6 m (24.9 ft)",
+        "value": 7.6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.9 ft",
+            "value": 24.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-3-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-3-corner-lot-1",
+        "value_raw": "7.6 m (24.9 ft)",
+        "value": 7.6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.9 ft",
+            "value": 24.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-3-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-4-interior-lot-1",
+        "value_raw": "7.6 m (24.9 ft)",
+        "value": 7.6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.9 ft",
+            "value": 24.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-4-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-4-corner-lot-1",
+        "value_raw": "7.6 m (24.9 ft)",
+        "value": 7.6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.9 ft",
+            "value": 24.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-4-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-5-interior-lot-1",
+        "value_raw": "3.0 m (9.8 ft)",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "9.8 ft",
+            "value": 9.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-5-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-5-corner-lot-1",
+        "value_raw": "3.0 m (9.8 ft)",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "9.8 ft",
+            "value": 9.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-5-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-6-corner-lot-1",
+        "value_raw": "7.6 m (24.9 ft)",
+        "value": 7.6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.9 ft",
+            "value": 24.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-6-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-7-interior-lot-1",
+        "value_raw": "11.0 m (36.1 ft)",
+        "value": 11,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "36.1 ft",
+            "value": 36.1,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-7-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-7-corner-lot-1",
+        "value_raw": "11.0 m (36.1 ft)",
+        "value": 11,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "36.1 ft",
+            "value": 36.1,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-7-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-1-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Interior Lot 790 sq. m (8,503.5 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-1-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-1-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Corner Lot 790 sq. m (8,503.5 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-1-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-2-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Interior Lot 7.6 m (24.9 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-2-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-2-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Corner Lot 7.6 m (24.9 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-2-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-3-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Interior Lot 7.6 m (24.9 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-3-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-3-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Corner Lot 7.6 m (24.9 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-3-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-4-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Interior Lot 7.6 m (24.9 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-4-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-4-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Corner Lot 7.6 m (24.9 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-4-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-5-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Interior Lot 3.0 m (9.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-5-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-5-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Corner Lot 3.0 m (9.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-5-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-6-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "flankage_yard",
+        "requirement_label_raw": "Flankage Yard (Minimum)",
+        "requirement_text_raw": "Flankage Yard (Minimum) Corner Lot 7.6 m (24.9 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-6-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-7-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Interior Lot 11.0 m (36.1 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-7-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-7-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Corner Lot 11.0 m (36.1 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-os-num-zone-os-table-regulations-for-permitted-uses-row-7-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-os-table-regulations-for-permitted-uses-row-7"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-os-regulation-group-zone",
+        "group_label_raw": "42",
+        "group_title_raw": "OPEN SPACE ZONE (OS)",
+        "regulated_use_terms": [
+          "zone-os-term-term-active_recreation",
+          "zone-os-term-term-cemetery",
+          "zone-os-term-term-community_gardens",
+          "zone-os-term-term-golf_course",
+          "zone-os-term-term-trail_system",
+          "zone-os-term-term-ancillary_uses_to_the_foregoing"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "OS"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-1-interior-lot",
+          "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-1-corner-lot",
+          "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-2-interior-lot",
+          "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-2-corner-lot",
+          "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-3-interior-lot",
+          "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-3-corner-lot",
+          "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-4-interior-lot",
+          "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-4-corner-lot",
+          "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-5-interior-lot",
+          "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-5-corner-lot",
+          "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-6-corner-lot",
+          "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-7-interior-lot",
+          "zone-os-req-zone-os-table-regulations-for-permitted-uses-row-7-corner-lot"
+        ],
+        "source_section_ref": "zone-os-section-42-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-os-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "OS",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-os-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-os-flag-unmatched-term-active-recreation",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Active Recreation",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-os-clause-42-1-1"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-os-flag-unmatched-term-cemetery",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Cemetery",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-os-clause-42-1-2"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-os-flag-unmatched-term-community-gardens",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Community Gardens",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-os-clause-42-1-3"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-os-flag-unmatched-term-golf-course",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Golf Course",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-os-clause-42-1-4"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-os-flag-unmatched-term-trail-system",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Trail System",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-os-clause-42-1-5"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-os-flag-unmatched-term-ancillary-uses-to-the-foregoing",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Ancillary uses to the foregoing",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-os-clause-42-1-6"
+        }
+      ]
+    }
+  ]
 }

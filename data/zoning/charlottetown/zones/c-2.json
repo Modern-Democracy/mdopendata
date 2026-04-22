@@ -1,187 +1,1145 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+    "document_type": "zone",
     "zone_code": "C-2",
     "zone_name": "HIGHWAY COMMERCIAL ZONE",
-    "part_label_raw": "26",
-    "chapter_heading_raw": "26 HIGHWAY COMMERCIAL ZONE (C-2)"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": []
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "26.1.1",
-      "use_type": "inherited_principal_use",
-      "use_name": "Uses as permitted in the R-4A Zone subject to the Regulations for Permitted Uses for the R-4A Zone",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 88,
-        "pdf_page_end": 88,
-        "bylaw_page_start": 88,
-        "bylaw_page_end": 88
-      },
-      "clause_path": [
-        "26.1.1"
-      ]
-    },
-    {
-      "clause_label_raw": "26.1.2",
-      "use_type": "inherited_principal_use",
-      "use_name": "Uses permitted in the Institutional (I) Zone, subject to the Regulations for permitted uses for the I Zone",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 88,
-        "pdf_page_end": 88,
-        "bylaw_page_start": 88,
-        "bylaw_page_end": 88
-      },
-      "clause_path": [
-        "26.1.2"
-      ]
-    },
-    {
-      "clause_label_raw": "26.1.3",
-      "use_type": "inherited_principal_use",
-      "use_name": "Commercial Uses permitted in the MUC Zone, including those permitted in the ER-MUVC Zone, subject to the following C-2 regulations.",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 88,
-        "pdf_page_end": 88,
-        "bylaw_page_start": 88,
-        "bylaw_page_end": 88
-      },
-      "clause_path": [
-        "26.1.3"
-      ]
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "26.1",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 88,
-        "pdf_page_end": 88,
-        "bylaw_page_start": 88,
-        "bylaw_page_end": 88
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "26.1.1",
-          "clause_path": [
-            "26.1.1"
-          ],
-          "text": "Uses as permitted in the R-4A Zone subject to the Regulations for Permitted Uses for the R-4A Zone;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 88,
-            "pdf_page_end": 88,
-            "bylaw_page_start": 88,
-            "bylaw_page_end": 88
-          }
-        },
-        {
-          "provision_label_raw": "26.1.2",
-          "clause_path": [
-            "26.1.2"
-          ],
-          "text": "Uses permitted in the Institutional (I) Zone, subject to the Regulations for permitted uses for the I Zone;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 88,
-            "pdf_page_end": 88,
-            "bylaw_page_start": 88,
-            "bylaw_page_end": 88
-          }
-        },
-        {
-          "provision_label_raw": "26.1.3",
-          "clause_path": [
-            "26.1.3"
-          ],
-          "text": "Commercial Uses permitted in the MUC Zone, including those permitted in the ER-MUVC Zone, subject to the following C-2 regulations.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 88,
-            "pdf_page_end": 88,
-            "bylaw_page_start": 88,
-            "bylaw_page_end": 88
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": null,
-      "title_label_raw": "REGULATIONS FOR PERMITTED COMMERCIAL USES",
-      "citations": {
-        "pdf_page_start": 88,
-        "pdf_page_end": 88,
-        "bylaw_page_start": 88,
-        "bylaw_page_end": 88
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "1",
-          "text": "Lot Area (Minimum) 550 sq. m (5,920.3 sq ft) 650 sq. m (6,996.8 sq ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 88,
-            "pdf_page_end": 88,
-            "bylaw_page_start": 88,
-            "bylaw_page_end": 88
-          }
-        }
-      ],
-      "table_column_headings_raw": [
-        "Interior Lot Corner Lot"
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": "MUC Zone",
-      "chapter_slug": "muc",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 88,
-        "pdf_page_end": 88,
-        "bylaw_page_start": 88,
-        "bylaw_page_end": 88
-      },
-      "source_text": "Commercial Uses permitted in the MUC Zone, including those permitted in the ER-MUVC Zone, subject to the following C-2 regulations."
-    }
-  ],
-  "content_blocks": [],
-  "open_issues": [
-    {
-      "issue_type": "table_parsing_review",
-      "description": "Section 'REGULATIONS FOR PERMITTED COMMERCIAL USES' contains table-derived provisions extracted from PDF text; verify column alignment against the source PDF before normalization."
-    },
-    {
-      "issue_type": "source_revision_review",
-      "description": "Source PDF cover identifies rev 049 updated March 9, 2026, but this zone page header may display rev 048 updated October 24, 2025; verify source revision during QA."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "26",
+    "zone_title_raw": "HIGHWAY COMMERCIAL ZONE (C-2)",
+    "citations": {
       "pdf_page_start": 88,
       "pdf_page_end": 88,
       "bylaw_page_start": 88,
       "bylaw_page_end": 88
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-c-2",
+        "source_unit_type": "zone",
+        "label_raw": "26",
+        "title_raw": "HIGHWAY COMMERCIAL ZONE (C-2)",
+        "text_raw": "Uses as permitted in the R-4A Zone subject to the Regulations for Permitted Uses for the R-4A Zone;\nUses permitted in the Institutional (I) Zone, subject to the Regulations for permitted uses for the I Zone;\nCommercial Uses permitted in the MUC Zone, including those permitted in the ER-MUVC Zone, subject to the following C-2 regulations.",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 88,
+          "pdf_page_end": 88,
+          "bylaw_page_start": 88,
+          "bylaw_page_end": 88
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-c-2-section-26-1",
+        "section_label_raw": "26.1",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-c-2-clause-26-1-1",
+            "clause_label_raw": "26.1.1",
+            "clause_text_raw": "Uses as permitted in the R-4A Zone subject to the Regulations for Permitted Uses for the R-4A Zone;",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 88,
+              "pdf_page_end": 88,
+              "bylaw_page_start": 88,
+              "bylaw_page_end": 88
+            }
+          },
+          {
+            "clause_id": "zone-c-2-clause-26-1-2",
+            "clause_label_raw": "26.1.2",
+            "clause_text_raw": "Uses permitted in the Institutional (I) Zone, subject to the Regulations for permitted uses for the I Zone;",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 88,
+              "pdf_page_end": 88,
+              "bylaw_page_start": 88,
+              "bylaw_page_end": 88
+            }
+          },
+          {
+            "clause_id": "zone-c-2-clause-26-1-3",
+            "clause_label_raw": "26.1.3",
+            "clause_text_raw": "Commercial Uses permitted in the MUC Zone, including those permitted in the ER-MUVC Zone, subject to the following C-2 regulations.",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 88,
+              "pdf_page_end": 88,
+              "bylaw_page_start": 88,
+              "bylaw_page_end": 88
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 88,
+          "pdf_page_end": 88,
+          "bylaw_page_start": 88,
+          "bylaw_page_end": 88
+        }
+      },
+      {
+        "section_id": "zone-c-2-section-2",
+        "section_label_raw": "",
+        "section_title_raw": "REGULATIONS FOR PERMITTED COMMERCIAL USES",
+        "source_order": 2,
+        "clauses_raw": [],
+        "tables_raw": [
+          {
+            "table_id": "zone-c-2-table-regulations-for-permitted-commercial-uses",
+            "table_title_raw": "REGULATIONS FOR PERMITTED COMMERCIAL USES",
+            "source_order": 1,
+            "columns_raw": [
+              {
+                "column_id": "row_number",
+                "column_label_raw": "",
+                "source_order": 1
+              },
+              {
+                "column_id": "requirement",
+                "column_label_raw": "",
+                "source_order": 2
+              },
+              {
+                "column_id": "interior_lot",
+                "column_label_raw": "Interior Lot",
+                "source_order": 3
+              },
+              {
+                "column_id": "corner_lot",
+                "column_label_raw": "Corner Lot",
+                "source_order": 4
+              }
+            ],
+            "rows_raw": [
+              {
+                "row_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-1",
+                "source_order": 1,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-1-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "1"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-1-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Area (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-1-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "550 sq. m (5,920.3 sq ft)"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-1-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "650 sq. m (6,996.8 sq ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-2",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-2-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "2"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-2-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-2-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "15 m (49.2 ft)"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-2-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "15 m (49.2 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-3",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-3-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "3"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-3-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-3-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "8 m (26.2 ft)"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-3-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "8 m (26.2 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-4",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-4-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "4"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-4-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-4-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "7.5 m (24.6 ft)"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-4-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "7.5 m (24.6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-5",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-5-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "5"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-5-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-5-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "3.0 m (9.8 ft)"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-5-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "3.0 m (9.8 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-6",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-6-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "6"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-6-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-6-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-6-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "8 m (26.2 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-7",
+                "source_order": 7,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-7-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "7"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-7-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "(Maximum)"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-7-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "12.0 m (39.4 ft)"
+                  },
+                  {
+                    "cell_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-7-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "12.0 m (39.4 ft)"
+                  }
+                ]
+              }
+            ],
+            "citations": {
+              "pdf_page_start": 88,
+              "pdf_page_end": 88,
+              "bylaw_page_start": 88,
+              "bylaw_page_end": 88
+            }
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 88,
+          "pdf_page_end": 88,
+          "bylaw_page_start": 88,
+          "bylaw_page_end": 88
+        }
+      }
+    ],
+    "tables_raw": [
+      {
+        "table_id": "zone-c-2-table-regulations-for-permitted-commercial-uses",
+        "section_id": "zone-c-2-section-2"
+      }
+    ],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-c-2-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 88,
+          "pdf_page_end": 88,
+          "bylaw_page_start": 88,
+          "bylaw_page_end": 88
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-c-2-clause-26-1-1",
+        "section_id": "zone-c-2-section-26-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-c-2-clause-26-1-2",
+        "section_id": "zone-c-2-section-26-1",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-c-2-clause-26-1-3",
+        "section_id": "zone-c-2-section-26-1",
+        "source_order": 3
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-c-2-term-term-uses_as_permitted_in_the_r_4a_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_4a_zone",
+        "term_raw": "Uses as permitted in the R-4A Zone subject to the Regulations for Permitted Uses for the R-4A Zone",
+        "term_normalized": "uses_as_permitted_in_the_r_4a_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_4a_zone",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-c-2-clause-26-1-1"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-c-2-term-term-uses_permitted_in_the_institutional_i_zone_subject_to_the_regulations_for_permitted_uses_for_the_i_zone",
+        "term_raw": "Uses permitted in the Institutional (I) Zone, subject to the Regulations for permitted uses for the I Zone",
+        "term_normalized": "uses_permitted_in_the_institutional_i_zone_subject_to_the_regulations_for_permitted_uses_for_the_i_zone",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-c-2-clause-26-1-2"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-c-2-term-term-commercial_uses_permitted_in_the_muc_zone_including_those_permitted_in_the_er_muvc_zone_subject_to_the_following_c_2_regulations",
+        "term_raw": "Commercial Uses permitted in the MUC Zone, including those permitted in the ER-MUVC Zone, subject to the following C-2 regulations",
+        "term_normalized": "commercial_uses_permitted_in_the_muc_zone_including_those_permitted_in_the_er_muvc_zone_subject_to_the_following_c_2_regulations",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-c-2-clause-26-1-3"
+          }
+        ],
+        "confidence": "needs_review"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-c-2-use-uses-as-permitted-in-the-r-4a-zone-subject-to-the-regulations-for-permitted-uses-for-the-r-4a-zone-1",
+        "use_name_raw": "Uses as permitted in the R-4A Zone subject to the Regulations for Permitted Uses for the R-4A Zone",
+        "use_term_id": "zone-c-2-term-term-uses_as_permitted_in_the_r_4a_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_4a_zone",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-c-2-clause-26-1-1",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-c-2-use-uses-permitted-in-the-institutional-i-zone-subject-to-the-regulations-for-permitted-uses-for-the-i-zone-2",
+        "use_name_raw": "Uses permitted in the Institutional (I) Zone, subject to the Regulations for permitted uses for the I Zone",
+        "use_term_id": "zone-c-2-term-term-uses_permitted_in_the_institutional_i_zone_subject_to_the_regulations_for_permitted_uses_for_the_i_zone",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-c-2-clause-26-1-2",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-c-2-use-commercial-uses-permitted-in-the-muc-zone-including-those-permitted-in-the-er-muvc-zone-subject-to-the-following-c-2-regulations-3",
+        "use_name_raw": "Commercial Uses permitted in the MUC Zone, including those permitted in the ER-MUVC Zone, subject to the following C-2 regulations",
+        "use_term_id": "zone-c-2-term-term-commercial_uses_permitted_in_the_muc_zone_including_those_permitted_in_the_er_muvc_zone_subject_to_the_following_c_2_regulations",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-c-2-clause-26-1-3",
+        "confidence": "needs_review"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-1-interior-lot-1",
+        "value_raw": "550 sq. m (5,920.3 sq ft)",
+        "value": 550,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "5,920.3 sq ft",
+            "value": 5920.3,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-1-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-1-corner-lot-1",
+        "value_raw": "650 sq. m (6,996.8 sq ft)",
+        "value": 650,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "6,996.8 sq ft",
+            "value": 6996.8,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-1-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-2-interior-lot-1",
+        "value_raw": "15 m (49.2 ft)",
+        "value": 15,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "49.2 ft",
+            "value": 49.2,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-2-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-2-corner-lot-1",
+        "value_raw": "15 m (49.2 ft)",
+        "value": 15,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "49.2 ft",
+            "value": 49.2,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-2-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-3-interior-lot-1",
+        "value_raw": "8 m (26.2 ft)",
+        "value": 8,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "26.2 ft",
+            "value": 26.2,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-3-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-3-corner-lot-1",
+        "value_raw": "8 m (26.2 ft)",
+        "value": 8,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "26.2 ft",
+            "value": 26.2,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-3-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-4-interior-lot-1",
+        "value_raw": "7.5 m (24.6 ft)",
+        "value": 7.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.6 ft",
+            "value": 24.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-4-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-4-corner-lot-1",
+        "value_raw": "7.5 m (24.6 ft)",
+        "value": 7.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.6 ft",
+            "value": 24.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-4-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-5-interior-lot-1",
+        "value_raw": "3.0 m (9.8 ft)",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "9.8 ft",
+            "value": 9.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-5-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-5-corner-lot-1",
+        "value_raw": "3.0 m (9.8 ft)",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "9.8 ft",
+            "value": 9.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-5-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-6-corner-lot-1",
+        "value_raw": "8 m (26.2 ft)",
+        "value": 8,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "26.2 ft",
+            "value": 26.2,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-6-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-7-interior-lot-1",
+        "value_raw": "12.0 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-7-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-7-corner-lot-1",
+        "value_raw": "12.0 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-7-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-1-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "area_minimum",
+        "requirement_label_raw": "Area (Minimum)",
+        "requirement_text_raw": "Area (Minimum) Interior Lot 550 sq. m (5,920.3 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-1-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-1-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "area_minimum",
+        "requirement_label_raw": "Area (Minimum)",
+        "requirement_text_raw": "Area (Minimum) Corner Lot 650 sq. m (6,996.8 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-1-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-2-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Frontage (Minimum)",
+        "requirement_text_raw": "Frontage (Minimum) Interior Lot 15 m (49.2 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-2-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-2-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Frontage (Minimum)",
+        "requirement_text_raw": "Frontage (Minimum) Corner Lot 15 m (49.2 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-2-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-3-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Interior Lot 8 m (26.2 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-3-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-3-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Corner Lot 8 m (26.2 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-3-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-4-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Interior Lot 7.5 m (24.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-4-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-4-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Corner Lot 7.5 m (24.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-4-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-5-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Interior Lot 3.0 m (9.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-5-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-5-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Corner Lot 3.0 m (9.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-5-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-6-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Corner Lot 8 m (26.2 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-6-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-7-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "maximum",
+        "requirement_label_raw": "(Maximum)",
+        "requirement_text_raw": "(Maximum) Interior Lot 12.0 m (39.4 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-7-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-7-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "maximum",
+        "requirement_label_raw": "(Maximum)",
+        "requirement_text_raw": "(Maximum) Corner Lot 12.0 m (39.4 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-c-2-num-zone-c-2-table-regulations-for-permitted-commercial-uses-row-7-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-c-2-table-regulations-for-permitted-commercial-uses-row-7"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-c-2-regulation-group-zone",
+        "group_label_raw": "26",
+        "group_title_raw": "HIGHWAY COMMERCIAL ZONE (C-2)",
+        "regulated_use_terms": [
+          "zone-c-2-term-term-uses_as_permitted_in_the_r_4a_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_4a_zone",
+          "zone-c-2-term-term-uses_permitted_in_the_institutional_i_zone_subject_to_the_regulations_for_permitted_uses_for_the_i_zone",
+          "zone-c-2-term-term-commercial_uses_permitted_in_the_muc_zone_including_those_permitted_in_the_er_muvc_zone_subject_to_the_following_c_2_regulations"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "C-2"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-1-interior-lot",
+          "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-1-corner-lot",
+          "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-2-interior-lot",
+          "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-2-corner-lot",
+          "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-3-interior-lot",
+          "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-3-corner-lot",
+          "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-4-interior-lot",
+          "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-4-corner-lot",
+          "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-5-interior-lot",
+          "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-5-corner-lot",
+          "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-6-corner-lot",
+          "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-7-interior-lot",
+          "zone-c-2-req-zone-c-2-table-regulations-for-permitted-commercial-uses-row-7-corner-lot"
+        ],
+        "source_section_ref": "zone-c-2-section-26-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-c-2-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "C-2",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-c-2-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-c-2-flag-unmatched-term-uses-as-permitted-in-the-r-4a-zone-subject-to-the-regulations-for-permitted-uses-for-the-r-4a-zone",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Uses as permitted in the R-4A Zone subject to the Regulations for Permitted Uses for the R-4A Zone",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-c-2-clause-26-1-1"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-c-2-flag-unmatched-term-uses-permitted-in-the-institutional-i-zone-subject-to-the-regulations-for-permitted-uses-for-the-i-zone",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Uses permitted in the Institutional (I) Zone, subject to the Regulations for permitted uses for the I Zone",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-c-2-clause-26-1-2"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-c-2-flag-unmatched-term-commercial-uses-permitted-in-the-muc-zone-including-those-permitted-in-the-er-muvc-zone-subject-to-the-following-c-2-regulations",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Commercial Uses permitted in the MUC Zone, including those permitted in the ER-MUVC Zone, subject to the following C-2 regulations",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-c-2-clause-26-1-3"
+        }
+      ]
+    }
+  ]
 }

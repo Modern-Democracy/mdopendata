@@ -1,702 +1,2223 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+    "document_type": "zone",
     "zone_code": "WF",
     "zone_name": "WATERFRONT ZONE",
-    "part_label_raw": "34",
-    "chapter_heading_raw": "34 WATERFRONT ZONE (WF)"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": []
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "34.1.1",
-      "use_type": "principal_use",
-      "use_name": "All uses as permitted in the Downtown Core (DC) Zone",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 100,
-        "pdf_page_end": 100,
-        "bylaw_page_start": 100,
-        "bylaw_page_end": 100
-      },
-      "clause_path": [
-        "34.1.1"
-      ]
-    },
-    {
-      "clause_label_raw": "34.1.2",
-      "use_type": "principal_use",
-      "use_name": "Limited Car Rental Operation",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 100,
-        "pdf_page_end": 100,
-        "bylaw_page_start": 100,
-        "bylaw_page_end": 100
-      },
-      "clause_path": [
-        "34.1.2"
-      ]
-    },
-    {
-      "clause_label_raw": "34.1.3",
-      "use_type": "principal_use",
-      "use_name": "Marina",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 100,
-        "pdf_page_end": 100,
-        "bylaw_page_start": 100,
-        "bylaw_page_end": 100
-      },
-      "clause_path": [
-        "34.1.3"
-      ]
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "34.1",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 100,
-        "pdf_page_end": 100,
-        "bylaw_page_start": 100,
-        "bylaw_page_end": 100
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "34.1.1",
-          "clause_path": [
-            "34.1.1"
-          ],
-          "text": "All uses as permitted in the Downtown Core (DC) Zone;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 100,
-            "pdf_page_end": 100,
-            "bylaw_page_start": 100,
-            "bylaw_page_end": 100
-          }
-        },
-        {
-          "provision_label_raw": "34.1.2",
-          "clause_path": [
-            "34.1.2"
-          ],
-          "text": "Limited Car Rental Operation; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 100,
-            "pdf_page_end": 100,
-            "bylaw_page_start": 100,
-            "bylaw_page_end": 100
-          }
-        },
-        {
-          "provision_label_raw": "34.1.3",
-          "clause_path": [
-            "34.1.3"
-          ],
-          "text": "Marina",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 100,
-            "pdf_page_end": 100,
-            "bylaw_page_start": 100,
-            "bylaw_page_end": 100
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": "34.2",
-      "title_label_raw": "PERMITTED LAND USES AT GRADE ON WALKABLE STREETS",
-      "citations": {
-        "pdf_page_start": 100,
-        "pdf_page_end": 100,
-        "bylaw_page_start": 100,
-        "bylaw_page_end": 100
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "34.2.1",
-          "clause_path": [
-            "34.2.1"
-          ],
-          "text": "Only those uses listed below shall be permitted on the ground floor of a Building in the WF Zone immediately abutting a designated Walkable Street (Map C):",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 100,
-            "pdf_page_end": 100,
-            "bylaw_page_start": 100,
-            "bylaw_page_end": 100
-          }
-        },
-        {
-          "provision_label_raw": "a",
-          "clause_path": [
-            "34.2.1",
-            "a"
-          ],
-          "text": "Eating and Drinking Establishments;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 100,
-            "pdf_page_end": 100,
-            "bylaw_page_start": 100,
-            "bylaw_page_end": 100
-          }
-        },
-        {
-          "provision_label_raw": "b",
-          "clause_path": [
-            "34.2.1",
-            "b"
-          ],
-          "text": "Tourism related services including but not limited to, information services, touring services, or personal equipment rentals;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 100,
-            "pdf_page_end": 100,
-            "bylaw_page_start": 100,
-            "bylaw_page_end": 100
-          }
-        },
-        {
-          "provision_label_raw": "c",
-          "clause_path": [
-            "34.2.1",
-            "c"
-          ],
-          "text": "Retail Store; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 100,
-            "pdf_page_end": 100,
-            "bylaw_page_start": 100,
-            "bylaw_page_end": 100
-          }
-        },
-        {
-          "provision_label_raw": "d",
-          "clause_path": [
-            "34.2.1",
-            "d"
-          ],
-          "text": "Cultural Establishment;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 100,
-            "pdf_page_end": 100,
-            "bylaw_page_start": 100,
-            "bylaw_page_end": 100
-          }
-        },
-        {
-          "provision_label_raw": "34.2.2",
-          "clause_path": [
-            "34.2.2"
-          ],
-          "text": "A minimum of 60% of the ground floor shall be designated to the above uses.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 100,
-            "pdf_page_end": 100,
-            "bylaw_page_start": 100,
-            "bylaw_page_end": 100
-          }
-        },
-        {
-          "provision_label_raw": "34.2.3",
-          "clause_path": [
-            "34.2.3"
-          ],
-          "text": "Map C. Walkable Streets",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 100,
-            "pdf_page_end": 100,
-            "bylaw_page_start": 100,
-            "bylaw_page_end": 100
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 3,
-      "section_label_raw": null,
-      "title_label_raw": "REGULATIONS FOR PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 101,
-        "pdf_page_end": 102,
-        "bylaw_page_start": 101,
-        "bylaw_page_end": 102
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "section",
-          "text": "All permitted uses in the WF Zone are subject to the following regulations: Minimum: 10 m (32.3 ft) Maximum: 16.5 m (54.1 ft) properties adjacent to Water St Maximum: 24.5 m (80.4 ft) for all other properties.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 101,
-            "pdf_page_end": 101,
-            "bylaw_page_start": 101,
-            "bylaw_page_end": 101
-          }
-        },
-        {
-          "provision_label_raw": "3",
-          "text": "Front or Flankage Yard (See Map F) Maximum: 1.5 m (4.9 ft) on Water St Maximum: 4 m (13.1 ft) on all other streets.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 101,
-            "pdf_page_end": 101,
-            "bylaw_page_start": 101,
-            "bylaw_page_end": 101
-          }
-        },
-        {
-          "provision_label_raw": "4",
-          "text": "Rear or Side Yard A Setback may be permitted but not to exceed 20% of the Lot Width or Lot Depth. “All buildings shall be setback a minimum of 8m (26.2ft) from the ordinary high water mark.”",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 101,
-            "pdf_page_end": 101,
-            "bylaw_page_start": 101,
-            "bylaw_page_end": 101
-          }
-        },
-        {
-          "provision_label_raw": "5",
-          "text": "Streetwall Height (See Map G) Maximum: 15.5 m (50.9 ft) on Water St Maximum: 16.5 m (54.1 ft) on all other streets",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 101,
-            "pdf_page_end": 101,
-            "bylaw_page_start": 101,
-            "bylaw_page_end": 101
-          }
-        },
-        {
-          "provision_label_raw": "6",
-          "text": "Projections Minimum 1.0 m (3.3 ft) from street line, and Maximum 2.5 m (8.2 ft) projection; OR Within the minimum and maximum range of the existing Buildings on the Block.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 101,
-            "pdf_page_end": 101,
-            "bylaw_page_start": 101,
-            "bylaw_page_end": 101
-          }
-        },
-        {
-          "provision_label_raw": "7",
-          "text": "Building Setback/ Stepback Low-Rise Building: A low-rise building may be setback from the interior lot line. This setback may not exceed 20% of the lot frontage; Mid-Rise Building: Massing for mid-rise Buildings with a height above 13 m (42.6 ft) or the height of the streetwall, the mid-rise portion of a building shall be step-back from the interior lot lines no less than 10% of the lot frontage or 5.5m (18ft); whichever is less. Where a lot has more than one streetline, the greater lot width shall be applied.”",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 101,
-            "pdf_page_end": 101,
-            "bylaw_page_start": 101,
-            "bylaw_page_end": 101
-          }
-        },
-        {
-          "provision_label_raw": "8",
-          "text": "Ground Floor Finished Floor Elevation (FFE) Minimum 3.76 m CGVD28 (Canadian Geodetic Vertical Datum 1928) 9. Map F. Streetwall Setbacks 10. Map G. Streetwall Heights",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 101,
-            "pdf_page_end": 102,
-            "bylaw_page_start": 101,
-            "bylaw_page_end": 102
-          }
-        }
-      ],
-      "table_column_headings_raw": [
-        "Interior/Corner Lots"
-      ]
-    },
-    {
-      "order_index": 4,
-      "section_label_raw": "34.4",
-      "title_label_raw": "BONUS HEIGHT DEVELOPMENT STANDARDS",
-      "citations": {
-        "pdf_page_start": 102,
-        "pdf_page_end": 104,
-        "bylaw_page_start": 102,
-        "bylaw_page_end": 104
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "34.4.1",
-          "clause_path": [
-            "34.4.1"
-          ],
-          "text": "Properties in the DWF Zone are eligible for a Bonus Height subject to the following regulations.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 102,
-            "pdf_page_end": 102,
-            "bylaw_page_start": 102,
-            "bylaw_page_end": 102
-          }
-        },
-        {
-          "provision_label_raw": "a",
-          "clause_path": [
-            "34.4.1",
-            "a"
-          ],
-          "text": "The maximum Height as specified on Map D may be exceeded to the maximum bonus Height as specified on Map E.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 102,
-            "pdf_page_end": 102,
-            "bylaw_page_start": 102,
-            "bylaw_page_end": 102
-          }
-        },
-        {
-          "provision_label_raw": "i",
-          "clause_path": [
-            "34.4.1",
-            "i"
-          ],
-          "text": "A bonus of up to a maximum Building Height of 24.5m (80.4 ft) for properties fronting on Water St.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 102,
-            "pdf_page_end": 102,
-            "bylaw_page_start": 102,
-            "bylaw_page_end": 102
-          }
-        },
-        {
-          "provision_label_raw": "ii",
-          "clause_path": [
-            "34.4.1",
-            "ii"
-          ],
-          "text": "A bonus of up to a maximum Building Height of 32.5m (106.6 ft) for all other properties.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 103,
-            "pdf_page_end": 103,
-            "bylaw_page_start": 103,
-            "bylaw_page_end": 103
-          }
-        },
-        {
-          "provision_label_raw": "b",
-          "clause_path": [
-            "34.4.1",
-            "b"
-          ],
-          "text": "Parking Structures are ineligible for a Bonus Height.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 103,
-            "pdf_page_end": 103,
-            "bylaw_page_start": 103,
-            "bylaw_page_end": 103
-          }
-        },
-        {
-          "provision_label_raw": "34.4.2",
-          "clause_path": [
-            "34.4.2"
-          ],
-          "text": "Massing for buildings up to 21.3 m (69.9 ft):",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 103,
-            "pdf_page_end": 103,
-            "bylaw_page_start": 103,
-            "bylaw_page_end": 103
-          }
-        },
-        {
-          "provision_label_raw": "a",
-          "clause_path": [
-            "34.4.2",
-            "a"
-          ],
-          "text": "The components above the base Building that are a bonus in Height shall be subject to:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 103,
-            "pdf_page_end": 103,
-            "bylaw_page_start": 103,
-            "bylaw_page_end": 103
-          }
-        },
-        {
-          "provision_label_raw": "i",
-          "clause_path": [
-            "34.4.2",
-            "i"
-          ],
-          "text": "A minimum 3.0m (9.8ft) Stepback from the base Building on the front façade.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 103,
-            "pdf_page_end": 103,
-            "bylaw_page_start": 103,
-            "bylaw_page_end": 103
-          }
-        },
-        {
-          "provision_label_raw": "ii",
-          "clause_path": [
-            "34.4.2",
-            "ii"
-          ],
-          "text": "A minimum 5.5m (18ft) Side Yard Setback or Stepback to ensure adequate separation distances of the upper levels from adjacent properties that may also be eligible for a Height bonus.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 103,
-            "pdf_page_end": 103,
-            "bylaw_page_start": 103,
-            "bylaw_page_end": 103
-          }
-        },
-        {
-          "provision_label_raw": "iii",
-          "clause_path": [
-            "34.4.2",
-            "iii"
-          ],
-          "text": "A 45-degree angular planes originating from the top of the flank or rear façade of the base Building that faces abutting properties.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 103,
-            "pdf_page_end": 103,
-            "bylaw_page_start": 103,
-            "bylaw_page_end": 103
-          }
-        },
-        {
-          "provision_label_raw": "34.4.3",
-          "clause_path": [
-            "34.4.3"
-          ],
-          "text": "Massing for Buildings greater than 21.3 m (69.9 ft):",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 103,
-            "pdf_page_end": 103,
-            "bylaw_page_start": 103,
-            "bylaw_page_end": 103
-          }
-        },
-        {
-          "provision_label_raw": "a",
-          "clause_path": [
-            "34.4.3",
-            "a"
-          ],
-          "text": "The components above the base Building that are a bonus in Height shall be subject to:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 103,
-            "pdf_page_end": 103,
-            "bylaw_page_start": 103,
-            "bylaw_page_end": 103
-          }
-        },
-        {
-          "provision_label_raw": "i",
-          "clause_path": [
-            "34.4.3",
-            "i"
-          ],
-          "text": "A minimum 6.0m (19.7ft) Stepback above the base Building or above that portion of the Building that is taller than 21.3 m (69.9 ft) on the front façade.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 103,
-            "pdf_page_end": 103,
-            "bylaw_page_start": 103,
-            "bylaw_page_end": 103
-          }
-        },
-        {
-          "provision_label_raw": "b",
-          "clause_path": [
-            "34.4.3",
-            "b"
-          ],
-          "text": "The portion of the Building above 21.3 m (69.9 ft) shall have:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 103,
-            "pdf_page_end": 103,
-            "bylaw_page_start": 103,
-            "bylaw_page_end": 103
-          }
-        },
-        {
-          "provision_label_raw": "i",
-          "clause_path": [
-            "34.4.3",
-            "i"
-          ],
-          "text": "A maximum gross floor plate size of 750 sq m (8,072.9 sq ft);",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 103,
-            "pdf_page_end": 103,
-            "bylaw_page_start": 103,
-            "bylaw_page_end": 103
-          }
-        },
-        {
-          "provision_label_raw": "ii",
-          "clause_path": [
-            "34.4.3",
-            "ii"
-          ],
-          "text": "A minimum 10m (32.8 ft) interior Yard Setbacks; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 103,
-            "pdf_page_end": 103,
-            "bylaw_page_start": 103,
-            "bylaw_page_end": 103
-          }
-        },
-        {
-          "provision_label_raw": "iii",
-          "clause_path": [
-            "34.4.3",
-            "iii"
-          ],
-          "text": "A maximum 25.0m (82 ft) Building width addressing the Street.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 103,
-            "pdf_page_end": 103,
-            "bylaw_page_start": 103,
-            "bylaw_page_end": 103
-          }
-        },
-        {
-          "provision_label_raw": "34.4.4",
-          "clause_path": [
-            "34.4.4"
-          ],
-          "text": "Bonus Height applications are subject to the provisions in the Bonus Height Applications Section of this by-law.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 103,
-            "pdf_page_end": 103,
-            "bylaw_page_start": 103,
-            "bylaw_page_end": 103
-          }
-        },
-        {
-          "provision_label_raw": "34.4.5",
-          "clause_path": [
-            "34.4.5"
-          ],
-          "text": "Map D: Maximum Height 34.4.6 16.5 m (54.1 ft) 24.5 m (80.4 ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 103,
-            "pdf_page_end": 103,
-            "bylaw_page_start": 103,
-            "bylaw_page_end": 103
-          }
-        },
-        {
-          "provision_label_raw": "34.4.7",
-          "clause_path": [
-            "34.4.7"
-          ],
-          "text": "Map E: Maximum Bonus Height",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 104,
-            "pdf_page_end": 104,
-            "bylaw_page_start": 104,
-            "bylaw_page_end": 104
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 5,
-      "section_label_raw": "34.5",
-      "title_label_raw": "STORM SURGE PROTECTION",
-      "citations": {
-        "pdf_page_start": 104,
-        "pdf_page_end": 104,
-        "bylaw_page_start": 104,
-        "bylaw_page_end": 104
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "34.5.1",
-          "clause_path": [
-            "34.5.1"
-          ],
-          "text": "The minimum finished floor elevation (FFE) shall not apply to Parking Structures, Accessory Buildings, or any water related Structures",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 104,
-            "pdf_page_end": 104,
-            "bylaw_page_start": 104,
-            "bylaw_page_end": 104
-          }
-        },
-        {
-          "provision_label_raw": "34.5.2",
-          "clause_path": [
-            "34.5.2"
-          ],
-          "text": "Any existing residential use presently below the required elevation may expand, provided the expansion area satisfies the minimum finished floor elevation (FFE) requirements. 24.5m (80.4 ft) 32.5m (106.6 ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 104,
-            "pdf_page_end": 104,
-            "bylaw_page_start": 104,
-            "bylaw_page_end": 104
-          }
-        }
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [],
-  "content_blocks": [],
-  "open_issues": [
-    {
-      "issue_type": "table_parsing_review",
-      "description": "Section 'REGULATIONS FOR PERMITTED USES' contains table-derived provisions extracted from PDF text; verify column alignment against the source PDF before normalization."
-    },
-    {
-      "issue_type": "source_revision_review",
-      "description": "Source PDF cover identifies rev 049 updated March 9, 2026, but this zone page header may display rev 048 updated October 24, 2025; verify source revision during QA."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "34",
+    "zone_title_raw": "WATERFRONT ZONE (WF)",
+    "citations": {
       "pdf_page_start": 100,
       "pdf_page_end": 104,
       "bylaw_page_start": 100,
       "bylaw_page_end": 104
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-wf",
+        "source_unit_type": "zone",
+        "label_raw": "34",
+        "title_raw": "WATERFRONT ZONE (WF)",
+        "text_raw": "All uses as permitted in the Downtown Core (DC) Zone;\nLimited Car Rental Operation; and\nMarina\nOnly those uses listed below shall be permitted on the ground floor of a Building in the WF Zone immediately abutting a designated Walkable Street (Map C):\nEating and Drinking Establishments;\nTourism related services including but not limited to, information services, touring services, or personal equipment rentals;\nRetail Store; and\nCultural Establishment;\nA minimum of 60% of the ground floor shall be designated to the above uses.\nMap C. Walkable Streets\nProperties in the DWF Zone are eligible for a Bonus Height subject to the following regulations.\nThe maximum Height as specified on Map D may be exceeded to the maximum bonus Height as specified on Map E.\nA bonus of up to a maximum Building Height of 24.5m (80.4 ft) for properties fronting on Water St.\nA bonus of up to a maximum Building Height of 32.5m (106.6 ft) for all other properties.\nParking Structures are ineligible for a Bonus Height.\nMassing for buildings up to 21.3 m (69.9 ft):\nThe components above the base Building that are a bonus in Height shall be subject to:\nA minimum 3.0m (9.8ft) Stepback from the base Building on the front façade.\nA minimum 5.5m (18ft) Side Yard Setback or Stepback to ensure adequate separation distances of the upper levels from adjacent properties that may also be eligible for a Height bonus.\nA 45-degree angular planes originating from the top of the flank or rear façade of the base Building that faces abutting properties.\nMassing for Buildings greater than 21.3 m (69.9 ft):\nThe components above the base Building that are a bonus in Height shall be subject to:\nA minimum 6.0m (19.7ft) Stepback above the base Building or above that portion of the Building that is taller than 21.3 m (69.9 ft) on the front façade.\nThe portion of the Building above 21.3 m (69.9 ft) shall have:\nA maximum gross floor plate size of 750 sq m (8,072.9 sq ft);\nA minimum 10m (32.8 ft) interior Yard Setbacks; and\nA maximum 25.0m (82 ft) Building width addressing the Street.\nBonus Height applications are subject to the provisions in the Bonus Height Applications Section of this by-law.\nMap D: Maximum Height 34.4.6 16.5 m (54.1 ft) 24.5 m (80.4 ft)\nMap E: Maximum Bonus Height\nThe minimum finished floor elevation (FFE) shall not apply to Parking Structures, Accessory Buildings, or any water related Structures\nAny existing residential use presently below the required elevation may expand, provided the expansion area satisfies the minimum finished floor elevation (FFE) requirements. 24.5m (80.4 ft) 32.5m (106.6 ft)",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 100,
+          "pdf_page_end": 104,
+          "bylaw_page_start": 100,
+          "bylaw_page_end": 104
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-wf-section-34-1",
+        "section_label_raw": "34.1",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-wf-clause-34-1-1",
+            "clause_label_raw": "34.1.1",
+            "clause_text_raw": "All uses as permitted in the Downtown Core (DC) Zone;",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 100,
+              "pdf_page_end": 100,
+              "bylaw_page_start": 100,
+              "bylaw_page_end": 100
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-1-2",
+            "clause_label_raw": "34.1.2",
+            "clause_text_raw": "Limited Car Rental Operation; and",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 100,
+              "pdf_page_end": 100,
+              "bylaw_page_start": 100,
+              "bylaw_page_end": 100
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-1-3",
+            "clause_label_raw": "34.1.3",
+            "clause_text_raw": "Marina",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 100,
+              "pdf_page_end": 100,
+              "bylaw_page_start": 100,
+              "bylaw_page_end": 100
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 100,
+          "pdf_page_end": 100,
+          "bylaw_page_start": 100,
+          "bylaw_page_end": 100
+        }
+      },
+      {
+        "section_id": "zone-wf-section-34-2",
+        "section_label_raw": "34.2",
+        "section_title_raw": "PERMITTED LAND USES AT GRADE ON WALKABLE STREETS",
+        "source_order": 2,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-wf-clause-34-2-1",
+            "clause_label_raw": "34.2.1",
+            "clause_text_raw": "Only those uses listed below shall be permitted on the ground floor of a Building in the WF Zone immediately abutting a designated Walkable Street (Map C):",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 100,
+              "pdf_page_end": 100,
+              "bylaw_page_start": 100,
+              "bylaw_page_end": 100
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-2-1-a",
+            "clause_label_raw": "a",
+            "clause_text_raw": "Eating and Drinking Establishments;",
+            "parent_clause_id": "zone-wf-clause-34-2-1",
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 100,
+              "pdf_page_end": 100,
+              "bylaw_page_start": 100,
+              "bylaw_page_end": 100
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-2-1-b",
+            "clause_label_raw": "b",
+            "clause_text_raw": "Tourism related services including but not limited to, information services, touring services, or personal equipment rentals;",
+            "parent_clause_id": "zone-wf-clause-34-2-1",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 100,
+              "pdf_page_end": 100,
+              "bylaw_page_start": 100,
+              "bylaw_page_end": 100
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-2-1-c",
+            "clause_label_raw": "c",
+            "clause_text_raw": "Retail Store; and",
+            "parent_clause_id": "zone-wf-clause-34-2-1",
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 100,
+              "pdf_page_end": 100,
+              "bylaw_page_start": 100,
+              "bylaw_page_end": 100
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-2-1-d",
+            "clause_label_raw": "d",
+            "clause_text_raw": "Cultural Establishment;",
+            "parent_clause_id": "zone-wf-clause-34-2-1",
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 100,
+              "pdf_page_end": 100,
+              "bylaw_page_start": 100,
+              "bylaw_page_end": 100
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-2-2",
+            "clause_label_raw": "34.2.2",
+            "clause_text_raw": "A minimum of 60% of the ground floor shall be designated to the above uses.",
+            "parent_clause_id": null,
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 100,
+              "pdf_page_end": 100,
+              "bylaw_page_start": 100,
+              "bylaw_page_end": 100
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-2-3",
+            "clause_label_raw": "34.2.3",
+            "clause_text_raw": "Map C. Walkable Streets",
+            "parent_clause_id": null,
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 100,
+              "pdf_page_end": 100,
+              "bylaw_page_start": 100,
+              "bylaw_page_end": 100
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 100,
+          "pdf_page_end": 100,
+          "bylaw_page_start": 100,
+          "bylaw_page_end": 100
+        }
+      },
+      {
+        "section_id": "zone-wf-section-3",
+        "section_label_raw": "",
+        "section_title_raw": "REGULATIONS FOR PERMITTED USES",
+        "source_order": 3,
+        "clauses_raw": [],
+        "tables_raw": [
+          {
+            "table_id": "zone-wf-table-regulations-for-permitted-uses",
+            "table_title_raw": "REGULATIONS FOR PERMITTED USES",
+            "source_order": 1,
+            "columns_raw": [
+              {
+                "column_id": "row_number",
+                "column_label_raw": "",
+                "source_order": 1
+              },
+              {
+                "column_id": "requirement",
+                "column_label_raw": "",
+                "source_order": 2
+              },
+              {
+                "column_id": "interior_corner_lots",
+                "column_label_raw": "Interior/Corner Lots",
+                "source_order": 3
+              }
+            ],
+            "rows_raw": [
+              {
+                "row_id": "zone-wf-table-regulations-for-permitted-uses-row-1",
+                "source_order": 1,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-1-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "1"
+                  },
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-1-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-1-interior_corner_lots",
+                    "column_id": "interior_corner_lots",
+                    "cell_text_raw": "Minimum 7.62 m (25 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-wf-table-regulations-for-permitted-uses-row-2",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-2-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "2"
+                  },
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-2-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "(See Map D)"
+                  },
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-2-interior_corner_lots",
+                    "column_id": "interior_corner_lots",
+                    "cell_text_raw": "Minimum: 10 m (32.3 ft) Maximum: 16.5 m (54.1 ft) properties adjacent to Water St Maximum: 24.5 m (80.4 ft) for all other properties."
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-wf-table-regulations-for-permitted-uses-row-3",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-3-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "3"
+                  },
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-3-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "or Flankage Yard Map F)"
+                  },
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-3-interior_corner_lots",
+                    "column_id": "interior_corner_lots",
+                    "cell_text_raw": "Maximum: 1.5 m (4.9 ft) on Water St Maximum: 4 m (13.1 ft) on all other streets."
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-wf-table-regulations-for-permitted-uses-row-4",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-4-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "4"
+                  },
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-4-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "or Side Yard"
+                  },
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-4-interior_corner_lots",
+                    "column_id": "interior_corner_lots",
+                    "cell_text_raw": "A Setback may be permitted but not to exceed 20% of the Lot Width or Lot Depth. “All buildings shall be setback a minimum of 8m (26.2ft) from the ordinary high water mark.”"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-wf-table-regulations-for-permitted-uses-row-5",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-5-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "5"
+                  },
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-5-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Height Map G)"
+                  },
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-5-interior_corner_lots",
+                    "column_id": "interior_corner_lots",
+                    "cell_text_raw": "Maximum: 15.5 m (50.9 ft) on Water St Maximum: 16.5 m (54.1 ft) on all other streets"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-wf-table-regulations-for-permitted-uses-row-6",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-6-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "6"
+                  },
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-6-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-6-interior_corner_lots",
+                    "column_id": "interior_corner_lots",
+                    "cell_text_raw": "Minimum 1.0 m (3.3 ft) from street line, and Maximum 2.5 m (8.2 ft) projection; OR Within the minimum and maximum range of the existing Buildings on the Block."
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-wf-table-regulations-for-permitted-uses-row-7",
+                "source_order": 7,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-7-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "7"
+                  },
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-7-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Setback/"
+                  },
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-7-interior_corner_lots",
+                    "column_id": "interior_corner_lots",
+                    "cell_text_raw": "Low-Rise Building: A low-rise building may be setback from the interior lot line. This setback may not exceed 20% of the lot frontage; Mid-Rise Building: Massing for mid-rise Buildings with a height above 13 m (42.6 ft) or the height of the streetwall, the mid-rise portion of a building shall be step-back from the interior lot lines no less than 10% of the lot frontage or 5.5m (18ft); whichever is less. Where a lot has more than one streetline, the greater lot width shall be applied.”"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-wf-table-regulations-for-permitted-uses-row-8",
+                "source_order": 8,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-8-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "8"
+                  },
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-8-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Ground Floor Finished Floor Elevation (FFE)"
+                  },
+                  {
+                    "cell_id": "zone-wf-table-regulations-for-permitted-uses-row-8-interior_corner_lots",
+                    "column_id": "interior_corner_lots",
+                    "cell_text_raw": "Minimum 3.76 m CGVD28 (Canadian Geodetic Vertical Datum 1928)"
+                  }
+                ]
+              }
+            ],
+            "citations": {
+              "pdf_page_start": 101,
+              "pdf_page_end": 102,
+              "bylaw_page_start": 101,
+              "bylaw_page_end": 102
+            }
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 101,
+          "pdf_page_end": 102,
+          "bylaw_page_start": 101,
+          "bylaw_page_end": 102
+        }
+      },
+      {
+        "section_id": "zone-wf-section-34-4",
+        "section_label_raw": "34.4",
+        "section_title_raw": "BONUS HEIGHT DEVELOPMENT STANDARDS",
+        "source_order": 4,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-wf-clause-34-4-1",
+            "clause_label_raw": "34.4.1",
+            "clause_text_raw": "Properties in the DWF Zone are eligible for a Bonus Height subject to the following regulations.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 102,
+              "pdf_page_end": 102,
+              "bylaw_page_start": 102,
+              "bylaw_page_end": 102
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-4-1-a",
+            "clause_label_raw": "a",
+            "clause_text_raw": "The maximum Height as specified on Map D may be exceeded to the maximum bonus Height as specified on Map E.",
+            "parent_clause_id": "zone-wf-clause-34-4-1",
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 102,
+              "pdf_page_end": 102,
+              "bylaw_page_start": 102,
+              "bylaw_page_end": 102
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-4-1-i",
+            "clause_label_raw": "i",
+            "clause_text_raw": "A bonus of up to a maximum Building Height of 24.5m (80.4 ft) for properties fronting on Water St.",
+            "parent_clause_id": "zone-wf-clause-34-4-1",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 102,
+              "pdf_page_end": 102,
+              "bylaw_page_start": 102,
+              "bylaw_page_end": 102
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-4-1-ii",
+            "clause_label_raw": "ii",
+            "clause_text_raw": "A bonus of up to a maximum Building Height of 32.5m (106.6 ft) for all other properties.",
+            "parent_clause_id": "zone-wf-clause-34-4-1",
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 103,
+              "pdf_page_end": 103,
+              "bylaw_page_start": 103,
+              "bylaw_page_end": 103
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-4-1-b",
+            "clause_label_raw": "b",
+            "clause_text_raw": "Parking Structures are ineligible for a Bonus Height.",
+            "parent_clause_id": "zone-wf-clause-34-4-1",
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 103,
+              "pdf_page_end": 103,
+              "bylaw_page_start": 103,
+              "bylaw_page_end": 103
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-4-2",
+            "clause_label_raw": "34.4.2",
+            "clause_text_raw": "Massing for buildings up to 21.3 m (69.9 ft):",
+            "parent_clause_id": null,
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 103,
+              "pdf_page_end": 103,
+              "bylaw_page_start": 103,
+              "bylaw_page_end": 103
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-4-2-a",
+            "clause_label_raw": "a",
+            "clause_text_raw": "The components above the base Building that are a bonus in Height shall be subject to:",
+            "parent_clause_id": "zone-wf-clause-34-4-2",
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 103,
+              "pdf_page_end": 103,
+              "bylaw_page_start": 103,
+              "bylaw_page_end": 103
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-4-2-i",
+            "clause_label_raw": "i",
+            "clause_text_raw": "A minimum 3.0m (9.8ft) Stepback from the base Building on the front façade.",
+            "parent_clause_id": "zone-wf-clause-34-4-2",
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 103,
+              "pdf_page_end": 103,
+              "bylaw_page_start": 103,
+              "bylaw_page_end": 103
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-4-2-ii",
+            "clause_label_raw": "ii",
+            "clause_text_raw": "A minimum 5.5m (18ft) Side Yard Setback or Stepback to ensure adequate separation distances of the upper levels from adjacent properties that may also be eligible for a Height bonus.",
+            "parent_clause_id": "zone-wf-clause-34-4-2",
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 103,
+              "pdf_page_end": 103,
+              "bylaw_page_start": 103,
+              "bylaw_page_end": 103
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-4-2-iii",
+            "clause_label_raw": "iii",
+            "clause_text_raw": "A 45-degree angular planes originating from the top of the flank or rear façade of the base Building that faces abutting properties.",
+            "parent_clause_id": "zone-wf-clause-34-4-2",
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 103,
+              "pdf_page_end": 103,
+              "bylaw_page_start": 103,
+              "bylaw_page_end": 103
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-4-3",
+            "clause_label_raw": "34.4.3",
+            "clause_text_raw": "Massing for Buildings greater than 21.3 m (69.9 ft):",
+            "parent_clause_id": null,
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 103,
+              "pdf_page_end": 103,
+              "bylaw_page_start": 103,
+              "bylaw_page_end": 103
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-4-3-a",
+            "clause_label_raw": "a",
+            "clause_text_raw": "The components above the base Building that are a bonus in Height shall be subject to:",
+            "parent_clause_id": "zone-wf-clause-34-4-3",
+            "source_order": 12,
+            "citations": {
+              "pdf_page_start": 103,
+              "pdf_page_end": 103,
+              "bylaw_page_start": 103,
+              "bylaw_page_end": 103
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-4-3-i",
+            "clause_label_raw": "i",
+            "clause_text_raw": "A minimum 6.0m (19.7ft) Stepback above the base Building or above that portion of the Building that is taller than 21.3 m (69.9 ft) on the front façade.",
+            "parent_clause_id": "zone-wf-clause-34-4-3",
+            "source_order": 13,
+            "citations": {
+              "pdf_page_start": 103,
+              "pdf_page_end": 103,
+              "bylaw_page_start": 103,
+              "bylaw_page_end": 103
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-4-3-b",
+            "clause_label_raw": "b",
+            "clause_text_raw": "The portion of the Building above 21.3 m (69.9 ft) shall have:",
+            "parent_clause_id": "zone-wf-clause-34-4-3",
+            "source_order": 14,
+            "citations": {
+              "pdf_page_start": 103,
+              "pdf_page_end": 103,
+              "bylaw_page_start": 103,
+              "bylaw_page_end": 103
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-4-3-i",
+            "clause_label_raw": "i",
+            "clause_text_raw": "A maximum gross floor plate size of 750 sq m (8,072.9 sq ft);",
+            "parent_clause_id": "zone-wf-clause-34-4-3",
+            "source_order": 15,
+            "citations": {
+              "pdf_page_start": 103,
+              "pdf_page_end": 103,
+              "bylaw_page_start": 103,
+              "bylaw_page_end": 103
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-4-3-ii",
+            "clause_label_raw": "ii",
+            "clause_text_raw": "A minimum 10m (32.8 ft) interior Yard Setbacks; and",
+            "parent_clause_id": "zone-wf-clause-34-4-3",
+            "source_order": 16,
+            "citations": {
+              "pdf_page_start": 103,
+              "pdf_page_end": 103,
+              "bylaw_page_start": 103,
+              "bylaw_page_end": 103
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-4-3-iii",
+            "clause_label_raw": "iii",
+            "clause_text_raw": "A maximum 25.0m (82 ft) Building width addressing the Street.",
+            "parent_clause_id": "zone-wf-clause-34-4-3",
+            "source_order": 17,
+            "citations": {
+              "pdf_page_start": 103,
+              "pdf_page_end": 103,
+              "bylaw_page_start": 103,
+              "bylaw_page_end": 103
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-4-4",
+            "clause_label_raw": "34.4.4",
+            "clause_text_raw": "Bonus Height applications are subject to the provisions in the Bonus Height Applications Section of this by-law.",
+            "parent_clause_id": null,
+            "source_order": 18,
+            "citations": {
+              "pdf_page_start": 103,
+              "pdf_page_end": 103,
+              "bylaw_page_start": 103,
+              "bylaw_page_end": 103
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-4-5",
+            "clause_label_raw": "34.4.5",
+            "clause_text_raw": "Map D: Maximum Height 34.4.6 16.5 m (54.1 ft) 24.5 m (80.4 ft)",
+            "parent_clause_id": null,
+            "source_order": 19,
+            "citations": {
+              "pdf_page_start": 103,
+              "pdf_page_end": 103,
+              "bylaw_page_start": 103,
+              "bylaw_page_end": 103
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-4-7",
+            "clause_label_raw": "34.4.7",
+            "clause_text_raw": "Map E: Maximum Bonus Height",
+            "parent_clause_id": null,
+            "source_order": 20,
+            "citations": {
+              "pdf_page_start": 104,
+              "pdf_page_end": 104,
+              "bylaw_page_start": 104,
+              "bylaw_page_end": 104
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 102,
+          "pdf_page_end": 104,
+          "bylaw_page_start": 102,
+          "bylaw_page_end": 104
+        }
+      },
+      {
+        "section_id": "zone-wf-section-34-5",
+        "section_label_raw": "34.5",
+        "section_title_raw": "STORM SURGE PROTECTION",
+        "source_order": 5,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-wf-clause-34-5-1",
+            "clause_label_raw": "34.5.1",
+            "clause_text_raw": "The minimum finished floor elevation (FFE) shall not apply to Parking Structures, Accessory Buildings, or any water related Structures",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 104,
+              "pdf_page_end": 104,
+              "bylaw_page_start": 104,
+              "bylaw_page_end": 104
+            }
+          },
+          {
+            "clause_id": "zone-wf-clause-34-5-2",
+            "clause_label_raw": "34.5.2",
+            "clause_text_raw": "Any existing residential use presently below the required elevation may expand, provided the expansion area satisfies the minimum finished floor elevation (FFE) requirements. 24.5m (80.4 ft) 32.5m (106.6 ft)",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 104,
+              "pdf_page_end": 104,
+              "bylaw_page_start": 104,
+              "bylaw_page_end": 104
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 104,
+          "pdf_page_end": 104,
+          "bylaw_page_start": 104,
+          "bylaw_page_end": 104
+        }
+      }
+    ],
+    "tables_raw": [
+      {
+        "table_id": "zone-wf-table-regulations-for-permitted-uses",
+        "section_id": "zone-wf-section-3"
+      }
+    ],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-wf-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 100,
+          "pdf_page_end": 104,
+          "bylaw_page_start": 100,
+          "bylaw_page_end": 104
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-wf-clause-34-1-1",
+        "section_id": "zone-wf-section-34-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-wf-clause-34-1-2",
+        "section_id": "zone-wf-section-34-1",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-wf-clause-34-1-3",
+        "section_id": "zone-wf-section-34-1",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-wf-clause-34-2-1",
+        "section_id": "zone-wf-section-34-2",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-wf-clause-34-2-1-a",
+        "section_id": "zone-wf-section-34-2",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-wf-clause-34-2-1-b",
+        "section_id": "zone-wf-section-34-2",
+        "source_order": 6
+      },
+      {
+        "clause_id": "zone-wf-clause-34-2-1-c",
+        "section_id": "zone-wf-section-34-2",
+        "source_order": 7
+      },
+      {
+        "clause_id": "zone-wf-clause-34-2-1-d",
+        "section_id": "zone-wf-section-34-2",
+        "source_order": 8
+      },
+      {
+        "clause_id": "zone-wf-clause-34-2-2",
+        "section_id": "zone-wf-section-34-2",
+        "source_order": 9
+      },
+      {
+        "clause_id": "zone-wf-clause-34-2-3",
+        "section_id": "zone-wf-section-34-2",
+        "source_order": 10
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-1",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 11
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-1-a",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 12
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-1-i",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 13
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-1-ii",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 14
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-1-b",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 15
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-2",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 16
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-2-a",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 17
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-2-i",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 18
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-2-ii",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 19
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-2-iii",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 20
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-3",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 21
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-3-a",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 22
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-3-i",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 23
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-3-b",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 24
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-3-i",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 25
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-3-ii",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 26
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-3-iii",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 27
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-4",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 28
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-5",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 29
+      },
+      {
+        "clause_id": "zone-wf-clause-34-4-7",
+        "section_id": "zone-wf-section-34-4",
+        "source_order": 30
+      },
+      {
+        "clause_id": "zone-wf-clause-34-5-1",
+        "section_id": "zone-wf-section-34-5",
+        "source_order": 31
+      },
+      {
+        "clause_id": "zone-wf-clause-34-5-2",
+        "section_id": "zone-wf-section-34-5",
+        "source_order": 32
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-wf-term-term-all_uses_as_permitted_in_the_downtown_core_dc_zone",
+        "term_raw": "All uses as permitted in the Downtown Core (DC) Zone",
+        "term_normalized": "all_uses_as_permitted_in_the_downtown_core_dc_zone",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-1-1"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-wf-term-term-limited_car_rental_operation",
+        "term_raw": "Limited Car Rental Operation",
+        "term_normalized": "limited_car_rental_operation",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-1-2"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-wf-term-term-marina",
+        "term_raw": "Marina",
+        "term_normalized": "marina",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-1-3"
+          }
+        ],
+        "confidence": "needs_review"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-wf-use-all-uses-as-permitted-in-the-downtown-core-dc-zone-1",
+        "use_name_raw": "All uses as permitted in the Downtown Core (DC) Zone",
+        "use_term_id": "zone-wf-term-term-all_uses_as_permitted_in_the_downtown_core_dc_zone",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-wf-clause-34-1-1",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-wf-use-limited-car-rental-operation-2",
+        "use_name_raw": "Limited Car Rental Operation",
+        "use_term_id": "zone-wf-term-term-limited_car_rental_operation",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-wf-clause-34-1-2",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-wf-use-marina-3",
+        "use_name_raw": "Marina",
+        "use_term_id": "zone-wf-term-term-marina",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-wf-clause-34-1-3",
+        "confidence": "needs_review"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-1-interior-corner-lots-1",
+        "value_raw": "7.62 m (25 ft)",
+        "value": 7.62,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "25 ft",
+            "value": 25,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-1-interior_corner_lots"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-2-interior-corner-lots-1",
+        "value_raw": "10 m (32.3 ft)",
+        "value": 10,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "32.3 ft",
+            "value": 32.3,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-2-interior_corner_lots"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-2-interior-corner-lots-2",
+        "value_raw": "16.5 m (54.1 ft)",
+        "value": 16.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "54.1 ft",
+            "value": 54.1,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-2-interior_corner_lots"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-2-interior-corner-lots-3",
+        "value_raw": "24.5 m (80.4 ft)",
+        "value": 24.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "80.4 ft",
+            "value": 80.4,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-2-interior_corner_lots"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-3-interior-corner-lots-1",
+        "value_raw": "1.5 m (4.9 ft)",
+        "value": 1.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "4.9 ft",
+            "value": 4.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-3-interior_corner_lots"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-3-interior-corner-lots-2",
+        "value_raw": "4 m (13.1 ft)",
+        "value": 4,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "13.1 ft",
+            "value": 13.1,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-3-interior_corner_lots"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-4-interior-corner-lots-1",
+        "value_raw": "8m (26.2ft)",
+        "value": 8,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "26.2ft",
+            "value": 26.2,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-4-interior_corner_lots"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-5-interior-corner-lots-1",
+        "value_raw": "15.5 m (50.9 ft)",
+        "value": 15.5,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "50.9 ft",
+            "value": 50.9,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-5-interior_corner_lots"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-5-interior-corner-lots-2",
+        "value_raw": "16.5 m (54.1 ft)",
+        "value": 16.5,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "54.1 ft",
+            "value": 54.1,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-5-interior_corner_lots"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-6-interior-corner-lots-1",
+        "value_raw": "1.0 m (3.3 ft)",
+        "value": 1,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "3.3 ft",
+            "value": 3.3,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-6-interior_corner_lots"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-6-interior-corner-lots-2",
+        "value_raw": "2.5 m (8.2 ft)",
+        "value": 2.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "8.2 ft",
+            "value": 8.2,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-6-interior_corner_lots"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-7-interior-corner-lots-1",
+        "value_raw": "13 m (42.6 ft)",
+        "value": 13,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "less_than",
+        "alternative_values": [
+          {
+            "value_raw": "42.6 ft",
+            "value": 42.6,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-7-interior_corner_lots"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-7-interior-corner-lots-2",
+        "value_raw": "5.5m (18ft)",
+        "value": 5.5,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "less_than",
+        "alternative_values": [
+          {
+            "value_raw": "18ft",
+            "value": 18,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-7-interior_corner_lots"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-8-interior-corner-lots-1",
+        "value_raw": "3.76 m",
+        "value": 3.76,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-8-interior_corner_lots"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-clause-34-4-1-i-1",
+        "value_raw": "24.5m (80.4 ft)",
+        "value": 24.5,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "80.4 ft",
+            "value": 80.4,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-1-i"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-clause-34-4-1-ii-1",
+        "value_raw": "32.5m (106.6 ft)",
+        "value": 32.5,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "106.6 ft",
+            "value": 106.6,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-1-ii"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-clause-34-4-2-1",
+        "value_raw": "21.3 m (69.9 ft)",
+        "value": 21.3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [
+          {
+            "value_raw": "69.9 ft",
+            "value": 69.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-clause-34-4-2-i-1",
+        "value_raw": "3.0m (9.8ft)",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "9.8ft",
+            "value": 9.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-2-i"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-clause-34-4-2-ii-1",
+        "value_raw": "5.5m (18ft)",
+        "value": 5.5,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "18ft",
+            "value": 18,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-2-ii"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-clause-34-4-3-1",
+        "value_raw": "21.3 m (69.9 ft)",
+        "value": 21.3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "greater_than",
+        "alternative_values": [
+          {
+            "value_raw": "69.9 ft",
+            "value": 69.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-clause-34-4-3-i-1",
+        "value_raw": "6.0m (19.7ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-3-i"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-clause-34-4-3-i-2",
+        "value_raw": "21.3 m (69.9 ft)",
+        "value": 21.3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "69.9 ft",
+            "value": 69.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-3-i"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-clause-34-4-3-b-1",
+        "value_raw": "21.3 m (69.9 ft)",
+        "value": 21.3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [
+          {
+            "value_raw": "69.9 ft",
+            "value": 69.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-3-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-clause-34-4-3-i-1",
+        "value_raw": "750 sq m (8,072.9 sq ft)",
+        "value": 750,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "8,072.9 sq ft",
+            "value": 8072.9,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-3-i"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-clause-34-4-3-ii-1",
+        "value_raw": "10m (32.8 ft)",
+        "value": 10,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "32.8 ft",
+            "value": 32.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-3-ii"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-clause-34-4-3-iii-1",
+        "value_raw": "25.0m (82 ft)",
+        "value": 25,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "82 ft",
+            "value": 82,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-3-iii"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-clause-34-4-5-1",
+        "value_raw": "16.5 m (54.1 ft)",
+        "value": 16.5,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "54.1 ft",
+            "value": 54.1,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-clause-34-4-5-2",
+        "value_raw": "24.5 m (80.4 ft)",
+        "value": 24.5,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "80.4 ft",
+            "value": 80.4,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-clause-34-5-2-1",
+        "value_raw": "24.5m (80.4 ft)",
+        "value": 24.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "80.4 ft",
+            "value": 80.4,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-5-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-wf-num-zone-wf-clause-34-5-2-2",
+        "value_raw": "32.5m (106.6 ft)",
+        "value": 32.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "106.6 ft",
+            "value": 106.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-5-2"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-wf-req-zone-wf-table-regulations-for-permitted-uses-row-1-interior-corner-lots",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Frontage (Minimum)",
+        "requirement_text_raw": "Frontage (Minimum) Interior/Corner Lots Minimum 7.62 m (25 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-1-interior-corner-lots-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-wf-req-zone-wf-table-regulations-for-permitted-uses-row-2-interior-corner-lots",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "see_map_d",
+        "requirement_label_raw": "(See Map D)",
+        "requirement_text_raw": "(See Map D) Interior/Corner Lots Minimum: 10 m (32.3 ft) Maximum: 16.5 m (54.1 ft) properties adjacent to Water St Maximum: 24.5 m (80.4 ft) for all other properties.",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-2-interior-corner-lots-1",
+          "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-2-interior-corner-lots-2",
+          "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-2-interior-corner-lots-3"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-wf-req-zone-wf-table-regulations-for-permitted-uses-row-3-interior-corner-lots",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "flankage_yard",
+        "requirement_label_raw": "or Flankage Yard Map F)",
+        "requirement_text_raw": "or Flankage Yard Map F) Interior/Corner Lots Maximum: 1.5 m (4.9 ft) on Water St Maximum: 4 m (13.1 ft) on all other streets.",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-3-interior-corner-lots-1",
+          "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-3-interior-corner-lots-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-wf-req-zone-wf-table-regulations-for-permitted-uses-row-4-interior-corner-lots",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "or Side Yard",
+        "requirement_text_raw": "or Side Yard Interior/Corner Lots A Setback may be permitted but not to exceed 20% of the Lot Width or Lot Depth. “All buildings shall be setback a minimum of 8m (26.2ft) from the ordinary high water mark.”",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-4-interior-corner-lots-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-wf-req-zone-wf-table-regulations-for-permitted-uses-row-5-interior-corner-lots",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height Map G)",
+        "requirement_text_raw": "Height Map G) Interior/Corner Lots Maximum: 15.5 m (50.9 ft) on Water St Maximum: 16.5 m (54.1 ft) on all other streets",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-5-interior-corner-lots-1",
+          "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-5-interior-corner-lots-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-wf-req-zone-wf-table-regulations-for-permitted-uses-row-6-interior-corner-lots",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "other",
+        "requirement_label_raw": "",
+        "requirement_text_raw": "Interior/Corner Lots Minimum 1.0 m (3.3 ft) from street line, and Maximum 2.5 m (8.2 ft) projection; OR Within the minimum and maximum range of the existing Buildings on the Block.",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-6-interior-corner-lots-1",
+          "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-6-interior-corner-lots-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-wf-req-zone-wf-table-regulations-for-permitted-uses-row-7-interior-corner-lots",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "setback",
+        "requirement_label_raw": "Setback/",
+        "requirement_text_raw": "Setback/ Interior/Corner Lots Low-Rise Building: A low-rise building may be setback from the interior lot line. This setback may not exceed 20% of the lot frontage; Mid-Rise Building: Massing for mid-rise Buildings with a height above 13 m (42.6 ft) or the height of the streetwall, the mid-rise portion of a building shall be step-back from the interior lot lines no less than 10% of the lot frontage or 5.5m (18ft); whichever is less. Where a lot has more than one streetline, the greater lot width shall be applied.”",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-7-interior-corner-lots-1",
+          "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-7-interior-corner-lots-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-wf-req-zone-wf-table-regulations-for-permitted-uses-row-8-interior-corner-lots",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "ground_floor_finished_floor_elevation_ffe",
+        "requirement_label_raw": "Ground Floor Finished Floor Elevation (FFE)",
+        "requirement_text_raw": "Ground Floor Finished Floor Elevation (FFE) Interior/Corner Lots Minimum 3.76 m CGVD28 (Canadian Geodetic Vertical Datum 1928)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-table-regulations-for-permitted-uses-row-8-interior-corner-lots-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-wf-table-regulations-for-permitted-uses-row-8"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-wf-req-zone-wf-clause-34-4-1-i",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "i",
+        "requirement_text_raw": "A bonus of up to a maximum Building Height of 24.5m (80.4 ft) for properties fronting on Water St.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-clause-34-4-1-i-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-1-i"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-wf-req-zone-wf-clause-34-4-1-ii",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "ii",
+        "requirement_text_raw": "A bonus of up to a maximum Building Height of 32.5m (106.6 ft) for all other properties.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-clause-34-4-1-ii-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-1-ii"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-wf-req-zone-wf-clause-34-4-2-i",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "setback",
+        "requirement_label_raw": "i",
+        "requirement_text_raw": "A minimum 3.0m (9.8ft) Stepback from the base Building on the front façade.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-clause-34-4-2-i-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-2-i"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-wf-req-zone-wf-clause-34-4-2-ii",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "ii",
+        "requirement_text_raw": "A minimum 5.5m (18ft) Side Yard Setback or Stepback to ensure adequate separation distances of the upper levels from adjacent properties that may also be eligible for a Height bonus.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-clause-34-4-2-ii-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-2-ii"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-wf-req-zone-wf-clause-34-4-3-i",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "setback",
+        "requirement_label_raw": "i",
+        "requirement_text_raw": "A minimum 6.0m (19.7ft) Stepback above the base Building or above that portion of the Building that is taller than 21.3 m (69.9 ft) on the front façade.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-clause-34-4-3-i-1",
+          "zone-wf-num-zone-wf-clause-34-4-3-i-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-3-i"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-wf-req-zone-wf-clause-34-4-3-ii",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "ii",
+        "requirement_text_raw": "A minimum 10m (32.8 ft) interior Yard Setbacks; and",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-clause-34-4-3-ii-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-3-ii"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-wf-req-zone-wf-clause-34-4-3-iii",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "a_maximum_25_0m_82_ft_building_width_addressing_the_street",
+        "requirement_label_raw": "iii",
+        "requirement_text_raw": "A maximum 25.0m (82 ft) Building width addressing the Street.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-clause-34-4-3-iii-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-3-iii"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-wf-req-zone-wf-clause-34-4-5",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "34.4.5",
+        "requirement_text_raw": "Map D: Maximum Height 34.4.6 16.5 m (54.1 ft) 24.5 m (80.4 ft)",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-clause-34-4-5-1",
+          "zone-wf-num-zone-wf-clause-34-4-5-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-wf-req-zone-wf-clause-34-5-2",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "any_existing_residential_use_presently_below_the_required_elevation_may_expand_p",
+        "requirement_label_raw": "34.5.2",
+        "requirement_text_raw": "Any existing residential use presently below the required elevation may expand, provided the expansion area satisfies the minimum finished floor elevation (FFE) requirements. 24.5m (80.4 ft) 32.5m (106.6 ft)",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-clause-34-5-2-1",
+          "zone-wf-num-zone-wf-clause-34-5-2-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-5-2"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-wf-regulation-group-zone",
+        "group_label_raw": "34",
+        "group_title_raw": "WATERFRONT ZONE (WF)",
+        "regulated_use_terms": [
+          "zone-wf-term-term-all_uses_as_permitted_in_the_downtown_core_dc_zone",
+          "zone-wf-term-term-limited_car_rental_operation",
+          "zone-wf-term-term-marina"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "WF"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-wf-req-zone-wf-table-regulations-for-permitted-uses-row-1-interior-corner-lots",
+          "zone-wf-req-zone-wf-table-regulations-for-permitted-uses-row-2-interior-corner-lots",
+          "zone-wf-req-zone-wf-table-regulations-for-permitted-uses-row-3-interior-corner-lots",
+          "zone-wf-req-zone-wf-table-regulations-for-permitted-uses-row-4-interior-corner-lots",
+          "zone-wf-req-zone-wf-table-regulations-for-permitted-uses-row-5-interior-corner-lots",
+          "zone-wf-req-zone-wf-table-regulations-for-permitted-uses-row-6-interior-corner-lots",
+          "zone-wf-req-zone-wf-table-regulations-for-permitted-uses-row-7-interior-corner-lots",
+          "zone-wf-req-zone-wf-table-regulations-for-permitted-uses-row-8-interior-corner-lots",
+          "zone-wf-req-zone-wf-clause-34-4-1-i",
+          "zone-wf-req-zone-wf-clause-34-4-1-ii",
+          "zone-wf-req-zone-wf-clause-34-4-2-i",
+          "zone-wf-req-zone-wf-clause-34-4-2-ii",
+          "zone-wf-req-zone-wf-clause-34-4-3-i",
+          "zone-wf-req-zone-wf-clause-34-4-3-ii",
+          "zone-wf-req-zone-wf-clause-34-4-3-iii",
+          "zone-wf-req-zone-wf-clause-34-4-5",
+          "zone-wf-req-zone-wf-clause-34-5-2"
+        ],
+        "source_section_ref": "zone-wf-section-34-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-wf-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "WF",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-wf-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [
+      {
+        "requirement_id": "zone-wf-req-zone-wf-clause-34-4-2",
+        "requirement_type": "other",
+        "requirement_category": "massing_for_buildings_up_to_21_3_m_69_9_ft",
+        "requirement_label_raw": "34.4.2",
+        "requirement_text_raw": "Massing for buildings up to 21.3 m (69.9 ft):",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-clause-34-4-2-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-2"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "requirement_id": "zone-wf-req-zone-wf-clause-34-4-3",
+        "requirement_type": "other",
+        "requirement_category": "massing_for_buildings_greater_than_21_3_m_69_9_ft",
+        "requirement_label_raw": "34.4.3",
+        "requirement_text_raw": "Massing for Buildings greater than 21.3 m (69.9 ft):",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-clause-34-4-3-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-3"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "requirement_id": "zone-wf-req-zone-wf-clause-34-4-3-b",
+        "requirement_type": "other",
+        "requirement_category": "the_portion_of_the_building_above_21_3_m_69_9_ft_shall_have",
+        "requirement_label_raw": "b",
+        "requirement_text_raw": "The portion of the Building above 21.3 m (69.9 ft) shall have:",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-wf-num-zone-wf-clause-34-4-3-b-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-wf-clause-34-4-3-b"
+          }
+        ],
+        "confidence": "needs_review"
+      }
+    ],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-wf-flag-unmatched-term-all-uses-as-permitted-in-the-downtown-core-dc-zone",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: All uses as permitted in the Downtown Core (DC) Zone",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-wf-clause-34-1-1"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-wf-flag-unmatched-term-limited-car-rental-operation",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Limited Car Rental Operation",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-wf-clause-34-1-2"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-wf-flag-unmatched-term-marina",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Marina",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-wf-clause-34-1-3"
+        }
+      ]
+    }
+  ]
 }

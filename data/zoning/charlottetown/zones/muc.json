@@ -1,535 +1,1781 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+    "document_type": "zone",
     "zone_code": "MUC",
     "zone_name": "MIXED-USE CORRIDOR ZONE",
-    "part_label_raw": "24",
-    "chapter_heading_raw": "24 MIXED-USE CORRIDOR ZONE (MUC)"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": []
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "24.1.1",
-      "use_type": "inherited_principal_use",
-      "use_name": "Uses permitted in the R-4 Zone, subject to the Regulations for Permitted Uses for the R-4 Zone",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 86,
-        "pdf_page_end": 86,
-        "bylaw_page_start": 86,
-        "bylaw_page_end": 86
-      },
-      "clause_path": [
-        "24.1.1"
-      ]
-    },
-    {
-      "clause_label_raw": "24.1.2",
-      "use_type": "inherited_principal_use",
-      "use_name": "Uses permitted in the Institutional (I) Zone, subject to the Regulations for permitted uses for the I Zone",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 86,
-        "pdf_page_end": 86,
-        "bylaw_page_start": 86,
-        "bylaw_page_end": 86
-      },
-      "clause_path": [
-        "24.1.2"
-      ]
-    },
-    {
-      "clause_label_raw": "24.1.3",
-      "use_type": "inherited_principal_use",
-      "use_name": "Commercial Uses permitted in the ER-Mixed Use Village Centre Zone (ER-MUVC)",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 86,
-        "pdf_page_end": 86,
-        "bylaw_page_start": 86,
-        "bylaw_page_end": 86
-      },
-      "clause_path": [
-        "24.1.3"
-      ]
-    },
-    {
-      "clause_label_raw": "24.1.4",
-      "use_type": "principal_use",
-      "use_name": "Automobile Sales and Services",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 86,
-        "pdf_page_end": 86,
-        "bylaw_page_start": 86,
-        "bylaw_page_end": 86
-      },
-      "clause_path": [
-        "24.1.4"
-      ]
-    },
-    {
-      "clause_label_raw": "24.1.5",
-      "use_type": "principal_use",
-      "use_name": "Cannabis Retail Store",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 86,
-        "pdf_page_end": 86,
-        "bylaw_page_start": 86,
-        "bylaw_page_end": 86
-      },
-      "clause_path": [
-        "24.1.5"
-      ]
-    },
-    {
-      "clause_label_raw": "24.1.6",
-      "use_type": "principal_use",
-      "use_name": "Equipment Sales, Rental Service",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 86,
-        "pdf_page_end": 86,
-        "bylaw_page_start": 86,
-        "bylaw_page_end": 86
-      },
-      "clause_path": [
-        "24.1.6"
-      ]
-    },
-    {
-      "clause_label_raw": "24.1.7",
-      "use_type": "principal_use",
-      "use_name": "Greenhouse (nursery retail)",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 86,
-        "pdf_page_end": 86,
-        "bylaw_page_start": 86,
-        "bylaw_page_end": 86
-      },
-      "clause_path": [
-        "24.1.7"
-      ]
-    },
-    {
-      "clause_label_raw": "24.1.8",
-      "use_type": "principal_use",
-      "use_name": "Outdoor Retail Display",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 86,
-        "pdf_page_end": 86,
-        "bylaw_page_start": 86,
-        "bylaw_page_end": 86
-      },
-      "clause_path": [
-        "24.1.8"
-      ]
-    },
-    {
-      "clause_label_raw": "24.1.9",
-      "use_type": "institutional_or_open_space_use",
-      "use_name": "Parking Lot",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 86,
-        "pdf_page_end": 86,
-        "bylaw_page_start": 86,
-        "bylaw_page_end": 86
-      },
-      "clause_path": [
-        "24.1.9"
-      ]
-    },
-    {
-      "clause_label_raw": "24.1.10",
-      "use_type": "principal_use",
-      "use_name": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 86,
-        "pdf_page_end": 86,
-        "bylaw_page_start": 86,
-        "bylaw_page_end": 86
-      },
-      "clause_path": [
-        "24.1.10"
-      ]
-    },
-    {
-      "clause_label_raw": "24.1.11",
-      "use_type": "principal_use",
-      "use_name": "Retail Warehouse",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 86,
-        "pdf_page_end": 86,
-        "bylaw_page_start": 86,
-        "bylaw_page_end": 86
-      },
-      "clause_path": [
-        "24.1.11"
-      ]
-    },
-    {
-      "clause_label_raw": "24.1.12",
-      "use_type": "principal_use",
-      "use_name": "Service Repair Establishment",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 86,
-        "pdf_page_end": 86,
-        "bylaw_page_start": 86,
-        "bylaw_page_end": 86
-      },
-      "clause_path": [
-        "24.1.12"
-      ]
-    },
-    {
-      "clause_label_raw": "24.1.13",
-      "use_type": "principal_use",
-      "use_name": "Storage Facility",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 86,
-        "pdf_page_end": 86,
-        "bylaw_page_start": 86,
-        "bylaw_page_end": 86
-      },
-      "clause_path": [
-        "24.1.13"
-      ]
-    },
-    {
-      "clause_label_raw": "24.1.14",
-      "use_type": "principal_use",
-      "use_name": "Transport Terminal",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 86,
-        "pdf_page_end": 86,
-        "bylaw_page_start": 86,
-        "bylaw_page_end": 86
-      },
-      "clause_path": [
-        "24.1.14"
-      ]
-    },
-    {
-      "clause_label_raw": "24.1.15",
-      "use_type": "principal_use",
-      "use_name": "Warehouse and/or Distribution Centre",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 86,
-        "pdf_page_end": 86,
-        "bylaw_page_start": 86,
-        "bylaw_page_end": 86
-      },
-      "clause_path": [
-        "24.1.15"
-      ]
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "24.1",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 86,
-        "pdf_page_end": 86,
-        "bylaw_page_start": 86,
-        "bylaw_page_end": 86
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "24.1.1",
-          "clause_path": [
-            "24.1.1"
-          ],
-          "text": "Uses permitted in the R-4 Zone, subject to the Regulations for Permitted Uses for the R-4 Zone;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 86,
-            "pdf_page_end": 86,
-            "bylaw_page_start": 86,
-            "bylaw_page_end": 86
-          }
-        },
-        {
-          "provision_label_raw": "24.1.2",
-          "clause_path": [
-            "24.1.2"
-          ],
-          "text": "Uses permitted in the Institutional (I) Zone, subject to the Regulations for permitted uses for the I Zone;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 86,
-            "pdf_page_end": 86,
-            "bylaw_page_start": 86,
-            "bylaw_page_end": 86
-          }
-        },
-        {
-          "provision_label_raw": "24.1.3",
-          "clause_path": [
-            "24.1.3"
-          ],
-          "text": "Commercial Uses permitted in the ER-Mixed Use Village Centre Zone (ER-MUVC);",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 86,
-            "pdf_page_end": 86,
-            "bylaw_page_start": 86,
-            "bylaw_page_end": 86
-          }
-        },
-        {
-          "provision_label_raw": "24.1.4",
-          "clause_path": [
-            "24.1.4"
-          ],
-          "text": "Automobile Sales and Services;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 86,
-            "pdf_page_end": 86,
-            "bylaw_page_start": 86,
-            "bylaw_page_end": 86
-          }
-        },
-        {
-          "provision_label_raw": "24.1.5",
-          "clause_path": [
-            "24.1.5"
-          ],
-          "text": "Cannabis Retail Store;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 86,
-            "pdf_page_end": 86,
-            "bylaw_page_start": 86,
-            "bylaw_page_end": 86
-          }
-        },
-        {
-          "provision_label_raw": "24.1.6",
-          "clause_path": [
-            "24.1.6"
-          ],
-          "text": "Equipment Sales, Rental Service;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 86,
-            "pdf_page_end": 86,
-            "bylaw_page_start": 86,
-            "bylaw_page_end": 86
-          }
-        },
-        {
-          "provision_label_raw": "24.1.7",
-          "clause_path": [
-            "24.1.7"
-          ],
-          "text": "Greenhouse (nursery retail);",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 86,
-            "pdf_page_end": 86,
-            "bylaw_page_start": 86,
-            "bylaw_page_end": 86
-          }
-        },
-        {
-          "provision_label_raw": "24.1.8",
-          "clause_path": [
-            "24.1.8"
-          ],
-          "text": "Outdoor Retail Display;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 86,
-            "pdf_page_end": 86,
-            "bylaw_page_start": 86,
-            "bylaw_page_end": 86
-          }
-        },
-        {
-          "provision_label_raw": "24.1.9",
-          "clause_path": [
-            "24.1.9"
-          ],
-          "text": "Parking Lot;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 86,
-            "pdf_page_end": 86,
-            "bylaw_page_start": 86,
-            "bylaw_page_end": 86
-          }
-        },
-        {
-          "provision_label_raw": "24.1.10",
-          "clause_path": [
-            "24.1.10"
-          ],
-          "text": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 86,
-            "pdf_page_end": 86,
-            "bylaw_page_start": 86,
-            "bylaw_page_end": 86
-          }
-        },
-        {
-          "provision_label_raw": "24.1.11",
-          "clause_path": [
-            "24.1.11"
-          ],
-          "text": "Retail Warehouse;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 86,
-            "pdf_page_end": 86,
-            "bylaw_page_start": 86,
-            "bylaw_page_end": 86
-          }
-        },
-        {
-          "provision_label_raw": "24.1.12",
-          "clause_path": [
-            "24.1.12"
-          ],
-          "text": "Service Repair Establishment;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 86,
-            "pdf_page_end": 86,
-            "bylaw_page_start": 86,
-            "bylaw_page_end": 86
-          }
-        },
-        {
-          "provision_label_raw": "24.1.13",
-          "clause_path": [
-            "24.1.13"
-          ],
-          "text": "Storage Facility;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 86,
-            "pdf_page_end": 86,
-            "bylaw_page_start": 86,
-            "bylaw_page_end": 86
-          }
-        },
-        {
-          "provision_label_raw": "24.1.14",
-          "clause_path": [
-            "24.1.14"
-          ],
-          "text": "Transport Terminal; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 86,
-            "pdf_page_end": 86,
-            "bylaw_page_start": 86,
-            "bylaw_page_end": 86
-          }
-        },
-        {
-          "provision_label_raw": "24.1.15",
-          "clause_path": [
-            "24.1.15"
-          ],
-          "text": "Warehouse and/or Distribution Centre",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 86,
-            "pdf_page_end": 86,
-            "bylaw_page_start": 86,
-            "bylaw_page_end": 86
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": null,
-      "title_label_raw": "REGULATIONS FOR COMMERCIAL USES",
-      "citations": {
-        "pdf_page_start": 86,
-        "pdf_page_end": 86,
-        "bylaw_page_start": 86,
-        "bylaw_page_end": 86
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "1",
-          "text": "Lot Area (Minimum) 600 sq. m (6,458.4 sq ft) 700 sq. m (7,535 sq ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 86,
-            "pdf_page_end": 86,
-            "bylaw_page_start": 86,
-            "bylaw_page_end": 86
-          }
-        }
-      ],
-      "table_column_headings_raw": [
-        "Interior Lot Corner Lot"
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": "R-4 Zone",
-      "chapter_slug": "r-4",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 86,
-        "pdf_page_end": 86,
-        "bylaw_page_start": 86,
-        "bylaw_page_end": 86
-      },
-      "source_text": "Uses permitted in the R-4 Zone, subject to the Regulations for Permitted Uses for the R-4 Zone"
-    }
-  ],
-  "content_blocks": [],
-  "open_issues": [
-    {
-      "issue_type": "table_parsing_review",
-      "description": "Section 'REGULATIONS FOR COMMERCIAL USES' contains table-derived provisions extracted from PDF text; verify column alignment against the source PDF before normalization."
-    },
-    {
-      "issue_type": "source_revision_review",
-      "description": "Source PDF cover identifies rev 049 updated March 9, 2026, but this zone page header may display rev 048 updated October 24, 2025; verify source revision during QA."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "24",
+    "zone_title_raw": "MIXED-USE CORRIDOR ZONE (MUC)",
+    "citations": {
       "pdf_page_start": 86,
       "pdf_page_end": 86,
       "bylaw_page_start": 86,
       "bylaw_page_end": 86
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-muc",
+        "source_unit_type": "zone",
+        "label_raw": "24",
+        "title_raw": "MIXED-USE CORRIDOR ZONE (MUC)",
+        "text_raw": "Uses permitted in the R-4 Zone, subject to the Regulations for Permitted Uses for the R-4 Zone;\nUses permitted in the Institutional (I) Zone, subject to the Regulations for permitted uses for the I Zone;\nCommercial Uses permitted in the ER-Mixed Use Village Centre Zone (ER-MUVC);\nAutomobile Sales and Services;\nCannabis Retail Store;\nEquipment Sales, Rental Service;\nGreenhouse (nursery retail);\nOutdoor Retail Display;\nParking Lot;\nRetail Store with connected Retail Warehouse, Light Manufacturing or assembly facility;\nRetail Warehouse;\nService Repair Establishment;\nStorage Facility;\nTransport Terminal; and\nWarehouse and/or Distribution Centre",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 86,
+          "pdf_page_end": 86,
+          "bylaw_page_start": 86,
+          "bylaw_page_end": 86
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-muc-section-24-1",
+        "section_label_raw": "24.1",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-muc-clause-24-1-1",
+            "clause_label_raw": "24.1.1",
+            "clause_text_raw": "Uses permitted in the R-4 Zone, subject to the Regulations for Permitted Uses for the R-4 Zone;",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 86,
+              "pdf_page_end": 86,
+              "bylaw_page_start": 86,
+              "bylaw_page_end": 86
+            }
+          },
+          {
+            "clause_id": "zone-muc-clause-24-1-2",
+            "clause_label_raw": "24.1.2",
+            "clause_text_raw": "Uses permitted in the Institutional (I) Zone, subject to the Regulations for permitted uses for the I Zone;",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 86,
+              "pdf_page_end": 86,
+              "bylaw_page_start": 86,
+              "bylaw_page_end": 86
+            }
+          },
+          {
+            "clause_id": "zone-muc-clause-24-1-3",
+            "clause_label_raw": "24.1.3",
+            "clause_text_raw": "Commercial Uses permitted in the ER-Mixed Use Village Centre Zone (ER-MUVC);",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 86,
+              "pdf_page_end": 86,
+              "bylaw_page_start": 86,
+              "bylaw_page_end": 86
+            }
+          },
+          {
+            "clause_id": "zone-muc-clause-24-1-4",
+            "clause_label_raw": "24.1.4",
+            "clause_text_raw": "Automobile Sales and Services;",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 86,
+              "pdf_page_end": 86,
+              "bylaw_page_start": 86,
+              "bylaw_page_end": 86
+            }
+          },
+          {
+            "clause_id": "zone-muc-clause-24-1-5",
+            "clause_label_raw": "24.1.5",
+            "clause_text_raw": "Cannabis Retail Store;",
+            "parent_clause_id": null,
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 86,
+              "pdf_page_end": 86,
+              "bylaw_page_start": 86,
+              "bylaw_page_end": 86
+            }
+          },
+          {
+            "clause_id": "zone-muc-clause-24-1-6",
+            "clause_label_raw": "24.1.6",
+            "clause_text_raw": "Equipment Sales, Rental Service;",
+            "parent_clause_id": null,
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 86,
+              "pdf_page_end": 86,
+              "bylaw_page_start": 86,
+              "bylaw_page_end": 86
+            }
+          },
+          {
+            "clause_id": "zone-muc-clause-24-1-7",
+            "clause_label_raw": "24.1.7",
+            "clause_text_raw": "Greenhouse (nursery retail);",
+            "parent_clause_id": null,
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 86,
+              "pdf_page_end": 86,
+              "bylaw_page_start": 86,
+              "bylaw_page_end": 86
+            }
+          },
+          {
+            "clause_id": "zone-muc-clause-24-1-8",
+            "clause_label_raw": "24.1.8",
+            "clause_text_raw": "Outdoor Retail Display;",
+            "parent_clause_id": null,
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 86,
+              "pdf_page_end": 86,
+              "bylaw_page_start": 86,
+              "bylaw_page_end": 86
+            }
+          },
+          {
+            "clause_id": "zone-muc-clause-24-1-9",
+            "clause_label_raw": "24.1.9",
+            "clause_text_raw": "Parking Lot;",
+            "parent_clause_id": null,
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 86,
+              "pdf_page_end": 86,
+              "bylaw_page_start": 86,
+              "bylaw_page_end": 86
+            }
+          },
+          {
+            "clause_id": "zone-muc-clause-24-1-10",
+            "clause_label_raw": "24.1.10",
+            "clause_text_raw": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility;",
+            "parent_clause_id": null,
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 86,
+              "pdf_page_end": 86,
+              "bylaw_page_start": 86,
+              "bylaw_page_end": 86
+            }
+          },
+          {
+            "clause_id": "zone-muc-clause-24-1-11",
+            "clause_label_raw": "24.1.11",
+            "clause_text_raw": "Retail Warehouse;",
+            "parent_clause_id": null,
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 86,
+              "pdf_page_end": 86,
+              "bylaw_page_start": 86,
+              "bylaw_page_end": 86
+            }
+          },
+          {
+            "clause_id": "zone-muc-clause-24-1-12",
+            "clause_label_raw": "24.1.12",
+            "clause_text_raw": "Service Repair Establishment;",
+            "parent_clause_id": null,
+            "source_order": 12,
+            "citations": {
+              "pdf_page_start": 86,
+              "pdf_page_end": 86,
+              "bylaw_page_start": 86,
+              "bylaw_page_end": 86
+            }
+          },
+          {
+            "clause_id": "zone-muc-clause-24-1-13",
+            "clause_label_raw": "24.1.13",
+            "clause_text_raw": "Storage Facility;",
+            "parent_clause_id": null,
+            "source_order": 13,
+            "citations": {
+              "pdf_page_start": 86,
+              "pdf_page_end": 86,
+              "bylaw_page_start": 86,
+              "bylaw_page_end": 86
+            }
+          },
+          {
+            "clause_id": "zone-muc-clause-24-1-14",
+            "clause_label_raw": "24.1.14",
+            "clause_text_raw": "Transport Terminal; and",
+            "parent_clause_id": null,
+            "source_order": 14,
+            "citations": {
+              "pdf_page_start": 86,
+              "pdf_page_end": 86,
+              "bylaw_page_start": 86,
+              "bylaw_page_end": 86
+            }
+          },
+          {
+            "clause_id": "zone-muc-clause-24-1-15",
+            "clause_label_raw": "24.1.15",
+            "clause_text_raw": "Warehouse and/or Distribution Centre",
+            "parent_clause_id": null,
+            "source_order": 15,
+            "citations": {
+              "pdf_page_start": 86,
+              "pdf_page_end": 86,
+              "bylaw_page_start": 86,
+              "bylaw_page_end": 86
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 86,
+          "pdf_page_end": 86,
+          "bylaw_page_start": 86,
+          "bylaw_page_end": 86
+        }
+      },
+      {
+        "section_id": "zone-muc-section-2",
+        "section_label_raw": "",
+        "section_title_raw": "REGULATIONS FOR COMMERCIAL USES",
+        "source_order": 2,
+        "clauses_raw": [],
+        "tables_raw": [
+          {
+            "table_id": "zone-muc-table-regulations-for-commercial-uses",
+            "table_title_raw": "REGULATIONS FOR COMMERCIAL USES",
+            "source_order": 1,
+            "columns_raw": [
+              {
+                "column_id": "row_number",
+                "column_label_raw": "",
+                "source_order": 1
+              },
+              {
+                "column_id": "requirement",
+                "column_label_raw": "",
+                "source_order": 2
+              },
+              {
+                "column_id": "interior_lot",
+                "column_label_raw": "Interior Lot",
+                "source_order": 3
+              },
+              {
+                "column_id": "corner_lot",
+                "column_label_raw": "Corner Lot",
+                "source_order": 4
+              }
+            ],
+            "rows_raw": [
+              {
+                "row_id": "zone-muc-table-regulations-for-commercial-uses-row-1",
+                "source_order": 1,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-1-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "1"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-1-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Area (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-1-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "600 sq. m (6,458.4 sq ft)"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-1-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "700 sq. m (7,535 sq ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-muc-table-regulations-for-commercial-uses-row-2",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-2-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "2"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-2-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-2-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "20 m (65.6 ft)"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-2-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "20 m (65.6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-muc-table-regulations-for-commercial-uses-row-3",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-3-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "3"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-3-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Front Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-3-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "8 m (26.2 ft)"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-3-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "8 m (26.2 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-muc-table-regulations-for-commercial-uses-row-4",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-4-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "4"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-4-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Rear Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-4-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-4-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-muc-table-regulations-for-commercial-uses-row-5",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-5-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "5"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-5-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Side Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-5-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "3.0 m (9.8 ft)"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-5-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "3.0 m (9.8 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-muc-table-regulations-for-commercial-uses-row-6",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-6-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "6"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-6-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Flankage Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-6-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-6-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-muc-table-regulations-for-commercial-uses-row-7",
+                "source_order": 7,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-7-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "7"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-7-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Height (Maximum)"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-7-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "12.0 m (39.4 ft)"
+                  },
+                  {
+                    "cell_id": "zone-muc-table-regulations-for-commercial-uses-row-7-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "12.0 m (39.4 ft)"
+                  }
+                ]
+              }
+            ],
+            "citations": {
+              "pdf_page_start": 86,
+              "pdf_page_end": 86,
+              "bylaw_page_start": 86,
+              "bylaw_page_end": 86
+            }
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 86,
+          "pdf_page_end": 86,
+          "bylaw_page_start": 86,
+          "bylaw_page_end": 86
+        }
+      }
+    ],
+    "tables_raw": [
+      {
+        "table_id": "zone-muc-table-regulations-for-commercial-uses",
+        "section_id": "zone-muc-section-2"
+      }
+    ],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-muc-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 86,
+          "pdf_page_end": 86,
+          "bylaw_page_start": 86,
+          "bylaw_page_end": 86
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-muc-clause-24-1-1",
+        "section_id": "zone-muc-section-24-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-muc-clause-24-1-2",
+        "section_id": "zone-muc-section-24-1",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-muc-clause-24-1-3",
+        "section_id": "zone-muc-section-24-1",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-muc-clause-24-1-4",
+        "section_id": "zone-muc-section-24-1",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-muc-clause-24-1-5",
+        "section_id": "zone-muc-section-24-1",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-muc-clause-24-1-6",
+        "section_id": "zone-muc-section-24-1",
+        "source_order": 6
+      },
+      {
+        "clause_id": "zone-muc-clause-24-1-7",
+        "section_id": "zone-muc-section-24-1",
+        "source_order": 7
+      },
+      {
+        "clause_id": "zone-muc-clause-24-1-8",
+        "section_id": "zone-muc-section-24-1",
+        "source_order": 8
+      },
+      {
+        "clause_id": "zone-muc-clause-24-1-9",
+        "section_id": "zone-muc-section-24-1",
+        "source_order": 9
+      },
+      {
+        "clause_id": "zone-muc-clause-24-1-10",
+        "section_id": "zone-muc-section-24-1",
+        "source_order": 10
+      },
+      {
+        "clause_id": "zone-muc-clause-24-1-11",
+        "section_id": "zone-muc-section-24-1",
+        "source_order": 11
+      },
+      {
+        "clause_id": "zone-muc-clause-24-1-12",
+        "section_id": "zone-muc-section-24-1",
+        "source_order": 12
+      },
+      {
+        "clause_id": "zone-muc-clause-24-1-13",
+        "section_id": "zone-muc-section-24-1",
+        "source_order": 13
+      },
+      {
+        "clause_id": "zone-muc-clause-24-1-14",
+        "section_id": "zone-muc-section-24-1",
+        "source_order": 14
+      },
+      {
+        "clause_id": "zone-muc-clause-24-1-15",
+        "section_id": "zone-muc-section-24-1",
+        "source_order": 15
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-muc-term-term-uses_permitted_in_the_r_4_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_4_zone",
+        "term_raw": "Uses permitted in the R-4 Zone, subject to the Regulations for Permitted Uses for the R-4 Zone",
+        "term_normalized": "uses_permitted_in_the_r_4_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_4_zone",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-1"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-muc-term-term-uses_permitted_in_the_institutional_i_zone_subject_to_the_regulations_for_permitted_uses_for_the_i_zone",
+        "term_raw": "Uses permitted in the Institutional (I) Zone, subject to the Regulations for permitted uses for the I Zone",
+        "term_normalized": "uses_permitted_in_the_institutional_i_zone_subject_to_the_regulations_for_permitted_uses_for_the_i_zone",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-2"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-muc-term-term-commercial_uses_permitted_in_the_er_mixed_use_village_centre_zone_er_muvc",
+        "term_raw": "Commercial Uses permitted in the ER-Mixed Use Village Centre Zone (ER-MUVC)",
+        "term_normalized": "commercial_uses_permitted_in_the_er_mixed_use_village_centre_zone_er_muvc",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-3"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-muc-term-term-automobile_sales_and_services",
+        "term_raw": "Automobile Sales and Services",
+        "term_normalized": "automobile_sales_and_services",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-4"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-muc-term-term-cannabis_retail_store",
+        "term_raw": "Cannabis Retail Store",
+        "term_normalized": "cannabis_retail_store",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-5"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-muc-term-term-equipment_sales_rental_service",
+        "term_raw": "Equipment Sales, Rental Service",
+        "term_normalized": "equipment_sales_rental_service",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-6"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-muc-term-term-greenhouse_nursery_retail",
+        "term_raw": "Greenhouse (nursery retail)",
+        "term_normalized": "greenhouse_nursery_retail",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-7"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-muc-term-term-outdoor_retail_display",
+        "term_raw": "Outdoor Retail Display",
+        "term_normalized": "outdoor_retail_display",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-8"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-muc-term-term-parking_lot",
+        "term_raw": "Parking Lot",
+        "term_normalized": "parking_lot",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-9"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-muc-term-term-retail_store_with_connected_retail_warehouse_light_manufacturing_or_assembly_facility",
+        "term_raw": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility",
+        "term_normalized": "retail_store_with_connected_retail_warehouse_light_manufacturing_or_assembly_facility",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-10"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-muc-term-term-retail_warehouse",
+        "term_raw": "Retail Warehouse",
+        "term_normalized": "retail_warehouse",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-11"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-muc-term-term-service_repair_establishment",
+        "term_raw": "Service Repair Establishment",
+        "term_normalized": "service_repair_establishment",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-12"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-muc-term-term-storage_facility",
+        "term_raw": "Storage Facility",
+        "term_normalized": "storage_facility",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-13"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-muc-term-term-transport_terminal",
+        "term_raw": "Transport Terminal",
+        "term_normalized": "transport_terminal",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-14"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-muc-term-term-warehouse_and_or_distribution_centre",
+        "term_raw": "Warehouse and/or Distribution Centre",
+        "term_normalized": "warehouse_and_or_distribution_centre",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-muc-clause-24-1-15"
+          }
+        ],
+        "confidence": "needs_review"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-muc-use-uses-permitted-in-the-r-4-zone-subject-to-the-regulations-for-permitted-uses-for-the-r-4-zone-1",
+        "use_name_raw": "Uses permitted in the R-4 Zone, subject to the Regulations for Permitted Uses for the R-4 Zone",
+        "use_term_id": "zone-muc-term-term-uses_permitted_in_the_r_4_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_4_zone",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-muc-clause-24-1-1",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-muc-use-uses-permitted-in-the-institutional-i-zone-subject-to-the-regulations-for-permitted-uses-for-the-i-zone-2",
+        "use_name_raw": "Uses permitted in the Institutional (I) Zone, subject to the Regulations for permitted uses for the I Zone",
+        "use_term_id": "zone-muc-term-term-uses_permitted_in_the_institutional_i_zone_subject_to_the_regulations_for_permitted_uses_for_the_i_zone",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-muc-clause-24-1-2",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-muc-use-commercial-uses-permitted-in-the-er-mixed-use-village-centre-zone-er-muvc-3",
+        "use_name_raw": "Commercial Uses permitted in the ER-Mixed Use Village Centre Zone (ER-MUVC)",
+        "use_term_id": "zone-muc-term-term-commercial_uses_permitted_in_the_er_mixed_use_village_centre_zone_er_muvc",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-muc-clause-24-1-3",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-muc-use-automobile-sales-and-services-4",
+        "use_name_raw": "Automobile Sales and Services",
+        "use_term_id": "zone-muc-term-term-automobile_sales_and_services",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-muc-clause-24-1-4",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-muc-use-cannabis-retail-store-5",
+        "use_name_raw": "Cannabis Retail Store",
+        "use_term_id": "zone-muc-term-term-cannabis_retail_store",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-muc-clause-24-1-5",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-muc-use-equipment-sales-rental-service-6",
+        "use_name_raw": "Equipment Sales, Rental Service",
+        "use_term_id": "zone-muc-term-term-equipment_sales_rental_service",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-muc-clause-24-1-6",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-muc-use-greenhouse-nursery-retail-7",
+        "use_name_raw": "Greenhouse (nursery retail)",
+        "use_term_id": "zone-muc-term-term-greenhouse_nursery_retail",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-muc-clause-24-1-7",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-muc-use-outdoor-retail-display-8",
+        "use_name_raw": "Outdoor Retail Display",
+        "use_term_id": "zone-muc-term-term-outdoor_retail_display",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-muc-clause-24-1-8",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-muc-use-parking-lot-9",
+        "use_name_raw": "Parking Lot",
+        "use_term_id": "zone-muc-term-term-parking_lot",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-muc-clause-24-1-9",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-muc-use-retail-store-with-connected-retail-warehouse-light-manufacturing-or-assembly-facility-10",
+        "use_name_raw": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility",
+        "use_term_id": "zone-muc-term-term-retail_store_with_connected_retail_warehouse_light_manufacturing_or_assembly_facility",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-muc-clause-24-1-10",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-muc-use-retail-warehouse-11",
+        "use_name_raw": "Retail Warehouse",
+        "use_term_id": "zone-muc-term-term-retail_warehouse",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-muc-clause-24-1-11",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-muc-use-service-repair-establishment-12",
+        "use_name_raw": "Service Repair Establishment",
+        "use_term_id": "zone-muc-term-term-service_repair_establishment",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-muc-clause-24-1-12",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-muc-use-storage-facility-13",
+        "use_name_raw": "Storage Facility",
+        "use_term_id": "zone-muc-term-term-storage_facility",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-muc-clause-24-1-13",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-muc-use-transport-terminal-14",
+        "use_name_raw": "Transport Terminal",
+        "use_term_id": "zone-muc-term-term-transport_terminal",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-muc-clause-24-1-14",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-muc-use-warehouse-and-or-distribution-centre-15",
+        "use_name_raw": "Warehouse and/or Distribution Centre",
+        "use_term_id": "zone-muc-term-term-warehouse_and_or_distribution_centre",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-muc-clause-24-1-15",
+        "confidence": "needs_review"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-1-interior-lot-1",
+        "value_raw": "600 sq. m (6,458.4 sq ft)",
+        "value": 600,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "6,458.4 sq ft",
+            "value": 6458.4,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-1-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-1-corner-lot-1",
+        "value_raw": "700 sq. m (7,535 sq ft)",
+        "value": 700,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "7,535 sq ft",
+            "value": 7535,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-1-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-2-interior-lot-1",
+        "value_raw": "20 m (65.6 ft)",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "65.6 ft",
+            "value": 65.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-2-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-2-corner-lot-1",
+        "value_raw": "20 m (65.6 ft)",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "65.6 ft",
+            "value": 65.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-2-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-3-interior-lot-1",
+        "value_raw": "8 m (26.2 ft)",
+        "value": 8,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "26.2 ft",
+            "value": 26.2,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-3-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-3-corner-lot-1",
+        "value_raw": "8 m (26.2 ft)",
+        "value": 8,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "26.2 ft",
+            "value": 26.2,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-3-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-4-interior-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-4-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-4-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-4-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-5-interior-lot-1",
+        "value_raw": "3.0 m (9.8 ft)",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "9.8 ft",
+            "value": 9.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-5-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-5-corner-lot-1",
+        "value_raw": "3.0 m (9.8 ft)",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "9.8 ft",
+            "value": 9.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-5-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-6-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-6-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-7-interior-lot-1",
+        "value_raw": "12.0 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-7-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-7-corner-lot-1",
+        "value_raw": "12.0 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-7-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-1-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Interior Lot 600 sq. m (6,458.4 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-1-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-1-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Corner Lot 700 sq. m (7,535 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-1-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-2-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Interior Lot 20 m (65.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-2-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-2-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Corner Lot 20 m (65.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-2-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-3-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Interior Lot 8 m (26.2 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-3-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-3-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Corner Lot 8 m (26.2 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-3-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-4-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Interior Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-4-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-4-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-4-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-5-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Interior Lot 3.0 m (9.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-5-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-5-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Corner Lot 3.0 m (9.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-5-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-6-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "flankage_yard",
+        "requirement_label_raw": "Flankage Yard (Minimum)",
+        "requirement_text_raw": "Flankage Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-6-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-7-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Interior Lot 12.0 m (39.4 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-7-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-7-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Corner Lot 12.0 m (39.4 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-muc-num-zone-muc-table-regulations-for-commercial-uses-row-7-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-muc-table-regulations-for-commercial-uses-row-7"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-muc-regulation-group-zone",
+        "group_label_raw": "24",
+        "group_title_raw": "MIXED-USE CORRIDOR ZONE (MUC)",
+        "regulated_use_terms": [
+          "zone-muc-term-term-uses_permitted_in_the_r_4_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_4_zone",
+          "zone-muc-term-term-uses_permitted_in_the_institutional_i_zone_subject_to_the_regulations_for_permitted_uses_for_the_i_zone",
+          "zone-muc-term-term-commercial_uses_permitted_in_the_er_mixed_use_village_centre_zone_er_muvc",
+          "zone-muc-term-term-automobile_sales_and_services",
+          "zone-muc-term-term-cannabis_retail_store",
+          "zone-muc-term-term-equipment_sales_rental_service",
+          "zone-muc-term-term-greenhouse_nursery_retail",
+          "zone-muc-term-term-outdoor_retail_display",
+          "zone-muc-term-term-parking_lot",
+          "zone-muc-term-term-retail_store_with_connected_retail_warehouse_light_manufacturing_or_assembly_facility",
+          "zone-muc-term-term-retail_warehouse",
+          "zone-muc-term-term-service_repair_establishment",
+          "zone-muc-term-term-storage_facility",
+          "zone-muc-term-term-transport_terminal",
+          "zone-muc-term-term-warehouse_and_or_distribution_centre"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "MUC"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-1-interior-lot",
+          "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-1-corner-lot",
+          "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-2-interior-lot",
+          "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-2-corner-lot",
+          "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-3-interior-lot",
+          "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-3-corner-lot",
+          "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-4-interior-lot",
+          "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-4-corner-lot",
+          "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-5-interior-lot",
+          "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-5-corner-lot",
+          "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-6-corner-lot",
+          "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-7-interior-lot",
+          "zone-muc-req-zone-muc-table-regulations-for-commercial-uses-row-7-corner-lot"
+        ],
+        "source_section_ref": "zone-muc-section-24-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-muc-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "MUC",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-muc-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-muc-flag-unmatched-term-uses-permitted-in-the-r-4-zone-subject-to-the-regulations-for-permitted-uses-for-the-r-4-zone",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Uses permitted in the R-4 Zone, subject to the Regulations for Permitted Uses for the R-4 Zone",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-muc-clause-24-1-1"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-muc-flag-unmatched-term-uses-permitted-in-the-institutional-i-zone-subject-to-the-regulations-for-permitted-uses-for-the-i-zone",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Uses permitted in the Institutional (I) Zone, subject to the Regulations for permitted uses for the I Zone",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-muc-clause-24-1-2"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-muc-flag-unmatched-term-commercial-uses-permitted-in-the-er-mixed-use-village-centre-zone-er-muvc",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Commercial Uses permitted in the ER-Mixed Use Village Centre Zone (ER-MUVC)",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-muc-clause-24-1-3"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-muc-flag-unmatched-term-automobile-sales-and-services",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Automobile Sales and Services",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-muc-clause-24-1-4"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-muc-flag-unmatched-term-cannabis-retail-store",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Cannabis Retail Store",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-muc-clause-24-1-5"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-muc-flag-unmatched-term-equipment-sales-rental-service",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Equipment Sales, Rental Service",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-muc-clause-24-1-6"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-muc-flag-unmatched-term-greenhouse-nursery-retail",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Greenhouse (nursery retail)",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-muc-clause-24-1-7"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-muc-flag-unmatched-term-outdoor-retail-display",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Outdoor Retail Display",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-muc-clause-24-1-8"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-muc-flag-unmatched-term-parking-lot",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Parking Lot",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-muc-clause-24-1-9"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-muc-flag-unmatched-term-retail-store-with-connected-retail-warehouse-light-manufacturing-or-assembly-facility",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-muc-clause-24-1-10"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-muc-flag-unmatched-term-retail-warehouse",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Retail Warehouse",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-muc-clause-24-1-11"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-muc-flag-unmatched-term-service-repair-establishment",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Service Repair Establishment",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-muc-clause-24-1-12"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-muc-flag-unmatched-term-storage-facility",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Storage Facility",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-muc-clause-24-1-13"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-muc-flag-unmatched-term-transport-terminal",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Transport Terminal",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-muc-clause-24-1-14"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-muc-flag-unmatched-term-warehouse-and-or-distribution-centre",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Warehouse and/or Distribution Centre",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-muc-clause-24-1-15"
+        }
+      ]
+    }
+  ]
 }

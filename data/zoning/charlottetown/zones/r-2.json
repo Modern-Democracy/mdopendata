@@ -1,352 +1,2757 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+    "document_type": "zone",
     "zone_code": "R-2",
     "zone_name": "LOW DENSITY RESIDENTIAL ZONE",
-    "part_label_raw": "14",
-    "chapter_heading_raw": "14 LOW DENSITY RESIDENTIAL ZONE (R-2)"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": []
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "14.1.1",
-      "use_type": "inherited_principal_use",
-      "use_name": "Uses permitted in the R-1S Zone, subject to the Regulations for Permitted Uses for the R-1S Zone",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 67,
-        "pdf_page_end": 67,
-        "bylaw_page_start": 67,
-        "bylaw_page_end": 67
-      },
-      "clause_path": [
-        "14.1.1"
-      ]
-    },
-    {
-      "clause_label_raw": "14.1.2",
-      "use_type": "residential_use",
-      "use_name": "Semi-detached Dwelling",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 67,
-        "pdf_page_end": 67,
-        "bylaw_page_start": 67,
-        "bylaw_page_end": 67
-      },
-      "clause_path": [
-        "14.1.2"
-      ]
-    },
-    {
-      "clause_label_raw": "14.1.3",
-      "use_type": "residential_use",
-      "use_name": "Duplex Dwelling",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 67,
-        "pdf_page_end": 67,
-        "bylaw_page_start": 67,
-        "bylaw_page_end": 67
-      },
-      "clause_path": [
-        "14.1.3"
-      ]
-    },
-    {
-      "clause_label_raw": "a",
-      "use_type": "accessory_or_secondary_use",
-      "use_name": "Accessory Building",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 68,
-        "pdf_page_end": 68,
-        "bylaw_page_start": 68,
-        "bylaw_page_end": 68
-      },
-      "clause_path": [
-        "14.4.1",
-        "a"
-      ],
-      "conditions": "Notwithstanding the requirements, the following are permitted as accessory or secondary uses:"
-    },
-    {
-      "clause_label_raw": "b",
-      "use_type": "accessory_or_secondary_use",
-      "use_name": "Home Occupation",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 68,
-        "pdf_page_end": 68,
-        "bylaw_page_start": 68,
-        "bylaw_page_end": 68
-      },
-      "clause_path": [
-        "14.4.1",
-        "b"
-      ],
-      "conditions": "Notwithstanding the requirements, the following are permitted as accessory or secondary uses:"
-    },
-    {
-      "clause_label_raw": "c",
-      "use_type": "accessory_or_secondary_use",
-      "use_name": "Home Daycare",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 68,
-        "pdf_page_end": 68,
-        "bylaw_page_start": 68,
-        "bylaw_page_end": 68
-      },
-      "clause_path": [
-        "14.4.1",
-        "c"
-      ],
-      "conditions": "Notwithstanding the requirements, the following are permitted as accessory or secondary uses:"
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "14.1",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 67,
-        "pdf_page_end": 67,
-        "bylaw_page_start": 67,
-        "bylaw_page_end": 67
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "14.1.1",
-          "clause_path": [
-            "14.1.1"
-          ],
-          "text": "Uses permitted in the R-1S Zone, subject to the Regulations for Permitted Uses for the R-1S Zone;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 67,
-            "pdf_page_end": 67,
-            "bylaw_page_start": 67,
-            "bylaw_page_end": 67
-          }
-        },
-        {
-          "provision_label_raw": "14.1.2",
-          "clause_path": [
-            "14.1.2"
-          ],
-          "text": "Semi-detached Dwelling; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 67,
-            "pdf_page_end": 67,
-            "bylaw_page_start": 67,
-            "bylaw_page_end": 67
-          }
-        },
-        {
-          "provision_label_raw": "14.1.3",
-          "clause_path": [
-            "14.1.3"
-          ],
-          "text": "Duplex Dwelling",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 67,
-            "pdf_page_end": 67,
-            "bylaw_page_start": 67,
-            "bylaw_page_end": 67
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": null,
-      "title_label_raw": "REGULATIONS FOR SEMI-DETACHED DWELLINGS",
-      "citations": {
-        "pdf_page_start": 67,
-        "pdf_page_end": 67,
-        "bylaw_page_start": 67,
-        "bylaw_page_end": 67
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "1",
-          "text": "Lot Area (Minimum) 348 sq. m (3,745.7 sq ft) per unit 395 sq. m (4,251.7 sq ft) per unit",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 67,
-            "pdf_page_end": 67,
-            "bylaw_page_start": 67,
-            "bylaw_page_end": 67
-          }
-        },
-        {
-          "provision_label_raw": "2",
-          "text": "Lot Frontage (Minimum) 11.0 m (36.1 ft) per unit 12.2 m (40 ft) per unit Front yard access Rear lane access 6.0 m (19.7 ft) 4.2 m (13.8 ft) 6.0 m (19.7 ft) 4.2 m (13.8 ft) Front yard access Rear lane access 7.5 m (24.6 ft) 10.5 m (34.6 ft) 7.5 m (24.6 ft) 10.5 m (34.6 ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 67,
-            "pdf_page_end": 67,
-            "bylaw_page_start": 67,
-            "bylaw_page_end": 67
-          }
-        }
-      ],
-      "table_column_headings_raw": [
-        "Interior Lot Corner Lot"
-      ]
-    },
-    {
-      "order_index": 3,
-      "section_label_raw": null,
-      "title_label_raw": "REGULATIONS FOR DUPLEX DWELLINGS",
-      "citations": {
-        "pdf_page_start": 67,
-        "pdf_page_end": 67,
-        "bylaw_page_start": 67,
-        "bylaw_page_end": 67
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "1",
-          "text": "Lot Area (Minimum) 650 sq. m (6,996.5 sq ft) 740 sq. m (7,965.3 sq ft) Front yard access Rear lane access 6.0 m (19.7 ft) 4.2 m (13.8 ft) 6.0 m (19.7 ft) 4.2 m (13.8 ft) Front yard access Rear lane access 6.0 m (19.7 ft) 9.0 m (29.5 ft) 6.0 m (19.7 ft) 9.0 m (29.5 ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 67,
-            "pdf_page_end": 67,
-            "bylaw_page_start": 67,
-            "bylaw_page_end": 67
-          }
-        }
-      ],
-      "table_column_headings_raw": [
-        "Interior Lot Corner Lot"
-      ]
-    },
-    {
-      "order_index": 4,
-      "section_label_raw": "14.4",
-      "title_label_raw": "ACCESSORY AND SECONDARY USES",
-      "citations": {
-        "pdf_page_start": 68,
-        "pdf_page_end": 68,
-        "bylaw_page_start": 68,
-        "bylaw_page_end": 68
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "14.4.1",
-          "clause_path": [
-            "14.4.1"
-          ],
-          "text": "Notwithstanding the requirements, the following are permitted as accessory or secondary uses:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 68,
-            "pdf_page_end": 68,
-            "bylaw_page_start": 68,
-            "bylaw_page_end": 68
-          }
-        },
-        {
-          "provision_label_raw": "a",
-          "clause_path": [
-            "14.4.1",
-            "a"
-          ],
-          "text": "Accessory Building;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 68,
-            "pdf_page_end": 68,
-            "bylaw_page_start": 68,
-            "bylaw_page_end": 68
-          }
-        },
-        {
-          "provision_label_raw": "b",
-          "clause_path": [
-            "14.4.1",
-            "b"
-          ],
-          "text": "Home Occupation; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 68,
-            "pdf_page_end": 68,
-            "bylaw_page_start": 68,
-            "bylaw_page_end": 68
-          }
-        },
-        {
-          "provision_label_raw": "c",
-          "clause_path": [
-            "14.4.1",
-            "c"
-          ],
-          "text": "Home Daycare",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 68,
-            "pdf_page_end": 68,
-            "bylaw_page_start": 68,
-            "bylaw_page_end": 68
-          }
-        }
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": "R-1S Zone",
-      "chapter_slug": "r-1s",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 67,
-        "pdf_page_end": 67,
-        "bylaw_page_start": 67,
-        "bylaw_page_end": 67
-      },
-      "source_text": "Uses permitted in the R-1S Zone, subject to the Regulations for Permitted Uses for the R-1S Zone"
-    }
-  ],
-  "content_blocks": [],
-  "open_issues": [
-    {
-      "issue_type": "table_parsing_review",
-      "description": "Section 'REGULATIONS FOR SEMI-DETACHED DWELLINGS' contains table-derived provisions extracted from PDF text; verify column alignment against the source PDF before normalization."
-    },
-    {
-      "issue_type": "table_parsing_review",
-      "description": "Section 'REGULATIONS FOR DUPLEX DWELLINGS' contains table-derived provisions extracted from PDF text; verify column alignment against the source PDF before normalization."
-    },
-    {
-      "issue_type": "source_revision_review",
-      "description": "Source PDF cover identifies rev 049 updated March 9, 2026, but this zone page header may display rev 048 updated October 24, 2025; verify source revision during QA."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "14",
+    "zone_title_raw": "LOW DENSITY RESIDENTIAL ZONE (R-2)",
+    "citations": {
       "pdf_page_start": 67,
       "pdf_page_end": 68,
       "bylaw_page_start": 67,
       "bylaw_page_end": 68
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-r-2",
+        "source_unit_type": "zone",
+        "label_raw": "14",
+        "title_raw": "LOW DENSITY RESIDENTIAL ZONE (R-2)",
+        "text_raw": "Uses permitted in the R-1S Zone, subject to the Regulations for Permitted Uses for the R-1S Zone;\nSemi-detached Dwelling; and\nDuplex Dwelling\nNotwithstanding the requirements, the following are permitted as accessory or secondary uses:\nAccessory Building;\nHome Occupation; and\nHome Daycare",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 67,
+          "pdf_page_end": 68,
+          "bylaw_page_start": 67,
+          "bylaw_page_end": 68
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-r-2-section-14-1",
+        "section_label_raw": "14.1",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-r-2-clause-14-1-1",
+            "clause_label_raw": "14.1.1",
+            "clause_text_raw": "Uses permitted in the R-1S Zone, subject to the Regulations for Permitted Uses for the R-1S Zone;",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 67,
+              "pdf_page_end": 67,
+              "bylaw_page_start": 67,
+              "bylaw_page_end": 67
+            }
+          },
+          {
+            "clause_id": "zone-r-2-clause-14-1-2",
+            "clause_label_raw": "14.1.2",
+            "clause_text_raw": "Semi-detached Dwelling; and",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 67,
+              "pdf_page_end": 67,
+              "bylaw_page_start": 67,
+              "bylaw_page_end": 67
+            }
+          },
+          {
+            "clause_id": "zone-r-2-clause-14-1-3",
+            "clause_label_raw": "14.1.3",
+            "clause_text_raw": "Duplex Dwelling",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 67,
+              "pdf_page_end": 67,
+              "bylaw_page_start": 67,
+              "bylaw_page_end": 67
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 67,
+          "pdf_page_end": 67,
+          "bylaw_page_start": 67,
+          "bylaw_page_end": 67
+        }
+      },
+      {
+        "section_id": "zone-r-2-section-2",
+        "section_label_raw": "",
+        "section_title_raw": "REGULATIONS FOR SEMI-DETACHED DWELLINGS",
+        "source_order": 2,
+        "clauses_raw": [],
+        "tables_raw": [
+          {
+            "table_id": "zone-r-2-table-regulations-for-semi-detached-dwellings",
+            "table_title_raw": "REGULATIONS FOR SEMI-DETACHED DWELLINGS",
+            "source_order": 1,
+            "columns_raw": [
+              {
+                "column_id": "row_number",
+                "column_label_raw": "",
+                "source_order": 1
+              },
+              {
+                "column_id": "requirement",
+                "column_label_raw": "",
+                "source_order": 2
+              },
+              {
+                "column_id": "condition",
+                "column_label_raw": "",
+                "source_order": 3
+              },
+              {
+                "column_id": "interior_lot",
+                "column_label_raw": "Interior Lot",
+                "source_order": 4
+              },
+              {
+                "column_id": "corner_lot",
+                "column_label_raw": "Corner Lot",
+                "source_order": 5
+              }
+            ],
+            "rows_raw": [
+              {
+                "row_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-1",
+                "source_order": 1,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-1-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "1"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-1-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Area (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-1-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "348 sq. m (3,745.7 sq ft) per unit"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-1-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "395 sq. m (4,251.7 sq ft) per unit"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-2",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-2-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "2"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-2-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-2-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "11.0 m (36.1 ft) per unit"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-2-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "12.2 m (40 ft) per unit"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-front-yard-access",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-front-yard-access-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "3"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-front-yard-access-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Front Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-front-yard-access-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Front yard access"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-front-yard-access-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-front-yard-access-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-rear-lane-access",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-rear-lane-access-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-rear-lane-access-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Front Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-rear-lane-access-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Rear lane access"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-rear-lane-access-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "4.2 m (13.8 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-rear-lane-access-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "4.2 m (13.8 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-front-yard-access",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-front-yard-access-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "4"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-front-yard-access-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Rear Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-front-yard-access-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Front yard access"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-front-yard-access-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "7.5 m (24.6 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-front-yard-access-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "7.5 m (24.6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-rear-lane-access",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-rear-lane-access-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-rear-lane-access-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Rear Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-rear-lane-access-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Rear lane access"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-rear-lane-access-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "10.5 m (34.6 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-rear-lane-access-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "10.5 m (34.6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-5",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-5-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "5"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-5-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Side Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-5-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "1.83 m (6.0 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-5-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "1.83 m (6.0 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-6",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-6-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "6"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-6-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Flankage Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-6-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-6-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-7",
+                "source_order": 7,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-7-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "7"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-7-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Height (Maximum)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-7-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "11.0 m (36.1 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-7-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "11.0 m (36.1 ft)"
+                  }
+                ]
+              }
+            ],
+            "citations": {
+              "pdf_page_start": 67,
+              "pdf_page_end": 67,
+              "bylaw_page_start": 67,
+              "bylaw_page_end": 67
+            }
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 67,
+          "pdf_page_end": 67,
+          "bylaw_page_start": 67,
+          "bylaw_page_end": 67
+        }
+      },
+      {
+        "section_id": "zone-r-2-section-3",
+        "section_label_raw": "",
+        "section_title_raw": "REGULATIONS FOR DUPLEX DWELLINGS",
+        "source_order": 3,
+        "clauses_raw": [],
+        "tables_raw": [
+          {
+            "table_id": "zone-r-2-table-regulations-for-duplex-dwellings",
+            "table_title_raw": "REGULATIONS FOR DUPLEX DWELLINGS",
+            "source_order": 2,
+            "columns_raw": [
+              {
+                "column_id": "row_number",
+                "column_label_raw": "",
+                "source_order": 1
+              },
+              {
+                "column_id": "requirement",
+                "column_label_raw": "",
+                "source_order": 2
+              },
+              {
+                "column_id": "condition",
+                "column_label_raw": "",
+                "source_order": 3
+              },
+              {
+                "column_id": "interior_lot",
+                "column_label_raw": "Interior Lot",
+                "source_order": 4
+              },
+              {
+                "column_id": "corner_lot",
+                "column_label_raw": "Corner Lot",
+                "source_order": 5
+              }
+            ],
+            "rows_raw": [
+              {
+                "row_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-1",
+                "source_order": 1,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-1-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "1"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-1-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Area (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-1-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "650 sq. m (6,996.5 sq ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-1-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "740 sq. m (7,965.3 sq ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-2",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-2-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "2"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-2-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-2-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "22.0 m (72.2 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-2-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "23.2 m (76.1 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-front-yard-access",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-front-yard-access-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "3"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-front-yard-access-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Front Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-front-yard-access-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Front yard access"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-front-yard-access-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-front-yard-access-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-rear-lane-access",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-rear-lane-access-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-rear-lane-access-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Front Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-rear-lane-access-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Rear lane access"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-rear-lane-access-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "4.2 m (13.8 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-rear-lane-access-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "4.2 m (13.8 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-front-yard-access",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-front-yard-access-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "4"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-front-yard-access-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Rear Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-front-yard-access-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Front yard access"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-front-yard-access-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-front-yard-access-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-rear-lane-access",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-rear-lane-access-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-rear-lane-access-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Rear Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-rear-lane-access-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Rear lane access"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-rear-lane-access-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "9.0 m (29.5 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-rear-lane-access-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "9.0 m (29.5 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-5",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-5-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "5"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-5-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Side Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-5-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "1.83 m (6.0 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-5-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "1.83 m (6.0 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-6",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-6-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "6"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-6-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Flankage Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-6-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-6-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-7",
+                "source_order": 7,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-7-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "7"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-7-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Height (Maximum)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-7-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "11.0 m (36.1 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-7-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "11.0 m (36.1 ft)"
+                  }
+                ]
+              }
+            ],
+            "citations": {
+              "pdf_page_start": 67,
+              "pdf_page_end": 67,
+              "bylaw_page_start": 67,
+              "bylaw_page_end": 67
+            }
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 67,
+          "pdf_page_end": 67,
+          "bylaw_page_start": 67,
+          "bylaw_page_end": 67
+        }
+      },
+      {
+        "section_id": "zone-r-2-section-14-4",
+        "section_label_raw": "14.4",
+        "section_title_raw": "ACCESSORY AND SECONDARY USES",
+        "source_order": 4,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-r-2-clause-14-4-1",
+            "clause_label_raw": "14.4.1",
+            "clause_text_raw": "Notwithstanding the requirements, the following are permitted as accessory or secondary uses:",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 68,
+              "pdf_page_end": 68,
+              "bylaw_page_start": 68,
+              "bylaw_page_end": 68
+            }
+          },
+          {
+            "clause_id": "zone-r-2-clause-14-4-1-a",
+            "clause_label_raw": "a",
+            "clause_text_raw": "Accessory Building;",
+            "parent_clause_id": "zone-r-2-clause-14-4-1",
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 68,
+              "pdf_page_end": 68,
+              "bylaw_page_start": 68,
+              "bylaw_page_end": 68
+            }
+          },
+          {
+            "clause_id": "zone-r-2-clause-14-4-1-b",
+            "clause_label_raw": "b",
+            "clause_text_raw": "Home Occupation; and",
+            "parent_clause_id": "zone-r-2-clause-14-4-1",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 68,
+              "pdf_page_end": 68,
+              "bylaw_page_start": 68,
+              "bylaw_page_end": 68
+            }
+          },
+          {
+            "clause_id": "zone-r-2-clause-14-4-1-c",
+            "clause_label_raw": "c",
+            "clause_text_raw": "Home Daycare",
+            "parent_clause_id": "zone-r-2-clause-14-4-1",
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 68,
+              "pdf_page_end": 68,
+              "bylaw_page_start": 68,
+              "bylaw_page_end": 68
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 68,
+          "pdf_page_end": 68,
+          "bylaw_page_start": 68,
+          "bylaw_page_end": 68
+        }
+      }
+    ],
+    "tables_raw": [
+      {
+        "table_id": "zone-r-2-table-regulations-for-semi-detached-dwellings",
+        "section_id": "zone-r-2-section-2"
+      },
+      {
+        "table_id": "zone-r-2-table-regulations-for-duplex-dwellings",
+        "section_id": "zone-r-2-section-3"
+      }
+    ],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-r-2-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 67,
+          "pdf_page_end": 68,
+          "bylaw_page_start": 67,
+          "bylaw_page_end": 68
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-r-2-clause-14-1-1",
+        "section_id": "zone-r-2-section-14-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-r-2-clause-14-1-2",
+        "section_id": "zone-r-2-section-14-1",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-r-2-clause-14-1-3",
+        "section_id": "zone-r-2-section-14-1",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-r-2-clause-14-4-1",
+        "section_id": "zone-r-2-section-14-4",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-r-2-clause-14-4-1-a",
+        "section_id": "zone-r-2-section-14-4",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-r-2-clause-14-4-1-b",
+        "section_id": "zone-r-2-section-14-4",
+        "source_order": 6
+      },
+      {
+        "clause_id": "zone-r-2-clause-14-4-1-c",
+        "section_id": "zone-r-2-section-14-4",
+        "source_order": 7
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-r-2-term-term-uses_permitted_in_the_r_1s_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_1s_zone",
+        "term_raw": "Uses permitted in the R-1S Zone, subject to the Regulations for Permitted Uses for the R-1S Zone",
+        "term_normalized": "uses_permitted_in_the_r_1s_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_1s_zone",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-2-clause-14-1-1"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-r-2-term-use-semi_detached_dwelling",
+        "term_raw": "Semi-detached Dwelling",
+        "term_normalized": "semi_detached_dwelling",
+        "term_category": "dwelling_type",
+        "code_table": "use",
+        "code": "semi_detached_dwelling",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-2-clause-14-1-2"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "term_id": "zone-r-2-term-use-duplex_dwelling",
+        "term_raw": "Duplex Dwelling",
+        "term_normalized": "duplex_dwelling",
+        "term_category": "dwelling_type",
+        "code_table": "use",
+        "code": "duplex_dwelling",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-2-clause-14-1-3"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "term_id": "zone-r-2-term-use-accessory_building",
+        "term_raw": "Accessory Building",
+        "term_normalized": "accessory_building",
+        "term_category": "accessory_or_secondary_use",
+        "code_table": "use",
+        "code": "accessory_building",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-2-clause-14-4-1-a"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "term_id": "zone-r-2-term-use-home_occupation",
+        "term_raw": "Home Occupation",
+        "term_normalized": "home_occupation",
+        "term_category": "accessory_or_secondary_use",
+        "code_table": "use",
+        "code": "home_occupation",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-2-clause-14-4-1-b"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "term_id": "zone-r-2-term-use-home_daycare",
+        "term_raw": "Home Daycare",
+        "term_normalized": "home_daycare",
+        "term_category": "accessory_or_secondary_use",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-2-clause-14-4-1-c"
+          }
+        ],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "home_daycare"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-r-2-use-uses-permitted-in-the-r-1s-zone-subject-to-the-regulations-for-permitted-uses-for-the-r-1s-zone-1",
+        "use_name_raw": "Uses permitted in the R-1S Zone, subject to the Regulations for Permitted Uses for the R-1S Zone",
+        "use_term_id": "zone-r-2-term-term-uses_permitted_in_the_r_1s_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_1s_zone",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-r-2-clause-14-1-1",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-r-2-use-semi-detached-dwelling-2",
+        "use_name_raw": "Semi-detached Dwelling",
+        "use_term_id": "zone-r-2-term-use-semi_detached_dwelling",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-r-2-clause-14-1-2",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-r-2-use-duplex-dwelling-3",
+        "use_name_raw": "Duplex Dwelling",
+        "use_term_id": "zone-r-2-term-use-duplex_dwelling",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-r-2-clause-14-1-3",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-r-2-use-accessory-building-4",
+        "use_name_raw": "Accessory Building",
+        "use_term_id": "zone-r-2-term-use-accessory_building",
+        "use_status": "accessory_or_secondary",
+        "source_clause_ref": "zone-r-2-clause-14-4-1-a",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-r-2-use-home-occupation-5",
+        "use_name_raw": "Home Occupation",
+        "use_term_id": "zone-r-2-term-use-home_occupation",
+        "use_status": "accessory_or_secondary",
+        "source_clause_ref": "zone-r-2-clause-14-4-1-b",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-r-2-use-home-daycare-6",
+        "use_name_raw": "Home Daycare",
+        "use_term_id": "zone-r-2-term-use-home_daycare",
+        "use_status": "accessory_or_secondary",
+        "source_clause_ref": "zone-r-2-clause-14-4-1-c",
+        "confidence": "high"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-1-interior-lot-1",
+        "value_raw": "348 sq. m (3,745.7 sq ft)",
+        "value": 348,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "3,745.7 sq ft",
+            "value": 3745.7,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-1-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-1-corner-lot-1",
+        "value_raw": "395 sq. m (4,251.7 sq ft)",
+        "value": 395,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "4,251.7 sq ft",
+            "value": 4251.7,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-1-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-2-interior-lot-1",
+        "value_raw": "11.0 m (36.1 ft)",
+        "value": 11,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "36.1 ft",
+            "value": 36.1,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-2-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-2-corner-lot-1",
+        "value_raw": "12.2 m (40 ft)",
+        "value": 12.2,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "40 ft",
+            "value": 40,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-2-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-front-yard-access-interior-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-front-yard-access-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-front-yard-access-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-front-yard-access-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-rear-lane-access-interior-lot-1",
+        "value_raw": "4.2 m (13.8 ft)",
+        "value": 4.2,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "13.8 ft",
+            "value": 13.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-rear-lane-access-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-rear-lane-access-corner-lot-1",
+        "value_raw": "4.2 m (13.8 ft)",
+        "value": 4.2,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "13.8 ft",
+            "value": 13.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-rear-lane-access-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-front-yard-access-interior-lot-1",
+        "value_raw": "7.5 m (24.6 ft)",
+        "value": 7.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.6 ft",
+            "value": 24.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-front-yard-access-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-front-yard-access-corner-lot-1",
+        "value_raw": "7.5 m (24.6 ft)",
+        "value": 7.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.6 ft",
+            "value": 24.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-front-yard-access-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-rear-lane-access-interior-lot-1",
+        "value_raw": "10.5 m (34.6 ft)",
+        "value": 10.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "34.6 ft",
+            "value": 34.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-rear-lane-access-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-rear-lane-access-corner-lot-1",
+        "value_raw": "10.5 m (34.6 ft)",
+        "value": 10.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "34.6 ft",
+            "value": 34.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-rear-lane-access-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-5-interior-lot-1",
+        "value_raw": "1.83 m (6.0 ft)",
+        "value": 1.83,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "6.0 ft",
+            "value": 6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-5-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-5-corner-lot-1",
+        "value_raw": "1.83 m (6.0 ft)",
+        "value": 1.83,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "6.0 ft",
+            "value": 6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-5-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-6-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-6-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-7-interior-lot-1",
+        "value_raw": "11.0 m (36.1 ft)",
+        "value": 11,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "36.1 ft",
+            "value": 36.1,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-7-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-7-corner-lot-1",
+        "value_raw": "11.0 m (36.1 ft)",
+        "value": 11,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "36.1 ft",
+            "value": 36.1,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-7-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-1-interior-lot-1",
+        "value_raw": "650 sq. m (6,996.5 sq ft)",
+        "value": 650,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "6,996.5 sq ft",
+            "value": 6996.5,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-1-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-1-corner-lot-1",
+        "value_raw": "740 sq. m (7,965.3 sq ft)",
+        "value": 740,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "7,965.3 sq ft",
+            "value": 7965.3,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-1-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-2-interior-lot-1",
+        "value_raw": "22.0 m (72.2 ft)",
+        "value": 22,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "72.2 ft",
+            "value": 72.2,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-2-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-2-corner-lot-1",
+        "value_raw": "23.2 m (76.1 ft)",
+        "value": 23.2,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "76.1 ft",
+            "value": 76.1,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-2-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-3-front-yard-access-interior-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-front-yard-access-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-3-front-yard-access-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-front-yard-access-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-3-rear-lane-access-interior-lot-1",
+        "value_raw": "4.2 m (13.8 ft)",
+        "value": 4.2,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "13.8 ft",
+            "value": 13.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-rear-lane-access-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-3-rear-lane-access-corner-lot-1",
+        "value_raw": "4.2 m (13.8 ft)",
+        "value": 4.2,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "13.8 ft",
+            "value": 13.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-rear-lane-access-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-4-front-yard-access-interior-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-front-yard-access-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-4-front-yard-access-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-front-yard-access-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-4-rear-lane-access-interior-lot-1",
+        "value_raw": "9.0 m (29.5 ft)",
+        "value": 9,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "29.5 ft",
+            "value": 29.5,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-rear-lane-access-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-4-rear-lane-access-corner-lot-1",
+        "value_raw": "9.0 m (29.5 ft)",
+        "value": 9,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "29.5 ft",
+            "value": 29.5,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-rear-lane-access-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-5-interior-lot-1",
+        "value_raw": "1.83 m (6.0 ft)",
+        "value": 1.83,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "6.0 ft",
+            "value": 6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-5-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-5-corner-lot-1",
+        "value_raw": "1.83 m (6.0 ft)",
+        "value": 1.83,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "6.0 ft",
+            "value": 6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-5-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-6-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-6-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-7-interior-lot-1",
+        "value_raw": "11.0 m (36.1 ft)",
+        "value": 11,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "36.1 ft",
+            "value": 36.1,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-7-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-7-corner-lot-1",
+        "value_raw": "11.0 m (36.1 ft)",
+        "value": 11,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "36.1 ft",
+            "value": 36.1,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-7-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-1-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Interior Lot 348 sq. m (3,745.7 sq ft) per unit",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-1-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-1-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Corner Lot 395 sq. m (4,251.7 sq ft) per unit",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-1-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-2-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Interior Lot 11.0 m (36.1 ft) per unit",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-2-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-2-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Corner Lot 12.2 m (40 ft) per unit",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-2-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-front-yard-access-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Front yard access Interior Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Front yard access"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-front-yard-access-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-front-yard-access"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-front-yard-access-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Front yard access Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Front yard access"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-front-yard-access-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-front-yard-access"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-rear-lane-access-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Rear lane access Interior Lot 4.2 m (13.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Rear lane access"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-rear-lane-access-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-rear-lane-access"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-rear-lane-access-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Rear lane access Corner Lot 4.2 m (13.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Rear lane access"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-rear-lane-access-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-rear-lane-access"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-front-yard-access-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Front yard access Interior Lot 7.5 m (24.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Front yard access"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-front-yard-access-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-front-yard-access"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-front-yard-access-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Front yard access Corner Lot 7.5 m (24.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Front yard access"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-front-yard-access-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-front-yard-access"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-rear-lane-access-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Rear lane access Interior Lot 10.5 m (34.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Rear lane access"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-rear-lane-access-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-rear-lane-access"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-rear-lane-access-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Rear lane access Corner Lot 10.5 m (34.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Rear lane access"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-rear-lane-access-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-rear-lane-access"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-5-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Interior Lot 1.83 m (6.0 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-5-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-5-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Corner Lot 1.83 m (6.0 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-5-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-6-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "flankage_yard",
+        "requirement_label_raw": "Flankage Yard (Minimum)",
+        "requirement_text_raw": "Flankage Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-6-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-7-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Interior Lot 11.0 m (36.1 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-7-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-7-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Corner Lot 11.0 m (36.1 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-semi-detached-dwellings-row-7-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-semi-detached-dwellings-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-1-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Interior Lot 650 sq. m (6,996.5 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-1-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-1-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Corner Lot 740 sq. m (7,965.3 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-1-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-2-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Interior Lot 22.0 m (72.2 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-2-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-2-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Corner Lot 23.2 m (76.1 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-2-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-3-front-yard-access-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Front yard access Interior Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Front yard access"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-3-front-yard-access-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-front-yard-access"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-3-front-yard-access-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Front yard access Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Front yard access"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-3-front-yard-access-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-front-yard-access"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-3-rear-lane-access-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Rear lane access Interior Lot 4.2 m (13.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Rear lane access"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-3-rear-lane-access-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-rear-lane-access"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-3-rear-lane-access-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Rear lane access Corner Lot 4.2 m (13.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Rear lane access"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-3-rear-lane-access-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-3-rear-lane-access"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-4-front-yard-access-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Front yard access Interior Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Front yard access"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-4-front-yard-access-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-front-yard-access"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-4-front-yard-access-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Front yard access Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Front yard access"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-4-front-yard-access-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-front-yard-access"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-4-rear-lane-access-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Rear lane access Interior Lot 9.0 m (29.5 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Rear lane access"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-4-rear-lane-access-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-rear-lane-access"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-4-rear-lane-access-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Rear lane access Corner Lot 9.0 m (29.5 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Rear lane access"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-4-rear-lane-access-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-4-rear-lane-access"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-5-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Interior Lot 1.83 m (6.0 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-5-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-5-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Corner Lot 1.83 m (6.0 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-5-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-6-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "flankage_yard",
+        "requirement_label_raw": "Flankage Yard (Minimum)",
+        "requirement_text_raw": "Flankage Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-6-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-7-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Interior Lot 11.0 m (36.1 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-7-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-7-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Corner Lot 11.0 m (36.1 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-2-num-zone-r-2-table-regulations-for-duplex-dwellings-row-7-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-2-table-regulations-for-duplex-dwellings-row-7"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-r-2-regulation-group-zone",
+        "group_label_raw": "14",
+        "group_title_raw": "LOW DENSITY RESIDENTIAL ZONE (R-2)",
+        "regulated_use_terms": [
+          "zone-r-2-term-term-uses_permitted_in_the_r_1s_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_1s_zone",
+          "zone-r-2-term-use-semi_detached_dwelling",
+          "zone-r-2-term-use-duplex_dwelling"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "R-2"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-1-interior-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-1-corner-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-2-interior-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-2-corner-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-front-yard-access-interior-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-front-yard-access-corner-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-rear-lane-access-interior-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-3-rear-lane-access-corner-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-front-yard-access-interior-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-front-yard-access-corner-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-rear-lane-access-interior-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-4-rear-lane-access-corner-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-5-interior-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-5-corner-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-6-corner-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-7-interior-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-semi-detached-dwellings-row-7-corner-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-1-interior-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-1-corner-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-2-interior-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-2-corner-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-3-front-yard-access-interior-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-3-front-yard-access-corner-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-3-rear-lane-access-interior-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-3-rear-lane-access-corner-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-4-front-yard-access-interior-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-4-front-yard-access-corner-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-4-rear-lane-access-interior-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-4-rear-lane-access-corner-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-5-interior-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-5-corner-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-6-corner-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-7-interior-lot",
+          "zone-r-2-req-zone-r-2-table-regulations-for-duplex-dwellings-row-7-corner-lot"
+        ],
+        "source_section_ref": "zone-r-2-section-14-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-r-2-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "R-2",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-r-2-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-r-2-flag-unmatched-term-uses-permitted-in-the-r-1s-zone-subject-to-the-regulations-for-permitted-uses-for-the-r-1s-zone",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Uses permitted in the R-1S Zone, subject to the Regulations for Permitted Uses for the R-1S Zone",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-r-2-clause-14-1-1"
+        }
+      ]
+    }
+  ]
 }

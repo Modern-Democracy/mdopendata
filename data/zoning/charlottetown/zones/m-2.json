@@ -1,955 +1,2523 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+    "document_type": "zone",
     "zone_code": "M-2",
     "zone_name": "HEAVY INDUSTRIAL ZONE",
-    "part_label_raw": "39",
-    "chapter_heading_raw": "39 HEAVY INDUSTRIAL ZONE (M-2)"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": []
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "39.1.1",
-      "use_type": "principal_use",
-      "use_name": "Abattoir",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.1"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.2",
-      "use_type": "principal_use",
-      "use_name": "Automobile Body Shop",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.2"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.3",
-      "use_type": "principal_use",
-      "use_name": "Automobile Sales and Service",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.3"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.4",
-      "use_type": "principal_use",
-      "use_name": "Automobile Service Station",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.4"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.5",
-      "use_type": "principal_use",
-      "use_name": "Bulk Fuel Station",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.5"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.6",
-      "use_type": "principal_use",
-      "use_name": "Equipment Sales, Rental Service",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.6"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.7",
-      "use_type": "principal_use",
-      "use_name": "Extractive Facilities",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.7"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.8",
-      "use_type": "principal_use",
-      "use_name": "Feedmill",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.8"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.9",
-      "use_type": "principal_use",
-      "use_name": "Fire Station",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.9"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.10",
-      "use_type": "principal_use",
-      "use_name": "Forestry Related",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.10"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.11",
-      "use_type": "principal_use",
-      "use_name": "Heavy Equipment Repair",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.11"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.12",
-      "use_type": "principal_use",
-      "use_name": "Kennel",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.12"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.13",
-      "use_type": "principal_use",
-      "use_name": "Manufacturing, Heavy",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.13"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.14",
-      "use_type": "principal_use",
-      "use_name": "Manufacturing, Light",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.14"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.15",
-      "use_type": "principal_use",
-      "use_name": "Marijuana Production Facility",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.15"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.16",
-      "use_type": "principal_use",
-      "use_name": "Office",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.16"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.17",
-      "use_type": "principal_use",
-      "use_name": "Outdoor Storage",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.17"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.18",
-      "use_type": "principal_use",
-      "use_name": "Police Station",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.18"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.19",
-      "use_type": "principal_use",
-      "use_name": "Public Utility Service Operations",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.19"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.20",
-      "use_type": "principal_use",
-      "use_name": "Recycling Depot",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.20"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.21",
-      "use_type": "principal_use",
-      "use_name": "Retail Store",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.21"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.22",
-      "use_type": "principal_use",
-      "use_name": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.22"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.23",
-      "use_type": "principal_use",
-      "use_name": "Retail Warehouse",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.23"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.24",
-      "use_type": "principal_use",
-      "use_name": "Salvage or Waste Disposal Facility",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.24"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.25",
-      "use_type": "principal_use",
-      "use_name": "Service Repair Establishment",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.25"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.26",
-      "use_type": "principal_use",
-      "use_name": "Storage Facility",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.26"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.27",
-      "use_type": "principal_use",
-      "use_name": "Transport Terminal",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.27"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.28",
-      "use_type": "principal_use",
-      "use_name": "Transportation Services",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 112,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 112
-      },
-      "clause_path": [
-        "39.1.28"
-      ]
-    },
-    {
-      "clause_label_raw": "39.1.29",
-      "use_type": "principal_use",
-      "use_name": "Warehouse and/or Distribution Centre",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 113,
-        "pdf_page_end": 113,
-        "bylaw_page_start": 113,
-        "bylaw_page_end": 113
-      },
-      "clause_path": [
-        "39.1.29"
-      ]
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "39.1",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 112,
-        "pdf_page_end": 113,
-        "bylaw_page_start": 112,
-        "bylaw_page_end": 113
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "39.1.1",
-          "clause_path": [
-            "39.1.1"
-          ],
-          "text": "Abattoir;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.2",
-          "clause_path": [
-            "39.1.2"
-          ],
-          "text": "Automobile Body Shop;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.3",
-          "clause_path": [
-            "39.1.3"
-          ],
-          "text": "Automobile Sales and Service;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.4",
-          "clause_path": [
-            "39.1.4"
-          ],
-          "text": "Automobile Service Station;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.5",
-          "clause_path": [
-            "39.1.5"
-          ],
-          "text": "Bulk Fuel Station;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.6",
-          "clause_path": [
-            "39.1.6"
-          ],
-          "text": "Equipment Sales, Rental Service;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.7",
-          "clause_path": [
-            "39.1.7"
-          ],
-          "text": "Extractive Facilities;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.8",
-          "clause_path": [
-            "39.1.8"
-          ],
-          "text": "Feedmill;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.9",
-          "clause_path": [
-            "39.1.9"
-          ],
-          "text": "Fire Station;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.10",
-          "clause_path": [
-            "39.1.10"
-          ],
-          "text": "Forestry Related;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.11",
-          "clause_path": [
-            "39.1.11"
-          ],
-          "text": "Heavy Equipment Repair;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.12",
-          "clause_path": [
-            "39.1.12"
-          ],
-          "text": "Kennel;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.13",
-          "clause_path": [
-            "39.1.13"
-          ],
-          "text": "Manufacturing, Heavy;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.14",
-          "clause_path": [
-            "39.1.14"
-          ],
-          "text": "Manufacturing, Light;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.15",
-          "clause_path": [
-            "39.1.15"
-          ],
-          "text": "Marijuana Production Facility;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.16",
-          "clause_path": [
-            "39.1.16"
-          ],
-          "text": "Office;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.17",
-          "clause_path": [
-            "39.1.17"
-          ],
-          "text": "Outdoor Storage;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.18",
-          "clause_path": [
-            "39.1.18"
-          ],
-          "text": "Police Station;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.19",
-          "clause_path": [
-            "39.1.19"
-          ],
-          "text": "Public Utility Service Operations;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.20",
-          "clause_path": [
-            "39.1.20"
-          ],
-          "text": "Recycling Depot;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.21",
-          "clause_path": [
-            "39.1.21"
-          ],
-          "text": "Retail Store",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.22",
-          "clause_path": [
-            "39.1.22"
-          ],
-          "text": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.23",
-          "clause_path": [
-            "39.1.23"
-          ],
-          "text": "Retail Warehouse;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.24",
-          "clause_path": [
-            "39.1.24"
-          ],
-          "text": "Salvage or Waste Disposal Facility;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.25",
-          "clause_path": [
-            "39.1.25"
-          ],
-          "text": "Service Repair Establishment;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.26",
-          "clause_path": [
-            "39.1.26"
-          ],
-          "text": "Storage Facility;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.27",
-          "clause_path": [
-            "39.1.27"
-          ],
-          "text": "Transport Terminal;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.28",
-          "clause_path": [
-            "39.1.28"
-          ],
-          "text": "Transportation Services; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 112,
-            "pdf_page_end": 112,
-            "bylaw_page_start": 112,
-            "bylaw_page_end": 112
-          }
-        },
-        {
-          "provision_label_raw": "39.1.29",
-          "clause_path": [
-            "39.1.29"
-          ],
-          "text": "Warehouse and/or Distribution Centre",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 113,
-            "pdf_page_end": 113,
-            "bylaw_page_start": 113,
-            "bylaw_page_end": 113
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": "39.2",
-      "title_label_raw": "REGULATIONS FOR INDUSTRIAL AND COMMERCIAL USES",
-      "citations": {
-        "pdf_page_start": 113,
-        "pdf_page_end": 113,
-        "bylaw_page_start": 113,
-        "bylaw_page_end": 113
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "1",
-          "text": "Lot Area (Minimum) 800 sq. m (8,611.4 sq ft) 900 sq. m (9,687.8 sq ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 113,
-            "pdf_page_end": 113,
-            "bylaw_page_start": 113,
-            "bylaw_page_end": 113
-          }
-        },
-        {
-          "provision_label_raw": "39.2.1",
-          "clause_path": [
-            "39.2.1"
-          ],
-          "text": "The Gross Floor Area of any Retail Store and Office that is accessory to an industrial activity shall not exceed 49% of the entire use, and this area shall be separated from the industrial activity by a solid partition.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 113,
-            "pdf_page_end": 113,
-            "bylaw_page_start": 113,
-            "bylaw_page_end": 113
-          }
-        },
-        {
-          "provision_label_raw": "39.2.2",
-          "clause_path": [
-            "39.2.2"
-          ],
-          "text": "Outdoor Storage of goods or materials shall be permitted only in accordance with the General Provisions for outdoor Commercial or Industrial Uses.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 113,
-            "pdf_page_end": 113,
-            "bylaw_page_start": 113,
-            "bylaw_page_end": 113
-          }
-        }
-      ],
-      "table_column_headings_raw": [
-        "Interior Lot Corner Lot"
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [],
-  "content_blocks": [],
-  "open_issues": [
-    {
-      "issue_type": "table_parsing_review",
-      "description": "Section 'REGULATIONS FOR INDUSTRIAL AND COMMERCIAL USES' contains table-derived provisions extracted from PDF text; verify column alignment against the source PDF before normalization."
-    },
-    {
-      "issue_type": "source_revision_review",
-      "description": "Source PDF cover identifies rev 049 updated March 9, 2026, but this zone page header may display rev 048 updated October 24, 2025; verify source revision during QA."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "39",
+    "zone_title_raw": "HEAVY INDUSTRIAL ZONE (M-2)",
+    "citations": {
       "pdf_page_start": 112,
       "pdf_page_end": 113,
       "bylaw_page_start": 112,
       "bylaw_page_end": 113
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-m-2",
+        "source_unit_type": "zone",
+        "label_raw": "39",
+        "title_raw": "HEAVY INDUSTRIAL ZONE (M-2)",
+        "text_raw": "Abattoir;\nAutomobile Body Shop;\nAutomobile Sales and Service;\nAutomobile Service Station;\nBulk Fuel Station;\nEquipment Sales, Rental Service;\nExtractive Facilities;\nFeedmill;\nFire Station;\nForestry Related;\nHeavy Equipment Repair;\nKennel;\nManufacturing, Heavy;\nManufacturing, Light;\nMarijuana Production Facility;\nOffice;\nOutdoor Storage;\nPolice Station;\nPublic Utility Service Operations;\nRecycling Depot;\nRetail Store\nRetail Store with connected Retail Warehouse, Light Manufacturing or assembly facility;\nRetail Warehouse;\nSalvage or Waste Disposal Facility;\nService Repair Establishment;\nStorage Facility;\nTransport Terminal;\nTransportation Services; and\nWarehouse and/or Distribution Centre",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 112,
+          "pdf_page_end": 113,
+          "bylaw_page_start": 112,
+          "bylaw_page_end": 113
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-m-2-section-39-1",
+        "section_label_raw": "39.1",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-m-2-clause-39-1-1",
+            "clause_label_raw": "39.1.1",
+            "clause_text_raw": "Abattoir;",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-2",
+            "clause_label_raw": "39.1.2",
+            "clause_text_raw": "Automobile Body Shop;",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-3",
+            "clause_label_raw": "39.1.3",
+            "clause_text_raw": "Automobile Sales and Service;",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-4",
+            "clause_label_raw": "39.1.4",
+            "clause_text_raw": "Automobile Service Station;",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-5",
+            "clause_label_raw": "39.1.5",
+            "clause_text_raw": "Bulk Fuel Station;",
+            "parent_clause_id": null,
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-6",
+            "clause_label_raw": "39.1.6",
+            "clause_text_raw": "Equipment Sales, Rental Service;",
+            "parent_clause_id": null,
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-7",
+            "clause_label_raw": "39.1.7",
+            "clause_text_raw": "Extractive Facilities;",
+            "parent_clause_id": null,
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-8",
+            "clause_label_raw": "39.1.8",
+            "clause_text_raw": "Feedmill;",
+            "parent_clause_id": null,
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-9",
+            "clause_label_raw": "39.1.9",
+            "clause_text_raw": "Fire Station;",
+            "parent_clause_id": null,
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-10",
+            "clause_label_raw": "39.1.10",
+            "clause_text_raw": "Forestry Related;",
+            "parent_clause_id": null,
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-11",
+            "clause_label_raw": "39.1.11",
+            "clause_text_raw": "Heavy Equipment Repair;",
+            "parent_clause_id": null,
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-12",
+            "clause_label_raw": "39.1.12",
+            "clause_text_raw": "Kennel;",
+            "parent_clause_id": null,
+            "source_order": 12,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-13",
+            "clause_label_raw": "39.1.13",
+            "clause_text_raw": "Manufacturing, Heavy;",
+            "parent_clause_id": null,
+            "source_order": 13,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-14",
+            "clause_label_raw": "39.1.14",
+            "clause_text_raw": "Manufacturing, Light;",
+            "parent_clause_id": null,
+            "source_order": 14,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-15",
+            "clause_label_raw": "39.1.15",
+            "clause_text_raw": "Marijuana Production Facility;",
+            "parent_clause_id": null,
+            "source_order": 15,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-16",
+            "clause_label_raw": "39.1.16",
+            "clause_text_raw": "Office;",
+            "parent_clause_id": null,
+            "source_order": 16,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-17",
+            "clause_label_raw": "39.1.17",
+            "clause_text_raw": "Outdoor Storage;",
+            "parent_clause_id": null,
+            "source_order": 17,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-18",
+            "clause_label_raw": "39.1.18",
+            "clause_text_raw": "Police Station;",
+            "parent_clause_id": null,
+            "source_order": 18,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-19",
+            "clause_label_raw": "39.1.19",
+            "clause_text_raw": "Public Utility Service Operations;",
+            "parent_clause_id": null,
+            "source_order": 19,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-20",
+            "clause_label_raw": "39.1.20",
+            "clause_text_raw": "Recycling Depot;",
+            "parent_clause_id": null,
+            "source_order": 20,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-21",
+            "clause_label_raw": "39.1.21",
+            "clause_text_raw": "Retail Store",
+            "parent_clause_id": null,
+            "source_order": 21,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-22",
+            "clause_label_raw": "39.1.22",
+            "clause_text_raw": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility;",
+            "parent_clause_id": null,
+            "source_order": 22,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-23",
+            "clause_label_raw": "39.1.23",
+            "clause_text_raw": "Retail Warehouse;",
+            "parent_clause_id": null,
+            "source_order": 23,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-24",
+            "clause_label_raw": "39.1.24",
+            "clause_text_raw": "Salvage or Waste Disposal Facility;",
+            "parent_clause_id": null,
+            "source_order": 24,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-25",
+            "clause_label_raw": "39.1.25",
+            "clause_text_raw": "Service Repair Establishment;",
+            "parent_clause_id": null,
+            "source_order": 25,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-26",
+            "clause_label_raw": "39.1.26",
+            "clause_text_raw": "Storage Facility;",
+            "parent_clause_id": null,
+            "source_order": 26,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-27",
+            "clause_label_raw": "39.1.27",
+            "clause_text_raw": "Transport Terminal;",
+            "parent_clause_id": null,
+            "source_order": 27,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-28",
+            "clause_label_raw": "39.1.28",
+            "clause_text_raw": "Transportation Services; and",
+            "parent_clause_id": null,
+            "source_order": 28,
+            "citations": {
+              "pdf_page_start": 112,
+              "pdf_page_end": 112,
+              "bylaw_page_start": 112,
+              "bylaw_page_end": 112
+            }
+          },
+          {
+            "clause_id": "zone-m-2-clause-39-1-29",
+            "clause_label_raw": "39.1.29",
+            "clause_text_raw": "Warehouse and/or Distribution Centre",
+            "parent_clause_id": null,
+            "source_order": 29,
+            "citations": {
+              "pdf_page_start": 113,
+              "pdf_page_end": 113,
+              "bylaw_page_start": 113,
+              "bylaw_page_end": 113
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 112,
+          "pdf_page_end": 113,
+          "bylaw_page_start": 112,
+          "bylaw_page_end": 113
+        }
+      },
+      {
+        "section_id": "zone-m-2-section-39-2",
+        "section_label_raw": "39.2",
+        "section_title_raw": "REGULATIONS FOR INDUSTRIAL AND COMMERCIAL USES",
+        "source_order": 2,
+        "clauses_raw": [],
+        "tables_raw": [
+          {
+            "table_id": "zone-m-2-table-39-2",
+            "table_title_raw": "REGULATIONS FOR INDUSTRIAL AND COMMERCIAL USES",
+            "source_order": 1,
+            "columns_raw": [
+              {
+                "column_id": "row_number",
+                "column_label_raw": "",
+                "source_order": 1
+              },
+              {
+                "column_id": "requirement",
+                "column_label_raw": "",
+                "source_order": 2
+              },
+              {
+                "column_id": "interior_lot",
+                "column_label_raw": "Interior Lot",
+                "source_order": 3
+              },
+              {
+                "column_id": "corner_lot",
+                "column_label_raw": "Corner Lot",
+                "source_order": 4
+              }
+            ],
+            "rows_raw": [
+              {
+                "row_id": "zone-m-2-table-39-2-row-1",
+                "source_order": 1,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-1-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "1"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-1-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Area (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-1-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "800 sq. m (8,611.4 sq ft)"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-1-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "900 sq. m (9,687.8 sq ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-m-2-table-39-2-row-2",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-2-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "2"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-2-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-2-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "20 m (65.6 ft)"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-2-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "20 m (65.6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-m-2-table-39-2-row-3",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-3-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "3"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-3-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Front Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-3-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "7.5 m (24.6 ft)"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-3-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "7.5 m (24.6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-m-2-table-39-2-row-4",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-4-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "4"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-4-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Rear Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-4-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "7.5 m (24.6 ft)"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-4-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "7.5 m (24.6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-m-2-table-39-2-row-5",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-5-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "5"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-5-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Side Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-5-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "3.0 m (9.8 ft)"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-5-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "3.0 m (9.8 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-m-2-table-39-2-row-6",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-6-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "6"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-6-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Flankage Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-6-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-6-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "7.5 m (24.6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-m-2-table-39-2-row-7",
+                "source_order": 7,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-7-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "7"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-7-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Height (Maximum)"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-7-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "12.0 m (39.4 ft)"
+                  },
+                  {
+                    "cell_id": "zone-m-2-table-39-2-row-7-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "12.0 m (39.4 ft)"
+                  }
+                ]
+              }
+            ],
+            "citations": {
+              "pdf_page_start": 113,
+              "pdf_page_end": 113,
+              "bylaw_page_start": 113,
+              "bylaw_page_end": 113
+            }
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 113,
+          "pdf_page_end": 113,
+          "bylaw_page_start": 113,
+          "bylaw_page_end": 113
+        }
+      }
+    ],
+    "tables_raw": [
+      {
+        "table_id": "zone-m-2-table-39-2",
+        "section_id": "zone-m-2-section-39-2"
+      }
+    ],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-m-2-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 112,
+          "pdf_page_end": 113,
+          "bylaw_page_start": 112,
+          "bylaw_page_end": 113
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-m-2-clause-39-1-1",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-2",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-3",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-4",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-5",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-6",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 6
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-7",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 7
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-8",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 8
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-9",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 9
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-10",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 10
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-11",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 11
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-12",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 12
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-13",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 13
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-14",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 14
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-15",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 15
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-16",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 16
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-17",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 17
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-18",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 18
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-19",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 19
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-20",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 20
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-21",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 21
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-22",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 22
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-23",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 23
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-24",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 24
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-25",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 25
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-26",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 26
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-27",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 27
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-28",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 28
+      },
+      {
+        "clause_id": "zone-m-2-clause-39-1-29",
+        "section_id": "zone-m-2-section-39-1",
+        "source_order": 29
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-m-2-term-term-abattoir",
+        "term_raw": "Abattoir",
+        "term_normalized": "abattoir",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-1"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-automobile_body_shop",
+        "term_raw": "Automobile Body Shop",
+        "term_normalized": "automobile_body_shop",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-2"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-automobile_sales_and_service",
+        "term_raw": "Automobile Sales and Service",
+        "term_normalized": "automobile_sales_and_service",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-3"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-automobile_service_station",
+        "term_raw": "Automobile Service Station",
+        "term_normalized": "automobile_service_station",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-4"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-bulk_fuel_station",
+        "term_raw": "Bulk Fuel Station",
+        "term_normalized": "bulk_fuel_station",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-5"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-equipment_sales_rental_service",
+        "term_raw": "Equipment Sales, Rental Service",
+        "term_normalized": "equipment_sales_rental_service",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-6"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-extractive_facilities",
+        "term_raw": "Extractive Facilities",
+        "term_normalized": "extractive_facilities",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-7"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-feedmill",
+        "term_raw": "Feedmill",
+        "term_normalized": "feedmill",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-8"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-fire_station",
+        "term_raw": "Fire Station",
+        "term_normalized": "fire_station",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-9"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-forestry_related",
+        "term_raw": "Forestry Related",
+        "term_normalized": "forestry_related",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-10"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-heavy_equipment_repair",
+        "term_raw": "Heavy Equipment Repair",
+        "term_normalized": "heavy_equipment_repair",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-11"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-kennel",
+        "term_raw": "Kennel",
+        "term_normalized": "kennel",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-12"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-manufacturing_heavy",
+        "term_raw": "Manufacturing, Heavy",
+        "term_normalized": "manufacturing_heavy",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-13"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-manufacturing_light",
+        "term_raw": "Manufacturing, Light",
+        "term_normalized": "manufacturing_light",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-14"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-marijuana_production_facility",
+        "term_raw": "Marijuana Production Facility",
+        "term_normalized": "marijuana_production_facility",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-15"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-office",
+        "term_raw": "Office",
+        "term_normalized": "office",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-16"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-outdoor_storage",
+        "term_raw": "Outdoor Storage",
+        "term_normalized": "outdoor_storage",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-17"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-police_station",
+        "term_raw": "Police Station",
+        "term_normalized": "police_station",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-18"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-public_utility_service_operations",
+        "term_raw": "Public Utility Service Operations",
+        "term_normalized": "public_utility_service_operations",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-19"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-recycling_depot",
+        "term_raw": "Recycling Depot",
+        "term_normalized": "recycling_depot",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-20"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-retail_store",
+        "term_raw": "Retail Store",
+        "term_normalized": "retail_store",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-21"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-retail_store_with_connected_retail_warehouse_light_manufacturing_or_assembly_facility",
+        "term_raw": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility",
+        "term_normalized": "retail_store_with_connected_retail_warehouse_light_manufacturing_or_assembly_facility",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-22"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-retail_warehouse",
+        "term_raw": "Retail Warehouse",
+        "term_normalized": "retail_warehouse",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-23"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-salvage_or_waste_disposal_facility",
+        "term_raw": "Salvage or Waste Disposal Facility",
+        "term_normalized": "salvage_or_waste_disposal_facility",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-24"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-service_repair_establishment",
+        "term_raw": "Service Repair Establishment",
+        "term_normalized": "service_repair_establishment",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-25"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-storage_facility",
+        "term_raw": "Storage Facility",
+        "term_normalized": "storage_facility",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-26"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-transport_terminal",
+        "term_raw": "Transport Terminal",
+        "term_normalized": "transport_terminal",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-27"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-transportation_services",
+        "term_raw": "Transportation Services",
+        "term_normalized": "transportation_services",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-28"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-m-2-term-term-warehouse_and_or_distribution_centre",
+        "term_raw": "Warehouse and/or Distribution Centre",
+        "term_normalized": "warehouse_and_or_distribution_centre",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-m-2-clause-39-1-29"
+          }
+        ],
+        "confidence": "needs_review"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-m-2-use-abattoir-1",
+        "use_name_raw": "Abattoir",
+        "use_term_id": "zone-m-2-term-term-abattoir",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-1",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-automobile-body-shop-2",
+        "use_name_raw": "Automobile Body Shop",
+        "use_term_id": "zone-m-2-term-term-automobile_body_shop",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-2",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-automobile-sales-and-service-3",
+        "use_name_raw": "Automobile Sales and Service",
+        "use_term_id": "zone-m-2-term-term-automobile_sales_and_service",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-3",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-automobile-service-station-4",
+        "use_name_raw": "Automobile Service Station",
+        "use_term_id": "zone-m-2-term-term-automobile_service_station",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-4",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-bulk-fuel-station-5",
+        "use_name_raw": "Bulk Fuel Station",
+        "use_term_id": "zone-m-2-term-term-bulk_fuel_station",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-5",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-equipment-sales-rental-service-6",
+        "use_name_raw": "Equipment Sales, Rental Service",
+        "use_term_id": "zone-m-2-term-term-equipment_sales_rental_service",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-6",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-extractive-facilities-7",
+        "use_name_raw": "Extractive Facilities",
+        "use_term_id": "zone-m-2-term-term-extractive_facilities",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-7",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-feedmill-8",
+        "use_name_raw": "Feedmill",
+        "use_term_id": "zone-m-2-term-term-feedmill",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-8",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-fire-station-9",
+        "use_name_raw": "Fire Station",
+        "use_term_id": "zone-m-2-term-term-fire_station",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-9",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-forestry-related-10",
+        "use_name_raw": "Forestry Related",
+        "use_term_id": "zone-m-2-term-term-forestry_related",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-10",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-heavy-equipment-repair-11",
+        "use_name_raw": "Heavy Equipment Repair",
+        "use_term_id": "zone-m-2-term-term-heavy_equipment_repair",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-11",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-kennel-12",
+        "use_name_raw": "Kennel",
+        "use_term_id": "zone-m-2-term-term-kennel",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-12",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-manufacturing-heavy-13",
+        "use_name_raw": "Manufacturing, Heavy",
+        "use_term_id": "zone-m-2-term-term-manufacturing_heavy",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-13",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-manufacturing-light-14",
+        "use_name_raw": "Manufacturing, Light",
+        "use_term_id": "zone-m-2-term-term-manufacturing_light",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-14",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-marijuana-production-facility-15",
+        "use_name_raw": "Marijuana Production Facility",
+        "use_term_id": "zone-m-2-term-term-marijuana_production_facility",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-15",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-office-16",
+        "use_name_raw": "Office",
+        "use_term_id": "zone-m-2-term-term-office",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-16",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-outdoor-storage-17",
+        "use_name_raw": "Outdoor Storage",
+        "use_term_id": "zone-m-2-term-term-outdoor_storage",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-17",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-police-station-18",
+        "use_name_raw": "Police Station",
+        "use_term_id": "zone-m-2-term-term-police_station",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-18",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-public-utility-service-operations-19",
+        "use_name_raw": "Public Utility Service Operations",
+        "use_term_id": "zone-m-2-term-term-public_utility_service_operations",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-19",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-recycling-depot-20",
+        "use_name_raw": "Recycling Depot",
+        "use_term_id": "zone-m-2-term-term-recycling_depot",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-20",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-retail-store-21",
+        "use_name_raw": "Retail Store",
+        "use_term_id": "zone-m-2-term-term-retail_store",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-21",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-retail-store-with-connected-retail-warehouse-light-manufacturing-or-assembly-facility-22",
+        "use_name_raw": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility",
+        "use_term_id": "zone-m-2-term-term-retail_store_with_connected_retail_warehouse_light_manufacturing_or_assembly_facility",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-22",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-retail-warehouse-23",
+        "use_name_raw": "Retail Warehouse",
+        "use_term_id": "zone-m-2-term-term-retail_warehouse",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-23",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-salvage-or-waste-disposal-facility-24",
+        "use_name_raw": "Salvage or Waste Disposal Facility",
+        "use_term_id": "zone-m-2-term-term-salvage_or_waste_disposal_facility",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-24",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-service-repair-establishment-25",
+        "use_name_raw": "Service Repair Establishment",
+        "use_term_id": "zone-m-2-term-term-service_repair_establishment",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-25",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-storage-facility-26",
+        "use_name_raw": "Storage Facility",
+        "use_term_id": "zone-m-2-term-term-storage_facility",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-26",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-transport-terminal-27",
+        "use_name_raw": "Transport Terminal",
+        "use_term_id": "zone-m-2-term-term-transport_terminal",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-27",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-transportation-services-28",
+        "use_name_raw": "Transportation Services",
+        "use_term_id": "zone-m-2-term-term-transportation_services",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-28",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-m-2-use-warehouse-and-or-distribution-centre-29",
+        "use_name_raw": "Warehouse and/or Distribution Centre",
+        "use_term_id": "zone-m-2-term-term-warehouse_and_or_distribution_centre",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-m-2-clause-39-1-29",
+        "confidence": "needs_review"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-m-2-num-zone-m-2-table-39-2-row-1-interior-lot-1",
+        "value_raw": "800 sq. m (8,611.4 sq ft)",
+        "value": 800,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "8,611.4 sq ft",
+            "value": 8611.4,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-m-2-table-39-2-row-1-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-m-2-num-zone-m-2-table-39-2-row-1-corner-lot-1",
+        "value_raw": "900 sq. m (9,687.8 sq ft)",
+        "value": 900,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "9,687.8 sq ft",
+            "value": 9687.8,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-m-2-table-39-2-row-1-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-m-2-num-zone-m-2-table-39-2-row-2-interior-lot-1",
+        "value_raw": "20 m (65.6 ft)",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "65.6 ft",
+            "value": 65.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-m-2-table-39-2-row-2-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-m-2-num-zone-m-2-table-39-2-row-2-corner-lot-1",
+        "value_raw": "20 m (65.6 ft)",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "65.6 ft",
+            "value": 65.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-m-2-table-39-2-row-2-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-m-2-num-zone-m-2-table-39-2-row-3-interior-lot-1",
+        "value_raw": "7.5 m (24.6 ft)",
+        "value": 7.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.6 ft",
+            "value": 24.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-m-2-table-39-2-row-3-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-m-2-num-zone-m-2-table-39-2-row-3-corner-lot-1",
+        "value_raw": "7.5 m (24.6 ft)",
+        "value": 7.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.6 ft",
+            "value": 24.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-m-2-table-39-2-row-3-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-m-2-num-zone-m-2-table-39-2-row-4-interior-lot-1",
+        "value_raw": "7.5 m (24.6 ft)",
+        "value": 7.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.6 ft",
+            "value": 24.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-m-2-table-39-2-row-4-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-m-2-num-zone-m-2-table-39-2-row-4-corner-lot-1",
+        "value_raw": "7.5 m (24.6 ft)",
+        "value": 7.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.6 ft",
+            "value": 24.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-m-2-table-39-2-row-4-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-m-2-num-zone-m-2-table-39-2-row-5-interior-lot-1",
+        "value_raw": "3.0 m (9.8 ft)",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "9.8 ft",
+            "value": 9.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-m-2-table-39-2-row-5-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-m-2-num-zone-m-2-table-39-2-row-5-corner-lot-1",
+        "value_raw": "3.0 m (9.8 ft)",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "9.8 ft",
+            "value": 9.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-m-2-table-39-2-row-5-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-m-2-num-zone-m-2-table-39-2-row-6-corner-lot-1",
+        "value_raw": "7.5 m (24.6 ft)",
+        "value": 7.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.6 ft",
+            "value": 24.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-m-2-table-39-2-row-6-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-m-2-num-zone-m-2-table-39-2-row-7-interior-lot-1",
+        "value_raw": "12.0 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-m-2-table-39-2-row-7-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-m-2-num-zone-m-2-table-39-2-row-7-corner-lot-1",
+        "value_raw": "12.0 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-m-2-table-39-2-row-7-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-m-2-req-zone-m-2-table-39-2-row-1-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Interior Lot 800 sq. m (8,611.4 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-m-2-num-zone-m-2-table-39-2-row-1-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-m-2-table-39-2-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-m-2-req-zone-m-2-table-39-2-row-1-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Corner Lot 900 sq. m (9,687.8 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-m-2-num-zone-m-2-table-39-2-row-1-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-m-2-table-39-2-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-m-2-req-zone-m-2-table-39-2-row-2-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Interior Lot 20 m (65.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-m-2-num-zone-m-2-table-39-2-row-2-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-m-2-table-39-2-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-m-2-req-zone-m-2-table-39-2-row-2-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Corner Lot 20 m (65.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-m-2-num-zone-m-2-table-39-2-row-2-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-m-2-table-39-2-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-m-2-req-zone-m-2-table-39-2-row-3-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Interior Lot 7.5 m (24.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-m-2-num-zone-m-2-table-39-2-row-3-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-m-2-table-39-2-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-m-2-req-zone-m-2-table-39-2-row-3-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Corner Lot 7.5 m (24.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-m-2-num-zone-m-2-table-39-2-row-3-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-m-2-table-39-2-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-m-2-req-zone-m-2-table-39-2-row-4-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Interior Lot 7.5 m (24.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-m-2-num-zone-m-2-table-39-2-row-4-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-m-2-table-39-2-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-m-2-req-zone-m-2-table-39-2-row-4-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Corner Lot 7.5 m (24.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-m-2-num-zone-m-2-table-39-2-row-4-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-m-2-table-39-2-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-m-2-req-zone-m-2-table-39-2-row-5-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Interior Lot 3.0 m (9.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-m-2-num-zone-m-2-table-39-2-row-5-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-m-2-table-39-2-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-m-2-req-zone-m-2-table-39-2-row-5-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Corner Lot 3.0 m (9.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-m-2-num-zone-m-2-table-39-2-row-5-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-m-2-table-39-2-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-m-2-req-zone-m-2-table-39-2-row-6-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "flankage_yard",
+        "requirement_label_raw": "Flankage Yard (Minimum)",
+        "requirement_text_raw": "Flankage Yard (Minimum) Corner Lot 7.5 m (24.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-m-2-num-zone-m-2-table-39-2-row-6-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-m-2-table-39-2-row-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-m-2-req-zone-m-2-table-39-2-row-7-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Interior Lot 12.0 m (39.4 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-m-2-num-zone-m-2-table-39-2-row-7-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-m-2-table-39-2-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-m-2-req-zone-m-2-table-39-2-row-7-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Corner Lot 12.0 m (39.4 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-m-2-num-zone-m-2-table-39-2-row-7-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-m-2-table-39-2-row-7"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-m-2-regulation-group-zone",
+        "group_label_raw": "39",
+        "group_title_raw": "HEAVY INDUSTRIAL ZONE (M-2)",
+        "regulated_use_terms": [
+          "zone-m-2-term-term-abattoir",
+          "zone-m-2-term-term-automobile_body_shop",
+          "zone-m-2-term-term-automobile_sales_and_service",
+          "zone-m-2-term-term-automobile_service_station",
+          "zone-m-2-term-term-bulk_fuel_station",
+          "zone-m-2-term-term-equipment_sales_rental_service",
+          "zone-m-2-term-term-extractive_facilities",
+          "zone-m-2-term-term-feedmill",
+          "zone-m-2-term-term-fire_station",
+          "zone-m-2-term-term-forestry_related",
+          "zone-m-2-term-term-heavy_equipment_repair",
+          "zone-m-2-term-term-kennel",
+          "zone-m-2-term-term-manufacturing_heavy",
+          "zone-m-2-term-term-manufacturing_light",
+          "zone-m-2-term-term-marijuana_production_facility",
+          "zone-m-2-term-term-office",
+          "zone-m-2-term-term-outdoor_storage",
+          "zone-m-2-term-term-police_station",
+          "zone-m-2-term-term-public_utility_service_operations",
+          "zone-m-2-term-term-recycling_depot",
+          "zone-m-2-term-term-retail_store",
+          "zone-m-2-term-term-retail_store_with_connected_retail_warehouse_light_manufacturing_or_assembly_facility",
+          "zone-m-2-term-term-retail_warehouse",
+          "zone-m-2-term-term-salvage_or_waste_disposal_facility",
+          "zone-m-2-term-term-service_repair_establishment",
+          "zone-m-2-term-term-storage_facility",
+          "zone-m-2-term-term-transport_terminal",
+          "zone-m-2-term-term-transportation_services",
+          "zone-m-2-term-term-warehouse_and_or_distribution_centre"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "M-2"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-m-2-req-zone-m-2-table-39-2-row-1-interior-lot",
+          "zone-m-2-req-zone-m-2-table-39-2-row-1-corner-lot",
+          "zone-m-2-req-zone-m-2-table-39-2-row-2-interior-lot",
+          "zone-m-2-req-zone-m-2-table-39-2-row-2-corner-lot",
+          "zone-m-2-req-zone-m-2-table-39-2-row-3-interior-lot",
+          "zone-m-2-req-zone-m-2-table-39-2-row-3-corner-lot",
+          "zone-m-2-req-zone-m-2-table-39-2-row-4-interior-lot",
+          "zone-m-2-req-zone-m-2-table-39-2-row-4-corner-lot",
+          "zone-m-2-req-zone-m-2-table-39-2-row-5-interior-lot",
+          "zone-m-2-req-zone-m-2-table-39-2-row-5-corner-lot",
+          "zone-m-2-req-zone-m-2-table-39-2-row-6-corner-lot",
+          "zone-m-2-req-zone-m-2-table-39-2-row-7-interior-lot",
+          "zone-m-2-req-zone-m-2-table-39-2-row-7-corner-lot"
+        ],
+        "source_section_ref": "zone-m-2-section-39-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-m-2-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "M-2",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-m-2-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-abattoir",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Abattoir",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-1"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-automobile-body-shop",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Automobile Body Shop",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-2"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-automobile-sales-and-service",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Automobile Sales and Service",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-3"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-automobile-service-station",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Automobile Service Station",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-4"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-bulk-fuel-station",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Bulk Fuel Station",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-5"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-equipment-sales-rental-service",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Equipment Sales, Rental Service",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-6"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-extractive-facilities",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Extractive Facilities",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-7"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-feedmill",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Feedmill",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-8"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-fire-station",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Fire Station",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-9"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-forestry-related",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Forestry Related",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-10"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-heavy-equipment-repair",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Heavy Equipment Repair",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-11"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-kennel",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Kennel",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-12"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-manufacturing-heavy",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Manufacturing, Heavy",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-13"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-manufacturing-light",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Manufacturing, Light",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-14"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-marijuana-production-facility",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Marijuana Production Facility",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-15"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-office",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Office",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-16"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-outdoor-storage",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Outdoor Storage",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-17"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-police-station",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Police Station",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-18"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-public-utility-service-operations",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Public Utility Service Operations",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-19"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-recycling-depot",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Recycling Depot",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-20"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-retail-store",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Retail Store",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-21"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-retail-store-with-connected-retail-warehouse-light-manufacturing-or-assembly-facility",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-22"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-retail-warehouse",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Retail Warehouse",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-23"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-salvage-or-waste-disposal-facility",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Salvage or Waste Disposal Facility",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-24"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-service-repair-establishment",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Service Repair Establishment",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-25"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-storage-facility",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Storage Facility",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-26"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-transport-terminal",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Transport Terminal",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-27"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-transportation-services",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Transportation Services",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-28"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-m-2-flag-unmatched-term-warehouse-and-or-distribution-centre",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Warehouse and/or Distribution Centre",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-m-2-clause-39-1-29"
+        }
+      ]
+    }
+  ]
 }

@@ -1,393 +1,963 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+    "document_type": "zone",
     "zone_code": "P",
     "zone_name": "PARKING ZONE",
-    "part_label_raw": "43",
-    "chapter_heading_raw": "43 PARKING ZONE (P)"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": []
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "43.1.1",
-      "use_type": "institutional_or_open_space_use",
-      "use_name": "Parking Lot",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 118,
-        "pdf_page_end": 118,
-        "bylaw_page_start": 118,
-        "bylaw_page_end": 118
-      },
-      "clause_path": [
-        "43.1.1"
-      ]
-    },
-    {
-      "clause_label_raw": "43.1.2",
-      "use_type": "institutional_or_open_space_use",
-      "use_name": "Parking Structure.",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 118,
-        "pdf_page_end": 118,
-        "bylaw_page_start": 118,
-        "bylaw_page_end": 118
-      },
-      "clause_path": [
-        "43.1.2"
-      ]
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "43.1",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 118,
-        "pdf_page_end": 118,
-        "bylaw_page_start": 118,
-        "bylaw_page_end": 118
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "43.1.1",
-          "clause_path": [
-            "43.1.1"
-          ],
-          "text": "Parking Lot; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 118,
-            "pdf_page_end": 118,
-            "bylaw_page_start": 118,
-            "bylaw_page_end": 118
-          }
-        },
-        {
-          "provision_label_raw": "43.1.2",
-          "clause_path": [
-            "43.1.2"
-          ],
-          "text": "Parking Structure.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 118,
-            "pdf_page_end": 118,
-            "bylaw_page_start": 118,
-            "bylaw_page_end": 118
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": "43.2",
-      "title_label_raw": "REGULATIONS FOR PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 118,
-        "pdf_page_end": 119,
-        "bylaw_page_start": 118,
-        "bylaw_page_end": 119
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "43.2.1",
-          "clause_path": [
-            "43.2.1"
-          ],
-          "text": "Council may approve a new Parking Structure designed predominantly for Parking of motor vehicles to a maximum Height of 12 m (39.4 ft.);",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 118,
-            "pdf_page_end": 118,
-            "bylaw_page_start": 118,
-            "bylaw_page_end": 118
-          }
-        },
-        {
-          "provision_label_raw": "43.2.2",
-          "clause_path": [
-            "43.2.2"
-          ],
-          "text": "Where four (4) or more vehicles are required for the land use on a Lot, the following minimum requirements shall apply:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 118,
-            "pdf_page_end": 118,
-            "bylaw_page_start": 118,
-            "bylaw_page_end": 118
-          }
-        },
-        {
-          "provision_label_raw": "a",
-          "clause_path": [
-            "43.2.2",
-            "a"
-          ],
-          "text": "The Parking Spaces shall be on a stable surface having a minimum size of 2.75 m (9.0 ft.) wide by 6.1 m (20.0 ft.) in length, with an aisle width of 6.7 m (22.0 ft.) for right angle Parking, 5.49 m (18.0 ft.) for 60 Parking, 3.35 m (11.0 ft.) for 45 or less;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 118,
-            "pdf_page_end": 118,
-            "bylaw_page_start": 118,
-            "bylaw_page_end": 118
-          }
-        },
-        {
-          "provision_label_raw": "b",
-          "clause_path": [
-            "43.2.2",
-            "b"
-          ],
-          "text": "The Parking Area shall be on a stable surface (pavement, gravel) to prevent the raising of dust and to prevent tracking materials on to a Street;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 118,
-            "pdf_page_end": 118,
-            "bylaw_page_start": 118,
-            "bylaw_page_end": 118
-          }
-        },
-        {
-          "provision_label_raw": "c",
-          "clause_path": [
-            "43.2.2",
-            "c"
-          ],
-          "text": "The Parking Lot shall allow for surface water drainage to a central storm system or Street drainage, Designed so that at no time shall water drain onto adjoining Lots, and the City may require an engineering assessment of the elevations and drainage to be provided.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 118,
-            "pdf_page_end": 118,
-            "bylaw_page_start": 118,
-            "bylaw_page_end": 118
-          }
-        },
-        {
-          "provision_label_raw": "d",
-          "clause_path": [
-            "43.2.2",
-            "d"
-          ],
-          "text": "Light used for illumination of the Parking Lot or Parking station shall be arranged so as to direct light away from adjacent Lots;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 118,
-            "pdf_page_end": 118,
-            "bylaw_page_start": 118,
-            "bylaw_page_end": 118
-          }
-        },
-        {
-          "provision_label_raw": "e",
-          "clause_path": [
-            "43.2.2",
-            "e"
-          ],
-          "text": "A Buffer, satisfactory to the Development Officer, consisting of a fence or mature trees, or both, shall be provided where a Parking Lot abuts a residential zone or a building occupied for residential use in a commercial zone;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 118,
-            "pdf_page_end": 118,
-            "bylaw_page_start": 118,
-            "bylaw_page_end": 118
-          }
-        },
-        {
-          "provision_label_raw": "f",
-          "clause_path": [
-            "43.2.2",
-            "f"
-          ],
-          "text": "The access to the Parking Lot or structure shall be 3 m (9.8 ft.) for one-way traffic and 6.1 m (20.0 ft.) for two-way traffic with a maximum width of access to a public Street to be 7.6 m (24.9 ft.), and individual Parking Spaces shall not have direct access to the Street but shall be Designed for access by way of the common access to the Parking Lot;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 118,
-            "pdf_page_end": 118,
-            "bylaw_page_start": 118,
-            "bylaw_page_end": 118
-          }
-        },
-        {
-          "provision_label_raw": "g",
-          "clause_path": [
-            "43.2.2",
-            "g"
-          ],
-          "text": "A structure of not more than 3.66 m (12.0 ft.) in Height and 4.65 sq. m (50.1 sq. ft.) in area may be erected on a Parking Lot for the use of attendants, and it shall be painted and maintained in good condition;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 118,
-            "pdf_page_end": 118,
-            "bylaw_page_start": 118,
-            "bylaw_page_end": 118
-          }
-        },
-        {
-          "provision_label_raw": "h",
-          "clause_path": [
-            "43.2.2",
-            "h"
-          ],
-          "text": "No Signs shall be permitted other than directional Signs for traffic and a Sign showing the name of the Owner or the Parking Lot which shall not exceed 1.1 sq. m (11.8 sq. ft.) in area;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 118,
-            "pdf_page_end": 118,
-            "bylaw_page_start": 118,
-            "bylaw_page_end": 118
-          }
-        },
-        {
-          "provision_label_raw": "i",
-          "clause_path": [
-            "43.2.2",
-            "i"
-          ],
-          "text": "A scaled drawing shall be submitted showing the Parking Spaces, aisles, Easements, access to the Lot, drainage, buildings, lighting, Signs and other pertinent information that may be required by the Development Officer;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 118,
-            "pdf_page_end": 118,
-            "bylaw_page_start": 118,
-            "bylaw_page_end": 118
-          }
-        },
-        {
-          "provision_label_raw": "j",
-          "clause_path": [
-            "43.2.2",
-            "j"
-          ],
-          "text": "Any Parking Space requirement which is calculated to a fraction of one-half or more shall require the provision of an additional Parking Space;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 118,
-            "pdf_page_end": 118,
-            "bylaw_page_start": 118,
-            "bylaw_page_end": 118
-          }
-        },
-        {
-          "provision_label_raw": "k",
-          "clause_path": [
-            "43.2.2",
-            "k"
-          ],
-          "text": "A Parking structure may be located in this Zone upon approval of Council after consideration of the following:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 119,
-            "pdf_page_end": 119,
-            "bylaw_page_start": 119,
-            "bylaw_page_end": 119
-          }
-        },
-        {
-          "provision_label_raw": "i",
-          "clause_path": [
-            "43.2.2",
-            "i"
-          ],
-          "text": "traffic and access to the site;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 119,
-            "pdf_page_end": 119,
-            "bylaw_page_start": 119,
-            "bylaw_page_end": 119
-          }
-        },
-        {
-          "provision_label_raw": "ii",
-          "clause_path": [
-            "43.2.2",
-            "ii"
-          ],
-          "text": "drainage and services available in the area;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 119,
-            "pdf_page_end": 119,
-            "bylaw_page_start": 119,
-            "bylaw_page_end": 119
-          }
-        },
-        {
-          "provision_label_raw": "iii",
-          "clause_path": [
-            "43.2.2",
-            "iii"
-          ],
-          "text": "architectural compatibility of the Parking structure to the neighbourhood;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 119,
-            "pdf_page_end": 119,
-            "bylaw_page_start": 119,
-            "bylaw_page_end": 119
-          }
-        },
-        {
-          "provision_label_raw": "iv",
-          "clause_path": [
-            "43.2.2",
-            "iv"
-          ],
-          "text": "impact of a Parking structure on the adjoining residential areas",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 119,
-            "pdf_page_end": 119,
-            "bylaw_page_start": 119,
-            "bylaw_page_end": 119
-          }
-        },
-        {
-          "provision_label_raw": "43.2.3",
-          "clause_path": [
-            "43.2.3"
-          ],
-          "text": "Council may, at its discretion, call a public meeting to consider input from the public on any proposed Parking Structure.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 119,
-            "pdf_page_end": 119,
-            "bylaw_page_start": 119,
-            "bylaw_page_end": 119
-          }
-        }
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [],
-  "content_blocks": [],
-  "open_issues": [
-    {
-      "issue_type": "source_revision_review",
-      "description": "Source PDF cover identifies rev 049 updated March 9, 2026, but this zone page header may display rev 048 updated October 24, 2025; verify source revision during QA."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "43",
+    "zone_title_raw": "PARKING ZONE (P)",
+    "citations": {
       "pdf_page_start": 118,
       "pdf_page_end": 119,
       "bylaw_page_start": 118,
       "bylaw_page_end": 119
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-p",
+        "source_unit_type": "zone",
+        "label_raw": "43",
+        "title_raw": "PARKING ZONE (P)",
+        "text_raw": "Parking Lot; and\nParking Structure.\nCouncil may approve a new Parking Structure designed predominantly for Parking of motor vehicles to a maximum Height of 12 m (39.4 ft.);\nWhere four (4) or more vehicles are required for the land use on a Lot, the following minimum requirements shall apply:\nThe Parking Spaces shall be on a stable surface having a minimum size of 2.75 m (9.0 ft.) wide by 6.1 m (20.0 ft.) in length, with an aisle width of 6.7 m (22.0 ft.) for right angle Parking, 5.49 m (18.0 ft.) for 60 Parking, 3.35 m (11.0 ft.) for 45 or less;\nThe Parking Area shall be on a stable surface (pavement, gravel) to prevent the raising of dust and to prevent tracking materials on to a Street;\nThe Parking Lot shall allow for surface water drainage to a central storm system or Street drainage, Designed so that at no time shall water drain onto adjoining Lots, and the City may require an engineering assessment of the elevations and drainage to be provided.\nLight used for illumination of the Parking Lot or Parking station shall be arranged so as to direct light away from adjacent Lots;\nA Buffer, satisfactory to the Development Officer, consisting of a fence or mature trees, or both, shall be provided where a Parking Lot abuts a residential zone or a building occupied for residential use in a commercial zone;\nThe access to the Parking Lot or structure shall be 3 m (9.8 ft.) for one-way traffic and 6.1 m (20.0 ft.) for two-way traffic with a maximum width of access to a public Street to be 7.6 m (24.9 ft.), and individual Parking Spaces shall not have direct access to the Street but shall be Designed for access by way of the common access to the Parking Lot;\nA structure of not more than 3.66 m (12.0 ft.) in Height and 4.65 sq. m (50.1 sq. ft.) in area may be erected on a Parking Lot for the use of attendants, and it shall be painted and maintained in good condition;\nNo Signs shall be permitted other than directional Signs for traffic and a Sign showing the name of the Owner or the Parking Lot which shall not exceed 1.1 sq. m (11.8 sq. ft.) in area;\nA scaled drawing shall be submitted showing the Parking Spaces, aisles, Easements, access to the Lot, drainage, buildings, lighting, Signs and other pertinent information that may be required by the Development Officer;\nAny Parking Space requirement which is calculated to a fraction of one-half or more shall require the provision of an additional Parking Space;\nA Parking structure may be located in this Zone upon approval of Council after consideration of the following:\ntraffic and access to the site;\ndrainage and services available in the area;\narchitectural compatibility of the Parking structure to the neighbourhood;\nimpact of a Parking structure on the adjoining residential areas\nCouncil may, at its discretion, call a public meeting to consider input from the public on any proposed Parking Structure.",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 118,
+          "pdf_page_end": 119,
+          "bylaw_page_start": 118,
+          "bylaw_page_end": 119
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-p-section-43-1",
+        "section_label_raw": "43.1",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-p-clause-43-1-1",
+            "clause_label_raw": "43.1.1",
+            "clause_text_raw": "Parking Lot; and",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 118,
+              "pdf_page_end": 118,
+              "bylaw_page_start": 118,
+              "bylaw_page_end": 118
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-43-1-2",
+            "clause_label_raw": "43.1.2",
+            "clause_text_raw": "Parking Structure.",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 118,
+              "pdf_page_end": 118,
+              "bylaw_page_start": 118,
+              "bylaw_page_end": 118
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 118,
+          "pdf_page_end": 118,
+          "bylaw_page_start": 118,
+          "bylaw_page_end": 118
+        }
+      },
+      {
+        "section_id": "zone-p-section-43-2",
+        "section_label_raw": "43.2",
+        "section_title_raw": "REGULATIONS FOR PERMITTED USES",
+        "source_order": 2,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-p-clause-43-2-1",
+            "clause_label_raw": "43.2.1",
+            "clause_text_raw": "Council may approve a new Parking Structure designed predominantly for Parking of motor vehicles to a maximum Height of 12 m (39.4 ft.);",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 118,
+              "pdf_page_end": 118,
+              "bylaw_page_start": 118,
+              "bylaw_page_end": 118
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-43-2-2",
+            "clause_label_raw": "43.2.2",
+            "clause_text_raw": "Where four (4) or more vehicles are required for the land use on a Lot, the following minimum requirements shall apply:",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 118,
+              "pdf_page_end": 118,
+              "bylaw_page_start": 118,
+              "bylaw_page_end": 118
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-43-2-2-a",
+            "clause_label_raw": "a",
+            "clause_text_raw": "The Parking Spaces shall be on a stable surface having a minimum size of 2.75 m (9.0 ft.) wide by 6.1 m (20.0 ft.) in length, with an aisle width of 6.7 m (22.0 ft.) for right angle Parking, 5.49 m (18.0 ft.) for 60 Parking, 3.35 m (11.0 ft.) for 45 or less;",
+            "parent_clause_id": "zone-p-clause-43-2-2",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 118,
+              "pdf_page_end": 118,
+              "bylaw_page_start": 118,
+              "bylaw_page_end": 118
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-43-2-2-b",
+            "clause_label_raw": "b",
+            "clause_text_raw": "The Parking Area shall be on a stable surface (pavement, gravel) to prevent the raising of dust and to prevent tracking materials on to a Street;",
+            "parent_clause_id": "zone-p-clause-43-2-2",
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 118,
+              "pdf_page_end": 118,
+              "bylaw_page_start": 118,
+              "bylaw_page_end": 118
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-43-2-2-c",
+            "clause_label_raw": "c",
+            "clause_text_raw": "The Parking Lot shall allow for surface water drainage to a central storm system or Street drainage, Designed so that at no time shall water drain onto adjoining Lots, and the City may require an engineering assessment of the elevations and drainage to be provided.",
+            "parent_clause_id": "zone-p-clause-43-2-2",
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 118,
+              "pdf_page_end": 118,
+              "bylaw_page_start": 118,
+              "bylaw_page_end": 118
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-43-2-2-d",
+            "clause_label_raw": "d",
+            "clause_text_raw": "Light used for illumination of the Parking Lot or Parking station shall be arranged so as to direct light away from adjacent Lots;",
+            "parent_clause_id": "zone-p-clause-43-2-2",
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 118,
+              "pdf_page_end": 118,
+              "bylaw_page_start": 118,
+              "bylaw_page_end": 118
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-43-2-2-e",
+            "clause_label_raw": "e",
+            "clause_text_raw": "A Buffer, satisfactory to the Development Officer, consisting of a fence or mature trees, or both, shall be provided where a Parking Lot abuts a residential zone or a building occupied for residential use in a commercial zone;",
+            "parent_clause_id": "zone-p-clause-43-2-2",
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 118,
+              "pdf_page_end": 118,
+              "bylaw_page_start": 118,
+              "bylaw_page_end": 118
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-43-2-2-f",
+            "clause_label_raw": "f",
+            "clause_text_raw": "The access to the Parking Lot or structure shall be 3 m (9.8 ft.) for one-way traffic and 6.1 m (20.0 ft.) for two-way traffic with a maximum width of access to a public Street to be 7.6 m (24.9 ft.), and individual Parking Spaces shall not have direct access to the Street but shall be Designed for access by way of the common access to the Parking Lot;",
+            "parent_clause_id": "zone-p-clause-43-2-2",
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 118,
+              "pdf_page_end": 118,
+              "bylaw_page_start": 118,
+              "bylaw_page_end": 118
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-43-2-2-g",
+            "clause_label_raw": "g",
+            "clause_text_raw": "A structure of not more than 3.66 m (12.0 ft.) in Height and 4.65 sq. m (50.1 sq. ft.) in area may be erected on a Parking Lot for the use of attendants, and it shall be painted and maintained in good condition;",
+            "parent_clause_id": "zone-p-clause-43-2-2",
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 118,
+              "pdf_page_end": 118,
+              "bylaw_page_start": 118,
+              "bylaw_page_end": 118
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-43-2-2-h",
+            "clause_label_raw": "h",
+            "clause_text_raw": "No Signs shall be permitted other than directional Signs for traffic and a Sign showing the name of the Owner or the Parking Lot which shall not exceed 1.1 sq. m (11.8 sq. ft.) in area;",
+            "parent_clause_id": "zone-p-clause-43-2-2",
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 118,
+              "pdf_page_end": 118,
+              "bylaw_page_start": 118,
+              "bylaw_page_end": 118
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-43-2-2-i",
+            "clause_label_raw": "i",
+            "clause_text_raw": "A scaled drawing shall be submitted showing the Parking Spaces, aisles, Easements, access to the Lot, drainage, buildings, lighting, Signs and other pertinent information that may be required by the Development Officer;",
+            "parent_clause_id": "zone-p-clause-43-2-2",
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 118,
+              "pdf_page_end": 118,
+              "bylaw_page_start": 118,
+              "bylaw_page_end": 118
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-43-2-2-j",
+            "clause_label_raw": "j",
+            "clause_text_raw": "Any Parking Space requirement which is calculated to a fraction of one-half or more shall require the provision of an additional Parking Space;",
+            "parent_clause_id": "zone-p-clause-43-2-2",
+            "source_order": 12,
+            "citations": {
+              "pdf_page_start": 118,
+              "pdf_page_end": 118,
+              "bylaw_page_start": 118,
+              "bylaw_page_end": 118
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-43-2-2-k",
+            "clause_label_raw": "k",
+            "clause_text_raw": "A Parking structure may be located in this Zone upon approval of Council after consideration of the following:",
+            "parent_clause_id": "zone-p-clause-43-2-2",
+            "source_order": 13,
+            "citations": {
+              "pdf_page_start": 119,
+              "pdf_page_end": 119,
+              "bylaw_page_start": 119,
+              "bylaw_page_end": 119
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-43-2-2-i",
+            "clause_label_raw": "i",
+            "clause_text_raw": "traffic and access to the site;",
+            "parent_clause_id": "zone-p-clause-43-2-2",
+            "source_order": 14,
+            "citations": {
+              "pdf_page_start": 119,
+              "pdf_page_end": 119,
+              "bylaw_page_start": 119,
+              "bylaw_page_end": 119
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-43-2-2-ii",
+            "clause_label_raw": "ii",
+            "clause_text_raw": "drainage and services available in the area;",
+            "parent_clause_id": "zone-p-clause-43-2-2",
+            "source_order": 15,
+            "citations": {
+              "pdf_page_start": 119,
+              "pdf_page_end": 119,
+              "bylaw_page_start": 119,
+              "bylaw_page_end": 119
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-43-2-2-iii",
+            "clause_label_raw": "iii",
+            "clause_text_raw": "architectural compatibility of the Parking structure to the neighbourhood;",
+            "parent_clause_id": "zone-p-clause-43-2-2",
+            "source_order": 16,
+            "citations": {
+              "pdf_page_start": 119,
+              "pdf_page_end": 119,
+              "bylaw_page_start": 119,
+              "bylaw_page_end": 119
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-43-2-2-iv",
+            "clause_label_raw": "iv",
+            "clause_text_raw": "impact of a Parking structure on the adjoining residential areas",
+            "parent_clause_id": "zone-p-clause-43-2-2",
+            "source_order": 17,
+            "citations": {
+              "pdf_page_start": 119,
+              "pdf_page_end": 119,
+              "bylaw_page_start": 119,
+              "bylaw_page_end": 119
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-43-2-3",
+            "clause_label_raw": "43.2.3",
+            "clause_text_raw": "Council may, at its discretion, call a public meeting to consider input from the public on any proposed Parking Structure.",
+            "parent_clause_id": null,
+            "source_order": 18,
+            "citations": {
+              "pdf_page_start": 119,
+              "pdf_page_end": 119,
+              "bylaw_page_start": 119,
+              "bylaw_page_end": 119
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 118,
+          "pdf_page_end": 119,
+          "bylaw_page_start": 118,
+          "bylaw_page_end": 119
+        }
+      }
+    ],
+    "tables_raw": [],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-p-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 118,
+          "pdf_page_end": 119,
+          "bylaw_page_start": 118,
+          "bylaw_page_end": 119
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-p-clause-43-1-1",
+        "section_id": "zone-p-section-43-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-p-clause-43-1-2",
+        "section_id": "zone-p-section-43-1",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-p-clause-43-2-1",
+        "section_id": "zone-p-section-43-2",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-p-clause-43-2-2",
+        "section_id": "zone-p-section-43-2",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-p-clause-43-2-2-a",
+        "section_id": "zone-p-section-43-2",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-p-clause-43-2-2-b",
+        "section_id": "zone-p-section-43-2",
+        "source_order": 6
+      },
+      {
+        "clause_id": "zone-p-clause-43-2-2-c",
+        "section_id": "zone-p-section-43-2",
+        "source_order": 7
+      },
+      {
+        "clause_id": "zone-p-clause-43-2-2-d",
+        "section_id": "zone-p-section-43-2",
+        "source_order": 8
+      },
+      {
+        "clause_id": "zone-p-clause-43-2-2-e",
+        "section_id": "zone-p-section-43-2",
+        "source_order": 9
+      },
+      {
+        "clause_id": "zone-p-clause-43-2-2-f",
+        "section_id": "zone-p-section-43-2",
+        "source_order": 10
+      },
+      {
+        "clause_id": "zone-p-clause-43-2-2-g",
+        "section_id": "zone-p-section-43-2",
+        "source_order": 11
+      },
+      {
+        "clause_id": "zone-p-clause-43-2-2-h",
+        "section_id": "zone-p-section-43-2",
+        "source_order": 12
+      },
+      {
+        "clause_id": "zone-p-clause-43-2-2-i",
+        "section_id": "zone-p-section-43-2",
+        "source_order": 13
+      },
+      {
+        "clause_id": "zone-p-clause-43-2-2-j",
+        "section_id": "zone-p-section-43-2",
+        "source_order": 14
+      },
+      {
+        "clause_id": "zone-p-clause-43-2-2-k",
+        "section_id": "zone-p-section-43-2",
+        "source_order": 15
+      },
+      {
+        "clause_id": "zone-p-clause-43-2-2-i",
+        "section_id": "zone-p-section-43-2",
+        "source_order": 16
+      },
+      {
+        "clause_id": "zone-p-clause-43-2-2-ii",
+        "section_id": "zone-p-section-43-2",
+        "source_order": 17
+      },
+      {
+        "clause_id": "zone-p-clause-43-2-2-iii",
+        "section_id": "zone-p-section-43-2",
+        "source_order": 18
+      },
+      {
+        "clause_id": "zone-p-clause-43-2-2-iv",
+        "section_id": "zone-p-section-43-2",
+        "source_order": 19
+      },
+      {
+        "clause_id": "zone-p-clause-43-2-3",
+        "section_id": "zone-p-section-43-2",
+        "source_order": 20
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-p-term-term-parking_lot",
+        "term_raw": "Parking Lot",
+        "term_normalized": "parking_lot",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-43-1-1"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-p-term-term-parking_structure",
+        "term_raw": "Parking Structure",
+        "term_normalized": "parking_structure",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-43-1-2"
+          }
+        ],
+        "confidence": "needs_review"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-p-use-parking-lot-1",
+        "use_name_raw": "Parking Lot",
+        "use_term_id": "zone-p-term-term-parking_lot",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-p-clause-43-1-1",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-p-use-parking-structure-2",
+        "use_name_raw": "Parking Structure",
+        "use_term_id": "zone-p-term-term-parking_structure",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-p-clause-43-1-2",
+        "confidence": "needs_review"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-43-2-1-1",
+        "value_raw": "12 m (39.4 ft",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-43-2-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-43-2-2-a-1",
+        "value_raw": "2.75 m (9.0 ft",
+        "value": 2.75,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "9.0 ft",
+            "value": 9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-43-2-2-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-43-2-2-a-2",
+        "value_raw": "6.1 m (20.0 ft",
+        "value": 6.1,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "20.0 ft",
+            "value": 20,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-43-2-2-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-43-2-2-a-3",
+        "value_raw": "6.7 m (22.0 ft",
+        "value": 6.7,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "22.0 ft",
+            "value": 22,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-43-2-2-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-43-2-2-a-4",
+        "value_raw": "5.49 m (18.0 ft",
+        "value": 5.49,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "18.0 ft",
+            "value": 18,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-43-2-2-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-43-2-2-a-5",
+        "value_raw": "3.35 m (11.0 ft",
+        "value": 3.35,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "11.0 ft",
+            "value": 11,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-43-2-2-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-43-2-2-f-1",
+        "value_raw": "3 m (9.8 ft",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "9.8 ft",
+            "value": 9.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-43-2-2-f"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-43-2-2-f-2",
+        "value_raw": "6.1 m (20.0 ft",
+        "value": 6.1,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "20.0 ft",
+            "value": 20,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-43-2-2-f"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-43-2-2-f-3",
+        "value_raw": "7.6 m (24.9 ft",
+        "value": 7.6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "24.9 ft",
+            "value": 24.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-43-2-2-f"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-43-2-2-g-1",
+        "value_raw": "3.66 m (12.0 ft",
+        "value": 3.66,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "at_most",
+        "alternative_values": [
+          {
+            "value_raw": "12.0 ft",
+            "value": 12,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-43-2-2-g"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-43-2-2-g-2",
+        "value_raw": "4.65 sq. m (50.1 sq. ft",
+        "value": 4.65,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "at_most",
+        "alternative_values": [
+          {
+            "value_raw": "50.1 sq. ft",
+            "value": 50.1,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-43-2-2-g"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-43-2-2-h-1",
+        "value_raw": "1.1 sq. m (11.8 sq. ft",
+        "value": 1.1,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "exact",
+        "alternative_values": [
+          {
+            "value_raw": "11.8 sq. ft",
+            "value": 11.8,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-43-2-2-h"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-p-req-zone-p-clause-43-2-1",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "43.2.1",
+        "requirement_text_raw": "Council may approve a new Parking Structure designed predominantly for Parking of motor vehicles to a maximum Height of 12 m (39.4 ft.);",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-p-num-zone-p-clause-43-2-1-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-43-2-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-p-req-zone-p-clause-43-2-2-a",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "parking",
+        "requirement_label_raw": "a",
+        "requirement_text_raw": "The Parking Spaces shall be on a stable surface having a minimum size of 2.75 m (9.0 ft.) wide by 6.1 m (20.0 ft.) in length, with an aisle width of 6.7 m (22.0 ft.) for right angle Parking, 5.49 m (18.0 ft.) for 60 Parking, 3.35 m (11.0 ft.) for 45 or less;",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-p-num-zone-p-clause-43-2-2-a-1",
+          "zone-p-num-zone-p-clause-43-2-2-a-2",
+          "zone-p-num-zone-p-clause-43-2-2-a-3",
+          "zone-p-num-zone-p-clause-43-2-2-a-4",
+          "zone-p-num-zone-p-clause-43-2-2-a-5"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-43-2-2-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-p-req-zone-p-clause-43-2-2-f",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "parking",
+        "requirement_label_raw": "f",
+        "requirement_text_raw": "The access to the Parking Lot or structure shall be 3 m (9.8 ft.) for one-way traffic and 6.1 m (20.0 ft.) for two-way traffic with a maximum width of access to a public Street to be 7.6 m (24.9 ft.), and individual Parking Spaces shall not have direct access to the Street but shall be Designed for access by way of the common access to the Parking Lot;",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-p-num-zone-p-clause-43-2-2-f-1",
+          "zone-p-num-zone-p-clause-43-2-2-f-2",
+          "zone-p-num-zone-p-clause-43-2-2-f-3"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-43-2-2-f"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-p-req-zone-p-clause-43-2-2-g",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "g",
+        "requirement_text_raw": "A structure of not more than 3.66 m (12.0 ft.) in Height and 4.65 sq. m (50.1 sq. ft.) in area may be erected on a Parking Lot for the use of attendants, and it shall be painted and maintained in good condition;",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-p-num-zone-p-clause-43-2-2-g-1",
+          "zone-p-num-zone-p-clause-43-2-2-g-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-43-2-2-g"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-p-req-zone-p-clause-43-2-2-h",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "parking",
+        "requirement_label_raw": "h",
+        "requirement_text_raw": "No Signs shall be permitted other than directional Signs for traffic and a Sign showing the name of the Owner or the Parking Lot which shall not exceed 1.1 sq. m (11.8 sq. ft.) in area;",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-p-num-zone-p-clause-43-2-2-h-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-43-2-2-h"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-p-regulation-group-zone",
+        "group_label_raw": "43",
+        "group_title_raw": "PARKING ZONE (P)",
+        "regulated_use_terms": [
+          "zone-p-term-term-parking_lot",
+          "zone-p-term-term-parking_structure"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "P"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-p-req-zone-p-clause-43-2-1",
+          "zone-p-req-zone-p-clause-43-2-2-a",
+          "zone-p-req-zone-p-clause-43-2-2-f",
+          "zone-p-req-zone-p-clause-43-2-2-g",
+          "zone-p-req-zone-p-clause-43-2-2-h"
+        ],
+        "source_section_ref": "zone-p-section-43-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-p-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "P",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-p-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-p-flag-unmatched-term-parking-lot",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Parking Lot",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-p-clause-43-1-1"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-p-flag-unmatched-term-parking-structure",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Parking Structure",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-p-clause-43-1-2"
+        }
+      ]
+    }
+  ]
 }

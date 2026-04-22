@@ -1,839 +1,4071 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+    "document_type": "zone",
     "zone_code": "I",
     "zone_name": "INSTITUTIONAL ZONE",
-    "part_label_raw": "22",
-    "chapter_heading_raw": "22 INSTITUTIONAL ZONE (I)"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": []
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "22.1.1",
-      "use_type": "principal_use",
-      "use_name": "Cemetery",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.1"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.2",
-      "use_type": "principal_use",
-      "use_name": "Club",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.2"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.3",
-      "use_type": "principal_use",
-      "use_name": "Commercial Daycare Centre",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.3"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.4",
-      "use_type": "principal_use",
-      "use_name": "Community Building",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.4"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.5",
-      "use_type": "principal_use",
-      "use_name": "Community Care Facility",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.5"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.6",
-      "use_type": "principal_use",
-      "use_name": "Community Institutional",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.6"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.7",
-      "use_type": "institutional_or_open_space_use",
-      "use_name": "Cultural Establishment",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.7"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.8",
-      "use_type": "principal_use",
-      "use_name": "Dormitory",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.8"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.9",
-      "use_type": "principal_use",
-      "use_name": "Educational Institution (private)",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.9"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.10",
-      "use_type": "principal_use",
-      "use_name": "Educational Institution (public)",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.10"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.11",
-      "use_type": "principal_use",
-      "use_name": "Fire Station",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.11"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.12",
-      "use_type": "principal_use",
-      "use_name": "Funeral Establishment",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.12"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.13",
-      "use_type": "principal_use",
-      "use_name": "Government Office",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.13"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.14",
-      "use_type": "principal_use",
-      "use_name": "Hospital",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.14"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.15",
-      "use_type": "principal_use",
-      "use_name": "Library",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.15"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.16",
-      "use_type": "principal_use",
-      "use_name": "Lodging House",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.16"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.17",
-      "use_type": "principal_use",
-      "use_name": "Medical, Health and Dental Office",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.17"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.18",
-      "use_type": "residential_use",
-      "use_name": "Nursing Home",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.18"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.19",
-      "use_type": "principal_use",
-      "use_name": "Place of Worship",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.19"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.20",
-      "use_type": "principal_use",
-      "use_name": "Police Station",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.20"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.21",
-      "use_type": "principal_use",
-      "use_name": "Public Utility Service Operation",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.21"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.22",
-      "use_type": "principal_use",
-      "use_name": "Recreation or Fitness Center (indoors)",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.22"
-      ]
-    },
-    {
-      "clause_label_raw": "22.1.23",
-      "use_type": "principal_use",
-      "use_name": "Transitional Housing Facility",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "clause_path": [
-        "22.1.23"
-      ]
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "22.1",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 82,
-        "pdf_page_end": 82,
-        "bylaw_page_start": 82,
-        "bylaw_page_end": 82
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "22.1.1",
-          "clause_path": [
-            "22.1.1"
-          ],
-          "text": "Cemetery;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.2",
-          "clause_path": [
-            "22.1.2"
-          ],
-          "text": "Club;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.3",
-          "clause_path": [
-            "22.1.3"
-          ],
-          "text": "Commercial Daycare Centre;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.4",
-          "clause_path": [
-            "22.1.4"
-          ],
-          "text": "Community Building;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.5",
-          "clause_path": [
-            "22.1.5"
-          ],
-          "text": "Community Care Facility;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.6",
-          "clause_path": [
-            "22.1.6"
-          ],
-          "text": "Community Institutional;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.7",
-          "clause_path": [
-            "22.1.7"
-          ],
-          "text": "Cultural Establishment;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.8",
-          "clause_path": [
-            "22.1.8"
-          ],
-          "text": "Dormitory;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.9",
-          "clause_path": [
-            "22.1.9"
-          ],
-          "text": "Educational Institution (private);",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.10",
-          "clause_path": [
-            "22.1.10"
-          ],
-          "text": "Educational Institution (public);",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.11",
-          "clause_path": [
-            "22.1.11"
-          ],
-          "text": "Fire Station;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.12",
-          "clause_path": [
-            "22.1.12"
-          ],
-          "text": "Funeral Establishment;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.13",
-          "clause_path": [
-            "22.1.13"
-          ],
-          "text": "Government Office;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.14",
-          "clause_path": [
-            "22.1.14"
-          ],
-          "text": "Hospital;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.15",
-          "clause_path": [
-            "22.1.15"
-          ],
-          "text": "Library;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.16",
-          "clause_path": [
-            "22.1.16"
-          ],
-          "text": "Lodging House;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.17",
-          "clause_path": [
-            "22.1.17"
-          ],
-          "text": "Medical, Health and Dental Office;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.18",
-          "clause_path": [
-            "22.1.18"
-          ],
-          "text": "Nursing Home;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.19",
-          "clause_path": [
-            "22.1.19"
-          ],
-          "text": "Place of Worship;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.20",
-          "clause_path": [
-            "22.1.20"
-          ],
-          "text": "Police Station;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.21",
-          "clause_path": [
-            "22.1.21"
-          ],
-          "text": "Public Utility Service Operation;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.22",
-          "clause_path": [
-            "22.1.22"
-          ],
-          "text": "Recreation or Fitness Center (indoors); and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        },
-        {
-          "provision_label_raw": "22.1.23",
-          "clause_path": [
-            "22.1.23"
-          ],
-          "text": "Transitional Housing Facility",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 82,
-            "pdf_page_end": 82,
-            "bylaw_page_start": 82,
-            "bylaw_page_end": 82
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": null,
-      "title_label_raw": "REGULATIONS FOR PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 83,
-        "pdf_page_end": 83,
-        "bylaw_page_start": 83,
-        "bylaw_page_end": 83
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "1",
-          "text": "Lot Area (Minimum) 930 sq. m (10,010.4 sq ft) 1,000 sq. m (10,764.9 sq ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 83,
-            "pdf_page_end": 83,
-            "bylaw_page_start": 83,
-            "bylaw_page_end": 83
-          }
-        }
-      ],
-      "table_column_headings_raw": [
-        "Interior Lot Corner Lot"
-      ]
-    },
-    {
-      "order_index": 3,
-      "section_label_raw": null,
-      "title_label_raw": "REGULATIONS FOR COMMUNITY CARE FACILITIES/NURSING HOMES",
-      "citations": {
-        "pdf_page_start": 83,
-        "pdf_page_end": 83,
-        "bylaw_page_start": 83,
-        "bylaw_page_end": 83
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "section",
-          "text": "For three (3) bedrooms For each additional bedroom 370 sq. m (3,982.6 sq ft) 100 sq. m (1076.4 sq ft) 395 sq. m (4,251.7 sq ft) 100 sq. m (1076.4 sq ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 83,
-            "pdf_page_end": 83,
-            "bylaw_page_start": 83,
-            "bylaw_page_end": 83
-          }
-        }
-      ],
-      "table_column_headings_raw": [
-        "Interior Lot Corner Lot"
-      ]
-    },
-    {
-      "order_index": 4,
-      "section_label_raw": null,
-      "title_label_raw": "REGULATIONS FOR LODGING HOUSES AND GROUP HOMES",
-      "citations": {
-        "pdf_page_start": 83,
-        "pdf_page_end": 84,
-        "bylaw_page_start": 83,
-        "bylaw_page_end": 84
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "1",
-          "text": "Lot Area (Minimum) 325 sq. m (3,498.3 sq. ft) 395 sq. m (4,251.9 sq. ft) The number of rooms is determined by the following:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 83,
-            "pdf_page_end": 84,
-            "bylaw_page_start": 83,
-            "bylaw_page_end": 84
-          }
-        },
-        {
-          "provision_label_raw": "a",
-          "clause_path": [
-            "a"
-          ],
-          "text": "For the first 325 sq. m (3,498.3 sq. ft.) for an interior lot and 395 sq. m (4,251.7 sq. ft.) for a corner lot of Lot Area, four (4) bedrooms are permitted;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 84,
-            "pdf_page_end": 84,
-            "bylaw_page_start": 84,
-            "bylaw_page_end": 84
-          }
-        },
-        {
-          "provision_label_raw": "b",
-          "clause_path": [
-            "b"
-          ],
-          "text": "For every additional bedroom or lodging room over four (4) bedrooms or lodging rooms, the Lot area must be increased by 90 sq. m (968.7 sq. ft.) thereof.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 84,
-            "pdf_page_end": 84,
-            "bylaw_page_start": 84,
-            "bylaw_page_end": 84
-          }
-        }
-      ],
-      "table_column_headings_raw": [
-        "Interior Lot Corner Lot"
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [],
-  "content_blocks": [],
-  "open_issues": [
-    {
-      "issue_type": "table_parsing_review",
-      "description": "Section 'REGULATIONS FOR PERMITTED USES' contains table-derived provisions extracted from PDF text; verify column alignment against the source PDF before normalization."
-    },
-    {
-      "issue_type": "table_parsing_review",
-      "description": "Section 'REGULATIONS FOR LODGING HOUSES AND GROUP HOMES' contains table-derived provisions extracted from PDF text; verify column alignment against the source PDF before normalization."
-    },
-    {
-      "issue_type": "source_revision_review",
-      "description": "Source PDF cover identifies rev 049 updated March 9, 2026, but this zone page header may display rev 048 updated October 24, 2025; verify source revision during QA."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "22",
+    "zone_title_raw": "INSTITUTIONAL ZONE (I)",
+    "citations": {
       "pdf_page_start": 82,
       "pdf_page_end": 84,
       "bylaw_page_start": 82,
       "bylaw_page_end": 84
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-i",
+        "source_unit_type": "zone",
+        "label_raw": "22",
+        "title_raw": "INSTITUTIONAL ZONE (I)",
+        "text_raw": "Cemetery;\nClub;\nCommercial Daycare Centre;\nCommunity Building;\nCommunity Care Facility;\nCommunity Institutional;\nCultural Establishment;\nDormitory;\nEducational Institution (private);\nEducational Institution (public);\nFire Station;\nFuneral Establishment;\nGovernment Office;\nHospital;\nLibrary;\nLodging House;\nMedical, Health and Dental Office;\nNursing Home;\nPlace of Worship;\nPolice Station;\nPublic Utility Service Operation;\nRecreation or Fitness Center (indoors); and\nTransitional Housing Facility",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 82,
+          "pdf_page_end": 84,
+          "bylaw_page_start": 82,
+          "bylaw_page_end": 84
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-i-section-22-1",
+        "section_label_raw": "22.1",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-i-clause-22-1-1",
+            "clause_label_raw": "22.1.1",
+            "clause_text_raw": "Cemetery;",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-2",
+            "clause_label_raw": "22.1.2",
+            "clause_text_raw": "Club;",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-3",
+            "clause_label_raw": "22.1.3",
+            "clause_text_raw": "Commercial Daycare Centre;",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-4",
+            "clause_label_raw": "22.1.4",
+            "clause_text_raw": "Community Building;",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-5",
+            "clause_label_raw": "22.1.5",
+            "clause_text_raw": "Community Care Facility;",
+            "parent_clause_id": null,
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-6",
+            "clause_label_raw": "22.1.6",
+            "clause_text_raw": "Community Institutional;",
+            "parent_clause_id": null,
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-7",
+            "clause_label_raw": "22.1.7",
+            "clause_text_raw": "Cultural Establishment;",
+            "parent_clause_id": null,
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-8",
+            "clause_label_raw": "22.1.8",
+            "clause_text_raw": "Dormitory;",
+            "parent_clause_id": null,
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-9",
+            "clause_label_raw": "22.1.9",
+            "clause_text_raw": "Educational Institution (private);",
+            "parent_clause_id": null,
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-10",
+            "clause_label_raw": "22.1.10",
+            "clause_text_raw": "Educational Institution (public);",
+            "parent_clause_id": null,
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-11",
+            "clause_label_raw": "22.1.11",
+            "clause_text_raw": "Fire Station;",
+            "parent_clause_id": null,
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-12",
+            "clause_label_raw": "22.1.12",
+            "clause_text_raw": "Funeral Establishment;",
+            "parent_clause_id": null,
+            "source_order": 12,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-13",
+            "clause_label_raw": "22.1.13",
+            "clause_text_raw": "Government Office;",
+            "parent_clause_id": null,
+            "source_order": 13,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-14",
+            "clause_label_raw": "22.1.14",
+            "clause_text_raw": "Hospital;",
+            "parent_clause_id": null,
+            "source_order": 14,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-15",
+            "clause_label_raw": "22.1.15",
+            "clause_text_raw": "Library;",
+            "parent_clause_id": null,
+            "source_order": 15,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-16",
+            "clause_label_raw": "22.1.16",
+            "clause_text_raw": "Lodging House;",
+            "parent_clause_id": null,
+            "source_order": 16,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-17",
+            "clause_label_raw": "22.1.17",
+            "clause_text_raw": "Medical, Health and Dental Office;",
+            "parent_clause_id": null,
+            "source_order": 17,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-18",
+            "clause_label_raw": "22.1.18",
+            "clause_text_raw": "Nursing Home;",
+            "parent_clause_id": null,
+            "source_order": 18,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-19",
+            "clause_label_raw": "22.1.19",
+            "clause_text_raw": "Place of Worship;",
+            "parent_clause_id": null,
+            "source_order": 19,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-20",
+            "clause_label_raw": "22.1.20",
+            "clause_text_raw": "Police Station;",
+            "parent_clause_id": null,
+            "source_order": 20,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-21",
+            "clause_label_raw": "22.1.21",
+            "clause_text_raw": "Public Utility Service Operation;",
+            "parent_clause_id": null,
+            "source_order": 21,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-22",
+            "clause_label_raw": "22.1.22",
+            "clause_text_raw": "Recreation or Fitness Center (indoors); and",
+            "parent_clause_id": null,
+            "source_order": 22,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          },
+          {
+            "clause_id": "zone-i-clause-22-1-23",
+            "clause_label_raw": "22.1.23",
+            "clause_text_raw": "Transitional Housing Facility",
+            "parent_clause_id": null,
+            "source_order": 23,
+            "citations": {
+              "pdf_page_start": 82,
+              "pdf_page_end": 82,
+              "bylaw_page_start": 82,
+              "bylaw_page_end": 82
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 82,
+          "pdf_page_end": 82,
+          "bylaw_page_start": 82,
+          "bylaw_page_end": 82
+        }
+      },
+      {
+        "section_id": "zone-i-section-2",
+        "section_label_raw": "",
+        "section_title_raw": "REGULATIONS FOR PERMITTED USES",
+        "source_order": 2,
+        "clauses_raw": [],
+        "tables_raw": [
+          {
+            "table_id": "zone-i-table-regulations-for-permitted-uses",
+            "table_title_raw": "REGULATIONS FOR PERMITTED USES",
+            "source_order": 1,
+            "columns_raw": [
+              {
+                "column_id": "row_number",
+                "column_label_raw": "",
+                "source_order": 1
+              },
+              {
+                "column_id": "requirement",
+                "column_label_raw": "",
+                "source_order": 2
+              },
+              {
+                "column_id": "interior_lot",
+                "column_label_raw": "Interior Lot",
+                "source_order": 3
+              },
+              {
+                "column_id": "corner_lot",
+                "column_label_raw": "Corner Lot",
+                "source_order": 4
+              }
+            ],
+            "rows_raw": [
+              {
+                "row_id": "zone-i-table-regulations-for-permitted-uses-row-1",
+                "source_order": 1,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-1-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "1"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-1-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Area (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-1-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "930 sq. m (10,010.4 sq ft)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-1-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "1,000 sq. m (10,764.9 sq ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-i-table-regulations-for-permitted-uses-row-2",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-2-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "2"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-2-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-2-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "24 m (78.7 ft)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-2-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "24 m (78.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-i-table-regulations-for-permitted-uses-row-3",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-3-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "3"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-3-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Front Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-3-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "7.6 m (24.9 ft)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-3-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "7.6 m (24.9 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-i-table-regulations-for-permitted-uses-row-4",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-4-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "4"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-4-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Rear Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-4-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "7.6 m (24.9 ft)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-4-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "7.6 m (24.9 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-i-table-regulations-for-permitted-uses-row-5",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-5-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "5"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-5-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Side Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-5-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "3.0 m (9.8 ft)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-5-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "3.0 m (9.8 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-i-table-regulations-for-permitted-uses-row-6",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-6-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "6"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-6-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Flankage Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-6-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-6-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "7.6 m (24.9 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-i-table-regulations-for-permitted-uses-row-7",
+                "source_order": 7,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-7-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "7"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-7-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Height (Maximum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-7-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "12.0 m (39.4 ft)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-permitted-uses-row-7-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "12.0 m (39.4 ft)"
+                  }
+                ]
+              }
+            ],
+            "citations": {
+              "pdf_page_start": 83,
+              "pdf_page_end": 83,
+              "bylaw_page_start": 83,
+              "bylaw_page_end": 83
+            }
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 83,
+          "pdf_page_end": 83,
+          "bylaw_page_start": 83,
+          "bylaw_page_end": 83
+        }
+      },
+      {
+        "section_id": "zone-i-section-3",
+        "section_label_raw": "",
+        "section_title_raw": "REGULATIONS FOR COMMUNITY CARE FACILITIES/NURSING HOMES",
+        "source_order": 3,
+        "clauses_raw": [],
+        "tables_raw": [
+          {
+            "table_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes",
+            "table_title_raw": "REGULATIONS FOR COMMUNITY CARE FACILITIES/NURSING HOMES",
+            "source_order": 2,
+            "columns_raw": [
+              {
+                "column_id": "row_number",
+                "column_label_raw": "",
+                "source_order": 1
+              },
+              {
+                "column_id": "requirement",
+                "column_label_raw": "",
+                "source_order": 2
+              },
+              {
+                "column_id": "condition",
+                "column_label_raw": "",
+                "source_order": 3
+              },
+              {
+                "column_id": "interior_lot",
+                "column_label_raw": "Interior Lot",
+                "source_order": 4
+              },
+              {
+                "column_id": "corner_lot",
+                "column_label_raw": "Corner Lot",
+                "source_order": 5
+              }
+            ],
+            "rows_raw": [
+              {
+                "row_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-three-3-bedrooms",
+                "source_order": 1,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-three-3-bedrooms-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "1"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-three-3-bedrooms-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Area (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-three-3-bedrooms-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "For three (3) bedrooms"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-three-3-bedrooms-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "370 sq. m (3,982.6 sq ft)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-three-3-bedrooms-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "395 sq. m (4,251.7 sq ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-each-additional-bedroom",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-each-additional-bedroom-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-each-additional-bedroom-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Area (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-each-additional-bedroom-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "For each additional bedroom"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-each-additional-bedroom-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "100 sq. m (1076.4 sq ft)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-each-additional-bedroom-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "100 sq. m (1076.4 sq ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-2",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-2-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "2"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-2-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-2-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "15 m (49.2 ft)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-2-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "15 m (49.2 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-3",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-3-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "3"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-3-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Front Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-3-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-3-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-4",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-4-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "4"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-4-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Rear Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-4-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-4-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-5",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-5-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "5"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-5-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Side Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-5-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "1.3 m (4.3 ft)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-5-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "3.0 m (9.8 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-6",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-6-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "6"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-6-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Flankage Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-6-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-6-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-7",
+                "source_order": 7,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-7-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "7"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-7-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Height (Maximum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-7-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "15.0 m (49.2 ft)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-7-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "15.0 m (49.2 ft)"
+                  }
+                ]
+              }
+            ],
+            "citations": {
+              "pdf_page_start": 83,
+              "pdf_page_end": 83,
+              "bylaw_page_start": 83,
+              "bylaw_page_end": 83
+            }
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 83,
+          "pdf_page_end": 83,
+          "bylaw_page_start": 83,
+          "bylaw_page_end": 83
+        }
+      },
+      {
+        "section_id": "zone-i-section-4",
+        "section_label_raw": "",
+        "section_title_raw": "REGULATIONS FOR LODGING HOUSES AND GROUP HOMES",
+        "source_order": 4,
+        "clauses_raw": [],
+        "tables_raw": [
+          {
+            "table_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes",
+            "table_title_raw": "REGULATIONS FOR LODGING HOUSES AND GROUP HOMES",
+            "source_order": 3,
+            "columns_raw": [
+              {
+                "column_id": "row_number",
+                "column_label_raw": "",
+                "source_order": 1
+              },
+              {
+                "column_id": "requirement",
+                "column_label_raw": "",
+                "source_order": 2
+              },
+              {
+                "column_id": "interior_lot",
+                "column_label_raw": "Interior Lot",
+                "source_order": 3
+              },
+              {
+                "column_id": "corner_lot",
+                "column_label_raw": "Corner Lot",
+                "source_order": 4
+              }
+            ],
+            "rows_raw": [
+              {
+                "row_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-1",
+                "source_order": 1,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-1-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "1"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-1-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Area (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-1-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "325 sq. m (3,498.3 sq. ft)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-1-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "395 sq. m (4,251.9 sq. ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-2",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-2-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "2"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-2-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-2-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "10.6 m (34.8 ft)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-2-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "15 m (49.2 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-3",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-3-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "3"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-3-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-3-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-3-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-4",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-4-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "4"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-4-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-4-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-4-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-5",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-5-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "5"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-5-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-5-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "1.8 m (6 ft)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-5-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "1.83 m (6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-6",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-6-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "6"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-6-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-6-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-6-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-7",
+                "source_order": 7,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-7-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "7"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-7-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "(Maximum)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-7-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "12.0 m (39.4 ft)"
+                  },
+                  {
+                    "cell_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-7-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "12.0 m (39.4 ft)"
+                  }
+                ]
+              }
+            ],
+            "citations": {
+              "pdf_page_start": 83,
+              "pdf_page_end": 84,
+              "bylaw_page_start": 83,
+              "bylaw_page_end": 84
+            }
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 83,
+          "pdf_page_end": 84,
+          "bylaw_page_start": 83,
+          "bylaw_page_end": 84
+        }
+      }
+    ],
+    "tables_raw": [
+      {
+        "table_id": "zone-i-table-regulations-for-permitted-uses",
+        "section_id": "zone-i-section-2"
+      },
+      {
+        "table_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes",
+        "section_id": "zone-i-section-3"
+      },
+      {
+        "table_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes",
+        "section_id": "zone-i-section-4"
+      }
+    ],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-i-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 82,
+          "pdf_page_end": 84,
+          "bylaw_page_start": 82,
+          "bylaw_page_end": 84
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-i-clause-22-1-1",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-2",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-3",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-4",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-5",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-6",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 6
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-7",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 7
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-8",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 8
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-9",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 9
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-10",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 10
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-11",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 11
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-12",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 12
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-13",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 13
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-14",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 14
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-15",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 15
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-16",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 16
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-17",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 17
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-18",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 18
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-19",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 19
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-20",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 20
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-21",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 21
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-22",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 22
+      },
+      {
+        "clause_id": "zone-i-clause-22-1-23",
+        "section_id": "zone-i-section-22-1",
+        "source_order": 23
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-i-term-term-cemetery",
+        "term_raw": "Cemetery",
+        "term_normalized": "cemetery",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-1"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-club",
+        "term_raw": "Club",
+        "term_normalized": "club",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-2"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-commercial_daycare_centre",
+        "term_raw": "Commercial Daycare Centre",
+        "term_normalized": "commercial_daycare_centre",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-3"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-use-community_building",
+        "term_raw": "Community Building",
+        "term_normalized": "community_building",
+        "term_category": "use_type",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-4"
+          }
+        ],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "community_building"
+      },
+      {
+        "term_id": "zone-i-term-term-community_care_facility",
+        "term_raw": "Community Care Facility",
+        "term_normalized": "community_care_facility",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-5"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-community_institutional",
+        "term_raw": "Community Institutional",
+        "term_normalized": "community_institutional",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-6"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-cultural_establishment",
+        "term_raw": "Cultural Establishment",
+        "term_normalized": "cultural_establishment",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-7"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-dormitory",
+        "term_raw": "Dormitory",
+        "term_normalized": "dormitory",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-8"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-educational_institution_private",
+        "term_raw": "Educational Institution (private)",
+        "term_normalized": "educational_institution_private",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-9"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-educational_institution_public",
+        "term_raw": "Educational Institution (public)",
+        "term_normalized": "educational_institution_public",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-10"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-fire_station",
+        "term_raw": "Fire Station",
+        "term_normalized": "fire_station",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-11"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-funeral_establishment",
+        "term_raw": "Funeral Establishment",
+        "term_normalized": "funeral_establishment",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-12"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-government_office",
+        "term_raw": "Government Office",
+        "term_normalized": "government_office",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-13"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-hospital",
+        "term_raw": "Hospital",
+        "term_normalized": "hospital",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-14"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-library",
+        "term_raw": "Library",
+        "term_normalized": "library",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-15"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-lodging_house",
+        "term_raw": "Lodging House",
+        "term_normalized": "lodging_house",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-16"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-medical_health_and_dental_office",
+        "term_raw": "Medical, Health and Dental Office",
+        "term_normalized": "medical_health_and_dental_office",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-17"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-nursing_home",
+        "term_raw": "Nursing Home",
+        "term_normalized": "nursing_home",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-18"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-place_of_worship",
+        "term_raw": "Place of Worship",
+        "term_normalized": "place_of_worship",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-19"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-police_station",
+        "term_raw": "Police Station",
+        "term_normalized": "police_station",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-20"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-public_utility_service_operation",
+        "term_raw": "Public Utility Service Operation",
+        "term_normalized": "public_utility_service_operation",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-21"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-recreation_or_fitness_center_indoors",
+        "term_raw": "Recreation or Fitness Center (indoors)",
+        "term_normalized": "recreation_or_fitness_center_indoors",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-22"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-i-term-term-transitional_housing_facility",
+        "term_raw": "Transitional Housing Facility",
+        "term_normalized": "transitional_housing_facility",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-i-clause-22-1-23"
+          }
+        ],
+        "confidence": "needs_review"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-i-use-cemetery-1",
+        "use_name_raw": "Cemetery",
+        "use_term_id": "zone-i-term-term-cemetery",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-1",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-club-2",
+        "use_name_raw": "Club",
+        "use_term_id": "zone-i-term-term-club",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-2",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-commercial-daycare-centre-3",
+        "use_name_raw": "Commercial Daycare Centre",
+        "use_term_id": "zone-i-term-term-commercial_daycare_centre",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-3",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-community-building-4",
+        "use_name_raw": "Community Building",
+        "use_term_id": "zone-i-term-use-community_building",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-4",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-i-use-community-care-facility-5",
+        "use_name_raw": "Community Care Facility",
+        "use_term_id": "zone-i-term-term-community_care_facility",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-5",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-community-institutional-6",
+        "use_name_raw": "Community Institutional",
+        "use_term_id": "zone-i-term-term-community_institutional",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-6",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-cultural-establishment-7",
+        "use_name_raw": "Cultural Establishment",
+        "use_term_id": "zone-i-term-term-cultural_establishment",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-7",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-dormitory-8",
+        "use_name_raw": "Dormitory",
+        "use_term_id": "zone-i-term-term-dormitory",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-8",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-educational-institution-private-9",
+        "use_name_raw": "Educational Institution (private)",
+        "use_term_id": "zone-i-term-term-educational_institution_private",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-9",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-educational-institution-public-10",
+        "use_name_raw": "Educational Institution (public)",
+        "use_term_id": "zone-i-term-term-educational_institution_public",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-10",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-fire-station-11",
+        "use_name_raw": "Fire Station",
+        "use_term_id": "zone-i-term-term-fire_station",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-11",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-funeral-establishment-12",
+        "use_name_raw": "Funeral Establishment",
+        "use_term_id": "zone-i-term-term-funeral_establishment",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-12",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-government-office-13",
+        "use_name_raw": "Government Office",
+        "use_term_id": "zone-i-term-term-government_office",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-13",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-hospital-14",
+        "use_name_raw": "Hospital",
+        "use_term_id": "zone-i-term-term-hospital",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-14",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-library-15",
+        "use_name_raw": "Library",
+        "use_term_id": "zone-i-term-term-library",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-15",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-lodging-house-16",
+        "use_name_raw": "Lodging House",
+        "use_term_id": "zone-i-term-term-lodging_house",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-16",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-medical-health-and-dental-office-17",
+        "use_name_raw": "Medical, Health and Dental Office",
+        "use_term_id": "zone-i-term-term-medical_health_and_dental_office",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-17",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-nursing-home-18",
+        "use_name_raw": "Nursing Home",
+        "use_term_id": "zone-i-term-term-nursing_home",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-18",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-place-of-worship-19",
+        "use_name_raw": "Place of Worship",
+        "use_term_id": "zone-i-term-term-place_of_worship",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-19",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-police-station-20",
+        "use_name_raw": "Police Station",
+        "use_term_id": "zone-i-term-term-police_station",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-20",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-public-utility-service-operation-21",
+        "use_name_raw": "Public Utility Service Operation",
+        "use_term_id": "zone-i-term-term-public_utility_service_operation",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-21",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-recreation-or-fitness-center-indoors-22",
+        "use_name_raw": "Recreation or Fitness Center (indoors)",
+        "use_term_id": "zone-i-term-term-recreation_or_fitness_center_indoors",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-22",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-i-use-transitional-housing-facility-23",
+        "use_name_raw": "Transitional Housing Facility",
+        "use_term_id": "zone-i-term-term-transitional_housing_facility",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-i-clause-22-1-23",
+        "confidence": "needs_review"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-1-interior-lot-1",
+        "value_raw": "930 sq. m (10,010.4 sq ft)",
+        "value": 930,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "10,010.4 sq ft",
+            "value": 10010.4,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-1-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-1-corner-lot-1",
+        "value_raw": "1,000 sq. m (10,764.9 sq ft)",
+        "value": 1000,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "10,764.9 sq ft",
+            "value": 10764.9,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-1-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-2-interior-lot-1",
+        "value_raw": "24 m (78.7 ft)",
+        "value": 24,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "78.7 ft",
+            "value": 78.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-2-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-2-corner-lot-1",
+        "value_raw": "24 m (78.7 ft)",
+        "value": 24,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "78.7 ft",
+            "value": 78.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-2-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-3-interior-lot-1",
+        "value_raw": "7.6 m (24.9 ft)",
+        "value": 7.6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.9 ft",
+            "value": 24.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-3-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-3-corner-lot-1",
+        "value_raw": "7.6 m (24.9 ft)",
+        "value": 7.6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.9 ft",
+            "value": 24.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-3-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-4-interior-lot-1",
+        "value_raw": "7.6 m (24.9 ft)",
+        "value": 7.6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.9 ft",
+            "value": 24.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-4-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-4-corner-lot-1",
+        "value_raw": "7.6 m (24.9 ft)",
+        "value": 7.6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.9 ft",
+            "value": 24.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-4-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-5-interior-lot-1",
+        "value_raw": "3.0 m (9.8 ft)",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "9.8 ft",
+            "value": 9.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-5-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-5-corner-lot-1",
+        "value_raw": "3.0 m (9.8 ft)",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "9.8 ft",
+            "value": 9.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-5-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-6-corner-lot-1",
+        "value_raw": "7.6 m (24.9 ft)",
+        "value": 7.6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.9 ft",
+            "value": 24.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-6-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-7-interior-lot-1",
+        "value_raw": "12.0 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-7-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-7-corner-lot-1",
+        "value_raw": "12.0 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-7-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-three-3-bedrooms-interior-lot-1",
+        "value_raw": "370 sq. m (3,982.6 sq ft)",
+        "value": 370,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "3,982.6 sq ft",
+            "value": 3982.6,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-three-3-bedrooms-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-three-3-bedrooms-corner-lot-1",
+        "value_raw": "395 sq. m (4,251.7 sq ft)",
+        "value": 395,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "4,251.7 sq ft",
+            "value": 4251.7,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-three-3-bedrooms-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-each-additional-bedroom-interior-lot-1",
+        "value_raw": "100 sq. m (1076.4 sq ft)",
+        "value": 100,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "1076.4 sq ft",
+            "value": 1076.4,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-each-additional-bedroom-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-each-additional-bedroom-corner-lot-1",
+        "value_raw": "100 sq. m (1076.4 sq ft)",
+        "value": 100,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "1076.4 sq ft",
+            "value": 1076.4,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-each-additional-bedroom-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-2-interior-lot-1",
+        "value_raw": "15 m (49.2 ft)",
+        "value": 15,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "49.2 ft",
+            "value": 49.2,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-2-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-2-corner-lot-1",
+        "value_raw": "15 m (49.2 ft)",
+        "value": 15,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "49.2 ft",
+            "value": 49.2,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-2-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-3-interior-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-3-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-3-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-3-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-4-interior-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-4-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-4-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-4-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-5-interior-lot-1",
+        "value_raw": "1.3 m (4.3 ft)",
+        "value": 1.3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "4.3 ft",
+            "value": 4.3,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-5-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-5-corner-lot-1",
+        "value_raw": "3.0 m (9.8 ft)",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "9.8 ft",
+            "value": 9.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-5-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-6-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-6-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-7-interior-lot-1",
+        "value_raw": "15.0 m (49.2 ft)",
+        "value": 15,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "49.2 ft",
+            "value": 49.2,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-7-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-7-corner-lot-1",
+        "value_raw": "15.0 m (49.2 ft)",
+        "value": 15,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "49.2 ft",
+            "value": 49.2,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-7-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-1-interior-lot-1",
+        "value_raw": "325 sq. m (3,498.3 sq. ft)",
+        "value": 325,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "3,498.3 sq. ft",
+            "value": 3498.3,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-1-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-1-corner-lot-1",
+        "value_raw": "395 sq. m (4,251.9 sq. ft)",
+        "value": 395,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "4,251.9 sq. ft",
+            "value": 4251.9,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-1-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-2-interior-lot-1",
+        "value_raw": "10.6 m (34.8 ft)",
+        "value": 10.6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "34.8 ft",
+            "value": 34.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-2-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-2-corner-lot-1",
+        "value_raw": "15 m (49.2 ft)",
+        "value": 15,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "49.2 ft",
+            "value": 49.2,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-2-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-3-interior-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-3-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-3-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-3-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-4-interior-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-4-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-4-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-4-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-5-interior-lot-1",
+        "value_raw": "1.8 m (6 ft)",
+        "value": 1.8,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "6 ft",
+            "value": 6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-5-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-5-corner-lot-1",
+        "value_raw": "1.83 m (6 ft)",
+        "value": 1.83,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "6 ft",
+            "value": 6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-5-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-6-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-6-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-7-interior-lot-1",
+        "value_raw": "12.0 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-7-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-7-corner-lot-1",
+        "value_raw": "12.0 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-7-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-1-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Interior Lot 930 sq. m (10,010.4 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-1-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-1-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Corner Lot 1,000 sq. m (10,764.9 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-1-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-2-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Interior Lot 24 m (78.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-2-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-2-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Corner Lot 24 m (78.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-2-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-3-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Interior Lot 7.6 m (24.9 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-3-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-3-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Corner Lot 7.6 m (24.9 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-3-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-4-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Interior Lot 7.6 m (24.9 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-4-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-4-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Corner Lot 7.6 m (24.9 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-4-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-5-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Interior Lot 3.0 m (9.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-5-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-5-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Corner Lot 3.0 m (9.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-5-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-6-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "flankage_yard",
+        "requirement_label_raw": "Flankage Yard (Minimum)",
+        "requirement_text_raw": "Flankage Yard (Minimum) Corner Lot 7.6 m (24.9 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-6-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-7-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Interior Lot 12.0 m (39.4 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-7-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-7-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Corner Lot 12.0 m (39.4 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-permitted-uses-row-7-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-permitted-uses-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-three-3-bedrooms-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) For three (3) bedrooms Interior Lot 370 sq. m (3,982.6 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "For three (3) bedrooms"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-three-3-bedrooms-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-three-3-bedrooms"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-three-3-bedrooms-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) For three (3) bedrooms Corner Lot 395 sq. m (4,251.7 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "For three (3) bedrooms"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-three-3-bedrooms-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-three-3-bedrooms"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-each-additional-bedroom-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) For each additional bedroom Interior Lot 100 sq. m (1076.4 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "For each additional bedroom"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-each-additional-bedroom-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-each-additional-bedroom"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-each-additional-bedroom-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) For each additional bedroom Corner Lot 100 sq. m (1076.4 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "For each additional bedroom"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-each-additional-bedroom-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-each-additional-bedroom"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-2-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Interior Lot 15 m (49.2 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-2-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-2-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Corner Lot 15 m (49.2 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-2-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-3-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Interior Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-3-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-3-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-3-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-4-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Interior Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-4-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-4-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-4-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-5-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Interior Lot 1.3 m (4.3 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-5-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-5-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Corner Lot 3.0 m (9.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-5-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-6-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "flankage_yard",
+        "requirement_label_raw": "Flankage Yard (Minimum)",
+        "requirement_text_raw": "Flankage Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-6-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-7-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Interior Lot 15.0 m (49.2 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-7-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-7-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Corner Lot 15.0 m (49.2 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-7-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-1-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "area_minimum",
+        "requirement_label_raw": "Area (Minimum)",
+        "requirement_text_raw": "Area (Minimum) Interior Lot 325 sq. m (3,498.3 sq. ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-1-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-1-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "area_minimum",
+        "requirement_label_raw": "Area (Minimum)",
+        "requirement_text_raw": "Area (Minimum) Corner Lot 395 sq. m (4,251.9 sq. ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-1-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-2-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Frontage (Minimum)",
+        "requirement_text_raw": "Frontage (Minimum) Interior Lot 10.6 m (34.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-2-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-2-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Frontage (Minimum)",
+        "requirement_text_raw": "Frontage (Minimum) Corner Lot 15 m (49.2 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-2-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-3-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Interior Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-3-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-3-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-3-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-4-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Interior Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-4-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-4-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-4-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-5-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Interior Lot 1.8 m (6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-5-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-5-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Corner Lot 1.83 m (6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-5-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-6-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-6-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-7-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "maximum",
+        "requirement_label_raw": "(Maximum)",
+        "requirement_text_raw": "(Maximum) Interior Lot 12.0 m (39.4 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-7-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-7-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "maximum",
+        "requirement_label_raw": "(Maximum)",
+        "requirement_text_raw": "(Maximum) Corner Lot 12.0 m (39.4 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-i-num-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-7-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-i-table-regulations-for-lodging-houses-and-group-homes-row-7"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-i-regulation-group-zone",
+        "group_label_raw": "22",
+        "group_title_raw": "INSTITUTIONAL ZONE (I)",
+        "regulated_use_terms": [
+          "zone-i-term-term-cemetery",
+          "zone-i-term-term-club",
+          "zone-i-term-term-commercial_daycare_centre",
+          "zone-i-term-use-community_building",
+          "zone-i-term-term-community_care_facility",
+          "zone-i-term-term-community_institutional",
+          "zone-i-term-term-cultural_establishment",
+          "zone-i-term-term-dormitory",
+          "zone-i-term-term-educational_institution_private",
+          "zone-i-term-term-educational_institution_public",
+          "zone-i-term-term-fire_station",
+          "zone-i-term-term-funeral_establishment",
+          "zone-i-term-term-government_office",
+          "zone-i-term-term-hospital",
+          "zone-i-term-term-library",
+          "zone-i-term-term-lodging_house",
+          "zone-i-term-term-medical_health_and_dental_office",
+          "zone-i-term-term-nursing_home",
+          "zone-i-term-term-place_of_worship",
+          "zone-i-term-term-police_station",
+          "zone-i-term-term-public_utility_service_operation",
+          "zone-i-term-term-recreation_or_fitness_center_indoors",
+          "zone-i-term-term-transitional_housing_facility"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "I"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-1-interior-lot",
+          "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-1-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-2-interior-lot",
+          "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-2-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-3-interior-lot",
+          "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-3-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-4-interior-lot",
+          "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-4-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-5-interior-lot",
+          "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-5-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-6-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-7-interior-lot",
+          "zone-i-req-zone-i-table-regulations-for-permitted-uses-row-7-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-three-3-bedrooms-interior-lot",
+          "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-three-3-bedrooms-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-each-additional-bedroom-interior-lot",
+          "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-1-for-each-additional-bedroom-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-2-interior-lot",
+          "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-2-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-3-interior-lot",
+          "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-3-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-4-interior-lot",
+          "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-4-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-5-interior-lot",
+          "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-5-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-6-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-7-interior-lot",
+          "zone-i-req-zone-i-table-regulations-for-community-care-facilities-nursing-homes-row-7-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-1-interior-lot",
+          "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-1-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-2-interior-lot",
+          "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-2-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-3-interior-lot",
+          "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-3-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-4-interior-lot",
+          "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-4-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-5-interior-lot",
+          "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-5-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-6-corner-lot",
+          "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-7-interior-lot",
+          "zone-i-req-zone-i-table-regulations-for-lodging-houses-and-group-homes-row-7-corner-lot"
+        ],
+        "source_section_ref": "zone-i-section-22-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-i-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "I",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-i-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-cemetery",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Cemetery",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-1"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-club",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Club",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-2"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-commercial-daycare-centre",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Commercial Daycare Centre",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-3"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-community-care-facility",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Community Care Facility",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-5"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-community-institutional",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Community Institutional",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-6"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-cultural-establishment",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Cultural Establishment",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-7"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-dormitory",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Dormitory",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-8"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-educational-institution-private",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Educational Institution (private)",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-9"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-educational-institution-public",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Educational Institution (public)",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-10"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-fire-station",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Fire Station",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-11"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-funeral-establishment",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Funeral Establishment",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-12"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-government-office",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Government Office",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-13"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-hospital",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Hospital",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-14"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-library",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Library",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-15"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-lodging-house",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Lodging House",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-16"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-medical-health-and-dental-office",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Medical, Health and Dental Office",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-17"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-nursing-home",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Nursing Home",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-18"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-place-of-worship",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Place of Worship",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-19"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-police-station",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Police Station",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-20"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-public-utility-service-operation",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Public Utility Service Operation",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-21"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-recreation-or-fitness-center-indoors",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Recreation or Fitness Center (indoors)",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-22"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-i-flag-unmatched-term-transitional-housing-facility",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Transitional Housing Facility",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-i-clause-22-1-23"
+        }
+      ]
+    }
+  ]
 }

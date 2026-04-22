@@ -1,462 +1,911 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+    "document_type": "zone",
     "zone_code": "MUR",
     "zone_name": "MEDIUM DENSITY MIXED USE RESIDENTIAL ZONE",
-    "part_label_raw": "21",
-    "chapter_heading_raw": "21 MEDIUM DENSITY MIXED USE RESIDENTIAL ZONE (MUR)"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": []
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "21.1.1",
-      "use_type": "inherited_principal_use",
-      "use_name": "The following uses are permitted subject to the Regulations for Permitted Uses for the R-3 Zone and the following Regulations for Mixed Density Distribution in the MUR Zone section 21.2:",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 80,
-        "pdf_page_end": 80,
-        "bylaw_page_start": 80,
-        "bylaw_page_end": 80
-      },
-      "clause_path": [
-        "21.1.1"
-      ]
-    },
-    {
-      "clause_label_raw": "21.1.2",
-      "use_type": "residential_use",
-      "use_name": "Single detached Dwelling",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 80,
-        "pdf_page_end": 80,
-        "bylaw_page_start": 80,
-        "bylaw_page_end": 80
-      },
-      "clause_path": [
-        "21.1.2"
-      ]
-    },
-    {
-      "clause_label_raw": "21.1.3",
-      "use_type": "residential_use",
-      "use_name": "Semi-Detached Dwelling",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 80,
-        "pdf_page_end": 80,
-        "bylaw_page_start": 80,
-        "bylaw_page_end": 80
-      },
-      "clause_path": [
-        "21.1.3"
-      ]
-    },
-    {
-      "clause_label_raw": "21.1.4",
-      "use_type": "residential_use",
-      "use_name": "Duplex Dwelling",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 80,
-        "pdf_page_end": 80,
-        "bylaw_page_start": 80,
-        "bylaw_page_end": 80
-      },
-      "clause_path": [
-        "21.1.4"
-      ]
-    },
-    {
-      "clause_label_raw": "21.1.5",
-      "use_type": "residential_use",
-      "use_name": "Townhouse Dwelling",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 80,
-        "pdf_page_end": 80,
-        "bylaw_page_start": 80,
-        "bylaw_page_end": 80
-      },
-      "clause_path": [
-        "21.1.5"
-      ]
-    },
-    {
-      "clause_label_raw": "21.1.6",
-      "use_type": "residential_use",
-      "use_name": "Stacked Townhouse Dwelling",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 80,
-        "pdf_page_end": 80,
-        "bylaw_page_start": 80,
-        "bylaw_page_end": 80
-      },
-      "clause_path": [
-        "21.1.6"
-      ]
-    },
-    {
-      "clause_label_raw": "21.1.7",
-      "use_type": "residential_use",
-      "use_name": "Block Townhouse Dwelling",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 80,
-        "pdf_page_end": 80,
-        "bylaw_page_start": 80,
-        "bylaw_page_end": 80
-      },
-      "clause_path": [
-        "21.1.7"
-      ]
-    },
-    {
-      "clause_label_raw": "21.1.8",
-      "use_type": "residential_use",
-      "use_name": "Nursing Home",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 80,
-        "pdf_page_end": 80,
-        "bylaw_page_start": 80,
-        "bylaw_page_end": 80
-      },
-      "clause_path": [
-        "21.1.8"
-      ]
-    },
-    {
-      "clause_label_raw": "21.1.9",
-      "use_type": "principal_use",
-      "use_name": "Community Care Facility.",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 80,
-        "pdf_page_end": 80,
-        "bylaw_page_start": 80,
-        "bylaw_page_end": 80
-      },
-      "clause_path": [
-        "21.1.9"
-      ]
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "21.1",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 80,
-        "pdf_page_end": 80,
-        "bylaw_page_start": 80,
-        "bylaw_page_end": 80
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "21.1.1",
-          "clause_path": [
-            "21.1.1"
-          ],
-          "text": "The following uses are permitted subject to the Regulations for Permitted Uses for the R-3 Zone and the following Regulations for Mixed Density Distribution in the MUR Zone section 21.2:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 80,
-            "pdf_page_end": 80,
-            "bylaw_page_start": 80,
-            "bylaw_page_end": 80
-          }
-        },
-        {
-          "provision_label_raw": "21.1.2",
-          "clause_path": [
-            "21.1.2"
-          ],
-          "text": "Single detached Dwelling;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 80,
-            "pdf_page_end": 80,
-            "bylaw_page_start": 80,
-            "bylaw_page_end": 80
-          }
-        },
-        {
-          "provision_label_raw": "21.1.3",
-          "clause_path": [
-            "21.1.3"
-          ],
-          "text": "Semi-Detached Dwelling;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 80,
-            "pdf_page_end": 80,
-            "bylaw_page_start": 80,
-            "bylaw_page_end": 80
-          }
-        },
-        {
-          "provision_label_raw": "21.1.4",
-          "clause_path": [
-            "21.1.4"
-          ],
-          "text": "Duplex Dwelling;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 80,
-            "pdf_page_end": 80,
-            "bylaw_page_start": 80,
-            "bylaw_page_end": 80
-          }
-        },
-        {
-          "provision_label_raw": "21.1.5",
-          "clause_path": [
-            "21.1.5"
-          ],
-          "text": "Townhouse Dwelling;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 80,
-            "pdf_page_end": 80,
-            "bylaw_page_start": 80,
-            "bylaw_page_end": 80
-          }
-        },
-        {
-          "provision_label_raw": "21.1.6",
-          "clause_path": [
-            "21.1.6"
-          ],
-          "text": "Stacked Townhouse Dwelling;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 80,
-            "pdf_page_end": 80,
-            "bylaw_page_start": 80,
-            "bylaw_page_end": 80
-          }
-        },
-        {
-          "provision_label_raw": "21.1.7",
-          "clause_path": [
-            "21.1.7"
-          ],
-          "text": "Block Townhouse Dwelling;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 80,
-            "pdf_page_end": 80,
-            "bylaw_page_start": 80,
-            "bylaw_page_end": 80
-          }
-        },
-        {
-          "provision_label_raw": "21.1.8",
-          "clause_path": [
-            "21.1.8"
-          ],
-          "text": "Nursing Home; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 80,
-            "pdf_page_end": 80,
-            "bylaw_page_start": 80,
-            "bylaw_page_end": 80
-          }
-        },
-        {
-          "provision_label_raw": "21.1.9",
-          "clause_path": [
-            "21.1.9"
-          ],
-          "text": "Community Care Facility.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 80,
-            "pdf_page_end": 80,
-            "bylaw_page_start": 80,
-            "bylaw_page_end": 80
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": "21.2",
-      "title_label_raw": "REGULATIONS FOR MIXED DENSITY DISTRIBUTION",
-      "citations": {
-        "pdf_page_start": 80,
-        "pdf_page_end": 81,
-        "bylaw_page_start": 80,
-        "bylaw_page_end": 81
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "21.2.1",
-          "clause_path": [
-            "21.2.1"
-          ],
-          "text": "Development within the MUR Zone is meant to be of a mixed variety of building forms and Semi-detached or Duplex Dwellings, Single-detached Dwellings, Nursing Homes and Community Care Facilities.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 80,
-            "pdf_page_end": 80,
-            "bylaw_page_start": 80,
-            "bylaw_page_end": 80
-          }
-        },
-        {
-          "provision_label_raw": "21.2.2",
-          "clause_path": [
-            "21.2.2"
-          ],
-          "text": "Within the MUR Zone the following Building forms shall be permitted on any Block in the percentages indicated:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 80,
-            "pdf_page_end": 80,
-            "bylaw_page_start": 80,
-            "bylaw_page_end": 80
-          }
-        },
-        {
-          "provision_label_raw": "a",
-          "clause_path": [
-            "21.2.2",
-            "a"
-          ],
-          "text": "Semi-detached and Duplex Dwellings shall be permitted on up to 25% of the Lots; 25% of the Lots;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 80,
-            "pdf_page_end": 80,
-            "bylaw_page_start": 80,
-            "bylaw_page_end": 80
-          }
-        },
-        {
-          "provision_label_raw": "c",
-          "clause_path": [
-            "21.2.2",
-            "c"
-          ],
-          "text": "Single-detached Dwellings shall be permitted on up to 35% of the Lots; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 80,
-            "pdf_page_end": 80,
-            "bylaw_page_start": 80,
-            "bylaw_page_end": 80
-          }
-        },
-        {
-          "provision_label_raw": "d",
-          "clause_path": [
-            "21.2.2",
-            "d"
-          ],
-          "text": "Institutional Uses as permitted in the R-3 Zone shall be permitted on up to 15% of the Lots. However, if the percentage for Institutional Uses is not used than the percentage allocated to this use can be allocated in 1/3 increments for the remaining uses as stipulated in this section or the remaining portion can be allocated in whole to Single-detached Dwellings.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 80,
-            "pdf_page_end": 80,
-            "bylaw_page_start": 80,
-            "bylaw_page_end": 80
-          }
-        },
-        {
-          "provision_label_raw": "21.2.3",
-          "clause_path": [
-            "21.2.3"
-          ],
-          "text": "Single-detached, Semi-detached and Duplex Dwellings shall be permitted on adjoining Lots on the same side of the street adjacent to townhouse Dwellings. At least one side of a run of semi- detached or duplex Dwelling must be flanked by a Single-detached Dwelling.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 80,
-            "pdf_page_end": 80,
-            "bylaw_page_start": 80,
-            "bylaw_page_end": 80
-          }
-        },
-        {
-          "provision_label_raw": "21.2.4",
-          "clause_path": [
-            "21.2.4"
-          ],
-          "text": "No more than three (3) Townhouse Dwellings with a maximum of twelve (12) units total on all three (3) lots shall be permitted to be constructed on adjoining Lots on the same side of the street.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 80,
-            "pdf_page_end": 80,
-            "bylaw_page_start": 80,
-            "bylaw_page_end": 80
-          }
-        },
-        {
-          "provision_label_raw": "21.2.5",
-          "clause_path": [
-            "21.2.5"
-          ],
-          "text": "At no time shall more than two (2) Townhouse Dwelling consisting of more than six (6) Dwelling Units be permitted to be constructed on adjoining Lots.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 81,
-            "pdf_page_end": 81,
-            "bylaw_page_start": 81,
-            "bylaw_page_end": 81
-          }
-        },
-        {
-          "provision_label_raw": "21.2.6",
-          "clause_path": [
-            "21.2.6"
-          ],
-          "text": "Subdivision of land within the MUR Zone shall be undertaken in Phases. Prior to approval of a Subdivision within the MUR Zone a concept plan shall be submitted for the overall parcel. The concept plan shall indicate the Phases of Development and shall ensure the mixed density formula has been satisfied for the overall parcel of land.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 81,
-            "pdf_page_end": 81,
-            "bylaw_page_start": 81,
-            "bylaw_page_end": 81
-          }
-        }
-      ],
-      "table_column_headings_raw": [
-        "density. Building forms within this Zone shall consist of a combination of Townhouse Dwellings,",
-        "b. Townhouses/Stacked Townhouses/Block Townhouse Dwellings shall be permitted on up to"
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [],
-  "content_blocks": [],
-  "open_issues": [
-    {
-      "issue_type": "source_revision_review",
-      "description": "Source PDF cover identifies rev 049 updated March 9, 2026, but this zone page header may display rev 048 updated October 24, 2025; verify source revision during QA."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "21",
+    "zone_title_raw": "MEDIUM DENSITY MIXED USE RESIDENTIAL ZONE (MUR)",
+    "citations": {
       "pdf_page_start": 80,
       "pdf_page_end": 81,
       "bylaw_page_start": 80,
       "bylaw_page_end": 81
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-mur",
+        "source_unit_type": "zone",
+        "label_raw": "21",
+        "title_raw": "MEDIUM DENSITY MIXED USE RESIDENTIAL ZONE (MUR)",
+        "text_raw": "The following uses are permitted subject to the Regulations for Permitted Uses for the R-3 Zone and the following Regulations for Mixed Density Distribution in the MUR Zone section 21.2:\nSingle detached Dwelling;\nSemi-Detached Dwelling;\nDuplex Dwelling;\nTownhouse Dwelling;\nStacked Townhouse Dwelling;\nBlock Townhouse Dwelling;\nNursing Home; and\nCommunity Care Facility.",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 80,
+          "pdf_page_end": 81,
+          "bylaw_page_start": 80,
+          "bylaw_page_end": 81
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-mur-section-21-1",
+        "section_label_raw": "21.1",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-mur-clause-21-1-1",
+            "clause_label_raw": "21.1.1",
+            "clause_text_raw": "The following uses are permitted subject to the Regulations for Permitted Uses for the R-3 Zone and the following Regulations for Mixed Density Distribution in the MUR Zone section 21.2:",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 80,
+              "pdf_page_end": 80,
+              "bylaw_page_start": 80,
+              "bylaw_page_end": 80
+            }
+          },
+          {
+            "clause_id": "zone-mur-clause-21-1-2",
+            "clause_label_raw": "21.1.2",
+            "clause_text_raw": "Single detached Dwelling;",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 80,
+              "pdf_page_end": 80,
+              "bylaw_page_start": 80,
+              "bylaw_page_end": 80
+            }
+          },
+          {
+            "clause_id": "zone-mur-clause-21-1-3",
+            "clause_label_raw": "21.1.3",
+            "clause_text_raw": "Semi-Detached Dwelling;",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 80,
+              "pdf_page_end": 80,
+              "bylaw_page_start": 80,
+              "bylaw_page_end": 80
+            }
+          },
+          {
+            "clause_id": "zone-mur-clause-21-1-4",
+            "clause_label_raw": "21.1.4",
+            "clause_text_raw": "Duplex Dwelling;",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 80,
+              "pdf_page_end": 80,
+              "bylaw_page_start": 80,
+              "bylaw_page_end": 80
+            }
+          },
+          {
+            "clause_id": "zone-mur-clause-21-1-5",
+            "clause_label_raw": "21.1.5",
+            "clause_text_raw": "Townhouse Dwelling;",
+            "parent_clause_id": null,
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 80,
+              "pdf_page_end": 80,
+              "bylaw_page_start": 80,
+              "bylaw_page_end": 80
+            }
+          },
+          {
+            "clause_id": "zone-mur-clause-21-1-6",
+            "clause_label_raw": "21.1.6",
+            "clause_text_raw": "Stacked Townhouse Dwelling;",
+            "parent_clause_id": null,
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 80,
+              "pdf_page_end": 80,
+              "bylaw_page_start": 80,
+              "bylaw_page_end": 80
+            }
+          },
+          {
+            "clause_id": "zone-mur-clause-21-1-7",
+            "clause_label_raw": "21.1.7",
+            "clause_text_raw": "Block Townhouse Dwelling;",
+            "parent_clause_id": null,
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 80,
+              "pdf_page_end": 80,
+              "bylaw_page_start": 80,
+              "bylaw_page_end": 80
+            }
+          },
+          {
+            "clause_id": "zone-mur-clause-21-1-8",
+            "clause_label_raw": "21.1.8",
+            "clause_text_raw": "Nursing Home; and",
+            "parent_clause_id": null,
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 80,
+              "pdf_page_end": 80,
+              "bylaw_page_start": 80,
+              "bylaw_page_end": 80
+            }
+          },
+          {
+            "clause_id": "zone-mur-clause-21-1-9",
+            "clause_label_raw": "21.1.9",
+            "clause_text_raw": "Community Care Facility.",
+            "parent_clause_id": null,
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 80,
+              "pdf_page_end": 80,
+              "bylaw_page_start": 80,
+              "bylaw_page_end": 80
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 80,
+          "pdf_page_end": 80,
+          "bylaw_page_start": 80,
+          "bylaw_page_end": 80
+        }
+      },
+      {
+        "section_id": "zone-mur-section-21-2",
+        "section_label_raw": "21.2",
+        "section_title_raw": "REGULATIONS FOR MIXED DENSITY DISTRIBUTION",
+        "source_order": 2,
+        "clauses_raw": [],
+        "tables_raw": [
+          {
+            "table_id": "zone-mur-table-21-2",
+            "table_title_raw": "REGULATIONS FOR MIXED DENSITY DISTRIBUTION",
+            "source_order": 1,
+            "columns_raw": [
+              {
+                "column_id": "row_number",
+                "column_label_raw": "",
+                "source_order": 1
+              },
+              {
+                "column_id": "requirement",
+                "column_label_raw": "",
+                "source_order": 2
+              },
+              {
+                "column_id": "density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to",
+                "column_label_raw": "density. Building forms within this Zone shall consist of a combination of Townhouse Dwellings, b. Townhouses/Stacked Townhouses/Block Townhouse Dwellings shall be permitted on up to",
+                "source_order": 3
+              }
+            ],
+            "rows_raw": [
+              {
+                "row_id": "zone-mur-table-21-2-row-1",
+                "source_order": 1,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-1-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "21.2.1"
+                  },
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-1-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Development within the MUR Zone is meant to be of a mixed variety of building forms and Semi-detached or Duplex Dwellings, Single-detached Dwellings, Nursing Homes and Community Care Facilities."
+                  },
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-1-density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to",
+                    "column_id": "density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to",
+                    "cell_text_raw": "Development within the MUR Zone is meant to be of a mixed variety of building forms and Semi-detached or Duplex Dwellings, Single-detached Dwellings, Nursing Homes and Community Care Facilities."
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-mur-table-21-2-row-2",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-2-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "21.2.2"
+                  },
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-2-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Within the MUR Zone the following Building forms shall be permitted on any Block in the percentages indicated:"
+                  },
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-2-density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to",
+                    "column_id": "density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to",
+                    "cell_text_raw": "Within the MUR Zone the following Building forms shall be permitted on any Block in the percentages indicated:"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-mur-table-21-2-row-3",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-3-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "a"
+                  },
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-3-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Semi-detached and Duplex Dwellings shall be permitted on up to 25% of the Lots; 25% of the Lots;"
+                  },
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-3-density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to",
+                    "column_id": "density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to",
+                    "cell_text_raw": "Semi-detached and Duplex Dwellings shall be permitted on up to 25% of the Lots; 25% of the Lots;"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-mur-table-21-2-row-4",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-4-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "c"
+                  },
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-4-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Single-detached Dwellings shall be permitted on up to 35% of the Lots; and"
+                  },
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-4-density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to",
+                    "column_id": "density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to",
+                    "cell_text_raw": "Single-detached Dwellings shall be permitted on up to 35% of the Lots; and"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-mur-table-21-2-row-5",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-5-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "d"
+                  },
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-5-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Institutional Uses as permitted in the R-3 Zone shall be permitted on up to 15% of the Lots. However, if the percentage for Institutional Uses is not used than the percentage allocated to this use can be allocated in 1/3 increments for the remaining uses as stipulated in this section or the remaining portion can be allocated in whole to Single-detached Dwellings."
+                  },
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-5-density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to",
+                    "column_id": "density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to",
+                    "cell_text_raw": "Institutional Uses as permitted in the R-3 Zone shall be permitted on up to 15% of the Lots. However, if the percentage for Institutional Uses is not used than the percentage allocated to this use can be allocated in 1/3 increments for the remaining uses as stipulated in this section or the remaining portion can be allocated in whole to Single-detached Dwellings."
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-mur-table-21-2-row-6",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-6-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "21.2.3"
+                  },
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-6-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Single-detached, Semi-detached and Duplex Dwellings shall be permitted on adjoining Lots on the same side of the street adjacent to townhouse Dwellings. At least one side of a run of semi- detached or duplex Dwelling must be flanked by a Single-detached Dwelling."
+                  },
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-6-density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to",
+                    "column_id": "density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to",
+                    "cell_text_raw": "Single-detached, Semi-detached and Duplex Dwellings shall be permitted on adjoining Lots on the same side of the street adjacent to townhouse Dwellings. At least one side of a run of semi- detached or duplex Dwelling must be flanked by a Single-detached Dwelling."
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-mur-table-21-2-row-7",
+                "source_order": 7,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-7-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "21.2.4"
+                  },
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-7-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "No more than three (3) Townhouse Dwellings with a maximum of twelve (12) units total on all three (3) lots shall be permitted to be constructed on adjoining Lots on the same side of the street."
+                  },
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-7-density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to",
+                    "column_id": "density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to",
+                    "cell_text_raw": "No more than three (3) Townhouse Dwellings with a maximum of twelve (12) units total on all three (3) lots shall be permitted to be constructed on adjoining Lots on the same side of the street."
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-mur-table-21-2-row-8",
+                "source_order": 8,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-8-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "21.2.5"
+                  },
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-8-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "At no time shall more than two (2) Townhouse Dwelling consisting of more than six (6) Dwelling Units be permitted to be constructed on adjoining Lots."
+                  },
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-8-density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to",
+                    "column_id": "density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to",
+                    "cell_text_raw": "At no time shall more than two (2) Townhouse Dwelling consisting of more than six (6) Dwelling Units be permitted to be constructed on adjoining Lots."
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-mur-table-21-2-row-9",
+                "source_order": 9,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-9-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "21.2.6"
+                  },
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-9-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Subdivision of land within the MUR Zone shall be undertaken in Phases. Prior to approval of a Subdivision within the MUR Zone a concept plan shall be submitted for the overall parcel. The concept plan shall indicate the Phases of Development and shall ensure the mixed density formula has been satisfied for the overall parcel of land."
+                  },
+                  {
+                    "cell_id": "zone-mur-table-21-2-row-9-density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to",
+                    "column_id": "density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to",
+                    "cell_text_raw": "Subdivision of land within the MUR Zone shall be undertaken in Phases. Prior to approval of a Subdivision within the MUR Zone a concept plan shall be submitted for the overall parcel. The concept plan shall indicate the Phases of Development and shall ensure the mixed density formula has been satisfied for the overall parcel of land."
+                  }
+                ]
+              }
+            ],
+            "citations": {
+              "pdf_page_start": 80,
+              "pdf_page_end": 81,
+              "bylaw_page_start": 80,
+              "bylaw_page_end": 81
+            }
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 80,
+          "pdf_page_end": 81,
+          "bylaw_page_start": 80,
+          "bylaw_page_end": 81
+        }
+      }
+    ],
+    "tables_raw": [
+      {
+        "table_id": "zone-mur-table-21-2",
+        "section_id": "zone-mur-section-21-2"
+      }
+    ],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-mur-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 80,
+          "pdf_page_end": 81,
+          "bylaw_page_start": 80,
+          "bylaw_page_end": 81
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-mur-clause-21-1-1",
+        "section_id": "zone-mur-section-21-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-mur-clause-21-1-2",
+        "section_id": "zone-mur-section-21-1",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-mur-clause-21-1-3",
+        "section_id": "zone-mur-section-21-1",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-mur-clause-21-1-4",
+        "section_id": "zone-mur-section-21-1",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-mur-clause-21-1-5",
+        "section_id": "zone-mur-section-21-1",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-mur-clause-21-1-6",
+        "section_id": "zone-mur-section-21-1",
+        "source_order": 6
+      },
+      {
+        "clause_id": "zone-mur-clause-21-1-7",
+        "section_id": "zone-mur-section-21-1",
+        "source_order": 7
+      },
+      {
+        "clause_id": "zone-mur-clause-21-1-8",
+        "section_id": "zone-mur-section-21-1",
+        "source_order": 8
+      },
+      {
+        "clause_id": "zone-mur-clause-21-1-9",
+        "section_id": "zone-mur-section-21-1",
+        "source_order": 9
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-mur-term-term-the_following_uses_are_permitted_subject_to_the_regulations_for_permitted_uses_for_the_r_3_zone_and_the_following_regulations_for_mixed_density_distribution_in_the_mur_zone_section_21_2",
+        "term_raw": "The following uses are permitted subject to the Regulations for Permitted Uses for the R-3 Zone and the following Regulations for Mixed Density Distribution in the MUR Zone section 21.2:",
+        "term_normalized": "the_following_uses_are_permitted_subject_to_the_regulations_for_permitted_uses_for_the_r_3_zone_and_the_following_regulations_for_mixed_density_distribution_in_the_mur_zone_section_21_2",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mur-clause-21-1-1"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-mur-term-use-single_detached_dwelling",
+        "term_raw": "Single detached Dwelling",
+        "term_normalized": "single_detached_dwelling",
+        "term_category": "dwelling_type",
+        "code_table": "use",
+        "code": "single_detached_dwelling",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mur-clause-21-1-2"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "term_id": "zone-mur-term-use-semi_detached_dwelling",
+        "term_raw": "Semi-Detached Dwelling",
+        "term_normalized": "semi_detached_dwelling",
+        "term_category": "dwelling_type",
+        "code_table": "use",
+        "code": "semi_detached_dwelling",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mur-clause-21-1-3"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "term_id": "zone-mur-term-use-duplex_dwelling",
+        "term_raw": "Duplex Dwelling",
+        "term_normalized": "duplex_dwelling",
+        "term_category": "dwelling_type",
+        "code_table": "use",
+        "code": "duplex_dwelling",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mur-clause-21-1-4"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "term_id": "zone-mur-term-use-townhouse_dwelling",
+        "term_raw": "Townhouse Dwelling",
+        "term_normalized": "townhouse_dwelling",
+        "term_category": "dwelling_type",
+        "code_table": "use",
+        "code": "townhouse_dwelling",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mur-clause-21-1-5"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "term_id": "zone-mur-term-term-stacked_townhouse_dwelling",
+        "term_raw": "Stacked Townhouse Dwelling",
+        "term_normalized": "stacked_townhouse_dwelling",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mur-clause-21-1-6"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-mur-term-term-block_townhouse_dwelling",
+        "term_raw": "Block Townhouse Dwelling",
+        "term_normalized": "block_townhouse_dwelling",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mur-clause-21-1-7"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-mur-term-term-nursing_home",
+        "term_raw": "Nursing Home",
+        "term_normalized": "nursing_home",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mur-clause-21-1-8"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-mur-term-term-community_care_facility",
+        "term_raw": "Community Care Facility",
+        "term_normalized": "community_care_facility",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mur-clause-21-1-9"
+          }
+        ],
+        "confidence": "needs_review"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-mur-use-the-following-uses-are-permitted-subject-to-the-regulations-for-permitted-uses-for-the-r-3-zone-and-the-following-regulations-for-mixed-density-distribution-in-the-mur-zone-section-21-2-1",
+        "use_name_raw": "The following uses are permitted subject to the Regulations for Permitted Uses for the R-3 Zone and the following Regulations for Mixed Density Distribution in the MUR Zone section 21.2:",
+        "use_term_id": "zone-mur-term-term-the_following_uses_are_permitted_subject_to_the_regulations_for_permitted_uses_for_the_r_3_zone_and_the_following_regulations_for_mixed_density_distribution_in_the_mur_zone_section_21_2",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-mur-clause-21-1-1",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-mur-use-single-detached-dwelling-2",
+        "use_name_raw": "Single detached Dwelling",
+        "use_term_id": "zone-mur-term-use-single_detached_dwelling",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-mur-clause-21-1-2",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-mur-use-semi-detached-dwelling-3",
+        "use_name_raw": "Semi-Detached Dwelling",
+        "use_term_id": "zone-mur-term-use-semi_detached_dwelling",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-mur-clause-21-1-3",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-mur-use-duplex-dwelling-4",
+        "use_name_raw": "Duplex Dwelling",
+        "use_term_id": "zone-mur-term-use-duplex_dwelling",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-mur-clause-21-1-4",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-mur-use-townhouse-dwelling-5",
+        "use_name_raw": "Townhouse Dwelling",
+        "use_term_id": "zone-mur-term-use-townhouse_dwelling",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-mur-clause-21-1-5",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-mur-use-stacked-townhouse-dwelling-6",
+        "use_name_raw": "Stacked Townhouse Dwelling",
+        "use_term_id": "zone-mur-term-term-stacked_townhouse_dwelling",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-mur-clause-21-1-6",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-mur-use-block-townhouse-dwelling-7",
+        "use_name_raw": "Block Townhouse Dwelling",
+        "use_term_id": "zone-mur-term-term-block_townhouse_dwelling",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-mur-clause-21-1-7",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-mur-use-nursing-home-8",
+        "use_name_raw": "Nursing Home",
+        "use_term_id": "zone-mur-term-term-nursing_home",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-mur-clause-21-1-8",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-mur-use-community-care-facility-9",
+        "use_name_raw": "Community Care Facility",
+        "use_term_id": "zone-mur-term-term-community_care_facility",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-mur-clause-21-1-9",
+        "confidence": "needs_review"
+      }
+    ],
+    "numeric_values": [],
+    "requirements": [],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-mur-regulation-group-zone",
+        "group_label_raw": "21",
+        "group_title_raw": "MEDIUM DENSITY MIXED USE RESIDENTIAL ZONE (MUR)",
+        "regulated_use_terms": [
+          "zone-mur-term-term-the_following_uses_are_permitted_subject_to_the_regulations_for_permitted_uses_for_the_r_3_zone_and_the_following_regulations_for_mixed_density_distribution_in_the_mur_zone_section_21_2",
+          "zone-mur-term-use-single_detached_dwelling",
+          "zone-mur-term-use-semi_detached_dwelling",
+          "zone-mur-term-use-duplex_dwelling",
+          "zone-mur-term-use-townhouse_dwelling",
+          "zone-mur-term-term-stacked_townhouse_dwelling",
+          "zone-mur-term-term-block_townhouse_dwelling",
+          "zone-mur-term-term-nursing_home",
+          "zone-mur-term-term-community_care_facility"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "MUR"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [],
+        "source_section_ref": "zone-mur-section-21-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-mur-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "MUR",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-mur-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-mur-flag-unparsed-table-value-zone-mur-table-21-2-row-1-density-building-forms-within-this-zone-shall-consist-of-a-combination-of-townhouse-dwellings-b-townhouses-stacked-townhouses-block-townhouse-dwellings-shall-be-permitted-on-up-to",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "numeric_value_review",
+      "description": "Table cell value was preserved but not normalized: Development within the MUR Zone is meant to be of a mixed variety of building forms and Semi-detached or Duplex Dwellings, Single-detached Dwellings, Nursing Homes and Community Care Facilities.",
+      "source_refs": [
+        {
+          "source_ref_type": "table_cell",
+          "source_ref_id": "zone-mur-table-21-2-row-1-density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-mur-flag-unparsed-table-value-zone-mur-table-21-2-row-2-density-building-forms-within-this-zone-shall-consist-of-a-combination-of-townhouse-dwellings-b-townhouses-stacked-townhouses-block-townhouse-dwellings-shall-be-permitted-on-up-to",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "numeric_value_review",
+      "description": "Table cell value was preserved but not normalized: Within the MUR Zone the following Building forms shall be permitted on any Block in the percentages indicated:",
+      "source_refs": [
+        {
+          "source_ref_type": "table_cell",
+          "source_ref_id": "zone-mur-table-21-2-row-2-density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-mur-flag-unparsed-table-value-zone-mur-table-21-2-row-3-density-building-forms-within-this-zone-shall-consist-of-a-combination-of-townhouse-dwellings-b-townhouses-stacked-townhouses-block-townhouse-dwellings-shall-be-permitted-on-up-to",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "numeric_value_review",
+      "description": "Table cell value was preserved but not normalized: Semi-detached and Duplex Dwellings shall be permitted on up to 25% of the Lots; 25% of the Lots;",
+      "source_refs": [
+        {
+          "source_ref_type": "table_cell",
+          "source_ref_id": "zone-mur-table-21-2-row-3-density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-mur-flag-unparsed-table-value-zone-mur-table-21-2-row-4-density-building-forms-within-this-zone-shall-consist-of-a-combination-of-townhouse-dwellings-b-townhouses-stacked-townhouses-block-townhouse-dwellings-shall-be-permitted-on-up-to",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "numeric_value_review",
+      "description": "Table cell value was preserved but not normalized: Single-detached Dwellings shall be permitted on up to 35% of the Lots; and",
+      "source_refs": [
+        {
+          "source_ref_type": "table_cell",
+          "source_ref_id": "zone-mur-table-21-2-row-4-density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-mur-flag-unparsed-table-value-zone-mur-table-21-2-row-5-density-building-forms-within-this-zone-shall-consist-of-a-combination-of-townhouse-dwellings-b-townhouses-stacked-townhouses-block-townhouse-dwellings-shall-be-permitted-on-up-to",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "numeric_value_review",
+      "description": "Table cell value was preserved but not normalized: Institutional Uses as permitted in the R-3 Zone shall be permitted on up to 15% of the Lots. However, if the percentage for Institutional Uses is not used than the percentage allocated to this use can be allocated in 1/3 increments for the remaining uses as stipulated in this section or the remaining portion can be allocated in whole to Single-detached Dwellings.",
+      "source_refs": [
+        {
+          "source_ref_type": "table_cell",
+          "source_ref_id": "zone-mur-table-21-2-row-5-density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-mur-flag-unparsed-table-value-zone-mur-table-21-2-row-6-density-building-forms-within-this-zone-shall-consist-of-a-combination-of-townhouse-dwellings-b-townhouses-stacked-townhouses-block-townhouse-dwellings-shall-be-permitted-on-up-to",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "numeric_value_review",
+      "description": "Table cell value was preserved but not normalized: Single-detached, Semi-detached and Duplex Dwellings shall be permitted on adjoining Lots on the same side of the street adjacent to townhouse Dwellings. At least one side of a run of semi- detached or duplex Dwelling must be flanked by a Single-detached Dwelling.",
+      "source_refs": [
+        {
+          "source_ref_type": "table_cell",
+          "source_ref_id": "zone-mur-table-21-2-row-6-density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-mur-flag-unparsed-table-value-zone-mur-table-21-2-row-7-density-building-forms-within-this-zone-shall-consist-of-a-combination-of-townhouse-dwellings-b-townhouses-stacked-townhouses-block-townhouse-dwellings-shall-be-permitted-on-up-to",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "numeric_value_review",
+      "description": "Table cell value was preserved but not normalized: No more than three (3) Townhouse Dwellings with a maximum of twelve (12) units total on all three (3) lots shall be permitted to be constructed on adjoining Lots on the same side of the street.",
+      "source_refs": [
+        {
+          "source_ref_type": "table_cell",
+          "source_ref_id": "zone-mur-table-21-2-row-7-density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-mur-flag-unparsed-table-value-zone-mur-table-21-2-row-8-density-building-forms-within-this-zone-shall-consist-of-a-combination-of-townhouse-dwellings-b-townhouses-stacked-townhouses-block-townhouse-dwellings-shall-be-permitted-on-up-to",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "numeric_value_review",
+      "description": "Table cell value was preserved but not normalized: At no time shall more than two (2) Townhouse Dwelling consisting of more than six (6) Dwelling Units be permitted to be constructed on adjoining Lots.",
+      "source_refs": [
+        {
+          "source_ref_type": "table_cell",
+          "source_ref_id": "zone-mur-table-21-2-row-8-density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-mur-flag-unparsed-table-value-zone-mur-table-21-2-row-9-density-building-forms-within-this-zone-shall-consist-of-a-combination-of-townhouse-dwellings-b-townhouses-stacked-townhouses-block-townhouse-dwellings-shall-be-permitted-on-up-to",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "numeric_value_review",
+      "description": "Table cell value was preserved but not normalized: Subdivision of land within the MUR Zone shall be undertaken in Phases. Prior to approval of a Subdivision within the MUR Zone a concept plan shall be submitted for the overall parcel. The concept plan shall indicate the Phases of Development and shall ensure the mixed density formula has been satisfied for the overall parcel of land.",
+      "source_refs": [
+        {
+          "source_ref_type": "table_cell",
+          "source_ref_id": "zone-mur-table-21-2-row-9-density_building_forms_within_this_zone_shall_consist_of_a_combination_of_townhouse_dwellings_b_townhouses_stacked_townhouses_block_townhouse_dwellings_shall_be_permitted_on_up_to"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-mur-flag-unmatched-term-the-following-uses-are-permitted-subject-to-the-regulations-for-permitted-uses-for-the-r-3-zone-and-the-following-regulations-for-mixed-density-distribution-in-the-mur-zone-section-21-2",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: The following uses are permitted subject to the Regulations for Permitted Uses for the R-3 Zone and the following Regulations for Mixed Density Distribution in the MUR Zone section 21.2:",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-mur-clause-21-1-1"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-mur-flag-unmatched-term-stacked-townhouse-dwelling",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Stacked Townhouse Dwelling",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-mur-clause-21-1-6"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-mur-flag-unmatched-term-block-townhouse-dwelling",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Block Townhouse Dwelling",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-mur-clause-21-1-7"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-mur-flag-unmatched-term-nursing-home",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Nursing Home",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-mur-clause-21-1-8"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-mur-flag-unmatched-term-community-care-facility",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Community Care Facility",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-mur-clause-21-1-9"
+        }
+      ]
+    }
+  ]
 }

@@ -1,858 +1,2995 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+    "document_type": "zone",
     "zone_code": "R-3T",
     "zone_name": "MEDIUM DENSITY RESIDENTIAL TOWNHOUSE ZONE",
-    "part_label_raw": "17",
-    "chapter_heading_raw": "17 MEDIUM DENSITY RESIDENTIAL TOWNHOUSE ZONE (R-3T)"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": []
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "17.1.1",
-      "use_type": "inherited_principal_use",
-      "use_name": "Uses permitted in the R-1N Zone subject to the Regulations for Permitted Uses for the R-1N Zone",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 74,
-        "pdf_page_end": 74,
-        "bylaw_page_start": 74,
-        "bylaw_page_end": 74
-      },
-      "clause_path": [
-        "17.1.1"
-      ]
-    },
-    {
-      "clause_label_raw": "17.1.2",
-      "use_type": "inherited_principal_use",
-      "use_name": "Uses permitted in the R-2 Zone subject to the Regulations for the Permitted Uses for the R-2 Zone",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 74,
-        "pdf_page_end": 74,
-        "bylaw_page_start": 74,
-        "bylaw_page_end": 74
-      },
-      "clause_path": [
-        "17.1.2"
-      ]
-    },
-    {
-      "clause_label_raw": "17.1.3",
-      "use_type": "residential_use",
-      "use_name": "Block Townhouse Dwelling",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 74,
-        "pdf_page_end": 74,
-        "bylaw_page_start": 74,
-        "bylaw_page_end": 74
-      },
-      "clause_path": [
-        "17.1.3"
-      ]
-    },
-    {
-      "clause_label_raw": "17.1.4",
-      "use_type": "residential_use",
-      "use_name": "Converted Dwelling",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 74,
-        "pdf_page_end": 74,
-        "bylaw_page_start": 74,
-        "bylaw_page_end": 74
-      },
-      "clause_path": [
-        "17.1.4"
-      ]
-    },
-    {
-      "clause_label_raw": "17.1.5",
-      "use_type": "principal_use",
-      "use_name": "Lodging House Limited",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 74,
-        "pdf_page_end": 74,
-        "bylaw_page_start": 74,
-        "bylaw_page_end": 74
-      },
-      "clause_path": [
-        "17.1.5"
-      ]
-    },
-    {
-      "clause_label_raw": "17.1.6",
-      "use_type": "residential_use",
-      "use_name": "Stacked Townhouse Dwelling",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 74,
-        "pdf_page_end": 74,
-        "bylaw_page_start": 74,
-        "bylaw_page_end": 74
-      },
-      "clause_path": [
-        "17.1.6"
-      ]
-    },
-    {
-      "clause_label_raw": "17.1.7",
-      "use_type": "residential_use",
-      "use_name": "Townhouse Dwelling",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 74,
-        "pdf_page_end": 74,
-        "bylaw_page_start": 74,
-        "bylaw_page_end": 74
-      },
-      "clause_path": [
-        "17.1.7"
-      ]
-    },
-    {
-      "clause_label_raw": "17.1.8",
-      "use_type": "inherited_principal_use",
-      "use_name": "The following Institutional uses are permitted in the R-3 Zone, subject to the Regulations for Permitted Uses for the Institutional (I) Zone",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 74,
-        "pdf_page_end": 74,
-        "bylaw_page_start": 74,
-        "bylaw_page_end": 74
-      },
-      "clause_path": [
-        "17.1.8"
-      ]
-    },
-    {
-      "clause_label_raw": "a",
-      "use_type": "principal_use",
-      "use_name": "Community Building",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 74,
-        "pdf_page_end": 74,
-        "bylaw_page_start": 74,
-        "bylaw_page_end": 74
-      },
-      "clause_path": [
-        "17.1.8",
-        "a"
-      ]
-    },
-    {
-      "clause_label_raw": "b",
-      "use_type": "principal_use",
-      "use_name": "Community Care Facility",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 74,
-        "pdf_page_end": 74,
-        "bylaw_page_start": 74,
-        "bylaw_page_end": 74
-      },
-      "clause_path": [
-        "17.1.8",
-        "b"
-      ]
-    },
-    {
-      "clause_label_raw": "c",
-      "use_type": "principal_use",
-      "use_name": "Community Institutional",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 74,
-        "pdf_page_end": 74,
-        "bylaw_page_start": 74,
-        "bylaw_page_end": 74
-      },
-      "clause_path": [
-        "17.1.8",
-        "c"
-      ]
-    },
-    {
-      "clause_label_raw": "d",
-      "use_type": "principal_use",
-      "use_name": "Commercial Daycare Centre",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 74,
-        "pdf_page_end": 74,
-        "bylaw_page_start": 74,
-        "bylaw_page_end": 74
-      },
-      "clause_path": [
-        "17.1.8",
-        "d"
-      ]
-    },
-    {
-      "clause_label_raw": "e",
-      "use_type": "residential_use",
-      "use_name": "Nursing Home",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 74,
-        "pdf_page_end": 74,
-        "bylaw_page_start": 74,
-        "bylaw_page_end": 74
-      },
-      "clause_path": [
-        "17.1.8",
-        "e"
-      ]
-    },
-    {
-      "clause_label_raw": "a",
-      "use_type": "accessory_or_secondary_use",
-      "use_name": "Accessory Building",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 76,
-        "pdf_page_end": 76,
-        "bylaw_page_start": 76,
-        "bylaw_page_end": 76
-      },
-      "clause_path": [
-        "17.5.1",
-        "a"
-      ],
-      "conditions": "Notwithstanding the requirements, the following are permitted as accessory or secondary uses:"
-    },
-    {
-      "clause_label_raw": "b",
-      "use_type": "accessory_or_secondary_use",
-      "use_name": "Home Occupation",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 76,
-        "pdf_page_end": 76,
-        "bylaw_page_start": 76,
-        "bylaw_page_end": 76
-      },
-      "clause_path": [
-        "17.5.1",
-        "b"
-      ],
-      "conditions": "Notwithstanding the requirements, the following are permitted as accessory or secondary uses:"
-    },
-    {
-      "clause_label_raw": "c",
-      "use_type": "accessory_or_secondary_use",
-      "use_name": "Home Daycare",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 76,
-        "pdf_page_end": 76,
-        "bylaw_page_start": 76,
-        "bylaw_page_end": 76
-      },
-      "clause_path": [
-        "17.5.1",
-        "c"
-      ],
-      "conditions": "Notwithstanding the requirements, the following are permitted as accessory or secondary uses:"
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "17.1",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 74,
-        "pdf_page_end": 74,
-        "bylaw_page_start": 74,
-        "bylaw_page_end": 74
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "17.1.1",
-          "clause_path": [
-            "17.1.1"
-          ],
-          "text": "Uses permitted in the R-1N Zone subject to the Regulations for Permitted Uses for the R-1N Zone;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 74,
-            "pdf_page_end": 74,
-            "bylaw_page_start": 74,
-            "bylaw_page_end": 74
-          }
-        },
-        {
-          "provision_label_raw": "17.1.2",
-          "clause_path": [
-            "17.1.2"
-          ],
-          "text": "Uses permitted in the R-2 Zone subject to the Regulations for the Permitted Uses for the R-2 Zone;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 74,
-            "pdf_page_end": 74,
-            "bylaw_page_start": 74,
-            "bylaw_page_end": 74
-          }
-        },
-        {
-          "provision_label_raw": "17.1.3",
-          "clause_path": [
-            "17.1.3"
-          ],
-          "text": "Block Townhouse Dwelling;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 74,
-            "pdf_page_end": 74,
-            "bylaw_page_start": 74,
-            "bylaw_page_end": 74
-          }
-        },
-        {
-          "provision_label_raw": "17.1.4",
-          "clause_path": [
-            "17.1.4"
-          ],
-          "text": "Converted Dwelling;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 74,
-            "pdf_page_end": 74,
-            "bylaw_page_start": 74,
-            "bylaw_page_end": 74
-          }
-        },
-        {
-          "provision_label_raw": "17.1.5",
-          "clause_path": [
-            "17.1.5"
-          ],
-          "text": "Lodging House Limited;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 74,
-            "pdf_page_end": 74,
-            "bylaw_page_start": 74,
-            "bylaw_page_end": 74
-          }
-        },
-        {
-          "provision_label_raw": "17.1.6",
-          "clause_path": [
-            "17.1.6"
-          ],
-          "text": "Stacked Townhouse Dwelling;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 74,
-            "pdf_page_end": 74,
-            "bylaw_page_start": 74,
-            "bylaw_page_end": 74
-          }
-        },
-        {
-          "provision_label_raw": "17.1.7",
-          "clause_path": [
-            "17.1.7"
-          ],
-          "text": "Townhouse Dwelling;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 74,
-            "pdf_page_end": 74,
-            "bylaw_page_start": 74,
-            "bylaw_page_end": 74
-          }
-        },
-        {
-          "provision_label_raw": "17.1.8",
-          "clause_path": [
-            "17.1.8"
-          ],
-          "text": "The following Institutional uses are permitted in the R-3 Zone, subject to the Regulations for Permitted Uses for the Institutional (I) Zone",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 74,
-            "pdf_page_end": 74,
-            "bylaw_page_start": 74,
-            "bylaw_page_end": 74
-          }
-        },
-        {
-          "provision_label_raw": "a",
-          "clause_path": [
-            "17.1.8",
-            "a"
-          ],
-          "text": "Community Building;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 74,
-            "pdf_page_end": 74,
-            "bylaw_page_start": 74,
-            "bylaw_page_end": 74
-          }
-        },
-        {
-          "provision_label_raw": "b",
-          "clause_path": [
-            "17.1.8",
-            "b"
-          ],
-          "text": "Community Care Facility;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 74,
-            "pdf_page_end": 74,
-            "bylaw_page_start": 74,
-            "bylaw_page_end": 74
-          }
-        },
-        {
-          "provision_label_raw": "c",
-          "clause_path": [
-            "17.1.8",
-            "c"
-          ],
-          "text": "Community Institutional;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 74,
-            "pdf_page_end": 74,
-            "bylaw_page_start": 74,
-            "bylaw_page_end": 74
-          }
-        },
-        {
-          "provision_label_raw": "d",
-          "clause_path": [
-            "17.1.8",
-            "d"
-          ],
-          "text": "Commercial Daycare Centre; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 74,
-            "pdf_page_end": 74,
-            "bylaw_page_start": 74,
-            "bylaw_page_end": 74
-          }
-        },
-        {
-          "provision_label_raw": "e",
-          "clause_path": [
-            "17.1.8",
-            "e"
-          ],
-          "text": "Nursing Home",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 74,
-            "pdf_page_end": 74,
-            "bylaw_page_start": 74,
-            "bylaw_page_end": 74
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": null,
-      "title_label_raw": "REGULATIONS FOR TOWNHOUSE, STACKED AND BLOCK TOWNHOUSE",
-      "citations": {
-        "pdf_page_start": 74,
-        "pdf_page_end": 74,
-        "bylaw_page_start": 74,
-        "bylaw_page_end": 74
-      },
-      "provisions": []
-    },
-    {
-      "order_index": 3,
-      "section_label_raw": "17.2",
-      "title_label_raw": "DWELLINGS",
-      "citations": {
-        "pdf_page_start": 74,
-        "pdf_page_end": 75,
-        "bylaw_page_start": 74,
-        "bylaw_page_end": 75
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "section",
-          "text": "Townhouse Stacked Townhouse 195 sq m (2,099.0 sq ft) per unit 140 sq m (1,507.0 sq ft) per unit 220 sq m (2,368.1 sq ft) per unit 165 sq m (1,776.0 sq ft) per unit",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 74,
-            "pdf_page_end": 74,
-            "bylaw_page_start": 74,
-            "bylaw_page_end": 74
-          }
-        },
-        {
-          "provision_label_raw": "2",
-          "text": "Lot Frontage Per Unit and Per Stack (2) Units for Stacked Townhouses (Minimum) 6.1 m (20.0 ft) OR 25.0 m (82 ft) whichever is less 9.0 m (29.5 ft) OR 30.0 m (98.4 ft) whichever is less",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 74,
-            "pdf_page_end": 74,
-            "bylaw_page_start": 74,
-            "bylaw_page_end": 74
-          }
-        },
-        {
-          "provision_label_raw": "3",
-          "text": "Front Yard Front Access (Minimum) Rear Lane Access (Minimum) 6.0 m (19.7 ft) 4.3 m (14.1 ft) 6.0 m (19.7 ft) 4.3 m (14.1 ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 74,
-            "pdf_page_end": 74,
-            "bylaw_page_start": 74,
-            "bylaw_page_end": 74
-          }
-        },
-        {
-          "provision_label_raw": "4",
-          "text": "Rear Yard Front Access (Minimum) Rear Lane Access (Minimum) 7.5 m (24.6 ft) 10.5 m (34.4 ft) 7.5 m (24.6 ft) 10.5 m (34.4 ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 74,
-            "pdf_page_end": 74,
-            "bylaw_page_start": 74,
-            "bylaw_page_end": 74
-          }
-        },
-        {
-          "provision_label_raw": "17.2.1",
-          "clause_path": [
-            "17.2.1"
-          ],
-          "text": "Regulations for Townhouses, Stacked and Block Townhouse Dwellings include:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 75,
-            "pdf_page_end": 75,
-            "bylaw_page_start": 75,
-            "bylaw_page_end": 75
-          }
-        },
-        {
-          "provision_label_raw": "a",
-          "clause_path": [
-            "17.2.1",
-            "a"
-          ],
-          "text": "Where Dwelling Units are to be subdivided, an Easement in favour of the central units for access to the Rear Yards from the Street shall be provided.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 75,
-            "pdf_page_end": 75,
-            "bylaw_page_start": 75,
-            "bylaw_page_end": 75
-          }
-        },
-        {
-          "provision_label_raw": "b",
-          "clause_path": [
-            "17.2.1",
-            "b"
-          ],
-          "text": "A maximum of 8 consecutive Dwelling Units",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 75,
-            "pdf_page_end": 75,
-            "bylaw_page_start": 75,
-            "bylaw_page_end": 75
-          }
-        },
-        {
-          "provision_label_raw": "c",
-          "clause_path": [
-            "17.2.1",
-            "c"
-          ],
-          "text": "Where 8 consecutive Dwelling Units are proposed, individual Dwelling Units shall not exceed 6.5 m (21.3 ft) in width.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 75,
-            "pdf_page_end": 75,
-            "bylaw_page_start": 75,
-            "bylaw_page_end": 75
-          }
-        }
-      ],
-      "table_column_headings_raw": [
-        "Interior Lot Corner Lot"
-      ]
-    },
-    {
-      "order_index": 4,
-      "section_label_raw": null,
-      "title_label_raw": "REGULATIONS FOR LODGING HOUSES AND GROUP HOMES",
-      "citations": {
-        "pdf_page_start": 75,
-        "pdf_page_end": 75,
-        "bylaw_page_start": 75,
-        "bylaw_page_end": 75
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "1",
-          "text": "Lot Area (Minimum) 325 sq. m (3,498.3 sq. ft) 395 sq. m (4,251.9 sq. ft) The number of rooms is determined by the following:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 75,
-            "pdf_page_end": 75,
-            "bylaw_page_start": 75,
-            "bylaw_page_end": 75
-          }
-        },
-        {
-          "provision_label_raw": "a",
-          "clause_path": [
-            "a"
-          ],
-          "text": "For the first 325 sq. m (3,498.3 sq. ft.) for an interior lot and 395 sq. m (4,251.7 sq. ft.) for a corner lot of Lot Area, four (4) bedrooms are permitted;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 75,
-            "pdf_page_end": 75,
-            "bylaw_page_start": 75,
-            "bylaw_page_end": 75
-          }
-        },
-        {
-          "provision_label_raw": "b",
-          "clause_path": [
-            "b"
-          ],
-          "text": "For every additional bedroom or lodging room over four (4) bedrooms or lodging rooms, the Lot area must be increased by 90 sq. m (968.7 sq. ft.) thereof.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 75,
-            "pdf_page_end": 75,
-            "bylaw_page_start": 75,
-            "bylaw_page_end": 75
-          }
-        }
-      ],
-      "table_column_headings_raw": [
-        "Interior Lot Corner Lot"
-      ]
-    },
-    {
-      "order_index": 5,
-      "section_label_raw": "17.4",
-      "title_label_raw": "CONVERTED DWELLING",
-      "citations": {
-        "pdf_page_start": 75,
-        "pdf_page_end": 76,
-        "bylaw_page_start": 75,
-        "bylaw_page_end": 76
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "17.4.1",
-          "clause_path": [
-            "17.4.1"
-          ],
-          "text": "An existing Dwelling may be Altered and used as a Duplex, Semi-detached or a Multi-unit Dwelling provided that:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 75,
-            "pdf_page_end": 75,
-            "bylaw_page_start": 75,
-            "bylaw_page_end": 75
-          }
-        },
-        {
-          "provision_label_raw": "a",
-          "clause_path": [
-            "17.4.1",
-            "a"
-          ],
-          "text": "The Building is structurally sound and the conversion satisfies the requirements under the City of Charlottetown Building Code By-law.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 76,
-            "pdf_page_end": 76,
-            "bylaw_page_start": 76,
-            "bylaw_page_end": 76
-          }
-        },
-        {
-          "provision_label_raw": "b",
-          "clause_path": [
-            "17.4.1",
-            "b"
-          ],
-          "text": "The conversion can be undertaken without extreme Alterations or Additions excepting the construction or addition of new windows, fire escapes and outside stairways;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 76,
-            "pdf_page_end": 76,
-            "bylaw_page_start": 76,
-            "bylaw_page_end": 76
-          }
-        },
-        {
-          "provision_label_raw": "c",
-          "clause_path": [
-            "17.4.1",
-            "c"
-          ],
-          "text": "The number of Dwelling Units permitted shall be consistent with that which is permitted for an Apartment Dwelling.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 76,
-            "pdf_page_end": 76,
-            "bylaw_page_start": 76,
-            "bylaw_page_end": 76
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 6,
-      "section_label_raw": "17.5",
-      "title_label_raw": "ACCESSORY AND SECONDARY USES",
-      "citations": {
-        "pdf_page_start": 76,
-        "pdf_page_end": 76,
-        "bylaw_page_start": 76,
-        "bylaw_page_end": 76
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "17.5.1",
-          "clause_path": [
-            "17.5.1"
-          ],
-          "text": "Notwithstanding the requirements, the following are permitted as accessory or secondary uses:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 76,
-            "pdf_page_end": 76,
-            "bylaw_page_start": 76,
-            "bylaw_page_end": 76
-          }
-        },
-        {
-          "provision_label_raw": "a",
-          "clause_path": [
-            "17.5.1",
-            "a"
-          ],
-          "text": "Accessory Building;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 76,
-            "pdf_page_end": 76,
-            "bylaw_page_start": 76,
-            "bylaw_page_end": 76
-          }
-        },
-        {
-          "provision_label_raw": "b",
-          "clause_path": [
-            "17.5.1",
-            "b"
-          ],
-          "text": "Home Occupation; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 76,
-            "pdf_page_end": 76,
-            "bylaw_page_start": 76,
-            "bylaw_page_end": 76
-          }
-        },
-        {
-          "provision_label_raw": "c",
-          "clause_path": [
-            "17.5.1",
-            "c"
-          ],
-          "text": "Home Daycare",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 76,
-            "pdf_page_end": 76,
-            "bylaw_page_start": 76,
-            "bylaw_page_end": 76
-          }
-        }
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": "R-1N Zone",
-      "chapter_slug": "r-1n",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 74,
-        "pdf_page_end": 74,
-        "bylaw_page_start": 74,
-        "bylaw_page_end": 74
-      },
-      "source_text": "Uses permitted in the R-1N Zone subject to the Regulations for Permitted Uses for the R-1N Zone"
-    },
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": "R-2 Zone",
-      "chapter_slug": "r-2",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 74,
-        "pdf_page_end": 74,
-        "bylaw_page_start": 74,
-        "bylaw_page_end": 74
-      },
-      "source_text": "Uses permitted in the R-2 Zone subject to the Regulations for the Permitted Uses for the R-2 Zone"
-    }
-  ],
-  "content_blocks": [],
-  "open_issues": [
-    {
-      "issue_type": "table_parsing_review",
-      "description": "Section 'DWELLINGS' contains table-derived provisions extracted from PDF text; verify column alignment against the source PDF before normalization."
-    },
-    {
-      "issue_type": "table_parsing_review",
-      "description": "Section 'REGULATIONS FOR LODGING HOUSES AND GROUP HOMES' contains table-derived provisions extracted from PDF text; verify column alignment against the source PDF before normalization."
-    },
-    {
-      "issue_type": "source_revision_review",
-      "description": "Source PDF cover identifies rev 049 updated March 9, 2026, but this zone page header may display rev 048 updated October 24, 2025; verify source revision during QA."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "17",
+    "zone_title_raw": "MEDIUM DENSITY RESIDENTIAL TOWNHOUSE ZONE (R-3T)",
+    "citations": {
       "pdf_page_start": 74,
       "pdf_page_end": 76,
       "bylaw_page_start": 74,
       "bylaw_page_end": 76
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-r-3t",
+        "source_unit_type": "zone",
+        "label_raw": "17",
+        "title_raw": "MEDIUM DENSITY RESIDENTIAL TOWNHOUSE ZONE (R-3T)",
+        "text_raw": "Uses permitted in the R-1N Zone subject to the Regulations for Permitted Uses for the R-1N Zone;\nUses permitted in the R-2 Zone subject to the Regulations for the Permitted Uses for the R-2 Zone;\nBlock Townhouse Dwelling;\nConverted Dwelling;\nLodging House Limited;\nStacked Townhouse Dwelling;\nTownhouse Dwelling;\nThe following Institutional uses are permitted in the R-3 Zone, subject to the Regulations for Permitted Uses for the Institutional (I) Zone\nCommunity Building;\nCommunity Care Facility;\nCommunity Institutional;\nCommercial Daycare Centre; and\nNursing Home\nAn existing Dwelling may be Altered and used as a Duplex, Semi-detached or a Multi-unit Dwelling provided that:\nThe Building is structurally sound and the conversion satisfies the requirements under the City of Charlottetown Building Code By-law.\nThe conversion can be undertaken without extreme Alterations or Additions excepting the construction or addition of new windows, fire escapes and outside stairways;\nThe number of Dwelling Units permitted shall be consistent with that which is permitted for an Apartment Dwelling.\nNotwithstanding the requirements, the following are permitted as accessory or secondary uses:\nAccessory Building;\nHome Occupation; and\nHome Daycare",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 74,
+          "pdf_page_end": 76,
+          "bylaw_page_start": 74,
+          "bylaw_page_end": 76
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-r-3t-section-17-1",
+        "section_label_raw": "17.1",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-r-3t-clause-17-1-1",
+            "clause_label_raw": "17.1.1",
+            "clause_text_raw": "Uses permitted in the R-1N Zone subject to the Regulations for Permitted Uses for the R-1N Zone;",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 74,
+              "pdf_page_end": 74,
+              "bylaw_page_start": 74,
+              "bylaw_page_end": 74
+            }
+          },
+          {
+            "clause_id": "zone-r-3t-clause-17-1-2",
+            "clause_label_raw": "17.1.2",
+            "clause_text_raw": "Uses permitted in the R-2 Zone subject to the Regulations for the Permitted Uses for the R-2 Zone;",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 74,
+              "pdf_page_end": 74,
+              "bylaw_page_start": 74,
+              "bylaw_page_end": 74
+            }
+          },
+          {
+            "clause_id": "zone-r-3t-clause-17-1-3",
+            "clause_label_raw": "17.1.3",
+            "clause_text_raw": "Block Townhouse Dwelling;",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 74,
+              "pdf_page_end": 74,
+              "bylaw_page_start": 74,
+              "bylaw_page_end": 74
+            }
+          },
+          {
+            "clause_id": "zone-r-3t-clause-17-1-4",
+            "clause_label_raw": "17.1.4",
+            "clause_text_raw": "Converted Dwelling;",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 74,
+              "pdf_page_end": 74,
+              "bylaw_page_start": 74,
+              "bylaw_page_end": 74
+            }
+          },
+          {
+            "clause_id": "zone-r-3t-clause-17-1-5",
+            "clause_label_raw": "17.1.5",
+            "clause_text_raw": "Lodging House Limited;",
+            "parent_clause_id": null,
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 74,
+              "pdf_page_end": 74,
+              "bylaw_page_start": 74,
+              "bylaw_page_end": 74
+            }
+          },
+          {
+            "clause_id": "zone-r-3t-clause-17-1-6",
+            "clause_label_raw": "17.1.6",
+            "clause_text_raw": "Stacked Townhouse Dwelling;",
+            "parent_clause_id": null,
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 74,
+              "pdf_page_end": 74,
+              "bylaw_page_start": 74,
+              "bylaw_page_end": 74
+            }
+          },
+          {
+            "clause_id": "zone-r-3t-clause-17-1-7",
+            "clause_label_raw": "17.1.7",
+            "clause_text_raw": "Townhouse Dwelling;",
+            "parent_clause_id": null,
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 74,
+              "pdf_page_end": 74,
+              "bylaw_page_start": 74,
+              "bylaw_page_end": 74
+            }
+          },
+          {
+            "clause_id": "zone-r-3t-clause-17-1-8",
+            "clause_label_raw": "17.1.8",
+            "clause_text_raw": "The following Institutional uses are permitted in the R-3 Zone, subject to the Regulations for Permitted Uses for the Institutional (I) Zone",
+            "parent_clause_id": null,
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 74,
+              "pdf_page_end": 74,
+              "bylaw_page_start": 74,
+              "bylaw_page_end": 74
+            }
+          },
+          {
+            "clause_id": "zone-r-3t-clause-17-1-8-a",
+            "clause_label_raw": "a",
+            "clause_text_raw": "Community Building;",
+            "parent_clause_id": "zone-r-3t-clause-17-1-8",
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 74,
+              "pdf_page_end": 74,
+              "bylaw_page_start": 74,
+              "bylaw_page_end": 74
+            }
+          },
+          {
+            "clause_id": "zone-r-3t-clause-17-1-8-b",
+            "clause_label_raw": "b",
+            "clause_text_raw": "Community Care Facility;",
+            "parent_clause_id": "zone-r-3t-clause-17-1-8",
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 74,
+              "pdf_page_end": 74,
+              "bylaw_page_start": 74,
+              "bylaw_page_end": 74
+            }
+          },
+          {
+            "clause_id": "zone-r-3t-clause-17-1-8-c",
+            "clause_label_raw": "c",
+            "clause_text_raw": "Community Institutional;",
+            "parent_clause_id": "zone-r-3t-clause-17-1-8",
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 74,
+              "pdf_page_end": 74,
+              "bylaw_page_start": 74,
+              "bylaw_page_end": 74
+            }
+          },
+          {
+            "clause_id": "zone-r-3t-clause-17-1-8-d",
+            "clause_label_raw": "d",
+            "clause_text_raw": "Commercial Daycare Centre; and",
+            "parent_clause_id": "zone-r-3t-clause-17-1-8",
+            "source_order": 12,
+            "citations": {
+              "pdf_page_start": 74,
+              "pdf_page_end": 74,
+              "bylaw_page_start": 74,
+              "bylaw_page_end": 74
+            }
+          },
+          {
+            "clause_id": "zone-r-3t-clause-17-1-8-e",
+            "clause_label_raw": "e",
+            "clause_text_raw": "Nursing Home",
+            "parent_clause_id": "zone-r-3t-clause-17-1-8",
+            "source_order": 13,
+            "citations": {
+              "pdf_page_start": 74,
+              "pdf_page_end": 74,
+              "bylaw_page_start": 74,
+              "bylaw_page_end": 74
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 74,
+          "pdf_page_end": 74,
+          "bylaw_page_start": 74,
+          "bylaw_page_end": 74
+        }
+      },
+      {
+        "section_id": "zone-r-3t-section-2",
+        "section_label_raw": "",
+        "section_title_raw": "REGULATIONS FOR TOWNHOUSE, STACKED AND BLOCK TOWNHOUSE",
+        "source_order": 2,
+        "clauses_raw": [],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 74,
+          "pdf_page_end": 74,
+          "bylaw_page_start": 74,
+          "bylaw_page_end": 74
+        }
+      },
+      {
+        "section_id": "zone-r-3t-section-17-2",
+        "section_label_raw": "17.2",
+        "section_title_raw": "DWELLINGS",
+        "source_order": 3,
+        "clauses_raw": [],
+        "tables_raw": [
+          {
+            "table_id": "zone-r-3t-table-17-2",
+            "table_title_raw": "DWELLINGS",
+            "source_order": 1,
+            "columns_raw": [
+              {
+                "column_id": "row_number",
+                "column_label_raw": "",
+                "source_order": 1
+              },
+              {
+                "column_id": "requirement",
+                "column_label_raw": "",
+                "source_order": 2
+              },
+              {
+                "column_id": "condition",
+                "column_label_raw": "",
+                "source_order": 3
+              },
+              {
+                "column_id": "interior_lot",
+                "column_label_raw": "Interior Lot",
+                "source_order": 4
+              },
+              {
+                "column_id": "corner_lot",
+                "column_label_raw": "Corner Lot",
+                "source_order": 5
+              }
+            ],
+            "rows_raw": [
+              {
+                "row_id": "zone-r-3t-table-17-2-row-1-townhouse",
+                "source_order": 1,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-1-townhouse-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "1"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-1-townhouse-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Area (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-1-townhouse-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Townhouse"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-1-townhouse-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "195 sq m (2,099.0 sq ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-1-townhouse-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "220 sq m (2,368.1 sq ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-3t-table-17-2-row-1-stacked-townhouse",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-1-stacked-townhouse-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-1-stacked-townhouse-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Area (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-1-stacked-townhouse-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Stacked Townhouse"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-1-stacked-townhouse-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "140 sq m (1,507.0 sq ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-1-stacked-townhouse-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "165 sq m (1,776.0 sq ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-3t-table-17-2-row-2",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-2-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "2"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-2-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Frontage Per Unit and Per Stack (2) Units for Stacked Townhouses (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-2-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "6.1 m (20.0 ft) OR 25.0 m (82 ft) whichever is less"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-2-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "9.0 m (29.5 ft) OR 30.0 m (98.4 ft) whichever is less"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-3t-table-17-2-row-3-front-access-minimum",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-3-front-access-minimum-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "3"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-3-front-access-minimum-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Front Yard"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-3-front-access-minimum-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Front Access (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-3-front-access-minimum-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-3-front-access-minimum-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-3t-table-17-2-row-3-rear-lane-access-minimum",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-3-rear-lane-access-minimum-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-3-rear-lane-access-minimum-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Front Yard"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-3-rear-lane-access-minimum-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Rear Lane Access (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-3-rear-lane-access-minimum-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "4.3 m (14.1 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-3-rear-lane-access-minimum-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "4.3 m (14.1 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-3t-table-17-2-row-4-front-access-minimum",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-4-front-access-minimum-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "4"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-4-front-access-minimum-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Rear Yard"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-4-front-access-minimum-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Front Access (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-4-front-access-minimum-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "7.5 m (24.6 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-4-front-access-minimum-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "7.5 m (24.6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-3t-table-17-2-row-4-rear-lane-access-minimum",
+                "source_order": 7,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-4-rear-lane-access-minimum-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-4-rear-lane-access-minimum-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Rear Yard"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-4-rear-lane-access-minimum-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Rear Lane Access (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-4-rear-lane-access-minimum-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "10.5 m (34.4 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-17-2-row-4-rear-lane-access-minimum-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "10.5 m (34.4 ft)"
+                  }
+                ]
+              }
+            ],
+            "citations": {
+              "pdf_page_start": 74,
+              "pdf_page_end": 75,
+              "bylaw_page_start": 74,
+              "bylaw_page_end": 75
+            }
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 74,
+          "pdf_page_end": 75,
+          "bylaw_page_start": 74,
+          "bylaw_page_end": 75
+        }
+      },
+      {
+        "section_id": "zone-r-3t-section-4",
+        "section_label_raw": "",
+        "section_title_raw": "REGULATIONS FOR LODGING HOUSES AND GROUP HOMES",
+        "source_order": 4,
+        "clauses_raw": [],
+        "tables_raw": [
+          {
+            "table_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes",
+            "table_title_raw": "REGULATIONS FOR LODGING HOUSES AND GROUP HOMES",
+            "source_order": 2,
+            "columns_raw": [
+              {
+                "column_id": "row_number",
+                "column_label_raw": "",
+                "source_order": 1
+              },
+              {
+                "column_id": "requirement",
+                "column_label_raw": "",
+                "source_order": 2
+              },
+              {
+                "column_id": "interior_lot",
+                "column_label_raw": "Interior Lot",
+                "source_order": 3
+              },
+              {
+                "column_id": "corner_lot",
+                "column_label_raw": "Corner Lot",
+                "source_order": 4
+              }
+            ],
+            "rows_raw": [
+              {
+                "row_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-1",
+                "source_order": 1,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-1-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "1"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-1-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Area (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-1-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "325 sq. m (3,498.3 sq. ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-1-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "395 sq. m (4,251.9 sq. ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-2",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-2-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "2"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-2-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-2-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "10.6 m (34.8 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-2-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "15 m (49.2 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-3",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-3-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "3"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-3-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-3-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-3-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-4",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-4-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "4"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-4-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-4-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-4-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-5",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-5-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "5"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-5-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-5-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "1.8 m (6 ft)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-5-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "1.83 m (6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-6",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-6-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "6"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-6-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-6-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-6-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7",
+                "source_order": 7,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "7"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "(Maximum) of rooms is determined by the following: For the first 325 sq. m (3,498.3 sq. ft.) a corner lot of Lot Area, four (4) bedrooms For every additional bedroom or lodging the Lot area must be increased by 90"
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "12.0 m (39.4 ft) for an interior lot and 395 are permitted; room over four (4) bedrooms sq. m (968.7 sq. ft.) thereof."
+                  },
+                  {
+                    "cell_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "12.0 m (39.4 ft) sq. m (4,251.7 sq. ft.) for or lodging rooms,"
+                  }
+                ]
+              }
+            ],
+            "citations": {
+              "pdf_page_start": 75,
+              "pdf_page_end": 75,
+              "bylaw_page_start": 75,
+              "bylaw_page_end": 75
+            }
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 75,
+          "pdf_page_end": 75,
+          "bylaw_page_start": 75,
+          "bylaw_page_end": 75
+        }
+      },
+      {
+        "section_id": "zone-r-3t-section-17-4",
+        "section_label_raw": "17.4",
+        "section_title_raw": "CONVERTED DWELLING",
+        "source_order": 5,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-r-3t-clause-17-4-1",
+            "clause_label_raw": "17.4.1",
+            "clause_text_raw": "An existing Dwelling may be Altered and used as a Duplex, Semi-detached or a Multi-unit Dwelling provided that:",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 75,
+              "pdf_page_end": 75,
+              "bylaw_page_start": 75,
+              "bylaw_page_end": 75
+            }
+          },
+          {
+            "clause_id": "zone-r-3t-clause-17-4-1-a",
+            "clause_label_raw": "a",
+            "clause_text_raw": "The Building is structurally sound and the conversion satisfies the requirements under the City of Charlottetown Building Code By-law.",
+            "parent_clause_id": "zone-r-3t-clause-17-4-1",
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 76,
+              "pdf_page_end": 76,
+              "bylaw_page_start": 76,
+              "bylaw_page_end": 76
+            }
+          },
+          {
+            "clause_id": "zone-r-3t-clause-17-4-1-b",
+            "clause_label_raw": "b",
+            "clause_text_raw": "The conversion can be undertaken without extreme Alterations or Additions excepting the construction or addition of new windows, fire escapes and outside stairways;",
+            "parent_clause_id": "zone-r-3t-clause-17-4-1",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 76,
+              "pdf_page_end": 76,
+              "bylaw_page_start": 76,
+              "bylaw_page_end": 76
+            }
+          },
+          {
+            "clause_id": "zone-r-3t-clause-17-4-1-c",
+            "clause_label_raw": "c",
+            "clause_text_raw": "The number of Dwelling Units permitted shall be consistent with that which is permitted for an Apartment Dwelling.",
+            "parent_clause_id": "zone-r-3t-clause-17-4-1",
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 76,
+              "pdf_page_end": 76,
+              "bylaw_page_start": 76,
+              "bylaw_page_end": 76
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 75,
+          "pdf_page_end": 76,
+          "bylaw_page_start": 75,
+          "bylaw_page_end": 76
+        }
+      },
+      {
+        "section_id": "zone-r-3t-section-17-5",
+        "section_label_raw": "17.5",
+        "section_title_raw": "ACCESSORY AND SECONDARY USES",
+        "source_order": 6,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-r-3t-clause-17-5-1",
+            "clause_label_raw": "17.5.1",
+            "clause_text_raw": "Notwithstanding the requirements, the following are permitted as accessory or secondary uses:",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 76,
+              "pdf_page_end": 76,
+              "bylaw_page_start": 76,
+              "bylaw_page_end": 76
+            }
+          },
+          {
+            "clause_id": "zone-r-3t-clause-17-5-1-a",
+            "clause_label_raw": "a",
+            "clause_text_raw": "Accessory Building;",
+            "parent_clause_id": "zone-r-3t-clause-17-5-1",
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 76,
+              "pdf_page_end": 76,
+              "bylaw_page_start": 76,
+              "bylaw_page_end": 76
+            }
+          },
+          {
+            "clause_id": "zone-r-3t-clause-17-5-1-b",
+            "clause_label_raw": "b",
+            "clause_text_raw": "Home Occupation; and",
+            "parent_clause_id": "zone-r-3t-clause-17-5-1",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 76,
+              "pdf_page_end": 76,
+              "bylaw_page_start": 76,
+              "bylaw_page_end": 76
+            }
+          },
+          {
+            "clause_id": "zone-r-3t-clause-17-5-1-c",
+            "clause_label_raw": "c",
+            "clause_text_raw": "Home Daycare",
+            "parent_clause_id": "zone-r-3t-clause-17-5-1",
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 76,
+              "pdf_page_end": 76,
+              "bylaw_page_start": 76,
+              "bylaw_page_end": 76
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 76,
+          "pdf_page_end": 76,
+          "bylaw_page_start": 76,
+          "bylaw_page_end": 76
+        }
+      }
+    ],
+    "tables_raw": [
+      {
+        "table_id": "zone-r-3t-table-17-2",
+        "section_id": "zone-r-3t-section-17-2"
+      },
+      {
+        "table_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes",
+        "section_id": "zone-r-3t-section-4"
+      }
+    ],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-r-3t-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 74,
+          "pdf_page_end": 76,
+          "bylaw_page_start": 74,
+          "bylaw_page_end": 76
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-r-3t-clause-17-1-1",
+        "section_id": "zone-r-3t-section-17-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-1-2",
+        "section_id": "zone-r-3t-section-17-1",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-1-3",
+        "section_id": "zone-r-3t-section-17-1",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-1-4",
+        "section_id": "zone-r-3t-section-17-1",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-1-5",
+        "section_id": "zone-r-3t-section-17-1",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-1-6",
+        "section_id": "zone-r-3t-section-17-1",
+        "source_order": 6
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-1-7",
+        "section_id": "zone-r-3t-section-17-1",
+        "source_order": 7
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-1-8",
+        "section_id": "zone-r-3t-section-17-1",
+        "source_order": 8
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-1-8-a",
+        "section_id": "zone-r-3t-section-17-1",
+        "source_order": 9
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-1-8-b",
+        "section_id": "zone-r-3t-section-17-1",
+        "source_order": 10
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-1-8-c",
+        "section_id": "zone-r-3t-section-17-1",
+        "source_order": 11
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-1-8-d",
+        "section_id": "zone-r-3t-section-17-1",
+        "source_order": 12
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-1-8-e",
+        "section_id": "zone-r-3t-section-17-1",
+        "source_order": 13
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-4-1",
+        "section_id": "zone-r-3t-section-17-4",
+        "source_order": 14
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-4-1-a",
+        "section_id": "zone-r-3t-section-17-4",
+        "source_order": 15
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-4-1-b",
+        "section_id": "zone-r-3t-section-17-4",
+        "source_order": 16
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-4-1-c",
+        "section_id": "zone-r-3t-section-17-4",
+        "source_order": 17
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-5-1",
+        "section_id": "zone-r-3t-section-17-5",
+        "source_order": 18
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-5-1-a",
+        "section_id": "zone-r-3t-section-17-5",
+        "source_order": 19
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-5-1-b",
+        "section_id": "zone-r-3t-section-17-5",
+        "source_order": 20
+      },
+      {
+        "clause_id": "zone-r-3t-clause-17-5-1-c",
+        "section_id": "zone-r-3t-section-17-5",
+        "source_order": 21
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-r-3t-term-term-uses_permitted_in_the_r_1n_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_1n_zone",
+        "term_raw": "Uses permitted in the R-1N Zone subject to the Regulations for Permitted Uses for the R-1N Zone",
+        "term_normalized": "uses_permitted_in_the_r_1n_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_1n_zone",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3t-clause-17-1-1"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-r-3t-term-term-uses_permitted_in_the_r_2_zone_subject_to_the_regulations_for_the_permitted_uses_for_the_r_2_zone",
+        "term_raw": "Uses permitted in the R-2 Zone subject to the Regulations for the Permitted Uses for the R-2 Zone",
+        "term_normalized": "uses_permitted_in_the_r_2_zone_subject_to_the_regulations_for_the_permitted_uses_for_the_r_2_zone",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3t-clause-17-1-2"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-r-3t-term-term-block_townhouse_dwelling",
+        "term_raw": "Block Townhouse Dwelling",
+        "term_normalized": "block_townhouse_dwelling",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3t-clause-17-1-3"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-r-3t-term-term-converted_dwelling",
+        "term_raw": "Converted Dwelling",
+        "term_normalized": "converted_dwelling",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3t-clause-17-1-4"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-r-3t-term-term-lodging_house_limited",
+        "term_raw": "Lodging House Limited",
+        "term_normalized": "lodging_house_limited",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3t-clause-17-1-5"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-r-3t-term-term-stacked_townhouse_dwelling",
+        "term_raw": "Stacked Townhouse Dwelling",
+        "term_normalized": "stacked_townhouse_dwelling",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3t-clause-17-1-6"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-r-3t-term-use-townhouse_dwelling",
+        "term_raw": "Townhouse Dwelling",
+        "term_normalized": "townhouse_dwelling",
+        "term_category": "dwelling_type",
+        "code_table": "use",
+        "code": "townhouse_dwelling",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3t-clause-17-1-7"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "term_id": "zone-r-3t-term-term-the_following_institutional_uses_are_permitted_in_the_r_3_zone_subject_to_the_regulations_for_permitted_uses_for_the_institutional_i_zone",
+        "term_raw": "The following Institutional uses are permitted in the R-3 Zone, subject to the Regulations for Permitted Uses for the Institutional (I) Zone",
+        "term_normalized": "the_following_institutional_uses_are_permitted_in_the_r_3_zone_subject_to_the_regulations_for_permitted_uses_for_the_institutional_i_zone",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3t-clause-17-1-8"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-r-3t-term-use-community_building",
+        "term_raw": "Community Building",
+        "term_normalized": "community_building",
+        "term_category": "use_type",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3t-clause-17-1-8-a"
+          }
+        ],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "community_building"
+      },
+      {
+        "term_id": "zone-r-3t-term-term-community_care_facility",
+        "term_raw": "Community Care Facility",
+        "term_normalized": "community_care_facility",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3t-clause-17-1-8-b"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-r-3t-term-term-community_institutional",
+        "term_raw": "Community Institutional",
+        "term_normalized": "community_institutional",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3t-clause-17-1-8-c"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-r-3t-term-term-commercial_daycare_centre",
+        "term_raw": "Commercial Daycare Centre",
+        "term_normalized": "commercial_daycare_centre",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3t-clause-17-1-8-d"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-r-3t-term-term-nursing_home",
+        "term_raw": "Nursing Home",
+        "term_normalized": "nursing_home",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3t-clause-17-1-8-e"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-r-3t-term-use-accessory_building",
+        "term_raw": "Accessory Building",
+        "term_normalized": "accessory_building",
+        "term_category": "accessory_or_secondary_use",
+        "code_table": "use",
+        "code": "accessory_building",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3t-clause-17-5-1-a"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "term_id": "zone-r-3t-term-use-home_occupation",
+        "term_raw": "Home Occupation",
+        "term_normalized": "home_occupation",
+        "term_category": "accessory_or_secondary_use",
+        "code_table": "use",
+        "code": "home_occupation",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3t-clause-17-5-1-b"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "term_id": "zone-r-3t-term-use-home_daycare",
+        "term_raw": "Home Daycare",
+        "term_normalized": "home_daycare",
+        "term_category": "accessory_or_secondary_use",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-r-3t-clause-17-5-1-c"
+          }
+        ],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "home_daycare"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-r-3t-use-uses-permitted-in-the-r-1n-zone-subject-to-the-regulations-for-permitted-uses-for-the-r-1n-zone-1",
+        "use_name_raw": "Uses permitted in the R-1N Zone subject to the Regulations for Permitted Uses for the R-1N Zone",
+        "use_term_id": "zone-r-3t-term-term-uses_permitted_in_the_r_1n_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_1n_zone",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-r-3t-clause-17-1-1",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-r-3t-use-uses-permitted-in-the-r-2-zone-subject-to-the-regulations-for-the-permitted-uses-for-the-r-2-zone-2",
+        "use_name_raw": "Uses permitted in the R-2 Zone subject to the Regulations for the Permitted Uses for the R-2 Zone",
+        "use_term_id": "zone-r-3t-term-term-uses_permitted_in_the_r_2_zone_subject_to_the_regulations_for_the_permitted_uses_for_the_r_2_zone",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-r-3t-clause-17-1-2",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-r-3t-use-block-townhouse-dwelling-3",
+        "use_name_raw": "Block Townhouse Dwelling",
+        "use_term_id": "zone-r-3t-term-term-block_townhouse_dwelling",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-r-3t-clause-17-1-3",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-r-3t-use-converted-dwelling-4",
+        "use_name_raw": "Converted Dwelling",
+        "use_term_id": "zone-r-3t-term-term-converted_dwelling",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-r-3t-clause-17-1-4",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-r-3t-use-lodging-house-limited-5",
+        "use_name_raw": "Lodging House Limited",
+        "use_term_id": "zone-r-3t-term-term-lodging_house_limited",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-r-3t-clause-17-1-5",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-r-3t-use-stacked-townhouse-dwelling-6",
+        "use_name_raw": "Stacked Townhouse Dwelling",
+        "use_term_id": "zone-r-3t-term-term-stacked_townhouse_dwelling",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-r-3t-clause-17-1-6",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-r-3t-use-townhouse-dwelling-7",
+        "use_name_raw": "Townhouse Dwelling",
+        "use_term_id": "zone-r-3t-term-use-townhouse_dwelling",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-r-3t-clause-17-1-7",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-r-3t-use-the-following-institutional-uses-are-permitted-in-the-r-3-zone-subject-to-the-regulations-for-permitted-uses-for-the-institutional-i-zone-8",
+        "use_name_raw": "The following Institutional uses are permitted in the R-3 Zone, subject to the Regulations for Permitted Uses for the Institutional (I) Zone",
+        "use_term_id": "zone-r-3t-term-term-the_following_institutional_uses_are_permitted_in_the_r_3_zone_subject_to_the_regulations_for_permitted_uses_for_the_institutional_i_zone",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-r-3t-clause-17-1-8",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-r-3t-use-community-building-9",
+        "use_name_raw": "Community Building",
+        "use_term_id": "zone-r-3t-term-use-community_building",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-r-3t-clause-17-1-8-a",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-r-3t-use-community-care-facility-10",
+        "use_name_raw": "Community Care Facility",
+        "use_term_id": "zone-r-3t-term-term-community_care_facility",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-r-3t-clause-17-1-8-b",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-r-3t-use-community-institutional-11",
+        "use_name_raw": "Community Institutional",
+        "use_term_id": "zone-r-3t-term-term-community_institutional",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-r-3t-clause-17-1-8-c",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-r-3t-use-commercial-daycare-centre-12",
+        "use_name_raw": "Commercial Daycare Centre",
+        "use_term_id": "zone-r-3t-term-term-commercial_daycare_centre",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-r-3t-clause-17-1-8-d",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-r-3t-use-nursing-home-13",
+        "use_name_raw": "Nursing Home",
+        "use_term_id": "zone-r-3t-term-term-nursing_home",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-r-3t-clause-17-1-8-e",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-r-3t-use-accessory-building-14",
+        "use_name_raw": "Accessory Building",
+        "use_term_id": "zone-r-3t-term-use-accessory_building",
+        "use_status": "accessory_or_secondary",
+        "source_clause_ref": "zone-r-3t-clause-17-5-1-a",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-r-3t-use-home-occupation-15",
+        "use_name_raw": "Home Occupation",
+        "use_term_id": "zone-r-3t-term-use-home_occupation",
+        "use_status": "accessory_or_secondary",
+        "source_clause_ref": "zone-r-3t-clause-17-5-1-b",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-r-3t-use-home-daycare-16",
+        "use_name_raw": "Home Daycare",
+        "use_term_id": "zone-r-3t-term-use-home_daycare",
+        "use_status": "accessory_or_secondary",
+        "source_clause_ref": "zone-r-3t-clause-17-5-1-c",
+        "confidence": "high"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-17-2-row-1-townhouse-interior-lot-1",
+        "value_raw": "195 sq m (2,099.0 sq ft)",
+        "value": 195,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "2,099.0 sq ft",
+            "value": 2099,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-17-2-row-1-townhouse-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-17-2-row-1-townhouse-corner-lot-1",
+        "value_raw": "220 sq m (2,368.1 sq ft)",
+        "value": 220,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "2,368.1 sq ft",
+            "value": 2368.1,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-17-2-row-1-townhouse-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-17-2-row-1-stacked-townhouse-interior-lot-1",
+        "value_raw": "140 sq m (1,507.0 sq ft)",
+        "value": 140,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "1,507.0 sq ft",
+            "value": 1507,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-17-2-row-1-stacked-townhouse-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-17-2-row-1-stacked-townhouse-corner-lot-1",
+        "value_raw": "165 sq m (1,776.0 sq ft)",
+        "value": 165,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "1,776.0 sq ft",
+            "value": 1776,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-17-2-row-1-stacked-townhouse-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-17-2-row-2-interior-lot-1",
+        "value_raw": "6.1 m (20.0 ft)",
+        "value": 6.1,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "20.0 ft",
+            "value": 20,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-17-2-row-2-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-17-2-row-2-interior-lot-2",
+        "value_raw": "25.0 m (82 ft)",
+        "value": 25,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "82 ft",
+            "value": 82,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-17-2-row-2-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-17-2-row-2-corner-lot-1",
+        "value_raw": "9.0 m (29.5 ft)",
+        "value": 9,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "29.5 ft",
+            "value": 29.5,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-17-2-row-2-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-17-2-row-2-corner-lot-2",
+        "value_raw": "30.0 m (98.4 ft)",
+        "value": 30,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "98.4 ft",
+            "value": 98.4,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-17-2-row-2-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-17-2-row-3-front-access-minimum-interior-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-17-2-row-3-front-access-minimum-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-17-2-row-3-front-access-minimum-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-17-2-row-3-front-access-minimum-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-17-2-row-3-rear-lane-access-minimum-interior-lot-1",
+        "value_raw": "4.3 m (14.1 ft)",
+        "value": 4.3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "14.1 ft",
+            "value": 14.1,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-17-2-row-3-rear-lane-access-minimum-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-17-2-row-3-rear-lane-access-minimum-corner-lot-1",
+        "value_raw": "4.3 m (14.1 ft)",
+        "value": 4.3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "14.1 ft",
+            "value": 14.1,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-17-2-row-3-rear-lane-access-minimum-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-17-2-row-4-front-access-minimum-interior-lot-1",
+        "value_raw": "7.5 m (24.6 ft)",
+        "value": 7.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.6 ft",
+            "value": 24.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-17-2-row-4-front-access-minimum-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-17-2-row-4-front-access-minimum-corner-lot-1",
+        "value_raw": "7.5 m (24.6 ft)",
+        "value": 7.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.6 ft",
+            "value": 24.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-17-2-row-4-front-access-minimum-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-17-2-row-4-rear-lane-access-minimum-interior-lot-1",
+        "value_raw": "10.5 m (34.4 ft)",
+        "value": 10.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "34.4 ft",
+            "value": 34.4,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-17-2-row-4-rear-lane-access-minimum-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-17-2-row-4-rear-lane-access-minimum-corner-lot-1",
+        "value_raw": "10.5 m (34.4 ft)",
+        "value": 10.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "34.4 ft",
+            "value": 34.4,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-17-2-row-4-rear-lane-access-minimum-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-1-interior-lot-1",
+        "value_raw": "325 sq. m (3,498.3 sq. ft)",
+        "value": 325,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "3,498.3 sq. ft",
+            "value": 3498.3,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-1-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-1-corner-lot-1",
+        "value_raw": "395 sq. m (4,251.9 sq. ft)",
+        "value": 395,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "4,251.9 sq. ft",
+            "value": 4251.9,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-1-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-2-interior-lot-1",
+        "value_raw": "10.6 m (34.8 ft)",
+        "value": 10.6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "34.8 ft",
+            "value": 34.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-2-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-2-corner-lot-1",
+        "value_raw": "15 m (49.2 ft)",
+        "value": 15,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "49.2 ft",
+            "value": 49.2,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-2-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-3-interior-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-3-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-3-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-3-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-4-interior-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-4-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-4-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-4-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-5-interior-lot-1",
+        "value_raw": "1.8 m (6 ft)",
+        "value": 1.8,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "6 ft",
+            "value": 6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-5-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-5-corner-lot-1",
+        "value_raw": "1.83 m (6 ft)",
+        "value": 1.83,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "6 ft",
+            "value": 6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-5-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-6-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-6-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-interior-lot-1",
+        "value_raw": "12.0 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-interior-lot-2",
+        "value_raw": "968.7 sq. ft",
+        "value": 968.7,
+        "unit": "sq_ft",
+        "measure_type": "area",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-corner-lot-1",
+        "value_raw": "12.0 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-corner-lot-2",
+        "value_raw": "4,251.7 sq. ft",
+        "value": 4251.7,
+        "unit": "sq_ft",
+        "measure_type": "area",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-17-2-row-1-townhouse-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Townhouse Interior Lot 195 sq m (2,099.0 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Townhouse"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-17-2-row-1-townhouse-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-17-2-row-1-townhouse"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-17-2-row-1-townhouse-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Townhouse Corner Lot 220 sq m (2,368.1 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Townhouse"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-17-2-row-1-townhouse-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-17-2-row-1-townhouse"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-17-2-row-1-stacked-townhouse-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Stacked Townhouse Interior Lot 140 sq m (1,507.0 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Stacked Townhouse"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-17-2-row-1-stacked-townhouse-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-17-2-row-1-stacked-townhouse"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-17-2-row-1-stacked-townhouse-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Stacked Townhouse Corner Lot 165 sq m (1,776.0 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Stacked Townhouse"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-17-2-row-1-stacked-townhouse-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-17-2-row-1-stacked-townhouse"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-17-2-row-2-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage Per Unit and Per Stack (2) Units for Stacked Townhouses (Minimum)",
+        "requirement_text_raw": "Lot Frontage Per Unit and Per Stack (2) Units for Stacked Townhouses (Minimum) Interior Lot 6.1 m (20.0 ft) OR 25.0 m (82 ft) whichever is less",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-17-2-row-2-interior-lot-1",
+          "zone-r-3t-num-zone-r-3t-table-17-2-row-2-interior-lot-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-17-2-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-17-2-row-2-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage Per Unit and Per Stack (2) Units for Stacked Townhouses (Minimum)",
+        "requirement_text_raw": "Lot Frontage Per Unit and Per Stack (2) Units for Stacked Townhouses (Minimum) Corner Lot 9.0 m (29.5 ft) OR 30.0 m (98.4 ft) whichever is less",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-17-2-row-2-corner-lot-1",
+          "zone-r-3t-num-zone-r-3t-table-17-2-row-2-corner-lot-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-17-2-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-17-2-row-3-front-access-minimum-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard",
+        "requirement_text_raw": "Front Yard Front Access (Minimum) Interior Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Front Access (Minimum)"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-17-2-row-3-front-access-minimum-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-17-2-row-3-front-access-minimum"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-17-2-row-3-front-access-minimum-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard",
+        "requirement_text_raw": "Front Yard Front Access (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Front Access (Minimum)"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-17-2-row-3-front-access-minimum-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-17-2-row-3-front-access-minimum"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-17-2-row-3-rear-lane-access-minimum-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard",
+        "requirement_text_raw": "Front Yard Rear Lane Access (Minimum) Interior Lot 4.3 m (14.1 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Rear Lane Access (Minimum)"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-17-2-row-3-rear-lane-access-minimum-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-17-2-row-3-rear-lane-access-minimum"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-17-2-row-3-rear-lane-access-minimum-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard",
+        "requirement_text_raw": "Front Yard Rear Lane Access (Minimum) Corner Lot 4.3 m (14.1 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Rear Lane Access (Minimum)"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-17-2-row-3-rear-lane-access-minimum-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-17-2-row-3-rear-lane-access-minimum"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-17-2-row-4-front-access-minimum-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard",
+        "requirement_text_raw": "Rear Yard Front Access (Minimum) Interior Lot 7.5 m (24.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Front Access (Minimum)"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-17-2-row-4-front-access-minimum-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-17-2-row-4-front-access-minimum"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-17-2-row-4-front-access-minimum-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard",
+        "requirement_text_raw": "Rear Yard Front Access (Minimum) Corner Lot 7.5 m (24.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Front Access (Minimum)"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-17-2-row-4-front-access-minimum-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-17-2-row-4-front-access-minimum"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-17-2-row-4-rear-lane-access-minimum-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard",
+        "requirement_text_raw": "Rear Yard Rear Lane Access (Minimum) Interior Lot 10.5 m (34.4 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Rear Lane Access (Minimum)"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-17-2-row-4-rear-lane-access-minimum-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-17-2-row-4-rear-lane-access-minimum"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-17-2-row-4-rear-lane-access-minimum-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard",
+        "requirement_text_raw": "Rear Yard Rear Lane Access (Minimum) Corner Lot 10.5 m (34.4 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Rear Lane Access (Minimum)"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-17-2-row-4-rear-lane-access-minimum-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-17-2-row-4-rear-lane-access-minimum"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-1-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "area_minimum",
+        "requirement_label_raw": "Area (Minimum)",
+        "requirement_text_raw": "Area (Minimum) Interior Lot 325 sq. m (3,498.3 sq. ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-1-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-1-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "area_minimum",
+        "requirement_label_raw": "Area (Minimum)",
+        "requirement_text_raw": "Area (Minimum) Corner Lot 395 sq. m (4,251.9 sq. ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-1-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-2-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Frontage (Minimum)",
+        "requirement_text_raw": "Frontage (Minimum) Interior Lot 10.6 m (34.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-2-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-2-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Frontage (Minimum)",
+        "requirement_text_raw": "Frontage (Minimum) Corner Lot 15 m (49.2 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-2-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-3-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Interior Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-3-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-3-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-3-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-4-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Interior Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-4-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-4-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-4-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-5-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Interior Lot 1.8 m (6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-5-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-5-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Corner Lot 1.83 m (6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-5-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-6-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-6-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "(Maximum) of rooms is determined by the following: For the first 325 sq. m (3,498.3 sq. ft.) a corner lot of Lot Area, four (4) bedrooms For every additional bedroom or lodging the Lot area must be increased by 90",
+        "requirement_text_raw": "(Maximum) of rooms is determined by the following: For the first 325 sq. m (3,498.3 sq. ft.) a corner lot of Lot Area, four (4) bedrooms For every additional bedroom or lodging the Lot area must be increased by 90 Interior Lot 12.0 m (39.4 ft) for an interior lot and 395 are permitted; room over four (4) bedrooms sq. m (968.7 sq. ft.) thereof.",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-interior-lot-1",
+          "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-interior-lot-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "(Maximum) of rooms is determined by the following: For the first 325 sq. m (3,498.3 sq. ft.) a corner lot of Lot Area, four (4) bedrooms For every additional bedroom or lodging the Lot area must be increased by 90",
+        "requirement_text_raw": "(Maximum) of rooms is determined by the following: For the first 325 sq. m (3,498.3 sq. ft.) a corner lot of Lot Area, four (4) bedrooms For every additional bedroom or lodging the Lot area must be increased by 90 Corner Lot 12.0 m (39.4 ft) sq. m (4,251.7 sq. ft.) for or lodging rooms,",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-corner-lot-1",
+          "zone-r-3t-num-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-corner-lot-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-r-3t-regulation-group-zone",
+        "group_label_raw": "17",
+        "group_title_raw": "MEDIUM DENSITY RESIDENTIAL TOWNHOUSE ZONE (R-3T)",
+        "regulated_use_terms": [
+          "zone-r-3t-term-term-uses_permitted_in_the_r_1n_zone_subject_to_the_regulations_for_permitted_uses_for_the_r_1n_zone",
+          "zone-r-3t-term-term-uses_permitted_in_the_r_2_zone_subject_to_the_regulations_for_the_permitted_uses_for_the_r_2_zone",
+          "zone-r-3t-term-term-block_townhouse_dwelling",
+          "zone-r-3t-term-term-converted_dwelling",
+          "zone-r-3t-term-term-lodging_house_limited",
+          "zone-r-3t-term-term-stacked_townhouse_dwelling",
+          "zone-r-3t-term-use-townhouse_dwelling",
+          "zone-r-3t-term-term-the_following_institutional_uses_are_permitted_in_the_r_3_zone_subject_to_the_regulations_for_permitted_uses_for_the_institutional_i_zone",
+          "zone-r-3t-term-use-community_building",
+          "zone-r-3t-term-term-community_care_facility",
+          "zone-r-3t-term-term-community_institutional",
+          "zone-r-3t-term-term-commercial_daycare_centre",
+          "zone-r-3t-term-term-nursing_home"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "R-3T"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-r-3t-req-zone-r-3t-table-17-2-row-1-townhouse-interior-lot",
+          "zone-r-3t-req-zone-r-3t-table-17-2-row-1-townhouse-corner-lot",
+          "zone-r-3t-req-zone-r-3t-table-17-2-row-1-stacked-townhouse-interior-lot",
+          "zone-r-3t-req-zone-r-3t-table-17-2-row-1-stacked-townhouse-corner-lot",
+          "zone-r-3t-req-zone-r-3t-table-17-2-row-2-interior-lot",
+          "zone-r-3t-req-zone-r-3t-table-17-2-row-2-corner-lot",
+          "zone-r-3t-req-zone-r-3t-table-17-2-row-3-front-access-minimum-interior-lot",
+          "zone-r-3t-req-zone-r-3t-table-17-2-row-3-front-access-minimum-corner-lot",
+          "zone-r-3t-req-zone-r-3t-table-17-2-row-3-rear-lane-access-minimum-interior-lot",
+          "zone-r-3t-req-zone-r-3t-table-17-2-row-3-rear-lane-access-minimum-corner-lot",
+          "zone-r-3t-req-zone-r-3t-table-17-2-row-4-front-access-minimum-interior-lot",
+          "zone-r-3t-req-zone-r-3t-table-17-2-row-4-front-access-minimum-corner-lot",
+          "zone-r-3t-req-zone-r-3t-table-17-2-row-4-rear-lane-access-minimum-interior-lot",
+          "zone-r-3t-req-zone-r-3t-table-17-2-row-4-rear-lane-access-minimum-corner-lot",
+          "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-1-interior-lot",
+          "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-1-corner-lot",
+          "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-2-interior-lot",
+          "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-2-corner-lot",
+          "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-3-interior-lot",
+          "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-3-corner-lot",
+          "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-4-interior-lot",
+          "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-4-corner-lot",
+          "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-5-interior-lot",
+          "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-5-corner-lot",
+          "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-6-corner-lot",
+          "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-interior-lot",
+          "zone-r-3t-req-zone-r-3t-table-regulations-for-lodging-houses-and-group-homes-row-7-corner-lot"
+        ],
+        "source_section_ref": "zone-r-3t-section-17-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-r-3t-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "R-3T",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-r-3t-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-r-3t-flag-unmatched-term-uses-permitted-in-the-r-1n-zone-subject-to-the-regulations-for-permitted-uses-for-the-r-1n-zone",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Uses permitted in the R-1N Zone subject to the Regulations for Permitted Uses for the R-1N Zone",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-r-3t-clause-17-1-1"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-r-3t-flag-unmatched-term-uses-permitted-in-the-r-2-zone-subject-to-the-regulations-for-the-permitted-uses-for-the-r-2-zone",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Uses permitted in the R-2 Zone subject to the Regulations for the Permitted Uses for the R-2 Zone",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-r-3t-clause-17-1-2"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-r-3t-flag-unmatched-term-block-townhouse-dwelling",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Block Townhouse Dwelling",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-r-3t-clause-17-1-3"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-r-3t-flag-unmatched-term-converted-dwelling",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Converted Dwelling",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-r-3t-clause-17-1-4"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-r-3t-flag-unmatched-term-lodging-house-limited",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Lodging House Limited",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-r-3t-clause-17-1-5"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-r-3t-flag-unmatched-term-stacked-townhouse-dwelling",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Stacked Townhouse Dwelling",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-r-3t-clause-17-1-6"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-r-3t-flag-unmatched-term-the-following-institutional-uses-are-permitted-in-the-r-3-zone-subject-to-the-regulations-for-permitted-uses-for-the-institutional-i-zone",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: The following Institutional uses are permitted in the R-3 Zone, subject to the Regulations for Permitted Uses for the Institutional (I) Zone",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-r-3t-clause-17-1-8"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-r-3t-flag-unmatched-term-community-care-facility",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Community Care Facility",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-r-3t-clause-17-1-8-b"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-r-3t-flag-unmatched-term-community-institutional",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Community Institutional",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-r-3t-clause-17-1-8-c"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-r-3t-flag-unmatched-term-commercial-daycare-centre",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Commercial Daycare Centre",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-r-3t-clause-17-1-8-d"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-r-3t-flag-unmatched-term-nursing-home",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Nursing Home",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-r-3t-clause-17-1-8-e"
+        }
+      ]
+    }
+  ]
 }

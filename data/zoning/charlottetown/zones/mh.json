@@ -1,525 +1,1751 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+    "document_type": "zone",
     "zone_code": "MH",
     "zone_name": "MANUFACTURED HOUSING ZONE",
-    "part_label_raw": "12",
-    "chapter_heading_raw": "12 MANUFACTURED HOUSING ZONE (MH)"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": []
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "12.1.1",
-      "use_type": "residential_use",
-      "use_name": "Single-detached Dwelling",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 64,
-        "pdf_page_end": 64,
-        "bylaw_page_start": 64,
-        "bylaw_page_end": 64
-      },
-      "clause_path": [
-        "12.1.1"
-      ]
-    },
-    {
-      "clause_label_raw": "12.1.2",
-      "use_type": "residential_use",
-      "use_name": "Modular Dwelling",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 64,
-        "pdf_page_end": 64,
-        "bylaw_page_start": 64,
-        "bylaw_page_end": 64
-      },
-      "clause_path": [
-        "12.1.2"
-      ]
-    },
-    {
-      "clause_label_raw": "12.1.3",
-      "use_type": "residential_use",
-      "use_name": "Mini-home Dwelling",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 64,
-        "pdf_page_end": 64,
-        "bylaw_page_start": 64,
-        "bylaw_page_end": 64
-      },
-      "clause_path": [
-        "12.1.3"
-      ]
-    },
-    {
-      "clause_label_raw": "12.1.4",
-      "use_type": "principal_use",
-      "use_name": "Community Building",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 64,
-        "pdf_page_end": 64,
-        "bylaw_page_start": 64,
-        "bylaw_page_end": 64
-      },
-      "clause_path": [
-        "12.1.4"
-      ]
-    },
-    {
-      "clause_label_raw": "a",
-      "use_type": "accessory_or_secondary_use",
-      "use_name": "Accessory Building",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 65,
-        "pdf_page_end": 65,
-        "bylaw_page_start": 65,
-        "bylaw_page_end": 65
-      },
-      "clause_path": [
-        "12.4.1",
-        "a"
-      ],
-      "conditions": "Notwithstanding the requirements, the following are permitted as accessory or secondary uses:"
-    },
-    {
-      "clause_label_raw": "b",
-      "use_type": "accessory_or_secondary_use",
-      "use_name": "Home Occupation",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 65,
-        "pdf_page_end": 65,
-        "bylaw_page_start": 65,
-        "bylaw_page_end": 65
-      },
-      "clause_path": [
-        "12.4.1",
-        "b"
-      ],
-      "conditions": "Notwithstanding the requirements, the following are permitted as accessory or secondary uses:"
-    },
-    {
-      "clause_label_raw": "c",
-      "use_type": "accessory_or_secondary_use",
-      "use_name": "Home Daycare",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 65,
-        "pdf_page_end": 65,
-        "bylaw_page_start": 65,
-        "bylaw_page_end": 65
-      },
-      "clause_path": [
-        "12.4.1",
-        "c"
-      ],
-      "conditions": "Notwithstanding the requirements, the following are permitted as accessory or secondary uses:"
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "12.1",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 64,
-        "pdf_page_end": 64,
-        "bylaw_page_start": 64,
-        "bylaw_page_end": 64
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "12.1.1",
-          "clause_path": [
-            "12.1.1"
-          ],
-          "text": "Single-detached Dwelling;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 64,
-            "pdf_page_end": 64,
-            "bylaw_page_start": 64,
-            "bylaw_page_end": 64
-          }
-        },
-        {
-          "provision_label_raw": "12.1.2",
-          "clause_path": [
-            "12.1.2"
-          ],
-          "text": "Modular Dwelling;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 64,
-            "pdf_page_end": 64,
-            "bylaw_page_start": 64,
-            "bylaw_page_end": 64
-          }
-        },
-        {
-          "provision_label_raw": "12.1.3",
-          "clause_path": [
-            "12.1.3"
-          ],
-          "text": "Mini-home Dwelling; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 64,
-            "pdf_page_end": 64,
-            "bylaw_page_start": 64,
-            "bylaw_page_end": 64
-          }
-        },
-        {
-          "provision_label_raw": "12.1.4",
-          "clause_path": [
-            "12.1.4"
-          ],
-          "text": "Community Building",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 64,
-            "pdf_page_end": 64,
-            "bylaw_page_start": 64,
-            "bylaw_page_end": 64
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": "12.2",
-      "title_label_raw": "REGULATIONS FOR PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 64,
-        "pdf_page_end": 64,
-        "bylaw_page_start": 64,
-        "bylaw_page_end": 64
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "1",
-          "text": "Site Area (Minimum) 465 sq. m (5,005.42 sq ft) 540 sq. m (5,812.5 sq ft) End-on Sites Front on Sites",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 64,
-            "pdf_page_end": 64,
-            "bylaw_page_start": 64,
-            "bylaw_page_end": 64
-          }
-        },
-        {
-          "provision_label_raw": "12.2.1",
-          "clause_path": [
-            "12.2.1"
-          ],
-          "text": "A Mini-home/Modular Dwelling Development or Mini-home/Modular Dwelling Subdivision shall be located on a designated site that is not less than 3.0 hectares (7.41 acres) in Lot Area.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 64,
-            "pdf_page_end": 64,
-            "bylaw_page_start": 64,
-            "bylaw_page_end": 64
-          }
-        },
-        {
-          "provision_label_raw": "12.2.2",
-          "clause_path": [
-            "12.2.2"
-          ],
-          "text": "Mini-home or Modular Dwelling Developments shall not have a density greater than 20 units per hectare.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 64,
-            "pdf_page_end": 64,
-            "bylaw_page_start": 64,
-            "bylaw_page_end": 64
-          }
-        },
-        {
-          "provision_label_raw": "12.2.3",
-          "clause_path": [
-            "12.2.3"
-          ],
-          "text": "Private streets within a Mini-home or Modular Dwelling Development shall have a minimum paved surface width of 7.3 m and have an overall Right-of-way width of 10.7 m (35.1 ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 64,
-            "pdf_page_end": 64,
-            "bylaw_page_start": 64,
-            "bylaw_page_end": 64
-          }
-        },
-        {
-          "provision_label_raw": "12.2.4",
-          "clause_path": [
-            "12.2.4"
-          ],
-          "text": "All sites shall be connected to Municipal Services.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 64,
-            "pdf_page_end": 64,
-            "bylaw_page_start": 64,
-            "bylaw_page_end": 64
-          }
-        },
-        {
-          "provision_label_raw": "12.2.5",
-          "clause_path": [
-            "12.2.5"
-          ],
-          "text": "The entire undercarriage of a Mini-home shall be skirted with an opaque material.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 64,
-            "pdf_page_end": 64,
-            "bylaw_page_start": 64,
-            "bylaw_page_end": 64
-          }
-        },
-        {
-          "provision_label_raw": "12.2.6",
-          "clause_path": [
-            "12.2.6"
-          ],
-          "text": "A storm water management plan shall be required for a Mini-home or Modular Dwelling Development. Storm water shall be managed through the use of a storm water system.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 64,
-            "pdf_page_end": 64,
-            "bylaw_page_start": 64,
-            "bylaw_page_end": 64
-          }
-        }
-      ],
-      "table_column_headings_raw": [
-        "Interior Lot Corner Lot"
-      ]
-    },
-    {
-      "order_index": 3,
-      "section_label_raw": "12.3",
-      "title_label_raw": "LANDSCAPED AREA",
-      "citations": {
-        "pdf_page_start": 64,
-        "pdf_page_end": 65,
-        "bylaw_page_start": 64,
-        "bylaw_page_end": 65
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "12.3.1",
-          "clause_path": [
-            "12.3.1"
-          ],
-          "text": "In addition to the minimum Landscaped Area requirements, a minimum 6 m (19.7 ft) wide Landscaped Area shall be maintained along all property lines. This strip shall be planted with deciduous and conifer trees and shrubs. Such vegetation shall be a minimum of 1.5 m (4.9 ft) in Height at the time of planting and shall be spaced no greater than 5 m (16.4 ft) apart, to the satisfaction of the Development Officer.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 64,
-            "pdf_page_end": 64,
-            "bylaw_page_start": 64,
-            "bylaw_page_end": 64
-          }
-        },
-        {
-          "provision_label_raw": "12.3.2",
-          "clause_path": [
-            "12.3.2"
-          ],
-          "text": "A Landscaped Area plan for a Mini-home or Modular Dwelling Development shall be submitted to the City having consideration for the following:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 65,
-            "pdf_page_end": 65,
-            "bylaw_page_start": 65,
-            "bylaw_page_end": 65
-          }
-        },
-        {
-          "provision_label_raw": "a",
-          "clause_path": [
-            "12.3.2",
-            "a"
-          ],
-          "text": "Trees and other vegetation;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 65,
-            "pdf_page_end": 65,
-            "bylaw_page_start": 65,
-            "bylaw_page_end": 65
-          }
-        },
-        {
-          "provision_label_raw": "b",
-          "clause_path": [
-            "12.3.2",
-            "b"
-          ],
-          "text": "Natural areas;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 65,
-            "pdf_page_end": 65,
-            "bylaw_page_start": 65,
-            "bylaw_page_end": 65
-          }
-        },
-        {
-          "provision_label_raw": "c",
-          "clause_path": [
-            "12.3.2",
-            "c"
-          ],
-          "text": "Elevations of the land;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 65,
-            "pdf_page_end": 65,
-            "bylaw_page_start": 65,
-            "bylaw_page_end": 65
-          }
-        },
-        {
-          "provision_label_raw": "d",
-          "clause_path": [
-            "12.3.2",
-            "d"
-          ],
-          "text": "A Land Use Buffer areas along the perimeter of the Mini-home, Modular Dwelling Development; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 65,
-            "pdf_page_end": 65,
-            "bylaw_page_start": 65,
-            "bylaw_page_end": 65
-          }
-        },
-        {
-          "provision_label_raw": "e",
-          "clause_path": [
-            "12.3.2",
-            "e"
-          ],
-          "text": "Walkways or Open Space area for general use by residents.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 65,
-            "pdf_page_end": 65,
-            "bylaw_page_start": 65,
-            "bylaw_page_end": 65
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 4,
-      "section_label_raw": "12.4",
-      "title_label_raw": "ACCESSORY AND SECONDARY USES",
-      "citations": {
-        "pdf_page_start": 65,
-        "pdf_page_end": 65,
-        "bylaw_page_start": 65,
-        "bylaw_page_end": 65
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "12.4.1",
-          "clause_path": [
-            "12.4.1"
-          ],
-          "text": "Notwithstanding the requirements, the following are permitted as accessory or secondary uses:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 65,
-            "pdf_page_end": 65,
-            "bylaw_page_start": 65,
-            "bylaw_page_end": 65
-          }
-        },
-        {
-          "provision_label_raw": "a",
-          "clause_path": [
-            "12.4.1",
-            "a"
-          ],
-          "text": "Accessory Building;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 65,
-            "pdf_page_end": 65,
-            "bylaw_page_start": 65,
-            "bylaw_page_end": 65
-          }
-        },
-        {
-          "provision_label_raw": "b",
-          "clause_path": [
-            "12.4.1",
-            "b"
-          ],
-          "text": "Home Occupation; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 65,
-            "pdf_page_end": 65,
-            "bylaw_page_start": 65,
-            "bylaw_page_end": 65
-          }
-        },
-        {
-          "provision_label_raw": "c",
-          "clause_path": [
-            "12.4.1",
-            "c"
-          ],
-          "text": "Home Daycare",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 65,
-            "pdf_page_end": 65,
-            "bylaw_page_start": 65,
-            "bylaw_page_end": 65
-          }
-        }
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [],
-  "content_blocks": [],
-  "open_issues": [
-    {
-      "issue_type": "table_parsing_review",
-      "description": "Section 'REGULATIONS FOR PERMITTED USES' contains table-derived provisions extracted from PDF text; verify column alignment against the source PDF before normalization."
-    },
-    {
-      "issue_type": "source_revision_review",
-      "description": "Source PDF cover identifies rev 049 updated March 9, 2026, but this zone page header may display rev 048 updated October 24, 2025; verify source revision during QA."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "12",
+    "zone_title_raw": "MANUFACTURED HOUSING ZONE (MH)",
+    "citations": {
       "pdf_page_start": 64,
       "pdf_page_end": 65,
       "bylaw_page_start": 64,
       "bylaw_page_end": 65
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-mh",
+        "source_unit_type": "zone",
+        "label_raw": "12",
+        "title_raw": "MANUFACTURED HOUSING ZONE (MH)",
+        "text_raw": "Single-detached Dwelling;\nModular Dwelling;\nMini-home Dwelling; and\nCommunity Building\nIn addition to the minimum Landscaped Area requirements, a minimum 6 m (19.7 ft) wide Landscaped Area shall be maintained along all property lines. This strip shall be planted with deciduous and conifer trees and shrubs. Such vegetation shall be a minimum of 1.5 m (4.9 ft) in Height at the time of planting and shall be spaced no greater than 5 m (16.4 ft) apart, to the satisfaction of the Development Officer.\nA Landscaped Area plan for a Mini-home or Modular Dwelling Development shall be submitted to the City having consideration for the following:\nTrees and other vegetation;\nNatural areas;\nElevations of the land;\nA Land Use Buffer areas along the perimeter of the Mini-home, Modular Dwelling Development; and\nWalkways or Open Space area for general use by residents.\nNotwithstanding the requirements, the following are permitted as accessory or secondary uses:\nAccessory Building;\nHome Occupation; and\nHome Daycare",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 64,
+          "pdf_page_end": 65,
+          "bylaw_page_start": 64,
+          "bylaw_page_end": 65
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-mh-section-12-1",
+        "section_label_raw": "12.1",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-mh-clause-12-1-1",
+            "clause_label_raw": "12.1.1",
+            "clause_text_raw": "Single-detached Dwelling;",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 64,
+              "pdf_page_end": 64,
+              "bylaw_page_start": 64,
+              "bylaw_page_end": 64
+            }
+          },
+          {
+            "clause_id": "zone-mh-clause-12-1-2",
+            "clause_label_raw": "12.1.2",
+            "clause_text_raw": "Modular Dwelling;",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 64,
+              "pdf_page_end": 64,
+              "bylaw_page_start": 64,
+              "bylaw_page_end": 64
+            }
+          },
+          {
+            "clause_id": "zone-mh-clause-12-1-3",
+            "clause_label_raw": "12.1.3",
+            "clause_text_raw": "Mini-home Dwelling; and",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 64,
+              "pdf_page_end": 64,
+              "bylaw_page_start": 64,
+              "bylaw_page_end": 64
+            }
+          },
+          {
+            "clause_id": "zone-mh-clause-12-1-4",
+            "clause_label_raw": "12.1.4",
+            "clause_text_raw": "Community Building",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 64,
+              "pdf_page_end": 64,
+              "bylaw_page_start": 64,
+              "bylaw_page_end": 64
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 64,
+          "pdf_page_end": 64,
+          "bylaw_page_start": 64,
+          "bylaw_page_end": 64
+        }
+      },
+      {
+        "section_id": "zone-mh-section-12-2",
+        "section_label_raw": "12.2",
+        "section_title_raw": "REGULATIONS FOR PERMITTED USES",
+        "source_order": 2,
+        "clauses_raw": [],
+        "tables_raw": [
+          {
+            "table_id": "zone-mh-table-12-2",
+            "table_title_raw": "REGULATIONS FOR PERMITTED USES",
+            "source_order": 1,
+            "columns_raw": [
+              {
+                "column_id": "row_number",
+                "column_label_raw": "",
+                "source_order": 1
+              },
+              {
+                "column_id": "requirement",
+                "column_label_raw": "",
+                "source_order": 2
+              },
+              {
+                "column_id": "condition",
+                "column_label_raw": "",
+                "source_order": 3
+              },
+              {
+                "column_id": "interior_lot",
+                "column_label_raw": "Interior Lot",
+                "source_order": 4
+              },
+              {
+                "column_id": "corner_lot",
+                "column_label_raw": "Corner Lot",
+                "source_order": 5
+              }
+            ],
+            "rows_raw": [
+              {
+                "row_id": "zone-mh-table-12-2-row-1",
+                "source_order": 1,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-1-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "1"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-1-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Site Area (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-1-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "465 sq. m (5,005.42 sq ft)"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-1-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "540 sq. m (5,812.5 sq ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-mh-table-12-2-row-2-end-on-sites",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-2-end-on-sites-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "2"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-2-end-on-sites-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Site Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-2-end-on-sites-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "End-on Sites"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-2-end-on-sites-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "12 m (39.4 ft)"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-2-end-on-sites-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "15 m (49.2 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-mh-table-12-2-row-2-front-on-sites",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-2-front-on-sites-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-2-front-on-sites-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Site Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-2-front-on-sites-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Front on Sites"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-2-front-on-sites-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "29 m (95.1 ft)"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-2-front-on-sites-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "29 m (95.1 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-mh-table-12-2-row-3",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-3-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "3"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-3-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Front Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-3-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-3-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-mh-table-12-2-row-4",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-4-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "4"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-4-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Rear Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-4-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "4.5 m (14.8 ft)"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-4-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "4.5 m (14.8 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-mh-table-12-2-row-5",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-5-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "5"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-5-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Side Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-5-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "1.83 m (6 ft)"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-5-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "1.83m (6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-mh-table-12-2-row-6",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-6-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "6"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-6-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Flankage Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-6-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-6-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-mh-table-12-2-row-7",
+                "source_order": 7,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-7-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "7"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-7-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Height (Maximum) Dwelling Development on a designated site that is not less or Modular Dwelling Developments streets within a Mini-home or Modular surface width of 7.3 m and have an overall shall be connected to Municipal Services. undercarriage of a Mini-home shall water management plan shall be required Storm water shall be managed through"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-7-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "10.0 m (32.8 ft) Mini-home/Modular Dwelling 3.0 hectares (7.41 acres) shall not have a density greater Development shall Right-of-way width of 10.7 skirted with an opaque material. for a Mini-home or Modular the use of a storm water"
+                  },
+                  {
+                    "cell_id": "zone-mh-table-12-2-row-7-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "10.0 m (32.8 ft) Subdivision shall in Lot Area. than 20 units per have a minimum m (35.1 ft) Dwelling system."
+                  }
+                ]
+              }
+            ],
+            "citations": {
+              "pdf_page_start": 64,
+              "pdf_page_end": 64,
+              "bylaw_page_start": 64,
+              "bylaw_page_end": 64
+            }
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 64,
+          "pdf_page_end": 64,
+          "bylaw_page_start": 64,
+          "bylaw_page_end": 64
+        }
+      },
+      {
+        "section_id": "zone-mh-section-12-3",
+        "section_label_raw": "12.3",
+        "section_title_raw": "LANDSCAPED AREA",
+        "source_order": 3,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-mh-clause-12-3-1",
+            "clause_label_raw": "12.3.1",
+            "clause_text_raw": "In addition to the minimum Landscaped Area requirements, a minimum 6 m (19.7 ft) wide Landscaped Area shall be maintained along all property lines. This strip shall be planted with deciduous and conifer trees and shrubs. Such vegetation shall be a minimum of 1.5 m (4.9 ft) in Height at the time of planting and shall be spaced no greater than 5 m (16.4 ft) apart, to the satisfaction of the Development Officer.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 64,
+              "pdf_page_end": 64,
+              "bylaw_page_start": 64,
+              "bylaw_page_end": 64
+            }
+          },
+          {
+            "clause_id": "zone-mh-clause-12-3-2",
+            "clause_label_raw": "12.3.2",
+            "clause_text_raw": "A Landscaped Area plan for a Mini-home or Modular Dwelling Development shall be submitted to the City having consideration for the following:",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 65,
+              "pdf_page_end": 65,
+              "bylaw_page_start": 65,
+              "bylaw_page_end": 65
+            }
+          },
+          {
+            "clause_id": "zone-mh-clause-12-3-2-a",
+            "clause_label_raw": "a",
+            "clause_text_raw": "Trees and other vegetation;",
+            "parent_clause_id": "zone-mh-clause-12-3-2",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 65,
+              "pdf_page_end": 65,
+              "bylaw_page_start": 65,
+              "bylaw_page_end": 65
+            }
+          },
+          {
+            "clause_id": "zone-mh-clause-12-3-2-b",
+            "clause_label_raw": "b",
+            "clause_text_raw": "Natural areas;",
+            "parent_clause_id": "zone-mh-clause-12-3-2",
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 65,
+              "pdf_page_end": 65,
+              "bylaw_page_start": 65,
+              "bylaw_page_end": 65
+            }
+          },
+          {
+            "clause_id": "zone-mh-clause-12-3-2-c",
+            "clause_label_raw": "c",
+            "clause_text_raw": "Elevations of the land;",
+            "parent_clause_id": "zone-mh-clause-12-3-2",
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 65,
+              "pdf_page_end": 65,
+              "bylaw_page_start": 65,
+              "bylaw_page_end": 65
+            }
+          },
+          {
+            "clause_id": "zone-mh-clause-12-3-2-d",
+            "clause_label_raw": "d",
+            "clause_text_raw": "A Land Use Buffer areas along the perimeter of the Mini-home, Modular Dwelling Development; and",
+            "parent_clause_id": "zone-mh-clause-12-3-2",
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 65,
+              "pdf_page_end": 65,
+              "bylaw_page_start": 65,
+              "bylaw_page_end": 65
+            }
+          },
+          {
+            "clause_id": "zone-mh-clause-12-3-2-e",
+            "clause_label_raw": "e",
+            "clause_text_raw": "Walkways or Open Space area for general use by residents.",
+            "parent_clause_id": "zone-mh-clause-12-3-2",
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 65,
+              "pdf_page_end": 65,
+              "bylaw_page_start": 65,
+              "bylaw_page_end": 65
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 64,
+          "pdf_page_end": 65,
+          "bylaw_page_start": 64,
+          "bylaw_page_end": 65
+        }
+      },
+      {
+        "section_id": "zone-mh-section-12-4",
+        "section_label_raw": "12.4",
+        "section_title_raw": "ACCESSORY AND SECONDARY USES",
+        "source_order": 4,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-mh-clause-12-4-1",
+            "clause_label_raw": "12.4.1",
+            "clause_text_raw": "Notwithstanding the requirements, the following are permitted as accessory or secondary uses:",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 65,
+              "pdf_page_end": 65,
+              "bylaw_page_start": 65,
+              "bylaw_page_end": 65
+            }
+          },
+          {
+            "clause_id": "zone-mh-clause-12-4-1-a",
+            "clause_label_raw": "a",
+            "clause_text_raw": "Accessory Building;",
+            "parent_clause_id": "zone-mh-clause-12-4-1",
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 65,
+              "pdf_page_end": 65,
+              "bylaw_page_start": 65,
+              "bylaw_page_end": 65
+            }
+          },
+          {
+            "clause_id": "zone-mh-clause-12-4-1-b",
+            "clause_label_raw": "b",
+            "clause_text_raw": "Home Occupation; and",
+            "parent_clause_id": "zone-mh-clause-12-4-1",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 65,
+              "pdf_page_end": 65,
+              "bylaw_page_start": 65,
+              "bylaw_page_end": 65
+            }
+          },
+          {
+            "clause_id": "zone-mh-clause-12-4-1-c",
+            "clause_label_raw": "c",
+            "clause_text_raw": "Home Daycare",
+            "parent_clause_id": "zone-mh-clause-12-4-1",
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 65,
+              "pdf_page_end": 65,
+              "bylaw_page_start": 65,
+              "bylaw_page_end": 65
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 65,
+          "pdf_page_end": 65,
+          "bylaw_page_start": 65,
+          "bylaw_page_end": 65
+        }
+      }
+    ],
+    "tables_raw": [
+      {
+        "table_id": "zone-mh-table-12-2",
+        "section_id": "zone-mh-section-12-2"
+      }
+    ],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-mh-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 64,
+          "pdf_page_end": 65,
+          "bylaw_page_start": 64,
+          "bylaw_page_end": 65
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-mh-clause-12-1-1",
+        "section_id": "zone-mh-section-12-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-mh-clause-12-1-2",
+        "section_id": "zone-mh-section-12-1",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-mh-clause-12-1-3",
+        "section_id": "zone-mh-section-12-1",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-mh-clause-12-1-4",
+        "section_id": "zone-mh-section-12-1",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-mh-clause-12-3-1",
+        "section_id": "zone-mh-section-12-3",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-mh-clause-12-3-2",
+        "section_id": "zone-mh-section-12-3",
+        "source_order": 6
+      },
+      {
+        "clause_id": "zone-mh-clause-12-3-2-a",
+        "section_id": "zone-mh-section-12-3",
+        "source_order": 7
+      },
+      {
+        "clause_id": "zone-mh-clause-12-3-2-b",
+        "section_id": "zone-mh-section-12-3",
+        "source_order": 8
+      },
+      {
+        "clause_id": "zone-mh-clause-12-3-2-c",
+        "section_id": "zone-mh-section-12-3",
+        "source_order": 9
+      },
+      {
+        "clause_id": "zone-mh-clause-12-3-2-d",
+        "section_id": "zone-mh-section-12-3",
+        "source_order": 10
+      },
+      {
+        "clause_id": "zone-mh-clause-12-3-2-e",
+        "section_id": "zone-mh-section-12-3",
+        "source_order": 11
+      },
+      {
+        "clause_id": "zone-mh-clause-12-4-1",
+        "section_id": "zone-mh-section-12-4",
+        "source_order": 12
+      },
+      {
+        "clause_id": "zone-mh-clause-12-4-1-a",
+        "section_id": "zone-mh-section-12-4",
+        "source_order": 13
+      },
+      {
+        "clause_id": "zone-mh-clause-12-4-1-b",
+        "section_id": "zone-mh-section-12-4",
+        "source_order": 14
+      },
+      {
+        "clause_id": "zone-mh-clause-12-4-1-c",
+        "section_id": "zone-mh-section-12-4",
+        "source_order": 15
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-mh-term-use-single_detached_dwelling",
+        "term_raw": "Single-detached Dwelling",
+        "term_normalized": "single_detached_dwelling",
+        "term_category": "dwelling_type",
+        "code_table": "use",
+        "code": "single_detached_dwelling",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mh-clause-12-1-1"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "term_id": "zone-mh-term-use-modular_dwelling",
+        "term_raw": "Modular Dwelling",
+        "term_normalized": "modular_dwelling",
+        "term_category": "dwelling_type",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mh-clause-12-1-2"
+          }
+        ],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "modular_dwelling"
+      },
+      {
+        "term_id": "zone-mh-term-use-mini_home_dwelling",
+        "term_raw": "Mini-home Dwelling",
+        "term_normalized": "mini_home_dwelling",
+        "term_category": "dwelling_type",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mh-clause-12-1-3"
+          }
+        ],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "mini_home_dwelling"
+      },
+      {
+        "term_id": "zone-mh-term-use-community_building",
+        "term_raw": "Community Building",
+        "term_normalized": "community_building",
+        "term_category": "use_type",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mh-clause-12-1-4"
+          }
+        ],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "community_building"
+      },
+      {
+        "term_id": "zone-mh-term-use-accessory_building",
+        "term_raw": "Accessory Building",
+        "term_normalized": "accessory_building",
+        "term_category": "accessory_or_secondary_use",
+        "code_table": "use",
+        "code": "accessory_building",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mh-clause-12-4-1-a"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "term_id": "zone-mh-term-use-home_occupation",
+        "term_raw": "Home Occupation",
+        "term_normalized": "home_occupation",
+        "term_category": "accessory_or_secondary_use",
+        "code_table": "use",
+        "code": "home_occupation",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mh-clause-12-4-1-b"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "term_id": "zone-mh-term-use-home_daycare",
+        "term_raw": "Home Daycare",
+        "term_normalized": "home_daycare",
+        "term_category": "accessory_or_secondary_use",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mh-clause-12-4-1-c"
+          }
+        ],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "home_daycare"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-mh-use-single-detached-dwelling-1",
+        "use_name_raw": "Single-detached Dwelling",
+        "use_term_id": "zone-mh-term-use-single_detached_dwelling",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-mh-clause-12-1-1",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-mh-use-modular-dwelling-2",
+        "use_name_raw": "Modular Dwelling",
+        "use_term_id": "zone-mh-term-use-modular_dwelling",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-mh-clause-12-1-2",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-mh-use-mini-home-dwelling-3",
+        "use_name_raw": "Mini-home Dwelling",
+        "use_term_id": "zone-mh-term-use-mini_home_dwelling",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-mh-clause-12-1-3",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-mh-use-community-building-4",
+        "use_name_raw": "Community Building",
+        "use_term_id": "zone-mh-term-use-community_building",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-mh-clause-12-1-4",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-mh-use-accessory-building-5",
+        "use_name_raw": "Accessory Building",
+        "use_term_id": "zone-mh-term-use-accessory_building",
+        "use_status": "accessory_or_secondary",
+        "source_clause_ref": "zone-mh-clause-12-4-1-a",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-mh-use-home-occupation-6",
+        "use_name_raw": "Home Occupation",
+        "use_term_id": "zone-mh-term-use-home_occupation",
+        "use_status": "accessory_or_secondary",
+        "source_clause_ref": "zone-mh-clause-12-4-1-b",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-mh-use-home-daycare-7",
+        "use_name_raw": "Home Daycare",
+        "use_term_id": "zone-mh-term-use-home_daycare",
+        "use_status": "accessory_or_secondary",
+        "source_clause_ref": "zone-mh-clause-12-4-1-c",
+        "confidence": "high"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-table-12-2-row-1-interior-lot-1",
+        "value_raw": "465 sq. m (5,005.42 sq ft)",
+        "value": 465,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "5,005.42 sq ft",
+            "value": 5005.42,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-mh-table-12-2-row-1-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-table-12-2-row-1-corner-lot-1",
+        "value_raw": "540 sq. m (5,812.5 sq ft)",
+        "value": 540,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "5,812.5 sq ft",
+            "value": 5812.5,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-mh-table-12-2-row-1-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-table-12-2-row-2-end-on-sites-interior-lot-1",
+        "value_raw": "12 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-mh-table-12-2-row-2-end-on-sites-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-table-12-2-row-2-end-on-sites-corner-lot-1",
+        "value_raw": "15 m (49.2 ft)",
+        "value": 15,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "49.2 ft",
+            "value": 49.2,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-mh-table-12-2-row-2-end-on-sites-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-table-12-2-row-2-front-on-sites-interior-lot-1",
+        "value_raw": "29 m (95.1 ft)",
+        "value": 29,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "95.1 ft",
+            "value": 95.1,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-mh-table-12-2-row-2-front-on-sites-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-table-12-2-row-2-front-on-sites-corner-lot-1",
+        "value_raw": "29 m (95.1 ft)",
+        "value": 29,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "95.1 ft",
+            "value": 95.1,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-mh-table-12-2-row-2-front-on-sites-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-table-12-2-row-3-interior-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-mh-table-12-2-row-3-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-table-12-2-row-3-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-mh-table-12-2-row-3-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-table-12-2-row-4-interior-lot-1",
+        "value_raw": "4.5 m (14.8 ft)",
+        "value": 4.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "14.8 ft",
+            "value": 14.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-mh-table-12-2-row-4-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-table-12-2-row-4-corner-lot-1",
+        "value_raw": "4.5 m (14.8 ft)",
+        "value": 4.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "14.8 ft",
+            "value": 14.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-mh-table-12-2-row-4-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-table-12-2-row-5-interior-lot-1",
+        "value_raw": "1.83 m (6 ft)",
+        "value": 1.83,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "6 ft",
+            "value": 6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-mh-table-12-2-row-5-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-table-12-2-row-5-corner-lot-1",
+        "value_raw": "1.83m (6 ft)",
+        "value": 1.83,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "6 ft",
+            "value": 6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-mh-table-12-2-row-5-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-table-12-2-row-6-corner-lot-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-mh-table-12-2-row-6-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-table-12-2-row-7-interior-lot-1",
+        "value_raw": "10.0 m (32.8 ft)",
+        "value": 10,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "32.8 ft",
+            "value": 32.8,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-mh-table-12-2-row-7-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-table-12-2-row-7-interior-lot-2",
+        "value_raw": "7.41 acres",
+        "value": 7.41,
+        "unit": "acre",
+        "measure_type": "area",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-mh-table-12-2-row-7-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-table-12-2-row-7-corner-lot-1",
+        "value_raw": "10.0 m (32.8 ft)",
+        "value": 10,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "32.8 ft",
+            "value": 32.8,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-mh-table-12-2-row-7-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-table-12-2-row-7-corner-lot-2",
+        "value_raw": "20 units",
+        "value": 20,
+        "unit": "unit",
+        "measure_type": "count",
+        "comparator": "minimum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-mh-table-12-2-row-7-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-table-12-2-row-7-corner-lot-3",
+        "value_raw": "35.1 ft",
+        "value": 35.1,
+        "unit": "ft",
+        "measure_type": "height",
+        "comparator": "minimum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-mh-table-12-2-row-7-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-clause-12-3-1-1",
+        "value_raw": "6 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mh-clause-12-3-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-clause-12-3-1-2",
+        "value_raw": "1.5 m (4.9 ft)",
+        "value": 1.5,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "4.9 ft",
+            "value": 4.9,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mh-clause-12-3-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-mh-num-zone-mh-clause-12-3-1-3",
+        "value_raw": "5 m (16.4 ft)",
+        "value": 5,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "16.4 ft",
+            "value": 16.4,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mh-clause-12-3-1"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-mh-req-zone-mh-table-12-2-row-1-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "site_area_minimum",
+        "requirement_label_raw": "Site Area (Minimum)",
+        "requirement_text_raw": "Site Area (Minimum) Interior Lot 465 sq. m (5,005.42 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-mh-num-zone-mh-table-12-2-row-1-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-mh-table-12-2-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-mh-req-zone-mh-table-12-2-row-1-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "site_area_minimum",
+        "requirement_label_raw": "Site Area (Minimum)",
+        "requirement_text_raw": "Site Area (Minimum) Corner Lot 540 sq. m (5,812.5 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-mh-num-zone-mh-table-12-2-row-1-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-mh-table-12-2-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-mh-req-zone-mh-table-12-2-row-2-end-on-sites-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Site Frontage (Minimum)",
+        "requirement_text_raw": "Site Frontage (Minimum) End-on Sites Interior Lot 12 m (39.4 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "End-on Sites"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-mh-num-zone-mh-table-12-2-row-2-end-on-sites-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-mh-table-12-2-row-2-end-on-sites"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-mh-req-zone-mh-table-12-2-row-2-end-on-sites-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Site Frontage (Minimum)",
+        "requirement_text_raw": "Site Frontage (Minimum) End-on Sites Corner Lot 15 m (49.2 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "End-on Sites"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-mh-num-zone-mh-table-12-2-row-2-end-on-sites-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-mh-table-12-2-row-2-end-on-sites"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-mh-req-zone-mh-table-12-2-row-2-front-on-sites-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Site Frontage (Minimum)",
+        "requirement_text_raw": "Site Frontage (Minimum) Front on Sites Interior Lot 29 m (95.1 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Front on Sites"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-mh-num-zone-mh-table-12-2-row-2-front-on-sites-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-mh-table-12-2-row-2-front-on-sites"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-mh-req-zone-mh-table-12-2-row-2-front-on-sites-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Site Frontage (Minimum)",
+        "requirement_text_raw": "Site Frontage (Minimum) Front on Sites Corner Lot 29 m (95.1 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Front on Sites"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-mh-num-zone-mh-table-12-2-row-2-front-on-sites-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-mh-table-12-2-row-2-front-on-sites"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-mh-req-zone-mh-table-12-2-row-3-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Interior Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-mh-num-zone-mh-table-12-2-row-3-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-mh-table-12-2-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-mh-req-zone-mh-table-12-2-row-3-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-mh-num-zone-mh-table-12-2-row-3-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-mh-table-12-2-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-mh-req-zone-mh-table-12-2-row-4-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Interior Lot 4.5 m (14.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-mh-num-zone-mh-table-12-2-row-4-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-mh-table-12-2-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-mh-req-zone-mh-table-12-2-row-4-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Corner Lot 4.5 m (14.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-mh-num-zone-mh-table-12-2-row-4-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-mh-table-12-2-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-mh-req-zone-mh-table-12-2-row-5-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Interior Lot 1.83 m (6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-mh-num-zone-mh-table-12-2-row-5-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-mh-table-12-2-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-mh-req-zone-mh-table-12-2-row-5-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Corner Lot 1.83m (6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-mh-num-zone-mh-table-12-2-row-5-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-mh-table-12-2-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-mh-req-zone-mh-table-12-2-row-6-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "flankage_yard",
+        "requirement_label_raw": "Flankage Yard (Minimum)",
+        "requirement_text_raw": "Flankage Yard (Minimum) Corner Lot 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-mh-num-zone-mh-table-12-2-row-6-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-mh-table-12-2-row-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-mh-req-zone-mh-table-12-2-row-7-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum) Dwelling Development on a designated site that is not less or Modular Dwelling Developments streets within a Mini-home or Modular surface width of 7.3 m and have an overall shall be connected to Municipal Services. undercarriage of a Mini-home shall water management plan shall be required Storm water shall be managed through",
+        "requirement_text_raw": "Height (Maximum) Dwelling Development on a designated site that is not less or Modular Dwelling Developments streets within a Mini-home or Modular surface width of 7.3 m and have an overall shall be connected to Municipal Services. undercarriage of a Mini-home shall water management plan shall be required Storm water shall be managed through Interior Lot 10.0 m (32.8 ft) Mini-home/Modular Dwelling 3.0 hectares (7.41 acres) shall not have a density greater Development shall Right-of-way width of 10.7 skirted with an opaque material. for a Mini-home or Modular the use of a storm water",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-mh-num-zone-mh-table-12-2-row-7-interior-lot-1",
+          "zone-mh-num-zone-mh-table-12-2-row-7-interior-lot-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-mh-table-12-2-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-mh-req-zone-mh-table-12-2-row-7-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum) Dwelling Development on a designated site that is not less or Modular Dwelling Developments streets within a Mini-home or Modular surface width of 7.3 m and have an overall shall be connected to Municipal Services. undercarriage of a Mini-home shall water management plan shall be required Storm water shall be managed through",
+        "requirement_text_raw": "Height (Maximum) Dwelling Development on a designated site that is not less or Modular Dwelling Developments streets within a Mini-home or Modular surface width of 7.3 m and have an overall shall be connected to Municipal Services. undercarriage of a Mini-home shall water management plan shall be required Storm water shall be managed through Corner Lot 10.0 m (32.8 ft) Subdivision shall in Lot Area. than 20 units per have a minimum m (35.1 ft) Dwelling system.",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-mh-num-zone-mh-table-12-2-row-7-corner-lot-1",
+          "zone-mh-num-zone-mh-table-12-2-row-7-corner-lot-2",
+          "zone-mh-num-zone-mh-table-12-2-row-7-corner-lot-3"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-mh-table-12-2-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-mh-req-zone-mh-clause-12-3-1",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "12.3.1",
+        "requirement_text_raw": "In addition to the minimum Landscaped Area requirements, a minimum 6 m (19.7 ft) wide Landscaped Area shall be maintained along all property lines. This strip shall be planted with deciduous and conifer trees and shrubs. Such vegetation shall be a minimum of 1.5 m (4.9 ft) in Height at the time of planting and shall be spaced no greater than 5 m (16.4 ft) apart, to the satisfaction of the Development Officer.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-mh-num-zone-mh-clause-12-3-1-1",
+          "zone-mh-num-zone-mh-clause-12-3-1-2",
+          "zone-mh-num-zone-mh-clause-12-3-1-3"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-mh-clause-12-3-1"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-mh-regulation-group-zone",
+        "group_label_raw": "12",
+        "group_title_raw": "MANUFACTURED HOUSING ZONE (MH)",
+        "regulated_use_terms": [
+          "zone-mh-term-use-single_detached_dwelling",
+          "zone-mh-term-use-modular_dwelling",
+          "zone-mh-term-use-mini_home_dwelling",
+          "zone-mh-term-use-community_building"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "MH"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-mh-req-zone-mh-table-12-2-row-1-interior-lot",
+          "zone-mh-req-zone-mh-table-12-2-row-1-corner-lot",
+          "zone-mh-req-zone-mh-table-12-2-row-2-end-on-sites-interior-lot",
+          "zone-mh-req-zone-mh-table-12-2-row-2-end-on-sites-corner-lot",
+          "zone-mh-req-zone-mh-table-12-2-row-2-front-on-sites-interior-lot",
+          "zone-mh-req-zone-mh-table-12-2-row-2-front-on-sites-corner-lot",
+          "zone-mh-req-zone-mh-table-12-2-row-3-interior-lot",
+          "zone-mh-req-zone-mh-table-12-2-row-3-corner-lot",
+          "zone-mh-req-zone-mh-table-12-2-row-4-interior-lot",
+          "zone-mh-req-zone-mh-table-12-2-row-4-corner-lot",
+          "zone-mh-req-zone-mh-table-12-2-row-5-interior-lot",
+          "zone-mh-req-zone-mh-table-12-2-row-5-corner-lot",
+          "zone-mh-req-zone-mh-table-12-2-row-6-corner-lot",
+          "zone-mh-req-zone-mh-table-12-2-row-7-interior-lot",
+          "zone-mh-req-zone-mh-table-12-2-row-7-corner-lot",
+          "zone-mh-req-zone-mh-clause-12-3-1"
+        ],
+        "source_section_ref": "zone-mh-section-12-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-mh-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "MH",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-mh-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [],
+    "cross_references": []
+  },
+  "review_flags": []
 }

@@ -1,232 +1,1072 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+    "document_type": "zone",
     "zone_code": "DN",
     "zone_name": "DOWNTOWN NEIGHBOURHOOD",
-    "part_label_raw": "29",
-    "chapter_heading_raw": "29 DOWNTOWN NEIGHBOURHOOD (DN)"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": []
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "29.1.1",
-      "use_type": "inherited_principal_use",
-      "use_name": "Uses permitted in the R-3 Zone",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 91,
-        "pdf_page_end": 91,
-        "bylaw_page_start": 91,
-        "bylaw_page_end": 91
-      },
-      "clause_path": [
-        "29.1.1"
-      ]
-    },
-    {
-      "clause_label_raw": "29.1.2",
-      "use_type": "inherited_principal_use",
-      "use_name": "Uses permitted in the Parks/Cultural Zone",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 91,
-        "pdf_page_end": 91,
-        "bylaw_page_start": 91,
-        "bylaw_page_end": 91
-      },
-      "clause_path": [
-        "29.1.2"
-      ]
-    },
-    {
-      "clause_label_raw": "29.1.3",
-      "use_type": "principal_use",
-      "use_name": "Convenience Store.",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 91,
-        "pdf_page_end": 91,
-        "bylaw_page_start": 91,
-        "bylaw_page_end": 91
-      },
-      "clause_path": [
-        "29.1.3"
-      ]
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "29.1",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 91,
-        "pdf_page_end": 91,
-        "bylaw_page_start": 91,
-        "bylaw_page_end": 91
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "29.1.1",
-          "clause_path": [
-            "29.1.1"
-          ],
-          "text": "Uses permitted in the R-3 Zone;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 91,
-            "pdf_page_end": 91,
-            "bylaw_page_start": 91,
-            "bylaw_page_end": 91
-          }
-        },
-        {
-          "provision_label_raw": "29.1.2",
-          "clause_path": [
-            "29.1.2"
-          ],
-          "text": "Uses permitted in the Parks/Cultural Zone; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 91,
-            "pdf_page_end": 91,
-            "bylaw_page_start": 91,
-            "bylaw_page_end": 91
-          }
-        },
-        {
-          "provision_label_raw": "29.1.3",
-          "clause_path": [
-            "29.1.3"
-          ],
-          "text": "Convenience Store.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 91,
-            "pdf_page_end": 91,
-            "bylaw_page_start": 91,
-            "bylaw_page_end": 91
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": null,
-      "title_label_raw": "REGULATIONS FOR PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 91,
-        "pdf_page_end": 91,
-        "bylaw_page_start": 91,
-        "bylaw_page_end": 91
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "section",
-          "text": "All permitted uses in the DN Zone are subject to the following regulations: Any Building type, 3 units or less Apartment Dwelling: 4 units or more Any other permitted Use 10.6 m (34.8 ft) 6.0 m (19.7 ft) per unit wide 20.0 m (65.6 ft) 20.0 m (65.6 ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 91,
-            "pdf_page_end": 91,
-            "bylaw_page_start": 91,
-            "bylaw_page_end": 91
-          }
-        },
-        {
-          "provision_label_raw": "2",
-          "text": "Front and Flankage Yard (Minimum) Minimum 2.4 m (7.9 ft) and Maximum 4.9m (16.1 ft); OR, Within the minimum and maximum range of the existing Buildings on the Block.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 91,
-            "pdf_page_end": 91,
-            "bylaw_page_start": 91,
-            "bylaw_page_end": 91
-          }
-        },
-        {
-          "provision_label_raw": "3",
-          "text": "Front Yard Projections Minimum 1.2 m (3.9 ft) from Front Lot Line, and Maximum 2.4m (7.9 ft) projection; OR Within the minimum and maximum range of the existing Buildings on the Block.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 91,
-            "pdf_page_end": 91,
-            "bylaw_page_start": 91,
-            "bylaw_page_end": 91
-          }
-        },
-        {
-          "provision_label_raw": "4",
-          "text": "Rear Yard (Minimum) 6.0 m (19.7 ft); OR Within the minimum and maximum range of the existing Buildings on the Block. 1.83 m (6.0 ft); OR Equal to the Side Yard Setback of the existing Building on the abutting property, whichever is less.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 91,
-            "pdf_page_end": 91,
-            "bylaw_page_start": 91,
-            "bylaw_page_end": 91
-          }
-        },
-        {
-          "provision_label_raw": "6",
-          "text": "Height Minimum 7.5 m (24.6ft) Maximum 12.0 m (39.4 ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 91,
-            "pdf_page_end": 91,
-            "bylaw_page_start": 91,
-            "bylaw_page_end": 91
-          }
-        }
-      ],
-      "table_column_headings_raw": [
-        "Interior/Corner Lots",
-        "Townhouse Dwelling: 4 units or more"
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": "R-3 Zone",
-      "chapter_slug": "r-3",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 91,
-        "pdf_page_end": 91,
-        "bylaw_page_start": 91,
-        "bylaw_page_end": 91
-      },
-      "source_text": "Uses permitted in the R-3 Zone"
-    }
-  ],
-  "content_blocks": [],
-  "open_issues": [
-    {
-      "issue_type": "table_parsing_review",
-      "description": "Section 'REGULATIONS FOR PERMITTED USES' contains table-derived provisions extracted from PDF text; verify column alignment against the source PDF before normalization."
-    },
-    {
-      "issue_type": "source_revision_review",
-      "description": "Source PDF cover identifies rev 049 updated March 9, 2026, but this zone page header may display rev 048 updated October 24, 2025; verify source revision during QA."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "29",
+    "zone_title_raw": "DOWNTOWN NEIGHBOURHOOD (DN)",
+    "citations": {
       "pdf_page_start": 91,
       "pdf_page_end": 91,
       "bylaw_page_start": 91,
       "bylaw_page_end": 91
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-dn",
+        "source_unit_type": "zone",
+        "label_raw": "29",
+        "title_raw": "DOWNTOWN NEIGHBOURHOOD (DN)",
+        "text_raw": "Uses permitted in the R-3 Zone;\nUses permitted in the Parks/Cultural Zone; and\nConvenience Store.",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 91,
+          "pdf_page_end": 91,
+          "bylaw_page_start": 91,
+          "bylaw_page_end": 91
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-dn-section-29-1",
+        "section_label_raw": "29.1",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-dn-clause-29-1-1",
+            "clause_label_raw": "29.1.1",
+            "clause_text_raw": "Uses permitted in the R-3 Zone;",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 91,
+              "pdf_page_end": 91,
+              "bylaw_page_start": 91,
+              "bylaw_page_end": 91
+            }
+          },
+          {
+            "clause_id": "zone-dn-clause-29-1-2",
+            "clause_label_raw": "29.1.2",
+            "clause_text_raw": "Uses permitted in the Parks/Cultural Zone; and",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 91,
+              "pdf_page_end": 91,
+              "bylaw_page_start": 91,
+              "bylaw_page_end": 91
+            }
+          },
+          {
+            "clause_id": "zone-dn-clause-29-1-3",
+            "clause_label_raw": "29.1.3",
+            "clause_text_raw": "Convenience Store.",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 91,
+              "pdf_page_end": 91,
+              "bylaw_page_start": 91,
+              "bylaw_page_end": 91
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 91,
+          "pdf_page_end": 91,
+          "bylaw_page_start": 91,
+          "bylaw_page_end": 91
+        }
+      },
+      {
+        "section_id": "zone-dn-section-2",
+        "section_label_raw": "",
+        "section_title_raw": "REGULATIONS FOR PERMITTED USES",
+        "source_order": 2,
+        "clauses_raw": [],
+        "tables_raw": [
+          {
+            "table_id": "zone-dn-table-regulations-for-permitted-uses",
+            "table_title_raw": "REGULATIONS FOR PERMITTED USES",
+            "source_order": 1,
+            "columns_raw": [
+              {
+                "column_id": "row_number",
+                "column_label_raw": "",
+                "source_order": 1
+              },
+              {
+                "column_id": "requirement",
+                "column_label_raw": "",
+                "source_order": 2
+              },
+              {
+                "column_id": "condition",
+                "column_label_raw": "",
+                "source_order": 3
+              },
+              {
+                "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                "column_label_raw": "Interior/Corner Lots Townhouse Dwelling: 4 units or more",
+                "source_order": 4
+              }
+            ],
+            "rows_raw": [
+              {
+                "row_id": "zone-dn-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less",
+                "source_order": 1,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "1"
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Any Building type, 3 units or less"
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less-interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "cell_text_raw": "10.6 m (34.8 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-dn-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Townhouse Dwelling: 4 units or more"
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more-interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "cell_text_raw": "6.0 m (19.7 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-dn-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Apartment Dwelling: 4 units or more"
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more-interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "cell_text_raw": "20.0 m (65.6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-dn-table-regulations-for-permitted-uses-row-1-any-other-permitted-use",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-1-any-other-permitted-use-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-1-any-other-permitted-use-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-1-any-other-permitted-use-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": "Any other permitted Use"
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-1-any-other-permitted-use-interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "cell_text_raw": "20.0 m (65.6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-dn-table-regulations-for-permitted-uses-row-2",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-2-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "2"
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-2-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "and Flankage Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-2-interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "cell_text_raw": "Minimum 2.4 m (7.9 ft) and Maximum 4.9m (16.1 ft); OR, Within the minimum and maximum range of the existing Buildings on the Block."
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-dn-table-regulations-for-permitted-uses-row-3",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-3-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "3"
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-3-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Yard Projections"
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-3-interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "cell_text_raw": "Minimum 1.2 m (3.9 ft) from Front Lot Line, and Maximum 2.4m (7.9 ft) projection; OR Within the minimum and maximum range of the existing Buildings on the Block."
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-dn-table-regulations-for-permitted-uses-row-4",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-4-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "4"
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-4-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-4-interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "cell_text_raw": "6.0 m (19.7 ft); OR Within the minimum and maximum range of the existing Buildings on the Block."
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-dn-table-regulations-for-permitted-uses-row-5",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-5-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "5"
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-5-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-5-interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "cell_text_raw": "1.83 m (6.0 ft); OR Equal to the Side Yard Setback of the existing Building on the abutting property, whichever is less."
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-dn-table-regulations-for-permitted-uses-row-6",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-6-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "6"
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-6-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-dn-table-regulations-for-permitted-uses-row-6-interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "column_id": "interior_corner_lots_townhouse_dwelling_4_units_or_more",
+                    "cell_text_raw": "Minimum 7.5 m (24.6ft) Maximum 12.0 m (39.4 ft)"
+                  }
+                ]
+              }
+            ],
+            "citations": {
+              "pdf_page_start": 91,
+              "pdf_page_end": 91,
+              "bylaw_page_start": 91,
+              "bylaw_page_end": 91
+            }
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 91,
+          "pdf_page_end": 91,
+          "bylaw_page_start": 91,
+          "bylaw_page_end": 91
+        }
+      }
+    ],
+    "tables_raw": [
+      {
+        "table_id": "zone-dn-table-regulations-for-permitted-uses",
+        "section_id": "zone-dn-section-2"
+      }
+    ],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-dn-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 91,
+          "pdf_page_end": 91,
+          "bylaw_page_start": 91,
+          "bylaw_page_end": 91
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-dn-clause-29-1-1",
+        "section_id": "zone-dn-section-29-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-dn-clause-29-1-2",
+        "section_id": "zone-dn-section-29-1",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-dn-clause-29-1-3",
+        "section_id": "zone-dn-section-29-1",
+        "source_order": 3
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-dn-term-term-uses_permitted_in_the_r_3_zone",
+        "term_raw": "Uses permitted in the R-3 Zone",
+        "term_normalized": "uses_permitted_in_the_r_3_zone",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dn-clause-29-1-1"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-dn-term-term-uses_permitted_in_the_parks_cultural_zone",
+        "term_raw": "Uses permitted in the Parks/Cultural Zone",
+        "term_normalized": "uses_permitted_in_the_parks_cultural_zone",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dn-clause-29-1-2"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-dn-term-term-convenience_store",
+        "term_raw": "Convenience Store",
+        "term_normalized": "convenience_store",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-dn-clause-29-1-3"
+          }
+        ],
+        "confidence": "needs_review"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-dn-use-uses-permitted-in-the-r-3-zone-1",
+        "use_name_raw": "Uses permitted in the R-3 Zone",
+        "use_term_id": "zone-dn-term-term-uses_permitted_in_the_r_3_zone",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-dn-clause-29-1-1",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-dn-use-uses-permitted-in-the-parks-cultural-zone-2",
+        "use_name_raw": "Uses permitted in the Parks/Cultural Zone",
+        "use_term_id": "zone-dn-term-term-uses_permitted_in_the_parks_cultural_zone",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-dn-clause-29-1-2",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-dn-use-convenience-store-3",
+        "use_name_raw": "Convenience Store",
+        "use_term_id": "zone-dn-term-term-convenience_store",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-dn-clause-29-1-3",
+        "confidence": "needs_review"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+        "value_raw": "10.6 m (34.8 ft)",
+        "value": 10.6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "34.8 ft",
+            "value": 34.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+        "value_raw": "20.0 m (65.6 ft)",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "65.6 ft",
+            "value": 65.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-1-any-other-permitted-use-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+        "value_raw": "20.0 m (65.6 ft)",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "65.6 ft",
+            "value": 65.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-1-any-other-permitted-use-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-2-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+        "value_raw": "2.4 m (7.9 ft)",
+        "value": 2.4,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "7.9 ft",
+            "value": 7.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-2-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-2-interior-corner-lots-townhouse-dwelling-4-units-or-more-2",
+        "value_raw": "4.9m (16.1 ft)",
+        "value": 4.9,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "16.1 ft",
+            "value": 16.1,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-2-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-3-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+        "value_raw": "1.2 m (3.9 ft)",
+        "value": 1.2,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "3.9 ft",
+            "value": 3.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-3-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-3-interior-corner-lots-townhouse-dwelling-4-units-or-more-2",
+        "value_raw": "2.4m (7.9 ft)",
+        "value": 2.4,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "7.9 ft",
+            "value": 7.9,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-3-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-4-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+        "value_raw": "6.0 m (19.7 ft)",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "19.7 ft",
+            "value": 19.7,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-4-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-5-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+        "value_raw": "1.83 m (6.0 ft)",
+        "value": 1.83,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "6.0 ft",
+            "value": 6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-5-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-6-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+        "value_raw": "7.5 m (24.6ft)",
+        "value": 7.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.6ft",
+            "value": 24.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-6-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-6-interior-corner-lots-townhouse-dwelling-4-units-or-more-2",
+        "value_raw": "12.0 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-6-interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-dn-req-zone-dn-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Frontage (Minimum)",
+        "requirement_text_raw": "Frontage (Minimum) Any Building type, 3 units or less Interior/Corner Lots Townhouse Dwelling: 4 units or more 10.6 m (34.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Any Building type, 3 units or less"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less-interior-corner-lots-townhouse-dwelling-4-units-or-more-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-dn-req-zone-dn-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Frontage (Minimum)",
+        "requirement_text_raw": "Frontage (Minimum) Townhouse Dwelling: 4 units or more Interior/Corner Lots Townhouse Dwelling: 4 units or more 6.0 m (19.7 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Townhouse Dwelling: 4 units or more"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more-interior-corner-lots-townhouse-dwelling-4-units-or-more-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-dn-req-zone-dn-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Frontage (Minimum)",
+        "requirement_text_raw": "Frontage (Minimum) Apartment Dwelling: 4 units or more Interior/Corner Lots Townhouse Dwelling: 4 units or more 20.0 m (65.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Apartment Dwelling: 4 units or more"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more-interior-corner-lots-townhouse-dwelling-4-units-or-more-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-dn-req-zone-dn-table-regulations-for-permitted-uses-row-1-any-other-permitted-use-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Frontage (Minimum)",
+        "requirement_text_raw": "Frontage (Minimum) Any other permitted Use Interior/Corner Lots Townhouse Dwelling: 4 units or more 20.0 m (65.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          ],
+          "conditions": [
+            {
+              "condition_type": "table_row_condition",
+              "condition_text_raw": "Any other permitted Use"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-1-any-other-permitted-use-interior-corner-lots-townhouse-dwelling-4-units-or-more-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-1-any-other-permitted-use"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-dn-req-zone-dn-table-regulations-for-permitted-uses-row-2-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "flankage_yard",
+        "requirement_label_raw": "and Flankage Yard (Minimum)",
+        "requirement_text_raw": "and Flankage Yard (Minimum) Interior/Corner Lots Townhouse Dwelling: 4 units or more Minimum 2.4 m (7.9 ft) and Maximum 4.9m (16.1 ft); OR, Within the minimum and maximum range of the existing Buildings on the Block.",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-2-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+          "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-2-interior-corner-lots-townhouse-dwelling-4-units-or-more-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-dn-req-zone-dn-table-regulations-for-permitted-uses-row-3-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_projections",
+        "requirement_label_raw": "Yard Projections",
+        "requirement_text_raw": "Yard Projections Interior/Corner Lots Townhouse Dwelling: 4 units or more Minimum 1.2 m (3.9 ft) from Front Lot Line, and Maximum 2.4m (7.9 ft) projection; OR Within the minimum and maximum range of the existing Buildings on the Block.",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-3-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+          "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-3-interior-corner-lots-townhouse-dwelling-4-units-or-more-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-dn-req-zone-dn-table-regulations-for-permitted-uses-row-4-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Interior/Corner Lots Townhouse Dwelling: 4 units or more 6.0 m (19.7 ft); OR Within the minimum and maximum range of the existing Buildings on the Block.",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-4-interior-corner-lots-townhouse-dwelling-4-units-or-more-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-dn-req-zone-dn-table-regulations-for-permitted-uses-row-5-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "yard_minimum",
+        "requirement_label_raw": "Yard (Minimum)",
+        "requirement_text_raw": "Yard (Minimum) Interior/Corner Lots Townhouse Dwelling: 4 units or more 1.83 m (6.0 ft); OR Equal to the Side Yard Setback of the existing Building on the abutting property, whichever is less.",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-5-interior-corner-lots-townhouse-dwelling-4-units-or-more-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-dn-req-zone-dn-table-regulations-for-permitted-uses-row-6-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "other",
+        "requirement_label_raw": "",
+        "requirement_text_raw": "Interior/Corner Lots Townhouse Dwelling: 4 units or more Minimum 7.5 m (24.6ft) Maximum 12.0 m (39.4 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_corner_lots_townhouse_dwelling_4_units_or_more"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-6-interior-corner-lots-townhouse-dwelling-4-units-or-more-1",
+          "zone-dn-num-zone-dn-table-regulations-for-permitted-uses-row-6-interior-corner-lots-townhouse-dwelling-4-units-or-more-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-dn-table-regulations-for-permitted-uses-row-6"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-dn-regulation-group-zone",
+        "group_label_raw": "29",
+        "group_title_raw": "DOWNTOWN NEIGHBOURHOOD (DN)",
+        "regulated_use_terms": [
+          "zone-dn-term-term-uses_permitted_in_the_r_3_zone",
+          "zone-dn-term-term-uses_permitted_in_the_parks_cultural_zone",
+          "zone-dn-term-term-convenience_store"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "DN"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-dn-req-zone-dn-table-regulations-for-permitted-uses-row-1-any-building-type-3-units-or-less-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+          "zone-dn-req-zone-dn-table-regulations-for-permitted-uses-row-1-townhouse-dwelling-4-units-or-more-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+          "zone-dn-req-zone-dn-table-regulations-for-permitted-uses-row-1-apartment-dwelling-4-units-or-more-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+          "zone-dn-req-zone-dn-table-regulations-for-permitted-uses-row-1-any-other-permitted-use-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+          "zone-dn-req-zone-dn-table-regulations-for-permitted-uses-row-2-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+          "zone-dn-req-zone-dn-table-regulations-for-permitted-uses-row-3-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+          "zone-dn-req-zone-dn-table-regulations-for-permitted-uses-row-4-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+          "zone-dn-req-zone-dn-table-regulations-for-permitted-uses-row-5-interior-corner-lots-townhouse-dwelling-4-units-or-more",
+          "zone-dn-req-zone-dn-table-regulations-for-permitted-uses-row-6-interior-corner-lots-townhouse-dwelling-4-units-or-more"
+        ],
+        "source_section_ref": "zone-dn-section-29-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-dn-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "DN",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-dn-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-dn-flag-unmatched-term-uses-permitted-in-the-r-3-zone",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Uses permitted in the R-3 Zone",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-dn-clause-29-1-1"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-dn-flag-unmatched-term-uses-permitted-in-the-parks-cultural-zone",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Uses permitted in the Parks/Cultural Zone",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-dn-clause-29-1-2"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-dn-flag-unmatched-term-convenience-store",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Convenience Store",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-dn-clause-29-1-3"
+        }
+      ]
+    }
+  ]
 }

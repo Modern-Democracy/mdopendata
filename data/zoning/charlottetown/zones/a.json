@@ -1,360 +1,1410 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Zoning & Development Bylaw (PH-ZD.2 rev 049)",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+    "document_type": "zone",
     "zone_code": "A",
     "zone_name": "AIRPORT ZONE",
-    "part_label_raw": "41",
-    "chapter_heading_raw": "41 AIRPORT ZONE (A)"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": []
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "41.1.1",
-      "use_type": "inherited_principal_use",
-      "use_name": "Uses permitted in the Business Park Industrial (M-3) Zone, subject to the Regulations for Permitted Uses for the M-3 Zone",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 116,
-        "pdf_page_end": 116,
-        "bylaw_page_start": 116,
-        "bylaw_page_end": 116
-      },
-      "clause_path": [
-        "41.1.1"
-      ]
-    },
-    {
-      "clause_label_raw": "41.1.2",
-      "use_type": "principal_use",
-      "use_name": "Airport",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 116,
-        "pdf_page_end": 116,
-        "bylaw_page_start": 116,
-        "bylaw_page_end": 116
-      },
-      "clause_path": [
-        "41.1.2"
-      ]
-    },
-    {
-      "clause_label_raw": "41.1.3",
-      "use_type": "institutional_or_open_space_use",
-      "use_name": "Agricultural and Resource Land Uses",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 116,
-        "pdf_page_end": 116,
-        "bylaw_page_start": 116,
-        "bylaw_page_end": 116
-      },
-      "clause_path": [
-        "41.1.3"
-      ]
-    },
-    {
-      "clause_label_raw": "41.1.4",
-      "use_type": "principal_use",
-      "use_name": "Bulk Fuel Station",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 116,
-        "pdf_page_end": 116,
-        "bylaw_page_start": 116,
-        "bylaw_page_end": 116
-      },
-      "clause_path": [
-        "41.1.4"
-      ]
-    },
-    {
-      "clause_label_raw": "41.1.5",
-      "use_type": "principal_use",
-      "use_name": "Forestry Related",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 116,
-        "pdf_page_end": 116,
-        "bylaw_page_start": 116,
-        "bylaw_page_end": 116
-      },
-      "clause_path": [
-        "41.1.5"
-      ]
-    },
-    {
-      "clause_label_raw": "41.1.6",
-      "use_type": "principal_use",
-      "use_name": "Government Offices",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 116,
-        "pdf_page_end": 116,
-        "bylaw_page_start": 116,
-        "bylaw_page_end": 116
-      },
-      "clause_path": [
-        "41.1.6"
-      ]
-    },
-    {
-      "clause_label_raw": "41.1.7",
-      "use_type": "principal_use",
-      "use_name": "Heavy Equipment Repair",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 116,
-        "pdf_page_end": 116,
-        "bylaw_page_start": 116,
-        "bylaw_page_end": 116
-      },
-      "clause_path": [
-        "41.1.7"
-      ]
-    },
-    {
-      "clause_label_raw": "41.1.8",
-      "use_type": "principal_use",
-      "use_name": "Manufacturing, Heavy.",
-      "status": "active",
-      "citations": {
-        "pdf_page_start": 116,
-        "pdf_page_end": 116,
-        "bylaw_page_start": 116,
-        "bylaw_page_end": 116
-      },
-      "clause_path": [
-        "41.1.8"
-      ]
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "41.1",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 116,
-        "pdf_page_end": 116,
-        "bylaw_page_start": 116,
-        "bylaw_page_end": 116
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "41.1.1",
-          "clause_path": [
-            "41.1.1"
-          ],
-          "text": "Uses permitted in the Business Park Industrial (M-3) Zone, subject to the Regulations for Permitted Uses for the M-3 Zone;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 116,
-            "pdf_page_end": 116,
-            "bylaw_page_start": 116,
-            "bylaw_page_end": 116
-          }
-        },
-        {
-          "provision_label_raw": "41.1.2",
-          "clause_path": [
-            "41.1.2"
-          ],
-          "text": "Airport;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 116,
-            "pdf_page_end": 116,
-            "bylaw_page_start": 116,
-            "bylaw_page_end": 116
-          }
-        },
-        {
-          "provision_label_raw": "41.1.3",
-          "clause_path": [
-            "41.1.3"
-          ],
-          "text": "Agricultural and Resource Land Uses;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 116,
-            "pdf_page_end": 116,
-            "bylaw_page_start": 116,
-            "bylaw_page_end": 116
-          }
-        },
-        {
-          "provision_label_raw": "41.1.4",
-          "clause_path": [
-            "41.1.4"
-          ],
-          "text": "Bulk Fuel Station;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 116,
-            "pdf_page_end": 116,
-            "bylaw_page_start": 116,
-            "bylaw_page_end": 116
-          }
-        },
-        {
-          "provision_label_raw": "41.1.5",
-          "clause_path": [
-            "41.1.5"
-          ],
-          "text": "Forestry Related;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 116,
-            "pdf_page_end": 116,
-            "bylaw_page_start": 116,
-            "bylaw_page_end": 116
-          }
-        },
-        {
-          "provision_label_raw": "41.1.6",
-          "clause_path": [
-            "41.1.6"
-          ],
-          "text": "Government Offices;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 116,
-            "pdf_page_end": 116,
-            "bylaw_page_start": 116,
-            "bylaw_page_end": 116
-          }
-        },
-        {
-          "provision_label_raw": "41.1.7",
-          "clause_path": [
-            "41.1.7"
-          ],
-          "text": "Heavy Equipment Repair; and",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 116,
-            "pdf_page_end": 116,
-            "bylaw_page_start": 116,
-            "bylaw_page_end": 116
-          }
-        },
-        {
-          "provision_label_raw": "41.1.8",
-          "clause_path": [
-            "41.1.8"
-          ],
-          "text": "Manufacturing, Heavy.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 116,
-            "pdf_page_end": 116,
-            "bylaw_page_start": 116,
-            "bylaw_page_end": 116
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": "41.2",
-      "title_label_raw": "REGULATIONS FOR PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 116,
-        "pdf_page_end": 116,
-        "bylaw_page_start": 116,
-        "bylaw_page_end": 116
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "1",
-          "text": "Lot Area (Minimum) 600 sq. m (6,458.3 sq ft) 700 sq. m (7,534.7 sq ft)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 116,
-            "pdf_page_end": 116,
-            "bylaw_page_start": 116,
-            "bylaw_page_end": 116
-          }
-        },
-        {
-          "provision_label_raw": "41.2.1",
-          "clause_path": [
-            "41.2.1"
-          ],
-          "text": "The Gross Floor Area of any Retail Store and Office that is accessory to an industrial activity shall not exceed 49% of the entire use, and this area shall be separated from the industrial activity by a solid partition.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 116,
-            "pdf_page_end": 116,
-            "bylaw_page_start": 116,
-            "bylaw_page_end": 116
-          }
-        },
-        {
-          "provision_label_raw": "41.2.2",
-          "clause_path": [
-            "41.2.2"
-          ],
-          "text": "Outdoor Storage of goods or materials shall be permitted only in accordance with the General Provisions for outdoor Commercial or Industrial Uses.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 116,
-            "pdf_page_end": 116,
-            "bylaw_page_start": 116,
-            "bylaw_page_end": 116
-          }
-        },
-        {
-          "provision_label_raw": "41.2.3",
-          "clause_path": [
-            "41.2.3"
-          ],
-          "text": "Development in the Airport (A) Zone may be subject to additional regulations of the Charlottetown Airport Zoning Regulations (SOR/92-649) under federal authority of the Aeronautics Act, R.S.C., 1985, c. A-2 and all amendments thereto.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 116,
-            "pdf_page_end": 116,
-            "bylaw_page_start": 116,
-            "bylaw_page_end": 116
-          }
-        }
-      ],
-      "table_column_headings_raw": [
-        "Interior Lot Corner Lot"
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [],
-  "content_blocks": [],
-  "open_issues": [
-    {
-      "issue_type": "table_parsing_review",
-      "description": "Section 'REGULATIONS FOR PERMITTED USES' contains table-derived provisions extracted from PDF text; verify column alignment against the source PDF before normalization."
-    },
-    {
-      "issue_type": "source_revision_review",
-      "description": "Source PDF cover identifies rev 049 updated March 9, 2026, but this zone page header may display rev 048 updated October 24, 2025; verify source revision during QA."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "41",
+    "zone_title_raw": "AIRPORT ZONE (A)",
+    "citations": {
       "pdf_page_start": 116,
       "pdf_page_end": 116,
       "bylaw_page_start": 116,
       "bylaw_page_end": 116
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-a",
+        "source_unit_type": "zone",
+        "label_raw": "41",
+        "title_raw": "AIRPORT ZONE (A)",
+        "text_raw": "Uses permitted in the Business Park Industrial (M-3) Zone, subject to the Regulations for Permitted Uses for the M-3 Zone;\nAirport;\nAgricultural and Resource Land Uses;\nBulk Fuel Station;\nForestry Related;\nGovernment Offices;\nHeavy Equipment Repair; and\nManufacturing, Heavy.",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 116,
+          "pdf_page_end": 116,
+          "bylaw_page_start": 116,
+          "bylaw_page_end": 116
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-a-section-41-1",
+        "section_label_raw": "41.1",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-a-clause-41-1-1",
+            "clause_label_raw": "41.1.1",
+            "clause_text_raw": "Uses permitted in the Business Park Industrial (M-3) Zone, subject to the Regulations for Permitted Uses for the M-3 Zone;",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 116,
+              "pdf_page_end": 116,
+              "bylaw_page_start": 116,
+              "bylaw_page_end": 116
+            }
+          },
+          {
+            "clause_id": "zone-a-clause-41-1-2",
+            "clause_label_raw": "41.1.2",
+            "clause_text_raw": "Airport;",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 116,
+              "pdf_page_end": 116,
+              "bylaw_page_start": 116,
+              "bylaw_page_end": 116
+            }
+          },
+          {
+            "clause_id": "zone-a-clause-41-1-3",
+            "clause_label_raw": "41.1.3",
+            "clause_text_raw": "Agricultural and Resource Land Uses;",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 116,
+              "pdf_page_end": 116,
+              "bylaw_page_start": 116,
+              "bylaw_page_end": 116
+            }
+          },
+          {
+            "clause_id": "zone-a-clause-41-1-4",
+            "clause_label_raw": "41.1.4",
+            "clause_text_raw": "Bulk Fuel Station;",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 116,
+              "pdf_page_end": 116,
+              "bylaw_page_start": 116,
+              "bylaw_page_end": 116
+            }
+          },
+          {
+            "clause_id": "zone-a-clause-41-1-5",
+            "clause_label_raw": "41.1.5",
+            "clause_text_raw": "Forestry Related;",
+            "parent_clause_id": null,
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 116,
+              "pdf_page_end": 116,
+              "bylaw_page_start": 116,
+              "bylaw_page_end": 116
+            }
+          },
+          {
+            "clause_id": "zone-a-clause-41-1-6",
+            "clause_label_raw": "41.1.6",
+            "clause_text_raw": "Government Offices;",
+            "parent_clause_id": null,
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 116,
+              "pdf_page_end": 116,
+              "bylaw_page_start": 116,
+              "bylaw_page_end": 116
+            }
+          },
+          {
+            "clause_id": "zone-a-clause-41-1-7",
+            "clause_label_raw": "41.1.7",
+            "clause_text_raw": "Heavy Equipment Repair; and",
+            "parent_clause_id": null,
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 116,
+              "pdf_page_end": 116,
+              "bylaw_page_start": 116,
+              "bylaw_page_end": 116
+            }
+          },
+          {
+            "clause_id": "zone-a-clause-41-1-8",
+            "clause_label_raw": "41.1.8",
+            "clause_text_raw": "Manufacturing, Heavy.",
+            "parent_clause_id": null,
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 116,
+              "pdf_page_end": 116,
+              "bylaw_page_start": 116,
+              "bylaw_page_end": 116
+            }
+          }
+        ],
+        "tables_raw": [],
+        "citations": {
+          "pdf_page_start": 116,
+          "pdf_page_end": 116,
+          "bylaw_page_start": 116,
+          "bylaw_page_end": 116
+        }
+      },
+      {
+        "section_id": "zone-a-section-41-2",
+        "section_label_raw": "41.2",
+        "section_title_raw": "REGULATIONS FOR PERMITTED USES",
+        "source_order": 2,
+        "clauses_raw": [],
+        "tables_raw": [
+          {
+            "table_id": "zone-a-table-41-2",
+            "table_title_raw": "REGULATIONS FOR PERMITTED USES",
+            "source_order": 1,
+            "columns_raw": [
+              {
+                "column_id": "row_number",
+                "column_label_raw": "",
+                "source_order": 1
+              },
+              {
+                "column_id": "requirement",
+                "column_label_raw": "",
+                "source_order": 2
+              },
+              {
+                "column_id": "interior_lot",
+                "column_label_raw": "Interior Lot",
+                "source_order": 3
+              },
+              {
+                "column_id": "corner_lot",
+                "column_label_raw": "Corner Lot",
+                "source_order": 4
+              }
+            ],
+            "rows_raw": [
+              {
+                "row_id": "zone-a-table-41-2-row-1",
+                "source_order": 1,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-a-table-41-2-row-1-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "1"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-1-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Area (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-1-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "600 sq. m (6,458.3 sq ft)"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-1-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "700 sq. m (7,534.7 sq ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-a-table-41-2-row-2",
+                "source_order": 2,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-a-table-41-2-row-2-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "2"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-2-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Lot Frontage (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-2-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "20 m (65.6 ft)"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-2-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "20 m (65.6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-a-table-41-2-row-3",
+                "source_order": 3,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-a-table-41-2-row-3-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "3"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-3-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Front Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-3-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "7.5 m (24.6 ft)"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-3-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "7.5 m (24.6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-a-table-41-2-row-4",
+                "source_order": 4,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-a-table-41-2-row-4-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "4"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-4-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Rear Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-4-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "10 m (32.8 ft)"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-4-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "10 m (32.8 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-a-table-41-2-row-5",
+                "source_order": 5,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-a-table-41-2-row-5-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "5"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-5-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Side Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-5-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "3.0 m (9.8 ft)"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-5-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "3.0 m (9.8 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-a-table-41-2-row-6",
+                "source_order": 6,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-a-table-41-2-row-6-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "6"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-6-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Flankage Yard (Minimum)"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-6-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": ""
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-6-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "7.5 m (24.6 ft)"
+                  }
+                ]
+              },
+              {
+                "row_id": "zone-a-table-41-2-row-7",
+                "source_order": 7,
+                "cells_raw": [
+                  {
+                    "cell_id": "zone-a-table-41-2-row-7-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": "7"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-7-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": "Height (Maximum)"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-7-interior_lot",
+                    "column_id": "interior_lot",
+                    "cell_text_raw": "12.0 m (39.4 ft)"
+                  },
+                  {
+                    "cell_id": "zone-a-table-41-2-row-7-corner_lot",
+                    "column_id": "corner_lot",
+                    "cell_text_raw": "12.0 m (39.4 ft)"
+                  }
+                ]
+              }
+            ],
+            "citations": {
+              "pdf_page_start": 116,
+              "pdf_page_end": 116,
+              "bylaw_page_start": 116,
+              "bylaw_page_end": 116
+            }
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 116,
+          "pdf_page_end": 116,
+          "bylaw_page_start": 116,
+          "bylaw_page_end": 116
+        }
+      }
+    ],
+    "tables_raw": [
+      {
+        "table_id": "zone-a-table-41-2",
+        "section_id": "zone-a-section-41-2"
+      }
+    ],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-a-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 116,
+          "pdf_page_end": 116,
+          "bylaw_page_start": 116,
+          "bylaw_page_end": 116
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-a-clause-41-1-1",
+        "section_id": "zone-a-section-41-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-a-clause-41-1-2",
+        "section_id": "zone-a-section-41-1",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-a-clause-41-1-3",
+        "section_id": "zone-a-section-41-1",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-a-clause-41-1-4",
+        "section_id": "zone-a-section-41-1",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-a-clause-41-1-5",
+        "section_id": "zone-a-section-41-1",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-a-clause-41-1-6",
+        "section_id": "zone-a-section-41-1",
+        "source_order": 6
+      },
+      {
+        "clause_id": "zone-a-clause-41-1-7",
+        "section_id": "zone-a-section-41-1",
+        "source_order": 7
+      },
+      {
+        "clause_id": "zone-a-clause-41-1-8",
+        "section_id": "zone-a-section-41-1",
+        "source_order": 8
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-a-term-term-uses_permitted_in_the_business_park_industrial_m_3_zone_subject_to_the_regulations_for_permitted_uses_for_the_m_3_zone",
+        "term_raw": "Uses permitted in the Business Park Industrial (M-3) Zone, subject to the Regulations for Permitted Uses for the M-3 Zone",
+        "term_normalized": "uses_permitted_in_the_business_park_industrial_m_3_zone_subject_to_the_regulations_for_permitted_uses_for_the_m_3_zone",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-a-clause-41-1-1"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-a-term-term-airport",
+        "term_raw": "Airport",
+        "term_normalized": "airport",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-a-clause-41-1-2"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-a-term-term-agricultural_and_resource_land_uses",
+        "term_raw": "Agricultural and Resource Land Uses",
+        "term_normalized": "agricultural_and_resource_land_uses",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-a-clause-41-1-3"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-a-term-term-bulk_fuel_station",
+        "term_raw": "Bulk Fuel Station",
+        "term_normalized": "bulk_fuel_station",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-a-clause-41-1-4"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-a-term-term-forestry_related",
+        "term_raw": "Forestry Related",
+        "term_normalized": "forestry_related",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-a-clause-41-1-5"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-a-term-term-government_offices",
+        "term_raw": "Government Offices",
+        "term_normalized": "government_offices",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-a-clause-41-1-6"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-a-term-term-heavy_equipment_repair",
+        "term_raw": "Heavy Equipment Repair",
+        "term_normalized": "heavy_equipment_repair",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-a-clause-41-1-7"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-a-term-term-manufacturing_heavy",
+        "term_raw": "Manufacturing, Heavy",
+        "term_normalized": "manufacturing_heavy",
+        "term_category": "unknown",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-a-clause-41-1-8"
+          }
+        ],
+        "confidence": "needs_review"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-a-use-uses-permitted-in-the-business-park-industrial-m-3-zone-subject-to-the-regulations-for-permitted-uses-for-the-m-3-zone-1",
+        "use_name_raw": "Uses permitted in the Business Park Industrial (M-3) Zone, subject to the Regulations for Permitted Uses for the M-3 Zone",
+        "use_term_id": "zone-a-term-term-uses_permitted_in_the_business_park_industrial_m_3_zone_subject_to_the_regulations_for_permitted_uses_for_the_m_3_zone",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-a-clause-41-1-1",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-a-use-airport-2",
+        "use_name_raw": "Airport",
+        "use_term_id": "zone-a-term-term-airport",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-a-clause-41-1-2",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-a-use-agricultural-and-resource-land-uses-3",
+        "use_name_raw": "Agricultural and Resource Land Uses",
+        "use_term_id": "zone-a-term-term-agricultural_and_resource_land_uses",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-a-clause-41-1-3",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-a-use-bulk-fuel-station-4",
+        "use_name_raw": "Bulk Fuel Station",
+        "use_term_id": "zone-a-term-term-bulk_fuel_station",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-a-clause-41-1-4",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-a-use-forestry-related-5",
+        "use_name_raw": "Forestry Related",
+        "use_term_id": "zone-a-term-term-forestry_related",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-a-clause-41-1-5",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-a-use-government-offices-6",
+        "use_name_raw": "Government Offices",
+        "use_term_id": "zone-a-term-term-government_offices",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-a-clause-41-1-6",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-a-use-heavy-equipment-repair-7",
+        "use_name_raw": "Heavy Equipment Repair",
+        "use_term_id": "zone-a-term-term-heavy_equipment_repair",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-a-clause-41-1-7",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-a-use-manufacturing-heavy-8",
+        "use_name_raw": "Manufacturing, Heavy",
+        "use_term_id": "zone-a-term-term-manufacturing_heavy",
+        "use_status": "permitted",
+        "source_clause_ref": "zone-a-clause-41-1-8",
+        "confidence": "needs_review"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-a-num-zone-a-table-41-2-row-1-interior-lot-1",
+        "value_raw": "600 sq. m (6,458.3 sq ft)",
+        "value": 600,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "6,458.3 sq ft",
+            "value": 6458.3,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-a-table-41-2-row-1-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-a-num-zone-a-table-41-2-row-1-corner-lot-1",
+        "value_raw": "700 sq. m (7,534.7 sq ft)",
+        "value": 700,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "7,534.7 sq ft",
+            "value": 7534.7,
+            "unit": "sq_ft",
+            "measure_type": "area"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-a-table-41-2-row-1-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-a-num-zone-a-table-41-2-row-2-interior-lot-1",
+        "value_raw": "20 m (65.6 ft)",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "65.6 ft",
+            "value": 65.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-a-table-41-2-row-2-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-a-num-zone-a-table-41-2-row-2-corner-lot-1",
+        "value_raw": "20 m (65.6 ft)",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "65.6 ft",
+            "value": 65.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-a-table-41-2-row-2-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-a-num-zone-a-table-41-2-row-3-interior-lot-1",
+        "value_raw": "7.5 m (24.6 ft)",
+        "value": 7.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.6 ft",
+            "value": 24.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-a-table-41-2-row-3-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-a-num-zone-a-table-41-2-row-3-corner-lot-1",
+        "value_raw": "7.5 m (24.6 ft)",
+        "value": 7.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.6 ft",
+            "value": 24.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-a-table-41-2-row-3-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-a-num-zone-a-table-41-2-row-4-interior-lot-1",
+        "value_raw": "10 m (32.8 ft)",
+        "value": 10,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "32.8 ft",
+            "value": 32.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-a-table-41-2-row-4-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-a-num-zone-a-table-41-2-row-4-corner-lot-1",
+        "value_raw": "10 m (32.8 ft)",
+        "value": 10,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "32.8 ft",
+            "value": 32.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-a-table-41-2-row-4-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-a-num-zone-a-table-41-2-row-5-interior-lot-1",
+        "value_raw": "3.0 m (9.8 ft)",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "9.8 ft",
+            "value": 9.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-a-table-41-2-row-5-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-a-num-zone-a-table-41-2-row-5-corner-lot-1",
+        "value_raw": "3.0 m (9.8 ft)",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "9.8 ft",
+            "value": 9.8,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-a-table-41-2-row-5-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-a-num-zone-a-table-41-2-row-6-corner-lot-1",
+        "value_raw": "7.5 m (24.6 ft)",
+        "value": 7.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [
+          {
+            "value_raw": "24.6 ft",
+            "value": 24.6,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-a-table-41-2-row-6-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-a-num-zone-a-table-41-2-row-7-interior-lot-1",
+        "value_raw": "12.0 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-a-table-41-2-row-7-interior_lot"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-a-num-zone-a-table-41-2-row-7-corner-lot-1",
+        "value_raw": "12.0 m (39.4 ft)",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [
+          {
+            "value_raw": "39.4 ft",
+            "value": 39.4,
+            "unit": "ft",
+            "measure_type": "height"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-a-table-41-2-row-7-corner_lot"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-a-req-zone-a-table-41-2-row-1-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Interior Lot 600 sq. m (6,458.3 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-a-num-zone-a-table-41-2-row-1-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-a-table-41-2-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-a-req-zone-a-table-41-2-row-1-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area (Minimum)",
+        "requirement_text_raw": "Lot Area (Minimum) Corner Lot 700 sq. m (7,534.7 sq ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-a-num-zone-a-table-41-2-row-1-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-a-table-41-2-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-a-req-zone-a-table-41-2-row-2-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Interior Lot 20 m (65.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-a-num-zone-a-table-41-2-row-2-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-a-table-41-2-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-a-req-zone-a-table-41-2-row-2-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "Lot Frontage (Minimum)",
+        "requirement_text_raw": "Lot Frontage (Minimum) Corner Lot 20 m (65.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-a-num-zone-a-table-41-2-row-2-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-a-table-41-2-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-a-req-zone-a-table-41-2-row-3-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Interior Lot 7.5 m (24.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-a-num-zone-a-table-41-2-row-3-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-a-table-41-2-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-a-req-zone-a-table-41-2-row-3-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "Front Yard (Minimum)",
+        "requirement_text_raw": "Front Yard (Minimum) Corner Lot 7.5 m (24.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-a-num-zone-a-table-41-2-row-3-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-a-table-41-2-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-a-req-zone-a-table-41-2-row-4-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Interior Lot 10 m (32.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-a-num-zone-a-table-41-2-row-4-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-a-table-41-2-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-a-req-zone-a-table-41-2-row-4-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "Rear Yard (Minimum)",
+        "requirement_text_raw": "Rear Yard (Minimum) Corner Lot 10 m (32.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-a-num-zone-a-table-41-2-row-4-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-a-table-41-2-row-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-a-req-zone-a-table-41-2-row-5-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Interior Lot 3.0 m (9.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-a-num-zone-a-table-41-2-row-5-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-a-table-41-2-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-a-req-zone-a-table-41-2-row-5-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "Side Yard (Minimum)",
+        "requirement_text_raw": "Side Yard (Minimum) Corner Lot 3.0 m (9.8 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-a-num-zone-a-table-41-2-row-5-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-a-table-41-2-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-a-req-zone-a-table-41-2-row-6-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "flankage_yard",
+        "requirement_label_raw": "Flankage Yard (Minimum)",
+        "requirement_text_raw": "Flankage Yard (Minimum) Corner Lot 7.5 m (24.6 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-a-num-zone-a-table-41-2-row-6-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-a-table-41-2-row-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-a-req-zone-a-table-41-2-row-7-interior-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Interior Lot 12.0 m (39.4 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "interior_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-a-num-zone-a-table-41-2-row-7-interior-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-a-table-41-2-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-a-req-zone-a-table-41-2-row-7-corner-lot",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (Maximum)",
+        "requirement_text_raw": "Height (Maximum) Corner Lot 12.0 m (39.4 ft)",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "corner_lot"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-a-num-zone-a-table-41-2-row-7-corner-lot-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-a-table-41-2-row-7"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-a-regulation-group-zone",
+        "group_label_raw": "41",
+        "group_title_raw": "AIRPORT ZONE (A)",
+        "regulated_use_terms": [
+          "zone-a-term-term-uses_permitted_in_the_business_park_industrial_m_3_zone_subject_to_the_regulations_for_permitted_uses_for_the_m_3_zone",
+          "zone-a-term-term-airport",
+          "zone-a-term-term-agricultural_and_resource_land_uses",
+          "zone-a-term-term-bulk_fuel_station",
+          "zone-a-term-term-forestry_related",
+          "zone-a-term-term-government_offices",
+          "zone-a-term-term-heavy_equipment_repair",
+          "zone-a-term-term-manufacturing_heavy"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "A"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-a-req-zone-a-table-41-2-row-1-interior-lot",
+          "zone-a-req-zone-a-table-41-2-row-1-corner-lot",
+          "zone-a-req-zone-a-table-41-2-row-2-interior-lot",
+          "zone-a-req-zone-a-table-41-2-row-2-corner-lot",
+          "zone-a-req-zone-a-table-41-2-row-3-interior-lot",
+          "zone-a-req-zone-a-table-41-2-row-3-corner-lot",
+          "zone-a-req-zone-a-table-41-2-row-4-interior-lot",
+          "zone-a-req-zone-a-table-41-2-row-4-corner-lot",
+          "zone-a-req-zone-a-table-41-2-row-5-interior-lot",
+          "zone-a-req-zone-a-table-41-2-row-5-corner-lot",
+          "zone-a-req-zone-a-table-41-2-row-6-corner-lot",
+          "zone-a-req-zone-a-table-41-2-row-7-interior-lot",
+          "zone-a-req-zone-a-table-41-2-row-7-corner-lot"
+        ],
+        "source_section_ref": "zone-a-section-41-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-a-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "A",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-a-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-a-flag-unmatched-term-uses-permitted-in-the-business-park-industrial-m-3-zone-subject-to-the-regulations-for-permitted-uses-for-the-m-3-zone",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Uses permitted in the Business Park Industrial (M-3) Zone, subject to the Regulations for Permitted Uses for the M-3 Zone",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-a-clause-41-1-1"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-a-flag-unmatched-term-airport",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Airport",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-a-clause-41-1-2"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-a-flag-unmatched-term-agricultural-and-resource-land-uses",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Agricultural and Resource Land Uses",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-a-clause-41-1-3"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-a-flag-unmatched-term-bulk-fuel-station",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Bulk Fuel Station",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-a-clause-41-1-4"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-a-flag-unmatched-term-forestry-related",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Forestry Related",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-a-clause-41-1-5"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-a-flag-unmatched-term-government-offices",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Government Offices",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-a-clause-41-1-6"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-a-flag-unmatched-term-heavy-equipment-repair",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Heavy Equipment Repair",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-a-clause-41-1-7"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-a-flag-unmatched-term-manufacturing-heavy",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Manufacturing, Heavy",
+      "source_refs": [
+        {
+          "source_ref_type": "clause",
+          "source_ref_id": "zone-a-clause-41-1-8"
+        }
+      ]
+    }
+  ]
 }
