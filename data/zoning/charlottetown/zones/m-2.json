@@ -934,17 +934,19 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-m-2-term-term-fire_station",
+        "term_id": "zone-m-2-term-use-fire_station",
         "term_raw": "Fire Station",
         "term_normalized": "fire_station",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-m-2-clause-39-1-9"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "fire_station"
       },
       {
         "term_id": "zone-m-2-term-term-forestry_related",
@@ -1025,17 +1027,19 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-m-2-term-term-office",
+        "term_id": "zone-m-2-term-use-office",
         "term_raw": "Office",
         "term_normalized": "office",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-m-2-clause-39-1-16"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "office"
       },
       {
         "term_id": "zone-m-2-term-term-outdoor_storage",
@@ -1051,17 +1055,19 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-m-2-term-term-police_station",
+        "term_id": "zone-m-2-term-use-police_station",
         "term_raw": "Police Station",
         "term_normalized": "police_station",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-m-2-clause-39-1-18"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "police_station"
       },
       {
         "term_id": "zone-m-2-term-term-public_utility_service_operations",
@@ -1090,17 +1096,19 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-m-2-term-term-retail_store",
+        "term_id": "zone-m-2-term-use-retail_store",
         "term_raw": "Retail Store",
         "term_normalized": "retail_store",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-m-2-clause-39-1-21"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "retail_store"
       },
       {
         "term_id": "zone-m-2-term-term-retail_store_with_connected_retail_warehouse_light_manufacturing_or_assembly_facility",
@@ -1142,17 +1150,19 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-m-2-term-term-service_repair_establishment",
+        "term_id": "zone-m-2-term-use-service_repair_establishment",
         "term_raw": "Service Repair Establishment",
         "term_normalized": "service_repair_establishment",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-m-2-clause-39-1-25"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "service_repair_establishment"
       },
       {
         "term_id": "zone-m-2-term-term-storage_facility",
@@ -1275,10 +1285,10 @@
       {
         "use_id": "zone-m-2-use-fire-station-9",
         "use_name_raw": "Fire Station",
-        "use_term_id": "zone-m-2-term-term-fire_station",
+        "use_term_id": "zone-m-2-term-use-fire_station",
         "use_status": "permitted",
         "source_clause_ref": "zone-m-2-clause-39-1-9",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-m-2-use-forestry-related-10",
@@ -1331,10 +1341,10 @@
       {
         "use_id": "zone-m-2-use-office-16",
         "use_name_raw": "Office",
-        "use_term_id": "zone-m-2-term-term-office",
+        "use_term_id": "zone-m-2-term-use-office",
         "use_status": "permitted",
         "source_clause_ref": "zone-m-2-clause-39-1-16",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-m-2-use-outdoor-storage-17",
@@ -1347,10 +1357,10 @@
       {
         "use_id": "zone-m-2-use-police-station-18",
         "use_name_raw": "Police Station",
-        "use_term_id": "zone-m-2-term-term-police_station",
+        "use_term_id": "zone-m-2-term-use-police_station",
         "use_status": "permitted",
         "source_clause_ref": "zone-m-2-clause-39-1-18",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-m-2-use-public-utility-service-operations-19",
@@ -1371,10 +1381,10 @@
       {
         "use_id": "zone-m-2-use-retail-store-21",
         "use_name_raw": "Retail Store",
-        "use_term_id": "zone-m-2-term-term-retail_store",
+        "use_term_id": "zone-m-2-term-use-retail_store",
         "use_status": "permitted",
         "source_clause_ref": "zone-m-2-clause-39-1-21",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-m-2-use-retail-store-with-connected-retail-warehouse-light-manufacturing-or-assembly-facility-22",
@@ -1403,10 +1413,10 @@
       {
         "use_id": "zone-m-2-use-service-repair-establishment-25",
         "use_name_raw": "Service Repair Establishment",
-        "use_term_id": "zone-m-2-term-term-service_repair_establishment",
+        "use_term_id": "zone-m-2-term-use-service_repair_establishment",
         "use_status": "permitted",
         "source_clause_ref": "zone-m-2-clause-39-1-25",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-m-2-use-storage-facility-26",
@@ -2070,23 +2080,23 @@
           "zone-m-2-term-term-equipment_sales_rental_service",
           "zone-m-2-term-term-extractive_facilities",
           "zone-m-2-term-term-feedmill",
-          "zone-m-2-term-term-fire_station",
+          "zone-m-2-term-use-fire_station",
           "zone-m-2-term-term-forestry_related",
           "zone-m-2-term-term-heavy_equipment_repair",
           "zone-m-2-term-term-kennel",
           "zone-m-2-term-term-manufacturing_heavy",
           "zone-m-2-term-term-manufacturing_light",
           "zone-m-2-term-term-marijuana_production_facility",
-          "zone-m-2-term-term-office",
+          "zone-m-2-term-use-office",
           "zone-m-2-term-term-outdoor_storage",
-          "zone-m-2-term-term-police_station",
+          "zone-m-2-term-use-police_station",
           "zone-m-2-term-term-public_utility_service_operations",
           "zone-m-2-term-term-recycling_depot",
-          "zone-m-2-term-term-retail_store",
+          "zone-m-2-term-use-retail_store",
           "zone-m-2-term-term-retail_store_with_connected_retail_warehouse_light_manufacturing_or_assembly_facility",
           "zone-m-2-term-term-retail_warehouse",
           "zone-m-2-term-term-salvage_or_waste_disposal_facility",
-          "zone-m-2-term-term-service_repair_establishment",
+          "zone-m-2-term-use-service_repair_establishment",
           "zone-m-2-term-term-storage_facility",
           "zone-m-2-term-term-transport_terminal",
           "zone-m-2-term-term-transportation_services",
@@ -2247,19 +2257,6 @@
       ]
     },
     {
-      "review_flag_id": "zone-m-2-flag-unmatched-term-fire-station",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Fire Station",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-m-2-clause-39-1-9"
-        }
-      ]
-    },
-    {
       "review_flag_id": "zone-m-2-flag-unmatched-term-forestry-related",
       "severity": "warning",
       "blocking": false,
@@ -2338,19 +2335,6 @@
       ]
     },
     {
-      "review_flag_id": "zone-m-2-flag-unmatched-term-office",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Office",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-m-2-clause-39-1-16"
-        }
-      ]
-    },
-    {
       "review_flag_id": "zone-m-2-flag-unmatched-term-outdoor-storage",
       "severity": "warning",
       "blocking": false,
@@ -2360,19 +2344,6 @@
         {
           "source_ref_type": "clause",
           "source_ref_id": "zone-m-2-clause-39-1-17"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-m-2-flag-unmatched-term-police-station",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Police Station",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-m-2-clause-39-1-18"
         }
       ]
     },
@@ -2399,19 +2370,6 @@
         {
           "source_ref_type": "clause",
           "source_ref_id": "zone-m-2-clause-39-1-20"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-m-2-flag-unmatched-term-retail-store",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Retail Store",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-m-2-clause-39-1-21"
         }
       ]
     },
@@ -2451,19 +2409,6 @@
         {
           "source_ref_type": "clause",
           "source_ref_id": "zone-m-2-clause-39-1-24"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-m-2-flag-unmatched-term-service-repair-establishment",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Service Repair Establishment",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-m-2-clause-39-1-25"
         }
       ]
     },

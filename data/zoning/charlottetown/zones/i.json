@@ -1289,17 +1289,19 @@
         "code": "community_building"
       },
       {
-        "term_id": "zone-i-term-term-community_care_facility",
+        "term_id": "zone-i-term-use-community_care_facility",
         "term_raw": "Community Care Facility",
         "term_normalized": "community_care_facility",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-i-clause-22-1-5"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "community_care_facility"
       },
       {
         "term_id": "zone-i-term-term-community_institutional",
@@ -1367,17 +1369,19 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-i-term-term-fire_station",
+        "term_id": "zone-i-term-use-fire_station",
         "term_raw": "Fire Station",
         "term_normalized": "fire_station",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-i-clause-22-1-11"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "fire_station"
       },
       {
         "term_id": "zone-i-term-term-funeral_establishment",
@@ -1445,30 +1449,34 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-i-term-term-medical_health_and_dental_office",
+        "term_id": "zone-i-term-use-medical_health_and_dental_office",
         "term_raw": "Medical, Health and Dental Office",
         "term_normalized": "medical_health_and_dental_office",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-i-clause-22-1-17"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "medical_health_and_dental_office"
       },
       {
-        "term_id": "zone-i-term-term-nursing_home",
+        "term_id": "zone-i-term-use-nursing_home",
         "term_raw": "Nursing Home",
         "term_normalized": "nursing_home",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-i-clause-22-1-18"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "nursing_home"
       },
       {
         "term_id": "zone-i-term-term-place_of_worship",
@@ -1484,17 +1492,19 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-i-term-term-police_station",
+        "term_id": "zone-i-term-use-police_station",
         "term_raw": "Police Station",
         "term_normalized": "police_station",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-i-clause-22-1-20"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "police_station"
       },
       {
         "term_id": "zone-i-term-term-public_utility_service_operation",
@@ -1572,10 +1582,10 @@
       {
         "use_id": "zone-i-use-community-care-facility-5",
         "use_name_raw": "Community Care Facility",
-        "use_term_id": "zone-i-term-term-community_care_facility",
+        "use_term_id": "zone-i-term-use-community_care_facility",
         "use_status": "permitted",
         "source_clause_ref": "zone-i-clause-22-1-5",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-i-use-community-institutional-6",
@@ -1620,10 +1630,10 @@
       {
         "use_id": "zone-i-use-fire-station-11",
         "use_name_raw": "Fire Station",
-        "use_term_id": "zone-i-term-term-fire_station",
+        "use_term_id": "zone-i-term-use-fire_station",
         "use_status": "permitted",
         "source_clause_ref": "zone-i-clause-22-1-11",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-i-use-funeral-establishment-12",
@@ -1668,18 +1678,18 @@
       {
         "use_id": "zone-i-use-medical-health-and-dental-office-17",
         "use_name_raw": "Medical, Health and Dental Office",
-        "use_term_id": "zone-i-term-term-medical_health_and_dental_office",
+        "use_term_id": "zone-i-term-use-medical_health_and_dental_office",
         "use_status": "permitted",
         "source_clause_ref": "zone-i-clause-22-1-17",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-i-use-nursing-home-18",
         "use_name_raw": "Nursing Home",
-        "use_term_id": "zone-i-term-term-nursing_home",
+        "use_term_id": "zone-i-term-use-nursing_home",
         "use_status": "permitted",
         "source_clause_ref": "zone-i-clause-22-1-18",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-i-use-place-of-worship-19",
@@ -1692,10 +1702,10 @@
       {
         "use_id": "zone-i-use-police-station-20",
         "use_name_raw": "Police Station",
-        "use_term_id": "zone-i-term-term-police_station",
+        "use_term_id": "zone-i-term-use-police_station",
         "use_status": "permitted",
         "source_clause_ref": "zone-i-clause-22-1-20",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-i-use-public-utility-service-operation-21",
@@ -3683,22 +3693,22 @@
           "zone-i-term-term-club",
           "zone-i-term-term-commercial_daycare_centre",
           "zone-i-term-use-community_building",
-          "zone-i-term-term-community_care_facility",
+          "zone-i-term-use-community_care_facility",
           "zone-i-term-term-community_institutional",
           "zone-i-term-term-cultural_establishment",
           "zone-i-term-term-dormitory",
           "zone-i-term-term-educational_institution_private",
           "zone-i-term-term-educational_institution_public",
-          "zone-i-term-term-fire_station",
+          "zone-i-term-use-fire_station",
           "zone-i-term-term-funeral_establishment",
           "zone-i-term-term-government_office",
           "zone-i-term-term-hospital",
           "zone-i-term-term-library",
           "zone-i-term-term-lodging_house",
-          "zone-i-term-term-medical_health_and_dental_office",
-          "zone-i-term-term-nursing_home",
+          "zone-i-term-use-medical_health_and_dental_office",
+          "zone-i-term-use-nursing_home",
           "zone-i-term-term-place_of_worship",
-          "zone-i-term-term-police_station",
+          "zone-i-term-use-police_station",
           "zone-i-term-term-public_utility_service_operation",
           "zone-i-term-term-recreation_or_fitness_center_indoors",
           "zone-i-term-term-transitional_housing_facility"
@@ -3821,19 +3831,6 @@
       ]
     },
     {
-      "review_flag_id": "zone-i-flag-unmatched-term-community-care-facility",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Community Care Facility",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-i-clause-22-1-5"
-        }
-      ]
-    },
-    {
       "review_flag_id": "zone-i-flag-unmatched-term-community-institutional",
       "severity": "warning",
       "blocking": false,
@@ -3895,19 +3892,6 @@
         {
           "source_ref_type": "clause",
           "source_ref_id": "zone-i-clause-22-1-10"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-i-flag-unmatched-term-fire-station",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Fire Station",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-i-clause-22-1-11"
         }
       ]
     },
@@ -3977,32 +3961,6 @@
       ]
     },
     {
-      "review_flag_id": "zone-i-flag-unmatched-term-medical-health-and-dental-office",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Medical, Health and Dental Office",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-i-clause-22-1-17"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-i-flag-unmatched-term-nursing-home",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Nursing Home",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-i-clause-22-1-18"
-        }
-      ]
-    },
-    {
       "review_flag_id": "zone-i-flag-unmatched-term-place-of-worship",
       "severity": "warning",
       "blocking": false,
@@ -4012,19 +3970,6 @@
         {
           "source_ref_type": "clause",
           "source_ref_id": "zone-i-clause-22-1-19"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-i-flag-unmatched-term-police-station",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Police Station",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-i-clause-22-1-20"
         }
       ]
     },

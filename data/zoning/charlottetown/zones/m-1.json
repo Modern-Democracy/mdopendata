@@ -789,17 +789,19 @@
         "code": "community_building"
       },
       {
-        "term_id": "zone-m-1-term-term-educational_institution",
+        "term_id": "zone-m-1-term-use-educational_institution",
         "term_raw": "Educational Institution",
         "term_normalized": "educational_institution",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-m-1-clause-38-1-7"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "educational_institution"
       },
       {
         "term_id": "zone-m-1-term-term-feedmill",
@@ -815,17 +817,19 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-m-1-term-term-fire_station",
+        "term_id": "zone-m-1-term-use-fire_station",
         "term_raw": "Fire Station",
         "term_normalized": "fire_station",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-m-1-clause-38-1-9"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "fire_station"
       },
       {
         "term_id": "zone-m-1-term-term-forestry_related",
@@ -906,17 +910,19 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-m-1-term-term-medical_health_and_dental_office",
+        "term_id": "zone-m-1-term-use-medical_health_and_dental_office",
         "term_raw": "Medical, Health and Dental Office",
         "term_normalized": "medical_health_and_dental_office",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-m-1-clause-38-1-16"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "medical_health_and_dental_office"
       },
       {
         "term_id": "zone-m-1-term-term-outdoor_storage",
@@ -945,17 +951,19 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-m-1-term-term-police_station",
+        "term_id": "zone-m-1-term-use-police_station",
         "term_raw": "Police Station",
         "term_normalized": "police_station",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-m-1-clause-38-1-19"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "police_station"
       },
       {
         "term_id": "zone-m-1-term-term-public_utility_service_operations",
@@ -1067,10 +1075,10 @@
       {
         "use_id": "zone-m-1-use-educational-institution-7",
         "use_name_raw": "Educational Institution",
-        "use_term_id": "zone-m-1-term-term-educational_institution",
+        "use_term_id": "zone-m-1-term-use-educational_institution",
         "use_status": "permitted",
         "source_clause_ref": "zone-m-1-clause-38-1-7",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-m-1-use-feedmill-8",
@@ -1083,10 +1091,10 @@
       {
         "use_id": "zone-m-1-use-fire-station-9",
         "use_name_raw": "Fire Station",
-        "use_term_id": "zone-m-1-term-term-fire_station",
+        "use_term_id": "zone-m-1-term-use-fire_station",
         "use_status": "permitted",
         "source_clause_ref": "zone-m-1-clause-38-1-9",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-m-1-use-forestry-related-10",
@@ -1139,10 +1147,10 @@
       {
         "use_id": "zone-m-1-use-medical-health-and-dental-office-16",
         "use_name_raw": "Medical, Health and Dental Office",
-        "use_term_id": "zone-m-1-term-term-medical_health_and_dental_office",
+        "use_term_id": "zone-m-1-term-use-medical_health_and_dental_office",
         "use_status": "permitted",
         "source_clause_ref": "zone-m-1-clause-38-1-16",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-m-1-use-outdoor-storage-17",
@@ -1163,10 +1171,10 @@
       {
         "use_id": "zone-m-1-use-police-station-19",
         "use_name_raw": "Police Station",
-        "use_term_id": "zone-m-1-term-term-police_station",
+        "use_term_id": "zone-m-1-term-use-police_station",
         "use_status": "permitted",
         "source_clause_ref": "zone-m-1-clause-38-1-19",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-m-1-use-public-utility-service-operations-20",
@@ -1827,19 +1835,19 @@
           "zone-m-1-term-term-club",
           "zone-m-1-term-term-commercial_daycare",
           "zone-m-1-term-use-community_building",
-          "zone-m-1-term-term-educational_institution",
+          "zone-m-1-term-use-educational_institution",
           "zone-m-1-term-term-feedmill",
-          "zone-m-1-term-term-fire_station",
+          "zone-m-1-term-use-fire_station",
           "zone-m-1-term-term-forestry_related",
           "zone-m-1-term-term-funeral_establishment",
           "zone-m-1-term-term-greenhouse_private_industrial",
           "zone-m-1-term-term-heavy_equipment_repair",
           "zone-m-1-term-term-kennel",
           "zone-m-1-term-term-manufacturing_light",
-          "zone-m-1-term-term-medical_health_and_dental_office",
+          "zone-m-1-term-use-medical_health_and_dental_office",
           "zone-m-1-term-term-outdoor_storage",
           "zone-m-1-term-term-place_of_worship",
-          "zone-m-1-term-term-police_station",
+          "zone-m-1-term-use-police_station",
           "zone-m-1-term-term-public_utility_service_operations",
           "zone-m-1-term-term-recreation_or_fitness_center_indoors",
           "zone-m-1-term-term-recycling_depot",
@@ -1998,19 +2006,6 @@
       ]
     },
     {
-      "review_flag_id": "zone-m-1-flag-unmatched-term-educational-institution",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Educational Institution",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-m-1-clause-38-1-7"
-        }
-      ]
-    },
-    {
       "review_flag_id": "zone-m-1-flag-unmatched-term-feedmill",
       "severity": "warning",
       "blocking": false,
@@ -2020,19 +2015,6 @@
         {
           "source_ref_type": "clause",
           "source_ref_id": "zone-m-1-clause-38-1-8"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-m-1-flag-unmatched-term-fire-station",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Fire Station",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-m-1-clause-38-1-9"
         }
       ]
     },
@@ -2115,19 +2097,6 @@
       ]
     },
     {
-      "review_flag_id": "zone-m-1-flag-unmatched-term-medical-health-and-dental-office",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Medical, Health and Dental Office",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-m-1-clause-38-1-16"
-        }
-      ]
-    },
-    {
       "review_flag_id": "zone-m-1-flag-unmatched-term-outdoor-storage",
       "severity": "warning",
       "blocking": false,
@@ -2150,19 +2119,6 @@
         {
           "source_ref_type": "clause",
           "source_ref_id": "zone-m-1-clause-38-1-18"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-m-1-flag-unmatched-term-police-station",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Police Station",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-m-1-clause-38-1-19"
         }
       ]
     },

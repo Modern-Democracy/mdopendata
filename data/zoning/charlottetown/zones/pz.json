@@ -387,17 +387,19 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-pz-term-term-retail_store",
+        "term_id": "zone-pz-term-use-retail_store",
         "term_raw": "Retail Store",
         "term_normalized": "retail_store",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-pz-clause-37-1-5"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "retail_store"
       },
       {
         "term_id": "zone-pz-term-term-transport_terminal",
@@ -488,10 +490,10 @@
       {
         "use_id": "zone-pz-use-retail-store-5",
         "use_name_raw": "Retail Store",
-        "use_term_id": "zone-pz-term-term-retail_store",
+        "use_term_id": "zone-pz-term-use-retail_store",
         "use_status": "permitted",
         "source_clause_ref": "zone-pz-clause-37-1-5",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-pz-use-transport-terminal-6",
@@ -577,7 +579,7 @@
           "zone-pz-term-term-offices",
           "zone-pz-term-term-outdoor_storage",
           "zone-pz-term-term-port_land_uses",
-          "zone-pz-term-term-retail_store",
+          "zone-pz-term-use-retail_store",
           "zone-pz-term-term-transport_terminal",
           "zone-pz-term-term-transportation_service",
           "zone-pz-term-term-events_hosting"
@@ -776,19 +778,6 @@
         {
           "source_ref_type": "clause",
           "source_ref_id": "zone-pz-clause-37-1-4"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-pz-flag-unmatched-term-retail-store",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Retail Store",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-pz-clause-37-1-5"
         }
       ]
     },

@@ -1469,17 +1469,19 @@
         "code": "community_building"
       },
       {
-        "term_id": "zone-r-3-term-term-community_care_facility",
+        "term_id": "zone-r-3-term-use-community_care_facility",
         "term_raw": "Community Care Facility",
         "term_normalized": "community_care_facility",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-r-3-clause-16-1-9-b"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "community_care_facility"
       },
       {
         "term_id": "zone-r-3-term-term-community_institutional",
@@ -1508,17 +1510,19 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-r-3-term-term-nursing_home",
+        "term_id": "zone-r-3-term-use-nursing_home",
         "term_raw": "Nursing Home",
         "term_normalized": "nursing_home",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-r-3-clause-16-1-9-e"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "nursing_home"
       },
       {
         "term_id": "zone-r-3-term-use-accessory_building",
@@ -1665,10 +1669,10 @@
       {
         "use_id": "zone-r-3-use-community-care-facility-11",
         "use_name_raw": "Community Care Facility",
-        "use_term_id": "zone-r-3-term-term-community_care_facility",
+        "use_term_id": "zone-r-3-term-use-community_care_facility",
         "use_status": "permitted",
         "source_clause_ref": "zone-r-3-clause-16-1-9-b",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-r-3-use-community-institutional-12",
@@ -1689,10 +1693,10 @@
       {
         "use_id": "zone-r-3-use-nursing-home-14",
         "use_name_raw": "Nursing Home",
-        "use_term_id": "zone-r-3-term-term-nursing_home",
+        "use_term_id": "zone-r-3-term-use-nursing_home",
         "use_status": "permitted",
         "source_clause_ref": "zone-r-3-clause-16-1-9-e",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-r-3-use-accessory-building-15",
@@ -4086,10 +4090,10 @@
           "zone-r-3-term-term-stacked_townhouse_dwelling",
           "zone-r-3-term-use-townhouse_dwelling",
           "zone-r-3-term-use-community_building",
-          "zone-r-3-term-term-community_care_facility",
+          "zone-r-3-term-use-community_care_facility",
           "zone-r-3-term-term-community_institutional",
           "zone-r-3-term-term-commercial_daycare_centre",
-          "zone-r-3-term-term-nursing_home"
+          "zone-r-3-term-use-nursing_home"
         ],
         "applicability": {
           "applies_to_zone_codes": [
@@ -4384,19 +4388,6 @@
       ]
     },
     {
-      "review_flag_id": "zone-r-3-flag-unmatched-term-community-care-facility",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Community Care Facility",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-r-3-clause-16-1-9-b"
-        }
-      ]
-    },
-    {
       "review_flag_id": "zone-r-3-flag-unmatched-term-community-institutional",
       "severity": "warning",
       "blocking": false,
@@ -4419,19 +4410,6 @@
         {
           "source_ref_type": "clause",
           "source_ref_id": "zone-r-3-clause-16-1-9-d"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-r-3-flag-unmatched-term-nursing-home",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Nursing Home",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-r-3-clause-16-1-9-e"
         }
       ]
     }

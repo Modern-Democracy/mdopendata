@@ -527,17 +527,19 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-c-1-term-term-educational_institution",
+        "term_id": "zone-c-1-term-use-educational_institution",
         "term_raw": "Educational Institution",
         "term_normalized": "educational_institution",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-c-1-clause-25-1-3"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "educational_institution"
       },
       {
         "term_id": "zone-c-1-term-term-funeral_establishment",
@@ -566,43 +568,49 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-c-1-term-term-medical_health_and_dental_office",
+        "term_id": "zone-c-1-term-use-medical_health_and_dental_office",
         "term_raw": "Medical, Health and Dental Office",
         "term_normalized": "medical_health_and_dental_office",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-c-1-clause-25-1-6"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "medical_health_and_dental_office"
       },
       {
-        "term_id": "zone-c-1-term-term-office",
+        "term_id": "zone-c-1-term-use-office",
         "term_raw": "Office",
         "term_normalized": "office",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-c-1-clause-25-1-7"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "office"
       },
       {
-        "term_id": "zone-c-1-term-term-parking_lot",
+        "term_id": "zone-c-1-term-use-parking_lot",
         "term_raw": "Parking Lot",
         "term_normalized": "parking_lot",
-        "term_category": "unknown",
+        "term_category": "parking_loading",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-c-1-clause-25-1-8"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "parking_lot"
       },
       {
         "term_id": "zone-c-1-term-term-personal_service_shop",
@@ -618,17 +626,19 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-c-1-term-term-retail_store",
+        "term_id": "zone-c-1-term-use-retail_store",
         "term_raw": "Retail Store",
         "term_normalized": "retail_store",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-c-1-clause-25-1-10"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "retail_store"
       },
       {
         "term_id": "zone-c-1-term-reference-zone-c-1-clause-25-1-1",
@@ -656,10 +666,10 @@
       {
         "use_id": "zone-c-1-use-educational-institution-3",
         "use_name_raw": "Educational Institution",
-        "use_term_id": "zone-c-1-term-term-educational_institution",
+        "use_term_id": "zone-c-1-term-use-educational_institution",
         "use_status": "permitted",
         "source_clause_ref": "zone-c-1-clause-25-1-3",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-c-1-use-funeral-establishment-4",
@@ -680,26 +690,26 @@
       {
         "use_id": "zone-c-1-use-medical-health-and-dental-office-6",
         "use_name_raw": "Medical, Health and Dental Office",
-        "use_term_id": "zone-c-1-term-term-medical_health_and_dental_office",
+        "use_term_id": "zone-c-1-term-use-medical_health_and_dental_office",
         "use_status": "permitted",
         "source_clause_ref": "zone-c-1-clause-25-1-6",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-c-1-use-office-7",
         "use_name_raw": "Office",
-        "use_term_id": "zone-c-1-term-term-office",
+        "use_term_id": "zone-c-1-term-use-office",
         "use_status": "permitted",
         "source_clause_ref": "zone-c-1-clause-25-1-7",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-c-1-use-parking-lot-8",
         "use_name_raw": "Parking Lot",
-        "use_term_id": "zone-c-1-term-term-parking_lot",
+        "use_term_id": "zone-c-1-term-use-parking_lot",
         "use_status": "permitted",
         "source_clause_ref": "zone-c-1-clause-25-1-8",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-c-1-use-personal-service-shop-9",
@@ -712,10 +722,10 @@
       {
         "use_id": "zone-c-1-use-retail-store-10",
         "use_name_raw": "Retail Store",
-        "use_term_id": "zone-c-1-term-term-retail_store",
+        "use_term_id": "zone-c-1-term-use-retail_store",
         "use_status": "permitted",
         "source_clause_ref": "zone-c-1-clause-25-1-10",
-        "confidence": "needs_review"
+        "confidence": "high"
       }
     ],
     "numeric_values": [
@@ -1434,14 +1444,14 @@
         "group_title_raw": "BUSINESS OFFICE COMMERCIAL ZONE (C-1)",
         "regulated_use_terms": [
           "zone-c-1-term-term-convenience_store",
-          "zone-c-1-term-term-educational_institution",
+          "zone-c-1-term-use-educational_institution",
           "zone-c-1-term-term-funeral_establishment",
           "zone-c-1-term-term-laundromat",
-          "zone-c-1-term-term-medical_health_and_dental_office",
-          "zone-c-1-term-term-office",
-          "zone-c-1-term-term-parking_lot",
+          "zone-c-1-term-use-medical_health_and_dental_office",
+          "zone-c-1-term-use-office",
+          "zone-c-1-term-use-parking_lot",
           "zone-c-1-term-term-personal_service_shop",
-          "zone-c-1-term-term-retail_store"
+          "zone-c-1-term-use-retail_store"
         ],
         "applicability": {
           "applies_to_zone_codes": [
@@ -1559,19 +1569,6 @@
       ]
     },
     {
-      "review_flag_id": "zone-c-1-flag-unmatched-term-educational-institution",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Educational Institution",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-c-1-clause-25-1-3"
-        }
-      ]
-    },
-    {
       "review_flag_id": "zone-c-1-flag-unmatched-term-funeral-establishment",
       "severity": "warning",
       "blocking": false,
@@ -1598,45 +1595,6 @@
       ]
     },
     {
-      "review_flag_id": "zone-c-1-flag-unmatched-term-medical-health-and-dental-office",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Medical, Health and Dental Office",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-c-1-clause-25-1-6"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-c-1-flag-unmatched-term-office",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Office",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-c-1-clause-25-1-7"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-c-1-flag-unmatched-term-parking-lot",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Parking Lot",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-c-1-clause-25-1-8"
-        }
-      ]
-    },
-    {
       "review_flag_id": "zone-c-1-flag-unmatched-term-personal-service-shop",
       "severity": "warning",
       "blocking": false,
@@ -1646,19 +1604,6 @@
         {
           "source_ref_type": "clause",
           "source_ref_id": "zone-c-1-clause-25-1-9"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-c-1-flag-unmatched-term-retail-store",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Retail Store",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-c-1-clause-25-1-10"
         }
       ]
     }

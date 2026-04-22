@@ -736,30 +736,34 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-dmun-term-term-medical_health_and_dental_office",
+        "term_id": "zone-dmun-term-use-medical_health_and_dental_office",
         "term_raw": "Medical, Health and Dental Office",
         "term_normalized": "medical_health_and_dental_office",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-dmun-clause-30-1-5"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "medical_health_and_dental_office"
       },
       {
-        "term_id": "zone-dmun-term-term-office",
+        "term_id": "zone-dmun-term-use-office",
         "term_raw": "Office",
         "term_normalized": "office",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-dmun-clause-30-1-6"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "office"
       },
       {
         "term_id": "zone-dmun-term-term-parking_structure",
@@ -788,17 +792,19 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-dmun-term-term-retail_store",
+        "term_id": "zone-dmun-term-use-retail_store",
         "term_raw": "Retail Store",
         "term_normalized": "retail_store",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-dmun-clause-30-1-9"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "retail_store"
       },
       {
         "term_id": "zone-dmun-term-reference-zone-dmun-clause-30-1-1",
@@ -847,18 +853,18 @@
       {
         "use_id": "zone-dmun-use-medical-health-and-dental-office-5",
         "use_name_raw": "Medical, Health and Dental Office",
-        "use_term_id": "zone-dmun-term-term-medical_health_and_dental_office",
+        "use_term_id": "zone-dmun-term-use-medical_health_and_dental_office",
         "use_status": "permitted",
         "source_clause_ref": "zone-dmun-clause-30-1-5",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-dmun-use-office-6",
         "use_name_raw": "Office",
-        "use_term_id": "zone-dmun-term-term-office",
+        "use_term_id": "zone-dmun-term-use-office",
         "use_status": "permitted",
         "source_clause_ref": "zone-dmun-clause-30-1-6",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-dmun-use-parking-structure-7",
@@ -879,10 +885,10 @@
       {
         "use_id": "zone-dmun-use-retail-store-9",
         "use_name_raw": "Retail Store",
-        "use_term_id": "zone-dmun-term-term-retail_store",
+        "use_term_id": "zone-dmun-term-use-retail_store",
         "use_status": "permitted",
         "source_clause_ref": "zone-dmun-clause-30-1-9",
-        "confidence": "needs_review"
+        "confidence": "high"
       }
     ],
     "numeric_values": [
@@ -1567,11 +1573,11 @@
         "regulated_use_terms": [
           "zone-dmun-term-term-eating_and_drinking_establishment",
           "zone-dmun-term-term-funeral_establishment",
-          "zone-dmun-term-term-medical_health_and_dental_office",
-          "zone-dmun-term-term-office",
+          "zone-dmun-term-use-medical_health_and_dental_office",
+          "zone-dmun-term-use-office",
           "zone-dmun-term-term-parking_structure",
           "zone-dmun-term-term-personal_service_shop",
-          "zone-dmun-term-term-retail_store"
+          "zone-dmun-term-use-retail_store"
         ],
         "applicability": {
           "applies_to_zone_codes": [
@@ -1715,32 +1721,6 @@
       ]
     },
     {
-      "review_flag_id": "zone-dmun-flag-unmatched-term-medical-health-and-dental-office",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Medical, Health and Dental Office",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-dmun-clause-30-1-5"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-dmun-flag-unmatched-term-office",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Office",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-dmun-clause-30-1-6"
-        }
-      ]
-    },
-    {
       "review_flag_id": "zone-dmun-flag-unmatched-term-parking-structure",
       "severity": "warning",
       "blocking": false,
@@ -1763,19 +1743,6 @@
         {
           "source_ref_type": "clause",
           "source_ref_id": "zone-dmun-clause-30-1-8"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-dmun-flag-unmatched-term-retail-store",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Retail Store",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-dmun-clause-30-1-9"
         }
       ]
     }

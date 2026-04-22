@@ -446,17 +446,19 @@
   "structured_data": {
     "terms": [
       {
-        "term_id": "zone-p-term-term-parking_lot",
+        "term_id": "zone-p-term-use-parking_lot",
         "term_raw": "Parking Lot",
         "term_normalized": "parking_lot",
-        "term_category": "unknown",
+        "term_category": "parking_loading",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-p-clause-43-1-1"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "parking_lot"
       },
       {
         "term_id": "zone-p-term-term-parking_structure",
@@ -476,10 +478,10 @@
       {
         "use_id": "zone-p-use-parking-lot-1",
         "use_name_raw": "Parking Lot",
-        "use_term_id": "zone-p-term-term-parking_lot",
+        "use_term_id": "zone-p-term-use-parking_lot",
         "use_status": "permitted",
         "source_clause_ref": "zone-p-clause-43-1-1",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-p-use-parking-structure-2",
@@ -888,7 +890,7 @@
         "group_label_raw": "43",
         "group_title_raw": "PARKING ZONE (P)",
         "regulated_use_terms": [
-          "zone-p-term-term-parking_lot",
+          "zone-p-term-use-parking_lot",
           "zone-p-term-term-parking_structure"
         ],
         "applicability": {
@@ -933,19 +935,6 @@
     "cross_references": []
   },
   "review_flags": [
-    {
-      "review_flag_id": "zone-p-flag-unmatched-term-parking-lot",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Parking Lot",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-p-clause-43-1-1"
-        }
-      ]
-    },
     {
       "review_flag_id": "zone-p-flag-unmatched-term-parking-structure",
       "severity": "warning",

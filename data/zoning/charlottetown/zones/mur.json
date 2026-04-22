@@ -558,30 +558,34 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-mur-term-term-nursing_home",
+        "term_id": "zone-mur-term-use-nursing_home",
         "term_raw": "Nursing Home",
         "term_normalized": "nursing_home",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-mur-clause-21-1-8"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "nursing_home"
       },
       {
-        "term_id": "zone-mur-term-term-community_care_facility",
+        "term_id": "zone-mur-term-use-community_care_facility",
         "term_raw": "Community Care Facility",
         "term_normalized": "community_care_facility",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-mur-clause-21-1-9"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "community_care_facility"
       },
       {
         "term_id": "zone-mur-term-reference-zone-mur-clause-21-1-1",
@@ -649,18 +653,18 @@
       {
         "use_id": "zone-mur-use-nursing-home-8",
         "use_name_raw": "Nursing Home",
-        "use_term_id": "zone-mur-term-term-nursing_home",
+        "use_term_id": "zone-mur-term-use-nursing_home",
         "use_status": "permitted",
         "source_clause_ref": "zone-mur-clause-21-1-8",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-mur-use-community-care-facility-9",
         "use_name_raw": "Community Care Facility",
-        "use_term_id": "zone-mur-term-term-community_care_facility",
+        "use_term_id": "zone-mur-term-use-community_care_facility",
         "use_status": "permitted",
         "source_clause_ref": "zone-mur-clause-21-1-9",
-        "confidence": "needs_review"
+        "confidence": "high"
       }
     ],
     "numeric_values": [],
@@ -677,8 +681,8 @@
           "zone-mur-term-use-townhouse_dwelling",
           "zone-mur-term-term-stacked_townhouse_dwelling",
           "zone-mur-term-term-block_townhouse_dwelling",
-          "zone-mur-term-term-nursing_home",
-          "zone-mur-term-term-community_care_facility"
+          "zone-mur-term-use-nursing_home",
+          "zone-mur-term-use-community_care_facility"
         ],
         "applicability": {
           "applies_to_zone_codes": [
@@ -890,32 +894,6 @@
         {
           "source_ref_type": "clause",
           "source_ref_id": "zone-mur-clause-21-1-7"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-mur-flag-unmatched-term-nursing-home",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Nursing Home",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-mur-clause-21-1-8"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-mur-flag-unmatched-term-community-care-facility",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Community Care Facility",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-mur-clause-21-1-9"
         }
       ]
     }

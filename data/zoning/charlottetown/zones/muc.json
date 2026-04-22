@@ -643,17 +643,19 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-muc-term-term-parking_lot",
+        "term_id": "zone-muc-term-use-parking_lot",
         "term_raw": "Parking Lot",
         "term_normalized": "parking_lot",
-        "term_category": "unknown",
+        "term_category": "parking_loading",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-muc-clause-24-1-9"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "parking_lot"
       },
       {
         "term_id": "zone-muc-term-term-retail_store_with_connected_retail_warehouse_light_manufacturing_or_assembly_facility",
@@ -682,17 +684,19 @@
         "confidence": "needs_review"
       },
       {
-        "term_id": "zone-muc-term-term-service_repair_establishment",
+        "term_id": "zone-muc-term-use-service_repair_establishment",
         "term_raw": "Service Repair Establishment",
         "term_normalized": "service_repair_establishment",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [
           {
             "source_ref_type": "clause",
             "source_ref_id": "zone-muc-clause-24-1-12"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "service_repair_establishment"
       },
       {
         "term_id": "zone-muc-term-term-storage_facility",
@@ -817,10 +821,10 @@
       {
         "use_id": "zone-muc-use-parking-lot-9",
         "use_name_raw": "Parking Lot",
-        "use_term_id": "zone-muc-term-term-parking_lot",
+        "use_term_id": "zone-muc-term-use-parking_lot",
         "use_status": "permitted",
         "source_clause_ref": "zone-muc-clause-24-1-9",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-muc-use-retail-store-with-connected-retail-warehouse-light-manufacturing-or-assembly-facility-10",
@@ -841,10 +845,10 @@
       {
         "use_id": "zone-muc-use-service-repair-establishment-12",
         "use_name_raw": "Service Repair Establishment",
-        "use_term_id": "zone-muc-term-term-service_repair_establishment",
+        "use_term_id": "zone-muc-term-use-service_repair_establishment",
         "use_status": "permitted",
         "source_clause_ref": "zone-muc-clause-24-1-12",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-muc-use-storage-facility-13",
@@ -1497,10 +1501,10 @@
           "zone-muc-term-term-equipment_sales_rental_service",
           "zone-muc-term-term-greenhouse_nursery_retail",
           "zone-muc-term-term-outdoor_retail_display",
-          "zone-muc-term-term-parking_lot",
+          "zone-muc-term-use-parking_lot",
           "zone-muc-term-term-retail_store_with_connected_retail_warehouse_light_manufacturing_or_assembly_facility",
           "zone-muc-term-term-retail_warehouse",
-          "zone-muc-term-term-service_repair_establishment",
+          "zone-muc-term-use-service_repair_establishment",
           "zone-muc-term-term-storage_facility",
           "zone-muc-term-term-transport_terminal",
           "zone-muc-term-term-warehouse_and_or_distribution_centre"
@@ -1751,19 +1755,6 @@
       ]
     },
     {
-      "review_flag_id": "zone-muc-flag-unmatched-term-parking-lot",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Parking Lot",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-muc-clause-24-1-9"
-        }
-      ]
-    },
-    {
       "review_flag_id": "zone-muc-flag-unmatched-term-retail-store-with-connected-retail-warehouse-light-manufacturing-or-assembly-facility",
       "severity": "warning",
       "blocking": false,
@@ -1786,19 +1777,6 @@
         {
           "source_ref_type": "clause",
           "source_ref_id": "zone-muc-clause-24-1-11"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-muc-flag-unmatched-term-service-repair-establishment",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Service Repair Establishment",
-      "source_refs": [
-        {
-          "source_ref_type": "clause",
-          "source_ref_id": "zone-muc-clause-24-1-12"
         }
       ]
     },
