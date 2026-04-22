@@ -257,6 +257,194 @@ def append_cell_text(existing: str, addition: str) -> str:
     return clean_text(f"{existing} {addition}" if existing else addition)
 
 
+def condition_split_for_requirement(requirement_text: str) -> tuple[str, list[str]]:
+    patterns = [
+        ("Front yard access Rear lane access", ["Front yard access", "Rear lane access"]),
+        ("Front Access (Minimum) Rear Lane Access (Minimum)", ["Front Access (Minimum)", "Rear Lane Access (Minimum)"]),
+        ("Eight (8) or less units More than eight (8) units", ["Eight (8) or less units", "More than eight (8) units"]),
+        ("Townhouse Stacked Townhouse", ["Townhouse", "Stacked Townhouse"]),
+        ("End-on Sites Front on Sites", ["End-on Sites", "Front on Sites"]),
+        ("For three (3) bedrooms For each additional bedroom", ["For three (3) bedrooms", "For each additional bedroom"]),
+        (
+            "Any Building type, 3 units or less Townhouse Dwelling: 4 units or more Apartment Dwelling: 4 units or more Any other permitted Use",
+            [
+                "Any Building type, 3 units or less",
+                "Townhouse Dwelling: 4 units or more",
+                "Apartment Dwelling: 4 units or more",
+                "Any other permitted Use",
+            ],
+        ),
+    ]
+    for suffix, conditions in patterns:
+        if requirement_text.endswith(suffix):
+            return clean_text(requirement_text[: -len(suffix)]), conditions
+    return requirement_text, []
+
+
+def measurement_value_groups(text: str) -> list[str]:
+    matches = list(MEASUREMENT_RE.finditer(text))
+    groups = []
+    index = 0
+    while index < len(matches):
+        match = matches[index]
+        end = match.end()
+        if index + 1 < len(matches) and compatible_alternative_units(
+            unit_code(match.group("unit")),
+            unit_code(matches[index + 1].group("unit")),
+        ):
+            end = matches[index + 1].end()
+            if text[end : end + 1] == ")":
+                end += 1
+            index += 2
+        else:
+            index += 1
+        groups.append(clean_text(text[match.start() : end]))
+    return groups
+
+
+def split_condition_rows(table: dict[str, Any]) -> dict[str, Any]:
+    columns = [column for column in table.get("columns_raw") or [] if column.get("column_id") != "condition"]
+    condition_column = {"column_id": "condition", "column_label_raw": "", "source_order": 3}
+    value_columns = columns[2:]
+    rows_out = []
+    split_seen = False
+    for row in table.get("rows_raw") or []:
+        cell_by_id = {cell["column_id"]: cell for cell in row.get("cells_raw") or []}
+        requirement_cell = cell_by_id.get("requirement")
+        if not requirement_cell:
+            rows_out.append(row)
+            continue
+        base_requirement, conditions = condition_split_for_requirement(requirement_cell.get("cell_text_raw") or "")
+        if not conditions:
+            rows_out.append(row)
+            continue
+        split_values: dict[str, list[str]] = {}
+        can_split = True
+        for column in value_columns:
+            cell = cell_by_id.get(column["column_id"], {})
+            text = cell.get("cell_text_raw") or ""
+            groups = measurement_value_groups(text)
+            if text and len(groups) != len(conditions):
+                can_split = False
+                break
+            split_values[column["column_id"]] = groups if text else [""] * len(conditions)
+        if not can_split:
+            rows_out.append(row)
+            continue
+        split_seen = True
+        row_number = (cell_by_id.get("row_number") or {}).get("cell_text_raw") or ""
+        for condition_index, condition in enumerate(conditions, start=1):
+            row_id = f"{row['row_id']}-{slugify(condition)}"
+            cells = [
+                {
+                    "cell_id": f"{row_id}-row-number",
+                    "column_id": "row_number",
+                    "cell_text_raw": row_number if condition_index == 1 else "",
+                },
+                {
+                    "cell_id": f"{row_id}-requirement",
+                    "column_id": "requirement",
+                    "cell_text_raw": base_requirement,
+                },
+                {
+                    "cell_id": f"{row_id}-condition",
+                    "column_id": "condition",
+                    "cell_text_raw": condition,
+                },
+            ]
+            for column in value_columns:
+                cells.append(
+                    {
+                        "cell_id": f"{row_id}-{column['column_id']}",
+                        "column_id": column["column_id"],
+                        "cell_text_raw": split_values[column["column_id"]][condition_index - 1],
+                    }
+                )
+            rows_out.append({"row_id": row_id, "source_order": len(rows_out) + 1, "cells_raw": cells})
+    if not split_seen:
+        return table
+    table = dict(table)
+    table["columns_raw"] = [
+        columns[0],
+        columns[1],
+        condition_column,
+        *[{**column, "source_order": index} for index, column in enumerate(value_columns, start=4)],
+    ]
+    table["rows_raw"] = rows_out
+    return table
+
+
+def fallback_table_column_bounds(value_column_count: int) -> tuple[float, list[tuple[float, float]]]:
+    if value_column_count == 1:
+        return 300.0, [(300.0, 560.0)]
+    if value_column_count == 2:
+        return 300.0, [(300.0, 420.0), (420.0, 560.0)]
+    width = 260.0 / value_column_count
+    return 300.0, [(300.0 + (idx * width), 300.0 + ((idx + 1) * width)) for idx in range(value_column_count)]
+
+
+def column_label_key(label: str) -> str:
+    words = re.findall(r"[A-Za-z]+", label)
+    return words[0].upper() if words else ""
+
+
+def infer_table_column_bounds(
+    lines: list[list[tuple[float, str]]],
+    value_columns: list[dict[str, Any]],
+) -> tuple[float, list[tuple[float, float]]]:
+    fallback_requirement_right, fallback_bounds = fallback_table_column_bounds(len(value_columns))
+    first_row_index = next(
+        (
+            idx
+            for idx, line in enumerate(lines)
+            if line and re.fullmatch(r"\d+", sorted(line)[0][1]) and sorted(line)[0][0] < 130
+        ),
+        None,
+    )
+    if first_row_index is None:
+        return fallback_requirement_right, fallback_bounds
+    header_lines = lines[:first_row_index]
+    starts = []
+    for column in value_columns:
+        key = column_label_key(column.get("column_label_raw") or "")
+        if not key:
+            return fallback_requirement_right, fallback_bounds
+        matches = [
+            x
+            for line in header_lines
+            for x, word in line
+            if re.sub(r"[^A-Za-z]+", "", word).upper().startswith(key)
+        ]
+        if not matches:
+            return fallback_requirement_right, fallback_bounds
+        starts.append(min(matches))
+    if len(starts) != len(value_columns) or starts != sorted(starts):
+        return fallback_requirement_right, fallback_bounds
+    requirement_right = max(125.0, starts[0] - 5.0)
+    bounds = []
+    for idx, start in enumerate(starts):
+        right = starts[idx + 1] - 3.0 if idx + 1 < len(starts) else 560.0
+        bounds.append((start, right))
+    return requirement_right, bounds
+
+
+def is_table_footer_or_following_text(line_text: str) -> bool:
+    normalized = line_text.upper()
+    return "PH-ZD" in normalized or "UPDATED AS OF" in normalized
+
+
+def is_non_table_heading(line_text: str) -> bool:
+    if re.match(r"^\d+\s", line_text):
+        return False
+    normalized = re.sub(r"[^A-Z0-9]+", " ", line_text.upper()).strip()
+    return bool(
+        re.search(
+            r"\b(ACCESSORY|SECONDARY|PERMITTED USES|PROHIBITED|SPECIAL REQUIREMENTS|REGULATIONS FOR)\b",
+            normalized,
+        )
+    )
+
+
 def rebuild_table_from_pdf(doc: Any, section: dict[str, Any], next_section: dict[str, Any] | None) -> dict[str, Any] | None:
     if doc is None or not section.get("tables_raw"):
         return None
@@ -266,7 +454,7 @@ def rebuild_table_from_pdf(doc: Any, section: dict[str, Any], next_section: dict
     if not pdf_start:
         return None
     first_table = section["tables_raw"][0]
-    columns = first_table.get("columns_raw") or []
+    columns = [column for column in first_table.get("columns_raw") or [] if column.get("column_id") != "condition"]
     value_columns = columns[2:]
     if not value_columns:
         return None
@@ -282,19 +470,25 @@ def rebuild_table_from_pdf(doc: Any, section: dict[str, Any], next_section: dict
         if next_section and (next_section.get("citations") or {}).get("pdf_page_start") == pdf_page:
             y_end = find_heading_y(words, next_section.get("section_title_raw") or "")
         if y_end is None:
-            y_end = 760.0
+            y_end = 740.0
         table_words = [
             word
             for word in words
             if y_start + 10 <= word[1] <= y_end - 3 and 100 <= word[0] <= 560
         ]
+        lines = group_words_into_lines(table_words)
+        requirement_right, value_bounds = infer_table_column_bounds(lines, value_columns)
         current: dict[str, Any] | None = None
-        for line in group_words_into_lines(table_words):
+        for line in lines:
             line_text = clean_text(" ".join(word for _x, word in sorted(line)))
             if not line_text:
                 continue
-            if re.search(r"\b(ACCESSORY|SECONDARY|PERMITTED USES|PROHIBITED|SPECIAL REQUIREMENTS)\b", line_text) and not re.match(r"^\d+\b", line_text):
-                continue
+            if is_table_footer_or_following_text(line_text):
+                break
+            if is_non_table_heading(line_text):
+                if current is None:
+                    continue
+                break
             first = sorted(line)[0]
             if re.fullmatch(r"\d+", first[1]) and first[0] < 130:
                 row_order += 1
@@ -308,12 +502,11 @@ def rebuild_table_from_pdf(doc: Any, section: dict[str, Any], next_section: dict
                     {
                         "cell_id": f"{row_id}-requirement",
                         "column_id": "requirement",
-                        "cell_text_raw": text_in_range(line, 130, 315),
+                        "cell_text_raw": text_in_range(line, 130, requirement_right),
                     },
                 ]
                 for idx, column in enumerate(value_columns):
-                    left = 315 if len(value_columns) == 1 else 315 + (idx * 115)
-                    right = 560 if idx == len(value_columns) - 1 else 315 + ((idx + 1) * 115)
+                    left, right = value_bounds[idx]
                     cells.append(
                         {
                             "cell_id": f"{row_id}-{column['column_id']}",
@@ -328,11 +521,10 @@ def rebuild_table_from_pdf(doc: Any, section: dict[str, Any], next_section: dict
                 continue
             current["cells_raw"][1]["cell_text_raw"] = append_cell_text(
                 current["cells_raw"][1]["cell_text_raw"],
-                text_in_range(line, 130, 315),
+                text_in_range(line, 130, requirement_right),
             )
             for idx, column in enumerate(value_columns):
-                left = 315 if len(value_columns) == 1 else 315 + (idx * 115)
-                right = 560 if idx == len(value_columns) - 1 else 315 + ((idx + 1) * 115)
+                left, right = value_bounds[idx]
                 current["cells_raw"][idx + 2]["cell_text_raw"] = append_cell_text(
                     current["cells_raw"][idx + 2]["cell_text_raw"],
                     text_in_range(line, left, right),
@@ -340,8 +532,9 @@ def rebuild_table_from_pdf(doc: Any, section: dict[str, Any], next_section: dict
     if not rows_out:
         return None
     rebuilt = dict(first_table)
+    rebuilt["columns_raw"] = columns
     rebuilt["rows_raw"] = rows_out
-    return rebuilt
+    return split_condition_rows(rebuilt)
 
 
 def rebuild_schema_tables_from_pdf(doc: Any, data: dict[str, Any]) -> bool:
@@ -383,6 +576,11 @@ def rebuild_clause_refs(data: dict[str, Any]) -> dict[str, Any]:
             )
     raw_data.pop("clauses_index", None)
     raw_data["clause_refs"] = refs
+    return data
+
+
+def reset_review_flags(data: dict[str, Any]) -> dict[str, Any]:
+    data["review_flags"] = []
     return data
 
 
@@ -658,10 +856,11 @@ def build_numeric_and_requirements(
     seen_requirement_text: set[str] = set()
 
     for table, row, cell, column in flatten_table_cells(raw_sections):
-        if cell["column_id"] in {"row_number", "requirement"}:
+        if cell["column_id"] in {"row_number", "requirement", "condition"}:
             continue
         row_label = next((c["cell_text_raw"] for c in row["cells_raw"] if c["column_id"] == "requirement"), "")
-        context_text = clean_text(f"{row_label} {column.get('column_label_raw', '')} {cell['cell_text_raw']}")
+        condition_text = next((c["cell_text_raw"] for c in row["cells_raw"] if c["column_id"] == "condition"), "")
+        context_text = clean_text(f"{row_label} {condition_text} {column.get('column_label_raw', '')} {cell['cell_text_raw']}")
         matches = list(MEASUREMENT_RE.finditer(cell["cell_text_raw"]))
         records = grouped_numeric_records(
             matches,
@@ -685,7 +884,11 @@ def build_numeric_and_requirements(
                         "applies_to_lot_contexts": [code_key(column.get("column_label_raw"))]
                         if column.get("column_label_raw")
                         else [],
-                        "conditions": [],
+                        "conditions": [
+                            {"condition_type": "table_row_condition", "condition_text_raw": condition_text}
+                        ]
+                        if condition_text
+                        else [],
                     },
                     "numeric_value_refs": numeric_refs,
                     "term_refs": [],
@@ -1230,6 +1433,8 @@ def refresh_schema_terms(normalizer: Normalizer, data: dict[str, Any]) -> dict[s
             term["code"] = normalized
             term["confidence"] = confidence_from_entry(entry)
             id_changes[old_id] = new_id
+            id_changes[f"{prefix}-term-term-{normalized}"] = new_id
+            id_changes[f"{prefix}-term-unmatched-{normalized}"] = new_id
             if entry.get("status") == "review":
                 flag_id = f"{prefix}-flag-review-code-{slugify(normalized)}"
                 if flag_id not in existing_flag_ids:
@@ -1247,15 +1452,35 @@ def refresh_schema_terms(normalizer: Normalizer, data: dict[str, Any]) -> dict[s
             term["confidence"] = "needs_review"
             term.pop("code_table", None)
             term.pop("code", None)
+            flag_id = f"{prefix}-flag-unmatched-term-{slugify(term.get('term_raw') or term.get('term_normalized') or old_id)}"
+            if flag_id not in existing_flag_ids:
+                review_flags.append(
+                    make_review_flag(
+                        flag_id,
+                        "code_table_match_review",
+                        f"Term was preserved but did not match reviewed term/use code tables: {term.get('term_raw') or term.get('term_normalized')}",
+                        term.get("source_refs") or [],
+                    )
+                )
+                existing_flag_ids.add(flag_id)
         if term["term_id"] not in seen_ids:
             refreshed_terms.append(term)
             seen_ids.add(term["term_id"])
     structured["terms"] = refreshed_terms
+    term_confidence_by_id = {term["term_id"]: term.get("confidence", "needs_review") for term in refreshed_terms}
     for use in structured.get("uses") or []:
         if use.get("use_status") == "accessory":
             use["use_status"] = "accessory_or_secondary"
         if use.get("use_term_id") in id_changes:
             use["use_term_id"] = id_changes[use["use_term_id"]]
+        if use.get("use_term_id") in term_confidence_by_id:
+            use["confidence"] = term_confidence_by_id[use["use_term_id"]]
+    for requirement in structured.get("requirements") or []:
+        requirement["term_refs"] = [id_changes.get(term_id, term_id) for term_id in requirement.get("term_refs") or []]
+    for group in structured.get("regulation_groups") or []:
+        group["regulated_use_terms"] = [
+            id_changes.get(term_id, term_id) for term_id in group.get("regulated_use_terms") or []
+        ]
     return data
 
 
@@ -1275,6 +1500,7 @@ def main() -> None:
         if {"raw_data", "structured_data", "review_flags"}.issubset(data):
             rebuild_clause_refs(data)
             rebuild_schema_tables_from_pdf(pdf_doc, data)
+            reset_review_flags(data)
             refresh_schema_numeric_values(data)
             write_json(path, refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data)))
             continue
@@ -1290,6 +1516,7 @@ def main() -> None:
         if {"raw_data", "structured_data", "review_flags"}.issubset(data):
             rebuild_clause_refs(data)
             rebuild_schema_tables_from_pdf(pdf_doc, data)
+            reset_review_flags(data)
             refresh_schema_numeric_values(data)
             write_json(path, refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data)))
             continue
@@ -1307,6 +1534,7 @@ def main() -> None:
         if {"raw_data", "structured_data", "review_flags"}.issubset(data):
             rebuild_clause_refs(data)
             rebuild_schema_tables_from_pdf(pdf_doc, data)
+            reset_review_flags(data)
             refresh_schema_numeric_values(data)
             write_json(path, refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data)))
             continue
