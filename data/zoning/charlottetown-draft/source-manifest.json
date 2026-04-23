@@ -1,398 +1,312 @@
 {
   "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
-  "extracted_at_local": "2026-04-19T17:55:48",
-  "extractor": "scripts/extract-charlottetown-draft-zoning-bylaw.py",
+  "extracted_at_local": "2026-04-23T13:30:42",
+  "extractor": "scripts/regenerate-charlottetown-draft-zoning-bylaw.py",
   "bylaw_name": "Draft Zoning & Development Bylaw",
   "jurisdiction": "City of Charlottetown",
-  "draft_date_raw": "April 7, 2026",
-  "source_page_count": 200,
   "zone_count": 20,
   "zones": [
     {
-      "part": 10,
-      "zone_code": "RN",
-      "zone_name": "Neighbourhood",
-      "file": "zones/rn.json",
-      "pdf_page_start": 91,
-      "pdf_page_end": 96,
-      "bylaw_page_start": 87,
-      "bylaw_page_end": 92,
-      "permitted_use_count": 4,
-      "requirement_section_count": 6
-    },
-    {
-      "part": 11,
-      "zone_code": "RM",
-      "zone_name": "Medium Density Residential",
-      "file": "zones/rm.json",
-      "pdf_page_start": 97,
-      "pdf_page_end": 100,
-      "bylaw_page_start": 93,
-      "bylaw_page_end": 96,
-      "permitted_use_count": 10,
-      "requirement_section_count": 6
-    },
-    {
-      "part": 12,
-      "zone_code": "RH",
-      "zone_name": "High Order Residential",
-      "file": "zones/rh.json",
-      "pdf_page_start": 101,
-      "pdf_page_end": 104,
-      "bylaw_page_start": 97,
-      "bylaw_page_end": 100,
-      "permitted_use_count": 8,
-      "requirement_section_count": 6
-    },
-    {
-      "part": 13,
-      "zone_code": "DC",
-      "zone_name": "Downtown Core",
-      "file": "zones/dc.json",
-      "pdf_page_start": 105,
-      "pdf_page_end": 108,
-      "bylaw_page_start": 101,
-      "bylaw_page_end": 104,
-      "permitted_use_count": 19,
-      "requirement_section_count": 7
-    },
-    {
-      "part": 14,
-      "zone_code": "DMS",
-      "zone_name": "Downtown Main Street",
-      "file": "zones/dms.json",
-      "pdf_page_start": 109,
-      "pdf_page_end": 112,
-      "bylaw_page_start": 105,
-      "bylaw_page_end": 108,
-      "permitted_use_count": 20,
-      "requirement_section_count": 6
-    },
-    {
-      "part": 15,
-      "zone_code": "DMU",
-      "zone_name": "Downtown Mixed Use",
-      "file": "zones/dmu.json",
-      "pdf_page_start": 113,
-      "pdf_page_end": 116,
-      "bylaw_page_start": 109,
-      "bylaw_page_end": 112,
-      "permitted_use_count": 15,
-      "requirement_section_count": 6
-    },
-    {
-      "part": 16,
-      "zone_code": "DN",
-      "zone_name": "Downtown Neighbourhood",
-      "file": "zones/dn.json",
-      "pdf_page_start": 117,
-      "pdf_page_end": 120,
-      "bylaw_page_start": 113,
-      "bylaw_page_end": 116,
-      "permitted_use_count": 4,
-      "requirement_section_count": 6
-    },
-    {
-      "part": 17,
-      "zone_code": "DW",
-      "zone_name": "Downtown Waterfront",
-      "file": "zones/dw.json",
-      "pdf_page_start": 121,
-      "pdf_page_end": 124,
-      "bylaw_page_start": 117,
-      "bylaw_page_end": 120,
-      "permitted_use_count": 20,
-      "requirement_section_count": 8
-    },
-    {
-      "part": 18,
-      "zone_code": "BP",
-      "zone_name": "Business Park",
-      "file": "zones/bp.json",
-      "pdf_page_start": 125,
-      "pdf_page_end": 130,
-      "bylaw_page_start": 121,
-      "bylaw_page_end": 126,
-      "permitted_use_count": 18,
-      "requirement_section_count": 6
-    },
-    {
-      "part": 19,
       "zone_code": "AP",
       "zone_name": "Airport Periphery",
       "file": "zones/ap.json",
       "pdf_page_start": 131,
       "pdf_page_end": 134,
       "bylaw_page_start": 127,
-      "bylaw_page_end": 130,
-      "permitted_use_count": 41,
-      "requirement_section_count": 6
+      "bylaw_page_end": 130
     },
     {
-      "part": 20,
-      "zone_code": "HI",
-      "zone_name": "Heavy Industrial",
-      "file": "zones/hi.json",
-      "pdf_page_start": 135,
-      "pdf_page_end": 138,
-      "bylaw_page_start": 131,
-      "bylaw_page_end": 134,
-      "permitted_use_count": 18,
-      "requirement_section_count": 6
+      "zone_code": "BP",
+      "zone_name": "Business Park",
+      "file": "zones/bp.json",
+      "pdf_page_start": 125,
+      "pdf_page_end": 130,
+      "bylaw_page_start": 121,
+      "bylaw_page_end": 126
     },
     {
-      "part": 21,
-      "zone_code": "P",
-      "zone_name": "Port",
-      "file": "zones/p.json",
-      "pdf_page_start": 139,
-      "pdf_page_end": 140,
-      "bylaw_page_start": 135,
-      "bylaw_page_end": 136,
-      "permitted_use_count": 7,
-      "requirement_section_count": 6
-    },
-    {
-      "part": 22,
-      "zone_code": "GC",
-      "zone_name": "Growth Corridor",
-      "file": "zones/gc.json",
-      "pdf_page_start": 141,
-      "pdf_page_end": 146,
-      "bylaw_page_start": 137,
-      "bylaw_page_end": 142,
-      "permitted_use_count": 18,
-      "requirement_section_count": 6
-    },
-    {
-      "part": 23,
-      "zone_code": "GN",
-      "zone_name": "Growth Node",
-      "file": "zones/gn.json",
-      "pdf_page_start": 147,
-      "pdf_page_end": 152,
-      "bylaw_page_start": 143,
-      "bylaw_page_end": 148,
-      "permitted_use_count": 18,
-      "requirement_section_count": 6
-    },
-    {
-      "part": 24,
-      "zone_code": "I",
-      "zone_name": "Institutional",
-      "file": "zones/i.json",
-      "pdf_page_start": 153,
-      "pdf_page_end": 156,
-      "bylaw_page_start": 149,
-      "bylaw_page_end": 152,
-      "permitted_use_count": 16,
-      "requirement_section_count": 6
-    },
-    {
-      "part": 25,
-      "zone_code": "PPS",
-      "zone_name": "Parks & Public Spaces",
-      "file": "zones/pps.json",
-      "pdf_page_start": 157,
-      "pdf_page_end": 158,
-      "bylaw_page_start": 153,
-      "bylaw_page_end": 154,
-      "permitted_use_count": 10,
-      "requirement_section_count": 5
-    },
-    {
-      "part": 26,
-      "zone_code": "POS",
-      "zone_name": "Privately-owned Open Spaces",
-      "file": "zones/pos.json",
-      "pdf_page_start": 159,
-      "pdf_page_end": 160,
-      "bylaw_page_start": 155,
-      "bylaw_page_end": 156,
-      "permitted_use_count": 1,
-      "requirement_section_count": 5
-    },
-    {
-      "part": 27,
       "zone_code": "C",
       "zone_name": "Conservation",
       "file": "zones/c.json",
       "pdf_page_start": 161,
       "pdf_page_end": 162,
       "bylaw_page_start": 157,
-      "bylaw_page_end": 158,
-      "permitted_use_count": 1,
-      "requirement_section_count": 5
+      "bylaw_page_end": 158
     },
     {
-      "part": 28,
+      "zone_code": "DC",
+      "zone_name": "Downtown Core",
+      "file": "zones/dc.json",
+      "pdf_page_start": 105,
+      "pdf_page_end": 108,
+      "bylaw_page_start": 101,
+      "bylaw_page_end": 104
+    },
+    {
+      "zone_code": "DMS",
+      "zone_name": "Downtown Main Street",
+      "file": "zones/dms.json",
+      "pdf_page_start": 109,
+      "pdf_page_end": 112,
+      "bylaw_page_start": 105,
+      "bylaw_page_end": 108
+    },
+    {
+      "zone_code": "DMU",
+      "zone_name": "Downtown Mixed Use",
+      "file": "zones/dmu.json",
+      "pdf_page_start": 113,
+      "pdf_page_end": 116,
+      "bylaw_page_start": 109,
+      "bylaw_page_end": 112
+    },
+    {
+      "zone_code": "DN",
+      "zone_name": "Downtown Neighbourhood",
+      "file": "zones/dn.json",
+      "pdf_page_start": 117,
+      "pdf_page_end": 120,
+      "bylaw_page_start": 113,
+      "bylaw_page_end": 116
+    },
+    {
+      "zone_code": "DW",
+      "zone_name": "Downtown Waterfront",
+      "file": "zones/dw.json",
+      "pdf_page_start": 121,
+      "pdf_page_end": 124,
+      "bylaw_page_start": 117,
+      "bylaw_page_end": 120
+    },
+    {
       "zone_code": "EG",
       "zone_name": "Eastern Gateway",
       "file": "zones/eg.json",
       "pdf_page_start": 163,
       "pdf_page_end": 164,
       "bylaw_page_start": 159,
-      "bylaw_page_end": 160,
-      "permitted_use_count": 2,
-      "requirement_section_count": 5
+      "bylaw_page_end": 160
     },
     {
-      "part": 29,
+      "zone_code": "GC",
+      "zone_name": "Growth Corridor",
+      "file": "zones/gc.json",
+      "pdf_page_start": 141,
+      "pdf_page_end": 146,
+      "bylaw_page_start": 137,
+      "bylaw_page_end": 142
+    },
+    {
+      "zone_code": "GN",
+      "zone_name": "Growth Node",
+      "file": "zones/gn.json",
+      "pdf_page_start": 147,
+      "pdf_page_end": 152,
+      "bylaw_page_start": 143,
+      "bylaw_page_end": 148
+    },
+    {
+      "zone_code": "HI",
+      "zone_name": "Heavy Industrial",
+      "file": "zones/hi.json",
+      "pdf_page_start": 135,
+      "pdf_page_end": 138,
+      "bylaw_page_start": 131,
+      "bylaw_page_end": 134
+    },
+    {
+      "zone_code": "I",
+      "zone_name": "Institutional",
+      "file": "zones/i.json",
+      "pdf_page_start": 153,
+      "pdf_page_end": 156,
+      "bylaw_page_start": 149,
+      "bylaw_page_end": 152
+    },
+    {
+      "zone_code": "P",
+      "zone_name": "Port",
+      "file": "zones/p.json",
+      "pdf_page_start": 139,
+      "pdf_page_end": 140,
+      "bylaw_page_start": 135,
+      "bylaw_page_end": 136
+    },
+    {
+      "zone_code": "POS",
+      "zone_name": "Privately-owned Open Spaces",
+      "file": "zones/pos.json",
+      "pdf_page_start": 159,
+      "pdf_page_end": 160,
+      "bylaw_page_start": 155,
+      "bylaw_page_end": 156
+    },
+    {
+      "zone_code": "PPS",
+      "zone_name": "Parks & Public Spaces",
+      "file": "zones/pps.json",
+      "pdf_page_start": 157,
+      "pdf_page_end": 158,
+      "bylaw_page_start": 153,
+      "bylaw_page_end": 154
+    },
+    {
+      "zone_code": "RH",
+      "zone_name": "High Order Residential",
+      "file": "zones/rh.json",
+      "pdf_page_start": 101,
+      "pdf_page_end": 104,
+      "bylaw_page_start": 97,
+      "bylaw_page_end": 100
+    },
+    {
+      "zone_code": "RM",
+      "zone_name": "Medium Density Residential",
+      "file": "zones/rm.json",
+      "pdf_page_start": 97,
+      "pdf_page_end": 100,
+      "bylaw_page_start": 93,
+      "bylaw_page_end": 96
+    },
+    {
+      "zone_code": "RN",
+      "zone_name": "Neighbourhood",
+      "file": "zones/rn.json",
+      "pdf_page_start": 91,
+      "pdf_page_end": 96,
+      "bylaw_page_start": 87,
+      "bylaw_page_end": 92
+    },
+    {
       "zone_code": "UE",
       "zone_name": "Urban Expansion",
       "file": "zones/ue.json",
       "pdf_page_start": 165,
       "pdf_page_end": 166,
       "bylaw_page_start": 161,
-      "bylaw_page_end": 162,
-      "permitted_use_count": 1,
-      "requirement_section_count": 4
+      "bylaw_page_end": 162
     }
   ],
-  "supporting_documents": [
+  "document_files": [
     {
-      "part": 1,
-      "document_type": "administration",
-      "title": "Administration & Operation",
       "file": "administration.json",
+      "document_type": "other",
+      "document_title_raw": "Administration & Operation",
       "pdf_page_start": 5,
       "pdf_page_end": 8,
       "bylaw_page_start": 1,
-      "bylaw_page_end": 4,
-      "section_count": 14
+      "bylaw_page_end": 4
     },
     {
-      "part": 2,
-      "document_type": "permit_applications_processes",
-      "title": "Permit Applications & Processes",
-      "file": "permit-applications-processes.json",
-      "pdf_page_start": 9,
-      "pdf_page_end": 19,
-      "bylaw_page_start": 5,
-      "bylaw_page_end": 15,
-      "section_count": 18
-    },
-    {
-      "part": 3,
-      "document_type": "general_provisions",
-      "title": "General Provisions for Buildings & Structures",
-      "file": "general-provisions-buildings-structures.json",
-      "pdf_page_start": 20,
-      "pdf_page_end": 30,
-      "bylaw_page_start": 16,
-      "bylaw_page_end": 26,
-      "section_count": 20
-    },
-    {
-      "part": 4,
-      "document_type": "general_provisions",
-      "title": "General Provisions for Land Use",
-      "file": "general-provisions-land-use.json",
-      "pdf_page_start": 31,
-      "pdf_page_end": 40,
-      "bylaw_page_start": 27,
-      "bylaw_page_end": 36,
-      "section_count": 17
-    },
-    {
-      "part": 5,
-      "document_type": "general_provisions",
-      "title": "General Provisions for Lots & Site Design",
-      "file": "general-provisions-lots-site-design.json",
-      "pdf_page_start": 41,
-      "pdf_page_end": 46,
-      "bylaw_page_start": 37,
-      "bylaw_page_end": 42,
-      "section_count": 9
-    },
-    {
-      "part": 6,
-      "document_type": "design_standards",
-      "title": "Design Standards for 500 Lot Area",
-      "file": "design-standards-500-lot-area.json",
-      "pdf_page_start": 47,
-      "pdf_page_end": 50,
-      "bylaw_page_start": 43,
-      "bylaw_page_end": 46,
-      "section_count": 11
-    },
-    {
-      "part": 7,
-      "document_type": "general_provisions",
-      "title": "General Provisions Subdividing Land",
-      "file": "general-provisions-subdividing-land.json",
-      "pdf_page_start": 51,
-      "pdf_page_end": 64,
-      "bylaw_page_start": 47,
-      "bylaw_page_end": 60,
-      "section_count": 13
-    },
-    {
-      "part": 8,
-      "document_type": "general_provisions",
-      "title": "General Provisions for Parking",
-      "file": "general-provisions-parking.json",
-      "pdf_page_start": 65,
-      "pdf_page_end": 74,
-      "bylaw_page_start": 61,
-      "bylaw_page_end": 70,
-      "section_count": 12
-    },
-    {
-      "part": 9,
-      "document_type": "general_provisions",
-      "title": "General Provisions For Signage",
-      "file": "general-provisions-signage.json",
-      "pdf_page_start": 75,
-      "pdf_page_end": 90,
-      "bylaw_page_start": 71,
-      "bylaw_page_end": 86,
-      "section_count": 23
-    },
-    {
-      "part": 30,
-      "document_type": "definitions",
-      "title": "DEFINITIONS",
       "file": "definitions.json",
+      "document_type": "definitions",
+      "document_title_raw": "DEFINITIONS",
       "pdf_page_start": 167,
       "pdf_page_end": 196,
       "bylaw_page_start": 163,
-      "bylaw_page_end": 192,
-      "definition_count": 357
+      "bylaw_page_end": 192
+    },
+    {
+      "file": "design-standards-500-lot-area.json",
+      "document_type": "design_standards",
+      "document_title_raw": "Design Standards for 500 Lot Area",
+      "pdf_page_start": 47,
+      "pdf_page_end": 50,
+      "bylaw_page_start": 43,
+      "bylaw_page_end": 46
+    },
+    {
+      "file": "general-provisions-buildings-structures.json",
+      "document_type": "general_provisions",
+      "document_title_raw": "General Provisions for Buildings & Structures",
+      "pdf_page_start": 20,
+      "pdf_page_end": 30,
+      "bylaw_page_start": 16,
+      "bylaw_page_end": 26
+    },
+    {
+      "file": "general-provisions-land-use.json",
+      "document_type": "general_provisions",
+      "document_title_raw": "General Provisions for Land Use",
+      "pdf_page_start": 31,
+      "pdf_page_end": 40,
+      "bylaw_page_start": 27,
+      "bylaw_page_end": 36
+    },
+    {
+      "file": "general-provisions-lots-site-design.json",
+      "document_type": "general_provisions",
+      "document_title_raw": "General Provisions for Lots & Site Design",
+      "pdf_page_start": 41,
+      "pdf_page_end": 46,
+      "bylaw_page_start": 37,
+      "bylaw_page_end": 42
+    },
+    {
+      "file": "general-provisions-parking.json",
+      "document_type": "general_provisions",
+      "document_title_raw": "General Provisions for Parking",
+      "pdf_page_start": 65,
+      "pdf_page_end": 74,
+      "bylaw_page_start": 61,
+      "bylaw_page_end": 70
+    },
+    {
+      "file": "general-provisions-signage.json",
+      "document_type": "general_provisions",
+      "document_title_raw": "General Provisions For Signage",
+      "pdf_page_start": 75,
+      "pdf_page_end": 90,
+      "bylaw_page_start": 71,
+      "bylaw_page_end": 86
+    },
+    {
+      "file": "general-provisions-subdividing-land.json",
+      "document_type": "general_provisions",
+      "document_title_raw": "General Provisions Subdividing Land",
+      "pdf_page_start": 51,
+      "pdf_page_end": 64,
+      "bylaw_page_start": 47,
+      "bylaw_page_end": 60
+    },
+    {
+      "file": "permit-applications-processes.json",
+      "document_type": "other",
+      "document_title_raw": "Permit Applications & Processes",
+      "pdf_page_start": 9,
+      "pdf_page_end": 19,
+      "bylaw_page_start": 5,
+      "bylaw_page_end": 15
     }
   ],
   "schedules": [
     {
-      "schedule_label_raw": "Schedule A",
-      "title": "Land Use Zoning Map",
       "file": "schedules/schedule-a-land-use-zoning-map.json",
+      "title": "Land Use Zoning Map",
       "pdf_page_start": 197,
       "pdf_page_end": 197,
       "bylaw_page_start": 193,
       "bylaw_page_end": 193
     },
     {
-      "schedule_label_raw": "Schedule B",
-      "title": "Downtown Height Schedule",
       "file": "schedules/schedule-b-downtown-height-schedule.json",
+      "title": "Downtown Height Schedule",
       "pdf_page_start": 198,
       "pdf_page_end": 198,
       "bylaw_page_start": 194,
       "bylaw_page_end": 194
     },
     {
-      "schedule_label_raw": "Schedule C",
-      "title": "Street Hierarchy Schedule",
       "file": "schedules/schedule-c-street-hierarchy-schedule.json",
+      "title": "Street Hierarchy Schedule",
       "pdf_page_start": 199,
       "pdf_page_end": 199,
       "bylaw_page_start": 195,
       "bylaw_page_end": 195
     },
     {
-      "schedule_label_raw": "Schedule D",
-      "title": "Hillsborough Height Schedule",
       "file": "schedules/schedule-d-hillsborough-height-schedule.json",
+      "title": "Hillsborough Height Schedule",
       "pdf_page_start": 200,
       "pdf_page_end": 200,
       "bylaw_page_start": 196,
@@ -400,8 +314,9 @@
     }
   ],
   "known_limits": [
-    "pypdf text order can differ from visual PDF order around columns, tables, figures, and schedules.",
-    "Tables, figures, and dimensional requirements are preserved as source text and require QA before normalization.",
-    "Schedule maps are not spatially extracted in this source JSON pass."
+    "Draft outputs are normalized into the approved Charlottetown extraction schema.",
+    "Code-table matches reuse reviewed current Charlottetown seed files; unmatched phrases are preserved with review flags and summarized in code-table-match-report.json.",
+    "Draft schedule map files preserve page text only and still require spatial QA before downstream use.",
+    "Any raw PDF ordering defects that survive the source extraction pass remain surfaced through review flags rather than silent normalization."
   ]
 }

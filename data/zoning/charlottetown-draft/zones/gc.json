@@ -1,1390 +1,3804 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Draft Zoning & Development Bylaw",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+    "document_type": "zone",
     "zone_code": "GC",
     "zone_name": "Growth Corridor",
-    "part_label_raw": "PART 22",
-    "chapter_heading_raw": "PART 22 GC - Growth Corridor",
-    "draft_date_raw": "April 7, 2026"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": [
-      "dot_numeric_provision_labels",
-      "parenthesized_alpha_clause_labels"
-    ]
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "(a)",
-      "use_type": "permitted_use",
-      "use_name": "Cemetery",
-      "status": "active",
-      "conditions": "The following uses are permitted in the GC Zone:",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      }
-    },
-    {
-      "clause_label_raw": "(b)",
-      "use_type": "permitted_use",
-      "use_name": "Commercial Daycare Centre",
-      "status": "active",
-      "conditions": "The following uses are permitted in the GC Zone:",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      }
-    },
-    {
-      "clause_label_raw": "(c)",
-      "use_type": "permitted_use",
-      "use_name": "Community Care Facility",
-      "status": "active",
-      "conditions": "The following uses are permitted in the GC Zone:",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      }
-    },
-    {
-      "clause_label_raw": "(d)",
-      "use_type": "permitted_use",
-      "use_name": "Community Institutional",
-      "status": "active",
-      "conditions": "The following uses are permitted in the GC Zone:",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      }
-    },
-    {
-      "clause_label_raw": "(e)",
-      "use_type": "permitted_use",
-      "use_name": "Cultural Establishment",
-      "status": "active",
-      "conditions": "The following uses are permitted in the GC Zone:",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      }
-    },
-    {
-      "clause_label_raw": "(f)",
-      "use_type": "permitted_use",
-      "use_name": "Dormitory",
-      "status": "active",
-      "conditions": "The following uses are permitted in the GC Zone:",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      }
-    },
-    {
-      "clause_label_raw": "(g)",
-      "use_type": "permitted_use",
-      "use_name": "Educational Institution (private)",
-      "status": "active",
-      "conditions": "The following uses are permitted in the GC Zone:",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      }
-    },
-    {
-      "clause_label_raw": "(h)",
-      "use_type": "permitted_use",
-      "use_name": "Educational Institution (public)",
-      "status": "active",
-      "conditions": "The following uses are permitted in the GC Zone:",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      }
-    },
-    {
-      "clause_label_raw": "(i)",
-      "use_type": "permitted_use",
-      "use_name": "Fire Station",
-      "status": "active",
-      "conditions": "The following uses are permitted in the GC Zone:",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      }
-    },
-    {
-      "clause_label_raw": "(j)",
-      "use_type": "permitted_use",
-      "use_name": "Funeral Establishment",
-      "status": "active",
-      "conditions": "The following uses are permitted in the GC Zone:",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      }
-    },
-    {
-      "clause_label_raw": "(k)",
-      "use_type": "permitted_use",
-      "use_name": "Government Offices",
-      "status": "active",
-      "conditions": "The following uses are permitted in the GC Zone:",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      }
-    },
-    {
-      "clause_label_raw": "(l)",
-      "use_type": "permitted_use",
-      "use_name": "Hospital",
-      "status": "active",
-      "conditions": "The following uses are permitted in the GC Zone:",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      }
-    },
-    {
-      "clause_label_raw": "(m)",
-      "use_type": "permitted_use",
-      "use_name": "Library",
-      "status": "active",
-      "conditions": "The following uses are permitted in the GC Zone:",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      }
-    },
-    {
-      "clause_label_raw": "(n)",
-      "use_type": "permitted_use",
-      "use_name": "Medical, Health and Dental Office",
-      "status": "active",
-      "conditions": "The following uses are permitted in the GC Zone:",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      }
-    },
-    {
-      "clause_label_raw": "(o)",
-      "use_type": "permitted_use",
-      "use_name": "Place of Worship",
-      "status": "active",
-      "conditions": "The following uses are permitted in the GC Zone:",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      }
-    },
-    {
-      "clause_label_raw": "(p)",
-      "use_type": "permitted_use",
-      "use_name": "Police Station",
-      "status": "active",
-      "conditions": "The following uses are permitted in the GC Zone:",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      }
-    },
-    {
-      "clause_label_raw": "(q)",
-      "use_type": "permitted_use",
-      "use_name": "Public Utility Service Operation",
-      "status": "active",
-      "conditions": "The following uses are permitted in the GC Zone:",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      }
-    },
-    {
-      "clause_label_raw": "(r)",
-      "use_type": "permitted_use",
-      "use_name": "Recreation or Fitness Center (indoors)",
-      "status": "active",
-      "conditions": "The following uses are permitted in the GC Zone:",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      }
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "22.1",
-      "title_label_raw": "INTENT",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "section",
-          "text": "Located primarily on the city's main arterial roads, linear Growth Corridors (GC) form corridors of development that are prime opportunities for increasing residential densities and supporting existing commercial uses. These areas are also ideal for mixed use development due to the proximity to transit and Active transportation linkages along the arterials. Growth corridors should support walkable neighbourhoods by encouraging street related buildings with parking on the sides or rear yards.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(s)",
-          "text": "Automobile Sales and Services",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(t)",
-          "text": "Automobile Service Station",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(u)",
-          "text": "Cannabis Retail Store",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(v)",
-          "text": "Convenience Store",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(w)",
-          "text": "Drive-thru Business",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(x)",
-          "text": "Eating and Drinking Establishment",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(y)",
-          "text": "Entertainment Establishment",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(z)",
-          "text": "Equipment Sales, Rental Service",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(aa)",
-          "text": "Garden Centre",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(ab)",
-          "text": "Greenhouse (nursery retail)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(ac)",
-          "text": "Grocery Store",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(ad)",
-          "text": "Hostel / Hotel",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(ae)",
-          "text": "Laundromat",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(af)",
-          "text": "Office",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(ag)",
-          "text": "Outdoor Retail Display",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(ah)",
-          "text": "Personal Service Shop",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(ai)",
-          "text": "Retail Store",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(aj)",
-          "text": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(ak)",
-          "text": "Retail Warehouse",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(al)",
-          "text": "Service Repair Establishment",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(am)",
-          "text": "Shopping Centre",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(an)",
-          "text": "Theatre",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(ao)",
-          "text": "Transportation Service",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(ap)",
-          "text": "Veterinary Services",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(aq)",
-          "text": "Warehouse, Storage Facility and/or Distribution Centre",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(ar)",
-          "text": "Parking Lot / Structure",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(as)",
-          "text": "Transport Terminal",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "These uses are permitted so long as the following lot requirements are met:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Lot Area N/A",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Frontage min. 12 m",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Front Yard Setback min. 2 m max.6 m the front yard setback may be greater than the max. for up to 20% of the streetline",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(d)",
-          "text": "Flanking Yard Setback min. 2 m max. 6 m the flankage yard setback may be greater than the max. for up to 20% of the streetline",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(e)",
-          "text": "Side Yard Setback min. 0 m, 6 m bordering residential zone",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(f)",
-          "text": "Rear Yard Setback min. 12 m when abutting RN, or RM, otherwise 6 m",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(g)",
-          "text": "Coverage max. 50%, 70% if half the parking is located underground",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": "22.2",
-      "title_label_raw": "RE-ZONING",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "Rezoning from GC to GN may be considered where the policies of the Official Plan can be demonstrated.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 3,
-      "section_label_raw": "22.3",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "The following uses are permitted in the GC Zone:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Cemetery",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Commercial Daycare Centre",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Community Care Facility",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(d)",
-          "text": "Community Institutional",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(e)",
-          "text": "Cultural Establishment",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(f)",
-          "text": "Dormitory",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(g)",
-          "text": "Educational Institution (private)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(h)",
-          "text": "Educational Institution (public)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(i)",
-          "text": "Fire Station",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(j)",
-          "text": "Funeral Establishment",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(k)",
-          "text": "Government Offices",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(l)",
-          "text": "Hospital",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(m)",
-          "text": "Library",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(n)",
-          "text": "Medical, Health and Dental Office",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(o)",
-          "text": "Place of Worship",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(p)",
-          "text": "Police Station",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(q)",
-          "text": "Public Utility Service Operation",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        },
-        {
-          "provision_label_raw": "(r)",
-          "text": "Recreation or Fitness Center (indoors)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 141,
-            "pdf_page_end": 141,
-            "bylaw_page_start": 137,
-            "bylaw_page_end": 137
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 4,
-      "section_label_raw": "22.4",
-      "title_label_raw": "PERMITTED WITH CONDITIONS",
-      "citations": {
-        "pdf_page_start": 143,
-        "pdf_page_end": 143,
-        "bylaw_page_start": 139,
-        "bylaw_page_end": 139
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "Drive-through's will only be considered by Development Agreement.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 143,
-            "pdf_page_end": 143,
-            "bylaw_page_start": 139,
-            "bylaw_page_end": 139
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "Gas stations will only be considered by Development Agreement.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 143,
-            "pdf_page_end": 143,
-            "bylaw_page_start": 139,
-            "bylaw_page_end": 139
-          }
-        },
-        {
-          "provision_label_raw": ".3",
-          "text": "Single storey chain stores will be considered by development agreement.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 143,
-            "pdf_page_end": 143,
-            "bylaw_page_start": 139,
-            "bylaw_page_end": 139
-          }
-        },
-        {
-          "provision_label_raw": ".4",
-          "text": "Flaglots are permitted with no less than 6m frontage as long as all other site and building requirements are met in Section 22.3.2 for both the flaglot and the main lot.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 143,
-            "pdf_page_end": 143,
-            "bylaw_page_start": 139,
-            "bylaw_page_end": 139
-          }
-        },
-        {
-          "provision_label_raw": ".5",
-          "text": "Permitted encroachments into the setbacks are listed in Table 3.2.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 143,
-            "pdf_page_end": 143,
-            "bylaw_page_start": 139,
-            "bylaw_page_end": 139
-          }
-        },
-        {
-          "provision_label_raw": ".6",
-          "text": "Home occupations are permitted if Section 4.9 requirements are met.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 143,
-            "pdf_page_end": 143,
-            "bylaw_page_start": 139,
-            "bylaw_page_end": 139
-          }
-        }
-      ],
-      "layout_artifacts_present": true
-    },
-    {
-      "order_index": 5,
-      "section_label_raw": "22.5",
-      "title_label_raw": "BUILT FORM REQUIREMENTS",
-      "citations": {
-        "pdf_page_start": 143,
-        "pdf_page_end": 143,
-        "bylaw_page_start": 139,
-        "bylaw_page_end": 139
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "One primary building per lot is permitted.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 143,
-            "pdf_page_end": 143,
-            "bylaw_page_start": 139,
-            "bylaw_page_end": 139
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "Attached garages shall not front onto the street frontage unless it provides access to an underground parking garage that does not exceed 25% of the primary building frontage on any streetline to a maximum width of 6 m.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 143,
-            "pdf_page_end": 143,
-            "bylaw_page_start": 139,
-            "bylaw_page_end": 139
-          }
-        },
-        {
-          "provision_label_raw": ".3",
-          "text": "All street-facing facades shall provide at least one horizontal or vertical facade articulation of no less than 300 mm for no less than 30% of the facade area.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 143,
-            "pdf_page_end": 143,
-            "bylaw_page_start": 139,
-            "bylaw_page_end": 139
-          }
-        },
-        {
-          "provision_label_raw": ".4",
-          "text": "Streetwall height varies depending on the allowable height of the building as follows:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 143,
-            "pdf_page_end": 143,
-            "bylaw_page_start": 139,
-            "bylaw_page_end": 139
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "If the allowable building height is equal to or less than 5 storeys, the maximum allowable streetwall height shall be 3 storeys",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 143,
-            "pdf_page_end": 143,
-            "bylaw_page_start": 139,
-            "bylaw_page_end": 139
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "If the allowable building height is 6 storeys, the maximum allowable streetwall height shall be 4 storeys",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 143,
-            "pdf_page_end": 143,
-            "bylaw_page_start": 139,
-            "bylaw_page_end": 139
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Streetwall height can be less than the maximum allowable streetwall height to a minimum of 2 storeys high.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 143,
-            "pdf_page_end": 143,
-            "bylaw_page_start": 139,
-            "bylaw_page_end": 139
-          }
-        },
-        {
-          "provision_label_raw": "(d)",
-          "text": "Streetwall heights can step up or down along sloping streetline grades as long as the maximum height is not exceeded (see Figure 22.1).",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 143,
-            "pdf_page_end": 143,
-            "bylaw_page_start": 139,
-            "bylaw_page_end": 139
-          }
-        },
-        {
-          "provision_label_raw": ".5",
-          "text": "Building height is controlled by lot depth and side yard adjacency such that:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 143,
-            "pdf_page_end": 143,
-            "bylaw_page_start": 139,
-            "bylaw_page_end": 139
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Any GC zoned property that borders a residential zone on its side yard shall have a maximum building height of 4 storeys.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 143,
-            "pdf_page_end": 143,
-            "bylaw_page_start": 139,
-            "bylaw_page_end": 139
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Any GC zoned property that borders a residential zone on its rear yard that has an average lot depth less than 38 m shall have a maximum building height of 4 storeys;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 143,
-            "pdf_page_end": 143,
-            "bylaw_page_start": 139,
-            "bylaw_page_end": 139
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Any GC zoned property that borders a residential zone on its rear yard that has an average lot Depth greater than 38 m",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 143,
-            "pdf_page_end": 143,
-            "bylaw_page_start": 139,
-            "bylaw_page_end": 139
-          }
-        }
-      ],
-      "layout_artifacts_present": true
-    },
-    {
-      "order_index": 6,
-      "section_label_raw": "22.6",
-      "title_label_raw": "LANDSCAPE REQUIREMENTS",
-      "citations": {
-        "pdf_page_start": 144,
-        "pdf_page_end": 144,
-        "bylaw_page_start": 140,
-        "bylaw_page_end": 140
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "All driveways shall be hard surfaced with asphalt, concrete or unit pavers. Loose gravel or soil is not permitted.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 144,
-            "pdf_page_end": 144,
-            "bylaw_page_start": 140,
-            "bylaw_page_end": 140
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "Only one driveway per 20 m of frontage is permitted to a maximum of two (2) driveways per lot.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 144,
-            "pdf_page_end": 144,
-            "bylaw_page_start": 140,
-            "bylaw_page_end": 140
-          }
-        },
-        {
-          "provision_label_raw": ".3",
-          "text": "Shared driveways are encouraged between neighbouring properties whenever possible.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 144,
-            "pdf_page_end": 144,
-            "bylaw_page_start": 140,
-            "bylaw_page_end": 140
-          }
-        },
-        {
-          "provision_label_raw": ".4",
-          "text": "A minimum 2 m wide hard surfaced pathway shall link the parking lot to the front door of every building.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 144,
-            "pdf_page_end": 144,
-            "bylaw_page_start": 140,
-            "bylaw_page_end": 140
-          }
-        },
-        {
-          "provision_label_raw": ".5",
-          "text": "A minimum 2 m wide hard surfaced pathway shall link the sidewalk to the front door of every building.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 144,
-            "pdf_page_end": 144,
-            "bylaw_page_start": 140,
-            "bylaw_page_end": 140
-          }
-        },
-        {
-          "provision_label_raw": ".6",
-          "text": "If there are no street trees in the bordering public street right-of-way, each development shall include no less than 1 tree per 10 m of frontage between the building and the street. Decimal results shall be rounded up.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 144,
-            "pdf_page_end": 144,
-            "bylaw_page_start": 140,
-            "bylaw_page_end": 140
-          }
-        },
-        {
-          "provision_label_raw": ".7",
-          "text": "A 3m landscape buffer is required for any GC properties that border residential zoned Max. Streetwall Height 3-storey SW for < 5-storey 4-storey SW for 6 storeys Front/Flank Setback 2-6 m for 80% Min. Lot Frontage 12 m Figure 22.2 GC Zone Built Form Standards Min. Side Yard Setback 0 m, 6 m bordering residential zone Min. Rear Yard Setback 6 m Min. Streetwall Stepback 2.5 m for 70% of streetwall Max. Building Dimension 60 m Max. Lot Coverage 50%, 70% if half the parking is located underground Max. Building Height Avg. Lot Depth < 38 m = 4 Storeys; Avg. Lot Depth 38 m<>60 m = 5 Storeys Avg. Lot Depth exceeds 60 m = 6 Storeys properties in the rear yard. Each landscape buffer shall include:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 144,
-            "pdf_page_end": 144,
-            "bylaw_page_start": 140,
-            "bylaw_page_end": 140
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "A 1.8 m high opaque fence along the rear yard",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 144,
-            "pdf_page_end": 144,
-            "bylaw_page_start": 140,
-            "bylaw_page_end": 140
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "One tree per 6 m of rear yard border",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 144,
-            "pdf_page_end": 144,
-            "bylaw_page_start": 140,
-            "bylaw_page_end": 140
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Shrub beds at a rate of 2 m 2 per tree consisting of shrubs, annuals or perennials.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 144,
-            "pdf_page_end": 144,
-            "bylaw_page_start": 140,
-            "bylaw_page_end": 140
-          }
-        },
-        {
-          "provision_label_raw": ".8",
-          "text": "All disturbed surfaces shall be seeded, sodded or hydroseeded with grass or meadow mixture or restored to natural condition.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 144,
-            "pdf_page_end": 144,
-            "bylaw_page_start": 140,
-            "bylaw_page_end": 140
-          }
-        },
-        {
-          "provision_label_raw": ".9",
-          "text": "Each grade-related unit must provide no less than 4 m 2 of private outdoor amenity space (patio, balcony, rooftop deck, or small yard) to ensure resident comfort and privacy.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 144,
-            "pdf_page_end": 144,
-            "bylaw_page_start": 140,
-            "bylaw_page_end": 140
-          }
-        },
-        {
-          "provision_label_raw": ".10",
-          "text": "Surface parking lots that exceed 24 cars shall include one landscaped island per 15 parking spots. Decimal results shall be rounded up.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 144,
-            "pdf_page_end": 144,
-            "bylaw_page_start": 140,
-            "bylaw_page_end": 140
-          }
-        }
-      ],
-      "layout_artifacts_present": true
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "Official Plan can",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 141,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 137
-      },
-      "source_text": "Rezoning from GC to GN may be considered where the policies of the Official Plan can be demonstrated."
-    },
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "Section 22.3.2",
-      "citations": {
-        "pdf_page_start": 143,
-        "pdf_page_end": 143,
-        "bylaw_page_start": 139,
-        "bylaw_page_end": 139
-      },
-      "source_text": "Flaglots are permitted with no less than 6m frontage as long as all other site and building requirements are met in Section 22.3.2 for both the flaglot and the main lot."
-    },
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "Table 3.2.",
-      "citations": {
-        "pdf_page_start": 143,
-        "pdf_page_end": 143,
-        "bylaw_page_start": 139,
-        "bylaw_page_end": 139
-      },
-      "source_text": "Permitted encroachments into the setbacks are listed in Table 3.2."
-    },
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "Section 4.9",
-      "citations": {
-        "pdf_page_start": 143,
-        "pdf_page_end": 143,
-        "bylaw_page_start": 139,
-        "bylaw_page_end": 139
-      },
-      "source_text": "Home occupations are permitted if Section 4.9 requirements are met."
-    }
-  ],
-  "content_blocks": [
-    {
-      "heading_context_raw": "PART 22 GC - unassigned extracted text",
-      "text": "Figure 22.1 GC Zone Sloping Streetline Grade Streetwall Conditions Streetwall Height May step up following avg. streetline grade Max. Building Height 6 Storeys Max. Streetwall Height 4 Storeys Min. Streetwall Stepback 2.5 m4 storeys 4 storeys Streetline grade Sloping Street Streetline Grade but less than 60 m shall have a maximum building height of 5 storeys (d) Any GC zoned property that borders a residential zone on its rear yard that has an average lot depth that exceeds 60 m shall have a maximum building height of 6 storeys. (e) Any GC zoned property that shares side yards and rear yard with another GC zoned property shall have a maximum building height of 6 storeys. The properties shall have been in existence at the time this bylaw was adopted. .6 The maximum building dimension is 60 m. .7 Parking is not permitted between the street and the building. .8 Primary building lobbies shall front onto the street-front. .9 The amenity requirements in Section 3.14 shall be followed. .10 For multi-unit buildings, each grade-related unit shall include a patio door.",
-      "citations": {
-        "pdf_page_start": 141,
-        "pdf_page_end": 146,
-        "bylaw_page_start": 137,
-        "bylaw_page_end": 142
-      }
-    }
-  ],
-  "open_issues": [
-    {
-      "issue_type": "extraction_review",
-      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization."
-    },
-    {
-      "issue_type": "table_parsing_review",
-      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization."
-    },
-    {
-      "issue_type": "zone_boundary_review",
-      "description": "Some extracted text was not safely assigned to a labeled section and is preserved in content_blocks."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "PART 22",
+    "zone_title_raw": "GC - Growth Corridor",
+    "citations": {
       "pdf_page_start": 141,
       "pdf_page_end": 146,
       "bylaw_page_start": 137,
       "bylaw_page_end": 142
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-gc",
+        "source_unit_type": "zone",
+        "label_raw": "PART 22",
+        "title_raw": "GC - Growth Corridor",
+        "text_raw": "Located primarily on the city's main arterial roads, linear Growth Corridors (GC) form corridors of development that are prime opportunities for increasing residential densities and supporting existing commercial uses. These areas are also ideal for mixed use development due to the proximity to transit and Active transportation linkages along the arterials. Growth corridors should support walkable neighbourhoods by encouraging street related buildings with parking on the sides or rear yards.\nAutomobile Sales and Services\nAutomobile Service Station\nCannabis Retail Store\nConvenience Store\nDrive-thru Business\nEating and Drinking Establishment\nEntertainment Establishment\nEquipment Sales, Rental Service\nGarden Centre\nGreenhouse (nursery retail)\nGrocery Store\nHostel / Hotel\nLaundromat\nOffice\nOutdoor Retail Display\nPersonal Service Shop\nRetail Store\nRetail Store with connected Retail Warehouse, Light Manufacturing or assembly facility\nRetail Warehouse\nService Repair Establishment\nShopping Centre\nTheatre\nTransportation Service\nVeterinary Services\nWarehouse, Storage Facility and/or Distribution Centre\nParking Lot / Structure\nTransport Terminal\nThese uses are permitted so long as the following lot requirements are met:\nLot Area N/A\nFrontage min. 12 m\nFront Yard Setback min. 2 m max.6 m the front yard setback may be greater than the max. for up to 20% of the streetline\nFlanking Yard Setback min. 2 m max. 6 m the flankage yard setback may be greater than the max. for up to 20% of the streetline\nSide Yard Setback min. 0 m, 6 m bordering residential zone\nRear Yard Setback min. 12 m when abutting RN, or RM, otherwise 6 m\nCoverage max. 50%, 70% if half the parking is located underground\nRezoning from GC to GN may be considered where the policies of the Official Plan can be demonstrated.\nThe following uses are permitted in the GC Zone:\nCemetery\nCommercial Daycare Centre\nCommunity Care Facility\nCommunity Institutional\nCultural Establishment\nDormitory\nEducational Institution (private)\nEducational Institution (public)\nFire Station\nFuneral Establishment\nGovernment Offices\nHospital\nLibrary\nMedical, Health and Dental Office\nPlace of Worship\nPolice Station\nPublic Utility Service Operation\nRecreation or Fitness Center (indoors)\nDrive-through's will only be considered by Development Agreement.\nGas stations will only be considered by Development Agreement.\nSingle storey chain stores will be considered by development agreement.\nFlaglots are permitted with no less than 6m frontage as long as all other site and building requirements are met in Section 22.3.2 for both the flaglot and the main lot.\nPermitted encroachments into the setbacks are listed in Table 3.2.\nHome occupations are permitted if Section 4.9 requirements are met.\nOne primary building per lot is permitted.\nAttached garages shall not front onto the street frontage unless it provides access to an underground parking garage that does not exceed 25% of the primary building frontage on any streetline to a maximum width of 6 m.\nAll street-facing facades shall provide at least one horizontal or vertical facade articulation of no less than 300 mm for no less than 30% of the facade area.\nStreetwall height varies depending on the allowable height of the building as follows:\nIf the allowable building height is equal to or less than 5 storeys, the maximum allowable streetwall height shall be 3 storeys\nIf the allowable building height is 6 storeys, the maximum allowable streetwall height shall be 4 storeys\nStreetwall height can be less than the maximum allowable streetwall height to a minimum of 2 storeys high.\nStreetwall heights can step up or down along sloping streetline grades as long as the maximum height is not exceeded (see Figure 22.1).\nBuilding height is controlled by lot depth and side yard adjacency such that:\nAny GC zoned property that borders a residential zone on its side yard shall have a maximum building height of 4 storeys.\nAny GC zoned property that borders a residential zone on its rear yard that has an average lot depth less than 38 m shall have a maximum building height of 4 storeys;\nAny GC zoned property that borders a residential zone on its rear yard that has an average lot Depth greater than 38 m\nAll driveways shall be hard surfaced with asphalt, concrete or unit pavers. Loose gravel or soil is not permitted.\nOnly one driveway per 20 m of frontage is permitted to a maximum of two (2) driveways per lot.\nShared driveways are encouraged between neighbouring properties whenever possible.\nA minimum 2 m wide hard surfaced pathway shall link the parking lot to the front door of every building.\nA minimum 2 m wide hard surfaced pathway shall link the sidewalk to the front door of every building.\nIf there are no street trees in the bordering public street right-of-way, each development shall include no less than 1 tree per 10 m of frontage between the building and the street. Decimal results shall be rounded up.\nA 3m landscape buffer is required for any GC properties that border residential zoned Max. Streetwall Height 3-storey SW for < 5-storey 4-storey SW for 6 storeys Front/Flank Setback 2-6 m for 80% Min. Lot Frontage 12 m Figure 22.2 GC Zone Built Form Standards Min. Side Yard Setback 0 m, 6 m bordering residential zone Min. Rear Yard Setback 6 m Min. Streetwall Stepback 2.5 m for 70% of streetwall Max. Building Dimension 60 m Max. Lot Coverage 50%, 70% if half the parking is located underground Max. Building Height Avg. Lot Depth < 38 m = 4 Storeys; Avg. Lot Depth 38 m<>60 m = 5 Storeys Avg. Lot Depth exceeds 60 m = 6 Storeys properties in the rear yard. Each landscape buffer shall include:\nA 1.8 m high opaque fence along the rear yard\nOne tree per 6 m of rear yard border\nShrub beds at a rate of 2 m 2 per tree consisting of shrubs, annuals or perennials.\nAll disturbed surfaces shall be seeded, sodded or hydroseeded with grass or meadow mixture or restored to natural condition.\nEach grade-related unit must provide no less than 4 m 2 of private outdoor amenity space (patio, balcony, rooftop deck, or small yard) to ensure resident comfort and privacy.\nSurface parking lots that exceed 24 cars shall include one landscaped island per 15 parking spots. Decimal results shall be rounded up.",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 141,
+          "pdf_page_end": 146,
+          "bylaw_page_start": 137,
+          "bylaw_page_end": 142
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-gc-section-22-1",
+        "section_label_raw": "22.1",
+        "section_title_raw": "INTENT",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-gc-clause-22-1",
+            "clause_label_raw": "section",
+            "clause_text_raw": "Located primarily on the city's main arterial roads, linear Growth Corridors (GC) form corridors of development that are prime opportunities for increasing residential densities and supporting existing commercial uses. These areas are also ideal for mixed use development due to the proximity to transit and Active transportation linkages along the arterials. Growth corridors should support walkable neighbourhoods by encouraging street related buildings with parking on the sides or rear yards.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-s",
+            "clause_label_raw": "(s)",
+            "clause_text_raw": "Automobile Sales and Services",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-t",
+            "clause_label_raw": "(t)",
+            "clause_text_raw": "Automobile Service Station",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-u",
+            "clause_label_raw": "(u)",
+            "clause_text_raw": "Cannabis Retail Store",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-v",
+            "clause_label_raw": "(v)",
+            "clause_text_raw": "Convenience Store",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-w",
+            "clause_label_raw": "(w)",
+            "clause_text_raw": "Drive-thru Business",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-x",
+            "clause_label_raw": "(x)",
+            "clause_text_raw": "Eating and Drinking Establishment",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-y",
+            "clause_label_raw": "(y)",
+            "clause_text_raw": "Entertainment Establishment",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-z",
+            "clause_label_raw": "(z)",
+            "clause_text_raw": "Equipment Sales, Rental Service",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-aa",
+            "clause_label_raw": "(aa)",
+            "clause_text_raw": "Garden Centre",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-ab",
+            "clause_label_raw": "(ab)",
+            "clause_text_raw": "Greenhouse (nursery retail)",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-ac",
+            "clause_label_raw": "(ac)",
+            "clause_text_raw": "Grocery Store",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 12,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-ad",
+            "clause_label_raw": "(ad)",
+            "clause_text_raw": "Hostel / Hotel",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 13,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-ae",
+            "clause_label_raw": "(ae)",
+            "clause_text_raw": "Laundromat",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 14,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-af",
+            "clause_label_raw": "(af)",
+            "clause_text_raw": "Office",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 15,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-ag",
+            "clause_label_raw": "(ag)",
+            "clause_text_raw": "Outdoor Retail Display",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 16,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-ah",
+            "clause_label_raw": "(ah)",
+            "clause_text_raw": "Personal Service Shop",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 17,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-ai",
+            "clause_label_raw": "(ai)",
+            "clause_text_raw": "Retail Store",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 18,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-aj",
+            "clause_label_raw": "(aj)",
+            "clause_text_raw": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 19,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-ak",
+            "clause_label_raw": "(ak)",
+            "clause_text_raw": "Retail Warehouse",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 20,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-al",
+            "clause_label_raw": "(al)",
+            "clause_text_raw": "Service Repair Establishment",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 21,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-am",
+            "clause_label_raw": "(am)",
+            "clause_text_raw": "Shopping Centre",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 22,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-an",
+            "clause_label_raw": "(an)",
+            "clause_text_raw": "Theatre",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 23,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-ao",
+            "clause_label_raw": "(ao)",
+            "clause_text_raw": "Transportation Service",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 24,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-ap",
+            "clause_label_raw": "(ap)",
+            "clause_text_raw": "Veterinary Services",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 25,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-aq",
+            "clause_label_raw": "(aq)",
+            "clause_text_raw": "Warehouse, Storage Facility and/or Distribution Centre",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 26,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-ar",
+            "clause_label_raw": "(ar)",
+            "clause_text_raw": "Parking Lot / Structure",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 27,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-as",
+            "clause_label_raw": "(as)",
+            "clause_text_raw": "Transport Terminal",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 28,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "These uses are permitted so long as the following lot requirements are met:",
+            "parent_clause_id": "zone-gc-clause-22-1",
+            "source_order": 29,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-2-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Lot Area N/A",
+            "parent_clause_id": "zone-gc-clause-22-1-2",
+            "source_order": 30,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-2-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Frontage min. 12 m",
+            "parent_clause_id": "zone-gc-clause-22-1-2",
+            "source_order": 31,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-2-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Front Yard Setback min. 2 m max.6 m the front yard setback may be greater than the max. for up to 20% of the streetline",
+            "parent_clause_id": "zone-gc-clause-22-1-2",
+            "source_order": 32,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-2-d",
+            "clause_label_raw": "(d)",
+            "clause_text_raw": "Flanking Yard Setback min. 2 m max. 6 m the flankage yard setback may be greater than the max. for up to 20% of the streetline",
+            "parent_clause_id": "zone-gc-clause-22-1-2",
+            "source_order": 33,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-2-e",
+            "clause_label_raw": "(e)",
+            "clause_text_raw": "Side Yard Setback min. 0 m, 6 m bordering residential zone",
+            "parent_clause_id": "zone-gc-clause-22-1-2",
+            "source_order": 34,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-2-f",
+            "clause_label_raw": "(f)",
+            "clause_text_raw": "Rear Yard Setback min. 12 m when abutting RN, or RM, otherwise 6 m",
+            "parent_clause_id": "zone-gc-clause-22-1-2",
+            "source_order": 35,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-1-2-g",
+            "clause_label_raw": "(g)",
+            "clause_text_raw": "Coverage max. 50%, 70% if half the parking is located underground",
+            "parent_clause_id": "zone-gc-clause-22-1-2",
+            "source_order": 36,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-s",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-t",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-u",
+            "source_order": 4
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-v",
+            "source_order": 5
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-w",
+            "source_order": 6
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-x",
+            "source_order": 7
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-y",
+            "source_order": 8
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-z",
+            "source_order": 9
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-aa",
+            "source_order": 10
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-ab",
+            "source_order": 11
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-ac",
+            "source_order": 12
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-ad",
+            "source_order": 13
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-ae",
+            "source_order": 14
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-af",
+            "source_order": 15
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-ag",
+            "source_order": 16
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-ah",
+            "source_order": 17
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-ai",
+            "source_order": 18
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-aj",
+            "source_order": 19
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-ak",
+            "source_order": 20
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-al",
+            "source_order": 21
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-am",
+            "source_order": 22
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-an",
+            "source_order": 23
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-ao",
+            "source_order": 24
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-ap",
+            "source_order": 25
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-aq",
+            "source_order": 26
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-ar",
+            "source_order": 27
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-as",
+            "source_order": 28
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-2",
+            "source_order": 29
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-2-a",
+            "source_order": 30
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-2-b",
+            "source_order": 31
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-2-c",
+            "source_order": 32
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-2-d",
+            "source_order": 33
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-2-e",
+            "source_order": 34
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-2-f",
+            "source_order": 35
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-1-2-g",
+            "source_order": 36
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 141,
+          "pdf_page_end": 141,
+          "bylaw_page_start": 137,
+          "bylaw_page_end": 137
+        }
+      },
+      {
+        "section_id": "zone-gc-section-22-2",
+        "section_label_raw": "22.2",
+        "section_title_raw": "RE-ZONING",
+        "source_order": 2,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-gc-clause-22-2-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "Rezoning from GC to GN may be considered where the policies of the Official Plan can be demonstrated.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-2-1",
+            "source_order": 1
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 141,
+          "pdf_page_end": 141,
+          "bylaw_page_start": 137,
+          "bylaw_page_end": 137
+        }
+      },
+      {
+        "section_id": "zone-gc-section-22-3",
+        "section_label_raw": "22.3",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 3,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-gc-clause-22-3-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "The following uses are permitted in the GC Zone:",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-3-1-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Cemetery",
+            "parent_clause_id": "zone-gc-clause-22-3-1",
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-3-1-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Commercial Daycare Centre",
+            "parent_clause_id": "zone-gc-clause-22-3-1",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-3-1-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Community Care Facility",
+            "parent_clause_id": "zone-gc-clause-22-3-1",
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-3-1-d",
+            "clause_label_raw": "(d)",
+            "clause_text_raw": "Community Institutional",
+            "parent_clause_id": "zone-gc-clause-22-3-1",
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-3-1-e",
+            "clause_label_raw": "(e)",
+            "clause_text_raw": "Cultural Establishment",
+            "parent_clause_id": "zone-gc-clause-22-3-1",
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-3-1-f",
+            "clause_label_raw": "(f)",
+            "clause_text_raw": "Dormitory",
+            "parent_clause_id": "zone-gc-clause-22-3-1",
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-3-1-g",
+            "clause_label_raw": "(g)",
+            "clause_text_raw": "Educational Institution (private)",
+            "parent_clause_id": "zone-gc-clause-22-3-1",
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-3-1-h",
+            "clause_label_raw": "(h)",
+            "clause_text_raw": "Educational Institution (public)",
+            "parent_clause_id": "zone-gc-clause-22-3-1",
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-3-1-i",
+            "clause_label_raw": "(i)",
+            "clause_text_raw": "Fire Station",
+            "parent_clause_id": "zone-gc-clause-22-3-1",
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-3-1-j",
+            "clause_label_raw": "(j)",
+            "clause_text_raw": "Funeral Establishment",
+            "parent_clause_id": "zone-gc-clause-22-3-1",
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-3-1-k",
+            "clause_label_raw": "(k)",
+            "clause_text_raw": "Government Offices",
+            "parent_clause_id": "zone-gc-clause-22-3-1",
+            "source_order": 12,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-3-1-l",
+            "clause_label_raw": "(l)",
+            "clause_text_raw": "Hospital",
+            "parent_clause_id": "zone-gc-clause-22-3-1",
+            "source_order": 13,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-3-1-m",
+            "clause_label_raw": "(m)",
+            "clause_text_raw": "Library",
+            "parent_clause_id": "zone-gc-clause-22-3-1",
+            "source_order": 14,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-3-1-n",
+            "clause_label_raw": "(n)",
+            "clause_text_raw": "Medical, Health and Dental Office",
+            "parent_clause_id": "zone-gc-clause-22-3-1",
+            "source_order": 15,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-3-1-o",
+            "clause_label_raw": "(o)",
+            "clause_text_raw": "Place of Worship",
+            "parent_clause_id": "zone-gc-clause-22-3-1",
+            "source_order": 16,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-3-1-p",
+            "clause_label_raw": "(p)",
+            "clause_text_raw": "Police Station",
+            "parent_clause_id": "zone-gc-clause-22-3-1",
+            "source_order": 17,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-3-1-q",
+            "clause_label_raw": "(q)",
+            "clause_text_raw": "Public Utility Service Operation",
+            "parent_clause_id": "zone-gc-clause-22-3-1",
+            "source_order": 18,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-3-1-r",
+            "clause_label_raw": "(r)",
+            "clause_text_raw": "Recreation or Fitness Center (indoors)",
+            "parent_clause_id": "zone-gc-clause-22-3-1",
+            "source_order": 19,
+            "citations": {
+              "pdf_page_start": 141,
+              "pdf_page_end": 141,
+              "bylaw_page_start": 137,
+              "bylaw_page_end": 137
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-3-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-3-1-a",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-3-1-b",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-3-1-c",
+            "source_order": 4
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-3-1-d",
+            "source_order": 5
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-3-1-e",
+            "source_order": 6
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-3-1-f",
+            "source_order": 7
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-3-1-g",
+            "source_order": 8
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-3-1-h",
+            "source_order": 9
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-3-1-i",
+            "source_order": 10
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-3-1-j",
+            "source_order": 11
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-3-1-k",
+            "source_order": 12
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-3-1-l",
+            "source_order": 13
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-3-1-m",
+            "source_order": 14
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-3-1-n",
+            "source_order": 15
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-3-1-o",
+            "source_order": 16
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-3-1-p",
+            "source_order": 17
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-3-1-q",
+            "source_order": 18
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-3-1-r",
+            "source_order": 19
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 141,
+          "pdf_page_end": 141,
+          "bylaw_page_start": 137,
+          "bylaw_page_end": 137
+        }
+      },
+      {
+        "section_id": "zone-gc-section-22-4",
+        "section_label_raw": "22.4",
+        "section_title_raw": "PERMITTED WITH CONDITIONS",
+        "source_order": 4,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-gc-clause-22-4-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "Drive-through's will only be considered by Development Agreement.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 143,
+              "pdf_page_end": 143,
+              "bylaw_page_start": 139,
+              "bylaw_page_end": 139
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-4-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "Gas stations will only be considered by Development Agreement.",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 143,
+              "pdf_page_end": 143,
+              "bylaw_page_start": 139,
+              "bylaw_page_end": 139
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-4-3",
+            "clause_label_raw": ".3",
+            "clause_text_raw": "Single storey chain stores will be considered by development agreement.",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 143,
+              "pdf_page_end": 143,
+              "bylaw_page_start": 139,
+              "bylaw_page_end": 139
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-4-4",
+            "clause_label_raw": ".4",
+            "clause_text_raw": "Flaglots are permitted with no less than 6m frontage as long as all other site and building requirements are met in Section 22.3.2 for both the flaglot and the main lot.",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 143,
+              "pdf_page_end": 143,
+              "bylaw_page_start": 139,
+              "bylaw_page_end": 139
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-4-5",
+            "clause_label_raw": ".5",
+            "clause_text_raw": "Permitted encroachments into the setbacks are listed in Table 3.2.",
+            "parent_clause_id": null,
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 143,
+              "pdf_page_end": 143,
+              "bylaw_page_start": 139,
+              "bylaw_page_end": 139
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-4-6",
+            "clause_label_raw": ".6",
+            "clause_text_raw": "Home occupations are permitted if Section 4.9 requirements are met.",
+            "parent_clause_id": null,
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 143,
+              "pdf_page_end": 143,
+              "bylaw_page_start": 139,
+              "bylaw_page_end": 139
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-4-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-4-2",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-4-3",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-4-4",
+            "source_order": 4
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-4-5",
+            "source_order": 5
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-4-6",
+            "source_order": 6
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 143,
+          "pdf_page_end": 143,
+          "bylaw_page_start": 139,
+          "bylaw_page_end": 139
+        }
+      },
+      {
+        "section_id": "zone-gc-section-22-5",
+        "section_label_raw": "22.5",
+        "section_title_raw": "BUILT FORM REQUIREMENTS",
+        "source_order": 5,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-gc-clause-22-5-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "One primary building per lot is permitted.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 143,
+              "pdf_page_end": 143,
+              "bylaw_page_start": 139,
+              "bylaw_page_end": 139
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-5-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "Attached garages shall not front onto the street frontage unless it provides access to an underground parking garage that does not exceed 25% of the primary building frontage on any streetline to a maximum width of 6 m.",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 143,
+              "pdf_page_end": 143,
+              "bylaw_page_start": 139,
+              "bylaw_page_end": 139
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-5-3",
+            "clause_label_raw": ".3",
+            "clause_text_raw": "All street-facing facades shall provide at least one horizontal or vertical facade articulation of no less than 300 mm for no less than 30% of the facade area.",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 143,
+              "pdf_page_end": 143,
+              "bylaw_page_start": 139,
+              "bylaw_page_end": 139
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-5-4",
+            "clause_label_raw": ".4",
+            "clause_text_raw": "Streetwall height varies depending on the allowable height of the building as follows:",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 143,
+              "pdf_page_end": 143,
+              "bylaw_page_start": 139,
+              "bylaw_page_end": 139
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-5-4-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "If the allowable building height is equal to or less than 5 storeys, the maximum allowable streetwall height shall be 3 storeys",
+            "parent_clause_id": "zone-gc-clause-22-5-4",
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 143,
+              "pdf_page_end": 143,
+              "bylaw_page_start": 139,
+              "bylaw_page_end": 139
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-5-4-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "If the allowable building height is 6 storeys, the maximum allowable streetwall height shall be 4 storeys",
+            "parent_clause_id": "zone-gc-clause-22-5-4",
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 143,
+              "pdf_page_end": 143,
+              "bylaw_page_start": 139,
+              "bylaw_page_end": 139
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-5-4-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Streetwall height can be less than the maximum allowable streetwall height to a minimum of 2 storeys high.",
+            "parent_clause_id": "zone-gc-clause-22-5-4",
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 143,
+              "pdf_page_end": 143,
+              "bylaw_page_start": 139,
+              "bylaw_page_end": 139
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-5-4-d",
+            "clause_label_raw": "(d)",
+            "clause_text_raw": "Streetwall heights can step up or down along sloping streetline grades as long as the maximum height is not exceeded (see Figure 22.1).",
+            "parent_clause_id": "zone-gc-clause-22-5-4",
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 143,
+              "pdf_page_end": 143,
+              "bylaw_page_start": 139,
+              "bylaw_page_end": 139
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-5-5",
+            "clause_label_raw": ".5",
+            "clause_text_raw": "Building height is controlled by lot depth and side yard adjacency such that:",
+            "parent_clause_id": null,
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 143,
+              "pdf_page_end": 143,
+              "bylaw_page_start": 139,
+              "bylaw_page_end": 139
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-5-5-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Any GC zoned property that borders a residential zone on its side yard shall have a maximum building height of 4 storeys.",
+            "parent_clause_id": "zone-gc-clause-22-5-5",
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 143,
+              "pdf_page_end": 143,
+              "bylaw_page_start": 139,
+              "bylaw_page_end": 139
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-5-5-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Any GC zoned property that borders a residential zone on its rear yard that has an average lot depth less than 38 m shall have a maximum building height of 4 storeys;",
+            "parent_clause_id": "zone-gc-clause-22-5-5",
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 143,
+              "pdf_page_end": 143,
+              "bylaw_page_start": 139,
+              "bylaw_page_end": 139
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-5-5-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Any GC zoned property that borders a residential zone on its rear yard that has an average lot Depth greater than 38 m",
+            "parent_clause_id": "zone-gc-clause-22-5-5",
+            "source_order": 12,
+            "citations": {
+              "pdf_page_start": 143,
+              "pdf_page_end": 143,
+              "bylaw_page_start": 139,
+              "bylaw_page_end": 139
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-5-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-5-2",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-5-3",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-5-4",
+            "source_order": 4
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-5-4-a",
+            "source_order": 5
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-5-4-b",
+            "source_order": 6
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-5-4-c",
+            "source_order": 7
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-5-4-d",
+            "source_order": 8
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-5-5",
+            "source_order": 9
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-5-5-a",
+            "source_order": 10
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-5-5-b",
+            "source_order": 11
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-5-5-c",
+            "source_order": 12
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 143,
+          "pdf_page_end": 143,
+          "bylaw_page_start": 139,
+          "bylaw_page_end": 139
+        }
+      },
+      {
+        "section_id": "zone-gc-section-22-6",
+        "section_label_raw": "22.6",
+        "section_title_raw": "LANDSCAPE REQUIREMENTS",
+        "source_order": 6,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-gc-clause-22-6-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "All driveways shall be hard surfaced with asphalt, concrete or unit pavers. Loose gravel or soil is not permitted.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 144,
+              "pdf_page_end": 144,
+              "bylaw_page_start": 140,
+              "bylaw_page_end": 140
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-6-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "Only one driveway per 20 m of frontage is permitted to a maximum of two (2) driveways per lot.",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 144,
+              "pdf_page_end": 144,
+              "bylaw_page_start": 140,
+              "bylaw_page_end": 140
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-6-3",
+            "clause_label_raw": ".3",
+            "clause_text_raw": "Shared driveways are encouraged between neighbouring properties whenever possible.",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 144,
+              "pdf_page_end": 144,
+              "bylaw_page_start": 140,
+              "bylaw_page_end": 140
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-6-4",
+            "clause_label_raw": ".4",
+            "clause_text_raw": "A minimum 2 m wide hard surfaced pathway shall link the parking lot to the front door of every building.",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 144,
+              "pdf_page_end": 144,
+              "bylaw_page_start": 140,
+              "bylaw_page_end": 140
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-6-5",
+            "clause_label_raw": ".5",
+            "clause_text_raw": "A minimum 2 m wide hard surfaced pathway shall link the sidewalk to the front door of every building.",
+            "parent_clause_id": null,
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 144,
+              "pdf_page_end": 144,
+              "bylaw_page_start": 140,
+              "bylaw_page_end": 140
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-6-6",
+            "clause_label_raw": ".6",
+            "clause_text_raw": "If there are no street trees in the bordering public street right-of-way, each development shall include no less than 1 tree per 10 m of frontage between the building and the street. Decimal results shall be rounded up.",
+            "parent_clause_id": null,
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 144,
+              "pdf_page_end": 144,
+              "bylaw_page_start": 140,
+              "bylaw_page_end": 140
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-6-7",
+            "clause_label_raw": ".7",
+            "clause_text_raw": "A 3m landscape buffer is required for any GC properties that border residential zoned Max. Streetwall Height 3-storey SW for < 5-storey 4-storey SW for 6 storeys Front/Flank Setback 2-6 m for 80% Min. Lot Frontage 12 m Figure 22.2 GC Zone Built Form Standards Min. Side Yard Setback 0 m, 6 m bordering residential zone Min. Rear Yard Setback 6 m Min. Streetwall Stepback 2.5 m for 70% of streetwall Max. Building Dimension 60 m Max. Lot Coverage 50%, 70% if half the parking is located underground Max. Building Height Avg. Lot Depth < 38 m = 4 Storeys; Avg. Lot Depth 38 m<>60 m = 5 Storeys Avg. Lot Depth exceeds 60 m = 6 Storeys properties in the rear yard. Each landscape buffer shall include:",
+            "parent_clause_id": null,
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 144,
+              "pdf_page_end": 144,
+              "bylaw_page_start": 140,
+              "bylaw_page_end": 140
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-6-7-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "A 1.8 m high opaque fence along the rear yard",
+            "parent_clause_id": "zone-gc-clause-22-6-7",
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 144,
+              "pdf_page_end": 144,
+              "bylaw_page_start": 140,
+              "bylaw_page_end": 140
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-6-7-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "One tree per 6 m of rear yard border",
+            "parent_clause_id": "zone-gc-clause-22-6-7",
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 144,
+              "pdf_page_end": 144,
+              "bylaw_page_start": 140,
+              "bylaw_page_end": 140
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-6-7-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Shrub beds at a rate of 2 m 2 per tree consisting of shrubs, annuals or perennials.",
+            "parent_clause_id": "zone-gc-clause-22-6-7",
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 144,
+              "pdf_page_end": 144,
+              "bylaw_page_start": 140,
+              "bylaw_page_end": 140
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-6-8",
+            "clause_label_raw": ".8",
+            "clause_text_raw": "All disturbed surfaces shall be seeded, sodded or hydroseeded with grass or meadow mixture or restored to natural condition.",
+            "parent_clause_id": null,
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 144,
+              "pdf_page_end": 144,
+              "bylaw_page_start": 140,
+              "bylaw_page_end": 140
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-6-9",
+            "clause_label_raw": ".9",
+            "clause_text_raw": "Each grade-related unit must provide no less than 4 m 2 of private outdoor amenity space (patio, balcony, rooftop deck, or small yard) to ensure resident comfort and privacy.",
+            "parent_clause_id": null,
+            "source_order": 12,
+            "citations": {
+              "pdf_page_start": 144,
+              "pdf_page_end": 144,
+              "bylaw_page_start": 140,
+              "bylaw_page_end": 140
+            }
+          },
+          {
+            "clause_id": "zone-gc-clause-22-6-10",
+            "clause_label_raw": ".10",
+            "clause_text_raw": "Surface parking lots that exceed 24 cars shall include one landscaped island per 15 parking spots. Decimal results shall be rounded up.",
+            "parent_clause_id": null,
+            "source_order": 13,
+            "citations": {
+              "pdf_page_start": 144,
+              "pdf_page_end": 144,
+              "bylaw_page_start": 140,
+              "bylaw_page_end": 140
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-6-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-6-2",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-6-3",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-6-4",
+            "source_order": 4
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-6-5",
+            "source_order": 5
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-6-6",
+            "source_order": 6
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-6-7",
+            "source_order": 7
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-6-7-a",
+            "source_order": 8
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-6-7-b",
+            "source_order": 9
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-6-7-c",
+            "source_order": 10
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-6-8",
+            "source_order": 11
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-6-9",
+            "source_order": 12
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-gc-clause-22-6-10",
+            "source_order": 13
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 144,
+          "pdf_page_end": 144,
+          "bylaw_page_start": 140,
+          "bylaw_page_end": 140
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-gc-clause-22-1",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-s",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-t",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-u",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-v",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-w",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 6
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-x",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 7
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-y",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 8
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-z",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 9
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-aa",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 10
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-ab",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 11
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-ac",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 12
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-ad",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 13
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-ae",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 14
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-af",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 15
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-ag",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 16
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-ah",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 17
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-ai",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 18
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-aj",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 19
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-ak",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 20
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-al",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 21
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-am",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 22
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-an",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 23
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-ao",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 24
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-ap",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 25
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-aq",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 26
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-ar",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 27
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-as",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 28
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-2",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 29
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-2-a",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 30
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-2-b",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 31
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-2-c",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 32
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-2-d",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 33
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-2-e",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 34
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-2-f",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 35
+      },
+      {
+        "clause_id": "zone-gc-clause-22-1-2-g",
+        "section_id": "zone-gc-section-22-1",
+        "source_order": 36
+      },
+      {
+        "clause_id": "zone-gc-clause-22-2-1",
+        "section_id": "zone-gc-section-22-2",
+        "source_order": 37
+      },
+      {
+        "clause_id": "zone-gc-clause-22-3-1",
+        "section_id": "zone-gc-section-22-3",
+        "source_order": 38
+      },
+      {
+        "clause_id": "zone-gc-clause-22-3-1-a",
+        "section_id": "zone-gc-section-22-3",
+        "source_order": 39
+      },
+      {
+        "clause_id": "zone-gc-clause-22-3-1-b",
+        "section_id": "zone-gc-section-22-3",
+        "source_order": 40
+      },
+      {
+        "clause_id": "zone-gc-clause-22-3-1-c",
+        "section_id": "zone-gc-section-22-3",
+        "source_order": 41
+      },
+      {
+        "clause_id": "zone-gc-clause-22-3-1-d",
+        "section_id": "zone-gc-section-22-3",
+        "source_order": 42
+      },
+      {
+        "clause_id": "zone-gc-clause-22-3-1-e",
+        "section_id": "zone-gc-section-22-3",
+        "source_order": 43
+      },
+      {
+        "clause_id": "zone-gc-clause-22-3-1-f",
+        "section_id": "zone-gc-section-22-3",
+        "source_order": 44
+      },
+      {
+        "clause_id": "zone-gc-clause-22-3-1-g",
+        "section_id": "zone-gc-section-22-3",
+        "source_order": 45
+      },
+      {
+        "clause_id": "zone-gc-clause-22-3-1-h",
+        "section_id": "zone-gc-section-22-3",
+        "source_order": 46
+      },
+      {
+        "clause_id": "zone-gc-clause-22-3-1-i",
+        "section_id": "zone-gc-section-22-3",
+        "source_order": 47
+      },
+      {
+        "clause_id": "zone-gc-clause-22-3-1-j",
+        "section_id": "zone-gc-section-22-3",
+        "source_order": 48
+      },
+      {
+        "clause_id": "zone-gc-clause-22-3-1-k",
+        "section_id": "zone-gc-section-22-3",
+        "source_order": 49
+      },
+      {
+        "clause_id": "zone-gc-clause-22-3-1-l",
+        "section_id": "zone-gc-section-22-3",
+        "source_order": 50
+      },
+      {
+        "clause_id": "zone-gc-clause-22-3-1-m",
+        "section_id": "zone-gc-section-22-3",
+        "source_order": 51
+      },
+      {
+        "clause_id": "zone-gc-clause-22-3-1-n",
+        "section_id": "zone-gc-section-22-3",
+        "source_order": 52
+      },
+      {
+        "clause_id": "zone-gc-clause-22-3-1-o",
+        "section_id": "zone-gc-section-22-3",
+        "source_order": 53
+      },
+      {
+        "clause_id": "zone-gc-clause-22-3-1-p",
+        "section_id": "zone-gc-section-22-3",
+        "source_order": 54
+      },
+      {
+        "clause_id": "zone-gc-clause-22-3-1-q",
+        "section_id": "zone-gc-section-22-3",
+        "source_order": 55
+      },
+      {
+        "clause_id": "zone-gc-clause-22-3-1-r",
+        "section_id": "zone-gc-section-22-3",
+        "source_order": 56
+      },
+      {
+        "clause_id": "zone-gc-clause-22-4-1",
+        "section_id": "zone-gc-section-22-4",
+        "source_order": 57
+      },
+      {
+        "clause_id": "zone-gc-clause-22-4-2",
+        "section_id": "zone-gc-section-22-4",
+        "source_order": 58
+      },
+      {
+        "clause_id": "zone-gc-clause-22-4-3",
+        "section_id": "zone-gc-section-22-4",
+        "source_order": 59
+      },
+      {
+        "clause_id": "zone-gc-clause-22-4-4",
+        "section_id": "zone-gc-section-22-4",
+        "source_order": 60
+      },
+      {
+        "clause_id": "zone-gc-clause-22-4-5",
+        "section_id": "zone-gc-section-22-4",
+        "source_order": 61
+      },
+      {
+        "clause_id": "zone-gc-clause-22-4-6",
+        "section_id": "zone-gc-section-22-4",
+        "source_order": 62
+      },
+      {
+        "clause_id": "zone-gc-clause-22-5-1",
+        "section_id": "zone-gc-section-22-5",
+        "source_order": 63
+      },
+      {
+        "clause_id": "zone-gc-clause-22-5-2",
+        "section_id": "zone-gc-section-22-5",
+        "source_order": 64
+      },
+      {
+        "clause_id": "zone-gc-clause-22-5-3",
+        "section_id": "zone-gc-section-22-5",
+        "source_order": 65
+      },
+      {
+        "clause_id": "zone-gc-clause-22-5-4",
+        "section_id": "zone-gc-section-22-5",
+        "source_order": 66
+      },
+      {
+        "clause_id": "zone-gc-clause-22-5-4-a",
+        "section_id": "zone-gc-section-22-5",
+        "source_order": 67
+      },
+      {
+        "clause_id": "zone-gc-clause-22-5-4-b",
+        "section_id": "zone-gc-section-22-5",
+        "source_order": 68
+      },
+      {
+        "clause_id": "zone-gc-clause-22-5-4-c",
+        "section_id": "zone-gc-section-22-5",
+        "source_order": 69
+      },
+      {
+        "clause_id": "zone-gc-clause-22-5-4-d",
+        "section_id": "zone-gc-section-22-5",
+        "source_order": 70
+      },
+      {
+        "clause_id": "zone-gc-clause-22-5-5",
+        "section_id": "zone-gc-section-22-5",
+        "source_order": 71
+      },
+      {
+        "clause_id": "zone-gc-clause-22-5-5-a",
+        "section_id": "zone-gc-section-22-5",
+        "source_order": 72
+      },
+      {
+        "clause_id": "zone-gc-clause-22-5-5-b",
+        "section_id": "zone-gc-section-22-5",
+        "source_order": 73
+      },
+      {
+        "clause_id": "zone-gc-clause-22-5-5-c",
+        "section_id": "zone-gc-section-22-5",
+        "source_order": 74
+      },
+      {
+        "clause_id": "zone-gc-clause-22-6-1",
+        "section_id": "zone-gc-section-22-6",
+        "source_order": 75
+      },
+      {
+        "clause_id": "zone-gc-clause-22-6-2",
+        "section_id": "zone-gc-section-22-6",
+        "source_order": 76
+      },
+      {
+        "clause_id": "zone-gc-clause-22-6-3",
+        "section_id": "zone-gc-section-22-6",
+        "source_order": 77
+      },
+      {
+        "clause_id": "zone-gc-clause-22-6-4",
+        "section_id": "zone-gc-section-22-6",
+        "source_order": 78
+      },
+      {
+        "clause_id": "zone-gc-clause-22-6-5",
+        "section_id": "zone-gc-section-22-6",
+        "source_order": 79
+      },
+      {
+        "clause_id": "zone-gc-clause-22-6-6",
+        "section_id": "zone-gc-section-22-6",
+        "source_order": 80
+      },
+      {
+        "clause_id": "zone-gc-clause-22-6-7",
+        "section_id": "zone-gc-section-22-6",
+        "source_order": 81
+      },
+      {
+        "clause_id": "zone-gc-clause-22-6-7-a",
+        "section_id": "zone-gc-section-22-6",
+        "source_order": 82
+      },
+      {
+        "clause_id": "zone-gc-clause-22-6-7-b",
+        "section_id": "zone-gc-section-22-6",
+        "source_order": 83
+      },
+      {
+        "clause_id": "zone-gc-clause-22-6-7-c",
+        "section_id": "zone-gc-section-22-6",
+        "source_order": 84
+      },
+      {
+        "clause_id": "zone-gc-clause-22-6-8",
+        "section_id": "zone-gc-section-22-6",
+        "source_order": 85
+      },
+      {
+        "clause_id": "zone-gc-clause-22-6-9",
+        "section_id": "zone-gc-section-22-6",
+        "source_order": 86
+      },
+      {
+        "clause_id": "zone-gc-clause-22-6-10",
+        "section_id": "zone-gc-section-22-6",
+        "source_order": 87
+      }
+    ],
+    "tables_raw": [],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-gc-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 141,
+          "pdf_page_end": 146,
+          "bylaw_page_start": 137,
+          "bylaw_page_end": 142
+        }
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-gc-term-use-cemetery",
+        "term_raw": "Cemetery",
+        "term_normalized": "cemetery",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "cemetery"
+      },
+      {
+        "term_id": "zone-gc-term-use-commercial_daycare_centre",
+        "term_raw": "Commercial Daycare Centre",
+        "term_normalized": "commercial_daycare_centre",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "commercial_daycare_centre"
+      },
+      {
+        "term_id": "zone-gc-term-use-community_care_facility",
+        "term_raw": "Community Care Facility",
+        "term_normalized": "community_care_facility",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "community_care_facility"
+      },
+      {
+        "term_id": "zone-gc-term-use-community_institutional",
+        "term_raw": "Community Institutional",
+        "term_normalized": "community_institutional",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "community_institutional"
+      },
+      {
+        "term_id": "zone-gc-term-use-cultural_establishment",
+        "term_raw": "Cultural Establishment",
+        "term_normalized": "cultural_establishment",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "cultural_establishment"
+      },
+      {
+        "term_id": "zone-gc-term-use-dormitory",
+        "term_raw": "Dormitory",
+        "term_normalized": "dormitory",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "dormitory"
+      },
+      {
+        "term_id": "zone-gc-term-use-educational_institution_private",
+        "term_raw": "Educational Institution (private)",
+        "term_normalized": "educational_institution_private",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "educational_institution_private"
+      },
+      {
+        "term_id": "zone-gc-term-use-educational_institution_public",
+        "term_raw": "Educational Institution (public)",
+        "term_normalized": "educational_institution_public",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "educational_institution_public"
+      },
+      {
+        "term_id": "zone-gc-term-use-fire_station",
+        "term_raw": "Fire Station",
+        "term_normalized": "fire_station",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "fire_station"
+      },
+      {
+        "term_id": "zone-gc-term-use-funeral_establishment",
+        "term_raw": "Funeral Establishment",
+        "term_normalized": "funeral_establishment",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "funeral_establishment"
+      },
+      {
+        "term_id": "zone-gc-term-use-government_office",
+        "term_raw": "Government Offices",
+        "term_normalized": "government_office",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "government_office"
+      },
+      {
+        "term_id": "zone-gc-term-use-hospital",
+        "term_raw": "Hospital",
+        "term_normalized": "hospital",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "hospital"
+      },
+      {
+        "term_id": "zone-gc-term-use-library",
+        "term_raw": "Library",
+        "term_normalized": "library",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "library"
+      },
+      {
+        "term_id": "zone-gc-term-use-medical_health_and_dental_office",
+        "term_raw": "Medical, Health and Dental Office",
+        "term_normalized": "medical_health_and_dental_office",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "medical_health_and_dental_office"
+      },
+      {
+        "term_id": "zone-gc-term-use-place_of_worship",
+        "term_raw": "Place of Worship",
+        "term_normalized": "place_of_worship",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "place_of_worship"
+      },
+      {
+        "term_id": "zone-gc-term-use-police_station",
+        "term_raw": "Police Station",
+        "term_normalized": "police_station",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "police_station"
+      },
+      {
+        "term_id": "zone-gc-term-use-public_utility_service_operation",
+        "term_raw": "Public Utility Service Operation",
+        "term_normalized": "public_utility_service_operation",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "public_utility_service_operation"
+      },
+      {
+        "term_id": "zone-gc-term-use-recreation_or_fitness_centre_indoors",
+        "term_raw": "Recreation or Fitness Center (indoors)",
+        "term_normalized": "recreation_or_fitness_centre_indoors",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "recreation_or_fitness_centre_indoors"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-gc-use-cemetery-1-1",
+        "use_name_raw": "Cemetery",
+        "use_term_id": "zone-gc-term-use-cemetery",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-gc-use-commercial-daycare-centre-2-1",
+        "use_name_raw": "Commercial Daycare Centre",
+        "use_term_id": "zone-gc-term-use-commercial_daycare_centre",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-gc-use-community-care-facility-3-1",
+        "use_name_raw": "Community Care Facility",
+        "use_term_id": "zone-gc-term-use-community_care_facility",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-gc-use-community-institutional-4-1",
+        "use_name_raw": "Community Institutional",
+        "use_term_id": "zone-gc-term-use-community_institutional",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-gc-use-cultural-establishment-5-1",
+        "use_name_raw": "Cultural Establishment",
+        "use_term_id": "zone-gc-term-use-cultural_establishment",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-gc-use-dormitory-6-1",
+        "use_name_raw": "Dormitory",
+        "use_term_id": "zone-gc-term-use-dormitory",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-gc-use-educational-institution-private-7-1",
+        "use_name_raw": "Educational Institution (private)",
+        "use_term_id": "zone-gc-term-use-educational_institution_private",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-gc-use-educational-institution-public-8-1",
+        "use_name_raw": "Educational Institution (public)",
+        "use_term_id": "zone-gc-term-use-educational_institution_public",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-gc-use-fire-station-9-1",
+        "use_name_raw": "Fire Station",
+        "use_term_id": "zone-gc-term-use-fire_station",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-gc-use-funeral-establishment-10-1",
+        "use_name_raw": "Funeral Establishment",
+        "use_term_id": "zone-gc-term-use-funeral_establishment",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-gc-use-government-offices-11-1",
+        "use_name_raw": "Government Offices",
+        "use_term_id": "zone-gc-term-use-government_office",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-gc-use-hospital-12-1",
+        "use_name_raw": "Hospital",
+        "use_term_id": "zone-gc-term-use-hospital",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-gc-use-library-13-1",
+        "use_name_raw": "Library",
+        "use_term_id": "zone-gc-term-use-library",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-gc-use-medical-health-and-dental-office-14-1",
+        "use_name_raw": "Medical, Health and Dental Office",
+        "use_term_id": "zone-gc-term-use-medical_health_and_dental_office",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-gc-use-place-of-worship-15-1",
+        "use_name_raw": "Place of Worship",
+        "use_term_id": "zone-gc-term-use-place_of_worship",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-gc-use-police-station-16-1",
+        "use_name_raw": "Police Station",
+        "use_term_id": "zone-gc-term-use-police_station",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-gc-use-public-utility-service-operation-17-1",
+        "use_name_raw": "Public Utility Service Operation",
+        "use_term_id": "zone-gc-term-use-public_utility_service_operation",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-gc-use-recreation-or-fitness-center-indoors-18-1",
+        "use_name_raw": "Recreation or Fitness Center (indoors)",
+        "use_term_id": "zone-gc-term-use-recreation_or_fitness_centre_indoors",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-1-2-b-1",
+        "value_raw": "12 m",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-1-2-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-1-2-c-1",
+        "value_raw": "2 m",
+        "value": 2,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "greater_than",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-1-2-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-1-2-c-2",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "greater_than",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-1-2-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-1-2-d-1",
+        "value_raw": "2 m",
+        "value": 2,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "greater_than",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-1-2-d"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-1-2-d-2",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "greater_than",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-1-2-d"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-1-2-e-1",
+        "value_raw": "0 m",
+        "value": 0,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-1-2-e"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-1-2-e-2",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-1-2-e"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-1-2-f-1",
+        "value_raw": "12 m",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-1-2-f"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-1-2-f-2",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-1-2-f"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-4-4-1",
+        "value_raw": "6m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "less_than",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-4-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-5-2-1",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-5-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-5-4-a-1",
+        "value_raw": "5 storeys",
+        "value": 5,
+        "unit": "storey",
+        "measure_type": "count",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-5-4-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-5-4-a-2",
+        "value_raw": "3 storeys",
+        "value": 3,
+        "unit": "storey",
+        "measure_type": "count",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-5-4-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-5-4-b-1",
+        "value_raw": "6 storeys",
+        "value": 6,
+        "unit": "storey",
+        "measure_type": "count",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-5-4-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-5-4-b-2",
+        "value_raw": "4 storeys",
+        "value": 4,
+        "unit": "storey",
+        "measure_type": "count",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-5-4-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-5-4-c-1",
+        "value_raw": "2 storeys",
+        "value": 2,
+        "unit": "storey",
+        "measure_type": "count",
+        "comparator": "minimum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-5-4-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-5-5-a-1",
+        "value_raw": "4 storeys",
+        "value": 4,
+        "unit": "storey",
+        "measure_type": "count",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-5-5-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-5-5-b-1",
+        "value_raw": "38 m",
+        "value": 38,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-5-5-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-5-5-b-2",
+        "value_raw": "4 storeys",
+        "value": 4,
+        "unit": "storey",
+        "measure_type": "count",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-5-5-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-5-5-c-1",
+        "value_raw": "38 m",
+        "value": 38,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "greater_than",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-5-5-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-2-1",
+        "value_raw": "20 m",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-4-1",
+        "value_raw": "2 m",
+        "value": 2,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-5-1",
+        "value_raw": "2 m",
+        "value": 2,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-6-1",
+        "value_raw": "10 m",
+        "value": 10,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "less_than",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-7-1",
+        "value_raw": "3m",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-7-2",
+        "value_raw": "6 storeys",
+        "value": 6,
+        "unit": "storey",
+        "measure_type": "count",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-7-3",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-7-4",
+        "value_raw": "12 m",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-7-5",
+        "value_raw": "0 m",
+        "value": 0,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-7-6",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-7-7",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-7-8",
+        "value_raw": "2.5 m",
+        "value": 2.5,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-7-9",
+        "value_raw": "60 m",
+        "value": 60,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-7-10",
+        "value_raw": "38 m",
+        "value": 38,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-7-11",
+        "value_raw": "4 Storeys",
+        "value": 4,
+        "unit": "storey",
+        "measure_type": "count",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-7-12",
+        "value_raw": "38 m",
+        "value": 38,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-7-13",
+        "value_raw": "60 m",
+        "value": 60,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-7-14",
+        "value_raw": "5 Storeys",
+        "value": 5,
+        "unit": "storey",
+        "measure_type": "count",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-7-15",
+        "value_raw": "60 m",
+        "value": 60,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-7-16",
+        "value_raw": "6 Storeys",
+        "value": 6,
+        "unit": "storey",
+        "measure_type": "count",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-7-a-1",
+        "value_raw": "1.8 m",
+        "value": 1.8,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-7-b-1",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-7-c-1",
+        "value_raw": "2 m",
+        "value": 2,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-clause-22-6-9-1",
+        "value_raw": "4 m",
+        "value": 4,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "less_than",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-9"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-1-2-b",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "(b)",
+        "requirement_text_raw": "Frontage min. 12 m",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-1-2-b-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-1-2-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-1-2-c",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "(c)",
+        "requirement_text_raw": "Front Yard Setback min. 2 m max.6 m the front yard setback may be greater than the max. for up to 20% of the streetline",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-1-2-c-1",
+          "zone-gc-num-zone-gc-clause-22-1-2-c-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-1-2-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-1-2-d",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "flankage_yard",
+        "requirement_label_raw": "(d)",
+        "requirement_text_raw": "Flanking Yard Setback min. 2 m max. 6 m the flankage yard setback may be greater than the max. for up to 20% of the streetline",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-1-2-d-1",
+          "zone-gc-num-zone-gc-clause-22-1-2-d-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-1-2-d"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-1-2-e",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "(e)",
+        "requirement_text_raw": "Side Yard Setback min. 0 m, 6 m bordering residential zone",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-1-2-e-1",
+          "zone-gc-num-zone-gc-clause-22-1-2-e-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-1-2-e"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-1-2-f",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "(f)",
+        "requirement_text_raw": "Rear Yard Setback min. 12 m when abutting RN, or RM, otherwise 6 m",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-1-2-f-1",
+          "zone-gc-num-zone-gc-clause-22-1-2-f-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-1-2-f"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-4-4",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": ".4",
+        "requirement_text_raw": "Flaglots are permitted with no less than 6m frontage as long as all other site and building requirements are met in Section 22.3.2 for both the flaglot and the main lot.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-4-4-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-4-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-5-2",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": ".2",
+        "requirement_text_raw": "Attached garages shall not front onto the street frontage unless it provides access to an underground parking garage that does not exceed 25% of the primary building frontage on any streetline to a maximum width of 6 m.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-5-2-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-5-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-5-4-a",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "(a)",
+        "requirement_text_raw": "If the allowable building height is equal to or less than 5 storeys, the maximum allowable streetwall height shall be 3 storeys",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-5-4-a-1",
+          "zone-gc-num-zone-gc-clause-22-5-4-a-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-5-4-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-5-4-b",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "(b)",
+        "requirement_text_raw": "If the allowable building height is 6 storeys, the maximum allowable streetwall height shall be 4 storeys",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-5-4-b-1",
+          "zone-gc-num-zone-gc-clause-22-5-4-b-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-5-4-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-5-4-c",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": "(c)",
+        "requirement_text_raw": "Streetwall height can be less than the maximum allowable streetwall height to a minimum of 2 storeys high.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-5-4-c-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-5-4-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-5-5-a",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "(a)",
+        "requirement_text_raw": "Any GC zoned property that borders a residential zone on its side yard shall have a maximum building height of 4 storeys.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-5-5-a-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-5-5-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-5-5-b",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "(b)",
+        "requirement_text_raw": "Any GC zoned property that borders a residential zone on its rear yard that has an average lot depth less than 38 m shall have a maximum building height of 4 storeys;",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-5-5-b-1",
+          "zone-gc-num-zone-gc-clause-22-5-5-b-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-5-5-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-5-5-c",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "(c)",
+        "requirement_text_raw": "Any GC zoned property that borders a residential zone on its rear yard that has an average lot Depth greater than 38 m",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-5-5-c-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-5-5-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-6-2",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": ".2",
+        "requirement_text_raw": "Only one driveway per 20 m of frontage is permitted to a maximum of two (2) driveways per lot.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-6-2-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-6-4",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "parking",
+        "requirement_label_raw": ".4",
+        "requirement_text_raw": "A minimum 2 m wide hard surfaced pathway shall link the parking lot to the front door of every building.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-6-4-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-6-5",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "a_minimum_2_m_wide_hard_surfaced_pathway_shall_link_the_sidewalk_to_the_front_do",
+        "requirement_label_raw": ".5",
+        "requirement_text_raw": "A minimum 2 m wide hard surfaced pathway shall link the sidewalk to the front door of every building.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-6-5-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-6-6",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": ".6",
+        "requirement_text_raw": "If there are no street trees in the bordering public street right-of-way, each development shall include no less than 1 tree per 10 m of frontage between the building and the street. Decimal results shall be rounded up.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-6-6-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-6-7",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": ".7",
+        "requirement_text_raw": "A 3m landscape buffer is required for any GC properties that border residential zoned Max. Streetwall Height 3-storey SW for < 5-storey 4-storey SW for 6 storeys Front/Flank Setback 2-6 m for 80% Min. Lot Frontage 12 m Figure 22.2 GC Zone Built Form Standards Min. Side Yard Setback 0 m, 6 m bordering residential zone Min. Rear Yard Setback 6 m Min. Streetwall Stepback 2.5 m for 70% of streetwall Max. Building Dimension 60 m Max. Lot Coverage 50%, 70% if half the parking is located underground Max. Building Height Avg. Lot Depth < 38 m = 4 Storeys; Avg. Lot Depth 38 m<>60 m = 5 Storeys Avg. Lot Depth exceeds 60 m = 6 Storeys properties in the rear yard. Each landscape buffer shall include:",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-6-7-1",
+          "zone-gc-num-zone-gc-clause-22-6-7-2",
+          "zone-gc-num-zone-gc-clause-22-6-7-3",
+          "zone-gc-num-zone-gc-clause-22-6-7-4",
+          "zone-gc-num-zone-gc-clause-22-6-7-5",
+          "zone-gc-num-zone-gc-clause-22-6-7-6",
+          "zone-gc-num-zone-gc-clause-22-6-7-7",
+          "zone-gc-num-zone-gc-clause-22-6-7-8",
+          "zone-gc-num-zone-gc-clause-22-6-7-9",
+          "zone-gc-num-zone-gc-clause-22-6-7-10",
+          "zone-gc-num-zone-gc-clause-22-6-7-11",
+          "zone-gc-num-zone-gc-clause-22-6-7-12",
+          "zone-gc-num-zone-gc-clause-22-6-7-13",
+          "zone-gc-num-zone-gc-clause-22-6-7-14",
+          "zone-gc-num-zone-gc-clause-22-6-7-15",
+          "zone-gc-num-zone-gc-clause-22-6-7-16"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-6-7-a",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "(a)",
+        "requirement_text_raw": "A 1.8 m high opaque fence along the rear yard",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-6-7-a-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-6-7-b",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "(b)",
+        "requirement_text_raw": "One tree per 6 m of rear yard border",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-6-7-b-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-6-9",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "each_grade_related_unit_must_provide_no_less_than_4_m_2_of_private_outdoor_ameni",
+        "requirement_label_raw": ".9",
+        "requirement_text_raw": "Each grade-related unit must provide no less than 4 m 2 of private outdoor amenity space (patio, balcony, rooftop deck, or small yard) to ensure resident comfort and privacy.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-6-9-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-9"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-gc-regulation-group-zone",
+        "group_label_raw": "PART 22",
+        "group_title_raw": "GC - Growth Corridor",
+        "regulated_use_terms": [
+          "zone-gc-term-use-cemetery",
+          "zone-gc-term-use-commercial_daycare_centre",
+          "zone-gc-term-use-community_care_facility",
+          "zone-gc-term-use-community_institutional",
+          "zone-gc-term-use-cultural_establishment",
+          "zone-gc-term-use-dormitory",
+          "zone-gc-term-use-educational_institution_private",
+          "zone-gc-term-use-educational_institution_public",
+          "zone-gc-term-use-fire_station",
+          "zone-gc-term-use-funeral_establishment",
+          "zone-gc-term-use-government_office",
+          "zone-gc-term-use-hospital",
+          "zone-gc-term-use-library",
+          "zone-gc-term-use-medical_health_and_dental_office",
+          "zone-gc-term-use-place_of_worship",
+          "zone-gc-term-use-police_station",
+          "zone-gc-term-use-public_utility_service_operation",
+          "zone-gc-term-use-recreation_or_fitness_centre_indoors"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "GC"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-gc-req-zone-gc-clause-22-1-2-b",
+          "zone-gc-req-zone-gc-clause-22-1-2-c",
+          "zone-gc-req-zone-gc-clause-22-1-2-d",
+          "zone-gc-req-zone-gc-clause-22-1-2-e",
+          "zone-gc-req-zone-gc-clause-22-1-2-f",
+          "zone-gc-req-zone-gc-clause-22-4-4",
+          "zone-gc-req-zone-gc-clause-22-5-2",
+          "zone-gc-req-zone-gc-clause-22-5-4-a",
+          "zone-gc-req-zone-gc-clause-22-5-4-b",
+          "zone-gc-req-zone-gc-clause-22-5-4-c",
+          "zone-gc-req-zone-gc-clause-22-5-5-a",
+          "zone-gc-req-zone-gc-clause-22-5-5-b",
+          "zone-gc-req-zone-gc-clause-22-5-5-c",
+          "zone-gc-req-zone-gc-clause-22-6-2",
+          "zone-gc-req-zone-gc-clause-22-6-4",
+          "zone-gc-req-zone-gc-clause-22-6-5",
+          "zone-gc-req-zone-gc-clause-22-6-6",
+          "zone-gc-req-zone-gc-clause-22-6-7",
+          "zone-gc-req-zone-gc-clause-22-6-7-a",
+          "zone-gc-req-zone-gc-clause-22-6-7-b",
+          "zone-gc-req-zone-gc-clause-22-6-9"
+        ],
+        "source_section_ref": "zone-gc-section-22-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-gc-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "GC",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-gc-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [
+      {
+        "requirement_id": "zone-gc-req-zone-gc-clause-22-6-7-c",
+        "requirement_type": "other",
+        "requirement_category": "shrub_beds_at_a_rate_of_2_m_2_per_tree_consisting_of_shrubs_annuals_or_perennial",
+        "requirement_label_raw": "(c)",
+        "requirement_text_raw": "Shrub beds at a rate of 2 m 2 per tree consisting of shrubs, annuals or perennials.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-clause-22-6-7-c-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-gc-clause-22-6-7-c"
+          }
+        ],
+        "confidence": "needs_review"
+      }
+    ],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-gc-flag-legacy-open-issue-1",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "extraction_review",
+      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization.",
+      "source_refs": [
+        {
+          "source_ref_type": "source_unit",
+          "source_ref_id": "zone-gc"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-gc-flag-legacy-open-issue-2",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "table_parsing_review",
+      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization.",
+      "source_refs": [
+        {
+          "source_ref_type": "source_unit",
+          "source_ref_id": "zone-gc"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-gc-flag-legacy-open-issue-3",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "zone_boundary_review",
+      "description": "Some extracted text was not safely assigned to a labeled section and is preserved in content_blocks.",
+      "source_refs": [
+        {
+          "source_ref_type": "source_unit",
+          "source_ref_id": "zone-gc"
+        }
+      ]
+    }
+  ]
 }

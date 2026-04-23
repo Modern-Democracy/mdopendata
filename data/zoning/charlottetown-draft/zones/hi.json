@@ -1,1255 +1,3277 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Draft Zoning & Development Bylaw",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+    "document_type": "zone",
     "zone_code": "HI",
     "zone_name": "Heavy Industrial",
-    "part_label_raw": "PART 20",
-    "chapter_heading_raw": "PART 20 HI - Heavy Industrial",
-    "draft_date_raw": "April 7, 2026"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": [
-      "dot_numeric_provision_labels",
-      "parenthesized_alpha_clause_labels"
-    ]
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "(a)",
-      "use_type": "permitted_use",
-      "use_name": "Fire Station",
-      "status": "active",
-      "conditions": "The following uses are permitted in the HI Zone:",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      }
-    },
-    {
-      "clause_label_raw": "(b)",
-      "use_type": "permitted_use",
-      "use_name": "Police Station",
-      "status": "active",
-      "conditions": "The following uses are permitted in the HI Zone:",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      }
-    },
-    {
-      "clause_label_raw": "(c)",
-      "use_type": "permitted_use",
-      "use_name": "Public Utility Service Operation",
-      "status": "active",
-      "conditions": "The following uses are permitted in the HI Zone:",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      }
-    },
-    {
-      "clause_label_raw": "(d)",
-      "use_type": "permitted_use",
-      "use_name": "Automobile Body Shop",
-      "status": "active",
-      "conditions": "The following uses are permitted in the HI Zone:",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      }
-    },
-    {
-      "clause_label_raw": "(e)",
-      "use_type": "permitted_use",
-      "use_name": "Automobile Sales and Services",
-      "status": "active",
-      "conditions": "The following uses are permitted in the HI Zone:",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      }
-    },
-    {
-      "clause_label_raw": "(f)",
-      "use_type": "permitted_use",
-      "use_name": "Automobile Service Station",
-      "status": "active",
-      "conditions": "The following uses are permitted in the HI Zone:",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      }
-    },
-    {
-      "clause_label_raw": "(g)",
-      "use_type": "permitted_use",
-      "use_name": "Equipment Sales, Rental Service",
-      "status": "active",
-      "conditions": "The following uses are permitted in the HI Zone:",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      }
-    },
-    {
-      "clause_label_raw": "(h)",
-      "use_type": "permitted_use",
-      "use_name": "Office",
-      "status": "active",
-      "conditions": "The following uses are permitted in the HI Zone:",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      }
-    },
-    {
-      "clause_label_raw": "(i)",
-      "use_type": "permitted_use",
-      "use_name": "Retail Store",
-      "status": "active",
-      "conditions": "The following uses are permitted in the HI Zone:",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      }
-    },
-    {
-      "clause_label_raw": "(j)",
-      "use_type": "permitted_use",
-      "use_name": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility",
-      "status": "active",
-      "conditions": "The following uses are permitted in the HI Zone:",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      }
-    },
-    {
-      "clause_label_raw": "(k)",
-      "use_type": "permitted_use",
-      "use_name": "Retail Warehouse",
-      "status": "active",
-      "conditions": "The following uses are permitted in the HI Zone:",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      }
-    },
-    {
-      "clause_label_raw": "(l)",
-      "use_type": "permitted_use",
-      "use_name": "Service Repair Establishment",
-      "status": "active",
-      "conditions": "The following uses are permitted in the HI Zone:",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      }
-    },
-    {
-      "clause_label_raw": "(m)",
-      "use_type": "permitted_use",
-      "use_name": "Transportation Service",
-      "status": "active",
-      "conditions": "The following uses are permitted in the HI Zone:",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      }
-    },
-    {
-      "clause_label_raw": "(n)",
-      "use_type": "permitted_use",
-      "use_name": "Abattoir",
-      "status": "active",
-      "conditions": "The following uses are permitted in the HI Zone:",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      }
-    },
-    {
-      "clause_label_raw": "(o)",
-      "use_type": "permitted_use",
-      "use_name": "Bulk Fuel Station",
-      "status": "active",
-      "conditions": "The following uses are permitted in the HI Zone:",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      }
-    },
-    {
-      "clause_label_raw": "(p)",
-      "use_type": "permitted_use",
-      "use_name": "Extractive Facilities",
-      "status": "active",
-      "conditions": "The following uses are permitted in the HI Zone:",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      }
-    },
-    {
-      "clause_label_raw": "(q)",
-      "use_type": "permitted_use",
-      "use_name": "Feedmill",
-      "status": "active",
-      "conditions": "The following uses are permitted in the HI Zone:",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      }
-    },
-    {
-      "clause_label_raw": "(r)",
-      "use_type": "permitted_use",
-      "use_name": "Heavy Equipment Repair",
-      "status": "active",
-      "conditions": "The following uses are permitted in the HI Zone:",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      }
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "20.1",
-      "title_label_raw": "INTENT",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "section",
-          "text": "The intent of the Heavy Industrial Zone is to provide areas for a range of industrial, manufacturing, warehousing, logistics, and related employment uses that contribute to the economic development of the City. This zone is intended to accommodate activities that require larger sites, specialized infrastructure, and separation from sensitive land uses due to noise, traffic, or operational characteristics. Development within the Industrial Zone shall promote efficient land use, safe and effective transportation access, and compatibility with adjacent uses, while supporting innovation, job creation, and long-term economic sustainability.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": "20.2",
-      "title_label_raw": "RE-ZONING",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "Rezoning from HI to another zone, except BP , is not permitted.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 3,
-      "section_label_raw": "20.3",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 135,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 131
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "The following uses are permitted in the HI Zone:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Fire Station",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Police Station",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Public Utility Service Operation",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        },
-        {
-          "provision_label_raw": "(d)",
-          "text": "Automobile Body Shop",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        },
-        {
-          "provision_label_raw": "(e)",
-          "text": "Automobile Sales and Services",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        },
-        {
-          "provision_label_raw": "(f)",
-          "text": "Automobile Service Station",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        },
-        {
-          "provision_label_raw": "(g)",
-          "text": "Equipment Sales, Rental Service",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        },
-        {
-          "provision_label_raw": "(h)",
-          "text": "Office",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        },
-        {
-          "provision_label_raw": "(i)",
-          "text": "Retail Store",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        },
-        {
-          "provision_label_raw": "(j)",
-          "text": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        },
-        {
-          "provision_label_raw": "(k)",
-          "text": "Retail Warehouse",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        },
-        {
-          "provision_label_raw": "(l)",
-          "text": "Service Repair Establishment",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        },
-        {
-          "provision_label_raw": "(m)",
-          "text": "Transportation Service",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        },
-        {
-          "provision_label_raw": "(n)",
-          "text": "Abattoir",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        },
-        {
-          "provision_label_raw": "(o)",
-          "text": "Bulk Fuel Station",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        },
-        {
-          "provision_label_raw": "(p)",
-          "text": "Extractive Facilities",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        },
-        {
-          "provision_label_raw": "(q)",
-          "text": "Feedmill",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        },
-        {
-          "provision_label_raw": "(r)",
-          "text": "Heavy Equipment Repair",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 135,
-            "pdf_page_end": 135,
-            "bylaw_page_start": 131,
-            "bylaw_page_end": 131
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 4,
-      "section_label_raw": "20.4",
-      "title_label_raw": "PERMITTED WITH CONDITIONS",
-      "citations": {
-        "pdf_page_start": 136,
-        "pdf_page_end": 136,
-        "bylaw_page_start": 132,
-        "bylaw_page_end": 132
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "Permitted encroachments into the setbacks are listed in Table 3.2.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "Refuelling stations may be permitted by Development Agreement.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": ".3",
-          "text": "Uses that produce strong odours or loud noises may be subject to additional studies (at the discretion of the Development Officer) to minimize impacts on surrounding land uses that may be negatively impacted;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": ".4",
-          "text": "Hazardous materials handling or processing, may be subject to provincial and federal approvals.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        }
-      ],
-      "layout_artifacts_present": true
-    },
-    {
-      "order_index": 5,
-      "section_label_raw": "20.5",
-      "title_label_raw": "BUILT FORM REQUIREMENTS",
-      "citations": {
-        "pdf_page_start": 136,
-        "pdf_page_end": 136,
-        "bylaw_page_start": 132,
-        "bylaw_page_end": 132
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "Two buildings per lot are permitted.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "The maximum building height shall be 12 m or 3 storeys.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": ".3",
-          "text": "Loading bays and service doors shall be located to the side or rear of the building where abutting a public street except where the lot configuration makes it impossible to do so.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": ".4",
-          "text": "Building facades facing a public street shall include architectural articulation, variation in materials, or glazing.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": ".5",
-          "text": "Blank facades exceeding 20 m in length are prohibited along a public street.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 6,
-      "section_label_raw": "20.6",
-      "title_label_raw": "LANDSCAPE REQUIREMENTS",
-      "citations": {
-        "pdf_page_start": 136,
-        "pdf_page_end": 136,
-        "bylaw_page_start": 132,
-        "bylaw_page_end": 132
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "Outdoor storage in the HI Zone shall:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Not be permitted in the front yard of the primary building;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Be fully screened in accordance with Section 5.6.2;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Not exceed the height of the principal building.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "General landscaping in the HI Zone:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Shall not be less than 15% of the lot area and may include preserving existing woodlands or vegetation on site;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(s)",
-          "text": "Kennel",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(t)",
-          "text": "Manufacturing, Heavy",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(u)",
-          "text": "Manufacturing, Light",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(v)",
-          "text": "Marijuana Production Facility",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(w)",
-          "text": "Recycling Depot",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(x)",
-          "text": "Salvage or Waste Disposal Facility",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(y)",
-          "text": "Warehouse, Storage Facility and/or Distribution Centre",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(z)",
-          "text": "Forestry Related",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(aa)",
-          "text": "Outdoor Storage",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(ab)",
-          "text": "Transport Terminal",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "These uses are permitted so long as the following lot requirements are met:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Lot Area min. 600m 2 interior lot, 700m 2 corner lot",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Frontage min. 20 m",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Front Yard Setback min. 7 .5 m",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(d)",
-          "text": "Flankage Yard Setback min. 7 .5 m",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(e)",
-          "text": "Side Yard Setback min. 3 m, 6 m if bordering on any residential zone",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(f)",
-          "text": "Rear Yard Setback min. 10 m, 20 m if bordering on any residential zone",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(g)",
-          "text": "Lot Coverage max. 35%",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "May permit the use of planting beds, grassy berms, bio-swales, and stormwater features as part of the landscape calculation;",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Requires native trees with a minimum height of 2.5 m at a rate of no less than 2 trees per acre.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(d)",
-          "text": "Requires landscaped beds consisting of ornamental grasses, woody shrubs or perennials at a rate of no less than 0.5 m 2 per metre of frontage of the principal building and located in the front yard.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": ".3",
-          "text": "Properties that abut residential uses shall include a 3 m wide landscape buffer along the abutting property line that includes:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "A 1.8 m high (min.) opaque fence",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "One 60 mm caliper tree per 8 m of side or rear yard planted in the landscape buffer placed to block light and views.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "For buildings that have been set back more than 3 m from the front lot line, no less than 1 tree shall be planted per front yard.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": ".4",
-          "text": "Any chain link fences fronting directly on a Parking Lot Encouraged on side or rear, If located in front, 1 additional tree per 10 parking spaces Min. Side Yard Setback 3 m; 6 m if bordering residential Min. Rear Yard Setback 7.5 m, 20 m if bordering residential Min. Front Yard Setback 7.5 mChain Link Fence Must be buffered with landscaping when fronting directly on a street Min. Frontage 20 m Max. Building Height 12 m and 3 storeys Truck Bays - Garage Doors On Side or Rear yard Walkway Connecting Parking to Entry Figure 20.1 HI Built Form and Landscape Requirements street must be buffered using a combination of trees, shrubs or vines.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": ".5",
-          "text": "All disturbed areas should be well landscaped using mostly (> 75% quantities) indigenous, low maintenance plants that are well adapted for the local microclimates on each site. Shade tolerant species shall be specified for the north side of buildings or in areas of frequent shade. Similarly, windy sites should be planted with wind tolerant species. Disturbed areas cannot be left without landscaping.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": ".6",
-          "text": "Where grass is being considered for any project:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Ensure the grass species is selected is adequate for shade levels on the site.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Pegged sod is required on all landscaped slopes exceeding 30%. Erosion Control measures must be clearly identified on sloping sites to minimize soil erosion.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "A minimum of 1.5 m wide of Sod strip is required adjoining any asphalt areas, pathways, gravel storage areas, or landscape beds.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(d)",
-          "text": "A minimum of 2 m wide strip of sod is required for all drainage swales",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(e)",
-          "text": "Any reinstatement of public road right- of-ways must be sodded.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": "(f)",
-          "text": "Hydraulic seeding is permitted in all other areas where sod is not required. Broadcast seed is not permitted unless used for spot repairs.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": ".7",
-          "text": "For any parking lots located in the front yard, a minimum 2 m wide hard surfaced sidewalk shall connect the front door of the building to any adjacent sidewalks adjoining the property if present.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": ".8",
-          "text": "Slopes shall be no steeper that three (3) horizontal to one (1) vertical, except as an engineered retaining structure. All slopes shall be vegetated (not necessarily grass) and no riprap stone armouring is permitted on any site unless it is not materially visible from any road or sidewalk.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": ".9",
-          "text": "All main entries should be well landscaped to a scale that is appropriate for the scale of the building and the importance of the entry sequence.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": ".10",
-          "text": "The front door of the primary building must connect to adjacent sidewalks and parking areas by a hard surfaced walkway no less than 1.8 m wide.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": ".11",
-          "text": "Parking is recommended in the side or rear yard of the lot, but any parking located in front yard of the primary building shall include one additional tree for every 10 parking spaces located in the front yard.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        },
-        {
-          "provision_label_raw": ".12",
-          "text": "The development officer may forgo these landscape requirements if it can be demonstrated that any of these requirements do not apply on a specific site. In addition, they may require additional requirements on a site specific basis to deal with special site consequences.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 136,
-            "pdf_page_end": 136,
-            "bylaw_page_start": 132,
-            "bylaw_page_end": 132
-          }
-        }
-      ],
-      "layout_artifacts_present": true
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "Table 3.2.",
-      "citations": {
-        "pdf_page_start": 136,
-        "pdf_page_end": 136,
-        "bylaw_page_start": 132,
-        "bylaw_page_end": 132
-      },
-      "source_text": "Permitted encroachments into the setbacks are listed in Table 3.2."
-    },
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "Section 5.6.2",
-      "citations": {
-        "pdf_page_start": 136,
-        "pdf_page_end": 136,
-        "bylaw_page_start": 132,
-        "bylaw_page_end": 132
-      },
-      "source_text": "Be fully screened in accordance with Section 5.6.2;"
-    },
-    {
-      "part_label_raw": "of",
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "part of",
-      "citations": {
-        "pdf_page_start": 136,
-        "pdf_page_end": 136,
-        "bylaw_page_start": 132,
-        "bylaw_page_end": 132
-      },
-      "source_text": "May permit the use of planting beds, grassy berms, bio-swales, and stormwater features as part of the landscape calculation;"
-    }
-  ],
-  "content_blocks": [
-    {
-      "heading_context_raw": "PART 20 HI - unassigned extracted text",
-      "text": ".3 Accessory buildings are permitted according to Section 3.1",
-      "citations": {
-        "pdf_page_start": 135,
-        "pdf_page_end": 138,
-        "bylaw_page_start": 131,
-        "bylaw_page_end": 134
-      }
-    }
-  ],
-  "open_issues": [
-    {
-      "issue_type": "extraction_review",
-      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization."
-    },
-    {
-      "issue_type": "table_parsing_review",
-      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization."
-    },
-    {
-      "issue_type": "zone_boundary_review",
-      "description": "Some extracted text was not safely assigned to a labeled section and is preserved in content_blocks."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "PART 20",
+    "zone_title_raw": "HI - Heavy Industrial",
+    "citations": {
       "pdf_page_start": 135,
       "pdf_page_end": 138,
       "bylaw_page_start": 131,
       "bylaw_page_end": 134
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-hi",
+        "source_unit_type": "zone",
+        "label_raw": "PART 20",
+        "title_raw": "HI - Heavy Industrial",
+        "text_raw": "The intent of the Heavy Industrial Zone is to provide areas for a range of industrial, manufacturing, warehousing, logistics, and related employment uses that contribute to the economic development of the City. This zone is intended to accommodate activities that require larger sites, specialized infrastructure, and separation from sensitive land uses due to noise, traffic, or operational characteristics. Development within the Industrial Zone shall promote efficient land use, safe and effective transportation access, and compatibility with adjacent uses, while supporting innovation, job creation, and long-term economic sustainability.\nRezoning from HI to another zone, except BP , is not permitted.\nThe following uses are permitted in the HI Zone:\nFire Station\nPolice Station\nPublic Utility Service Operation\nAutomobile Body Shop\nAutomobile Sales and Services\nAutomobile Service Station\nEquipment Sales, Rental Service\nOffice\nRetail Store\nRetail Store with connected Retail Warehouse, Light Manufacturing or assembly facility\nRetail Warehouse\nService Repair Establishment\nTransportation Service\nAbattoir\nBulk Fuel Station\nExtractive Facilities\nFeedmill\nHeavy Equipment Repair\nPermitted encroachments into the setbacks are listed in Table 3.2.\nRefuelling stations may be permitted by Development Agreement.\nUses that produce strong odours or loud noises may be subject to additional studies (at the discretion of the Development Officer) to minimize impacts on surrounding land uses that may be negatively impacted;\nHazardous materials handling or processing, may be subject to provincial and federal approvals.\nTwo buildings per lot are permitted.\nThe maximum building height shall be 12 m or 3 storeys.\nLoading bays and service doors shall be located to the side or rear of the building where abutting a public street except where the lot configuration makes it impossible to do so.\nBuilding facades facing a public street shall include architectural articulation, variation in materials, or glazing.\nBlank facades exceeding 20 m in length are prohibited along a public street.\nOutdoor storage in the HI Zone shall:\nNot be permitted in the front yard of the primary building;\nBe fully screened in accordance with Section 5.6.2;\nNot exceed the height of the principal building.\nGeneral landscaping in the HI Zone:\nShall not be less than 15% of the lot area and may include preserving existing woodlands or vegetation on site;\nKennel\nManufacturing, Heavy\nManufacturing, Light\nMarijuana Production Facility\nRecycling Depot\nSalvage or Waste Disposal Facility\nWarehouse, Storage Facility and/or Distribution Centre\nForestry Related\nOutdoor Storage\nTransport Terminal\nThese uses are permitted so long as the following lot requirements are met:\nLot Area min. 600m 2 interior lot, 700m 2 corner lot\nFrontage min. 20 m\nFront Yard Setback min. 7 .5 m\nFlankage Yard Setback min. 7 .5 m\nSide Yard Setback min. 3 m, 6 m if bordering on any residential zone\nRear Yard Setback min. 10 m, 20 m if bordering on any residential zone\nLot Coverage max. 35%\nMay permit the use of planting beds, grassy berms, bio-swales, and stormwater features as part of the landscape calculation;\nRequires native trees with a minimum height of 2.5 m at a rate of no less than 2 trees per acre.\nRequires landscaped beds consisting of ornamental grasses, woody shrubs or perennials at a rate of no less than 0.5 m 2 per metre of frontage of the principal building and located in the front yard.\nProperties that abut residential uses shall include a 3 m wide landscape buffer along the abutting property line that includes:\nA 1.8 m high (min.) opaque fence\nOne 60 mm caliper tree per 8 m of side or rear yard planted in the landscape buffer placed to block light and views.\nFor buildings that have been set back more than 3 m from the front lot line, no less than 1 tree shall be planted per front yard.\nAny chain link fences fronting directly on a Parking Lot Encouraged on side or rear, If located in front, 1 additional tree per 10 parking spaces Min. Side Yard Setback 3 m; 6 m if bordering residential Min. Rear Yard Setback 7.5 m, 20 m if bordering residential Min. Front Yard Setback 7.5 mChain Link Fence Must be buffered with landscaping when fronting directly on a street Min. Frontage 20 m Max. Building Height 12 m and 3 storeys Truck Bays - Garage Doors On Side or Rear yard Walkway Connecting Parking to Entry Figure 20.1 HI Built Form and Landscape Requirements street must be buffered using a combination of trees, shrubs or vines.\nAll disturbed areas should be well landscaped using mostly (> 75% quantities) indigenous, low maintenance plants that are well adapted for the local microclimates on each site. Shade tolerant species shall be specified for the north side of buildings or in areas of frequent shade. Similarly, windy sites should be planted with wind tolerant species. Disturbed areas cannot be left without landscaping.\nWhere grass is being considered for any project:\nEnsure the grass species is selected is adequate for shade levels on the site.\nPegged sod is required on all landscaped slopes exceeding 30%. Erosion Control measures must be clearly identified on sloping sites to minimize soil erosion.\nA minimum of 1.5 m wide of Sod strip is required adjoining any asphalt areas, pathways, gravel storage areas, or landscape beds.\nA minimum of 2 m wide strip of sod is required for all drainage swales\nAny reinstatement of public road right- of-ways must be sodded.\nHydraulic seeding is permitted in all other areas where sod is not required. Broadcast seed is not permitted unless used for spot repairs.\nFor any parking lots located in the front yard, a minimum 2 m wide hard surfaced sidewalk shall connect the front door of the building to any adjacent sidewalks adjoining the property if present.\nSlopes shall be no steeper that three (3) horizontal to one (1) vertical, except as an engineered retaining structure. All slopes shall be vegetated (not necessarily grass) and no riprap stone armouring is permitted on any site unless it is not materially visible from any road or sidewalk.\nAll main entries should be well landscaped to a scale that is appropriate for the scale of the building and the importance of the entry sequence.\nThe front door of the primary building must connect to adjacent sidewalks and parking areas by a hard surfaced walkway no less than 1.8 m wide.\nParking is recommended in the side or rear yard of the lot, but any parking located in front yard of the primary building shall include one additional tree for every 10 parking spaces located in the front yard.\nThe development officer may forgo these landscape requirements if it can be demonstrated that any of these requirements do not apply on a specific site. In addition, they may require additional requirements on a site specific basis to deal with special site consequences.",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 135,
+          "pdf_page_end": 138,
+          "bylaw_page_start": 131,
+          "bylaw_page_end": 134
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-hi-section-20-1",
+        "section_label_raw": "20.1",
+        "section_title_raw": "INTENT",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-hi-clause-20-1",
+            "clause_label_raw": "section",
+            "clause_text_raw": "The intent of the Heavy Industrial Zone is to provide areas for a range of industrial, manufacturing, warehousing, logistics, and related employment uses that contribute to the economic development of the City. This zone is intended to accommodate activities that require larger sites, specialized infrastructure, and separation from sensitive land uses due to noise, traffic, or operational characteristics. Development within the Industrial Zone shall promote efficient land use, safe and effective transportation access, and compatibility with adjacent uses, while supporting innovation, job creation, and long-term economic sustainability.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-1",
+            "source_order": 1
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 135,
+          "pdf_page_end": 135,
+          "bylaw_page_start": 131,
+          "bylaw_page_end": 131
+        }
+      },
+      {
+        "section_id": "zone-hi-section-20-2",
+        "section_label_raw": "20.2",
+        "section_title_raw": "RE-ZONING",
+        "source_order": 2,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-hi-clause-20-2-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "Rezoning from HI to another zone, except BP , is not permitted.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-2-1",
+            "source_order": 1
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 135,
+          "pdf_page_end": 135,
+          "bylaw_page_start": 131,
+          "bylaw_page_end": 131
+        }
+      },
+      {
+        "section_id": "zone-hi-section-20-3",
+        "section_label_raw": "20.3",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 3,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-hi-clause-20-3-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "The following uses are permitted in the HI Zone:",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-3-1-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Fire Station",
+            "parent_clause_id": "zone-hi-clause-20-3-1",
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-3-1-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Police Station",
+            "parent_clause_id": "zone-hi-clause-20-3-1",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-3-1-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Public Utility Service Operation",
+            "parent_clause_id": "zone-hi-clause-20-3-1",
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-3-1-d",
+            "clause_label_raw": "(d)",
+            "clause_text_raw": "Automobile Body Shop",
+            "parent_clause_id": "zone-hi-clause-20-3-1",
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-3-1-e",
+            "clause_label_raw": "(e)",
+            "clause_text_raw": "Automobile Sales and Services",
+            "parent_clause_id": "zone-hi-clause-20-3-1",
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-3-1-f",
+            "clause_label_raw": "(f)",
+            "clause_text_raw": "Automobile Service Station",
+            "parent_clause_id": "zone-hi-clause-20-3-1",
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-3-1-g",
+            "clause_label_raw": "(g)",
+            "clause_text_raw": "Equipment Sales, Rental Service",
+            "parent_clause_id": "zone-hi-clause-20-3-1",
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-3-1-h",
+            "clause_label_raw": "(h)",
+            "clause_text_raw": "Office",
+            "parent_clause_id": "zone-hi-clause-20-3-1",
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-3-1-i",
+            "clause_label_raw": "(i)",
+            "clause_text_raw": "Retail Store",
+            "parent_clause_id": "zone-hi-clause-20-3-1",
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-3-1-j",
+            "clause_label_raw": "(j)",
+            "clause_text_raw": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility",
+            "parent_clause_id": "zone-hi-clause-20-3-1",
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-3-1-k",
+            "clause_label_raw": "(k)",
+            "clause_text_raw": "Retail Warehouse",
+            "parent_clause_id": "zone-hi-clause-20-3-1",
+            "source_order": 12,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-3-1-l",
+            "clause_label_raw": "(l)",
+            "clause_text_raw": "Service Repair Establishment",
+            "parent_clause_id": "zone-hi-clause-20-3-1",
+            "source_order": 13,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-3-1-m",
+            "clause_label_raw": "(m)",
+            "clause_text_raw": "Transportation Service",
+            "parent_clause_id": "zone-hi-clause-20-3-1",
+            "source_order": 14,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-3-1-n",
+            "clause_label_raw": "(n)",
+            "clause_text_raw": "Abattoir",
+            "parent_clause_id": "zone-hi-clause-20-3-1",
+            "source_order": 15,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-3-1-o",
+            "clause_label_raw": "(o)",
+            "clause_text_raw": "Bulk Fuel Station",
+            "parent_clause_id": "zone-hi-clause-20-3-1",
+            "source_order": 16,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-3-1-p",
+            "clause_label_raw": "(p)",
+            "clause_text_raw": "Extractive Facilities",
+            "parent_clause_id": "zone-hi-clause-20-3-1",
+            "source_order": 17,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-3-1-q",
+            "clause_label_raw": "(q)",
+            "clause_text_raw": "Feedmill",
+            "parent_clause_id": "zone-hi-clause-20-3-1",
+            "source_order": 18,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-3-1-r",
+            "clause_label_raw": "(r)",
+            "clause_text_raw": "Heavy Equipment Repair",
+            "parent_clause_id": "zone-hi-clause-20-3-1",
+            "source_order": 19,
+            "citations": {
+              "pdf_page_start": 135,
+              "pdf_page_end": 135,
+              "bylaw_page_start": 131,
+              "bylaw_page_end": 131
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-3-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-3-1-a",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-3-1-b",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-3-1-c",
+            "source_order": 4
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-3-1-d",
+            "source_order": 5
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-3-1-e",
+            "source_order": 6
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-3-1-f",
+            "source_order": 7
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-3-1-g",
+            "source_order": 8
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-3-1-h",
+            "source_order": 9
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-3-1-i",
+            "source_order": 10
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-3-1-j",
+            "source_order": 11
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-3-1-k",
+            "source_order": 12
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-3-1-l",
+            "source_order": 13
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-3-1-m",
+            "source_order": 14
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-3-1-n",
+            "source_order": 15
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-3-1-o",
+            "source_order": 16
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-3-1-p",
+            "source_order": 17
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-3-1-q",
+            "source_order": 18
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-3-1-r",
+            "source_order": 19
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 135,
+          "pdf_page_end": 135,
+          "bylaw_page_start": 131,
+          "bylaw_page_end": 131
+        }
+      },
+      {
+        "section_id": "zone-hi-section-20-4",
+        "section_label_raw": "20.4",
+        "section_title_raw": "PERMITTED WITH CONDITIONS",
+        "source_order": 4,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-hi-clause-20-4-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "Permitted encroachments into the setbacks are listed in Table 3.2.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-4-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "Refuelling stations may be permitted by Development Agreement.",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-4-3",
+            "clause_label_raw": ".3",
+            "clause_text_raw": "Uses that produce strong odours or loud noises may be subject to additional studies (at the discretion of the Development Officer) to minimize impacts on surrounding land uses that may be negatively impacted;",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-4-4",
+            "clause_label_raw": ".4",
+            "clause_text_raw": "Hazardous materials handling or processing, may be subject to provincial and federal approvals.",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-4-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-4-2",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-4-3",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-4-4",
+            "source_order": 4
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 136,
+          "pdf_page_end": 136,
+          "bylaw_page_start": 132,
+          "bylaw_page_end": 132
+        }
+      },
+      {
+        "section_id": "zone-hi-section-20-5",
+        "section_label_raw": "20.5",
+        "section_title_raw": "BUILT FORM REQUIREMENTS",
+        "source_order": 5,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-hi-clause-20-5-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "Two buildings per lot are permitted.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-5-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "The maximum building height shall be 12 m or 3 storeys.",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-5-3",
+            "clause_label_raw": ".3",
+            "clause_text_raw": "Loading bays and service doors shall be located to the side or rear of the building where abutting a public street except where the lot configuration makes it impossible to do so.",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-5-4",
+            "clause_label_raw": ".4",
+            "clause_text_raw": "Building facades facing a public street shall include architectural articulation, variation in materials, or glazing.",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-5-5",
+            "clause_label_raw": ".5",
+            "clause_text_raw": "Blank facades exceeding 20 m in length are prohibited along a public street.",
+            "parent_clause_id": null,
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-5-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-5-2",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-5-3",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-5-4",
+            "source_order": 4
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-5-5",
+            "source_order": 5
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 136,
+          "pdf_page_end": 136,
+          "bylaw_page_start": 132,
+          "bylaw_page_end": 132
+        }
+      },
+      {
+        "section_id": "zone-hi-section-20-6",
+        "section_label_raw": "20.6",
+        "section_title_raw": "LANDSCAPE REQUIREMENTS",
+        "source_order": 6,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-hi-clause-20-6-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "Outdoor storage in the HI Zone shall:",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-1-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Not be permitted in the front yard of the primary building;",
+            "parent_clause_id": "zone-hi-clause-20-6-1",
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-1-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Be fully screened in accordance with Section 5.6.2;",
+            "parent_clause_id": "zone-hi-clause-20-6-1",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-1-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Not exceed the height of the principal building.",
+            "parent_clause_id": "zone-hi-clause-20-6-1",
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "General landscaping in the HI Zone:",
+            "parent_clause_id": null,
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Shall not be less than 15% of the lot area and may include preserving existing woodlands or vegetation on site;",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-s",
+            "clause_label_raw": "(s)",
+            "clause_text_raw": "Kennel",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-t",
+            "clause_label_raw": "(t)",
+            "clause_text_raw": "Manufacturing, Heavy",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-u",
+            "clause_label_raw": "(u)",
+            "clause_text_raw": "Manufacturing, Light",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-v",
+            "clause_label_raw": "(v)",
+            "clause_text_raw": "Marijuana Production Facility",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-w",
+            "clause_label_raw": "(w)",
+            "clause_text_raw": "Recycling Depot",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-x",
+            "clause_label_raw": "(x)",
+            "clause_text_raw": "Salvage or Waste Disposal Facility",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 12,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-y",
+            "clause_label_raw": "(y)",
+            "clause_text_raw": "Warehouse, Storage Facility and/or Distribution Centre",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 13,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-z",
+            "clause_label_raw": "(z)",
+            "clause_text_raw": "Forestry Related",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 14,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-aa",
+            "clause_label_raw": "(aa)",
+            "clause_text_raw": "Outdoor Storage",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 15,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-ab",
+            "clause_label_raw": "(ab)",
+            "clause_text_raw": "Transport Terminal",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 16,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "These uses are permitted so long as the following lot requirements are met:",
+            "parent_clause_id": null,
+            "source_order": 17,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Lot Area min. 600m 2 interior lot, 700m 2 corner lot",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 18,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Frontage min. 20 m",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 19,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Front Yard Setback min. 7 .5 m",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 20,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-d",
+            "clause_label_raw": "(d)",
+            "clause_text_raw": "Flankage Yard Setback min. 7 .5 m",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 21,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-e",
+            "clause_label_raw": "(e)",
+            "clause_text_raw": "Side Yard Setback min. 3 m, 6 m if bordering on any residential zone",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 22,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-f",
+            "clause_label_raw": "(f)",
+            "clause_text_raw": "Rear Yard Setback min. 10 m, 20 m if bordering on any residential zone",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 23,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-g",
+            "clause_label_raw": "(g)",
+            "clause_text_raw": "Lot Coverage max. 35%",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 24,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "May permit the use of planting beds, grassy berms, bio-swales, and stormwater features as part of the landscape calculation;",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 25,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Requires native trees with a minimum height of 2.5 m at a rate of no less than 2 trees per acre.",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 26,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-2-d",
+            "clause_label_raw": "(d)",
+            "clause_text_raw": "Requires landscaped beds consisting of ornamental grasses, woody shrubs or perennials at a rate of no less than 0.5 m 2 per metre of frontage of the principal building and located in the front yard.",
+            "parent_clause_id": "zone-hi-clause-20-6-2",
+            "source_order": 27,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-3",
+            "clause_label_raw": ".3",
+            "clause_text_raw": "Properties that abut residential uses shall include a 3 m wide landscape buffer along the abutting property line that includes:",
+            "parent_clause_id": null,
+            "source_order": 28,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-3-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "A 1.8 m high (min.) opaque fence",
+            "parent_clause_id": "zone-hi-clause-20-6-3",
+            "source_order": 29,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-3-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "One 60 mm caliper tree per 8 m of side or rear yard planted in the landscape buffer placed to block light and views.",
+            "parent_clause_id": "zone-hi-clause-20-6-3",
+            "source_order": 30,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-3-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "For buildings that have been set back more than 3 m from the front lot line, no less than 1 tree shall be planted per front yard.",
+            "parent_clause_id": "zone-hi-clause-20-6-3",
+            "source_order": 31,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-4",
+            "clause_label_raw": ".4",
+            "clause_text_raw": "Any chain link fences fronting directly on a Parking Lot Encouraged on side or rear, If located in front, 1 additional tree per 10 parking spaces Min. Side Yard Setback 3 m; 6 m if bordering residential Min. Rear Yard Setback 7.5 m, 20 m if bordering residential Min. Front Yard Setback 7.5 mChain Link Fence Must be buffered with landscaping when fronting directly on a street Min. Frontage 20 m Max. Building Height 12 m and 3 storeys Truck Bays - Garage Doors On Side or Rear yard Walkway Connecting Parking to Entry Figure 20.1 HI Built Form and Landscape Requirements street must be buffered using a combination of trees, shrubs or vines.",
+            "parent_clause_id": null,
+            "source_order": 32,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-5",
+            "clause_label_raw": ".5",
+            "clause_text_raw": "All disturbed areas should be well landscaped using mostly (> 75% quantities) indigenous, low maintenance plants that are well adapted for the local microclimates on each site. Shade tolerant species shall be specified for the north side of buildings or in areas of frequent shade. Similarly, windy sites should be planted with wind tolerant species. Disturbed areas cannot be left without landscaping.",
+            "parent_clause_id": null,
+            "source_order": 33,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-6",
+            "clause_label_raw": ".6",
+            "clause_text_raw": "Where grass is being considered for any project:",
+            "parent_clause_id": null,
+            "source_order": 34,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-6-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Ensure the grass species is selected is adequate for shade levels on the site.",
+            "parent_clause_id": "zone-hi-clause-20-6-6",
+            "source_order": 35,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-6-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Pegged sod is required on all landscaped slopes exceeding 30%. Erosion Control measures must be clearly identified on sloping sites to minimize soil erosion.",
+            "parent_clause_id": "zone-hi-clause-20-6-6",
+            "source_order": 36,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-6-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "A minimum of 1.5 m wide of Sod strip is required adjoining any asphalt areas, pathways, gravel storage areas, or landscape beds.",
+            "parent_clause_id": "zone-hi-clause-20-6-6",
+            "source_order": 37,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-6-d",
+            "clause_label_raw": "(d)",
+            "clause_text_raw": "A minimum of 2 m wide strip of sod is required for all drainage swales",
+            "parent_clause_id": "zone-hi-clause-20-6-6",
+            "source_order": 38,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-6-e",
+            "clause_label_raw": "(e)",
+            "clause_text_raw": "Any reinstatement of public road right- of-ways must be sodded.",
+            "parent_clause_id": "zone-hi-clause-20-6-6",
+            "source_order": 39,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-6-f",
+            "clause_label_raw": "(f)",
+            "clause_text_raw": "Hydraulic seeding is permitted in all other areas where sod is not required. Broadcast seed is not permitted unless used for spot repairs.",
+            "parent_clause_id": "zone-hi-clause-20-6-6",
+            "source_order": 40,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-7",
+            "clause_label_raw": ".7",
+            "clause_text_raw": "For any parking lots located in the front yard, a minimum 2 m wide hard surfaced sidewalk shall connect the front door of the building to any adjacent sidewalks adjoining the property if present.",
+            "parent_clause_id": null,
+            "source_order": 41,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-8",
+            "clause_label_raw": ".8",
+            "clause_text_raw": "Slopes shall be no steeper that three (3) horizontal to one (1) vertical, except as an engineered retaining structure. All slopes shall be vegetated (not necessarily grass) and no riprap stone armouring is permitted on any site unless it is not materially visible from any road or sidewalk.",
+            "parent_clause_id": null,
+            "source_order": 42,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-9",
+            "clause_label_raw": ".9",
+            "clause_text_raw": "All main entries should be well landscaped to a scale that is appropriate for the scale of the building and the importance of the entry sequence.",
+            "parent_clause_id": null,
+            "source_order": 43,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-10",
+            "clause_label_raw": ".10",
+            "clause_text_raw": "The front door of the primary building must connect to adjacent sidewalks and parking areas by a hard surfaced walkway no less than 1.8 m wide.",
+            "parent_clause_id": null,
+            "source_order": 44,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-11",
+            "clause_label_raw": ".11",
+            "clause_text_raw": "Parking is recommended in the side or rear yard of the lot, but any parking located in front yard of the primary building shall include one additional tree for every 10 parking spaces located in the front yard.",
+            "parent_clause_id": null,
+            "source_order": 45,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          },
+          {
+            "clause_id": "zone-hi-clause-20-6-12",
+            "clause_label_raw": ".12",
+            "clause_text_raw": "The development officer may forgo these landscape requirements if it can be demonstrated that any of these requirements do not apply on a specific site. In addition, they may require additional requirements on a site specific basis to deal with special site consequences.",
+            "parent_clause_id": null,
+            "source_order": 46,
+            "citations": {
+              "pdf_page_start": 136,
+              "pdf_page_end": 136,
+              "bylaw_page_start": 132,
+              "bylaw_page_end": 132
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-1-a",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-1-b",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-1-c",
+            "source_order": 4
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2",
+            "source_order": 5
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-a",
+            "source_order": 6
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-s",
+            "source_order": 7
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-t",
+            "source_order": 8
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-u",
+            "source_order": 9
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-v",
+            "source_order": 10
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-w",
+            "source_order": 11
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-x",
+            "source_order": 12
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-y",
+            "source_order": 13
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-z",
+            "source_order": 14
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-aa",
+            "source_order": 15
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-ab",
+            "source_order": 16
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2",
+            "source_order": 17
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-a",
+            "source_order": 18
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-b",
+            "source_order": 19
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-c",
+            "source_order": 20
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-d",
+            "source_order": 21
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-e",
+            "source_order": 22
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-f",
+            "source_order": 23
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-g",
+            "source_order": 24
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-b",
+            "source_order": 25
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-c",
+            "source_order": 26
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-2-d",
+            "source_order": 27
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-3",
+            "source_order": 28
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-3-a",
+            "source_order": 29
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-3-b",
+            "source_order": 30
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-3-c",
+            "source_order": 31
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-4",
+            "source_order": 32
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-5",
+            "source_order": 33
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-6",
+            "source_order": 34
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-6-a",
+            "source_order": 35
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-6-b",
+            "source_order": 36
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-6-c",
+            "source_order": 37
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-6-d",
+            "source_order": 38
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-6-e",
+            "source_order": 39
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-6-f",
+            "source_order": 40
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-7",
+            "source_order": 41
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-8",
+            "source_order": 42
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-9",
+            "source_order": 43
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-10",
+            "source_order": 44
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-11",
+            "source_order": 45
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-hi-clause-20-6-12",
+            "source_order": 46
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 136,
+          "pdf_page_end": 136,
+          "bylaw_page_start": 132,
+          "bylaw_page_end": 132
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-hi-clause-20-1",
+        "section_id": "zone-hi-section-20-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-hi-clause-20-2-1",
+        "section_id": "zone-hi-section-20-2",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-hi-clause-20-3-1",
+        "section_id": "zone-hi-section-20-3",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-hi-clause-20-3-1-a",
+        "section_id": "zone-hi-section-20-3",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-hi-clause-20-3-1-b",
+        "section_id": "zone-hi-section-20-3",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-hi-clause-20-3-1-c",
+        "section_id": "zone-hi-section-20-3",
+        "source_order": 6
+      },
+      {
+        "clause_id": "zone-hi-clause-20-3-1-d",
+        "section_id": "zone-hi-section-20-3",
+        "source_order": 7
+      },
+      {
+        "clause_id": "zone-hi-clause-20-3-1-e",
+        "section_id": "zone-hi-section-20-3",
+        "source_order": 8
+      },
+      {
+        "clause_id": "zone-hi-clause-20-3-1-f",
+        "section_id": "zone-hi-section-20-3",
+        "source_order": 9
+      },
+      {
+        "clause_id": "zone-hi-clause-20-3-1-g",
+        "section_id": "zone-hi-section-20-3",
+        "source_order": 10
+      },
+      {
+        "clause_id": "zone-hi-clause-20-3-1-h",
+        "section_id": "zone-hi-section-20-3",
+        "source_order": 11
+      },
+      {
+        "clause_id": "zone-hi-clause-20-3-1-i",
+        "section_id": "zone-hi-section-20-3",
+        "source_order": 12
+      },
+      {
+        "clause_id": "zone-hi-clause-20-3-1-j",
+        "section_id": "zone-hi-section-20-3",
+        "source_order": 13
+      },
+      {
+        "clause_id": "zone-hi-clause-20-3-1-k",
+        "section_id": "zone-hi-section-20-3",
+        "source_order": 14
+      },
+      {
+        "clause_id": "zone-hi-clause-20-3-1-l",
+        "section_id": "zone-hi-section-20-3",
+        "source_order": 15
+      },
+      {
+        "clause_id": "zone-hi-clause-20-3-1-m",
+        "section_id": "zone-hi-section-20-3",
+        "source_order": 16
+      },
+      {
+        "clause_id": "zone-hi-clause-20-3-1-n",
+        "section_id": "zone-hi-section-20-3",
+        "source_order": 17
+      },
+      {
+        "clause_id": "zone-hi-clause-20-3-1-o",
+        "section_id": "zone-hi-section-20-3",
+        "source_order": 18
+      },
+      {
+        "clause_id": "zone-hi-clause-20-3-1-p",
+        "section_id": "zone-hi-section-20-3",
+        "source_order": 19
+      },
+      {
+        "clause_id": "zone-hi-clause-20-3-1-q",
+        "section_id": "zone-hi-section-20-3",
+        "source_order": 20
+      },
+      {
+        "clause_id": "zone-hi-clause-20-3-1-r",
+        "section_id": "zone-hi-section-20-3",
+        "source_order": 21
+      },
+      {
+        "clause_id": "zone-hi-clause-20-4-1",
+        "section_id": "zone-hi-section-20-4",
+        "source_order": 22
+      },
+      {
+        "clause_id": "zone-hi-clause-20-4-2",
+        "section_id": "zone-hi-section-20-4",
+        "source_order": 23
+      },
+      {
+        "clause_id": "zone-hi-clause-20-4-3",
+        "section_id": "zone-hi-section-20-4",
+        "source_order": 24
+      },
+      {
+        "clause_id": "zone-hi-clause-20-4-4",
+        "section_id": "zone-hi-section-20-4",
+        "source_order": 25
+      },
+      {
+        "clause_id": "zone-hi-clause-20-5-1",
+        "section_id": "zone-hi-section-20-5",
+        "source_order": 26
+      },
+      {
+        "clause_id": "zone-hi-clause-20-5-2",
+        "section_id": "zone-hi-section-20-5",
+        "source_order": 27
+      },
+      {
+        "clause_id": "zone-hi-clause-20-5-3",
+        "section_id": "zone-hi-section-20-5",
+        "source_order": 28
+      },
+      {
+        "clause_id": "zone-hi-clause-20-5-4",
+        "section_id": "zone-hi-section-20-5",
+        "source_order": 29
+      },
+      {
+        "clause_id": "zone-hi-clause-20-5-5",
+        "section_id": "zone-hi-section-20-5",
+        "source_order": 30
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-1",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 31
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-1-a",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 32
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-1-b",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 33
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-1-c",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 34
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 35
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-a",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 36
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-s",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 37
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-t",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 38
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-u",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 39
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-v",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 40
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-w",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 41
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-x",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 42
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-y",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 43
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-z",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 44
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-aa",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 45
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-ab",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 46
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 47
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-a",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 48
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-b",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 49
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-c",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 50
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-d",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 51
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-e",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 52
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-f",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 53
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-g",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 54
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-b",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 55
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-c",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 56
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-2-d",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 57
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-3",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 58
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-3-a",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 59
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-3-b",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 60
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-3-c",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 61
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-4",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 62
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-5",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 63
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-6",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 64
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-6-a",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 65
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-6-b",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 66
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-6-c",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 67
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-6-d",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 68
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-6-e",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 69
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-6-f",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 70
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-7",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 71
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-8",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 72
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-9",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 73
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-10",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 74
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-11",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 75
+      },
+      {
+        "clause_id": "zone-hi-clause-20-6-12",
+        "section_id": "zone-hi-section-20-6",
+        "source_order": 76
+      }
+    ],
+    "tables_raw": [],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-hi-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 135,
+          "pdf_page_end": 138,
+          "bylaw_page_start": 131,
+          "bylaw_page_end": 134
+        }
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-hi-term-use-fire_station",
+        "term_raw": "Fire Station",
+        "term_normalized": "fire_station",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "fire_station"
+      },
+      {
+        "term_id": "zone-hi-term-use-police_station",
+        "term_raw": "Police Station",
+        "term_normalized": "police_station",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "police_station"
+      },
+      {
+        "term_id": "zone-hi-term-use-public_utility_service_operation",
+        "term_raw": "Public Utility Service Operation",
+        "term_normalized": "public_utility_service_operation",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "public_utility_service_operation"
+      },
+      {
+        "term_id": "zone-hi-term-use-automobile_body_shop",
+        "term_raw": "Automobile Body Shop",
+        "term_normalized": "automobile_body_shop",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "automobile_body_shop"
+      },
+      {
+        "term_id": "zone-hi-term-use-automobile_sales_and_service",
+        "term_raw": "Automobile Sales and Services",
+        "term_normalized": "automobile_sales_and_service",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "automobile_sales_and_service"
+      },
+      {
+        "term_id": "zone-hi-term-use-automobile_service_station",
+        "term_raw": "Automobile Service Station",
+        "term_normalized": "automobile_service_station",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "automobile_service_station"
+      },
+      {
+        "term_id": "zone-hi-term-use-equipment_sales_rental_service",
+        "term_raw": "Equipment Sales, Rental Service",
+        "term_normalized": "equipment_sales_rental_service",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "equipment_sales_rental_service"
+      },
+      {
+        "term_id": "zone-hi-term-use-office",
+        "term_raw": "Office",
+        "term_normalized": "office",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "office"
+      },
+      {
+        "term_id": "zone-hi-term-use-retail_store",
+        "term_raw": "Retail Store",
+        "term_normalized": "retail_store",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "retail_store"
+      },
+      {
+        "term_id": "zone-hi-term-use-retail_warehouse",
+        "term_raw": "Retail warehouse",
+        "term_normalized": "retail_warehouse",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "retail_warehouse"
+      },
+      {
+        "term_id": "zone-hi-term-use-light_manufacturing",
+        "term_raw": "Light manufacturing",
+        "term_normalized": "light_manufacturing",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "light_manufacturing"
+      },
+      {
+        "term_id": "zone-hi-term-use-assembly_facility",
+        "term_raw": "Assembly facility",
+        "term_normalized": "assembly_facility",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "assembly_facility"
+      },
+      {
+        "term_id": "zone-hi-term-use-service_repair_establishment",
+        "term_raw": "Service Repair Establishment",
+        "term_normalized": "service_repair_establishment",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "service_repair_establishment"
+      },
+      {
+        "term_id": "zone-hi-term-use-transportation_service",
+        "term_raw": "Transportation Service",
+        "term_normalized": "transportation_service",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "transportation_service"
+      },
+      {
+        "term_id": "zone-hi-term-use-abattoir",
+        "term_raw": "Abattoir",
+        "term_normalized": "abattoir",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "abattoir"
+      },
+      {
+        "term_id": "zone-hi-term-use-bulk_fuel_station",
+        "term_raw": "Bulk Fuel Station",
+        "term_normalized": "bulk_fuel_station",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "bulk_fuel_station"
+      },
+      {
+        "term_id": "zone-hi-term-use-extractive_facilities",
+        "term_raw": "Extractive Facilities",
+        "term_normalized": "extractive_facilities",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "extractive_facilities"
+      },
+      {
+        "term_id": "zone-hi-term-use-feedmill",
+        "term_raw": "Feedmill",
+        "term_normalized": "feedmill",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "feedmill"
+      },
+      {
+        "term_id": "zone-hi-term-use-heavy_equipment_repair",
+        "term_raw": "Heavy Equipment Repair",
+        "term_normalized": "heavy_equipment_repair",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "heavy_equipment_repair"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-hi-use-fire-station-1-1",
+        "use_name_raw": "Fire Station",
+        "use_term_id": "zone-hi-term-use-fire_station",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-police-station-2-1",
+        "use_name_raw": "Police Station",
+        "use_term_id": "zone-hi-term-use-police_station",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-public-utility-service-operation-3-1",
+        "use_name_raw": "Public Utility Service Operation",
+        "use_term_id": "zone-hi-term-use-public_utility_service_operation",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-automobile-body-shop-4-1",
+        "use_name_raw": "Automobile Body Shop",
+        "use_term_id": "zone-hi-term-use-automobile_body_shop",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-automobile-sales-and-services-5-1",
+        "use_name_raw": "Automobile Sales and Services",
+        "use_term_id": "zone-hi-term-use-automobile_sales_and_service",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-automobile-service-station-6-1",
+        "use_name_raw": "Automobile Service Station",
+        "use_term_id": "zone-hi-term-use-automobile_service_station",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-equipment-sales-rental-service-7-1",
+        "use_name_raw": "Equipment Sales, Rental Service",
+        "use_term_id": "zone-hi-term-use-equipment_sales_rental_service",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-office-8-1",
+        "use_name_raw": "Office",
+        "use_term_id": "zone-hi-term-use-office",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-retail-store-9-1",
+        "use_name_raw": "Retail Store",
+        "use_term_id": "zone-hi-term-use-retail_store",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-retail-store-10-1",
+        "use_name_raw": "Retail store",
+        "use_term_id": "zone-hi-term-use-retail_store",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-retail-warehouse-10-2",
+        "use_name_raw": "Retail warehouse",
+        "use_term_id": "zone-hi-term-use-retail_warehouse",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-light-manufacturing-10-3",
+        "use_name_raw": "Light manufacturing",
+        "use_term_id": "zone-hi-term-use-light_manufacturing",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-assembly-facility-10-4",
+        "use_name_raw": "Assembly facility",
+        "use_term_id": "zone-hi-term-use-assembly_facility",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-retail-warehouse-11-1",
+        "use_name_raw": "Retail Warehouse",
+        "use_term_id": "zone-hi-term-use-retail_warehouse",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-service-repair-establishment-12-1",
+        "use_name_raw": "Service Repair Establishment",
+        "use_term_id": "zone-hi-term-use-service_repair_establishment",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-transportation-service-13-1",
+        "use_name_raw": "Transportation Service",
+        "use_term_id": "zone-hi-term-use-transportation_service",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-abattoir-14-1",
+        "use_name_raw": "Abattoir",
+        "use_term_id": "zone-hi-term-use-abattoir",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-bulk-fuel-station-15-1",
+        "use_name_raw": "Bulk Fuel Station",
+        "use_term_id": "zone-hi-term-use-bulk_fuel_station",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-extractive-facilities-16-1",
+        "use_name_raw": "Extractive Facilities",
+        "use_term_id": "zone-hi-term-use-extractive_facilities",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-feedmill-17-1",
+        "use_name_raw": "Feedmill",
+        "use_term_id": "zone-hi-term-use-feedmill",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-hi-use-heavy-equipment-repair-18-1",
+        "use_name_raw": "Heavy Equipment Repair",
+        "use_term_id": "zone-hi-term-use-heavy_equipment_repair",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-5-2-1",
+        "value_raw": "12 m",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-5-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-5-2-2",
+        "value_raw": "3 storeys",
+        "value": 3,
+        "unit": "storey",
+        "measure_type": "count",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-5-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-5-5-1",
+        "value_raw": "20 m",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-5-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-2-a-1",
+        "value_raw": "600m",
+        "value": 600,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-2-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-2-a-2",
+        "value_raw": "700m",
+        "value": 700,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-2-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-2-b-1",
+        "value_raw": "20 m",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-2-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-2-c-1",
+        "value_raw": "5 m",
+        "value": 5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-2-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-2-d-1",
+        "value_raw": "5 m",
+        "value": 5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-2-d"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-2-e-1",
+        "value_raw": "3 m",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-2-e"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-2-e-2",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-2-e"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-2-f-1",
+        "value_raw": "10 m",
+        "value": 10,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-2-f"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-2-f-2",
+        "value_raw": "20 m",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-2-f"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-2-c-1",
+        "value_raw": "2.5 m",
+        "value": 2.5,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "minimum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-2-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-2-d-1",
+        "value_raw": "0.5 m",
+        "value": 0.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "less_than",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-2-d"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-3-1",
+        "value_raw": "3 m",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-3-a-1",
+        "value_raw": "1.8 m",
+        "value": 1.8,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-3-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-3-b-1",
+        "value_raw": "8 m",
+        "value": 8,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-3-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-3-c-1",
+        "value_raw": "3 m",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "less_than",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-3-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-4-1",
+        "value_raw": "10 parking spaces",
+        "value": 10,
+        "unit": "parking_space",
+        "measure_type": "count",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-4-2",
+        "value_raw": "3 m",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-4-3",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-4-4",
+        "value_raw": "7.5 m",
+        "value": 7.5,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-4-5",
+        "value_raw": "20 m",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-4-6",
+        "value_raw": "20 m",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-4-7",
+        "value_raw": "12 m",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-4-8",
+        "value_raw": "3 storeys",
+        "value": 3,
+        "unit": "storey",
+        "measure_type": "count",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-6-c-1",
+        "value_raw": "1.5 m",
+        "value": 1.5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-6-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-6-d-1",
+        "value_raw": "2 m",
+        "value": 2,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-6-d"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-7-1",
+        "value_raw": "2 m",
+        "value": 2,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "minimum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-10-1",
+        "value_raw": "1.8 m",
+        "value": 1.8,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "less_than",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-10"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-hi-num-zone-hi-clause-20-6-11-1",
+        "value_raw": "10 parking spaces",
+        "value": 10,
+        "unit": "parking_space",
+        "measure_type": "count",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-11"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-hi-req-zone-hi-clause-20-5-2",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": ".2",
+        "requirement_text_raw": "The maximum building height shall be 12 m or 3 storeys.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-hi-num-zone-hi-clause-20-5-2-1",
+          "zone-hi-num-zone-hi-clause-20-5-2-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-5-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-hi-req-zone-hi-clause-20-6-2-a",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "(a)",
+        "requirement_text_raw": "Lot Area min. 600m 2 interior lot, 700m 2 corner lot",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-hi-num-zone-hi-clause-20-6-2-a-1",
+          "zone-hi-num-zone-hi-clause-20-6-2-a-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-2-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-hi-req-zone-hi-clause-20-6-2-b",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "(b)",
+        "requirement_text_raw": "Frontage min. 20 m",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-hi-num-zone-hi-clause-20-6-2-b-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-2-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-hi-req-zone-hi-clause-20-6-2-c",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "(c)",
+        "requirement_text_raw": "Front Yard Setback min. 7 .5 m",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-hi-num-zone-hi-clause-20-6-2-c-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-2-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-hi-req-zone-hi-clause-20-6-2-d",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "flankage_yard",
+        "requirement_label_raw": "(d)",
+        "requirement_text_raw": "Flankage Yard Setback min. 7 .5 m",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-hi-num-zone-hi-clause-20-6-2-d-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-2-d"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-hi-req-zone-hi-clause-20-6-2-e",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "(e)",
+        "requirement_text_raw": "Side Yard Setback min. 3 m, 6 m if bordering on any residential zone",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-hi-num-zone-hi-clause-20-6-2-e-1",
+          "zone-hi-num-zone-hi-clause-20-6-2-e-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-2-e"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-hi-req-zone-hi-clause-20-6-2-f",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "(f)",
+        "requirement_text_raw": "Rear Yard Setback min. 10 m, 20 m if bordering on any residential zone",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-hi-num-zone-hi-clause-20-6-2-f-1",
+          "zone-hi-num-zone-hi-clause-20-6-2-f-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-2-f"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-hi-req-zone-hi-clause-20-6-3-b",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "(b)",
+        "requirement_text_raw": "One 60 mm caliper tree per 8 m of side or rear yard planted in the landscape buffer placed to block light and views.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-hi-num-zone-hi-clause-20-6-3-b-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-3-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-hi-req-zone-hi-clause-20-6-3-c",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "(c)",
+        "requirement_text_raw": "For buildings that have been set back more than 3 m from the front lot line, no less than 1 tree shall be planted per front yard.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-hi-num-zone-hi-clause-20-6-3-c-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-3-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-hi-req-zone-hi-clause-20-6-4",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": ".4",
+        "requirement_text_raw": "Any chain link fences fronting directly on a Parking Lot Encouraged on side or rear, If located in front, 1 additional tree per 10 parking spaces Min. Side Yard Setback 3 m; 6 m if bordering residential Min. Rear Yard Setback 7.5 m, 20 m if bordering residential Min. Front Yard Setback 7.5 mChain Link Fence Must be buffered with landscaping when fronting directly on a street Min. Frontage 20 m Max. Building Height 12 m and 3 storeys Truck Bays - Garage Doors On Side or Rear yard Walkway Connecting Parking to Entry Figure 20.1 HI Built Form and Landscape Requirements street must be buffered using a combination of trees, shrubs or vines.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-hi-num-zone-hi-clause-20-6-4-1",
+          "zone-hi-num-zone-hi-clause-20-6-4-2",
+          "zone-hi-num-zone-hi-clause-20-6-4-3",
+          "zone-hi-num-zone-hi-clause-20-6-4-4",
+          "zone-hi-num-zone-hi-clause-20-6-4-5",
+          "zone-hi-num-zone-hi-clause-20-6-4-6",
+          "zone-hi-num-zone-hi-clause-20-6-4-7",
+          "zone-hi-num-zone-hi-clause-20-6-4-8"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-4"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-hi-req-zone-hi-clause-20-6-6-c",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "a_minimum_of_1_5_m_wide_of_sod_strip_is_required_adjoining_any_asphalt_areas_pat",
+        "requirement_label_raw": "(c)",
+        "requirement_text_raw": "A minimum of 1.5 m wide of Sod strip is required adjoining any asphalt areas, pathways, gravel storage areas, or landscape beds.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-hi-num-zone-hi-clause-20-6-6-c-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-6-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-hi-req-zone-hi-clause-20-6-6-d",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "a_minimum_of_2_m_wide_strip_of_sod_is_required_for_all_drainage_swales",
+        "requirement_label_raw": "(d)",
+        "requirement_text_raw": "A minimum of 2 m wide strip of sod is required for all drainage swales",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-hi-num-zone-hi-clause-20-6-6-d-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-6-d"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-hi-req-zone-hi-clause-20-6-7",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": ".7",
+        "requirement_text_raw": "For any parking lots located in the front yard, a minimum 2 m wide hard surfaced sidewalk shall connect the front door of the building to any adjacent sidewalks adjoining the property if present.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-hi-num-zone-hi-clause-20-6-7-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-hi-req-zone-hi-clause-20-6-10",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "parking",
+        "requirement_label_raw": ".10",
+        "requirement_text_raw": "The front door of the primary building must connect to adjacent sidewalks and parking areas by a hard surfaced walkway no less than 1.8 m wide.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-hi-num-zone-hi-clause-20-6-10-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-10"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-hi-req-zone-hi-clause-20-6-11",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": ".11",
+        "requirement_text_raw": "Parking is recommended in the side or rear yard of the lot, but any parking located in front yard of the primary building shall include one additional tree for every 10 parking spaces located in the front yard.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-hi-num-zone-hi-clause-20-6-11-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-11"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-hi-regulation-group-zone",
+        "group_label_raw": "PART 20",
+        "group_title_raw": "HI - Heavy Industrial",
+        "regulated_use_terms": [
+          "zone-hi-term-use-fire_station",
+          "zone-hi-term-use-police_station",
+          "zone-hi-term-use-public_utility_service_operation",
+          "zone-hi-term-use-automobile_body_shop",
+          "zone-hi-term-use-automobile_sales_and_service",
+          "zone-hi-term-use-automobile_service_station",
+          "zone-hi-term-use-equipment_sales_rental_service",
+          "zone-hi-term-use-office",
+          "zone-hi-term-use-retail_store",
+          "zone-hi-term-use-retail_warehouse",
+          "zone-hi-term-use-light_manufacturing",
+          "zone-hi-term-use-assembly_facility",
+          "zone-hi-term-use-service_repair_establishment",
+          "zone-hi-term-use-transportation_service",
+          "zone-hi-term-use-abattoir",
+          "zone-hi-term-use-bulk_fuel_station",
+          "zone-hi-term-use-extractive_facilities",
+          "zone-hi-term-use-feedmill",
+          "zone-hi-term-use-heavy_equipment_repair"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "HI"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-hi-req-zone-hi-clause-20-5-2",
+          "zone-hi-req-zone-hi-clause-20-6-2-a",
+          "zone-hi-req-zone-hi-clause-20-6-2-b",
+          "zone-hi-req-zone-hi-clause-20-6-2-c",
+          "zone-hi-req-zone-hi-clause-20-6-2-d",
+          "zone-hi-req-zone-hi-clause-20-6-2-e",
+          "zone-hi-req-zone-hi-clause-20-6-2-f",
+          "zone-hi-req-zone-hi-clause-20-6-3-b",
+          "zone-hi-req-zone-hi-clause-20-6-3-c",
+          "zone-hi-req-zone-hi-clause-20-6-4",
+          "zone-hi-req-zone-hi-clause-20-6-6-c",
+          "zone-hi-req-zone-hi-clause-20-6-6-d",
+          "zone-hi-req-zone-hi-clause-20-6-7",
+          "zone-hi-req-zone-hi-clause-20-6-10",
+          "zone-hi-req-zone-hi-clause-20-6-11"
+        ],
+        "source_section_ref": "zone-hi-section-20-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-hi-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "HI",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-hi-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [
+      {
+        "requirement_id": "zone-hi-req-zone-hi-clause-20-5-5",
+        "requirement_type": "other",
+        "requirement_category": "blank_facades_exceeding_20_m_in_length_are_prohibited_along_a_public_street",
+        "requirement_label_raw": ".5",
+        "requirement_text_raw": "Blank facades exceeding 20 m in length are prohibited along a public street.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-hi-num-zone-hi-clause-20-5-5-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-5-5"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "requirement_id": "zone-hi-req-zone-hi-clause-20-6-3",
+        "requirement_type": "other",
+        "requirement_category": "properties_that_abut_residential_uses_shall_include_a_3_m_wide_landscape_buffer_",
+        "requirement_label_raw": ".3",
+        "requirement_text_raw": "Properties that abut residential uses shall include a 3 m wide landscape buffer along the abutting property line that includes:",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-hi-num-zone-hi-clause-20-6-3-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-3"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "requirement_id": "zone-hi-req-zone-hi-clause-20-6-3-a",
+        "requirement_type": "other",
+        "requirement_category": "a_1_8_m_high_min_opaque_fence",
+        "requirement_label_raw": "(a)",
+        "requirement_text_raw": "A 1.8 m high (min.) opaque fence",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-hi-num-zone-hi-clause-20-6-3-a-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-hi-clause-20-6-3-a"
+          }
+        ],
+        "confidence": "needs_review"
+      }
+    ],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-hi-flag-legacy-open-issue-1",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "extraction_review",
+      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization.",
+      "source_refs": [
+        {
+          "source_ref_type": "source_unit",
+          "source_ref_id": "zone-hi"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-hi-flag-legacy-open-issue-2",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "table_parsing_review",
+      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization.",
+      "source_refs": [
+        {
+          "source_ref_type": "source_unit",
+          "source_ref_id": "zone-hi"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-hi-flag-legacy-open-issue-3",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "zone_boundary_review",
+      "description": "Some extracted text was not safely assigned to a labeled section and is preserved in content_blocks.",
+      "source_refs": [
+        {
+          "source_ref_type": "source_unit",
+          "source_ref_id": "zone-hi"
+        }
+      ]
+    }
+  ]
 }

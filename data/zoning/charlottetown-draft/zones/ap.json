@@ -1,1521 +1,3236 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Draft Zoning & Development Bylaw",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+    "document_type": "zone",
     "zone_code": "AP",
     "zone_name": "Airport Periphery",
-    "part_label_raw": "PART 19",
-    "chapter_heading_raw": "PART 19 AP - Airport Periphery",
-    "draft_date_raw": "April 7, 2026"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": [
-      "dot_numeric_provision_labels",
-      "parenthesized_alpha_clause_labels"
-    ]
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "(a)",
-      "use_type": "permitted_use",
-      "use_name": "Transitional Housing",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(b)",
-      "use_type": "permitted_use",
-      "use_name": "Commercial Daycare Centre",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(c)",
-      "use_type": "permitted_use",
-      "use_name": "Cultural Establishment",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(d)",
-      "use_type": "permitted_use",
-      "use_name": "Educational Institution (private)",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(e)",
-      "use_type": "permitted_use",
-      "use_name": "Educational Institution (public)",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(f)",
-      "use_type": "permitted_use",
-      "use_name": "Fire Station",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(g)",
-      "use_type": "permitted_use",
-      "use_name": "Government Offices",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(h)",
-      "use_type": "permitted_use",
-      "use_name": "Medical, Health and Dental Office",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(i)",
-      "use_type": "permitted_use",
-      "use_name": "Place of Worship",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(j)",
-      "use_type": "permitted_use",
-      "use_name": "Police Station",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(k)",
-      "use_type": "permitted_use",
-      "use_name": "Recreation or Fitness Center (indoors)",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(l)",
-      "use_type": "permitted_use",
-      "use_name": "Research and Development Facilities",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(m)",
-      "use_type": "permitted_use",
-      "use_name": "Automobile Body Shop",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(n)",
-      "use_type": "permitted_use",
-      "use_name": "Automobile Sales and Services",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(o)",
-      "use_type": "permitted_use",
-      "use_name": "Automobile Service Station",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(p)",
-      "use_type": "permitted_use",
-      "use_name": "Club",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(q)",
-      "use_type": "permitted_use",
-      "use_name": "Equipment Sales, Rental Service",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(r)",
-      "use_type": "permitted_use",
-      "use_name": "Garden Centre",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(s)",
-      "use_type": "permitted_use",
-      "use_name": "Office",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(t)",
-      "use_type": "permitted_use",
-      "use_name": "Outdoor Retail Display",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(u)",
-      "use_type": "permitted_use",
-      "use_name": "Personal Service Shop",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(v)",
-      "use_type": "permitted_use",
-      "use_name": "Retail Store",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(w)",
-      "use_type": "permitted_use",
-      "use_name": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(x)",
-      "use_type": "permitted_use",
-      "use_name": "Retail Warehouse",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(y)",
-      "use_type": "permitted_use",
-      "use_name": "Service Repair Establishment",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(z)",
-      "use_type": "permitted_use",
-      "use_name": "Transportation Service",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(aa)",
-      "use_type": "permitted_use",
-      "use_name": "Veterinary Services",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(ab)",
-      "use_type": "permitted_use",
-      "use_name": "Bulk Fuel Station",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(ac)",
-      "use_type": "permitted_use",
-      "use_name": "Greenhouse (private industrial)",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(ad)",
-      "use_type": "permitted_use",
-      "use_name": "Heavy Equipment Repair",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(ae)",
-      "use_type": "permitted_use",
-      "use_name": "Hostel/ Hotel",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(af)",
-      "use_type": "permitted_use",
-      "use_name": "Kennel",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(ag)",
-      "use_type": "permitted_use",
-      "use_name": "Manufacturing, Heavy",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(ah)",
-      "use_type": "permitted_use",
-      "use_name": "Manufacturing, Light",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(ai)",
-      "use_type": "permitted_use",
-      "use_name": "Marijuana Production Facility",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(aj)",
-      "use_type": "permitted_use",
-      "use_name": "Warehouse, Storage Facility and/or Distribution Centre",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(ak)",
-      "use_type": "permitted_use",
-      "use_name": "Agricultural and Resource Land Uses",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(al)",
-      "use_type": "permitted_use",
-      "use_name": "Airport",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(am)",
-      "use_type": "permitted_use",
-      "use_name": "Outdoor Storage",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(an)",
-      "use_type": "permitted_use",
-      "use_name": "Parking Lot / Structure",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    },
-    {
-      "clause_label_raw": "(ao)",
-      "use_type": "permitted_use",
-      "use_name": "Transport Terminal",
-      "status": "active",
-      "conditions": "The following uses are permitted in the AP Zone:",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      }
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "19.1",
-      "title_label_raw": "INTENT",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "section",
-          "text": "The Airport Periphery Zone is established to accommodate aviation-related operations and supporting uses essential to the safe and efficient functioning of the Charlottetown Airport. The zone provides for runways, taxiways, terminals, hangars, air cargo facilities, and associated commercial and service uses, while ensuring that development remains compatible with federal aviation regulations and surrounding land uses. The intent is to protect the long-term viability of the airport as a regional transportation hub, promote economic development through aviation-related industries, and manage land use in a manner that minimizes impacts on neighbouring residential and business areas.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": "19.2",
-      "title_label_raw": "RE-ZONING",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "Rezoning from AP to another zone is not permitted.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 3,
-      "section_label_raw": "19.3",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "The following uses are permitted in the AP Zone:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Transitional Housing",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Commercial Daycare Centre",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Cultural Establishment",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(d)",
-          "text": "Educational Institution (private)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(e)",
-          "text": "Educational Institution (public)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(f)",
-          "text": "Fire Station",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(g)",
-          "text": "Government Offices",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(h)",
-          "text": "Medical, Health and Dental Office",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(i)",
-          "text": "Place of Worship",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(j)",
-          "text": "Police Station",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(k)",
-          "text": "Recreation or Fitness Center (indoors)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(l)",
-          "text": "Research and Development Facilities",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(m)",
-          "text": "Automobile Body Shop",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(n)",
-          "text": "Automobile Sales and Services",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(o)",
-          "text": "Automobile Service Station",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(p)",
-          "text": "Club",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(q)",
-          "text": "Equipment Sales, Rental Service",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(r)",
-          "text": "Garden Centre",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(s)",
-          "text": "Office",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(t)",
-          "text": "Outdoor Retail Display",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(u)",
-          "text": "Personal Service Shop",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(v)",
-          "text": "Retail Store",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(w)",
-          "text": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(x)",
-          "text": "Retail Warehouse",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(y)",
-          "text": "Service Repair Establishment",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(z)",
-          "text": "Transportation Service",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(aa)",
-          "text": "Veterinary Services",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(ab)",
-          "text": "Bulk Fuel Station",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(ac)",
-          "text": "Greenhouse (private industrial)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(ad)",
-          "text": "Heavy Equipment Repair",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(ae)",
-          "text": "Hostel/ Hotel",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(af)",
-          "text": "Kennel",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(ag)",
-          "text": "Manufacturing, Heavy",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(ah)",
-          "text": "Manufacturing, Light",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(ai)",
-          "text": "Marijuana Production Facility",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(aj)",
-          "text": "Warehouse, Storage Facility and/or Distribution Centre",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(ak)",
-          "text": "Agricultural and Resource Land Uses",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(al)",
-          "text": "Airport",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(am)",
-          "text": "Outdoor Storage",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(an)",
-          "text": "Parking Lot / Structure",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(ao)",
-          "text": "Transport Terminal",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "These uses are permitted so long as the following lot requirements are met:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Lot Area min. 600 m 2 interior lot, 700 m 2 corner lot",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Frontage min. 20 m",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Front Yard Setback min. 7 .5 m",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(d)",
-          "text": "Flankage Yard Setback min. 7 .5 m",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(e)",
-          "text": "Side Yard Setback min. 3 m, 6 m if bordering on any residential zone",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(f)",
-          "text": "Rear Yard Setback min. 10 m, 20 m if bordering on any residential zone",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": "(g)",
-          "text": "Lot Coverage max. 35%",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": ".3",
-          "text": "Accessory buildings are permitted according to Section 3.1",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": ".4",
-          "text": "Notwithstanding 20.2.3, airport related facilities operated by the Charlottetown Airport Authority Inc. are permitted to include more than one building per lot, with no maximum or minimum zoning requirements.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": ".5",
-          "text": "Development in the Airport Periphery (AP) Zone may be subject to additional regulations of the Charlottetown Airport Zoning Regulations (SOR/92-649) under federal authority of the Aeronautics Act, R.S.C., 1985, c. A-2 and all amendments thereto.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        },
-        {
-          "provision_label_raw": ".6",
-          "text": "Subject to Transport Canada's Obstruction Limitation Surfaces (OLS) - no building or structure may penetrate federally regulated height surfaces. Parking Lot Encouraged on side or rear, If located in front, 1 Island per 15 cars, no more than 50% of front yard area Min. Side Yard Setback 3 m; 6 m if bordering residential Min. Rear Yard Setback 10 m; 20 m if bordering residential Min. Front Yard Setback 7.5 mStorage Compounds Fenced to min. 1.8 m height Min. Frontage 20 m Max. Building Height 12 m and 3 Storeys Truck Bays - Garage Doors On Side or Rear yard Walkway Connecting Parking to Entry Figure 19.1 AP Built Form and Landscape Requirements",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 131,
-            "pdf_page_end": 131,
-            "bylaw_page_start": 127,
-            "bylaw_page_end": 127
-          }
-        }
-      ],
-      "layout_artifacts_present": true
-    },
-    {
-      "order_index": 4,
-      "section_label_raw": "19.4",
-      "title_label_raw": "PERMITTED WITH CONDITIONS",
-      "citations": {
-        "pdf_page_start": 134,
-        "pdf_page_end": 134,
-        "bylaw_page_start": 130,
-        "bylaw_page_end": 130
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "Permitted encroachments into the setbacks are listed in Table 3.2.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 134,
-            "pdf_page_end": 134,
-            "bylaw_page_start": 130,
-            "bylaw_page_end": 130
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "Gas stations may be permitted by Development Agreement.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 134,
-            "pdf_page_end": 134,
-            "bylaw_page_start": 130,
-            "bylaw_page_end": 130
-          }
-        },
-        {
-          "provision_label_raw": ".3",
-          "text": "All uses permitted in the Business Park (BP) Zone are permitted in the AP Zone, subject to the Regulations for Permitted Uses for the BP Zone.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 134,
-            "pdf_page_end": 134,
-            "bylaw_page_start": 130,
-            "bylaw_page_end": 130
-          }
-        },
-        {
-          "provision_label_raw": ".4",
-          "text": "Airport towers or aviation equipment that exceed the maximum height requirement are permitted as of right.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 134,
-            "pdf_page_end": 134,
-            "bylaw_page_start": 130,
-            "bylaw_page_end": 130
-          }
-        }
-      ],
-      "layout_artifacts_present": true
-    },
-    {
-      "order_index": 5,
-      "section_label_raw": "19.5",
-      "title_label_raw": "BUILT FORM REQUIREMENTS",
-      "citations": {
-        "pdf_page_start": 134,
-        "pdf_page_end": 134,
-        "bylaw_page_start": 130,
-        "bylaw_page_end": 130
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "One primary building per lot is permitted.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 134,
-            "pdf_page_end": 134,
-            "bylaw_page_start": 130,
-            "bylaw_page_end": 130
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "The maximum building height shall be 12 m or 3 storeys.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 134,
-            "pdf_page_end": 134,
-            "bylaw_page_start": 130,
-            "bylaw_page_end": 130
-          }
-        },
-        {
-          "provision_label_raw": ".3",
-          "text": "All built form requirements in the BP Zone (Section 18.5) apply to all uses for new buildings in this zone, except airport related facilities.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 134,
-            "pdf_page_end": 134,
-            "bylaw_page_start": 130,
-            "bylaw_page_end": 130
-          }
-        },
-        {
-          "provision_label_raw": ".4",
-          "text": "Airport related facilities are exempt from any built for requirements such as:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 134,
-            "pdf_page_end": 134,
-            "bylaw_page_start": 130,
-            "bylaw_page_end": 130
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Service and loading areas requirements or screening from public streets.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 134,
-            "pdf_page_end": 134,
-            "bylaw_page_start": 130,
-            "bylaw_page_end": 130
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Garage requirements",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 134,
-            "pdf_page_end": 134,
-            "bylaw_page_start": 130,
-            "bylaw_page_end": 130
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Any parking requirements",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 134,
-            "pdf_page_end": 134,
-            "bylaw_page_start": 130,
-            "bylaw_page_end": 130
-          }
-        },
-        {
-          "provision_label_raw": "(d)",
-          "text": "Setback and coverage requirements",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 134,
-            "pdf_page_end": 134,
-            "bylaw_page_start": 130,
-            "bylaw_page_end": 130
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 6,
-      "section_label_raw": "19.6",
-      "title_label_raw": "LANDSCAPE REQUIREMENTS",
-      "citations": {
-        "pdf_page_start": 134,
-        "pdf_page_end": 134,
-        "bylaw_page_start": 130,
-        "bylaw_page_end": 130
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "All Landscape requirements in the BP Zone (Section 18.6) apply to all uses for new buildings in this zone.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 134,
-            "pdf_page_end": 134,
-            "bylaw_page_start": 130,
-            "bylaw_page_end": 130
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "Airport related facilities are exempt from:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 134,
-            "pdf_page_end": 134,
-            "bylaw_page_start": 130,
-            "bylaw_page_end": 130
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Any of the landscape requirements in Section 19.6",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 134,
-            "pdf_page_end": 134,
-            "bylaw_page_start": 130,
-            "bylaw_page_end": 130
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Any safety fencing requirements which prohibit the use of razor wire",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 134,
-            "pdf_page_end": 134,
-            "bylaw_page_start": 130,
-            "bylaw_page_end": 130
-          }
-        }
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "Section 3.1",
-      "citations": {
-        "pdf_page_start": 131,
-        "pdf_page_end": 131,
-        "bylaw_page_start": 127,
-        "bylaw_page_end": 127
-      },
-      "source_text": "Accessory buildings are permitted according to Section 3.1"
-    },
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "Table 3.2.",
-      "citations": {
-        "pdf_page_start": 134,
-        "pdf_page_end": 134,
-        "bylaw_page_start": 130,
-        "bylaw_page_end": 130
-      },
-      "source_text": "Permitted encroachments into the setbacks are listed in Table 3.2."
-    },
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "Section 18.5",
-      "citations": {
-        "pdf_page_start": 134,
-        "pdf_page_end": 134,
-        "bylaw_page_start": 130,
-        "bylaw_page_end": 130
-      },
-      "source_text": "All built form requirements in the BP Zone (Section 18.5) apply to all uses for new buildings in this zone, except airport related facilities."
-    },
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "Section 18.6",
-      "citations": {
-        "pdf_page_start": 134,
-        "pdf_page_end": 134,
-        "bylaw_page_start": 130,
-        "bylaw_page_end": 130
-      },
-      "source_text": "All Landscape requirements in the BP Zone (Section 18.6) apply to all uses for new buildings in this zone."
-    },
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "Section 19.6",
-      "citations": {
-        "pdf_page_start": 134,
-        "pdf_page_end": 134,
-        "bylaw_page_start": 130,
-        "bylaw_page_end": 130
-      },
-      "source_text": "Any of the landscape requirements in Section 19.6"
-    }
-  ],
-  "content_blocks": [],
-  "open_issues": [
-    {
-      "issue_type": "extraction_review",
-      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization."
-    },
-    {
-      "issue_type": "table_parsing_review",
-      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "PART 19",
+    "zone_title_raw": "AP - Airport Periphery",
+    "citations": {
       "pdf_page_start": 131,
       "pdf_page_end": 134,
       "bylaw_page_start": 127,
       "bylaw_page_end": 130
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-ap",
+        "source_unit_type": "zone",
+        "label_raw": "PART 19",
+        "title_raw": "AP - Airport Periphery",
+        "text_raw": "The Airport Periphery Zone is established to accommodate aviation-related operations and supporting uses essential to the safe and efficient functioning of the Charlottetown Airport. The zone provides for runways, taxiways, terminals, hangars, air cargo facilities, and associated commercial and service uses, while ensuring that development remains compatible with federal aviation regulations and surrounding land uses. The intent is to protect the long-term viability of the airport as a regional transportation hub, promote economic development through aviation-related industries, and manage land use in a manner that minimizes impacts on neighbouring residential and business areas.\nRezoning from AP to another zone is not permitted.\nThe following uses are permitted in the AP Zone:\nTransitional Housing\nCommercial Daycare Centre\nCultural Establishment\nEducational Institution (private)\nEducational Institution (public)\nFire Station\nGovernment Offices\nMedical, Health and Dental Office\nPlace of Worship\nPolice Station\nRecreation or Fitness Center (indoors)\nResearch and Development Facilities\nAutomobile Body Shop\nAutomobile Sales and Services\nAutomobile Service Station\nClub\nEquipment Sales, Rental Service\nGarden Centre\nOffice\nOutdoor Retail Display\nPersonal Service Shop\nRetail Store\nRetail Store with connected Retail Warehouse, Light Manufacturing or assembly facility\nRetail Warehouse\nService Repair Establishment\nTransportation Service\nVeterinary Services\nBulk Fuel Station\nGreenhouse (private industrial)\nHeavy Equipment Repair\nHostel/ Hotel\nKennel\nManufacturing, Heavy\nManufacturing, Light\nMarijuana Production Facility\nWarehouse, Storage Facility and/or Distribution Centre\nAgricultural and Resource Land Uses\nAirport\nOutdoor Storage\nParking Lot / Structure\nTransport Terminal\nThese uses are permitted so long as the following lot requirements are met:\nLot Area min. 600 m 2 interior lot, 700 m 2 corner lot\nFrontage min. 20 m\nFront Yard Setback min. 7 .5 m\nFlankage Yard Setback min. 7 .5 m\nSide Yard Setback min. 3 m, 6 m if bordering on any residential zone\nRear Yard Setback min. 10 m, 20 m if bordering on any residential zone\nLot Coverage max. 35%\nAccessory buildings are permitted according to Section 3.1\nNotwithstanding 20.2.3, airport related facilities operated by the Charlottetown Airport Authority Inc. are permitted to include more than one building per lot, with no maximum or minimum zoning requirements.\nDevelopment in the Airport Periphery (AP) Zone may be subject to additional regulations of the Charlottetown Airport Zoning Regulations (SOR/92-649) under federal authority of the Aeronautics Act, R.S.C., 1985, c. A-2 and all amendments thereto.\nSubject to Transport Canada's Obstruction Limitation Surfaces (OLS) - no building or structure may penetrate federally regulated height surfaces. Parking Lot Encouraged on side or rear, If located in front, 1 Island per 15 cars, no more than 50% of front yard area Min. Side Yard Setback 3 m; 6 m if bordering residential Min. Rear Yard Setback 10 m; 20 m if bordering residential Min. Front Yard Setback 7.5 mStorage Compounds Fenced to min. 1.8 m height Min. Frontage 20 m Max. Building Height 12 m and 3 Storeys Truck Bays - Garage Doors On Side or Rear yard Walkway Connecting Parking to Entry Figure 19.1 AP Built Form and Landscape Requirements\nPermitted encroachments into the setbacks are listed in Table 3.2.\nGas stations may be permitted by Development Agreement.\nAll uses permitted in the Business Park (BP) Zone are permitted in the AP Zone, subject to the Regulations for Permitted Uses for the BP Zone.\nAirport towers or aviation equipment that exceed the maximum height requirement are permitted as of right.\nOne primary building per lot is permitted.\nThe maximum building height shall be 12 m or 3 storeys.\nAll built form requirements in the BP Zone (Section 18.5) apply to all uses for new buildings in this zone, except airport related facilities.\nAirport related facilities are exempt from any built for requirements such as:\nService and loading areas requirements or screening from public streets.\nGarage requirements\nAny parking requirements\nSetback and coverage requirements\nAll Landscape requirements in the BP Zone (Section 18.6) apply to all uses for new buildings in this zone.\nAirport related facilities are exempt from:\nAny of the landscape requirements in Section 19.6\nAny safety fencing requirements which prohibit the use of razor wire",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 131,
+          "pdf_page_end": 134,
+          "bylaw_page_start": 127,
+          "bylaw_page_end": 130
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-ap-section-19-1",
+        "section_label_raw": "19.1",
+        "section_title_raw": "INTENT",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-ap-clause-19-1",
+            "clause_label_raw": "section",
+            "clause_text_raw": "The Airport Periphery Zone is established to accommodate aviation-related operations and supporting uses essential to the safe and efficient functioning of the Charlottetown Airport. The zone provides for runways, taxiways, terminals, hangars, air cargo facilities, and associated commercial and service uses, while ensuring that development remains compatible with federal aviation regulations and surrounding land uses. The intent is to protect the long-term viability of the airport as a regional transportation hub, promote economic development through aviation-related industries, and manage land use in a manner that minimizes impacts on neighbouring residential and business areas.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-1",
+            "source_order": 1
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 131,
+          "pdf_page_end": 131,
+          "bylaw_page_start": 127,
+          "bylaw_page_end": 127
+        }
+      },
+      {
+        "section_id": "zone-ap-section-19-2",
+        "section_label_raw": "19.2",
+        "section_title_raw": "RE-ZONING",
+        "source_order": 2,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-ap-clause-19-2-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "Rezoning from AP to another zone is not permitted.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-2-1",
+            "source_order": 1
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 131,
+          "pdf_page_end": 131,
+          "bylaw_page_start": 127,
+          "bylaw_page_end": 127
+        }
+      },
+      {
+        "section_id": "zone-ap-section-19-3",
+        "section_label_raw": "19.3",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 3,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-ap-clause-19-3-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "The following uses are permitted in the AP Zone:",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Transitional Housing",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Commercial Daycare Centre",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Cultural Establishment",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-d",
+            "clause_label_raw": "(d)",
+            "clause_text_raw": "Educational Institution (private)",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-e",
+            "clause_label_raw": "(e)",
+            "clause_text_raw": "Educational Institution (public)",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-f",
+            "clause_label_raw": "(f)",
+            "clause_text_raw": "Fire Station",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-g",
+            "clause_label_raw": "(g)",
+            "clause_text_raw": "Government Offices",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-h",
+            "clause_label_raw": "(h)",
+            "clause_text_raw": "Medical, Health and Dental Office",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-i",
+            "clause_label_raw": "(i)",
+            "clause_text_raw": "Place of Worship",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-j",
+            "clause_label_raw": "(j)",
+            "clause_text_raw": "Police Station",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-k",
+            "clause_label_raw": "(k)",
+            "clause_text_raw": "Recreation or Fitness Center (indoors)",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 12,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-l",
+            "clause_label_raw": "(l)",
+            "clause_text_raw": "Research and Development Facilities",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 13,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-m",
+            "clause_label_raw": "(m)",
+            "clause_text_raw": "Automobile Body Shop",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 14,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-n",
+            "clause_label_raw": "(n)",
+            "clause_text_raw": "Automobile Sales and Services",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 15,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-o",
+            "clause_label_raw": "(o)",
+            "clause_text_raw": "Automobile Service Station",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 16,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-p",
+            "clause_label_raw": "(p)",
+            "clause_text_raw": "Club",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 17,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-q",
+            "clause_label_raw": "(q)",
+            "clause_text_raw": "Equipment Sales, Rental Service",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 18,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-r",
+            "clause_label_raw": "(r)",
+            "clause_text_raw": "Garden Centre",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 19,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-s",
+            "clause_label_raw": "(s)",
+            "clause_text_raw": "Office",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 20,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-t",
+            "clause_label_raw": "(t)",
+            "clause_text_raw": "Outdoor Retail Display",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 21,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-u",
+            "clause_label_raw": "(u)",
+            "clause_text_raw": "Personal Service Shop",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 22,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-v",
+            "clause_label_raw": "(v)",
+            "clause_text_raw": "Retail Store",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 23,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-w",
+            "clause_label_raw": "(w)",
+            "clause_text_raw": "Retail Store with connected Retail Warehouse, Light Manufacturing or assembly facility",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 24,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-x",
+            "clause_label_raw": "(x)",
+            "clause_text_raw": "Retail Warehouse",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 25,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-y",
+            "clause_label_raw": "(y)",
+            "clause_text_raw": "Service Repair Establishment",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 26,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-z",
+            "clause_label_raw": "(z)",
+            "clause_text_raw": "Transportation Service",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 27,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-aa",
+            "clause_label_raw": "(aa)",
+            "clause_text_raw": "Veterinary Services",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 28,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-ab",
+            "clause_label_raw": "(ab)",
+            "clause_text_raw": "Bulk Fuel Station",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 29,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-ac",
+            "clause_label_raw": "(ac)",
+            "clause_text_raw": "Greenhouse (private industrial)",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 30,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-ad",
+            "clause_label_raw": "(ad)",
+            "clause_text_raw": "Heavy Equipment Repair",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 31,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-ae",
+            "clause_label_raw": "(ae)",
+            "clause_text_raw": "Hostel/ Hotel",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 32,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-af",
+            "clause_label_raw": "(af)",
+            "clause_text_raw": "Kennel",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 33,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-ag",
+            "clause_label_raw": "(ag)",
+            "clause_text_raw": "Manufacturing, Heavy",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 34,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-ah",
+            "clause_label_raw": "(ah)",
+            "clause_text_raw": "Manufacturing, Light",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 35,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-ai",
+            "clause_label_raw": "(ai)",
+            "clause_text_raw": "Marijuana Production Facility",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 36,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-aj",
+            "clause_label_raw": "(aj)",
+            "clause_text_raw": "Warehouse, Storage Facility and/or Distribution Centre",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 37,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-ak",
+            "clause_label_raw": "(ak)",
+            "clause_text_raw": "Agricultural and Resource Land Uses",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 38,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-al",
+            "clause_label_raw": "(al)",
+            "clause_text_raw": "Airport",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 39,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-am",
+            "clause_label_raw": "(am)",
+            "clause_text_raw": "Outdoor Storage",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 40,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-an",
+            "clause_label_raw": "(an)",
+            "clause_text_raw": "Parking Lot / Structure",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 41,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-1-ao",
+            "clause_label_raw": "(ao)",
+            "clause_text_raw": "Transport Terminal",
+            "parent_clause_id": "zone-ap-clause-19-3-1",
+            "source_order": 42,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "These uses are permitted so long as the following lot requirements are met:",
+            "parent_clause_id": null,
+            "source_order": 43,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-2-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Lot Area min. 600 m 2 interior lot, 700 m 2 corner lot",
+            "parent_clause_id": "zone-ap-clause-19-3-2",
+            "source_order": 44,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-2-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Frontage min. 20 m",
+            "parent_clause_id": "zone-ap-clause-19-3-2",
+            "source_order": 45,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-2-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Front Yard Setback min. 7 .5 m",
+            "parent_clause_id": "zone-ap-clause-19-3-2",
+            "source_order": 46,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-2-d",
+            "clause_label_raw": "(d)",
+            "clause_text_raw": "Flankage Yard Setback min. 7 .5 m",
+            "parent_clause_id": "zone-ap-clause-19-3-2",
+            "source_order": 47,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-2-e",
+            "clause_label_raw": "(e)",
+            "clause_text_raw": "Side Yard Setback min. 3 m, 6 m if bordering on any residential zone",
+            "parent_clause_id": "zone-ap-clause-19-3-2",
+            "source_order": 48,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-2-f",
+            "clause_label_raw": "(f)",
+            "clause_text_raw": "Rear Yard Setback min. 10 m, 20 m if bordering on any residential zone",
+            "parent_clause_id": "zone-ap-clause-19-3-2",
+            "source_order": 49,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-2-g",
+            "clause_label_raw": "(g)",
+            "clause_text_raw": "Lot Coverage max. 35%",
+            "parent_clause_id": "zone-ap-clause-19-3-2",
+            "source_order": 50,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-3",
+            "clause_label_raw": ".3",
+            "clause_text_raw": "Accessory buildings are permitted according to Section 3.1",
+            "parent_clause_id": null,
+            "source_order": 51,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-4",
+            "clause_label_raw": ".4",
+            "clause_text_raw": "Notwithstanding 20.2.3, airport related facilities operated by the Charlottetown Airport Authority Inc. are permitted to include more than one building per lot, with no maximum or minimum zoning requirements.",
+            "parent_clause_id": null,
+            "source_order": 52,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-5",
+            "clause_label_raw": ".5",
+            "clause_text_raw": "Development in the Airport Periphery (AP) Zone may be subject to additional regulations of the Charlottetown Airport Zoning Regulations (SOR/92-649) under federal authority of the Aeronautics Act, R.S.C., 1985, c. A-2 and all amendments thereto.",
+            "parent_clause_id": null,
+            "source_order": 53,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-3-6",
+            "clause_label_raw": ".6",
+            "clause_text_raw": "Subject to Transport Canada's Obstruction Limitation Surfaces (OLS) - no building or structure may penetrate federally regulated height surfaces. Parking Lot Encouraged on side or rear, If located in front, 1 Island per 15 cars, no more than 50% of front yard area Min. Side Yard Setback 3 m; 6 m if bordering residential Min. Rear Yard Setback 10 m; 20 m if bordering residential Min. Front Yard Setback 7.5 mStorage Compounds Fenced to min. 1.8 m height Min. Frontage 20 m Max. Building Height 12 m and 3 Storeys Truck Bays - Garage Doors On Side or Rear yard Walkway Connecting Parking to Entry Figure 19.1 AP Built Form and Landscape Requirements",
+            "parent_clause_id": null,
+            "source_order": 54,
+            "citations": {
+              "pdf_page_start": 131,
+              "pdf_page_end": 131,
+              "bylaw_page_start": 127,
+              "bylaw_page_end": 127
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-a",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-b",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-c",
+            "source_order": 4
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-d",
+            "source_order": 5
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-e",
+            "source_order": 6
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-f",
+            "source_order": 7
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-g",
+            "source_order": 8
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-h",
+            "source_order": 9
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-i",
+            "source_order": 10
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-j",
+            "source_order": 11
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-k",
+            "source_order": 12
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-l",
+            "source_order": 13
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-m",
+            "source_order": 14
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-n",
+            "source_order": 15
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-o",
+            "source_order": 16
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-p",
+            "source_order": 17
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-q",
+            "source_order": 18
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-r",
+            "source_order": 19
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-s",
+            "source_order": 20
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-t",
+            "source_order": 21
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-u",
+            "source_order": 22
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-v",
+            "source_order": 23
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-w",
+            "source_order": 24
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-x",
+            "source_order": 25
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-y",
+            "source_order": 26
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-z",
+            "source_order": 27
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-aa",
+            "source_order": 28
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-ab",
+            "source_order": 29
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-ac",
+            "source_order": 30
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-ad",
+            "source_order": 31
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-ae",
+            "source_order": 32
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-af",
+            "source_order": 33
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-ag",
+            "source_order": 34
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-ah",
+            "source_order": 35
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-ai",
+            "source_order": 36
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-aj",
+            "source_order": 37
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-ak",
+            "source_order": 38
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-al",
+            "source_order": 39
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-am",
+            "source_order": 40
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-an",
+            "source_order": 41
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-1-ao",
+            "source_order": 42
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-2",
+            "source_order": 43
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-2-a",
+            "source_order": 44
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-2-b",
+            "source_order": 45
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-2-c",
+            "source_order": 46
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-2-d",
+            "source_order": 47
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-2-e",
+            "source_order": 48
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-2-f",
+            "source_order": 49
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-2-g",
+            "source_order": 50
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-3",
+            "source_order": 51
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-4",
+            "source_order": 52
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-5",
+            "source_order": 53
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-3-6",
+            "source_order": 54
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 131,
+          "pdf_page_end": 131,
+          "bylaw_page_start": 127,
+          "bylaw_page_end": 127
+        }
+      },
+      {
+        "section_id": "zone-ap-section-19-4",
+        "section_label_raw": "19.4",
+        "section_title_raw": "PERMITTED WITH CONDITIONS",
+        "source_order": 4,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-ap-clause-19-4-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "Permitted encroachments into the setbacks are listed in Table 3.2.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 134,
+              "pdf_page_end": 134,
+              "bylaw_page_start": 130,
+              "bylaw_page_end": 130
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-4-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "Gas stations may be permitted by Development Agreement.",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 134,
+              "pdf_page_end": 134,
+              "bylaw_page_start": 130,
+              "bylaw_page_end": 130
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-4-3",
+            "clause_label_raw": ".3",
+            "clause_text_raw": "All uses permitted in the Business Park (BP) Zone are permitted in the AP Zone, subject to the Regulations for Permitted Uses for the BP Zone.",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 134,
+              "pdf_page_end": 134,
+              "bylaw_page_start": 130,
+              "bylaw_page_end": 130
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-4-4",
+            "clause_label_raw": ".4",
+            "clause_text_raw": "Airport towers or aviation equipment that exceed the maximum height requirement are permitted as of right.",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 134,
+              "pdf_page_end": 134,
+              "bylaw_page_start": 130,
+              "bylaw_page_end": 130
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-4-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-4-2",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-4-3",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-4-4",
+            "source_order": 4
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 134,
+          "pdf_page_end": 134,
+          "bylaw_page_start": 130,
+          "bylaw_page_end": 130
+        }
+      },
+      {
+        "section_id": "zone-ap-section-19-5",
+        "section_label_raw": "19.5",
+        "section_title_raw": "BUILT FORM REQUIREMENTS",
+        "source_order": 5,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-ap-clause-19-5-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "One primary building per lot is permitted.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 134,
+              "pdf_page_end": 134,
+              "bylaw_page_start": 130,
+              "bylaw_page_end": 130
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-5-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "The maximum building height shall be 12 m or 3 storeys.",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 134,
+              "pdf_page_end": 134,
+              "bylaw_page_start": 130,
+              "bylaw_page_end": 130
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-5-3",
+            "clause_label_raw": ".3",
+            "clause_text_raw": "All built form requirements in the BP Zone (Section 18.5) apply to all uses for new buildings in this zone, except airport related facilities.",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 134,
+              "pdf_page_end": 134,
+              "bylaw_page_start": 130,
+              "bylaw_page_end": 130
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-5-4",
+            "clause_label_raw": ".4",
+            "clause_text_raw": "Airport related facilities are exempt from any built for requirements such as:",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 134,
+              "pdf_page_end": 134,
+              "bylaw_page_start": 130,
+              "bylaw_page_end": 130
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-5-4-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Service and loading areas requirements or screening from public streets.",
+            "parent_clause_id": "zone-ap-clause-19-5-4",
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 134,
+              "pdf_page_end": 134,
+              "bylaw_page_start": 130,
+              "bylaw_page_end": 130
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-5-4-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Garage requirements",
+            "parent_clause_id": "zone-ap-clause-19-5-4",
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 134,
+              "pdf_page_end": 134,
+              "bylaw_page_start": 130,
+              "bylaw_page_end": 130
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-5-4-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Any parking requirements",
+            "parent_clause_id": "zone-ap-clause-19-5-4",
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 134,
+              "pdf_page_end": 134,
+              "bylaw_page_start": 130,
+              "bylaw_page_end": 130
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-5-4-d",
+            "clause_label_raw": "(d)",
+            "clause_text_raw": "Setback and coverage requirements",
+            "parent_clause_id": "zone-ap-clause-19-5-4",
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 134,
+              "pdf_page_end": 134,
+              "bylaw_page_start": 130,
+              "bylaw_page_end": 130
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-5-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-5-2",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-5-3",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-5-4",
+            "source_order": 4
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-5-4-a",
+            "source_order": 5
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-5-4-b",
+            "source_order": 6
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-5-4-c",
+            "source_order": 7
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-5-4-d",
+            "source_order": 8
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 134,
+          "pdf_page_end": 134,
+          "bylaw_page_start": 130,
+          "bylaw_page_end": 130
+        }
+      },
+      {
+        "section_id": "zone-ap-section-19-6",
+        "section_label_raw": "19.6",
+        "section_title_raw": "LANDSCAPE REQUIREMENTS",
+        "source_order": 6,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-ap-clause-19-6-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "All Landscape requirements in the BP Zone (Section 18.6) apply to all uses for new buildings in this zone.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 134,
+              "pdf_page_end": 134,
+              "bylaw_page_start": 130,
+              "bylaw_page_end": 130
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-6-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "Airport related facilities are exempt from:",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 134,
+              "pdf_page_end": 134,
+              "bylaw_page_start": 130,
+              "bylaw_page_end": 130
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-6-2-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Any of the landscape requirements in Section 19.6",
+            "parent_clause_id": "zone-ap-clause-19-6-2",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 134,
+              "pdf_page_end": 134,
+              "bylaw_page_start": 130,
+              "bylaw_page_end": 130
+            }
+          },
+          {
+            "clause_id": "zone-ap-clause-19-6-2-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Any safety fencing requirements which prohibit the use of razor wire",
+            "parent_clause_id": "zone-ap-clause-19-6-2",
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 134,
+              "pdf_page_end": 134,
+              "bylaw_page_start": 130,
+              "bylaw_page_end": 130
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-6-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-6-2",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-6-2-a",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-ap-clause-19-6-2-b",
+            "source_order": 4
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 134,
+          "pdf_page_end": 134,
+          "bylaw_page_start": 130,
+          "bylaw_page_end": 130
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-ap-clause-19-1",
+        "section_id": "zone-ap-section-19-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-ap-clause-19-2-1",
+        "section_id": "zone-ap-section-19-2",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-a",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-b",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-c",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 6
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-d",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 7
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-e",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 8
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-f",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 9
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-g",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 10
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-h",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 11
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-i",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 12
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-j",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 13
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-k",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 14
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-l",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 15
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-m",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 16
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-n",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 17
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-o",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 18
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-p",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 19
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-q",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 20
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-r",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 21
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-s",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 22
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-t",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 23
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-u",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 24
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-v",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 25
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-w",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 26
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-x",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 27
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-y",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 28
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-z",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 29
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-aa",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 30
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-ab",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 31
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-ac",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 32
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-ad",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 33
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-ae",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 34
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-af",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 35
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-ag",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 36
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-ah",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 37
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-ai",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 38
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-aj",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 39
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-ak",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 40
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-al",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 41
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-am",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 42
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-an",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 43
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-1-ao",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 44
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-2",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 45
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-2-a",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 46
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-2-b",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 47
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-2-c",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 48
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-2-d",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 49
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-2-e",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 50
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-2-f",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 51
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-2-g",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 52
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-3",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 53
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-4",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 54
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-5",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 55
+      },
+      {
+        "clause_id": "zone-ap-clause-19-3-6",
+        "section_id": "zone-ap-section-19-3",
+        "source_order": 56
+      },
+      {
+        "clause_id": "zone-ap-clause-19-4-1",
+        "section_id": "zone-ap-section-19-4",
+        "source_order": 57
+      },
+      {
+        "clause_id": "zone-ap-clause-19-4-2",
+        "section_id": "zone-ap-section-19-4",
+        "source_order": 58
+      },
+      {
+        "clause_id": "zone-ap-clause-19-4-3",
+        "section_id": "zone-ap-section-19-4",
+        "source_order": 59
+      },
+      {
+        "clause_id": "zone-ap-clause-19-4-4",
+        "section_id": "zone-ap-section-19-4",
+        "source_order": 60
+      },
+      {
+        "clause_id": "zone-ap-clause-19-5-1",
+        "section_id": "zone-ap-section-19-5",
+        "source_order": 61
+      },
+      {
+        "clause_id": "zone-ap-clause-19-5-2",
+        "section_id": "zone-ap-section-19-5",
+        "source_order": 62
+      },
+      {
+        "clause_id": "zone-ap-clause-19-5-3",
+        "section_id": "zone-ap-section-19-5",
+        "source_order": 63
+      },
+      {
+        "clause_id": "zone-ap-clause-19-5-4",
+        "section_id": "zone-ap-section-19-5",
+        "source_order": 64
+      },
+      {
+        "clause_id": "zone-ap-clause-19-5-4-a",
+        "section_id": "zone-ap-section-19-5",
+        "source_order": 65
+      },
+      {
+        "clause_id": "zone-ap-clause-19-5-4-b",
+        "section_id": "zone-ap-section-19-5",
+        "source_order": 66
+      },
+      {
+        "clause_id": "zone-ap-clause-19-5-4-c",
+        "section_id": "zone-ap-section-19-5",
+        "source_order": 67
+      },
+      {
+        "clause_id": "zone-ap-clause-19-5-4-d",
+        "section_id": "zone-ap-section-19-5",
+        "source_order": 68
+      },
+      {
+        "clause_id": "zone-ap-clause-19-6-1",
+        "section_id": "zone-ap-section-19-6",
+        "source_order": 69
+      },
+      {
+        "clause_id": "zone-ap-clause-19-6-2",
+        "section_id": "zone-ap-section-19-6",
+        "source_order": 70
+      },
+      {
+        "clause_id": "zone-ap-clause-19-6-2-a",
+        "section_id": "zone-ap-section-19-6",
+        "source_order": 71
+      },
+      {
+        "clause_id": "zone-ap-clause-19-6-2-b",
+        "section_id": "zone-ap-section-19-6",
+        "source_order": 72
+      }
+    ],
+    "tables_raw": [],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-ap-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 131,
+          "pdf_page_end": 134,
+          "bylaw_page_start": 127,
+          "bylaw_page_end": 130
+        }
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-ap-term-term-transitional_housing",
+        "term_raw": "Transitional Housing",
+        "term_normalized": "transitional_housing",
+        "term_category": "unknown",
+        "source_refs": [],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-ap-term-use-commercial_daycare_centre",
+        "term_raw": "Commercial Daycare Centre",
+        "term_normalized": "commercial_daycare_centre",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "commercial_daycare_centre"
+      },
+      {
+        "term_id": "zone-ap-term-use-cultural_establishment",
+        "term_raw": "Cultural Establishment",
+        "term_normalized": "cultural_establishment",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "cultural_establishment"
+      },
+      {
+        "term_id": "zone-ap-term-use-educational_institution_private",
+        "term_raw": "Educational Institution (private)",
+        "term_normalized": "educational_institution_private",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "educational_institution_private"
+      },
+      {
+        "term_id": "zone-ap-term-use-educational_institution_public",
+        "term_raw": "Educational Institution (public)",
+        "term_normalized": "educational_institution_public",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "educational_institution_public"
+      },
+      {
+        "term_id": "zone-ap-term-use-fire_station",
+        "term_raw": "Fire Station",
+        "term_normalized": "fire_station",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "fire_station"
+      },
+      {
+        "term_id": "zone-ap-term-use-government_office",
+        "term_raw": "Government Offices",
+        "term_normalized": "government_office",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "government_office"
+      },
+      {
+        "term_id": "zone-ap-term-use-medical_health_and_dental_office",
+        "term_raw": "Medical, Health and Dental Office",
+        "term_normalized": "medical_health_and_dental_office",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "medical_health_and_dental_office"
+      },
+      {
+        "term_id": "zone-ap-term-use-place_of_worship",
+        "term_raw": "Place of Worship",
+        "term_normalized": "place_of_worship",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "place_of_worship"
+      },
+      {
+        "term_id": "zone-ap-term-use-police_station",
+        "term_raw": "Police Station",
+        "term_normalized": "police_station",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "police_station"
+      },
+      {
+        "term_id": "zone-ap-term-use-recreation_or_fitness_centre_indoors",
+        "term_raw": "Recreation or Fitness Center (indoors)",
+        "term_normalized": "recreation_or_fitness_centre_indoors",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "recreation_or_fitness_centre_indoors"
+      },
+      {
+        "term_id": "zone-ap-term-use-research_and_development_facilities",
+        "term_raw": "Research and Development Facilities",
+        "term_normalized": "research_and_development_facilities",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "research_and_development_facilities"
+      },
+      {
+        "term_id": "zone-ap-term-use-automobile_body_shop",
+        "term_raw": "Automobile Body Shop",
+        "term_normalized": "automobile_body_shop",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "automobile_body_shop"
+      },
+      {
+        "term_id": "zone-ap-term-use-automobile_sales_and_service",
+        "term_raw": "Automobile Sales and Services",
+        "term_normalized": "automobile_sales_and_service",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "automobile_sales_and_service"
+      },
+      {
+        "term_id": "zone-ap-term-use-automobile_service_station",
+        "term_raw": "Automobile Service Station",
+        "term_normalized": "automobile_service_station",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "automobile_service_station"
+      },
+      {
+        "term_id": "zone-ap-term-use-club",
+        "term_raw": "Club",
+        "term_normalized": "club",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "club"
+      },
+      {
+        "term_id": "zone-ap-term-use-equipment_sales_rental_service",
+        "term_raw": "Equipment Sales, Rental Service",
+        "term_normalized": "equipment_sales_rental_service",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "equipment_sales_rental_service"
+      },
+      {
+        "term_id": "zone-ap-term-use-garden_centre",
+        "term_raw": "Garden Centre",
+        "term_normalized": "garden_centre",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "garden_centre"
+      },
+      {
+        "term_id": "zone-ap-term-use-office",
+        "term_raw": "Office",
+        "term_normalized": "office",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "office"
+      },
+      {
+        "term_id": "zone-ap-term-use-outdoor_retail_display",
+        "term_raw": "Outdoor Retail Display",
+        "term_normalized": "outdoor_retail_display",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "outdoor_retail_display"
+      },
+      {
+        "term_id": "zone-ap-term-use-personal_service_shop",
+        "term_raw": "Personal Service Shop",
+        "term_normalized": "personal_service_shop",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "personal_service_shop"
+      },
+      {
+        "term_id": "zone-ap-term-use-retail_store",
+        "term_raw": "Retail Store",
+        "term_normalized": "retail_store",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "retail_store"
+      },
+      {
+        "term_id": "zone-ap-term-use-retail_warehouse",
+        "term_raw": "Retail warehouse",
+        "term_normalized": "retail_warehouse",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "retail_warehouse"
+      },
+      {
+        "term_id": "zone-ap-term-use-light_manufacturing",
+        "term_raw": "Light manufacturing",
+        "term_normalized": "light_manufacturing",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "light_manufacturing"
+      },
+      {
+        "term_id": "zone-ap-term-use-assembly_facility",
+        "term_raw": "Assembly facility",
+        "term_normalized": "assembly_facility",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "assembly_facility"
+      },
+      {
+        "term_id": "zone-ap-term-use-service_repair_establishment",
+        "term_raw": "Service Repair Establishment",
+        "term_normalized": "service_repair_establishment",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "service_repair_establishment"
+      },
+      {
+        "term_id": "zone-ap-term-use-transportation_service",
+        "term_raw": "Transportation Service",
+        "term_normalized": "transportation_service",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "transportation_service"
+      },
+      {
+        "term_id": "zone-ap-term-use-veterinary_services",
+        "term_raw": "Veterinary Services",
+        "term_normalized": "veterinary_services",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "veterinary_services"
+      },
+      {
+        "term_id": "zone-ap-term-use-bulk_fuel_station",
+        "term_raw": "Bulk Fuel Station",
+        "term_normalized": "bulk_fuel_station",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "bulk_fuel_station"
+      },
+      {
+        "term_id": "zone-ap-term-use-greenhouse_private_industrial",
+        "term_raw": "Greenhouse (private industrial)",
+        "term_normalized": "greenhouse_private_industrial",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "greenhouse_private_industrial"
+      },
+      {
+        "term_id": "zone-ap-term-use-heavy_equipment_repair",
+        "term_raw": "Heavy Equipment Repair",
+        "term_normalized": "heavy_equipment_repair",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "heavy_equipment_repair"
+      },
+      {
+        "term_id": "zone-ap-term-term-hostel_hotel",
+        "term_raw": "Hostel/ Hotel",
+        "term_normalized": "hostel_hotel",
+        "term_category": "unknown",
+        "source_refs": [],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-ap-term-use-kennel",
+        "term_raw": "Kennel",
+        "term_normalized": "kennel",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "kennel"
+      },
+      {
+        "term_id": "zone-ap-term-use-manufacturing_heavy",
+        "term_raw": "Manufacturing, Heavy",
+        "term_normalized": "manufacturing_heavy",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "manufacturing_heavy"
+      },
+      {
+        "term_id": "zone-ap-term-use-marijuana_production_facility",
+        "term_raw": "Marijuana Production Facility",
+        "term_normalized": "marijuana_production_facility",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "marijuana_production_facility"
+      },
+      {
+        "term_id": "zone-ap-term-term-warehouse_storage_facility_and_or_distribution_centre",
+        "term_raw": "Warehouse, Storage Facility and/or Distribution Centre",
+        "term_normalized": "warehouse_storage_facility_and_or_distribution_centre",
+        "term_category": "unknown",
+        "source_refs": [],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-ap-term-use-agricultural_and_resource_land_uses",
+        "term_raw": "Agricultural and Resource Land Uses",
+        "term_normalized": "agricultural_and_resource_land_uses",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "agricultural_and_resource_land_uses"
+      },
+      {
+        "term_id": "zone-ap-term-use-airport",
+        "term_raw": "Airport",
+        "term_normalized": "airport",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "airport"
+      },
+      {
+        "term_id": "zone-ap-term-use-outdoor_storage",
+        "term_raw": "Outdoor Storage",
+        "term_normalized": "outdoor_storage",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "outdoor_storage"
+      },
+      {
+        "term_id": "zone-ap-term-term-parking_lot_structure",
+        "term_raw": "Parking Lot / Structure",
+        "term_normalized": "parking_lot_structure",
+        "term_category": "unknown",
+        "source_refs": [],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-ap-term-use-transport_terminal",
+        "term_raw": "Transport Terminal",
+        "term_normalized": "transport_terminal",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "transport_terminal"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-ap-use-transitional-housing-1-1",
+        "use_name_raw": "Transitional Housing",
+        "use_term_id": "zone-ap-term-term-transitional_housing",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-ap-use-commercial-daycare-centre-2-1",
+        "use_name_raw": "Commercial Daycare Centre",
+        "use_term_id": "zone-ap-term-use-commercial_daycare_centre",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-cultural-establishment-3-1",
+        "use_name_raw": "Cultural Establishment",
+        "use_term_id": "zone-ap-term-use-cultural_establishment",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-educational-institution-private-4-1",
+        "use_name_raw": "Educational Institution (private)",
+        "use_term_id": "zone-ap-term-use-educational_institution_private",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-educational-institution-public-5-1",
+        "use_name_raw": "Educational Institution (public)",
+        "use_term_id": "zone-ap-term-use-educational_institution_public",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-fire-station-6-1",
+        "use_name_raw": "Fire Station",
+        "use_term_id": "zone-ap-term-use-fire_station",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-government-offices-7-1",
+        "use_name_raw": "Government Offices",
+        "use_term_id": "zone-ap-term-use-government_office",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-medical-health-and-dental-office-8-1",
+        "use_name_raw": "Medical, Health and Dental Office",
+        "use_term_id": "zone-ap-term-use-medical_health_and_dental_office",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-place-of-worship-9-1",
+        "use_name_raw": "Place of Worship",
+        "use_term_id": "zone-ap-term-use-place_of_worship",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-police-station-10-1",
+        "use_name_raw": "Police Station",
+        "use_term_id": "zone-ap-term-use-police_station",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-recreation-or-fitness-center-indoors-11-1",
+        "use_name_raw": "Recreation or Fitness Center (indoors)",
+        "use_term_id": "zone-ap-term-use-recreation_or_fitness_centre_indoors",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-research-and-development-facilities-12-1",
+        "use_name_raw": "Research and Development Facilities",
+        "use_term_id": "zone-ap-term-use-research_and_development_facilities",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-automobile-body-shop-13-1",
+        "use_name_raw": "Automobile Body Shop",
+        "use_term_id": "zone-ap-term-use-automobile_body_shop",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-automobile-sales-and-services-14-1",
+        "use_name_raw": "Automobile Sales and Services",
+        "use_term_id": "zone-ap-term-use-automobile_sales_and_service",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-automobile-service-station-15-1",
+        "use_name_raw": "Automobile Service Station",
+        "use_term_id": "zone-ap-term-use-automobile_service_station",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-club-16-1",
+        "use_name_raw": "Club",
+        "use_term_id": "zone-ap-term-use-club",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-equipment-sales-rental-service-17-1",
+        "use_name_raw": "Equipment Sales, Rental Service",
+        "use_term_id": "zone-ap-term-use-equipment_sales_rental_service",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-garden-centre-18-1",
+        "use_name_raw": "Garden Centre",
+        "use_term_id": "zone-ap-term-use-garden_centre",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-office-19-1",
+        "use_name_raw": "Office",
+        "use_term_id": "zone-ap-term-use-office",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-outdoor-retail-display-20-1",
+        "use_name_raw": "Outdoor Retail Display",
+        "use_term_id": "zone-ap-term-use-outdoor_retail_display",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-personal-service-shop-21-1",
+        "use_name_raw": "Personal Service Shop",
+        "use_term_id": "zone-ap-term-use-personal_service_shop",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-retail-store-22-1",
+        "use_name_raw": "Retail Store",
+        "use_term_id": "zone-ap-term-use-retail_store",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-retail-store-23-1",
+        "use_name_raw": "Retail store",
+        "use_term_id": "zone-ap-term-use-retail_store",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-retail-warehouse-23-2",
+        "use_name_raw": "Retail warehouse",
+        "use_term_id": "zone-ap-term-use-retail_warehouse",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-light-manufacturing-23-3",
+        "use_name_raw": "Light manufacturing",
+        "use_term_id": "zone-ap-term-use-light_manufacturing",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-assembly-facility-23-4",
+        "use_name_raw": "Assembly facility",
+        "use_term_id": "zone-ap-term-use-assembly_facility",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-retail-warehouse-24-1",
+        "use_name_raw": "Retail Warehouse",
+        "use_term_id": "zone-ap-term-use-retail_warehouse",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-service-repair-establishment-25-1",
+        "use_name_raw": "Service Repair Establishment",
+        "use_term_id": "zone-ap-term-use-service_repair_establishment",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-transportation-service-26-1",
+        "use_name_raw": "Transportation Service",
+        "use_term_id": "zone-ap-term-use-transportation_service",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-veterinary-services-27-1",
+        "use_name_raw": "Veterinary Services",
+        "use_term_id": "zone-ap-term-use-veterinary_services",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-bulk-fuel-station-28-1",
+        "use_name_raw": "Bulk Fuel Station",
+        "use_term_id": "zone-ap-term-use-bulk_fuel_station",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-greenhouse-private-industrial-29-1",
+        "use_name_raw": "Greenhouse (private industrial)",
+        "use_term_id": "zone-ap-term-use-greenhouse_private_industrial",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-heavy-equipment-repair-30-1",
+        "use_name_raw": "Heavy Equipment Repair",
+        "use_term_id": "zone-ap-term-use-heavy_equipment_repair",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-hostel-hotel-31-1",
+        "use_name_raw": "Hostel/ Hotel",
+        "use_term_id": "zone-ap-term-term-hostel_hotel",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-ap-use-kennel-32-1",
+        "use_name_raw": "Kennel",
+        "use_term_id": "zone-ap-term-use-kennel",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-manufacturing-heavy-33-1",
+        "use_name_raw": "Manufacturing, Heavy",
+        "use_term_id": "zone-ap-term-use-manufacturing_heavy",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-manufacturing-light-34-1",
+        "use_name_raw": "Manufacturing, Light",
+        "use_term_id": "zone-ap-term-use-light_manufacturing",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-marijuana-production-facility-35-1",
+        "use_name_raw": "Marijuana Production Facility",
+        "use_term_id": "zone-ap-term-use-marijuana_production_facility",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-warehouse-storage-facility-and-or-distribution-centre-36-1",
+        "use_name_raw": "Warehouse, Storage Facility and/or Distribution Centre",
+        "use_term_id": "zone-ap-term-term-warehouse_storage_facility_and_or_distribution_centre",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-ap-use-agricultural-and-resource-land-uses-37-1",
+        "use_name_raw": "Agricultural and Resource Land Uses",
+        "use_term_id": "zone-ap-term-use-agricultural_and_resource_land_uses",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-airport-38-1",
+        "use_name_raw": "Airport",
+        "use_term_id": "zone-ap-term-use-airport",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-outdoor-storage-39-1",
+        "use_name_raw": "Outdoor Storage",
+        "use_term_id": "zone-ap-term-use-outdoor_storage",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-ap-use-parking-lot-structure-40-1",
+        "use_name_raw": "Parking Lot / Structure",
+        "use_term_id": "zone-ap-term-term-parking_lot_structure",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-ap-use-transport-terminal-41-1",
+        "use_name_raw": "Transport Terminal",
+        "use_term_id": "zone-ap-term-use-transport_terminal",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-clause-19-3-2-a-1",
+        "value_raw": "600 m",
+        "value": 600,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-2-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-clause-19-3-2-a-2",
+        "value_raw": "700 m",
+        "value": 700,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-2-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-clause-19-3-2-b-1",
+        "value_raw": "20 m",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-2-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-clause-19-3-2-c-1",
+        "value_raw": "5 m",
+        "value": 5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-2-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-clause-19-3-2-d-1",
+        "value_raw": "5 m",
+        "value": 5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-2-d"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-clause-19-3-2-e-1",
+        "value_raw": "3 m",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-2-e"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-clause-19-3-2-e-2",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-2-e"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-clause-19-3-2-f-1",
+        "value_raw": "10 m",
+        "value": 10,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-2-f"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-clause-19-3-2-f-2",
+        "value_raw": "20 m",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-2-f"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-clause-19-3-6-1",
+        "value_raw": "3 m",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-clause-19-3-6-2",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-clause-19-3-6-3",
+        "value_raw": "10 m",
+        "value": 10,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-clause-19-3-6-4",
+        "value_raw": "20 m",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-clause-19-3-6-5",
+        "value_raw": "1.8 m",
+        "value": 1.8,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-clause-19-3-6-6",
+        "value_raw": "20 m",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-clause-19-3-6-7",
+        "value_raw": "12 m",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-clause-19-3-6-8",
+        "value_raw": "3 Storeys",
+        "value": 3,
+        "unit": "storey",
+        "measure_type": "count",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-clause-19-5-2-1",
+        "value_raw": "12 m",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-5-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-clause-19-5-2-2",
+        "value_raw": "3 storeys",
+        "value": 3,
+        "unit": "storey",
+        "measure_type": "count",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-5-2"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-ap-req-zone-ap-clause-19-3-2-a",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "(a)",
+        "requirement_text_raw": "Lot Area min. 600 m 2 interior lot, 700 m 2 corner lot",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-ap-num-zone-ap-clause-19-3-2-a-1",
+          "zone-ap-num-zone-ap-clause-19-3-2-a-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-2-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-ap-req-zone-ap-clause-19-3-2-b",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "(b)",
+        "requirement_text_raw": "Frontage min. 20 m",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-ap-num-zone-ap-clause-19-3-2-b-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-2-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-ap-req-zone-ap-clause-19-3-2-c",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "(c)",
+        "requirement_text_raw": "Front Yard Setback min. 7 .5 m",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-ap-num-zone-ap-clause-19-3-2-c-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-2-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-ap-req-zone-ap-clause-19-3-2-d",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "flankage_yard",
+        "requirement_label_raw": "(d)",
+        "requirement_text_raw": "Flankage Yard Setback min. 7 .5 m",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-ap-num-zone-ap-clause-19-3-2-d-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-2-d"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-ap-req-zone-ap-clause-19-3-2-e",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "(e)",
+        "requirement_text_raw": "Side Yard Setback min. 3 m, 6 m if bordering on any residential zone",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-ap-num-zone-ap-clause-19-3-2-e-1",
+          "zone-ap-num-zone-ap-clause-19-3-2-e-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-2-e"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-ap-req-zone-ap-clause-19-3-2-f",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "(f)",
+        "requirement_text_raw": "Rear Yard Setback min. 10 m, 20 m if bordering on any residential zone",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-ap-num-zone-ap-clause-19-3-2-f-1",
+          "zone-ap-num-zone-ap-clause-19-3-2-f-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-2-f"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-ap-req-zone-ap-clause-19-3-6",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": ".6",
+        "requirement_text_raw": "Subject to Transport Canada's Obstruction Limitation Surfaces (OLS) - no building or structure may penetrate federally regulated height surfaces. Parking Lot Encouraged on side or rear, If located in front, 1 Island per 15 cars, no more than 50% of front yard area Min. Side Yard Setback 3 m; 6 m if bordering residential Min. Rear Yard Setback 10 m; 20 m if bordering residential Min. Front Yard Setback 7.5 mStorage Compounds Fenced to min. 1.8 m height Min. Frontage 20 m Max. Building Height 12 m and 3 Storeys Truck Bays - Garage Doors On Side or Rear yard Walkway Connecting Parking to Entry Figure 19.1 AP Built Form and Landscape Requirements",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-ap-num-zone-ap-clause-19-3-6-1",
+          "zone-ap-num-zone-ap-clause-19-3-6-2",
+          "zone-ap-num-zone-ap-clause-19-3-6-3",
+          "zone-ap-num-zone-ap-clause-19-3-6-4",
+          "zone-ap-num-zone-ap-clause-19-3-6-5",
+          "zone-ap-num-zone-ap-clause-19-3-6-6",
+          "zone-ap-num-zone-ap-clause-19-3-6-7",
+          "zone-ap-num-zone-ap-clause-19-3-6-8"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-3-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-ap-req-zone-ap-clause-19-5-2",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": ".2",
+        "requirement_text_raw": "The maximum building height shall be 12 m or 3 storeys.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-ap-num-zone-ap-clause-19-5-2-1",
+          "zone-ap-num-zone-ap-clause-19-5-2-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-ap-clause-19-5-2"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-ap-regulation-group-zone",
+        "group_label_raw": "PART 19",
+        "group_title_raw": "AP - Airport Periphery",
+        "regulated_use_terms": [
+          "zone-ap-term-term-transitional_housing",
+          "zone-ap-term-use-commercial_daycare_centre",
+          "zone-ap-term-use-cultural_establishment",
+          "zone-ap-term-use-educational_institution_private",
+          "zone-ap-term-use-educational_institution_public",
+          "zone-ap-term-use-fire_station",
+          "zone-ap-term-use-government_office",
+          "zone-ap-term-use-medical_health_and_dental_office",
+          "zone-ap-term-use-place_of_worship",
+          "zone-ap-term-use-police_station",
+          "zone-ap-term-use-recreation_or_fitness_centre_indoors",
+          "zone-ap-term-use-research_and_development_facilities",
+          "zone-ap-term-use-automobile_body_shop",
+          "zone-ap-term-use-automobile_sales_and_service",
+          "zone-ap-term-use-automobile_service_station",
+          "zone-ap-term-use-club",
+          "zone-ap-term-use-equipment_sales_rental_service",
+          "zone-ap-term-use-garden_centre",
+          "zone-ap-term-use-office",
+          "zone-ap-term-use-outdoor_retail_display",
+          "zone-ap-term-use-personal_service_shop",
+          "zone-ap-term-use-retail_store",
+          "zone-ap-term-use-retail_warehouse",
+          "zone-ap-term-use-light_manufacturing",
+          "zone-ap-term-use-assembly_facility",
+          "zone-ap-term-use-service_repair_establishment",
+          "zone-ap-term-use-transportation_service",
+          "zone-ap-term-use-veterinary_services",
+          "zone-ap-term-use-bulk_fuel_station",
+          "zone-ap-term-use-greenhouse_private_industrial",
+          "zone-ap-term-use-heavy_equipment_repair",
+          "zone-ap-term-term-hostel_hotel",
+          "zone-ap-term-use-kennel",
+          "zone-ap-term-use-manufacturing_heavy",
+          "zone-ap-term-use-marijuana_production_facility",
+          "zone-ap-term-term-warehouse_storage_facility_and_or_distribution_centre",
+          "zone-ap-term-use-agricultural_and_resource_land_uses",
+          "zone-ap-term-use-airport",
+          "zone-ap-term-use-outdoor_storage",
+          "zone-ap-term-term-parking_lot_structure",
+          "zone-ap-term-use-transport_terminal"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "AP"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-ap-req-zone-ap-clause-19-3-2-a",
+          "zone-ap-req-zone-ap-clause-19-3-2-b",
+          "zone-ap-req-zone-ap-clause-19-3-2-c",
+          "zone-ap-req-zone-ap-clause-19-3-2-d",
+          "zone-ap-req-zone-ap-clause-19-3-2-e",
+          "zone-ap-req-zone-ap-clause-19-3-2-f",
+          "zone-ap-req-zone-ap-clause-19-3-6",
+          "zone-ap-req-zone-ap-clause-19-5-2"
+        ],
+        "source_section_ref": "zone-ap-section-19-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-ap-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "AP",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-ap-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-ap-flag-unmatched-use-transitional-housing-1-1",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Transitional Housing"
+    },
+    {
+      "review_flag_id": "zone-ap-flag-unmatched-use-hostel-hotel-31-1",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Hostel/ Hotel"
+    },
+    {
+      "review_flag_id": "zone-ap-flag-unmatched-use-warehouse-storage-facility-and-or-distribution-centre-36-1",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Warehouse, Storage Facility and/or Distribution Centre"
+    },
+    {
+      "review_flag_id": "zone-ap-flag-unmatched-use-parking-lot-structure-40-1",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Parking Lot / Structure"
+    },
+    {
+      "review_flag_id": "zone-ap-flag-legacy-open-issue-1",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "extraction_review",
+      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization.",
+      "source_refs": [
+        {
+          "source_ref_type": "source_unit",
+          "source_ref_id": "zone-ap"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-ap-flag-legacy-open-issue-2",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "table_parsing_review",
+      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization.",
+      "source_refs": [
+        {
+          "source_ref_type": "source_unit",
+          "source_ref_id": "zone-ap"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-ap-flag-unmatched-term-transitional-housing",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Transitional Housing"
+    },
+    {
+      "review_flag_id": "zone-ap-flag-unmatched-term-hostel-hotel",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Hostel/ Hotel"
+    },
+    {
+      "review_flag_id": "zone-ap-flag-unmatched-term-warehouse-storage-facility-and-or-distribution-centre",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Warehouse, Storage Facility and/or Distribution Centre"
+    },
+    {
+      "review_flag_id": "zone-ap-flag-unmatched-term-parking-lot-structure",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Parking Lot / Structure"
+    }
+  ]
 }

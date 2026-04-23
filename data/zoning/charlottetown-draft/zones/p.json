@@ -1,693 +1,1810 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Draft Zoning & Development Bylaw",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+    "document_type": "zone",
     "zone_code": "P",
     "zone_name": "Port",
-    "part_label_raw": "PART 21",
-    "chapter_heading_raw": "PART 21 P - Port",
-    "draft_date_raw": "April 7, 2026"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": [
-      "dot_numeric_provision_labels",
-      "parenthesized_alpha_clause_labels"
-    ]
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "(a)",
-      "use_type": "site_plan_approval_use",
-      "use_name": "Events Hosting",
-      "status": "active",
-      "conditions": "Uses Permitted by Site Plan Approval:",
-      "citations": {
-        "pdf_page_start": 139,
-        "pdf_page_end": 139,
-        "bylaw_page_start": 135,
-        "bylaw_page_end": 135
-      }
-    },
-    {
-      "clause_label_raw": "(b)",
-      "use_type": "site_plan_approval_use",
-      "use_name": "Hostel / Hotel",
-      "status": "active",
-      "conditions": "Uses Permitted by Site Plan Approval:",
-      "citations": {
-        "pdf_page_start": 139,
-        "pdf_page_end": 139,
-        "bylaw_page_start": 135,
-        "bylaw_page_end": 135
-      }
-    },
-    {
-      "clause_label_raw": "(c)",
-      "use_type": "site_plan_approval_use",
-      "use_name": "Marina",
-      "status": "active",
-      "conditions": "Uses Permitted by Site Plan Approval:",
-      "citations": {
-        "pdf_page_start": 139,
-        "pdf_page_end": 139,
-        "bylaw_page_start": 135,
-        "bylaw_page_end": 135
-      }
-    },
-    {
-      "clause_label_raw": "(d)",
-      "use_type": "site_plan_approval_use",
-      "use_name": "Office",
-      "status": "active",
-      "conditions": "Uses Permitted by Site Plan Approval:",
-      "citations": {
-        "pdf_page_start": 139,
-        "pdf_page_end": 139,
-        "bylaw_page_start": 135,
-        "bylaw_page_end": 135
-      }
-    },
-    {
-      "clause_label_raw": "(e)",
-      "use_type": "site_plan_approval_use",
-      "use_name": "Retail Store",
-      "status": "active",
-      "conditions": "Uses Permitted by Site Plan Approval:",
-      "citations": {
-        "pdf_page_start": 139,
-        "pdf_page_end": 139,
-        "bylaw_page_start": 135,
-        "bylaw_page_end": 135
-      }
-    },
-    {
-      "clause_label_raw": "(f)",
-      "use_type": "site_plan_approval_use",
-      "use_name": "Transportation Service",
-      "status": "active",
-      "conditions": "Uses Permitted by Site Plan Approval:",
-      "citations": {
-        "pdf_page_start": 139,
-        "pdf_page_end": 139,
-        "bylaw_page_start": 135,
-        "bylaw_page_end": 135
-      }
-    },
-    {
-      "clause_label_raw": "(g)",
-      "use_type": "site_plan_approval_use",
-      "use_name": "Port Land Uses",
-      "status": "active",
-      "conditions": "Uses Permitted by Site Plan Approval:",
-      "citations": {
-        "pdf_page_start": 139,
-        "pdf_page_end": 139,
-        "bylaw_page_start": 135,
-        "bylaw_page_end": 135
-      }
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "21.1",
-      "title_label_raw": "INTENT",
-      "citations": {
-        "pdf_page_start": 139,
-        "pdf_page_end": 139,
-        "bylaw_page_start": 135,
-        "bylaw_page_end": 135
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "section",
-          "text": "The Port Zone is intended to accommodate marine-related operations and supporting uses essential to the functioning of Charlottetown's harbour. This zone provides for shipping, ferry, cruise, fishing, and cargo-handling activities, along with associated industrial, commercial, and transportation facilities. The intent is to protect the Port's role as a regional economic driver and gateway, while ensuring safe and efficient marine operations, maintaining public access to selected waterfront areas, and managing land uses to minimize impacts on adjacent neighbourhoods and the downtown waterfront.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 139,
-            "pdf_page_end": 139,
-            "bylaw_page_start": 135,
-            "bylaw_page_end": 135
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": "21.2",
-      "title_label_raw": "RE-ZONING",
-      "citations": {
-        "pdf_page_start": 139,
-        "pdf_page_end": 139,
-        "bylaw_page_start": 135,
-        "bylaw_page_end": 135
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "Rezoning from P to another zone is not permitted but the boundaries of the zoning map may change from time to time.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 139,
-            "pdf_page_end": 139,
-            "bylaw_page_start": 135,
-            "bylaw_page_end": 135
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 3,
-      "section_label_raw": "21.3",
-      "title_label_raw": "PERMITTED USES BY SITE PLAN APPROVAL",
-      "citations": {
-        "pdf_page_start": 139,
-        "pdf_page_end": 139,
-        "bylaw_page_start": 135,
-        "bylaw_page_end": 135
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "Uses Permitted by Site Plan Approval:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 139,
-            "pdf_page_end": 139,
-            "bylaw_page_start": 135,
-            "bylaw_page_end": 135
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Events Hosting",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 139,
-            "pdf_page_end": 139,
-            "bylaw_page_start": 135,
-            "bylaw_page_end": 135
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Hostel / Hotel",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 139,
-            "pdf_page_end": 139,
-            "bylaw_page_start": 135,
-            "bylaw_page_end": 135
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Marina",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 139,
-            "pdf_page_end": 139,
-            "bylaw_page_start": 135,
-            "bylaw_page_end": 135
-          }
-        },
-        {
-          "provision_label_raw": "(d)",
-          "text": "Office",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 139,
-            "pdf_page_end": 139,
-            "bylaw_page_start": 135,
-            "bylaw_page_end": 135
-          }
-        },
-        {
-          "provision_label_raw": "(e)",
-          "text": "Retail Store",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 139,
-            "pdf_page_end": 139,
-            "bylaw_page_start": 135,
-            "bylaw_page_end": 135
-          }
-        },
-        {
-          "provision_label_raw": "(f)",
-          "text": "Transportation Service",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 139,
-            "pdf_page_end": 139,
-            "bylaw_page_start": 135,
-            "bylaw_page_end": 135
-          }
-        },
-        {
-          "provision_label_raw": "(g)",
-          "text": "Port Land Uses",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 139,
-            "pdf_page_end": 139,
-            "bylaw_page_start": 135,
-            "bylaw_page_end": 135
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 4,
-      "section_label_raw": "21.4",
-      "title_label_raw": "PERMITTED WITH CONDITIONS",
-      "citations": {
-        "pdf_page_start": 140,
-        "pdf_page_end": 140,
-        "bylaw_page_start": 136,
-        "bylaw_page_end": 136
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "Permitted encroachments into the setbacks are listed in Table 3.2.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "Marine Gas stations are permitted as-of- right.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": ".3",
-          "text": "Notwithstanding the accessory buildings which are permitted according to Section 3.1, port facilities operated by the Charlottetown Port Authority Inc. are permitted to include more than one building per lot, with no maximum or minimum zoning requirements.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": ".4",
-          "text": "A continuous linear boardwalk connection shall be provided along the waterfront, excluding wharfs and piers for the length of the Port Zone along the waterfront.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": ".5",
-          "text": "Any new building or development proposed in the Port Zone (P) is subject to the Regulations for Permitted Uses for the Downtown Waterfront (DW) Zone.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        }
-      ],
-      "layout_artifacts_present": true
-    },
-    {
-      "order_index": 5,
-      "section_label_raw": "21.5",
-      "title_label_raw": "BUILT FORM REQUIREMENTS",
-      "citations": {
-        "pdf_page_start": 140,
-        "pdf_page_end": 140,
-        "bylaw_page_start": 136,
-        "bylaw_page_end": 136
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "Two buildings per lot are permitted.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "The maximum building height shall be 12 m or 3 storeys.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": ".3",
-          "text": "New buildings require a separation distance of 5m.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": ".4",
-          "text": "Port related facilities are exempt from any built for requirements such as:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Service and loading areas requirements or screening from public streets",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Garage requirements",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Any parking requirements",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": "(d)",
-          "text": "Setback and coverage requirements",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": "(e)",
-          "text": "Storage requirements",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 6,
-      "section_label_raw": "21.6",
-      "title_label_raw": "LANDSCAPE REQUIREMENTS",
-      "citations": {
-        "pdf_page_start": 140,
-        "pdf_page_end": 140,
-        "bylaw_page_start": 136,
-        "bylaw_page_end": 136
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "A land use buffer from adjacent abutting zones shall include:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "No less than 5 m (16.4 ft) in width reserved for boardwalk, a linear trail, greenway, or landscaped area.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "The land use buffer shall be planted with street trees and shrubs at a frequency of one tree for every 8 m (26.2 ft) of length along the abutting boundary line.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "Direct Port related facilities are exempt from:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Any of the landscape requirements in Section 20.6.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Any safety fencing requirements which prohibit the use of razor wire or security fencing.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "These uses are permitted so long as the following lot requirements are met:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Lot Area min. 600 m 2 interior lot, 700m 2 corner lot",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Frontage min. 20 m",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Front Yard Setback min. 7 .5 m",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": "(d)",
-          "text": "Flanking Yard Setback min. 7 .5 m",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": "(e)",
-          "text": "Side Yard Setback min. 3 m, 6 m if bordering on any other",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": "(f)",
-          "text": "Rear Yard Setback min. 10 m, 20 m if bordering on any other zone",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        },
-        {
-          "provision_label_raw": "(g)",
-          "text": "Lot Coverage max. 50%",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 140,
-            "pdf_page_end": 140,
-            "bylaw_page_start": 136,
-            "bylaw_page_end": 136
-          }
-        }
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "Table 3.2.",
-      "citations": {
-        "pdf_page_start": 140,
-        "pdf_page_end": 140,
-        "bylaw_page_start": 136,
-        "bylaw_page_end": 136
-      },
-      "source_text": "Permitted encroachments into the setbacks are listed in Table 3.2."
-    },
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "Section 3.1",
-      "citations": {
-        "pdf_page_start": 140,
-        "pdf_page_end": 140,
-        "bylaw_page_start": 136,
-        "bylaw_page_end": 136
-      },
-      "source_text": "Notwithstanding the accessory buildings which are permitted according to Section 3.1, port facilities operated by the Charlottetown Port Authority Inc. are permitted to include more than one building per lot, with no maximum or minimum zoning requirements."
-    },
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "Section 20.6.",
-      "citations": {
-        "pdf_page_start": 140,
-        "pdf_page_end": 140,
-        "bylaw_page_start": 136,
-        "bylaw_page_end": 136
-      },
-      "source_text": "Any of the landscape requirements in Section 20.6."
-    }
-  ],
-  "content_blocks": [
-    {
-      "heading_context_raw": "PART 21 P - unassigned extracted text",
-      "text": ".3 Accessory buildings are permitted according to Section 3.1. .4 Facilities and uses must comply with Transport Canada's Marine Transportation Security Act and Regulations.",
-      "citations": {
-        "pdf_page_start": 139,
-        "pdf_page_end": 140,
-        "bylaw_page_start": 135,
-        "bylaw_page_end": 136
-      }
-    }
-  ],
-  "open_issues": [
-    {
-      "issue_type": "extraction_review",
-      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization."
-    },
-    {
-      "issue_type": "table_parsing_review",
-      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization."
-    },
-    {
-      "issue_type": "zone_boundary_review",
-      "description": "Some extracted text was not safely assigned to a labeled section and is preserved in content_blocks."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "PART 21",
+    "zone_title_raw": "P - Port",
+    "citations": {
       "pdf_page_start": 139,
       "pdf_page_end": 140,
       "bylaw_page_start": 135,
       "bylaw_page_end": 136
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-p",
+        "source_unit_type": "zone",
+        "label_raw": "PART 21",
+        "title_raw": "P - Port",
+        "text_raw": "The Port Zone is intended to accommodate marine-related operations and supporting uses essential to the functioning of Charlottetown's harbour. This zone provides for shipping, ferry, cruise, fishing, and cargo-handling activities, along with associated industrial, commercial, and transportation facilities. The intent is to protect the Port's role as a regional economic driver and gateway, while ensuring safe and efficient marine operations, maintaining public access to selected waterfront areas, and managing land uses to minimize impacts on adjacent neighbourhoods and the downtown waterfront.\nRezoning from P to another zone is not permitted but the boundaries of the zoning map may change from time to time.\nUses Permitted by Site Plan Approval:\nEvents Hosting\nHostel / Hotel\nMarina\nOffice\nRetail Store\nTransportation Service\nPort Land Uses\nPermitted encroachments into the setbacks are listed in Table 3.2.\nMarine Gas stations are permitted as-of- right.\nNotwithstanding the accessory buildings which are permitted according to Section 3.1, port facilities operated by the Charlottetown Port Authority Inc. are permitted to include more than one building per lot, with no maximum or minimum zoning requirements.\nA continuous linear boardwalk connection shall be provided along the waterfront, excluding wharfs and piers for the length of the Port Zone along the waterfront.\nAny new building or development proposed in the Port Zone (P) is subject to the Regulations for Permitted Uses for the Downtown Waterfront (DW) Zone.\nTwo buildings per lot are permitted.\nThe maximum building height shall be 12 m or 3 storeys.\nNew buildings require a separation distance of 5m.\nPort related facilities are exempt from any built for requirements such as:\nService and loading areas requirements or screening from public streets\nGarage requirements\nAny parking requirements\nSetback and coverage requirements\nStorage requirements\nA land use buffer from adjacent abutting zones shall include:\nNo less than 5 m (16.4 ft) in width reserved for boardwalk, a linear trail, greenway, or landscaped area.\nThe land use buffer shall be planted with street trees and shrubs at a frequency of one tree for every 8 m (26.2 ft) of length along the abutting boundary line.\nDirect Port related facilities are exempt from:\nAny of the landscape requirements in Section 20.6.\nAny safety fencing requirements which prohibit the use of razor wire or security fencing.\nThese uses are permitted so long as the following lot requirements are met:\nLot Area min. 600 m 2 interior lot, 700m 2 corner lot\nFrontage min. 20 m\nFront Yard Setback min. 7 .5 m\nFlanking Yard Setback min. 7 .5 m\nSide Yard Setback min. 3 m, 6 m if bordering on any other\nRear Yard Setback min. 10 m, 20 m if bordering on any other zone\nLot Coverage max. 50%",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 139,
+          "pdf_page_end": 140,
+          "bylaw_page_start": 135,
+          "bylaw_page_end": 136
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-p-section-21-1",
+        "section_label_raw": "21.1",
+        "section_title_raw": "INTENT",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-p-clause-21-1",
+            "clause_label_raw": "section",
+            "clause_text_raw": "The Port Zone is intended to accommodate marine-related operations and supporting uses essential to the functioning of Charlottetown's harbour. This zone provides for shipping, ferry, cruise, fishing, and cargo-handling activities, along with associated industrial, commercial, and transportation facilities. The intent is to protect the Port's role as a regional economic driver and gateway, while ensuring safe and efficient marine operations, maintaining public access to selected waterfront areas, and managing land uses to minimize impacts on adjacent neighbourhoods and the downtown waterfront.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 139,
+              "pdf_page_end": 139,
+              "bylaw_page_start": 135,
+              "bylaw_page_end": 135
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-1",
+            "source_order": 1
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 139,
+          "pdf_page_end": 139,
+          "bylaw_page_start": 135,
+          "bylaw_page_end": 135
+        }
+      },
+      {
+        "section_id": "zone-p-section-21-2",
+        "section_label_raw": "21.2",
+        "section_title_raw": "RE-ZONING",
+        "source_order": 2,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-p-clause-21-2-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "Rezoning from P to another zone is not permitted but the boundaries of the zoning map may change from time to time.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 139,
+              "pdf_page_end": 139,
+              "bylaw_page_start": 135,
+              "bylaw_page_end": 135
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-2-1",
+            "source_order": 1
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 139,
+          "pdf_page_end": 139,
+          "bylaw_page_start": 135,
+          "bylaw_page_end": 135
+        }
+      },
+      {
+        "section_id": "zone-p-section-21-3",
+        "section_label_raw": "21.3",
+        "section_title_raw": "PERMITTED USES BY SITE PLAN APPROVAL",
+        "source_order": 3,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-p-clause-21-3-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "Uses Permitted by Site Plan Approval:",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 139,
+              "pdf_page_end": 139,
+              "bylaw_page_start": 135,
+              "bylaw_page_end": 135
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-3-1-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Events Hosting",
+            "parent_clause_id": "zone-p-clause-21-3-1",
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 139,
+              "pdf_page_end": 139,
+              "bylaw_page_start": 135,
+              "bylaw_page_end": 135
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-3-1-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Hostel / Hotel",
+            "parent_clause_id": "zone-p-clause-21-3-1",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 139,
+              "pdf_page_end": 139,
+              "bylaw_page_start": 135,
+              "bylaw_page_end": 135
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-3-1-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Marina",
+            "parent_clause_id": "zone-p-clause-21-3-1",
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 139,
+              "pdf_page_end": 139,
+              "bylaw_page_start": 135,
+              "bylaw_page_end": 135
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-3-1-d",
+            "clause_label_raw": "(d)",
+            "clause_text_raw": "Office",
+            "parent_clause_id": "zone-p-clause-21-3-1",
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 139,
+              "pdf_page_end": 139,
+              "bylaw_page_start": 135,
+              "bylaw_page_end": 135
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-3-1-e",
+            "clause_label_raw": "(e)",
+            "clause_text_raw": "Retail Store",
+            "parent_clause_id": "zone-p-clause-21-3-1",
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 139,
+              "pdf_page_end": 139,
+              "bylaw_page_start": 135,
+              "bylaw_page_end": 135
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-3-1-f",
+            "clause_label_raw": "(f)",
+            "clause_text_raw": "Transportation Service",
+            "parent_clause_id": "zone-p-clause-21-3-1",
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 139,
+              "pdf_page_end": 139,
+              "bylaw_page_start": 135,
+              "bylaw_page_end": 135
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-3-1-g",
+            "clause_label_raw": "(g)",
+            "clause_text_raw": "Port Land Uses",
+            "parent_clause_id": "zone-p-clause-21-3-1",
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 139,
+              "pdf_page_end": 139,
+              "bylaw_page_start": 135,
+              "bylaw_page_end": 135
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-3-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-3-1-a",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-3-1-b",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-3-1-c",
+            "source_order": 4
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-3-1-d",
+            "source_order": 5
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-3-1-e",
+            "source_order": 6
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-3-1-f",
+            "source_order": 7
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-3-1-g",
+            "source_order": 8
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 139,
+          "pdf_page_end": 139,
+          "bylaw_page_start": 135,
+          "bylaw_page_end": 135
+        }
+      },
+      {
+        "section_id": "zone-p-section-21-4",
+        "section_label_raw": "21.4",
+        "section_title_raw": "PERMITTED WITH CONDITIONS",
+        "source_order": 4,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-p-clause-21-4-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "Permitted encroachments into the setbacks are listed in Table 3.2.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-4-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "Marine Gas stations are permitted as-of- right.",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-4-3",
+            "clause_label_raw": ".3",
+            "clause_text_raw": "Notwithstanding the accessory buildings which are permitted according to Section 3.1, port facilities operated by the Charlottetown Port Authority Inc. are permitted to include more than one building per lot, with no maximum or minimum zoning requirements.",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-4-4",
+            "clause_label_raw": ".4",
+            "clause_text_raw": "A continuous linear boardwalk connection shall be provided along the waterfront, excluding wharfs and piers for the length of the Port Zone along the waterfront.",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-4-5",
+            "clause_label_raw": ".5",
+            "clause_text_raw": "Any new building or development proposed in the Port Zone (P) is subject to the Regulations for Permitted Uses for the Downtown Waterfront (DW) Zone.",
+            "parent_clause_id": null,
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-4-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-4-2",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-4-3",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-4-4",
+            "source_order": 4
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-4-5",
+            "source_order": 5
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 140,
+          "pdf_page_end": 140,
+          "bylaw_page_start": 136,
+          "bylaw_page_end": 136
+        }
+      },
+      {
+        "section_id": "zone-p-section-21-5",
+        "section_label_raw": "21.5",
+        "section_title_raw": "BUILT FORM REQUIREMENTS",
+        "source_order": 5,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-p-clause-21-5-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "Two buildings per lot are permitted.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-5-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "The maximum building height shall be 12 m or 3 storeys.",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-5-3",
+            "clause_label_raw": ".3",
+            "clause_text_raw": "New buildings require a separation distance of 5m.",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-5-4",
+            "clause_label_raw": ".4",
+            "clause_text_raw": "Port related facilities are exempt from any built for requirements such as:",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-5-4-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Service and loading areas requirements or screening from public streets",
+            "parent_clause_id": "zone-p-clause-21-5-4",
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-5-4-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Garage requirements",
+            "parent_clause_id": "zone-p-clause-21-5-4",
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-5-4-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Any parking requirements",
+            "parent_clause_id": "zone-p-clause-21-5-4",
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-5-4-d",
+            "clause_label_raw": "(d)",
+            "clause_text_raw": "Setback and coverage requirements",
+            "parent_clause_id": "zone-p-clause-21-5-4",
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-5-4-e",
+            "clause_label_raw": "(e)",
+            "clause_text_raw": "Storage requirements",
+            "parent_clause_id": "zone-p-clause-21-5-4",
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-5-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-5-2",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-5-3",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-5-4",
+            "source_order": 4
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-5-4-a",
+            "source_order": 5
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-5-4-b",
+            "source_order": 6
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-5-4-c",
+            "source_order": 7
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-5-4-d",
+            "source_order": 8
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-5-4-e",
+            "source_order": 9
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 140,
+          "pdf_page_end": 140,
+          "bylaw_page_start": 136,
+          "bylaw_page_end": 136
+        }
+      },
+      {
+        "section_id": "zone-p-section-21-6",
+        "section_label_raw": "21.6",
+        "section_title_raw": "LANDSCAPE REQUIREMENTS",
+        "source_order": 6,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-p-clause-21-6-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "A land use buffer from adjacent abutting zones shall include:",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-6-1-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "No less than 5 m (16.4 ft) in width reserved for boardwalk, a linear trail, greenway, or landscaped area.",
+            "parent_clause_id": "zone-p-clause-21-6-1",
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-6-1-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "The land use buffer shall be planted with street trees and shrubs at a frequency of one tree for every 8 m (26.2 ft) of length along the abutting boundary line.",
+            "parent_clause_id": "zone-p-clause-21-6-1",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-6-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "Direct Port related facilities are exempt from:",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-6-2-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Any of the landscape requirements in Section 20.6.",
+            "parent_clause_id": "zone-p-clause-21-6-2",
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-6-2-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Any safety fencing requirements which prohibit the use of razor wire or security fencing.",
+            "parent_clause_id": "zone-p-clause-21-6-2",
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-6-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "These uses are permitted so long as the following lot requirements are met:",
+            "parent_clause_id": null,
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-6-2-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Lot Area min. 600 m 2 interior lot, 700m 2 corner lot",
+            "parent_clause_id": "zone-p-clause-21-6-2",
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-6-2-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Frontage min. 20 m",
+            "parent_clause_id": "zone-p-clause-21-6-2",
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-6-2-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Front Yard Setback min. 7 .5 m",
+            "parent_clause_id": "zone-p-clause-21-6-2",
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-6-2-d",
+            "clause_label_raw": "(d)",
+            "clause_text_raw": "Flanking Yard Setback min. 7 .5 m",
+            "parent_clause_id": "zone-p-clause-21-6-2",
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-6-2-e",
+            "clause_label_raw": "(e)",
+            "clause_text_raw": "Side Yard Setback min. 3 m, 6 m if bordering on any other",
+            "parent_clause_id": "zone-p-clause-21-6-2",
+            "source_order": 12,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-6-2-f",
+            "clause_label_raw": "(f)",
+            "clause_text_raw": "Rear Yard Setback min. 10 m, 20 m if bordering on any other zone",
+            "parent_clause_id": "zone-p-clause-21-6-2",
+            "source_order": 13,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          },
+          {
+            "clause_id": "zone-p-clause-21-6-2-g",
+            "clause_label_raw": "(g)",
+            "clause_text_raw": "Lot Coverage max. 50%",
+            "parent_clause_id": "zone-p-clause-21-6-2",
+            "source_order": 14,
+            "citations": {
+              "pdf_page_start": 140,
+              "pdf_page_end": 140,
+              "bylaw_page_start": 136,
+              "bylaw_page_end": 136
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-6-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-6-1-a",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-6-1-b",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-6-2",
+            "source_order": 4
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-6-2-a",
+            "source_order": 5
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-6-2-b",
+            "source_order": 6
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-6-2",
+            "source_order": 7
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-6-2-a",
+            "source_order": 8
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-6-2-b",
+            "source_order": 9
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-6-2-c",
+            "source_order": 10
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-6-2-d",
+            "source_order": 11
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-6-2-e",
+            "source_order": 12
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-6-2-f",
+            "source_order": 13
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-p-clause-21-6-2-g",
+            "source_order": 14
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 140,
+          "pdf_page_end": 140,
+          "bylaw_page_start": 136,
+          "bylaw_page_end": 136
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-p-clause-21-1",
+        "section_id": "zone-p-section-21-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-p-clause-21-2-1",
+        "section_id": "zone-p-section-21-2",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-p-clause-21-3-1",
+        "section_id": "zone-p-section-21-3",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-p-clause-21-3-1-a",
+        "section_id": "zone-p-section-21-3",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-p-clause-21-3-1-b",
+        "section_id": "zone-p-section-21-3",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-p-clause-21-3-1-c",
+        "section_id": "zone-p-section-21-3",
+        "source_order": 6
+      },
+      {
+        "clause_id": "zone-p-clause-21-3-1-d",
+        "section_id": "zone-p-section-21-3",
+        "source_order": 7
+      },
+      {
+        "clause_id": "zone-p-clause-21-3-1-e",
+        "section_id": "zone-p-section-21-3",
+        "source_order": 8
+      },
+      {
+        "clause_id": "zone-p-clause-21-3-1-f",
+        "section_id": "zone-p-section-21-3",
+        "source_order": 9
+      },
+      {
+        "clause_id": "zone-p-clause-21-3-1-g",
+        "section_id": "zone-p-section-21-3",
+        "source_order": 10
+      },
+      {
+        "clause_id": "zone-p-clause-21-4-1",
+        "section_id": "zone-p-section-21-4",
+        "source_order": 11
+      },
+      {
+        "clause_id": "zone-p-clause-21-4-2",
+        "section_id": "zone-p-section-21-4",
+        "source_order": 12
+      },
+      {
+        "clause_id": "zone-p-clause-21-4-3",
+        "section_id": "zone-p-section-21-4",
+        "source_order": 13
+      },
+      {
+        "clause_id": "zone-p-clause-21-4-4",
+        "section_id": "zone-p-section-21-4",
+        "source_order": 14
+      },
+      {
+        "clause_id": "zone-p-clause-21-4-5",
+        "section_id": "zone-p-section-21-4",
+        "source_order": 15
+      },
+      {
+        "clause_id": "zone-p-clause-21-5-1",
+        "section_id": "zone-p-section-21-5",
+        "source_order": 16
+      },
+      {
+        "clause_id": "zone-p-clause-21-5-2",
+        "section_id": "zone-p-section-21-5",
+        "source_order": 17
+      },
+      {
+        "clause_id": "zone-p-clause-21-5-3",
+        "section_id": "zone-p-section-21-5",
+        "source_order": 18
+      },
+      {
+        "clause_id": "zone-p-clause-21-5-4",
+        "section_id": "zone-p-section-21-5",
+        "source_order": 19
+      },
+      {
+        "clause_id": "zone-p-clause-21-5-4-a",
+        "section_id": "zone-p-section-21-5",
+        "source_order": 20
+      },
+      {
+        "clause_id": "zone-p-clause-21-5-4-b",
+        "section_id": "zone-p-section-21-5",
+        "source_order": 21
+      },
+      {
+        "clause_id": "zone-p-clause-21-5-4-c",
+        "section_id": "zone-p-section-21-5",
+        "source_order": 22
+      },
+      {
+        "clause_id": "zone-p-clause-21-5-4-d",
+        "section_id": "zone-p-section-21-5",
+        "source_order": 23
+      },
+      {
+        "clause_id": "zone-p-clause-21-5-4-e",
+        "section_id": "zone-p-section-21-5",
+        "source_order": 24
+      },
+      {
+        "clause_id": "zone-p-clause-21-6-1",
+        "section_id": "zone-p-section-21-6",
+        "source_order": 25
+      },
+      {
+        "clause_id": "zone-p-clause-21-6-1-a",
+        "section_id": "zone-p-section-21-6",
+        "source_order": 26
+      },
+      {
+        "clause_id": "zone-p-clause-21-6-1-b",
+        "section_id": "zone-p-section-21-6",
+        "source_order": 27
+      },
+      {
+        "clause_id": "zone-p-clause-21-6-2",
+        "section_id": "zone-p-section-21-6",
+        "source_order": 28
+      },
+      {
+        "clause_id": "zone-p-clause-21-6-2-a",
+        "section_id": "zone-p-section-21-6",
+        "source_order": 29
+      },
+      {
+        "clause_id": "zone-p-clause-21-6-2-b",
+        "section_id": "zone-p-section-21-6",
+        "source_order": 30
+      },
+      {
+        "clause_id": "zone-p-clause-21-6-2",
+        "section_id": "zone-p-section-21-6",
+        "source_order": 31
+      },
+      {
+        "clause_id": "zone-p-clause-21-6-2-a",
+        "section_id": "zone-p-section-21-6",
+        "source_order": 32
+      },
+      {
+        "clause_id": "zone-p-clause-21-6-2-b",
+        "section_id": "zone-p-section-21-6",
+        "source_order": 33
+      },
+      {
+        "clause_id": "zone-p-clause-21-6-2-c",
+        "section_id": "zone-p-section-21-6",
+        "source_order": 34
+      },
+      {
+        "clause_id": "zone-p-clause-21-6-2-d",
+        "section_id": "zone-p-section-21-6",
+        "source_order": 35
+      },
+      {
+        "clause_id": "zone-p-clause-21-6-2-e",
+        "section_id": "zone-p-section-21-6",
+        "source_order": 36
+      },
+      {
+        "clause_id": "zone-p-clause-21-6-2-f",
+        "section_id": "zone-p-section-21-6",
+        "source_order": 37
+      },
+      {
+        "clause_id": "zone-p-clause-21-6-2-g",
+        "section_id": "zone-p-section-21-6",
+        "source_order": 38
+      }
+    ],
+    "tables_raw": [],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-p-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 139,
+          "pdf_page_end": 140,
+          "bylaw_page_start": 135,
+          "bylaw_page_end": 136
+        }
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-p-term-use-events_hosting",
+        "term_raw": "Events Hosting",
+        "term_normalized": "events_hosting",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "events_hosting"
+      },
+      {
+        "term_id": "zone-p-term-term-hostel_hotel",
+        "term_raw": "Hostel / Hotel",
+        "term_normalized": "hostel_hotel",
+        "term_category": "unknown",
+        "source_refs": [],
+        "confidence": "needs_review"
+      },
+      {
+        "term_id": "zone-p-term-use-marina",
+        "term_raw": "Marina",
+        "term_normalized": "marina",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "marina"
+      },
+      {
+        "term_id": "zone-p-term-use-office",
+        "term_raw": "Office",
+        "term_normalized": "office",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "office"
+      },
+      {
+        "term_id": "zone-p-term-use-retail_store",
+        "term_raw": "Retail Store",
+        "term_normalized": "retail_store",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "retail_store"
+      },
+      {
+        "term_id": "zone-p-term-use-transportation_service",
+        "term_raw": "Transportation Service",
+        "term_normalized": "transportation_service",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "transportation_service"
+      },
+      {
+        "term_id": "zone-p-term-use-port_land_uses",
+        "term_raw": "Port Land Uses",
+        "term_normalized": "port_land_uses",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "port_land_uses"
+      },
+      {
+        "term_id": "zone-p-term-reference-zone-p-clause-21-4-5",
+        "term_raw": "Any new building or development proposed in the Port Zone (P) is subject to the Regulations for Permitted Uses for the Downtown Waterfront (DW) Zone",
+        "term_normalized": "zone_reference_p_pz",
+        "term_category": "document_reference",
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-4-5"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-p-use-events-hosting-1-1",
+        "use_name_raw": "Events Hosting",
+        "use_term_id": "zone-p-term-use-events_hosting",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-p-use-hostel-hotel-2-1",
+        "use_name_raw": "Hostel / Hotel",
+        "use_term_id": "zone-p-term-term-hostel_hotel",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "needs_review"
+      },
+      {
+        "use_id": "zone-p-use-marina-3-1",
+        "use_name_raw": "Marina",
+        "use_term_id": "zone-p-term-use-marina",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-p-use-office-4-1",
+        "use_name_raw": "Office",
+        "use_term_id": "zone-p-term-use-office",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-p-use-retail-store-5-1",
+        "use_name_raw": "Retail Store",
+        "use_term_id": "zone-p-term-use-retail_store",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-p-use-transportation-service-6-1",
+        "use_name_raw": "Transportation Service",
+        "use_term_id": "zone-p-term-use-transportation_service",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-p-use-port-land-uses-7-1",
+        "use_name_raw": "Port Land Uses",
+        "use_term_id": "zone-p-term-use-port_land_uses",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-21-5-2-1",
+        "value_raw": "12 m",
+        "value": 12,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-5-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-21-5-2-2",
+        "value_raw": "3 storeys",
+        "value": 3,
+        "unit": "storey",
+        "measure_type": "count",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-5-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-21-5-3-1",
+        "value_raw": "5m",
+        "value": 5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-5-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-21-6-1-a-1",
+        "value_raw": "5 m (16.4 ft)",
+        "value": 5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "less_than",
+        "alternative_values": [
+          {
+            "value_raw": "16.4 ft",
+            "value": 16.4,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-6-1-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-21-6-1-b-1",
+        "value_raw": "8 m (26.2 ft)",
+        "value": 8,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [
+          {
+            "value_raw": "26.2 ft",
+            "value": 26.2,
+            "unit": "ft",
+            "measure_type": "length"
+          }
+        ],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-6-1-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-21-6-2-a-1",
+        "value_raw": "600 m",
+        "value": 600,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-6-2-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-21-6-2-a-2",
+        "value_raw": "700m",
+        "value": 700,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-6-2-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-21-6-2-b-1",
+        "value_raw": "20 m",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-6-2-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-21-6-2-c-1",
+        "value_raw": "5 m",
+        "value": 5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-6-2-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-21-6-2-d-1",
+        "value_raw": "5 m",
+        "value": 5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-6-2-d"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-21-6-2-e-1",
+        "value_raw": "3 m",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-6-2-e"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-21-6-2-e-2",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-6-2-e"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-21-6-2-f-1",
+        "value_raw": "10 m",
+        "value": 10,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-6-2-f"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-clause-21-6-2-f-2",
+        "value_raw": "20 m",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-6-2-f"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-p-req-zone-p-clause-21-5-2",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": ".2",
+        "requirement_text_raw": "The maximum building height shall be 12 m or 3 storeys.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-p-num-zone-p-clause-21-5-2-1",
+          "zone-p-num-zone-p-clause-21-5-2-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-5-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-p-req-zone-p-clause-21-6-1-a",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "no_less_than_5_m_16_4_ft_in_width_reserved_for_boardwalk_a_linear_trail_greenway",
+        "requirement_label_raw": "(a)",
+        "requirement_text_raw": "No less than 5 m (16.4 ft) in width reserved for boardwalk, a linear trail, greenway, or landscaped area.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-p-num-zone-p-clause-21-6-1-a-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-6-1-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-p-req-zone-p-clause-21-6-2-a",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "(a)",
+        "requirement_text_raw": "Lot Area min. 600 m 2 interior lot, 700m 2 corner lot",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-p-num-zone-p-clause-21-6-2-a-1",
+          "zone-p-num-zone-p-clause-21-6-2-a-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-6-2-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-p-req-zone-p-clause-21-6-2-b",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "(b)",
+        "requirement_text_raw": "Frontage min. 20 m",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-p-num-zone-p-clause-21-6-2-b-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-6-2-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-p-req-zone-p-clause-21-6-2-c",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "(c)",
+        "requirement_text_raw": "Front Yard Setback min. 7 .5 m",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-p-num-zone-p-clause-21-6-2-c-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-6-2-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-p-req-zone-p-clause-21-6-2-d",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "setback",
+        "requirement_label_raw": "(d)",
+        "requirement_text_raw": "Flanking Yard Setback min. 7 .5 m",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-p-num-zone-p-clause-21-6-2-d-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-6-2-d"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-p-req-zone-p-clause-21-6-2-e",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "(e)",
+        "requirement_text_raw": "Side Yard Setback min. 3 m, 6 m if bordering on any other",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-p-num-zone-p-clause-21-6-2-e-1",
+          "zone-p-num-zone-p-clause-21-6-2-e-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-6-2-e"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-p-req-zone-p-clause-21-6-2-f",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "(f)",
+        "requirement_text_raw": "Rear Yard Setback min. 10 m, 20 m if bordering on any other zone",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-p-num-zone-p-clause-21-6-2-f-1",
+          "zone-p-num-zone-p-clause-21-6-2-f-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-6-2-f"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-p-regulation-group-zone",
+        "group_label_raw": "PART 21",
+        "group_title_raw": "P - Port",
+        "regulated_use_terms": [
+          "zone-p-term-use-events_hosting",
+          "zone-p-term-term-hostel_hotel",
+          "zone-p-term-use-marina",
+          "zone-p-term-use-office",
+          "zone-p-term-use-retail_store",
+          "zone-p-term-use-transportation_service",
+          "zone-p-term-use-port_land_uses"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "P"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-p-req-zone-p-clause-21-5-2",
+          "zone-p-req-zone-p-clause-21-6-1-a",
+          "zone-p-req-zone-p-clause-21-6-2-a",
+          "zone-p-req-zone-p-clause-21-6-2-b",
+          "zone-p-req-zone-p-clause-21-6-2-c",
+          "zone-p-req-zone-p-clause-21-6-2-d",
+          "zone-p-req-zone-p-clause-21-6-2-e",
+          "zone-p-req-zone-p-clause-21-6-2-f"
+        ],
+        "source_section_ref": "zone-p-section-21-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [
+      {
+        "relationship_id": "zone-p-relationship-inherits_regulations-p-zone-p-clause-21-4-5",
+        "relationship_type": "inherits_regulations",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "P"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "P"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-p-clause-21-4-5",
+        "join_behavior": "include_target_values",
+        "confidence": "high"
+      },
+      {
+        "relationship_id": "zone-p-relationship-inherits_regulations-pz-zone-p-clause-21-4-5",
+        "relationship_type": "inherits_regulations",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "P"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "PZ"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-p-clause-21-4-5",
+        "join_behavior": "include_target_values",
+        "confidence": "high"
+      }
+    ],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-p-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "P",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-p-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [
+      {
+        "requirement_id": "zone-p-req-zone-p-clause-21-5-3",
+        "requirement_type": "other",
+        "requirement_category": "new_buildings_require_a_separation_distance_of_5m",
+        "requirement_label_raw": ".3",
+        "requirement_text_raw": "New buildings require a separation distance of 5m.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-p-num-zone-p-clause-21-5-3-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-5-3"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "requirement_id": "zone-p-req-zone-p-clause-21-6-1-b",
+        "requirement_type": "other",
+        "requirement_category": "the_land_use_buffer_shall_be_planted_with_street_trees_and_shrubs_at_a_frequency",
+        "requirement_label_raw": "(b)",
+        "requirement_text_raw": "The land use buffer shall be planted with street trees and shrubs at a frequency of one tree for every 8 m (26.2 ft) of length along the abutting boundary line.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-p-num-zone-p-clause-21-6-1-b-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-p-clause-21-6-1-b"
+          }
+        ],
+        "confidence": "needs_review"
+      }
+    ],
+    "cross_references": [
+      {
+        "relationship_id": "zone-p-cross-reference-references-zone-p-zone-p-clause-21-4-5",
+        "relationship_type": "references_zone",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "P"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "P"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-p-clause-21-4-5",
+        "join_behavior": "reference_only",
+        "confidence": "high"
+      },
+      {
+        "relationship_id": "zone-p-cross-reference-references-zone-pz-zone-p-clause-21-4-5",
+        "relationship_type": "references_zone",
+        "source_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "P"
+        },
+        "target_ref": {
+          "source_ref_type": "zone",
+          "source_ref_id": "PZ"
+        },
+        "scope": "zone_reference_clause",
+        "source_clause_ref": "zone-p-clause-21-4-5",
+        "join_behavior": "reference_only",
+        "confidence": "high"
+      }
+    ]
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-p-flag-unmatched-use-hostel-hotel-2-1",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Hostel / Hotel"
+    },
+    {
+      "review_flag_id": "zone-p-flag-legacy-open-issue-1",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "extraction_review",
+      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization.",
+      "source_refs": [
+        {
+          "source_ref_type": "source_unit",
+          "source_ref_id": "zone-p"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-p-flag-legacy-open-issue-2",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "table_parsing_review",
+      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization.",
+      "source_refs": [
+        {
+          "source_ref_type": "source_unit",
+          "source_ref_id": "zone-p"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-p-flag-legacy-open-issue-3",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "zone_boundary_review",
+      "description": "Some extracted text was not safely assigned to a labeled section and is preserved in content_blocks.",
+      "source_refs": [
+        {
+          "source_ref_type": "source_unit",
+          "source_ref_id": "zone-p"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-p-flag-unmatched-term-hostel-hotel",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Hostel / Hotel"
+    }
+  ]
 }

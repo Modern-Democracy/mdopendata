@@ -1,36 +1,100 @@
 {
+  "$schema": "../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Draft Zoning & Development Bylaw",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
-    "document_type": "schedule",
-    "schedule_label_raw": "Schedule C",
-    "draft_date_raw": "April 7, 2026"
-  },
-  "source_section": {
-    "section_label_raw": "Schedule C",
-    "title_label_raw": "Street Hierarchy Schedule",
-    "pdf_page_start": 199,
-    "pdf_page_end": 199,
-    "bylaw_page_start": 195,
-    "bylaw_page_end": 195
-  },
-  "content_blocks": [
-    {
-      "heading_context_raw": "Schedule C: Street Hierarchy Schedule",
-      "text": "GREATGEORGE ST\nBRIGHTON\nRD\nRTE 25\nLONGWORTH A V\nMALPEQUE RD\nKIRKWOOD DR\nEUSTON ST\nALLEN ST\nGRAFTON ST\nCAPITAL DR\nSHERWOOD RD\nBELVEDERE AV\nST\nPETERS\nRD\nUNI\nVER\nSITY\nAVNORTH RIVER RD\nBRACKLEY POINT RD\nMOUNT EDWARD RD\nLOW\nERMALPEQUERD\nTR\nANS\nCANADAHW\nY\nUPTON RD\nCAPITAL\nDR\nSTPETERS\nRD\nMALPEQUE RD\nRIVER\nSIDEDR\nARTERIAL HWY\n0 0.5 1 1.5 2\nkm\nBrackley\nMilton\nStation\nMarshfield\nStratford\nYork\nCornwall\nStreet Hierarchy\nSchedule C\nScale 1:35,000\nHillsborough\nRiver\nNorth\nRiver\nGREATGEORGE ST\nBRIGHT\nON\nRD\nRTE 25\nLONGWORTH A V\nMALPEQUE RD\nKIRKWOOD DR\nEUSTON ST\nALLEN ST\nGRAFTON ST\nCAPITAL\nDR\nSHERWOOD\nRD\nBELVEDERE\nAV\nST\nPETERS\nRD\nUNIV\nERSI\nTY\nAV\nNORTH RIVER RD\nBRACKLEY POINT RD\nMOUNT EDWARD RD\nLOW ERMALPEQU\nERD\nTR\nANS\nCANA\nDA HWY\nUPTON RD\nCAPITAL DR\nSTPETERSRD\nMALPEQUE RD\nRIVERS\nIDEDR\nARTERIAL HWY\n0 1 20.5\nKm\nArterialStreets_P\nCollectorStreets_P\nMobile_Homes_P\nArterial Roads\nCollector Roads",
-      "citations": {
-        "pdf_page_start": 199,
-        "pdf_page_end": 199,
-        "bylaw_page_start": 195,
-        "bylaw_page_end": 195
-      }
+    "document_type": "other",
+    "citations": {
+      "pdf_page_start": 199,
+      "pdf_page_end": 199,
+      "bylaw_page_start": 195,
+      "bylaw_page_end": 195
     }
-  ],
-  "open_issues": [
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "schedule-schedule-c-source",
+        "source_unit_type": "schedule_map",
+        "label_raw": "Schedule C",
+        "title_raw": "Street Hierarchy Schedule",
+        "text_raw": "GREATGEORGE ST\nBRIGHTON\nRD\nRTE 25\nLONGWORTH A V\nMALPEQUE RD\nKIRKWOOD DR\nEUSTON ST\nALLEN ST\nGRAFTON ST\nCAPITAL DR\nSHERWOOD RD\nBELVEDERE AV\nST\nPETERS\nRD\nUNI\nVER\nSITY\nAVNORTH RIVER RD\nBRACKLEY POINT RD\nMOUNT EDWARD RD\nLOW\nERMALPEQUERD\nTR\nANS\nCANADAHW\nY\nUPTON RD\nCAPITAL\nDR\nSTPETERS\nRD\nMALPEQUE RD\nRIVER\nSIDEDR\nARTERIAL HWY\n0 0.5 1 1.5 2\nkm\nBrackley\nMilton\nStation\nMarshfield\nStratford\nYork\nCornwall\nStreet Hierarchy\nSchedule C\nScale 1:35,000\nHillsborough\nRiver\nNorth\nRiver\nGREATGEORGE ST\nBRIGHT\nON\nRD\nRTE 25\nLONGWORTH A V\nMALPEQUE RD\nKIRKWOOD DR\nEUSTON ST\nALLEN ST\nGRAFTON ST\nCAPITAL\nDR\nSHERWOOD\nRD\nBELVEDERE\nAV\nST\nPETERS\nRD\nUNIV\nERSI\nTY\nAV\nNORTH RIVER RD\nBRACKLEY POINT RD\nMOUNT EDWARD RD\nLOW ERMALPEQU\nERD\nTR\nANS\nCANA\nDA HWY\nUPTON RD\nCAPITAL DR\nSTPETERSRD\nMALPEQUE RD\nRIVERS\nIDEDR\nARTERIAL HWY\n0 1 20.5\nKm\nArterialStreets_P\nCollectorStreets_P\nMobile_Homes_P\nArterial Roads\nCollector Roads",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 199,
+          "pdf_page_end": 199,
+          "bylaw_page_start": 195,
+          "bylaw_page_end": 195
+        }
+      }
+    ],
+    "clause_refs": [],
+    "tables_raw": [],
+    "map_references_raw": [
+      {
+        "map_reference_id": "schedule-schedule-c-map",
+        "map_label_raw": "Schedule C",
+        "map_title_raw": "Street Hierarchy Schedule",
+        "text_raw": "GREATGEORGE ST\nBRIGHTON\nRD\nRTE 25\nLONGWORTH A V\nMALPEQUE RD\nKIRKWOOD DR\nEUSTON ST\nALLEN ST\nGRAFTON ST\nCAPITAL DR\nSHERWOOD RD\nBELVEDERE AV\nST\nPETERS\nRD\nUNI\nVER\nSITY\nAVNORTH RIVER RD\nBRACKLEY POINT RD\nMOUNT EDWARD RD\nLOW\nERMALPEQUERD\nTR\nANS\nCANADAHW\nY\nUPTON RD\nCAPITAL\nDR\nSTPETERS\nRD\nMALPEQUE RD\nRIVER\nSIDEDR\nARTERIAL HWY\n0 0.5 1 1.5 2\nkm\nBrackley\nMilton\nStation\nMarshfield\nStratford\nYork\nCornwall\nStreet Hierarchy\nSchedule C\nScale 1:35,000\nHillsborough\nRiver\nNorth\nRiver\nGREATGEORGE ST\nBRIGHT\nON\nRD\nRTE 25\nLONGWORTH A V\nMALPEQUE RD\nKIRKWOOD DR\nEUSTON ST\nALLEN ST\nGRAFTON ST\nCAPITAL\nDR\nSHERWOOD\nRD\nBELVEDERE\nAV\nST\nPETERS\nRD\nUNIV\nERSI\nTY\nAV\nNORTH RIVER RD\nBRACKLEY POINT RD\nMOUNT EDWARD RD\nLOW ERMALPEQU\nERD\nTR\nANS\nCANA\nDA HWY\nUPTON RD\nCAPITAL DR\nSTPETERSRD\nMALPEQUE RD\nRIVERS\nIDEDR\nARTERIAL HWY\n0 1 20.5\nKm\nArterialStreets_P\nCollectorStreets_P\nMobile_Homes_P\nArterial Roads\nCollector Roads",
+        "citations": {
+          "pdf_page_start": 199,
+          "pdf_page_end": 199,
+          "bylaw_page_start": 195,
+          "bylaw_page_end": 195
+        }
+      }
+    ],
+    "pages_raw": [
+      {
+        "page_id": "schedule-schedule-c-page-1",
+        "pdf_page": 199,
+        "bylaw_page": 195,
+        "text_raw": "GREATGEORGE ST\nBRIGHTON\nRD\nRTE 25\nLONGWORTH A V\nMALPEQUE RD\nKIRKWOOD DR\nEUSTON ST\nALLEN ST\nGRAFTON ST\nCAPITAL DR\nSHERWOOD RD\nBELVEDERE AV\nST\nPETERS\nRD\nUNI\nVER\nSITY\nAVNORTH RIVER RD\nBRACKLEY POINT RD\nMOUNT EDWARD RD\nLOW\nERMALPEQUERD\nTR\nANS\nCANADAHW\nY\nUPTON RD\nCAPITAL\nDR\nSTPETERS\nRD\nMALPEQUE RD\nRIVER\nSIDEDR\nARTERIAL HWY\n0 0.5 1 1.5 2\nkm\nBrackley\nMilton\nStation\nMarshfield\nStratford\nYork\nCornwall\nStreet Hierarchy\nSchedule C\nScale 1:35,000\nHillsborough\nRiver\nNorth\nRiver\nGREATGEORGE ST\nBRIGHT\nON\nRD\nRTE 25\nLONGWORTH A V\nMALPEQUE RD\nKIRKWOOD DR\nEUSTON ST\nALLEN ST\nGRAFTON ST\nCAPITAL\nDR\nSHERWOOD\nRD\nBELVEDERE\nAV\nST\nPETERS\nRD\nUNIV\nERSI\nTY\nAV\nNORTH RIVER RD\nBRACKLEY POINT RD\nMOUNT EDWARD RD\nLOW ERMALPEQU\nERD\nTR\nANS\nCANA\nDA HWY\nUPTON RD\nCAPITAL DR\nSTPETERSRD\nMALPEQUE RD\nRIVERS\nIDEDR\nARTERIAL HWY\n0 1 20.5\nKm\nArterialStreets_P\nCollectorStreets_P\nMobile_Homes_P\nArterial Roads\nCollector Roads",
+        "source_order": 1
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [],
+    "uses": [],
+    "numeric_values": [],
+    "requirements": [],
+    "regulation_groups": [],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "schedule-schedule-c-map",
+        "map_title_raw": "Street Hierarchy Schedule",
+        "map_label_raw": "Schedule C",
+        "map_reference_type": "other",
+        "feature_key": "street-hierarchy-schedule",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "schedule-schedule-c-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [],
+    "cross_references": []
+  },
+  "review_flags": [
     {
-      "issue_type": "spatial_extraction_review",
-      "description": "Schedule map text was extracted from the PDF, but map geometry and cartographic symbols were not vectorized in this source JSON pass."
+      "review_flag_id": "schedule-schedule-c-flag-schedule-review",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "schedule_map_review",
+      "description": "Schedule map text is preserved by page and requires spatial QA before downstream use.",
+      "source_refs": [
+        {
+          "source_ref_type": "map_reference",
+          "source_ref_id": "schedule-schedule-c-map"
+        }
+      ]
     }
   ]
 }

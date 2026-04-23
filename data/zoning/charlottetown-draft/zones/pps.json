@@ -1,686 +1,1512 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Draft Zoning & Development Bylaw",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+    "document_type": "zone",
     "zone_code": "PPS",
     "zone_name": "Parks & Public Spaces",
-    "part_label_raw": "PART 25",
-    "chapter_heading_raw": "PART 25 PPS - Parks & Public Spaces",
-    "draft_date_raw": "April 7, 2026"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": [
-      "dot_numeric_provision_labels",
-      "parenthesized_alpha_clause_labels"
-    ]
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "(a)",
-      "use_type": "permitted_use",
-      "use_name": "Active Recreation",
-      "status": "active",
-      "conditions": "The following uses are permitted in the PPS Zone:",
-      "citations": {
-        "pdf_page_start": 157,
-        "pdf_page_end": 157,
-        "bylaw_page_start": 153,
-        "bylaw_page_end": 153
-      }
-    },
-    {
-      "clause_label_raw": "(b)",
-      "use_type": "permitted_use",
-      "use_name": "Cemetery",
-      "status": "active",
-      "conditions": "The following uses are permitted in the PPS Zone:",
-      "citations": {
-        "pdf_page_start": 157,
-        "pdf_page_end": 157,
-        "bylaw_page_start": 153,
-        "bylaw_page_end": 153
-      }
-    },
-    {
-      "clause_label_raw": "(c)",
-      "use_type": "permitted_use",
-      "use_name": "Community Gardens",
-      "status": "active",
-      "conditions": "The following uses are permitted in the PPS Zone:",
-      "citations": {
-        "pdf_page_start": 157,
-        "pdf_page_end": 157,
-        "bylaw_page_start": 153,
-        "bylaw_page_end": 153
-      }
-    },
-    {
-      "clause_label_raw": "(d)",
-      "use_type": "permitted_use",
-      "use_name": "Community Institutional",
-      "status": "active",
-      "conditions": "The following uses are permitted in the PPS Zone:",
-      "citations": {
-        "pdf_page_start": 157,
-        "pdf_page_end": 157,
-        "bylaw_page_start": 153,
-        "bylaw_page_end": 153
-      }
-    },
-    {
-      "clause_label_raw": "(e)",
-      "use_type": "permitted_use",
-      "use_name": "Cultural Establishment",
-      "status": "active",
-      "conditions": "The following uses are permitted in the PPS Zone:",
-      "citations": {
-        "pdf_page_start": 157,
-        "pdf_page_end": 157,
-        "bylaw_page_start": 153,
-        "bylaw_page_end": 153
-      }
-    },
-    {
-      "clause_label_raw": "(f)",
-      "use_type": "permitted_use",
-      "use_name": "Government Offices",
-      "status": "active",
-      "conditions": "The following uses are permitted in the PPS Zone:",
-      "citations": {
-        "pdf_page_start": 157,
-        "pdf_page_end": 157,
-        "bylaw_page_start": 153,
-        "bylaw_page_end": 153
-      }
-    },
-    {
-      "clause_label_raw": "(g)",
-      "use_type": "permitted_use",
-      "use_name": "Library",
-      "status": "active",
-      "conditions": "The following uses are permitted in the PPS Zone:",
-      "citations": {
-        "pdf_page_start": 157,
-        "pdf_page_end": 157,
-        "bylaw_page_start": 153,
-        "bylaw_page_end": 153
-      }
-    },
-    {
-      "clause_label_raw": "(h)",
-      "use_type": "permitted_use",
-      "use_name": "Recreation or Fitness Center (indoors)",
-      "status": "active",
-      "conditions": "The following uses are permitted in the PPS Zone:",
-      "citations": {
-        "pdf_page_start": 157,
-        "pdf_page_end": 157,
-        "bylaw_page_start": 153,
-        "bylaw_page_end": 153
-      }
-    },
-    {
-      "clause_label_raw": "(i)",
-      "use_type": "permitted_use",
-      "use_name": "Trail System",
-      "status": "active",
-      "conditions": "The following uses are permitted in the PPS Zone:",
-      "citations": {
-        "pdf_page_start": 157,
-        "pdf_page_end": 157,
-        "bylaw_page_start": 153,
-        "bylaw_page_end": 153
-      }
-    },
-    {
-      "clause_label_raw": "(j)",
-      "use_type": "permitted_use",
-      "use_name": "Golf Course",
-      "status": "active",
-      "conditions": "The following uses are permitted in the PPS Zone:",
-      "citations": {
-        "pdf_page_start": 157,
-        "pdf_page_end": 157,
-        "bylaw_page_start": 153,
-        "bylaw_page_end": 153
-      }
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "25.1",
-      "title_label_raw": "INTENT",
-      "citations": {
-        "pdf_page_start": 157,
-        "pdf_page_end": 157,
-        "bylaw_page_start": 153,
-        "bylaw_page_end": 153
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "section",
-          "text": "This part aims to safeguard and enhance lands designated as parks and public spaces, ensuring they serve as accessible and multi-functional amenities that enrich the aesthetic, recreational, ecological, and social fabric of Charlottetown. It supports the City's Official Plan by preserving open areas for leisure, community gathering, and environmental conservation, promoting equitable distribution across neighbourhoods while reinforcing connectivity with pedestrian and active transportation networks.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 157,
-            "pdf_page_end": 157,
-            "bylaw_page_start": 153,
-            "bylaw_page_end": 153
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": "25.2",
-      "title_label_raw": "RE-ZONING",
-      "citations": {
-        "pdf_page_start": 157,
-        "pdf_page_end": 157,
-        "bylaw_page_start": 153,
-        "bylaw_page_end": 153
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "Rezoning from PPS to any other zone may be considered where the intent meets the policies of the Official Plan.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 157,
-            "pdf_page_end": 157,
-            "bylaw_page_start": 153,
-            "bylaw_page_end": 153
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 3,
-      "section_label_raw": "25.3",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 157,
-        "pdf_page_end": 157,
-        "bylaw_page_start": 153,
-        "bylaw_page_end": 153
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "The following uses are permitted in the PPS Zone:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 157,
-            "pdf_page_end": 157,
-            "bylaw_page_start": 153,
-            "bylaw_page_end": 153
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Active Recreation",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 157,
-            "pdf_page_end": 157,
-            "bylaw_page_start": 153,
-            "bylaw_page_end": 153
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Cemetery",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 157,
-            "pdf_page_end": 157,
-            "bylaw_page_start": 153,
-            "bylaw_page_end": 153
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Community Gardens",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 157,
-            "pdf_page_end": 157,
-            "bylaw_page_start": 153,
-            "bylaw_page_end": 153
-          }
-        },
-        {
-          "provision_label_raw": "(d)",
-          "text": "Community Institutional",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 157,
-            "pdf_page_end": 157,
-            "bylaw_page_start": 153,
-            "bylaw_page_end": 153
-          }
-        },
-        {
-          "provision_label_raw": "(e)",
-          "text": "Cultural Establishment",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 157,
-            "pdf_page_end": 157,
-            "bylaw_page_start": 153,
-            "bylaw_page_end": 153
-          }
-        },
-        {
-          "provision_label_raw": "(f)",
-          "text": "Government Offices",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 157,
-            "pdf_page_end": 157,
-            "bylaw_page_start": 153,
-            "bylaw_page_end": 153
-          }
-        },
-        {
-          "provision_label_raw": "(g)",
-          "text": "Library",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 157,
-            "pdf_page_end": 157,
-            "bylaw_page_start": 153,
-            "bylaw_page_end": 153
-          }
-        },
-        {
-          "provision_label_raw": "(h)",
-          "text": "Recreation or Fitness Center (indoors)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 157,
-            "pdf_page_end": 157,
-            "bylaw_page_start": 153,
-            "bylaw_page_end": 153
-          }
-        },
-        {
-          "provision_label_raw": "(i)",
-          "text": "Trail System",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 157,
-            "pdf_page_end": 157,
-            "bylaw_page_start": 153,
-            "bylaw_page_end": 153
-          }
-        },
-        {
-          "provision_label_raw": "(j)",
-          "text": "Golf Course",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 157,
-            "pdf_page_end": 157,
-            "bylaw_page_start": 153,
-            "bylaw_page_end": 153
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 4,
-      "section_label_raw": "25.4",
-      "title_label_raw": "PERMITTED WITH CONDITIONS",
-      "citations": {
-        "pdf_page_start": 158,
-        "pdf_page_end": 158,
-        "bylaw_page_start": 154,
-        "bylaw_page_end": 154
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "Permitted encroachments into the setbacks are listed in Table 3.2.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "Commercial buildings and seasonal kiosks by development agreement.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": ".3",
-          "text": "Temporary commercial events by agreement with the City.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        }
-      ],
-      "layout_artifacts_present": true
-    },
-    {
-      "order_index": 5,
-      "section_label_raw": "25.5",
-      "title_label_raw": "BUILT FORM REQUIREMENTS",
-      "citations": {
-        "pdf_page_start": 158,
-        "pdf_page_end": 158,
-        "bylaw_page_start": 154,
-        "bylaw_page_end": 154
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "More than one building per lot is permitted.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "The maximum building height shall be 4 storeys.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": ".3",
-          "text": "Buildings shall be constructed of high-quality materials excluding:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Vinyl siding",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "EIFS / synthetic stucco (Exterior Insulation and Finish Systems)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Imitation stone/brick panels (faux masonry veneer), stone-tile, plastic laminates or other synthetic materials that mimic real stone or real wood.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": "(d)",
-          "text": "Concrete block (CMU) exposed finishes",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": "(e)",
-          "text": "Unfinished or painted metal sheet siding",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": "(f)",
-          "text": "Reflective or mirrored glass",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": ".4",
-          "text": "The City may also approve other materials that, in its discretion, determines are compatible with any permitted materials if it finds that the use of these materials will not have a detrimental effect upon adjacent property values.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": ".5",
-          "text": "The City, or its partners, may establish design guidelines or operating covenants at their sole discretion with groups or individuals to operate park facilities, events or special uses within the PPS zone.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "These uses are permitted so long as the following lot requirements are met:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Lot Area min. 930 m 2",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Frontage min. 24 m",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Front Yard Setback min. 7 .6 m",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": "(d)",
-          "text": "Flanking Yard Setback min. 7 .6 m",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": "(e)",
-          "text": "Side Yard Setback min. 3 m",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": "(f)",
-          "text": "Rear Yard Setback min. 6 m; 10 m when abutting RN, or RM",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        },
-        {
-          "provision_label_raw": "(g)",
-          "text": "Coverage max. 60%",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 158,
-            "pdf_page_end": 158,
-            "bylaw_page_start": 154,
-            "bylaw_page_end": 154
-          }
-        }
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [
-    {
-      "part_label_raw": "aims",
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "part aims",
-      "citations": {
-        "pdf_page_start": 157,
-        "pdf_page_end": 157,
-        "bylaw_page_start": 153,
-        "bylaw_page_end": 153
-      },
-      "source_text": "This part aims to safeguard and enhance lands designated as parks and public spaces, ensuring they serve as accessible and multi-functional amenities that enrich the aesthetic, recreational, ecological, and social fabric of Charlottetown. It supports the City's Official Plan by preserving open areas for leisure, community gathering, and environmental conservation, promoting equitable distribution across neighbourhoods while reinforcing connectivity with pedestrian and active transportation networks."
-    },
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "Official Plan by",
-      "citations": {
-        "pdf_page_start": 157,
-        "pdf_page_end": 157,
-        "bylaw_page_start": 153,
-        "bylaw_page_end": 153
-      },
-      "source_text": "This part aims to safeguard and enhance lands designated as parks and public spaces, ensuring they serve as accessible and multi-functional amenities that enrich the aesthetic, recreational, ecological, and social fabric of Charlottetown. It supports the City's Official Plan by preserving open areas for leisure, community gathering, and environmental conservation, promoting equitable distribution across neighbourhoods while reinforcing connectivity with pedestrian and active transportation networks."
-    },
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "Table 3.2.",
-      "citations": {
-        "pdf_page_start": 158,
-        "pdf_page_end": 158,
-        "bylaw_page_start": 154,
-        "bylaw_page_end": 154
-      },
-      "source_text": "Permitted encroachments into the setbacks are listed in Table 3.2."
-    }
-  ],
-  "content_blocks": [
-    {
-      "heading_context_raw": "PART 25 PPS - unassigned extracted text",
-      "text": ".3 Accessory buildings are permitted according to Section 3.1.",
-      "citations": {
-        "pdf_page_start": 157,
-        "pdf_page_end": 158,
-        "bylaw_page_start": 153,
-        "bylaw_page_end": 154
-      }
-    }
-  ],
-  "open_issues": [
-    {
-      "issue_type": "extraction_review",
-      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization."
-    },
-    {
-      "issue_type": "table_parsing_review",
-      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization."
-    },
-    {
-      "issue_type": "zone_boundary_review",
-      "description": "Some extracted text was not safely assigned to a labeled section and is preserved in content_blocks."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "PART 25",
+    "zone_title_raw": "PPS - Parks & Public Spaces",
+    "citations": {
       "pdf_page_start": 157,
       "pdf_page_end": 158,
       "bylaw_page_start": 153,
       "bylaw_page_end": 154
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-pps",
+        "source_unit_type": "zone",
+        "label_raw": "PART 25",
+        "title_raw": "PPS - Parks & Public Spaces",
+        "text_raw": "This part aims to safeguard and enhance lands designated as parks and public spaces, ensuring they serve as accessible and multi-functional amenities that enrich the aesthetic, recreational, ecological, and social fabric of Charlottetown. It supports the City's Official Plan by preserving open areas for leisure, community gathering, and environmental conservation, promoting equitable distribution across neighbourhoods while reinforcing connectivity with pedestrian and active transportation networks.\nRezoning from PPS to any other zone may be considered where the intent meets the policies of the Official Plan.\nThe following uses are permitted in the PPS Zone:\nActive Recreation\nCemetery\nCommunity Gardens\nCommunity Institutional\nCultural Establishment\nGovernment Offices\nLibrary\nRecreation or Fitness Center (indoors)\nTrail System\nGolf Course\nPermitted encroachments into the setbacks are listed in Table 3.2.\nCommercial buildings and seasonal kiosks by development agreement.\nTemporary commercial events by agreement with the City.\nMore than one building per lot is permitted.\nThe maximum building height shall be 4 storeys.\nBuildings shall be constructed of high-quality materials excluding:\nVinyl siding\nEIFS / synthetic stucco (Exterior Insulation and Finish Systems)\nImitation stone/brick panels (faux masonry veneer), stone-tile, plastic laminates or other synthetic materials that mimic real stone or real wood.\nConcrete block (CMU) exposed finishes\nUnfinished or painted metal sheet siding\nReflective or mirrored glass\nThe City may also approve other materials that, in its discretion, determines are compatible with any permitted materials if it finds that the use of these materials will not have a detrimental effect upon adjacent property values.\nThe City, or its partners, may establish design guidelines or operating covenants at their sole discretion with groups or individuals to operate park facilities, events or special uses within the PPS zone.\nThese uses are permitted so long as the following lot requirements are met:\nLot Area min. 930 m 2\nFrontage min. 24 m\nFront Yard Setback min. 7 .6 m\nFlanking Yard Setback min. 7 .6 m\nSide Yard Setback min. 3 m\nRear Yard Setback min. 6 m; 10 m when abutting RN, or RM\nCoverage max. 60%",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 157,
+          "pdf_page_end": 158,
+          "bylaw_page_start": 153,
+          "bylaw_page_end": 154
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-pps-section-25-1",
+        "section_label_raw": "25.1",
+        "section_title_raw": "INTENT",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-pps-clause-25-1",
+            "clause_label_raw": "section",
+            "clause_text_raw": "This part aims to safeguard and enhance lands designated as parks and public spaces, ensuring they serve as accessible and multi-functional amenities that enrich the aesthetic, recreational, ecological, and social fabric of Charlottetown. It supports the City's Official Plan by preserving open areas for leisure, community gathering, and environmental conservation, promoting equitable distribution across neighbourhoods while reinforcing connectivity with pedestrian and active transportation networks.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 157,
+              "pdf_page_end": 157,
+              "bylaw_page_start": 153,
+              "bylaw_page_end": 153
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-1",
+            "source_order": 1
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 157,
+          "pdf_page_end": 157,
+          "bylaw_page_start": 153,
+          "bylaw_page_end": 153
+        }
+      },
+      {
+        "section_id": "zone-pps-section-25-2",
+        "section_label_raw": "25.2",
+        "section_title_raw": "RE-ZONING",
+        "source_order": 2,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-pps-clause-25-2-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "Rezoning from PPS to any other zone may be considered where the intent meets the policies of the Official Plan.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 157,
+              "pdf_page_end": 157,
+              "bylaw_page_start": 153,
+              "bylaw_page_end": 153
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-2-1",
+            "source_order": 1
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 157,
+          "pdf_page_end": 157,
+          "bylaw_page_start": 153,
+          "bylaw_page_end": 153
+        }
+      },
+      {
+        "section_id": "zone-pps-section-25-3",
+        "section_label_raw": "25.3",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 3,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-pps-clause-25-3-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "The following uses are permitted in the PPS Zone:",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 157,
+              "pdf_page_end": 157,
+              "bylaw_page_start": 153,
+              "bylaw_page_end": 153
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-3-1-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Active Recreation",
+            "parent_clause_id": "zone-pps-clause-25-3-1",
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 157,
+              "pdf_page_end": 157,
+              "bylaw_page_start": 153,
+              "bylaw_page_end": 153
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-3-1-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Cemetery",
+            "parent_clause_id": "zone-pps-clause-25-3-1",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 157,
+              "pdf_page_end": 157,
+              "bylaw_page_start": 153,
+              "bylaw_page_end": 153
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-3-1-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Community Gardens",
+            "parent_clause_id": "zone-pps-clause-25-3-1",
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 157,
+              "pdf_page_end": 157,
+              "bylaw_page_start": 153,
+              "bylaw_page_end": 153
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-3-1-d",
+            "clause_label_raw": "(d)",
+            "clause_text_raw": "Community Institutional",
+            "parent_clause_id": "zone-pps-clause-25-3-1",
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 157,
+              "pdf_page_end": 157,
+              "bylaw_page_start": 153,
+              "bylaw_page_end": 153
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-3-1-e",
+            "clause_label_raw": "(e)",
+            "clause_text_raw": "Cultural Establishment",
+            "parent_clause_id": "zone-pps-clause-25-3-1",
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 157,
+              "pdf_page_end": 157,
+              "bylaw_page_start": 153,
+              "bylaw_page_end": 153
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-3-1-f",
+            "clause_label_raw": "(f)",
+            "clause_text_raw": "Government Offices",
+            "parent_clause_id": "zone-pps-clause-25-3-1",
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 157,
+              "pdf_page_end": 157,
+              "bylaw_page_start": 153,
+              "bylaw_page_end": 153
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-3-1-g",
+            "clause_label_raw": "(g)",
+            "clause_text_raw": "Library",
+            "parent_clause_id": "zone-pps-clause-25-3-1",
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 157,
+              "pdf_page_end": 157,
+              "bylaw_page_start": 153,
+              "bylaw_page_end": 153
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-3-1-h",
+            "clause_label_raw": "(h)",
+            "clause_text_raw": "Recreation or Fitness Center (indoors)",
+            "parent_clause_id": "zone-pps-clause-25-3-1",
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 157,
+              "pdf_page_end": 157,
+              "bylaw_page_start": 153,
+              "bylaw_page_end": 153
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-3-1-i",
+            "clause_label_raw": "(i)",
+            "clause_text_raw": "Trail System",
+            "parent_clause_id": "zone-pps-clause-25-3-1",
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 157,
+              "pdf_page_end": 157,
+              "bylaw_page_start": 153,
+              "bylaw_page_end": 153
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-3-1-j",
+            "clause_label_raw": "(j)",
+            "clause_text_raw": "Golf Course",
+            "parent_clause_id": "zone-pps-clause-25-3-1",
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 157,
+              "pdf_page_end": 157,
+              "bylaw_page_start": 153,
+              "bylaw_page_end": 153
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-3-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-3-1-a",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-3-1-b",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-3-1-c",
+            "source_order": 4
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-3-1-d",
+            "source_order": 5
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-3-1-e",
+            "source_order": 6
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-3-1-f",
+            "source_order": 7
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-3-1-g",
+            "source_order": 8
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-3-1-h",
+            "source_order": 9
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-3-1-i",
+            "source_order": 10
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-3-1-j",
+            "source_order": 11
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 157,
+          "pdf_page_end": 157,
+          "bylaw_page_start": 153,
+          "bylaw_page_end": 153
+        }
+      },
+      {
+        "section_id": "zone-pps-section-25-4",
+        "section_label_raw": "25.4",
+        "section_title_raw": "PERMITTED WITH CONDITIONS",
+        "source_order": 4,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-pps-clause-25-4-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "Permitted encroachments into the setbacks are listed in Table 3.2.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-4-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "Commercial buildings and seasonal kiosks by development agreement.",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-4-3",
+            "clause_label_raw": ".3",
+            "clause_text_raw": "Temporary commercial events by agreement with the City.",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-4-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-4-2",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-4-3",
+            "source_order": 3
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 158,
+          "pdf_page_end": 158,
+          "bylaw_page_start": 154,
+          "bylaw_page_end": 154
+        }
+      },
+      {
+        "section_id": "zone-pps-section-25-5",
+        "section_label_raw": "25.5",
+        "section_title_raw": "BUILT FORM REQUIREMENTS",
+        "source_order": 5,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-pps-clause-25-5-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "More than one building per lot is permitted.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-5-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "The maximum building height shall be 4 storeys.",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-5-3",
+            "clause_label_raw": ".3",
+            "clause_text_raw": "Buildings shall be constructed of high-quality materials excluding:",
+            "parent_clause_id": null,
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-5-3-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Vinyl siding",
+            "parent_clause_id": "zone-pps-clause-25-5-3",
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-5-3-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "EIFS / synthetic stucco (Exterior Insulation and Finish Systems)",
+            "parent_clause_id": "zone-pps-clause-25-5-3",
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-5-3-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Imitation stone/brick panels (faux masonry veneer), stone-tile, plastic laminates or other synthetic materials that mimic real stone or real wood.",
+            "parent_clause_id": "zone-pps-clause-25-5-3",
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-5-3-d",
+            "clause_label_raw": "(d)",
+            "clause_text_raw": "Concrete block (CMU) exposed finishes",
+            "parent_clause_id": "zone-pps-clause-25-5-3",
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-5-3-e",
+            "clause_label_raw": "(e)",
+            "clause_text_raw": "Unfinished or painted metal sheet siding",
+            "parent_clause_id": "zone-pps-clause-25-5-3",
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-5-3-f",
+            "clause_label_raw": "(f)",
+            "clause_text_raw": "Reflective or mirrored glass",
+            "parent_clause_id": "zone-pps-clause-25-5-3",
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-5-4",
+            "clause_label_raw": ".4",
+            "clause_text_raw": "The City may also approve other materials that, in its discretion, determines are compatible with any permitted materials if it finds that the use of these materials will not have a detrimental effect upon adjacent property values.",
+            "parent_clause_id": null,
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-5-5",
+            "clause_label_raw": ".5",
+            "clause_text_raw": "The City, or its partners, may establish design guidelines or operating covenants at their sole discretion with groups or individuals to operate park facilities, events or special uses within the PPS zone.",
+            "parent_clause_id": null,
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-5-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "These uses are permitted so long as the following lot requirements are met:",
+            "parent_clause_id": null,
+            "source_order": 12,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-5-2-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Lot Area min. 930 m 2",
+            "parent_clause_id": "zone-pps-clause-25-5-2",
+            "source_order": 13,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-5-2-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Frontage min. 24 m",
+            "parent_clause_id": "zone-pps-clause-25-5-2",
+            "source_order": 14,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-5-2-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Front Yard Setback min. 7 .6 m",
+            "parent_clause_id": "zone-pps-clause-25-5-2",
+            "source_order": 15,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-5-2-d",
+            "clause_label_raw": "(d)",
+            "clause_text_raw": "Flanking Yard Setback min. 7 .6 m",
+            "parent_clause_id": "zone-pps-clause-25-5-2",
+            "source_order": 16,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-5-2-e",
+            "clause_label_raw": "(e)",
+            "clause_text_raw": "Side Yard Setback min. 3 m",
+            "parent_clause_id": "zone-pps-clause-25-5-2",
+            "source_order": 17,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-5-2-f",
+            "clause_label_raw": "(f)",
+            "clause_text_raw": "Rear Yard Setback min. 6 m; 10 m when abutting RN, or RM",
+            "parent_clause_id": "zone-pps-clause-25-5-2",
+            "source_order": 18,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          },
+          {
+            "clause_id": "zone-pps-clause-25-5-2-g",
+            "clause_label_raw": "(g)",
+            "clause_text_raw": "Coverage max. 60%",
+            "parent_clause_id": "zone-pps-clause-25-5-2",
+            "source_order": 19,
+            "citations": {
+              "pdf_page_start": 158,
+              "pdf_page_end": 158,
+              "bylaw_page_start": 154,
+              "bylaw_page_end": 154
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-5-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-5-2",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-5-3",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-5-3-a",
+            "source_order": 4
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-5-3-b",
+            "source_order": 5
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-5-3-c",
+            "source_order": 6
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-5-3-d",
+            "source_order": 7
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-5-3-e",
+            "source_order": 8
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-5-3-f",
+            "source_order": 9
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-5-4",
+            "source_order": 10
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-5-5",
+            "source_order": 11
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-5-2",
+            "source_order": 12
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-5-2-a",
+            "source_order": 13
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-5-2-b",
+            "source_order": 14
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-5-2-c",
+            "source_order": 15
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-5-2-d",
+            "source_order": 16
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-5-2-e",
+            "source_order": 17
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-5-2-f",
+            "source_order": 18
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-pps-clause-25-5-2-g",
+            "source_order": 19
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 158,
+          "pdf_page_end": 158,
+          "bylaw_page_start": 154,
+          "bylaw_page_end": 154
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-pps-clause-25-1",
+        "section_id": "zone-pps-section-25-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-pps-clause-25-2-1",
+        "section_id": "zone-pps-section-25-2",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-pps-clause-25-3-1",
+        "section_id": "zone-pps-section-25-3",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-pps-clause-25-3-1-a",
+        "section_id": "zone-pps-section-25-3",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-pps-clause-25-3-1-b",
+        "section_id": "zone-pps-section-25-3",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-pps-clause-25-3-1-c",
+        "section_id": "zone-pps-section-25-3",
+        "source_order": 6
+      },
+      {
+        "clause_id": "zone-pps-clause-25-3-1-d",
+        "section_id": "zone-pps-section-25-3",
+        "source_order": 7
+      },
+      {
+        "clause_id": "zone-pps-clause-25-3-1-e",
+        "section_id": "zone-pps-section-25-3",
+        "source_order": 8
+      },
+      {
+        "clause_id": "zone-pps-clause-25-3-1-f",
+        "section_id": "zone-pps-section-25-3",
+        "source_order": 9
+      },
+      {
+        "clause_id": "zone-pps-clause-25-3-1-g",
+        "section_id": "zone-pps-section-25-3",
+        "source_order": 10
+      },
+      {
+        "clause_id": "zone-pps-clause-25-3-1-h",
+        "section_id": "zone-pps-section-25-3",
+        "source_order": 11
+      },
+      {
+        "clause_id": "zone-pps-clause-25-3-1-i",
+        "section_id": "zone-pps-section-25-3",
+        "source_order": 12
+      },
+      {
+        "clause_id": "zone-pps-clause-25-3-1-j",
+        "section_id": "zone-pps-section-25-3",
+        "source_order": 13
+      },
+      {
+        "clause_id": "zone-pps-clause-25-4-1",
+        "section_id": "zone-pps-section-25-4",
+        "source_order": 14
+      },
+      {
+        "clause_id": "zone-pps-clause-25-4-2",
+        "section_id": "zone-pps-section-25-4",
+        "source_order": 15
+      },
+      {
+        "clause_id": "zone-pps-clause-25-4-3",
+        "section_id": "zone-pps-section-25-4",
+        "source_order": 16
+      },
+      {
+        "clause_id": "zone-pps-clause-25-5-1",
+        "section_id": "zone-pps-section-25-5",
+        "source_order": 17
+      },
+      {
+        "clause_id": "zone-pps-clause-25-5-2",
+        "section_id": "zone-pps-section-25-5",
+        "source_order": 18
+      },
+      {
+        "clause_id": "zone-pps-clause-25-5-3",
+        "section_id": "zone-pps-section-25-5",
+        "source_order": 19
+      },
+      {
+        "clause_id": "zone-pps-clause-25-5-3-a",
+        "section_id": "zone-pps-section-25-5",
+        "source_order": 20
+      },
+      {
+        "clause_id": "zone-pps-clause-25-5-3-b",
+        "section_id": "zone-pps-section-25-5",
+        "source_order": 21
+      },
+      {
+        "clause_id": "zone-pps-clause-25-5-3-c",
+        "section_id": "zone-pps-section-25-5",
+        "source_order": 22
+      },
+      {
+        "clause_id": "zone-pps-clause-25-5-3-d",
+        "section_id": "zone-pps-section-25-5",
+        "source_order": 23
+      },
+      {
+        "clause_id": "zone-pps-clause-25-5-3-e",
+        "section_id": "zone-pps-section-25-5",
+        "source_order": 24
+      },
+      {
+        "clause_id": "zone-pps-clause-25-5-3-f",
+        "section_id": "zone-pps-section-25-5",
+        "source_order": 25
+      },
+      {
+        "clause_id": "zone-pps-clause-25-5-4",
+        "section_id": "zone-pps-section-25-5",
+        "source_order": 26
+      },
+      {
+        "clause_id": "zone-pps-clause-25-5-5",
+        "section_id": "zone-pps-section-25-5",
+        "source_order": 27
+      },
+      {
+        "clause_id": "zone-pps-clause-25-5-2",
+        "section_id": "zone-pps-section-25-5",
+        "source_order": 28
+      },
+      {
+        "clause_id": "zone-pps-clause-25-5-2-a",
+        "section_id": "zone-pps-section-25-5",
+        "source_order": 29
+      },
+      {
+        "clause_id": "zone-pps-clause-25-5-2-b",
+        "section_id": "zone-pps-section-25-5",
+        "source_order": 30
+      },
+      {
+        "clause_id": "zone-pps-clause-25-5-2-c",
+        "section_id": "zone-pps-section-25-5",
+        "source_order": 31
+      },
+      {
+        "clause_id": "zone-pps-clause-25-5-2-d",
+        "section_id": "zone-pps-section-25-5",
+        "source_order": 32
+      },
+      {
+        "clause_id": "zone-pps-clause-25-5-2-e",
+        "section_id": "zone-pps-section-25-5",
+        "source_order": 33
+      },
+      {
+        "clause_id": "zone-pps-clause-25-5-2-f",
+        "section_id": "zone-pps-section-25-5",
+        "source_order": 34
+      },
+      {
+        "clause_id": "zone-pps-clause-25-5-2-g",
+        "section_id": "zone-pps-section-25-5",
+        "source_order": 35
+      }
+    ],
+    "tables_raw": [],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-pps-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 157,
+          "pdf_page_end": 158,
+          "bylaw_page_start": 153,
+          "bylaw_page_end": 154
+        }
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-pps-term-use-active_recreation",
+        "term_raw": "Active Recreation",
+        "term_normalized": "active_recreation",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "active_recreation"
+      },
+      {
+        "term_id": "zone-pps-term-use-cemetery",
+        "term_raw": "Cemetery",
+        "term_normalized": "cemetery",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "cemetery"
+      },
+      {
+        "term_id": "zone-pps-term-use-community_gardens",
+        "term_raw": "Community Gardens",
+        "term_normalized": "community_gardens",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "community_gardens"
+      },
+      {
+        "term_id": "zone-pps-term-use-community_institutional",
+        "term_raw": "Community Institutional",
+        "term_normalized": "community_institutional",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "community_institutional"
+      },
+      {
+        "term_id": "zone-pps-term-use-cultural_establishment",
+        "term_raw": "Cultural Establishment",
+        "term_normalized": "cultural_establishment",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "cultural_establishment"
+      },
+      {
+        "term_id": "zone-pps-term-use-government_office",
+        "term_raw": "Government Offices",
+        "term_normalized": "government_office",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "government_office"
+      },
+      {
+        "term_id": "zone-pps-term-use-library",
+        "term_raw": "Library",
+        "term_normalized": "library",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "library"
+      },
+      {
+        "term_id": "zone-pps-term-use-recreation_or_fitness_centre_indoors",
+        "term_raw": "Recreation or Fitness Center (indoors)",
+        "term_normalized": "recreation_or_fitness_centre_indoors",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "recreation_or_fitness_centre_indoors"
+      },
+      {
+        "term_id": "zone-pps-term-use-trail_system",
+        "term_raw": "Trail System",
+        "term_normalized": "trail_system",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "trail_system"
+      },
+      {
+        "term_id": "zone-pps-term-use-golf_course",
+        "term_raw": "Golf Course",
+        "term_normalized": "golf_course",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "golf_course"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-pps-use-active-recreation-1-1",
+        "use_name_raw": "Active Recreation",
+        "use_term_id": "zone-pps-term-use-active_recreation",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-pps-use-cemetery-2-1",
+        "use_name_raw": "Cemetery",
+        "use_term_id": "zone-pps-term-use-cemetery",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-pps-use-community-gardens-3-1",
+        "use_name_raw": "Community Gardens",
+        "use_term_id": "zone-pps-term-use-community_gardens",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-pps-use-community-institutional-4-1",
+        "use_name_raw": "Community Institutional",
+        "use_term_id": "zone-pps-term-use-community_institutional",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-pps-use-cultural-establishment-5-1",
+        "use_name_raw": "Cultural Establishment",
+        "use_term_id": "zone-pps-term-use-cultural_establishment",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-pps-use-government-offices-6-1",
+        "use_name_raw": "Government Offices",
+        "use_term_id": "zone-pps-term-use-government_office",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-pps-use-library-7-1",
+        "use_name_raw": "Library",
+        "use_term_id": "zone-pps-term-use-library",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-pps-use-recreation-or-fitness-center-indoors-8-1",
+        "use_name_raw": "Recreation or Fitness Center (indoors)",
+        "use_term_id": "zone-pps-term-use-recreation_or_fitness_centre_indoors",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-pps-use-trail-system-9-1",
+        "use_name_raw": "Trail System",
+        "use_term_id": "zone-pps-term-use-trail_system",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-pps-use-golf-course-10-1",
+        "use_name_raw": "Golf Course",
+        "use_term_id": "zone-pps-term-use-golf_course",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-pps-num-zone-pps-clause-25-5-2-1",
+        "value_raw": "4 storeys",
+        "value": 4,
+        "unit": "storey",
+        "measure_type": "count",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pps-clause-25-5-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-pps-num-zone-pps-clause-25-5-2-a-1",
+        "value_raw": "930 m",
+        "value": 930,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pps-clause-25-5-2-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-pps-num-zone-pps-clause-25-5-2-b-1",
+        "value_raw": "24 m",
+        "value": 24,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pps-clause-25-5-2-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-pps-num-zone-pps-clause-25-5-2-c-1",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pps-clause-25-5-2-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-pps-num-zone-pps-clause-25-5-2-d-1",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pps-clause-25-5-2-d"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-pps-num-zone-pps-clause-25-5-2-e-1",
+        "value_raw": "3 m",
+        "value": 3,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pps-clause-25-5-2-e"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-pps-num-zone-pps-clause-25-5-2-f-1",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pps-clause-25-5-2-f"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-pps-num-zone-pps-clause-25-5-2-f-2",
+        "value_raw": "10 m",
+        "value": 10,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pps-clause-25-5-2-f"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-pps-req-zone-pps-clause-25-5-2",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": ".2",
+        "requirement_text_raw": "The maximum building height shall be 4 storeys.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-pps-num-zone-pps-clause-25-5-2-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pps-clause-25-5-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-pps-req-zone-pps-clause-25-5-2-a",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "(a)",
+        "requirement_text_raw": "Lot Area min. 930 m 2",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-pps-num-zone-pps-clause-25-5-2-a-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pps-clause-25-5-2-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-pps-req-zone-pps-clause-25-5-2-b",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "(b)",
+        "requirement_text_raw": "Frontage min. 24 m",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-pps-num-zone-pps-clause-25-5-2-b-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pps-clause-25-5-2-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-pps-req-zone-pps-clause-25-5-2-c",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "front_yard",
+        "requirement_label_raw": "(c)",
+        "requirement_text_raw": "Front Yard Setback min. 7 .6 m",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-pps-num-zone-pps-clause-25-5-2-c-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pps-clause-25-5-2-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-pps-req-zone-pps-clause-25-5-2-d",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "setback",
+        "requirement_label_raw": "(d)",
+        "requirement_text_raw": "Flanking Yard Setback min. 7 .6 m",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-pps-num-zone-pps-clause-25-5-2-d-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pps-clause-25-5-2-d"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-pps-req-zone-pps-clause-25-5-2-e",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "side_yard",
+        "requirement_label_raw": "(e)",
+        "requirement_text_raw": "Side Yard Setback min. 3 m",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-pps-num-zone-pps-clause-25-5-2-e-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pps-clause-25-5-2-e"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-pps-req-zone-pps-clause-25-5-2-f",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "rear_yard",
+        "requirement_label_raw": "(f)",
+        "requirement_text_raw": "Rear Yard Setback min. 6 m; 10 m when abutting RN, or RM",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-pps-num-zone-pps-clause-25-5-2-f-1",
+          "zone-pps-num-zone-pps-clause-25-5-2-f-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-pps-clause-25-5-2-f"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-pps-regulation-group-zone",
+        "group_label_raw": "PART 25",
+        "group_title_raw": "PPS - Parks & Public Spaces",
+        "regulated_use_terms": [
+          "zone-pps-term-use-active_recreation",
+          "zone-pps-term-use-cemetery",
+          "zone-pps-term-use-community_gardens",
+          "zone-pps-term-use-community_institutional",
+          "zone-pps-term-use-cultural_establishment",
+          "zone-pps-term-use-government_office",
+          "zone-pps-term-use-library",
+          "zone-pps-term-use-recreation_or_fitness_centre_indoors",
+          "zone-pps-term-use-trail_system",
+          "zone-pps-term-use-golf_course"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "PPS"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-pps-req-zone-pps-clause-25-5-2",
+          "zone-pps-req-zone-pps-clause-25-5-2-a",
+          "zone-pps-req-zone-pps-clause-25-5-2-b",
+          "zone-pps-req-zone-pps-clause-25-5-2-c",
+          "zone-pps-req-zone-pps-clause-25-5-2-d",
+          "zone-pps-req-zone-pps-clause-25-5-2-e",
+          "zone-pps-req-zone-pps-clause-25-5-2-f"
+        ],
+        "source_section_ref": "zone-pps-section-25-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-pps-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "PPS",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-pps-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-pps-flag-legacy-open-issue-1",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "extraction_review",
+      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization.",
+      "source_refs": [
+        {
+          "source_ref_type": "source_unit",
+          "source_ref_id": "zone-pps"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-pps-flag-legacy-open-issue-2",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "table_parsing_review",
+      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization.",
+      "source_refs": [
+        {
+          "source_ref_type": "source_unit",
+          "source_ref_id": "zone-pps"
+        }
+      ]
+    },
+    {
+      "review_flag_id": "zone-pps-flag-legacy-open-issue-3",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "zone_boundary_review",
+      "description": "Some extracted text was not safely assigned to a labeled section and is preserved in content_blocks.",
+      "source_refs": [
+        {
+          "source_ref_type": "source_unit",
+          "source_ref_id": "zone-pps"
+        }
+      ]
+    }
+  ]
 }
