@@ -23,7 +23,7 @@
         "source_unit_type": "zone",
         "label_raw": "PART 27",
         "title_raw": "C - Conservation",
-        "text_raw": "The Municipal Natural Asset Inventory describes the natural areas within the city in six categories including agricultural land, forests, grassland, shrub land, water and wetlands. Most of the natural areas in the city are concentrated along its edge and water-bodies. Conservation Areas need to be protected from development to ensure the continued protection of habitat and functioning of ecosystem services.\nRezoning from C to any other zone is not permitted.\nThe following use is permitted in the C Zone:\nExisting uses\nAlterations to existing uses are permitted so long as the following requirements are met:\nLot Area N/A\nFrontage min. 6 m\nFront Yard Setback min. 6 m\nFlanking Yard Setback min. 6 m\nSide Yard Setback min. 3 m; 20 m when abutting RN, or RM\nRear Yard Setback min. 6 m; 20 m when abutting RN, or RM\nCoverage N/A\nThe maximum building height shall be 2 storeys.\nBuildings require a separation distance of 4m.\nPermitted encroachments into the setbacks are listed in Table 3.2.\nAny buildings or facilities that support research, interpretation, or learning facilities will be considered by development agreement.",
+        "text_raw": "The Municipal Natural Asset Inventory describes the natural areas within the city in six categories including agricultural land, forests, grassland, shrub land, water and wetlands. Most of the natural areas in the city are concentrated along its edge and water-bodies. Conservation Areas need to be protected from development to ensure the continued protection of habitat and functioning of ecosystem services.\nRezoning from C to any other zone is not permitted.\nThe following use is permitted in the C Zone:\nExisting uses\nAlterations to existing uses are permitted so long as the following requirements are met:\nLot Area N/A\nFrontage min. 6 m\nFront Yard Setback min. 6 m\nFlanking Yard Setback min. 6 m\nSide Yard Setback min. 3 m; 20 m when abutting RN, or RM\nRear Yard Setback min. 6 m; 20 m when abutting RN, or RM\nCoverage N/A\nAccessory buildings are permitted according to Section 3.1\nThe maximum building height shall be 2 storeys.\nBuildings require a separation distance of 4m.\nPermitted encroachments into the setbacks are listed in Table 3.2.\nAny buildings or facilities that support research, interpretation, or learning facilities will be considered by development agreement.",
         "source_order": 1,
         "citations": {
           "pdf_page_start": 161,
@@ -239,6 +239,19 @@
               "bylaw_page_start": 157,
               "bylaw_page_end": 157
             }
+          },
+          {
+            "clause_id": "zone-c-clause-27-3-3",
+            "clause_label_raw": ".3",
+            "clause_text_raw": "Accessory buildings are permitted according to Section 3.1",
+            "parent_clause_id": null,
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 161,
+              "pdf_page_end": 161,
+              "bylaw_page_start": 157,
+              "bylaw_page_end": 157
+            }
           }
         ],
         "tables_raw": [],
@@ -292,6 +305,11 @@
             "content_type": "clause",
             "content_id": "zone-c-clause-27-3-2-g",
             "source_order": 10
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-c-clause-27-3-3",
+            "source_order": 11
           }
         ],
         "citations": {
@@ -470,24 +488,29 @@
         "source_order": 12
       },
       {
-        "clause_id": "zone-c-clause-27-4-1",
-        "section_id": "zone-c-section-27-4",
+        "clause_id": "zone-c-clause-27-3-3",
+        "section_id": "zone-c-section-27-3",
         "source_order": 13
       },
       {
-        "clause_id": "zone-c-clause-27-4-2",
+        "clause_id": "zone-c-clause-27-4-1",
         "section_id": "zone-c-section-27-4",
         "source_order": 14
       },
       {
+        "clause_id": "zone-c-clause-27-4-2",
+        "section_id": "zone-c-section-27-4",
+        "source_order": 15
+      },
+      {
         "clause_id": "zone-c-clause-27-5-1",
         "section_id": "zone-c-section-27-5",
-        "source_order": 15
+        "source_order": 16
       },
       {
         "clause_id": "zone-c-clause-27-5-2",
         "section_id": "zone-c-section-27-5",
-        "source_order": 16
+        "source_order": 17
       }
     ],
     "tables_raw": [],
@@ -507,8 +530,26 @@
     ]
   },
   "structured_data": {
-    "terms": [],
-    "uses": [],
+    "terms": [
+      {
+        "term_id": "zone-c-term-term-existing_uses",
+        "term_raw": "Existing uses",
+        "term_normalized": "existing_uses",
+        "term_category": "unknown",
+        "source_refs": [],
+        "confidence": "needs_review"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-c-use-existing-uses-1-1",
+        "use_name_raw": "Existing uses",
+        "use_term_id": "zone-c-term-term-existing_uses",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "needs_review"
+      }
+    ],
     "numeric_values": [
       {
         "numeric_value_id": "zone-c-num-zone-c-clause-27-3-2-b-1",
@@ -790,7 +831,9 @@
         "regulation_group_id": "zone-c-regulation-group-zone",
         "group_label_raw": "PART 27",
         "group_title_raw": "C - Conservation",
-        "regulated_use_terms": [],
+        "regulated_use_terms": [
+          "zone-c-term-term-existing_uses"
+        ],
         "applicability": {
           "applies_to_zone_codes": [
             "C"
@@ -857,6 +900,13 @@
   },
   "review_flags": [
     {
+      "review_flag_id": "zone-c-flag-unmatched-use-existing-uses-1-1",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "code_table_match_review",
+      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Existing uses"
+    },
+    {
       "review_flag_id": "zone-c-flag-legacy-open-issue-1",
       "severity": "warning",
       "blocking": false,
@@ -883,17 +933,11 @@
       ]
     },
     {
-      "review_flag_id": "zone-c-flag-legacy-open-issue-3",
+      "review_flag_id": "zone-c-flag-unmatched-term-existing-uses",
       "severity": "warning",
       "blocking": false,
-      "review_type": "zone_boundary_review",
-      "description": "Some extracted text was not safely assigned to a labeled section and is preserved in content_blocks.",
-      "source_refs": [
-        {
-          "source_ref_type": "source_unit",
-          "source_ref_id": "zone-c"
-        }
-      ]
+      "review_type": "code_table_match_review",
+      "description": "Term was preserved but did not match reviewed term/use code tables: Existing uses"
     }
   ]
 }

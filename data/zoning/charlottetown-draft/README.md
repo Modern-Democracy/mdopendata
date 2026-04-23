@@ -15,8 +15,8 @@ This folder contains approved-schema draft zoning bylaw extraction outputs regen
 - Term exact matches: 13
 - Term semantic matches: 0
 - Term new codes surfaced: 0
-- Use exact matches: 85
+- Use exact matches: 86
 - Use semantic matches: 5
-- Use new codes surfaced: 16
+- Use new codes surfaced: 25
 
 See `code-table-match-report.json` for phrase-level details.

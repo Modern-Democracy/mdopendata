@@ -5,6 +5,11 @@ import re
 from datetime import datetime
 from pathlib import Path
 
+try:
+    import fitz
+except ImportError:  # pragma: no cover - environment guard
+    fitz = None
+
 from pypdf import PdfReader
 
 
@@ -222,9 +227,7 @@ def extract_zone_lines(reader: PdfReader, zone: dict, next_bylaw_start: int | No
     pdf_start, pdf_end, _, _ = zone_pages(zone, next_bylaw_start)
     page_texts = []
     for pdf_page in range(pdf_start, pdf_end + 1):
-        text = reader.pages[pdf_page - 1].extract_text() or ""
-        text = clean_text(text)
-        lines = [line.strip() for line in text.splitlines()]
+        lines = extract_clean_lines_for_page(reader, pdf_page)
         kept = [line for line in lines if not is_noise_line(line, zone)]
         page_texts.append({"pdf_page": pdf_page, "text": "\n".join(kept)})
     combined = "\n".join(page["text"] for page in page_texts if page["text"])
@@ -235,8 +238,7 @@ def extract_page_texts(reader: PdfReader, bylaw_start: int, bylaw_end: int) -> l
     page_texts = []
     for bylaw_page in range(bylaw_start, bylaw_end + 1):
         pdf_page = pdf_page_for_bylaw_page(bylaw_page)
-        text = clean_text(reader.pages[pdf_page - 1].extract_text() or "")
-        lines = [line.strip() for line in text.splitlines() if line.strip()]
+        lines = [line.strip() for line in extract_clean_lines_for_page(reader, pdf_page) if line.strip()]
         kept = []
         for line in lines:
             if line == "CITY OF CHARLOTTETOWN":
@@ -252,6 +254,136 @@ def extract_page_texts(reader: PdfReader, bylaw_start: int, bylaw_end: int) -> l
             kept.append(line)
         page_texts.append({"pdf_page": pdf_page, "bylaw_page": bylaw_page, "text": "\n".join(kept)})
     return page_texts
+
+
+SECTION_OR_PROVISION_RE = re.compile(
+    r"^(?:\d+\.\d+(?:\s|$)|\.\d+(?:\s|$)|\([a-z]{1,3}\)(?:\s|$)|[ivxlcdm]+\)(?:\s|$))",
+    re.IGNORECASE,
+)
+
+
+def _fitz_block_rows(pdf_page: int) -> list[dict]:
+    if fitz is None:
+        return []
+    doc = fitz.open(SOURCE)
+    try:
+        page = doc.load_page(pdf_page - 1)
+        rows = []
+        for block in page.get_text("blocks"):
+            x0, y0, x1, y1, text, *_ = block
+            cleaned = clean_text(text)
+            if not cleaned:
+                continue
+            rows.append({"x0": float(x0), "y0": float(y0), "x1": float(x1), "y1": float(y1), "text": cleaned})
+        rows.sort(key=lambda row: (round(row["y0"], 1), round(row["x0"], 1)))
+        return rows
+    finally:
+        doc.close()
+
+
+def _is_structural_block(text: str) -> bool:
+    first = (text.splitlines() or [""])[0].strip()
+    if not first:
+        return False
+    if PART_RE.match(first) or ZONE_TITLE_RE.match(first):
+        return True
+    return bool(SECTION_OR_PROVISION_RE.match(first))
+
+
+def _is_caption_block(text: str) -> bool:
+    first = (text.splitlines() or [""])[0].strip()
+    return bool(re.match(r"^(?:Table|Figure)\b", first, re.IGNORECASE))
+
+
+def _is_short_fragment(text: str) -> bool:
+    flat = " ".join(text.split())
+    words = flat.split()
+    return len(words) <= 12 and not re.search(r"[.;:]$", flat)
+
+
+def _column_groups(rows: list[dict]) -> tuple[list[dict], list[dict], list[dict], bool]:
+    midpoint = 306.0
+    gutter = 24.0
+    left = [row for row in rows if row["x1"] <= midpoint + gutter]
+    right = [row for row in rows if row["x0"] >= midpoint - gutter]
+    spanning = [row for row in rows if row not in left and row not in right]
+    two_column = len(left) >= 4 and len(right) >= 4 and len(spanning) <= max(len(left), len(right))
+    return (
+        sorted(spanning, key=lambda row: (round(row["y0"], 1), round(row["x0"], 1))),
+        sorted(left, key=lambda row: (round(row["y0"], 1), round(row["x0"], 1))),
+        sorted(right, key=lambda row: (round(row["y0"], 1), round(row["x0"], 1))),
+        two_column,
+    )
+
+
+def _filter_column_rows(rows: list[dict]) -> list[dict]:
+    filtered = [row for row in rows if not _is_caption_block(row["text"]) and not row["text"].lstrip().startswith("*")]
+    if not filtered:
+        return []
+    first_structural = next((idx for idx, row in enumerate(filtered) if _is_structural_block(row["text"])), None)
+    if first_structural is None:
+        return [row for row in filtered if not _is_short_fragment(row["text"])]
+    leading = filtered[:first_structural]
+    core = filtered[first_structural:]
+    core = [
+        *[row for row in leading if not _is_short_fragment(row["text"])],
+        *core,
+    ]
+    last_structural = next((idx for idx in range(len(core) - 1, -1, -1) if _is_structural_block(core[idx]["text"])), None)
+    if last_structural is None:
+        return core
+    trailing = core[last_structural + 1 :]
+    return [
+        *core[: last_structural + 1],
+        *[row for row in trailing if not _is_short_fragment(row["text"])],
+    ]
+
+
+def _suppress_layout_artifacts(rows: list[dict]) -> list[dict]:
+    if not rows:
+        return []
+    spanning, left, right, two_column = _column_groups(rows)
+    spanning = _filter_column_rows(spanning)
+    left = _filter_column_rows(left)
+    right = _filter_column_rows(right)
+    if not two_column:
+        return sorted([*spanning, *left, *right], key=lambda row: (round(row["y0"], 1), round(row["x0"], 1)))
+    return [*spanning, *left, *right]
+
+
+def _merge_label_lines(lines: list[str]) -> list[str]:
+    merged: list[str] = []
+    idx = 0
+    while idx < len(lines):
+        current = lines[idx].strip()
+        if not current:
+            idx += 1
+            continue
+        next_line = lines[idx + 1].strip() if idx + 1 < len(lines) else None
+        if next_line:
+            if re.fullmatch(r"\d+\.\d+", current) and re.fullmatch(r"[A-Z][A-Z0-9 '&/\-]+", next_line):
+                merged.append(f"{current} {next_line}")
+                idx += 2
+                continue
+            if re.fullmatch(r"\.\d+", current) or re.fullmatch(r"\([a-z]{1,3}\)", current, re.IGNORECASE):
+                merged.append(f"{current} {next_line}")
+                idx += 2
+                continue
+        merged.append(current)
+        idx += 1
+    return merged
+
+
+def extract_clean_lines_for_page(reader: PdfReader, pdf_page: int) -> list[str]:
+    rows = _fitz_block_rows(pdf_page)
+    if rows:
+        lines = []
+        for row in _suppress_layout_artifacts(rows):
+            lines.extend(line.strip() for line in row["text"].splitlines() if line.strip())
+        if lines:
+            return _merge_label_lines(lines)
+    text = clean_text(reader.pages[pdf_page - 1].extract_text() or "")
+    return _merge_label_lines([line.strip() for line in text.splitlines() if line.strip()])
 
 
 SECTION_RE = re.compile(r"^(?P<label>\d+\.\d+)\s+(?P<title>[A-Z][A-Z0-9 '&/\-]+)$")
@@ -283,7 +415,14 @@ def split_sections(page_texts: list[dict], zone: dict, next_bylaw_start: int | N
                 if not PART_RE.match(line) and not ZONE_TITLE_RE.match(line)
             ]
             if leading:
-                unassigned.extend(leading)
+                if current_label is None:
+                    unassigned.extend(leading)
+                else:
+                    sections.setdefault(
+                        current_label,
+                        {"section_label_raw": current_label, "title_label_raw": "", "lines": []},
+                    )
+                    sections[current_label]["lines"].extend(leading)
 
         for idx, line in enumerate(lines):
             if first_heading_index is not None and idx < first_heading_index:

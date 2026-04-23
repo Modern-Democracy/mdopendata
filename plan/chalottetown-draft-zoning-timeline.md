@@ -7,7 +7,7 @@ Reference plan: `plan/chalottetown-draft-zoning-plan.md`
 - Active phase: Phase 3
 - Active phase name: High-Priority Clause Validation
 - Overall status: In progress
-- Current progress: Phase 2 is complete. Approved code-table normalization decisions have been applied across the affected draft zone files and `data/zoning/charlottetown-draft/code-table-match-report.json`. The report now retains only `Cluster Housing` and `Seniors Housing` as remaining true new-code candidates from this pass. Phase 3 is now active.
+- Current progress: Phase 2 is complete. Approved code-table normalization decisions have been applied across the affected draft zone files and `data/zoning/charlottetown-draft/code-table-match-report.json`. The report now retains only `Cluster Housing` and `Seniors Housing` as remaining true new-code candidates from this pass. Phase 3 remains active for the pending high-priority general-provisions files, and a targeted layout-repair pass has now been applied in the draft extractor for RM-style figure and table bleed. Regenerated draft outputs now restore the missing RM `11.3.2`, `11.3.3`, `11.5`, and `11.6` clause structure and remove the identified `Table 11.2`, `Figure 11.1`, and `Table 11.3` spillover from RM requirement text.
 - Last updated: 2026-04-23
 
 ## Phase Timeline
@@ -56,13 +56,19 @@ Current progress:
 - combined-use labels were split where approved, condition-bearing pseudo-codes were reduced to base use codes, and extraction-artifact pseudo-codes were removed from use tables
 - `data/zoning/charlottetown-draft/code-table-match-report.json` now retains only `Cluster Housing` and `Seniors Housing` as remaining true new-code candidates from this review pass
 - Phase 3 opened with the high-priority clause-validation batch as the next active workstream
+- the remaining clause-level `other_requirements` `needs_review` entries in `zones/rn.json`, `zones/rm.json`, `zones/rh.json`, and `zones/dms.json` were reviewed against the draft PDF and promoted from `needs_review`
+- direct numeric artifacts tied to those reviewed clauses were normalized where the PDF gave an unambiguous unit or comparator
+- matching issue-ledger requirement rows for this batch were closed
+- `scripts/extract-charlottetown-draft-zoning-bylaw.py` now uses coordinate-aware page blocks to preserve visual reading order, carry page-leading continuation text into the prior active section, and suppress obvious figure and table caption spillover
+- `data/zoning/charlottetown-draft/zones/rm.json` was regenerated with `11.1` intent text cleaned, `11.3.2` and `11.3.3` restored under `11.3`, and `11.5` continuation text preserved before `11.6`
+- a negative-control regeneration check on `zones/dms.json`, `zones/dmu.json`, and `zones/dw.json` did not reproduce the RM-style figure or table bleed in requirement text
 
 Next actions:
 
-1. Validate the remaining high-priority `needs_review` entries in `zones/rn.json`, `zones/rm.json`, `zones/rh.json`, and `zones/dms.json` against the PDF.
-2. Resolve the highest-density clause and numeric defects in `general-provisions-parking.json` and `general-provisions-land-use.json`.
-3. Recompute the ledger counts after the first clause-validation batch.
-4. Update the timeline and ledger status fields as each batch closes.
+1. Resolve the highest-density clause and numeric defects in `general-provisions-parking.json` and `general-provisions-land-use.json`.
+2. Recompute the ledger counts after the RM layout-repair regeneration pass.
+3. Review the remaining open non-clause rows in the four zone files only if they still affect Phase 3 acceptance.
+4. Expand the layout-repair review to other draft zones that share the same figure and dimensional-table page pattern.
 
 ## Progress Rules
 
