@@ -1040,19 +1040,43 @@
         "confidence": "high"
       },
       {
-        "use_id": "zone-muc-use-warehouse-and-or-distribution-centre-15-warehouse",
+        "use_id": "zone-muc-use-warehouse-15",
         "use_name_raw": "Warehouse",
         "use_term_id": "zone-muc-term-use-warehouse",
         "use_status": "permitted",
         "source_clause_ref": "zone-muc-clause-24-1-15",
+        "conditions": [
+          {
+            "condition_type": "source_use_operator",
+            "condition_text_raw": "and/or",
+            "source_refs": [
+              {
+                "source_ref_type": "clause",
+                "source_ref_id": "zone-muc-clause-24-1-15"
+              }
+            ]
+          }
+        ],
         "confidence": "high"
       },
       {
-        "use_id": "zone-muc-use-warehouse-and-or-distribution-centre-15-distribution-centre",
+        "use_id": "zone-muc-use-distribution-centre-15",
         "use_name_raw": "Distribution centre",
         "use_term_id": "zone-muc-term-use-distribution_centre",
         "use_status": "permitted",
         "source_clause_ref": "zone-muc-clause-24-1-15",
+        "conditions": [
+          {
+            "condition_type": "source_use_operator",
+            "condition_text_raw": "and/or",
+            "source_refs": [
+              {
+                "source_ref_type": "clause",
+                "source_ref_id": "zone-muc-clause-24-1-15"
+              }
+            ]
+          }
+        ],
         "confidence": "high"
       }
     ],

@@ -2145,19 +2145,43 @@
         "confidence": "high"
       },
       {
-        "use_id": "zone-m-3-use-warehouse-and-or-distribution-center-38-warehouse",
+        "use_id": "zone-m-3-use-warehouse-38",
         "use_name_raw": "Warehouse",
         "use_term_id": "zone-m-3-term-use-warehouse",
         "use_status": "permitted",
         "source_clause_ref": "zone-m-3-clause-40-1-38",
+        "conditions": [
+          {
+            "condition_type": "source_use_operator",
+            "condition_text_raw": "and/or",
+            "source_refs": [
+              {
+                "source_ref_type": "clause",
+                "source_ref_id": "zone-m-3-clause-40-1-38"
+              }
+            ]
+          }
+        ],
         "confidence": "high"
       },
       {
-        "use_id": "zone-m-3-use-warehouse-and-or-distribution-center-38-distribution-centre",
+        "use_id": "zone-m-3-use-distribution-centre-38",
         "use_name_raw": "Distribution centre",
         "use_term_id": "zone-m-3-term-use-distribution_centre",
         "use_status": "permitted",
         "source_clause_ref": "zone-m-3-clause-40-1-38",
+        "conditions": [
+          {
+            "condition_type": "source_use_operator",
+            "condition_text_raw": "and/or",
+            "source_refs": [
+              {
+                "source_ref_type": "clause",
+                "source_ref_id": "zone-m-3-clause-40-1-38"
+              }
+            ]
+          }
+        ],
         "confidence": "high"
       }
     ],
