@@ -159,6 +159,9 @@ def preprocess_sections_legacy(doc: dict[str, Any]) -> dict[str, Any]:
 def transform_zone_doc(path: Path) -> dict[str, Any]:
     legacy = preprocess_zone_legacy(read_json(path))
     data = current.transform_zone(NORMALIZER, legacy)
+    repair_rm_table_clauses = getattr(current, "repair_rm_table_clauses", None)
+    if callable(repair_rm_table_clauses):
+        repair_rm_table_clauses(data)
     current.refresh_schema_numeric_values(data)
     current.refresh_schema_terms(NORMALIZER, data)
     current.apply_zone_reference_model(data)

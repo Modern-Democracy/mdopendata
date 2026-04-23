@@ -7,7 +7,7 @@ Reference plan: `plan/chalottetown-draft-zoning-plan.md`
 - Active phase: Phase 3
 - Active phase name: High-Priority Clause Validation
 - Overall status: In progress
-- Current progress: Phase 2 is complete. Approved code-table normalization decisions have been applied across the affected draft zone files and `data/zoning/charlottetown-draft/code-table-match-report.json`. The report now retains only `Cluster Housing` and `Seniors Housing` as remaining true new-code candidates from this pass. Phase 3 remains active for the pending high-priority general-provisions files, and a targeted layout-repair pass has now been applied in the draft extractor for RM-style figure and table bleed. Regenerated draft outputs now restore the missing RM `11.3.2`, `11.3.3`, `11.5`, and `11.6` clause structure and remove the identified `Table 11.2`, `Figure 11.1`, and `Table 11.3` spillover from RM requirement text.
+- Current progress: Phase 2 is complete. Approved code-table normalization decisions have been applied across the affected draft zone files and `data/zoning/charlottetown-draft/code-table-match-report.json`. The report now retains only `Cluster Housing` and `Seniors Housing` as remaining true new-code candidates from this pass. Phase 3 remains active for the pending high-priority general-provisions files, and a targeted layout-repair pass has now been applied in the draft extractor for RM-style figure and table bleed. Regenerated draft outputs now restore the missing RM `11.3.2`, `11.3.3`, `11.5`, and `11.6` clause structure and remove the identified `Table 11.2`, `Figure 11.1`, and `Table 11.3` spillover from RM requirement text. The normalized draft-zone repair step now generalizes RM-style clause-table promotion across zone files so equivalent dimensional requirement blocks are emitted as `tables_raw` outside RM as well, while retaining the RM-only shared-wall footnote as a clause note.
 - Last updated: 2026-04-23
 
 ## Phase Timeline
@@ -62,6 +62,7 @@ Current progress:
 - `scripts/extract-charlottetown-draft-zoning-bylaw.py` now uses coordinate-aware page blocks to preserve visual reading order, carry page-leading continuation text into the prior active section, and suppress obvious figure and table caption spillover
 - `data/zoning/charlottetown-draft/zones/rm.json` was regenerated with `11.1` intent text cleaned, `11.3.2` and `11.3.3` restored under `11.3`, and `11.5` continuation text preserved before `11.6`
 - a negative-control regeneration check on `zones/dms.json`, `zones/dmu.json`, and `zones/dw.json` did not reproduce the RM-style figure or table bleed in requirement text
+- `scripts/extract-charlottetown-zoning-bylaw.py` now promotes RM-style dimensional clause groups into section tables generically for draft zone outputs, instead of limiting that repair to `RM`
 
 Next actions:
 

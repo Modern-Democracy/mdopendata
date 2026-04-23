@@ -814,6 +814,26 @@ def refresh_source_unit_text_from_raw(data: dict[str, Any]) -> None:
     source_units[0]["text_raw"] = "\n".join(parts)
 
 
+def table_row_label_sort_key(label: str | None) -> tuple[int, int | str]:
+    raw = clean_text(label).strip()
+    match = re.fullmatch(r"\(([^)]+)\)", raw)
+    token = match.group(1).lower() if match else raw.lower()
+    if token.isdigit():
+        return (0, int(token))
+    if token.isalpha():
+        value = 0
+        for char in token:
+            value = (value * 26) + (ord(char) - 96)
+        return (1, value)
+    return (2, token)
+
+
+TABLE_ROW_VALUE_RE = re.compile(
+    r"(?:^|\s)(N/A|min\.|max\.|no less than|no more than|at least|at most|greater than|less than|equal to|up to)(?=\s|$)",
+    re.IGNORECASE,
+)
+
+
 def general_provisions_table_columns(labels: list[tuple[str, str]]) -> list[dict[str, Any]]:
     return [
         {"column_id": column_id, "column_label_raw": label, "source_order": index}
@@ -1611,9 +1631,119 @@ def repair_wf_bonus_height_section(data: dict[str, Any]) -> bool:
     return True
 
 
+def repair_rm_table_clauses(data: dict[str, Any]) -> bool:
+    metadata = data.get("document_metadata") or {}
+    if metadata.get("document_type") != "zone":
+        return False
+    raw_data = data.get("raw_data") or {}
+    sections = raw_data.get("sections_raw") or []
+    changed = False
+
+    for section in sections:
+        clauses = section.get("clauses_raw") or []
+        if not clauses:
+            continue
+        children_by_parent: dict[str, list[dict[str, Any]]] = {}
+        for clause in clauses:
+            parent_clause_id = clause.get("parent_clause_id")
+            if parent_clause_id:
+                children_by_parent.setdefault(parent_clause_id, []).append(clause)
+
+        for parent in list(clauses):
+            parent_clause_id = parent.get("clause_id") or ""
+            child_clauses = sorted(
+                children_by_parent.get(parent_clause_id, []),
+                key=lambda item: table_row_label_sort_key(item.get("clause_label_raw")),
+            )
+            if len(child_clauses) < 2:
+                continue
+            if not all(re.fullmatch(r"\([a-z0-9.]+\)", clean_text(child.get("clause_label_raw")), re.IGNORECASE) for child in child_clauses):
+                continue
+
+            rows_raw = []
+            for row_order, child in enumerate(child_clauses, start=1):
+                cell_text = clean_text(child.get("clause_text_raw"))
+                match = TABLE_ROW_VALUE_RE.search(cell_text)
+                if not match:
+                    rows_raw = []
+                    break
+                requirement = clean_text(cell_text[: match.start(1)])
+                value = clean_text(cell_text[match.start(1) :])
+                if not requirement or not value:
+                    rows_raw = []
+                    break
+                table_id_value = parent_clause_id.replace("-clause-", "-table-")
+                rows_raw.append(
+                    make_labeled_table_row(
+                        table_id_value,
+                        row_order,
+                        clean_text(child.get("clause_label_raw")),
+                        {"requirement": requirement, "value": value},
+                    )
+                )
+            if not rows_raw:
+                continue
+
+            table_id_value = parent_clause_id.replace("-clause-", "-table-")
+            table = {
+                "table_id": table_id_value,
+                "table_title_raw": f"{clean_text(section.get('section_label_raw'))}{clean_text(parent.get('clause_label_raw'))}",
+                "source_order": parent.get("source_order", 0) + 1,
+                "columns_raw": general_provisions_table_columns(
+                    [
+                        ("row_label", "clause_label_raw"),
+                        ("requirement", "clause_name"),
+                        ("value", ""),
+                    ]
+                ),
+                "rows_raw": rows_raw,
+                "citations": citation(parent.get("citations")),
+            }
+            replace_section_table(section, table)
+            remove_clause_id_range(section, {child.get("clause_id") for child in child_clauses})
+            changed = True
+
+        if metadata.get("zone_code") == "RM":
+            clause_by_id = {clause.get("clause_id"): clause for clause in section.get("clauses_raw") or []}
+            parent_11_3_2 = clause_by_id.get("zone-rm-clause-11-3-2")
+            if parent_11_3_2:
+                footnote_id = "zone-rm-clause-11-3-2-note-shared"
+                if not any(clause.get("clause_id") == footnote_id for clause in section.get("clauses_raw") or []):
+                    repaired = []
+                    inserted = False
+                    for clause in section.get("clauses_raw") or []:
+                        repaired.append(clause)
+                        if clause.get("clause_id") == "zone-rm-clause-11-3-2":
+                            repaired.append(
+                                {
+                                    "clause_id": footnote_id,
+                                    "clause_label_raw": "",
+                                    "clause_text_raw": "* 'shared' includes the shared walls of a townhouse or semi.",
+                                    "parent_clause_id": "zone-rm-clause-11-3-2",
+                                    "source_order": clause.get("source_order", 0) + 1,
+                                    "citations": citation(parent_11_3_2.get("citations")),
+                                }
+                            )
+                            inserted = True
+                    if inserted:
+                        for order, clause in enumerate(repaired, start=1):
+                            clause["source_order"] = order
+                        section["clauses_raw"] = repaired
+                        changed = True
+
+    if not changed:
+        return False
+    rebuild_content_refs(data)
+    rebuild_clause_refs(data)
+    refresh_source_unit_text_from_raw(data)
+    return True
+
+
 TABLE_CONTENT_ANCHORS = {
     "doc-general-provisions-table-4-1-2-accessory-buildings": "doc-general-provisions-clause-4-1-2",
     "doc-general-provisions-table-4-2-2-projecting-structures": "doc-general-provisions-clause-4-2-2",
+    "zone-rm-table-11-3-2": "zone-rm-clause-11-3-2",
+    "zone-rm-table-11-3-3": "zone-rm-clause-11-3-3",
 }
 
 TABLE_CONTENT_BEFORE_CLAUSES = {
@@ -1631,7 +1761,10 @@ def rebuild_content_refs(data: dict[str, Any]) -> dict[str, Any]:
         tables = sorted(section.get("tables_raw") or [], key=lambda item: item.get("source_order", 0))
         tables_by_anchor: dict[str, list[dict[str, Any]]] = {}
         for table in tables:
-            anchor = TABLE_CONTENT_ANCHORS.get(table.get("table_id") or "")
+            table_id_value = table.get("table_id") or ""
+            anchor = TABLE_CONTENT_ANCHORS.get(table_id_value)
+            if anchor is None and "-table-" in table_id_value:
+                anchor = table_id_value.replace("-table-", "-clause-")
             if anchor:
                 tables_by_anchor.setdefault(anchor, []).append(table)
         added_table_ids: set[str] = set()
