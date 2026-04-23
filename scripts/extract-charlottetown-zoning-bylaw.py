@@ -1083,6 +1083,108 @@ def repair_r3_lodging_houses_table(data: dict[str, Any]) -> bool:
     return True
 
 
+def repair_r3_section_structure(data: dict[str, Any]) -> bool:
+    metadata = data.get("document_metadata") or {}
+    if metadata.get("zone_code") != "R-3":
+        return False
+    raw_data = data.get("raw_data") or {}
+    sections = raw_data.get("sections_raw") or []
+    changed = False
+
+    section_16_2 = next((section for section in sections if section.get("section_id") == "zone-r-3-section-2"), None)
+    if section_16_2:
+        section_16_2["section_id"] = "zone-r-3-section-16-2"
+        section_16_2["section_label_raw"] = "16.2"
+        changed = True
+
+    section_16_3 = next((section for section in sections if section.get("section_id") == "zone-r-3-section-3"), None)
+    split_title_section = next((section for section in sections if section.get("section_id") == "zone-r-3-section-16-3"), None)
+    if section_16_3:
+        section_16_3["section_id"] = "zone-r-3-section-16-3"
+        section_16_3["section_label_raw"] = "16.3"
+        if not str(section_16_3.get("section_title_raw") or "").endswith("DWELLINGS"):
+            section_16_3["section_title_raw"] = clean_text(f"{section_16_3.get('section_title_raw') or ''} DWELLINGS")
+        if split_title_section:
+            section_16_3["tables_raw"] = sorted(
+                [*section_16_3.get("tables_raw", []), *split_title_section.get("tables_raw", [])],
+                key=lambda table: table.get("source_order", 0),
+            )
+            for index, table in enumerate(section_16_3["tables_raw"], start=1):
+                table["source_order"] = index
+        page_72 = {"pdf_page_start": 72, "pdf_page_end": 72, "bylaw_page_start": 72, "bylaw_page_end": 72}
+        clause_16_3_8_id = "zone-r-3-clause-16-3-8"
+        clauses = [
+            {
+                "clause_id": clause_16_3_8_id,
+                "clause_label_raw": "16.3.8",
+                "clause_text_raw": "Regulations for Townhouses, Stacked and Block Townhouse Dwellings include:",
+                "parent_clause_id": None,
+                "source_order": 1,
+                "citations": page_72,
+            },
+            {
+                "clause_id": "zone-r-3-clause-16-3-8-a",
+                "clause_label_raw": "a",
+                "clause_text_raw": "Where Dwelling Units are to be subdivided, an Easement in favour of the central units for access to the Rear Yards from the Street shall be provided.",
+                "parent_clause_id": clause_16_3_8_id,
+                "source_order": 2,
+                "citations": page_72,
+            },
+            {
+                "clause_id": "zone-r-3-clause-16-3-8-b",
+                "clause_label_raw": "b",
+                "clause_text_raw": "A maximum of 8 consecutive Dwelling Units",
+                "parent_clause_id": clause_16_3_8_id,
+                "source_order": 3,
+                "citations": page_72,
+            },
+            {
+                "clause_id": "zone-r-3-clause-16-3-8-c",
+                "clause_label_raw": "c",
+                "clause_text_raw": "Where 8 consecutive Dwelling Units are proposed, individual Dwelling Units shall not exceed 6.5 m (21.3 ft) in width.",
+                "parent_clause_id": clause_16_3_8_id,
+                "source_order": 4,
+                "citations": page_72,
+            },
+        ]
+        existing = [
+            clause
+            for clause in section_16_3.get("clauses_raw") or []
+            if not str(clause.get("clause_id") or "").startswith(clause_16_3_8_id)
+        ]
+        section_16_3["clauses_raw"] = [*existing, *clauses]
+        changed = True
+
+    if split_title_section:
+        sections[:] = [section for section in sections if section is not split_title_section]
+        changed = True
+
+    section_16_4 = next(
+        (
+            section
+            for section in sections
+            if section.get("section_title_raw") == "REGULATIONS FOR LODGING HOUSES AND GROUP HOMES"
+        ),
+        None,
+    )
+    if section_16_4 and section_16_4.get("section_id") == "zone-r-3-section-5":
+        section_16_4["section_id"] = "zone-r-3-section-16-4"
+        section_16_4["section_label_raw"] = "16.4"
+        changed = True
+
+    if changed:
+        for index, section in enumerate(sections, start=1):
+            section["source_order"] = index
+        raw_data["tables_raw"] = [
+            {"table_id": table["table_id"], "section_id": section["section_id"]}
+            for section in sections
+            for table in section.get("tables_raw") or []
+        ]
+        rebuild_clause_refs(data)
+        refresh_source_unit_text_from_raw(data)
+    return changed
+
+
 def repair_dc_bonus_height_section(data: dict[str, Any]) -> bool:
     metadata = data.get("document_metadata") or {}
     if metadata.get("zone_code") != "DC":
@@ -1254,6 +1356,11 @@ TABLE_CONTENT_ANCHORS = {
     "doc-general-provisions-table-4-2-2-projecting-structures": "doc-general-provisions-clause-4-2-2",
 }
 
+TABLE_CONTENT_BEFORE_CLAUSES = {
+    "zone-r-3-table-16-3",
+    "zone-r-3-table-regulations-for-lodging-houses-and-group-homes",
+}
+
 
 def rebuild_content_refs(data: dict[str, Any]) -> dict[str, Any]:
     raw_data = data.get("raw_data") or {}
@@ -1267,6 +1374,11 @@ def rebuild_content_refs(data: dict[str, Any]) -> dict[str, Any]:
                 tables_by_anchor.setdefault(anchor, []).append(table)
         added_table_ids: set[str] = set()
         refs: list[dict[str, Any]] = []
+
+        for table in tables:
+            if table.get("table_id") in TABLE_CONTENT_BEFORE_CLAUSES:
+                refs.append({"content_type": "table", "content_id": table["table_id"]})
+                added_table_ids.add(table["table_id"])
 
         for clause in clauses:
             refs.append({"content_type": "clause", "content_id": clause["clause_id"]})
@@ -3261,6 +3373,7 @@ def main() -> None:
             repair_wf_bonus_height_section(data)
             repair_mur_mixed_density_section(data)
             repair_r3_lodging_houses_table(data)
+            repair_r3_section_structure(data)
             reset_review_flags(data)
             refresh_schema_numeric_values(data)
             apply_dc_bonus_height_context(data)
@@ -3277,6 +3390,7 @@ def main() -> None:
         repair_wf_bonus_height_section(transformed)
         repair_mur_mixed_density_section(transformed)
         repair_r3_lodging_houses_table(transformed)
+        repair_r3_section_structure(transformed)
         refresh_schema_numeric_values(transformed)
         apply_dc_bonus_height_context(transformed)
         apply_dms_bonus_height_context(transformed)
@@ -3304,6 +3418,7 @@ def main() -> None:
             repair_wf_bonus_height_section(data)
             repair_mur_mixed_density_section(data)
             repair_r3_lodging_houses_table(data)
+            repair_r3_section_structure(data)
             reset_review_flags(data)
             refresh_schema_numeric_values(data)
             apply_dc_bonus_height_context(data)
@@ -3339,6 +3454,7 @@ def main() -> None:
             repair_wf_bonus_height_section(data)
             repair_mur_mixed_density_section(data)
             repair_r3_lodging_houses_table(data)
+            repair_r3_section_structure(data)
             reset_review_flags(data)
             refresh_schema_numeric_values(data)
             apply_dc_bonus_height_context(data)
