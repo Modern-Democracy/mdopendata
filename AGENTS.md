@@ -83,3 +83,7 @@
 - Current task purpose: enable parcel and neighbourhood comparison between
   current and draft Charlottetown zoning, with outputs suitable for later
   PostGIS/QGIS use and a future public web front end.
+- For the Charlottetown draft zoning validation workstream, keep
+  `plan/chalottetown-draft-zoning-timeline.md` up to date until the plan is
+  complete. Update its active phase, overall status, current progress, and
+  phase statuses whenever work advances, pauses, is blocked, or completes.
