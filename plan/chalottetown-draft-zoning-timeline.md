@@ -7,7 +7,7 @@ Reference plan: `plan/chalottetown-draft-zoning-plan.md`
 - Active phase: Phase 2
 - Active phase name: Code-Table Normalization
 - Overall status: In progress
-- Current progress: Phase 1 is complete. The issue ledger now exists at `plan/chalottetown-draft-zoning-issue-ledger.csv` with 285 open items cataloged: 139 `review_flags`, 130 structured `confidence: "needs_review"` records, and 16 unmatched code-table phrases. Phase 2 is now active.
+- Current progress: Phase 1 is complete. The issue ledger now exists at `plan/chalottetown-draft-zoning-issue-ledger.csv` with 285 open items cataloged: 139 `review_flags`, 130 structured `confidence: "needs_review"` records, and 16 unmatched code-table phrases. Phase 2 phrase review is complete, including grouped normalization proposals for split-code phrases and condition-bearing phrases. Phase 2 application work remains active.
 - Last updated: 2026-04-23
 
 ## Phase Timeline
@@ -48,13 +48,14 @@ Current progress:
 - ledger counts verified against the plan baseline: 139 `review_flags`, 130 `needs_review` records, 16 unmatched code-table phrases
 - Phase 1 exit criteria satisfied
 - Phase 2 opened with code-table normalization as the next active workstream
+- grouped review completed for the 16 unmatched code-table phrases, including proposed splits for combined use labels and separation of condition text from base use codes
 
 Next actions:
 
-1. Review the 16 unmatched phrase rows in `plan/chalottetown-draft-zoning-issue-ledger.csv`.
-2. Group phrase variants that likely represent the same draft concept, including repeated `Multi-unit Dwelling` and `Hostel / Hotel` variants.
-3. Decide reuse versus reviewed new code versus extraction-artifact removal for each unmatched phrase.
-4. Apply those decisions consistently to the affected draft files and `code-table-match-report.json`.
+1. Apply the approved split decisions for combined labels such as `Hostel / Hotel`, `Parking Lot / Structure`, and `Warehouse, Storage Facility and/or Distribution Centre`.
+2. Replace condition-bearing pseudo-codes with base use codes plus separate requirements or references, including the RN and UE residential phrases.
+3. Confirm whether draft-only concepts such as `Cluster Housing` and `Seniors Housing` should become reviewed new codes or be normalized to existing dwelling codes after source review.
+4. Update the affected draft files and `code-table-match-report.json` consistently once the grouped decisions are approved.
 
 ## Progress Rules
 
