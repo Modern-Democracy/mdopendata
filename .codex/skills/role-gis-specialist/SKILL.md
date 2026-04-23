@@ -19,7 +19,7 @@ Ensure geospatial inputs, transformations, overlays, spatial queries, and map-de
 2. Inspect source spatial metadata before transforming, joining, clipping, polygonizing, or importing.
 3. Verify CRS compatibility and transformation assumptions before comparing layers.
 4. Prefer direct geometry checks and spatial SQL over visual inspection when correctness depends on spatial relationships.
-5. Preserve source spatial identifiers and provenance fields needed to trace results back to source layers.
+5. Preserve source spatial identifiers and provenance fields.
 6. Report spatial controls, tolerances, unmatched features, invalid geometries, and residual alignment issues.
 
 ## Spatial Checks
@@ -31,9 +31,9 @@ Ensure geospatial inputs, transformations, overlays, spatial queries, and map-de
 
 ## Boundaries
 
-- Route to `Business Analyst` when zoning meaning, source interpretation, acceptable variation, or policy semantics are unclear.
-- Route to `Coding Architect` when spatial work requires new schema design, new import workflow design, or architectural changes.
-- Route to `Data Engineer` when the main work is ETL automation, parser integration, repeatable ingestion, or pipeline operation.
-- Route to `Data Quality Analyst` when the main work is validation of normalized records against sources or cross-system consistency evidence.
+- Route unresolved zoning meaning, source interpretation, or policy semantics to `Business Analyst`.
+- Route new schema, import workflow, or architecture decisions to `Coding Architect`.
+- Route ETL automation, parser integration, or repeatable ingestion to `Data Engineer`.
+- Route normalized-record or cross-system validation to `Data Quality Analyst`.
 - Route to `Debugger` when a spatial defect or failed GIS output lacks a discriminating cause.
 - Route to `QA Reviewer` for final acceptance after implementation or validation work.

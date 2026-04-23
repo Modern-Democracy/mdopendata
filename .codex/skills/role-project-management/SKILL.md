@@ -7,7 +7,7 @@ metadata:
 
 # Project Management
 
-Use this role before any coding, file generation, bulk extraction, or verification work.
+Use this role before coding, file generation, bulk extraction, or verification.
 
 ## Required Classification
 
@@ -18,55 +18,25 @@ Determine:
 4. whether the request contains grey areas, implied choices, or bulk-pattern variation risk
 5. the most appropriate next role
 
-Do not begin coding or bulk data generation until the task has been classified and the next role has been identified.
-
 ## Clarification Gate
 
-If the task contains grey areas, stop and ask the user for clarification before implementation.
+If the task contains unresolved grey areas, stop and ask before implementation.
 
 Grey areas include:
-- preserving compatibility fields, legacy schemas, or existing output structures not explicitly requested
-- adding new abstractions, helper scripts, normalization layers, or workflow changes not explicitly requested
-- deciding how to handle source content that does not fit a provided template
-- making assumptions that affect document structure, data schema, field naming, normalization semantics, or downstream imports
-- applying one example template across multiple sections, zones, appendices, tables, or document types where source patterns vary materially
-- changing code-table entries, normalized categories, terms, uses, or schema enums beyond the exact identifiers named or approved by the user
+- unrequested compatibility, schema, helper, abstraction, or workflow changes
+- source content that does not fit a provided template
+- assumptions affecting structure, field naming, normalization, or downstream imports
+- bulk use of one template where source patterns vary materially
+- changes beyond exact named or approved identifiers
 
 ## Bulk Template Adaptation
 
-For bulk template-adaptation tasks:
-- Apply the template directly only where the source pattern is clearly equivalent.
-- For light variation, make a conservative best-effort adaptation and flag the variation in the output or final report.
-- For material variation, stop before bulk generation and report:
-  1. the source section or zone
-  2. the raw text or structural feature causing the mismatch
-  3. why the provided template does not fit cleanly
-  4. the minimum template change or decision needed
-- Do not force a template onto content that is structurally different.
-- Do not preserve legacy top-level fields, importer compatibility fields, or old schema shapes unless the user explicitly asks for compatibility preservation.
+Apply templates only where source patterns are clearly equivalent. For material mismatch, stop and report the source location, mismatch, and decision needed.
 
 ## Targeted Data Edit Gate
 
-For requests that name specific codes, terms, uses, clauses, files, rows, or fields:
-- Treat the named identifiers as an allowlist.
-- Do not modify similar identifiers, adjacent entries, shared categories, or repeated text patterns unless the user explicitly includes them.
-- If a broader normalization appears desirable, stop and ask for approval before changing it.
-- Route to `Debugger` when a prior edit changed unintended identifiers or when the task is to correct unintended data changes.
+Treat named codes, terms, uses, clauses, files, rows, or fields as an allowlist. Route unintended prior changes to `Debugger`.
 
 ## Routing
 
-Route to `Business Analyst` when the task is ambiguous, requirement-heavy, behavior-changing, likely to depend on edge-case clarification, or contains unresolved template-fit, schema, compatibility, or acceptable-variation questions.
-
-Route to `Coding Architect` when the task involves module boundaries, memory pressure, runtime ownership, packing implications, protocol changes, or new technical patterns, and only after template-fit policy and compatibility requirements are explicit enough to design safely.
-
-Route to `Data Engineer` when the task involves ETL pipeline development or operation, PDF parsing workflows, document extraction automation, normalization pipeline execution, structured data generation, repeatable imports, PostGIS ingestion mechanics, schema-aware transformations, or data workflow automation.
-
-Route to `GIS Specialist` when the task involves QGIS inspection, spatial layer handling, CRS checks, geometry validity, spatial joins, parcel/zoning overlays, map alignment, PostGIS spatial schemas, spatial indexes, or spatial SQL.
-
-Route to `Data Quality Analyst` when the task involves validating normalized data against source documents, checking source fidelity, controlled vocabularies, completeness, raw label preservation, spatial integrity, cross-system consistency, or quality findings before final acceptance.
-
-Route to `Debugger` when the task begins from a reported error, unexpected runtime behavior, failed output, or an unverified regression.
-
-Route to implementation only when the requested change is narrow, already approved, and sufficiently specified. Follow the implementation protocol in `AGENTS.md`.
-
-Route to `QA Reviewer` when the task is primarily about verification, review, regression checking, acceptance, or completion readiness.
+Choose the next role by the role descriptions in `AGENTS.md` and each role skill. Route to implementation only when the request is narrow, approved, and specified; then follow the `AGENTS.md` implementation protocol.

@@ -20,7 +20,7 @@ Build or run reliable data pipelines that convert source documents and spatial i
 3. Prefer existing extraction, normalization, validation, and import scripts before adding new tooling.
 4. Preserve raw source text, raw labels, provenance, and stable identifiers needed for auditability.
 5. Make transformations deterministic and rerunnable.
-6. Validate record counts, required fields, key uniqueness, referential links, schema conformance, and import readiness before handoff.
+6. Validate counts, required fields, keys, links, schema conformance, and import readiness.
 
 ## Pipeline Rules
 
@@ -32,9 +32,9 @@ Build or run reliable data pipelines that convert source documents and spatial i
 
 ## Boundaries
 
-- Route to `Business Analyst` when source interpretation, field meaning, compatibility, template fit, or acceptance criteria are unclear.
-- Route to `Coding Architect` when a new pipeline design, schema design, helper module, protocol, or workflow change is required.
-- Route to `GIS Specialist` when the main uncertainty is spatial validity, CRS handling, spatial SQL, map alignment, or GIS analysis.
-- Route to `Data Quality Analyst` when the main work is source-fidelity, normalized-record, or cross-system validation.
+- Route unresolved interpretation or acceptance criteria to `Business Analyst`.
+- Route new pipeline, schema, helper, protocol, or workflow design to `Coding Architect`.
+- Route spatial validity, CRS, alignment, or spatial SQL questions to `GIS Specialist`.
+- Route source-fidelity or cross-system validation to `Data Quality Analyst`.
 - Route to `Debugger` when extraction, transformation, or ingestion fails without a discriminating cause.
 - Route to `QA Reviewer` for final acceptance after implementation.

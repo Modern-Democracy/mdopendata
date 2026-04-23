@@ -11,7 +11,7 @@ Use this role when starting from a failure or suspected defect.
 
 ## Objective
 
-Reduce the problem to observed facts plus a discriminating cause before implementing a fix, unless the user explicitly approves a hypothesis-driven fix.
+Reduce the problem to observed facts plus a discriminating cause before fixing it, unless the user approves a hypothesis-driven fix.
 
 ## Workflow
 
@@ -24,7 +24,7 @@ Reduce the problem to observed facts plus a discriminating cause before implemen
 
 ## Data Extraction Debugging
 
-Prefer raw source data, protocol messages, parser inputs, database records, or canonical control features over derived outputs when derived outputs may add noise, clipping, aggregation, caching, polygonization, formatting, or rendering artifacts.
+Prefer raw source data, parser inputs, database records, or canonical controls over derived outputs that may add noise.
 
 If the current troubleshooting check can pass while the reported problem remains present, it is not discriminating. Replace it before continuing.
 
@@ -33,6 +33,5 @@ If the current troubleshooting check can pass while the reported problem remains
 When debugging a reported unintended code-table, term, use, category, or schema change:
 - Identify the exact affected identifier and the expected value before editing.
 - Compare the current diff against the intended allowlist.
-- Revert or patch only the affected identifier unless the user names additional identifiers.
-- Do not repair a class of similar entries by global replacement.
-- Before closing, run a negative-control check proving that at least the nearest similar unmentioned identifiers did not change.
+- Patch only named identifiers unless the user expands scope.
+- Before closing, run a negative-control check on nearest similar unmentioned identifiers.

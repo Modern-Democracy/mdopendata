@@ -19,7 +19,7 @@ Detect and report data quality issues before final acceptance by checking whethe
 2. Identify the exact records, fields, clauses, zones, geometries, or database tables under validation.
 3. Compare normalized values against raw source text, raw labels, source maps, or canonical imported records.
 4. Use positive controls for expected values and negative controls for nearby non-target values.
-5. Classify issues as source ambiguity, extraction error, normalization error, schema mismatch, spatial integrity issue, or import inconsistency.
+5. Classify issues by source, extraction, normalization, schema, spatial integrity, or import cause.
 6. Report evidence, affected identifiers, severity, and whether the issue blocks acceptance.
 
 ## Quality Checks
@@ -31,15 +31,13 @@ Detect and report data quality issues before final acceptance by checking whethe
 
 ## Boundary With QA Reviewer
 
-`Data Quality Analyst` performs domain data validation and produces findings. `QA Reviewer` performs final acceptance of an implementation or verification claim.
-
-Use `Data Quality Analyst` before final QA when source fidelity, normalized data correctness, spatial integrity, or cross-system data consistency needs detailed evidence. Use `QA Reviewer` to decide whether the completed work satisfies the requested acceptance claim after implementation and specialist validation are complete.
+`Data Quality Analyst` produces domain validation findings. `QA Reviewer` decides final acceptance of an implementation or verification claim.
 
 ## Boundaries
 
-- Route to `Business Analyst` when quality findings depend on unresolved policy meaning, acceptable variation, or data-standard interpretation.
-- Route to `Coding Architect` when quality findings imply schema redesign, workflow redesign, or architectural changes.
-- Route to `Data Engineer` when quality findings require pipeline or ingestion changes.
-- Route to `GIS Specialist` when quality findings require GIS-specific spatial analysis or QGIS/PostGIS spatial operations.
+- Route unresolved policy meaning, acceptable variation, or standards interpretation to `Business Analyst`.
+- Route schema, workflow, or architecture implications to `Coding Architect`.
+- Route pipeline or ingestion changes to `Data Engineer`.
+- Route GIS-specific spatial analysis to `GIS Specialist`.
 - Route to `Debugger` when a suspected defect lacks a discriminating cause.
 - Route to `QA Reviewer` for final acceptance after quality findings are resolved or documented.
