@@ -1185,6 +1185,136 @@ def repair_r3_section_structure(data: dict[str, Any]) -> bool:
     return changed
 
 
+def repair_r3t_section_structure(data: dict[str, Any]) -> bool:
+    metadata = data.get("document_metadata") or {}
+    if metadata.get("zone_code") != "R-3T":
+        return False
+    raw_data = data.get("raw_data") or {}
+    sections = raw_data.get("sections_raw") or []
+    changed = False
+
+    section_17_2 = next((section for section in sections if section.get("section_id") == "zone-r-3t-section-2"), None)
+    split_title_section = next((section for section in sections if section.get("section_id") == "zone-r-3t-section-17-2"), None)
+    if section_17_2:
+        section_17_2["section_id"] = "zone-r-3t-section-17-2"
+        section_17_2["section_label_raw"] = "17.2"
+        if not str(section_17_2.get("section_title_raw") or "").endswith("DWELLINGS"):
+            section_17_2["section_title_raw"] = clean_text(f"{section_17_2.get('section_title_raw') or ''} DWELLINGS")
+        if split_title_section:
+            section_17_2["tables_raw"] = sorted(
+                [*section_17_2.get("tables_raw", []), *split_title_section.get("tables_raw", [])],
+                key=lambda table: table.get("source_order", 0),
+            )
+            for index, table in enumerate(section_17_2["tables_raw"], start=1):
+                table["source_order"] = index
+        page_75 = {"pdf_page_start": 75, "pdf_page_end": 75, "bylaw_page_start": 75, "bylaw_page_end": 75}
+        clause_17_2_1_id = "zone-r-3t-clause-17-2-1"
+        clauses = [
+            {
+                "clause_id": clause_17_2_1_id,
+                "clause_label_raw": "17.2.1",
+                "clause_text_raw": "Regulations for Townhouses, Stacked and Block Townhouse Dwellings include:",
+                "parent_clause_id": None,
+                "source_order": 1,
+                "citations": page_75,
+            },
+            {
+                "clause_id": "zone-r-3t-clause-17-2-1-a",
+                "clause_label_raw": "a",
+                "clause_text_raw": "Where Dwelling Units are to be subdivided, an Easement in favour of the central units for access to the Rear Yards from the Street shall be provided.",
+                "parent_clause_id": clause_17_2_1_id,
+                "source_order": 2,
+                "citations": page_75,
+            },
+            {
+                "clause_id": "zone-r-3t-clause-17-2-1-b",
+                "clause_label_raw": "b",
+                "clause_text_raw": "A maximum of 8 consecutive Dwelling Units",
+                "parent_clause_id": clause_17_2_1_id,
+                "source_order": 3,
+                "citations": page_75,
+            },
+            {
+                "clause_id": "zone-r-3t-clause-17-2-1-c",
+                "clause_label_raw": "c",
+                "clause_text_raw": "Where 8 consecutive Dwelling Units are proposed, individual Dwelling Units shall not exceed 6.5 m (21.3 ft) in width.",
+                "parent_clause_id": clause_17_2_1_id,
+                "source_order": 4,
+                "citations": page_75,
+            },
+        ]
+        existing = [
+            clause
+            for clause in section_17_2.get("clauses_raw") or []
+            if not str(clause.get("clause_id") or "").startswith(clause_17_2_1_id)
+        ]
+        section_17_2["clauses_raw"] = [*existing, *clauses]
+        changed = True
+
+    if split_title_section:
+        sections[:] = [section for section in sections if section is not split_title_section]
+        changed = True
+
+    section_17_3 = next(
+        (
+            section
+            for section in sections
+            if section.get("section_title_raw") == "REGULATIONS FOR LODGING HOUSES AND GROUP HOMES"
+        ),
+        None,
+    )
+    if section_17_3:
+        section_17_3["section_id"] = "zone-r-3t-section-17-3"
+        section_17_3["section_label_raw"] = "17.3"
+        page_75 = {"pdf_page_start": 75, "pdf_page_end": 75, "bylaw_page_start": 75, "bylaw_page_end": 75}
+        parent_clause_id_value = "zone-r-3t-clause-17-3-room-count"
+        room_clauses = [
+            {
+                "clause_id": parent_clause_id_value,
+                "clause_label_raw": "",
+                "clause_text_raw": "The number of rooms is determined by the following:",
+                "parent_clause_id": None,
+                "source_order": 1,
+                "citations": page_75,
+            },
+            {
+                "clause_id": "zone-r-3t-clause-17-3-room-count-a",
+                "clause_label_raw": "a",
+                "clause_text_raw": "For the first 325 sq. m (3,498.3 sq. ft.) for an interior lot and 395 sq. m (4,251.7 sq. ft.) for a corner lot of Lot Area, four (4) bedrooms are permitted;",
+                "parent_clause_id": parent_clause_id_value,
+                "source_order": 2,
+                "citations": page_75,
+            },
+            {
+                "clause_id": "zone-r-3t-clause-17-3-room-count-b",
+                "clause_label_raw": "b",
+                "clause_text_raw": "For every additional bedroom or lodging room over four (4) bedrooms or lodging rooms, the Lot area must be increased by 90 sq. m (968.7 sq. ft.) thereof.",
+                "parent_clause_id": parent_clause_id_value,
+                "source_order": 3,
+                "citations": page_75,
+            },
+        ]
+        existing = [
+            clause
+            for clause in section_17_3.get("clauses_raw") or []
+            if not str(clause.get("clause_id") or "").startswith(parent_clause_id_value)
+        ]
+        section_17_3["clauses_raw"] = [*existing, *room_clauses]
+        changed = True
+
+    if changed:
+        for index, section in enumerate(sections, start=1):
+            section["source_order"] = index
+        raw_data["tables_raw"] = [
+            {"table_id": table["table_id"], "section_id": section["section_id"]}
+            for section in sections
+            for table in section.get("tables_raw") or []
+        ]
+        rebuild_clause_refs(data)
+        refresh_source_unit_text_from_raw(data)
+    return changed
+
+
 def repair_dc_bonus_height_section(data: dict[str, Any]) -> bool:
     metadata = data.get("document_metadata") or {}
     if metadata.get("zone_code") != "DC":
@@ -1359,6 +1489,8 @@ TABLE_CONTENT_ANCHORS = {
 TABLE_CONTENT_BEFORE_CLAUSES = {
     "zone-r-3-table-16-3",
     "zone-r-3-table-regulations-for-lodging-houses-and-group-homes",
+    "zone-r-3t-table-17-2",
+    "zone-r-3t-table-regulations-for-lodging-houses-and-group-homes",
 }
 
 
@@ -3374,6 +3506,7 @@ def main() -> None:
             repair_mur_mixed_density_section(data)
             repair_r3_lodging_houses_table(data)
             repair_r3_section_structure(data)
+            repair_r3t_section_structure(data)
             reset_review_flags(data)
             refresh_schema_numeric_values(data)
             apply_dc_bonus_height_context(data)
@@ -3391,6 +3524,7 @@ def main() -> None:
         repair_mur_mixed_density_section(transformed)
         repair_r3_lodging_houses_table(transformed)
         repair_r3_section_structure(transformed)
+        repair_r3t_section_structure(transformed)
         refresh_schema_numeric_values(transformed)
         apply_dc_bonus_height_context(transformed)
         apply_dms_bonus_height_context(transformed)
@@ -3419,6 +3553,7 @@ def main() -> None:
             repair_mur_mixed_density_section(data)
             repair_r3_lodging_houses_table(data)
             repair_r3_section_structure(data)
+            repair_r3t_section_structure(data)
             reset_review_flags(data)
             refresh_schema_numeric_values(data)
             apply_dc_bonus_height_context(data)
@@ -3455,6 +3590,7 @@ def main() -> None:
             repair_mur_mixed_density_section(data)
             repair_r3_lodging_houses_table(data)
             repair_r3_section_structure(data)
+            repair_r3t_section_structure(data)
             reset_review_flags(data)
             refresh_schema_numeric_values(data)
             apply_dc_bonus_height_context(data)
