@@ -968,6 +968,136 @@ def repair_general_provisions_tables(data: dict[str, Any]) -> bool:
     return changed
 
 
+def repair_general_provisions_sign_permit_hierarchy(data: dict[str, Any]) -> bool:
+    metadata = data.get("document_metadata") or {}
+    if metadata.get("document_type") != "general_provisions":
+        return False
+    raw_data = data.get("raw_data") or {}
+    section = next(
+        (
+            item
+            for item in raw_data.get("sections_raw") or []
+            if item.get("section_id") == "doc-general-provisions-section-47-2"
+        ),
+        None,
+    )
+    if not section:
+        return False
+    parent_id = "doc-general-provisions-clause-47-2-1"
+    clauses = section.get("clauses_raw") or []
+    if any(clause.get("clause_id") == f"{parent_id}-c-i" for clause in clauses):
+        return False
+
+    repaired: list[dict[str, Any]] = []
+    changed = False
+    active_parent: str | None = None
+    active_n_parent: str | None = None
+    for clause in clauses:
+        cid = str(clause.get("clause_id") or "")
+        label = str(clause.get("clause_label_raw") or "")
+        text = str(clause.get("clause_text_raw") or "")
+        if not cid.startswith(parent_id):
+            repaired.append(clause)
+            continue
+        if cid == f"{parent_id}-c":
+            active_parent = f"{parent_id}-c"
+            repaired.append(clause)
+            continue
+        if cid == f"{parent_id}-n":
+            active_parent = f"{parent_id}-n"
+            if " a) " in text:
+                n_text, n_a_text = text.split(" a) ", 1)
+                clause["clause_text_raw"] = clean_text(n_text)
+                n_a = dict(clause)
+                n_a["clause_id"] = f"{parent_id}-n-a"
+                n_a["clause_label_raw"] = "a"
+                n_a["clause_text_raw"] = clean_text(n_a_text)
+                n_a["parent_clause_id"] = f"{parent_id}-n"
+                repaired.append(clause)
+                repaired.append(n_a)
+                active_n_parent = f"{parent_id}-n-a"
+                changed = True
+                continue
+            repaired.append(clause)
+            continue
+        if cid == f"{parent_id}-t":
+            active_parent = f"{parent_id}-t"
+            active_n_parent = None
+            repaired.append(clause)
+            continue
+        if cid == f"{parent_id}-u":
+            active_parent = f"{parent_id}-u"
+            active_n_parent = None
+            repaired.append(clause)
+            continue
+        nested_label = False
+        if label in {"i", "ii", "iii", "iv", "v", "vi"}:
+            if active_parent == f"{parent_id}-c":
+                clause["clause_id"] = f"{parent_id}-c-{label}"
+                clause["parent_clause_id"] = f"{parent_id}-c"
+                changed = True
+                nested_label = True
+            elif active_parent == f"{parent_id}-n":
+                if label == "iii" and " b) " in text:
+                    before_b, n_b_text = text.split(" b) ", 1)
+                    clause["clause_text_raw"] = clean_text(before_b)
+                    clause["clause_id"] = f"{parent_id}-n-a-iii"
+                    clause["parent_clause_id"] = f"{parent_id}-n-a"
+                    repaired.append(clause)
+                    n_b = dict(clause)
+                    n_b["clause_id"] = f"{parent_id}-n-b"
+                    n_b["clause_label_raw"] = "b"
+                    n_b["clause_text_raw"] = clean_text(n_b_text)
+                    n_b["parent_clause_id"] = f"{parent_id}-n"
+                    repaired.append(n_b)
+                    active_n_parent = f"{parent_id}-n-b"
+                    changed = True
+                    continue
+                if active_n_parent:
+                    clause["clause_id"] = f"{active_n_parent}-{label}"
+                    clause["parent_clause_id"] = active_n_parent
+                    changed = True
+                    nested_label = True
+            elif active_parent in {f"{parent_id}-t", f"{parent_id}-u"}:
+                clause["clause_id"] = f"{active_parent}-{label}"
+                clause["parent_clause_id"] = active_parent
+                if active_parent == f"{parent_id}-u" and label == "vi":
+                    active_parent = None
+                changed = True
+                nested_label = True
+        if label in {"d", "e", "f", "g", "h", "j", "k", "l", "m", "o", "p", "q", "r", "s", "v"} and not nested_label:
+            active_parent = None
+            active_n_parent = None
+        repaired.append(clause)
+
+    if not changed:
+        return False
+    for order, clause in enumerate(repaired, start=1):
+        clause["source_order"] = order
+    section["clauses_raw"] = repaired
+    rebuild_clause_refs(data)
+    refresh_source_unit_text_from_raw(data)
+    return True
+
+
+def apply_general_provisions_sign_permit_numeric_context(data: dict[str, Any]) -> dict[str, Any]:
+    metadata = data.get("document_metadata") or {}
+    if metadata.get("document_type") != "general_provisions":
+        return data
+    structured = data.get("structured_data") or {}
+    for value in structured.get("numeric_values") or []:
+        numeric_id = value.get("numeric_value_id")
+        if numeric_id == "doc-general-provisions-source-num-doc-general-provisions-clause-47-2-1-u-iii-1":
+            value["measure_type"] = "length"
+            for alternative in value.get("alternative_values") or []:
+                alternative["measure_type"] = "length"
+        elif numeric_id == "doc-general-provisions-source-num-doc-general-provisions-clause-47-2-1-u-iii-2":
+            value["measure_type"] = "height"
+            for alternative in value.get("alternative_values") or []:
+                alternative["measure_type"] = "height"
+    return data
+
+
 def repair_r3_lodging_houses_table(data: dict[str, Any]) -> bool:
     metadata = data.get("document_metadata") or {}
     if metadata.get("zone_code") != "R-3":
@@ -3547,6 +3677,7 @@ def main() -> None:
             rebuild_clause_refs(data)
             rebuild_schema_tables_from_pdf(pdf_doc, data)
             repair_general_provisions_tables(data)
+            repair_general_provisions_sign_permit_hierarchy(data)
             repair_dc_bonus_height_section(data)
             repair_dms_bonus_height_section(data)
             repair_wf_bonus_height_section(data)
@@ -3556,6 +3687,7 @@ def main() -> None:
             repair_r3t_section_structure(data)
             reset_review_flags(data)
             refresh_schema_numeric_values(data)
+            apply_general_provisions_sign_permit_numeric_context(data)
             apply_dc_bonus_height_context(data)
             apply_dms_bonus_height_context(data)
             apply_wf_bonus_height_context(data)
@@ -3572,8 +3704,10 @@ def main() -> None:
                 document_type,
             )
             repair_general_provisions_tables(transformed)
+            repair_general_provisions_sign_permit_hierarchy(transformed)
             reset_review_flags(transformed)
             refresh_schema_numeric_values(transformed)
+            apply_general_provisions_sign_permit_numeric_context(transformed)
             write_json(path, apply_zone_reference_model(refresh_schema_terms(normalizer, transformed)))
 
     for item in manifest.get("supporting_files", []):
