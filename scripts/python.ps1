@@ -3,7 +3,7 @@ param(
   [string[]]$Args
 )
 
-$python = Join-Path $PSScriptRoot '..\.python\python.exe'
+$python = Join-Path $PSScriptRoot '..\.venv\Scripts\python.exe'
 $resolvedPython = (Resolve-Path $python).Path
 
 & $resolvedPython @Args
