@@ -765,6 +765,209 @@ def make_table_row(table_id_value: str, row_order: int, row_number: str, require
     return {"row_id": row_id, "source_order": row_order, "cells_raw": cells}
 
 
+def make_labeled_table_row(
+    table_id_value: str,
+    row_order: int,
+    row_label: str,
+    values: dict[str, str],
+) -> dict[str, Any]:
+    row_id = f"{table_id_value}-row-{row_order}"
+    cells = [{"cell_id": f"{row_id}-row-label", "column_id": "row_label", "cell_text_raw": row_label}]
+    for column_id, value in values.items():
+        cells.append({"cell_id": f"{row_id}-{column_id}", "column_id": column_id, "cell_text_raw": value})
+    return {"row_id": row_id, "source_order": row_order, "cells_raw": cells}
+
+
+def table_rows_text(table: dict[str, Any]) -> list[str]:
+    rows = []
+    for row in table.get("rows_raw") or []:
+        rows.append(clean_text(" ".join(cell.get("cell_text_raw") or "" for cell in row.get("cells_raw") or [])))
+    return [row for row in rows if row]
+
+
+def refresh_source_unit_text_from_raw(data: dict[str, Any]) -> None:
+    raw_data = data.get("raw_data") or {}
+    source_units = raw_data.get("source_units") or []
+    if not source_units:
+        return
+    parts = []
+    for raw_section in raw_data.get("sections_raw") or []:
+        clauses_by_id = {clause.get("clause_id"): clause for clause in raw_section.get("clauses_raw") or []}
+        tables_by_id = {table.get("table_id"): table for table in raw_section.get("tables_raw") or []}
+        content_refs = sorted(raw_section.get("content_refs") or [], key=lambda item: item.get("source_order", 0))
+        if content_refs:
+            for ref in content_refs:
+                if ref.get("content_type") == "clause":
+                    clause = clauses_by_id.get(ref.get("content_id"))
+                    if clause and clause.get("clause_text_raw"):
+                        parts.append(clause["clause_text_raw"])
+                elif ref.get("content_type") == "table":
+                    table = tables_by_id.get(ref.get("content_id"))
+                    if table:
+                        parts.extend(table_rows_text(table))
+            continue
+        for clause in raw_section.get("clauses_raw") or []:
+            if clause.get("clause_text_raw"):
+                parts.append(clause["clause_text_raw"])
+        for table in raw_section.get("tables_raw") or []:
+            parts.extend(table_rows_text(table))
+    source_units[0]["text_raw"] = "\n".join(parts)
+
+
+def general_provisions_table_columns(labels: list[tuple[str, str]]) -> list[dict[str, Any]]:
+    return [
+        {"column_id": column_id, "column_label_raw": label, "source_order": index}
+        for index, (column_id, label) in enumerate(labels, start=1)
+    ]
+
+
+def replace_section_table(section: dict[str, Any], table: dict[str, Any]) -> None:
+    section["tables_raw"] = [
+        existing for existing in section.get("tables_raw") or [] if existing.get("table_id") != table["table_id"]
+    ]
+    section["tables_raw"].append(table)
+    section["tables_raw"].sort(key=lambda item: item.get("source_order", 0))
+
+
+def remove_clause_id_range(section: dict[str, Any], clause_ids: set[str]) -> None:
+    section["clauses_raw"] = [
+        clause for clause in section.get("clauses_raw") or [] if clause.get("clause_id") not in clause_ids
+    ]
+    for index, clause in enumerate(section["clauses_raw"], start=1):
+        clause["source_order"] = index
+
+
+def repair_general_provisions_tables(data: dict[str, Any]) -> bool:
+    metadata = data.get("document_metadata") or {}
+    if metadata.get("document_type") != "general_provisions":
+        return False
+    raw_data = data.get("raw_data") or {}
+    sections = raw_data.get("sections_raw") or []
+    changed = False
+
+    section_4_1 = next((section for section in sections if section.get("section_id") == "doc-general-provisions-section-4-1"), None)
+    if section_4_1:
+        table_id_value = "doc-general-provisions-table-4-1-2-accessory-buildings"
+        table = {
+            "table_id": table_id_value,
+            "table_title_raw": "4.1.2 Accessory Building Regulations",
+            "source_order": 1,
+            "columns_raw": general_provisions_table_columns(
+                [
+                    ("row_label", ""),
+                    ("lot_area", "Lot Area"),
+                    ("accessory_buildings_permitted", "# of Accessory Buildings permitted"),
+                    ("total_building_footprint_maximum", "Total Building Footprint (maximum)"),
+                    ("height_maximum", "Height (maximum)"),
+                ]
+            ),
+            "rows_raw": [
+                make_labeled_table_row(
+                    table_id_value,
+                    1,
+                    "a",
+                    {
+                        "lot_area": "0 to 0.499 Acres (0 to 21,779sq ft)",
+                        "accessory_buildings_permitted": "Two",
+                        "total_building_footprint_maximum": "10% of the Lot Area, up to a maximum of 69.68sq m (750sq ft)",
+                        "height_maximum": "5.3m (17.5ft)",
+                    },
+                ),
+                make_labeled_table_row(
+                    table_id_value,
+                    2,
+                    "b",
+                    {
+                        "lot_area": "0.5 to 0.99 Acres (21,780sq ft to 43,559sq ft)",
+                        "accessory_buildings_permitted": "Two",
+                        "total_building_footprint_maximum": "78.97sq m (850sq ft)",
+                        "height_maximum": "6.1m (20ft)",
+                    },
+                ),
+                make_labeled_table_row(
+                    table_id_value,
+                    3,
+                    "c",
+                    {
+                        "lot_area": "1 Acre or more (43,560sq ft or more)",
+                        "accessory_buildings_permitted": "Three",
+                        "total_building_footprint_maximum": "111.48sq m (1,200sq ft); however, no Accessory Building shall exceed 78.97sq m (850sq ft)",
+                        "height_maximum": "6.1m (20ft)",
+                    },
+                ),
+            ],
+            "citations": {
+                "pdf_page_start": 33,
+                "pdf_page_end": 33,
+                "bylaw_page_start": 33,
+                "bylaw_page_end": 33,
+            },
+        }
+        replace_section_table(section_4_1, table)
+        remove_clause_id_range(
+            section_4_1,
+            {
+                "doc-general-provisions-clause-4-1-2-a",
+                "doc-general-provisions-clause-4-1-2-b",
+                "doc-general-provisions-clause-4-1-2-c",
+            },
+        )
+        changed = True
+
+    section_4_2 = next((section for section in sections if section.get("section_id") == "doc-general-provisions-section-4-2"), None)
+    if section_4_2:
+        table_id_value = "doc-general-provisions-table-4-2-2-projecting-structures"
+        table = {
+            "table_id": table_id_value,
+            "table_title_raw": "4.2.2 Projecting Structures",
+            "source_order": 1,
+            "columns_raw": general_provisions_table_columns(
+                [
+                    ("row_label", ""),
+                    ("structure", "Structure"),
+                    ("yard_projection_permitted", "Yard in which projection is permitted"),
+                    ("maximum_projection_into_yard", "Maximum projection into Yard"),
+                    ("minimum_distance_from_lot_line", "Minimum distance from Lot Line"),
+                ]
+            ),
+            "rows_raw": [
+                make_labeled_table_row(table_id_value, 1, "a", {"structure": "Canopy, Awning", "yard_projection_permitted": "Front Yard, Rear Yard, Flankage Yard", "maximum_projection_into_yard": "1.0 m (3.3 ft)", "minimum_distance_from_lot_line": "0.3 m (1.0 ft)"}),
+                make_labeled_table_row(table_id_value, 2, "b", {"structure": "Cornice, eave, gutter, chimney, pilaster, and footing", "yard_projection_permitted": "All Yards", "maximum_projection_into_yard": "0.6 m (2.0 ft)", "minimum_distance_from_lot_line": "0.3 m (1.0 ft)"}),
+                make_labeled_table_row(table_id_value, 3, "c", {"structure": "Balcony", "yard_projection_permitted": "Side Yard, Flankage Yard, Rear Yard", "maximum_projection_into_yard": "1.2 m (3.9 ft)", "minimum_distance_from_lot_line": "1.0 m (3.3 ft)"}),
+                make_labeled_table_row(table_id_value, 4, "d", {"structure": "Bay window", "yard_projection_permitted": "All Yards", "maximum_projection_into_yard": "0.6 m (2.0 ft)", "minimum_distance_from_lot_line": "1.0 m (3.3 ft)"}),
+                make_labeled_table_row(table_id_value, 5, "e", {"structure": "Ramp", "yard_projection_permitted": "All Yards", "maximum_projection_into_yard": "1.83 m (6 ft)", "minimum_distance_from_lot_line": "1.0 m (3.3 ft)"}),
+                make_labeled_table_row(table_id_value, 6, "f", {"structure": "Exterior staircase (landing and stairs connecting to the First Storey)", "yard_projection_permitted": "All Yards", "maximum_projection_into_yard": "1.83m (6 ft)", "minimum_distance_from_lot_line": "6.0 m (19.7 ft) from the Front Lot Line and Flankage Lot Line; 1.2 m (3.9 ft) from the Side or Rear Lot Line"}),
+                make_labeled_table_row(table_id_value, 7, "g", {"structure": "Exterior staircase (fire escape and any stairs extending beyond the First Storey)", "yard_projection_permitted": "Side Yard, Rear Yard", "maximum_projection_into_yard": "1.2 m (3.9 ft)", "minimum_distance_from_lot_line": "1.2 m (3.9 ft)"}),
+                make_labeled_table_row(table_id_value, 8, "h", {"structure": "Deck 0.3 m (1.0 ft) or more above Grade", "yard_projection_permitted": "Rear Yard, Flankage Yard, Side Yard", "maximum_projection_into_yard": "Same as minimum Side Yard for the Building, except in R-1L R-1S, R-1N, R-2 and R-2S Zones where the Setback is 4.6 m (15.1 ft) from the Rear Lot Line", "minimum_distance_from_lot_line": ""}),
+                make_labeled_table_row(table_id_value, 9, "i", {"structure": "Deck at Grade or less than 0.3 m (1.0 ft)", "yard_projection_permitted": "Rear Yard, Flankage Yard, Side Yard", "maximum_projection_into_yard": "", "minimum_distance_from_lot_line": "1.0 m (3.3 ft)"}),
+                make_labeled_table_row(table_id_value, 10, "j", {"structure": "Deck at Grade or less than 0.3 m (1.0 ft)", "yard_projection_permitted": "Front Yard", "maximum_projection_into_yard": "1.83m (6 ft)", "minimum_distance_from_lot_line": "2.0 m (6.6 ft)"}),
+                make_labeled_table_row(table_id_value, 11, "k", {"structure": "Porch", "yard_projection_permitted": "Front Yard, Flankage Yard, Rear Yard", "maximum_projection_into_yard": "1.5 m (4.9 ft)", "minimum_distance_from_lot_line": "1.0 m (3.3 ft)"}),
+            ],
+            "citations": {
+                "pdf_page_start": 34,
+                "pdf_page_end": 35,
+                "bylaw_page_start": 34,
+                "bylaw_page_end": 35,
+            },
+        }
+        replace_section_table(section_4_2, table)
+        remove_clause_id_range(
+            section_4_2,
+            {f"doc-general-provisions-clause-4-2-2-{label}" for label in "abcdefghijk"},
+        )
+        changed = True
+
+    if changed:
+        raw_data["tables_raw"] = [
+            {"table_id": table["table_id"], "section_id": section["section_id"]}
+            for section in sections
+            for table in section.get("tables_raw") or []
+        ]
+        rebuild_clause_refs(data)
+        refresh_source_unit_text_from_raw(data)
+    return changed
+
+
 def repair_r3_lodging_houses_table(data: dict[str, Any]) -> bool:
     metadata = data.get("document_metadata") or {}
     if metadata.get("zone_code") != "R-3":
@@ -1046,6 +1249,42 @@ def repair_wf_bonus_height_section(data: dict[str, Any]) -> bool:
     return True
 
 
+TABLE_CONTENT_ANCHORS = {
+    "doc-general-provisions-table-4-1-2-accessory-buildings": "doc-general-provisions-clause-4-1-2",
+    "doc-general-provisions-table-4-2-2-projecting-structures": "doc-general-provisions-clause-4-2-2",
+}
+
+
+def rebuild_content_refs(data: dict[str, Any]) -> dict[str, Any]:
+    raw_data = data.get("raw_data") or {}
+    for section in raw_data.get("sections_raw") or []:
+        clauses = sorted(section.get("clauses_raw") or [], key=lambda item: item.get("source_order", 0))
+        tables = sorted(section.get("tables_raw") or [], key=lambda item: item.get("source_order", 0))
+        tables_by_anchor: dict[str, list[dict[str, Any]]] = {}
+        for table in tables:
+            anchor = TABLE_CONTENT_ANCHORS.get(table.get("table_id") or "")
+            if anchor:
+                tables_by_anchor.setdefault(anchor, []).append(table)
+        added_table_ids: set[str] = set()
+        refs: list[dict[str, Any]] = []
+
+        for clause in clauses:
+            refs.append({"content_type": "clause", "content_id": clause["clause_id"]})
+            for table in tables_by_anchor.get(clause["clause_id"], []):
+                refs.append({"content_type": "table", "content_id": table["table_id"]})
+                added_table_ids.add(table["table_id"])
+
+        for table in tables:
+            if table["table_id"] not in added_table_ids:
+                refs.append({"content_type": "table", "content_id": table["table_id"]})
+
+        section["content_refs"] = [
+            {**ref, "source_order": index}
+            for index, ref in enumerate(refs, start=1)
+        ]
+    return data
+
+
 def rebuild_clause_refs(data: dict[str, Any]) -> dict[str, Any]:
     raw_data = data.get("raw_data") or {}
     refs = []
@@ -1061,6 +1300,84 @@ def rebuild_clause_refs(data: dict[str, Any]) -> dict[str, Any]:
             )
     raw_data.pop("clauses_index", None)
     raw_data["clause_refs"] = refs
+    rebuild_content_refs(data)
+    return data
+
+
+def section_in_allowed_sources(label: str, allowed_source_sections: set[str]) -> bool:
+    if not allowed_source_sections:
+        return True
+    label = clean_text(label)
+    if not label:
+        return False
+    return any(label == allowed or label.startswith(f"{allowed}.") for allowed in allowed_source_sections)
+
+
+def filter_legacy_sections_by_source_sections(legacy: dict[str, Any], source_sections: list[str] | None) -> dict[str, Any]:
+    allowed = {str(section) for section in source_sections or []}
+    if not allowed:
+        return legacy
+    filtered = dict(legacy)
+    filtered["sections"] = [
+        section
+        for section in legacy.get("sections") or []
+        if section_in_allowed_sources(str(section.get("section_label_raw") or ""), allowed)
+    ]
+    return filtered
+
+
+def filter_raw_sections_by_source_sections(data: dict[str, Any], source_sections: list[str] | None) -> dict[str, Any]:
+    allowed = {str(section) for section in source_sections or []}
+    if not allowed:
+        return data
+    raw_data = data.setdefault("raw_data", {})
+    raw_data["sections_raw"] = [
+        section
+        for section in raw_data.get("sections_raw") or []
+        if section_in_allowed_sources(str(section.get("section_label_raw") or ""), allowed)
+    ]
+    section_ids = {section.get("section_id") for section in raw_data.get("sections_raw") or []}
+    table_ids = {
+        table.get("table_id")
+        for section in raw_data.get("sections_raw") or []
+        for table in section.get("tables_raw") or []
+    }
+    raw_data["tables_raw"] = [
+        table
+        for table in raw_data.get("tables_raw") or []
+        if table.get("section_id") in section_ids and table.get("table_id") in table_ids
+    ]
+    if raw_data.get("source_units"):
+        raw_data["source_units"][0]["text_raw"] = "\n".join(
+            clause["clause_text_raw"]
+            for section in raw_data.get("sections_raw") or []
+            for clause in section.get("clauses_raw") or []
+        )
+    rebuild_clause_refs(data)
+    valid_clause_ids = {
+        clause.get("clause_id")
+        for section in raw_data.get("sections_raw") or []
+        for clause in section.get("clauses_raw") or []
+    }
+    structured = data.setdefault("structured_data", base_structured_data())
+
+    def keep_item_with_source_refs(item: dict[str, Any]) -> bool:
+        clause_refs = {
+            ref.get("source_ref_id")
+            for ref in item.get("source_refs") or []
+            if ref.get("source_ref_type") == "clause"
+        }
+        return not clause_refs or bool(clause_refs & valid_clause_ids)
+
+    for key in ("terms", "uses", "numeric_values", "requirements", "other_requirements"):
+        structured[key] = [item for item in structured.get(key) or [] if keep_item_with_source_refs(item)]
+    structured["zone_relationships"] = [
+        item for item in structured.get("zone_relationships") or [] if item.get("source_clause_ref") in valid_clause_ids
+    ]
+    structured["cross_references"] = [
+        item for item in structured.get("cross_references") or [] if item.get("source_clause_ref") in valid_clause_ids
+    ]
+    data["review_flags"] = [flag for flag in data.get("review_flags") or [] if keep_item_with_source_refs(flag)]
     return data
 
 
@@ -1419,10 +1736,10 @@ def apply_pz_land_use_buffer_context(data: dict[str, Any]) -> dict[str, Any]:
         "zone-pz-num-zone-pz-clause-37-2-2-1",
         "zone-pz-num-zone-pz-clause-37-2-4-1",
     }
-    requirement_ids = {
-        "zone-pz-req-zone-pz-clause-37-2-2",
+    requirement_ids = (
         "zone-pz-req-zone-pz-clause-37-2-4",
-    }
+        "zone-pz-req-zone-pz-clause-37-2-2",
+    )
     structured["numeric_values"] = [
         value
         for value in structured.get("numeric_values") or []
@@ -1584,6 +1901,7 @@ def build_raw_sections(prefix: str, sections: list[dict[str, Any]]) -> tuple[lis
             "source_order": sec_order,
             "clauses_raw": [],
             "tables_raw": [],
+            "content_refs": [],
             "citations": citation(section.get("citations")),
         }
         if section.get("table_column_headings_raw"):
@@ -1614,6 +1932,7 @@ def build_raw_sections(prefix: str, sections: list[dict[str, Any]]) -> tuple[lis
                         "source_order": len(clause_refs) + 1,
                     }
                 )
+        rebuild_content_refs({"raw_data": {"sections_raw": [raw_section]}})
         raw_sections.append(raw_section)
     return raw_sections, clause_refs, table_refs
 
@@ -1774,6 +2093,27 @@ def grouped_numeric_records(
     return records
 
 
+GENERAL_PROVISIONS_COLUMN_REQUIREMENT_TABLES = {
+    "doc-general-provisions-table-4-1-2-accessory-buildings",
+    "doc-general-provisions-table-4-2-2-projecting-structures",
+}
+
+
+def row_cell_text(row: dict[str, Any], column_id: str) -> str:
+    return next((cell.get("cell_text_raw") or "" for cell in row.get("cells_raw") or [] if cell.get("column_id") == column_id), "")
+
+
+def column_requirement_context(table_id_value: str, row: dict[str, Any], column_id: str, column_label: str, cell_text: str) -> str:
+    if table_id_value == "doc-general-provisions-table-4-1-2-accessory-buildings":
+        lot_area = row_cell_text(row, "lot_area")
+        return clean_text(f"{column_label} Lot Area {lot_area} {cell_text}")
+    if table_id_value == "doc-general-provisions-table-4-2-2-projecting-structures":
+        structure = row_cell_text(row, "structure")
+        yards = row_cell_text(row, "yard_projection_permitted")
+        return clean_text(f"{column_label} Structure {structure} Yard {yards} {cell_text}")
+    return clean_text(f"{column_label} {cell_text}")
+
+
 def build_numeric_and_requirements(
     raw_sections: list[dict[str, Any]],
     prefix: str,
@@ -1785,7 +2125,62 @@ def build_numeric_and_requirements(
     seen_requirement_text: set[str] = set()
 
     for table, row, cell, column in flatten_table_cells(raw_sections):
-        if cell["column_id"] in {"row_number", "requirement", "condition"}:
+        if cell["column_id"] in {"row_number", "row_label", "requirement", "condition"}:
+            continue
+        if table.get("table_id") in GENERAL_PROVISIONS_COLUMN_REQUIREMENT_TABLES:
+            if cell["column_id"] in {"structure", "yard_projection_permitted", "accessory_buildings_permitted"}:
+                continue
+            row_label = column.get("column_label_raw", "")
+            condition_text = row_cell_text(row, "row_label")
+            context_text = column_requirement_context(
+                table.get("table_id", ""),
+                row,
+                cell["column_id"],
+                row_label,
+                cell["cell_text_raw"],
+            )
+            matches = list(MEASUREMENT_RE.finditer(cell["cell_text_raw"]))
+            records = grouped_numeric_records(
+                matches,
+                f"{prefix}-num-{slugify(row['row_id'])}-{slugify(cell['column_id'])}",
+                context_text,
+                cell["cell_text_raw"],
+                source_ref("table_cell", cell["cell_id"]),
+            )
+            numeric_values.extend(records)
+            numeric_refs = [record["numeric_value_id"] for record in records]
+            if numeric_refs:
+                req_id = f"{prefix}-req-{slugify(row['row_id'])}-{slugify(cell['column_id'])}"
+                requirements.append(
+                    {
+                        "requirement_id": req_id,
+                        "requirement_type": "dimensional_standard",
+                        "requirement_category": requirement_category(row_label),
+                        "requirement_label_raw": row_label,
+                        "requirement_text_raw": context_text,
+                        "applicability": {
+                            "applies_to_lot_contexts": [],
+                            "conditions": [
+                                {"condition_type": "table_row_label", "condition_text_raw": condition_text}
+                            ]
+                            if condition_text
+                            else [],
+                        },
+                        "numeric_value_refs": numeric_refs,
+                        "term_refs": [],
+                        "source_refs": [source_ref("table_row", row["row_id"])],
+                        "confidence": "medium",
+                    }
+                )
+            elif cell["cell_text_raw"]:
+                review_flags.append(
+                    make_review_flag(
+                        f"{prefix}-flag-unparsed-table-value-{slugify(cell['cell_id'])}",
+                        "numeric_value_review",
+                        f"Table cell value was preserved but not normalized: {cell['cell_text_raw']}",
+                        [source_ref("table_cell", cell["cell_id"])],
+                    )
+                )
             continue
         row_label = next((c["cell_text_raw"] for c in row["cells_raw"] if c["column_id"] == "requirement"), "")
         condition_text = next((c["cell_text_raw"] for c in row["cells_raw"] if c["column_id"] == "condition"), "")
@@ -2032,20 +2427,149 @@ def build_zone_reference_structures(
     return terms, relationships, reference_clause_ids
 
 
+def is_document_reference_clause(text: str) -> bool:
+    lowered = clean_text(text).lower()
+    if is_zone_reference_clause(text):
+        return True
+    if referenced_zone_codes(text) and (
+        "permitted in" in lowered
+        or "subject to" in lowered
+        or "excluding" in lowered
+        or "zone" in lowered
+        or "regulations" in lowered
+    ):
+        return True
+    return any(
+        phrase in lowered
+        for phrase in (
+            "environmental protection act",
+            "regulations of the zone",
+            "subject to the regulations therein",
+            "subject to regulations therein",
+            "approved by council",
+        )
+    )
+
+
+def build_document_reference_structures(
+    data: dict[str, Any],
+    candidate_clause_ids: set[str],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], set[str]]:
+    prefix = ((data.get("raw_data") or {}).get("source_units") or [{}])[0].get("source_unit_id") or "document"
+    document_ref_id = prefix.removesuffix("-source")
+    clauses = raw_clause_lookup((data.get("raw_data") or {}).get("sections_raw") or [])
+    terms = []
+    relationships = []
+    reference_clause_ids: set[str] = set()
+    relationship_keys: set[tuple[str, str, str]] = set()
+    for clause_id, clause in clauses.items():
+        if clause_id not in candidate_clause_ids:
+            continue
+        raw_text = strip_list_punctuation(clause.get("clause_text_raw") or "")
+        if not is_document_reference_clause(raw_text):
+            continue
+        target_zone_codes = referenced_zone_codes(raw_text)
+        reference_clause_ids.add(clause_id)
+        normalized_targets = "_".join(code_key(code) for code in target_zone_codes) or slugify(clause_id)
+        terms.append(
+            {
+                "term_id": f"{prefix}-term-reference-{slugify(clause_id)}",
+                "term_raw": raw_text,
+                "term_normalized": f"document_reference_{normalized_targets}",
+                "term_category": "document_reference",
+                "source_refs": [source_ref("clause", clause_id)],
+                "confidence": "high",
+            }
+        )
+        for target_zone_code in target_zone_codes:
+            for relationship_type in zone_reference_relationship_types(raw_text):
+                key = (relationship_type, clause_id, target_zone_code)
+                if key in relationship_keys:
+                    continue
+                relationship_keys.add(key)
+                relationships.append(
+                    {
+                        "relationship_id": f"{prefix}-relationship-{relationship_type}-{slugify(target_zone_code)}-{slugify(clause_id)}",
+                        "relationship_type": relationship_type,
+                        "source_ref": source_ref("document", document_ref_id),
+                        "target_ref": source_ref("zone", target_zone_code),
+                        "scope": "document_reference_clause",
+                        "source_clause_ref": clause_id,
+                        "join_behavior": "include_target_values" if relationship_type.startswith("inherits_") else "reference_only",
+                        "confidence": "high",
+                    }
+                )
+    return terms, relationships, reference_clause_ids
+
+
+def apply_document_reference_model(data: dict[str, Any]) -> dict[str, Any]:
+    structured = data.setdefault("structured_data", base_structured_data())
+    candidate_clause_ids = {
+        ref.get("source_ref_id")
+        for term in structured.get("terms") or []
+        if term.get("confidence") == "needs_review"
+        for ref in term.get("source_refs") or []
+        if ref.get("source_ref_type") == "clause"
+    }
+    candidate_clause_ids.update(
+        ref.get("source_ref_id")
+        for flag in data.get("review_flags") or []
+        if flag.get("review_type") == "code_table_match_review"
+        for ref in flag.get("source_refs") or []
+        if ref.get("source_ref_type") == "clause"
+    )
+    candidate_clause_ids.discard(None)
+    reference_terms, relationships, reference_clause_ids = build_document_reference_structures(data, candidate_clause_ids)
+    structured["zone_relationships"] = [
+        relationship
+        for relationship in structured.get("zone_relationships") or []
+        if relationship.get("scope") != "document_reference_clause"
+    ]
+    structured["cross_references"] = [
+        relationship
+        for relationship in structured.get("cross_references") or []
+        if relationship.get("scope") != "document_reference_clause"
+    ]
+    if not reference_clause_ids:
+        return data
+    filtered_terms = []
+    for term in structured.get("terms") or []:
+        source_clause_ids = {
+            ref.get("source_ref_id")
+            for ref in term.get("source_refs") or []
+            if ref.get("source_ref_type") == "clause"
+        }
+        if source_clause_ids and source_clause_ids <= reference_clause_ids:
+            continue
+        filtered_terms.append(term)
+    existing_term_ids = {term["term_id"] for term in filtered_terms}
+    for term in reference_terms:
+        if term["term_id"] not in existing_term_ids:
+            filtered_terms.append(term)
+            existing_term_ids.add(term["term_id"])
+    structured["terms"] = filtered_terms
+    existing_relationship_ids = {
+        relationship.get("relationship_id")
+        for relationship in (structured.get("zone_relationships") or []) + (structured.get("cross_references") or [])
+    }
+    for relationship in relationships:
+        if relationship["relationship_id"] not in existing_relationship_ids:
+            structured["zone_relationships"].append(relationship)
+            existing_relationship_ids.add(relationship["relationship_id"])
+    data["review_flags"] = [
+        flag
+        for flag in data.get("review_flags") or []
+        if not any(
+            ref.get("source_ref_type") == "clause" and ref.get("source_ref_id") in reference_clause_ids
+            for ref in flag.get("source_refs") or []
+        )
+    ]
+    return data
+
+
 def apply_zone_reference_model(data: dict[str, Any]) -> dict[str, Any]:
     if (data.get("document_metadata") or {}).get("document_type") != "zone":
-        structured = data.get("structured_data") or {}
-        structured["zone_relationships"] = [
-            relationship
-            for relationship in structured.get("zone_relationships") or []
-            if relationship.get("scope") != "zone_reference_clause"
-        ]
-        structured["cross_references"] = [
-            relationship
-            for relationship in structured.get("cross_references") or []
-            if relationship.get("scope") != "zone_reference_clause"
-        ]
-        return data
+        return apply_document_reference_model(data)
     structured = data.setdefault("structured_data", base_structured_data())
     reference_terms, relationships, reference_clause_ids = build_zone_reference_structures(data)
     if not reference_clause_ids:
@@ -2766,9 +3290,15 @@ def main() -> None:
         if not path.exists():
             continue
         data = read_json(path)
+        document_type = item.get("document_type") or (data.get("document_metadata") or {}).get("document_type")
         if {"raw_data", "structured_data", "review_flags"}.issubset(data):
+            if document_type == "definitions":
+                continue
+            if document_type in {"general_provisions", "design_standards"}:
+                filter_raw_sections_by_source_sections(data, item.get("source_sections"))
             rebuild_clause_refs(data)
             rebuild_schema_tables_from_pdf(pdf_doc, data)
+            repair_general_provisions_tables(data)
             repair_dc_bonus_height_section(data)
             repair_dms_bonus_height_section(data)
             repair_wf_bonus_height_section(data)
@@ -2783,11 +3313,18 @@ def main() -> None:
             apply_pz_land_use_buffer_context(data)
             write_json(path, apply_zone_reference_model(refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data))))
             continue
-        document_type = item.get("document_type") or (data.get("document_metadata") or {}).get("document_type")
         if document_type == "definitions":
             write_json(path, transform_definitions(normalizer, data))
         elif document_type in {"general_provisions", "design_standards"}:
-            write_json(path, transform_sections_doc(normalizer, data, document_type))
+            transformed = transform_sections_doc(
+                normalizer,
+                filter_legacy_sections_by_source_sections(data, item.get("source_sections")),
+                document_type,
+            )
+            repair_general_provisions_tables(transformed)
+            reset_review_flags(transformed)
+            refresh_schema_numeric_values(transformed)
+            write_json(path, apply_zone_reference_model(refresh_schema_terms(normalizer, transformed)))
 
     for item in manifest.get("supporting_files", []):
         path = OUT / item["file"]

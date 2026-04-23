@@ -1023,6 +1023,7 @@
         "section_label_raw",
         "section_title_raw",
         "source_order",
+        "content_refs",
         "citations"
       ],
       "properties": {
@@ -1048,6 +1049,12 @@
           "type": "array",
           "items": {
             "$ref": "#/$defs/table_raw"
+          }
+        },
+        "content_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/content_ref"
           }
         },
         "citations": {
@@ -1092,6 +1099,30 @@
         },
         "citations": {
           "$ref": "#/$defs/citation"
+        }
+      }
+    },
+    "content_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "content_type",
+        "content_id",
+        "source_order"
+      ],
+      "properties": {
+        "content_type": {
+          "type": "string",
+          "enum": [
+            "clause",
+            "table"
+          ]
+        },
+        "content_id": {
+          "type": "string"
+        },
+        "source_order": {
+          "type": "integer"
         }
       }
     },
