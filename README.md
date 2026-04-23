@@ -1,51 +1,73 @@
 # mdopendata Spatial Knowledge Datastore
 
-This repository now has a concrete path toward a spatially-aware datastore for land use, development controls, and municipal business records.
+This repository converts open data from public sources into PostGIS database sources and QGIS projects for visualization, spatial analysis, and future public-facing tools.
 
-## Current source inventory
+## Project Status
 
-The repository currently contains:
+The project began with two initial workstreams:
 
-- Official plan PDF and future land use map
-- Zoning bylaw PDF and zoning map
-- General city maps such as wards, neighborhoods, truck routes, cycling, parks, and streets
+- PEI corporate land use: bring in the 2010 and 2020 Prince Edward Island corporate land use layers for spatial comparison of changing land use.
+- Halifax Regional Municipality planning data: extract land use bylaws, municipal planning strategy documents, and related spatial layers into normalized content for cross-boundary analysis.
 
-The repository does not yet contain council agendas, minutes, committee packets, permit records, or parcel geometry. Those sources are required for full day-to-day operational queries.
+Both workstreams are currently on hold.
 
-## Target outcome
+The active workstream is Charlottetown zoning extraction. The goal is to extract the current and draft zoning bylaw for the City of Charlottetown, their associated zoning maps, parcel layer, and street map. The resulting data should support parcel and neighbourhood comparison and provide a base for a future web-based public front end.
 
-Build a datastore that can answer questions such as:
+## Current Charlottetown Inputs and Outputs
+
+Target source material for the active Charlottetown task is stored under:
+
+```text
+docs/charlottetown
+```
+
+Zone data extraction outputs are split by bylaw status:
+
+```text
+data/zoning/charlottetown        current zoning bylaw
+data/zoning/charlottetown-draft  draft zoning bylaw
+```
+
+The current workflow focuses on:
+
+- extracting zone and clause text from the current Charlottetown zoning bylaw
+- extracting equivalent content from the draft Charlottetown zoning bylaw
+- preserving source clause labels and citation context
+- normalizing zoning content for comparison across current and draft bylaws
+- connecting normalized zoning outputs to maps, parcels, streets, and neighbourhood-scale analysis
+
+## Target Outcome
+
+The repository should support queries such as:
 
 - What zoning rules apply to a parcel or location
-- What official plan designation overlaps that same location
+- How current and draft Charlottetown zoning differ for a parcel, zone, or neighbourhood
 - What uses, setbacks, density, height, parking, and overlay constraints apply
-- Which council or committee decisions affect that area, zone, or policy topic
-- Which meetings discussed a specific address, development application, street, or neighborhood
+- Which zoning map feature overlaps a parcel or street segment
+- Which source bylaw clause supports a normalized zoning rule
 
-## Recommended datastore
+## Recommended Datastore
 
 Use PostgreSQL with PostGIS as the canonical query layer.
 
 Reasons:
 
-- Strong spatial joins and indexing
-- Good fit for parcel, zone, ward, neighborhood, and application geometries
-- Full-text search can coexist with structured land-use rules
-- Easy to add embeddings later without changing the core schema
+- strong spatial joins and indexing
+- good fit for parcel, zone, street, neighbourhood, and overlay geometries
+- full-text search can coexist with structured zoning rules
+- embeddings can be added later without changing the core spatial model
 
 The repository includes a starter schema at [schema/sql/postgis.sql](/D:/opendata/mdopendata/schema/sql/postgis.sql).
 
-## Local database and MCP
+## Local Database
 
-The repository now includes a local PostGIS runtime and MCP wiring:
+The repository includes a local PostGIS Docker service:
 
-- Docker service: [docker-compose.yml](/D:/opendata/charlottown/docker-compose.yml)
-- MCP config: [.mcp.json](/D:/opendata/charlottown/.mcp.json)
-- Setup guide: [POSTGIS-MCP.md](/D:/opendata/charlottown/POSTGIS-MCP.md)
+- Docker service: [docker-compose.yml](/D:/opendata/mdopendata/docker-compose.yml)
 
-Use the MCP server for read-only inspection and querying. Load data through PostgreSQL tools or repository ingestion scripts.
+Use read-only database inspection where possible. Load data through PostgreSQL tools or repository ingestion scripts.
 
-## Python environment
+## Python Environment
 
 Use `.venv` as the canonical project Python environment for PDF extraction, JSON conversion, schema validation, GIS processing, and database import scripts. QGIS MCP remains separate because it runs under QGIS's bundled Python and uses `.qgis-mcp-packages` plus `qgis_mcp_vendor`.
 
@@ -70,7 +92,7 @@ Run project Python scripts through:
 .\scripts\python.ps1 .\scripts\validate-code-table-candidates.py
 ```
 
-### Current approved Python libraries
+### Current Approved Python Libraries
 
 - `pypdf`: Primary text extraction from bylaw and planning PDF documents through `PdfReader` and `page.extract_text()`.
 - `pymupdf`: PDF layout, word-position, drawing, and vector-content inspection through the `fitz` import.
@@ -91,7 +113,7 @@ Run project Python scripts through:
 - `geoalchemy2`: PostGIS geometry support for SQLAlchemy workflows.
 - `rapidfuzz`: Fast fuzzy matching for zone names, land-use terms, definitions, and noisy extraction cleanup.
 
-### Future Python libraries to consider
+### Future Python Libraries to Consider
 
 - `camelot-py`: PDF table extraction for lattice and stream tables when source PDFs contain extractable table structures.
 - `tabula-py`: Java-backed PDF table extraction fallback for sources that Camelot or pdfplumber do not handle well.
@@ -108,21 +130,21 @@ Run project Python scripts through:
 - `rtree`: Optional spatial indexing support for workloads that need it beyond the installed geometry stack.
 - `fiona`: Legacy vector I/O fallback when a GIS workflow requires it and `pyogrio` is insufficient.
 
-## Data model
+## Data Model
 
 The model separates five concerns:
 
-1. Source documents
-2. Extracted text blocks and citations
-3. Structured land-use rules
-4. Spatial features and overlays
-5. Municipal business records such as meetings, agenda items, motions, and decisions
+1. source documents
+2. extracted text blocks and citations
+3. structured zoning and land-use rules
+4. spatial features and overlays
+5. municipal business records such as meetings, agenda items, motions, and decisions
 
-This allows one query to combine a parcel geometry, a zoning rule, and a meeting decision with traceable citations.
+This allows one query to combine parcel geometry, zoning rules, mapped overlays, and traceable source citations.
 
-## Ingestion strategy
+## Ingestion Strategy
 
-### Phase 1: inventory and classify
+### Phase 1: Inventory and Classify
 
 Run:
 
@@ -132,57 +154,56 @@ npm run inventory
 
 This writes a machine-readable source manifest to `data/manifest/sources.json`.
 
-### Phase 2: extract
+### Phase 2: Extract
 
 For each source:
 
 - Text PDFs: extract text with page-level coordinates where possible
-- Map PDFs: extract vector layers if available; otherwise render and georeference for OCR/manual digitization
-- Images: OCR and classify legends, labels, and map content
+- Map PDFs: extract vector layers if available; otherwise render and georeference for OCR or manual digitization
+- Images: OCR and classify legends, labels, and map content where needed
 
-### Phase 3: normalize
+### Phase 3: Normalize
 
 Normalize extracted content into:
 
 - `documents`
 - `document_pages`
 - `text_spans`
-- `land_use_rules`
+- `zoning_rules`
 - `spatial_features`
 - `meetings`
 - `agenda_items`
 - `decisions`
 
-### Phase 4: spatial linking
+### Phase 4: Spatial Linking
 
 Link:
 
-- parcels to zones
-- parcels to future land use designations
-- parcels to wards and neighborhoods
-- agenda items and decisions to locations, parcels, streets, and policy topics
+- parcels to current and draft zones
+- parcels to overlays and map features
+- parcels to streets and neighbourhoods
+- rules to source clauses and mapped geometries
+- future municipal records to locations, parcels, streets, and policy topics
 
-## Current implementation
+## Current Implementation
 
 Added in this repository:
 
-- Source inventory builder: [src/build-inventory.js](/D:/opendata/charlottown/src/build-inventory.js)
+- Source inventory builder: [src/build-inventory.js](/D:/opendata/mdopendata/src/build-inventory.js)
 - PostGIS starter schema: [schema/sql/postgis.sql](/D:/opendata/mdopendata/schema/sql/postgis.sql)
-- Detailed design notes: [docs/architecture.md](/D:/opendata/charlottown/docs/architecture.md)
+- Detailed design notes: [docs/architecture.md](/D:/opendata/mdopendata/docs/architecture.md)
+- Charlottetown source directory: [docs/charlottetown](/D:/opendata/mdopendata/docs/charlottetown)
+- Charlottetown current zoning outputs: [data/zoning/charlottetown](/D:/opendata/mdopendata/data/zoning/charlottetown)
+- Charlottetown draft zoning outputs: [data/zoning/charlottetown-draft](/D:/opendata/mdopendata/data/zoning/charlottetown-draft)
 
-## Known gaps
+## Known Gaps
 
-- OCR tooling is not part of the approved project Python environment yet
-- No parcel dataset is present
-- No council or committee records are present
-- No georeferencing metadata is present for the map documents
+- The PEI corporate land use and HRM planning workstreams are paused.
+- OCR tooling is not part of the approved project Python environment yet.
+- Full Charlottetown parcel and street integration is still in progress.
+- Georeferencing and vectorization status varies by source map.
+- No public web front end exists yet.
 
-## Next implementation step
+## Next Implementation Step
 
-The next practical step is to install extraction tooling and add parsers for:
-
-- zoning bylaw text
-- official plan text
-- zoning map features
-- future land use map features
-- meeting agendas and minutes when added
+Continue the Charlottetown workflow by extracting and normalizing current and draft zoning bylaw content, then connect those outputs to zoning maps, parcel geometry, and street/neighbourhood comparison layers.

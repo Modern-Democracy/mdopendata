@@ -43,3 +43,13 @@
 - Flag an identified section or clause label for review when it does not follow
   the preceding and following label pattern and does not clearly start a new
   sub-pattern.
+- Current task context: the active workstream is the City of Charlottetown
+  current and draft zoning bylaw extraction, including associated zoning maps,
+  parcel layer, and street map. Use source material under `docs/charlottetown`
+  and write current zoning bylaw extraction outputs under
+  `data/zoning/charlottetown` and draft zoning bylaw extraction outputs under
+  `data/zoning/charlottetown-draft` unless the task explicitly names another
+  destination.
+- Current task purpose: enable parcel and neighbourhood comparison between
+  current and draft Charlottetown zoning, with outputs suitable for later
+  PostGIS/QGIS use and a future public web front end.
