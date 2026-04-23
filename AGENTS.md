@@ -1,9 +1,11 @@
 - The first role for every new task is `Project Management`.
 - Before acting in a role, read the corresponding role skill:
   - `Project Management`: `.codex/skills/role-project-management/SKILL.md`
-  - `Project Implementation`: `.codex/skills/role-project-implementation/SKILL.md`
   - `Business Analyst`: `.codex/skills/role-business-analyst/SKILL.md`
   - `Coding Architect`: `.codex/skills/role-coding-architect/SKILL.md`
+  - `Data Engineer`: `.codex/skills/role-data-engineer/SKILL.md`
+  - `GIS Specialist`: `.codex/skills/role-gis-specialist/SKILL.md`
+  - `Data Quality Analyst`: `.codex/skills/role-data-quality-analyst/SKILL.md`
   - `Debugger`: `.codex/skills/role-debugger/SKILL.md`
   - `QA Reviewer`: `.codex/skills/role-qa-reviewer/SKILL.md`
 - Do not begin coding or bulk data generation until `Project Management` has
@@ -19,10 +21,33 @@
 - If a task would introduce a new abstraction, helper module, protocol,
   workflow change, or architectural refactor that the user did not explicitly
   request, obtain approval before implementation.
-- During `Project Implementation`, execute only the approved change surface and
-  redirect back to the appropriate planning, analysis, architecture, or
-  debugging role if unresolved scope, requirement, design, or failure-cause
-  questions appear.
+- Implementation is a protocol, not a role skill. During implementation:
+  - execute only the approved objective, files, identifiers, schemas, data
+    paths, or deployment targets
+  - inspect relevant source files, scripts, schemas, generated artifacts, and
+    specifications before editing
+  - prefer existing repository patterns, scripts, schemas, and workflows
+  - apply the smallest concrete change that satisfies the approved requirement
+  - do not introduce new abstractions, helper modules, protocols, schema
+    shapes, or workflow changes unless explicitly approved
+  - do not widen targeted edits beyond named files, rows, codes, clauses,
+    categories, terms, or fields
+  - do not preserve legacy compatibility fields unless the user explicitly
+    requested compatibility preservation
+  - for bulk generation, stop on material source-pattern mismatch unless a
+    review-output strategy was approved
+  - for structured data, edit by keyed object or schema-aware tooling where
+    practical instead of broad text replacement
+  - route to `Project Management` if scope, deliverables, affected artifact
+    classes, roadmap, or priority changes appear
+  - route to `Business Analyst` if requirements, scenarios, accepted
+    variations, compatibility expectations, or data-standard interpretations
+    are not explicit enough to execute safely
+  - route to `Coding Architect` if execution requires unapproved design,
+    schema, workflow, protocol, or architectural decisions
+  - route to `Debugger` if an error, failed output, unexpected runtime
+    behavior, suspected extraction defect, or integration blocker lacks a
+    discriminating cause
 - After any implementation task, finish in `QA Reviewer`.
 - When asked to prepare a prompt for a new conversation, do not include
   instructions that already appear in `AGENTS.md` or role skill `SKILL.md`

@@ -59,8 +59,14 @@ Route to `Business Analyst` when the task is ambiguous, requirement-heavy, behav
 
 Route to `Coding Architect` when the task involves module boundaries, memory pressure, runtime ownership, packing implications, protocol changes, or new technical patterns, and only after template-fit policy and compatibility requirements are explicit enough to design safely.
 
+Route to `Data Engineer` when the task involves ETL pipeline development or operation, PDF parsing workflows, document extraction automation, normalization pipeline execution, structured data generation, repeatable imports, PostGIS ingestion mechanics, schema-aware transformations, or data workflow automation.
+
+Route to `GIS Specialist` when the task involves QGIS inspection, spatial layer handling, CRS checks, geometry validity, spatial joins, parcel/zoning overlays, map alignment, PostGIS spatial schemas, spatial indexes, or spatial SQL.
+
+Route to `Data Quality Analyst` when the task involves validating normalized data against source documents, checking source fidelity, controlled vocabularies, completeness, raw label preservation, spatial integrity, cross-system consistency, or quality findings before final acceptance.
+
 Route to `Debugger` when the task begins from a reported error, unexpected runtime behavior, failed output, or an unverified regression.
 
-Route to `Project Implementation` only when the requested change is narrow, already approved, and sufficiently specified.
+Route to implementation only when the requested change is narrow, already approved, and sufficiently specified. Follow the implementation protocol in `AGENTS.md`.
 
 Route to `QA Reviewer` when the task is primarily about verification, review, regression checking, acceptance, or completion readiness.
