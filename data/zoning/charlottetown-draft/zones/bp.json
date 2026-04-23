@@ -2322,10 +2322,12 @@
       {
         "term_id": "zone-bp-term-term-transitional_housing",
         "term_raw": "Transitional Housing",
-        "term_normalized": "transitional_housing",
-        "term_category": "unknown",
+        "term_normalized": "transitional_housing_facility",
+        "term_category": "use_type",
         "source_refs": [],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "transitional_housing_facility"
       },
       {
         "term_id": "zone-bp-term-use-commercial_daycare_centre",
@@ -2488,12 +2490,24 @@
         "code": "garden_centre"
       },
       {
-        "term_id": "zone-bp-term-term-hostel_hotel",
-        "term_raw": "Hostel / Hotel",
-        "term_normalized": "hostel_hotel",
-        "term_category": "unknown",
+        "term_id": "zone-bp-term-use-hostel",
+        "term_raw": "Hostel",
+        "term_normalized": "hostel",
+        "term_category": "use_type",
         "source_refs": [],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "hostel"
+      },
+      {
+        "term_id": "zone-bp-term-use-hotel",
+        "term_raw": "Hotel",
+        "term_normalized": "hotel",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "hotel"
       }
     ],
     "uses": [
@@ -2503,7 +2517,7 @@
         "use_term_id": "zone-bp-term-term-transitional_housing",
         "use_status": "permitted",
         "source_clause_ref": "",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-bp-use-commercial-daycare-centre-2-1",
@@ -2634,12 +2648,20 @@
         "confidence": "high"
       },
       {
-        "use_id": "zone-bp-use-hostel-hotel-18-1",
-        "use_name_raw": "Hostel / Hotel",
-        "use_term_id": "zone-bp-term-term-hostel_hotel",
+        "use_id": "zone-bp-use-hostel-18-1",
+        "use_name_raw": "Hostel",
+        "use_term_id": "zone-bp-term-use-hostel",
         "use_status": "permitted",
         "source_clause_ref": "",
-        "confidence": "needs_review"
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-bp-use-hotel-18-2",
+        "use_name_raw": "Hotel",
+        "use_term_id": "zone-bp-term-use-hotel",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
       }
     ],
     "numeric_values": [
@@ -3567,7 +3589,8 @@
           "zone-bp-term-use-club",
           "zone-bp-term-use-equipment_sales_rental_service",
           "zone-bp-term-use-garden_centre",
-          "zone-bp-term-term-hostel_hotel"
+          "zone-bp-term-use-hostel",
+          "zone-bp-term-use-hotel"
         ],
         "applicability": {
           "applies_to_zone_codes": [
@@ -3688,20 +3711,6 @@
   },
   "review_flags": [
     {
-      "review_flag_id": "zone-bp-flag-unmatched-use-transitional-housing-1-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Transitional Housing"
-    },
-    {
-      "review_flag_id": "zone-bp-flag-unmatched-use-hostel-hotel-18-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Hostel / Hotel"
-    },
-    {
       "review_flag_id": "zone-bp-flag-legacy-open-issue-1",
       "severity": "warning",
       "blocking": false,
@@ -3739,20 +3748,6 @@
           "source_ref_id": "zone-bp"
         }
       ]
-    },
-    {
-      "review_flag_id": "zone-bp-flag-unmatched-term-transitional-housing",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Transitional Housing"
-    },
-    {
-      "review_flag_id": "zone-bp-flag-unmatched-term-hostel-hotel",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Hostel / Hotel"
     }
   ]
 }

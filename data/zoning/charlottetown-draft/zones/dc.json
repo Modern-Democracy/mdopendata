@@ -1849,9 +1849,11 @@
         "term_id": "zone-dc-term-term-multi_unit_dwelling",
         "term_raw": "Multi-Unit Dwelling",
         "term_normalized": "multi_unit_dwelling",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "multi_unit_dwelling"
       },
       {
         "term_id": "zone-dc-term-use-police_station",
@@ -2015,7 +2017,7 @@
         "use_term_id": "zone-dc-term-term-multi_unit_dwelling",
         "use_status": "permitted",
         "source_clause_ref": "",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-dc-use-police-station-15-1",
@@ -3158,13 +3160,6 @@
   },
   "review_flags": [
     {
-      "review_flag_id": "zone-dc-flag-unmatched-use-multi-unit-dwelling-14-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Multi-Unit Dwelling"
-    },
-    {
       "review_flag_id": "zone-dc-flag-legacy-open-issue-1",
       "severity": "warning",
       "blocking": false,
@@ -3202,13 +3197,6 @@
           "source_ref_id": "zone-dc"
         }
       ]
-    },
-    {
-      "review_flag_id": "zone-dc-flag-unmatched-term-multi-unit-dwelling",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Multi-Unit Dwelling"
     }
   ]
 }

@@ -239,22 +239,24 @@
   "structured_data": {
     "terms": [
       {
-        "term_id": "zone-ue-term-term-the_only_permitted_uses_in_this_zone_include_single_detached_dwellings_additions_or_accessory_buildings_are_permitted_according_to_section_3_1",
-        "term_raw": "The only permitted uses in this zone include single detached dwellings, additions, or accessory buildings are permitted according to Section 3.1",
-        "term_normalized": "the_only_permitted_uses_in_this_zone_include_single_detached_dwellings_additions_or_accessory_buildings_are_permitted_according_to_section_3_1",
-        "term_category": "unknown",
+        "term_id": "zone-ue-term-use-single_detached_dwelling",
+        "term_raw": "single detached dwellings",
+        "term_normalized": "single_detached_dwelling",
+        "term_category": "use_type",
         "source_refs": [],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "single_detached_dwelling"
       }
     ],
     "uses": [
       {
-        "use_id": "zone-ue-use-the-only-permitted-uses-in-this-zone-include-single-detached-dwellings-additions-or-accessory-buildings-are-permitted-according-to-section-3-1-1-1",
-        "use_name_raw": "The only permitted uses in this zone include single detached dwellings, additions, or accessory buildings are permitted according to Section 3.1",
-        "use_term_id": "zone-ue-term-term-the_only_permitted_uses_in_this_zone_include_single_detached_dwellings_additions_or_accessory_buildings_are_permitted_according_to_section_3_1",
+        "use_id": "zone-ue-use-single-detached-dwellings-1-1",
+        "use_name_raw": "single detached dwellings",
+        "use_term_id": "zone-ue-term-use-single_detached_dwelling",
         "use_status": "permitted",
         "source_clause_ref": "",
-        "confidence": "needs_review"
+        "confidence": "high"
       }
     ],
     "numeric_values": [],
@@ -265,7 +267,7 @@
         "group_label_raw": "PART 29",
         "group_title_raw": "UE - Urban Expansion",
         "regulated_use_terms": [
-          "zone-ue-term-term-the_only_permitted_uses_in_this_zone_include_single_detached_dwellings_additions_or_accessory_buildings_are_permitted_according_to_section_3_1"
+          "zone-ue-term-use-single_detached_dwelling"
         ],
         "applicability": {
           "applies_to_zone_codes": [
@@ -304,13 +306,6 @@
   },
   "review_flags": [
     {
-      "review_flag_id": "zone-ue-flag-unmatched-use-the-only-permitted-uses-in-this-zone-include-single-detached-dwellings-additions-or-accessory-buildings-are-permitted-according-to-section-3-1-1-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: The only permitted uses in this zone include single detached dwellings, additions, or accessory buildings are permitted according to Section 3.1"
-    },
-    {
       "review_flag_id": "zone-ue-flag-legacy-open-issue-1",
       "severity": "warning",
       "blocking": false,
@@ -322,13 +317,6 @@
           "source_ref_id": "zone-ue"
         }
       ]
-    },
-    {
-      "review_flag_id": "zone-ue-flag-unmatched-term-the-only-permitted-uses-in-this-zone-include-single-detached-dwellings-additions-or-accessory-buildings-are-permitted-according-to-section-3-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: The only permitted uses in this zone include single detached dwellings, additions, or accessory buildings are permitted according to Section 3.1"
     }
   ]
 }

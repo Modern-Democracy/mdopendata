@@ -1343,10 +1343,12 @@
       {
         "term_id": "zone-dmu-term-term-multi_unit_dwellings",
         "term_raw": "Multi-Unit Dwellings",
-        "term_normalized": "multi_unit_dwellings",
-        "term_category": "unknown",
+        "term_normalized": "multi_unit_dwelling",
+        "term_category": "use_type",
         "source_refs": [],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "multi_unit_dwelling"
       },
       {
         "term_id": "zone-dmu-term-use-commercial_daycare_centre",
@@ -1494,7 +1496,7 @@
         "use_term_id": "zone-dmu-term-term-multi_unit_dwellings",
         "use_status": "permitted",
         "source_clause_ref": "",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-dmu-use-commercial-daycare-centre-3-1",
@@ -2314,13 +2316,6 @@
   },
   "review_flags": [
     {
-      "review_flag_id": "zone-dmu-flag-unmatched-use-multi-unit-dwellings-2-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Multi-Unit Dwellings"
-    },
-    {
       "review_flag_id": "zone-dmu-flag-legacy-open-issue-1",
       "severity": "warning",
       "blocking": false,
@@ -2358,13 +2353,6 @@
           "source_ref_id": "zone-dmu"
         }
       ]
-    },
-    {
-      "review_flag_id": "zone-dmu-flag-unmatched-term-multi-unit-dwellings",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Multi-Unit Dwellings"
     }
   ]
 }

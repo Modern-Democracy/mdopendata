@@ -1310,18 +1310,32 @@
       {
         "term_id": "zone-rn-term-term-single_detached_dwelling_up_to_4_units",
         "term_raw": "Single Detached Dwelling (up to 4 units)",
-        "term_normalized": "single_detached_dwelling_up_to_4_units",
-        "term_category": "unknown",
+        "term_normalized": "single_detached_dwelling",
+        "term_category": "use_type",
         "source_refs": [],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "single_detached_dwelling"
       },
       {
-        "term_id": "zone-rn-term-term-semi_detached_or_duplex_dwelling",
-        "term_raw": "Semi Detached or Duplex Dwelling",
-        "term_normalized": "semi_detached_or_duplex_dwelling",
-        "term_category": "unknown",
+        "term_id": "zone-rn-term-use-semi_detached_dwelling",
+        "term_raw": "Semi Detached Dwelling",
+        "term_normalized": "semi_detached_dwelling",
+        "term_category": "use_type",
         "source_refs": [],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "semi_detached_dwelling"
+      },
+      {
+        "term_id": "zone-rn-term-use-duplex_dwelling",
+        "term_raw": "Duplex Dwelling",
+        "term_normalized": "duplex_dwelling",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "duplex_dwelling"
       },
       {
         "term_id": "zone-rn-term-use-government_office",
@@ -1351,15 +1365,23 @@
         "use_term_id": "zone-rn-term-term-single_detached_dwelling_up_to_4_units",
         "use_status": "permitted",
         "source_clause_ref": "",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
-        "use_id": "zone-rn-use-semi-detached-or-duplex-dwelling-2-1",
-        "use_name_raw": "Semi Detached or Duplex Dwelling",
-        "use_term_id": "zone-rn-term-term-semi_detached_or_duplex_dwelling",
+        "use_id": "zone-rn-use-semi-detached-dwelling-2-1",
+        "use_name_raw": "Semi Detached Dwelling",
+        "use_term_id": "zone-rn-term-use-semi_detached_dwelling",
         "use_status": "permitted",
         "source_clause_ref": "",
-        "confidence": "needs_review"
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-rn-use-duplex-dwelling-2-2",
+        "use_name_raw": "Duplex Dwelling",
+        "use_term_id": "zone-rn-term-use-duplex_dwelling",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
       },
       {
         "use_id": "zone-rn-use-government-offices-3-1",
@@ -2236,7 +2258,8 @@
         "group_title_raw": "RN - Neighbourhood",
         "regulated_use_terms": [
           "zone-rn-term-term-single_detached_dwelling_up_to_4_units",
-          "zone-rn-term-term-semi_detached_or_duplex_dwelling",
+          "zone-rn-term-use-semi_detached_dwelling",
+          "zone-rn-term-use-duplex_dwelling",
           "zone-rn-term-use-government_office",
           "zone-rn-term-use-library"
         ],
@@ -2315,7 +2338,7 @@
       {
         "requirement_id": "zone-rn-req-zone-rn-clause-10-3-1-a",
         "requirement_type": "other",
-        "requirement_category": "single_detached_dwelling_up_to_4_units",
+        "requirement_category": "single_detached_dwelling",
         "requirement_label_raw": "(a)",
         "requirement_text_raw": "Single Detached Dwelling (up to 4 units)",
         "applicability": {
@@ -2331,7 +2354,7 @@
             "source_ref_id": "zone-rn-clause-10-3-1-a"
           }
         ],
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "requirement_id": "zone-rn-req-zone-rn-clause-10-4-3",
@@ -2358,20 +2381,6 @@
     "cross_references": []
   },
   "review_flags": [
-    {
-      "review_flag_id": "zone-rn-flag-unmatched-use-single-detached-dwelling-up-to-4-units-1-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Single Detached Dwelling (up to 4 units)"
-    },
-    {
-      "review_flag_id": "zone-rn-flag-unmatched-use-semi-detached-or-duplex-dwelling-2-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Semi Detached or Duplex Dwelling"
-    },
     {
       "review_flag_id": "zone-rn-flag-legacy-open-issue-1",
       "severity": "warning",
@@ -2423,20 +2432,6 @@
           "source_ref_id": "zone-rn"
         }
       ]
-    },
-    {
-      "review_flag_id": "zone-rn-flag-unmatched-term-single-detached-dwelling-up-to-4-units",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Single Detached Dwelling (up to 4 units)"
-    },
-    {
-      "review_flag_id": "zone-rn-flag-unmatched-term-semi-detached-or-duplex-dwelling",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Semi Detached or Duplex Dwelling"
     }
   ]
 }

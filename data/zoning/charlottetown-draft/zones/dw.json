@@ -1867,12 +1867,24 @@
         "code": "grocery_store"
       },
       {
-        "term_id": "zone-dw-term-term-hostel_hotel",
-        "term_raw": "Hostel / Hotel",
-        "term_normalized": "hostel_hotel",
-        "term_category": "unknown",
+        "term_id": "zone-dw-term-use-hostel",
+        "term_raw": "Hostel",
+        "term_normalized": "hostel",
+        "term_category": "use_type",
         "source_refs": [],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "hostel"
+      },
+      {
+        "term_id": "zone-dw-term-use-hotel",
+        "term_raw": "Hotel",
+        "term_normalized": "hotel",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "hotel"
       },
       {
         "term_id": "zone-dw-term-use-office",
@@ -2031,12 +2043,20 @@
         "confidence": "high"
       },
       {
-        "use_id": "zone-dw-use-hostel-hotel-19-1",
-        "use_name_raw": "Hostel / Hotel",
-        "use_term_id": "zone-dw-term-term-hostel_hotel",
+        "use_id": "zone-dw-use-hostel-10-1",
+        "use_name_raw": "Hostel",
+        "use_term_id": "zone-dw-term-use-hostel",
         "use_status": "permitted",
         "source_clause_ref": "",
-        "confidence": "needs_review"
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-dw-use-hotel-10-2",
+        "use_name_raw": "Hotel",
+        "use_term_id": "zone-dw-term-use-hotel",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
       },
       {
         "use_id": "zone-dw-use-office-20-1",
@@ -2892,7 +2912,8 @@
           "zone-dw-term-use-eating_and_drinking_establishment",
           "zone-dw-term-use-entertainment_establishment",
           "zone-dw-term-use-grocery_store",
-          "zone-dw-term-term-hostel_hotel",
+          "zone-dw-term-use-hostel",
+          "zone-dw-term-use-hotel",
           "zone-dw-term-use-office"
         ],
         "applicability": {
@@ -3031,13 +3052,6 @@
   },
   "review_flags": [
     {
-      "review_flag_id": "zone-dw-flag-unmatched-use-hostel-hotel-19-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Hostel / Hotel"
-    },
-    {
       "review_flag_id": "zone-dw-flag-legacy-open-issue-1",
       "severity": "warning",
       "blocking": false,
@@ -3075,13 +3089,6 @@
           "source_ref_id": "zone-dw"
         }
       ]
-    },
-    {
-      "review_flag_id": "zone-dw-flag-unmatched-term-hostel-hotel",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Hostel / Hotel"
     }
   ]
 }

@@ -1753,9 +1753,11 @@
         "term_id": "zone-dms-term-term-multi_unit_dwelling",
         "term_raw": "Multi-unit dwelling",
         "term_normalized": "multi_unit_dwelling",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "multi_unit_dwelling"
       },
       {
         "term_id": "zone-dms-term-use-police_station",
@@ -1818,12 +1820,24 @@
         "code": "grocery_store"
       },
       {
-        "term_id": "zone-dms-term-term-hostel_hotel",
-        "term_raw": "Hostel / Hotel",
-        "term_normalized": "hostel_hotel",
-        "term_category": "unknown",
+        "term_id": "zone-dms-term-use-hostel",
+        "term_raw": "Hostel",
+        "term_normalized": "hostel",
+        "term_category": "use_type",
         "source_refs": [],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "hostel"
+      },
+      {
+        "term_id": "zone-dms-term-use-hotel",
+        "term_raw": "Hotel",
+        "term_normalized": "hotel",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "hotel"
       }
     ],
     "uses": [
@@ -1929,7 +1943,7 @@
         "use_term_id": "zone-dms-term-term-multi_unit_dwelling",
         "use_status": "permitted",
         "source_clause_ref": "",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-dms-use-police-station-14-1",
@@ -1980,12 +1994,20 @@
         "confidence": "high"
       },
       {
-        "use_id": "zone-dms-use-hostel-hotel-20-1",
-        "use_name_raw": "Hostel / Hotel",
-        "use_term_id": "zone-dms-term-term-hostel_hotel",
+        "use_id": "zone-dms-use-hostel-20-1",
+        "use_name_raw": "Hostel",
+        "use_term_id": "zone-dms-term-use-hostel",
         "use_status": "permitted",
         "source_clause_ref": "",
-        "confidence": "needs_review"
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-dms-use-hotel-20-2",
+        "use_name_raw": "Hotel",
+        "use_term_id": "zone-dms-term-use-hotel",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
       }
     ],
     "numeric_values": [
@@ -2677,7 +2699,8 @@
           "zone-dms-term-use-eating_and_drinking_establishment",
           "zone-dms-term-use-entertainment_establishment",
           "zone-dms-term-use-grocery_store",
-          "zone-dms-term-term-hostel_hotel"
+          "zone-dms-term-use-hostel",
+          "zone-dms-term-use-hotel"
         ],
         "applicability": {
           "applies_to_zone_codes": [
@@ -2835,20 +2858,6 @@
   },
   "review_flags": [
     {
-      "review_flag_id": "zone-dms-flag-unmatched-use-multi-unit-dwelling-13-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Multi-unit dwelling"
-    },
-    {
-      "review_flag_id": "zone-dms-flag-unmatched-use-hostel-hotel-20-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Hostel / Hotel"
-    },
-    {
       "review_flag_id": "zone-dms-flag-legacy-open-issue-1",
       "severity": "warning",
       "blocking": false,
@@ -2886,20 +2895,6 @@
           "source_ref_id": "zone-dms"
         }
       ]
-    },
-    {
-      "review_flag_id": "zone-dms-flag-unmatched-term-multi-unit-dwelling",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Multi-unit dwelling"
-    },
-    {
-      "review_flag_id": "zone-dms-flag-unmatched-term-hostel-hotel",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Hostel / Hotel"
     }
   ]
 }

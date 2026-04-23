@@ -1042,12 +1042,24 @@
         "code": "events_hosting"
       },
       {
-        "term_id": "zone-p-term-term-hostel_hotel",
-        "term_raw": "Hostel / Hotel",
-        "term_normalized": "hostel_hotel",
-        "term_category": "unknown",
+        "term_id": "zone-p-term-use-hostel",
+        "term_raw": "Hostel",
+        "term_normalized": "hostel",
+        "term_category": "use_type",
         "source_refs": [],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "hostel"
+      },
+      {
+        "term_id": "zone-p-term-use-hotel",
+        "term_raw": "Hotel",
+        "term_normalized": "hotel",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "hotel"
       },
       {
         "term_id": "zone-p-term-use-marina",
@@ -1123,12 +1135,20 @@
         "confidence": "high"
       },
       {
-        "use_id": "zone-p-use-hostel-hotel-2-1",
-        "use_name_raw": "Hostel / Hotel",
-        "use_term_id": "zone-p-term-term-hostel_hotel",
+        "use_id": "zone-p-use-hostel-9-1",
+        "use_name_raw": "Hostel",
+        "use_term_id": "zone-p-term-use-hostel",
         "use_status": "permitted",
         "source_clause_ref": "",
-        "confidence": "needs_review"
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-p-use-hotel-9-2",
+        "use_name_raw": "Hotel",
+        "use_term_id": "zone-p-term-use-hotel",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
       },
       {
         "use_id": "zone-p-use-marina-3-1",
@@ -1592,7 +1612,8 @@
         "group_title_raw": "P - Port",
         "regulated_use_terms": [
           "zone-p-term-use-events_hosting",
-          "zone-p-term-term-hostel_hotel",
+          "zone-p-term-use-hostel",
+          "zone-p-term-use-hotel",
           "zone-p-term-use-marina",
           "zone-p-term-use-office",
           "zone-p-term-use-retail_store",
@@ -1754,13 +1775,6 @@
   },
   "review_flags": [
     {
-      "review_flag_id": "zone-p-flag-unmatched-use-hostel-hotel-2-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Hostel / Hotel"
-    },
-    {
       "review_flag_id": "zone-p-flag-legacy-open-issue-1",
       "severity": "warning",
       "blocking": false,
@@ -1798,13 +1812,6 @@
           "source_ref_id": "zone-p"
         }
       ]
-    },
-    {
-      "review_flag_id": "zone-p-flag-unmatched-term-hostel-hotel",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Hostel / Hotel"
     }
   ]
 }

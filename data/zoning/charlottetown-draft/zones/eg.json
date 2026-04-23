@@ -764,18 +764,22 @@
       {
         "term_id": "zone-eg-term-term-transitional_housing",
         "term_raw": "Transitional Housing",
-        "term_normalized": "transitional_housing",
-        "term_category": "unknown",
+        "term_normalized": "transitional_housing_facility",
+        "term_category": "use_type",
         "source_refs": [],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "transitional_housing_facility"
       },
       {
         "term_id": "zone-eg-term-term-multi_unit_dwelling",
         "term_raw": "Multi-unit dwelling",
         "term_normalized": "multi_unit_dwelling",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "multi_unit_dwelling"
       }
     ],
     "uses": [
@@ -785,7 +789,7 @@
         "use_term_id": "zone-eg-term-term-transitional_housing",
         "use_status": "permitted",
         "source_clause_ref": "",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-eg-use-multi-unit-dwelling-2-1",
@@ -793,7 +797,7 @@
         "use_term_id": "zone-eg-term-term-multi_unit_dwelling",
         "use_status": "permitted",
         "source_clause_ref": "",
-        "confidence": "needs_review"
+        "confidence": "high"
       }
     ],
     "numeric_values": [
@@ -1164,20 +1168,6 @@
   },
   "review_flags": [
     {
-      "review_flag_id": "zone-eg-flag-unmatched-use-transitional-housing-1-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Transitional Housing"
-    },
-    {
-      "review_flag_id": "zone-eg-flag-unmatched-use-multi-unit-dwelling-2-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Multi-unit dwelling"
-    },
-    {
       "review_flag_id": "zone-eg-flag-legacy-open-issue-1",
       "severity": "warning",
       "blocking": false,
@@ -1202,20 +1192,6 @@
           "source_ref_id": "zone-eg"
         }
       ]
-    },
-    {
-      "review_flag_id": "zone-eg-flag-unmatched-term-transitional-housing",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Transitional Housing"
-    },
-    {
-      "review_flag_id": "zone-eg-flag-unmatched-term-multi-unit-dwelling",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Multi-unit dwelling"
     }
   ]
 }

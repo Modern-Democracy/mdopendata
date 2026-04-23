@@ -1410,9 +1410,11 @@
         "term_id": "zone-rm-term-term-multi_unit_dwelling",
         "term_raw": "Multi-unit Dwelling",
         "term_normalized": "multi_unit_dwelling",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "multi_unit_dwelling"
       },
       {
         "term_id": "zone-rm-term-use-lodging_house",
@@ -1428,17 +1430,21 @@
         "term_id": "zone-rm-term-term-seniors_housing",
         "term_raw": "Seniors Housing",
         "term_normalized": "seniors_housing",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "seniors_housing"
       },
       {
         "term_id": "zone-rm-term-term-tourist_accommodation",
         "term_raw": "Tourist Accommodation",
         "term_normalized": "tourist_accommodation",
-        "term_category": "unknown",
+        "term_category": "use_type",
         "source_refs": [],
-        "confidence": "needs_review"
+        "confidence": "high",
+        "code_table": "use",
+        "code": "tourist_accommodation"
       },
       {
         "term_id": "zone-rm-term-use-government_office",
@@ -1502,7 +1508,7 @@
         "use_term_id": "zone-rm-term-term-multi_unit_dwelling",
         "use_status": "permitted",
         "source_clause_ref": "",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-rm-use-lodging-house-5-1",
@@ -1518,7 +1524,7 @@
         "use_term_id": "zone-rm-term-term-seniors_housing",
         "use_status": "permitted",
         "source_clause_ref": "",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-rm-use-tourist-accommodation-7-1",
@@ -1526,7 +1532,7 @@
         "use_term_id": "zone-rm-term-term-tourist_accommodation",
         "use_status": "permitted",
         "source_clause_ref": "",
-        "confidence": "needs_review"
+        "confidence": "high"
       },
       {
         "use_id": "zone-rm-use-government-offices-8-1",
@@ -2787,27 +2793,6 @@
   },
   "review_flags": [
     {
-      "review_flag_id": "zone-rm-flag-unmatched-use-multi-unit-dwelling-4-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Multi-unit Dwelling"
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unmatched-use-seniors-housing-6-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Seniors Housing"
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unmatched-use-tourist-accommodation-7-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Tourist Accommodation"
-    },
-    {
       "review_flag_id": "zone-rm-flag-legacy-open-issue-1",
       "severity": "warning",
       "blocking": false,
@@ -2858,27 +2843,6 @@
           "source_ref_id": "zone-rm"
         }
       ]
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unmatched-term-multi-unit-dwelling",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Multi-unit Dwelling"
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unmatched-term-seniors-housing",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Seniors Housing"
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unmatched-term-tourist-accommodation",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Tourist Accommodation"
     }
   ]
 }

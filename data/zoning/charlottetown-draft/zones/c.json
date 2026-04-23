@@ -507,26 +507,8 @@
     ]
   },
   "structured_data": {
-    "terms": [
-      {
-        "term_id": "zone-c-term-term-existing_uses",
-        "term_raw": "Existing uses",
-        "term_normalized": "existing_uses",
-        "term_category": "unknown",
-        "source_refs": [],
-        "confidence": "needs_review"
-      }
-    ],
-    "uses": [
-      {
-        "use_id": "zone-c-use-existing-uses-1-1",
-        "use_name_raw": "Existing uses",
-        "use_term_id": "zone-c-term-term-existing_uses",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "needs_review"
-      }
-    ],
+    "terms": [],
+    "uses": [],
     "numeric_values": [
       {
         "numeric_value_id": "zone-c-num-zone-c-clause-27-3-2-b-1",
@@ -808,9 +790,7 @@
         "regulation_group_id": "zone-c-regulation-group-zone",
         "group_label_raw": "PART 27",
         "group_title_raw": "C - Conservation",
-        "regulated_use_terms": [
-          "zone-c-term-term-existing_uses"
-        ],
+        "regulated_use_terms": [],
         "applicability": {
           "applies_to_zone_codes": [
             "C"
@@ -877,13 +857,6 @@
   },
   "review_flags": [
     {
-      "review_flag_id": "zone-c-flag-unmatched-use-existing-uses-1-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Existing uses"
-    },
-    {
       "review_flag_id": "zone-c-flag-legacy-open-issue-1",
       "severity": "warning",
       "blocking": false,
@@ -921,13 +894,6 @@
           "source_ref_id": "zone-c"
         }
       ]
-    },
-    {
-      "review_flag_id": "zone-c-flag-unmatched-term-existing-uses",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Existing uses"
     }
   ]
 }
