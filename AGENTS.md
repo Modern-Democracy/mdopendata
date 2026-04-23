@@ -1,6 +1,7 @@
 - The first role for every new task is `Project Management`.
 - Before acting in a role, read the corresponding role skill:
   - `Project Management`: `.codex/skills/role-project-management/SKILL.md`
+  - `Project Implementation`: `.codex/skills/role-project-implementation/SKILL.md`
   - `Business Analyst`: `.codex/skills/role-business-analyst/SKILL.md`
   - `Coding Architect`: `.codex/skills/role-coding-architect/SKILL.md`
   - `Debugger`: `.codex/skills/role-debugger/SKILL.md`
@@ -18,6 +19,10 @@
 - If a task would introduce a new abstraction, helper module, protocol,
   workflow change, or architectural refactor that the user did not explicitly
   request, obtain approval before implementation.
+- During `Project Implementation`, execute only the approved change surface and
+  redirect back to the appropriate planning, analysis, architecture, or
+  debugging role if unresolved scope, requirement, design, or failure-cause
+  questions appear.
 - After any implementation task, finish in `QA Reviewer`.
 - When asked to prepare a prompt for a new conversation, do not include
   instructions that already appear in `AGENTS.md` or role skill `SKILL.md`

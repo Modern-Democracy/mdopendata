@@ -61,6 +61,6 @@ Route to `Coding Architect` when the task involves module boundaries, memory pre
 
 Route to `Debugger` when the task begins from a reported error, unexpected runtime behavior, failed output, or an unverified regression.
 
-Route directly to implementation only when the requested code change is narrow, already approved, and sufficiently specified.
+Route to `Project Implementation` only when the requested change is narrow, already approved, and sufficiently specified.
 
 Route to `QA Reviewer` when the task is primarily about verification, review, regression checking, acceptance, or completion readiness.
