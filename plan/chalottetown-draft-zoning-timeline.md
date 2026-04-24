@@ -7,8 +7,8 @@ Reference plan: `plan/chalottetown-draft-zoning-plan.md`
 - Active phase: Phase 3
 - Active phase name: High-Priority Clause Validation
 - Overall status: In progress
-- Current progress: Phase 2 is complete. Approved code-table normalization decisions have been applied across the affected draft zone files and `data/zoning/charlottetown-draft/code-table-match-report.json`. The report now retains only `Cluster Housing` and `Seniors Housing` as remaining true new-code candidates from this pass. Phase 3 remains active for the pending high-priority general-provisions files, and a targeted layout-repair pass has now been applied in the draft extractor for RM-style figure and table bleed. Regenerated draft outputs now restore the missing RM `11.3.2`, `11.3.3`, `11.5`, and `11.6` clause structure and remove the identified `Table 11.2`, `Figure 11.1`, and `Table 11.3` spillover from RM requirement text. The normalized draft-zone repair step now generalizes RM-style clause-table promotion across zone files so equivalent dimensional requirement blocks are emitted as `tables_raw` outside RM as well, while retaining the RM-only shared-wall footnote as a clause note.
-- Last updated: 2026-04-23
+- Current progress: Phase 2 is complete. Approved code-table normalization decisions have been applied across the affected draft zone files and `data/zoning/charlottetown-draft/code-table-match-report.json`. The report now retains only `Cluster Housing` and `Seniors Housing` as remaining true new-code candidates from this pass. Phase 3 remains active for the pending high-priority general-provisions files, and targeted layout-repair passes have now been applied in the draft extractor for RM-style figure/table bleed and the named Part 3, Part 4, and Part 5 general-provisions parsing defects. Regenerated draft outputs now restore the missing RM `11.3.2`, `11.3.3`, `11.5`, and `11.6` clause structure, promote equivalent dimensional requirement blocks into `tables_raw`, repair draft Tables 3.1, 3.2, 3.3, and 4.1 placement, and split or reassign the reported clauses in sections `2.19`, `3.1`, `3.16`, `3.19`, `4.5`, `4.6`, `4.7`, and `5.2`.
+- Last updated: 2026-04-24
 
 ## Phase Timeline
 
@@ -63,6 +63,8 @@ Current progress:
 - `data/zoning/charlottetown-draft/zones/rm.json` was regenerated with `11.1` intent text cleaned, `11.3.2` and `11.3.3` restored under `11.3`, and `11.5` continuation text preserved before `11.6`
 - a negative-control regeneration check on `zones/dms.json`, `zones/dmu.json`, and `zones/dw.json` did not reproduce the RM-style figure or table bleed in requirement text
 - `scripts/extract-charlottetown-zoning-bylaw.py` now promotes RM-style dimensional clause groups into section tables generically for draft zone outputs, instead of limiting that repair to `RM`
+- `scripts/extract-charlottetown-zoning-bylaw.py` now applies targeted draft general-provisions repairs for the named Part 3, Part 4, and Part 5 section-order, table-placement, and inline-clause defects
+- regenerated draft outputs move `2.19(d-g)` to `3.1.2(d-g)`, insert Tables 3.1, 3.2, 3.3, and 4.1 after their applicable clauses, restore `3.19.2(c-i)` and `3.19.3(d-g)`, split `4.6` out of `4.5`, and split `5.2.2(a-b)`
 
 Next actions:
 

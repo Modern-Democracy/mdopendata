@@ -171,6 +171,7 @@ def transform_zone_doc(path: Path) -> dict[str, Any]:
 def transform_supporting_doc(path: Path, document_type: str) -> dict[str, Any]:
     legacy = preprocess_sections_legacy(read_json(path))
     data = current.transform_sections_doc(NORMALIZER, legacy, document_type)
+    current.repair_general_provisions_tables(data)
     current.refresh_schema_numeric_values(data)
     current.refresh_schema_terms(NORMALIZER, data)
     current.apply_zone_reference_model(data)

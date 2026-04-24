@@ -857,10 +857,307 @@ def remove_clause_id_range(section: dict[str, Any], clause_ids: set[str]) -> Non
         clause["source_order"] = index
 
 
+def find_raw_section(sections: list[dict[str, Any]], label: str) -> dict[str, Any] | None:
+    return next((section for section in sections if section.get("section_label_raw") == label), None)
+
+
+def resequence_clauses(section: dict[str, Any]) -> None:
+    for index, clause in enumerate(section.get("clauses_raw") or [], start=1):
+        clause["source_order"] = index
+
+
+def reparent_clause(
+    clause: dict[str, Any],
+    new_section_label: str,
+    parent_clause_id: str | None,
+    parent_decimal: str | None = None,
+) -> None:
+    label = clean_text(clause.get("clause_label_raw"))
+    token = clean_text(label).strip(".()")
+    if label.startswith("."):
+        suffix = token
+    elif parent_decimal:
+        suffix = f"{parent_decimal}-{token}"
+    else:
+        suffix = token
+    clause["clause_id"] = f"doc-general-provisions-clause-{slugify(new_section_label)}-{slugify(suffix)}"
+    clause["parent_clause_id"] = parent_clause_id
+
+
+def repair_charlottetown_draft_general_provisions_tables(data: dict[str, Any]) -> bool:
+    metadata = data.get("document_metadata") or {}
+    if not str(metadata.get("bylaw_name") or "").startswith("Draft Zoning"):
+        return False
+    raw_data = data.get("raw_data") or {}
+    sections = raw_data.get("sections_raw") or []
+    changed = False
+
+    section_2_19 = find_raw_section(sections, "2.19")
+    section_3_1 = find_raw_section(sections, "3.1")
+    if section_2_19 and section_3_1:
+        moved = []
+        moved_ids = {
+            "doc-general-provisions-clause-2-19-4-d",
+            "doc-general-provisions-clause-2-19-4-e",
+            "doc-general-provisions-clause-2-19-4-f",
+            "doc-general-provisions-clause-2-19-4-g",
+        }
+        kept = []
+        for clause in section_2_19.get("clauses_raw") or []:
+            if clause.get("clause_id") in moved_ids:
+                reparent_clause(clause, "3.1", "doc-general-provisions-clause-3-1-2", "2")
+                moved.append(clause)
+            else:
+                kept.append(clause)
+        if moved:
+            section_2_19["clauses_raw"] = kept
+            section_3_1["clauses_raw"].extend(moved)
+            resequence_clauses(section_2_19)
+            resequence_clauses(section_3_1)
+            changed = True
+
+        table_id_value = "doc-general-provisions-table-3-1-2-a"
+        replace_section_table(
+            section_3_1,
+            {
+                "table_id": table_id_value,
+                "table_title_raw": "Table 3.1 Non-Habitable accessory buildings requirements per lot",
+                "source_order": 7,
+                "columns_raw": general_provisions_table_columns(
+                    [
+                        ("row_label", ""),
+                        ("lot_area", "Lot Area"),
+                        ("accessory_buildings_permitted", "# of Accessory Buildings permitted"),
+                        ("total_building_footprint_maximum", "Total Building Footprint (max.)"),
+                        ("height_maximum", "Height (max.)"),
+                    ]
+                ),
+                "rows_raw": [
+                    make_labeled_table_row(table_id_value, 1, "a", {"lot_area": "< 0.5 Acres", "accessory_buildings_permitted": "One", "total_building_footprint_maximum": "10% of the lot area", "height_maximum": "5.3 m (17.5 ft)"}),
+                    make_labeled_table_row(table_id_value, 2, "b", {"lot_area": "> 0.5 to 0.99 Acres", "accessory_buildings_permitted": "Two", "total_building_footprint_maximum": "79 m2 combined", "height_maximum": "6.1 m (20 ft)"}),
+                    make_labeled_table_row(table_id_value, 3, "c", {"lot_area": "> 1 Acre", "accessory_buildings_permitted": "Three", "total_building_footprint_maximum": "111.5 m2 combined; however, no individual accessory building shall exceed 79 m2", "height_maximum": "6.1 m (20 ft)"}),
+                ],
+                "citations": {"pdf_page_start": 21, "pdf_page_end": 21, "bylaw_page_start": 17, "bylaw_page_end": 17},
+            },
+        )
+        changed = True
+
+    section_3_2 = find_raw_section(sections, "3.2")
+    if section_3_2:
+        clause_3_2_1 = next((clause for clause in section_3_2.get("clauses_raw") or [] if clause.get("clause_id") == "doc-general-provisions-clause-3-2-1"), None)
+        if clause_3_2_1:
+            clause_3_2_1["clause_text_raw"] = "Projecting structures listed in Table 3.2 shall be permitted to project from a primary building into the required Yard for the distance specified."
+        table_id_value = "doc-general-provisions-table-3-2-1"
+        replace_section_table(
+            section_3_2,
+            {
+                "table_id": table_id_value,
+                "table_title_raw": "Table 3.2 Projecting Structures into yard setbacks",
+                "source_order": 3,
+                "columns_raw": general_provisions_table_columns(
+                    [
+                        ("row_label", ""),
+                        ("structure", "Structure"),
+                        ("yard_projection_permitted", "Yard in which projection is permitted"),
+                        ("maximum_projection_into_yard", "Maximum projection into Yard"),
+                        ("minimum_distance_from_lot_line", "Minimum distance from Lot Line"),
+                    ]
+                ),
+                "rows_raw": [
+                    make_labeled_table_row(table_id_value, 1, "a", {"structure": "Air Conditioning / Heat Pump units", "yard_projection_permitted": "All yards", "maximum_projection_into_yard": "1.5m", "minimum_distance_from_lot_line": "1 m"}),
+                    make_labeled_table_row(table_id_value, 2, "b", {"structure": "Awning/Canopy", "yard_projection_permitted": "Front, Rear, Flankage", "maximum_projection_into_yard": "1.0 m (3.3 ft)", "minimum_distance_from_lot_line": "0.3 m (1 ft)"}),
+                    make_labeled_table_row(table_id_value, 3, "c", {"structure": "Balcony", "yard_projection_permitted": "Front, flankage, rear", "maximum_projection_into_yard": "1.2 m (3.9 ft)", "minimum_distance_from_lot_line": "1 m (3.3 ft)"}),
+                    make_labeled_table_row(table_id_value, 4, "d", {"structure": "Bay window", "yard_projection_permitted": "All Yards", "maximum_projection_into_yard": "0.6 m (2.0 ft)", "minimum_distance_from_lot_line": "1 m (3.3 ft)"}),
+                    make_labeled_table_row(table_id_value, 5, "e", {"structure": "Ramp", "yard_projection_permitted": "All Yards", "maximum_projection_into_yard": "1.83 m (6 ft)", "minimum_distance_from_lot_line": "1 m (3.3 ft)"}),
+                    make_labeled_table_row(table_id_value, 6, "f", {"structure": "Exterior staircase (landing and stairs connecting to the First Storey)", "yard_projection_permitted": "All Yards", "maximum_projection_into_yard": "1.83m (6 ft)", "minimum_distance_from_lot_line": "6 m (19.7 ft) from the front lot line and flankage lot line; 1.2 m (3.9 ft) from the side or rear lot line"}),
+                    make_labeled_table_row(table_id_value, 7, "g", {"structure": "Exterior staircase (fire escape and any stairs extending beyond the First Storey)", "yard_projection_permitted": "Side and rear", "maximum_projection_into_yard": "1.2 m (3.9 ft)", "minimum_distance_from_lot_line": "1.2 m (3.9 ft)"}),
+                    make_labeled_table_row(table_id_value, 8, "h", {"structure": "Deck 0.3 m (1.0 ft) or more above Grade", "yard_projection_permitted": "Rear, side, Flankage", "maximum_projection_into_yard": "Same as minimum Side Yard for the building, except in R-1L R-1S, R-1N, R-2 and R-2S Zones where the Setback is 4.6 m (15.1 ft) from the rear lot line", "minimum_distance_from_lot_line": ""}),
+                    make_labeled_table_row(table_id_value, 9, "i", {"structure": "Deck at Grade or less than 0.3 m (1.0 ft)", "yard_projection_permitted": "Rear, side, Flankage", "maximum_projection_into_yard": "", "minimum_distance_from_lot_line": "1 m (3.3 ft)"}),
+                    make_labeled_table_row(table_id_value, 10, "j", {"structure": "Deck at Grade or less than 0.3 m (1.0 ft)", "yard_projection_permitted": "Front Yard", "maximum_projection_into_yard": "1.83m (6 ft)", "minimum_distance_from_lot_line": "2 m (6.6 ft)"}),
+                    make_labeled_table_row(table_id_value, 11, "k", {"structure": "Porch", "yard_projection_permitted": "Front, rear, Flankage", "maximum_projection_into_yard": "1.5 m (4.9 ft)", "minimum_distance_from_lot_line": "1 m (3.3 ft)"}),
+                ],
+                "citations": {"pdf_page_start": 22, "pdf_page_end": 22, "bylaw_page_start": 18, "bylaw_page_end": 18},
+            },
+        )
+        changed = True
+
+    section_3_6 = find_raw_section(sections, "3.6")
+    if section_3_6:
+        clause_3_6_1 = next((clause for clause in section_3_6.get("clauses_raw") or [] if clause.get("clause_id") == "doc-general-provisions-clause-3-6-1"), None)
+        if clause_3_6_1:
+            clause_3_6_1["clause_text_raw"] = "The maximum Height of a building may be increased, to accommodate the following rooftop height exemptions as listed in Table 3.3."
+        table_id_value = "doc-general-provisions-table-3-6-1"
+        replace_section_table(
+            section_3_6,
+            {
+                "table_id": table_id_value,
+                "table_title_raw": "Table 3.3 Rooftop Height Exemptions",
+                "source_order": 2,
+                "columns_raw": general_provisions_table_columns(
+                    [
+                        ("row_label", ""),
+                        ("feature", "Feature"),
+                        ("maximum_height_above_maximum_roof", "Column 1: Maximum height above maximum roof"),
+                        ("roof_coverage_restriction", "Column 2: 30% roof coverage restriction"),
+                        ("minimum_setback_from_roof_edge", "Column 3: Minimum setback from roof edge facing front flanking lot lines"),
+                    ]
+                ),
+                "rows_raw": [
+                    make_labeled_table_row(table_id_value, 1, "a", {"feature": "Antenna", "maximum_height_above_maximum_roof": "Unlimited", "roof_coverage_restriction": "", "minimum_setback_from_roof_edge": "3 m"}),
+                    make_labeled_table_row(table_id_value, 2, "b", {"feature": "Chimney", "maximum_height_above_maximum_roof": "Unlimited", "roof_coverage_restriction": "", "minimum_setback_from_roof_edge": ""}),
+                    make_labeled_table_row(table_id_value, 3, "c", {"feature": "Clear glass guard and railing system", "maximum_height_above_maximum_roof": "2 m", "roof_coverage_restriction": "", "minimum_setback_from_roof_edge": ""}),
+                    make_labeled_table_row(table_id_value, 4, "d", {"feature": "Clock tower or bell tower", "maximum_height_above_maximum_roof": "Unlimited", "roof_coverage_restriction": "YES", "minimum_setback_from_roof_edge": ""}),
+                    make_labeled_table_row(table_id_value, 5, "e", {"feature": "Communication tower required to support uses and activities in the building", "maximum_height_above_maximum_roof": "Unlimited", "roof_coverage_restriction": "", "minimum_setback_from_roof_edge": "3 m"}),
+                    make_labeled_table_row(table_id_value, 6, "f", {"feature": "Cooling Tower", "maximum_height_above_maximum_roof": "Unlimited", "roof_coverage_restriction": "YES", "minimum_setback_from_roof_edge": "3 m"}),
+                    make_labeled_table_row(table_id_value, 7, "g", {"feature": "Elevator enclosure", "maximum_height_above_maximum_roof": "6.0 m", "roof_coverage_restriction": "YES", "minimum_setback_from_roof_edge": ""}),
+                    make_labeled_table_row(table_id_value, 8, "h", {"feature": "Flag pole", "maximum_height_above_maximum_roof": "Unlimited", "roof_coverage_restriction": "", "minimum_setback_from_roof_edge": ""}),
+                    make_labeled_table_row(table_id_value, 9, "i", {"feature": "Heating, ventilation, and air conditioning equipment and enclosure", "maximum_height_above_maximum_roof": "5.5 m", "roof_coverage_restriction": "YES", "minimum_setback_from_roof_edge": "3 m"}),
+                    make_labeled_table_row(table_id_value, 10, "j", {"feature": "Helipad on a hospital roof", "maximum_height_above_maximum_roof": "4.5 m", "roof_coverage_restriction": "", "minimum_setback_from_roof_edge": ""}),
+                    make_labeled_table_row(table_id_value, 11, "k", {"feature": "High-plume laboratory exhaust fan", "maximum_height_above_maximum_roof": "Unlimited", "roof_coverage_restriction": "YES", "minimum_setback_from_roof_edge": "3 m"}),
+                    make_labeled_table_row(table_id_value, 12, "l", {"feature": "Hard landscaping or soft landscaping", "maximum_height_above_maximum_roof": "4.5 m", "roof_coverage_restriction": "", "minimum_setback_from_roof_edge": ""}),
+                    make_labeled_table_row(table_id_value, 13, "m", {"feature": "Lighting Rod", "maximum_height_above_maximum_roof": "Unlimited", "roof_coverage_restriction": "", "minimum_setback_from_roof_edge": ""}),
+                    make_labeled_table_row(table_id_value, 14, "n", {"feature": "Mechanical Penthouse", "maximum_height_above_maximum_roof": "5.5 m", "roof_coverage_restriction": "", "minimum_setback_from_roof_edge": "3 m"}),
+                    make_labeled_table_row(table_id_value, 15, "o", {"feature": "Parapet", "maximum_height_above_maximum_roof": "2 m", "roof_coverage_restriction": "", "minimum_setback_from_roof_edge": ""}),
+                    make_labeled_table_row(table_id_value, 16, "p", {"feature": "Rooftop Cupola", "maximum_height_above_maximum_roof": "4.5 m", "roof_coverage_restriction": "YES", "minimum_setback_from_roof_edge": ""}),
+                    make_labeled_table_row(table_id_value, 17, "q", {"feature": "Rooftop Greenhouse", "maximum_height_above_maximum_roof": "6.0 m", "roof_coverage_restriction": "", "minimum_setback_from_roof_edge": "3 m"}),
+                    make_labeled_table_row(table_id_value, 18, "r", {"feature": "Skylight", "maximum_height_above_maximum_roof": "1.5 m", "roof_coverage_restriction": "", "minimum_setback_from_roof_edge": ""}),
+                    make_labeled_table_row(table_id_value, 19, "s", {"feature": "Solar collector", "maximum_height_above_maximum_roof": "4.5 m", "roof_coverage_restriction": "", "minimum_setback_from_roof_edge": ""}),
+                    make_labeled_table_row(table_id_value, 20, "t", {"feature": "Spire, steeple, minaret, and similar features", "maximum_height_above_maximum_roof": "Unlimited", "roof_coverage_restriction": "YES", "minimum_setback_from_roof_edge": ""}),
+                    make_labeled_table_row(table_id_value, 21, "u", {"feature": "Staircase or staircase enclosure", "maximum_height_above_maximum_roof": "4.5 m", "roof_coverage_restriction": "", "minimum_setback_from_roof_edge": "3 m"}),
+                    make_labeled_table_row(table_id_value, 22, "v", {"feature": "Windscreen", "maximum_height_above_maximum_roof": "4.5 m", "roof_coverage_restriction": "", "minimum_setback_from_roof_edge": ""}),
+                    make_labeled_table_row(table_id_value, 23, "w", {"feature": "Window cleaning Platform", "maximum_height_above_maximum_roof": "Unlimited", "roof_coverage_restriction": "YES", "minimum_setback_from_roof_edge": ""}),
+                ],
+                "citations": {"pdf_page_start": 25, "pdf_page_end": 25, "bylaw_page_start": 21, "bylaw_page_end": 21},
+            },
+        )
+        changed = True
+
+    section_3_16 = find_raw_section(sections, "3.16")
+    section_3_19 = find_raw_section(sections, "3.19")
+    if section_3_16 and section_3_19:
+        tail = "pump-out facility that is permanently connected to the municipal sewer system that is available for use at all times, and complies with all applicable Federal and Provincial Environmental Protection Acts and Regulations."
+        moved_2_clauses: list[dict[str, Any]] = []
+        kept_3_16 = []
+        for clause in section_3_16.get("clauses_raw") or []:
+            if clause.get("clause_id") == "doc-general-provisions-clause-3-16-4":
+                clause["clause_text_raw"] = clean_text((clause.get("clause_text_raw") or "").replace(tail, ""))
+                kept_3_16.append(clause)
+            elif clause.get("clause_id") in {f"doc-general-provisions-clause-3-16-4-{label}" for label in "defgh"}:
+                reparent_clause(clause, "3.19", "doc-general-provisions-clause-3-19-2", "2")
+                moved_2_clauses.append(clause)
+            else:
+                kept_3_16.append(clause)
+        section_3_16["clauses_raw"] = kept_3_16
+        for clause in section_3_19.get("clauses_raw") or []:
+            if clause.get("clause_id") == "doc-general-provisions-clause-3-19-2-c":
+                clause["clause_text_raw"] = "Floating structures must be permanently connected to the municipal sewer system by means of a marina sewage collection system, or are moored at a marina that has a sewage " + tail
+            elif clause.get("clause_id") in {f"doc-general-provisions-clause-3-19-2-{label}" for label in "defg"}:
+                reparent_clause(clause, "3.19", "doc-general-provisions-clause-3-19-3", "3")
+        if moved_2_clauses:
+            clauses = section_3_19.get("clauses_raw") or []
+            insert_at = next((index + 1 for index, clause in enumerate(clauses) if clause.get("clause_id") == "doc-general-provisions-clause-3-19-2-c"), 6)
+            section_3_19["clauses_raw"] = clauses[:insert_at] + moved_2_clauses + clauses[insert_at:]
+        ordered_prefix = [
+            "doc-general-provisions-clause-3-19",
+            "doc-general-provisions-clause-3-19-1",
+            "doc-general-provisions-clause-3-19-2",
+            *[f"doc-general-provisions-clause-3-19-2-{label}" for label in "abcdefghi"],
+            "doc-general-provisions-clause-3-19-3",
+            *[f"doc-general-provisions-clause-3-19-3-{label}" for label in "abcdefg"],
+            "doc-general-provisions-clause-3-19-4",
+        ]
+        order_lookup = {clause_id_value: index for index, clause_id_value in enumerate(ordered_prefix)}
+        section_3_19["clauses_raw"].sort(
+            key=lambda clause: (order_lookup.get(clause.get("clause_id"), len(order_lookup)), clause.get("source_order", 0))
+        )
+        resequence_clauses(section_3_16)
+        resequence_clauses(section_3_19)
+        changed = True
+
+    section_4_5 = find_raw_section(sections, "4.5")
+    if section_4_5 and not find_raw_section(sections, "4.6"):
+        section_4_5["clauses_raw"][3]["clause_text_raw"] = section_4_5["clauses_raw"][3]["clause_text_raw"].replace(" 4.6 ACCESSORY DWELLING UNITS, ATTACHED", "")
+        moved = section_4_5["clauses_raw"][4:]
+        section_4_5["clauses_raw"] = section_4_5["clauses_raw"][:4]
+        last_decimal: str | None = None
+        for clause in moved:
+            label = clean_text(clause.get("clause_label_raw"))
+            if label.startswith("."):
+                last_decimal = label.strip(".")
+                reparent_clause(clause, "4.6", None)
+            else:
+                reparent_clause(clause, "4.6", f"doc-general-provisions-clause-4-6-{last_decimal}", last_decimal)
+        new_section = {
+            **section_4_5,
+            "section_id": "doc-general-provisions-section-4-6",
+            "section_label_raw": "4.6",
+            "section_title_raw": "ACCESSORY DWELLING UNITS, ATTACHED",
+            "source_order": section_4_5.get("source_order", 5) + 1,
+            "clauses_raw": moved,
+            "tables_raw": [],
+        }
+        insert_at = sections.index(section_4_5) + 1
+        sections.insert(insert_at, new_section)
+        for index, section in enumerate(sections, start=1):
+            section["source_order"] = index
+        resequence_clauses(section_4_5)
+        resequence_clauses(new_section)
+        changed = True
+
+    section_4_7 = find_raw_section(sections, "4.7")
+    if section_4_7:
+        table_id_value = "doc-general-provisions-table-4-7-3-a"
+        replace_section_table(
+            section_4_7,
+            {
+                "table_id": table_id_value,
+                "table_title_raw": "Table 4.1 Detached ADU Requirements",
+                "source_order": 15,
+                "columns_raw": general_provisions_table_columns([("row_label", ""), ("requirement", "Requirement"), ("condition", "Condition")]),
+                "rows_raw": [
+                    make_labeled_table_row(table_id_value, 1, "a", {"requirement": "Rear Setback", "condition": "min. 1.5 m"}),
+                    make_labeled_table_row(table_id_value, 2, "b", {"requirement": "Side Setback", "condition": "min. 1.5 m"}),
+                    make_labeled_table_row(table_id_value, 3, "c", {"requirement": "Floor Area", "condition": "max. 80 m2"}),
+                    make_labeled_table_row(table_id_value, 4, "d", {"requirement": "Height", "condition": "max. 7 m"}),
+                    make_labeled_table_row(table_id_value, 5, "e", {"requirement": "Distance between Buildings", "condition": "min. 2 m"}),
+                ],
+                "citations": {"pdf_page_start": 34, "pdf_page_end": 34, "bylaw_page_start": 30, "bylaw_page_end": 30},
+            },
+        )
+        changed = True
+
+    section_5_2 = find_raw_section(sections, "5.2")
+    if section_5_2:
+        clause_5_2_2 = next((clause for clause in section_5_2.get("clauses_raw") or [] if clause.get("clause_id") == "doc-general-provisions-clause-5-2-2"), None)
+        if clause_5_2_2 and " a) " in clause_5_2_2.get("clause_text_raw", ""):
+            clause_5_2_2["clause_text_raw"] = "In all other zones nothing in this bylaw shall prevent the use of an undersized lot with respect to minimum lot area or frontage provided that:"
+            cite = clause_5_2_2.get("citations")
+            section_5_2["clauses_raw"].extend(
+                [
+                    {"clause_id": "doc-general-provisions-clause-5-2-2-a", "clause_label_raw": "(a)", "clause_text_raw": "The use of such lot is permitted in the zone in which such lot is located;", "parent_clause_id": "doc-general-provisions-clause-5-2-2", "source_order": 3, "citations": cite},
+                    {"clause_id": "doc-general-provisions-clause-5-2-2-b", "clause_label_raw": "(b)", "clause_text_raw": "All other standards of the zone are maintained.", "parent_clause_id": "doc-general-provisions-clause-5-2-2", "source_order": 4, "citations": cite},
+                ]
+            )
+            resequence_clauses(section_5_2)
+            changed = True
+
+    if changed:
+        raw_data["tables_raw"] = [
+            {"table_id": table["table_id"], "section_id": section["section_id"]}
+            for section in sections
+            for table in section.get("tables_raw") or []
+        ]
+        rebuild_clause_refs(data)
+        refresh_source_unit_text_from_raw(data)
+    return changed
+
+
 def repair_general_provisions_tables(data: dict[str, Any]) -> bool:
     metadata = data.get("document_metadata") or {}
     if metadata.get("document_type") != "general_provisions":
         return False
+    if repair_charlottetown_draft_general_provisions_tables(data):
+        return True
     raw_data = data.get("raw_data") or {}
     sections = raw_data.get("sections_raw") or []
     changed = False
