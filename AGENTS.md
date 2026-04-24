@@ -83,6 +83,13 @@
 - Current task purpose: enable parcel and neighbourhood comparison between
   current and draft Charlottetown zoning, with outputs suitable for later
   PostGIS/QGIS use and a future public web front end.
+- For substantive Charlottetown extraction, validation, comparison, GIS, QA,
+  or planning work, maintain `wiki/charlottetown` when the work creates or
+  changes durable knowledge. Follow `wiki/charlottetown/README.md`, update
+  `wiki/charlottetown/index.md` for added or materially changed wiki pages,
+  and append `wiki/charlottetown/log.md` in the same change. Do not add wiki
+  entries for purely mechanical edits, failed experiments, or transient
+  command output unless they affect durable project knowledge.
 - For the Charlottetown draft zoning validation workstream, keep
   `plan/chalottetown-draft-zoning-timeline.md` up to date until the plan is
   complete. Update its active phase, overall status, current progress, and
