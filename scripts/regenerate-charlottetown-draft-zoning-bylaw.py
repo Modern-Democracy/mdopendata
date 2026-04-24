@@ -172,7 +172,9 @@ def transform_supporting_doc(path: Path, document_type: str) -> dict[str, Any]:
     legacy = preprocess_sections_legacy(read_json(path))
     data = current.transform_sections_doc(NORMALIZER, legacy, document_type)
     current.repair_general_provisions_tables(data)
+    current.repair_charlottetown_draft_parking_sections(data)
     current.refresh_schema_numeric_values(data)
+    current.promote_reviewed_draft_general_provisions_requirements(data)
     current.refresh_schema_terms(NORMALIZER, data)
     current.apply_zone_reference_model(data)
     return data

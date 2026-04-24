@@ -6,6 +6,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-24] extraction | Draft parking and land-use Phase 3 repairs
+
+Updated `topics/draft-layout-repair-notes.md` and `topics/draft-validation-rebaseline.md` after resolving the Phase 3 `needs_review` entries in `general-provisions-parking.json` and `general-provisions-land-use.json`.
+
 ## [2026-04-24] validation | Draft issue ledger refresh
 
 Updated `topics/draft-validation-rebaseline.md` after refreshing `plan/chalottetown-draft-zoning-issue-ledger.csv` from the current regenerated draft outputs.

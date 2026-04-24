@@ -1315,6 +1315,278 @@ def repair_charlottetown_draft_general_provisions_tables(data: dict[str, Any]) -
     return changed
 
 
+def repair_charlottetown_draft_parking_sections(data: dict[str, Any]) -> bool:
+    metadata = data.get("document_metadata") or {}
+    if not str(metadata.get("bylaw_name") or "").startswith("Draft Zoning"):
+        return False
+    raw_data = data.get("raw_data") or {}
+    sections = raw_data.get("sections_raw") or []
+    changed = False
+
+    section_8_3 = find_raw_section(sections, "8.3")
+    section_8_4 = find_raw_section(sections, "8.4")
+    if section_8_3 and section_8_4:
+        moved = []
+        kept = []
+        for clause in section_8_3.get("clauses_raw") or []:
+            if clause.get("clause_id") in {
+                "doc-general-provisions-clause-8-3-4",
+                "doc-general-provisions-clause-8-3-5",
+            }:
+                new_label = clause["clause_id"].rsplit("-", 1)[-1]
+                clause["clause_id"] = f"doc-general-provisions-clause-8-4-{new_label}"
+                moved.append(clause)
+            else:
+                kept.append(clause)
+        if moved:
+            section_8_3["clauses_raw"] = kept
+            section_8_4["clauses_raw"].extend(moved)
+            section_8_4["clauses_raw"].sort(key=lambda clause: int(clean_text(clause.get("clause_label_raw", "")).strip(".") or 0))
+            resequence_clauses(section_8_3)
+            resequence_clauses(section_8_4)
+            changed = True
+
+    section_8_4 = find_raw_section(sections, "8.4")
+    if section_8_4:
+        for clause in section_8_4.get("clauses_raw") or []:
+            if clause.get("clause_id") == "doc-general-provisions-clause-8-4-5":
+                text = clause.get("clause_text_raw") or ""
+                clause["clause_text_raw"] = clean_text(text.split(" Clubs, Educational Facilities", 1)[0])
+                changed = True
+
+    section_8_5 = find_raw_section(sections, "8.5")
+    if section_8_5:
+        section_8_5["clauses_raw"] = [
+            clause for clause in section_8_5.get("clauses_raw") or [] if clause.get("clause_label_raw") != "section"
+        ]
+        for clause in section_8_5.get("clauses_raw") or []:
+            if clause.get("clause_id") == "doc-general-provisions-clause-8-5-2-f":
+                clause["clause_text_raw"] = (
+                    "A land use buffer, satisfactory to the Development Officer, consisting of a 1 m wide landscape "
+                    "treatment, a fence and/or mature trees (spaced no more than 6.1 m apart), or both, shall be "
+                    "provided where a parking lot abuts a residential zone or a building occupied for residential use "
+                    "in a commercial zone;"
+                )
+                changed = True
+        resequence_clauses(section_8_5)
+
+    section_8_7 = find_raw_section(sections, "8.7")
+    if section_8_7:
+        merge_section_title_clause(section_8_7, "STANDARDS")
+        for clause in section_8_7.get("clauses_raw") or []:
+            if clause.get("clause_id") == "doc-general-provisions-clause-8-7-1-c":
+                clause["clause_text_raw"] = "An accessible curb cut or mountable curb where curbs are present"
+                changed = True
+
+    section_8_8 = find_raw_section(sections, "8.8")
+    if section_8_8:
+        for clause in section_8_8.get("clauses_raw") or []:
+            if clause.get("clause_id") == "doc-general-provisions-clause-8-8-2":
+                clause["clause_text_raw"] = (
+                    "For all semi detached and duplex homes, no more than 50% of the area of the front or flankage "
+                    "yard shall be dedicated to driveways or parking;"
+                )
+                changed = True
+            elif clause.get("clause_id") == "doc-general-provisions-clause-8-8-6":
+                clause["clause_text_raw"] = (
+                    "Porte cochere's or driveway drop-offs for multi-unit dwellings entries are permitted between "
+                    "the building and the street with 2 temporary parking stalls."
+                )
+                changed = True
+
+    section_8_12 = find_raw_section(sections, "8.12")
+    if section_8_12 and not find_raw_section(sections, "8.13"):
+        clauses_8_12 = []
+        clauses_8_13 = []
+        clauses_8_14 = []
+        segment = "8.12"
+        for clause in section_8_12.get("clauses_raw") or []:
+            clause_id = clause.get("clause_id")
+            text = clause.get("clause_text_raw") or ""
+            if clause_id == "doc-general-provisions-clause-8-12-3-b":
+                clause["clause_text_raw"] = "At least 0.9 m apart for other types of rack."
+                clauses_8_12.append(clause)
+                segment = "8.13"
+                continue
+            if clause_id == "doc-general-provisions-clause-8-12-3":
+                clause["clause_text_raw"] = (
+                    "Parking stalls shall be no less than 0.6 m (2 ft) long and 1.2 m (3.9 ft) high, "
+                    "and have an associated aisle of 1.5 m in width."
+                )
+                reparent_clause(clause, "8.13", None)
+                clauses_8_13.append(clause)
+                segment = "8.14"
+                continue
+            if clause_id == "doc-general-provisions-clause-8-12-1-a":
+                clause["clause_text_raw"] = (
+                    "Be located outside of a building in a location that is visible and accessible from the street, "
+                    "within 20 m of a main door;"
+                )
+                reparent_clause(clause, "8.14", "doc-general-provisions-clause-8-14-1", "1")
+                clauses_8_14.append(clause)
+                continue
+            if clause_id == "doc-general-provisions-clause-8-12-1-c":
+                reparent_clause(clause, "8.14", "doc-general-provisions-clause-8-14-1", "1")
+                clauses_8_14.append(clause)
+                continue
+            if clause_id == "doc-general-provisions-clause-8-12-1":
+                clause["clause_text_raw"] = "Class B bicycle parking shall:"
+                reparent_clause(clause, "8.14", None)
+                clauses_8_14.append(clause)
+                segment = "8.14"
+                continue
+            if clause_id == "doc-general-provisions-clause-8-12-1-d":
+                clause["clause_text_raw"] = "Within a covered parking garage area reserved for bicycles; or"
+            if segment == "8.13":
+                if clause.get("clause_label_raw") in {"(b)", "(c)"} and clause_id in {
+                    "doc-general-provisions-clause-8-12-1-b",
+                    "doc-general-provisions-clause-8-12-1-c",
+                }:
+                    reparent_clause(clause, "8.14", "doc-general-provisions-clause-8-14-1", "1")
+                    clauses_8_14.append(clause)
+                    segment = "8.14"
+                else:
+                    reparent_clause(clause, "8.13", None if clause.get("clause_label_raw", "").startswith(".") else "doc-general-provisions-clause-8-13-1", "1")
+                    clauses_8_13.append(clause)
+            elif segment == "8.14":
+                reparent_clause(clause, "8.14", None if clause.get("clause_label_raw", "").startswith(".") else "doc-general-provisions-clause-8-14-1", "1")
+                clauses_8_14.append(clause)
+            else:
+                clauses_8_12.append(clause)
+        if clauses_8_13 or clauses_8_14:
+            section_8_12["clauses_raw"] = clauses_8_12
+            new_sections = []
+            if clauses_8_13:
+                new_8_13 = {**section_8_12, "section_id": "doc-general-provisions-section-8-13", "section_label_raw": "8.13", "section_title_raw": "BICYCLE PARKING (CLASS A)", "clauses_raw": clauses_8_13, "tables_raw": []}
+                resequence_clauses(new_8_13)
+                new_sections.append(new_8_13)
+            if clauses_8_14:
+                new_8_14 = {**section_8_12, "section_id": "doc-general-provisions-section-8-14", "section_label_raw": "8.14", "section_title_raw": "BICYCLE PARKING (CLASS B)", "clauses_raw": clauses_8_14, "tables_raw": []}
+                resequence_clauses(new_8_14)
+                new_sections.append(new_8_14)
+            insert_at = sections.index(section_8_12) + 1
+            sections[insert_at:insert_at] = new_sections
+            for index, section in enumerate(sections, start=1):
+                section["source_order"] = index
+            resequence_clauses(section_8_12)
+            changed = True
+
+    section_8_12 = find_raw_section(sections, "8.12")
+    if section_8_12:
+        cite = (section_8_12.get("clauses_raw") or [{}])[0].get("citations") or section_8_12.get("citations")
+
+        def parking_clause(section_label: str, suffix: str, label: str, text: str, parent: str | None = None) -> dict[str, Any]:
+            return {
+                "clause_id": f"doc-general-provisions-clause-{slugify(section_label)}-{slugify(suffix)}",
+                "clause_label_raw": label,
+                "clause_text_raw": text,
+                "parent_clause_id": parent,
+                "source_order": 0,
+                "citations": cite,
+            }
+
+        section_8_12["clauses_raw"] = [
+            parking_clause("8.12", "1", ".1", "The minimum required bicycle parking spaces shall be provided in accordance with the bicycle parking requirements in Table 8.5. Decimal results shall be rounded up."),
+            parking_clause("8.12", "2", ".2", "Notwithstanding the ratios required for class A and B bike parking, class A bike parking can be provided at a higher than the recommended percentage to meet the bike parking requirements up to 100%."),
+            parking_clause("8.12", "3", ".3", "Bicycle parking racks shall be required to be spaced"),
+            parking_clause("8.12", "3-a", "(a)", "At least 0.45 m apart for a vertical rack or two-tier rack with a lift assist, or", "doc-general-provisions-clause-8-12-3"),
+            parking_clause("8.12", "3-b", "(b)", "At least 0.9 m apart for other types of rack.", "doc-general-provisions-clause-8-12-3"),
+        ]
+        section_8_13 = {
+            **section_8_12,
+            "section_id": "doc-general-provisions-section-8-13",
+            "section_label_raw": "8.13",
+            "section_title_raw": "BICYCLE PARKING (CLASS A)",
+            "clauses_raw": [
+                parking_clause("8.13", "1", ".1", "Class A bicycle parking shall be located:"),
+                parking_clause("8.13", "1-a", "(a)", "Within a room that is dedicated to the storage of bicycles;", "doc-general-provisions-clause-8-13-1"),
+                parking_clause("8.13", "1-b", "(b)", "Within a roofed bicycle cage outside of a building;", "doc-general-provisions-clause-8-13-1"),
+                parking_clause("8.13", "1-c", "(c)", "Within an enclosed bicycle locker outside of a building;", "doc-general-provisions-clause-8-13-1"),
+                parking_clause("8.13", "1-d", "(d)", "Within a covered parking garage area reserved for bicycles; or", "doc-general-provisions-clause-8-13-1"),
+                parking_clause("8.13", "1-e", "(e)", "Within a resident storage unit located in an indoor parking area that is associated with a multi-unit dwelling use.", "doc-general-provisions-clause-8-13-1"),
+                parking_clause("8.13", "1-f", "(f)", "On the ground floor of the building; or", "doc-general-provisions-clause-8-13-1"),
+                parking_clause("8.13", "1-g", "(g)", "Within one storey of a ground floor and be:", "doc-general-provisions-clause-8-13-1"),
+                parking_clause("8.13", "1-g-i", "i)", "Accessible from a ground floor with ramps, which are protected from motor vehicle traffic, or", "doc-general-provisions-clause-8-13-1-g"),
+                parking_clause("8.13", "1-g-ii", "ii)", "Accessible from a ground floor by elevator.", "doc-general-provisions-clause-8-13-1-g"),
+                parking_clause("8.13", "2", ".2", "Any Class A bicycle storage shall be secured against unauthorized entry."),
+                parking_clause("8.13", "3", ".3", "Parking stalls shall be no less than 0.6 m (2 ft) long and 1.2 m (3.9 ft) high, and have an associated aisle of 1.5 m in width."),
+            ],
+            "tables_raw": [],
+        }
+        section_8_14 = {
+            **section_8_12,
+            "section_id": "doc-general-provisions-section-8-14",
+            "section_label_raw": "8.14",
+            "section_title_raw": "BICYCLE PARKING (CLASS B)",
+            "clauses_raw": [
+                parking_clause("8.14", "1", ".1", "Class B bicycle parking shall:"),
+                parking_clause("8.14", "1-a", "(a)", "Be located outside of a building in a location that is visible and accessible from the street, within 20 m of a main door;", "doc-general-provisions-clause-8-14-1"),
+                parking_clause("8.14", "1-b", "(b)", "Be surfaced with a hard material such as asphalt, concrete, or unit pavers;", "doc-general-provisions-clause-8-14-1"),
+                parking_clause("8.14", "1-c", "(c)", "Include galvanized, powder coated or stainless steel racks spaced 0.90 m width apart with a clear bike parking length of 1.8 m.", "doc-general-provisions-clause-8-14-1"),
+            ],
+            "tables_raw": [],
+        }
+        sections[:] = [section for section in sections if section.get("section_label_raw") not in {"8.13", "8.14"}]
+        insert_at = sections.index(section_8_12) + 1
+        sections[insert_at:insert_at] = [section_8_13, section_8_14]
+        for index, section in enumerate(sections, start=1):
+            section["source_order"] = index
+            resequence_clauses(section)
+        changed = True
+
+    if changed:
+        raw_data["tables_raw"] = [
+            {"table_id": table["table_id"], "section_id": section["section_id"]}
+            for section in sections
+            for table in section.get("tables_raw") or []
+        ]
+        rebuild_clause_refs(data)
+        refresh_source_unit_text_from_raw(data)
+    return changed
+
+
+DRAFT_GENERAL_PROVISIONS_REVIEWED_REQUIREMENT_CLAUSES = {
+    "doc-general-provisions-clause-4-6-3-d",
+    "doc-general-provisions-clause-4-6-5",
+    "doc-general-provisions-clause-4-7-2-d",
+    "doc-general-provisions-clause-4-13-2-b",
+    "doc-general-provisions-clause-4-17-1",
+    "doc-general-provisions-clause-4-18-2",
+    "doc-general-provisions-clause-4-18-3",
+    "doc-general-provisions-clause-8-4-4",
+    "doc-general-provisions-clause-8-4-5",
+    "doc-general-provisions-clause-8-5-2-f",
+    "doc-general-provisions-clause-8-6-1-a",
+    "doc-general-provisions-clause-8-6-1-e",
+    "doc-general-provisions-clause-8-7-1",
+    "doc-general-provisions-clause-8-7-2",
+    "doc-general-provisions-clause-8-8-6",
+    "doc-general-provisions-clause-8-12-3-a",
+    "doc-general-provisions-clause-8-12-3-b",
+    "doc-general-provisions-clause-8-13-3",
+    "doc-general-provisions-clause-8-14-1-a",
+    "doc-general-provisions-clause-8-14-1-c",
+}
+
+
+def promote_reviewed_draft_general_provisions_requirements(data: dict[str, Any]) -> bool:
+    metadata = data.get("document_metadata") or {}
+    if not str(metadata.get("bylaw_name") or "").startswith("Draft Zoning"):
+        return False
+    changed = False
+    for requirement in (data.get("structured_data") or {}).get("other_requirements") or []:
+        clause_ids = {
+            ref.get("source_ref_id")
+            for ref in requirement.get("source_refs") or []
+            if ref.get("source_ref_type") == "clause"
+        }
+        if clause_ids & DRAFT_GENERAL_PROVISIONS_REVIEWED_REQUIREMENT_CLAUSES:
+            if requirement.get("confidence") != "high":
+                requirement["confidence"] = "high"
+                changed = True
+    return changed
+
+
 def repair_general_provisions_tables(data: dict[str, Any]) -> bool:
     metadata = data.get("document_metadata") or {}
     if metadata.get("document_type") not in {"general_provisions", "design_standards"}:
@@ -4270,6 +4542,7 @@ def main() -> None:
             rebuild_clause_refs(data)
             rebuild_schema_tables_from_pdf(pdf_doc, data)
             repair_general_provisions_tables(data)
+            repair_charlottetown_draft_parking_sections(data)
             repair_general_provisions_sign_permit_hierarchy(data)
             repair_dc_bonus_height_section(data)
             repair_dms_bonus_height_section(data)
@@ -4286,6 +4559,7 @@ def main() -> None:
             apply_wf_bonus_height_context(data)
             apply_cda_development_concept_plan_context(data)
             apply_pz_land_use_buffer_context(data)
+            promote_reviewed_draft_general_provisions_requirements(data)
             write_json(path, apply_zone_reference_model(refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data))))
             continue
         if document_type == "definitions":
@@ -4297,10 +4571,12 @@ def main() -> None:
                 document_type,
             )
             repair_general_provisions_tables(transformed)
+            repair_charlottetown_draft_parking_sections(transformed)
             repair_general_provisions_sign_permit_hierarchy(transformed)
             reset_review_flags(transformed)
             refresh_schema_numeric_values(transformed)
             apply_general_provisions_sign_permit_numeric_context(transformed)
+            promote_reviewed_draft_general_provisions_requirements(transformed)
             write_json(path, apply_zone_reference_model(refresh_schema_terms(normalizer, transformed)))
 
     for item in manifest.get("supporting_files", []):
