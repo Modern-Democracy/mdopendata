@@ -63,14 +63,14 @@ SUPPORTING_PARTS = [
         "document_type": "permit_applications_processes",
         "title": "Permit Applications & Processes",
         "bylaw_start": 5,
-        "bylaw_end": 15,
+        "bylaw_end": 16,
     },
     {
         "part": 3,
         "slug": "general-provisions-buildings-structures",
         "document_type": "general_provisions",
         "title": "General Provisions for Buildings & Structures",
-        "bylaw_start": 16,
+        "bylaw_start": 17,
         "bylaw_end": 26,
     },
     {
