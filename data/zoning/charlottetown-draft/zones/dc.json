@@ -1,3285 +1,1284 @@
 {
-  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Draft Zoning & Development Bylaw",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
-    "document_type": "zone",
     "zone_code": "DC",
     "zone_name": "Downtown Core",
-    "zone_label_raw": "PART 13",
-    "zone_title_raw": "DC - Downtown Core",
-    "citations": {
+    "part_label_raw": "PART 13",
+    "chapter_heading_raw": "PART 13 DC - Downtown Core",
+    "draft_date_raw": "April 7, 2026"
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": [
+      "21(e)",
+      "21(ea)",
+      "21(ea)(1)",
+      "20(1)(a.1)"
+    ],
+    "pending_review_clause_patterns": [
+      "dot_numeric_provision_labels",
+      "parenthesized_alpha_clause_labels"
+    ]
+  },
+  "permitted_uses": [
+    {
+      "clause_label_raw": "(a)",
+      "use_type": "permitted_use",
+      "use_name": "Lodging House",
+      "status": "active",
+      "conditions": "The following uses are permitted in the DC Zone:",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      }
+    },
+    {
+      "clause_label_raw": "(b)",
+      "use_type": "permitted_use",
+      "use_name": "Converted Dwelling",
+      "status": "active",
+      "conditions": "The following uses are permitted in the DC Zone:",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      }
+    },
+    {
+      "clause_label_raw": "(c)",
+      "use_type": "permitted_use",
+      "use_name": "Commercial Daycare Centre",
+      "status": "active",
+      "conditions": "The following uses are permitted in the DC Zone:",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      }
+    },
+    {
+      "clause_label_raw": "(d)",
+      "use_type": "permitted_use",
+      "use_name": "Community Care Facility",
+      "status": "active",
+      "conditions": "The following uses are permitted in the DC Zone:",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      }
+    },
+    {
+      "clause_label_raw": "(e)",
+      "use_type": "permitted_use",
+      "use_name": "Community Institutional",
+      "status": "active",
+      "conditions": "The following uses are permitted in the DC Zone:",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      }
+    },
+    {
+      "clause_label_raw": "(f)",
+      "use_type": "permitted_use",
+      "use_name": "Cultural Establishment",
+      "status": "active",
+      "conditions": "The following uses are permitted in the DC Zone:",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      }
+    },
+    {
+      "clause_label_raw": "(g)",
+      "use_type": "permitted_use",
+      "use_name": "Educational Institution (private)",
+      "status": "active",
+      "conditions": "The following uses are permitted in the DC Zone:",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      }
+    },
+    {
+      "clause_label_raw": "(h)",
+      "use_type": "permitted_use",
+      "use_name": "Educational Institution (public)",
+      "status": "active",
+      "conditions": "The following uses are permitted in the DC Zone:",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      }
+    },
+    {
+      "clause_label_raw": "(i)",
+      "use_type": "permitted_use",
+      "use_name": "Fire Station",
+      "status": "active",
+      "conditions": "The following uses are permitted in the DC Zone:",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      }
+    },
+    {
+      "clause_label_raw": "(j)",
+      "use_type": "permitted_use",
+      "use_name": "Funeral Establishment",
+      "status": "active",
+      "conditions": "The following uses are permitted in the DC Zone:",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      }
+    },
+    {
+      "clause_label_raw": "(k)",
+      "use_type": "permitted_use",
+      "use_name": "Government Offices",
+      "status": "active",
+      "conditions": "The following uses are permitted in the DC Zone:",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      }
+    },
+    {
+      "clause_label_raw": "(l)",
+      "use_type": "permitted_use",
+      "use_name": "Library",
+      "status": "active",
+      "conditions": "The following uses are permitted in the DC Zone:",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      }
+    },
+    {
+      "clause_label_raw": "(m)",
+      "use_type": "permitted_use",
+      "use_name": "Medical, Health and Dental Office",
+      "status": "active",
+      "conditions": "The following uses are permitted in the DC Zone:",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      }
+    },
+    {
+      "clause_label_raw": "(n)",
+      "use_type": "permitted_use",
+      "use_name": "Multi-Unit Dwelling",
+      "status": "active",
+      "conditions": "The following uses are permitted in the DC Zone:",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      }
+    },
+    {
+      "clause_label_raw": "(o)",
+      "use_type": "permitted_use",
+      "use_name": "Police Station",
+      "status": "active",
+      "conditions": "The following uses are permitted in the DC Zone:",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      }
+    },
+    {
+      "clause_label_raw": "(p)",
+      "use_type": "permitted_use",
+      "use_name": "Recreation or Fitness Center (indoors)",
+      "status": "active",
+      "conditions": "The following uses are permitted in the DC Zone:",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      }
+    },
+    {
+      "clause_label_raw": "(q)",
+      "use_type": "permitted_use",
+      "use_name": "Convenience Store",
+      "status": "active",
+      "conditions": "The following uses are permitted in the DC Zone:",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      }
+    },
+    {
+      "clause_label_raw": "(r)",
+      "use_type": "permitted_use",
+      "use_name": "Eating and Drinking Establishment",
+      "status": "active",
+      "conditions": "The following uses are permitted in the DC Zone:",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      }
+    },
+    {
+      "clause_label_raw": "(s)",
+      "use_type": "permitted_use",
+      "use_name": "Entertainment Establishment",
+      "status": "active",
+      "conditions": "The following uses are permitted in the DC Zone:",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      }
+    }
+  ],
+  "requirement_sections": [
+    {
+      "order_index": 1,
+      "section_label_raw": "13.1",
+      "title_label_raw": "INTENT",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      },
+      "provisions": [
+        {
+          "provision_label_raw": "section",
+          "text": "The DC zone is celebrated as the historic heart of Charlottetown's downtown core. With a small lot fabric and small block scale compared to other more modern downtowns, the Downtown Core sits at the northwestern gateway to Province House and links to the waterfront via Queen Street. The area supports several large new developments that are sympathetic to the city's rich history and the need to project the City as a modern hub in Atlantic Canada.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 2,
+      "section_label_raw": "13.2",
+      "title_label_raw": "RE-ZONING",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "Rezoning to another zone is not permitted in the DC Zone",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 3,
+      "section_label_raw": "13.3",
+      "title_label_raw": "PERMITTED USES",
+      "citations": {
+        "pdf_page_start": 105,
+        "pdf_page_end": 105,
+        "bylaw_page_start": 101,
+        "bylaw_page_end": 101
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "The following uses are permitted in the DC Zone:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Lodging House",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "Converted Dwelling",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "Commercial Daycare Centre",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(d)",
+          "text": "Community Care Facility",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(e)",
+          "text": "Community Institutional",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(f)",
+          "text": "Cultural Establishment",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(g)",
+          "text": "Educational Institution (private)",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(h)",
+          "text": "Educational Institution (public)",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(i)",
+          "text": "Fire Station",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(j)",
+          "text": "Funeral Establishment",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(k)",
+          "text": "Government Offices",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(l)",
+          "text": "Library",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(m)",
+          "text": "Medical, Health and Dental Office",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(n)",
+          "text": "Multi-Unit Dwelling",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(o)",
+          "text": "Police Station",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(p)",
+          "text": "Recreation or Fitness Center (indoors)",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(q)",
+          "text": "Convenience Store",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(r)",
+          "text": "Eating and Drinking Establishment",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(s)",
+          "text": "Entertainment Establishment",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "These uses are permitted so long as the following lot requirements are met: the front yard setback may be greater than the max. for up to 20% of the streetline the flankage yard setback may be greater than the max. for up to 20% of the streetline",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(f)",
+          "text": "Rear Yard Setback min. 0 m when abutting DC, otherwise 6 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(t)",
+          "text": "Grocery Store",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(u)",
+          "text": "Hostel / Hotel",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(v)",
+          "text": "Office",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(w)",
+          "text": "Personal Service Shop",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(x)",
+          "text": "Retail Store",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(y)",
+          "text": "Service Repair Establishment",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(z)",
+          "text": "Shopping Centre",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(aa)",
+          "text": "Theatre",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(ab)",
+          "text": "Veterinary Services",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Lot Area N/A",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "Frontage min. 7.6 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "Front Yard Setback min. 0 m max. 2 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(d)",
+          "text": "Flankage Yard Setback min. 0 m max. 2 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(e)",
+          "text": "Side Yard Setback min. 0 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        },
+        {
+          "provision_label_raw": "(g)",
+          "text": "Coverage max. 100%",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 105,
+            "pdf_page_end": 105,
+            "bylaw_page_start": 101,
+            "bylaw_page_end": 101
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 4,
+      "section_label_raw": "13.4",
+      "title_label_raw": "PERMITTED WITH CONDITIONS",
+      "citations": {
+        "pdf_page_start": 106,
+        "pdf_page_end": 106,
+        "bylaw_page_start": 102,
+        "bylaw_page_end": 102
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "Encroachments into the public street right- of-way for decks, signage, public art, and architectural features above 3 m from grade at the streetline may be considered by Planning Board.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "Permitted encroachments into the setbacks are listed in Table 3.2.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": ".3",
+          "text": "Short term rentals are permitted following the requirements of Section 4.10.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        }
+      ],
+      "layout_artifacts_present": true
+    },
+    {
+      "order_index": 5,
+      "section_label_raw": "13.5",
+      "title_label_raw": "BUILT FORM REQUIREMENTS",
+      "citations": {
+        "pdf_page_start": 106,
+        "pdf_page_end": 106,
+        "bylaw_page_start": 102,
+        "bylaw_page_end": 102
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "One building per lot is permitted with the exception of cluster housing.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "The minimum building height shall be 3 storeys.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": ".3",
+          "text": "The maximum building height shall be:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "The height shown in schedule B for unregistered heritage properties.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "For registered heritage properties, the height shall be the height of the existing heritage building unless negotiated through a Heritage Development Agreement.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": ".4",
+          "text": "The maximum streetwall height shall be:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "4 storeys for all buildings that exceed 4 storeys in height; and",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "5 storeys for all buildings that are equal to or exceed 8 storeys in height.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": ".5",
+          "text": "The minimum streetwall stepback shall be: 7.6 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "2 m for all buildings that exceed 4 storeys in height; and",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "3 m for all buildings that are equal to or exceed 8 storeys in height.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": ".6",
+          "text": "The streetwall stepback may be less than the minimum requirement for up to 30% of the width of the building facing the streetline.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": ".7",
+          "text": "Any portion of a tower above 8 storeys in height shall have a minimum required side yard stepback of 10 m.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": ".8",
+          "text": "Above 8 storeys, the maximum floor plate area shall be 800 m2 and the maximum tower dimensions shall be 35 m x 40 m.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": ".9",
+          "text": "The minimum groundfloor height shall not be less than 4 m in height and shall be no more than 1.5 m above or below the streetline grade. Registered heritage properties shall maintain their groundfloor height.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": ".10",
+          "text": "Groundfloor uses in the DC zone are reserved for active uses like retail, offices, institutional uses, and lobbies, and are restricted from uses such as:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Parking (unless placed no less than 12 m behind an active groundfloor use), and",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "Grade-related residential dwellings (except residential lobbies) unless placed no less than 10 m behind an active groundfloor use.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": ".11",
+          "text": "A streetwall frontage shall extend the full width of any streetline unless an at-grade plaza is or a mid-block pedestrian connection is provided or if an existing heritage facade is preserved which is less than the full width.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": ".12",
+          "text": "Cantilevered or recessed portions within any streetwall that have a depth of 2 m or greater shall not exceed 30% of the width of the streetwall.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": ".13",
+          "text": "Parking garage entries are permitted if they are less than 40% of the frontage.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": ".14",
+          "text": "Parking garage doors shall be set back no less than 3 m from the front lot line.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": ".15",
+          "text": "The maximum front or flanking setback requirement in Section 13.3.3 may be exceeded, if an at-grade open space, such as a plaza, is located between a front or flanking lot line and a primary building provided the setback is not exceeded by more than 30% of the facade.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": ".16",
+          "text": "The amenity requirements in Section 3.14 shall be followed.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        },
+        {
+          "provision_label_raw": ".17",
+          "text": "For multi-unit dwellings, each grade-related unit shall include a patio door.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 106,
+            "pdf_page_end": 106,
+            "bylaw_page_start": 102,
+            "bylaw_page_end": 102
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 6,
+      "section_label_raw": "13.6",
+      "title_label_raw": "LANDSCAPE REQUIREMENTS",
+      "citations": {
+        "pdf_page_start": 108,
+        "pdf_page_end": 108,
+        "bylaw_page_start": 104,
+        "bylaw_page_end": 104
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "Parking is not permitted between the building and the street.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 108,
+            "pdf_page_end": 108,
+            "bylaw_page_start": 104,
+            "bylaw_page_end": 104
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "All entries and exits shall be constructed of high quality landscape materials including natural stone or unit pavers. Cast in place concrete is only permitted for garage entries.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 108,
+            "pdf_page_end": 108,
+            "bylaw_page_start": 104,
+            "bylaw_page_end": 104
+          }
+        },
+        {
+          "provision_label_raw": ".3",
+          "text": "Sidewalk patios may be permitted following the requirements of Section 4.2.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 108,
+            "pdf_page_end": 108,
+            "bylaw_page_start": 104,
+            "bylaw_page_end": 104
+          }
+        },
+        {
+          "provision_label_raw": ".4",
+          "text": "All disturbed surfaces shall be sodded or hard surfaced.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 108,
+            "pdf_page_end": 108,
+            "bylaw_page_start": 104,
+            "bylaw_page_end": 104
+          }
+        },
+        {
+          "provision_label_raw": ".5",
+          "text": "All buildings exceeding 4 storeys with a flat roof shall include a no less than 30% green roof.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 108,
+            "pdf_page_end": 108,
+            "bylaw_page_start": 104,
+            "bylaw_page_end": 104
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 7,
+      "section_label_raw": "13.7",
+      "title_label_raw": "LANDSCAPE REQUIREMENTS",
+      "citations": {
+        "pdf_page_start": 108,
+        "pdf_page_end": 108,
+        "bylaw_page_start": 104,
+        "bylaw_page_end": 104
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "See Section 6.8-6.9",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 108,
+            "pdf_page_end": 108,
+            "bylaw_page_start": 104,
+            "bylaw_page_end": 104
+          }
+        }
+      ]
+    }
+  ],
+  "zone_specific_requirements": [],
+  "shared_requirement_references": [
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Table 3.2.",
+      "citations": {
+        "pdf_page_start": 106,
+        "pdf_page_end": 106,
+        "bylaw_page_start": 102,
+        "bylaw_page_end": 102
+      },
+      "source_text": "Permitted encroachments into the setbacks are listed in Table 3.2."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Section 4.10.",
+      "citations": {
+        "pdf_page_start": 106,
+        "pdf_page_end": 106,
+        "bylaw_page_start": 102,
+        "bylaw_page_end": 102
+      },
+      "source_text": "Short term rentals are permitted following the requirements of Section 4.10."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "schedule B",
+      "citations": {
+        "pdf_page_start": 106,
+        "pdf_page_end": 106,
+        "bylaw_page_start": 102,
+        "bylaw_page_end": 102
+      },
+      "source_text": "The height shown in schedule B for unregistered heritage properties."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Section 13.3.3",
+      "citations": {
+        "pdf_page_start": 106,
+        "pdf_page_end": 106,
+        "bylaw_page_start": 102,
+        "bylaw_page_end": 102
+      },
+      "source_text": "The maximum front or flanking setback requirement in Section 13.3.3 may be exceeded, if an at-grade open space, such as a plaza, is located between a front or flanking lot line and a primary building provided the setback is not exceeded by more than 30% of the facade."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Section 3.14",
+      "citations": {
+        "pdf_page_start": 106,
+        "pdf_page_end": 106,
+        "bylaw_page_start": 102,
+        "bylaw_page_end": 102
+      },
+      "source_text": "The amenity requirements in Section 3.14 shall be followed."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Section 4.2.",
+      "citations": {
+        "pdf_page_start": 108,
+        "pdf_page_end": 108,
+        "bylaw_page_start": 104,
+        "bylaw_page_end": 104
+      },
+      "source_text": "Sidewalk patios may be permitted following the requirements of Section 4.2."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Section 6.8-6.9",
+      "citations": {
+        "pdf_page_start": 108,
+        "pdf_page_end": 108,
+        "bylaw_page_start": 104,
+        "bylaw_page_end": 104
+      },
+      "source_text": "See Section 6.8-6.9"
+    }
+  ],
+  "content_blocks": [],
+  "open_issues": [
+    {
+      "issue_type": "extraction_review",
+      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization."
+    },
+    {
+      "issue_type": "table_parsing_review",
+      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization."
+    }
+  ],
+  "citations": {
+    "zone_section": {
       "pdf_page_start": 105,
       "pdf_page_end": 108,
       "bylaw_page_start": 101,
       "bylaw_page_end": 104
     }
-  },
-  "raw_data": {
-    "source_units": [
-      {
-        "source_unit_id": "zone-dc",
-        "source_unit_type": "zone",
-        "label_raw": "PART 13",
-        "title_raw": "DC - Downtown Core",
-        "text_raw": "The DC zone is celebrated as the historic heart of Charlottetown's downtown core. With a small lot fabric and small block scale compared to other more modern downtowns, the Downtown Core sits at the northwestern gateway to Province House and links to the waterfront via Queen Street. The area supports several large new developments that are sympathetic to the city's rich history and the need to project the City as a modern hub in Atlantic Canada.\nRezoning to another zone is not permitted in the DC Zone\nThe following uses are permitted in the DC Zone:\nLodging House\nConverted Dwelling\nCommercial Daycare Centre\nCommunity Care Facility\nCommunity Institutional\nCultural Establishment\nEducational Institution (private)\nEducational Institution (public)\nFire Station\nFuneral Establishment\nGovernment Offices\nLibrary\nMedical, Health and Dental Office\nMulti-Unit Dwelling\nPolice Station\nRecreation or Fitness Center (indoors)\nConvenience Store\nEating and Drinking Establishment\nEntertainment Establishment\nThese uses are permitted so long as the following lot requirements are met: the front yard setback may be greater than the max. for up to 20% of the streetline the flankage yard setback may be greater than the max. for up to 20% of the streetline\nRear Yard Setback min. 0 m when abutting DC, otherwise 6 m\nGrocery Store\nHostel / Hotel\nOffice\nPersonal Service Shop\nRetail Store\nService Repair Establishment\nShopping Centre\nTheatre\nVeterinary Services\nLot Area N/A\nFrontage min. 7.6 m\nFront Yard Setback min. 0 m max. 2 m\nFlankage Yard Setback min. 0 m max. 2 m\nSide Yard Setback min. 0 m\nCoverage max. 100%\nEncroachments into the public street right- of-way for decks, signage, public art, and architectural features above 3 m from grade at the streetline may be considered by Planning Board.\nPermitted encroachments into the setbacks are listed in Table 3.2.\nShort term rentals are permitted following the requirements of Section 4.10.\nOne building per lot is permitted with the exception of cluster housing.\nThe minimum building height shall be 3 storeys.\nThe maximum building height shall be:\nThe height shown in schedule B for unregistered heritage properties.\nFor registered heritage properties, the height shall be the height of the existing heritage building unless negotiated through a Heritage Development Agreement.\nThe maximum streetwall height shall be:\n4 storeys for all buildings that exceed 4 storeys in height; and\n5 storeys for all buildings that are equal to or exceed 8 storeys in height.\nThe minimum streetwall stepback shall be: 7.6 m\n2 m for all buildings that exceed 4 storeys in height; and\n3 m for all buildings that are equal to or exceed 8 storeys in height.\nThe streetwall stepback may be less than the minimum requirement for up to 30% of the width of the building facing the streetline.\nAny portion of a tower above 8 storeys in height shall have a minimum required side yard stepback of 10 m.\nAbove 8 storeys, the maximum floor plate area shall be 800 m2 and the maximum tower dimensions shall be 35 m x 40 m.\nThe minimum groundfloor height shall not be less than 4 m in height and shall be no more than 1.5 m above or below the streetline grade. Registered heritage properties shall maintain their groundfloor height.\nGroundfloor uses in the DC zone are reserved for active uses like retail, offices, institutional uses, and lobbies, and are restricted from uses such as:\n(a) Parking (unless placed no less than 12 m behind an active groundfloor use), and\n(b) Grade-related residential dwellings (except residential lobbies) unless placed no less than 10 m behind an active groundfloor use.\nA streetwall frontage shall extend the full width of any streetline unless an at-grade plaza is or a mid-block pedestrian connection is provided or if an existing heritage facade is preserved which is less than the full width.\nCantilevered or recessed portions within any streetwall that have a depth of 2 m or greater shall not exceed 30% of the width of the streetwall.\nParking garage entries are permitted if they are less than 40% of the frontage.\nParking garage doors shall be set back no less than 3 m from the front lot line.\nThe maximum front or flanking setback requirement in Section 13.3.3 may be exceeded, if an at-grade open space, such as a plaza, is located between a front or flanking lot line and a primary building provided the setback is not exceeded by more than 30% of the facade.\nThe amenity requirements in Section 3.14 shall be followed.\nFor multi-unit dwellings, each grade-related unit shall include a patio door.\nParking is not permitted between the building and the street.\nAll entries and exits shall be constructed of high quality landscape materials including natural stone or unit pavers. Cast in place concrete is only permitted for garage entries.\nSidewalk patios may be permitted following the requirements of Section 4.2.\nAll disturbed surfaces shall be sodded or hard surfaced.\nAll buildings exceeding 4 storeys with a flat roof shall include a no less than 30% green roof.\nSee Section 6.8-6.9",
-        "source_order": 1,
-        "citations": {
-          "pdf_page_start": 105,
-          "pdf_page_end": 108,
-          "bylaw_page_start": 101,
-          "bylaw_page_end": 104
-        }
-      }
-    ],
-    "sections_raw": [
-      {
-        "section_id": "zone-dc-section-13-1",
-        "section_label_raw": "13.1",
-        "section_title_raw": "INTENT",
-        "source_order": 1,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-dc-clause-13-1",
-            "clause_label_raw": "section",
-            "clause_text_raw": "The DC zone is celebrated as the historic heart of Charlottetown's downtown core. With a small lot fabric and small block scale compared to other more modern downtowns, the Downtown Core sits at the northwestern gateway to Province House and links to the waterfront via Queen Street. The area supports several large new developments that are sympathetic to the city's rich history and the need to project the City as a modern hub in Atlantic Canada.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-1",
-            "source_order": 1
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 105,
-          "pdf_page_end": 105,
-          "bylaw_page_start": 101,
-          "bylaw_page_end": 101
-        }
-      },
-      {
-        "section_id": "zone-dc-section-13-2",
-        "section_label_raw": "13.2",
-        "section_title_raw": "RE-ZONING",
-        "source_order": 2,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-dc-clause-13-2-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "Rezoning to another zone is not permitted in the DC Zone",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-2-1",
-            "source_order": 1
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 105,
-          "pdf_page_end": 105,
-          "bylaw_page_start": 101,
-          "bylaw_page_end": 101
-        }
-      },
-      {
-        "section_id": "zone-dc-section-13-3",
-        "section_label_raw": "13.3",
-        "section_title_raw": "PERMITTED USES",
-        "source_order": 3,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-dc-clause-13-3-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "The following uses are permitted in the DC Zone:",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-1-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "Lodging House",
-            "parent_clause_id": "zone-dc-clause-13-3-1",
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-1-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "Converted Dwelling",
-            "parent_clause_id": "zone-dc-clause-13-3-1",
-            "source_order": 3,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-1-c",
-            "clause_label_raw": "(c)",
-            "clause_text_raw": "Commercial Daycare Centre",
-            "parent_clause_id": "zone-dc-clause-13-3-1",
-            "source_order": 4,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-1-d",
-            "clause_label_raw": "(d)",
-            "clause_text_raw": "Community Care Facility",
-            "parent_clause_id": "zone-dc-clause-13-3-1",
-            "source_order": 5,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-1-e",
-            "clause_label_raw": "(e)",
-            "clause_text_raw": "Community Institutional",
-            "parent_clause_id": "zone-dc-clause-13-3-1",
-            "source_order": 6,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-1-f",
-            "clause_label_raw": "(f)",
-            "clause_text_raw": "Cultural Establishment",
-            "parent_clause_id": "zone-dc-clause-13-3-1",
-            "source_order": 7,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-1-g",
-            "clause_label_raw": "(g)",
-            "clause_text_raw": "Educational Institution (private)",
-            "parent_clause_id": "zone-dc-clause-13-3-1",
-            "source_order": 8,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-1-h",
-            "clause_label_raw": "(h)",
-            "clause_text_raw": "Educational Institution (public)",
-            "parent_clause_id": "zone-dc-clause-13-3-1",
-            "source_order": 9,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-1-i",
-            "clause_label_raw": "(i)",
-            "clause_text_raw": "Fire Station",
-            "parent_clause_id": "zone-dc-clause-13-3-1",
-            "source_order": 10,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-1-j",
-            "clause_label_raw": "(j)",
-            "clause_text_raw": "Funeral Establishment",
-            "parent_clause_id": "zone-dc-clause-13-3-1",
-            "source_order": 11,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-1-k",
-            "clause_label_raw": "(k)",
-            "clause_text_raw": "Government Offices",
-            "parent_clause_id": "zone-dc-clause-13-3-1",
-            "source_order": 12,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-1-l",
-            "clause_label_raw": "(l)",
-            "clause_text_raw": "Library",
-            "parent_clause_id": "zone-dc-clause-13-3-1",
-            "source_order": 13,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-1-m",
-            "clause_label_raw": "(m)",
-            "clause_text_raw": "Medical, Health and Dental Office",
-            "parent_clause_id": "zone-dc-clause-13-3-1",
-            "source_order": 14,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-1-n",
-            "clause_label_raw": "(n)",
-            "clause_text_raw": "Multi-Unit Dwelling",
-            "parent_clause_id": "zone-dc-clause-13-3-1",
-            "source_order": 15,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-1-o",
-            "clause_label_raw": "(o)",
-            "clause_text_raw": "Police Station",
-            "parent_clause_id": "zone-dc-clause-13-3-1",
-            "source_order": 16,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-1-p",
-            "clause_label_raw": "(p)",
-            "clause_text_raw": "Recreation or Fitness Center (indoors)",
-            "parent_clause_id": "zone-dc-clause-13-3-1",
-            "source_order": 17,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-1-q",
-            "clause_label_raw": "(q)",
-            "clause_text_raw": "Convenience Store",
-            "parent_clause_id": "zone-dc-clause-13-3-1",
-            "source_order": 18,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-1-r",
-            "clause_label_raw": "(r)",
-            "clause_text_raw": "Eating and Drinking Establishment",
-            "parent_clause_id": "zone-dc-clause-13-3-1",
-            "source_order": 19,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-1-s",
-            "clause_label_raw": "(s)",
-            "clause_text_raw": "Entertainment Establishment",
-            "parent_clause_id": "zone-dc-clause-13-3-1",
-            "source_order": 20,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "These uses are permitted so long as the following lot requirements are met: the front yard setback may be greater than the max. for up to 20% of the streetline the flankage yard setback may be greater than the max. for up to 20% of the streetline",
-            "parent_clause_id": null,
-            "source_order": 21,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-2-f",
-            "clause_label_raw": "(f)",
-            "clause_text_raw": "Rear Yard Setback min. 0 m when abutting DC, otherwise 6 m",
-            "parent_clause_id": "zone-dc-clause-13-3-2",
-            "source_order": 22,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-2-t",
-            "clause_label_raw": "(t)",
-            "clause_text_raw": "Grocery Store",
-            "parent_clause_id": "zone-dc-clause-13-3-2",
-            "source_order": 23,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-2-u",
-            "clause_label_raw": "(u)",
-            "clause_text_raw": "Hostel / Hotel",
-            "parent_clause_id": "zone-dc-clause-13-3-2",
-            "source_order": 24,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-2-v",
-            "clause_label_raw": "(v)",
-            "clause_text_raw": "Office",
-            "parent_clause_id": "zone-dc-clause-13-3-2",
-            "source_order": 25,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-2-w",
-            "clause_label_raw": "(w)",
-            "clause_text_raw": "Personal Service Shop",
-            "parent_clause_id": "zone-dc-clause-13-3-2",
-            "source_order": 26,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-2-x",
-            "clause_label_raw": "(x)",
-            "clause_text_raw": "Retail Store",
-            "parent_clause_id": "zone-dc-clause-13-3-2",
-            "source_order": 27,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-2-y",
-            "clause_label_raw": "(y)",
-            "clause_text_raw": "Service Repair Establishment",
-            "parent_clause_id": "zone-dc-clause-13-3-2",
-            "source_order": 28,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-2-z",
-            "clause_label_raw": "(z)",
-            "clause_text_raw": "Shopping Centre",
-            "parent_clause_id": "zone-dc-clause-13-3-2",
-            "source_order": 29,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-2-aa",
-            "clause_label_raw": "(aa)",
-            "clause_text_raw": "Theatre",
-            "parent_clause_id": "zone-dc-clause-13-3-2",
-            "source_order": 30,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-2-ab",
-            "clause_label_raw": "(ab)",
-            "clause_text_raw": "Veterinary Services",
-            "parent_clause_id": "zone-dc-clause-13-3-2",
-            "source_order": 31,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-2-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "Lot Area N/A",
-            "parent_clause_id": "zone-dc-clause-13-3-2",
-            "source_order": 32,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-2-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "Frontage min. 7.6 m",
-            "parent_clause_id": "zone-dc-clause-13-3-2",
-            "source_order": 33,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-2-c",
-            "clause_label_raw": "(c)",
-            "clause_text_raw": "Front Yard Setback min. 0 m max. 2 m",
-            "parent_clause_id": "zone-dc-clause-13-3-2",
-            "source_order": 34,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-2-d",
-            "clause_label_raw": "(d)",
-            "clause_text_raw": "Flankage Yard Setback min. 0 m max. 2 m",
-            "parent_clause_id": "zone-dc-clause-13-3-2",
-            "source_order": 35,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-2-e",
-            "clause_label_raw": "(e)",
-            "clause_text_raw": "Side Yard Setback min. 0 m",
-            "parent_clause_id": "zone-dc-clause-13-3-2",
-            "source_order": 36,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-3-2-g",
-            "clause_label_raw": "(g)",
-            "clause_text_raw": "Coverage max. 100%",
-            "parent_clause_id": "zone-dc-clause-13-3-2",
-            "source_order": 37,
-            "citations": {
-              "pdf_page_start": 105,
-              "pdf_page_end": 105,
-              "bylaw_page_start": 101,
-              "bylaw_page_end": 101
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1-a",
-            "source_order": 2
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1-b",
-            "source_order": 3
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1-c",
-            "source_order": 4
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1-d",
-            "source_order": 5
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1-e",
-            "source_order": 6
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1-f",
-            "source_order": 7
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1-g",
-            "source_order": 8
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1-h",
-            "source_order": 9
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1-i",
-            "source_order": 10
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1-j",
-            "source_order": 11
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1-k",
-            "source_order": 12
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1-l",
-            "source_order": 13
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1-m",
-            "source_order": 14
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1-n",
-            "source_order": 15
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1-o",
-            "source_order": 16
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1-p",
-            "source_order": 17
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1-q",
-            "source_order": 18
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1-r",
-            "source_order": 19
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-1-s",
-            "source_order": 20
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-2",
-            "source_order": 21
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-2-f",
-            "source_order": 22
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-2-t",
-            "source_order": 23
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-2-u",
-            "source_order": 24
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-2-v",
-            "source_order": 25
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-2-w",
-            "source_order": 26
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-2-x",
-            "source_order": 27
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-2-y",
-            "source_order": 28
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-2-z",
-            "source_order": 29
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-2-aa",
-            "source_order": 30
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-2-ab",
-            "source_order": 31
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-2-a",
-            "source_order": 32
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-2-b",
-            "source_order": 33
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-2-c",
-            "source_order": 34
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-2-d",
-            "source_order": 35
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-2-e",
-            "source_order": 36
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-3-2-g",
-            "source_order": 37
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 105,
-          "pdf_page_end": 105,
-          "bylaw_page_start": 101,
-          "bylaw_page_end": 101
-        }
-      },
-      {
-        "section_id": "zone-dc-section-13-4",
-        "section_label_raw": "13.4",
-        "section_title_raw": "PERMITTED WITH CONDITIONS",
-        "source_order": 4,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-dc-clause-13-4-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "Encroachments into the public street right- of-way for decks, signage, public art, and architectural features above 3 m from grade at the streetline may be considered by Planning Board.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-4-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "Permitted encroachments into the setbacks are listed in Table 3.2.",
-            "parent_clause_id": null,
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-4-3",
-            "clause_label_raw": ".3",
-            "clause_text_raw": "Short term rentals are permitted following the requirements of Section 4.10.",
-            "parent_clause_id": null,
-            "source_order": 3,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-4-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-4-2",
-            "source_order": 2
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-4-3",
-            "source_order": 3
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 106,
-          "pdf_page_end": 106,
-          "bylaw_page_start": 102,
-          "bylaw_page_end": 102
-        }
-      },
-      {
-        "section_id": "zone-dc-section-13-5",
-        "section_label_raw": "13.5",
-        "section_title_raw": "BUILT FORM REQUIREMENTS",
-        "source_order": 5,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-dc-clause-13-5-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "One building per lot is permitted with the exception of cluster housing.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "The minimum building height shall be 3 storeys.",
-            "parent_clause_id": null,
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-3",
-            "clause_label_raw": ".3",
-            "clause_text_raw": "The maximum building height shall be:",
-            "parent_clause_id": null,
-            "source_order": 3,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-3-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "The height shown in schedule B for unregistered heritage properties.",
-            "parent_clause_id": "zone-dc-clause-13-5-3",
-            "source_order": 4,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-3-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "For registered heritage properties, the height shall be the height of the existing heritage building unless negotiated through a Heritage Development Agreement.",
-            "parent_clause_id": "zone-dc-clause-13-5-3",
-            "source_order": 5,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-4",
-            "clause_label_raw": ".4",
-            "clause_text_raw": "The maximum streetwall height shall be:",
-            "parent_clause_id": null,
-            "source_order": 6,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-4-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "4 storeys for all buildings that exceed 4 storeys in height; and",
-            "parent_clause_id": "zone-dc-clause-13-5-4",
-            "source_order": 7,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-4-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "5 storeys for all buildings that are equal to or exceed 8 storeys in height.",
-            "parent_clause_id": "zone-dc-clause-13-5-4",
-            "source_order": 8,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-5",
-            "clause_label_raw": ".5",
-            "clause_text_raw": "The minimum streetwall stepback shall be: 7.6 m",
-            "parent_clause_id": null,
-            "source_order": 9,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-5-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "2 m for all buildings that exceed 4 storeys in height; and",
-            "parent_clause_id": "zone-dc-clause-13-5-5",
-            "source_order": 10,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-5-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "3 m for all buildings that are equal to or exceed 8 storeys in height.",
-            "parent_clause_id": "zone-dc-clause-13-5-5",
-            "source_order": 11,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-6",
-            "clause_label_raw": ".6",
-            "clause_text_raw": "The streetwall stepback may be less than the minimum requirement for up to 30% of the width of the building facing the streetline.",
-            "parent_clause_id": null,
-            "source_order": 12,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-7",
-            "clause_label_raw": ".7",
-            "clause_text_raw": "Any portion of a tower above 8 storeys in height shall have a minimum required side yard stepback of 10 m.",
-            "parent_clause_id": null,
-            "source_order": 13,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-8",
-            "clause_label_raw": ".8",
-            "clause_text_raw": "Above 8 storeys, the maximum floor plate area shall be 800 m2 and the maximum tower dimensions shall be 35 m x 40 m.",
-            "parent_clause_id": null,
-            "source_order": 14,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-9",
-            "clause_label_raw": ".9",
-            "clause_text_raw": "The minimum groundfloor height shall not be less than 4 m in height and shall be no more than 1.5 m above or below the streetline grade. Registered heritage properties shall maintain their groundfloor height.",
-            "parent_clause_id": null,
-            "source_order": 15,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-10",
-            "clause_label_raw": ".10",
-            "clause_text_raw": "Groundfloor uses in the DC zone are reserved for active uses like retail, offices, institutional uses, and lobbies, and are restricted from uses such as:",
-            "parent_clause_id": null,
-            "source_order": 16,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-11",
-            "clause_label_raw": ".11",
-            "clause_text_raw": "A streetwall frontage shall extend the full width of any streetline unless an at-grade plaza is or a mid-block pedestrian connection is provided or if an existing heritage facade is preserved which is less than the full width.",
-            "parent_clause_id": null,
-            "source_order": 17,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-12",
-            "clause_label_raw": ".12",
-            "clause_text_raw": "Cantilevered or recessed portions within any streetwall that have a depth of 2 m or greater shall not exceed 30% of the width of the streetwall.",
-            "parent_clause_id": null,
-            "source_order": 18,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-13",
-            "clause_label_raw": ".13",
-            "clause_text_raw": "Parking garage entries are permitted if they are less than 40% of the frontage.",
-            "parent_clause_id": null,
-            "source_order": 19,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-14",
-            "clause_label_raw": ".14",
-            "clause_text_raw": "Parking garage doors shall be set back no less than 3 m from the front lot line.",
-            "parent_clause_id": null,
-            "source_order": 20,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-15",
-            "clause_label_raw": ".15",
-            "clause_text_raw": "The maximum front or flanking setback requirement in Section 13.3.3 may be exceeded, if an at-grade open space, such as a plaza, is located between a front or flanking lot line and a primary building provided the setback is not exceeded by more than 30% of the facade.",
-            "parent_clause_id": null,
-            "source_order": 21,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-16",
-            "clause_label_raw": ".16",
-            "clause_text_raw": "The amenity requirements in Section 3.14 shall be followed.",
-            "parent_clause_id": null,
-            "source_order": 22,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-5-17",
-            "clause_label_raw": ".17",
-            "clause_text_raw": "For multi-unit dwellings, each grade-related unit shall include a patio door.",
-            "parent_clause_id": null,
-            "source_order": 23,
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          }
-        ],
-        "tables_raw": [
-          {
-            "table_id": "zone-dc-table-13-5-10",
-            "table_title_raw": "13.5.10",
-            "source_order": 17,
-            "columns_raw": [
-              {
-                "column_id": "row_label",
-                "column_label_raw": "clause_label_raw",
-                "source_order": 1
-              },
-              {
-                "column_id": "requirement",
-                "column_label_raw": "clause_name",
-                "source_order": 2
-              },
-              {
-                "column_id": "value",
-                "column_label_raw": "",
-                "source_order": 3
-              }
-            ],
-            "rows_raw": [
-              {
-                "row_id": "zone-dc-table-13-5-10-row-1",
-                "source_order": 1,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-dc-table-13-5-10-row-1-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(a)"
-                  },
-                  {
-                    "cell_id": "zone-dc-table-13-5-10-row-1-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Parking (unless placed"
-                  },
-                  {
-                    "cell_id": "zone-dc-table-13-5-10-row-1-value",
-                    "column_id": "value",
-                    "cell_text_raw": "no less than 12 m behind an active groundfloor use), and"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-dc-table-13-5-10-row-2",
-                "source_order": 2,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-dc-table-13-5-10-row-2-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(b)"
-                  },
-                  {
-                    "cell_id": "zone-dc-table-13-5-10-row-2-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Grade-related residential dwellings (except residential lobbies) unless placed"
-                  },
-                  {
-                    "cell_id": "zone-dc-table-13-5-10-row-2-value",
-                    "column_id": "value",
-                    "cell_text_raw": "no less than 10 m behind an active groundfloor use."
-                  }
-                ]
-              }
-            ],
-            "citations": {
-              "pdf_page_start": 106,
-              "pdf_page_end": 106,
-              "bylaw_page_start": 102,
-              "bylaw_page_end": 102
-            }
-          }
-        ],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-2",
-            "source_order": 2
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-3",
-            "source_order": 3
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-3-a",
-            "source_order": 4
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-3-b",
-            "source_order": 5
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-4",
-            "source_order": 6
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-4-a",
-            "source_order": 7
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-4-b",
-            "source_order": 8
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-5",
-            "source_order": 9
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-5-a",
-            "source_order": 10
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-5-b",
-            "source_order": 11
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-6",
-            "source_order": 12
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-7",
-            "source_order": 13
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-8",
-            "source_order": 14
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-9",
-            "source_order": 15
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-10",
-            "source_order": 16
-          },
-          {
-            "content_type": "table",
-            "content_id": "zone-dc-table-13-5-10",
-            "source_order": 17
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-11",
-            "source_order": 18
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-12",
-            "source_order": 19
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-13",
-            "source_order": 20
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-14",
-            "source_order": 21
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-15",
-            "source_order": 22
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-16",
-            "source_order": 23
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-5-17",
-            "source_order": 24
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 106,
-          "pdf_page_end": 106,
-          "bylaw_page_start": 102,
-          "bylaw_page_end": 102
-        }
-      },
-      {
-        "section_id": "zone-dc-section-13-6",
-        "section_label_raw": "13.6",
-        "section_title_raw": "LANDSCAPE REQUIREMENTS",
-        "source_order": 6,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-dc-clause-13-6-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "Parking is not permitted between the building and the street.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 108,
-              "pdf_page_end": 108,
-              "bylaw_page_start": 104,
-              "bylaw_page_end": 104
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-6-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "All entries and exits shall be constructed of high quality landscape materials including natural stone or unit pavers. Cast in place concrete is only permitted for garage entries.",
-            "parent_clause_id": null,
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 108,
-              "pdf_page_end": 108,
-              "bylaw_page_start": 104,
-              "bylaw_page_end": 104
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-6-3",
-            "clause_label_raw": ".3",
-            "clause_text_raw": "Sidewalk patios may be permitted following the requirements of Section 4.2.",
-            "parent_clause_id": null,
-            "source_order": 3,
-            "citations": {
-              "pdf_page_start": 108,
-              "pdf_page_end": 108,
-              "bylaw_page_start": 104,
-              "bylaw_page_end": 104
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-6-4",
-            "clause_label_raw": ".4",
-            "clause_text_raw": "All disturbed surfaces shall be sodded or hard surfaced.",
-            "parent_clause_id": null,
-            "source_order": 4,
-            "citations": {
-              "pdf_page_start": 108,
-              "pdf_page_end": 108,
-              "bylaw_page_start": 104,
-              "bylaw_page_end": 104
-            }
-          },
-          {
-            "clause_id": "zone-dc-clause-13-6-5",
-            "clause_label_raw": ".5",
-            "clause_text_raw": "All buildings exceeding 4 storeys with a flat roof shall include a no less than 30% green roof.",
-            "parent_clause_id": null,
-            "source_order": 5,
-            "citations": {
-              "pdf_page_start": 108,
-              "pdf_page_end": 108,
-              "bylaw_page_start": 104,
-              "bylaw_page_end": 104
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-6-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-6-2",
-            "source_order": 2
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-6-3",
-            "source_order": 3
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-6-4",
-            "source_order": 4
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-6-5",
-            "source_order": 5
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 108,
-          "pdf_page_end": 108,
-          "bylaw_page_start": 104,
-          "bylaw_page_end": 104
-        }
-      },
-      {
-        "section_id": "zone-dc-section-13-7",
-        "section_label_raw": "13.7",
-        "section_title_raw": "LANDSCAPE REQUIREMENTS",
-        "source_order": 7,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-dc-clause-13-7-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "See Section 6.8-6.9",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 108,
-              "pdf_page_end": 108,
-              "bylaw_page_start": 104,
-              "bylaw_page_end": 104
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-dc-clause-13-7-1",
-            "source_order": 1
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 108,
-          "pdf_page_end": 108,
-          "bylaw_page_start": 104,
-          "bylaw_page_end": 104
-        }
-      }
-    ],
-    "clause_refs": [
-      {
-        "clause_id": "zone-dc-clause-13-1",
-        "section_id": "zone-dc-section-13-1",
-        "source_order": 1
-      },
-      {
-        "clause_id": "zone-dc-clause-13-2-1",
-        "section_id": "zone-dc-section-13-2",
-        "source_order": 2
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 3
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1-a",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 4
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1-b",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 5
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1-c",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 6
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1-d",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 7
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1-e",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 8
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1-f",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 9
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1-g",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 10
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1-h",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 11
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1-i",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 12
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1-j",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 13
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1-k",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 14
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1-l",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 15
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1-m",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 16
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1-n",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 17
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1-o",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 18
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1-p",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 19
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1-q",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 20
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1-r",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 21
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-1-s",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 22
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-2",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 23
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-2-f",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 24
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-2-t",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 25
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-2-u",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 26
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-2-v",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 27
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-2-w",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 28
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-2-x",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 29
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-2-y",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 30
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-2-z",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 31
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-2-aa",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 32
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-2-ab",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 33
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-2-a",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 34
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-2-b",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 35
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-2-c",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 36
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-2-d",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 37
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-2-e",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 38
-      },
-      {
-        "clause_id": "zone-dc-clause-13-3-2-g",
-        "section_id": "zone-dc-section-13-3",
-        "source_order": 39
-      },
-      {
-        "clause_id": "zone-dc-clause-13-4-1",
-        "section_id": "zone-dc-section-13-4",
-        "source_order": 40
-      },
-      {
-        "clause_id": "zone-dc-clause-13-4-2",
-        "section_id": "zone-dc-section-13-4",
-        "source_order": 41
-      },
-      {
-        "clause_id": "zone-dc-clause-13-4-3",
-        "section_id": "zone-dc-section-13-4",
-        "source_order": 42
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-1",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 43
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-2",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 44
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-3",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 45
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-3-a",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 46
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-3-b",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 47
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-4",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 48
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-4-a",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 49
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-4-b",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 50
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-5",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 51
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-5-a",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 52
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-5-b",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 53
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-6",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 54
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-7",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 55
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-8",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 56
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-9",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 57
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-10",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 58
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-11",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 59
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-12",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 60
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-13",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 61
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-14",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 62
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-15",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 63
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-16",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 64
-      },
-      {
-        "clause_id": "zone-dc-clause-13-5-17",
-        "section_id": "zone-dc-section-13-5",
-        "source_order": 65
-      },
-      {
-        "clause_id": "zone-dc-clause-13-6-1",
-        "section_id": "zone-dc-section-13-6",
-        "source_order": 66
-      },
-      {
-        "clause_id": "zone-dc-clause-13-6-2",
-        "section_id": "zone-dc-section-13-6",
-        "source_order": 67
-      },
-      {
-        "clause_id": "zone-dc-clause-13-6-3",
-        "section_id": "zone-dc-section-13-6",
-        "source_order": 68
-      },
-      {
-        "clause_id": "zone-dc-clause-13-6-4",
-        "section_id": "zone-dc-section-13-6",
-        "source_order": 69
-      },
-      {
-        "clause_id": "zone-dc-clause-13-6-5",
-        "section_id": "zone-dc-section-13-6",
-        "source_order": 70
-      },
-      {
-        "clause_id": "zone-dc-clause-13-7-1",
-        "section_id": "zone-dc-section-13-7",
-        "source_order": 71
-      }
-    ],
-    "tables_raw": [],
-    "map_references_raw": [
-      {
-        "map_reference_id": "zone-dc-map-zoning-map",
-        "map_label_raw": "Zoning Map",
-        "map_title_raw": "Charlottetown Zoning Map 2026",
-        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
-        "citations": {
-          "pdf_page_start": 105,
-          "pdf_page_end": 108,
-          "bylaw_page_start": 101,
-          "bylaw_page_end": 104
-        }
-      }
-    ]
-  },
-  "structured_data": {
-    "terms": [
-      {
-        "term_id": "zone-dc-term-use-lodging_house",
-        "term_raw": "Lodging House",
-        "term_normalized": "lodging_house",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "lodging_house"
-      },
-      {
-        "term_id": "zone-dc-term-use-converted_dwelling",
-        "term_raw": "Converted Dwelling",
-        "term_normalized": "converted_dwelling",
-        "term_category": "dwelling_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "converted_dwelling"
-      },
-      {
-        "term_id": "zone-dc-term-use-commercial_daycare_centre",
-        "term_raw": "Commercial Daycare Centre",
-        "term_normalized": "commercial_daycare_centre",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "commercial_daycare_centre"
-      },
-      {
-        "term_id": "zone-dc-term-use-community_care_facility",
-        "term_raw": "Community Care Facility",
-        "term_normalized": "community_care_facility",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "community_care_facility"
-      },
-      {
-        "term_id": "zone-dc-term-use-community_institutional",
-        "term_raw": "Community Institutional",
-        "term_normalized": "community_institutional",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "community_institutional"
-      },
-      {
-        "term_id": "zone-dc-term-use-cultural_establishment",
-        "term_raw": "Cultural Establishment",
-        "term_normalized": "cultural_establishment",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "cultural_establishment"
-      },
-      {
-        "term_id": "zone-dc-term-use-educational_institution_private",
-        "term_raw": "Educational Institution (private)",
-        "term_normalized": "educational_institution_private",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "educational_institution_private"
-      },
-      {
-        "term_id": "zone-dc-term-use-educational_institution_public",
-        "term_raw": "Educational Institution (public)",
-        "term_normalized": "educational_institution_public",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "educational_institution_public"
-      },
-      {
-        "term_id": "zone-dc-term-use-fire_station",
-        "term_raw": "Fire Station",
-        "term_normalized": "fire_station",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "fire_station"
-      },
-      {
-        "term_id": "zone-dc-term-use-funeral_establishment",
-        "term_raw": "Funeral Establishment",
-        "term_normalized": "funeral_establishment",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "funeral_establishment"
-      },
-      {
-        "term_id": "zone-dc-term-use-government_office",
-        "term_raw": "Government Offices",
-        "term_normalized": "government_office",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "government_office"
-      },
-      {
-        "term_id": "zone-dc-term-use-library",
-        "term_raw": "Library",
-        "term_normalized": "library",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "library"
-      },
-      {
-        "term_id": "zone-dc-term-use-medical_health_and_dental_office",
-        "term_raw": "Medical, Health and Dental Office",
-        "term_normalized": "medical_health_and_dental_office",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "medical_health_and_dental_office"
-      },
-      {
-        "term_id": "zone-dc-term-term-multi_unit_dwelling",
-        "term_raw": "Multi-Unit Dwelling",
-        "term_normalized": "multi_unit_dwelling",
-        "term_category": "unknown",
-        "source_refs": [],
-        "confidence": "needs_review"
-      },
-      {
-        "term_id": "zone-dc-term-use-police_station",
-        "term_raw": "Police Station",
-        "term_normalized": "police_station",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "police_station"
-      },
-      {
-        "term_id": "zone-dc-term-use-recreation_or_fitness_centre_indoors",
-        "term_raw": "Recreation or Fitness Center (indoors)",
-        "term_normalized": "recreation_or_fitness_centre_indoors",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "recreation_or_fitness_centre_indoors"
-      },
-      {
-        "term_id": "zone-dc-term-use-convenience_store",
-        "term_raw": "Convenience Store",
-        "term_normalized": "convenience_store",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "convenience_store"
-      },
-      {
-        "term_id": "zone-dc-term-use-eating_and_drinking_establishment",
-        "term_raw": "Eating and Drinking Establishment",
-        "term_normalized": "eating_and_drinking_establishment",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "eating_and_drinking_establishment"
-      },
-      {
-        "term_id": "zone-dc-term-use-entertainment_establishment",
-        "term_raw": "Entertainment Establishment",
-        "term_normalized": "entertainment_establishment",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "entertainment_establishment"
-      }
-    ],
-    "uses": [
-      {
-        "use_id": "zone-dc-use-lodging-house-1-1",
-        "use_name_raw": "Lodging House",
-        "use_term_id": "zone-dc-term-use-lodging_house",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-dc-use-converted-dwelling-2-1",
-        "use_name_raw": "Converted Dwelling",
-        "use_term_id": "zone-dc-term-use-converted_dwelling",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-dc-use-commercial-daycare-centre-3-1",
-        "use_name_raw": "Commercial Daycare Centre",
-        "use_term_id": "zone-dc-term-use-commercial_daycare_centre",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-dc-use-community-care-facility-4-1",
-        "use_name_raw": "Community Care Facility",
-        "use_term_id": "zone-dc-term-use-community_care_facility",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-dc-use-community-institutional-5-1",
-        "use_name_raw": "Community Institutional",
-        "use_term_id": "zone-dc-term-use-community_institutional",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-dc-use-cultural-establishment-6-1",
-        "use_name_raw": "Cultural Establishment",
-        "use_term_id": "zone-dc-term-use-cultural_establishment",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-dc-use-educational-institution-private-7-1",
-        "use_name_raw": "Educational Institution (private)",
-        "use_term_id": "zone-dc-term-use-educational_institution_private",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-dc-use-educational-institution-public-8-1",
-        "use_name_raw": "Educational Institution (public)",
-        "use_term_id": "zone-dc-term-use-educational_institution_public",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-dc-use-fire-station-9-1",
-        "use_name_raw": "Fire Station",
-        "use_term_id": "zone-dc-term-use-fire_station",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-dc-use-funeral-establishment-10-1",
-        "use_name_raw": "Funeral Establishment",
-        "use_term_id": "zone-dc-term-use-funeral_establishment",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-dc-use-government-offices-11-1",
-        "use_name_raw": "Government Offices",
-        "use_term_id": "zone-dc-term-use-government_office",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-dc-use-library-12-1",
-        "use_name_raw": "Library",
-        "use_term_id": "zone-dc-term-use-library",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-dc-use-medical-health-and-dental-office-13-1",
-        "use_name_raw": "Medical, Health and Dental Office",
-        "use_term_id": "zone-dc-term-use-medical_health_and_dental_office",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-dc-use-multi-unit-dwelling-14-1",
-        "use_name_raw": "Multi-Unit Dwelling",
-        "use_term_id": "zone-dc-term-term-multi_unit_dwelling",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "needs_review"
-      },
-      {
-        "use_id": "zone-dc-use-police-station-15-1",
-        "use_name_raw": "Police Station",
-        "use_term_id": "zone-dc-term-use-police_station",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-dc-use-recreation-or-fitness-center-indoors-16-1",
-        "use_name_raw": "Recreation or Fitness Center (indoors)",
-        "use_term_id": "zone-dc-term-use-recreation_or_fitness_centre_indoors",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-dc-use-convenience-store-17-1",
-        "use_name_raw": "Convenience Store",
-        "use_term_id": "zone-dc-term-use-convenience_store",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-dc-use-eating-and-drinking-establishment-18-1",
-        "use_name_raw": "Eating and Drinking Establishment",
-        "use_term_id": "zone-dc-term-use-eating_and_drinking_establishment",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-dc-use-entertainment-establishment-19-1",
-        "use_name_raw": "Entertainment Establishment",
-        "use_term_id": "zone-dc-term-use-entertainment_establishment",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      }
-    ],
-    "numeric_values": [
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-table-13-5-10-row-1-value-1",
-        "value_raw": "12 m",
-        "value": 12,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "less_than",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-dc-table-13-5-10-row-1-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-table-13-5-10-row-2-value-1",
-        "value_raw": "10 m",
-        "value": 10,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "less_than",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-dc-table-13-5-10-row-2-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-3-2-f-1",
-        "value_raw": "0 m",
-        "value": 0,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-3-2-f"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-3-2-f-2",
-        "value_raw": "6 m",
-        "value": 6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-3-2-f"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-3-2-b-1",
-        "value_raw": "7.6 m",
-        "value": 7.6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-3-2-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-3-2-c-1",
-        "value_raw": "0 m",
-        "value": 0,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-3-2-c"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-3-2-c-2",
-        "value_raw": "2 m",
-        "value": 2,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-3-2-c"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-3-2-d-1",
-        "value_raw": "0 m",
-        "value": 0,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-3-2-d"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-3-2-d-2",
-        "value_raw": "2 m",
-        "value": 2,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-3-2-d"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-3-2-e-1",
-        "value_raw": "0 m",
-        "value": 0,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-3-2-e"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-4-1-1",
-        "value_raw": "3 m",
-        "value": 3,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-4-1"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-5-2-1",
-        "value_raw": "3 storeys",
-        "value": 3,
-        "unit": "storey",
-        "measure_type": "count",
-        "comparator": "minimum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-2"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-5-4-a-1",
-        "value_raw": "4 storeys",
-        "value": 4,
-        "unit": "storey",
-        "measure_type": "count",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-4-a"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-5-4-a-2",
-        "value_raw": "4 storeys",
-        "value": 4,
-        "unit": "storey",
-        "measure_type": "count",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-4-a"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-5-4-b-1",
-        "value_raw": "5 storeys",
-        "value": 5,
-        "unit": "storey",
-        "measure_type": "count",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-4-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-5-4-b-2",
-        "value_raw": "8 storeys",
-        "value": 8,
-        "unit": "storey",
-        "measure_type": "count",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-4-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-5-5-1",
-        "value_raw": "7.6 m",
-        "value": 7.6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "minimum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-5"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-5-5-a-1",
-        "value_raw": "2 m",
-        "value": 2,
-        "unit": "m",
-        "measure_type": "height",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-5-a"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-5-5-a-2",
-        "value_raw": "4 storeys",
-        "value": 4,
-        "unit": "storey",
-        "measure_type": "count",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-5-a"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-5-5-b-1",
-        "value_raw": "3 m",
-        "value": 3,
-        "unit": "m",
-        "measure_type": "height",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-5-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-5-5-b-2",
-        "value_raw": "8 storeys",
-        "value": 8,
-        "unit": "storey",
-        "measure_type": "count",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-5-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-5-7-1",
-        "value_raw": "8 storeys",
-        "value": 8,
-        "unit": "storey",
-        "measure_type": "count",
-        "comparator": "minimum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-7"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-5-7-2",
-        "value_raw": "10 m",
-        "value": 10,
-        "unit": "m",
-        "measure_type": "height",
-        "comparator": "minimum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-7"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-5-8-1",
-        "value_raw": "8 storeys",
-        "value": 8,
-        "unit": "storey",
-        "measure_type": "count",
-        "comparator": "maximum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-8"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-5-8-2",
-        "value_raw": "35 m",
-        "value": 35,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "maximum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-8"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-5-8-3",
-        "value_raw": "40 m",
-        "value": 40,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "maximum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-8"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-5-9-1",
-        "value_raw": "4 m",
-        "value": 4,
-        "unit": "m",
-        "measure_type": "height",
-        "comparator": "minimum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-9"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-5-9-2",
-        "value_raw": "1.5 m",
-        "value": 1.5,
-        "unit": "m",
-        "measure_type": "height",
-        "comparator": "minimum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-9"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-5-12-1",
-        "value_raw": "2 m",
-        "value": 2,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-12"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-5-14-1",
-        "value_raw": "3 m",
-        "value": 3,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "less_than",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-14"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-dc-num-zone-dc-clause-13-6-5-1",
-        "value_raw": "4 storeys",
-        "value": 4,
-        "unit": "storey",
-        "measure_type": "count",
-        "comparator": "less_than",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-6-5"
-          }
-        ],
-        "confidence": "medium"
-      }
-    ],
-    "requirements": [
-      {
-        "requirement_id": "zone-dc-req-zone-dc-table-13-5-10-row-1-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "parking",
-        "requirement_label_raw": "Parking (unless placed",
-        "requirement_text_raw": "Parking (unless placed no less than 12 m behind an active groundfloor use), and",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-table-13-5-10-row-1-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-dc-table-13-5-10-row-1"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-dc-req-zone-dc-table-13-5-10-row-2-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "grade_related_residential_dwellings_except_residential_lobbies_unless_placed",
-        "requirement_label_raw": "Grade-related residential dwellings (except residential lobbies) unless placed",
-        "requirement_text_raw": "Grade-related residential dwellings (except residential lobbies) unless placed no less than 10 m behind an active groundfloor use.",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-table-13-5-10-row-2-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-dc-table-13-5-10-row-2"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-dc-req-zone-dc-clause-13-3-2-f",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "rear_yard",
-        "requirement_label_raw": "(f)",
-        "requirement_text_raw": "Rear Yard Setback min. 0 m when abutting DC, otherwise 6 m",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-clause-13-3-2-f-1",
-          "zone-dc-num-zone-dc-clause-13-3-2-f-2"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-3-2-f"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-dc-req-zone-dc-clause-13-3-2-b",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "lot_frontage",
-        "requirement_label_raw": "(b)",
-        "requirement_text_raw": "Frontage min. 7.6 m",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-clause-13-3-2-b-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-3-2-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-dc-req-zone-dc-clause-13-3-2-c",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "front_yard",
-        "requirement_label_raw": "(c)",
-        "requirement_text_raw": "Front Yard Setback min. 0 m max. 2 m",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-clause-13-3-2-c-1",
-          "zone-dc-num-zone-dc-clause-13-3-2-c-2"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-3-2-c"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-dc-req-zone-dc-clause-13-3-2-d",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "flankage_yard",
-        "requirement_label_raw": "(d)",
-        "requirement_text_raw": "Flankage Yard Setback min. 0 m max. 2 m",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-clause-13-3-2-d-1",
-          "zone-dc-num-zone-dc-clause-13-3-2-d-2"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-3-2-d"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-dc-req-zone-dc-clause-13-3-2-e",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "side_yard",
-        "requirement_label_raw": "(e)",
-        "requirement_text_raw": "Side Yard Setback min. 0 m",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-clause-13-3-2-e-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-3-2-e"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-dc-req-zone-dc-clause-13-5-2",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "height",
-        "requirement_label_raw": ".2",
-        "requirement_text_raw": "The minimum building height shall be 3 storeys.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-clause-13-5-2-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-2"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-dc-req-zone-dc-clause-13-5-4-a",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "height",
-        "requirement_label_raw": "(a)",
-        "requirement_text_raw": "4 storeys for all buildings that exceed 4 storeys in height; and",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-clause-13-5-4-a-1",
-          "zone-dc-num-zone-dc-clause-13-5-4-a-2"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-4-a"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-dc-req-zone-dc-clause-13-5-4-b",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "height",
-        "requirement_label_raw": "(b)",
-        "requirement_text_raw": "5 storeys for all buildings that are equal to or exceed 8 storeys in height.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-clause-13-5-4-b-1",
-          "zone-dc-num-zone-dc-clause-13-5-4-b-2"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-4-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-dc-req-zone-dc-clause-13-5-5",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "setback",
-        "requirement_label_raw": ".5",
-        "requirement_text_raw": "The minimum streetwall stepback shall be: 7.6 m",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-clause-13-5-5-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-5"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-dc-req-zone-dc-clause-13-5-5-a",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "height",
-        "requirement_label_raw": "(a)",
-        "requirement_text_raw": "2 m for all buildings that exceed 4 storeys in height; and",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-clause-13-5-5-a-1",
-          "zone-dc-num-zone-dc-clause-13-5-5-a-2"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-5-a"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-dc-req-zone-dc-clause-13-5-5-b",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "height",
-        "requirement_label_raw": "(b)",
-        "requirement_text_raw": "3 m for all buildings that are equal to or exceed 8 storeys in height.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-clause-13-5-5-b-1",
-          "zone-dc-num-zone-dc-clause-13-5-5-b-2"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-5-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-dc-req-zone-dc-clause-13-5-7",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "side_yard",
-        "requirement_label_raw": ".7",
-        "requirement_text_raw": "Any portion of a tower above 8 storeys in height shall have a minimum required side yard stepback of 10 m.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-clause-13-5-7-1",
-          "zone-dc-num-zone-dc-clause-13-5-7-2"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-7"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-dc-req-zone-dc-clause-13-5-8",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "height",
-        "requirement_label_raw": ".8",
-        "requirement_text_raw": "Above 8 storeys, the maximum floor plate area shall be 800 m2 and the maximum tower dimensions shall be 35 m x 40 m.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-clause-13-5-8-1",
-          "zone-dc-num-zone-dc-clause-13-5-8-2",
-          "zone-dc-num-zone-dc-clause-13-5-8-3"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-8"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-dc-req-zone-dc-clause-13-5-9",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "height",
-        "requirement_label_raw": ".9",
-        "requirement_text_raw": "The minimum groundfloor height shall not be less than 4 m in height and shall be no more than 1.5 m above or below the streetline grade. Registered heritage properties shall maintain their groundfloor height.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-clause-13-5-9-1",
-          "zone-dc-num-zone-dc-clause-13-5-9-2"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-9"
-          }
-        ],
-        "confidence": "medium"
-      }
-    ],
-    "regulation_groups": [
-      {
-        "regulation_group_id": "zone-dc-regulation-group-zone",
-        "group_label_raw": "PART 13",
-        "group_title_raw": "DC - Downtown Core",
-        "regulated_use_terms": [
-          "zone-dc-term-use-lodging_house",
-          "zone-dc-term-use-converted_dwelling",
-          "zone-dc-term-use-commercial_daycare_centre",
-          "zone-dc-term-use-community_care_facility",
-          "zone-dc-term-use-community_institutional",
-          "zone-dc-term-use-cultural_establishment",
-          "zone-dc-term-use-educational_institution_private",
-          "zone-dc-term-use-educational_institution_public",
-          "zone-dc-term-use-fire_station",
-          "zone-dc-term-use-funeral_establishment",
-          "zone-dc-term-use-government_office",
-          "zone-dc-term-use-library",
-          "zone-dc-term-use-medical_health_and_dental_office",
-          "zone-dc-term-term-multi_unit_dwelling",
-          "zone-dc-term-use-police_station",
-          "zone-dc-term-use-recreation_or_fitness_centre_indoors",
-          "zone-dc-term-use-convenience_store",
-          "zone-dc-term-use-eating_and_drinking_establishment",
-          "zone-dc-term-use-entertainment_establishment"
-        ],
-        "applicability": {
-          "applies_to_zone_codes": [
-            "DC"
-          ],
-          "conditions": []
-        },
-        "requirement_refs": [
-          "zone-dc-req-zone-dc-table-13-5-10-row-1-value",
-          "zone-dc-req-zone-dc-table-13-5-10-row-2-value",
-          "zone-dc-req-zone-dc-clause-13-3-2-f",
-          "zone-dc-req-zone-dc-clause-13-3-2-b",
-          "zone-dc-req-zone-dc-clause-13-3-2-c",
-          "zone-dc-req-zone-dc-clause-13-3-2-d",
-          "zone-dc-req-zone-dc-clause-13-3-2-e",
-          "zone-dc-req-zone-dc-clause-13-5-2",
-          "zone-dc-req-zone-dc-clause-13-5-4-a",
-          "zone-dc-req-zone-dc-clause-13-5-4-b",
-          "zone-dc-req-zone-dc-clause-13-5-5",
-          "zone-dc-req-zone-dc-clause-13-5-5-a",
-          "zone-dc-req-zone-dc-clause-13-5-5-b",
-          "zone-dc-req-zone-dc-clause-13-5-7",
-          "zone-dc-req-zone-dc-clause-13-5-8",
-          "zone-dc-req-zone-dc-clause-13-5-9"
-        ],
-        "source_section_ref": "zone-dc-section-13-1",
-        "confidence": "medium"
-      }
-    ],
-    "conditional_rule_groups": [],
-    "zone_relationships": [],
-    "map_layer_references": [
-      {
-        "map_reference_id": "zone-dc-map-zoning-map",
-        "map_title_raw": "Charlottetown Zoning Map 2026",
-        "map_label_raw": "Zoning Map",
-        "map_reference_type": "zoning_map",
-        "postgis_schema": "public",
-        "postgis_table": "spatial_features",
-        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
-        "feature_key": "DC",
-        "source_refs": [
-          {
-            "source_ref_type": "map_reference",
-            "source_ref_id": "zone-dc-map-zoning-map"
-          }
-        ],
-        "confidence": "medium"
-      }
-    ],
-    "other_requirements": [
-      {
-        "requirement_id": "zone-dc-req-zone-dc-clause-13-4-1",
-        "requirement_type": "other",
-        "requirement_category": "encroachments_into_the_public_street_right_of_way_for_decks_signage_public_art_a",
-        "requirement_label_raw": ".1",
-        "requirement_text_raw": "Encroachments into the public street right- of-way for decks, signage, public art, and architectural features above 3 m from grade at the streetline may be considered by Planning Board.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-clause-13-4-1-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-4-1"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
-        "requirement_id": "zone-dc-req-zone-dc-clause-13-5-12",
-        "requirement_type": "other",
-        "requirement_category": "cantilevered_or_recessed_portions_within_any_streetwall_that_have_a_depth_of_2_m",
-        "requirement_label_raw": ".12",
-        "requirement_text_raw": "Cantilevered or recessed portions within any streetwall that have a depth of 2 m or greater shall not exceed 30% of the width of the streetwall.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-clause-13-5-12-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-12"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
-        "requirement_id": "zone-dc-req-zone-dc-clause-13-5-14",
-        "requirement_type": "other",
-        "requirement_category": "parking",
-        "requirement_label_raw": ".14",
-        "requirement_text_raw": "Parking garage doors shall be set back no less than 3 m from the front lot line.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-clause-13-5-14-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-5-14"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
-        "requirement_id": "zone-dc-req-zone-dc-clause-13-6-5",
-        "requirement_type": "other",
-        "requirement_category": "height",
-        "requirement_label_raw": ".5",
-        "requirement_text_raw": "All buildings exceeding 4 storeys with a flat roof shall include a no less than 30% green roof.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-dc-num-zone-dc-clause-13-6-5-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-dc-clause-13-6-5"
-          }
-        ],
-        "confidence": "needs_review"
-      }
-    ],
-    "cross_references": []
-  },
-  "review_flags": [
-    {
-      "review_flag_id": "zone-dc-flag-unmatched-use-multi-unit-dwelling-14-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Multi-Unit Dwelling"
-    },
-    {
-      "review_flag_id": "zone-dc-flag-legacy-open-issue-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "extraction_review",
-      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization.",
-      "source_refs": [
-        {
-          "source_ref_type": "source_unit",
-          "source_ref_id": "zone-dc"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-dc-flag-legacy-open-issue-2",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "table_parsing_review",
-      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization.",
-      "source_refs": [
-        {
-          "source_ref_type": "source_unit",
-          "source_ref_id": "zone-dc"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-dc-flag-unmatched-term-multi-unit-dwelling",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Multi-Unit Dwelling"
-    }
-  ]
+  }
 }

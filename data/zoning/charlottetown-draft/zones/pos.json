@@ -1,989 +1,354 @@
 {
-  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Draft Zoning & Development Bylaw",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
-    "document_type": "zone",
     "zone_code": "POS",
     "zone_name": "Privately-owned Open Spaces",
-    "zone_label_raw": "PART 26",
-    "zone_title_raw": "POS - Privately-owned Open Spaces",
-    "citations": {
+    "part_label_raw": "PART 26",
+    "chapter_heading_raw": "PART 26 POS - Privately-owned Open Spaces",
+    "draft_date_raw": "April 7, 2026"
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": [
+      "21(e)",
+      "21(ea)",
+      "21(ea)(1)",
+      "20(1)(a.1)"
+    ],
+    "pending_review_clause_patterns": [
+      "dot_numeric_provision_labels",
+      "parenthesized_alpha_clause_labels"
+    ]
+  },
+  "permitted_uses": [
+    {
+      "clause_label_raw": "(a)",
+      "use_type": "permitted_use",
+      "use_name": "Golf Course",
+      "status": "active",
+      "conditions": "The following uses are permitted in the POS Zone by Site Plan Approval:",
+      "citations": {
+        "pdf_page_start": 159,
+        "pdf_page_end": 159,
+        "bylaw_page_start": 155,
+        "bylaw_page_end": 155
+      }
+    }
+  ],
+  "requirement_sections": [
+    {
+      "order_index": 1,
+      "section_label_raw": "26.1",
+      "title_label_raw": "INTENT",
+      "citations": {
+        "pdf_page_start": 159,
+        "pdf_page_end": 159,
+        "bylaw_page_start": 155,
+        "bylaw_page_end": 155
+      },
+      "provisions": [
+        {
+          "provision_label_raw": "section",
+          "text": "The intent of this chapter is to regulate the use and preservation of privately owned open spaces, including golf courses, driving ranges, and similar recreational lands, recognizing their dual role as community amenities and significant landscaped areas within the urban fabric. These lands are intended primarily for outdoor recreational use, while maintaining their contribution to the City's green space network, stormwater management, and ecological systems.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 159,
+            "pdf_page_end": 159,
+            "bylaw_page_start": 155,
+            "bylaw_page_end": 155
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 2,
+      "section_label_raw": "26.2",
+      "title_label_raw": "RE-ZONING",
+      "citations": {
+        "pdf_page_start": 159,
+        "pdf_page_end": 159,
+        "bylaw_page_start": 155,
+        "bylaw_page_end": 155
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "Rezoning from POS to any other zone may be considered where the intent meets the policies of the Official Plan.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 159,
+            "pdf_page_end": 159,
+            "bylaw_page_start": 155,
+            "bylaw_page_end": 155
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 3,
+      "section_label_raw": "26.3",
+      "title_label_raw": "PERMITTED USES",
+      "citations": {
+        "pdf_page_start": 159,
+        "pdf_page_end": 159,
+        "bylaw_page_start": 155,
+        "bylaw_page_end": 155
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "The following uses are permitted in the POS Zone by Site Plan Approval:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 159,
+            "pdf_page_end": 159,
+            "bylaw_page_start": 155,
+            "bylaw_page_end": 155
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Golf Course",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 159,
+            "pdf_page_end": 159,
+            "bylaw_page_start": 155,
+            "bylaw_page_end": 155
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "This use is permitted so long as the following lot requirements are met:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 159,
+            "pdf_page_end": 159,
+            "bylaw_page_start": 155,
+            "bylaw_page_end": 155
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Lot Area min. 930 m2",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 159,
+            "pdf_page_end": 159,
+            "bylaw_page_start": 155,
+            "bylaw_page_end": 155
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "Frontage min. 24 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 159,
+            "pdf_page_end": 159,
+            "bylaw_page_start": 155,
+            "bylaw_page_end": 155
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "Front Yard Setback min. 7.6 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 159,
+            "pdf_page_end": 159,
+            "bylaw_page_start": 155,
+            "bylaw_page_end": 155
+          }
+        },
+        {
+          "provision_label_raw": "(d)",
+          "text": "Flanking Yard Setback min. 7.6 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 159,
+            "pdf_page_end": 159,
+            "bylaw_page_start": 155,
+            "bylaw_page_end": 155
+          }
+        },
+        {
+          "provision_label_raw": "(e)",
+          "text": "Side Yard Setback min. 3 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 159,
+            "pdf_page_end": 159,
+            "bylaw_page_start": 155,
+            "bylaw_page_end": 155
+          }
+        },
+        {
+          "provision_label_raw": "(f)",
+          "text": "Rear Yard Setback min. 6 m; 10 m when abutting RN, or RM",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 159,
+            "pdf_page_end": 159,
+            "bylaw_page_start": 155,
+            "bylaw_page_end": 155
+          }
+        },
+        {
+          "provision_label_raw": "(g)",
+          "text": "Height max. 4 storeys",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 159,
+            "pdf_page_end": 159,
+            "bylaw_page_start": 155,
+            "bylaw_page_end": 155
+          }
+        },
+        {
+          "provision_label_raw": "(h)",
+          "text": "Coverage max. 60%",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 159,
+            "pdf_page_end": 159,
+            "bylaw_page_start": 155,
+            "bylaw_page_end": 155
+          }
+        },
+        {
+          "provision_label_raw": ".3",
+          "text": "Accessory buildings are permitted according to Section 3.1.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 159,
+            "pdf_page_end": 159,
+            "bylaw_page_start": 155,
+            "bylaw_page_end": 155
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 4,
+      "section_label_raw": "26.4",
+      "title_label_raw": "BUILT FORM REQUIREMENTS",
+      "citations": {
+        "pdf_page_start": 160,
+        "pdf_page_end": 160,
+        "bylaw_page_start": 156,
+        "bylaw_page_end": 156
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "The maximum building height shall be 4 storeys.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 160,
+            "pdf_page_end": 160,
+            "bylaw_page_start": 156,
+            "bylaw_page_end": 156
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "Up to four buildings per lot are permitted by Site Plan Approval.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 160,
+            "pdf_page_end": 160,
+            "bylaw_page_start": 156,
+            "bylaw_page_end": 156
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 5,
+      "section_label_raw": "26.5",
+      "title_label_raw": "PERMITTED WITH CONDITIONS",
+      "citations": {
+        "pdf_page_start": 160,
+        "pdf_page_end": 160,
+        "bylaw_page_start": 156,
+        "bylaw_page_end": 156
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "Permitted encroachments into the setbacks are listed in Table 3.2.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 160,
+            "pdf_page_end": 160,
+            "bylaw_page_start": 156,
+            "bylaw_page_end": 156
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "Additional residential uses are permitted by development agreement.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 160,
+            "pdf_page_end": 160,
+            "bylaw_page_start": 156,
+            "bylaw_page_end": 156
+          }
+        }
+      ],
+      "layout_artifacts_present": true
+    }
+  ],
+  "zone_specific_requirements": [],
+  "shared_requirement_references": [
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Section 3.1.",
+      "citations": {
+        "pdf_page_start": 159,
+        "pdf_page_end": 159,
+        "bylaw_page_start": 155,
+        "bylaw_page_end": 155
+      },
+      "source_text": "Accessory buildings are permitted according to Section 3.1."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Table 3.2.",
+      "citations": {
+        "pdf_page_start": 160,
+        "pdf_page_end": 160,
+        "bylaw_page_start": 156,
+        "bylaw_page_end": 156
+      },
+      "source_text": "Permitted encroachments into the setbacks are listed in Table 3.2."
+    }
+  ],
+  "content_blocks": [],
+  "open_issues": [
+    {
+      "issue_type": "extraction_review",
+      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization."
+    },
+    {
+      "issue_type": "table_parsing_review",
+      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization."
+    }
+  ],
+  "citations": {
+    "zone_section": {
       "pdf_page_start": 159,
       "pdf_page_end": 160,
       "bylaw_page_start": 155,
       "bylaw_page_end": 156
     }
-  },
-  "raw_data": {
-    "source_units": [
-      {
-        "source_unit_id": "zone-pos",
-        "source_unit_type": "zone",
-        "label_raw": "PART 26",
-        "title_raw": "POS - Privately-owned Open Spaces",
-        "text_raw": "The intent of this chapter is to regulate the use and preservation of privately owned open spaces, including golf courses, driving ranges, and similar recreational lands, recognizing their dual role as community amenities and significant landscaped areas within the urban fabric. These lands are intended primarily for outdoor recreational use, while maintaining their contribution to the City's green space network, stormwater management, and ecological systems.\nRezoning from POS to any other zone may be considered where the intent meets the policies of the Official Plan.\nThe following uses are permitted in the POS Zone by Site Plan Approval:\nGolf Course\nThis use is permitted so long as the following lot requirements are met:\n(a) Lot Area min. 930 m2\n(b) Frontage min. 24 m\n(c) Front Yard Setback min. 7.6 m\n(d) Flanking Yard Setback min. 7.6 m\n(e) Side Yard Setback min. 3 m\n(f) Rear Yard Setback min. 6 m; 10 m when abutting RN, or RM\n(g) Height max. 4 storeys\n(h) Coverage max. 60%\nAccessory buildings are permitted according to Section 3.1.\nThe maximum building height shall be 4 storeys.\nUp to four buildings per lot are permitted by Site Plan Approval.\nPermitted encroachments into the setbacks are listed in Table 3.2.\nAdditional residential uses are permitted by development agreement.",
-        "source_order": 1,
-        "citations": {
-          "pdf_page_start": 159,
-          "pdf_page_end": 160,
-          "bylaw_page_start": 155,
-          "bylaw_page_end": 156
-        }
-      }
-    ],
-    "sections_raw": [
-      {
-        "section_id": "zone-pos-section-26-1",
-        "section_label_raw": "26.1",
-        "section_title_raw": "INTENT",
-        "source_order": 1,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-pos-clause-26-1",
-            "clause_label_raw": "section",
-            "clause_text_raw": "The intent of this chapter is to regulate the use and preservation of privately owned open spaces, including golf courses, driving ranges, and similar recreational lands, recognizing their dual role as community amenities and significant landscaped areas within the urban fabric. These lands are intended primarily for outdoor recreational use, while maintaining their contribution to the City's green space network, stormwater management, and ecological systems.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 159,
-              "pdf_page_end": 159,
-              "bylaw_page_start": 155,
-              "bylaw_page_end": 155
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-pos-clause-26-1",
-            "source_order": 1
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 159,
-          "pdf_page_end": 159,
-          "bylaw_page_start": 155,
-          "bylaw_page_end": 155
-        }
-      },
-      {
-        "section_id": "zone-pos-section-26-2",
-        "section_label_raw": "26.2",
-        "section_title_raw": "RE-ZONING",
-        "source_order": 2,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-pos-clause-26-2-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "Rezoning from POS to any other zone may be considered where the intent meets the policies of the Official Plan.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 159,
-              "pdf_page_end": 159,
-              "bylaw_page_start": 155,
-              "bylaw_page_end": 155
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-pos-clause-26-2-1",
-            "source_order": 1
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 159,
-          "pdf_page_end": 159,
-          "bylaw_page_start": 155,
-          "bylaw_page_end": 155
-        }
-      },
-      {
-        "section_id": "zone-pos-section-26-3",
-        "section_label_raw": "26.3",
-        "section_title_raw": "PERMITTED USES",
-        "source_order": 3,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-pos-clause-26-3-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "The following uses are permitted in the POS Zone by Site Plan Approval:",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 159,
-              "pdf_page_end": 159,
-              "bylaw_page_start": 155,
-              "bylaw_page_end": 155
-            }
-          },
-          {
-            "clause_id": "zone-pos-clause-26-3-1-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "Golf Course",
-            "parent_clause_id": "zone-pos-clause-26-3-1",
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 159,
-              "pdf_page_end": 159,
-              "bylaw_page_start": 155,
-              "bylaw_page_end": 155
-            }
-          },
-          {
-            "clause_id": "zone-pos-clause-26-3-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "This use is permitted so long as the following lot requirements are met:",
-            "parent_clause_id": null,
-            "source_order": 3,
-            "citations": {
-              "pdf_page_start": 159,
-              "pdf_page_end": 159,
-              "bylaw_page_start": 155,
-              "bylaw_page_end": 155
-            }
-          },
-          {
-            "clause_id": "zone-pos-clause-26-3-3",
-            "clause_label_raw": ".3",
-            "clause_text_raw": "Accessory buildings are permitted according to Section 3.1.",
-            "parent_clause_id": null,
-            "source_order": 4,
-            "citations": {
-              "pdf_page_start": 159,
-              "pdf_page_end": 159,
-              "bylaw_page_start": 155,
-              "bylaw_page_end": 155
-            }
-          }
-        ],
-        "tables_raw": [
-          {
-            "table_id": "zone-pos-table-26-3-2",
-            "table_title_raw": "26.3.2",
-            "source_order": 4,
-            "columns_raw": [
-              {
-                "column_id": "row_label",
-                "column_label_raw": "clause_label_raw",
-                "source_order": 1
-              },
-              {
-                "column_id": "requirement",
-                "column_label_raw": "clause_name",
-                "source_order": 2
-              },
-              {
-                "column_id": "value",
-                "column_label_raw": "",
-                "source_order": 3
-              }
-            ],
-            "rows_raw": [
-              {
-                "row_id": "zone-pos-table-26-3-2-row-1",
-                "source_order": 1,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-1-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(a)"
-                  },
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-1-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Lot Area"
-                  },
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-1-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 930 m2"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-pos-table-26-3-2-row-2",
-                "source_order": 2,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-2-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(b)"
-                  },
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-2-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Frontage"
-                  },
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-2-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 24 m"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-pos-table-26-3-2-row-3",
-                "source_order": 3,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-3-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(c)"
-                  },
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-3-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Front Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-3-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 7.6 m"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-pos-table-26-3-2-row-4",
-                "source_order": 4,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-4-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(d)"
-                  },
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-4-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Flanking Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-4-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 7.6 m"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-pos-table-26-3-2-row-5",
-                "source_order": 5,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-5-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(e)"
-                  },
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-5-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Side Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-5-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 3 m"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-pos-table-26-3-2-row-6",
-                "source_order": 6,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-6-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(f)"
-                  },
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-6-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Rear Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-6-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 6 m; 10 m when abutting RN, or RM"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-pos-table-26-3-2-row-7",
-                "source_order": 7,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-7-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(g)"
-                  },
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-7-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Height"
-                  },
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-7-value",
-                    "column_id": "value",
-                    "cell_text_raw": "max. 4 storeys"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-pos-table-26-3-2-row-8",
-                "source_order": 8,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-8-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(h)"
-                  },
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-8-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Coverage"
-                  },
-                  {
-                    "cell_id": "zone-pos-table-26-3-2-row-8-value",
-                    "column_id": "value",
-                    "cell_text_raw": "max. 60%"
-                  }
-                ]
-              }
-            ],
-            "citations": {
-              "pdf_page_start": 159,
-              "pdf_page_end": 159,
-              "bylaw_page_start": 155,
-              "bylaw_page_end": 155
-            }
-          }
-        ],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-pos-clause-26-3-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-pos-clause-26-3-1-a",
-            "source_order": 2
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-pos-clause-26-3-2",
-            "source_order": 3
-          },
-          {
-            "content_type": "table",
-            "content_id": "zone-pos-table-26-3-2",
-            "source_order": 4
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-pos-clause-26-3-3",
-            "source_order": 5
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 159,
-          "pdf_page_end": 159,
-          "bylaw_page_start": 155,
-          "bylaw_page_end": 155
-        }
-      },
-      {
-        "section_id": "zone-pos-section-26-4",
-        "section_label_raw": "26.4",
-        "section_title_raw": "BUILT FORM REQUIREMENTS",
-        "source_order": 4,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-pos-clause-26-4-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "The maximum building height shall be 4 storeys.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 160,
-              "pdf_page_end": 160,
-              "bylaw_page_start": 156,
-              "bylaw_page_end": 156
-            }
-          },
-          {
-            "clause_id": "zone-pos-clause-26-4-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "Up to four buildings per lot are permitted by Site Plan Approval.",
-            "parent_clause_id": null,
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 160,
-              "pdf_page_end": 160,
-              "bylaw_page_start": 156,
-              "bylaw_page_end": 156
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-pos-clause-26-4-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-pos-clause-26-4-2",
-            "source_order": 2
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 160,
-          "pdf_page_end": 160,
-          "bylaw_page_start": 156,
-          "bylaw_page_end": 156
-        }
-      },
-      {
-        "section_id": "zone-pos-section-26-5",
-        "section_label_raw": "26.5",
-        "section_title_raw": "PERMITTED WITH CONDITIONS",
-        "source_order": 5,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-pos-clause-26-5-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "Permitted encroachments into the setbacks are listed in Table 3.2.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 160,
-              "pdf_page_end": 160,
-              "bylaw_page_start": 156,
-              "bylaw_page_end": 156
-            }
-          },
-          {
-            "clause_id": "zone-pos-clause-26-5-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "Additional residential uses are permitted by development agreement.",
-            "parent_clause_id": null,
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 160,
-              "pdf_page_end": 160,
-              "bylaw_page_start": 156,
-              "bylaw_page_end": 156
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-pos-clause-26-5-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-pos-clause-26-5-2",
-            "source_order": 2
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 160,
-          "pdf_page_end": 160,
-          "bylaw_page_start": 156,
-          "bylaw_page_end": 156
-        }
-      }
-    ],
-    "clause_refs": [
-      {
-        "clause_id": "zone-pos-clause-26-1",
-        "section_id": "zone-pos-section-26-1",
-        "source_order": 1
-      },
-      {
-        "clause_id": "zone-pos-clause-26-2-1",
-        "section_id": "zone-pos-section-26-2",
-        "source_order": 2
-      },
-      {
-        "clause_id": "zone-pos-clause-26-3-1",
-        "section_id": "zone-pos-section-26-3",
-        "source_order": 3
-      },
-      {
-        "clause_id": "zone-pos-clause-26-3-1-a",
-        "section_id": "zone-pos-section-26-3",
-        "source_order": 4
-      },
-      {
-        "clause_id": "zone-pos-clause-26-3-2",
-        "section_id": "zone-pos-section-26-3",
-        "source_order": 5
-      },
-      {
-        "clause_id": "zone-pos-clause-26-3-3",
-        "section_id": "zone-pos-section-26-3",
-        "source_order": 6
-      },
-      {
-        "clause_id": "zone-pos-clause-26-4-1",
-        "section_id": "zone-pos-section-26-4",
-        "source_order": 7
-      },
-      {
-        "clause_id": "zone-pos-clause-26-4-2",
-        "section_id": "zone-pos-section-26-4",
-        "source_order": 8
-      },
-      {
-        "clause_id": "zone-pos-clause-26-5-1",
-        "section_id": "zone-pos-section-26-5",
-        "source_order": 9
-      },
-      {
-        "clause_id": "zone-pos-clause-26-5-2",
-        "section_id": "zone-pos-section-26-5",
-        "source_order": 10
-      }
-    ],
-    "tables_raw": [],
-    "map_references_raw": [
-      {
-        "map_reference_id": "zone-pos-map-zoning-map",
-        "map_label_raw": "Zoning Map",
-        "map_title_raw": "Charlottetown Zoning Map 2026",
-        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
-        "citations": {
-          "pdf_page_start": 159,
-          "pdf_page_end": 160,
-          "bylaw_page_start": 155,
-          "bylaw_page_end": 156
-        }
-      }
-    ]
-  },
-  "structured_data": {
-    "terms": [
-      {
-        "term_id": "zone-pos-term-use-golf_course",
-        "term_raw": "Golf Course",
-        "term_normalized": "golf_course",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "golf_course"
-      }
-    ],
-    "uses": [
-      {
-        "use_id": "zone-pos-use-golf-course-1-1",
-        "use_name_raw": "Golf Course",
-        "use_term_id": "zone-pos-term-use-golf_course",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      }
-    ],
-    "numeric_values": [
-      {
-        "numeric_value_id": "zone-pos-num-zone-pos-table-26-3-2-row-2-value-1",
-        "value_raw": "24 m",
-        "value": 24,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-pos-table-26-3-2-row-2-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-pos-num-zone-pos-table-26-3-2-row-3-value-1",
-        "value_raw": "7.6 m",
-        "value": 7.6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-pos-table-26-3-2-row-3-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-pos-num-zone-pos-table-26-3-2-row-4-value-1",
-        "value_raw": "7.6 m",
-        "value": 7.6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-pos-table-26-3-2-row-4-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-pos-num-zone-pos-table-26-3-2-row-5-value-1",
-        "value_raw": "3 m",
-        "value": 3,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-pos-table-26-3-2-row-5-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-pos-num-zone-pos-table-26-3-2-row-6-value-1",
-        "value_raw": "6 m",
-        "value": 6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-pos-table-26-3-2-row-6-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-pos-num-zone-pos-table-26-3-2-row-6-value-2",
-        "value_raw": "10 m",
-        "value": 10,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-pos-table-26-3-2-row-6-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-pos-num-zone-pos-table-26-3-2-row-7-value-1",
-        "value_raw": "4 storeys",
-        "value": 4,
-        "unit": "storey",
-        "measure_type": "count",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-pos-table-26-3-2-row-7-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-pos-num-zone-pos-clause-26-4-1-1",
-        "value_raw": "4 storeys",
-        "value": 4,
-        "unit": "storey",
-        "measure_type": "count",
-        "comparator": "maximum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-pos-clause-26-4-1"
-          }
-        ],
-        "confidence": "medium"
-      }
-    ],
-    "requirements": [
-      {
-        "requirement_id": "zone-pos-req-zone-pos-table-26-3-2-row-2-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "lot_frontage",
-        "requirement_label_raw": "Frontage",
-        "requirement_text_raw": "Frontage min. 24 m",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-pos-num-zone-pos-table-26-3-2-row-2-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-pos-table-26-3-2-row-2"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-pos-req-zone-pos-table-26-3-2-row-3-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "front_yard",
-        "requirement_label_raw": "Front Yard Setback",
-        "requirement_text_raw": "Front Yard Setback min. 7.6 m",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-pos-num-zone-pos-table-26-3-2-row-3-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-pos-table-26-3-2-row-3"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-pos-req-zone-pos-table-26-3-2-row-4-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "setback",
-        "requirement_label_raw": "Flanking Yard Setback",
-        "requirement_text_raw": "Flanking Yard Setback min. 7.6 m",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-pos-num-zone-pos-table-26-3-2-row-4-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-pos-table-26-3-2-row-4"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-pos-req-zone-pos-table-26-3-2-row-5-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "side_yard",
-        "requirement_label_raw": "Side Yard Setback",
-        "requirement_text_raw": "Side Yard Setback min. 3 m",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-pos-num-zone-pos-table-26-3-2-row-5-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-pos-table-26-3-2-row-5"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-pos-req-zone-pos-table-26-3-2-row-6-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "rear_yard",
-        "requirement_label_raw": "Rear Yard Setback",
-        "requirement_text_raw": "Rear Yard Setback min. 6 m; 10 m when abutting RN, or RM",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-pos-num-zone-pos-table-26-3-2-row-6-value-1",
-          "zone-pos-num-zone-pos-table-26-3-2-row-6-value-2"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-pos-table-26-3-2-row-6"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-pos-req-zone-pos-table-26-3-2-row-7-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "height",
-        "requirement_label_raw": "Height",
-        "requirement_text_raw": "Height max. 4 storeys",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-pos-num-zone-pos-table-26-3-2-row-7-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-pos-table-26-3-2-row-7"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-pos-req-zone-pos-clause-26-4-1",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "height",
-        "requirement_label_raw": ".1",
-        "requirement_text_raw": "The maximum building height shall be 4 storeys.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-pos-num-zone-pos-clause-26-4-1-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-pos-clause-26-4-1"
-          }
-        ],
-        "confidence": "medium"
-      }
-    ],
-    "regulation_groups": [
-      {
-        "regulation_group_id": "zone-pos-regulation-group-zone",
-        "group_label_raw": "PART 26",
-        "group_title_raw": "POS - Privately-owned Open Spaces",
-        "regulated_use_terms": [
-          "zone-pos-term-use-golf_course"
-        ],
-        "applicability": {
-          "applies_to_zone_codes": [
-            "POS"
-          ],
-          "conditions": []
-        },
-        "requirement_refs": [
-          "zone-pos-req-zone-pos-table-26-3-2-row-2-value",
-          "zone-pos-req-zone-pos-table-26-3-2-row-3-value",
-          "zone-pos-req-zone-pos-table-26-3-2-row-4-value",
-          "zone-pos-req-zone-pos-table-26-3-2-row-5-value",
-          "zone-pos-req-zone-pos-table-26-3-2-row-6-value",
-          "zone-pos-req-zone-pos-table-26-3-2-row-7-value",
-          "zone-pos-req-zone-pos-clause-26-4-1"
-        ],
-        "source_section_ref": "zone-pos-section-26-1",
-        "confidence": "medium"
-      }
-    ],
-    "conditional_rule_groups": [],
-    "zone_relationships": [],
-    "map_layer_references": [
-      {
-        "map_reference_id": "zone-pos-map-zoning-map",
-        "map_title_raw": "Charlottetown Zoning Map 2026",
-        "map_label_raw": "Zoning Map",
-        "map_reference_type": "zoning_map",
-        "postgis_schema": "public",
-        "postgis_table": "spatial_features",
-        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
-        "feature_key": "POS",
-        "source_refs": [
-          {
-            "source_ref_type": "map_reference",
-            "source_ref_id": "zone-pos-map-zoning-map"
-          }
-        ],
-        "confidence": "medium"
-      }
-    ],
-    "other_requirements": [],
-    "cross_references": []
-  },
-  "review_flags": [
-    {
-      "review_flag_id": "zone-pos-flag-legacy-open-issue-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "extraction_review",
-      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization.",
-      "source_refs": [
-        {
-          "source_ref_type": "source_unit",
-          "source_ref_id": "zone-pos"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-pos-flag-legacy-open-issue-2",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "table_parsing_review",
-      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization.",
-      "source_refs": [
-        {
-          "source_ref_type": "source_unit",
-          "source_ref_id": "zone-pos"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-pos-flag-unparsed-table-value-zone-pos-table-26-3-2-row-1-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: min. 930 m2",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-pos-table-26-3-2-row-1-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-pos-flag-unparsed-table-value-zone-pos-table-26-3-2-row-8-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: max. 60%",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-pos-table-26-3-2-row-8-value"
-        }
-      ]
-    }
-  ]
+  }
 }

@@ -1,3250 +1,1338 @@
 {
-  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Draft Zoning & Development Bylaw",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
-    "document_type": "zone",
     "zone_code": "I",
     "zone_name": "Institutional",
-    "zone_label_raw": "PART 24",
-    "zone_title_raw": "I - Institutional",
-    "citations": {
+    "part_label_raw": "PART 24",
+    "chapter_heading_raw": "PART 24 I - Institutional",
+    "draft_date_raw": "April 7, 2026"
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": [
+      "21(e)",
+      "21(ea)",
+      "21(ea)(1)",
+      "20(1)(a.1)"
+    ],
+    "pending_review_clause_patterns": [
+      "dot_numeric_provision_labels",
+      "parenthesized_alpha_clause_labels"
+    ]
+  },
+  "permitted_uses": [
+    {
+      "clause_label_raw": "(a)",
+      "use_type": "permitted_use",
+      "use_name": "Cemetery",
+      "status": "active",
+      "conditions": "The following uses are permitted in the I Zone:",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      }
+    },
+    {
+      "clause_label_raw": "(b)",
+      "use_type": "permitted_use",
+      "use_name": "Commercial Daycare Centre",
+      "status": "active",
+      "conditions": "The following uses are permitted in the I Zone:",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      }
+    },
+    {
+      "clause_label_raw": "(c)",
+      "use_type": "permitted_use",
+      "use_name": "Community Care Facility",
+      "status": "active",
+      "conditions": "The following uses are permitted in the I Zone:",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      }
+    },
+    {
+      "clause_label_raw": "(d)",
+      "use_type": "permitted_use",
+      "use_name": "Community Institutional",
+      "status": "active",
+      "conditions": "The following uses are permitted in the I Zone:",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      }
+    },
+    {
+      "clause_label_raw": "(e)",
+      "use_type": "permitted_use",
+      "use_name": "Cultural Establishment",
+      "status": "active",
+      "conditions": "The following uses are permitted in the I Zone:",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      }
+    },
+    {
+      "clause_label_raw": "(f)",
+      "use_type": "permitted_use",
+      "use_name": "Dormitory",
+      "status": "active",
+      "conditions": "The following uses are permitted in the I Zone:",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      }
+    },
+    {
+      "clause_label_raw": "(g)",
+      "use_type": "permitted_use",
+      "use_name": "Educational Institution (private)",
+      "status": "active",
+      "conditions": "The following uses are permitted in the I Zone:",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      }
+    },
+    {
+      "clause_label_raw": "(h)",
+      "use_type": "permitted_use",
+      "use_name": "Educational Institution (public)",
+      "status": "active",
+      "conditions": "The following uses are permitted in the I Zone:",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      }
+    },
+    {
+      "clause_label_raw": "(i)",
+      "use_type": "permitted_use",
+      "use_name": "Fire Station",
+      "status": "active",
+      "conditions": "The following uses are permitted in the I Zone:",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      }
+    },
+    {
+      "clause_label_raw": "(j)",
+      "use_type": "permitted_use",
+      "use_name": "Funeral Establishment",
+      "status": "active",
+      "conditions": "The following uses are permitted in the I Zone:",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      }
+    },
+    {
+      "clause_label_raw": "(k)",
+      "use_type": "permitted_use",
+      "use_name": "Government Offices",
+      "status": "active",
+      "conditions": "The following uses are permitted in the I Zone:",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      }
+    },
+    {
+      "clause_label_raw": "(l)",
+      "use_type": "permitted_use",
+      "use_name": "Hospital",
+      "status": "active",
+      "conditions": "The following uses are permitted in the I Zone:",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      }
+    },
+    {
+      "clause_label_raw": "(m)",
+      "use_type": "permitted_use",
+      "use_name": "Library",
+      "status": "active",
+      "conditions": "The following uses are permitted in the I Zone:",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      }
+    },
+    {
+      "clause_label_raw": "(n)",
+      "use_type": "permitted_use",
+      "use_name": "Medical, Health and Dental Office",
+      "status": "active",
+      "conditions": "The following uses are permitted in the I Zone:",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      }
+    },
+    {
+      "clause_label_raw": "(o)",
+      "use_type": "permitted_use",
+      "use_name": "Place of Worship",
+      "status": "active",
+      "conditions": "The following uses are permitted in the I Zone:",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      }
+    },
+    {
+      "clause_label_raw": "(p)",
+      "use_type": "permitted_use",
+      "use_name": "Police Station",
+      "status": "active",
+      "conditions": "The following uses are permitted in the I Zone:",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      }
+    }
+  ],
+  "requirement_sections": [
+    {
+      "order_index": 1,
+      "section_label_raw": "24.1",
+      "title_label_raw": "INTENT",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      },
+      "provisions": [
+        {
+          "provision_label_raw": "section",
+          "text": "The Institutional Zone is intended to accommodate public and community-oriented facilities that provide essential services to Charlottetown residents, including schools, places of worship, government buildings, health care, cultural, and recreational institutions. The zone ensures that these uses are integrated into neighbourhoods in a manner that is compatible with surrounding development, while allowing flexibility for future expansion and modernization. Development in the Institutional Zone should emphasize accessibility, pedestrian connections, high-quality landscaping, and building forms that contribute positively to the community fabric.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 2,
+      "section_label_raw": "24.2",
+      "title_label_raw": "RE-ZONING",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "Rezoning from I to any other zone may be considered where the intent meets the policies of the Official Plan.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 3,
+      "section_label_raw": "24.3",
+      "title_label_raw": "PERMITTED USES",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "The following uses are permitted in the I Zone:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Cemetery",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "Commercial Daycare Centre",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "Community Care Facility",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(d)",
+          "text": "Community Institutional",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(e)",
+          "text": "Cultural Establishment",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(f)",
+          "text": "Dormitory",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(g)",
+          "text": "Educational Institution (private)",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(h)",
+          "text": "Educational Institution (public)",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(i)",
+          "text": "Fire Station",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(j)",
+          "text": "Funeral Establishment",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(k)",
+          "text": "Government Offices",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(l)",
+          "text": "Hospital",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(m)",
+          "text": "Library",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(n)",
+          "text": "Medical, Health and Dental Office",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(o)",
+          "text": "Place of Worship",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(p)",
+          "text": "Police Station",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "These uses are permitted so long as the following lot requirements are met:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(f)",
+          "text": "Rear Yard Setback min. 6 m; 10 m when abutting RN, or RM",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(q)",
+          "text": "Public Utility Service Operation",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(r)",
+          "text": "Recreation or Fitness Center (indoors)",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Lot Area min. 930 m2",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "Frontage min. 24 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "Front Yard Setback min. 7.6 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(d)",
+          "text": "Flanking Yard Setback min. 7.6 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(e)",
+          "text": "Side Yard Setback min. 3 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": "(g)",
+          "text": "Coverage max. 60%",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        },
+        {
+          "provision_label_raw": ".3",
+          "text": "Accessory buildings are permitted according to Section 3.1.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 153,
+            "pdf_page_end": 153,
+            "bylaw_page_start": 149,
+            "bylaw_page_end": 149
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 4,
+      "section_label_raw": "24.4",
+      "title_label_raw": "PERMITTED WITH CONDITIONS",
+      "citations": {
+        "pdf_page_start": 154,
+        "pdf_page_end": 154,
+        "bylaw_page_start": 150,
+        "bylaw_page_end": 150
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "Permitted encroachments into the setbacks are listed in Table 3.2.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "Community care facilities and nursing Homes are subject to the following conditions over and above Table 25.1.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "A density cap of 100 m2 of site area for each bedroom.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "The 4 storey height cap is increased to 5 storeys.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": ".3",
+          "text": "Lodging Houses and Group Homes are subject to the following conditions over and above Table 25.1.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "A density cap of 100 m2 of site area for each bedroom.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "A lot area minimum of 325 m2",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "A lot frontage of 10.6 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        }
+      ],
+      "layout_artifacts_present": true
+    },
+    {
+      "order_index": 5,
+      "section_label_raw": "24.5",
+      "title_label_raw": "BUILT FORM REQUIREMENTS",
+      "citations": {
+        "pdf_page_start": 154,
+        "pdf_page_end": 154,
+        "bylaw_page_start": 150,
+        "bylaw_page_end": 150
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "More than one building per lot is permitted.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "The maximum building height shall be 4 storeys.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": ".3",
+          "text": "Buildings shall be constructed of high- quality materials excluding:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Vinyl siding",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "EIFS / synthetic stucco (Exterior Insulation and Finish Systems)",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "Imitation stone/brick panels (faux masonry veneer), stone-tile, plastic laminates or other synthetic materials that mimic real stone or real wood.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(d)",
+          "text": "Concrete block (CMU) exposed finishes",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(e)",
+          "text": "Unfinished or painted metal sheet siding",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(f)",
+          "text": "Reflective or mirrored glass",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": ".4",
+          "text": "The City may also approve other materials that, in its discretion, determines are compatible with any permitted materials if it finds that the use of these materials will not have a detrimental effect upon adjacent property values.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": ".5",
+          "text": "Primary building entries should be clearly visible in the design of the building and scaled proportionally for the buildings. The use of character defining elements such as; overhangs, columns, pilasters, window placements and/or signage should be used to define the main entry.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": ".6",
+          "text": "Buildings in the I Zone should employ design approaches to avoid monolithic or monotonous building appearances. This includes:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Facade modulation - stepping back or extending forward a portion of the facade to articulate flat building faces",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "Vertical divisions using different textures or materials",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "Division into store-fronts, with separate display windows and entrances",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(d)",
+          "text": "Front facing facades shall include no less than 2 different building materials with each material no less than 20% of the total facade area.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(e)",
+          "text": "Pedestrian entrances must be prominent, glazed, and weather- protected (canopy, awning).",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(f)",
+          "text": "Buildings on corner lots must address both street frontages with articulated facades.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": ".7",
+          "text": "Loading bays, overhead doors, vehicle services doors and service yards must be located at the side or rear of the lot except for fire stations or public works buildings.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": ".8",
+          "text": "Parking is encouraged on the side or rear of the lot but is permitted in the front yard if:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "No more than 50% of the front yard is dedicated to a parking lot (lanes, stalls and driveways)",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "For every 15 parking spaces, the lot shall include one landscaped island (the size of a parking stall) which includes 1 tree and landscaping including shrubs, ornamental grasses or stormwater gardens.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "These landscaped islands are not included in the area calculation above.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        },
+        {
+          "provision_label_raw": ".9",
+          "text": "Temporary and/or mobile buildings are prohibited from serving as primary buildings on locations found in front or flank yard.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 154,
+            "pdf_page_end": 154,
+            "bylaw_page_start": 150,
+            "bylaw_page_end": 150
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 6,
+      "section_label_raw": "24.6",
+      "title_label_raw": "LANDSCAPE REQUIREMENTS",
+      "citations": {
+        "pdf_page_start": 155,
+        "pdf_page_end": 155,
+        "bylaw_page_start": 151,
+        "bylaw_page_end": 151
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "All disturbed areas should be well landscaped using mostly (>75% quantities) indigenous, low maintenance plants that are well adapted for the local microclimates on each site. Shade tolerant species shall be specified for the north side of buildings or in areas of frequent shade. Similarly, windy sites should be planted with wind tolerant species. Disturbed areas cannot be left without landscaping.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "Where grass is being considered for any project:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Ensure the grass species is selected is adequate for shade levels on the site.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "Pegged sod is required on all landscaped slopes exceeding 30%. Erosion Control measures must be clearly identified on sloping sites to minimize soil erosion.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "A minimum of 1.5 m wide of Sod strip is required adjoining any asphalt areas, pathways, gravel storage areas, or landscape beds.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": "(d)",
+          "text": "A minimum of 2 m wide strip of sod is required for all drainage swales",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": "(e)",
+          "text": "Any reinstatement of public road right-of-ways must be sodded.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": "(f)",
+          "text": "Hydraulic seeding is permitted in all other areas where sod is not required. Broadcast seed is not permitted unless used for spot repairs.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": ".3",
+          "text": "For any parking lots located in the front yard, a minimum 2 m wide hard surfaced sidewalk shall connect the front door of the building to any adjacent sidewalks adjoining the property if present.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": ".4",
+          "text": "Driveways, parking areas, storage areas, and loading and unloading areas shall be separated from landscaped areas by continuous concrete curbing unless the design is part of a larger stormwater management strategy using rain gardens, engineered wetlands or other stormwater measures.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": ".5",
+          "text": "Slopes shall be no steeper that three (3) horizontal to one (1) vertical, except as an engineered retaining structure. All slopes shall be vegetated (not necessarily grass) and no riprap stone armouring is permitted on any site unless it is not materially visible from any road or sidewalk.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": ".6",
+          "text": "No permanent or temporary structures are permitted in the public road right of way and any disturbance to the public right-of-way shall be reinstated to existing or better condition including damages to trees, grass, lights or power infrastructure. Only driveways and walkways are permitted in the public right-of-way.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": ".7",
+          "text": "All main entries should be well landscaped to a scale that is appropriate for the scale of the building and the importance of the entry sequence.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": ".8",
+          "text": "Every institutional uses with more than 30 employees working in the building must include a well designed outdoor rest area complete with features such as outdoor seating, picnic tables, wind shelter, landscaping, or hardscape areas. The area should be no less than 1.5 m2 for every employee parking space and the area should be located to maximize use and enjoyment by staff.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": ".9",
+          "text": "The front doors must connect to adjacent sidewalks and parking areas by a hard surfaced walkway no less than 1.8m wide.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": ".10",
+          "text": "All disturbed surfaces shall be sodded or hard surfaced (asphalt, pavers, concrete). Gravel or bare earth is not permitted except within fenced storage compounds (1.8 m min. fence).",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": ".11",
+          "text": "Front yards shall be landscaped with grass and shrub bed(s) at a rate of 0.5 m2 of shrub bed per metre of frontage and one tree in the front yard for every 8 m of frontage. Decimal results shall round up.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": ".12",
+          "text": "Garbage and refuse containers shall be concealed from the view of adjoining properties and public streets by means of a screening fence of material compatible with the architecture of the building. These screening elements shall be integrated with the concept of the site and building plan; be designed so as not to attract attention; and shall be located in the most inconspicuous manner possible.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": ".13",
+          "text": "Properties that abut residential uses shall include a 3 m wide landscape buffer along the abutting property line that includes:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "A 1.8 m high (min.) opaque fence",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "One 60 mm caliper tree per 8m of side or rear yard planted in the landscape buffer placed to block light and views.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "For buildings that have been set back more than 3 m from the front lot line, no less than one (1) tree shall be planted per front yard.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        },
+        {
+          "provision_label_raw": ".14",
+          "text": "The development officer may forgo these landscape requirements if it can be demonstrated that any of these requirements do not apply on a specific site. In addition, they may require additional requirements on a site specific basis to deal with special site consequences.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 155,
+            "pdf_page_end": 155,
+            "bylaw_page_start": 151,
+            "bylaw_page_end": 151
+          }
+        }
+      ]
+    }
+  ],
+  "zone_specific_requirements": [],
+  "shared_requirement_references": [
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Section 3.1.",
+      "citations": {
+        "pdf_page_start": 153,
+        "pdf_page_end": 153,
+        "bylaw_page_start": 149,
+        "bylaw_page_end": 149
+      },
+      "source_text": "Accessory buildings are permitted according to Section 3.1."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Table 3.2.",
+      "citations": {
+        "pdf_page_start": 154,
+        "pdf_page_end": 154,
+        "bylaw_page_start": 150,
+        "bylaw_page_end": 150
+      },
+      "source_text": "Permitted encroachments into the setbacks are listed in Table 3.2."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Table 25.1.",
+      "citations": {
+        "pdf_page_start": 154,
+        "pdf_page_end": 154,
+        "bylaw_page_start": 150,
+        "bylaw_page_end": 150
+      },
+      "source_text": "Community care facilities and nursing Homes are subject to the following conditions over and above Table 25.1."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Table 25.1.",
+      "citations": {
+        "pdf_page_start": 154,
+        "pdf_page_end": 154,
+        "bylaw_page_start": 150,
+        "bylaw_page_end": 150
+      },
+      "source_text": "Lodging Houses and Group Homes are subject to the following conditions over and above Table 25.1."
+    },
+    {
+      "part_label_raw": "of",
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "part of",
+      "citations": {
+        "pdf_page_start": 155,
+        "pdf_page_end": 155,
+        "bylaw_page_start": 151,
+        "bylaw_page_end": 151
+      },
+      "source_text": "Driveways, parking areas, storage areas, and loading and unloading areas shall be separated from landscaped areas by continuous concrete curbing unless the design is part of a larger stormwater management strategy using rain gardens, engineered wetlands or other stormwater measures."
+    }
+  ],
+  "content_blocks": [],
+  "open_issues": [
+    {
+      "issue_type": "extraction_review",
+      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization."
+    },
+    {
+      "issue_type": "table_parsing_review",
+      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization."
+    }
+  ],
+  "citations": {
+    "zone_section": {
       "pdf_page_start": 153,
       "pdf_page_end": 156,
       "bylaw_page_start": 149,
       "bylaw_page_end": 152
     }
-  },
-  "raw_data": {
-    "source_units": [
-      {
-        "source_unit_id": "zone-i",
-        "source_unit_type": "zone",
-        "label_raw": "PART 24",
-        "title_raw": "I - Institutional",
-        "text_raw": "The Institutional Zone is intended to accommodate public and community-oriented facilities that provide essential services to Charlottetown residents, including schools, places of worship, government buildings, health care, cultural, and recreational institutions. The zone ensures that these uses are integrated into neighbourhoods in a manner that is compatible with surrounding development, while allowing flexibility for future expansion and modernization. Development in the Institutional Zone should emphasize accessibility, pedestrian connections, high-quality landscaping, and building forms that contribute positively to the community fabric.\nRezoning from I to any other zone may be considered where the intent meets the policies of the Official Plan.\nThe following uses are permitted in the I Zone:\nCemetery\nCommercial Daycare Centre\nCommunity Care Facility\nCommunity Institutional\nCultural Establishment\nDormitory\nEducational Institution (private)\nEducational Institution (public)\nFire Station\nFuneral Establishment\nGovernment Offices\nHospital\nLibrary\nMedical, Health and Dental Office\nPlace of Worship\nPolice Station\nThese uses are permitted so long as the following lot requirements are met:\nRear Yard Setback min. 6 m; 10 m when abutting RN, or RM\nPublic Utility Service Operation\nRecreation or Fitness Center (indoors)\nLot Area min. 930 m2\nFrontage min. 24 m\nFront Yard Setback min. 7.6 m\nFlanking Yard Setback min. 7.6 m\nSide Yard Setback min. 3 m\nCoverage max. 60%\nAccessory buildings are permitted according to Section 3.1.\nPermitted encroachments into the setbacks are listed in Table 3.2.\nCommunity care facilities and nursing Homes are subject to the following conditions over and above Table 25.1.\nA density cap of 100 m2 of site area for each bedroom.\nThe 4 storey height cap is increased to 5 storeys.\nLodging Houses and Group Homes are subject to the following conditions over and above Table 25.1.\nA density cap of 100 m2 of site area for each bedroom.\nA lot area minimum of 325 m2\nA lot frontage of 10.6 m\nMore than one building per lot is permitted.\nThe maximum building height shall be 4 storeys.\nBuildings shall be constructed of high- quality materials excluding:\nVinyl siding\nEIFS / synthetic stucco (Exterior Insulation and Finish Systems)\nImitation stone/brick panels (faux masonry veneer), stone-tile, plastic laminates or other synthetic materials that mimic real stone or real wood.\nConcrete block (CMU) exposed finishes\nUnfinished or painted metal sheet siding\nReflective or mirrored glass\nThe City may also approve other materials that, in its discretion, determines are compatible with any permitted materials if it finds that the use of these materials will not have a detrimental effect upon adjacent property values.\nPrimary building entries should be clearly visible in the design of the building and scaled proportionally for the buildings. The use of character defining elements such as; overhangs, columns, pilasters, window placements and/or signage should be used to define the main entry.\nBuildings in the I Zone should employ design approaches to avoid monolithic or monotonous building appearances. This includes:\nFacade modulation - stepping back or extending forward a portion of the facade to articulate flat building faces\nVertical divisions using different textures or materials\nDivision into store-fronts, with separate display windows and entrances\nFront facing facades shall include no less than 2 different building materials with each material no less than 20% of the total facade area.\nPedestrian entrances must be prominent, glazed, and weather- protected (canopy, awning).\nBuildings on corner lots must address both street frontages with articulated facades.\nLoading bays, overhead doors, vehicle services doors and service yards must be located at the side or rear of the lot except for fire stations or public works buildings.\nParking is encouraged on the side or rear of the lot but is permitted in the front yard if:\nNo more than 50% of the front yard is dedicated to a parking lot (lanes, stalls and driveways)\nFor every 15 parking spaces, the lot shall include one landscaped island (the size of a parking stall) which includes 1 tree and landscaping including shrubs, ornamental grasses or stormwater gardens.\nThese landscaped islands are not included in the area calculation above.\nTemporary and/or mobile buildings are prohibited from serving as primary buildings on locations found in front or flank yard.\nAll disturbed areas should be well landscaped using mostly (>75% quantities) indigenous, low maintenance plants that are well adapted for the local microclimates on each site. Shade tolerant species shall be specified for the north side of buildings or in areas of frequent shade. Similarly, windy sites should be planted with wind tolerant species. Disturbed areas cannot be left without landscaping.\nWhere grass is being considered for any project:\nEnsure the grass species is selected is adequate for shade levels on the site.\nPegged sod is required on all landscaped slopes exceeding 30%. Erosion Control measures must be clearly identified on sloping sites to minimize soil erosion.\nA minimum of 1.5 m wide of Sod strip is required adjoining any asphalt areas, pathways, gravel storage areas, or landscape beds.\nA minimum of 2 m wide strip of sod is required for all drainage swales\nAny reinstatement of public road right-of-ways must be sodded.\nHydraulic seeding is permitted in all other areas where sod is not required. Broadcast seed is not permitted unless used for spot repairs.\nFor any parking lots located in the front yard, a minimum 2 m wide hard surfaced sidewalk shall connect the front door of the building to any adjacent sidewalks adjoining the property if present.\nDriveways, parking areas, storage areas, and loading and unloading areas shall be separated from landscaped areas by continuous concrete curbing unless the design is part of a larger stormwater management strategy using rain gardens, engineered wetlands or other stormwater measures.\nSlopes shall be no steeper that three (3) horizontal to one (1) vertical, except as an engineered retaining structure. All slopes shall be vegetated (not necessarily grass) and no riprap stone armouring is permitted on any site unless it is not materially visible from any road or sidewalk.\nNo permanent or temporary structures are permitted in the public road right of way and any disturbance to the public right-of-way shall be reinstated to existing or better condition including damages to trees, grass, lights or power infrastructure. Only driveways and walkways are permitted in the public right-of-way.\nAll main entries should be well landscaped to a scale that is appropriate for the scale of the building and the importance of the entry sequence.\nEvery institutional uses with more than 30 employees working in the building must include a well designed outdoor rest area complete with features such as outdoor seating, picnic tables, wind shelter, landscaping, or hardscape areas. The area should be no less than 1.5 m2 for every employee parking space and the area should be located to maximize use and enjoyment by staff.\nThe front doors must connect to adjacent sidewalks and parking areas by a hard surfaced walkway no less than 1.8m wide.\nAll disturbed surfaces shall be sodded or hard surfaced (asphalt, pavers, concrete). Gravel or bare earth is not permitted except within fenced storage compounds (1.8 m min. fence).\nFront yards shall be landscaped with grass and shrub bed(s) at a rate of 0.5 m2 of shrub bed per metre of frontage and one tree in the front yard for every 8 m of frontage. Decimal results shall round up.\nGarbage and refuse containers shall be concealed from the view of adjoining properties and public streets by means of a screening fence of material compatible with the architecture of the building. These screening elements shall be integrated with the concept of the site and building plan; be designed so as not to attract attention; and shall be located in the most inconspicuous manner possible.\nProperties that abut residential uses shall include a 3 m wide landscape buffer along the abutting property line that includes:\nA 1.8 m high (min.) opaque fence\nOne 60 mm caliper tree per 8m of side or rear yard planted in the landscape buffer placed to block light and views.\nFor buildings that have been set back more than 3 m from the front lot line, no less than one (1) tree shall be planted per front yard.\nThe development officer may forgo these landscape requirements if it can be demonstrated that any of these requirements do not apply on a specific site. In addition, they may require additional requirements on a site specific basis to deal with special site consequences.",
-        "source_order": 1,
-        "citations": {
-          "pdf_page_start": 153,
-          "pdf_page_end": 156,
-          "bylaw_page_start": 149,
-          "bylaw_page_end": 152
-        }
-      }
-    ],
-    "sections_raw": [
-      {
-        "section_id": "zone-i-section-24-1",
-        "section_label_raw": "24.1",
-        "section_title_raw": "INTENT",
-        "source_order": 1,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-i-clause-24-1",
-            "clause_label_raw": "section",
-            "clause_text_raw": "The Institutional Zone is intended to accommodate public and community-oriented facilities that provide essential services to Charlottetown residents, including schools, places of worship, government buildings, health care, cultural, and recreational institutions. The zone ensures that these uses are integrated into neighbourhoods in a manner that is compatible with surrounding development, while allowing flexibility for future expansion and modernization. Development in the Institutional Zone should emphasize accessibility, pedestrian connections, high-quality landscaping, and building forms that contribute positively to the community fabric.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-1",
-            "source_order": 1
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 153,
-          "pdf_page_end": 153,
-          "bylaw_page_start": 149,
-          "bylaw_page_end": 149
-        }
-      },
-      {
-        "section_id": "zone-i-section-24-2",
-        "section_label_raw": "24.2",
-        "section_title_raw": "RE-ZONING",
-        "source_order": 2,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-i-clause-24-2-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "Rezoning from I to any other zone may be considered where the intent meets the policies of the Official Plan.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-2-1",
-            "source_order": 1
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 153,
-          "pdf_page_end": 153,
-          "bylaw_page_start": 149,
-          "bylaw_page_end": 149
-        }
-      },
-      {
-        "section_id": "zone-i-section-24-3",
-        "section_label_raw": "24.3",
-        "section_title_raw": "PERMITTED USES",
-        "source_order": 3,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-i-clause-24-3-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "The following uses are permitted in the I Zone:",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-1-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "Cemetery",
-            "parent_clause_id": "zone-i-clause-24-3-1",
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-1-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "Commercial Daycare Centre",
-            "parent_clause_id": "zone-i-clause-24-3-1",
-            "source_order": 3,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-1-c",
-            "clause_label_raw": "(c)",
-            "clause_text_raw": "Community Care Facility",
-            "parent_clause_id": "zone-i-clause-24-3-1",
-            "source_order": 4,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-1-d",
-            "clause_label_raw": "(d)",
-            "clause_text_raw": "Community Institutional",
-            "parent_clause_id": "zone-i-clause-24-3-1",
-            "source_order": 5,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-1-e",
-            "clause_label_raw": "(e)",
-            "clause_text_raw": "Cultural Establishment",
-            "parent_clause_id": "zone-i-clause-24-3-1",
-            "source_order": 6,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-1-f",
-            "clause_label_raw": "(f)",
-            "clause_text_raw": "Dormitory",
-            "parent_clause_id": "zone-i-clause-24-3-1",
-            "source_order": 7,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-1-g",
-            "clause_label_raw": "(g)",
-            "clause_text_raw": "Educational Institution (private)",
-            "parent_clause_id": "zone-i-clause-24-3-1",
-            "source_order": 8,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-1-h",
-            "clause_label_raw": "(h)",
-            "clause_text_raw": "Educational Institution (public)",
-            "parent_clause_id": "zone-i-clause-24-3-1",
-            "source_order": 9,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-1-i",
-            "clause_label_raw": "(i)",
-            "clause_text_raw": "Fire Station",
-            "parent_clause_id": "zone-i-clause-24-3-1",
-            "source_order": 10,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-1-j",
-            "clause_label_raw": "(j)",
-            "clause_text_raw": "Funeral Establishment",
-            "parent_clause_id": "zone-i-clause-24-3-1",
-            "source_order": 11,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-1-k",
-            "clause_label_raw": "(k)",
-            "clause_text_raw": "Government Offices",
-            "parent_clause_id": "zone-i-clause-24-3-1",
-            "source_order": 12,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-1-l",
-            "clause_label_raw": "(l)",
-            "clause_text_raw": "Hospital",
-            "parent_clause_id": "zone-i-clause-24-3-1",
-            "source_order": 13,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-1-m",
-            "clause_label_raw": "(m)",
-            "clause_text_raw": "Library",
-            "parent_clause_id": "zone-i-clause-24-3-1",
-            "source_order": 14,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-1-n",
-            "clause_label_raw": "(n)",
-            "clause_text_raw": "Medical, Health and Dental Office",
-            "parent_clause_id": "zone-i-clause-24-3-1",
-            "source_order": 15,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-1-o",
-            "clause_label_raw": "(o)",
-            "clause_text_raw": "Place of Worship",
-            "parent_clause_id": "zone-i-clause-24-3-1",
-            "source_order": 16,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-1-p",
-            "clause_label_raw": "(p)",
-            "clause_text_raw": "Police Station",
-            "parent_clause_id": "zone-i-clause-24-3-1",
-            "source_order": 17,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "These uses are permitted so long as the following lot requirements are met:",
-            "parent_clause_id": null,
-            "source_order": 18,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-2-f",
-            "clause_label_raw": "(f)",
-            "clause_text_raw": "Rear Yard Setback min. 6 m; 10 m when abutting RN, or RM",
-            "parent_clause_id": "zone-i-clause-24-3-2",
-            "source_order": 19,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-2-q",
-            "clause_label_raw": "(q)",
-            "clause_text_raw": "Public Utility Service Operation",
-            "parent_clause_id": "zone-i-clause-24-3-2",
-            "source_order": 20,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-2-r",
-            "clause_label_raw": "(r)",
-            "clause_text_raw": "Recreation or Fitness Center (indoors)",
-            "parent_clause_id": "zone-i-clause-24-3-2",
-            "source_order": 21,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-2-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "Lot Area min. 930 m2",
-            "parent_clause_id": "zone-i-clause-24-3-2",
-            "source_order": 22,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-2-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "Frontage min. 24 m",
-            "parent_clause_id": "zone-i-clause-24-3-2",
-            "source_order": 23,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-2-c",
-            "clause_label_raw": "(c)",
-            "clause_text_raw": "Front Yard Setback min. 7.6 m",
-            "parent_clause_id": "zone-i-clause-24-3-2",
-            "source_order": 24,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-2-d",
-            "clause_label_raw": "(d)",
-            "clause_text_raw": "Flanking Yard Setback min. 7.6 m",
-            "parent_clause_id": "zone-i-clause-24-3-2",
-            "source_order": 25,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-2-e",
-            "clause_label_raw": "(e)",
-            "clause_text_raw": "Side Yard Setback min. 3 m",
-            "parent_clause_id": "zone-i-clause-24-3-2",
-            "source_order": 26,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-2-g",
-            "clause_label_raw": "(g)",
-            "clause_text_raw": "Coverage max. 60%",
-            "parent_clause_id": "zone-i-clause-24-3-2",
-            "source_order": 27,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-3-3",
-            "clause_label_raw": ".3",
-            "clause_text_raw": "Accessory buildings are permitted according to Section 3.1.",
-            "parent_clause_id": null,
-            "source_order": 28,
-            "citations": {
-              "pdf_page_start": 153,
-              "pdf_page_end": 153,
-              "bylaw_page_start": 149,
-              "bylaw_page_end": 149
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-1-a",
-            "source_order": 2
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-1-b",
-            "source_order": 3
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-1-c",
-            "source_order": 4
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-1-d",
-            "source_order": 5
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-1-e",
-            "source_order": 6
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-1-f",
-            "source_order": 7
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-1-g",
-            "source_order": 8
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-1-h",
-            "source_order": 9
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-1-i",
-            "source_order": 10
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-1-j",
-            "source_order": 11
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-1-k",
-            "source_order": 12
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-1-l",
-            "source_order": 13
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-1-m",
-            "source_order": 14
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-1-n",
-            "source_order": 15
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-1-o",
-            "source_order": 16
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-1-p",
-            "source_order": 17
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-2",
-            "source_order": 18
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-2-f",
-            "source_order": 19
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-2-q",
-            "source_order": 20
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-2-r",
-            "source_order": 21
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-2-a",
-            "source_order": 22
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-2-b",
-            "source_order": 23
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-2-c",
-            "source_order": 24
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-2-d",
-            "source_order": 25
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-2-e",
-            "source_order": 26
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-2-g",
-            "source_order": 27
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-3-3",
-            "source_order": 28
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 153,
-          "pdf_page_end": 153,
-          "bylaw_page_start": 149,
-          "bylaw_page_end": 149
-        }
-      },
-      {
-        "section_id": "zone-i-section-24-4",
-        "section_label_raw": "24.4",
-        "section_title_raw": "PERMITTED WITH CONDITIONS",
-        "source_order": 4,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-i-clause-24-4-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "Permitted encroachments into the setbacks are listed in Table 3.2.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-4-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "Community care facilities and nursing Homes are subject to the following conditions over and above Table 25.1.",
-            "parent_clause_id": null,
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-4-2-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "A density cap of 100 m2 of site area for each bedroom.",
-            "parent_clause_id": "zone-i-clause-24-4-2",
-            "source_order": 3,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-4-2-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "The 4 storey height cap is increased to 5 storeys.",
-            "parent_clause_id": "zone-i-clause-24-4-2",
-            "source_order": 4,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-4-3",
-            "clause_label_raw": ".3",
-            "clause_text_raw": "Lodging Houses and Group Homes are subject to the following conditions over and above Table 25.1.",
-            "parent_clause_id": null,
-            "source_order": 5,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-4-3-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "A density cap of 100 m2 of site area for each bedroom.",
-            "parent_clause_id": "zone-i-clause-24-4-3",
-            "source_order": 6,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-4-3-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "A lot area minimum of 325 m2",
-            "parent_clause_id": "zone-i-clause-24-4-3",
-            "source_order": 7,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-4-3-c",
-            "clause_label_raw": "(c)",
-            "clause_text_raw": "A lot frontage of 10.6 m",
-            "parent_clause_id": "zone-i-clause-24-4-3",
-            "source_order": 8,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-4-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-4-2",
-            "source_order": 2
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-4-2-a",
-            "source_order": 3
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-4-2-b",
-            "source_order": 4
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-4-3",
-            "source_order": 5
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-4-3-a",
-            "source_order": 6
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-4-3-b",
-            "source_order": 7
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-4-3-c",
-            "source_order": 8
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 154,
-          "pdf_page_end": 154,
-          "bylaw_page_start": 150,
-          "bylaw_page_end": 150
-        }
-      },
-      {
-        "section_id": "zone-i-section-24-5",
-        "section_label_raw": "24.5",
-        "section_title_raw": "BUILT FORM REQUIREMENTS",
-        "source_order": 5,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-i-clause-24-5-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "More than one building per lot is permitted.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "The maximum building height shall be 4 storeys.",
-            "parent_clause_id": null,
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-3",
-            "clause_label_raw": ".3",
-            "clause_text_raw": "Buildings shall be constructed of high- quality materials excluding:",
-            "parent_clause_id": null,
-            "source_order": 3,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-3-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "Vinyl siding",
-            "parent_clause_id": "zone-i-clause-24-5-3",
-            "source_order": 4,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-3-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "EIFS / synthetic stucco (Exterior Insulation and Finish Systems)",
-            "parent_clause_id": "zone-i-clause-24-5-3",
-            "source_order": 5,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-3-c",
-            "clause_label_raw": "(c)",
-            "clause_text_raw": "Imitation stone/brick panels (faux masonry veneer), stone-tile, plastic laminates or other synthetic materials that mimic real stone or real wood.",
-            "parent_clause_id": "zone-i-clause-24-5-3",
-            "source_order": 6,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-3-d",
-            "clause_label_raw": "(d)",
-            "clause_text_raw": "Concrete block (CMU) exposed finishes",
-            "parent_clause_id": "zone-i-clause-24-5-3",
-            "source_order": 7,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-3-e",
-            "clause_label_raw": "(e)",
-            "clause_text_raw": "Unfinished or painted metal sheet siding",
-            "parent_clause_id": "zone-i-clause-24-5-3",
-            "source_order": 8,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-3-f",
-            "clause_label_raw": "(f)",
-            "clause_text_raw": "Reflective or mirrored glass",
-            "parent_clause_id": "zone-i-clause-24-5-3",
-            "source_order": 9,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-4",
-            "clause_label_raw": ".4",
-            "clause_text_raw": "The City may also approve other materials that, in its discretion, determines are compatible with any permitted materials if it finds that the use of these materials will not have a detrimental effect upon adjacent property values.",
-            "parent_clause_id": null,
-            "source_order": 10,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-5",
-            "clause_label_raw": ".5",
-            "clause_text_raw": "Primary building entries should be clearly visible in the design of the building and scaled proportionally for the buildings. The use of character defining elements such as; overhangs, columns, pilasters, window placements and/or signage should be used to define the main entry.",
-            "parent_clause_id": null,
-            "source_order": 11,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-6",
-            "clause_label_raw": ".6",
-            "clause_text_raw": "Buildings in the I Zone should employ design approaches to avoid monolithic or monotonous building appearances. This includes:",
-            "parent_clause_id": null,
-            "source_order": 12,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-6-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "Facade modulation - stepping back or extending forward a portion of the facade to articulate flat building faces",
-            "parent_clause_id": "zone-i-clause-24-5-6",
-            "source_order": 13,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-6-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "Vertical divisions using different textures or materials",
-            "parent_clause_id": "zone-i-clause-24-5-6",
-            "source_order": 14,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-6-c",
-            "clause_label_raw": "(c)",
-            "clause_text_raw": "Division into store-fronts, with separate display windows and entrances",
-            "parent_clause_id": "zone-i-clause-24-5-6",
-            "source_order": 15,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-6-d",
-            "clause_label_raw": "(d)",
-            "clause_text_raw": "Front facing facades shall include no less than 2 different building materials with each material no less than 20% of the total facade area.",
-            "parent_clause_id": "zone-i-clause-24-5-6",
-            "source_order": 16,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-6-e",
-            "clause_label_raw": "(e)",
-            "clause_text_raw": "Pedestrian entrances must be prominent, glazed, and weather- protected (canopy, awning).",
-            "parent_clause_id": "zone-i-clause-24-5-6",
-            "source_order": 17,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-6-f",
-            "clause_label_raw": "(f)",
-            "clause_text_raw": "Buildings on corner lots must address both street frontages with articulated facades.",
-            "parent_clause_id": "zone-i-clause-24-5-6",
-            "source_order": 18,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-7",
-            "clause_label_raw": ".7",
-            "clause_text_raw": "Loading bays, overhead doors, vehicle services doors and service yards must be located at the side or rear of the lot except for fire stations or public works buildings.",
-            "parent_clause_id": null,
-            "source_order": 19,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-8",
-            "clause_label_raw": ".8",
-            "clause_text_raw": "Parking is encouraged on the side or rear of the lot but is permitted in the front yard if:",
-            "parent_clause_id": null,
-            "source_order": 20,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-8-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "No more than 50% of the front yard is dedicated to a parking lot (lanes, stalls and driveways)",
-            "parent_clause_id": "zone-i-clause-24-5-8",
-            "source_order": 21,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-8-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "For every 15 parking spaces, the lot shall include one landscaped island (the size of a parking stall) which includes 1 tree and landscaping including shrubs, ornamental grasses or stormwater gardens.",
-            "parent_clause_id": "zone-i-clause-24-5-8",
-            "source_order": 22,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-8-c",
-            "clause_label_raw": "(c)",
-            "clause_text_raw": "These landscaped islands are not included in the area calculation above.",
-            "parent_clause_id": "zone-i-clause-24-5-8",
-            "source_order": 23,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-5-9",
-            "clause_label_raw": ".9",
-            "clause_text_raw": "Temporary and/or mobile buildings are prohibited from serving as primary buildings on locations found in front or flank yard.",
-            "parent_clause_id": null,
-            "source_order": 24,
-            "citations": {
-              "pdf_page_start": 154,
-              "pdf_page_end": 154,
-              "bylaw_page_start": 150,
-              "bylaw_page_end": 150
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-2",
-            "source_order": 2
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-3",
-            "source_order": 3
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-3-a",
-            "source_order": 4
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-3-b",
-            "source_order": 5
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-3-c",
-            "source_order": 6
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-3-d",
-            "source_order": 7
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-3-e",
-            "source_order": 8
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-3-f",
-            "source_order": 9
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-4",
-            "source_order": 10
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-5",
-            "source_order": 11
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-6",
-            "source_order": 12
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-6-a",
-            "source_order": 13
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-6-b",
-            "source_order": 14
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-6-c",
-            "source_order": 15
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-6-d",
-            "source_order": 16
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-6-e",
-            "source_order": 17
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-6-f",
-            "source_order": 18
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-7",
-            "source_order": 19
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-8",
-            "source_order": 20
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-8-a",
-            "source_order": 21
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-8-b",
-            "source_order": 22
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-8-c",
-            "source_order": 23
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-5-9",
-            "source_order": 24
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 154,
-          "pdf_page_end": 154,
-          "bylaw_page_start": 150,
-          "bylaw_page_end": 150
-        }
-      },
-      {
-        "section_id": "zone-i-section-24-6",
-        "section_label_raw": "24.6",
-        "section_title_raw": "LANDSCAPE REQUIREMENTS",
-        "source_order": 6,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-i-clause-24-6-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "All disturbed areas should be well landscaped using mostly (>75% quantities) indigenous, low maintenance plants that are well adapted for the local microclimates on each site. Shade tolerant species shall be specified for the north side of buildings or in areas of frequent shade. Similarly, windy sites should be planted with wind tolerant species. Disturbed areas cannot be left without landscaping.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "Where grass is being considered for any project:",
-            "parent_clause_id": null,
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-2-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "Ensure the grass species is selected is adequate for shade levels on the site.",
-            "parent_clause_id": "zone-i-clause-24-6-2",
-            "source_order": 3,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-2-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "Pegged sod is required on all landscaped slopes exceeding 30%. Erosion Control measures must be clearly identified on sloping sites to minimize soil erosion.",
-            "parent_clause_id": "zone-i-clause-24-6-2",
-            "source_order": 4,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-2-c",
-            "clause_label_raw": "(c)",
-            "clause_text_raw": "A minimum of 1.5 m wide of Sod strip is required adjoining any asphalt areas, pathways, gravel storage areas, or landscape beds.",
-            "parent_clause_id": "zone-i-clause-24-6-2",
-            "source_order": 5,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-2-d",
-            "clause_label_raw": "(d)",
-            "clause_text_raw": "A minimum of 2 m wide strip of sod is required for all drainage swales",
-            "parent_clause_id": "zone-i-clause-24-6-2",
-            "source_order": 6,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-2-e",
-            "clause_label_raw": "(e)",
-            "clause_text_raw": "Any reinstatement of public road right-of-ways must be sodded.",
-            "parent_clause_id": "zone-i-clause-24-6-2",
-            "source_order": 7,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-2-f",
-            "clause_label_raw": "(f)",
-            "clause_text_raw": "Hydraulic seeding is permitted in all other areas where sod is not required. Broadcast seed is not permitted unless used for spot repairs.",
-            "parent_clause_id": "zone-i-clause-24-6-2",
-            "source_order": 8,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-3",
-            "clause_label_raw": ".3",
-            "clause_text_raw": "For any parking lots located in the front yard, a minimum 2 m wide hard surfaced sidewalk shall connect the front door of the building to any adjacent sidewalks adjoining the property if present.",
-            "parent_clause_id": null,
-            "source_order": 9,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-4",
-            "clause_label_raw": ".4",
-            "clause_text_raw": "Driveways, parking areas, storage areas, and loading and unloading areas shall be separated from landscaped areas by continuous concrete curbing unless the design is part of a larger stormwater management strategy using rain gardens, engineered wetlands or other stormwater measures.",
-            "parent_clause_id": null,
-            "source_order": 10,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-5",
-            "clause_label_raw": ".5",
-            "clause_text_raw": "Slopes shall be no steeper that three (3) horizontal to one (1) vertical, except as an engineered retaining structure. All slopes shall be vegetated (not necessarily grass) and no riprap stone armouring is permitted on any site unless it is not materially visible from any road or sidewalk.",
-            "parent_clause_id": null,
-            "source_order": 11,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-6",
-            "clause_label_raw": ".6",
-            "clause_text_raw": "No permanent or temporary structures are permitted in the public road right of way and any disturbance to the public right-of-way shall be reinstated to existing or better condition including damages to trees, grass, lights or power infrastructure. Only driveways and walkways are permitted in the public right-of-way.",
-            "parent_clause_id": null,
-            "source_order": 12,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-7",
-            "clause_label_raw": ".7",
-            "clause_text_raw": "All main entries should be well landscaped to a scale that is appropriate for the scale of the building and the importance of the entry sequence.",
-            "parent_clause_id": null,
-            "source_order": 13,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-8",
-            "clause_label_raw": ".8",
-            "clause_text_raw": "Every institutional uses with more than 30 employees working in the building must include a well designed outdoor rest area complete with features such as outdoor seating, picnic tables, wind shelter, landscaping, or hardscape areas. The area should be no less than 1.5 m2 for every employee parking space and the area should be located to maximize use and enjoyment by staff.",
-            "parent_clause_id": null,
-            "source_order": 14,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-9",
-            "clause_label_raw": ".9",
-            "clause_text_raw": "The front doors must connect to adjacent sidewalks and parking areas by a hard surfaced walkway no less than 1.8m wide.",
-            "parent_clause_id": null,
-            "source_order": 15,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-10",
-            "clause_label_raw": ".10",
-            "clause_text_raw": "All disturbed surfaces shall be sodded or hard surfaced (asphalt, pavers, concrete). Gravel or bare earth is not permitted except within fenced storage compounds (1.8 m min. fence).",
-            "parent_clause_id": null,
-            "source_order": 16,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-11",
-            "clause_label_raw": ".11",
-            "clause_text_raw": "Front yards shall be landscaped with grass and shrub bed(s) at a rate of 0.5 m2 of shrub bed per metre of frontage and one tree in the front yard for every 8 m of frontage. Decimal results shall round up.",
-            "parent_clause_id": null,
-            "source_order": 17,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-12",
-            "clause_label_raw": ".12",
-            "clause_text_raw": "Garbage and refuse containers shall be concealed from the view of adjoining properties and public streets by means of a screening fence of material compatible with the architecture of the building. These screening elements shall be integrated with the concept of the site and building plan; be designed so as not to attract attention; and shall be located in the most inconspicuous manner possible.",
-            "parent_clause_id": null,
-            "source_order": 18,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-13",
-            "clause_label_raw": ".13",
-            "clause_text_raw": "Properties that abut residential uses shall include a 3 m wide landscape buffer along the abutting property line that includes:",
-            "parent_clause_id": null,
-            "source_order": 19,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-13-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "A 1.8 m high (min.) opaque fence",
-            "parent_clause_id": "zone-i-clause-24-6-13",
-            "source_order": 20,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-13-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "One 60 mm caliper tree per 8m of side or rear yard planted in the landscape buffer placed to block light and views.",
-            "parent_clause_id": "zone-i-clause-24-6-13",
-            "source_order": 21,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-13-c",
-            "clause_label_raw": "(c)",
-            "clause_text_raw": "For buildings that have been set back more than 3 m from the front lot line, no less than one (1) tree shall be planted per front yard.",
-            "parent_clause_id": "zone-i-clause-24-6-13",
-            "source_order": 22,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          },
-          {
-            "clause_id": "zone-i-clause-24-6-14",
-            "clause_label_raw": ".14",
-            "clause_text_raw": "The development officer may forgo these landscape requirements if it can be demonstrated that any of these requirements do not apply on a specific site. In addition, they may require additional requirements on a site specific basis to deal with special site consequences.",
-            "parent_clause_id": null,
-            "source_order": 23,
-            "citations": {
-              "pdf_page_start": 155,
-              "pdf_page_end": 155,
-              "bylaw_page_start": 151,
-              "bylaw_page_end": 151
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-2",
-            "source_order": 2
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-2-a",
-            "source_order": 3
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-2-b",
-            "source_order": 4
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-2-c",
-            "source_order": 5
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-2-d",
-            "source_order": 6
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-2-e",
-            "source_order": 7
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-2-f",
-            "source_order": 8
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-3",
-            "source_order": 9
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-4",
-            "source_order": 10
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-5",
-            "source_order": 11
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-6",
-            "source_order": 12
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-7",
-            "source_order": 13
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-8",
-            "source_order": 14
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-9",
-            "source_order": 15
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-10",
-            "source_order": 16
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-11",
-            "source_order": 17
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-12",
-            "source_order": 18
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-13",
-            "source_order": 19
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-13-a",
-            "source_order": 20
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-13-b",
-            "source_order": 21
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-13-c",
-            "source_order": 22
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-i-clause-24-6-14",
-            "source_order": 23
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 155,
-          "pdf_page_end": 155,
-          "bylaw_page_start": 151,
-          "bylaw_page_end": 151
-        }
-      }
-    ],
-    "clause_refs": [
-      {
-        "clause_id": "zone-i-clause-24-1",
-        "section_id": "zone-i-section-24-1",
-        "source_order": 1
-      },
-      {
-        "clause_id": "zone-i-clause-24-2-1",
-        "section_id": "zone-i-section-24-2",
-        "source_order": 2
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-1",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 3
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-1-a",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 4
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-1-b",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 5
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-1-c",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 6
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-1-d",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 7
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-1-e",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 8
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-1-f",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 9
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-1-g",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 10
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-1-h",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 11
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-1-i",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 12
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-1-j",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 13
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-1-k",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 14
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-1-l",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 15
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-1-m",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 16
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-1-n",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 17
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-1-o",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 18
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-1-p",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 19
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-2",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 20
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-2-f",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 21
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-2-q",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 22
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-2-r",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 23
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-2-a",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 24
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-2-b",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 25
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-2-c",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 26
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-2-d",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 27
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-2-e",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 28
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-2-g",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 29
-      },
-      {
-        "clause_id": "zone-i-clause-24-3-3",
-        "section_id": "zone-i-section-24-3",
-        "source_order": 30
-      },
-      {
-        "clause_id": "zone-i-clause-24-4-1",
-        "section_id": "zone-i-section-24-4",
-        "source_order": 31
-      },
-      {
-        "clause_id": "zone-i-clause-24-4-2",
-        "section_id": "zone-i-section-24-4",
-        "source_order": 32
-      },
-      {
-        "clause_id": "zone-i-clause-24-4-2-a",
-        "section_id": "zone-i-section-24-4",
-        "source_order": 33
-      },
-      {
-        "clause_id": "zone-i-clause-24-4-2-b",
-        "section_id": "zone-i-section-24-4",
-        "source_order": 34
-      },
-      {
-        "clause_id": "zone-i-clause-24-4-3",
-        "section_id": "zone-i-section-24-4",
-        "source_order": 35
-      },
-      {
-        "clause_id": "zone-i-clause-24-4-3-a",
-        "section_id": "zone-i-section-24-4",
-        "source_order": 36
-      },
-      {
-        "clause_id": "zone-i-clause-24-4-3-b",
-        "section_id": "zone-i-section-24-4",
-        "source_order": 37
-      },
-      {
-        "clause_id": "zone-i-clause-24-4-3-c",
-        "section_id": "zone-i-section-24-4",
-        "source_order": 38
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-1",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 39
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-2",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 40
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-3",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 41
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-3-a",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 42
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-3-b",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 43
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-3-c",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 44
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-3-d",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 45
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-3-e",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 46
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-3-f",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 47
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-4",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 48
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-5",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 49
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-6",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 50
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-6-a",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 51
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-6-b",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 52
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-6-c",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 53
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-6-d",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 54
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-6-e",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 55
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-6-f",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 56
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-7",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 57
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-8",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 58
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-8-a",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 59
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-8-b",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 60
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-8-c",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 61
-      },
-      {
-        "clause_id": "zone-i-clause-24-5-9",
-        "section_id": "zone-i-section-24-5",
-        "source_order": 62
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-1",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 63
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-2",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 64
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-2-a",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 65
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-2-b",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 66
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-2-c",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 67
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-2-d",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 68
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-2-e",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 69
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-2-f",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 70
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-3",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 71
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-4",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 72
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-5",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 73
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-6",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 74
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-7",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 75
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-8",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 76
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-9",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 77
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-10",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 78
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-11",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 79
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-12",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 80
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-13",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 81
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-13-a",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 82
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-13-b",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 83
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-13-c",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 84
-      },
-      {
-        "clause_id": "zone-i-clause-24-6-14",
-        "section_id": "zone-i-section-24-6",
-        "source_order": 85
-      }
-    ],
-    "tables_raw": [],
-    "map_references_raw": [
-      {
-        "map_reference_id": "zone-i-map-zoning-map",
-        "map_label_raw": "Zoning Map",
-        "map_title_raw": "Charlottetown Zoning Map 2026",
-        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
-        "citations": {
-          "pdf_page_start": 153,
-          "pdf_page_end": 156,
-          "bylaw_page_start": 149,
-          "bylaw_page_end": 152
-        }
-      }
-    ]
-  },
-  "structured_data": {
-    "terms": [
-      {
-        "term_id": "zone-i-term-use-cemetery",
-        "term_raw": "Cemetery",
-        "term_normalized": "cemetery",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "cemetery"
-      },
-      {
-        "term_id": "zone-i-term-use-commercial_daycare_centre",
-        "term_raw": "Commercial Daycare Centre",
-        "term_normalized": "commercial_daycare_centre",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "commercial_daycare_centre"
-      },
-      {
-        "term_id": "zone-i-term-use-community_care_facility",
-        "term_raw": "Community Care Facility",
-        "term_normalized": "community_care_facility",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "community_care_facility"
-      },
-      {
-        "term_id": "zone-i-term-use-community_institutional",
-        "term_raw": "Community Institutional",
-        "term_normalized": "community_institutional",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "community_institutional"
-      },
-      {
-        "term_id": "zone-i-term-use-cultural_establishment",
-        "term_raw": "Cultural Establishment",
-        "term_normalized": "cultural_establishment",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "cultural_establishment"
-      },
-      {
-        "term_id": "zone-i-term-use-dormitory",
-        "term_raw": "Dormitory",
-        "term_normalized": "dormitory",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "dormitory"
-      },
-      {
-        "term_id": "zone-i-term-use-educational_institution_private",
-        "term_raw": "Educational Institution (private)",
-        "term_normalized": "educational_institution_private",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "educational_institution_private"
-      },
-      {
-        "term_id": "zone-i-term-use-educational_institution_public",
-        "term_raw": "Educational Institution (public)",
-        "term_normalized": "educational_institution_public",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "educational_institution_public"
-      },
-      {
-        "term_id": "zone-i-term-use-fire_station",
-        "term_raw": "Fire Station",
-        "term_normalized": "fire_station",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "fire_station"
-      },
-      {
-        "term_id": "zone-i-term-use-funeral_establishment",
-        "term_raw": "Funeral Establishment",
-        "term_normalized": "funeral_establishment",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "funeral_establishment"
-      },
-      {
-        "term_id": "zone-i-term-use-government_office",
-        "term_raw": "Government Offices",
-        "term_normalized": "government_office",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "government_office"
-      },
-      {
-        "term_id": "zone-i-term-use-hospital",
-        "term_raw": "Hospital",
-        "term_normalized": "hospital",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "hospital"
-      },
-      {
-        "term_id": "zone-i-term-use-library",
-        "term_raw": "Library",
-        "term_normalized": "library",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "library"
-      },
-      {
-        "term_id": "zone-i-term-use-medical_health_and_dental_office",
-        "term_raw": "Medical, Health and Dental Office",
-        "term_normalized": "medical_health_and_dental_office",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "medical_health_and_dental_office"
-      },
-      {
-        "term_id": "zone-i-term-use-place_of_worship",
-        "term_raw": "Place of Worship",
-        "term_normalized": "place_of_worship",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "place_of_worship"
-      },
-      {
-        "term_id": "zone-i-term-use-police_station",
-        "term_raw": "Police Station",
-        "term_normalized": "police_station",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "police_station"
-      }
-    ],
-    "uses": [
-      {
-        "use_id": "zone-i-use-cemetery-1-1",
-        "use_name_raw": "Cemetery",
-        "use_term_id": "zone-i-term-use-cemetery",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-i-use-commercial-daycare-centre-2-1",
-        "use_name_raw": "Commercial Daycare Centre",
-        "use_term_id": "zone-i-term-use-commercial_daycare_centre",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-i-use-community-care-facility-3-1",
-        "use_name_raw": "Community Care Facility",
-        "use_term_id": "zone-i-term-use-community_care_facility",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-i-use-community-institutional-4-1",
-        "use_name_raw": "Community Institutional",
-        "use_term_id": "zone-i-term-use-community_institutional",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-i-use-cultural-establishment-5-1",
-        "use_name_raw": "Cultural Establishment",
-        "use_term_id": "zone-i-term-use-cultural_establishment",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-i-use-dormitory-6-1",
-        "use_name_raw": "Dormitory",
-        "use_term_id": "zone-i-term-use-dormitory",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-i-use-educational-institution-private-7-1",
-        "use_name_raw": "Educational Institution (private)",
-        "use_term_id": "zone-i-term-use-educational_institution_private",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-i-use-educational-institution-public-8-1",
-        "use_name_raw": "Educational Institution (public)",
-        "use_term_id": "zone-i-term-use-educational_institution_public",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-i-use-fire-station-9-1",
-        "use_name_raw": "Fire Station",
-        "use_term_id": "zone-i-term-use-fire_station",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-i-use-funeral-establishment-10-1",
-        "use_name_raw": "Funeral Establishment",
-        "use_term_id": "zone-i-term-use-funeral_establishment",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-i-use-government-offices-11-1",
-        "use_name_raw": "Government Offices",
-        "use_term_id": "zone-i-term-use-government_office",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-i-use-hospital-12-1",
-        "use_name_raw": "Hospital",
-        "use_term_id": "zone-i-term-use-hospital",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-i-use-library-13-1",
-        "use_name_raw": "Library",
-        "use_term_id": "zone-i-term-use-library",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-i-use-medical-health-and-dental-office-14-1",
-        "use_name_raw": "Medical, Health and Dental Office",
-        "use_term_id": "zone-i-term-use-medical_health_and_dental_office",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-i-use-place-of-worship-15-1",
-        "use_name_raw": "Place of Worship",
-        "use_term_id": "zone-i-term-use-place_of_worship",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-i-use-police-station-16-1",
-        "use_name_raw": "Police Station",
-        "use_term_id": "zone-i-term-use-police_station",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      }
-    ],
-    "numeric_values": [
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-3-2-f-1",
-        "value_raw": "6 m",
-        "value": 6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-3-2-f"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-3-2-f-2",
-        "value_raw": "10 m",
-        "value": 10,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-3-2-f"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-3-2-b-1",
-        "value_raw": "24 m",
-        "value": 24,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-3-2-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-3-2-c-1",
-        "value_raw": "7.6 m",
-        "value": 7.6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-3-2-c"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-3-2-d-1",
-        "value_raw": "7.6 m",
-        "value": 7.6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-3-2-d"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-3-2-e-1",
-        "value_raw": "3 m",
-        "value": 3,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-3-2-e"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-4-2-b-1",
-        "value_raw": "4 storey",
-        "value": 4,
-        "unit": "storey",
-        "measure_type": "count",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-4-2-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-4-2-b-2",
-        "value_raw": "5 storeys",
-        "value": 5,
-        "unit": "storey",
-        "measure_type": "count",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-4-2-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-4-3-c-1",
-        "value_raw": "10.6 m",
-        "value": 10.6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-4-3-c"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-5-2-1",
-        "value_raw": "4 storeys",
-        "value": 4,
-        "unit": "storey",
-        "measure_type": "count",
-        "comparator": "maximum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-5-2"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-5-8-b-1",
-        "value_raw": "15 parking spaces",
-        "value": 15,
-        "unit": "parking_space",
-        "measure_type": "count",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-5-8-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-6-2-c-1",
-        "value_raw": "1.5 m",
-        "value": 1.5,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "minimum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-2-c"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-6-2-d-1",
-        "value_raw": "2 m",
-        "value": 2,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "minimum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-2-d"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-6-3-1",
-        "value_raw": "2 m",
-        "value": 2,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "minimum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-3"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-6-9-1",
-        "value_raw": "1.8m",
-        "value": 1.8,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "less_than",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-9"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-6-10-1",
-        "value_raw": "1.8 m",
-        "value": 1.8,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-10"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-6-11-1",
-        "value_raw": "8 m",
-        "value": 8,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-11"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-6-13-1",
-        "value_raw": "3 m",
-        "value": 3,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-13"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-6-13-a-1",
-        "value_raw": "1.8 m",
-        "value": 1.8,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "minimum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-13-a"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-6-13-b-1",
-        "value_raw": "8m",
-        "value": 8,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-13-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-i-num-zone-i-clause-24-6-13-c-1",
-        "value_raw": "3 m",
-        "value": 3,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "less_than",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-13-c"
-          }
-        ],
-        "confidence": "medium"
-      }
-    ],
-    "requirements": [
-      {
-        "requirement_id": "zone-i-req-zone-i-clause-24-3-2-f",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "rear_yard",
-        "requirement_label_raw": "(f)",
-        "requirement_text_raw": "Rear Yard Setback min. 6 m; 10 m when abutting RN, or RM",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-i-num-zone-i-clause-24-3-2-f-1",
-          "zone-i-num-zone-i-clause-24-3-2-f-2"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-3-2-f"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-i-req-zone-i-clause-24-3-2-b",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "lot_frontage",
-        "requirement_label_raw": "(b)",
-        "requirement_text_raw": "Frontage min. 24 m",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-i-num-zone-i-clause-24-3-2-b-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-3-2-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-i-req-zone-i-clause-24-3-2-c",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "front_yard",
-        "requirement_label_raw": "(c)",
-        "requirement_text_raw": "Front Yard Setback min. 7.6 m",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-i-num-zone-i-clause-24-3-2-c-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-3-2-c"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-i-req-zone-i-clause-24-3-2-d",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "setback",
-        "requirement_label_raw": "(d)",
-        "requirement_text_raw": "Flanking Yard Setback min. 7.6 m",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-i-num-zone-i-clause-24-3-2-d-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-3-2-d"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-i-req-zone-i-clause-24-3-2-e",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "side_yard",
-        "requirement_label_raw": "(e)",
-        "requirement_text_raw": "Side Yard Setback min. 3 m",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-i-num-zone-i-clause-24-3-2-e-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-3-2-e"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-i-req-zone-i-clause-24-4-2-b",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "height",
-        "requirement_label_raw": "(b)",
-        "requirement_text_raw": "The 4 storey height cap is increased to 5 storeys.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-i-num-zone-i-clause-24-4-2-b-1",
-          "zone-i-num-zone-i-clause-24-4-2-b-2"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-4-2-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-i-req-zone-i-clause-24-4-3-c",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "lot_frontage",
-        "requirement_label_raw": "(c)",
-        "requirement_text_raw": "A lot frontage of 10.6 m",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-i-num-zone-i-clause-24-4-3-c-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-4-3-c"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-i-req-zone-i-clause-24-5-2",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "height",
-        "requirement_label_raw": ".2",
-        "requirement_text_raw": "The maximum building height shall be 4 storeys.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-i-num-zone-i-clause-24-5-2-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-5-2"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-i-req-zone-i-clause-24-6-2-c",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "a_minimum_of_1_5_m_wide_of_sod_strip_is_required_adjoining_any_asphalt_areas_pat",
-        "requirement_label_raw": "(c)",
-        "requirement_text_raw": "A minimum of 1.5 m wide of Sod strip is required adjoining any asphalt areas, pathways, gravel storage areas, or landscape beds.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-i-num-zone-i-clause-24-6-2-c-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-2-c"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-i-req-zone-i-clause-24-6-2-d",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "a_minimum_of_2_m_wide_strip_of_sod_is_required_for_all_drainage_swales",
-        "requirement_label_raw": "(d)",
-        "requirement_text_raw": "A minimum of 2 m wide strip of sod is required for all drainage swales",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-i-num-zone-i-clause-24-6-2-d-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-2-d"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-i-req-zone-i-clause-24-6-3",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "front_yard",
-        "requirement_label_raw": ".3",
-        "requirement_text_raw": "For any parking lots located in the front yard, a minimum 2 m wide hard surfaced sidewalk shall connect the front door of the building to any adjacent sidewalks adjoining the property if present.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-i-num-zone-i-clause-24-6-3-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-3"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-i-req-zone-i-clause-24-6-9",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "parking",
-        "requirement_label_raw": ".9",
-        "requirement_text_raw": "The front doors must connect to adjacent sidewalks and parking areas by a hard surfaced walkway no less than 1.8m wide.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-i-num-zone-i-clause-24-6-9-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-9"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-i-req-zone-i-clause-24-6-11",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "lot_frontage",
-        "requirement_label_raw": ".11",
-        "requirement_text_raw": "Front yards shall be landscaped with grass and shrub bed(s) at a rate of 0.5 m2 of shrub bed per metre of frontage and one tree in the front yard for every 8 m of frontage. Decimal results shall round up.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-i-num-zone-i-clause-24-6-11-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-11"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-i-req-zone-i-clause-24-6-13-b",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "rear_yard",
-        "requirement_label_raw": "(b)",
-        "requirement_text_raw": "One 60 mm caliper tree per 8m of side or rear yard planted in the landscape buffer placed to block light and views.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-i-num-zone-i-clause-24-6-13-b-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-13-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-i-req-zone-i-clause-24-6-13-c",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "front_yard",
-        "requirement_label_raw": "(c)",
-        "requirement_text_raw": "For buildings that have been set back more than 3 m from the front lot line, no less than one (1) tree shall be planted per front yard.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-i-num-zone-i-clause-24-6-13-c-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-13-c"
-          }
-        ],
-        "confidence": "medium"
-      }
-    ],
-    "regulation_groups": [
-      {
-        "regulation_group_id": "zone-i-regulation-group-zone",
-        "group_label_raw": "PART 24",
-        "group_title_raw": "I - Institutional",
-        "regulated_use_terms": [
-          "zone-i-term-use-cemetery",
-          "zone-i-term-use-commercial_daycare_centre",
-          "zone-i-term-use-community_care_facility",
-          "zone-i-term-use-community_institutional",
-          "zone-i-term-use-cultural_establishment",
-          "zone-i-term-use-dormitory",
-          "zone-i-term-use-educational_institution_private",
-          "zone-i-term-use-educational_institution_public",
-          "zone-i-term-use-fire_station",
-          "zone-i-term-use-funeral_establishment",
-          "zone-i-term-use-government_office",
-          "zone-i-term-use-hospital",
-          "zone-i-term-use-library",
-          "zone-i-term-use-medical_health_and_dental_office",
-          "zone-i-term-use-place_of_worship",
-          "zone-i-term-use-police_station"
-        ],
-        "applicability": {
-          "applies_to_zone_codes": [
-            "I"
-          ],
-          "conditions": []
-        },
-        "requirement_refs": [
-          "zone-i-req-zone-i-clause-24-3-2-f",
-          "zone-i-req-zone-i-clause-24-3-2-b",
-          "zone-i-req-zone-i-clause-24-3-2-c",
-          "zone-i-req-zone-i-clause-24-3-2-d",
-          "zone-i-req-zone-i-clause-24-3-2-e",
-          "zone-i-req-zone-i-clause-24-4-2-b",
-          "zone-i-req-zone-i-clause-24-4-3-c",
-          "zone-i-req-zone-i-clause-24-5-2",
-          "zone-i-req-zone-i-clause-24-6-2-c",
-          "zone-i-req-zone-i-clause-24-6-2-d",
-          "zone-i-req-zone-i-clause-24-6-3",
-          "zone-i-req-zone-i-clause-24-6-9",
-          "zone-i-req-zone-i-clause-24-6-11",
-          "zone-i-req-zone-i-clause-24-6-13-b",
-          "zone-i-req-zone-i-clause-24-6-13-c"
-        ],
-        "source_section_ref": "zone-i-section-24-1",
-        "confidence": "medium"
-      }
-    ],
-    "conditional_rule_groups": [],
-    "zone_relationships": [],
-    "map_layer_references": [
-      {
-        "map_reference_id": "zone-i-map-zoning-map",
-        "map_title_raw": "Charlottetown Zoning Map 2026",
-        "map_label_raw": "Zoning Map",
-        "map_reference_type": "zoning_map",
-        "postgis_schema": "public",
-        "postgis_table": "spatial_features",
-        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
-        "feature_key": "I",
-        "source_refs": [
-          {
-            "source_ref_type": "map_reference",
-            "source_ref_id": "zone-i-map-zoning-map"
-          }
-        ],
-        "confidence": "medium"
-      }
-    ],
-    "other_requirements": [
-      {
-        "requirement_id": "zone-i-req-zone-i-clause-24-5-8-b",
-        "requirement_type": "other",
-        "requirement_category": "parking",
-        "requirement_label_raw": "(b)",
-        "requirement_text_raw": "For every 15 parking spaces, the lot shall include one landscaped island (the size of a parking stall) which includes 1 tree and landscaping including shrubs, ornamental grasses or stormwater gardens.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-i-num-zone-i-clause-24-5-8-b-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-5-8-b"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
-        "requirement_id": "zone-i-req-zone-i-clause-24-6-10",
-        "requirement_type": "other",
-        "requirement_category": "all_disturbed_surfaces_shall_be_sodded_or_hard_surfaced_asphalt_pavers_concrete_",
-        "requirement_label_raw": ".10",
-        "requirement_text_raw": "All disturbed surfaces shall be sodded or hard surfaced (asphalt, pavers, concrete). Gravel or bare earth is not permitted except within fenced storage compounds (1.8 m min. fence).",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-i-num-zone-i-clause-24-6-10-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-10"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
-        "requirement_id": "zone-i-req-zone-i-clause-24-6-13",
-        "requirement_type": "other",
-        "requirement_category": "properties_that_abut_residential_uses_shall_include_a_3_m_wide_landscape_buffer_",
-        "requirement_label_raw": ".13",
-        "requirement_text_raw": "Properties that abut residential uses shall include a 3 m wide landscape buffer along the abutting property line that includes:",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-i-num-zone-i-clause-24-6-13-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-13"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
-        "requirement_id": "zone-i-req-zone-i-clause-24-6-13-a",
-        "requirement_type": "other",
-        "requirement_category": "a_1_8_m_high_min_opaque_fence",
-        "requirement_label_raw": "(a)",
-        "requirement_text_raw": "A 1.8 m high (min.) opaque fence",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-i-num-zone-i-clause-24-6-13-a-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-i-clause-24-6-13-a"
-          }
-        ],
-        "confidence": "needs_review"
-      }
-    ],
-    "cross_references": []
-  },
-  "review_flags": [
-    {
-      "review_flag_id": "zone-i-flag-legacy-open-issue-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "extraction_review",
-      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization.",
-      "source_refs": [
-        {
-          "source_ref_type": "source_unit",
-          "source_ref_id": "zone-i"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-i-flag-legacy-open-issue-2",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "table_parsing_review",
-      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization.",
-      "source_refs": [
-        {
-          "source_ref_type": "source_unit",
-          "source_ref_id": "zone-i"
-        }
-      ]
-    }
-  ]
+  }
 }

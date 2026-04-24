@@ -1,996 +1,343 @@
 {
-  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Draft Zoning & Development Bylaw",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
-    "document_type": "zone",
     "zone_code": "C",
     "zone_name": "Conservation",
-    "zone_label_raw": "PART 27",
-    "zone_title_raw": "C - Conservation",
-    "citations": {
+    "part_label_raw": "PART 27",
+    "chapter_heading_raw": "PART 27 C - Conservation",
+    "draft_date_raw": "April 7, 2026"
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": [
+      "21(e)",
+      "21(ea)",
+      "21(ea)(1)",
+      "20(1)(a.1)"
+    ],
+    "pending_review_clause_patterns": [
+      "dot_numeric_provision_labels",
+      "parenthesized_alpha_clause_labels"
+    ]
+  },
+  "permitted_uses": [
+    {
+      "clause_label_raw": "(a)",
+      "use_type": "permitted_use",
+      "use_name": "Existing uses",
+      "status": "active",
+      "conditions": "The following use is permitted in the C Zone:",
+      "citations": {
+        "pdf_page_start": 161,
+        "pdf_page_end": 161,
+        "bylaw_page_start": 157,
+        "bylaw_page_end": 157
+      }
+    }
+  ],
+  "requirement_sections": [
+    {
+      "order_index": 1,
+      "section_label_raw": "27.1",
+      "title_label_raw": "INTENT",
+      "citations": {
+        "pdf_page_start": 161,
+        "pdf_page_end": 161,
+        "bylaw_page_start": 157,
+        "bylaw_page_end": 157
+      },
+      "provisions": [
+        {
+          "provision_label_raw": "section",
+          "text": "The Municipal Natural Asset Inventory describes the natural areas within the city in six categories including agricultural land, forests, grassland, shrub land, water and wetlands. Most of the natural areas in the city are concentrated along its edge and water-bodies. Conservation Areas need to be protected from development to ensure the continued protection of habitat and functioning of ecosystem services.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 161,
+            "pdf_page_end": 161,
+            "bylaw_page_start": 157,
+            "bylaw_page_end": 157
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 2,
+      "section_label_raw": "27.2",
+      "title_label_raw": "RE-ZONING",
+      "citations": {
+        "pdf_page_start": 161,
+        "pdf_page_end": 161,
+        "bylaw_page_start": 157,
+        "bylaw_page_end": 157
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "Rezoning from C to any other zone is not permitted.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 161,
+            "pdf_page_end": 161,
+            "bylaw_page_start": 157,
+            "bylaw_page_end": 157
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 3,
+      "section_label_raw": "27.3",
+      "title_label_raw": "PERMITTED USES",
+      "citations": {
+        "pdf_page_start": 161,
+        "pdf_page_end": 161,
+        "bylaw_page_start": 157,
+        "bylaw_page_end": 157
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "The following use is permitted in the C Zone:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 161,
+            "pdf_page_end": 161,
+            "bylaw_page_start": 157,
+            "bylaw_page_end": 157
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Existing uses",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 161,
+            "pdf_page_end": 161,
+            "bylaw_page_start": 157,
+            "bylaw_page_end": 157
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "Alterations to existing uses are permitted so long as the following requirements are met:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 161,
+            "pdf_page_end": 161,
+            "bylaw_page_start": 157,
+            "bylaw_page_end": 157
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Lot Area N/A",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 161,
+            "pdf_page_end": 161,
+            "bylaw_page_start": 157,
+            "bylaw_page_end": 157
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "Frontage min. 6 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 161,
+            "pdf_page_end": 161,
+            "bylaw_page_start": 157,
+            "bylaw_page_end": 157
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "Front Yard Setback min. 6 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 161,
+            "pdf_page_end": 161,
+            "bylaw_page_start": 157,
+            "bylaw_page_end": 157
+          }
+        },
+        {
+          "provision_label_raw": "(d)",
+          "text": "Flanking Yard Setback min. 6 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 161,
+            "pdf_page_end": 161,
+            "bylaw_page_start": 157,
+            "bylaw_page_end": 157
+          }
+        },
+        {
+          "provision_label_raw": "(e)",
+          "text": "Side Yard Setback min. 3 m; 20 m when abutting RN, or RM",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 161,
+            "pdf_page_end": 161,
+            "bylaw_page_start": 157,
+            "bylaw_page_end": 157
+          }
+        },
+        {
+          "provision_label_raw": "(f)",
+          "text": "Rear Yard Setback min. 6 m; 20 m when abutting RN, or RM",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 161,
+            "pdf_page_end": 161,
+            "bylaw_page_start": 157,
+            "bylaw_page_end": 157
+          }
+        },
+        {
+          "provision_label_raw": "(g)",
+          "text": "Coverage N/A",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 161,
+            "pdf_page_end": 161,
+            "bylaw_page_start": 157,
+            "bylaw_page_end": 157
+          }
+        },
+        {
+          "provision_label_raw": ".3",
+          "text": "Accessory buildings are permitted according to Section 3.1",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 161,
+            "pdf_page_end": 161,
+            "bylaw_page_start": 157,
+            "bylaw_page_end": 157
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 4,
+      "section_label_raw": "27.4",
+      "title_label_raw": "BUILT FORM REQUIREMENTS",
+      "citations": {
+        "pdf_page_start": 162,
+        "pdf_page_end": 162,
+        "bylaw_page_start": 158,
+        "bylaw_page_end": 158
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "The maximum building height shall be 2 storeys.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 162,
+            "pdf_page_end": 162,
+            "bylaw_page_start": 158,
+            "bylaw_page_end": 158
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "Buildings require a separation distance of 4m.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 162,
+            "pdf_page_end": 162,
+            "bylaw_page_start": 158,
+            "bylaw_page_end": 158
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 5,
+      "section_label_raw": "27.5",
+      "title_label_raw": "PERMITTED WITH CONDITIONS",
+      "citations": {
+        "pdf_page_start": 162,
+        "pdf_page_end": 162,
+        "bylaw_page_start": 158,
+        "bylaw_page_end": 158
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "Permitted encroachments into the setbacks are listed in Table 3.2.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 162,
+            "pdf_page_end": 162,
+            "bylaw_page_start": 158,
+            "bylaw_page_end": 158
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "Any buildings or facilities that support research, interpretation, or learning facilities will be considered by development agreement.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 162,
+            "pdf_page_end": 162,
+            "bylaw_page_start": 158,
+            "bylaw_page_end": 158
+          }
+        }
+      ],
+      "layout_artifacts_present": true
+    }
+  ],
+  "zone_specific_requirements": [],
+  "shared_requirement_references": [
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Section 3.1",
+      "citations": {
+        "pdf_page_start": 161,
+        "pdf_page_end": 161,
+        "bylaw_page_start": 157,
+        "bylaw_page_end": 157
+      },
+      "source_text": "Accessory buildings are permitted according to Section 3.1"
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Table 3.2.",
+      "citations": {
+        "pdf_page_start": 162,
+        "pdf_page_end": 162,
+        "bylaw_page_start": 158,
+        "bylaw_page_end": 158
+      },
+      "source_text": "Permitted encroachments into the setbacks are listed in Table 3.2."
+    }
+  ],
+  "content_blocks": [],
+  "open_issues": [
+    {
+      "issue_type": "extraction_review",
+      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization."
+    },
+    {
+      "issue_type": "table_parsing_review",
+      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization."
+    }
+  ],
+  "citations": {
+    "zone_section": {
       "pdf_page_start": 161,
       "pdf_page_end": 162,
       "bylaw_page_start": 157,
       "bylaw_page_end": 158
     }
-  },
-  "raw_data": {
-    "source_units": [
-      {
-        "source_unit_id": "zone-c",
-        "source_unit_type": "zone",
-        "label_raw": "PART 27",
-        "title_raw": "C - Conservation",
-        "text_raw": "The Municipal Natural Asset Inventory describes the natural areas within the city in six categories including agricultural land, forests, grassland, shrub land, water and wetlands. Most of the natural areas in the city are concentrated along its edge and water-bodies. Conservation Areas need to be protected from development to ensure the continued protection of habitat and functioning of ecosystem services.\nRezoning from C to any other zone is not permitted.\nThe following use is permitted in the C Zone:\nExisting uses\nAlterations to existing uses are permitted so long as the following requirements are met:\n(a) Lot Area N/A\n(b) Frontage min. 6 m\n(c) Front Yard Setback min. 6 m\n(d) Flanking Yard Setback min. 6 m\n(e) Side Yard Setback min. 3 m; 20 m when abutting RN, or RM\n(f) Rear Yard Setback min. 6 m; 20 m when abutting RN, or RM\n(g) Coverage N/A\nAccessory buildings are permitted according to Section 3.1\nThe maximum building height shall be 2 storeys.\nBuildings require a separation distance of 4m.\nPermitted encroachments into the setbacks are listed in Table 3.2.\nAny buildings or facilities that support research, interpretation, or learning facilities will be considered by development agreement.",
-        "source_order": 1,
-        "citations": {
-          "pdf_page_start": 161,
-          "pdf_page_end": 162,
-          "bylaw_page_start": 157,
-          "bylaw_page_end": 158
-        }
-      }
-    ],
-    "sections_raw": [
-      {
-        "section_id": "zone-c-section-27-1",
-        "section_label_raw": "27.1",
-        "section_title_raw": "INTENT",
-        "source_order": 1,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-c-clause-27-1",
-            "clause_label_raw": "section",
-            "clause_text_raw": "The Municipal Natural Asset Inventory describes the natural areas within the city in six categories including agricultural land, forests, grassland, shrub land, water and wetlands. Most of the natural areas in the city are concentrated along its edge and water-bodies. Conservation Areas need to be protected from development to ensure the continued protection of habitat and functioning of ecosystem services.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 161,
-              "pdf_page_end": 161,
-              "bylaw_page_start": 157,
-              "bylaw_page_end": 157
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-c-clause-27-1",
-            "source_order": 1
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 161,
-          "pdf_page_end": 161,
-          "bylaw_page_start": 157,
-          "bylaw_page_end": 157
-        }
-      },
-      {
-        "section_id": "zone-c-section-27-2",
-        "section_label_raw": "27.2",
-        "section_title_raw": "RE-ZONING",
-        "source_order": 2,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-c-clause-27-2-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "Rezoning from C to any other zone is not permitted.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 161,
-              "pdf_page_end": 161,
-              "bylaw_page_start": 157,
-              "bylaw_page_end": 157
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-c-clause-27-2-1",
-            "source_order": 1
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 161,
-          "pdf_page_end": 161,
-          "bylaw_page_start": 157,
-          "bylaw_page_end": 157
-        }
-      },
-      {
-        "section_id": "zone-c-section-27-3",
-        "section_label_raw": "27.3",
-        "section_title_raw": "PERMITTED USES",
-        "source_order": 3,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-c-clause-27-3-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "The following use is permitted in the C Zone:",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 161,
-              "pdf_page_end": 161,
-              "bylaw_page_start": 157,
-              "bylaw_page_end": 157
-            }
-          },
-          {
-            "clause_id": "zone-c-clause-27-3-1-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "Existing uses",
-            "parent_clause_id": "zone-c-clause-27-3-1",
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 161,
-              "pdf_page_end": 161,
-              "bylaw_page_start": 157,
-              "bylaw_page_end": 157
-            }
-          },
-          {
-            "clause_id": "zone-c-clause-27-3-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "Alterations to existing uses are permitted so long as the following requirements are met:",
-            "parent_clause_id": null,
-            "source_order": 3,
-            "citations": {
-              "pdf_page_start": 161,
-              "pdf_page_end": 161,
-              "bylaw_page_start": 157,
-              "bylaw_page_end": 157
-            }
-          },
-          {
-            "clause_id": "zone-c-clause-27-3-3",
-            "clause_label_raw": ".3",
-            "clause_text_raw": "Accessory buildings are permitted according to Section 3.1",
-            "parent_clause_id": null,
-            "source_order": 4,
-            "citations": {
-              "pdf_page_start": 161,
-              "pdf_page_end": 161,
-              "bylaw_page_start": 157,
-              "bylaw_page_end": 157
-            }
-          }
-        ],
-        "tables_raw": [
-          {
-            "table_id": "zone-c-table-27-3-2",
-            "table_title_raw": "27.3.2",
-            "source_order": 4,
-            "columns_raw": [
-              {
-                "column_id": "row_label",
-                "column_label_raw": "clause_label_raw",
-                "source_order": 1
-              },
-              {
-                "column_id": "requirement",
-                "column_label_raw": "clause_name",
-                "source_order": 2
-              },
-              {
-                "column_id": "value",
-                "column_label_raw": "",
-                "source_order": 3
-              }
-            ],
-            "rows_raw": [
-              {
-                "row_id": "zone-c-table-27-3-2-row-1",
-                "source_order": 1,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-1-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(a)"
-                  },
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-1-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Lot Area"
-                  },
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-1-value",
-                    "column_id": "value",
-                    "cell_text_raw": "N/A"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-c-table-27-3-2-row-2",
-                "source_order": 2,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-2-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(b)"
-                  },
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-2-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Frontage"
-                  },
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-2-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 6 m"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-c-table-27-3-2-row-3",
-                "source_order": 3,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-3-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(c)"
-                  },
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-3-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Front Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-3-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 6 m"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-c-table-27-3-2-row-4",
-                "source_order": 4,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-4-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(d)"
-                  },
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-4-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Flanking Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-4-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 6 m"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-c-table-27-3-2-row-5",
-                "source_order": 5,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-5-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(e)"
-                  },
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-5-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Side Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-5-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 3 m; 20 m when abutting RN, or RM"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-c-table-27-3-2-row-6",
-                "source_order": 6,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-6-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(f)"
-                  },
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-6-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Rear Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-6-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 6 m; 20 m when abutting RN, or RM"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-c-table-27-3-2-row-7",
-                "source_order": 7,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-7-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(g)"
-                  },
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-7-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Coverage"
-                  },
-                  {
-                    "cell_id": "zone-c-table-27-3-2-row-7-value",
-                    "column_id": "value",
-                    "cell_text_raw": "N/A"
-                  }
-                ]
-              }
-            ],
-            "citations": {
-              "pdf_page_start": 161,
-              "pdf_page_end": 161,
-              "bylaw_page_start": 157,
-              "bylaw_page_end": 157
-            }
-          }
-        ],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-c-clause-27-3-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-c-clause-27-3-1-a",
-            "source_order": 2
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-c-clause-27-3-2",
-            "source_order": 3
-          },
-          {
-            "content_type": "table",
-            "content_id": "zone-c-table-27-3-2",
-            "source_order": 4
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-c-clause-27-3-3",
-            "source_order": 5
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 161,
-          "pdf_page_end": 161,
-          "bylaw_page_start": 157,
-          "bylaw_page_end": 157
-        }
-      },
-      {
-        "section_id": "zone-c-section-27-4",
-        "section_label_raw": "27.4",
-        "section_title_raw": "BUILT FORM REQUIREMENTS",
-        "source_order": 4,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-c-clause-27-4-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "The maximum building height shall be 2 storeys.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 162,
-              "pdf_page_end": 162,
-              "bylaw_page_start": 158,
-              "bylaw_page_end": 158
-            }
-          },
-          {
-            "clause_id": "zone-c-clause-27-4-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "Buildings require a separation distance of 4m.",
-            "parent_clause_id": null,
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 162,
-              "pdf_page_end": 162,
-              "bylaw_page_start": 158,
-              "bylaw_page_end": 158
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-c-clause-27-4-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-c-clause-27-4-2",
-            "source_order": 2
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 162,
-          "pdf_page_end": 162,
-          "bylaw_page_start": 158,
-          "bylaw_page_end": 158
-        }
-      },
-      {
-        "section_id": "zone-c-section-27-5",
-        "section_label_raw": "27.5",
-        "section_title_raw": "PERMITTED WITH CONDITIONS",
-        "source_order": 5,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-c-clause-27-5-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "Permitted encroachments into the setbacks are listed in Table 3.2.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 162,
-              "pdf_page_end": 162,
-              "bylaw_page_start": 158,
-              "bylaw_page_end": 158
-            }
-          },
-          {
-            "clause_id": "zone-c-clause-27-5-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "Any buildings or facilities that support research, interpretation, or learning facilities will be considered by development agreement.",
-            "parent_clause_id": null,
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 162,
-              "pdf_page_end": 162,
-              "bylaw_page_start": 158,
-              "bylaw_page_end": 158
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-c-clause-27-5-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-c-clause-27-5-2",
-            "source_order": 2
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 162,
-          "pdf_page_end": 162,
-          "bylaw_page_start": 158,
-          "bylaw_page_end": 158
-        }
-      }
-    ],
-    "clause_refs": [
-      {
-        "clause_id": "zone-c-clause-27-1",
-        "section_id": "zone-c-section-27-1",
-        "source_order": 1
-      },
-      {
-        "clause_id": "zone-c-clause-27-2-1",
-        "section_id": "zone-c-section-27-2",
-        "source_order": 2
-      },
-      {
-        "clause_id": "zone-c-clause-27-3-1",
-        "section_id": "zone-c-section-27-3",
-        "source_order": 3
-      },
-      {
-        "clause_id": "zone-c-clause-27-3-1-a",
-        "section_id": "zone-c-section-27-3",
-        "source_order": 4
-      },
-      {
-        "clause_id": "zone-c-clause-27-3-2",
-        "section_id": "zone-c-section-27-3",
-        "source_order": 5
-      },
-      {
-        "clause_id": "zone-c-clause-27-3-3",
-        "section_id": "zone-c-section-27-3",
-        "source_order": 6
-      },
-      {
-        "clause_id": "zone-c-clause-27-4-1",
-        "section_id": "zone-c-section-27-4",
-        "source_order": 7
-      },
-      {
-        "clause_id": "zone-c-clause-27-4-2",
-        "section_id": "zone-c-section-27-4",
-        "source_order": 8
-      },
-      {
-        "clause_id": "zone-c-clause-27-5-1",
-        "section_id": "zone-c-section-27-5",
-        "source_order": 9
-      },
-      {
-        "clause_id": "zone-c-clause-27-5-2",
-        "section_id": "zone-c-section-27-5",
-        "source_order": 10
-      }
-    ],
-    "tables_raw": [],
-    "map_references_raw": [
-      {
-        "map_reference_id": "zone-c-map-zoning-map",
-        "map_label_raw": "Zoning Map",
-        "map_title_raw": "Charlottetown Zoning Map 2026",
-        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
-        "citations": {
-          "pdf_page_start": 161,
-          "pdf_page_end": 162,
-          "bylaw_page_start": 157,
-          "bylaw_page_end": 158
-        }
-      }
-    ]
-  },
-  "structured_data": {
-    "terms": [
-      {
-        "term_id": "zone-c-term-term-existing_uses",
-        "term_raw": "Existing uses",
-        "term_normalized": "existing_uses",
-        "term_category": "unknown",
-        "source_refs": [],
-        "confidence": "needs_review"
-      }
-    ],
-    "uses": [
-      {
-        "use_id": "zone-c-use-existing-uses-1-1",
-        "use_name_raw": "Existing uses",
-        "use_term_id": "zone-c-term-term-existing_uses",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "needs_review"
-      }
-    ],
-    "numeric_values": [
-      {
-        "numeric_value_id": "zone-c-num-zone-c-table-27-3-2-row-2-value-1",
-        "value_raw": "6 m",
-        "value": 6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-c-table-27-3-2-row-2-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-c-num-zone-c-table-27-3-2-row-3-value-1",
-        "value_raw": "6 m",
-        "value": 6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-c-table-27-3-2-row-3-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-c-num-zone-c-table-27-3-2-row-4-value-1",
-        "value_raw": "6 m",
-        "value": 6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-c-table-27-3-2-row-4-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-c-num-zone-c-table-27-3-2-row-5-value-1",
-        "value_raw": "3 m",
-        "value": 3,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-c-table-27-3-2-row-5-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-c-num-zone-c-table-27-3-2-row-5-value-2",
-        "value_raw": "20 m",
-        "value": 20,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-c-table-27-3-2-row-5-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-c-num-zone-c-table-27-3-2-row-6-value-1",
-        "value_raw": "6 m",
-        "value": 6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-c-table-27-3-2-row-6-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-c-num-zone-c-table-27-3-2-row-6-value-2",
-        "value_raw": "20 m",
-        "value": 20,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-c-table-27-3-2-row-6-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-c-num-zone-c-clause-27-4-1-1",
-        "value_raw": "2 storeys",
-        "value": 2,
-        "unit": "storey",
-        "measure_type": "count",
-        "comparator": "maximum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-c-clause-27-4-1"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-c-num-zone-c-clause-27-4-2-1",
-        "value_raw": "4m",
-        "value": 4,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-c-clause-27-4-2"
-          }
-        ],
-        "confidence": "medium"
-      }
-    ],
-    "requirements": [
-      {
-        "requirement_id": "zone-c-req-zone-c-table-27-3-2-row-2-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "lot_frontage",
-        "requirement_label_raw": "Frontage",
-        "requirement_text_raw": "Frontage min. 6 m",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-c-num-zone-c-table-27-3-2-row-2-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-c-table-27-3-2-row-2"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-c-req-zone-c-table-27-3-2-row-3-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "front_yard",
-        "requirement_label_raw": "Front Yard Setback",
-        "requirement_text_raw": "Front Yard Setback min. 6 m",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-c-num-zone-c-table-27-3-2-row-3-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-c-table-27-3-2-row-3"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-c-req-zone-c-table-27-3-2-row-4-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "setback",
-        "requirement_label_raw": "Flanking Yard Setback",
-        "requirement_text_raw": "Flanking Yard Setback min. 6 m",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-c-num-zone-c-table-27-3-2-row-4-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-c-table-27-3-2-row-4"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-c-req-zone-c-table-27-3-2-row-5-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "side_yard",
-        "requirement_label_raw": "Side Yard Setback",
-        "requirement_text_raw": "Side Yard Setback min. 3 m; 20 m when abutting RN, or RM",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-c-num-zone-c-table-27-3-2-row-5-value-1",
-          "zone-c-num-zone-c-table-27-3-2-row-5-value-2"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-c-table-27-3-2-row-5"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-c-req-zone-c-table-27-3-2-row-6-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "rear_yard",
-        "requirement_label_raw": "Rear Yard Setback",
-        "requirement_text_raw": "Rear Yard Setback min. 6 m; 20 m when abutting RN, or RM",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-c-num-zone-c-table-27-3-2-row-6-value-1",
-          "zone-c-num-zone-c-table-27-3-2-row-6-value-2"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-c-table-27-3-2-row-6"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-c-req-zone-c-clause-27-4-1",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "height",
-        "requirement_label_raw": ".1",
-        "requirement_text_raw": "The maximum building height shall be 2 storeys.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-c-num-zone-c-clause-27-4-1-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-c-clause-27-4-1"
-          }
-        ],
-        "confidence": "medium"
-      }
-    ],
-    "regulation_groups": [
-      {
-        "regulation_group_id": "zone-c-regulation-group-zone",
-        "group_label_raw": "PART 27",
-        "group_title_raw": "C - Conservation",
-        "regulated_use_terms": [
-          "zone-c-term-term-existing_uses"
-        ],
-        "applicability": {
-          "applies_to_zone_codes": [
-            "C"
-          ],
-          "conditions": []
-        },
-        "requirement_refs": [
-          "zone-c-req-zone-c-table-27-3-2-row-2-value",
-          "zone-c-req-zone-c-table-27-3-2-row-3-value",
-          "zone-c-req-zone-c-table-27-3-2-row-4-value",
-          "zone-c-req-zone-c-table-27-3-2-row-5-value",
-          "zone-c-req-zone-c-table-27-3-2-row-6-value",
-          "zone-c-req-zone-c-clause-27-4-1"
-        ],
-        "source_section_ref": "zone-c-section-27-1",
-        "confidence": "medium"
-      }
-    ],
-    "conditional_rule_groups": [],
-    "zone_relationships": [],
-    "map_layer_references": [
-      {
-        "map_reference_id": "zone-c-map-zoning-map",
-        "map_title_raw": "Charlottetown Zoning Map 2026",
-        "map_label_raw": "Zoning Map",
-        "map_reference_type": "zoning_map",
-        "postgis_schema": "public",
-        "postgis_table": "spatial_features",
-        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
-        "feature_key": "C",
-        "source_refs": [
-          {
-            "source_ref_type": "map_reference",
-            "source_ref_id": "zone-c-map-zoning-map"
-          }
-        ],
-        "confidence": "medium"
-      }
-    ],
-    "other_requirements": [
-      {
-        "requirement_id": "zone-c-req-zone-c-clause-27-4-2",
-        "requirement_type": "other",
-        "requirement_category": "buildings_require_a_separation_distance_of_4m",
-        "requirement_label_raw": ".2",
-        "requirement_text_raw": "Buildings require a separation distance of 4m.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-c-num-zone-c-clause-27-4-2-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-c-clause-27-4-2"
-          }
-        ],
-        "confidence": "needs_review"
-      }
-    ],
-    "cross_references": []
-  },
-  "review_flags": [
-    {
-      "review_flag_id": "zone-c-flag-unmatched-use-existing-uses-1-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Existing uses"
-    },
-    {
-      "review_flag_id": "zone-c-flag-legacy-open-issue-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "extraction_review",
-      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization.",
-      "source_refs": [
-        {
-          "source_ref_type": "source_unit",
-          "source_ref_id": "zone-c"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-c-flag-legacy-open-issue-2",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "table_parsing_review",
-      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization.",
-      "source_refs": [
-        {
-          "source_ref_type": "source_unit",
-          "source_ref_id": "zone-c"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-c-flag-unparsed-table-value-zone-c-table-27-3-2-row-1-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: N/A",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-c-table-27-3-2-row-1-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-c-flag-unparsed-table-value-zone-c-table-27-3-2-row-7-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: N/A",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-c-table-27-3-2-row-7-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-c-flag-unmatched-term-existing-uses",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Existing uses"
-    }
-  ]
+  }
 }

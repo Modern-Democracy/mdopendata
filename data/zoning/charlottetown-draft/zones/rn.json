@@ -1,2727 +1,1009 @@
 {
-  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Draft Zoning & Development Bylaw",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
-    "document_type": "zone",
     "zone_code": "RN",
     "zone_name": "Neighbourhood",
-    "zone_label_raw": "PART 10",
-    "zone_title_raw": "RN - Neighbourhood",
-    "citations": {
+    "part_label_raw": "PART 10",
+    "chapter_heading_raw": "PART 10 RN - Neighbourhood",
+    "draft_date_raw": "April 7, 2026"
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": [
+      "21(e)",
+      "21(ea)",
+      "21(ea)(1)",
+      "20(1)(a.1)"
+    ],
+    "pending_review_clause_patterns": [
+      "dot_numeric_provision_labels",
+      "parenthesized_alpha_clause_labels",
+      "roman_numeral_trailing_parenthesis_clause_labels"
+    ]
+  },
+  "permitted_uses": [
+    {
+      "clause_label_raw": "(a)",
+      "use_type": "permitted_use",
+      "use_name": "Single Detached Dwelling (up to 4 units)",
+      "status": "active",
+      "conditions": "The following uses are permitted in the RN Zone:",
+      "citations": {
+        "pdf_page_start": 91,
+        "pdf_page_end": 91,
+        "bylaw_page_start": 87,
+        "bylaw_page_end": 87
+      }
+    },
+    {
+      "clause_label_raw": "(b)",
+      "use_type": "permitted_use",
+      "use_name": "Semi Detached or Duplex Dwelling",
+      "status": "active",
+      "conditions": "The following uses are permitted in the RN Zone:",
+      "citations": {
+        "pdf_page_start": 91,
+        "pdf_page_end": 91,
+        "bylaw_page_start": 87,
+        "bylaw_page_end": 87
+      }
+    },
+    {
+      "clause_label_raw": "(c)",
+      "use_type": "permitted_use",
+      "use_name": "Government Offices",
+      "status": "active",
+      "conditions": "The following uses are permitted in the RN Zone:",
+      "citations": {
+        "pdf_page_start": 91,
+        "pdf_page_end": 91,
+        "bylaw_page_start": 87,
+        "bylaw_page_end": 87
+      }
+    },
+    {
+      "clause_label_raw": "(d)",
+      "use_type": "permitted_use",
+      "use_name": "Library",
+      "status": "active",
+      "conditions": "The following uses are permitted in the RN Zone:",
+      "citations": {
+        "pdf_page_start": 91,
+        "pdf_page_end": 91,
+        "bylaw_page_start": 87,
+        "bylaw_page_end": 87
+      }
+    }
+  ],
+  "requirement_sections": [
+    {
+      "order_index": 1,
+      "section_label_raw": "10.1",
+      "title_label_raw": "INTENT",
+      "citations": {
+        "pdf_page_start": 91,
+        "pdf_page_end": 91,
+        "bylaw_page_start": 87,
+        "bylaw_page_end": 87
+      },
+      "provisions": [
+        {
+          "provision_label_raw": "section",
+          "text": "The RN zone is intended to permit single-detached and semi-detached dwellings up to 4 units per lot (with conditions) and complimentary forms of uses that maintain community residential character (accessory dwelling uses, home occupations, home daycare, etc.).",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 91,
+            "pdf_page_end": 91,
+            "bylaw_page_start": 87,
+            "bylaw_page_end": 87
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 2,
+      "section_label_raw": "10.2",
+      "title_label_raw": "RE-ZONING",
+      "citations": {
+        "pdf_page_start": 91,
+        "pdf_page_end": 91,
+        "bylaw_page_start": 87,
+        "bylaw_page_end": 87
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "Rezoning from RN to RM may be considered where the policies of the Official Plan can be demonstrated, otherwise, rezonings are not permitted in the RN Zone.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 91,
+            "pdf_page_end": 91,
+            "bylaw_page_start": 87,
+            "bylaw_page_end": 87
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 3,
+      "section_label_raw": "10.3",
+      "title_label_raw": "PERMITTED USES",
+      "citations": {
+        "pdf_page_start": 91,
+        "pdf_page_end": 91,
+        "bylaw_page_start": 87,
+        "bylaw_page_end": 87
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "The following uses are permitted in the RN Zone:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 91,
+            "pdf_page_end": 91,
+            "bylaw_page_start": 87,
+            "bylaw_page_end": 87
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Single Detached Dwelling (up to 4 units)",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 91,
+            "pdf_page_end": 91,
+            "bylaw_page_start": 87,
+            "bylaw_page_end": 87
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "Semi Detached or Duplex Dwelling",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 91,
+            "pdf_page_end": 91,
+            "bylaw_page_start": 87,
+            "bylaw_page_end": 87
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "Government Offices",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 91,
+            "pdf_page_end": 91,
+            "bylaw_page_start": 87,
+            "bylaw_page_end": 87
+          }
+        },
+        {
+          "provision_label_raw": "(d)",
+          "text": "Library",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 91,
+            "pdf_page_end": 91,
+            "bylaw_page_start": 87,
+            "bylaw_page_end": 87
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "These uses are permitted so long as the following lot requirements are met:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 91,
+            "pdf_page_end": 91,
+            "bylaw_page_start": 87,
+            "bylaw_page_end": 87
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Lot Area min. 318 m2 for detached dwelling, 240 m2 for semi detached dwelling",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 91,
+            "pdf_page_end": 91,
+            "bylaw_page_start": 87,
+            "bylaw_page_end": 87
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "Frontage min. 10.6 m, 8 m for semi detached dwelling",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 91,
+            "pdf_page_end": 91,
+            "bylaw_page_start": 87,
+            "bylaw_page_end": 87
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "Front Yard Setback min. 6 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 91,
+            "pdf_page_end": 91,
+            "bylaw_page_start": 87,
+            "bylaw_page_end": 87
+          }
+        },
+        {
+          "provision_label_raw": "(d)",
+          "text": "Flankage Yard Setback min. 4 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 91,
+            "pdf_page_end": 91,
+            "bylaw_page_start": 87,
+            "bylaw_page_end": 87
+          }
+        },
+        {
+          "provision_label_raw": "(e)",
+          "text": "Side Yard Setback min. 1.8 m, 0 m for the shared wall of a semi detached dwelling",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 91,
+            "pdf_page_end": 91,
+            "bylaw_page_start": 87,
+            "bylaw_page_end": 87
+          }
+        },
+        {
+          "provision_label_raw": "(f)",
+          "text": "Rear Yard Setback min. 6 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 91,
+            "pdf_page_end": 91,
+            "bylaw_page_start": 87,
+            "bylaw_page_end": 87
+          }
+        },
+        {
+          "provision_label_raw": "(g)",
+          "text": "Coverage max. 40%",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 91,
+            "pdf_page_end": 91,
+            "bylaw_page_start": 87,
+            "bylaw_page_end": 87
+          }
+        },
+        {
+          "provision_label_raw": ".3",
+          "text": "Existing lots with frontage greater than 18 m shall not be subdivided except with an approved variance.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 91,
+            "pdf_page_end": 91,
+            "bylaw_page_start": 87,
+            "bylaw_page_end": 87
+          }
+        },
+        {
+          "provision_label_raw": ".9",
+          "text": "Neighbourhood local commercial is permitted in the RN Zone along any collector or arterial road as identified in Schedule C up to a gross floor area of 120 m2 and by meeting the following requirements:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 91,
+            "pdf_page_end": 91,
+            "bylaw_page_start": 87,
+            "bylaw_page_end": 87
+          }
+        }
+      ],
+      "layout_artifacts_present": true
+    },
+    {
+      "order_index": 4,
+      "section_label_raw": "10.4",
+      "title_label_raw": "PERMITTED WITH CONDITIONS",
+      "citations": {
+        "pdf_page_start": 92,
+        "pdf_page_end": 92,
+        "bylaw_page_start": 88,
+        "bylaw_page_end": 88
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "One or two attached ADU's may be permitted if the conditions in Section 4.5 can be met.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 92,
+            "pdf_page_end": 92,
+            "bylaw_page_start": 88,
+            "bylaw_page_end": 88
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "One rear-yard or side-yard detached Accessory Dwelling Units (ADU's) may be permitted if the conditions in Section 4.6 can be met.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 92,
+            "pdf_page_end": 92,
+            "bylaw_page_start": 88,
+            "bylaw_page_end": 88
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Three dedicated off-street automobile parking spaces and 2 class B biking parking spaces; and",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 92,
+            "pdf_page_end": 92,
+            "bylaw_page_start": 88,
+            "bylaw_page_end": 88
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "A minimum 1.5 m wide hard surface sidewalk linking the front entry of the store with the parking area.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 92,
+            "pdf_page_end": 92,
+            "bylaw_page_start": 88,
+            "bylaw_page_end": 88
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "A landscape buffer 2 m wide shall be constructed which includes an opaque fence no less than 1.8 m high along all properties that directly abut the commercial use or any associated parking.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 92,
+            "pdf_page_end": 92,
+            "bylaw_page_start": 88,
+            "bylaw_page_end": 88
+          }
+        },
+        {
+          "provision_label_raw": ".3",
+          "text": "Registered heritage buildings on lots that exceed 600 m2 permit up to 6 attached ADU units if the conditions in Section 4.5 can be met.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 92,
+            "pdf_page_end": 92,
+            "bylaw_page_start": 88,
+            "bylaw_page_end": 88
+          }
+        },
+        {
+          "provision_label_raw": ".4",
+          "text": "Permitted encroachments into the setbacks are listed in Table 3.2.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 92,
+            "pdf_page_end": 92,
+            "bylaw_page_start": 88,
+            "bylaw_page_end": 88
+          }
+        },
+        {
+          "provision_label_raw": ".5",
+          "text": "Home occupations are permitted if Section 4.8 requirements are met.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 92,
+            "pdf_page_end": 92,
+            "bylaw_page_start": 88,
+            "bylaw_page_end": 88
+          }
+        },
+        {
+          "provision_label_raw": ".6",
+          "text": "Home daycare uses are permitted if Section 4.9 requirements are met.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 92,
+            "pdf_page_end": 92,
+            "bylaw_page_start": 88,
+            "bylaw_page_end": 88
+          }
+        },
+        {
+          "provision_label_raw": ".7",
+          "text": "Notwithstanding Section 10.3.3, manufactured housing uses are permitted in the areas shown in Schedule 10.1 so long as the following requirements are met:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 92,
+            "pdf_page_end": 92,
+            "bylaw_page_start": 88,
+            "bylaw_page_end": 88
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Lot Area min. 465 m2 interior lot, 3,540 m2 for corner lot",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 92,
+            "pdf_page_end": 92,
+            "bylaw_page_start": 88,
+            "bylaw_page_end": 88
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "Frontage min. 12 m for interior lots, 15 m for corner lots",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 92,
+            "pdf_page_end": 92,
+            "bylaw_page_start": 88,
+            "bylaw_page_end": 88
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "Front Yard Setback min. 6 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 92,
+            "pdf_page_end": 92,
+            "bylaw_page_start": 88,
+            "bylaw_page_end": 88
+          }
+        },
+        {
+          "provision_label_raw": "(d)",
+          "text": "Flankage Yard Setback min. 4 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 92,
+            "pdf_page_end": 92,
+            "bylaw_page_start": 88,
+            "bylaw_page_end": 88
+          }
+        },
+        {
+          "provision_label_raw": "(e)",
+          "text": "Side Yard Setback min. 1.8 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 92,
+            "pdf_page_end": 92,
+            "bylaw_page_start": 88,
+            "bylaw_page_end": 88
+          }
+        },
+        {
+          "provision_label_raw": "(f)",
+          "text": "Rear Yard Setback min. 4.5 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 92,
+            "pdf_page_end": 92,
+            "bylaw_page_start": 88,
+            "bylaw_page_end": 88
+          }
+        },
+        {
+          "provision_label_raw": "(g)",
+          "text": "Coverage max. 40% 1.8 m, 0 m for the shared wall of a Semi Min. Lot Frontage 10.6 m, 8 m for Semi",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 92,
+            "pdf_page_end": 92,
+            "bylaw_page_start": 88,
+            "bylaw_page_end": 88
+          }
+        }
+      ],
+      "layout_artifacts_present": true
+    },
+    {
+      "order_index": 5,
+      "section_label_raw": "10.5",
+      "title_label_raw": "BUILT FORM REQUIREMENTS",
+      "citations": {
+        "pdf_page_start": 93,
+        "pdf_page_end": 93,
+        "bylaw_page_start": 89,
+        "bylaw_page_end": 89
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "One building per lot is permitted.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 93,
+            "pdf_page_end": 93,
+            "bylaw_page_start": 89,
+            "bylaw_page_end": 89
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "The maximum building height for the RN zone is 3 storeys.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 93,
+            "pdf_page_end": 93,
+            "bylaw_page_start": 89,
+            "bylaw_page_end": 89
+          }
+        },
+        {
+          "provision_label_raw": ".3",
+          "text": "Any garage (attached or detached) shall not project any closer to the streetline than the longest wall of the attached main dwelling that faces the same streetline.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 93,
+            "pdf_page_end": 93,
+            "bylaw_page_start": 89,
+            "bylaw_page_end": 89
+          }
+        },
+        {
+          "provision_label_raw": ".4",
+          "text": "Attached garages shall not exceed 50% of the primary building's frontage on any streetline to a maximum of 6 m in total.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 93,
+            "pdf_page_end": 93,
+            "bylaw_page_start": 89,
+            "bylaw_page_end": 89
+          }
+        },
+        {
+          "provision_label_raw": ".5",
+          "text": "Developers are encouraged to use materials and styles consistent with existing neighbourhood character.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 93,
+            "pdf_page_end": 93,
+            "bylaw_page_start": 89,
+            "bylaw_page_end": 89
+          }
+        },
+        {
+          "provision_label_raw": ".6",
+          "text": "To discourage excessive repetition of identical home designs within the same street block the following requirements must be met:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 93,
+            "pdf_page_end": 93,
+            "bylaw_page_start": 89,
+            "bylaw_page_end": 89
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "New residential development shall exhibit a variety of building designs along each block to reinforce individual identity and neighbourhood character.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 93,
+            "pdf_page_end": 93,
+            "bylaw_page_start": 89,
+            "bylaw_page_end": 89
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "The same dwelling design, including mirrored variations, shall not appear more than twice within any street block.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 93,
+            "pdf_page_end": 93,
+            "bylaw_page_start": 89,
+            "bylaw_page_end": 89
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "Developments proposing repeated models shall vary at least two of the following elements between dwellings:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 93,
+            "pdf_page_end": 93,
+            "bylaw_page_start": 89,
+            "bylaw_page_end": 89
+          }
+        },
+        {
+          "provision_label_raw": "i)",
+          "text": "Exterior cladding material;",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 93,
+            "pdf_page_end": 93,
+            "bylaw_page_start": 89,
+            "bylaw_page_end": 89
+          }
+        },
+        {
+          "provision_label_raw": "ii)",
+          "text": "Roof form or pitch;",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 93,
+            "pdf_page_end": 93,
+            "bylaw_page_start": 89,
+            "bylaw_page_end": 89
+          }
+        },
+        {
+          "provision_label_raw": "iii)",
+          "text": "Porch or entry design;",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 93,
+            "pdf_page_end": 93,
+            "bylaw_page_start": 89,
+            "bylaw_page_end": 89
+          }
+        },
+        {
+          "provision_label_raw": "iv)",
+          "text": "Window placement; or",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 93,
+            "pdf_page_end": 93,
+            "bylaw_page_start": 89,
+            "bylaw_page_end": 89
+          }
+        },
+        {
+          "provision_label_raw": "v)",
+          "text": "Garage placement and style",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 93,
+            "pdf_page_end": 93,
+            "bylaw_page_start": 89,
+            "bylaw_page_end": 89
+          }
+        },
+        {
+          "provision_label_raw": "(d)",
+          "text": "The Development Officer may approve alternative approaches that achieve an equivalent degree of architectural diversity.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 93,
+            "pdf_page_end": 93,
+            "bylaw_page_start": 89,
+            "bylaw_page_end": 89
+          }
+        },
+        {
+          "provision_label_raw": ".7",
+          "text": "To enhance streetscape interest and avoid flat wall surfaces, all street-facing facades shall include horizontal or vertical modulation of at least 150 mm in depth across no less than 20% of the facade area.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 93,
+            "pdf_page_end": 93,
+            "bylaw_page_start": 89,
+            "bylaw_page_end": 89
+          }
+        },
+        {
+          "provision_label_raw": ".8",
+          "text": "At least 4 m2 of front porch (covered or uncovered) is required for every street facing facade.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 93,
+            "pdf_page_end": 93,
+            "bylaw_page_start": 89,
+            "bylaw_page_end": 89
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 6,
+      "section_label_raw": "10.6",
+      "title_label_raw": "LANDSCAPE REQUIREMENTS",
+      "citations": {
+        "pdf_page_start": 94,
+        "pdf_page_end": 94,
+        "bylaw_page_start": 90,
+        "bylaw_page_end": 90
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "All disturbed surfaces shall be seeded, sodded or hydroseeded with grass or meadow mixture or restored to natural condition.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 94,
+            "pdf_page_end": 94,
+            "bylaw_page_start": 90,
+            "bylaw_page_end": 90
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "All driveways shall be hard surfaced with asphalt, concrete or unit pavers. Loose gravel or soil is not permitted. 4 m2 Landscaping 1.5 m Walkway",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 94,
+            "pdf_page_end": 94,
+            "bylaw_page_start": 90,
+            "bylaw_page_end": 90
+          }
+        },
+        {
+          "provision_label_raw": ".3",
+          "text": "Parking in the front yard is only permitted on a hard surfaced driveways or parking spots.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 94,
+            "pdf_page_end": 94,
+            "bylaw_page_start": 90,
+            "bylaw_page_end": 90
+          }
+        },
+        {
+          "provision_label_raw": ".4",
+          "text": "No more than 40% of the front yard area can be driveway or parking spaces.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 94,
+            "pdf_page_end": 94,
+            "bylaw_page_start": 90,
+            "bylaw_page_end": 90
+          }
+        },
+        {
+          "provision_label_raw": ".5",
+          "text": "No less than 4 (min. 2 m high) trees shall be planted on each lot or 1 per manufactured home for units in Schedule 10.1 areas.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 94,
+            "pdf_page_end": 94,
+            "bylaw_page_start": 90,
+            "bylaw_page_end": 90
+          }
+        },
+        {
+          "provision_label_raw": ".6",
+          "text": "No less than 4 m2 of shrub beds shall be planted in the front yard consisting of shrubs, annuals or perennials.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 94,
+            "pdf_page_end": 94,
+            "bylaw_page_start": 90,
+            "bylaw_page_end": 90
+          }
+        },
+        {
+          "provision_label_raw": ".7",
+          "text": "Where manufactured housing directly abuts the property line of any other housing type in the RN zone, a landscape buffer consisting of a minimum 1.8 m high opaque fence, and one tree (min. 2 m high) for every 8 m of abutting side or rear yard shall be installed. EUSTON ST W E YMOU T H ST M OUN T EDWARD R D KING ST UNIVERSITY AV N A SSAU ST MAPLE AV KENSINGTON RD NORTH RIVER RD PAR K SIDE DR LOWER MALPEQUE RD BEACH GROVE R D V I C TORIA PA R K R Y SPRING PARK RD MACWILLIAMS RD BRACKLEY POINT RD ST PETERS RD BEL V E D E R E A V MAYPOINT RD K E NW OO D C IR ESSEX CR DORCHESTER ST SYDNEY ST WATER ST GRAFTON ST BRIGHTON RD M A C RA E D R UPTON RD CAPITAL DR FITZROY ST NORWOOD RD BARBOUR CIR P A T TERSO N DR SH E RW OO D R D M U R CHIS O N LN EAST ROYAL TY RD Q UEE N EL I Z A B E TH D R WESTRIDGE CR E N GLA N D CI R ACADIAN DR REGI S D U F F Y D R ROYAL TY RD KENT ST UNDEFINED W EST C O M B CR M AP LE H IL LS AV HE ART Z RD UNION RD - RTE 221 ROYAL TY JUNCTION RD QUE E N S T HURRY RD LILAC AV 0 1 20.5 Km Schedule 10.1 Manufactured Home Schedule Manufactured Homes Permitted following Table 11.2 GREATGEORGE ST BRIGHT ON RD RTE 25 LONGWORTH A V MALPEQUE RD KIRKWOOD DR EUSTON ST ALLEN ST GRAFTON ST CAPITAL DR SHERWOOD RD BELVEDERE AV ST PETERS RD UNIV ERSI TY AV NORTH RIVER RD BRACKLEY POINT RD MOUNT EDWARD RD LOW ERMALPEQU ERD TR ANS CANA DA HWY UPTON RD CAPITAL DR STPETERSRD MALPEQUE RD RIVE RS IDEDR ARTERIAL HWY 0 1 20.5 Km ArterialStreets_P CollectorStreets_P Mobile_Homes_P",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 94,
+            "pdf_page_end": 94,
+            "bylaw_page_start": 90,
+            "bylaw_page_end": 90
+          }
+        }
+      ],
+      "layout_artifacts_present": true
+    }
+  ],
+  "zone_specific_requirements": [],
+  "shared_requirement_references": [
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Official Plan can",
+      "citations": {
+        "pdf_page_start": 91,
+        "pdf_page_end": 91,
+        "bylaw_page_start": 87,
+        "bylaw_page_end": 87
+      },
+      "source_text": "Rezoning from RN to RM may be considered where the policies of the Official Plan can be demonstrated, otherwise, rezonings are not permitted in the RN Zone."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Schedule C",
+      "citations": {
+        "pdf_page_start": 91,
+        "pdf_page_end": 91,
+        "bylaw_page_start": 87,
+        "bylaw_page_end": 87
+      },
+      "source_text": "Neighbourhood local commercial is permitted in the RN Zone along any collector or arterial road as identified in Schedule C up to a gross floor area of 120 m2 and by meeting the following requirements:"
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Section 4.5",
+      "citations": {
+        "pdf_page_start": 92,
+        "pdf_page_end": 92,
+        "bylaw_page_start": 88,
+        "bylaw_page_end": 88
+      },
+      "source_text": "One or two attached ADU's may be permitted if the conditions in Section 4.5 can be met."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Section 4.6",
+      "citations": {
+        "pdf_page_start": 92,
+        "pdf_page_end": 92,
+        "bylaw_page_start": 88,
+        "bylaw_page_end": 88
+      },
+      "source_text": "One rear-yard or side-yard detached Accessory Dwelling Units (ADU's) may be permitted if the conditions in Section 4.6 can be met."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Section 4.5",
+      "citations": {
+        "pdf_page_start": 92,
+        "pdf_page_end": 92,
+        "bylaw_page_start": 88,
+        "bylaw_page_end": 88
+      },
+      "source_text": "Registered heritage buildings on lots that exceed 600 m2 permit up to 6 attached ADU units if the conditions in Section 4.5 can be met."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Table 3.2.",
+      "citations": {
+        "pdf_page_start": 92,
+        "pdf_page_end": 92,
+        "bylaw_page_start": 88,
+        "bylaw_page_end": 88
+      },
+      "source_text": "Permitted encroachments into the setbacks are listed in Table 3.2."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Section 4.8",
+      "citations": {
+        "pdf_page_start": 92,
+        "pdf_page_end": 92,
+        "bylaw_page_start": 88,
+        "bylaw_page_end": 88
+      },
+      "source_text": "Home occupations are permitted if Section 4.8 requirements are met."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Section 4.9",
+      "citations": {
+        "pdf_page_start": 92,
+        "pdf_page_end": 92,
+        "bylaw_page_start": 88,
+        "bylaw_page_end": 88
+      },
+      "source_text": "Home daycare uses are permitted if Section 4.9 requirements are met."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Section 10.3.3",
+      "citations": {
+        "pdf_page_start": 92,
+        "pdf_page_end": 92,
+        "bylaw_page_start": 88,
+        "bylaw_page_end": 88
+      },
+      "source_text": "Notwithstanding Section 10.3.3, manufactured housing uses are permitted in the areas shown in Schedule 10.1 so long as the following requirements are met:"
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Schedule 10.1",
+      "citations": {
+        "pdf_page_start": 92,
+        "pdf_page_end": 92,
+        "bylaw_page_start": 88,
+        "bylaw_page_end": 88
+      },
+      "source_text": "Notwithstanding Section 10.3.3, manufactured housing uses are permitted in the areas shown in Schedule 10.1 so long as the following requirements are met:"
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Schedule 10.1",
+      "citations": {
+        "pdf_page_start": 94,
+        "pdf_page_end": 94,
+        "bylaw_page_start": 90,
+        "bylaw_page_end": 90
+      },
+      "source_text": "No less than 4 (min. 2 m high) trees shall be planted on each lot or 1 per manufactured home for units in Schedule 10.1 areas."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Schedule 10.1",
+      "citations": {
+        "pdf_page_start": 94,
+        "pdf_page_end": 94,
+        "bylaw_page_start": 90,
+        "bylaw_page_end": 90
+      },
+      "source_text": "Where manufactured housing directly abuts the property line of any other housing type in the RN zone, a landscape buffer consisting of a minimum 1.8 m high opaque fence, and one tree (min. 2 m high) for every 8 m of abutting side or rear yard shall be installed. EUSTON ST W E YMOU T H ST M OUN T EDWARD R D KING ST UNIVERSITY AV N A SSAU ST MAPLE AV KENSINGTON RD NORTH RIVER RD PAR K SIDE DR LOWER MALPEQUE RD BEACH GROVE R D V I C TORIA PA R K R Y SPRING PARK RD MACWILLIAMS RD BRACKLEY POINT RD ST PETERS RD BEL V E D E R E A V MAYPOINT RD K E NW OO D C IR ESSEX CR DORCHESTER ST SYDNEY ST WATER ST GRAFTON ST BRIGHTON RD M A C RA E D R UPTON RD CAPITAL DR FITZROY ST NORWOOD RD BARBOUR CIR P A T TERSO N DR SH E RW OO D R D M U R CHIS O N LN EAST ROYAL TY RD Q UEE N EL I Z A B E TH D R WESTRIDGE CR E N GLA N D CI R ACADIAN DR REGI S D U F F Y D R ROYAL TY RD KENT ST UNDEFINED W EST C O M B CR M AP LE H IL LS AV HE ART Z RD UNION RD - RTE 221 ROYAL TY JUNCTION RD QUE E N S T HURRY RD LILAC AV 0 1 20.5 Km Schedule 10.1 Manufactured Home Schedule Manufactured Homes Permitted following Table 11.2 GREATGEORGE ST BRIGHT ON RD RTE 25 LONGWORTH A V MALPEQUE RD KIRKWOOD DR EUSTON ST ALLEN ST GRAFTON ST CAPITAL DR SHERWOOD RD BELVEDERE AV ST PETERS RD UNIV ERSI TY AV NORTH RIVER RD BRACKLEY POINT RD MOUNT EDWARD RD LOW ERMALPEQU ERD TR ANS CANA DA HWY UPTON RD CAPITAL DR STPETERSRD MALPEQUE RD RIVE RS IDEDR ARTERIAL HWY 0 1 20.5 Km ArterialStreets_P CollectorStreets_P Mobile_Homes_P"
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Schedule Manufactured",
+      "citations": {
+        "pdf_page_start": 94,
+        "pdf_page_end": 94,
+        "bylaw_page_start": 90,
+        "bylaw_page_end": 90
+      },
+      "source_text": "Where manufactured housing directly abuts the property line of any other housing type in the RN zone, a landscape buffer consisting of a minimum 1.8 m high opaque fence, and one tree (min. 2 m high) for every 8 m of abutting side or rear yard shall be installed. EUSTON ST W E YMOU T H ST M OUN T EDWARD R D KING ST UNIVERSITY AV N A SSAU ST MAPLE AV KENSINGTON RD NORTH RIVER RD PAR K SIDE DR LOWER MALPEQUE RD BEACH GROVE R D V I C TORIA PA R K R Y SPRING PARK RD MACWILLIAMS RD BRACKLEY POINT RD ST PETERS RD BEL V E D E R E A V MAYPOINT RD K E NW OO D C IR ESSEX CR DORCHESTER ST SYDNEY ST WATER ST GRAFTON ST BRIGHTON RD M A C RA E D R UPTON RD CAPITAL DR FITZROY ST NORWOOD RD BARBOUR CIR P A T TERSO N DR SH E RW OO D R D M U R CHIS O N LN EAST ROYAL TY RD Q UEE N EL I Z A B E TH D R WESTRIDGE CR E N GLA N D CI R ACADIAN DR REGI S D U F F Y D R ROYAL TY RD KENT ST UNDEFINED W EST C O M B CR M AP LE H IL LS AV HE ART Z RD UNION RD - RTE 221 ROYAL TY JUNCTION RD QUE E N S T HURRY RD LILAC AV 0 1 20.5 Km Schedule 10.1 Manufactured Home Schedule Manufactured Homes Permitted following Table 11.2 GREATGEORGE ST BRIGHT ON RD RTE 25 LONGWORTH A V MALPEQUE RD KIRKWOOD DR EUSTON ST ALLEN ST GRAFTON ST CAPITAL DR SHERWOOD RD BELVEDERE AV ST PETERS RD UNIV ERSI TY AV NORTH RIVER RD BRACKLEY POINT RD MOUNT EDWARD RD LOW ERMALPEQU ERD TR ANS CANA DA HWY UPTON RD CAPITAL DR STPETERSRD MALPEQUE RD RIVE RS IDEDR ARTERIAL HWY 0 1 20.5 Km ArterialStreets_P CollectorStreets_P Mobile_Homes_P"
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Table 11.2",
+      "citations": {
+        "pdf_page_start": 94,
+        "pdf_page_end": 94,
+        "bylaw_page_start": 90,
+        "bylaw_page_end": 90
+      },
+      "source_text": "Where manufactured housing directly abuts the property line of any other housing type in the RN zone, a landscape buffer consisting of a minimum 1.8 m high opaque fence, and one tree (min. 2 m high) for every 8 m of abutting side or rear yard shall be installed. EUSTON ST W E YMOU T H ST M OUN T EDWARD R D KING ST UNIVERSITY AV N A SSAU ST MAPLE AV KENSINGTON RD NORTH RIVER RD PAR K SIDE DR LOWER MALPEQUE RD BEACH GROVE R D V I C TORIA PA R K R Y SPRING PARK RD MACWILLIAMS RD BRACKLEY POINT RD ST PETERS RD BEL V E D E R E A V MAYPOINT RD K E NW OO D C IR ESSEX CR DORCHESTER ST SYDNEY ST WATER ST GRAFTON ST BRIGHTON RD M A C RA E D R UPTON RD CAPITAL DR FITZROY ST NORWOOD RD BARBOUR CIR P A T TERSO N DR SH E RW OO D R D M U R CHIS O N LN EAST ROYAL TY RD Q UEE N EL I Z A B E TH D R WESTRIDGE CR E N GLA N D CI R ACADIAN DR REGI S D U F F Y D R ROYAL TY RD KENT ST UNDEFINED W EST C O M B CR M AP LE H IL LS AV HE ART Z RD UNION RD - RTE 221 ROYAL TY JUNCTION RD QUE E N S T HURRY RD LILAC AV 0 1 20.5 Km Schedule 10.1 Manufactured Home Schedule Manufactured Homes Permitted following Table 11.2 GREATGEORGE ST BRIGHT ON RD RTE 25 LONGWORTH A V MALPEQUE RD KIRKWOOD DR EUSTON ST ALLEN ST GRAFTON ST CAPITAL DR SHERWOOD RD BELVEDERE AV ST PETERS RD UNIV ERSI TY AV NORTH RIVER RD BRACKLEY POINT RD MOUNT EDWARD RD LOW ERMALPEQU ERD TR ANS CANA DA HWY UPTON RD CAPITAL DR STPETERSRD MALPEQUE RD RIVE RS IDEDR ARTERIAL HWY 0 1 20.5 Km ArterialStreets_P CollectorStreets_P Mobile_Homes_P"
+    }
+  ],
+  "content_blocks": [],
+  "open_issues": [
+    {
+      "issue_type": "extraction_review",
+      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization."
+    },
+    {
+      "issue_type": "table_parsing_review",
+      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization."
+    },
+    {
+      "issue_type": "layout_order_review",
+      "description": "The source PDF places some dimensional and figure text before or beside related section headings in extracted text; verify provision assignment against the visual PDF."
+    }
+  ],
+  "citations": {
+    "zone_section": {
       "pdf_page_start": 91,
       "pdf_page_end": 96,
       "bylaw_page_start": 87,
       "bylaw_page_end": 92
     }
-  },
-  "raw_data": {
-    "source_units": [
-      {
-        "source_unit_id": "zone-rn",
-        "source_unit_type": "zone",
-        "label_raw": "PART 10",
-        "title_raw": "RN - Neighbourhood",
-        "text_raw": "The RN zone is intended to permit single-detached and semi-detached dwellings up to 4 units per lot (with conditions) and complimentary forms of uses that maintain community residential character (accessory dwelling uses, home occupations, home daycare, etc.).\nRezoning from RN to RM may be considered where the policies of the Official Plan can be demonstrated, otherwise, rezonings are not permitted in the RN Zone.\nThe following uses are permitted in the RN Zone:\nSingle Detached Dwelling (up to 4 units)\nSemi Detached or Duplex Dwelling\nGovernment Offices\nLibrary\nThese uses are permitted so long as the following lot requirements are met:\n(a) Lot Area min. 318 m2 for detached dwelling, 240 m2 for semi detached dwelling\n(b) Frontage min. 10.6 m, 8 m for semi detached dwelling\n(c) Front Yard Setback min. 6 m\n(d) Flankage Yard Setback min. 4 m\n(e) Side Yard Setback min. 1.8 m, 0 m for the shared wall of a semi detached dwelling\n(f) Rear Yard Setback min. 6 m\n(g) Coverage max. 40%\nExisting lots with frontage greater than 18 m shall not be subdivided except with an approved variance.\nNeighbourhood local commercial is permitted in the RN Zone along any collector or arterial road as identified in Schedule C up to a gross floor area of 120 m2 and by meeting the following requirements:\nOne or two attached ADU's may be permitted if the conditions in Section 4.5 can be met.\nOne rear-yard or side-yard detached Accessory Dwelling Units (ADU's) may be permitted if the conditions in Section 4.6 can be met.\nThree dedicated off-street automobile parking spaces and 2 class B biking parking spaces; and\nA minimum 1.5 m wide hard surface sidewalk linking the front entry of the store with the parking area.\nA landscape buffer 2 m wide shall be constructed which includes an opaque fence no less than 1.8 m high along all properties that directly abut the commercial use or any associated parking.\nRegistered heritage buildings on lots that exceed 600 m2 permit up to 6 attached ADU units if the conditions in Section 4.5 can be met.\nPermitted encroachments into the setbacks are listed in Table 3.2.\nHome occupations are permitted if Section 4.8 requirements are met.\nHome daycare uses are permitted if Section 4.9 requirements are met.\nNotwithstanding Section 10.3.3, manufactured housing uses are permitted in the areas shown in Schedule 10.1 so long as the following requirements are met:\n(a) Lot Area min. 465 m2 interior lot, 3,540 m2 for corner lot\n(b) Frontage min. 12 m for interior lots, 15 m for corner lots\n(c) Front Yard Setback min. 6 m\n(d) Flankage Yard Setback min. 4 m\n(e) Side Yard Setback min. 1.8 m\n(f) Rear Yard Setback min. 4.5 m\n(g) Coverage max. 40% 1.8 m, 0 m for the shared wall of a Semi Min. Lot Frontage 10.6 m, 8 m for Semi\nOne building per lot is permitted.\nThe maximum building height for the RN zone is 3 storeys.\nAny garage (attached or detached) shall not project any closer to the streetline than the longest wall of the attached main dwelling that faces the same streetline.\nAttached garages shall not exceed 50% of the primary building's frontage on any streetline to a maximum of 6 m in total.\nDevelopers are encouraged to use materials and styles consistent with existing neighbourhood character.\nTo discourage excessive repetition of identical home designs within the same street block the following requirements must be met:\nNew residential development shall exhibit a variety of building designs along each block to reinforce individual identity and neighbourhood character.\nThe same dwelling design, including mirrored variations, shall not appear more than twice within any street block.\nDevelopments proposing repeated models shall vary at least two of the following elements between dwellings:\nExterior cladding material;\nRoof form or pitch;\nPorch or entry design;\nWindow placement; or\nGarage placement and style\nThe Development Officer may approve alternative approaches that achieve an equivalent degree of architectural diversity.\nTo enhance streetscape interest and avoid flat wall surfaces, all street-facing facades shall include horizontal or vertical modulation of at least 150 mm in depth across no less than 20% of the facade area.\nAt least 4 m2 of front porch (covered or uncovered) is required for every street facing facade.\nAll disturbed surfaces shall be seeded, sodded or hydroseeded with grass or meadow mixture or restored to natural condition.\nAll driveways shall be hard surfaced with asphalt, concrete or unit pavers. Loose gravel or soil is not permitted. 4 m2 Landscaping 1.5 m Walkway\nParking in the front yard is only permitted on a hard surfaced driveways or parking spots.\nNo more than 40% of the front yard area can be driveway or parking spaces.\nNo less than 4 (min. 2 m high) trees shall be planted on each lot or 1 per manufactured home for units in Schedule 10.1 areas.\nNo less than 4 m2 of shrub beds shall be planted in the front yard consisting of shrubs, annuals or perennials.\nWhere manufactured housing directly abuts the property line of any other housing type in the RN zone, a landscape buffer consisting of a minimum 1.8 m high opaque fence, and one tree (min. 2 m high) for every 8 m of abutting side or rear yard shall be installed. EUSTON ST W E YMOU T H ST M OUN T EDWARD R D KING ST UNIVERSITY AV N A SSAU ST MAPLE AV KENSINGTON RD NORTH RIVER RD PAR K SIDE DR LOWER MALPEQUE RD BEACH GROVE R D V I C TORIA PA R K R Y SPRING PARK RD MACWILLIAMS RD BRACKLEY POINT RD ST PETERS RD BEL V E D E R E A V MAYPOINT RD K E NW OO D C IR ESSEX CR DORCHESTER ST SYDNEY ST WATER ST GRAFTON ST BRIGHTON RD M A C RA E D R UPTON RD CAPITAL DR FITZROY ST NORWOOD RD BARBOUR CIR P A T TERSO N DR SH E RW OO D R D M U R CHIS O N LN EAST ROYAL TY RD Q UEE N EL I Z A B E TH D R WESTRIDGE CR E N GLA N D CI R ACADIAN DR REGI S D U F F Y D R ROYAL TY RD KENT ST UNDEFINED W EST C O M B CR M AP LE H IL LS AV HE ART Z RD UNION RD - RTE 221 ROYAL TY JUNCTION RD QUE E N S T HURRY RD LILAC AV 0 1 20.5 Km Schedule 10.1 Manufactured Home Schedule Manufactured Homes Permitted following Table 11.2 GREATGEORGE ST BRIGHT ON RD RTE 25 LONGWORTH A V MALPEQUE RD KIRKWOOD DR EUSTON ST ALLEN ST GRAFTON ST CAPITAL DR SHERWOOD RD BELVEDERE AV ST PETERS RD UNIV ERSI TY AV NORTH RIVER RD BRACKLEY POINT RD MOUNT EDWARD RD LOW ERMALPEQU ERD TR ANS CANA DA HWY UPTON RD CAPITAL DR STPETERSRD MALPEQUE RD RIVE RS IDEDR ARTERIAL HWY 0 1 20.5 Km ArterialStreets_P CollectorStreets_P Mobile_Homes_P",
-        "source_order": 1,
-        "citations": {
-          "pdf_page_start": 91,
-          "pdf_page_end": 96,
-          "bylaw_page_start": 87,
-          "bylaw_page_end": 92
-        }
-      }
-    ],
-    "sections_raw": [
-      {
-        "section_id": "zone-rn-section-10-1",
-        "section_label_raw": "10.1",
-        "section_title_raw": "INTENT",
-        "source_order": 1,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-rn-clause-10-1",
-            "clause_label_raw": "section",
-            "clause_text_raw": "The RN zone is intended to permit single-detached and semi-detached dwellings up to 4 units per lot (with conditions) and complimentary forms of uses that maintain community residential character (accessory dwelling uses, home occupations, home daycare, etc.).",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 91,
-              "pdf_page_end": 91,
-              "bylaw_page_start": 87,
-              "bylaw_page_end": 87
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-1",
-            "source_order": 1
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 91,
-          "pdf_page_end": 91,
-          "bylaw_page_start": 87,
-          "bylaw_page_end": 87
-        }
-      },
-      {
-        "section_id": "zone-rn-section-10-2",
-        "section_label_raw": "10.2",
-        "section_title_raw": "RE-ZONING",
-        "source_order": 2,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-rn-clause-10-2-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "Rezoning from RN to RM may be considered where the policies of the Official Plan can be demonstrated, otherwise, rezonings are not permitted in the RN Zone.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 91,
-              "pdf_page_end": 91,
-              "bylaw_page_start": 87,
-              "bylaw_page_end": 87
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-2-1",
-            "source_order": 1
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 91,
-          "pdf_page_end": 91,
-          "bylaw_page_start": 87,
-          "bylaw_page_end": 87
-        }
-      },
-      {
-        "section_id": "zone-rn-section-10-3",
-        "section_label_raw": "10.3",
-        "section_title_raw": "PERMITTED USES",
-        "source_order": 3,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-rn-clause-10-3-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "The following uses are permitted in the RN Zone:",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 91,
-              "pdf_page_end": 91,
-              "bylaw_page_start": 87,
-              "bylaw_page_end": 87
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-3-1-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "Single Detached Dwelling (up to 4 units)",
-            "parent_clause_id": "zone-rn-clause-10-3-1",
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 91,
-              "pdf_page_end": 91,
-              "bylaw_page_start": 87,
-              "bylaw_page_end": 87
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-3-1-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "Semi Detached or Duplex Dwelling",
-            "parent_clause_id": "zone-rn-clause-10-3-1",
-            "source_order": 3,
-            "citations": {
-              "pdf_page_start": 91,
-              "pdf_page_end": 91,
-              "bylaw_page_start": 87,
-              "bylaw_page_end": 87
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-3-1-c",
-            "clause_label_raw": "(c)",
-            "clause_text_raw": "Government Offices",
-            "parent_clause_id": "zone-rn-clause-10-3-1",
-            "source_order": 4,
-            "citations": {
-              "pdf_page_start": 91,
-              "pdf_page_end": 91,
-              "bylaw_page_start": 87,
-              "bylaw_page_end": 87
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-3-1-d",
-            "clause_label_raw": "(d)",
-            "clause_text_raw": "Library",
-            "parent_clause_id": "zone-rn-clause-10-3-1",
-            "source_order": 5,
-            "citations": {
-              "pdf_page_start": 91,
-              "pdf_page_end": 91,
-              "bylaw_page_start": 87,
-              "bylaw_page_end": 87
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-3-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "These uses are permitted so long as the following lot requirements are met:",
-            "parent_clause_id": null,
-            "source_order": 6,
-            "citations": {
-              "pdf_page_start": 91,
-              "pdf_page_end": 91,
-              "bylaw_page_start": 87,
-              "bylaw_page_end": 87
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-3-3",
-            "clause_label_raw": ".3",
-            "clause_text_raw": "Existing lots with frontage greater than 18 m shall not be subdivided except with an approved variance.",
-            "parent_clause_id": null,
-            "source_order": 7,
-            "citations": {
-              "pdf_page_start": 91,
-              "pdf_page_end": 91,
-              "bylaw_page_start": 87,
-              "bylaw_page_end": 87
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-3-9",
-            "clause_label_raw": ".9",
-            "clause_text_raw": "Neighbourhood local commercial is permitted in the RN Zone along any collector or arterial road as identified in Schedule C up to a gross floor area of 120 m2 and by meeting the following requirements:",
-            "parent_clause_id": null,
-            "source_order": 8,
-            "citations": {
-              "pdf_page_start": 91,
-              "pdf_page_end": 91,
-              "bylaw_page_start": 87,
-              "bylaw_page_end": 87
-            }
-          }
-        ],
-        "tables_raw": [
-          {
-            "table_id": "zone-rn-table-10-3-2",
-            "table_title_raw": "10.3.2",
-            "source_order": 7,
-            "columns_raw": [
-              {
-                "column_id": "row_label",
-                "column_label_raw": "clause_label_raw",
-                "source_order": 1
-              },
-              {
-                "column_id": "requirement",
-                "column_label_raw": "clause_name",
-                "source_order": 2
-              },
-              {
-                "column_id": "value",
-                "column_label_raw": "",
-                "source_order": 3
-              }
-            ],
-            "rows_raw": [
-              {
-                "row_id": "zone-rn-table-10-3-2-row-1",
-                "source_order": 1,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-1-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(a)"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-1-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Lot Area"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-1-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 318 m2 for detached dwelling, 240 m2 for semi detached dwelling"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rn-table-10-3-2-row-2",
-                "source_order": 2,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-2-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(b)"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-2-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Frontage"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-2-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 10.6 m, 8 m for semi detached dwelling"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rn-table-10-3-2-row-3",
-                "source_order": 3,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-3-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(c)"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-3-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Front Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-3-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 6 m"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rn-table-10-3-2-row-4",
-                "source_order": 4,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-4-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(d)"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-4-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Flankage Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-4-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 4 m"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rn-table-10-3-2-row-5",
-                "source_order": 5,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-5-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(e)"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-5-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Side Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-5-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 1.8 m, 0 m for the shared wall of a semi detached dwelling"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rn-table-10-3-2-row-6",
-                "source_order": 6,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-6-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(f)"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-6-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Rear Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-6-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 6 m"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rn-table-10-3-2-row-7",
-                "source_order": 7,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-7-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(g)"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-7-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Coverage"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-3-2-row-7-value",
-                    "column_id": "value",
-                    "cell_text_raw": "max. 40%"
-                  }
-                ]
-              }
-            ],
-            "citations": {
-              "pdf_page_start": 91,
-              "pdf_page_end": 91,
-              "bylaw_page_start": 87,
-              "bylaw_page_end": 87
-            }
-          }
-        ],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-3-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-3-1-a",
-            "source_order": 2
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-3-1-b",
-            "source_order": 3
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-3-1-c",
-            "source_order": 4
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-3-1-d",
-            "source_order": 5
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-3-2",
-            "source_order": 6
-          },
-          {
-            "content_type": "table",
-            "content_id": "zone-rn-table-10-3-2",
-            "source_order": 7
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-3-3",
-            "source_order": 8
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-3-9",
-            "source_order": 9
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 91,
-          "pdf_page_end": 91,
-          "bylaw_page_start": 87,
-          "bylaw_page_end": 87
-        }
-      },
-      {
-        "section_id": "zone-rn-section-10-4",
-        "section_label_raw": "10.4",
-        "section_title_raw": "PERMITTED WITH CONDITIONS",
-        "source_order": 4,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-rn-clause-10-4-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "One or two attached ADU's may be permitted if the conditions in Section 4.5 can be met.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 92,
-              "pdf_page_end": 92,
-              "bylaw_page_start": 88,
-              "bylaw_page_end": 88
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-4-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "One rear-yard or side-yard detached Accessory Dwelling Units (ADU's) may be permitted if the conditions in Section 4.6 can be met.",
-            "parent_clause_id": null,
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 92,
-              "pdf_page_end": 92,
-              "bylaw_page_start": 88,
-              "bylaw_page_end": 88
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-4-2-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "Three dedicated off-street automobile parking spaces and 2 class B biking parking spaces; and",
-            "parent_clause_id": "zone-rn-clause-10-4-2",
-            "source_order": 3,
-            "citations": {
-              "pdf_page_start": 92,
-              "pdf_page_end": 92,
-              "bylaw_page_start": 88,
-              "bylaw_page_end": 88
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-4-2-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "A minimum 1.5 m wide hard surface sidewalk linking the front entry of the store with the parking area.",
-            "parent_clause_id": "zone-rn-clause-10-4-2",
-            "source_order": 4,
-            "citations": {
-              "pdf_page_start": 92,
-              "pdf_page_end": 92,
-              "bylaw_page_start": 88,
-              "bylaw_page_end": 88
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-4-2-c",
-            "clause_label_raw": "(c)",
-            "clause_text_raw": "A landscape buffer 2 m wide shall be constructed which includes an opaque fence no less than 1.8 m high along all properties that directly abut the commercial use or any associated parking.",
-            "parent_clause_id": "zone-rn-clause-10-4-2",
-            "source_order": 5,
-            "citations": {
-              "pdf_page_start": 92,
-              "pdf_page_end": 92,
-              "bylaw_page_start": 88,
-              "bylaw_page_end": 88
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-4-3",
-            "clause_label_raw": ".3",
-            "clause_text_raw": "Registered heritage buildings on lots that exceed 600 m2 permit up to 6 attached ADU units if the conditions in Section 4.5 can be met.",
-            "parent_clause_id": null,
-            "source_order": 6,
-            "citations": {
-              "pdf_page_start": 92,
-              "pdf_page_end": 92,
-              "bylaw_page_start": 88,
-              "bylaw_page_end": 88
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-4-4",
-            "clause_label_raw": ".4",
-            "clause_text_raw": "Permitted encroachments into the setbacks are listed in Table 3.2.",
-            "parent_clause_id": null,
-            "source_order": 7,
-            "citations": {
-              "pdf_page_start": 92,
-              "pdf_page_end": 92,
-              "bylaw_page_start": 88,
-              "bylaw_page_end": 88
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-4-5",
-            "clause_label_raw": ".5",
-            "clause_text_raw": "Home occupations are permitted if Section 4.8 requirements are met.",
-            "parent_clause_id": null,
-            "source_order": 8,
-            "citations": {
-              "pdf_page_start": 92,
-              "pdf_page_end": 92,
-              "bylaw_page_start": 88,
-              "bylaw_page_end": 88
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-4-6",
-            "clause_label_raw": ".6",
-            "clause_text_raw": "Home daycare uses are permitted if Section 4.9 requirements are met.",
-            "parent_clause_id": null,
-            "source_order": 9,
-            "citations": {
-              "pdf_page_start": 92,
-              "pdf_page_end": 92,
-              "bylaw_page_start": 88,
-              "bylaw_page_end": 88
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-4-7",
-            "clause_label_raw": ".7",
-            "clause_text_raw": "Notwithstanding Section 10.3.3, manufactured housing uses are permitted in the areas shown in Schedule 10.1 so long as the following requirements are met:",
-            "parent_clause_id": null,
-            "source_order": 10,
-            "citations": {
-              "pdf_page_start": 92,
-              "pdf_page_end": 92,
-              "bylaw_page_start": 88,
-              "bylaw_page_end": 88
-            }
-          }
-        ],
-        "tables_raw": [
-          {
-            "table_id": "zone-rn-table-10-4-7",
-            "table_title_raw": "10.4.7",
-            "source_order": 11,
-            "columns_raw": [
-              {
-                "column_id": "row_label",
-                "column_label_raw": "clause_label_raw",
-                "source_order": 1
-              },
-              {
-                "column_id": "requirement",
-                "column_label_raw": "clause_name",
-                "source_order": 2
-              },
-              {
-                "column_id": "value",
-                "column_label_raw": "",
-                "source_order": 3
-              }
-            ],
-            "rows_raw": [
-              {
-                "row_id": "zone-rn-table-10-4-7-row-1",
-                "source_order": 1,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-1-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(a)"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-1-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Lot Area"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-1-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 465 m2 interior lot, 3,540 m2 for corner lot"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rn-table-10-4-7-row-2",
-                "source_order": 2,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-2-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(b)"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-2-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Frontage"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-2-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 12 m for interior lots, 15 m for corner lots"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rn-table-10-4-7-row-3",
-                "source_order": 3,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-3-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(c)"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-3-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Front Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-3-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 6 m"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rn-table-10-4-7-row-4",
-                "source_order": 4,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-4-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(d)"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-4-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Flankage Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-4-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 4 m"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rn-table-10-4-7-row-5",
-                "source_order": 5,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-5-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(e)"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-5-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Side Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-5-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 1.8 m"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rn-table-10-4-7-row-6",
-                "source_order": 6,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-6-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(f)"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-6-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Rear Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-6-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 4.5 m"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rn-table-10-4-7-row-7",
-                "source_order": 7,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-7-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(g)"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-7-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Coverage"
-                  },
-                  {
-                    "cell_id": "zone-rn-table-10-4-7-row-7-value",
-                    "column_id": "value",
-                    "cell_text_raw": "max. 40% 1.8 m, 0 m for the shared wall of a Semi Min. Lot Frontage 10.6 m, 8 m for Semi"
-                  }
-                ]
-              }
-            ],
-            "citations": {
-              "pdf_page_start": 92,
-              "pdf_page_end": 92,
-              "bylaw_page_start": 88,
-              "bylaw_page_end": 88
-            }
-          }
-        ],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-4-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-4-2",
-            "source_order": 2
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-4-2-a",
-            "source_order": 3
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-4-2-b",
-            "source_order": 4
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-4-2-c",
-            "source_order": 5
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-4-3",
-            "source_order": 6
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-4-4",
-            "source_order": 7
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-4-5",
-            "source_order": 8
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-4-6",
-            "source_order": 9
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-4-7",
-            "source_order": 10
-          },
-          {
-            "content_type": "table",
-            "content_id": "zone-rn-table-10-4-7",
-            "source_order": 11
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 92,
-          "pdf_page_end": 92,
-          "bylaw_page_start": 88,
-          "bylaw_page_end": 88
-        }
-      },
-      {
-        "section_id": "zone-rn-section-10-5",
-        "section_label_raw": "10.5",
-        "section_title_raw": "BUILT FORM REQUIREMENTS",
-        "source_order": 5,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-rn-clause-10-5-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "One building per lot is permitted.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 93,
-              "pdf_page_end": 93,
-              "bylaw_page_start": 89,
-              "bylaw_page_end": 89
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-5-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "The maximum building height for the RN zone is 3 storeys.",
-            "parent_clause_id": null,
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 93,
-              "pdf_page_end": 93,
-              "bylaw_page_start": 89,
-              "bylaw_page_end": 89
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-5-3",
-            "clause_label_raw": ".3",
-            "clause_text_raw": "Any garage (attached or detached) shall not project any closer to the streetline than the longest wall of the attached main dwelling that faces the same streetline.",
-            "parent_clause_id": null,
-            "source_order": 3,
-            "citations": {
-              "pdf_page_start": 93,
-              "pdf_page_end": 93,
-              "bylaw_page_start": 89,
-              "bylaw_page_end": 89
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-5-4",
-            "clause_label_raw": ".4",
-            "clause_text_raw": "Attached garages shall not exceed 50% of the primary building's frontage on any streetline to a maximum of 6 m in total.",
-            "parent_clause_id": null,
-            "source_order": 4,
-            "citations": {
-              "pdf_page_start": 93,
-              "pdf_page_end": 93,
-              "bylaw_page_start": 89,
-              "bylaw_page_end": 89
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-5-5",
-            "clause_label_raw": ".5",
-            "clause_text_raw": "Developers are encouraged to use materials and styles consistent with existing neighbourhood character.",
-            "parent_clause_id": null,
-            "source_order": 5,
-            "citations": {
-              "pdf_page_start": 93,
-              "pdf_page_end": 93,
-              "bylaw_page_start": 89,
-              "bylaw_page_end": 89
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-5-6",
-            "clause_label_raw": ".6",
-            "clause_text_raw": "To discourage excessive repetition of identical home designs within the same street block the following requirements must be met:",
-            "parent_clause_id": null,
-            "source_order": 6,
-            "citations": {
-              "pdf_page_start": 93,
-              "pdf_page_end": 93,
-              "bylaw_page_start": 89,
-              "bylaw_page_end": 89
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-5-6-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "New residential development shall exhibit a variety of building designs along each block to reinforce individual identity and neighbourhood character.",
-            "parent_clause_id": "zone-rn-clause-10-5-6",
-            "source_order": 7,
-            "citations": {
-              "pdf_page_start": 93,
-              "pdf_page_end": 93,
-              "bylaw_page_start": 89,
-              "bylaw_page_end": 89
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-5-6-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "The same dwelling design, including mirrored variations, shall not appear more than twice within any street block.",
-            "parent_clause_id": "zone-rn-clause-10-5-6",
-            "source_order": 8,
-            "citations": {
-              "pdf_page_start": 93,
-              "pdf_page_end": 93,
-              "bylaw_page_start": 89,
-              "bylaw_page_end": 89
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-5-6-c",
-            "clause_label_raw": "(c)",
-            "clause_text_raw": "Developments proposing repeated models shall vary at least two of the following elements between dwellings:",
-            "parent_clause_id": "zone-rn-clause-10-5-6",
-            "source_order": 9,
-            "citations": {
-              "pdf_page_start": 93,
-              "pdf_page_end": 93,
-              "bylaw_page_start": 89,
-              "bylaw_page_end": 89
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-5-6-c-i",
-            "clause_label_raw": "i)",
-            "clause_text_raw": "Exterior cladding material;",
-            "parent_clause_id": "zone-rn-clause-10-5-6-c",
-            "source_order": 10,
-            "citations": {
-              "pdf_page_start": 93,
-              "pdf_page_end": 93,
-              "bylaw_page_start": 89,
-              "bylaw_page_end": 89
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-5-6-c-ii",
-            "clause_label_raw": "ii)",
-            "clause_text_raw": "Roof form or pitch;",
-            "parent_clause_id": "zone-rn-clause-10-5-6-c",
-            "source_order": 11,
-            "citations": {
-              "pdf_page_start": 93,
-              "pdf_page_end": 93,
-              "bylaw_page_start": 89,
-              "bylaw_page_end": 89
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-5-6-c-iii",
-            "clause_label_raw": "iii)",
-            "clause_text_raw": "Porch or entry design;",
-            "parent_clause_id": "zone-rn-clause-10-5-6-c",
-            "source_order": 12,
-            "citations": {
-              "pdf_page_start": 93,
-              "pdf_page_end": 93,
-              "bylaw_page_start": 89,
-              "bylaw_page_end": 89
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-5-6-c-iv",
-            "clause_label_raw": "iv)",
-            "clause_text_raw": "Window placement; or",
-            "parent_clause_id": "zone-rn-clause-10-5-6-c",
-            "source_order": 13,
-            "citations": {
-              "pdf_page_start": 93,
-              "pdf_page_end": 93,
-              "bylaw_page_start": 89,
-              "bylaw_page_end": 89
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-5-6-c-v",
-            "clause_label_raw": "v)",
-            "clause_text_raw": "Garage placement and style",
-            "parent_clause_id": "zone-rn-clause-10-5-6-c",
-            "source_order": 14,
-            "citations": {
-              "pdf_page_start": 93,
-              "pdf_page_end": 93,
-              "bylaw_page_start": 89,
-              "bylaw_page_end": 89
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-5-6-d",
-            "clause_label_raw": "(d)",
-            "clause_text_raw": "The Development Officer may approve alternative approaches that achieve an equivalent degree of architectural diversity.",
-            "parent_clause_id": "zone-rn-clause-10-5-6",
-            "source_order": 15,
-            "citations": {
-              "pdf_page_start": 93,
-              "pdf_page_end": 93,
-              "bylaw_page_start": 89,
-              "bylaw_page_end": 89
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-5-7",
-            "clause_label_raw": ".7",
-            "clause_text_raw": "To enhance streetscape interest and avoid flat wall surfaces, all street-facing facades shall include horizontal or vertical modulation of at least 150 mm in depth across no less than 20% of the facade area.",
-            "parent_clause_id": null,
-            "source_order": 16,
-            "citations": {
-              "pdf_page_start": 93,
-              "pdf_page_end": 93,
-              "bylaw_page_start": 89,
-              "bylaw_page_end": 89
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-5-8",
-            "clause_label_raw": ".8",
-            "clause_text_raw": "At least 4 m2 of front porch (covered or uncovered) is required for every street facing facade.",
-            "parent_clause_id": null,
-            "source_order": 17,
-            "citations": {
-              "pdf_page_start": 93,
-              "pdf_page_end": 93,
-              "bylaw_page_start": 89,
-              "bylaw_page_end": 89
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-5-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-5-2",
-            "source_order": 2
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-5-3",
-            "source_order": 3
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-5-4",
-            "source_order": 4
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-5-5",
-            "source_order": 5
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-5-6",
-            "source_order": 6
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-5-6-a",
-            "source_order": 7
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-5-6-b",
-            "source_order": 8
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-5-6-c",
-            "source_order": 9
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-5-6-c-i",
-            "source_order": 10
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-5-6-c-ii",
-            "source_order": 11
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-5-6-c-iii",
-            "source_order": 12
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-5-6-c-iv",
-            "source_order": 13
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-5-6-c-v",
-            "source_order": 14
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-5-6-d",
-            "source_order": 15
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-5-7",
-            "source_order": 16
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-5-8",
-            "source_order": 17
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 93,
-          "pdf_page_end": 93,
-          "bylaw_page_start": 89,
-          "bylaw_page_end": 89
-        }
-      },
-      {
-        "section_id": "zone-rn-section-10-6",
-        "section_label_raw": "10.6",
-        "section_title_raw": "LANDSCAPE REQUIREMENTS",
-        "source_order": 6,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-rn-clause-10-6-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "All disturbed surfaces shall be seeded, sodded or hydroseeded with grass or meadow mixture or restored to natural condition.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 94,
-              "pdf_page_end": 94,
-              "bylaw_page_start": 90,
-              "bylaw_page_end": 90
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-6-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "All driveways shall be hard surfaced with asphalt, concrete or unit pavers. Loose gravel or soil is not permitted. 4 m2 Landscaping 1.5 m Walkway",
-            "parent_clause_id": null,
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 94,
-              "pdf_page_end": 94,
-              "bylaw_page_start": 90,
-              "bylaw_page_end": 90
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-6-3",
-            "clause_label_raw": ".3",
-            "clause_text_raw": "Parking in the front yard is only permitted on a hard surfaced driveways or parking spots.",
-            "parent_clause_id": null,
-            "source_order": 3,
-            "citations": {
-              "pdf_page_start": 94,
-              "pdf_page_end": 94,
-              "bylaw_page_start": 90,
-              "bylaw_page_end": 90
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-6-4",
-            "clause_label_raw": ".4",
-            "clause_text_raw": "No more than 40% of the front yard area can be driveway or parking spaces.",
-            "parent_clause_id": null,
-            "source_order": 4,
-            "citations": {
-              "pdf_page_start": 94,
-              "pdf_page_end": 94,
-              "bylaw_page_start": 90,
-              "bylaw_page_end": 90
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-6-5",
-            "clause_label_raw": ".5",
-            "clause_text_raw": "No less than 4 (min. 2 m high) trees shall be planted on each lot or 1 per manufactured home for units in Schedule 10.1 areas.",
-            "parent_clause_id": null,
-            "source_order": 5,
-            "citations": {
-              "pdf_page_start": 94,
-              "pdf_page_end": 94,
-              "bylaw_page_start": 90,
-              "bylaw_page_end": 90
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-6-6",
-            "clause_label_raw": ".6",
-            "clause_text_raw": "No less than 4 m2 of shrub beds shall be planted in the front yard consisting of shrubs, annuals or perennials.",
-            "parent_clause_id": null,
-            "source_order": 6,
-            "citations": {
-              "pdf_page_start": 94,
-              "pdf_page_end": 94,
-              "bylaw_page_start": 90,
-              "bylaw_page_end": 90
-            }
-          },
-          {
-            "clause_id": "zone-rn-clause-10-6-7",
-            "clause_label_raw": ".7",
-            "clause_text_raw": "Where manufactured housing directly abuts the property line of any other housing type in the RN zone, a landscape buffer consisting of a minimum 1.8 m high opaque fence, and one tree (min. 2 m high) for every 8 m of abutting side or rear yard shall be installed. EUSTON ST W E YMOU T H ST M OUN T EDWARD R D KING ST UNIVERSITY AV N A SSAU ST MAPLE AV KENSINGTON RD NORTH RIVER RD PAR K SIDE DR LOWER MALPEQUE RD BEACH GROVE R D V I C TORIA PA R K R Y SPRING PARK RD MACWILLIAMS RD BRACKLEY POINT RD ST PETERS RD BEL V E D E R E A V MAYPOINT RD K E NW OO D C IR ESSEX CR DORCHESTER ST SYDNEY ST WATER ST GRAFTON ST BRIGHTON RD M A C RA E D R UPTON RD CAPITAL DR FITZROY ST NORWOOD RD BARBOUR CIR P A T TERSO N DR SH E RW OO D R D M U R CHIS O N LN EAST ROYAL TY RD Q UEE N EL I Z A B E TH D R WESTRIDGE CR E N GLA N D CI R ACADIAN DR REGI S D U F F Y D R ROYAL TY RD KENT ST UNDEFINED W EST C O M B CR M AP LE H IL LS AV HE ART Z RD UNION RD - RTE 221 ROYAL TY JUNCTION RD QUE E N S T HURRY RD LILAC AV 0 1 20.5 Km Schedule 10.1 Manufactured Home Schedule Manufactured Homes Permitted following Table 11.2 GREATGEORGE ST BRIGHT ON RD RTE 25 LONGWORTH A V MALPEQUE RD KIRKWOOD DR EUSTON ST ALLEN ST GRAFTON ST CAPITAL DR SHERWOOD RD BELVEDERE AV ST PETERS RD UNIV ERSI TY AV NORTH RIVER RD BRACKLEY POINT RD MOUNT EDWARD RD LOW ERMALPEQU ERD TR ANS CANA DA HWY UPTON RD CAPITAL DR STPETERSRD MALPEQUE RD RIVE RS IDEDR ARTERIAL HWY 0 1 20.5 Km ArterialStreets_P CollectorStreets_P Mobile_Homes_P",
-            "parent_clause_id": null,
-            "source_order": 7,
-            "citations": {
-              "pdf_page_start": 94,
-              "pdf_page_end": 94,
-              "bylaw_page_start": 90,
-              "bylaw_page_end": 90
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-6-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-6-2",
-            "source_order": 2
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-6-3",
-            "source_order": 3
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-6-4",
-            "source_order": 4
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-6-5",
-            "source_order": 5
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-6-6",
-            "source_order": 6
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rn-clause-10-6-7",
-            "source_order": 7
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 94,
-          "pdf_page_end": 94,
-          "bylaw_page_start": 90,
-          "bylaw_page_end": 90
-        }
-      }
-    ],
-    "clause_refs": [
-      {
-        "clause_id": "zone-rn-clause-10-1",
-        "section_id": "zone-rn-section-10-1",
-        "source_order": 1
-      },
-      {
-        "clause_id": "zone-rn-clause-10-2-1",
-        "section_id": "zone-rn-section-10-2",
-        "source_order": 2
-      },
-      {
-        "clause_id": "zone-rn-clause-10-3-1",
-        "section_id": "zone-rn-section-10-3",
-        "source_order": 3
-      },
-      {
-        "clause_id": "zone-rn-clause-10-3-1-a",
-        "section_id": "zone-rn-section-10-3",
-        "source_order": 4
-      },
-      {
-        "clause_id": "zone-rn-clause-10-3-1-b",
-        "section_id": "zone-rn-section-10-3",
-        "source_order": 5
-      },
-      {
-        "clause_id": "zone-rn-clause-10-3-1-c",
-        "section_id": "zone-rn-section-10-3",
-        "source_order": 6
-      },
-      {
-        "clause_id": "zone-rn-clause-10-3-1-d",
-        "section_id": "zone-rn-section-10-3",
-        "source_order": 7
-      },
-      {
-        "clause_id": "zone-rn-clause-10-3-2",
-        "section_id": "zone-rn-section-10-3",
-        "source_order": 8
-      },
-      {
-        "clause_id": "zone-rn-clause-10-3-3",
-        "section_id": "zone-rn-section-10-3",
-        "source_order": 9
-      },
-      {
-        "clause_id": "zone-rn-clause-10-3-9",
-        "section_id": "zone-rn-section-10-3",
-        "source_order": 10
-      },
-      {
-        "clause_id": "zone-rn-clause-10-4-1",
-        "section_id": "zone-rn-section-10-4",
-        "source_order": 11
-      },
-      {
-        "clause_id": "zone-rn-clause-10-4-2",
-        "section_id": "zone-rn-section-10-4",
-        "source_order": 12
-      },
-      {
-        "clause_id": "zone-rn-clause-10-4-2-a",
-        "section_id": "zone-rn-section-10-4",
-        "source_order": 13
-      },
-      {
-        "clause_id": "zone-rn-clause-10-4-2-b",
-        "section_id": "zone-rn-section-10-4",
-        "source_order": 14
-      },
-      {
-        "clause_id": "zone-rn-clause-10-4-2-c",
-        "section_id": "zone-rn-section-10-4",
-        "source_order": 15
-      },
-      {
-        "clause_id": "zone-rn-clause-10-4-3",
-        "section_id": "zone-rn-section-10-4",
-        "source_order": 16
-      },
-      {
-        "clause_id": "zone-rn-clause-10-4-4",
-        "section_id": "zone-rn-section-10-4",
-        "source_order": 17
-      },
-      {
-        "clause_id": "zone-rn-clause-10-4-5",
-        "section_id": "zone-rn-section-10-4",
-        "source_order": 18
-      },
-      {
-        "clause_id": "zone-rn-clause-10-4-6",
-        "section_id": "zone-rn-section-10-4",
-        "source_order": 19
-      },
-      {
-        "clause_id": "zone-rn-clause-10-4-7",
-        "section_id": "zone-rn-section-10-4",
-        "source_order": 20
-      },
-      {
-        "clause_id": "zone-rn-clause-10-5-1",
-        "section_id": "zone-rn-section-10-5",
-        "source_order": 21
-      },
-      {
-        "clause_id": "zone-rn-clause-10-5-2",
-        "section_id": "zone-rn-section-10-5",
-        "source_order": 22
-      },
-      {
-        "clause_id": "zone-rn-clause-10-5-3",
-        "section_id": "zone-rn-section-10-5",
-        "source_order": 23
-      },
-      {
-        "clause_id": "zone-rn-clause-10-5-4",
-        "section_id": "zone-rn-section-10-5",
-        "source_order": 24
-      },
-      {
-        "clause_id": "zone-rn-clause-10-5-5",
-        "section_id": "zone-rn-section-10-5",
-        "source_order": 25
-      },
-      {
-        "clause_id": "zone-rn-clause-10-5-6",
-        "section_id": "zone-rn-section-10-5",
-        "source_order": 26
-      },
-      {
-        "clause_id": "zone-rn-clause-10-5-6-a",
-        "section_id": "zone-rn-section-10-5",
-        "source_order": 27
-      },
-      {
-        "clause_id": "zone-rn-clause-10-5-6-b",
-        "section_id": "zone-rn-section-10-5",
-        "source_order": 28
-      },
-      {
-        "clause_id": "zone-rn-clause-10-5-6-c",
-        "section_id": "zone-rn-section-10-5",
-        "source_order": 29
-      },
-      {
-        "clause_id": "zone-rn-clause-10-5-6-c-i",
-        "section_id": "zone-rn-section-10-5",
-        "source_order": 30
-      },
-      {
-        "clause_id": "zone-rn-clause-10-5-6-c-ii",
-        "section_id": "zone-rn-section-10-5",
-        "source_order": 31
-      },
-      {
-        "clause_id": "zone-rn-clause-10-5-6-c-iii",
-        "section_id": "zone-rn-section-10-5",
-        "source_order": 32
-      },
-      {
-        "clause_id": "zone-rn-clause-10-5-6-c-iv",
-        "section_id": "zone-rn-section-10-5",
-        "source_order": 33
-      },
-      {
-        "clause_id": "zone-rn-clause-10-5-6-c-v",
-        "section_id": "zone-rn-section-10-5",
-        "source_order": 34
-      },
-      {
-        "clause_id": "zone-rn-clause-10-5-6-d",
-        "section_id": "zone-rn-section-10-5",
-        "source_order": 35
-      },
-      {
-        "clause_id": "zone-rn-clause-10-5-7",
-        "section_id": "zone-rn-section-10-5",
-        "source_order": 36
-      },
-      {
-        "clause_id": "zone-rn-clause-10-5-8",
-        "section_id": "zone-rn-section-10-5",
-        "source_order": 37
-      },
-      {
-        "clause_id": "zone-rn-clause-10-6-1",
-        "section_id": "zone-rn-section-10-6",
-        "source_order": 38
-      },
-      {
-        "clause_id": "zone-rn-clause-10-6-2",
-        "section_id": "zone-rn-section-10-6",
-        "source_order": 39
-      },
-      {
-        "clause_id": "zone-rn-clause-10-6-3",
-        "section_id": "zone-rn-section-10-6",
-        "source_order": 40
-      },
-      {
-        "clause_id": "zone-rn-clause-10-6-4",
-        "section_id": "zone-rn-section-10-6",
-        "source_order": 41
-      },
-      {
-        "clause_id": "zone-rn-clause-10-6-5",
-        "section_id": "zone-rn-section-10-6",
-        "source_order": 42
-      },
-      {
-        "clause_id": "zone-rn-clause-10-6-6",
-        "section_id": "zone-rn-section-10-6",
-        "source_order": 43
-      },
-      {
-        "clause_id": "zone-rn-clause-10-6-7",
-        "section_id": "zone-rn-section-10-6",
-        "source_order": 44
-      }
-    ],
-    "tables_raw": [],
-    "map_references_raw": [
-      {
-        "map_reference_id": "zone-rn-map-zoning-map",
-        "map_label_raw": "Zoning Map",
-        "map_title_raw": "Charlottetown Zoning Map 2026",
-        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
-        "citations": {
-          "pdf_page_start": 91,
-          "pdf_page_end": 96,
-          "bylaw_page_start": 87,
-          "bylaw_page_end": 92
-        }
-      }
-    ]
-  },
-  "structured_data": {
-    "terms": [
-      {
-        "term_id": "zone-rn-term-term-single_detached_dwelling_up_to_4_units",
-        "term_raw": "Single Detached Dwelling (up to 4 units)",
-        "term_normalized": "single_detached_dwelling_up_to_4_units",
-        "term_category": "unknown",
-        "source_refs": [],
-        "confidence": "needs_review"
-      },
-      {
-        "term_id": "zone-rn-term-term-semi_detached_or_duplex_dwelling",
-        "term_raw": "Semi Detached or Duplex Dwelling",
-        "term_normalized": "semi_detached_or_duplex_dwelling",
-        "term_category": "unknown",
-        "source_refs": [],
-        "confidence": "needs_review"
-      },
-      {
-        "term_id": "zone-rn-term-use-government_office",
-        "term_raw": "Government Offices",
-        "term_normalized": "government_office",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "government_office"
-      },
-      {
-        "term_id": "zone-rn-term-use-library",
-        "term_raw": "Library",
-        "term_normalized": "library",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "library"
-      }
-    ],
-    "uses": [
-      {
-        "use_id": "zone-rn-use-single-detached-dwelling-up-to-4-units-1-1",
-        "use_name_raw": "Single Detached Dwelling (up to 4 units)",
-        "use_term_id": "zone-rn-term-term-single_detached_dwelling_up_to_4_units",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "needs_review"
-      },
-      {
-        "use_id": "zone-rn-use-semi-detached-or-duplex-dwelling-2-1",
-        "use_name_raw": "Semi Detached or Duplex Dwelling",
-        "use_term_id": "zone-rn-term-term-semi_detached_or_duplex_dwelling",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "needs_review"
-      },
-      {
-        "use_id": "zone-rn-use-government-offices-3-1",
-        "use_name_raw": "Government Offices",
-        "use_term_id": "zone-rn-term-use-government_office",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-rn-use-library-4-1",
-        "use_name_raw": "Library",
-        "use_term_id": "zone-rn-term-use-library",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      }
-    ],
-    "numeric_values": [
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-table-10-3-2-row-2-value-1",
-        "value_raw": "10.6 m",
-        "value": 10.6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rn-table-10-3-2-row-2-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-table-10-3-2-row-2-value-2",
-        "value_raw": "8 m",
-        "value": 8,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rn-table-10-3-2-row-2-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-table-10-3-2-row-3-value-1",
-        "value_raw": "6 m",
-        "value": 6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rn-table-10-3-2-row-3-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-table-10-3-2-row-4-value-1",
-        "value_raw": "4 m",
-        "value": 4,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rn-table-10-3-2-row-4-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-table-10-3-2-row-5-value-1",
-        "value_raw": "1.8 m",
-        "value": 1.8,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rn-table-10-3-2-row-5-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-table-10-3-2-row-5-value-2",
-        "value_raw": "0 m",
-        "value": 0,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rn-table-10-3-2-row-5-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-table-10-3-2-row-6-value-1",
-        "value_raw": "6 m",
-        "value": 6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rn-table-10-3-2-row-6-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-table-10-4-7-row-2-value-1",
-        "value_raw": "12 m",
-        "value": 12,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rn-table-10-4-7-row-2-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-table-10-4-7-row-2-value-2",
-        "value_raw": "15 m",
-        "value": 15,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rn-table-10-4-7-row-2-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-table-10-4-7-row-3-value-1",
-        "value_raw": "6 m",
-        "value": 6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rn-table-10-4-7-row-3-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-table-10-4-7-row-4-value-1",
-        "value_raw": "4 m",
-        "value": 4,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rn-table-10-4-7-row-4-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-table-10-4-7-row-5-value-1",
-        "value_raw": "1.8 m",
-        "value": 1.8,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rn-table-10-4-7-row-5-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-table-10-4-7-row-6-value-1",
-        "value_raw": "4.5 m",
-        "value": 4.5,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rn-table-10-4-7-row-6-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-table-10-4-7-row-7-value-1",
-        "value_raw": "1.8 m",
-        "value": 1.8,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rn-table-10-4-7-row-7-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-table-10-4-7-row-7-value-2",
-        "value_raw": "0 m",
-        "value": 0,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rn-table-10-4-7-row-7-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-table-10-4-7-row-7-value-3",
-        "value_raw": "10.6 m",
-        "value": 10.6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rn-table-10-4-7-row-7-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-table-10-4-7-row-7-value-4",
-        "value_raw": "8 m",
-        "value": 8,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rn-table-10-4-7-row-7-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-clause-10-1-1",
-        "value_raw": "4 units",
-        "value": 4,
-        "unit": "unit",
-        "measure_type": "count",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-1"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-clause-10-3-1-a-1",
-        "value_raw": "4 units",
-        "value": 4,
-        "unit": "unit",
-        "measure_type": "count",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-3-1-a"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-clause-10-3-3-1",
-        "value_raw": "18 m",
-        "value": 18,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "greater_than",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-3-3"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-clause-10-4-2-b-1",
-        "value_raw": "1.5 m",
-        "value": 1.5,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "minimum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-4-2-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-clause-10-4-2-c-1",
-        "value_raw": "2 m",
-        "value": 2,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "less_than",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-4-2-c"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-clause-10-4-2-c-2",
-        "value_raw": "1.8 m",
-        "value": 1.8,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "less_than",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-4-2-c"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-clause-10-5-2-1",
-        "value_raw": "3 storeys",
-        "value": 3,
-        "unit": "storey",
-        "measure_type": "count",
-        "comparator": "maximum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-5-2"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-clause-10-5-4-1",
-        "value_raw": "6 m",
-        "value": 6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "maximum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-5-4"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-clause-10-6-2-1",
-        "value_raw": "1.5 m",
-        "value": 1.5,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-6-2"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-clause-10-6-5-1",
-        "value_raw": "2 m",
-        "value": 2,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "minimum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-6-5"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-clause-10-6-7-1",
-        "value_raw": "1.8 m",
-        "value": 1.8,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "minimum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-6-7"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-clause-10-6-7-2",
-        "value_raw": "2 m",
-        "value": 2,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "minimum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-6-7"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rn-num-zone-rn-clause-10-6-7-3",
-        "value_raw": "8 m",
-        "value": 8,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "minimum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-6-7"
-          }
-        ],
-        "confidence": "medium"
-      }
-    ],
-    "requirements": [
-      {
-        "requirement_id": "zone-rn-req-zone-rn-table-10-3-2-row-2-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "lot_frontage",
-        "requirement_label_raw": "Frontage",
-        "requirement_text_raw": "Frontage min. 10.6 m, 8 m for semi detached dwelling",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-table-10-3-2-row-2-value-1",
-          "zone-rn-num-zone-rn-table-10-3-2-row-2-value-2"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-rn-table-10-3-2-row-2"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rn-req-zone-rn-table-10-3-2-row-3-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "front_yard",
-        "requirement_label_raw": "Front Yard Setback",
-        "requirement_text_raw": "Front Yard Setback min. 6 m",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-table-10-3-2-row-3-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-rn-table-10-3-2-row-3"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rn-req-zone-rn-table-10-3-2-row-4-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "flankage_yard",
-        "requirement_label_raw": "Flankage Yard Setback",
-        "requirement_text_raw": "Flankage Yard Setback min. 4 m",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-table-10-3-2-row-4-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-rn-table-10-3-2-row-4"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rn-req-zone-rn-table-10-3-2-row-5-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "side_yard",
-        "requirement_label_raw": "Side Yard Setback",
-        "requirement_text_raw": "Side Yard Setback min. 1.8 m, 0 m for the shared wall of a semi detached dwelling",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-table-10-3-2-row-5-value-1",
-          "zone-rn-num-zone-rn-table-10-3-2-row-5-value-2"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-rn-table-10-3-2-row-5"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rn-req-zone-rn-table-10-3-2-row-6-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "rear_yard",
-        "requirement_label_raw": "Rear Yard Setback",
-        "requirement_text_raw": "Rear Yard Setback min. 6 m",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-table-10-3-2-row-6-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-rn-table-10-3-2-row-6"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rn-req-zone-rn-table-10-4-7-row-2-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "lot_frontage",
-        "requirement_label_raw": "Frontage",
-        "requirement_text_raw": "Frontage min. 12 m for interior lots, 15 m for corner lots",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-table-10-4-7-row-2-value-1",
-          "zone-rn-num-zone-rn-table-10-4-7-row-2-value-2"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-rn-table-10-4-7-row-2"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rn-req-zone-rn-table-10-4-7-row-3-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "front_yard",
-        "requirement_label_raw": "Front Yard Setback",
-        "requirement_text_raw": "Front Yard Setback min. 6 m",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-table-10-4-7-row-3-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-rn-table-10-4-7-row-3"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rn-req-zone-rn-table-10-4-7-row-4-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "flankage_yard",
-        "requirement_label_raw": "Flankage Yard Setback",
-        "requirement_text_raw": "Flankage Yard Setback min. 4 m",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-table-10-4-7-row-4-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-rn-table-10-4-7-row-4"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rn-req-zone-rn-table-10-4-7-row-5-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "side_yard",
-        "requirement_label_raw": "Side Yard Setback",
-        "requirement_text_raw": "Side Yard Setback min. 1.8 m",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-table-10-4-7-row-5-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-rn-table-10-4-7-row-5"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rn-req-zone-rn-table-10-4-7-row-6-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "rear_yard",
-        "requirement_label_raw": "Rear Yard Setback",
-        "requirement_text_raw": "Rear Yard Setback min. 4.5 m",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-table-10-4-7-row-6-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-rn-table-10-4-7-row-6"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rn-req-zone-rn-table-10-4-7-row-7-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "lot_coverage",
-        "requirement_label_raw": "Coverage",
-        "requirement_text_raw": "Coverage max. 40% 1.8 m, 0 m for the shared wall of a Semi Min. Lot Frontage 10.6 m, 8 m for Semi",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-table-10-4-7-row-7-value-1",
-          "zone-rn-num-zone-rn-table-10-4-7-row-7-value-2",
-          "zone-rn-num-zone-rn-table-10-4-7-row-7-value-3",
-          "zone-rn-num-zone-rn-table-10-4-7-row-7-value-4"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-rn-table-10-4-7-row-7"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rn-req-zone-rn-clause-10-3-3",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "lot_frontage",
-        "requirement_label_raw": ".3",
-        "requirement_text_raw": "Existing lots with frontage greater than 18 m shall not be subdivided except with an approved variance.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-clause-10-3-3-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-3-3"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rn-req-zone-rn-clause-10-4-2-b",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "parking",
-        "requirement_label_raw": "(b)",
-        "requirement_text_raw": "A minimum 1.5 m wide hard surface sidewalk linking the front entry of the store with the parking area.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-clause-10-4-2-b-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-4-2-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rn-req-zone-rn-clause-10-5-2",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "height",
-        "requirement_label_raw": ".2",
-        "requirement_text_raw": "The maximum building height for the RN zone is 3 storeys.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-clause-10-5-2-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-5-2"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rn-req-zone-rn-clause-10-5-4",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "lot_frontage",
-        "requirement_label_raw": ".4",
-        "requirement_text_raw": "Attached garages shall not exceed 50% of the primary building's frontage on any streetline to a maximum of 6 m in total.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-clause-10-5-4-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-5-4"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rn-req-zone-rn-clause-10-6-5",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "no_less_than_4_min_2_m_high_trees_shall_be_planted_on_each_lot_or_1_per_manufact",
-        "requirement_label_raw": ".5",
-        "requirement_text_raw": "No less than 4 (min. 2 m high) trees shall be planted on each lot or 1 per manufactured home for units in Schedule 10.1 areas.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-clause-10-6-5-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-6-5"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rn-req-zone-rn-clause-10-6-7",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "rear_yard",
-        "requirement_label_raw": ".7",
-        "requirement_text_raw": "Where manufactured housing directly abuts the property line of any other housing type in the RN zone, a landscape buffer consisting of a minimum 1.8 m high opaque fence, and one tree (min. 2 m high) for every 8 m of abutting side or rear yard shall be installed. EUSTON ST W E YMOU T H ST M OUN T EDWARD R D KING ST UNIVERSITY AV N A SSAU ST MAPLE AV KENSINGTON RD NORTH RIVER RD PAR K SIDE DR LOWER MALPEQUE RD BEACH GROVE R D V I C TORIA PA R K R Y SPRING PARK RD MACWILLIAMS RD BRACKLEY POINT RD ST PETERS RD BEL V E D E R E A V MAYPOINT RD K E NW OO D C IR ESSEX CR DORCHESTER ST SYDNEY ST WATER ST GRAFTON ST BRIGHTON RD M A C RA E D R UPTON RD CAPITAL DR FITZROY ST NORWOOD RD BARBOUR CIR P A T TERSO N DR SH E RW OO D R D M U R CHIS O N LN EAST ROYAL TY RD Q UEE N EL I Z A B E TH D R WESTRIDGE CR E N GLA N D CI R ACADIAN DR REGI S D U F F Y D R ROYAL TY RD KENT ST UNDEFINED W EST C O M B CR M AP LE H IL LS AV HE ART Z RD UNION RD - RTE 221 ROYAL TY JUNCTION RD QUE E N S T HURRY RD LILAC AV 0 1 20.5 Km Schedule 10.1 Manufactured Home Schedule Manufactured Homes Permitted following Table 11.2 GREATGEORGE ST BRIGHT ON RD RTE 25 LONGWORTH A V MALPEQUE RD KIRKWOOD DR EUSTON ST ALLEN ST GRAFTON ST CAPITAL DR SHERWOOD RD BELVEDERE AV ST PETERS RD UNIV ERSI TY AV NORTH RIVER RD BRACKLEY POINT RD MOUNT EDWARD RD LOW ERMALPEQU ERD TR ANS CANA DA HWY UPTON RD CAPITAL DR STPETERSRD MALPEQUE RD RIVE RS IDEDR ARTERIAL HWY 0 1 20.5 Km ArterialStreets_P CollectorStreets_P Mobile_Homes_P",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-clause-10-6-7-1",
-          "zone-rn-num-zone-rn-clause-10-6-7-2",
-          "zone-rn-num-zone-rn-clause-10-6-7-3"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-6-7"
-          }
-        ],
-        "confidence": "medium"
-      }
-    ],
-    "regulation_groups": [
-      {
-        "regulation_group_id": "zone-rn-regulation-group-zone",
-        "group_label_raw": "PART 10",
-        "group_title_raw": "RN - Neighbourhood",
-        "regulated_use_terms": [
-          "zone-rn-term-term-single_detached_dwelling_up_to_4_units",
-          "zone-rn-term-term-semi_detached_or_duplex_dwelling",
-          "zone-rn-term-use-government_office",
-          "zone-rn-term-use-library"
-        ],
-        "applicability": {
-          "applies_to_zone_codes": [
-            "RN"
-          ],
-          "conditions": []
-        },
-        "requirement_refs": [
-          "zone-rn-req-zone-rn-table-10-3-2-row-2-value",
-          "zone-rn-req-zone-rn-table-10-3-2-row-3-value",
-          "zone-rn-req-zone-rn-table-10-3-2-row-4-value",
-          "zone-rn-req-zone-rn-table-10-3-2-row-5-value",
-          "zone-rn-req-zone-rn-table-10-3-2-row-6-value",
-          "zone-rn-req-zone-rn-table-10-4-7-row-2-value",
-          "zone-rn-req-zone-rn-table-10-4-7-row-3-value",
-          "zone-rn-req-zone-rn-table-10-4-7-row-4-value",
-          "zone-rn-req-zone-rn-table-10-4-7-row-5-value",
-          "zone-rn-req-zone-rn-table-10-4-7-row-6-value",
-          "zone-rn-req-zone-rn-table-10-4-7-row-7-value",
-          "zone-rn-req-zone-rn-clause-10-3-3",
-          "zone-rn-req-zone-rn-clause-10-4-2-b",
-          "zone-rn-req-zone-rn-clause-10-5-2",
-          "zone-rn-req-zone-rn-clause-10-5-4",
-          "zone-rn-req-zone-rn-clause-10-6-5",
-          "zone-rn-req-zone-rn-clause-10-6-7"
-        ],
-        "source_section_ref": "zone-rn-section-10-1",
-        "confidence": "medium"
-      }
-    ],
-    "conditional_rule_groups": [],
-    "zone_relationships": [],
-    "map_layer_references": [
-      {
-        "map_reference_id": "zone-rn-map-zoning-map",
-        "map_title_raw": "Charlottetown Zoning Map 2026",
-        "map_label_raw": "Zoning Map",
-        "map_reference_type": "zoning_map",
-        "postgis_schema": "public",
-        "postgis_table": "spatial_features",
-        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
-        "feature_key": "RN",
-        "source_refs": [
-          {
-            "source_ref_type": "map_reference",
-            "source_ref_id": "zone-rn-map-zoning-map"
-          }
-        ],
-        "confidence": "medium"
-      }
-    ],
-    "other_requirements": [
-      {
-        "requirement_id": "zone-rn-req-zone-rn-clause-10-1",
-        "requirement_type": "other",
-        "requirement_category": "the_rn_zone_is_intended_to_permit_single_detached_and_semi_detached_dwellings_up",
-        "requirement_label_raw": "section",
-        "requirement_text_raw": "The RN zone is intended to permit single-detached and semi-detached dwellings up to 4 units per lot (with conditions) and complimentary forms of uses that maintain community residential character (accessory dwelling uses, home occupations, home daycare, etc.).",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-clause-10-1-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-1"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
-        "requirement_id": "zone-rn-req-zone-rn-clause-10-3-1-a",
-        "requirement_type": "other",
-        "requirement_category": "single_detached_dwelling_up_to_4_units",
-        "requirement_label_raw": "(a)",
-        "requirement_text_raw": "Single Detached Dwelling (up to 4 units)",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-clause-10-3-1-a-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-3-1-a"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
-        "requirement_id": "zone-rn-req-zone-rn-clause-10-4-2-c",
-        "requirement_type": "other",
-        "requirement_category": "parking",
-        "requirement_label_raw": "(c)",
-        "requirement_text_raw": "A landscape buffer 2 m wide shall be constructed which includes an opaque fence no less than 1.8 m high along all properties that directly abut the commercial use or any associated parking.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-clause-10-4-2-c-1",
-          "zone-rn-num-zone-rn-clause-10-4-2-c-2"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-4-2-c"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
-        "requirement_id": "zone-rn-req-zone-rn-clause-10-6-2",
-        "requirement_type": "other",
-        "requirement_category": "all_driveways_shall_be_hard_surfaced_with_asphalt_concrete_or_unit_pavers_loose_",
-        "requirement_label_raw": ".2",
-        "requirement_text_raw": "All driveways shall be hard surfaced with asphalt, concrete or unit pavers. Loose gravel or soil is not permitted. 4 m2 Landscaping 1.5 m Walkway",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rn-num-zone-rn-clause-10-6-2-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rn-clause-10-6-2"
-          }
-        ],
-        "confidence": "needs_review"
-      }
-    ],
-    "cross_references": []
-  },
-  "review_flags": [
-    {
-      "review_flag_id": "zone-rn-flag-unmatched-use-single-detached-dwelling-up-to-4-units-1-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Single Detached Dwelling (up to 4 units)"
-    },
-    {
-      "review_flag_id": "zone-rn-flag-unmatched-use-semi-detached-or-duplex-dwelling-2-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Semi Detached or Duplex Dwelling"
-    },
-    {
-      "review_flag_id": "zone-rn-flag-legacy-open-issue-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "extraction_review",
-      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization.",
-      "source_refs": [
-        {
-          "source_ref_type": "source_unit",
-          "source_ref_id": "zone-rn"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rn-flag-legacy-open-issue-2",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "table_parsing_review",
-      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization.",
-      "source_refs": [
-        {
-          "source_ref_type": "source_unit",
-          "source_ref_id": "zone-rn"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rn-flag-legacy-open-issue-3",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "layout_order_review",
-      "description": "The source PDF places some dimensional and figure text before or beside related section headings in extracted text; verify provision assignment against the visual PDF.",
-      "source_refs": [
-        {
-          "source_ref_type": "source_unit",
-          "source_ref_id": "zone-rn"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rn-flag-unparsed-table-value-zone-rn-table-10-3-2-row-1-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: min. 318 m2 for detached dwelling, 240 m2 for semi detached dwelling",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-rn-table-10-3-2-row-1-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rn-flag-unparsed-table-value-zone-rn-table-10-3-2-row-7-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: max. 40%",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-rn-table-10-3-2-row-7-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rn-flag-unparsed-table-value-zone-rn-table-10-4-7-row-1-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: min. 465 m2 interior lot, 3,540 m2 for corner lot",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-rn-table-10-4-7-row-1-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rn-flag-unmatched-term-single-detached-dwelling-up-to-4-units",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Single Detached Dwelling (up to 4 units)"
-    },
-    {
-      "review_flag_id": "zone-rn-flag-unmatched-term-semi-detached-or-duplex-dwelling",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Semi Detached or Duplex Dwelling"
-    }
-  ]
+  }
 }

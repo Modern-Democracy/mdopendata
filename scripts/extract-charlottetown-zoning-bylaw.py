@@ -143,14 +143,23 @@ def build_lookup(entries: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
 
 
 USE_TERM_SPLITS = {
+    "hostel_hotel": ["hostel", "hotel"],
+    "parking_lot_structure": ["parking_lot", "parking_structure"],
+    "semi_detached_or_duplex_dwelling": ["semi_detached_dwelling", "duplex_dwelling"],
+    "single_detached_dwelling_up_to_4_units": ["single_detached_dwelling"],
     "retail_store_with_connected_retail_warehouse_light_manufacturing_or_assembly_facility": [
         "retail_store",
         "retail_warehouse",
         "light_manufacturing",
         "assembly_facility",
     ],
+    "the_only_permitted_uses_in_this_zone_include_single_detached_dwellings_additions_or_accessory_buildings_are_permitted_according_to_section_3_1": [
+        "single_detached_dwelling",
+        "accessory_building",
+    ],
     "warehouse_and_or_distribution_centre": ["warehouse", "distribution_centre"],
     "warehouse_and_or_distribution_center": ["warehouse", "distribution_centre"],
+    "warehouse_storage_facility_and_or_distribution_centre": ["warehouse", "storage_facility", "distribution_centre"],
 }
 
 USE_TERM_ALIASES = {
@@ -174,13 +183,27 @@ USE_TERM_ALIASES = {
     "semi_detached_dwellings": "semi_detached_dwelling",
     "stacked_townhouse": "stacked_townhouse_dwelling",
     "converted_dwellings": "converted_dwelling",
+    "multi_unit_dwelling": "apartment_building",
+    "multi_unit_dwellings": "apartment_building",
     "one_single_detached_dwelling_per_lot_with_serviced_lot_frontage": "single_detached_dwelling",
     "home_daycare_home": "home_daycare",
+    "tourist_accommodation": "tourist_accommodations",
+    "transitional_housing": "transitional_housing_facility",
 }
 
 NON_QUERYABLE_USE_TERMS = {
     "ancillary_uses_to_the_foregoing",
+    "coverage_max_60",
     "council_shall_give_due_consideration_to_other_sections_of_this_by_law_but_council_may_approve_any_use_or_development_in_a_cda_zone_which_it_deems_to_be_in_the_public_interest_notwithstanding_all_other_sections_of_this_by_law_but_only_after_following_the_procedures_set_out_in_this_section",
+    "existing_uses",
+    "flaglots_are_permitted_with_no_less_than_6_m_frontage_as_long_as_all_other_site_and_building",
+    "flankage_yard_setback_min_6_m",
+    "footprint_building_max_800_m2",
+    "front_yard_setback_min_6_m",
+    "golf_course_zoning_and_development_byl_aw",
+    "lot_area_min_1_100_m2",
+    "rear_yard_setback_min_6_m",
+    "separation_between_units_min_6_m",
     "subject_to_sections_35_inclusive_the_water_lots_shall_remain_as_a_water_lot_open_space_zone_in_which_no_development_may_occur_other_than_navigation_and_required_infrastructure_related_to_navigation",
     "existing_uses_such_as_navigation_and_docking_for_commercial_e_g_petroleum_aggregate_and_cruise_ships_vessels_and_navigation_docking_and_marinas_related_to_the_port_authority",
 }
@@ -1166,6 +1189,7 @@ def repair_charlottetown_draft_general_provisions_tables(data: dict[str, Any]) -
 
     for label, suffix in {
         "3.1": "BUILDINGS",
+        "4.6": "ATTACHED",
         "4.14": "GAS BARS",
         "4.16": "ZONES",
         "4.17": "A SEWAGE LAGOON OR TREATMENT PLANT",
@@ -1175,6 +1199,7 @@ def repair_charlottetown_draft_general_provisions_tables(data: dict[str, Any]) -
         "7.3": "OF LOTS",
         "7.4": "SUBDIVISION",
         "7.8": "SUBDIVISION",
+        "7.10": "SERVICES:",
         "7.12": "CONVEYANCE OF PUBLIC SERVICES",
         "7.13": "REQUIREMENTS",
     }.items():

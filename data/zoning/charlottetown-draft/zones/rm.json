@@ -1,2660 +1,1028 @@
 {
-  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Draft Zoning & Development Bylaw",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
-    "document_type": "zone",
     "zone_code": "RM",
     "zone_name": "Medium Density Residential",
-    "zone_label_raw": "PART 11",
-    "zone_title_raw": "RM - Medium Density Residential",
-    "citations": {
+    "part_label_raw": "PART 11",
+    "chapter_heading_raw": "PART 11 RM - Medium Density Residential",
+    "draft_date_raw": "April 7, 2026"
+  },
+  "normalization_policy": {
+    "clause_labels_preserved_raw": true,
+    "approved_hierarchy_examples": [
+      "21(e)",
+      "21(ea)",
+      "21(ea)(1)",
+      "20(1)(a.1)"
+    ],
+    "pending_review_clause_patterns": [
+      "dot_numeric_provision_labels",
+      "parenthesized_alpha_clause_labels"
+    ]
+  },
+  "permitted_uses": [
+    {
+      "clause_label_raw": "(a)",
+      "use_type": "permitted_use",
+      "use_name": "Townhouse Dwelling",
+      "status": "active",
+      "conditions": "The following uses are permitted in the RM Zone:",
+      "citations": {
+        "pdf_page_start": 97,
+        "pdf_page_end": 97,
+        "bylaw_page_start": 93,
+        "bylaw_page_end": 93
+      }
+    },
+    {
+      "clause_label_raw": "(b)",
+      "use_type": "permitted_use",
+      "use_name": "Mini-home Dwelling",
+      "status": "active",
+      "conditions": "The following uses are permitted in the RM Zone:",
+      "citations": {
+        "pdf_page_start": 97,
+        "pdf_page_end": 97,
+        "bylaw_page_start": 93,
+        "bylaw_page_end": 93
+      }
+    },
+    {
+      "clause_label_raw": "(c)",
+      "use_type": "permitted_use",
+      "use_name": "Modular Dwelling",
+      "status": "active",
+      "conditions": "The following uses are permitted in the RM Zone:",
+      "citations": {
+        "pdf_page_start": 97,
+        "pdf_page_end": 97,
+        "bylaw_page_start": 93,
+        "bylaw_page_end": 93
+      }
+    },
+    {
+      "clause_label_raw": "(d)",
+      "use_type": "permitted_use",
+      "use_name": "Multi-unit Dwelling",
+      "status": "active",
+      "conditions": "The following uses are permitted in the RM Zone:",
+      "citations": {
+        "pdf_page_start": 97,
+        "pdf_page_end": 97,
+        "bylaw_page_start": 93,
+        "bylaw_page_end": 93
+      }
+    },
+    {
+      "clause_label_raw": "(e)",
+      "use_type": "permitted_use",
+      "use_name": "Lodging House",
+      "status": "active",
+      "conditions": "The following uses are permitted in the RM Zone:",
+      "citations": {
+        "pdf_page_start": 97,
+        "pdf_page_end": 97,
+        "bylaw_page_start": 93,
+        "bylaw_page_end": 93
+      }
+    },
+    {
+      "clause_label_raw": "(f)",
+      "use_type": "permitted_use",
+      "use_name": "Seniors Housing",
+      "status": "active",
+      "conditions": "The following uses are permitted in the RM Zone:",
+      "citations": {
+        "pdf_page_start": 97,
+        "pdf_page_end": 97,
+        "bylaw_page_start": 93,
+        "bylaw_page_end": 93
+      }
+    },
+    {
+      "clause_label_raw": "(g)",
+      "use_type": "permitted_use",
+      "use_name": "Tourist Accommodation",
+      "status": "active",
+      "conditions": "The following uses are permitted in the RM Zone:",
+      "citations": {
+        "pdf_page_start": 97,
+        "pdf_page_end": 97,
+        "bylaw_page_start": 93,
+        "bylaw_page_end": 93
+      }
+    },
+    {
+      "clause_label_raw": "(h)",
+      "use_type": "permitted_use",
+      "use_name": "Government Offices",
+      "status": "active",
+      "conditions": "The following uses are permitted in the RM Zone:",
+      "citations": {
+        "pdf_page_start": 97,
+        "pdf_page_end": 97,
+        "bylaw_page_start": 93,
+        "bylaw_page_end": 93
+      }
+    },
+    {
+      "clause_label_raw": "(i)",
+      "use_type": "permitted_use",
+      "use_name": "Library",
+      "status": "active",
+      "conditions": "The following uses are permitted in the RM Zone:",
+      "citations": {
+        "pdf_page_start": 97,
+        "pdf_page_end": 97,
+        "bylaw_page_start": 93,
+        "bylaw_page_end": 93
+      }
+    },
+    {
+      "clause_label_raw": "(j)",
+      "use_type": "permitted_use",
+      "use_name": "Recreation or Fitness Center (indoors)",
+      "status": "active",
+      "conditions": "The following uses are permitted in the RM Zone:",
+      "citations": {
+        "pdf_page_start": 97,
+        "pdf_page_end": 97,
+        "bylaw_page_start": 93,
+        "bylaw_page_end": 93
+      }
+    }
+  ],
+  "requirement_sections": [
+    {
+      "order_index": 1,
+      "section_label_raw": "11.1",
+      "title_label_raw": "INTENT",
+      "citations": {
+        "pdf_page_start": 97,
+        "pdf_page_end": 97,
+        "bylaw_page_start": 93,
+        "bylaw_page_end": 93
+      },
+      "provisions": [
+        {
+          "provision_label_raw": "section",
+          "text": "The RM zone is intended to a range of medium density dwelling types that allow for gentle densification in suitable locations with developments of up to three storeys and one dwelling unit per 115 square metres of lot area.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 2,
+      "section_label_raw": "11.2",
+      "title_label_raw": "RE-ZONING",
+      "citations": {
+        "pdf_page_start": 97,
+        "pdf_page_end": 97,
+        "bylaw_page_start": 93,
+        "bylaw_page_end": 93
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "Rezonings are not permitted in the RM Zone except:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Rezoning from RM to RH may be considered where the lot fronts on a Collector Road and the policies of the Official Plan can be demonstrated.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 3,
+      "section_label_raw": "11.3",
+      "title_label_raw": "PERMITTED USES",
+      "citations": {
+        "pdf_page_start": 97,
+        "pdf_page_end": 97,
+        "bylaw_page_start": 93,
+        "bylaw_page_end": 93
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "The following uses are permitted in the RM Zone:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Townhouse Dwelling",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "Mini-home Dwelling",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "Modular Dwelling",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(d)",
+          "text": "Multi-unit Dwelling",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(e)",
+          "text": "Lodging House",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(f)",
+          "text": "Seniors Housing",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(g)",
+          "text": "Tourist Accommodation",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(h)",
+          "text": "Government Offices",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(i)",
+          "text": "Library",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(j)",
+          "text": "Recreation or Fitness Center (indoors)",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "These uses are permitted so long as the following lot requirements are met:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Lot Area min. 230m2 multi-unit dwelling, 165m2 for a semi detached dwelling or townhouse",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "Frontage min. 8 m for semi detached dwelling, 10 m for duplex dwelling, 5 m for townhouse 20 m for multi-unit or cluster townhouse condos",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "Front Yard Setback min. 6 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(d)",
+          "text": "Flankage Yard Setback min. 6 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(e)",
+          "text": "Side Yard Setback min. 0 m shared*, 2 m for duplex or semi detached dwelling, 3 m for end townhouse or cluster, 6 m for multi- unit dwelling",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(f)",
+          "text": "Rear Yard Setback min. 6 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(g)",
+          "text": "Coverage max. 50%, 60% if half the parking is located underground",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": ".3",
+          "text": "Cluster housing is permitted so long as the following lot requirements are met:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Coverage max. 60%",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "Footprint / building max. 90 m2",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "Density min. one unit per 115 m2 of lot area",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(d)",
+          "text": "Units max. 8 units per cluster",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(e)",
+          "text": "Separation between units min. 3 m",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        },
+        {
+          "provision_label_raw": "(f)",
+          "text": "Central garden area min. 25 m2 / unit",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 97,
+            "pdf_page_end": 97,
+            "bylaw_page_start": 93,
+            "bylaw_page_end": 93
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 4,
+      "section_label_raw": "11.4",
+      "title_label_raw": "PERMITTED WITH CONDITIONS",
+      "citations": {
+        "pdf_page_start": 99,
+        "pdf_page_end": 99,
+        "bylaw_page_start": 95,
+        "bylaw_page_end": 95
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "One rear-yard or side-yard Accessory Dwelling Units (ADU's) per lot may be permitted if the conditions in Sections 4.6 can be met.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "One Attached ADUs may be permitted if the conditions in Section 4.5 can be met.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": ".3",
+          "text": "Flaglots are permitted with no less than 4 m frontage as long as all other site and building requirements are met in Section 11.3.2 for both the flaglot and main lot.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": ".4",
+          "text": "Permitted encroachments into the setbacks are listed in Table 3.2.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": ".5",
+          "text": "Home occupations are permitted if Section 4.8 requirements are met.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": ".6",
+          "text": "Home daycare uses are permitted if Section 4.9 requirements are met.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": ".7",
+          "text": "Neighbourhood local commercial is permitted in the RM Zone along any collector or arterial road as identified in Schedule C up to a gross floor area of 120 m2 and by meeting the following requirements:",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "Three dedicated off-street automobile parking spaces and 2 Class B biking parking spaces; and",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "A minimum 1.5 m wide hard surface sidewalk linking the front entry of the store with the parking area.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "A landscape buffer 2 m wide shall be constructed which includes an opaque fence no less than 1.8 m high along all properties that directly abut the commercial use or any associated parking.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        }
+      ],
+      "layout_artifacts_present": true
+    },
+    {
+      "order_index": 5,
+      "section_label_raw": "11.5",
+      "title_label_raw": "BUILT FORM REQUIREMENTS",
+      "citations": {
+        "pdf_page_start": 99,
+        "pdf_page_end": 99,
+        "bylaw_page_start": 95,
+        "bylaw_page_end": 95
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "One primary building per lot is permitted with the exception of cluster housing.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "The maximum building height for the RM zone is 3 storeys.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": ".3",
+          "text": "Any garage (attached or detached) shall not project any closer to the streetline than the longest wall of the attached main dwelling that faces the same streetline.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": ".4",
+          "text": "Garage doors shall not exceed 50% of the primary building frontage on any streetline to a maximum of 7 m in total.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": ".5",
+          "text": "Developers are encouraged to use materials and styles consistent with existing neighbourhood character.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": ".6",
+          "text": "All street-facing facades shall provide at least one horizontal or vertical facade articulation of no less than 150 mm for no less than 30% of the facade area.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": ".7",
+          "text": "Townhouse clusters shall not exceed 6 consecutive units.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": ".8",
+          "text": "Townhouses may be oriented perpendicular to the street as long as",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": "(a)",
+          "text": "The building has frontage on a street and meets the fire code requirements.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": "(b)",
+          "text": "Provides a connected walkway from each door to the street",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": "(c)",
+          "text": "Parking is in the rear or side yard",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        },
+        {
+          "provision_label_raw": "(d)",
+          "text": "The building is located on one lot such that units are rental or condominium",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 99,
+            "pdf_page_end": 99,
+            "bylaw_page_start": 95,
+            "bylaw_page_end": 95
+          }
+        }
+      ]
+    },
+    {
+      "order_index": 6,
+      "section_label_raw": "11.6",
+      "title_label_raw": "LANDSCAPE REQUIREMENTS",
+      "citations": {
+        "pdf_page_start": 100,
+        "pdf_page_end": 100,
+        "bylaw_page_start": 96,
+        "bylaw_page_end": 96
+      },
+      "provisions": [
+        {
+          "provision_label_raw": ".1",
+          "text": "All disturbed surfaces shall be seeded, sodded or hydroseeded with grass or meadow mixture or restored to natural condition.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 100,
+            "pdf_page_end": 100,
+            "bylaw_page_start": 96,
+            "bylaw_page_end": 96
+          }
+        },
+        {
+          "provision_label_raw": ".2",
+          "text": "All driveways shall be hard surfaced with asphalt, concrete or unit pavers. Loose gravel or soil is not permitted.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 100,
+            "pdf_page_end": 100,
+            "bylaw_page_start": 96,
+            "bylaw_page_end": 96
+          }
+        },
+        {
+          "provision_label_raw": ".3",
+          "text": "Parking in the front yard is only permitted on a hard surfaced driveways or parking spots with no more than 1 car per driveway.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 100,
+            "pdf_page_end": 100,
+            "bylaw_page_start": 96,
+            "bylaw_page_end": 96
+          }
+        },
+        {
+          "provision_label_raw": ".4",
+          "text": "No more than 40% of the front yard area can be driveway or parking spaces.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 100,
+            "pdf_page_end": 100,
+            "bylaw_page_start": 96,
+            "bylaw_page_end": 96
+          }
+        },
+        {
+          "provision_label_raw": ".5",
+          "text": "A minimum 1.5 m wide hard surfaced pathway shall link the driveway to the front door of every ground floor unit.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 100,
+            "pdf_page_end": 100,
+            "bylaw_page_start": 96,
+            "bylaw_page_end": 96
+          }
+        },
+        {
+          "provision_label_raw": ".6",
+          "text": "No less than 1 (min. 2 m high) tree shall be planted on each lot or 0.5 trees per unit, whichever is greater. Decimals shall be rounded up.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 100,
+            "pdf_page_end": 100,
+            "bylaw_page_start": 96,
+            "bylaw_page_end": 96
+          }
+        },
+        {
+          "provision_label_raw": ".7",
+          "text": "No less than 3 m2 of shrub beds shall be planted per groundfloor unit consisting of shrubs, annuals or perennials.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 100,
+            "pdf_page_end": 100,
+            "bylaw_page_start": 96,
+            "bylaw_page_end": 96
+          }
+        },
+        {
+          "provision_label_raw": ".8",
+          "text": "All disturbed surfaces shall be seeded, sodded or hydroseeded with grass or meadow mixture or restored to natural condition.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 100,
+            "pdf_page_end": 100,
+            "bylaw_page_start": 96,
+            "bylaw_page_end": 96
+          }
+        },
+        {
+          "provision_label_raw": ".9",
+          "text": "Each grade-related unit shall provide no less than 4 m2 of private outdoor amenity space (patio, balcony, rooftop deck, or small yard) to ensure resident comfort and privacy.",
+          "status": "active",
+          "citations": {
+            "pdf_page_start": 100,
+            "pdf_page_end": 100,
+            "bylaw_page_start": 96,
+            "bylaw_page_end": 96
+          }
+        }
+      ]
+    }
+  ],
+  "zone_specific_requirements": [],
+  "shared_requirement_references": [
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Official Plan can",
+      "citations": {
+        "pdf_page_start": 97,
+        "pdf_page_end": 97,
+        "bylaw_page_start": 93,
+        "bylaw_page_end": 93
+      },
+      "source_text": "Rezoning from RM to RH may be considered where the lot fronts on a Collector Road and the policies of the Official Plan can be demonstrated."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Sections 4.6",
+      "citations": {
+        "pdf_page_start": 99,
+        "pdf_page_end": 99,
+        "bylaw_page_start": 95,
+        "bylaw_page_end": 95
+      },
+      "source_text": "One rear-yard or side-yard Accessory Dwelling Units (ADU's) per lot may be permitted if the conditions in Sections 4.6 can be met."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Section 4.5",
+      "citations": {
+        "pdf_page_start": 99,
+        "pdf_page_end": 99,
+        "bylaw_page_start": 95,
+        "bylaw_page_end": 95
+      },
+      "source_text": "One Attached ADUs may be permitted if the conditions in Section 4.5 can be met."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Section 11.3.2",
+      "citations": {
+        "pdf_page_start": 99,
+        "pdf_page_end": 99,
+        "bylaw_page_start": 95,
+        "bylaw_page_end": 95
+      },
+      "source_text": "Flaglots are permitted with no less than 4 m frontage as long as all other site and building requirements are met in Section 11.3.2 for both the flaglot and main lot."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Table 3.2.",
+      "citations": {
+        "pdf_page_start": 99,
+        "pdf_page_end": 99,
+        "bylaw_page_start": 95,
+        "bylaw_page_end": 95
+      },
+      "source_text": "Permitted encroachments into the setbacks are listed in Table 3.2."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Section 4.8",
+      "citations": {
+        "pdf_page_start": 99,
+        "pdf_page_end": 99,
+        "bylaw_page_start": 95,
+        "bylaw_page_end": 95
+      },
+      "source_text": "Home occupations are permitted if Section 4.8 requirements are met."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Section 4.9",
+      "citations": {
+        "pdf_page_start": 99,
+        "pdf_page_end": 99,
+        "bylaw_page_start": 95,
+        "bylaw_page_end": 95
+      },
+      "source_text": "Home daycare uses are permitted if Section 4.9 requirements are met."
+    },
+    {
+      "part_label_raw": null,
+      "chapter_title_raw": null,
+      "chapter_slug": null,
+      "title_label_raw": "Schedule C",
+      "citations": {
+        "pdf_page_start": 99,
+        "pdf_page_end": 99,
+        "bylaw_page_start": 95,
+        "bylaw_page_end": 95
+      },
+      "source_text": "Neighbourhood local commercial is permitted in the RM Zone along any collector or arterial road as identified in Schedule C up to a gross floor area of 120 m2 and by meeting the following requirements:"
+    }
+  ],
+  "content_blocks": [],
+  "open_issues": [
+    {
+      "issue_type": "extraction_review",
+      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization."
+    },
+    {
+      "issue_type": "table_parsing_review",
+      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization."
+    },
+    {
+      "issue_type": "layout_order_review",
+      "description": "The source PDF places some dimensional and figure text before or beside related section headings in extracted text; verify provision assignment against the visual PDF."
+    }
+  ],
+  "citations": {
+    "zone_section": {
       "pdf_page_start": 97,
       "pdf_page_end": 100,
       "bylaw_page_start": 93,
       "bylaw_page_end": 96
     }
-  },
-  "raw_data": {
-    "source_units": [
-      {
-        "source_unit_id": "zone-rm",
-        "source_unit_type": "zone",
-        "label_raw": "PART 11",
-        "title_raw": "RM - Medium Density Residential",
-        "text_raw": "The RM zone is intended to a range of medium density dwelling types that allow for gentle densification in suitable locations with developments of up to three storeys and one dwelling unit per 115 square metres of lot area.\nRezonings are not permitted in the RM Zone except:\nRezoning from RM to RH may be considered where the lot fronts on a Collector Road and the policies of the Official Plan can be demonstrated.\nThe following uses are permitted in the RM Zone:\nTownhouse Dwelling\nMini-home Dwelling\nModular Dwelling\nMulti-unit Dwelling\nLodging House\nSeniors Housing\nTourist Accommodation\nGovernment Offices\nLibrary\nRecreation or Fitness Center (indoors)\nThese uses are permitted so long as the following lot requirements are met:\n(a) Lot Area min. 230m2 multi-unit dwelling, 165m2 for a semi detached dwelling or townhouse\n(b) Frontage min. 8 m for semi detached dwelling, 10 m for duplex dwelling, 5 m for townhouse 20 m for multi-unit or cluster townhouse condos\n(c) Front Yard Setback min. 6 m\n(d) Flankage Yard Setback min. 6 m\n(e) Side Yard Setback min. 0 m shared*, 2 m for duplex or semi detached dwelling, 3 m for end townhouse or cluster, 6 m for multi- unit dwelling\n(f) Rear Yard Setback min. 6 m\n(g) Coverage max. 50%, 60% if half the parking is located underground\n* 'shared' includes the shared walls of a townhouse or semi.\nCluster housing is permitted so long as the following lot requirements are met:\n(a) Coverage max. 60%\n(b) Footprint / building max. 90 m2\n(c) Density min. one unit per 115 m2 of lot area\n(d) Units max. 8 units per cluster\n(e) Separation between units min. 3 m\n(f) Central garden area min. 25 m2 / unit\nOne rear-yard or side-yard Accessory Dwelling Units (ADU's) per lot may be permitted if the conditions in Sections 4.6 can be met.\nOne Attached ADUs may be permitted if the conditions in Section 4.5 can be met.\nFlaglots are permitted with no less than 4 m frontage as long as all other site and building requirements are met in Section 11.3.2 for both the flaglot and main lot.\nPermitted encroachments into the setbacks are listed in Table 3.2.\nHome occupations are permitted if Section 4.8 requirements are met.\nHome daycare uses are permitted if Section 4.9 requirements are met.\nNeighbourhood local commercial is permitted in the RM Zone along any collector or arterial road as identified in Schedule C up to a gross floor area of 120 m2 and by meeting the following requirements:\nThree dedicated off-street automobile parking spaces and 2 Class B biking parking spaces; and\nA minimum 1.5 m wide hard surface sidewalk linking the front entry of the store with the parking area.\nA landscape buffer 2 m wide shall be constructed which includes an opaque fence no less than 1.8 m high along all properties that directly abut the commercial use or any associated parking.\nOne primary building per lot is permitted with the exception of cluster housing.\nThe maximum building height for the RM zone is 3 storeys.\nAny garage (attached or detached) shall not project any closer to the streetline than the longest wall of the attached main dwelling that faces the same streetline.\nGarage doors shall not exceed 50% of the primary building frontage on any streetline to a maximum of 7 m in total.\nDevelopers are encouraged to use materials and styles consistent with existing neighbourhood character.\nAll street-facing facades shall provide at least one horizontal or vertical facade articulation of no less than 150 mm for no less than 30% of the facade area.\nTownhouse clusters shall not exceed 6 consecutive units.\nTownhouses may be oriented perpendicular to the street as long as\nThe building has frontage on a street and meets the fire code requirements.\nProvides a connected walkway from each door to the street\nParking is in the rear or side yard\nThe building is located on one lot such that units are rental or condominium\nAll disturbed surfaces shall be seeded, sodded or hydroseeded with grass or meadow mixture or restored to natural condition.\nAll driveways shall be hard surfaced with asphalt, concrete or unit pavers. Loose gravel or soil is not permitted.\nParking in the front yard is only permitted on a hard surfaced driveways or parking spots with no more than 1 car per driveway.\nNo more than 40% of the front yard area can be driveway or parking spaces.\nA minimum 1.5 m wide hard surfaced pathway shall link the driveway to the front door of every ground floor unit.\nNo less than 1 (min. 2 m high) tree shall be planted on each lot or 0.5 trees per unit, whichever is greater. Decimals shall be rounded up.\nNo less than 3 m2 of shrub beds shall be planted per groundfloor unit consisting of shrubs, annuals or perennials.\nAll disturbed surfaces shall be seeded, sodded or hydroseeded with grass or meadow mixture or restored to natural condition.\nEach grade-related unit shall provide no less than 4 m2 of private outdoor amenity space (patio, balcony, rooftop deck, or small yard) to ensure resident comfort and privacy.",
-        "source_order": 1,
-        "citations": {
-          "pdf_page_start": 97,
-          "pdf_page_end": 100,
-          "bylaw_page_start": 93,
-          "bylaw_page_end": 96
-        }
-      }
-    ],
-    "sections_raw": [
-      {
-        "section_id": "zone-rm-section-11-1",
-        "section_label_raw": "11.1",
-        "section_title_raw": "INTENT",
-        "source_order": 1,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-rm-clause-11-1",
-            "clause_label_raw": "section",
-            "clause_text_raw": "The RM zone is intended to a range of medium density dwelling types that allow for gentle densification in suitable locations with developments of up to three storeys and one dwelling unit per 115 square metres of lot area.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 97,
-              "pdf_page_end": 97,
-              "bylaw_page_start": 93,
-              "bylaw_page_end": 93
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-1",
-            "source_order": 1
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 97,
-          "pdf_page_end": 97,
-          "bylaw_page_start": 93,
-          "bylaw_page_end": 93
-        }
-      },
-      {
-        "section_id": "zone-rm-section-11-2",
-        "section_label_raw": "11.2",
-        "section_title_raw": "RE-ZONING",
-        "source_order": 2,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-rm-clause-11-2-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "Rezonings are not permitted in the RM Zone except:",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 97,
-              "pdf_page_end": 97,
-              "bylaw_page_start": 93,
-              "bylaw_page_end": 93
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-2-1-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "Rezoning from RM to RH may be considered where the lot fronts on a Collector Road and the policies of the Official Plan can be demonstrated.",
-            "parent_clause_id": "zone-rm-clause-11-2-1",
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 97,
-              "pdf_page_end": 97,
-              "bylaw_page_start": 93,
-              "bylaw_page_end": 93
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-2-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-2-1-a",
-            "source_order": 2
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 97,
-          "pdf_page_end": 97,
-          "bylaw_page_start": 93,
-          "bylaw_page_end": 93
-        }
-      },
-      {
-        "section_id": "zone-rm-section-11-3",
-        "section_label_raw": "11.3",
-        "section_title_raw": "PERMITTED USES",
-        "source_order": 3,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-rm-clause-11-3-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "The following uses are permitted in the RM Zone:",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 97,
-              "pdf_page_end": 97,
-              "bylaw_page_start": 93,
-              "bylaw_page_end": 93
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-3-1-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "Townhouse Dwelling",
-            "parent_clause_id": "zone-rm-clause-11-3-1",
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 97,
-              "pdf_page_end": 97,
-              "bylaw_page_start": 93,
-              "bylaw_page_end": 93
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-3-1-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "Mini-home Dwelling",
-            "parent_clause_id": "zone-rm-clause-11-3-1",
-            "source_order": 3,
-            "citations": {
-              "pdf_page_start": 97,
-              "pdf_page_end": 97,
-              "bylaw_page_start": 93,
-              "bylaw_page_end": 93
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-3-1-c",
-            "clause_label_raw": "(c)",
-            "clause_text_raw": "Modular Dwelling",
-            "parent_clause_id": "zone-rm-clause-11-3-1",
-            "source_order": 4,
-            "citations": {
-              "pdf_page_start": 97,
-              "pdf_page_end": 97,
-              "bylaw_page_start": 93,
-              "bylaw_page_end": 93
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-3-1-d",
-            "clause_label_raw": "(d)",
-            "clause_text_raw": "Multi-unit Dwelling",
-            "parent_clause_id": "zone-rm-clause-11-3-1",
-            "source_order": 5,
-            "citations": {
-              "pdf_page_start": 97,
-              "pdf_page_end": 97,
-              "bylaw_page_start": 93,
-              "bylaw_page_end": 93
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-3-1-e",
-            "clause_label_raw": "(e)",
-            "clause_text_raw": "Lodging House",
-            "parent_clause_id": "zone-rm-clause-11-3-1",
-            "source_order": 6,
-            "citations": {
-              "pdf_page_start": 97,
-              "pdf_page_end": 97,
-              "bylaw_page_start": 93,
-              "bylaw_page_end": 93
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-3-1-f",
-            "clause_label_raw": "(f)",
-            "clause_text_raw": "Seniors Housing",
-            "parent_clause_id": "zone-rm-clause-11-3-1",
-            "source_order": 7,
-            "citations": {
-              "pdf_page_start": 97,
-              "pdf_page_end": 97,
-              "bylaw_page_start": 93,
-              "bylaw_page_end": 93
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-3-1-g",
-            "clause_label_raw": "(g)",
-            "clause_text_raw": "Tourist Accommodation",
-            "parent_clause_id": "zone-rm-clause-11-3-1",
-            "source_order": 8,
-            "citations": {
-              "pdf_page_start": 97,
-              "pdf_page_end": 97,
-              "bylaw_page_start": 93,
-              "bylaw_page_end": 93
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-3-1-h",
-            "clause_label_raw": "(h)",
-            "clause_text_raw": "Government Offices",
-            "parent_clause_id": "zone-rm-clause-11-3-1",
-            "source_order": 9,
-            "citations": {
-              "pdf_page_start": 97,
-              "pdf_page_end": 97,
-              "bylaw_page_start": 93,
-              "bylaw_page_end": 93
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-3-1-i",
-            "clause_label_raw": "(i)",
-            "clause_text_raw": "Library",
-            "parent_clause_id": "zone-rm-clause-11-3-1",
-            "source_order": 10,
-            "citations": {
-              "pdf_page_start": 97,
-              "pdf_page_end": 97,
-              "bylaw_page_start": 93,
-              "bylaw_page_end": 93
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-3-1-j",
-            "clause_label_raw": "(j)",
-            "clause_text_raw": "Recreation or Fitness Center (indoors)",
-            "parent_clause_id": "zone-rm-clause-11-3-1",
-            "source_order": 11,
-            "citations": {
-              "pdf_page_start": 97,
-              "pdf_page_end": 97,
-              "bylaw_page_start": 93,
-              "bylaw_page_end": 93
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-3-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "These uses are permitted so long as the following lot requirements are met:",
-            "parent_clause_id": null,
-            "source_order": 12,
-            "citations": {
-              "pdf_page_start": 97,
-              "pdf_page_end": 97,
-              "bylaw_page_start": 93,
-              "bylaw_page_end": 93
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-3-2-note-shared",
-            "clause_label_raw": "",
-            "clause_text_raw": "* 'shared' includes the shared walls of a townhouse or semi.",
-            "parent_clause_id": "zone-rm-clause-11-3-2",
-            "source_order": 13,
-            "citations": {
-              "pdf_page_start": 97,
-              "pdf_page_end": 97,
-              "bylaw_page_start": 93,
-              "bylaw_page_end": 93
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-3-3",
-            "clause_label_raw": ".3",
-            "clause_text_raw": "Cluster housing is permitted so long as the following lot requirements are met:",
-            "parent_clause_id": null,
-            "source_order": 14,
-            "citations": {
-              "pdf_page_start": 97,
-              "pdf_page_end": 97,
-              "bylaw_page_start": 93,
-              "bylaw_page_end": 93
-            }
-          }
-        ],
-        "tables_raw": [
-          {
-            "table_id": "zone-rm-table-11-3-2",
-            "table_title_raw": "11.3.2",
-            "source_order": 13,
-            "columns_raw": [
-              {
-                "column_id": "row_label",
-                "column_label_raw": "clause_label_raw",
-                "source_order": 1
-              },
-              {
-                "column_id": "requirement",
-                "column_label_raw": "clause_name",
-                "source_order": 2
-              },
-              {
-                "column_id": "value",
-                "column_label_raw": "",
-                "source_order": 3
-              }
-            ],
-            "rows_raw": [
-              {
-                "row_id": "zone-rm-table-11-3-2-row-1",
-                "source_order": 1,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-1-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(a)"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-1-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Lot Area"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-1-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 230m2 multi-unit dwelling, 165m2 for a semi detached dwelling or townhouse"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rm-table-11-3-2-row-2",
-                "source_order": 2,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-2-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(b)"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-2-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Frontage"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-2-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 8 m for semi detached dwelling, 10 m for duplex dwelling, 5 m for townhouse 20 m for multi-unit or cluster townhouse condos"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rm-table-11-3-2-row-3",
-                "source_order": 3,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-3-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(c)"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-3-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Front Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-3-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 6 m"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rm-table-11-3-2-row-4",
-                "source_order": 4,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-4-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(d)"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-4-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Flankage Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-4-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 6 m"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rm-table-11-3-2-row-5",
-                "source_order": 5,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-5-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(e)"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-5-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Side Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-5-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 0 m shared*, 2 m for duplex or semi detached dwelling, 3 m for end townhouse or cluster, 6 m for multi- unit dwelling"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rm-table-11-3-2-row-6",
-                "source_order": 6,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-6-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(f)"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-6-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Rear Yard Setback"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-6-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 6 m"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rm-table-11-3-2-row-7",
-                "source_order": 7,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-7-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(g)"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-7-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Coverage"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-2-row-7-value",
-                    "column_id": "value",
-                    "cell_text_raw": "max. 50%, 60% if half the parking is located underground"
-                  }
-                ]
-              }
-            ],
-            "citations": {
-              "pdf_page_start": 97,
-              "pdf_page_end": 97,
-              "bylaw_page_start": 93,
-              "bylaw_page_end": 93
-            }
-          },
-          {
-            "table_id": "zone-rm-table-11-3-3",
-            "table_title_raw": "11.3.3",
-            "source_order": 14,
-            "columns_raw": [
-              {
-                "column_id": "row_label",
-                "column_label_raw": "clause_label_raw",
-                "source_order": 1
-              },
-              {
-                "column_id": "requirement",
-                "column_label_raw": "clause_name",
-                "source_order": 2
-              },
-              {
-                "column_id": "value",
-                "column_label_raw": "",
-                "source_order": 3
-              }
-            ],
-            "rows_raw": [
-              {
-                "row_id": "zone-rm-table-11-3-3-row-1",
-                "source_order": 1,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rm-table-11-3-3-row-1-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(a)"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-3-row-1-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Coverage"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-3-row-1-value",
-                    "column_id": "value",
-                    "cell_text_raw": "max. 60%"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rm-table-11-3-3-row-2",
-                "source_order": 2,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rm-table-11-3-3-row-2-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(b)"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-3-row-2-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Footprint / building"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-3-row-2-value",
-                    "column_id": "value",
-                    "cell_text_raw": "max. 90 m2"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rm-table-11-3-3-row-3",
-                "source_order": 3,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rm-table-11-3-3-row-3-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(c)"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-3-row-3-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Density"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-3-row-3-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. one unit per 115 m2 of lot area"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rm-table-11-3-3-row-4",
-                "source_order": 4,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rm-table-11-3-3-row-4-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(d)"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-3-row-4-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Units"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-3-row-4-value",
-                    "column_id": "value",
-                    "cell_text_raw": "max. 8 units per cluster"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rm-table-11-3-3-row-5",
-                "source_order": 5,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rm-table-11-3-3-row-5-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(e)"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-3-row-5-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Separation between units"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-3-row-5-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 3 m"
-                  }
-                ]
-              },
-              {
-                "row_id": "zone-rm-table-11-3-3-row-6",
-                "source_order": 6,
-                "cells_raw": [
-                  {
-                    "cell_id": "zone-rm-table-11-3-3-row-6-row-label",
-                    "column_id": "row_label",
-                    "cell_text_raw": "(f)"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-3-row-6-requirement",
-                    "column_id": "requirement",
-                    "cell_text_raw": "Central garden area"
-                  },
-                  {
-                    "cell_id": "zone-rm-table-11-3-3-row-6-value",
-                    "column_id": "value",
-                    "cell_text_raw": "min. 25 m2 / unit"
-                  }
-                ]
-              }
-            ],
-            "citations": {
-              "pdf_page_start": 97,
-              "pdf_page_end": 97,
-              "bylaw_page_start": 93,
-              "bylaw_page_end": 93
-            }
-          }
-        ],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-3-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-3-1-a",
-            "source_order": 2
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-3-1-b",
-            "source_order": 3
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-3-1-c",
-            "source_order": 4
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-3-1-d",
-            "source_order": 5
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-3-1-e",
-            "source_order": 6
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-3-1-f",
-            "source_order": 7
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-3-1-g",
-            "source_order": 8
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-3-1-h",
-            "source_order": 9
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-3-1-i",
-            "source_order": 10
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-3-1-j",
-            "source_order": 11
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-3-2",
-            "source_order": 12
-          },
-          {
-            "content_type": "table",
-            "content_id": "zone-rm-table-11-3-2",
-            "source_order": 13
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-3-2-note-shared",
-            "source_order": 14
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-3-3",
-            "source_order": 15
-          },
-          {
-            "content_type": "table",
-            "content_id": "zone-rm-table-11-3-3",
-            "source_order": 16
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 97,
-          "pdf_page_end": 97,
-          "bylaw_page_start": 93,
-          "bylaw_page_end": 93
-        }
-      },
-      {
-        "section_id": "zone-rm-section-11-4",
-        "section_label_raw": "11.4",
-        "section_title_raw": "PERMITTED WITH CONDITIONS",
-        "source_order": 4,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-rm-clause-11-4-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "One rear-yard or side-yard Accessory Dwelling Units (ADU's) per lot may be permitted if the conditions in Sections 4.6 can be met.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-4-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "One Attached ADUs may be permitted if the conditions in Section 4.5 can be met.",
-            "parent_clause_id": null,
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-4-3",
-            "clause_label_raw": ".3",
-            "clause_text_raw": "Flaglots are permitted with no less than 4 m frontage as long as all other site and building requirements are met in Section 11.3.2 for both the flaglot and main lot.",
-            "parent_clause_id": null,
-            "source_order": 3,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-4-4",
-            "clause_label_raw": ".4",
-            "clause_text_raw": "Permitted encroachments into the setbacks are listed in Table 3.2.",
-            "parent_clause_id": null,
-            "source_order": 4,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-4-5",
-            "clause_label_raw": ".5",
-            "clause_text_raw": "Home occupations are permitted if Section 4.8 requirements are met.",
-            "parent_clause_id": null,
-            "source_order": 5,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-4-6",
-            "clause_label_raw": ".6",
-            "clause_text_raw": "Home daycare uses are permitted if Section 4.9 requirements are met.",
-            "parent_clause_id": null,
-            "source_order": 6,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-4-7",
-            "clause_label_raw": ".7",
-            "clause_text_raw": "Neighbourhood local commercial is permitted in the RM Zone along any collector or arterial road as identified in Schedule C up to a gross floor area of 120 m2 and by meeting the following requirements:",
-            "parent_clause_id": null,
-            "source_order": 7,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-4-7-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "Three dedicated off-street automobile parking spaces and 2 Class B biking parking spaces; and",
-            "parent_clause_id": "zone-rm-clause-11-4-7",
-            "source_order": 8,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-4-7-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "A minimum 1.5 m wide hard surface sidewalk linking the front entry of the store with the parking area.",
-            "parent_clause_id": "zone-rm-clause-11-4-7",
-            "source_order": 9,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-4-7-c",
-            "clause_label_raw": "(c)",
-            "clause_text_raw": "A landscape buffer 2 m wide shall be constructed which includes an opaque fence no less than 1.8 m high along all properties that directly abut the commercial use or any associated parking.",
-            "parent_clause_id": "zone-rm-clause-11-4-7",
-            "source_order": 10,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-4-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-4-2",
-            "source_order": 2
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-4-3",
-            "source_order": 3
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-4-4",
-            "source_order": 4
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-4-5",
-            "source_order": 5
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-4-6",
-            "source_order": 6
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-4-7",
-            "source_order": 7
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-4-7-a",
-            "source_order": 8
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-4-7-b",
-            "source_order": 9
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-4-7-c",
-            "source_order": 10
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 99,
-          "pdf_page_end": 99,
-          "bylaw_page_start": 95,
-          "bylaw_page_end": 95
-        }
-      },
-      {
-        "section_id": "zone-rm-section-11-5",
-        "section_label_raw": "11.5",
-        "section_title_raw": "BUILT FORM REQUIREMENTS",
-        "source_order": 5,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-rm-clause-11-5-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "One primary building per lot is permitted with the exception of cluster housing.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-5-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "The maximum building height for the RM zone is 3 storeys.",
-            "parent_clause_id": null,
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-5-3",
-            "clause_label_raw": ".3",
-            "clause_text_raw": "Any garage (attached or detached) shall not project any closer to the streetline than the longest wall of the attached main dwelling that faces the same streetline.",
-            "parent_clause_id": null,
-            "source_order": 3,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-5-4",
-            "clause_label_raw": ".4",
-            "clause_text_raw": "Garage doors shall not exceed 50% of the primary building frontage on any streetline to a maximum of 7 m in total.",
-            "parent_clause_id": null,
-            "source_order": 4,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-5-5",
-            "clause_label_raw": ".5",
-            "clause_text_raw": "Developers are encouraged to use materials and styles consistent with existing neighbourhood character.",
-            "parent_clause_id": null,
-            "source_order": 5,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-5-6",
-            "clause_label_raw": ".6",
-            "clause_text_raw": "All street-facing facades shall provide at least one horizontal or vertical facade articulation of no less than 150 mm for no less than 30% of the facade area.",
-            "parent_clause_id": null,
-            "source_order": 6,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-5-7",
-            "clause_label_raw": ".7",
-            "clause_text_raw": "Townhouse clusters shall not exceed 6 consecutive units.",
-            "parent_clause_id": null,
-            "source_order": 7,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-5-8",
-            "clause_label_raw": ".8",
-            "clause_text_raw": "Townhouses may be oriented perpendicular to the street as long as",
-            "parent_clause_id": null,
-            "source_order": 8,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-5-8-a",
-            "clause_label_raw": "(a)",
-            "clause_text_raw": "The building has frontage on a street and meets the fire code requirements.",
-            "parent_clause_id": "zone-rm-clause-11-5-8",
-            "source_order": 9,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-5-8-b",
-            "clause_label_raw": "(b)",
-            "clause_text_raw": "Provides a connected walkway from each door to the street",
-            "parent_clause_id": "zone-rm-clause-11-5-8",
-            "source_order": 10,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-5-8-c",
-            "clause_label_raw": "(c)",
-            "clause_text_raw": "Parking is in the rear or side yard",
-            "parent_clause_id": "zone-rm-clause-11-5-8",
-            "source_order": 11,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-5-8-d",
-            "clause_label_raw": "(d)",
-            "clause_text_raw": "The building is located on one lot such that units are rental or condominium",
-            "parent_clause_id": "zone-rm-clause-11-5-8",
-            "source_order": 12,
-            "citations": {
-              "pdf_page_start": 99,
-              "pdf_page_end": 99,
-              "bylaw_page_start": 95,
-              "bylaw_page_end": 95
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-5-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-5-2",
-            "source_order": 2
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-5-3",
-            "source_order": 3
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-5-4",
-            "source_order": 4
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-5-5",
-            "source_order": 5
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-5-6",
-            "source_order": 6
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-5-7",
-            "source_order": 7
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-5-8",
-            "source_order": 8
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-5-8-a",
-            "source_order": 9
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-5-8-b",
-            "source_order": 10
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-5-8-c",
-            "source_order": 11
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-5-8-d",
-            "source_order": 12
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 99,
-          "pdf_page_end": 99,
-          "bylaw_page_start": 95,
-          "bylaw_page_end": 95
-        }
-      },
-      {
-        "section_id": "zone-rm-section-11-6",
-        "section_label_raw": "11.6",
-        "section_title_raw": "LANDSCAPE REQUIREMENTS",
-        "source_order": 6,
-        "clauses_raw": [
-          {
-            "clause_id": "zone-rm-clause-11-6-1",
-            "clause_label_raw": ".1",
-            "clause_text_raw": "All disturbed surfaces shall be seeded, sodded or hydroseeded with grass or meadow mixture or restored to natural condition.",
-            "parent_clause_id": null,
-            "source_order": 1,
-            "citations": {
-              "pdf_page_start": 100,
-              "pdf_page_end": 100,
-              "bylaw_page_start": 96,
-              "bylaw_page_end": 96
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-6-2",
-            "clause_label_raw": ".2",
-            "clause_text_raw": "All driveways shall be hard surfaced with asphalt, concrete or unit pavers. Loose gravel or soil is not permitted.",
-            "parent_clause_id": null,
-            "source_order": 2,
-            "citations": {
-              "pdf_page_start": 100,
-              "pdf_page_end": 100,
-              "bylaw_page_start": 96,
-              "bylaw_page_end": 96
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-6-3",
-            "clause_label_raw": ".3",
-            "clause_text_raw": "Parking in the front yard is only permitted on a hard surfaced driveways or parking spots with no more than 1 car per driveway.",
-            "parent_clause_id": null,
-            "source_order": 3,
-            "citations": {
-              "pdf_page_start": 100,
-              "pdf_page_end": 100,
-              "bylaw_page_start": 96,
-              "bylaw_page_end": 96
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-6-4",
-            "clause_label_raw": ".4",
-            "clause_text_raw": "No more than 40% of the front yard area can be driveway or parking spaces.",
-            "parent_clause_id": null,
-            "source_order": 4,
-            "citations": {
-              "pdf_page_start": 100,
-              "pdf_page_end": 100,
-              "bylaw_page_start": 96,
-              "bylaw_page_end": 96
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-6-5",
-            "clause_label_raw": ".5",
-            "clause_text_raw": "A minimum 1.5 m wide hard surfaced pathway shall link the driveway to the front door of every ground floor unit.",
-            "parent_clause_id": null,
-            "source_order": 5,
-            "citations": {
-              "pdf_page_start": 100,
-              "pdf_page_end": 100,
-              "bylaw_page_start": 96,
-              "bylaw_page_end": 96
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-6-6",
-            "clause_label_raw": ".6",
-            "clause_text_raw": "No less than 1 (min. 2 m high) tree shall be planted on each lot or 0.5 trees per unit, whichever is greater. Decimals shall be rounded up.",
-            "parent_clause_id": null,
-            "source_order": 6,
-            "citations": {
-              "pdf_page_start": 100,
-              "pdf_page_end": 100,
-              "bylaw_page_start": 96,
-              "bylaw_page_end": 96
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-6-7",
-            "clause_label_raw": ".7",
-            "clause_text_raw": "No less than 3 m2 of shrub beds shall be planted per groundfloor unit consisting of shrubs, annuals or perennials.",
-            "parent_clause_id": null,
-            "source_order": 7,
-            "citations": {
-              "pdf_page_start": 100,
-              "pdf_page_end": 100,
-              "bylaw_page_start": 96,
-              "bylaw_page_end": 96
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-6-8",
-            "clause_label_raw": ".8",
-            "clause_text_raw": "All disturbed surfaces shall be seeded, sodded or hydroseeded with grass or meadow mixture or restored to natural condition.",
-            "parent_clause_id": null,
-            "source_order": 8,
-            "citations": {
-              "pdf_page_start": 100,
-              "pdf_page_end": 100,
-              "bylaw_page_start": 96,
-              "bylaw_page_end": 96
-            }
-          },
-          {
-            "clause_id": "zone-rm-clause-11-6-9",
-            "clause_label_raw": ".9",
-            "clause_text_raw": "Each grade-related unit shall provide no less than 4 m2 of private outdoor amenity space (patio, balcony, rooftop deck, or small yard) to ensure resident comfort and privacy.",
-            "parent_clause_id": null,
-            "source_order": 9,
-            "citations": {
-              "pdf_page_start": 100,
-              "pdf_page_end": 100,
-              "bylaw_page_start": 96,
-              "bylaw_page_end": 96
-            }
-          }
-        ],
-        "tables_raw": [],
-        "content_refs": [
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-6-1",
-            "source_order": 1
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-6-2",
-            "source_order": 2
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-6-3",
-            "source_order": 3
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-6-4",
-            "source_order": 4
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-6-5",
-            "source_order": 5
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-6-6",
-            "source_order": 6
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-6-7",
-            "source_order": 7
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-6-8",
-            "source_order": 8
-          },
-          {
-            "content_type": "clause",
-            "content_id": "zone-rm-clause-11-6-9",
-            "source_order": 9
-          }
-        ],
-        "citations": {
-          "pdf_page_start": 100,
-          "pdf_page_end": 100,
-          "bylaw_page_start": 96,
-          "bylaw_page_end": 96
-        }
-      }
-    ],
-    "clause_refs": [
-      {
-        "clause_id": "zone-rm-clause-11-1",
-        "section_id": "zone-rm-section-11-1",
-        "source_order": 1
-      },
-      {
-        "clause_id": "zone-rm-clause-11-2-1",
-        "section_id": "zone-rm-section-11-2",
-        "source_order": 2
-      },
-      {
-        "clause_id": "zone-rm-clause-11-2-1-a",
-        "section_id": "zone-rm-section-11-2",
-        "source_order": 3
-      },
-      {
-        "clause_id": "zone-rm-clause-11-3-1",
-        "section_id": "zone-rm-section-11-3",
-        "source_order": 4
-      },
-      {
-        "clause_id": "zone-rm-clause-11-3-1-a",
-        "section_id": "zone-rm-section-11-3",
-        "source_order": 5
-      },
-      {
-        "clause_id": "zone-rm-clause-11-3-1-b",
-        "section_id": "zone-rm-section-11-3",
-        "source_order": 6
-      },
-      {
-        "clause_id": "zone-rm-clause-11-3-1-c",
-        "section_id": "zone-rm-section-11-3",
-        "source_order": 7
-      },
-      {
-        "clause_id": "zone-rm-clause-11-3-1-d",
-        "section_id": "zone-rm-section-11-3",
-        "source_order": 8
-      },
-      {
-        "clause_id": "zone-rm-clause-11-3-1-e",
-        "section_id": "zone-rm-section-11-3",
-        "source_order": 9
-      },
-      {
-        "clause_id": "zone-rm-clause-11-3-1-f",
-        "section_id": "zone-rm-section-11-3",
-        "source_order": 10
-      },
-      {
-        "clause_id": "zone-rm-clause-11-3-1-g",
-        "section_id": "zone-rm-section-11-3",
-        "source_order": 11
-      },
-      {
-        "clause_id": "zone-rm-clause-11-3-1-h",
-        "section_id": "zone-rm-section-11-3",
-        "source_order": 12
-      },
-      {
-        "clause_id": "zone-rm-clause-11-3-1-i",
-        "section_id": "zone-rm-section-11-3",
-        "source_order": 13
-      },
-      {
-        "clause_id": "zone-rm-clause-11-3-1-j",
-        "section_id": "zone-rm-section-11-3",
-        "source_order": 14
-      },
-      {
-        "clause_id": "zone-rm-clause-11-3-2",
-        "section_id": "zone-rm-section-11-3",
-        "source_order": 15
-      },
-      {
-        "clause_id": "zone-rm-clause-11-3-2-note-shared",
-        "section_id": "zone-rm-section-11-3",
-        "source_order": 16
-      },
-      {
-        "clause_id": "zone-rm-clause-11-3-3",
-        "section_id": "zone-rm-section-11-3",
-        "source_order": 17
-      },
-      {
-        "clause_id": "zone-rm-clause-11-4-1",
-        "section_id": "zone-rm-section-11-4",
-        "source_order": 18
-      },
-      {
-        "clause_id": "zone-rm-clause-11-4-2",
-        "section_id": "zone-rm-section-11-4",
-        "source_order": 19
-      },
-      {
-        "clause_id": "zone-rm-clause-11-4-3",
-        "section_id": "zone-rm-section-11-4",
-        "source_order": 20
-      },
-      {
-        "clause_id": "zone-rm-clause-11-4-4",
-        "section_id": "zone-rm-section-11-4",
-        "source_order": 21
-      },
-      {
-        "clause_id": "zone-rm-clause-11-4-5",
-        "section_id": "zone-rm-section-11-4",
-        "source_order": 22
-      },
-      {
-        "clause_id": "zone-rm-clause-11-4-6",
-        "section_id": "zone-rm-section-11-4",
-        "source_order": 23
-      },
-      {
-        "clause_id": "zone-rm-clause-11-4-7",
-        "section_id": "zone-rm-section-11-4",
-        "source_order": 24
-      },
-      {
-        "clause_id": "zone-rm-clause-11-4-7-a",
-        "section_id": "zone-rm-section-11-4",
-        "source_order": 25
-      },
-      {
-        "clause_id": "zone-rm-clause-11-4-7-b",
-        "section_id": "zone-rm-section-11-4",
-        "source_order": 26
-      },
-      {
-        "clause_id": "zone-rm-clause-11-4-7-c",
-        "section_id": "zone-rm-section-11-4",
-        "source_order": 27
-      },
-      {
-        "clause_id": "zone-rm-clause-11-5-1",
-        "section_id": "zone-rm-section-11-5",
-        "source_order": 28
-      },
-      {
-        "clause_id": "zone-rm-clause-11-5-2",
-        "section_id": "zone-rm-section-11-5",
-        "source_order": 29
-      },
-      {
-        "clause_id": "zone-rm-clause-11-5-3",
-        "section_id": "zone-rm-section-11-5",
-        "source_order": 30
-      },
-      {
-        "clause_id": "zone-rm-clause-11-5-4",
-        "section_id": "zone-rm-section-11-5",
-        "source_order": 31
-      },
-      {
-        "clause_id": "zone-rm-clause-11-5-5",
-        "section_id": "zone-rm-section-11-5",
-        "source_order": 32
-      },
-      {
-        "clause_id": "zone-rm-clause-11-5-6",
-        "section_id": "zone-rm-section-11-5",
-        "source_order": 33
-      },
-      {
-        "clause_id": "zone-rm-clause-11-5-7",
-        "section_id": "zone-rm-section-11-5",
-        "source_order": 34
-      },
-      {
-        "clause_id": "zone-rm-clause-11-5-8",
-        "section_id": "zone-rm-section-11-5",
-        "source_order": 35
-      },
-      {
-        "clause_id": "zone-rm-clause-11-5-8-a",
-        "section_id": "zone-rm-section-11-5",
-        "source_order": 36
-      },
-      {
-        "clause_id": "zone-rm-clause-11-5-8-b",
-        "section_id": "zone-rm-section-11-5",
-        "source_order": 37
-      },
-      {
-        "clause_id": "zone-rm-clause-11-5-8-c",
-        "section_id": "zone-rm-section-11-5",
-        "source_order": 38
-      },
-      {
-        "clause_id": "zone-rm-clause-11-5-8-d",
-        "section_id": "zone-rm-section-11-5",
-        "source_order": 39
-      },
-      {
-        "clause_id": "zone-rm-clause-11-6-1",
-        "section_id": "zone-rm-section-11-6",
-        "source_order": 40
-      },
-      {
-        "clause_id": "zone-rm-clause-11-6-2",
-        "section_id": "zone-rm-section-11-6",
-        "source_order": 41
-      },
-      {
-        "clause_id": "zone-rm-clause-11-6-3",
-        "section_id": "zone-rm-section-11-6",
-        "source_order": 42
-      },
-      {
-        "clause_id": "zone-rm-clause-11-6-4",
-        "section_id": "zone-rm-section-11-6",
-        "source_order": 43
-      },
-      {
-        "clause_id": "zone-rm-clause-11-6-5",
-        "section_id": "zone-rm-section-11-6",
-        "source_order": 44
-      },
-      {
-        "clause_id": "zone-rm-clause-11-6-6",
-        "section_id": "zone-rm-section-11-6",
-        "source_order": 45
-      },
-      {
-        "clause_id": "zone-rm-clause-11-6-7",
-        "section_id": "zone-rm-section-11-6",
-        "source_order": 46
-      },
-      {
-        "clause_id": "zone-rm-clause-11-6-8",
-        "section_id": "zone-rm-section-11-6",
-        "source_order": 47
-      },
-      {
-        "clause_id": "zone-rm-clause-11-6-9",
-        "section_id": "zone-rm-section-11-6",
-        "source_order": 48
-      }
-    ],
-    "tables_raw": [],
-    "map_references_raw": [
-      {
-        "map_reference_id": "zone-rm-map-zoning-map",
-        "map_label_raw": "Zoning Map",
-        "map_title_raw": "Charlottetown Zoning Map 2026",
-        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
-        "citations": {
-          "pdf_page_start": 97,
-          "pdf_page_end": 100,
-          "bylaw_page_start": 93,
-          "bylaw_page_end": 96
-        }
-      }
-    ]
-  },
-  "structured_data": {
-    "terms": [
-      {
-        "term_id": "zone-rm-term-use-townhouse_dwelling",
-        "term_raw": "Townhouse Dwelling",
-        "term_normalized": "townhouse_dwelling",
-        "term_category": "dwelling_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "townhouse_dwelling"
-      },
-      {
-        "term_id": "zone-rm-term-use-mini_home_dwelling",
-        "term_raw": "Mini-home Dwelling",
-        "term_normalized": "mini_home_dwelling",
-        "term_category": "dwelling_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "mini_home_dwelling"
-      },
-      {
-        "term_id": "zone-rm-term-use-modular_dwelling",
-        "term_raw": "Modular Dwelling",
-        "term_normalized": "modular_dwelling",
-        "term_category": "dwelling_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "modular_dwelling"
-      },
-      {
-        "term_id": "zone-rm-term-term-multi_unit_dwelling",
-        "term_raw": "Multi-unit Dwelling",
-        "term_normalized": "multi_unit_dwelling",
-        "term_category": "unknown",
-        "source_refs": [],
-        "confidence": "needs_review"
-      },
-      {
-        "term_id": "zone-rm-term-use-lodging_house",
-        "term_raw": "Lodging House",
-        "term_normalized": "lodging_house",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "lodging_house"
-      },
-      {
-        "term_id": "zone-rm-term-term-seniors_housing",
-        "term_raw": "Seniors Housing",
-        "term_normalized": "seniors_housing",
-        "term_category": "unknown",
-        "source_refs": [],
-        "confidence": "needs_review"
-      },
-      {
-        "term_id": "zone-rm-term-term-tourist_accommodation",
-        "term_raw": "Tourist Accommodation",
-        "term_normalized": "tourist_accommodation",
-        "term_category": "unknown",
-        "source_refs": [],
-        "confidence": "needs_review"
-      },
-      {
-        "term_id": "zone-rm-term-use-government_office",
-        "term_raw": "Government Offices",
-        "term_normalized": "government_office",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "government_office"
-      },
-      {
-        "term_id": "zone-rm-term-use-library",
-        "term_raw": "Library",
-        "term_normalized": "library",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "library"
-      },
-      {
-        "term_id": "zone-rm-term-use-recreation_or_fitness_centre_indoors",
-        "term_raw": "Recreation or Fitness Center (indoors)",
-        "term_normalized": "recreation_or_fitness_centre_indoors",
-        "term_category": "use_type",
-        "source_refs": [],
-        "confidence": "high",
-        "code_table": "use",
-        "code": "recreation_or_fitness_centre_indoors"
-      }
-    ],
-    "uses": [
-      {
-        "use_id": "zone-rm-use-townhouse-dwelling-1-1",
-        "use_name_raw": "Townhouse Dwelling",
-        "use_term_id": "zone-rm-term-use-townhouse_dwelling",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-rm-use-mini-home-dwelling-2-1",
-        "use_name_raw": "Mini-home Dwelling",
-        "use_term_id": "zone-rm-term-use-mini_home_dwelling",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-rm-use-modular-dwelling-3-1",
-        "use_name_raw": "Modular Dwelling",
-        "use_term_id": "zone-rm-term-use-modular_dwelling",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-rm-use-multi-unit-dwelling-4-1",
-        "use_name_raw": "Multi-unit Dwelling",
-        "use_term_id": "zone-rm-term-term-multi_unit_dwelling",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "needs_review"
-      },
-      {
-        "use_id": "zone-rm-use-lodging-house-5-1",
-        "use_name_raw": "Lodging House",
-        "use_term_id": "zone-rm-term-use-lodging_house",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-rm-use-seniors-housing-6-1",
-        "use_name_raw": "Seniors Housing",
-        "use_term_id": "zone-rm-term-term-seniors_housing",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "needs_review"
-      },
-      {
-        "use_id": "zone-rm-use-tourist-accommodation-7-1",
-        "use_name_raw": "Tourist Accommodation",
-        "use_term_id": "zone-rm-term-term-tourist_accommodation",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "needs_review"
-      },
-      {
-        "use_id": "zone-rm-use-government-offices-8-1",
-        "use_name_raw": "Government Offices",
-        "use_term_id": "zone-rm-term-use-government_office",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-rm-use-library-9-1",
-        "use_name_raw": "Library",
-        "use_term_id": "zone-rm-term-use-library",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      },
-      {
-        "use_id": "zone-rm-use-recreation-or-fitness-center-indoors-10-1",
-        "use_name_raw": "Recreation or Fitness Center (indoors)",
-        "use_term_id": "zone-rm-term-use-recreation_or_fitness_centre_indoors",
-        "use_status": "permitted",
-        "source_clause_ref": "",
-        "confidence": "high"
-      }
-    ],
-    "numeric_values": [
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-2-row-2-value-1",
-        "value_raw": "8 m",
-        "value": 8,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rm-table-11-3-2-row-2-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-2-row-2-value-2",
-        "value_raw": "10 m",
-        "value": 10,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rm-table-11-3-2-row-2-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-2-row-2-value-3",
-        "value_raw": "5 m",
-        "value": 5,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rm-table-11-3-2-row-2-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-2-row-2-value-4",
-        "value_raw": "20 m",
-        "value": 20,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rm-table-11-3-2-row-2-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-2-row-3-value-1",
-        "value_raw": "6 m",
-        "value": 6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rm-table-11-3-2-row-3-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-2-row-4-value-1",
-        "value_raw": "6 m",
-        "value": 6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rm-table-11-3-2-row-4-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-2-row-5-value-1",
-        "value_raw": "0 m",
-        "value": 0,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rm-table-11-3-2-row-5-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-2-row-5-value-2",
-        "value_raw": "2 m",
-        "value": 2,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rm-table-11-3-2-row-5-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-2-row-5-value-3",
-        "value_raw": "3 m",
-        "value": 3,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rm-table-11-3-2-row-5-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-2-row-5-value-4",
-        "value_raw": "6 m",
-        "value": 6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rm-table-11-3-2-row-5-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-2-row-6-value-1",
-        "value_raw": "6 m",
-        "value": 6,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rm-table-11-3-2-row-6-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-3-row-4-value-1",
-        "value_raw": "8 units",
-        "value": 8,
-        "unit": "unit",
-        "measure_type": "count",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rm-table-11-3-3-row-4-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-3-row-5-value-1",
-        "value_raw": "3 m",
-        "value": 3,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "zone-rm-table-11-3-3-row-5-value"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-clause-11-4-3-1",
-        "value_raw": "4 m",
-        "value": 4,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "less_than",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rm-clause-11-4-3"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-clause-11-4-7-b-1",
-        "value_raw": "1.5 m",
-        "value": 1.5,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "minimum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rm-clause-11-4-7-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-clause-11-4-7-c-1",
-        "value_raw": "2 m",
-        "value": 2,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "less_than",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rm-clause-11-4-7-c"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-clause-11-4-7-c-2",
-        "value_raw": "1.8 m",
-        "value": 1.8,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "less_than",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rm-clause-11-4-7-c"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-clause-11-5-2-1",
-        "value_raw": "3 storeys",
-        "value": 3,
-        "unit": "storey",
-        "measure_type": "count",
-        "comparator": "maximum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rm-clause-11-5-2"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-clause-11-5-4-1",
-        "value_raw": "7 m",
-        "value": 7,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "maximum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rm-clause-11-5-4"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-clause-11-6-5-1",
-        "value_raw": "1.5 m",
-        "value": 1.5,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "minimum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rm-clause-11-6-5"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "zone-rm-num-zone-rm-clause-11-6-6-1",
-        "value_raw": "2 m",
-        "value": 2,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "minimum",
-        "alternative_values": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rm-clause-11-6-6"
-          }
-        ],
-        "confidence": "medium"
-      }
-    ],
-    "requirements": [
-      {
-        "requirement_id": "zone-rm-req-zone-rm-table-11-3-2-row-2-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "lot_frontage",
-        "requirement_label_raw": "Frontage",
-        "requirement_text_raw": "Frontage min. 8 m for semi detached dwelling, 10 m for duplex dwelling, 5 m for townhouse 20 m for multi-unit or cluster townhouse condos",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rm-num-zone-rm-table-11-3-2-row-2-value-1",
-          "zone-rm-num-zone-rm-table-11-3-2-row-2-value-2",
-          "zone-rm-num-zone-rm-table-11-3-2-row-2-value-3",
-          "zone-rm-num-zone-rm-table-11-3-2-row-2-value-4"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-rm-table-11-3-2-row-2"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rm-req-zone-rm-table-11-3-2-row-3-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "front_yard",
-        "requirement_label_raw": "Front Yard Setback",
-        "requirement_text_raw": "Front Yard Setback min. 6 m",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rm-num-zone-rm-table-11-3-2-row-3-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-rm-table-11-3-2-row-3"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rm-req-zone-rm-table-11-3-2-row-4-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "flankage_yard",
-        "requirement_label_raw": "Flankage Yard Setback",
-        "requirement_text_raw": "Flankage Yard Setback min. 6 m",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rm-num-zone-rm-table-11-3-2-row-4-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-rm-table-11-3-2-row-4"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rm-req-zone-rm-table-11-3-2-row-5-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "side_yard",
-        "requirement_label_raw": "Side Yard Setback",
-        "requirement_text_raw": "Side Yard Setback min. 0 m shared*, 2 m for duplex or semi detached dwelling, 3 m for end townhouse or cluster, 6 m for multi- unit dwelling",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rm-num-zone-rm-table-11-3-2-row-5-value-1",
-          "zone-rm-num-zone-rm-table-11-3-2-row-5-value-2",
-          "zone-rm-num-zone-rm-table-11-3-2-row-5-value-3",
-          "zone-rm-num-zone-rm-table-11-3-2-row-5-value-4"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-rm-table-11-3-2-row-5"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rm-req-zone-rm-table-11-3-2-row-6-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "rear_yard",
-        "requirement_label_raw": "Rear Yard Setback",
-        "requirement_text_raw": "Rear Yard Setback min. 6 m",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rm-num-zone-rm-table-11-3-2-row-6-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-rm-table-11-3-2-row-6"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rm-req-zone-rm-table-11-3-3-row-4-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "units",
-        "requirement_label_raw": "Units",
-        "requirement_text_raw": "Units max. 8 units per cluster",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rm-num-zone-rm-table-11-3-3-row-4-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-rm-table-11-3-3-row-4"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rm-req-zone-rm-table-11-3-3-row-5-value",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "separation_between_units",
-        "requirement_label_raw": "Separation between units",
-        "requirement_text_raw": "Separation between units min. 3 m",
-        "applicability": {
-          "applies_to_lot_contexts": [],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rm-num-zone-rm-table-11-3-3-row-5-value-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "zone-rm-table-11-3-3-row-5"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rm-req-zone-rm-clause-11-4-3",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "lot_frontage",
-        "requirement_label_raw": ".3",
-        "requirement_text_raw": "Flaglots are permitted with no less than 4 m frontage as long as all other site and building requirements are met in Section 11.3.2 for both the flaglot and main lot.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rm-num-zone-rm-clause-11-4-3-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rm-clause-11-4-3"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rm-req-zone-rm-clause-11-4-7-b",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "parking",
-        "requirement_label_raw": "(b)",
-        "requirement_text_raw": "A minimum 1.5 m wide hard surface sidewalk linking the front entry of the store with the parking area.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rm-num-zone-rm-clause-11-4-7-b-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rm-clause-11-4-7-b"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rm-req-zone-rm-clause-11-5-2",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "height",
-        "requirement_label_raw": ".2",
-        "requirement_text_raw": "The maximum building height for the RM zone is 3 storeys.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rm-num-zone-rm-clause-11-5-2-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rm-clause-11-5-2"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rm-req-zone-rm-clause-11-5-4",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "lot_frontage",
-        "requirement_label_raw": ".4",
-        "requirement_text_raw": "Garage doors shall not exceed 50% of the primary building frontage on any streetline to a maximum of 7 m in total.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rm-num-zone-rm-clause-11-5-4-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rm-clause-11-5-4"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "zone-rm-req-zone-rm-clause-11-6-5",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "a_minimum_1_5_m_wide_hard_surfaced_pathway_shall_link_the_driveway_to_the_front_",
-        "requirement_label_raw": ".5",
-        "requirement_text_raw": "A minimum 1.5 m wide hard surfaced pathway shall link the driveway to the front door of every ground floor unit.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rm-num-zone-rm-clause-11-6-5-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rm-clause-11-6-5"
-          }
-        ],
-        "confidence": "medium"
-      }
-    ],
-    "regulation_groups": [
-      {
-        "regulation_group_id": "zone-rm-regulation-group-zone",
-        "group_label_raw": "PART 11",
-        "group_title_raw": "RM - Medium Density Residential",
-        "regulated_use_terms": [
-          "zone-rm-term-use-townhouse_dwelling",
-          "zone-rm-term-use-mini_home_dwelling",
-          "zone-rm-term-use-modular_dwelling",
-          "zone-rm-term-term-multi_unit_dwelling",
-          "zone-rm-term-use-lodging_house",
-          "zone-rm-term-term-seniors_housing",
-          "zone-rm-term-term-tourist_accommodation",
-          "zone-rm-term-use-government_office",
-          "zone-rm-term-use-library",
-          "zone-rm-term-use-recreation_or_fitness_centre_indoors"
-        ],
-        "applicability": {
-          "applies_to_zone_codes": [
-            "RM"
-          ],
-          "conditions": []
-        },
-        "requirement_refs": [
-          "zone-rm-req-zone-rm-table-11-3-2-row-2-value",
-          "zone-rm-req-zone-rm-table-11-3-2-row-3-value",
-          "zone-rm-req-zone-rm-table-11-3-2-row-4-value",
-          "zone-rm-req-zone-rm-table-11-3-2-row-5-value",
-          "zone-rm-req-zone-rm-table-11-3-2-row-6-value",
-          "zone-rm-req-zone-rm-table-11-3-3-row-4-value",
-          "zone-rm-req-zone-rm-table-11-3-3-row-5-value",
-          "zone-rm-req-zone-rm-clause-11-4-3",
-          "zone-rm-req-zone-rm-clause-11-4-7-b",
-          "zone-rm-req-zone-rm-clause-11-5-2",
-          "zone-rm-req-zone-rm-clause-11-5-4",
-          "zone-rm-req-zone-rm-clause-11-6-5"
-        ],
-        "source_section_ref": "zone-rm-section-11-1",
-        "confidence": "medium"
-      }
-    ],
-    "conditional_rule_groups": [],
-    "zone_relationships": [],
-    "map_layer_references": [
-      {
-        "map_reference_id": "zone-rm-map-zoning-map",
-        "map_title_raw": "Charlottetown Zoning Map 2026",
-        "map_label_raw": "Zoning Map",
-        "map_reference_type": "zoning_map",
-        "postgis_schema": "public",
-        "postgis_table": "spatial_features",
-        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
-        "feature_key": "RM",
-        "source_refs": [
-          {
-            "source_ref_type": "map_reference",
-            "source_ref_id": "zone-rm-map-zoning-map"
-          }
-        ],
-        "confidence": "medium"
-      }
-    ],
-    "other_requirements": [
-      {
-        "requirement_id": "zone-rm-req-zone-rm-clause-11-4-7-c",
-        "requirement_type": "other",
-        "requirement_category": "parking",
-        "requirement_label_raw": "(c)",
-        "requirement_text_raw": "A landscape buffer 2 m wide shall be constructed which includes an opaque fence no less than 1.8 m high along all properties that directly abut the commercial use or any associated parking.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rm-num-zone-rm-clause-11-4-7-c-1",
-          "zone-rm-num-zone-rm-clause-11-4-7-c-2"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rm-clause-11-4-7-c"
-          }
-        ],
-        "confidence": "needs_review"
-      },
-      {
-        "requirement_id": "zone-rm-req-zone-rm-clause-11-6-6",
-        "requirement_type": "other",
-        "requirement_category": "no_less_than_1_min_2_m_high_tree_shall_be_planted_on_each_lot_or_0_5_trees_per_u",
-        "requirement_label_raw": ".6",
-        "requirement_text_raw": "No less than 1 (min. 2 m high) tree shall be planted on each lot or 0.5 trees per unit, whichever is greater. Decimals shall be rounded up.",
-        "applicability": {
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "zone-rm-num-zone-rm-clause-11-6-6-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "clause",
-            "source_ref_id": "zone-rm-clause-11-6-6"
-          }
-        ],
-        "confidence": "needs_review"
-      }
-    ],
-    "cross_references": []
-  },
-  "review_flags": [
-    {
-      "review_flag_id": "zone-rm-flag-unmatched-use-multi-unit-dwelling-4-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Multi-unit Dwelling"
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unmatched-use-seniors-housing-6-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Seniors Housing"
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unmatched-use-tourist-accommodation-7-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Use phrase was preserved but did not match reviewed term/use code tables: Tourist Accommodation"
-    },
-    {
-      "review_flag_id": "zone-rm-flag-legacy-open-issue-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "extraction_review",
-      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization.",
-      "source_refs": [
-        {
-          "source_ref_type": "source_unit",
-          "source_ref_id": "zone-rm"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rm-flag-legacy-open-issue-2",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "table_parsing_review",
-      "description": "The zone contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization.",
-      "source_refs": [
-        {
-          "source_ref_type": "source_unit",
-          "source_ref_id": "zone-rm"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rm-flag-legacy-open-issue-3",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "layout_order_review",
-      "description": "The source PDF places some dimensional and figure text before or beside related section headings in extracted text; verify provision assignment against the visual PDF.",
-      "source_refs": [
-        {
-          "source_ref_type": "source_unit",
-          "source_ref_id": "zone-rm"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unparsed-table-value-zone-rm-table-11-3-2-row-1-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: min. 230m2 multi-unit dwelling, 165m2 for a semi detached dwelling or townhouse",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-rm-table-11-3-2-row-1-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unparsed-table-value-zone-rm-table-11-3-2-row-7-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: max. 50%, 60% if half the parking is located underground",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-rm-table-11-3-2-row-7-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unparsed-table-value-zone-rm-table-11-3-3-row-1-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: max. 60%",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-rm-table-11-3-3-row-1-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unparsed-table-value-zone-rm-table-11-3-3-row-2-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: max. 90 m2",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-rm-table-11-3-3-row-2-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unparsed-table-value-zone-rm-table-11-3-3-row-3-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: min. one unit per 115 m2 of lot area",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-rm-table-11-3-3-row-3-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unparsed-table-value-zone-rm-table-11-3-3-row-6-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: min. 25 m2 / unit",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-rm-table-11-3-3-row-6-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unmatched-term-multi-unit-dwelling",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Multi-unit Dwelling"
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unmatched-term-seniors-housing",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Seniors Housing"
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unmatched-term-tourist-accommodation",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "code_table_match_review",
-      "description": "Term was preserved but did not match reviewed term/use code tables: Tourist Accommodation"
-    }
-  ]
+  }
 }
