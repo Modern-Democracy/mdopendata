@@ -884,6 +884,21 @@ def reparent_clause(
     clause["parent_clause_id"] = parent_clause_id
 
 
+def merge_section_title_clause(section: dict[str, Any], suffix: str) -> bool:
+    clauses = section.get("clauses_raw") or []
+    if not clauses:
+        return False
+    first = clauses[0]
+    if first.get("clause_label_raw") != "section":
+        return False
+    if clean_text(first.get("clause_text_raw")) != suffix:
+        return False
+    section["section_title_raw"] = clean_text(f"{section.get('section_title_raw', '')} {suffix}")
+    section["clauses_raw"] = clauses[1:]
+    resequence_clauses(section)
+    return True
+
+
 def repair_charlottetown_draft_general_provisions_tables(data: dict[str, Any]) -> bool:
     metadata = data.get("document_metadata") or {}
     if not str(metadata.get("bylaw_name") or "").startswith("Draft Zoning"):
@@ -1106,6 +1121,8 @@ def repair_charlottetown_draft_general_provisions_tables(data: dict[str, Any]) -
 
     section_4_7 = find_raw_section(sections, "4.7")
     if section_4_7:
+        if merge_section_title_clause(section_4_7, "(DETACHED)"):
+            changed = True
         table_id_value = "doc-general-provisions-table-4-7-3-a"
         replace_section_table(
             section_4_7,
@@ -1125,6 +1142,127 @@ def repair_charlottetown_draft_general_provisions_tables(data: dict[str, Any]) -
             },
         )
         changed = True
+
+    section_4_11 = find_raw_section(sections, "4.11")
+    if section_4_11:
+        table_id_value = "doc-general-provisions-table-4-11-1-c"
+        replace_section_table(
+            section_4_11,
+            {
+                "table_id": table_id_value,
+                "table_title_raw": "Table 4.2 Regulations for Tourist Accommodations",
+                "source_order": 5,
+                "columns_raw": general_provisions_table_columns(
+                    [("row_label", ""), ("zone_designation", "Zone Designation"), ("bedrooms_permitted", "# of Bedrooms Permitted")]
+                ),
+                "rows_raw": [
+                    make_labeled_table_row(table_id_value, 1, "a", {"zone_designation": "RN, RM, and HR Zones", "bedrooms_permitted": "Up to four (4) bedrooms"}),
+                    make_labeled_table_row(table_id_value, 2, "b", {"zone_designation": "GC, GN, DC, DN, DMU, and DW Zones", "bedrooms_permitted": "Four (4) bedrooms are permitted for the first 370 m2 (3,982.8 ft2) of lot area, and for every additional bedroom over four (4) the lot must be increased by 100 m2 (1076.4 ft2), up to a maximum of 7 bedrooms."}),
+                ],
+                "citations": {"pdf_page_start": 37, "pdf_page_end": 37, "bylaw_page_start": 33, "bylaw_page_end": 33},
+            },
+        )
+        changed = True
+
+    for label, suffix in {
+        "3.1": "BUILDINGS",
+        "4.14": "GAS BARS",
+        "4.16": "ZONES",
+        "4.17": "A SEWAGE LAGOON OR TREATMENT PLANT",
+        "5.4": "MANAGEMENT",
+        "5.6": "CONFEDERATION TRAIL",
+        "5.8": "WATERCOURSES AND WETLANDS",
+        "7.3": "OF LOTS",
+        "7.4": "SUBDIVISION",
+        "7.8": "SUBDIVISION",
+        "7.12": "CONVEYANCE OF PUBLIC SERVICES",
+        "7.13": "REQUIREMENTS",
+    }.items():
+        section = find_raw_section(sections, label)
+        if section and merge_section_title_clause(section, suffix):
+            changed = True
+
+    section_6_3 = find_raw_section(sections, "6.3")
+    if section_6_3 and section_6_3.get("section_title_raw") == "NEIGHBOURING HERITAGE":
+        clauses = section_6_3.get("clauses_raw") or []
+        if clauses and str(clauses[0].get("clause_text_raw") or "").startswith("RESOURCES "):
+            clauses[0]["clause_text_raw"] = clean_text(clauses[0]["clause_text_raw"].removeprefix("RESOURCES "))
+            section_6_3["section_title_raw"] = "NEIGHBOURING HERITAGE RESOURCES"
+            changed = True
+
+    section_7_3 = find_raw_section(sections, "7.3")
+    if section_7_3:
+        order = {"doc-general-provisions-clause-7-3-2": 0, **{f"doc-general-provisions-clause-7-3-2-{label}": i for i, label in enumerate("abcdefghi", start=1)}}
+        section_7_3["clauses_raw"].sort(key=lambda clause: (order.get(clause.get("clause_id"), -1), clause.get("source_order", 0)))
+        resequence_clauses(section_7_3)
+        changed = True
+
+    section_7_4 = find_raw_section(sections, "7.4")
+    section_7_5 = find_raw_section(sections, "7.5")
+    if section_7_4 and section_7_5:
+        moved = []
+        kept = []
+        for clause in section_7_4.get("clauses_raw") or []:
+            if clause.get("clause_id") in {f"doc-general-provisions-clause-7-4-2-c-{roman}" for roman in ["iv", "v", "vi", "vii", "viii", "ix"]}:
+                clause["clause_id"] = clause["clause_id"].replace("clause-7-4-2-c", "clause-7-5-1-e")
+                clause["parent_clause_id"] = "doc-general-provisions-clause-7-5-1-e"
+                moved.append(clause)
+            else:
+                kept.append(clause)
+        if moved:
+            section_7_4["clauses_raw"] = kept
+            insert_at = next((index + 1 for index, clause in enumerate(section_7_5.get("clauses_raw") or []) if clause.get("clause_id") == "doc-general-provisions-clause-7-5-1-e-iii"), 8)
+            section_7_5["clauses_raw"] = section_7_5["clauses_raw"][:insert_at] + moved + section_7_5["clauses_raw"][insert_at:]
+            resequence_clauses(section_7_4)
+            resequence_clauses(section_7_5)
+            changed = True
+
+    section_7_9 = find_raw_section(sections, "7.9")
+    if section_7_9 and not find_raw_section(sections, "7.10"):
+        clauses_7_9: list[dict[str, Any]] = []
+        clauses_7_10: list[dict[str, Any]] = []
+        clauses_7_11: list[dict[str, Any]] = []
+        segment = "7.9"
+        for clause in section_7_9.get("clauses_raw") or []:
+            text = clause.get("clause_text_raw") or ""
+            if "7.10 WATER, SEWER, AND OTHER SERVICES:" in text or "7.10  WATER, SEWER, AND OTHER SERVICES:" in text:
+                clause["clause_text_raw"] = clean_text(re.split(r"7\.10\s+WATER, SEWER, AND OTHER SERVICES:", text, maxsplit=1)[0])
+                clauses_7_9.append(clause)
+                segment = "7.10"
+                continue
+            if segment == "7.10" and clause.get("clause_label_raw") == ".1" and clauses_7_10:
+                segment = "7.11"
+            if "7.11  LAND FOR PUBLIC PURPOSES (LPP)" in text:
+                clause["clause_text_raw"] = clean_text(text.split("7.11  LAND FOR PUBLIC PURPOSES (LPP)", 1)[0])
+                segment = "7.11"
+            if segment == "7.10":
+                reparent_clause(clause, "7.10", None)
+                clauses_7_10.append(clause)
+            elif segment == "7.11":
+                label = clean_text(clause.get("clause_label_raw"))
+                parent = "doc-general-provisions-clause-7-11-1" if label.startswith("(") else None
+                parent_decimal = "1" if label.startswith("(") else None
+                reparent_clause(clause, "7.11", parent, parent_decimal)
+                clauses_7_11.append(clause)
+            else:
+                clauses_7_9.append(clause)
+        if clauses_7_10 or clauses_7_11:
+            section_7_9["clauses_raw"] = clauses_7_9
+            new_sections = []
+            if clauses_7_10:
+                new_7_10 = {**section_7_9, "section_id": "doc-general-provisions-section-7-10", "section_label_raw": "7.10", "section_title_raw": "WATER, SEWER, AND OTHER SERVICES", "clauses_raw": clauses_7_10, "tables_raw": []}
+                resequence_clauses(new_7_10)
+                new_sections.append(new_7_10)
+            if clauses_7_11:
+                new_7_11 = {**section_7_9, "section_id": "doc-general-provisions-section-7-11", "section_label_raw": "7.11", "section_title_raw": "LAND FOR PUBLIC PURPOSES (LPP)", "clauses_raw": clauses_7_11, "tables_raw": []}
+                resequence_clauses(new_7_11)
+                new_sections.append(new_7_11)
+            insert_at = sections.index(section_7_9) + 1
+            sections[insert_at:insert_at] = new_sections
+            for index, section in enumerate(sections, start=1):
+                section["source_order"] = index
+            resequence_clauses(section_7_9)
+            changed = True
 
     section_5_2 = find_raw_section(sections, "5.2")
     if section_5_2:
@@ -1154,7 +1292,7 @@ def repair_charlottetown_draft_general_provisions_tables(data: dict[str, Any]) -
 
 def repair_general_provisions_tables(data: dict[str, Any]) -> bool:
     metadata = data.get("document_metadata") or {}
-    if metadata.get("document_type") != "general_provisions":
+    if metadata.get("document_type") not in {"general_provisions", "design_standards"}:
         return False
     if repair_charlottetown_draft_general_provisions_tables(data):
         return True
