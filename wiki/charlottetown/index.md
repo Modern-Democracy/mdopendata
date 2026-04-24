@@ -16,6 +16,7 @@ This index catalogs the Charlottetown LLM Wiki pages and source families. Update
 | [sources](sources/.gitkeep) | Future source-summary pages for approved Charlottetown source artifacts. |
 | [entities](entities/.gitkeep) | Future pages for zones, bylaws, maps, schedules, parcels, streets, and neighbourhoods. |
 | [topics](topics/.gitkeep) | Future pages for zoning concepts, provisions, definitions, and review themes. |
+| [Draft layout repair notes](topics/draft-layout-repair-notes.md) | Durable notes for draft bylaw section-title and two-column clause-assignment repairs. |
 | [comparisons](comparisons/.gitkeep) | Future current-versus-draft, parcel, zone, or neighbourhood comparison pages. |
 | [questions](questions/.gitkeep) | Future reusable answers generated from user queries. |
 | [templates](templates/source-summary.md) | Templates for future wiki maintenance. |
@@ -45,4 +46,4 @@ These source families remain outside the wiki and must be referenced in place:
 
 ## Current Status
 
-The wiki is scaffold-only. No substantive current or draft zoning synthesis has been added.
+The wiki contains a scaffold plus targeted draft extraction repair notes.

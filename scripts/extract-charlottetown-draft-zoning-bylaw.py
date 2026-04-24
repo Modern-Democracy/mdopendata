@@ -351,7 +351,7 @@ def _suppress_layout_artifacts(rows: list[dict]) -> list[dict]:
     return [*spanning, *left, *right]
 
 
-def _merge_label_lines(lines: list[str]) -> list[str]:
+def _merge_label_lines(lines: list[str], merge_wrapped_section_titles: bool = False) -> list[str]:
     merged: list[str] = []
     idx = 0
     while idx < len(lines):
@@ -361,7 +361,20 @@ def _merge_label_lines(lines: list[str]) -> list[str]:
             continue
         next_line = lines[idx + 1].strip() if idx + 1 < len(lines) else None
         if next_line:
-            if re.fullmatch(r"\d+\.\d+", current) and re.fullmatch(r"[A-Z][A-Z0-9 '&/\-]+", next_line):
+            if merge_wrapped_section_titles and re.fullmatch(r"\d+\.\d+(?:\s+[A-Z][A-Z0-9 '&/,\-]+)?", current):
+                title_parts = [current]
+                lookahead = idx + 1
+                while lookahead < len(lines):
+                    candidate = lines[lookahead].strip()
+                    if not re.fullmatch(r"[A-Z][A-Z0-9 '&/,\-]+", candidate):
+                        break
+                    title_parts.append(candidate)
+                    lookahead += 1
+                if len(title_parts) > 1:
+                    merged.append(" ".join(title_parts))
+                    idx = lookahead
+                    continue
+            if re.fullmatch(r"\d+\.\d+", current) and re.fullmatch(r"[A-Z][A-Z0-9 '&/,\-]+", next_line):
                 merged.append(f"{current} {next_line}")
                 idx += 2
                 continue
@@ -377,16 +390,34 @@ def _merge_label_lines(lines: list[str]) -> list[str]:
 def extract_clean_lines_for_page(reader: PdfReader, pdf_page: int) -> list[str]:
     rows = _fitz_block_rows(pdf_page)
     if rows:
+        if pdf_page in {7, 15, 19}:
+            rows = [
+                row
+                for row in rows
+                if not re.fullmatch(r"\d+\s+ZONING & DEVELOPMENT BYL AW.*", row["text"].replace("\n", " "))
+                and not re.fullmatch(r"CIT Y OF CHARLOTTETOWN\s+\d+\s+\|.*", row["text"].replace("\n", " "))
+            ]
+            left = [row for row in rows if row["x0"] < 306.0]
+            right = [row for row in rows if row["x0"] >= 306.0]
+            ordered_rows = [
+                *sorted(left, key=lambda row: (round(row["y0"], 1), round(row["x0"], 1))),
+                *sorted(right, key=lambda row: (round(row["y0"], 1), round(row["x0"], 1))),
+            ]
+        else:
+            ordered_rows = _suppress_layout_artifacts(rows)
         lines = []
-        for row in _suppress_layout_artifacts(rows):
+        for row in ordered_rows:
             lines.extend(line.strip() for line in row["text"].splitlines() if line.strip())
         if lines:
-            return _merge_label_lines(lines)
+            return _merge_label_lines(lines, merge_wrapped_section_titles=pdf_page in {7, 8, 9, 13, 15})
     text = clean_text(reader.pages[pdf_page - 1].extract_text() or "")
-    return _merge_label_lines([line.strip() for line in text.splitlines() if line.strip()])
+    return _merge_label_lines(
+        [line.strip() for line in text.splitlines() if line.strip()],
+        merge_wrapped_section_titles=pdf_page in {7, 8, 9, 13, 15},
+    )
 
 
-SECTION_RE = re.compile(r"^(?P<label>\d+\.\d+)\s+(?P<title>[A-Z][A-Z0-9 '&/\-]+)$")
+SECTION_RE = re.compile(r"^(?P<label>\d+\.\d+)\s+(?P<title>[A-Z][A-Z0-9 '&/,\-]+)$")
 PART_RE = re.compile(r"^PART\s+\d+")
 ZONE_TITLE_RE = re.compile(r"^[A-Z]{1,4}(?:-[A-Z]+)?\s+-\s+")
 PROVISION_RE = re.compile(r"^(?P<label>\.\d+|\([a-z]{1,3}\)|[ivx]+\))\s*(?P<text>.*)$", re.IGNORECASE)
