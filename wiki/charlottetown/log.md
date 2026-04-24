@@ -6,6 +6,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-24] extraction | Draft DW and signage Phase 3 review
+
+Updated `topics/draft-validation-rebaseline.md` after resolving the Phase 3 `needs_review` entries in `zones/dw.json` and `general-provisions-signage.json`.
+
 ## [2026-04-24] extraction | Draft parking and land-use Phase 3 repairs
 
 Updated `topics/draft-layout-repair-notes.md` and `topics/draft-validation-rebaseline.md` after resolving the Phase 3 `needs_review` entries in `general-provisions-parking.json` and `general-provisions-land-use.json`.

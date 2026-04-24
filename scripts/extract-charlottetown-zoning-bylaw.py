@@ -1566,6 +1566,12 @@ DRAFT_GENERAL_PROVISIONS_REVIEWED_REQUIREMENT_CLAUSES = {
     "doc-general-provisions-clause-8-13-3",
     "doc-general-provisions-clause-8-14-1-a",
     "doc-general-provisions-clause-8-14-1-c",
+    "doc-general-provisions-clause-9-3-1-c-ii",
+    "doc-general-provisions-clause-9-21-1-c-i",
+    "doc-general-provisions-clause-9-21-1-c-ii",
+    "doc-general-provisions-clause-9-21-1-c-iii",
+    "doc-general-provisions-clause-9-21-1-c-iv",
+    "doc-general-provisions-clause-9-22-6-f",
 }
 
 
@@ -1581,6 +1587,36 @@ def promote_reviewed_draft_general_provisions_requirements(data: dict[str, Any])
             if ref.get("source_ref_type") == "clause"
         }
         if clause_ids & DRAFT_GENERAL_PROVISIONS_REVIEWED_REQUIREMENT_CLAUSES:
+            if requirement.get("confidence") != "high":
+                requirement["confidence"] = "high"
+                changed = True
+    return changed
+
+
+DRAFT_ZONE_REVIEWED_REQUIREMENT_CLAUSES = {
+    "zone-dw-clause-17-5-1",
+    "zone-dw-clause-17-5-3",
+    "zone-dw-clause-17-5-8-ffe",
+    "zone-dw-clause-17-5-9",
+    "zone-dw-clause-17-6-1",
+    "zone-dw-clause-17-7-10-b",
+    "zone-dw-clause-17-7-12",
+    "zone-dw-clause-17-7-14",
+}
+
+
+def promote_reviewed_draft_zone_requirements(data: dict[str, Any]) -> bool:
+    metadata = data.get("document_metadata") or {}
+    if not str(metadata.get("bylaw_name") or "").startswith("Draft Zoning"):
+        return False
+    changed = False
+    for requirement in (data.get("structured_data") or {}).get("other_requirements") or []:
+        clause_ids = {
+            ref.get("source_ref_id")
+            for ref in requirement.get("source_refs") or []
+            if ref.get("source_ref_type") == "clause"
+        }
+        if clause_ids & DRAFT_ZONE_REVIEWED_REQUIREMENT_CLAUSES:
             if requirement.get("confidence") != "high":
                 requirement["confidence"] = "high"
                 changed = True

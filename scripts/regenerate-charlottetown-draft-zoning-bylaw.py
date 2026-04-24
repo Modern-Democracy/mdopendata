@@ -163,6 +163,7 @@ def transform_zone_doc(path: Path) -> dict[str, Any]:
     if callable(repair_rm_table_clauses):
         repair_rm_table_clauses(data)
     current.refresh_schema_numeric_values(data)
+    current.promote_reviewed_draft_zone_requirements(data)
     current.refresh_schema_terms(NORMALIZER, data)
     current.apply_zone_reference_model(data)
     return data
