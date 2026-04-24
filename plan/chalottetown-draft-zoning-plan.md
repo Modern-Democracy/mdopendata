@@ -277,3 +277,43 @@ The draft validation and normalization pass is complete when:
 - Table and figure text may continue to leak into clause text if fixes are applied only at the normalized layer.
 - Schedule pages are not yet parcel-comparison-ready and should not be treated as validated spatial zoning inputs.
 - Some broad intent statements may have been normalized as enforceable requirements and must be checked clause by clause.
+
+## 2026-04-24 Plan Review Addendum
+
+The 2026-04-23 baseline remains useful as the original validation baseline, but it is no longer the active inventory baseline after the parser and layout repairs that added or restored many clauses and sections.
+
+Current generated-output marker counts from `data/zoning/charlottetown-draft/**/*.json` on 2026-04-24:
+
+- 33 JSON files contain `review_flags`
+- 246 total `review_flags` are present
+- 27 JSON files contain at least one `confidence: "needs_review"` entry
+- 174 total `needs_review` entries are present
+
+Current `review_flags` by `review_type`:
+
+- `numeric_value_review`: 94
+- `code_table_match_review`: 88
+- `extraction_review`: 29
+- `table_parsing_review`: 24
+- `section_assignment_review`: 4
+- `schedule_map_review`: 4
+- `layout_order_review`: 3
+
+Highest current `needs_review` concentration:
+
+1. `data/zoning/charlottetown-draft/zones/rh.json` with 25
+2. `data/zoning/charlottetown-draft/general-provisions-parking.json` with 13
+3. `data/zoning/charlottetown-draft/zones/bp.json` with 12
+4. `data/zoning/charlottetown-draft/zones/dw.json` with 10
+5. `data/zoning/charlottetown-draft/zones/dms.json` with 9
+6. `data/zoning/charlottetown-draft/zones/ap.json` with 8
+7. `data/zoning/charlottetown-draft/zones/rm.json` with 8
+8. `data/zoning/charlottetown-draft/zones/rn.json` with 8
+
+Plan adjustment:
+
+- Treat Phase 1 as complete only for the initial 2026-04-23 ledger. A refreshed ledger is required before closing additional Phase 3 work because the generated outputs now contain more direct open markers than the ledger catalogs.
+- Treat Phase 2 as complete only for decisions already approved and applied. Re-review code-table status after the refreshed ledger because the current match report still lists 25 `use.new_codes`, including likely extraction artifacts such as dimensional requirement text and zone-header spillover.
+- Keep Phase 3 active, but make inventory refresh and code-table drift review the next prerequisites before promoting any additional high-priority files to complete.
+- Keep Phase 4 pending, but recognize that targeted layout-repair tasks have already been performed inside the Phase 3 parser-fix work. Phase 4 should begin with a regression review of those repaired sections before widening to remaining layout issues.
+- Continue monitoring for new extraction defects after each regeneration. Any increase in `review_flags`, `needs_review`, unmatched code-table phrases, or section-count drift must update this plan and the timeline before further closure claims.
