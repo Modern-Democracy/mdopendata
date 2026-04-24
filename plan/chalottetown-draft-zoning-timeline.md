@@ -66,6 +66,7 @@ Current progress:
 - `scripts/extract-charlottetown-zoning-bylaw.py` now applies targeted draft general-provisions repairs for the named Part 3, Part 4, and Part 5 section-order, table-placement, and inline-clause defects
 - regenerated draft outputs move `2.19(d-g)` to `3.1.2(d-g)`, insert Tables 3.1, 3.2, 3.3, and 4.1 after their applicable clauses, restore `3.19.2(c-i)` and `3.19.3(d-g)`, split `4.6` out of `4.5`, and split `5.2.2(a-b)`
 - `scripts/extract-charlottetown-zoning-bylaw.py` now also merges the newly reported wrapped title continuations, inserts Table 4.2 under `4.11`, reorders `7.3.2(a-i)`, moves `7.5.1(e)(iv-ix)` out of `7.4`, and splits `7.10` and `7.11` out of `7.9`
+- follow-up title-continuation repairs now merge `ATTACHED` into `4.6 ACCESSORY DWELLING UNITS, ATTACHED` and `SERVICES:` into `7.10 WATER, SEWER, AND OTHER SERVICES:`
 - `scripts/regenerate-charlottetown-draft-zoning-bylaw.py` was rerun and completed schema validation for the regenerated draft outputs
 - the Part 2/Part 3 boundary in `scripts/extract-charlottetown-draft-zoning-bylaw.py` now keeps bylaw page 16 in Part 2, so section `2.19` is generated in `permit-applications-processes.json` and Part 3 begins at bylaw page 17
 - `scripts/extract-charlottetown-draft-zoning-bylaw.py` now preserves multi-line uppercase section titles with commas and applies targeted left-column-before-right-column ordering on draft PDF pages 7, 15, and 19; regenerated outputs repair section/title placement for `1.6`, `1.14`, `2.1`, `2.9`, `2.11`, and `2.18`

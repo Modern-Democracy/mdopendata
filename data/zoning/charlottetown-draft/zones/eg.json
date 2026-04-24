@@ -1,472 +1,1169 @@
 {
+  "$schema": "../../../schema/json-schema/charlottetown-bylaw-extraction.schema.json",
   "document_metadata": {
     "jurisdiction": "City of Charlottetown",
     "bylaw_name": "Draft Zoning & Development Bylaw",
     "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+    "document_type": "zone",
     "zone_code": "EG",
     "zone_name": "Eastern Gateway",
-    "part_label_raw": "PART 28",
-    "chapter_heading_raw": "PART 28 EG - Eastern Gateway",
-    "draft_date_raw": "April 7, 2026"
-  },
-  "normalization_policy": {
-    "clause_labels_preserved_raw": true,
-    "approved_hierarchy_examples": [
-      "21(e)",
-      "21(ea)",
-      "21(ea)(1)",
-      "20(1)(a.1)"
-    ],
-    "pending_review_clause_patterns": [
-      "dot_numeric_provision_labels",
-      "parenthesized_alpha_clause_labels"
-    ]
-  },
-  "permitted_uses": [
-    {
-      "clause_label_raw": "(a)",
-      "use_type": "permitted_use",
-      "use_name": "Transitional Housing",
-      "status": "active",
-      "conditions": "The following uses are permitted in the EG Zone:",
-      "citations": {
-        "pdf_page_start": 163,
-        "pdf_page_end": 163,
-        "bylaw_page_start": 159,
-        "bylaw_page_end": 159
-      }
-    },
-    {
-      "clause_label_raw": "(b)",
-      "use_type": "permitted_use",
-      "use_name": "Multi-unit dwelling",
-      "status": "active",
-      "conditions": "The following uses are permitted in the EG Zone:",
-      "citations": {
-        "pdf_page_start": 163,
-        "pdf_page_end": 163,
-        "bylaw_page_start": 159,
-        "bylaw_page_end": 159
-      }
-    }
-  ],
-  "requirement_sections": [
-    {
-      "order_index": 1,
-      "section_label_raw": "28.1",
-      "title_label_raw": "INTENT",
-      "citations": {
-        "pdf_page_start": 163,
-        "pdf_page_end": 163,
-        "bylaw_page_start": 159,
-        "bylaw_page_end": 159
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "section",
-          "text": "The Eastern Gateway (EG Zone) is a secondary planning area just north of the waterfront Port area of Charlottetown and at the gateway into Charlottetown from Stratford. The Eastern Gateway includes the Red Shores and Eastlink Centre facilities, plus new public facilities and event grounds, and future public facilities like sports fields, sports arenas, trails, new mixed use development, new residential development and parks and open spaces. Developments in this zone shall proceed by Development Agreement.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 163,
-            "pdf_page_end": 163,
-            "bylaw_page_start": 159,
-            "bylaw_page_end": 159
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 2,
-      "section_label_raw": "28.2",
-      "title_label_raw": "RE-ZONING",
-      "citations": {
-        "pdf_page_start": 163,
-        "pdf_page_end": 163,
-        "bylaw_page_start": 159,
-        "bylaw_page_end": 159
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "Rezoning is not permitted in the EG Zone",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 163,
-            "pdf_page_end": 163,
-            "bylaw_page_start": 159,
-            "bylaw_page_end": 159
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 3,
-      "section_label_raw": "28.3",
-      "title_label_raw": "PERMITTED USES",
-      "citations": {
-        "pdf_page_start": 163,
-        "pdf_page_end": 163,
-        "bylaw_page_start": 159,
-        "bylaw_page_end": 159
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "The following uses are permitted in the EG Zone:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 163,
-            "pdf_page_end": 163,
-            "bylaw_page_start": 159,
-            "bylaw_page_end": 159
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Transitional Housing",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 163,
-            "pdf_page_end": 163,
-            "bylaw_page_start": 159,
-            "bylaw_page_end": 159
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Multi-unit dwelling",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 163,
-            "pdf_page_end": 163,
-            "bylaw_page_start": 159,
-            "bylaw_page_end": 159
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "Any existing use may expand by up to 20% of the existing gross floor area so long as the following requirements are met:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 163,
-            "pdf_page_end": 163,
-            "bylaw_page_start": 159,
-            "bylaw_page_end": 159
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Lot Area min. 300 m2",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 163,
-            "pdf_page_end": 163,
-            "bylaw_page_start": 159,
-            "bylaw_page_end": 159
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Frontage min. 15 m for commercial building only; 20 m for multi-unit dwelling or mixed use building",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 163,
-            "pdf_page_end": 163,
-            "bylaw_page_start": 159,
-            "bylaw_page_end": 159
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Front Setback 2-5 m",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 163,
-            "pdf_page_end": 163,
-            "bylaw_page_start": 159,
-            "bylaw_page_end": 159
-          }
-        },
-        {
-          "provision_label_raw": "(d)",
-          "text": "Flankage Setback 2-6 m",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 163,
-            "pdf_page_end": 163,
-            "bylaw_page_start": 159,
-            "bylaw_page_end": 159
-          }
-        },
-        {
-          "provision_label_raw": "(e)",
-          "text": "Side Setback min. 0 m shared*, 6 m for other residential zones",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 163,
-            "pdf_page_end": 163,
-            "bylaw_page_start": 159,
-            "bylaw_page_end": 159
-          }
-        },
-        {
-          "provision_label_raw": "(f)",
-          "text": "Rear Setback min. 6 m",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 163,
-            "pdf_page_end": 163,
-            "bylaw_page_start": 159,
-            "bylaw_page_end": 159
-          }
-        },
-        {
-          "provision_label_raw": "(g)",
-          "text": "Coverage max. 50%, 60% if half or more the parking is underground",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 163,
-            "pdf_page_end": 163,
-            "bylaw_page_start": 159,
-            "bylaw_page_end": 159
-          }
-        },
-        {
-          "provision_label_raw": ".3",
-          "text": "All other developments must be negotiated through Development Agreement. development agreement should include commitments to public access, integration with surrounding neighbourhoods, and design excellence along the waterfront.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 163,
-            "pdf_page_end": 163,
-            "bylaw_page_start": 159,
-            "bylaw_page_end": 159
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 4,
-      "section_label_raw": "28.4",
-      "title_label_raw": "BUILT FORM REQUIREMENTS",
-      "citations": {
-        "pdf_page_start": 164,
-        "pdf_page_end": 164,
-        "bylaw_page_start": 160,
-        "bylaw_page_end": 160
-      },
-      "provisions": [
-        {
-          "provision_label_raw": ".1",
-          "text": "The maximum building height shall be 16 m or 4 storeys.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 164,
-            "pdf_page_end": 164,
-            "bylaw_page_start": 160,
-            "bylaw_page_end": 160
-          }
-        },
-        {
-          "provision_label_raw": ".4",
-          "text": "Development agreements should clarify responsibilities for funding, maintenance, and long-term stewardship of shared infrastructure.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 164,
-            "pdf_page_end": 164,
-            "bylaw_page_start": 160,
-            "bylaw_page_end": 160
-          }
-        }
-      ]
-    },
-    {
-      "order_index": 5,
-      "section_label_raw": "28.5",
-      "title_label_raw": "DEVELOPMENT AGREEMENT",
-      "citations": {
-        "pdf_page_start": 164,
-        "pdf_page_end": 164,
-        "bylaw_page_start": 160,
-        "bylaw_page_end": 160
-      },
-      "provisions": [
-        {
-          "provision_label_raw": "section",
-          "text": "CONSIDERATIONS",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 164,
-            "pdf_page_end": 164,
-            "bylaw_page_start": 160,
-            "bylaw_page_end": 160
-          }
-        },
-        {
-          "provision_label_raw": ".1",
-          "text": "Developments in the Eastern Gateway should be generally consistent with the polices and aims of the Charlottetown Official Plan and the Charlottetown Eastern Gateway Waterfront Master Plan (2011)",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 164,
-            "pdf_page_end": 164,
-            "bylaw_page_start": 160,
-            "bylaw_page_end": 160
-          }
-        },
-        {
-          "provision_label_raw": ".2",
-          "text": "The Eastern Gateway is conceived as a \"campus-like destination\" integrating civic, recreational, and private uses - a counterpart to Victoria Park on the city's western edge. The vision calls for:",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 164,
-            "pdf_page_end": 164,
-            "bylaw_page_start": 160,
-            "bylaw_page_end": 160
-          }
-        },
-        {
-          "provision_label_raw": "(a)",
-          "text": "Enhanced public access to the waterfront.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 164,
-            "pdf_page_end": 164,
-            "bylaw_page_start": 160,
-            "bylaw_page_end": 160
-          }
-        },
-        {
-          "provision_label_raw": "(b)",
-          "text": "Reinforcement of existing neighbourhoods and urban connections.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 164,
-            "pdf_page_end": 164,
-            "bylaw_page_start": 160,
-            "bylaw_page_end": 160
-          }
-        },
-        {
-          "provision_label_raw": "(c)",
-          "text": "Development of a high-quality public realm with strong open-space networks.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 164,
-            "pdf_page_end": 164,
-            "bylaw_page_start": 160,
-            "bylaw_page_end": 160
-          }
-        },
-        {
-          "provision_label_raw": "(d)",
-          "text": "Recognition of the Hillsborough Heritage River and Charlottetown's historic identity.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 164,
-            "pdf_page_end": 164,
-            "bylaw_page_start": 160,
-            "bylaw_page_end": 160
-          }
-        },
-        {
-          "provision_label_raw": "(e)",
-          "text": "Mixed-use parcels (institutional/ commercial/light industrial) along the waterfront (e.g., Maritime Electric site).",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 164,
-            "pdf_page_end": 164,
-            "bylaw_page_start": 160,
-            "bylaw_page_end": 160
-          }
-        },
-        {
-          "provision_label_raw": "(f)",
-          "text": "Institutional nodes for Holland College and HMCS Queen Charlotte.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 164,
-            "pdf_page_end": 164,
-            "bylaw_page_start": 160,
-            "bylaw_page_end": 160
-          }
-        },
-        {
-          "provision_label_raw": "(g)",
-          "text": "Residential reinforcement in the Park- Beech Street area.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 164,
-            "pdf_page_end": 164,
-            "bylaw_page_start": 160,
-            "bylaw_page_end": 160
-          }
-        },
-        {
-          "provision_label_raw": "(h)",
-          "text": "Special use area for Red Shores Casino, Driving Park, and Civic Centre.",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 164,
-            "pdf_page_end": 164,
-            "bylaw_page_start": 160,
-            "bylaw_page_end": 160
-          }
-        },
-        {
-          "provision_label_raw": ".3",
-          "text": "These principles imply that any new",
-          "status": "active",
-          "citations": {
-            "pdf_page_start": 164,
-            "pdf_page_end": 164,
-            "bylaw_page_start": 160,
-            "bylaw_page_end": 160
-          }
-        }
-      ]
-    }
-  ],
-  "zone_specific_requirements": [],
-  "shared_requirement_references": [
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "development agreement should",
-      "citations": {
-        "pdf_page_start": 163,
-        "pdf_page_end": 163,
-        "bylaw_page_start": 159,
-        "bylaw_page_end": 159
-      },
-      "source_text": "All other developments must be negotiated through Development Agreement. development agreement should include commitments to public access, integration with surrounding neighbourhoods, and design excellence along the waterfront."
-    },
-    {
-      "part_label_raw": null,
-      "chapter_title_raw": null,
-      "chapter_slug": null,
-      "title_label_raw": "Official Plan and",
-      "citations": {
-        "pdf_page_start": 164,
-        "pdf_page_end": 164,
-        "bylaw_page_start": 160,
-        "bylaw_page_end": 160
-      },
-      "source_text": "Developments in the Eastern Gateway should be generally consistent with the polices and aims of the Charlottetown Official Plan and the Charlottetown Eastern Gateway Waterfront Master Plan (2011)"
-    }
-  ],
-  "content_blocks": [],
-  "open_issues": [
-    {
-      "issue_type": "extraction_review",
-      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization."
-    }
-  ],
-  "citations": {
-    "zone_section": {
+    "zone_label_raw": "PART 28",
+    "zone_title_raw": "EG - Eastern Gateway",
+    "citations": {
       "pdf_page_start": 163,
       "pdf_page_end": 164,
       "bylaw_page_start": 159,
       "bylaw_page_end": 160
     }
-  }
+  },
+  "raw_data": {
+    "source_units": [
+      {
+        "source_unit_id": "zone-eg",
+        "source_unit_type": "zone",
+        "label_raw": "PART 28",
+        "title_raw": "EG - Eastern Gateway",
+        "text_raw": "The Eastern Gateway (EG Zone) is a secondary planning area just north of the waterfront Port area of Charlottetown and at the gateway into Charlottetown from Stratford. The Eastern Gateway includes the Red Shores and Eastlink Centre facilities, plus new public facilities and event grounds, and future public facilities like sports fields, sports arenas, trails, new mixed use development, new residential development and parks and open spaces. Developments in this zone shall proceed by Development Agreement.\nRezoning is not permitted in the EG Zone\nThe following uses are permitted in the EG Zone:\nTransitional Housing\nMulti-unit dwelling\nAny existing use may expand by up to 20% of the existing gross floor area so long as the following requirements are met:\nLot Area min. 300 m2\nFrontage min. 15 m for commercial building only; 20 m for multi-unit dwelling or mixed use building\nFront Setback 2-5 m\nFlankage Setback 2-6 m\nSide Setback min. 0 m shared*, 6 m for other residential zones\nRear Setback min. 6 m\nCoverage max. 50%, 60% if half or more the parking is underground\nAll other developments must be negotiated through Development Agreement. development agreement should include commitments to public access, integration with surrounding neighbourhoods, and design excellence along the waterfront.\nThe maximum building height shall be 16 m or 4 storeys.\nDevelopment agreements should clarify responsibilities for funding, maintenance, and long-term stewardship of shared infrastructure.\nCONSIDERATIONS\nDevelopments in the Eastern Gateway should be generally consistent with the polices and aims of the Charlottetown Official Plan and the Charlottetown Eastern Gateway Waterfront Master Plan (2011)\nThe Eastern Gateway is conceived as a \"campus-like destination\" integrating civic, recreational, and private uses - a counterpart to Victoria Park on the city's western edge. The vision calls for:\nEnhanced public access to the waterfront.\nReinforcement of existing neighbourhoods and urban connections.\nDevelopment of a high-quality public realm with strong open-space networks.\nRecognition of the Hillsborough Heritage River and Charlottetown's historic identity.\nMixed-use parcels (institutional/ commercial/light industrial) along the waterfront (e.g., Maritime Electric site).\nInstitutional nodes for Holland College and HMCS Queen Charlotte.\nResidential reinforcement in the Park- Beech Street area.\nSpecial use area for Red Shores Casino, Driving Park, and Civic Centre.\nThese principles imply that any new",
+        "source_order": 1,
+        "citations": {
+          "pdf_page_start": 163,
+          "pdf_page_end": 164,
+          "bylaw_page_start": 159,
+          "bylaw_page_end": 160
+        }
+      }
+    ],
+    "sections_raw": [
+      {
+        "section_id": "zone-eg-section-28-1",
+        "section_label_raw": "28.1",
+        "section_title_raw": "INTENT",
+        "source_order": 1,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-eg-clause-28-1",
+            "clause_label_raw": "section",
+            "clause_text_raw": "The Eastern Gateway (EG Zone) is a secondary planning area just north of the waterfront Port area of Charlottetown and at the gateway into Charlottetown from Stratford. The Eastern Gateway includes the Red Shores and Eastlink Centre facilities, plus new public facilities and event grounds, and future public facilities like sports fields, sports arenas, trails, new mixed use development, new residential development and parks and open spaces. Developments in this zone shall proceed by Development Agreement.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 163,
+              "pdf_page_end": 163,
+              "bylaw_page_start": 159,
+              "bylaw_page_end": 159
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-1",
+            "source_order": 1
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 163,
+          "pdf_page_end": 163,
+          "bylaw_page_start": 159,
+          "bylaw_page_end": 159
+        }
+      },
+      {
+        "section_id": "zone-eg-section-28-2",
+        "section_label_raw": "28.2",
+        "section_title_raw": "RE-ZONING",
+        "source_order": 2,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-eg-clause-28-2-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "Rezoning is not permitted in the EG Zone",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 163,
+              "pdf_page_end": 163,
+              "bylaw_page_start": 159,
+              "bylaw_page_end": 159
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-2-1",
+            "source_order": 1
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 163,
+          "pdf_page_end": 163,
+          "bylaw_page_start": 159,
+          "bylaw_page_end": 159
+        }
+      },
+      {
+        "section_id": "zone-eg-section-28-3",
+        "section_label_raw": "28.3",
+        "section_title_raw": "PERMITTED USES",
+        "source_order": 3,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-eg-clause-28-3-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "The following uses are permitted in the EG Zone:",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 163,
+              "pdf_page_end": 163,
+              "bylaw_page_start": 159,
+              "bylaw_page_end": 159
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-3-1-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Transitional Housing",
+            "parent_clause_id": "zone-eg-clause-28-3-1",
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 163,
+              "pdf_page_end": 163,
+              "bylaw_page_start": 159,
+              "bylaw_page_end": 159
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-3-1-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Multi-unit dwelling",
+            "parent_clause_id": "zone-eg-clause-28-3-1",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 163,
+              "pdf_page_end": 163,
+              "bylaw_page_start": 159,
+              "bylaw_page_end": 159
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-3-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "Any existing use may expand by up to 20% of the existing gross floor area so long as the following requirements are met:",
+            "parent_clause_id": null,
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 163,
+              "pdf_page_end": 163,
+              "bylaw_page_start": 159,
+              "bylaw_page_end": 159
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-3-2-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Lot Area min. 300 m2",
+            "parent_clause_id": "zone-eg-clause-28-3-2",
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 163,
+              "pdf_page_end": 163,
+              "bylaw_page_start": 159,
+              "bylaw_page_end": 159
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-3-2-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Frontage min. 15 m for commercial building only; 20 m for multi-unit dwelling or mixed use building",
+            "parent_clause_id": "zone-eg-clause-28-3-2",
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 163,
+              "pdf_page_end": 163,
+              "bylaw_page_start": 159,
+              "bylaw_page_end": 159
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-3-2-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Front Setback 2-5 m",
+            "parent_clause_id": "zone-eg-clause-28-3-2",
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 163,
+              "pdf_page_end": 163,
+              "bylaw_page_start": 159,
+              "bylaw_page_end": 159
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-3-2-d",
+            "clause_label_raw": "(d)",
+            "clause_text_raw": "Flankage Setback 2-6 m",
+            "parent_clause_id": "zone-eg-clause-28-3-2",
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 163,
+              "pdf_page_end": 163,
+              "bylaw_page_start": 159,
+              "bylaw_page_end": 159
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-3-2-e",
+            "clause_label_raw": "(e)",
+            "clause_text_raw": "Side Setback min. 0 m shared*, 6 m for other residential zones",
+            "parent_clause_id": "zone-eg-clause-28-3-2",
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 163,
+              "pdf_page_end": 163,
+              "bylaw_page_start": 159,
+              "bylaw_page_end": 159
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-3-2-f",
+            "clause_label_raw": "(f)",
+            "clause_text_raw": "Rear Setback min. 6 m",
+            "parent_clause_id": "zone-eg-clause-28-3-2",
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 163,
+              "pdf_page_end": 163,
+              "bylaw_page_start": 159,
+              "bylaw_page_end": 159
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-3-2-g",
+            "clause_label_raw": "(g)",
+            "clause_text_raw": "Coverage max. 50%, 60% if half or more the parking is underground",
+            "parent_clause_id": "zone-eg-clause-28-3-2",
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 163,
+              "pdf_page_end": 163,
+              "bylaw_page_start": 159,
+              "bylaw_page_end": 159
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-3-3",
+            "clause_label_raw": ".3",
+            "clause_text_raw": "All other developments must be negotiated through Development Agreement. development agreement should include commitments to public access, integration with surrounding neighbourhoods, and design excellence along the waterfront.",
+            "parent_clause_id": null,
+            "source_order": 12,
+            "citations": {
+              "pdf_page_start": 163,
+              "pdf_page_end": 163,
+              "bylaw_page_start": 159,
+              "bylaw_page_end": 159
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-3-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-3-1-a",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-3-1-b",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-3-2",
+            "source_order": 4
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-3-2-a",
+            "source_order": 5
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-3-2-b",
+            "source_order": 6
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-3-2-c",
+            "source_order": 7
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-3-2-d",
+            "source_order": 8
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-3-2-e",
+            "source_order": 9
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-3-2-f",
+            "source_order": 10
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-3-2-g",
+            "source_order": 11
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-3-3",
+            "source_order": 12
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 163,
+          "pdf_page_end": 163,
+          "bylaw_page_start": 159,
+          "bylaw_page_end": 159
+        }
+      },
+      {
+        "section_id": "zone-eg-section-28-4",
+        "section_label_raw": "28.4",
+        "section_title_raw": "BUILT FORM REQUIREMENTS",
+        "source_order": 4,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-eg-clause-28-4-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "The maximum building height shall be 16 m or 4 storeys.",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 164,
+              "pdf_page_end": 164,
+              "bylaw_page_start": 160,
+              "bylaw_page_end": 160
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-4-4",
+            "clause_label_raw": ".4",
+            "clause_text_raw": "Development agreements should clarify responsibilities for funding, maintenance, and long-term stewardship of shared infrastructure.",
+            "parent_clause_id": null,
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 164,
+              "pdf_page_end": 164,
+              "bylaw_page_start": 160,
+              "bylaw_page_end": 160
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-4-1",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-4-4",
+            "source_order": 2
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 164,
+          "pdf_page_end": 164,
+          "bylaw_page_start": 160,
+          "bylaw_page_end": 160
+        }
+      },
+      {
+        "section_id": "zone-eg-section-28-5",
+        "section_label_raw": "28.5",
+        "section_title_raw": "DEVELOPMENT AGREEMENT",
+        "source_order": 5,
+        "clauses_raw": [
+          {
+            "clause_id": "zone-eg-clause-28-5",
+            "clause_label_raw": "section",
+            "clause_text_raw": "CONSIDERATIONS",
+            "parent_clause_id": null,
+            "source_order": 1,
+            "citations": {
+              "pdf_page_start": 164,
+              "pdf_page_end": 164,
+              "bylaw_page_start": 160,
+              "bylaw_page_end": 160
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-5-1",
+            "clause_label_raw": ".1",
+            "clause_text_raw": "Developments in the Eastern Gateway should be generally consistent with the polices and aims of the Charlottetown Official Plan and the Charlottetown Eastern Gateway Waterfront Master Plan (2011)",
+            "parent_clause_id": "zone-eg-clause-28-5",
+            "source_order": 2,
+            "citations": {
+              "pdf_page_start": 164,
+              "pdf_page_end": 164,
+              "bylaw_page_start": 160,
+              "bylaw_page_end": 160
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-5-2",
+            "clause_label_raw": ".2",
+            "clause_text_raw": "The Eastern Gateway is conceived as a \"campus-like destination\" integrating civic, recreational, and private uses - a counterpart to Victoria Park on the city's western edge. The vision calls for:",
+            "parent_clause_id": "zone-eg-clause-28-5",
+            "source_order": 3,
+            "citations": {
+              "pdf_page_start": 164,
+              "pdf_page_end": 164,
+              "bylaw_page_start": 160,
+              "bylaw_page_end": 160
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-5-2-a",
+            "clause_label_raw": "(a)",
+            "clause_text_raw": "Enhanced public access to the waterfront.",
+            "parent_clause_id": "zone-eg-clause-28-5-2",
+            "source_order": 4,
+            "citations": {
+              "pdf_page_start": 164,
+              "pdf_page_end": 164,
+              "bylaw_page_start": 160,
+              "bylaw_page_end": 160
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-5-2-b",
+            "clause_label_raw": "(b)",
+            "clause_text_raw": "Reinforcement of existing neighbourhoods and urban connections.",
+            "parent_clause_id": "zone-eg-clause-28-5-2",
+            "source_order": 5,
+            "citations": {
+              "pdf_page_start": 164,
+              "pdf_page_end": 164,
+              "bylaw_page_start": 160,
+              "bylaw_page_end": 160
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-5-2-c",
+            "clause_label_raw": "(c)",
+            "clause_text_raw": "Development of a high-quality public realm with strong open-space networks.",
+            "parent_clause_id": "zone-eg-clause-28-5-2",
+            "source_order": 6,
+            "citations": {
+              "pdf_page_start": 164,
+              "pdf_page_end": 164,
+              "bylaw_page_start": 160,
+              "bylaw_page_end": 160
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-5-2-d",
+            "clause_label_raw": "(d)",
+            "clause_text_raw": "Recognition of the Hillsborough Heritage River and Charlottetown's historic identity.",
+            "parent_clause_id": "zone-eg-clause-28-5-2",
+            "source_order": 7,
+            "citations": {
+              "pdf_page_start": 164,
+              "pdf_page_end": 164,
+              "bylaw_page_start": 160,
+              "bylaw_page_end": 160
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-5-2-e",
+            "clause_label_raw": "(e)",
+            "clause_text_raw": "Mixed-use parcels (institutional/ commercial/light industrial) along the waterfront (e.g., Maritime Electric site).",
+            "parent_clause_id": "zone-eg-clause-28-5-2",
+            "source_order": 8,
+            "citations": {
+              "pdf_page_start": 164,
+              "pdf_page_end": 164,
+              "bylaw_page_start": 160,
+              "bylaw_page_end": 160
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-5-2-f",
+            "clause_label_raw": "(f)",
+            "clause_text_raw": "Institutional nodes for Holland College and HMCS Queen Charlotte.",
+            "parent_clause_id": "zone-eg-clause-28-5-2",
+            "source_order": 9,
+            "citations": {
+              "pdf_page_start": 164,
+              "pdf_page_end": 164,
+              "bylaw_page_start": 160,
+              "bylaw_page_end": 160
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-5-2-g",
+            "clause_label_raw": "(g)",
+            "clause_text_raw": "Residential reinforcement in the Park- Beech Street area.",
+            "parent_clause_id": "zone-eg-clause-28-5-2",
+            "source_order": 10,
+            "citations": {
+              "pdf_page_start": 164,
+              "pdf_page_end": 164,
+              "bylaw_page_start": 160,
+              "bylaw_page_end": 160
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-5-2-h",
+            "clause_label_raw": "(h)",
+            "clause_text_raw": "Special use area for Red Shores Casino, Driving Park, and Civic Centre.",
+            "parent_clause_id": "zone-eg-clause-28-5-2",
+            "source_order": 11,
+            "citations": {
+              "pdf_page_start": 164,
+              "pdf_page_end": 164,
+              "bylaw_page_start": 160,
+              "bylaw_page_end": 160
+            }
+          },
+          {
+            "clause_id": "zone-eg-clause-28-5-3",
+            "clause_label_raw": ".3",
+            "clause_text_raw": "These principles imply that any new",
+            "parent_clause_id": "zone-eg-clause-28-5",
+            "source_order": 12,
+            "citations": {
+              "pdf_page_start": 164,
+              "pdf_page_end": 164,
+              "bylaw_page_start": 160,
+              "bylaw_page_end": 160
+            }
+          }
+        ],
+        "tables_raw": [],
+        "content_refs": [
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-5",
+            "source_order": 1
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-5-1",
+            "source_order": 2
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-5-2",
+            "source_order": 3
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-5-2-a",
+            "source_order": 4
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-5-2-b",
+            "source_order": 5
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-5-2-c",
+            "source_order": 6
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-5-2-d",
+            "source_order": 7
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-5-2-e",
+            "source_order": 8
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-5-2-f",
+            "source_order": 9
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-5-2-g",
+            "source_order": 10
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-5-2-h",
+            "source_order": 11
+          },
+          {
+            "content_type": "clause",
+            "content_id": "zone-eg-clause-28-5-3",
+            "source_order": 12
+          }
+        ],
+        "citations": {
+          "pdf_page_start": 164,
+          "pdf_page_end": 164,
+          "bylaw_page_start": 160,
+          "bylaw_page_end": 160
+        }
+      }
+    ],
+    "clause_refs": [
+      {
+        "clause_id": "zone-eg-clause-28-1",
+        "section_id": "zone-eg-section-28-1",
+        "source_order": 1
+      },
+      {
+        "clause_id": "zone-eg-clause-28-2-1",
+        "section_id": "zone-eg-section-28-2",
+        "source_order": 2
+      },
+      {
+        "clause_id": "zone-eg-clause-28-3-1",
+        "section_id": "zone-eg-section-28-3",
+        "source_order": 3
+      },
+      {
+        "clause_id": "zone-eg-clause-28-3-1-a",
+        "section_id": "zone-eg-section-28-3",
+        "source_order": 4
+      },
+      {
+        "clause_id": "zone-eg-clause-28-3-1-b",
+        "section_id": "zone-eg-section-28-3",
+        "source_order": 5
+      },
+      {
+        "clause_id": "zone-eg-clause-28-3-2",
+        "section_id": "zone-eg-section-28-3",
+        "source_order": 6
+      },
+      {
+        "clause_id": "zone-eg-clause-28-3-2-a",
+        "section_id": "zone-eg-section-28-3",
+        "source_order": 7
+      },
+      {
+        "clause_id": "zone-eg-clause-28-3-2-b",
+        "section_id": "zone-eg-section-28-3",
+        "source_order": 8
+      },
+      {
+        "clause_id": "zone-eg-clause-28-3-2-c",
+        "section_id": "zone-eg-section-28-3",
+        "source_order": 9
+      },
+      {
+        "clause_id": "zone-eg-clause-28-3-2-d",
+        "section_id": "zone-eg-section-28-3",
+        "source_order": 10
+      },
+      {
+        "clause_id": "zone-eg-clause-28-3-2-e",
+        "section_id": "zone-eg-section-28-3",
+        "source_order": 11
+      },
+      {
+        "clause_id": "zone-eg-clause-28-3-2-f",
+        "section_id": "zone-eg-section-28-3",
+        "source_order": 12
+      },
+      {
+        "clause_id": "zone-eg-clause-28-3-2-g",
+        "section_id": "zone-eg-section-28-3",
+        "source_order": 13
+      },
+      {
+        "clause_id": "zone-eg-clause-28-3-3",
+        "section_id": "zone-eg-section-28-3",
+        "source_order": 14
+      },
+      {
+        "clause_id": "zone-eg-clause-28-4-1",
+        "section_id": "zone-eg-section-28-4",
+        "source_order": 15
+      },
+      {
+        "clause_id": "zone-eg-clause-28-4-4",
+        "section_id": "zone-eg-section-28-4",
+        "source_order": 16
+      },
+      {
+        "clause_id": "zone-eg-clause-28-5",
+        "section_id": "zone-eg-section-28-5",
+        "source_order": 17
+      },
+      {
+        "clause_id": "zone-eg-clause-28-5-1",
+        "section_id": "zone-eg-section-28-5",
+        "source_order": 18
+      },
+      {
+        "clause_id": "zone-eg-clause-28-5-2",
+        "section_id": "zone-eg-section-28-5",
+        "source_order": 19
+      },
+      {
+        "clause_id": "zone-eg-clause-28-5-2-a",
+        "section_id": "zone-eg-section-28-5",
+        "source_order": 20
+      },
+      {
+        "clause_id": "zone-eg-clause-28-5-2-b",
+        "section_id": "zone-eg-section-28-5",
+        "source_order": 21
+      },
+      {
+        "clause_id": "zone-eg-clause-28-5-2-c",
+        "section_id": "zone-eg-section-28-5",
+        "source_order": 22
+      },
+      {
+        "clause_id": "zone-eg-clause-28-5-2-d",
+        "section_id": "zone-eg-section-28-5",
+        "source_order": 23
+      },
+      {
+        "clause_id": "zone-eg-clause-28-5-2-e",
+        "section_id": "zone-eg-section-28-5",
+        "source_order": 24
+      },
+      {
+        "clause_id": "zone-eg-clause-28-5-2-f",
+        "section_id": "zone-eg-section-28-5",
+        "source_order": 25
+      },
+      {
+        "clause_id": "zone-eg-clause-28-5-2-g",
+        "section_id": "zone-eg-section-28-5",
+        "source_order": 26
+      },
+      {
+        "clause_id": "zone-eg-clause-28-5-2-h",
+        "section_id": "zone-eg-section-28-5",
+        "source_order": 27
+      },
+      {
+        "clause_id": "zone-eg-clause-28-5-3",
+        "section_id": "zone-eg-section-28-5",
+        "source_order": 28
+      }
+    ],
+    "tables_raw": [],
+    "map_references_raw": [
+      {
+        "map_reference_id": "zone-eg-map-zoning-map",
+        "map_label_raw": "Zoning Map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "text_raw": "Current zoning map raster package represented in PostGIS-compatible spatial artifacts.",
+        "citations": {
+          "pdf_page_start": 163,
+          "pdf_page_end": 164,
+          "bylaw_page_start": 159,
+          "bylaw_page_end": 160
+        }
+      }
+    ]
+  },
+  "structured_data": {
+    "terms": [
+      {
+        "term_id": "zone-eg-term-use-transitional_housing_facility",
+        "term_raw": "Transitional Housing",
+        "term_normalized": "transitional_housing_facility",
+        "term_category": "use_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "transitional_housing_facility"
+      },
+      {
+        "term_id": "zone-eg-term-use-apartment_building",
+        "term_raw": "Multi-unit dwelling",
+        "term_normalized": "apartment_building",
+        "term_category": "dwelling_type",
+        "source_refs": [],
+        "confidence": "high",
+        "code_table": "use",
+        "code": "apartment_building"
+      }
+    ],
+    "uses": [
+      {
+        "use_id": "zone-eg-use-transitional-housing-1-1",
+        "use_name_raw": "Transitional Housing",
+        "use_term_id": "zone-eg-term-use-transitional_housing_facility",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      },
+      {
+        "use_id": "zone-eg-use-multi-unit-dwelling-2-1",
+        "use_name_raw": "Multi-unit dwelling",
+        "use_term_id": "zone-eg-term-use-apartment_building",
+        "use_status": "permitted",
+        "source_clause_ref": "",
+        "confidence": "high"
+      }
+    ],
+    "numeric_values": [
+      {
+        "numeric_value_id": "zone-eg-num-zone-eg-clause-28-3-2-b-1",
+        "value_raw": "15 m",
+        "value": 15,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-eg-clause-28-3-2-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-eg-num-zone-eg-clause-28-3-2-b-2",
+        "value_raw": "20 m",
+        "value": 20,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-eg-clause-28-3-2-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-eg-num-zone-eg-clause-28-3-2-c-1",
+        "value_raw": "5 m",
+        "value": 5,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-eg-clause-28-3-2-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-eg-num-zone-eg-clause-28-3-2-d-1",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-eg-clause-28-3-2-d"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-eg-num-zone-eg-clause-28-3-2-e-1",
+        "value_raw": "0 m",
+        "value": 0,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-eg-clause-28-3-2-e"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-eg-num-zone-eg-clause-28-3-2-e-2",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-eg-clause-28-3-2-e"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-eg-num-zone-eg-clause-28-3-2-f-1",
+        "value_raw": "6 m",
+        "value": 6,
+        "unit": "m",
+        "measure_type": "length",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-eg-clause-28-3-2-f"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-eg-num-zone-eg-clause-28-4-1-1",
+        "value_raw": "16 m",
+        "value": 16,
+        "unit": "m",
+        "measure_type": "height",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-eg-clause-28-4-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-eg-num-zone-eg-clause-28-4-1-2",
+        "value_raw": "4 storeys",
+        "value": 4,
+        "unit": "storey",
+        "measure_type": "count",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-eg-clause-28-4-1"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "requirements": [
+      {
+        "requirement_id": "zone-eg-req-zone-eg-clause-28-3-2-b",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_frontage",
+        "requirement_label_raw": "(b)",
+        "requirement_text_raw": "Frontage min. 15 m for commercial building only; 20 m for multi-unit dwelling or mixed use building",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-eg-num-zone-eg-clause-28-3-2-b-1",
+          "zone-eg-num-zone-eg-clause-28-3-2-b-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-eg-clause-28-3-2-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-eg-req-zone-eg-clause-28-3-2-c",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "setback",
+        "requirement_label_raw": "(c)",
+        "requirement_text_raw": "Front Setback 2-5 m",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-eg-num-zone-eg-clause-28-3-2-c-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-eg-clause-28-3-2-c"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-eg-req-zone-eg-clause-28-3-2-d",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "flankage_yard",
+        "requirement_label_raw": "(d)",
+        "requirement_text_raw": "Flankage Setback 2-6 m",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-eg-num-zone-eg-clause-28-3-2-d-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-eg-clause-28-3-2-d"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-eg-req-zone-eg-clause-28-3-2-e",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "setback",
+        "requirement_label_raw": "(e)",
+        "requirement_text_raw": "Side Setback min. 0 m shared*, 6 m for other residential zones",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-eg-num-zone-eg-clause-28-3-2-e-1",
+          "zone-eg-num-zone-eg-clause-28-3-2-e-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-eg-clause-28-3-2-e"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-eg-req-zone-eg-clause-28-3-2-f",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "setback",
+        "requirement_label_raw": "(f)",
+        "requirement_text_raw": "Rear Setback min. 6 m",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-eg-num-zone-eg-clause-28-3-2-f-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-eg-clause-28-3-2-f"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-eg-req-zone-eg-clause-28-4-1",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "height",
+        "requirement_label_raw": ".1",
+        "requirement_text_raw": "The maximum building height shall be 16 m or 4 storeys.",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-eg-num-zone-eg-clause-28-4-1-1",
+          "zone-eg-num-zone-eg-clause-28-4-1-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "zone-eg-clause-28-4-1"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "regulation_groups": [
+      {
+        "regulation_group_id": "zone-eg-regulation-group-zone",
+        "group_label_raw": "PART 28",
+        "group_title_raw": "EG - Eastern Gateway",
+        "regulated_use_terms": [
+          "zone-eg-term-use-transitional_housing_facility",
+          "zone-eg-term-use-apartment_building"
+        ],
+        "applicability": {
+          "applies_to_zone_codes": [
+            "EG"
+          ],
+          "conditions": []
+        },
+        "requirement_refs": [
+          "zone-eg-req-zone-eg-clause-28-3-2-b",
+          "zone-eg-req-zone-eg-clause-28-3-2-c",
+          "zone-eg-req-zone-eg-clause-28-3-2-d",
+          "zone-eg-req-zone-eg-clause-28-3-2-e",
+          "zone-eg-req-zone-eg-clause-28-3-2-f",
+          "zone-eg-req-zone-eg-clause-28-4-1"
+        ],
+        "source_section_ref": "zone-eg-section-28-1",
+        "confidence": "medium"
+      }
+    ],
+    "conditional_rule_groups": [],
+    "zone_relationships": [],
+    "map_layer_references": [
+      {
+        "map_reference_id": "zone-eg-map-zoning-map",
+        "map_title_raw": "Charlottetown Zoning Map 2026",
+        "map_label_raw": "Zoning Map",
+        "map_reference_type": "zoning_map",
+        "postgis_schema": "public",
+        "postgis_table": "spatial_features",
+        "postgis_layer_name": "charlottetown_zoning_map_2026_raster",
+        "feature_key": "EG",
+        "source_refs": [
+          {
+            "source_ref_type": "map_reference",
+            "source_ref_id": "zone-eg-map-zoning-map"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "other_requirements": [],
+    "cross_references": []
+  },
+  "review_flags": [
+    {
+      "review_flag_id": "zone-eg-flag-legacy-open-issue-1",
+      "severity": "warning",
+      "blocking": false,
+      "review_type": "extraction_review",
+      "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization.",
+      "source_refs": [
+        {
+          "source_ref_type": "source_unit",
+          "source_ref_id": "zone-eg"
+        }
+      ]
+    }
+  ]
 }
