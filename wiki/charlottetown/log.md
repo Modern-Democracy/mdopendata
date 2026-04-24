@@ -6,6 +6,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-24] validation | Draft issue ledger refresh
+
+Updated `topics/draft-validation-rebaseline.md` after refreshing `plan/chalottetown-draft-zoning-issue-ledger.csv` from the current regenerated draft outputs.
+
 ## [2026-04-24] validation | Draft use-code reconciliation
 
 Updated `topics/draft-validation-rebaseline.md` after reconciling the 25 draft `use.new_codes` candidates into true new use codes, semantic matches, and extraction artifacts.
