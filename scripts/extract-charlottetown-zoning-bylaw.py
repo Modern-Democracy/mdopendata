@@ -1573,6 +1573,8 @@ DRAFT_GENERAL_PROVISIONS_REVIEWED_REQUIREMENT_CLAUSES = {
     "doc-general-provisions-clause-4-17-1",
     "doc-general-provisions-clause-4-18-2",
     "doc-general-provisions-clause-4-18-3",
+    "doc-general-provisions-clause-5-4-3-a",
+    "doc-general-provisions-clause-5-4-3-b",
     "doc-general-provisions-clause-5-5-1",
     "doc-general-provisions-clause-8-4-4",
     "doc-general-provisions-clause-8-4-5",

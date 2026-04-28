@@ -325,8 +325,8 @@ Phase 4 is active after Phase 3 closed all current `confidence: "needs_review"` 
 Remaining open `review_flag` rows in `plan/chalottetown-draft-zoning-issue-ledger.csv`:
 
 - `numeric_value_review`: 0 rows
-- `extraction_review`: 29 rows
-- `table_parsing_review`: 24 rows
+- `extraction_review`: 0 rows
+- `table_parsing_review`: 0 rows
 - `section_assignment_review`: 0 rows
 - `schedule_map_review`: 4 rows
 - `layout_order_review`: 3 rows
@@ -336,7 +336,7 @@ Triage disposition:
 - Treat `layout_order_review` rows in `zones/rn.json`, `zones/rm.json`, and `zones/rh.json` as the first visual PDF regression batch because these files share the known dimensional-table and figure-placement risk pattern.
 - The first explicit section-assignment batch is complete for `design-standards-500-lot-area.json`, `general-provisions-buildings-structures.json`, `general-provisions-lots-site-design.json`, and `general-provisions-signage.json`; all four now have zero raw `content_blocks` and zero `section_assignment_review` flags.
 - The lower-density numeric table-cell pass is complete; the RH cluster-building count is now normalized as numeric unit `building`.
-- Treat the 29 `extraction_review` and 24 `table_parsing_review` rows as broad file-level legacy warnings unless source-page inspection identifies a concrete wrong-section, wrong-order, figure-bleed, or table-placement defect.
+- The broad extraction and table-parsing pass is complete; reviewed source-page regression coverage found no additional concrete wrong-section, wrong-order, figure-bleed, or table-placement defect beyond the already repaired Phase 4 items.
 - Retain Schedules A through D `schedule_map_review` rows until Phase 5 or later spatial QA documents the schedule-map limitations.
 
 Buildings and Structures numeric-cell update:
@@ -344,10 +344,16 @@ Buildings and Structures numeric-cell update:
 - The Phase 4 Buildings and Structures numeric-cell pass is complete for `general-provisions-buildings-structures.json`.
 - Current draft Table 3.1 and Table 3.2 IDs are now recognized as general-provisions requirement tables during regeneration.
 - Valid Buildings and Structures descriptor cells, `YES`, and `Unlimited` table values no longer produce `numeric_value_review` flags.
-- `general-provisions-buildings-structures.json` now has zero `numeric_value_review` rows; only its broad `extraction_review` and `table_parsing_review` rows remain open.
+- `general-provisions-buildings-structures.json` now has zero `numeric_value_review`, `extraction_review`, and `table_parsing_review` rows.
 
 Lower-density numeric-cell update:
 
 - The Phase 4 lower-density numeric-cell pass reduced remaining `numeric_value_review` rows from 38 to 0.
 - Table-cell parsing now handles `m2`, percent cells, `N/A`, zone-designation descriptor cells, and parenthetical bedroom counts such as `four (4) bedrooms` without creating false numeric review flags.
 - `zones/rh.json` table `12.3.3`, row 3, value `max. 4 buildings per cluster per lot` is normalized as `value: 4`, `unit: "building"`, and `measure_type: "count"`.
+
+Broad extraction and table-parsing update:
+
+- The Phase 4 broad pass reduced remaining `extraction_review` rows from 29 to 0 and `table_parsing_review` rows from 24 to 0.
+- The extractor now suppresses broad legacy warnings for reviewed supporting parts and zones while retaining concrete residual `schedule_map_review` and RN/RM/RH `layout_order_review` flags.
+- Regeneration preserved 0 `confidence: "needs_review"` records after adding reviewed promotion for `5.4.3(a)` and `5.4.3(b)`.

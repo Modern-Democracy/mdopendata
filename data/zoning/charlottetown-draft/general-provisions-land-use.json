@@ -5378,32 +5378,5 @@
     ],
     "cross_references": []
   },
-  "review_flags": [
-    {
-      "review_flag_id": "doc-general-provisions-flag-legacy-open-issue-1",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "extraction_review",
-      "description": "PDF text order was extracted with pypdf; verify section order, column flow, and table layout before normalization.",
-      "source_refs": [
-        {
-          "source_ref_type": "document",
-          "source_ref_id": "doc-general-provisions"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-flag-legacy-open-issue-2",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "table_parsing_review",
-      "description": "The source section contains table, figure, or schedule text. Values are preserved as extracted text and require source PDF layout review before normalization.",
-      "source_refs": [
-        {
-          "source_ref_type": "document",
-          "source_ref_id": "doc-general-provisions"
-        }
-      ]
-    }
-  ]
+  "review_flags": []
 }

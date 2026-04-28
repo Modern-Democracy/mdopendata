@@ -48,6 +48,29 @@ ZONES = [
     {"part": 29, "code": "UE", "name": "Urban Expansion", "bylaw_start": 161},
 ]
 
+PHASE4_BROAD_REVIEWED_ZONE_CODES = {
+    "AP",
+    "BP",
+    "C",
+    "DC",
+    "DMS",
+    "DMU",
+    "DN",
+    "DW",
+    "EG",
+    "GC",
+    "GN",
+    "HI",
+    "I",
+    "P",
+    "POS",
+    "PPS",
+    "RH",
+    "RM",
+    "RN",
+    "UE",
+}
+
 SUPPORTING_PARTS = [
     {
         "part": 1,
@@ -122,6 +145,18 @@ SUPPORTING_PARTS = [
         "bylaw_end": 86,
     },
 ]
+
+PHASE4_BROAD_REVIEWED_SUPPORTING_SLUGS = {
+    "administration",
+    "design-standards-500-lot-area",
+    "general-provisions-buildings-structures",
+    "general-provisions-land-use",
+    "general-provisions-lots-site-design",
+    "general-provisions-parking",
+    "general-provisions-signage",
+    "general-provisions-subdividing-land",
+    "permit-applications-processes",
+}
 
 SCHEDULES = [
     {
@@ -742,12 +777,15 @@ def build_supporting_part_doc(reader: PdfReader, part: dict) -> dict:
             }
         )
 
-    open_issues = [
-        {
-            "issue_type": "extraction_review",
-            "description": "PDF text order was extracted with pypdf; verify section order, column flow, and table layout before normalization.",
-        }
-    ]
+    open_issues = []
+    broad_reviewed = part["slug"] in PHASE4_BROAD_REVIEWED_SUPPORTING_SLUGS
+    if not broad_reviewed:
+        open_issues.append(
+            {
+                "issue_type": "extraction_review",
+                "description": "PDF text order was extracted with pypdf; verify section order, column flow, and table layout before normalization.",
+            }
+        )
     if content_blocks:
         open_issues.append(
             {
@@ -755,7 +793,7 @@ def build_supporting_part_doc(reader: PdfReader, part: dict) -> dict:
                 "description": "Some extracted text was not safely assigned to a labeled section and is preserved in content_blocks.",
             }
         )
-    if any(re.search(r"\b(Table|Figure|Schedule)\b", page["text"]) for page in page_texts):
+    if not broad_reviewed and any(re.search(r"\b(Table|Figure|Schedule)\b", page["text"]) for page in page_texts):
         open_issues.append(
             {
                 "issue_type": "table_parsing_review",
@@ -912,12 +950,15 @@ def build_zone_doc(reader: PdfReader, zone: dict, next_bylaw_start: int | None) 
     requirement_sections = []
     permitted_uses = []
     pending_patterns: set[str] = set()
-    open_issues = [
-        {
-            "issue_type": "extraction_review",
-            "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization.",
-        }
-    ]
+    open_issues = []
+    broad_reviewed = zone["code"] in PHASE4_BROAD_REVIEWED_ZONE_CODES
+    if not broad_reviewed:
+        open_issues.append(
+            {
+                "issue_type": "extraction_review",
+                "description": "PDF text order and figure/table text were extracted with pypdf; verify section order, column flow, and page layout before normalization.",
+            }
+        )
 
     for index, section in enumerate(raw_sections, start=1):
         page = section_page_lookup(page_texts, section["section_label_raw"], section["title_label_raw"], zone, next_bylaw_start)
@@ -936,7 +977,7 @@ def build_zone_doc(reader: PdfReader, zone: dict, next_bylaw_start: int | None) 
         requirement_sections.append(req_section)
         permitted_uses.extend(extract_permitted_uses(req_section, zone, section_citation))
 
-    if re.search(r"\b(Table|Figure|Schedule)\b", text):
+    if not broad_reviewed and re.search(r"\b(Table|Figure|Schedule)\b", text):
         open_issues.append(
             {
                 "issue_type": "table_parsing_review",

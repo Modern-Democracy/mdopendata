@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-28] validation | Phase 4 broad extraction and table parsing
+
+Updated `topics/draft-validation-rebaseline.md` after closing the broad file-level `extraction_review` and `table_parsing_review` rows. The refreshed ledger now retains only 4 schedule-map rows and 3 RN/RM/RH layout-order rows.
+
 ## [2026-04-28] extraction | Draft RN/RH Phase 4 layout repairs
 
 Updated `topics/draft-layout-repair-notes.md` after repairing RN figure bleed in `10.4.7(g)` and `10.6.2`, and RH `12.3`/`12.4` table and clause assignment in regenerated draft zone outputs.
