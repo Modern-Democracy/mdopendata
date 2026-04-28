@@ -7,7 +7,7 @@ Reference plan: `plan/chalottetown-draft-zoning-plan.md`
 - Active phase: Phase 4
 - Active phase name: Section and Layout Repair
 - Overall status: In progress
-- Current progress: Phase 1 has been refreshed from current regenerated outputs in `plan/chalottetown-draft-zoning-issue-ledger.csv`; after the final Phase 3 needs-review pass, the ledger contains 158 open rows: 158 `review_flag` rows and 0 `needs_review` rows. Phase 2 is complete for the approved 2026-04-23 code-table normalization pass and the 2026-04-24 `use.new_codes` drift check. The code-table match report previously listed 25 `use.new_codes`; the reconciliation classified `Cluster Housing` and `Seniors Housing` as true draft-origin use codes, mapped renamed or compound phrases to existing codes, removed dimensional/header/pseudo-use artifacts from queryable terms, and regenerated the report with 0 `use.new_codes`, 11 `use.semantic_matches`, and 97 `use.exact_matches`. Phase 3 is complete for all current `confidence: "needs_review"` entries. Phase 4 is active for section, layout, table, figure, and residual review-flag validation. Targeted layout-repair passes have already been applied in the draft extractor for RM-style figure/table bleed and the named Part 1, Part 2, Part 3, Part 4, Part 5, Part 6, Part 7, and Part 8 general-provisions parsing defects. Regenerated draft outputs now restore the missing RM `11.3.2`, `11.3.3`, `11.5`, and `11.6` clause structure, promote equivalent dimensional requirement blocks into `tables_raw`, repair draft Tables 3.1, 3.2, 3.3, 4.1, and 4.2 placement, split or reassign the reported clauses in sections `1.6`, `2.11`, `2.18`, `2.19`, `3.1`, `3.16`, `3.19`, `4.5`, `4.6`, `4.7`, `5.2`, `7.10`, and `7.11`, restore wrapped title continuations in sections `1.6`, `1.14`, `2.1`, `2.9`, `2.11`, `4.14`, `4.16`, `4.17`, `5.4`, `5.6`, `5.8`, `6.3`, `7.3`, `7.4`, `7.8`, `7.12`, and `7.13`, reorder or reparent the reported `7.3` and `7.5` clauses, correct the Part 2/Part 3 extraction boundary so section `2.19` is generated in `permit-applications-processes.json` rather than `general-provisions-buildings-structures.json`, repair Part 8 parking section assignment, clause tails, and bicycle-parking section splits for `8.4`, `8.5`, `8.7`, `8.8`, `8.12`, `8.13`, and `8.14`, remove DMU clause `15.6.1` figure/dimensional bleed, remove source figure bleed from general-provisions clause `3.9.1(a)` and RN clause `10.6.2`, and restore the truncated BP clause `18.6.13`.
+- Current progress: Phase 1 has been refreshed from current regenerated outputs in `plan/chalottetown-draft-zoning-issue-ledger.csv`; after the final Phase 3 needs-review pass, the ledger contains 158 open rows: 158 `review_flag` rows and 0 `needs_review` rows. Phase 2 is complete for the approved 2026-04-23 code-table normalization pass and the 2026-04-24 `use.new_codes` drift check. The code-table match report previously listed 25 `use.new_codes`; the reconciliation classified `Cluster Housing` and `Seniors Housing` as true draft-origin use codes, mapped renamed or compound phrases to existing codes, removed dimensional/header/pseudo-use artifacts from queryable terms, and regenerated the report with 0 `use.new_codes`, 11 `use.semantic_matches`, and 97 `use.exact_matches`. Phase 3 is complete for all current `confidence: "needs_review"` entries. Phase 4 is active for section, layout, table, figure, and residual review-flag validation. Targeted layout-repair passes have already been applied in the draft extractor for RM-style figure/table bleed and the named Part 1, Part 2, Part 3, Part 4, Part 5, Part 6, Part 7, and Part 8 general-provisions parsing defects. Regenerated draft outputs now restore the missing RM `11.3.2`, `11.3.3`, `11.5`, and `11.6` clause structure, promote equivalent dimensional requirement blocks into `tables_raw`, repair draft Tables 3.1, 3.2, 3.3, 4.1, and 4.2 placement, split or reassign the reported clauses in sections `1.6`, `2.11`, `2.18`, `2.19`, `3.1`, `3.16`, `3.19`, `4.5`, `4.6`, `4.7`, `5.2`, `7.10`, and `7.11`, restore wrapped title continuations in sections `1.6`, `1.14`, `2.1`, `2.9`, `2.11`, `4.14`, `4.16`, `4.17`, `5.4`, `5.6`, `5.8`, `6.3`, `7.3`, `7.4`, `7.8`, `7.12`, and `7.13`, reorder or reparent the reported `7.3` and `7.5` clauses, correct the Part 2/Part 3 extraction boundary so section `2.19` is generated in `permit-applications-processes.json` rather than `general-provisions-buildings-structures.json`, repair Part 8 parking section assignment, clause tails, and bicycle-parking section splits for `8.4`, `8.5`, `8.7`, `8.8`, `8.12`, `8.13`, and `8.14`, remove DMU clause `15.6.1` figure/dimensional bleed, remove source figure bleed from general-provisions clause `3.9.1(a)` and RN clause `10.6.2`, and restore the truncated BP clause `18.6.13`. Phase 4 triage classifies the remaining review flags into 94 numeric table-cell normalization rows, 29 broad extraction-review rows, 24 broad table-parsing rows, 4 schedule-map QA rows, 4 section-assignment rows, and 3 layout-order rows; the first repair allowlist is RN/RM/RH layout regression plus explicit section-assignment review in 500 Lot Area, Buildings and Structures, Lots and Site Design, and Signage.
 - Last updated: 2026-04-28
 
 ## Phase Timeline
@@ -24,27 +24,23 @@ Reference plan: `plan/chalottetown-draft-zoning-plan.md`
 
 ## Current Phase Detail
 
-### Phase 3: High-Priority Clause Validation
+### Phase 4: Section and Layout Repair
 
 Objective:
 
-- validate and normalize the highest-density remaining `needs_review` records after the Phase 2 code-table cleanup
+- validate remaining open `review_flag` rows after Phase 3 eliminated all current `confidence: "needs_review"` records
+- separate broad legacy review warnings from actionable section, layout, table, figure, and residual numeric issues
 
 Required outputs:
 
-- corrected high-priority clause, numeric, and record-type entries in the first validation batch
-- reduced `needs_review` counts in the batch files with explicit residual issues only where source ambiguity remains
-- updated draft JSON outputs and timeline tracking for the batch
+- repaired or intentionally retained section, layout, table, figure, and numeric review flags
+- updated draft JSON outputs and timeline tracking for each Phase 4 batch
+- residual flags narrowed to true source, schema, schedule-map, or spatial-QA limits
 
 Inputs:
 
 - `plan/chalottetown-draft-zoning-issue-ledger.csv`
-- `data/zoning/charlottetown-draft/zones/rn.json`
-- `data/zoning/charlottetown-draft/zones/rm.json`
-- `data/zoning/charlottetown-draft/zones/rh.json`
-- `data/zoning/charlottetown-draft/zones/dms.json`
-- `data/zoning/charlottetown-draft/general-provisions-parking.json`
-- `data/zoning/charlottetown-draft/general-provisions-land-use.json`
+- `data/zoning/charlottetown-draft/**/*.json`
 - `docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf`
 
 Current progress:
@@ -101,11 +97,17 @@ Current progress:
 - `scripts/extract-charlottetown-zoning-bylaw.py` now preserves those four reviewed requirement promotions during regeneration
 - `plan/chalottetown-draft-zoning-issue-ledger.csv` now has 158 open rows: 158 `review_flag` rows and 0 `needs_review` rows
 - Phase 3 is complete for all current `confidence: "needs_review"` entries
+- Phase 4 triage found 94 `numeric_value_review` rows, 29 `extraction_review` rows, 24 `table_parsing_review` rows, 4 `schedule_map_review` rows, 4 `section_assignment_review` rows, and 3 `layout_order_review` rows
+- the 94 numeric rows are mostly table-cell preservation flags, with 60 in `general-provisions-buildings-structures.json`; handle them as table-normalization review after section and layout regression checks
+- the broad extraction and table-parsing rows are mostly one or two file-level legacy warnings per affected file; close them only after source-page regression checks show section order, table placement, and figure bleed are correct for the file
+- schedule-map review rows in Schedules A through D should remain open until spatial QA inputs exist, unless Phase 5 explicitly documents them as intentional residual limitations
+- first Phase 4 repair allowlist: `zones/rn.json`, `zones/rm.json`, and `zones/rh.json` for layout-order regression, plus `design-standards-500-lot-area.json`, `general-provisions-buildings-structures.json`, `general-provisions-lots-site-design.json`, and `general-provisions-signage.json` for explicit section-assignment review
 
 Next actions:
 
-1. Begin Phase 4 by reviewing remaining open section, layout, table, figure, and numeric `review_flag` rows.
-2. Expand the layout-repair regression review to other draft zones that share the same figure and dimensional-table page pattern.
+1. Review the RN/RM/RH visual PDF pages against regenerated clause order, table placement, and figure bleed.
+2. Review the four explicit section-assignment files for unassigned `content_blocks` and misplaced section text.
+3. Then triage the 60 Buildings and Structures numeric table-cell flags before expanding to lower-density zone files.
 
 ## Progress Rules
 

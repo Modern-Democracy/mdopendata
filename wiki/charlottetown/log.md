@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-28] validation | Phase 4 review-flag triage
+
+Updated `topics/draft-validation-rebaseline.md` after triaging the 158 remaining draft `review_flag` rows into numeric, extraction, table, section-assignment, schedule-map, and layout-order batches.
+
 ## [2026-04-28] extraction | Draft HI, subdivision, permit, DN, P, and RM Phase 3 review
 
 Updated `topics/draft-validation-rebaseline.md` after resolving the Phase 3 `needs_review` entries in `zones/hi.json`, `general-provisions-subdividing-land.json`, `permit-applications-processes.json`, `zones/dn.json`, `zones/p.json`, and `zones/rm.json`.
