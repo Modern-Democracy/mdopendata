@@ -1546,6 +1546,11 @@ def repair_charlottetown_draft_parking_sections(data: dict[str, Any]) -> bool:
 
 
 DRAFT_GENERAL_PROVISIONS_REVIEWED_REQUIREMENT_CLAUSES = {
+    "doc-design-standards-clause-6-8-3",
+    "doc-design-standards-clause-6-8-8",
+    "doc-design-standards-clause-6-8-8-a",
+    "doc-design-standards-clause-6-8-8-b",
+    "doc-design-standards-clause-6-8-8-d",
     "doc-general-provisions-clause-4-6-3-d",
     "doc-general-provisions-clause-4-6-5",
     "doc-general-provisions-clause-4-7-2-d",
@@ -1594,6 +1599,15 @@ def promote_reviewed_draft_general_provisions_requirements(data: dict[str, Any])
 
 
 DRAFT_ZONE_REVIEWED_REQUIREMENT_CLAUSES = {
+    "zone-dms-clause-14-4-1",
+    "zone-dms-clause-14-5-9-b",
+    "zone-dms-clause-14-5-9-c",
+    "zone-dms-clause-14-5-11",
+    "zone-dms-clause-14-5-13",
+    "zone-dmu-clause-15-3-2",
+    "zone-dmu-clause-15-4-1",
+    "zone-dmu-clause-15-5-3-a",
+    "zone-dmu-clause-15-5-10",
     "zone-dw-clause-17-5-1",
     "zone-dw-clause-17-5-3",
     "zone-dw-clause-17-5-8-ffe",
@@ -1619,6 +1633,25 @@ def promote_reviewed_draft_zone_requirements(data: dict[str, Any]) -> bool:
         if clause_ids & DRAFT_ZONE_REVIEWED_REQUIREMENT_CLAUSES:
             if requirement.get("confidence") != "high":
                 requirement["confidence"] = "high"
+                changed = True
+    return changed
+
+
+def repair_draft_dmu_landscape_clause(data: dict[str, Any]) -> bool:
+    metadata = data.get("document_metadata") or {}
+    if metadata.get("zone_code") != "DMU" or not str(metadata.get("bylaw_name") or "").startswith("Draft Zoning"):
+        return False
+    changed = False
+    raw_data = data.get("raw_data") or {}
+    for source_unit in raw_data.get("source_units") or []:
+        text = source_unit.get("text_raw")
+        if isinstance(text, str) and "See Section 6.8-6.9 1.5 m" in text:
+            source_unit["text_raw"] = text.replace("See Section 6.8-6.9 1.5 m", "See Section 6.8-6.9")
+            changed = True
+    for section in raw_data.get("sections_raw") or []:
+        for clause in section.get("clauses_raw") or []:
+            if clause.get("clause_id") == "zone-dmu-clause-15-6-1" and clause.get("clause_text_raw") == "See Section 6.8-6.9 1.5 m":
+                clause["clause_text_raw"] = "See Section 6.8-6.9"
                 changed = True
     return changed
 

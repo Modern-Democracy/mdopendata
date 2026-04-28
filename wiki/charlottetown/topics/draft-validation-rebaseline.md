@@ -18,12 +18,13 @@ This page records the 2026-04-24 rebaseline of the Charlottetown draft zoning va
 - The current issue ledger was refreshed from regenerated outputs after the use-code reconciliation. It initially cataloged 244 open rows: 158 `review_flag` rows across 33 JSON files and 86 `needs_review` rows across 22 JSON files.
 - After the Phase 3 parking and land-use pass, `plan/chalottetown-draft-zoning-issue-ledger.csv` catalogs 224 open rows: 158 `review_flag` rows and 66 `needs_review` rows. `general-provisions-parking.json` and `general-provisions-land-use.json` have no remaining `confidence: "needs_review"` entries.
 - After the Phase 3 DW and signage pass, `plan/chalottetown-draft-zoning-issue-ledger.csv` catalogs 210 open rows: 158 `review_flag` rows and 52 `needs_review` rows. `zones/dw.json` and `general-provisions-signage.json` also have no remaining `confidence: "needs_review"` entries.
+- After the Phase 3 500 Lot Area, DMS, and DMU pass, `plan/chalottetown-draft-zoning-issue-ledger.csv` has 195 open rows: 158 `review_flag` rows and 37 `needs_review` rows. `design-standards-500-lot-area.json`, `zones/dms.json`, and `zones/dmu.json` also have no remaining `confidence: "needs_review"` entries. `zones/dmu.json` clause `15.6.1` was corrected to `See Section 6.8-6.9` after source comparison showed the generated `1.5 m` value came from nearby figure or dimensional text bleed.
 - The refreshed ledger has no unmatched code-table `new_codes` rows.
-- `design-standards-500-lot-area.json`, `zones/dms.json`, and `zones/dmu.json` currently have the highest remaining `needs_review` concentrations.
+- The next highest remaining `needs_review` concentrations are `general-provisions-buildings-structures.json`, `zones/bp.json`, `zones/dc.json`, `zones/i.json`, and `zones/rn.json`.
 
 ## Plan Impact
 
 - Phase 1 is refreshed for the current regenerated outputs.
 - Phase 2 code-table drift has been rechecked for `use.new_codes`; the report now has no unresolved new use codes.
-- Phase 3 remains active; the parking, land-use, DW, and signage high-priority files are closed for `needs_review` records, and the next highest-density files are `design-standards-500-lot-area.json`, `zones/dms.json`, and `zones/dmu.json`.
+- Phase 3 remains active; the parking, land-use, DW, signage, 500 Lot Area, DMS, and DMU high-priority files are closed for `needs_review` records.
 - Phase 4 should begin with regression review of already repaired layout sections before widening to remaining layout issues.
