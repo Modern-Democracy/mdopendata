@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-28] validation | Phase 4 RN/RM/RH layout-order closure
+
+Updated `topics/draft-validation-rebaseline.md` after closing the reviewed RN/RM/RH `layout_order_review` residual warnings. The refreshed ledger now retains only 4 schedule-map rows.
+
 ## [2026-04-28] validation | Phase 4 broad extraction and table parsing
 
 Updated `topics/draft-validation-rebaseline.md` after closing the broad file-level `extraction_review` and `table_parsing_review` rows. The refreshed ledger now retains only 4 schedule-map rows and 3 RN/RM/RH layout-order rows.

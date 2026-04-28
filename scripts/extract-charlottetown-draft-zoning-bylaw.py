@@ -71,6 +71,12 @@ PHASE4_BROAD_REVIEWED_ZONE_CODES = {
     "UE",
 }
 
+PHASE4_LAYOUT_REVIEWED_ZONE_CODES = {
+    "RH",
+    "RM",
+    "RN",
+}
+
 SUPPORTING_PARTS = [
     {
         "part": 1,
@@ -1001,7 +1007,7 @@ def build_zone_doc(reader: PdfReader, zone: dict, next_bylaw_start: int | None) 
             }
         )
 
-    if zone["code"] in {"RN", "RM", "RH"}:
+    if zone["code"] in {"RN", "RM", "RH"} and zone["code"] not in PHASE4_LAYOUT_REVIEWED_ZONE_CODES:
         open_issues.append(
             {
                 "issue_type": "layout_order_review",

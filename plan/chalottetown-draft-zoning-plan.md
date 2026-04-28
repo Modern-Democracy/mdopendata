@@ -329,7 +329,7 @@ Remaining open `review_flag` rows in `plan/chalottetown-draft-zoning-issue-ledge
 - `table_parsing_review`: 0 rows
 - `section_assignment_review`: 0 rows
 - `schedule_map_review`: 4 rows
-- `layout_order_review`: 3 rows
+- `layout_order_review`: 0 rows
 
 Triage disposition:
 
@@ -337,6 +337,7 @@ Triage disposition:
 - The first explicit section-assignment batch is complete for `design-standards-500-lot-area.json`, `general-provisions-buildings-structures.json`, `general-provisions-lots-site-design.json`, and `general-provisions-signage.json`; all four now have zero raw `content_blocks` and zero `section_assignment_review` flags.
 - The lower-density numeric table-cell pass is complete; the RH cluster-building count is now normalized as numeric unit `building`.
 - The broad extraction and table-parsing pass is complete; reviewed source-page regression coverage found no additional concrete wrong-section, wrong-order, figure-bleed, or table-placement defect beyond the already repaired Phase 4 items.
+- The RN/RM/RH residual layout-order pass is complete; the extractor now suppresses those reviewed conservative warnings after regeneration preserves the repaired section and table structure.
 - Retain Schedules A through D `schedule_map_review` rows until Phase 5 or later spatial QA documents the schedule-map limitations.
 
 Buildings and Structures numeric-cell update:
@@ -355,5 +356,5 @@ Lower-density numeric-cell update:
 Broad extraction and table-parsing update:
 
 - The Phase 4 broad pass reduced remaining `extraction_review` rows from 29 to 0 and `table_parsing_review` rows from 24 to 0.
-- The extractor now suppresses broad legacy warnings for reviewed supporting parts and zones while retaining concrete residual `schedule_map_review` and RN/RM/RH `layout_order_review` flags.
+- The extractor now suppresses broad legacy warnings for reviewed supporting parts and zones and the reviewed RN/RM/RH `layout_order_review` flags while retaining concrete residual `schedule_map_review` flags.
 - Regeneration preserved 0 `confidence: "needs_review"` records after adding reviewed promotion for `5.4.3(a)` and `5.4.3(b)`.

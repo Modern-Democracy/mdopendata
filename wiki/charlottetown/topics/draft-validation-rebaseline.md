@@ -34,10 +34,11 @@ This page records the 2026-04-24 rebaseline of the Charlottetown draft zoning va
 - After the Phase 4 broad extraction and table-parsing pass, the refreshed ledger has 7 `review_flag` rows and 0 `needs_review` rows. The distribution is 0 `numeric_value_review`, 0 `extraction_review`, 0 `table_parsing_review`, 0 `section_assignment_review`, 4 `schedule_map_review`, and 3 `layout_order_review` rows.
 - The broad file-level legacy warnings were closed for reviewed supporting parts and zones after source-page regression coverage found no additional concrete wrong-section, wrong-order, figure-bleed, or table-placement defect beyond the already repaired Phase 4 items.
 - Reviewed regeneration now also preserves `doc-general-provisions-clause-5-4-3-a` and `doc-general-provisions-clause-5-4-3-b` as high-confidence requirements so the Phase 3 closure remains stable.
+- After the Phase 4 RN/RM/RH layout-order closure, the refreshed ledger has 4 `review_flag` rows and 0 `needs_review` rows. The distribution is 0 `numeric_value_review`, 0 `extraction_review`, 0 `table_parsing_review`, 0 `section_assignment_review`, 4 `schedule_map_review`, and 0 `layout_order_review` rows.
 
 ## Plan Impact
 
 - Phase 1 is refreshed for the current regenerated outputs.
 - Phase 2 code-table drift has been rechecked for `use.new_codes`; the report now has no unresolved new use codes.
 - Phase 3 is complete for all current `confidence: "needs_review"` records.
-- Phase 4 has completed the RN/RM/RH layout regression, the four explicit section-assignment files, all numeric table-cell flags, and broad extraction/table-parsing warnings; remaining review should retain or explicitly close schedule-map and RN/RM/RH layout-order residuals.
+- Phase 4 has completed the RN/RM/RH layout regression and layout-order closure, the four explicit section-assignment files, all numeric table-cell flags, and broad extraction/table-parsing warnings; remaining review should retain or explicitly close schedule-map residuals.
