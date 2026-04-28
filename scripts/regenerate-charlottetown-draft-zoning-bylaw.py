@@ -260,14 +260,7 @@ def transform_schedule_doc(path: Path) -> dict[str, Any]:
                 }
             ],
         },
-        "review_flags": [
-            current.make_review_flag(
-                f"{prefix}-flag-schedule-review",
-                "schedule_map_review",
-                "Schedule map text is preserved by page and requires spatial QA before downstream use.",
-                [current.source_ref("map_reference", map_ref_id)],
-            )
-        ],
+        "review_flags": [],
     }
 
 
@@ -428,6 +421,10 @@ This folder contains approved-schema draft zoning bylaw extraction outputs regen
 - Zone files: {manifest["zone_count"]}
 - Supporting document files: {len(manifest["document_files"])}
 - Schedule files: {len(manifest["schedules"])}
+
+## Schedule map limits
+
+Schedule files preserve extracted page text and map-reference metadata only. They are not digitized spatial zoning layers and require later spatial QA before parcel overlays, zoning-boundary comparison, or downstream GIS use.
 
 ## Code-table matching
 

@@ -10,6 +10,10 @@ This folder contains approved-schema draft zoning bylaw extraction outputs regen
 - Supporting document files: 10
 - Schedule files: 4
 
+## Schedule map limits
+
+Schedule files preserve extracted page text and map-reference metadata only. They are not digitized spatial zoning layers and require later spatial QA before parcel overlays, zoning-boundary comparison, or downstream GIS use.
+
 ## Code-table matching
 
 - Term exact matches: 13

@@ -37,7 +37,7 @@ Review-flag distribution:
 - `table_parsing_review`: 24
 - `zone_boundary_review`: 18
 - `section_assignment_review`: 9
-- `schedule_map_review`: 4
+- `schedule_map_review`: 0
 - `layout_order_review`: 3
 
 Highest `needs_review` concentration:
@@ -174,7 +174,7 @@ Tasks for schedules:
 
 1. Confirm each schedule JSON is page-text only.
 2. Verify titles, citations, and map references against the PDF.
-3. Keep `schedule_map_review` open until spatial QA inputs exist.
+3. Close `schedule_map_review` only when Phase 5 documents schedule-map files as intentional residual limitations or when later spatial QA inputs exist.
 4. Do not treat schedule page text as parcel-ready zoning data.
 
 ## Recommended Execution Order
@@ -296,7 +296,7 @@ Current `review_flags` by `review_type`:
 - `extraction_review`: 29
 - `table_parsing_review`: 24
 - `section_assignment_review`: 4
-- `schedule_map_review`: 4
+- `schedule_map_review`: 0
 - `layout_order_review`: 3
 
 Highest current `needs_review` concentration:
@@ -328,7 +328,7 @@ Remaining open `review_flag` rows in `plan/chalottetown-draft-zoning-issue-ledge
 - `extraction_review`: 0 rows
 - `table_parsing_review`: 0 rows
 - `section_assignment_review`: 0 rows
-- `schedule_map_review`: 4 rows
+- `schedule_map_review`: 0 rows
 - `layout_order_review`: 0 rows
 
 Triage disposition:
@@ -338,7 +338,7 @@ Triage disposition:
 - The lower-density numeric table-cell pass is complete; the RH cluster-building count is now normalized as numeric unit `building`.
 - The broad extraction and table-parsing pass is complete; reviewed source-page regression coverage found no additional concrete wrong-section, wrong-order, figure-bleed, or table-placement defect beyond the already repaired Phase 4 items.
 - The RN/RM/RH residual layout-order pass is complete; the extractor now suppresses those reviewed conservative warnings after regeneration preserves the repaired section and table structure.
-- Retain Schedules A through D `schedule_map_review` rows until Phase 5 or later spatial QA documents the schedule-map limitations.
+- Phase 5 closed the Schedules A through D `schedule_map_review` rows as intentional residual limitations: the schedule files preserve page text and map-reference metadata only, are not digitized zoning layers, and require later spatial QA before parcel overlays, zoning-boundary comparison, or downstream GIS use.
 
 Buildings and Structures numeric-cell update:
 
@@ -356,5 +356,5 @@ Lower-density numeric-cell update:
 Broad extraction and table-parsing update:
 
 - The Phase 4 broad pass reduced remaining `extraction_review` rows from 29 to 0 and `table_parsing_review` rows from 24 to 0.
-- The extractor now suppresses broad legacy warnings for reviewed supporting parts and zones and the reviewed RN/RM/RH `layout_order_review` flags while retaining concrete residual `schedule_map_review` flags.
+- The extractor now suppresses broad legacy warnings for reviewed supporting parts and zones, the reviewed RN/RM/RH `layout_order_review` flags, and Phase 5 schedule-map residual warnings after documenting schedule-map downstream limits.
 - Regeneration preserved 0 `confidence: "needs_review"` records after adding reviewed promotion for `5.4.3(a)` and `5.4.3(b)`.
