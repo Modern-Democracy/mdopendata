@@ -15,6 +15,8 @@ This page records the active Charlottetown zoning workstream context formerly ke
 
 The active workstream is the City of Charlottetown current and draft zoning bylaw extraction, including associated zoning maps, parcel layer, and street map.
 
+The next phase is unified relational and PostGIS ingestion for current and draft bylaw comparison, revision-aware draft updates, approved spatial layers, and later text-vector support.
+
 ## Purpose
 
 The current purpose is to enable parcel and neighbourhood comparison between current and draft Charlottetown zoning, with outputs suitable for later PostGIS/QGIS use and a future public web front end.
@@ -44,5 +46,6 @@ Update its active phase, overall status, current progress, and phase statuses wh
 ## Sources
 
 - [Charlottetown wiki guide](../README.md)
+- [Unified zoning ingestion plan](./unified-zoning-ingestion-plan.md)
 - [Draft zoning validation timeline](../../../plan/chalottetown-draft-zoning-timeline.md)
 - [Draft zoning validation plan](../../../plan/chalottetown-draft-zoning-plan.md)

@@ -26,6 +26,7 @@ This index catalogs the Charlottetown LLM Wiki pages and source families. Update
 | [topics](topics/.gitkeep) | Future pages for zoning concepts, provisions, definitions, and review themes. |
 | [Draft layout repair notes](topics/draft-layout-repair-notes.md) | Durable notes for draft bylaw section-title and two-column clause-assignment repairs. |
 | [Draft validation rebaseline](topics/draft-validation-rebaseline.md) | Durable notes for the 2026-04-24 validation-plan rebaseline after parser repairs restored or added clauses and sections. |
+| [Unified zoning ingestion plan](topics/unified-zoning-ingestion-plan.md) | Next-phase plan for unified relational, spatial, comparison, revision, and vector-ready ingestion of current and draft bylaws. |
 | [Workstream context](topics/workstream-context.md) | Active Charlottetown source paths, output paths, purpose, and maintenance duties. |
 | [comparisons](comparisons/.gitkeep) | Future current-versus-draft, parcel, zone, or neighbourhood comparison pages. |
 | [questions](questions/.gitkeep) | Future reusable answers generated from user queries. |
@@ -56,9 +57,10 @@ These source families remain outside the wiki and must be referenced in place:
 
 ## Current Status
 
-The wiki contains a scaffold plus targeted draft extraction repair and validation rebaseline notes.
+The wiki contains a scaffold, targeted draft extraction repair and validation notes, and the next-phase unified zoning ingestion plan.
 
 ## Sources
 
 - [Charlottetown wiki guide](./README.md)
 - [Charlottetown workstream context](./topics/workstream-context.md)
+- [Unified zoning ingestion plan](./topics/unified-zoning-ingestion-plan.md)

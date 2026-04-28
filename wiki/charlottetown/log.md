@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-28] planning | Unified zoning ingestion plan
+
+Added `topics/unified-zoning-ingestion-plan.md` and updated the Charlottetown index and workstream context for the next phase of relational, spatial, comparison, revision-aware, and text-vector-ready ingestion of the current and draft zoning bylaws.
+
 ## [2026-04-28] validation | Phase 6 final QA
 
 Completed Phase 6 final QA for the Charlottetown draft zoning validation workstream. Regeneration and schema validation passed, the final scan found 0 `review_flags`, 0 `confidence: "needs_review"` entries, and 0 unresolved new code-table entries, and `plan/chalottetown-draft-zoning-final-qa-summary.md` now records the final QA evidence.
@@ -101,3 +105,4 @@ Created the v1 scaffold for the Charlottetown LLM Wiki, including the local guid
 ## Sources
 
 - [Charlottetown wiki guide](./README.md)
+- [Unified zoning ingestion plan](./topics/unified-zoning-ingestion-plan.md)
