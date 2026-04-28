@@ -23,6 +23,15 @@ This page records durable extraction notes for reported Charlottetown draft zoni
 - Figure and table bleed from parking island and accessible-parking graphics was removed from `8.7.1(c)`, `8.8.2`, and `8.8.6`.
 - The source has distinct sections `8.12 BICYCLE PARKING`, `8.13 BICYCLE PARKING (CLASS A)`, and `8.14 BICYCLE PARKING (CLASS B)`; regenerated output now creates those sections explicitly instead of preserving title and figure text inside clause bodies.
 
+## 2026-04-28 RN/RH Phase 4 Layout Repairs
+
+- Source: `docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf`, bylaw pages 92, 94, 98, and 99.
+- Extractors: `scripts/extract-charlottetown-zoning-bylaw.py` and `scripts/regenerate-charlottetown-draft-zoning-bylaw.py`.
+- Outputs: `data/zoning/charlottetown-draft/zones/rn.json` and `data/zoning/charlottetown-draft/zones/rh.json`.
+- The RN source table for `10.4.7(g)` gives coverage as `max. 40%`; regenerated output now removes Figure 10.1 side-yard and frontage label bleed from that table cell.
+- The RN source clause `10.6.2` ends after the loose gravel or soil prohibition; regenerated output now removes Figure 10.2 labels from the clause text.
+- The RH source places the complete `12.3.2` and `12.3.3` dimensional requirement rows before `12.4 PERMITTED WITH CONDITIONS`; regenerated output now stores those requirements as complete `tables_raw`, removes duplicate `12.3.1` clause records, and restores the full `12.4` flaglot clause.
+
 ## Open Limits
 
-- This note covers only the named Part 1, Part 2, and Part 8 extraction defects verified on 2026-04-24.
+- This note covers only the named Part 1, Part 2, Part 8, RN, and RH extraction defects verified on 2026-04-24 and 2026-04-28.

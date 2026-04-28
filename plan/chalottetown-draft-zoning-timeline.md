@@ -102,12 +102,16 @@ Current progress:
 - the broad extraction and table-parsing rows are mostly one or two file-level legacy warnings per affected file; close them only after source-page regression checks show section order, table placement, and figure bleed are correct for the file
 - schedule-map review rows in Schedules A through D should remain open until spatial QA inputs exist, unless Phase 5 explicitly documents them as intentional residual limitations
 - first Phase 4 repair allowlist: `zones/rn.json`, `zones/rm.json`, and `zones/rh.json` for layout-order regression, plus `design-standards-500-lot-area.json`, `general-provisions-buildings-structures.json`, `general-provisions-lots-site-design.json`, and `general-provisions-signage.json` for explicit section-assignment review
+- the RN/RM/RH Phase 4 layout regression review found no RM regression, but confirmed RN `10.4.7(g)` figure bleed, RN `10.6.2` Figure 10.2 label bleed, and RH `12.3`/`12.4` layout corruption
+- `scripts/extract-charlottetown-zoning-bylaw.py` and `scripts/regenerate-charlottetown-draft-zoning-bylaw.py` now apply a targeted RN/RH Phase 4 layout repair during draft regeneration
+- regenerated `zones/rn.json` now keeps `10.4.7(g)` as `max. 40%` and removes Figure 10.2 labels from `10.6.2`
+- regenerated `zones/rh.json` now restores complete `12.3.2` and `12.3.3` table rows, removes duplicate `12.3.1` clause records, and restores the full `12.4` flaglot clause
 
 Next actions:
 
-1. Review the RN/RM/RH visual PDF pages against regenerated clause order, table placement, and figure bleed.
-2. Review the four explicit section-assignment files for unassigned `content_blocks` and misplaced section text.
-3. Then triage the 60 Buildings and Structures numeric table-cell flags before expanding to lower-density zone files.
+1. Review the four explicit section-assignment files for unassigned `content_blocks` and misplaced section text.
+2. Then triage the 60 Buildings and Structures numeric table-cell flags before expanding to lower-density zone files.
+3. Continue retaining schedule-map review rows until spatial QA inputs exist or Phase 5 documents them as intentional residual limitations.
 
 ## Progress Rules
 

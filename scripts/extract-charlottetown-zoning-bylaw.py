@@ -2653,11 +2653,148 @@ def repair_rm_table_clauses(data: dict[str, Any]) -> bool:
     return True
 
 
+def repair_draft_rn_rh_phase4_layout_regressions(data: dict[str, Any]) -> bool:
+    metadata = data.get("document_metadata") or {}
+    if metadata.get("document_type") != "zone":
+        return False
+    zone_code = metadata.get("zone_code")
+    if zone_code not in {"RN", "RH"}:
+        return False
+
+    raw_data = data.get("raw_data") or {}
+    sections = raw_data.get("sections_raw") or []
+    changed = False
+
+    if zone_code == "RN":
+        section_10_4 = find_raw_section(sections, "10.4")
+        if section_10_4:
+            for table in section_10_4.get("tables_raw") or []:
+                if table.get("table_id") != "zone-rn-table-10-4-7":
+                    continue
+                for row in table.get("rows_raw") or []:
+                    if row.get("row_id") != "zone-rn-table-10-4-7-row-7":
+                        continue
+                    for cell in row.get("cells_raw") or []:
+                        if cell.get("column_id") == "value" and cell.get("cell_text_raw") != "max. 40%":
+                            cell["cell_text_raw"] = "max. 40%"
+                            changed = True
+
+        section_10_6 = find_raw_section(sections, "10.6")
+        if section_10_6:
+            for clause in section_10_6.get("clauses_raw") or []:
+                if clause.get("clause_id") != "zone-rn-clause-10-6-2":
+                    continue
+                text = "All driveways shall be hard surfaced with asphalt, concrete or unit pavers. Loose gravel or soil is not permitted."
+                if clause.get("clause_text_raw") != text:
+                    clause["clause_text_raw"] = text
+                    changed = True
+
+    if zone_code == "RH":
+        section_12_3 = find_raw_section(sections, "12.3")
+        if section_12_3:
+            keep_ids = {
+                "zone-rh-clause-12-3-1",
+                "zone-rh-clause-12-3-1-a",
+                "zone-rh-clause-12-3-1-b",
+                "zone-rh-clause-12-3-1-c",
+                "zone-rh-clause-12-3-1-d",
+                "zone-rh-clause-12-3-1-e",
+                "zone-rh-clause-12-3-1-f",
+                "zone-rh-clause-12-3-1-g",
+                "zone-rh-clause-12-3-1-h",
+                "zone-rh-clause-12-3-2",
+                "zone-rh-clause-12-3-3",
+            }
+            clauses = []
+            seen_ids: set[str] = set()
+            for clause in section_12_3.get("clauses_raw") or []:
+                clause_id_value = clause.get("clause_id")
+                if clause_id_value not in keep_ids or clause_id_value in seen_ids:
+                    changed = True
+                    continue
+                clauses.append(clause)
+                seen_ids.add(clause_id_value)
+            if len(clauses) != len(section_12_3.get("clauses_raw") or []):
+                section_12_3["clauses_raw"] = clauses
+                resequence_clauses(section_12_3)
+
+            table_12_3_2_id = "zone-rh-table-12-3-2"
+            table_12_3_3_id = "zone-rh-table-12-3-3"
+            replace_section_table(
+                section_12_3,
+                {
+                    "table_id": table_12_3_2_id,
+                    "table_title_raw": "12.3.2",
+                    "source_order": 11,
+                    "columns_raw": general_provisions_table_columns(
+                        [
+                            ("row_label", "clause_label_raw"),
+                            ("requirement", "clause_name"),
+                            ("value", ""),
+                        ]
+                    ),
+                    "rows_raw": [
+                        make_labeled_table_row(table_12_3_2_id, 1, "(a)", {"requirement": "Lot Area", "value": "min. 1,100 m2"}),
+                        make_labeled_table_row(table_12_3_2_id, 2, "(b)", {"requirement": "Frontage", "value": "min. 20 m for multi"}),
+                        make_labeled_table_row(table_12_3_2_id, 3, "(c)", {"requirement": "Front Yard Setback", "value": "min. 6 m"}),
+                        make_labeled_table_row(table_12_3_2_id, 4, "(d)", {"requirement": "Flankage Yard Setback", "value": "min. 6 m"}),
+                        make_labeled_table_row(table_12_3_2_id, 5, "(e)", {"requirement": "Side Yard Setback", "value": "min. 3 m for cluster, 6 m for multi"}),
+                        make_labeled_table_row(table_12_3_2_id, 6, "(f)", {"requirement": "Rear Yard Setback", "value": "min. 6 m"}),
+                        make_labeled_table_row(table_12_3_2_id, 7, "(g)", {"requirement": "Coverage", "value": "max. 50%, 60% if half or more the parking is underground"}),
+                    ],
+                    "citations": citation({"pdf_page_start": 102, "pdf_page_end": 102, "bylaw_page_start": 98, "bylaw_page_end": 98}),
+                },
+            )
+            replace_section_table(
+                section_12_3,
+                {
+                    "table_id": table_12_3_3_id,
+                    "table_title_raw": "12.3.3",
+                    "source_order": 13,
+                    "columns_raw": general_provisions_table_columns(
+                        [
+                            ("row_label", "clause_label_raw"),
+                            ("requirement", "clause_name"),
+                            ("value", ""),
+                        ]
+                    ),
+                    "rows_raw": [
+                        make_labeled_table_row(table_12_3_3_id, 1, "(a)", {"requirement": "Coverage", "value": "max. 60%"}),
+                        make_labeled_table_row(table_12_3_3_id, 2, "(b)", {"requirement": "Footprint / building", "value": "max. 800 m2"}),
+                        make_labeled_table_row(table_12_3_3_id, 3, "(c)", {"requirement": "Buildings", "value": "max. 4 buildings per cluster per lot"}),
+                        make_labeled_table_row(table_12_3_3_id, 4, "(d)", {"requirement": "Separation between units", "value": "min. 6 m"}),
+                        make_labeled_table_row(table_12_3_3_id, 5, "(e)", {"requirement": "Central garden area", "value": "min. 35 m2 / building"}),
+                    ],
+                    "citations": citation({"pdf_page_start": 102, "pdf_page_end": 102, "bylaw_page_start": 98, "bylaw_page_end": 98}),
+                },
+            )
+            changed = True
+
+        section_12_4 = find_raw_section(sections, "12.4")
+        if section_12_4:
+            for clause in section_12_4.get("clauses_raw") or []:
+                if clause.get("clause_id") != "zone-rh-clause-12-4":
+                    continue
+                text = "Flaglots are permitted with no less than 6 m frontage as long as all other site and building requirements are met in Section 12.3.2 for both the flaglot and main lot."
+                if clause.get("clause_text_raw") != text:
+                    clause["clause_text_raw"] = text
+                    changed = True
+
+    if not changed:
+        return False
+    rebuild_content_refs(data)
+    rebuild_clause_refs(data)
+    refresh_source_unit_text_from_raw(data)
+    return True
+
+
 TABLE_CONTENT_ANCHORS = {
     "doc-general-provisions-table-4-1-2-accessory-buildings": "doc-general-provisions-clause-4-1-2",
     "doc-general-provisions-table-4-2-2-projecting-structures": "doc-general-provisions-clause-4-2-2",
     "zone-rm-table-11-3-2": "zone-rm-clause-11-3-2",
     "zone-rm-table-11-3-3": "zone-rm-clause-11-3-3",
+    "zone-rh-table-12-3-2": "zone-rh-clause-12-3-2",
+    "zone-rh-table-12-3-3": "zone-rh-clause-12-3-3",
 }
 
 TABLE_CONTENT_BEFORE_CLAUSES = {

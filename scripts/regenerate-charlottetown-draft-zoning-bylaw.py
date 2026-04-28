@@ -162,6 +162,9 @@ def transform_zone_doc(path: Path) -> dict[str, Any]:
     repair_rm_table_clauses = getattr(current, "repair_rm_table_clauses", None)
     if callable(repair_rm_table_clauses):
         repair_rm_table_clauses(data)
+    repair_phase4_layout = getattr(current, "repair_draft_rn_rh_phase4_layout_regressions", None)
+    if callable(repair_phase4_layout):
+        repair_phase4_layout(data)
     current.repair_draft_dmu_landscape_clause(data)
     current.refresh_schema_numeric_values(data)
     current.repair_reviewed_draft_zone_clause_text(data)
