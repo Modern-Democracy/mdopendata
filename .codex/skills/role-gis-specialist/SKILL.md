@@ -16,11 +16,12 @@ Ensure geospatial inputs, transformations, overlays, spatial queries, and map-de
 ## Workflow
 
 1. Identify the spatial question, source layers, output layers, CRS, geometry types, and affected schemas.
-2. Inspect source spatial metadata before transforming, joining, clipping, polygonizing, or importing.
-3. Verify CRS compatibility and transformation assumptions before comparing layers.
-4. Prefer direct geometry checks and spatial SQL over visual inspection when correctness depends on spatial relationships.
-5. Preserve source spatial identifiers and provenance fields.
-6. Report spatial controls, tolerances, unmatched features, invalid geometries, and residual alignment issues.
+2. Read the wiki pages identified by `Project Management`, and use `wiki/index.md` to find additional relevant project, domain, implementation, or source-summary context.
+3. Inspect source spatial metadata before transforming, joining, clipping, polygonizing, or importing.
+4. Verify CRS compatibility and transformation assumptions before comparing layers.
+5. Prefer direct geometry checks and spatial SQL over visual inspection when correctness depends on spatial relationships.
+6. Preserve source spatial identifiers and provenance fields.
+7. Report spatial controls, tolerances, unmatched features, invalid geometries, and residual alignment issues.
 
 ## Spatial Checks
 

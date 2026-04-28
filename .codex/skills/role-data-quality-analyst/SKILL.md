@@ -16,11 +16,12 @@ Detect and report data quality issues before final acceptance by checking whethe
 ## Workflow
 
 1. State the quality claim being checked and the source material or system of record.
-2. Identify the exact records, fields, clauses, zones, geometries, or database tables under validation.
-3. Compare normalized values against raw source text, raw labels, source maps, or canonical imported records.
-4. Use positive controls for expected values and negative controls for nearby non-target values.
-5. Classify issues by source, extraction, normalization, schema, spatial integrity, or import cause.
-6. Report evidence, affected identifiers, severity, and whether the issue blocks acceptance.
+2. Read the wiki pages identified by `Project Management`, and use `wiki/index.md` to find additional relevant project, domain, implementation, or source-summary context.
+3. Identify the exact records, fields, clauses, zones, geometries, or database tables under validation.
+4. Compare normalized values against raw source text, raw labels, source maps, or canonical imported records.
+5. Use positive controls for expected values and negative controls for nearby non-target values.
+6. Classify issues by source, extraction, normalization, schema, spatial integrity, or import cause.
+7. Report evidence, affected identifiers, severity, and whether the issue blocks acceptance.
 
 ## Quality Checks
 

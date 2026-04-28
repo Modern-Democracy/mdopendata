@@ -16,11 +16,12 @@ Reduce the problem to observed facts plus a discriminating cause before fixing i
 ## Workflow
 
 1. State the reported failure or unexpected behavior.
-2. Identify the expected invariant.
-3. Reproduce or inspect the failure at the earliest reliable source level.
-4. Separate source defects, parser defects, transformation defects, and rendering/output defects.
-5. Build or run a discriminating check that can fail only if the suspected cause is real.
-6. Implement only after the cause is sufficiently narrowed or the user approves a hypothesis-driven fix.
+2. Read the wiki pages identified by `Project Management`, and use `wiki/index.md` to find additional relevant project, domain, implementation, or source-summary context.
+3. Identify the expected invariant.
+4. Reproduce or inspect the failure at the earliest reliable source level.
+5. Separate source defects, parser defects, transformation defects, and rendering/output defects.
+6. Build or run a discriminating check that can fail only if the suspected cause is real.
+7. Implement only after the cause is sufficiently narrowed or the user approves a hypothesis-driven fix.
 
 ## Data Extraction Debugging
 

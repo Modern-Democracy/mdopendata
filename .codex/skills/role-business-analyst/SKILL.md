@@ -16,10 +16,11 @@ Convert an ambiguous request into explicit implementation criteria, accepted var
 ## Workflow
 
 1. Restate the requested outcome and current uncertainty.
-2. Identify decisions that would change data shape, behavior, schema, workflow, or compatibility.
-3. Separate direct requirements from assumptions.
-4. Identify source-pattern variations that may affect bulk work.
-5. Ask only the minimum questions needed to proceed safely.
+2. Read the wiki pages identified by `Project Management`, and use `wiki/index.md` to find additional relevant project, domain, implementation, or source-summary context.
+3. Identify decisions that would change data shape, behavior, schema, workflow, or compatibility.
+4. Separate direct requirements from assumptions.
+5. Identify source-pattern variations that may affect bulk work.
+6. Ask only the minimum questions needed to proceed safely.
 
 ## Template-Fit Questions
 

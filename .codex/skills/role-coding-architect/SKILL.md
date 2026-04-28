@@ -16,11 +16,12 @@ Show that the design is viable for this repository's memory, packing, runtime, s
 ## Workflow
 
 1. Identify affected modules, scripts, generated data, schemas, and import workflows.
-2. Confirm compatibility and template-fit requirements are explicit.
-3. Prefer existing repository patterns over new abstractions.
-4. Avoid unapproved helper modules, protocols, workflow changes, or architectural refactors.
-5. Define the smallest implementation that satisfies the clarified requirements.
-6. Define discriminating QA checks before coding.
+2. Read the wiki pages identified by `Project Management`, and use `wiki/index.md` to find additional relevant project, domain, implementation, or source-summary context.
+3. Confirm compatibility and template-fit requirements are explicit.
+4. Prefer existing repository patterns over new abstractions.
+5. Avoid unapproved helper modules, protocols, workflow changes, or architectural refactors.
+6. Define the smallest implementation that satisfies the clarified requirements.
+7. Define discriminating QA checks before coding.
 
 ## Bulk Data and Extraction Design
 

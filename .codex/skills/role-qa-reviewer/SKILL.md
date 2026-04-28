@@ -16,6 +16,8 @@ Start by restating the specific failure mode or acceptance claim that must be ve
 2. the expected invariant
 3. the smallest evidence that can distinguish success from failure
 
+Read the wiki pages identified by `Project Management`, and use `wiki/index.md` to find additional relevant project, domain, implementation, or source-summary context before choosing acceptance checks.
+
 ## Evidence Rules
 
 Do not accept proxy checks when the user has identified a more specific failure. A check is insufficient if it can pass while the reported problem remains present. State why the check is discriminating before relying on it.
