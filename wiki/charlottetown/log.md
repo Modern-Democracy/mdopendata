@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-28] planning | Unified zoning ingestion contracts
+
+Updated `topics/unified-zoning-ingestion-plan.md` with missing implementation contracts for source JSON field mapping, v1 import scope, stable identity and hashing, manual correction replay, coverage-gap semantics, section-topic ownership, spatial layer contracts, and readiness checks.
+
 ## [2026-04-28] planning | Unified zoning ingestion plan
 
 Added `topics/unified-zoning-ingestion-plan.md` and updated the Charlottetown index and workstream context for the next phase of relational, spatial, comparison, revision-aware, and text-vector-ready ingestion of the current and draft zoning bylaws.
