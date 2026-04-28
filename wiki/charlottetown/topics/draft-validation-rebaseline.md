@@ -27,10 +27,12 @@ This page records the 2026-04-24 rebaseline of the Charlottetown draft zoning va
 - Phase 4 triage classifies the 158 remaining `review_flag` rows as 94 `numeric_value_review`, 29 `extraction_review`, 24 `table_parsing_review`, 4 `section_assignment_review`, 4 `schedule_map_review`, and 3 `layout_order_review` rows.
 - The first Phase 4 allowlist is `zones/rn.json`, `zones/rm.json`, and `zones/rh.json` for layout-order regression, plus `design-standards-500-lot-area.json`, `general-provisions-buildings-structures.json`, `general-provisions-lots-site-design.json`, and `general-provisions-signage.json` for explicit section-assignment review.
 - The 94 numeric rows are table-cell normalization review rather than primary section-boundary repair; 60 are concentrated in `general-provisions-buildings-structures.json`.
+- After the explicit section-assignment batch, the refreshed ledger still has 158 `review_flag` rows and 0 `needs_review` rows, but the distribution is 98 `numeric_value_review`, 29 `extraction_review`, 24 `table_parsing_review`, 0 `section_assignment_review`, 4 `schedule_map_review`, and 3 `layout_order_review` rows.
+- The four explicit section-assignment files now have zero raw `content_blocks` and zero `section_assignment_review` flags. Part 3 `3.1.2(d)` through `(g)` are assigned under `3.1`, Part 9 purpose text is assigned under `9.1`, the displaced Part 9 liability tail is assigned under `9.2.5`, and Part 5/6 running header/footer artifacts are dropped.
 
 ## Plan Impact
 
 - Phase 1 is refreshed for the current regenerated outputs.
 - Phase 2 code-table drift has been rechecked for `use.new_codes`; the report now has no unresolved new use codes.
 - Phase 3 is complete for all current `confidence: "needs_review"` records.
-- Phase 4 has begun with triage of all remaining `review_flag` records and should proceed through the RN/RM/RH layout regression and the four explicit section-assignment files before lower-density table and numeric review.
+- Phase 4 has completed the RN/RM/RH layout regression and the four explicit section-assignment files; next review should proceed through numeric table-cell flags and remaining broad extraction or table-parsing warnings.

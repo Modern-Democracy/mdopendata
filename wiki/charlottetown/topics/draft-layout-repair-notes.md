@@ -32,6 +32,16 @@ This page records durable extraction notes for reported Charlottetown draft zoni
 - The RN source clause `10.6.2` ends after the loose gravel or soil prohibition; regenerated output now removes Figure 10.2 labels from the clause text.
 - The RH source places the complete `12.3.2` and `12.3.3` dimensional requirement rows before `12.4 PERMITTED WITH CONDITIONS`; regenerated output now stores those requirements as complete `tables_raw`, removes duplicate `12.3.1` clause records, and restores the full `12.4` flaglot clause.
 
+## 2026-04-28 Phase 4 Section-Assignment Repairs
+
+- Source: `docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf`, bylaw pages 17, 37, 43, and 71.
+- Extractor: `scripts/extract-charlottetown-draft-zoning-bylaw.py`.
+- Outputs: `data/zoning/charlottetown-draft/general-provisions-buildings-structures.json`, `data/zoning/charlottetown-draft/general-provisions-lots-site-design.json`, `data/zoning/charlottetown-draft/design-standards-500-lot-area.json`, and `data/zoning/charlottetown-draft/general-provisions-signage.json`.
+- The source places Part 3 `3.1.2(d)` through `(g)` in the right column before the `3.1` heading in pypdf text order; regenerated output now assigns those clauses under section `3.1`.
+- The Part 5 and Part 6 unassigned text consisted only of running header/footer artifacts; regenerated output now drops those artifacts instead of preserving them as section-assignment content.
+- The Part 9 source places the `9.1 PURPOSE` heading between the purpose paragraph and the tail of `9.2.5`; regenerated output now assigns the purpose paragraph under `9.1` and returns the liability tail to `9.2.5`.
+- The four explicit section-assignment files now have zero raw `content_blocks` and zero `section_assignment_review` flags.
+
 ## Open Limits
 
-- This note covers only the named Part 1, Part 2, Part 8, RN, and RH extraction defects verified on 2026-04-24 and 2026-04-28.
+- This note covers only the named Part 1, Part 2, Part 3, Part 5, Part 6, Part 8, Part 9, RN, and RH extraction defects verified on 2026-04-24 and 2026-04-28.

@@ -324,17 +324,17 @@ Phase 4 is active after Phase 3 closed all current `confidence: "needs_review"` 
 
 Remaining open `review_flag` rows in `plan/chalottetown-draft-zoning-issue-ledger.csv`:
 
-- `numeric_value_review`: 94 rows
+- `numeric_value_review`: 98 rows
 - `extraction_review`: 29 rows
 - `table_parsing_review`: 24 rows
-- `section_assignment_review`: 4 rows
+- `section_assignment_review`: 0 rows
 - `schedule_map_review`: 4 rows
 - `layout_order_review`: 3 rows
 
 Triage disposition:
 
 - Treat `layout_order_review` rows in `zones/rn.json`, `zones/rm.json`, and `zones/rh.json` as the first visual PDF regression batch because these files share the known dimensional-table and figure-placement risk pattern.
-- Treat `section_assignment_review` rows in `design-standards-500-lot-area.json`, `general-provisions-buildings-structures.json`, `general-provisions-lots-site-design.json`, and `general-provisions-signage.json` as the first explicit section-assignment batch.
-- Treat the 94 `numeric_value_review` rows as table-cell normalization review, not primary section-boundary repair; 60 are concentrated in `general-provisions-buildings-structures.json`.
+- The first explicit section-assignment batch is complete for `design-standards-500-lot-area.json`, `general-provisions-buildings-structures.json`, `general-provisions-lots-site-design.json`, and `general-provisions-signage.json`; all four now have zero raw `content_blocks` and zero `section_assignment_review` flags.
+- Treat the 98 `numeric_value_review` rows as table-cell normalization review, not primary section-boundary repair.
 - Treat the 29 `extraction_review` and 24 `table_parsing_review` rows as broad file-level legacy warnings unless source-page inspection identifies a concrete wrong-section, wrong-order, figure-bleed, or table-placement defect.
 - Retain Schedules A through D `schedule_map_review` rows until Phase 5 or later spatial QA documents the schedule-map limitations.

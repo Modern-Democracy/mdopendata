@@ -537,6 +537,48 @@ def source_section_for_part(part: dict) -> dict:
     }
 
 
+def repair_supporting_part_section_assignments(part: dict, raw_sections: list[dict], content_blocks: list[dict]) -> None:
+    """Apply targeted PDF text-order repairs for reviewed draft supporting parts."""
+    if not content_blocks:
+        return
+
+    block_text = " ".join(clean_text(block.get("text")) for block in content_blocks)
+    sections_by_label = {section.get("section_label_raw"): section for section in raw_sections}
+
+    if part["slug"] == "general-provisions-buildings-structures":
+        section = sections_by_label.get("3.1")
+        if section and block_text.startswith("(d) Separation:"):
+            section["lines"].extend(
+                [
+                    "(d) Separation: the minimum distance between any building on a lot shall be 2.4 m (8 ft).",
+                    "(e) Accessory buildings are prohibited from containing a basement or any below grade construction.",
+                    "(f) A boat house and/or boat dock may be built to the water's edge, subject to the regulations of the provincial Environmental Protection Act; and",
+                    "(g) A toll booth or security booth may be erected at the entrance of any parking lot that exceeds 20 cars.",
+                ]
+            )
+            content_blocks.clear()
+        return
+
+    if part["slug"] == "general-provisions-signage":
+        section_9_1 = sections_by_label.get("9.1")
+        section_9_2 = sections_by_label.get("9.2")
+        if section_9_1 and section_9_2 and block_text.startswith("The purpose of this section is to regulate signage"):
+            tail_lines = section_9_1.get("lines") or []
+            if tail_lines:
+                section_9_2.setdefault("lines", []).extend(tail_lines)
+            section_9_1["lines"] = [block_text]
+            content_blocks.clear()
+        return
+
+    if part["slug"] in {"general-provisions-lots-site-design", "design-standards-500-lot-area"}:
+        header_footer = {
+            "ZONING & DEVELOPMENT BYL AW General Provisions for Lots & Site Design |",
+            "ZONING & DEVELOPMENT BYL AW Design Standards for 500 Lot Area |",
+        }
+        if block_text in header_footer:
+            content_blocks.clear()
+
+
 def parse_provisions(lines: list[str], citation: dict) -> tuple[list[dict], set[str]]:
     provisions = []
     pending_label = "section"
@@ -676,6 +718,7 @@ def build_supporting_part_doc(reader: PdfReader, part: dict) -> dict:
         },
         None,
     )
+    repair_supporting_part_section_assignments(part, raw_sections, content_blocks)
     sections = []
     pending_patterns: set[str] = set()
     for index, section in enumerate(raw_sections, start=1):

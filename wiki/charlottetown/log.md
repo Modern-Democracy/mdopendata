@@ -18,6 +18,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 
 Updated `topics/draft-layout-repair-notes.md` after repairing RN figure bleed in `10.4.7(g)` and `10.6.2`, and RH `12.3`/`12.4` table and clause assignment in regenerated draft zone outputs.
 
+## [2026-04-28] extraction | Draft Phase 4 section-assignment repairs
+
+Updated `topics/draft-layout-repair-notes.md` and `topics/draft-validation-rebaseline.md` after repairing the four explicit section-assignment files. Regenerated outputs now have zero raw `content_blocks` and zero `section_assignment_review` flags in those files.
+
 ## [2026-04-28] validation | Phase 4 review-flag triage
 
 Updated `topics/draft-validation-rebaseline.md` after triaging the 158 remaining draft `review_flag` rows into numeric, extraction, table, section-assignment, schedule-map, and layout-order batches.
