@@ -58,6 +58,14 @@ Updated `topics/draft-layout-repair-notes.md` and `topics/draft-validation-rebas
 
 Updated `topics/draft-validation-rebaseline.md` after refreshing `plan/chalottetown-draft-zoning-issue-ledger.csv` from the current regenerated draft outputs.
 
+## [2026-04-28] schema | Building-count numeric unit
+
+Updated `topics/draft-validation-rebaseline.md` after adding `building` as a normalized numeric count unit and closing the final `numeric_value_review` row.
+
+## [2026-04-28] validation | Phase 4 numeric table-cell pass
+
+Updated `topics/draft-validation-rebaseline.md` after the lower-density numeric table-cell pass reduced draft `numeric_value_review` rows from 38 to 1, with the remaining RH cluster-building count retained as a schema-limited residual.
+
 ## [2026-04-24] validation | Draft use-code reconciliation
 
 Updated `topics/draft-validation-rebaseline.md` after reconciling the 25 draft `use.new_codes` candidates into true new use codes, semantic matches, and extraction artifacts.

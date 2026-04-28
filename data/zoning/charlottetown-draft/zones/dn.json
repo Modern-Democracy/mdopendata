@@ -1143,6 +1143,22 @@
         "confidence": "medium"
       },
       {
+        "numeric_value_id": "zone-dn-num-zone-dn-table-16-3-2-row-7-value-1",
+        "value_raw": "80%",
+        "value": 80,
+        "unit": "percent",
+        "measure_type": "percentage",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-dn-table-16-3-2-row-7-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "numeric_value_id": "zone-dn-num-zone-dn-clause-16-1-1",
         "value_raw": "3 storeys",
         "value": 3,
@@ -1498,6 +1514,28 @@
         "confidence": "medium"
       },
       {
+        "requirement_id": "zone-dn-req-zone-dn-table-16-3-2-row-7-value",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_coverage",
+        "requirement_label_raw": "Lot Coverage",
+        "requirement_text_raw": "Lot Coverage max. 80%",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-dn-num-zone-dn-table-16-3-2-row-7-value-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-dn-table-16-3-2-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "requirement_id": "zone-dn-req-zone-dn-clause-16-1",
         "requirement_type": "dimensional_standard",
         "requirement_category": "lot_area",
@@ -1694,6 +1732,7 @@
           "zone-dn-req-zone-dn-table-16-3-2-row-4-value",
           "zone-dn-req-zone-dn-table-16-3-2-row-5-value",
           "zone-dn-req-zone-dn-table-16-3-2-row-6-value",
+          "zone-dn-req-zone-dn-table-16-3-2-row-7-value",
           "zone-dn-req-zone-dn-clause-16-1",
           "zone-dn-req-zone-dn-clause-16-4-3-c",
           "zone-dn-req-zone-dn-clause-16-4-3-d",
@@ -1798,32 +1837,6 @@
         {
           "source_ref_type": "source_unit",
           "source_ref_id": "zone-dn"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-dn-flag-unparsed-table-value-zone-dn-table-16-3-2-row-1-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: N/A",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-dn-table-16-3-2-row-1-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-dn-flag-unparsed-table-value-zone-dn-table-16-3-2-row-7-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: max. 80%",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-dn-table-16-3-2-row-7-value"
         }
       ]
     }

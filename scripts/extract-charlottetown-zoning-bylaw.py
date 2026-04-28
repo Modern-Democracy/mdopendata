@@ -33,6 +33,7 @@ UNIT_MAP = {
     "sq m": "sq_m",
     "sq. m": "sq_m",
     "sqm": "sq_m",
+    "m2": "sq_m",
     "sq ft": "sq_ft",
     "sq. ft": "sq_ft",
     "sqft": "sq_ft",
@@ -47,6 +48,8 @@ UNIT_MAP = {
     "storeys": "storey",
     "bedroom": "bedroom",
     "bedrooms": "bedroom",
+    "building": "building",
+    "buildings": "building",
     "unit": "unit",
     "units": "unit",
     "dwelling unit": "dwelling_unit",
@@ -61,10 +64,18 @@ UNIT_MAP = {
 
 UNIT_RE = "|".join(
     re.escape(unit)
-    for unit in sorted(UNIT_MAP, key=len, reverse=True)
+    for unit in sorted((unit for unit in UNIT_MAP if unit != "m2"), key=len, reverse=True)
 )
 MEASUREMENT_RE = re.compile(
     rf"(?P<value>\d+(?:,\d{{3}})*(?:\.\d+)?)\s*(?P<unit>{UNIT_RE})\b",
+    re.IGNORECASE,
+)
+TABLE_UNIT_RE = "|".join(
+    re.escape(unit)
+    for unit in sorted(UNIT_MAP, key=len, reverse=True)
+)
+TABLE_MEASUREMENT_RE = re.compile(
+    rf"(?P<value>\d+(?:,\d{{3}})*(?:\.\d+)?)\s*(?P<unit>{TABLE_UNIT_RE})(?=\b|[^A-Za-z0-9_]|$)",
     re.IGNORECASE,
 )
 
@@ -3532,7 +3543,7 @@ def measure_type_for_unit(unit: str, text: str) -> str:
         return "length"
     if unit == "percent":
         return "percentage"
-    if unit in {"storey", "bedroom", "dwelling_unit", "unit", "parking_space", "seat", "room", "sign"}:
+    if unit in {"storey", "bedroom", "building", "dwelling_unit", "unit", "parking_space", "seat", "room", "sign"}:
         return "count"
     return "unknown"
 
@@ -3651,6 +3662,15 @@ def grouped_numeric_records(
     return records
 
 
+def measurement_source_text(text: str) -> str:
+    return re.sub(
+        r"\b[A-Za-z-]+\s+\((\d+(?:,\d{3})*(?:\.\d+)?)\)\s+(bedrooms?)\b",
+        r"\1 \2",
+        text,
+        flags=re.IGNORECASE,
+    )
+
+
 GENERAL_PROVISIONS_COLUMN_REQUIREMENT_TABLES = {
     "doc-general-provisions-table-3-1-2",
     "doc-general-provisions-table-3-2-1",
@@ -3661,6 +3681,7 @@ GENERAL_PROVISIONS_COLUMN_REQUIREMENT_TABLES = {
 TABLE_DESCRIPTOR_COLUMNS_BY_TABLE = {
     "doc-general-provisions-table-3-2-1": {"structure", "yard_projection_permitted"},
     "doc-general-provisions-table-3-6-1": {"feature"},
+    "doc-general-provisions-table-4-11-1-c": {"zone_designation"},
 }
 
 
@@ -3670,6 +3691,8 @@ def row_cell_text(row: dict[str, Any], column_id: str) -> str:
 
 def is_reviewable_non_numeric_cell(table_id_value: str, cell_text: str) -> bool:
     normalized = cell_text.strip().lower()
+    if normalized in {"n/a", "na"}:
+        return False
     if table_id_value == "doc-general-provisions-table-3-6-1" and normalized in {"yes", "unlimited"}:
         return False
     return bool(cell_text)
@@ -3721,12 +3744,13 @@ def build_numeric_and_requirements(
                 row_label,
                 cell["cell_text_raw"],
             )
-            matches = list(MEASUREMENT_RE.finditer(cell["cell_text_raw"]))
+            source_text = measurement_source_text(cell["cell_text_raw"])
+            matches = list(TABLE_MEASUREMENT_RE.finditer(source_text))
             records = grouped_numeric_records(
                 matches,
                 f"{prefix}-num-{slugify(row['row_id'])}-{slugify(cell['column_id'])}",
                 context_text,
-                cell["cell_text_raw"],
+                source_text,
                 source_ref("table_cell", cell["cell_id"]),
             )
             numeric_values.extend(records)
@@ -3767,12 +3791,13 @@ def build_numeric_and_requirements(
         row_label = next((c["cell_text_raw"] for c in row["cells_raw"] if c["column_id"] == "requirement"), "")
         condition_text = next((c["cell_text_raw"] for c in row["cells_raw"] if c["column_id"] == "condition"), "")
         context_text = clean_text(f"{row_label} {condition_text} {column.get('column_label_raw', '')} {cell['cell_text_raw']}")
-        matches = list(MEASUREMENT_RE.finditer(cell["cell_text_raw"]))
+        source_text = measurement_source_text(cell["cell_text_raw"])
+        matches = list(TABLE_MEASUREMENT_RE.finditer(source_text))
         records = grouped_numeric_records(
             matches,
             f"{prefix}-num-{slugify(row['row_id'])}-{slugify(cell['column_id'])}",
             context_text,
-            cell["cell_text_raw"],
+            source_text,
             source_ref("table_cell", cell["cell_id"]),
         )
         numeric_values.extend(records)

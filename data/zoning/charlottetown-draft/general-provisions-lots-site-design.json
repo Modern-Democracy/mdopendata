@@ -1658,6 +1658,38 @@
     "uses": [],
     "numeric_values": [
       {
+        "numeric_value_id": "doc-general-provisions-source-num-doc-general-provisions-clause-5-4-3-a-1",
+        "value_raw": "1 building",
+        "value": 1,
+        "unit": "building",
+        "measure_type": "count",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "doc-general-provisions-clause-5-4-3-a"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "doc-general-provisions-source-num-doc-general-provisions-clause-5-4-3-b-1",
+        "value_raw": "2 building",
+        "value": 2,
+        "unit": "building",
+        "measure_type": "count",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "doc-general-provisions-clause-5-4-3-b"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "numeric_value_id": "doc-general-provisions-source-num-doc-general-provisions-clause-5-5-1-1",
         "value_raw": "1.8 metre",
         "value": 1.8,
@@ -1867,6 +1899,48 @@
       }
     ],
     "other_requirements": [
+      {
+        "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-clause-5-4-3-a",
+        "requirement_type": "other",
+        "requirement_category": "at_the_stage_1_building_permit_review",
+        "requirement_label_raw": "(a)",
+        "requirement_text_raw": "At the stage 1 building permit review;",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "doc-general-provisions-source-num-doc-general-provisions-clause-5-4-3-a-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "doc-general-provisions-clause-5-4-3-a"
+          }
+        ],
+        "confidence": "needs_review"
+      },
+      {
+        "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-clause-5-4-3-b",
+        "requirement_type": "other",
+        "requirement_category": "at_the_stage_2_building_permit_review_and",
+        "requirement_label_raw": "(b)",
+        "requirement_text_raw": "At the stage 2 building permit review; and",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "doc-general-provisions-source-num-doc-general-provisions-clause-5-4-3-b-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "doc-general-provisions-clause-5-4-3-b"
+          }
+        ],
+        "confidence": "needs_review"
+      },
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-clause-5-5-1",
         "requirement_type": "other",

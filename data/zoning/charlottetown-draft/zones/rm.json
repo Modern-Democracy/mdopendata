@@ -1790,6 +1790,38 @@
     ],
     "numeric_values": [
       {
+        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-2-row-1-value-1",
+        "value_raw": "230m2",
+        "value": 230,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-rm-table-11-3-2-row-1-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-2-row-1-value-2",
+        "value_raw": "165m2",
+        "value": 165,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-rm-table-11-3-2-row-1-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-2-row-2-value-1",
         "value_raw": "8 m",
         "value": 8,
@@ -1966,6 +1998,86 @@
         "confidence": "medium"
       },
       {
+        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-2-row-7-value-1",
+        "value_raw": "50%",
+        "value": 50,
+        "unit": "percent",
+        "measure_type": "percentage",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-rm-table-11-3-2-row-7-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-2-row-7-value-2",
+        "value_raw": "60%",
+        "value": 60,
+        "unit": "percent",
+        "measure_type": "percentage",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-rm-table-11-3-2-row-7-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-3-row-1-value-1",
+        "value_raw": "60%",
+        "value": 60,
+        "unit": "percent",
+        "measure_type": "percentage",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-rm-table-11-3-3-row-1-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-3-row-2-value-1",
+        "value_raw": "90 m2",
+        "value": 90,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-rm-table-11-3-3-row-2-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-3-row-3-value-1",
+        "value_raw": "115 m2",
+        "value": 115,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-rm-table-11-3-3-row-3-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-3-row-4-value-1",
         "value_raw": "8 units",
         "value": 8,
@@ -1993,6 +2105,22 @@
           {
             "source_ref_type": "table_cell",
             "source_ref_id": "zone-rm-table-11-3-3-row-5-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-rm-num-zone-rm-table-11-3-3-row-6-value-1",
+        "value_raw": "25 m2",
+        "value": 25,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-rm-table-11-3-3-row-6-value"
           }
         ],
         "confidence": "medium"
@@ -2128,6 +2256,29 @@
     ],
     "requirements": [
       {
+        "requirement_id": "zone-rm-req-zone-rm-table-11-3-2-row-1-value",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area",
+        "requirement_text_raw": "Lot Area min. 230m2 multi-unit dwelling, 165m2 for a semi detached dwelling or townhouse",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-rm-num-zone-rm-table-11-3-2-row-1-value-1",
+          "zone-rm-num-zone-rm-table-11-3-2-row-1-value-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-rm-table-11-3-2-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "requirement_id": "zone-rm-req-zone-rm-table-11-3-2-row-2-value",
         "requirement_type": "dimensional_standard",
         "requirement_category": "lot_frontage",
@@ -2244,6 +2395,95 @@
         "confidence": "medium"
       },
       {
+        "requirement_id": "zone-rm-req-zone-rm-table-11-3-2-row-7-value",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_coverage",
+        "requirement_label_raw": "Coverage",
+        "requirement_text_raw": "Coverage max. 50%, 60% if half the parking is located underground",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-rm-num-zone-rm-table-11-3-2-row-7-value-1",
+          "zone-rm-num-zone-rm-table-11-3-2-row-7-value-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-rm-table-11-3-2-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-rm-req-zone-rm-table-11-3-3-row-1-value",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_coverage",
+        "requirement_label_raw": "Coverage",
+        "requirement_text_raw": "Coverage max. 60%",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-rm-num-zone-rm-table-11-3-3-row-1-value-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-rm-table-11-3-3-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-rm-req-zone-rm-table-11-3-3-row-2-value",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "footprint_building",
+        "requirement_label_raw": "Footprint / building",
+        "requirement_text_raw": "Footprint / building max. 90 m2",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-rm-num-zone-rm-table-11-3-3-row-2-value-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-rm-table-11-3-3-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-rm-req-zone-rm-table-11-3-3-row-3-value",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "density",
+        "requirement_label_raw": "Density",
+        "requirement_text_raw": "Density min. one unit per 115 m2 of lot area",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-rm-num-zone-rm-table-11-3-3-row-3-value-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-rm-table-11-3-3-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "requirement_id": "zone-rm-req-zone-rm-table-11-3-3-row-4-value",
         "requirement_type": "dimensional_standard",
         "requirement_category": "units",
@@ -2283,6 +2523,28 @@
           {
             "source_ref_type": "table_row",
             "source_ref_id": "zone-rm-table-11-3-3-row-5"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-rm-req-zone-rm-table-11-3-3-row-6-value",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "central_garden_area",
+        "requirement_label_raw": "Central garden area",
+        "requirement_text_raw": "Central garden area min. 25 m2 / unit",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-rm-num-zone-rm-table-11-3-3-row-6-value-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-rm-table-11-3-3-row-6"
           }
         ],
         "confidence": "medium"
@@ -2417,13 +2679,19 @@
           "conditions": []
         },
         "requirement_refs": [
+          "zone-rm-req-zone-rm-table-11-3-2-row-1-value",
           "zone-rm-req-zone-rm-table-11-3-2-row-2-value",
           "zone-rm-req-zone-rm-table-11-3-2-row-3-value",
           "zone-rm-req-zone-rm-table-11-3-2-row-4-value",
           "zone-rm-req-zone-rm-table-11-3-2-row-5-value",
           "zone-rm-req-zone-rm-table-11-3-2-row-6-value",
+          "zone-rm-req-zone-rm-table-11-3-2-row-7-value",
+          "zone-rm-req-zone-rm-table-11-3-3-row-1-value",
+          "zone-rm-req-zone-rm-table-11-3-3-row-2-value",
+          "zone-rm-req-zone-rm-table-11-3-3-row-3-value",
           "zone-rm-req-zone-rm-table-11-3-3-row-4-value",
           "zone-rm-req-zone-rm-table-11-3-3-row-5-value",
+          "zone-rm-req-zone-rm-table-11-3-3-row-6-value",
           "zone-rm-req-zone-rm-clause-11-4-3",
           "zone-rm-req-zone-rm-clause-11-4-7-b",
           "zone-rm-req-zone-rm-clause-11-5-2",
@@ -2539,84 +2807,6 @@
         {
           "source_ref_type": "source_unit",
           "source_ref_id": "zone-rm"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unparsed-table-value-zone-rm-table-11-3-2-row-1-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: min. 230m2 multi-unit dwelling, 165m2 for a semi detached dwelling or townhouse",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-rm-table-11-3-2-row-1-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unparsed-table-value-zone-rm-table-11-3-2-row-7-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: max. 50%, 60% if half the parking is located underground",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-rm-table-11-3-2-row-7-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unparsed-table-value-zone-rm-table-11-3-3-row-1-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: max. 60%",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-rm-table-11-3-3-row-1-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unparsed-table-value-zone-rm-table-11-3-3-row-2-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: max. 90 m2",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-rm-table-11-3-3-row-2-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unparsed-table-value-zone-rm-table-11-3-3-row-3-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: min. one unit per 115 m2 of lot area",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-rm-table-11-3-3-row-3-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rm-flag-unparsed-table-value-zone-rm-table-11-3-3-row-6-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: min. 25 m2 / unit",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-rm-table-11-3-3-row-6-value"
         }
       ]
     }

@@ -1261,6 +1261,38 @@
     ],
     "numeric_values": [
       {
+        "numeric_value_id": "zone-p-num-zone-p-table-21-3-2-row-1-value-1",
+        "value_raw": "600 m2",
+        "value": 600,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-p-table-21-3-2-row-1-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-p-num-zone-p-table-21-3-2-row-1-value-2",
+        "value_raw": "700m2",
+        "value": 700,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-p-table-21-3-2-row-1-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "numeric_value_id": "zone-p-num-zone-p-table-21-3-2-row-2-value-1",
         "value_raw": "20 m",
         "value": 20,
@@ -1373,6 +1405,22 @@
         "confidence": "medium"
       },
       {
+        "numeric_value_id": "zone-p-num-zone-p-table-21-3-2-row-7-value-1",
+        "value_raw": "50%",
+        "value": 50,
+        "unit": "percent",
+        "measure_type": "percentage",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-p-table-21-3-2-row-7-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "numeric_value_id": "zone-p-num-zone-p-clause-21-5-2-1",
         "value_raw": "12 m",
         "value": 12,
@@ -1468,6 +1516,29 @@
       }
     ],
     "requirements": [
+      {
+        "requirement_id": "zone-p-req-zone-p-table-21-3-2-row-1-value",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area",
+        "requirement_text_raw": "Lot Area min. 600 m2 interior lot, 700m2 corner lot",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-p-num-zone-p-table-21-3-2-row-1-value-1",
+          "zone-p-num-zone-p-table-21-3-2-row-1-value-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-p-table-21-3-2-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
       {
         "requirement_id": "zone-p-req-zone-p-table-21-3-2-row-2-value",
         "requirement_type": "dimensional_standard",
@@ -1581,6 +1652,28 @@
         "confidence": "medium"
       },
       {
+        "requirement_id": "zone-p-req-zone-p-table-21-3-2-row-7-value",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_coverage",
+        "requirement_label_raw": "Lot Coverage",
+        "requirement_text_raw": "Lot Coverage max. 50%",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-p-num-zone-p-table-21-3-2-row-7-value-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-p-table-21-3-2-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "requirement_id": "zone-p-req-zone-p-clause-21-5-2",
         "requirement_type": "dimensional_standard",
         "requirement_category": "height",
@@ -1646,11 +1739,13 @@
           "conditions": []
         },
         "requirement_refs": [
+          "zone-p-req-zone-p-table-21-3-2-row-1-value",
           "zone-p-req-zone-p-table-21-3-2-row-2-value",
           "zone-p-req-zone-p-table-21-3-2-row-3-value",
           "zone-p-req-zone-p-table-21-3-2-row-4-value",
           "zone-p-req-zone-p-table-21-3-2-row-5-value",
           "zone-p-req-zone-p-table-21-3-2-row-6-value",
+          "zone-p-req-zone-p-table-21-3-2-row-7-value",
           "zone-p-req-zone-p-clause-21-5-2",
           "zone-p-req-zone-p-clause-21-6-1-a"
         ],
@@ -1815,32 +1910,6 @@
         {
           "source_ref_type": "source_unit",
           "source_ref_id": "zone-p"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-p-flag-unparsed-table-value-zone-p-table-21-3-2-row-1-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: min. 600 m2 interior lot, 700m2 corner lot",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-p-table-21-3-2-row-1-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-p-flag-unparsed-table-value-zone-p-table-21-3-2-row-7-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: max. 50%",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-p-table-21-3-2-row-7-value"
         }
       ]
     }

@@ -1157,6 +1157,22 @@
     ],
     "numeric_values": [
       {
+        "numeric_value_id": "zone-pps-num-zone-pps-table-25-3-2-row-1-value-1",
+        "value_raw": "930 m2",
+        "value": 930,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-pps-table-25-3-2-row-1-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "numeric_value_id": "zone-pps-num-zone-pps-table-25-3-2-row-2-value-1",
         "value_raw": "24 m",
         "value": 24,
@@ -1253,6 +1269,22 @@
         "confidence": "medium"
       },
       {
+        "numeric_value_id": "zone-pps-num-zone-pps-table-25-3-2-row-7-value-1",
+        "value_raw": "60%",
+        "value": 60,
+        "unit": "percent",
+        "measure_type": "percentage",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-pps-table-25-3-2-row-7-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "numeric_value_id": "zone-pps-num-zone-pps-clause-25-5-2-1",
         "value_raw": "4 storeys",
         "value": 4,
@@ -1270,6 +1302,28 @@
       }
     ],
     "requirements": [
+      {
+        "requirement_id": "zone-pps-req-zone-pps-table-25-3-2-row-1-value",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area",
+        "requirement_text_raw": "Lot Area min. 930 m2",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-pps-num-zone-pps-table-25-3-2-row-1-value-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-pps-table-25-3-2-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
       {
         "requirement_id": "zone-pps-req-zone-pps-table-25-3-2-row-2-value",
         "requirement_type": "dimensional_standard",
@@ -1382,6 +1436,28 @@
         "confidence": "medium"
       },
       {
+        "requirement_id": "zone-pps-req-zone-pps-table-25-3-2-row-7-value",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_coverage",
+        "requirement_label_raw": "Coverage",
+        "requirement_text_raw": "Coverage max. 60%",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-pps-num-zone-pps-table-25-3-2-row-7-value-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-pps-table-25-3-2-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "requirement_id": "zone-pps-req-zone-pps-clause-25-5-2",
         "requirement_type": "dimensional_standard",
         "requirement_category": "height",
@@ -1426,11 +1502,13 @@
           "conditions": []
         },
         "requirement_refs": [
+          "zone-pps-req-zone-pps-table-25-3-2-row-1-value",
           "zone-pps-req-zone-pps-table-25-3-2-row-2-value",
           "zone-pps-req-zone-pps-table-25-3-2-row-3-value",
           "zone-pps-req-zone-pps-table-25-3-2-row-4-value",
           "zone-pps-req-zone-pps-table-25-3-2-row-5-value",
           "zone-pps-req-zone-pps-table-25-3-2-row-6-value",
+          "zone-pps-req-zone-pps-table-25-3-2-row-7-value",
           "zone-pps-req-zone-pps-clause-25-5-2"
         ],
         "source_section_ref": "zone-pps-section-25-1",
@@ -1485,32 +1563,6 @@
         {
           "source_ref_type": "source_unit",
           "source_ref_id": "zone-pps"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-pps-flag-unparsed-table-value-zone-pps-table-25-3-2-row-1-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: min. 930 m2",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-pps-table-25-3-2-row-1-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-pps-flag-unparsed-table-value-zone-pps-table-25-3-2-row-7-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: max. 60%",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-pps-table-25-3-2-row-7-value"
         }
       ]
     }

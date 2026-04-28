@@ -3310,11 +3310,43 @@
         "confidence": "medium"
       },
       {
+        "numeric_value_id": "zone-gc-num-zone-gc-table-22-3-2-row-3-value-3",
+        "value_raw": "20%",
+        "value": 20,
+        "unit": "percent",
+        "measure_type": "percentage",
+        "comparator": "greater_than",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-gc-table-22-3-2-row-3-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "numeric_value_id": "zone-gc-num-zone-gc-table-22-3-2-row-4-value-1",
         "value_raw": "2 m",
         "value": 2,
         "unit": "m",
         "measure_type": "length",
+        "comparator": "greater_than",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-gc-table-22-3-2-row-4-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-table-22-3-2-row-4-value-2",
+        "value_raw": "20%",
+        "value": 20,
+        "unit": "percent",
+        "measure_type": "percentage",
         "comparator": "greater_than",
         "alternative_values": [],
         "source_refs": [
@@ -3385,6 +3417,38 @@
           {
             "source_ref_type": "table_cell",
             "source_ref_id": "zone-gc-table-22-3-2-row-6-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-table-22-3-2-row-7-value-1",
+        "value_raw": "50%",
+        "value": 50,
+        "unit": "percent",
+        "measure_type": "percentage",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-gc-table-22-3-2-row-7-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-gc-num-zone-gc-table-22-3-2-row-7-value-2",
+        "value_raw": "70%",
+        "value": 70,
+        "unit": "percent",
+        "measure_type": "percentage",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-gc-table-22-3-2-row-7-value"
           }
         ],
         "confidence": "medium"
@@ -3921,7 +3985,8 @@
         },
         "numeric_value_refs": [
           "zone-gc-num-zone-gc-table-22-3-2-row-3-value-1",
-          "zone-gc-num-zone-gc-table-22-3-2-row-3-value-2"
+          "zone-gc-num-zone-gc-table-22-3-2-row-3-value-2",
+          "zone-gc-num-zone-gc-table-22-3-2-row-3-value-3"
         ],
         "term_refs": [],
         "source_refs": [
@@ -3943,7 +4008,8 @@
           "conditions": []
         },
         "numeric_value_refs": [
-          "zone-gc-num-zone-gc-table-22-3-2-row-4-value-1"
+          "zone-gc-num-zone-gc-table-22-3-2-row-4-value-1",
+          "zone-gc-num-zone-gc-table-22-3-2-row-4-value-2"
         ],
         "term_refs": [],
         "source_refs": [
@@ -3996,6 +4062,29 @@
           {
             "source_ref_type": "table_row",
             "source_ref_id": "zone-gc-table-22-3-2-row-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-gc-req-zone-gc-table-22-3-2-row-7-value",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_coverage",
+        "requirement_label_raw": "Coverage",
+        "requirement_text_raw": "Coverage max. 50%, 70% if half the parking is located underground",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-gc-num-zone-gc-table-22-3-2-row-7-value-1",
+          "zone-gc-num-zone-gc-table-22-3-2-row-7-value-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-gc-table-22-3-2-row-7"
           }
         ],
         "confidence": "medium"
@@ -4501,6 +4590,7 @@
           "zone-gc-req-zone-gc-table-22-3-2-row-4-value",
           "zone-gc-req-zone-gc-table-22-3-2-row-5-value",
           "zone-gc-req-zone-gc-table-22-3-2-row-6-value",
+          "zone-gc-req-zone-gc-table-22-3-2-row-7-value",
           "zone-gc-req-zone-gc-clause-22-4-4",
           "zone-gc-req-zone-gc-clause-22-5-2",
           "zone-gc-req-zone-gc-clause-22-5-3",
@@ -4574,32 +4664,6 @@
         {
           "source_ref_type": "source_unit",
           "source_ref_id": "zone-gc"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-gc-flag-unparsed-table-value-zone-gc-table-22-3-2-row-1-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: N/A",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-gc-table-22-3-2-row-1-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-gc-flag-unparsed-table-value-zone-gc-table-22-3-2-row-7-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: max. 50%, 70% if half the parking is located underground",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-gc-table-22-3-2-row-7-value"
         }
       ]
     }

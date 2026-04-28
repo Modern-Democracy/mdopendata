@@ -4926,6 +4926,22 @@
         "confidence": "medium"
       },
       {
+        "numeric_value_id": "doc-other-source-num-doc-other-clause-2-7-1-1",
+        "value_raw": "1 building",
+        "value": 1,
+        "unit": "building",
+        "measure_type": "count",
+        "comparator": "minimum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "doc-other-clause-2-7-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "numeric_value_id": "doc-other-source-num-doc-other-clause-2-8-5-a-1",
         "value_raw": "100 m (328.1 ft)",
         "value": 100,
@@ -4949,12 +4965,36 @@
         "confidence": "medium"
       }
     ],
-    "requirements": [],
+    "requirements": [
+      {
+        "requirement_id": "doc-other-source-req-doc-other-clause-2-7-1",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "when_a_stage_1_building_permit_application_does_not_meet_the_minimum_regulations",
+        "requirement_label_raw": ".1",
+        "requirement_text_raw": "When a stage 1 building permit application does not meet the minimum regulations of this bylaw, the applicant may apply for a variance to:",
+        "applicability": {
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "doc-other-source-num-doc-other-clause-2-7-1-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "clause",
+            "source_ref_id": "doc-other-clause-2-7-1"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
     "regulation_groups": [
       {
         "regulation_group_id": "doc-other-regulation-group",
         "group_title_raw": "Permit Applications & Processes",
-        "requirement_refs": [],
+        "requirement_refs": [
+          "doc-other-source-req-doc-other-clause-2-7-1"
+        ],
         "source_section_ref": "doc-other-section-2-1",
         "confidence": "medium",
         "regulated_use_terms": []

@@ -2674,6 +2674,38 @@
     ],
     "numeric_values": [
       {
+        "numeric_value_id": "zone-ap-num-zone-ap-table-19-3-2-row-1-value-1",
+        "value_raw": "600 m2",
+        "value": 600,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-ap-table-19-3-2-row-1-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-table-19-3-2-row-1-value-2",
+        "value_raw": "700 m2",
+        "value": 700,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-ap-table-19-3-2-row-1-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "numeric_value_id": "zone-ap-num-zone-ap-table-19-3-2-row-2-value-1",
         "value_raw": "20 m",
         "value": 20,
@@ -2787,6 +2819,22 @@
       },
       {
         "numeric_value_id": "zone-ap-num-zone-ap-table-19-3-2-row-7-value-1",
+        "value_raw": "35%",
+        "value": 35,
+        "unit": "percent",
+        "measure_type": "percentage",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-ap-table-19-3-2-row-7-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-ap-num-zone-ap-table-19-3-2-row-7-value-2",
         "value_raw": "7.5 m",
         "value": 7.5,
         "unit": "m",
@@ -2835,6 +2883,29 @@
       }
     ],
     "requirements": [
+      {
+        "requirement_id": "zone-ap-req-zone-ap-table-19-3-2-row-1-value",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area",
+        "requirement_text_raw": "Lot Area min. 600 m2 interior lot, 700 m2 corner lot",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-ap-num-zone-ap-table-19-3-2-row-1-value-1",
+          "zone-ap-num-zone-ap-table-19-3-2-row-1-value-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-ap-table-19-3-2-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
       {
         "requirement_id": "zone-ap-req-zone-ap-table-19-3-2-row-2-value",
         "requirement_type": "dimensional_standard",
@@ -2958,7 +3029,8 @@
           "conditions": []
         },
         "numeric_value_refs": [
-          "zone-ap-num-zone-ap-table-19-3-2-row-7-value-1"
+          "zone-ap-num-zone-ap-table-19-3-2-row-7-value-1",
+          "zone-ap-num-zone-ap-table-19-3-2-row-7-value-2"
         ],
         "term_refs": [],
         "source_refs": [
@@ -3051,6 +3123,7 @@
           "conditions": []
         },
         "requirement_refs": [
+          "zone-ap-req-zone-ap-table-19-3-2-row-1-value",
           "zone-ap-req-zone-ap-table-19-3-2-row-2-value",
           "zone-ap-req-zone-ap-table-19-3-2-row-3-value",
           "zone-ap-req-zone-ap-table-19-3-2-row-4-value",
@@ -3111,19 +3184,6 @@
         {
           "source_ref_type": "source_unit",
           "source_ref_id": "zone-ap"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-ap-flag-unparsed-table-value-zone-ap-table-19-3-2-row-1-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: min. 600 m2 interior lot, 700 m2 corner lot",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-ap-table-19-3-2-row-1-value"
         }
       ]
     }

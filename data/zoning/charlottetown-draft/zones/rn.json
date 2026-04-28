@@ -1630,6 +1630,38 @@
     ],
     "numeric_values": [
       {
+        "numeric_value_id": "zone-rn-num-zone-rn-table-10-3-2-row-1-value-1",
+        "value_raw": "318 m2",
+        "value": 318,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-rn-table-10-3-2-row-1-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-rn-num-zone-rn-table-10-3-2-row-1-value-2",
+        "value_raw": "240 m2",
+        "value": 240,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-rn-table-10-3-2-row-1-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "numeric_value_id": "zone-rn-num-zone-rn-table-10-3-2-row-2-value-1",
         "value_raw": "10.6 m",
         "value": 10.6,
@@ -1742,6 +1774,54 @@
         "confidence": "medium"
       },
       {
+        "numeric_value_id": "zone-rn-num-zone-rn-table-10-3-2-row-7-value-1",
+        "value_raw": "40%",
+        "value": 40,
+        "unit": "percent",
+        "measure_type": "percentage",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-rn-table-10-3-2-row-7-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-rn-num-zone-rn-table-10-4-7-row-1-value-1",
+        "value_raw": "465 m2",
+        "value": 465,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-rn-table-10-4-7-row-1-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-rn-num-zone-rn-table-10-4-7-row-1-value-2",
+        "value_raw": "3,540 m2",
+        "value": 3540,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-rn-table-10-4-7-row-1-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "numeric_value_id": "zone-rn-num-zone-rn-table-10-4-7-row-2-value-1",
         "value_raw": "12 m",
         "value": 12,
@@ -1833,6 +1913,22 @@
           {
             "source_ref_type": "table_cell",
             "source_ref_id": "zone-rn-table-10-4-7-row-6-value"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "zone-rn-num-zone-rn-table-10-4-7-row-7-value-1",
+        "value_raw": "40%",
+        "value": 40,
+        "unit": "percent",
+        "measure_type": "percentage",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "zone-rn-table-10-4-7-row-7-value"
           }
         ],
         "confidence": "medium"
@@ -2032,6 +2128,29 @@
     ],
     "requirements": [
       {
+        "requirement_id": "zone-rn-req-zone-rn-table-10-3-2-row-1-value",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area",
+        "requirement_text_raw": "Lot Area min. 318 m2 for detached dwelling, 240 m2 for semi detached dwelling",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-rn-num-zone-rn-table-10-3-2-row-1-value-1",
+          "zone-rn-num-zone-rn-table-10-3-2-row-1-value-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-rn-table-10-3-2-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "requirement_id": "zone-rn-req-zone-rn-table-10-3-2-row-2-value",
         "requirement_type": "dimensional_standard",
         "requirement_category": "lot_frontage",
@@ -2144,6 +2263,51 @@
         "confidence": "medium"
       },
       {
+        "requirement_id": "zone-rn-req-zone-rn-table-10-3-2-row-7-value",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_coverage",
+        "requirement_label_raw": "Coverage",
+        "requirement_text_raw": "Coverage max. 40%",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-rn-num-zone-rn-table-10-3-2-row-7-value-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-rn-table-10-3-2-row-7"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-rn-req-zone-rn-table-10-4-7-row-1-value",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area",
+        "requirement_text_raw": "Lot Area min. 465 m2 interior lot, 3,540 m2 for corner lot",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-rn-num-zone-rn-table-10-4-7-row-1-value-1",
+          "zone-rn-num-zone-rn-table-10-4-7-row-1-value-2"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-rn-table-10-4-7-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "requirement_id": "zone-rn-req-zone-rn-table-10-4-7-row-2-value",
         "requirement_type": "dimensional_standard",
         "requirement_category": "lot_frontage",
@@ -2250,6 +2414,28 @@
           {
             "source_ref_type": "table_row",
             "source_ref_id": "zone-rn-table-10-4-7-row-6"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "requirement_id": "zone-rn-req-zone-rn-table-10-4-7-row-7-value",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "lot_coverage",
+        "requirement_label_raw": "Coverage",
+        "requirement_text_raw": "Coverage max. 40%",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "zone-rn-num-zone-rn-table-10-4-7-row-7-value-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "zone-rn-table-10-4-7-row-7"
           }
         ],
         "confidence": "medium"
@@ -2402,16 +2588,20 @@
           "conditions": []
         },
         "requirement_refs": [
+          "zone-rn-req-zone-rn-table-10-3-2-row-1-value",
           "zone-rn-req-zone-rn-table-10-3-2-row-2-value",
           "zone-rn-req-zone-rn-table-10-3-2-row-3-value",
           "zone-rn-req-zone-rn-table-10-3-2-row-4-value",
           "zone-rn-req-zone-rn-table-10-3-2-row-5-value",
           "zone-rn-req-zone-rn-table-10-3-2-row-6-value",
+          "zone-rn-req-zone-rn-table-10-3-2-row-7-value",
+          "zone-rn-req-zone-rn-table-10-4-7-row-1-value",
           "zone-rn-req-zone-rn-table-10-4-7-row-2-value",
           "zone-rn-req-zone-rn-table-10-4-7-row-3-value",
           "zone-rn-req-zone-rn-table-10-4-7-row-4-value",
           "zone-rn-req-zone-rn-table-10-4-7-row-5-value",
           "zone-rn-req-zone-rn-table-10-4-7-row-6-value",
+          "zone-rn-req-zone-rn-table-10-4-7-row-7-value",
           "zone-rn-req-zone-rn-clause-10-3-3",
           "zone-rn-req-zone-rn-clause-10-4-2-b",
           "zone-rn-req-zone-rn-clause-10-5-2",
@@ -2549,58 +2739,6 @@
         {
           "source_ref_type": "source_unit",
           "source_ref_id": "zone-rn"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rn-flag-unparsed-table-value-zone-rn-table-10-3-2-row-1-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: min. 318 m2 for detached dwelling, 240 m2 for semi detached dwelling",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-rn-table-10-3-2-row-1-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rn-flag-unparsed-table-value-zone-rn-table-10-3-2-row-7-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: max. 40%",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-rn-table-10-3-2-row-7-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rn-flag-unparsed-table-value-zone-rn-table-10-4-7-row-1-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: min. 465 m2 interior lot, 3,540 m2 for corner lot",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-rn-table-10-4-7-row-1-value"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "zone-rn-flag-unparsed-table-value-zone-rn-table-10-4-7-row-7-value",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: max. 40%",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "zone-rn-table-10-4-7-row-7-value"
         }
       ]
     }

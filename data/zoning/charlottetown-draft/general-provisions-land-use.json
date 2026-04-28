@@ -4385,7 +4385,71 @@
     "uses": [],
     "numeric_values": [
       {
+        "numeric_value_id": "doc-general-provisions-source-num-doc-general-provisions-table-4-11-1-c-row-1-bedrooms-permitted-1",
+        "value_raw": "4 bedrooms",
+        "value": 4,
+        "unit": "bedroom",
+        "measure_type": "count",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "doc-general-provisions-table-4-11-1-c-row-1-bedrooms_permitted"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "numeric_value_id": "doc-general-provisions-source-num-doc-general-provisions-table-4-11-1-c-row-2-bedrooms-permitted-1",
+        "value_raw": "4 bedrooms",
+        "value": 4,
+        "unit": "bedroom",
+        "measure_type": "count",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "doc-general-provisions-table-4-11-1-c-row-2-bedrooms_permitted"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "doc-general-provisions-source-num-doc-general-provisions-table-4-11-1-c-row-2-bedrooms-permitted-2",
+        "value_raw": "370 m2",
+        "value": 370,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "doc-general-provisions-table-4-11-1-c-row-2-bedrooms_permitted"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "doc-general-provisions-source-num-doc-general-provisions-table-4-11-1-c-row-2-bedrooms-permitted-3",
+        "value_raw": "100 m2",
+        "value": 100,
+        "unit": "sq_m",
+        "measure_type": "area",
+        "comparator": "maximum",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "doc-general-provisions-table-4-11-1-c-row-2-bedrooms_permitted"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "doc-general-provisions-source-num-doc-general-provisions-table-4-11-1-c-row-2-bedrooms-permitted-4",
         "value_raw": "7 bedrooms",
         "value": 7,
         "unit": "bedroom",
@@ -4832,6 +4896,30 @@
     ],
     "requirements": [
       {
+        "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-4-11-1-c-row-1-bedrooms-permitted",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "other",
+        "requirement_label_raw": "",
+        "requirement_text_raw": "# of Bedrooms Permitted Up to four (4) bedrooms",
+        "applicability": {
+          "applies_to_lot_contexts": [
+            "of_bedrooms_permitted"
+          ],
+          "conditions": []
+        },
+        "numeric_value_refs": [
+          "doc-general-provisions-source-num-doc-general-provisions-table-4-11-1-c-row-1-bedrooms-permitted-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "doc-general-provisions-table-4-11-1-c-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-4-11-1-c-row-2-bedrooms-permitted",
         "requirement_type": "dimensional_standard",
         "requirement_category": "other",
@@ -4844,7 +4932,10 @@
           "conditions": []
         },
         "numeric_value_refs": [
-          "doc-general-provisions-source-num-doc-general-provisions-table-4-11-1-c-row-2-bedrooms-permitted-1"
+          "doc-general-provisions-source-num-doc-general-provisions-table-4-11-1-c-row-2-bedrooms-permitted-1",
+          "doc-general-provisions-source-num-doc-general-provisions-table-4-11-1-c-row-2-bedrooms-permitted-2",
+          "doc-general-provisions-source-num-doc-general-provisions-table-4-11-1-c-row-2-bedrooms-permitted-3",
+          "doc-general-provisions-source-num-doc-general-provisions-table-4-11-1-c-row-2-bedrooms-permitted-4"
         ],
         "term_refs": [],
         "source_refs": [
@@ -5096,6 +5187,7 @@
         "regulation_group_id": "doc-general-provisions-regulation-group",
         "group_title_raw": "General Provisions for Land Use",
         "requirement_refs": [
+          "doc-general-provisions-source-req-doc-general-provisions-table-4-11-1-c-row-1-bedrooms-permitted",
           "doc-general-provisions-source-req-doc-general-provisions-table-4-11-1-c-row-2-bedrooms-permitted",
           "doc-general-provisions-source-req-doc-general-provisions-clause-4-6-6",
           "doc-general-provisions-source-req-doc-general-provisions-clause-4-8-2-a",
@@ -5310,45 +5402,6 @@
         {
           "source_ref_type": "document",
           "source_ref_id": "doc-general-provisions"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-4-11-1-c-row-1-zone-designation",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: RN, RM, and HR Zones",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-4-11-1-c-row-1-zone_designation"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-4-11-1-c-row-1-bedrooms-permitted",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Up to four (4) bedrooms",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-4-11-1-c-row-1-bedrooms_permitted"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-4-11-1-c-row-2-zone-designation",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: GC, GN, DC, DN, DMU, and DW Zones",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-4-11-1-c-row-2-zone_designation"
         }
       ]
     }
