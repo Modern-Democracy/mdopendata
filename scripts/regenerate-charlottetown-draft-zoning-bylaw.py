@@ -164,6 +164,7 @@ def transform_zone_doc(path: Path) -> dict[str, Any]:
         repair_rm_table_clauses(data)
     current.repair_draft_dmu_landscape_clause(data)
     current.refresh_schema_numeric_values(data)
+    current.repair_reviewed_draft_zone_clause_text(data)
     current.promote_reviewed_draft_zone_requirements(data)
     current.refresh_schema_terms(NORMALIZER, data)
     current.apply_zone_reference_model(data)
@@ -177,6 +178,7 @@ def transform_supporting_doc(path: Path, document_type: str) -> dict[str, Any]:
     current.repair_charlottetown_draft_parking_sections(data)
     current.refresh_schema_numeric_values(data)
     current.promote_reviewed_draft_general_provisions_requirements(data)
+    current.repair_reviewed_draft_general_provisions_clause_text(data)
     current.refresh_schema_terms(NORMALIZER, data)
     current.apply_zone_reference_model(data)
     return data

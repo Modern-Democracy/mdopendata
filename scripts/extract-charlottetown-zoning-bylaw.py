@@ -1551,6 +1551,10 @@ DRAFT_GENERAL_PROVISIONS_REVIEWED_REQUIREMENT_CLAUSES = {
     "doc-design-standards-clause-6-8-8-a",
     "doc-design-standards-clause-6-8-8-b",
     "doc-design-standards-clause-6-8-8-d",
+    "doc-general-provisions-clause-3-4-2-b",
+    "doc-general-provisions-clause-3-4-2-c",
+    "doc-general-provisions-clause-3-9-1-a",
+    "doc-general-provisions-clause-3-13-1",
     "doc-general-provisions-clause-4-6-3-d",
     "doc-general-provisions-clause-4-6-5",
     "doc-general-provisions-clause-4-7-2-d",
@@ -1577,6 +1581,10 @@ DRAFT_GENERAL_PROVISIONS_REVIEWED_REQUIREMENT_CLAUSES = {
     "doc-general-provisions-clause-9-21-1-c-iii",
     "doc-general-provisions-clause-9-21-1-c-iv",
     "doc-general-provisions-clause-9-22-6-f",
+    "doc-general-provisions-clause-7-3-2-g",
+    "doc-general-provisions-clause-7-4-1-e-xvii",
+    "doc-other-clause-2-3-1-c-vi",
+    "doc-other-clause-2-8-5-a",
 }
 
 
@@ -1616,6 +1624,31 @@ DRAFT_ZONE_REVIEWED_REQUIREMENT_CLAUSES = {
     "zone-dw-clause-17-7-10-b",
     "zone-dw-clause-17-7-12",
     "zone-dw-clause-17-7-14",
+    "zone-bp-clause-18-5-9-b",
+    "zone-bp-clause-18-6-7-a",
+    "zone-bp-clause-18-6-10",
+    "zone-bp-clause-18-6-13",
+    "zone-dc-clause-13-4-1",
+    "zone-dc-clause-13-5-12",
+    "zone-dc-clause-13-5-14",
+    "zone-dc-clause-13-6-5",
+    "zone-dn-clause-16-4-3-b",
+    "zone-dn-clause-16-5-5",
+    "zone-hi-clause-20-5-5",
+    "zone-hi-clause-20-6-3",
+    "zone-hi-clause-20-6-3-a",
+    "zone-p-clause-21-5-3",
+    "zone-p-clause-21-6-1-b",
+    "zone-i-clause-24-5-8-b",
+    "zone-i-clause-24-6-10",
+    "zone-i-clause-24-6-13",
+    "zone-i-clause-24-6-13-a",
+    "zone-rn-clause-10-1",
+    "zone-rn-clause-10-3-1-a",
+    "zone-rn-clause-10-4-2-c",
+    "zone-rn-clause-10-6-2",
+    "zone-rm-clause-11-4-7-c",
+    "zone-rm-clause-11-6-6",
 }
 
 
@@ -1653,6 +1686,82 @@ def repair_draft_dmu_landscape_clause(data: dict[str, Any]) -> bool:
             if clause.get("clause_id") == "zone-dmu-clause-15-6-1" and clause.get("clause_text_raw") == "See Section 6.8-6.9 1.5 m":
                 clause["clause_text_raw"] = "See Section 6.8-6.9"
                 changed = True
+    return changed
+
+
+def repair_reviewed_draft_zone_clause_text(data: dict[str, Any]) -> bool:
+    metadata = data.get("document_metadata") or {}
+    if not str(metadata.get("bylaw_name") or "").startswith("Draft Zoning"):
+        return False
+    zone_code = metadata.get("zone_code")
+    structured = data.get("structured_data") or {}
+    changed = False
+    if zone_code == "BP":
+        for requirement in structured.get("other_requirements") or []:
+            if requirement.get("requirement_id") == "zone-bp-req-zone-bp-clause-18-6-13":
+                text = "Properties that abut residential uses shall include a 3 m wide landscape buffer along the abutting property line that includes:"
+                if requirement.get("requirement_text_raw") != text:
+                    requirement["requirement_text_raw"] = text
+                    changed = True
+    if zone_code == "RN":
+        for requirement in structured.get("other_requirements") or []:
+            if requirement.get("requirement_id") == "zone-rn-req-zone-rn-clause-10-6-2":
+                text = "All driveways shall be hard surfaced with asphalt, concrete or unit pavers. Loose gravel or soil is not permitted."
+                if requirement.get("requirement_text_raw") != text:
+                    requirement["requirement_text_raw"] = text
+                    changed = True
+                if requirement.get("numeric_value_refs"):
+                    requirement["numeric_value_refs"] = []
+                    changed = True
+        numeric_values = structured.get("numeric_values") or []
+        filtered = [
+            value
+            for value in numeric_values
+            if value.get("numeric_value_id") != "zone-rn-num-zone-rn-clause-10-6-2-1"
+        ]
+        if len(filtered) != len(numeric_values):
+            structured["numeric_values"] = filtered
+            changed = True
+    return changed
+
+
+def repair_reviewed_draft_general_provisions_clause_text(data: dict[str, Any]) -> bool:
+    metadata = data.get("document_metadata") or {}
+    if not str(metadata.get("bylaw_name") or "").startswith("Draft Zoning"):
+        return False
+    structured = data.get("structured_data") or {}
+    bad_text = " 6.0 m Road Right-of-Way Sidewalk Road"
+    changed = False
+    raw_data = data.get("raw_data") or {}
+    for source_unit in raw_data.get("source_units") or []:
+        text = source_unit.get("text_raw")
+        if isinstance(text, str) and bad_text in text:
+            source_unit["text_raw"] = text.replace(bad_text, "")
+            changed = True
+    for section in raw_data.get("sections_raw") or []:
+        for clause in section.get("clauses_raw") or []:
+            text = clause.get("clause_text_raw")
+            if clause.get("clause_id") == "doc-general-provisions-clause-3-9-1-a" and isinstance(text, str) and bad_text in text:
+                clause["clause_text_raw"] = text.replace(bad_text, "")
+                changed = True
+    for requirement in structured.get("other_requirements") or []:
+        if requirement.get("requirement_id") == "doc-general-provisions-source-req-doc-general-provisions-clause-3-9-1-a":
+            text = "When a building or structure is accessory to construction in progress, such as a work or construction camp, Modular Dwelling, sales or rental Office, tool or maintenance shed and scaffold."
+            if requirement.get("requirement_text_raw") != text:
+                requirement["requirement_text_raw"] = text
+                changed = True
+            if requirement.get("numeric_value_refs"):
+                requirement["numeric_value_refs"] = []
+                changed = True
+    numeric_values = structured.get("numeric_values") or []
+    filtered = [
+        value
+        for value in numeric_values
+        if value.get("numeric_value_id") != "doc-general-provisions-source-num-doc-general-provisions-clause-3-9-1-a-1"
+    ]
+    if len(filtered) != len(numeric_values):
+        structured["numeric_values"] = filtered
+        changed = True
     return changed
 
 
@@ -4578,6 +4687,8 @@ def main() -> None:
             apply_wf_bonus_height_context(data)
             apply_cda_development_concept_plan_context(data)
             apply_pz_land_use_buffer_context(data)
+            repair_reviewed_draft_zone_clause_text(data)
+            promote_reviewed_draft_zone_requirements(data)
             write_json(path, apply_zone_reference_model(refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data))))
             continue
         transformed = transform_zone(normalizer, data)
@@ -4595,6 +4706,8 @@ def main() -> None:
         apply_wf_bonus_height_context(transformed)
         apply_cda_development_concept_plan_context(transformed)
         apply_pz_land_use_buffer_context(transformed)
+        repair_reviewed_draft_zone_clause_text(transformed)
+        promote_reviewed_draft_zone_requirements(transformed)
         write_json(path, transformed)
 
     for item in manifest.get("document_files", []):
@@ -4629,6 +4742,7 @@ def main() -> None:
             apply_cda_development_concept_plan_context(data)
             apply_pz_land_use_buffer_context(data)
             promote_reviewed_draft_general_provisions_requirements(data)
+            repair_reviewed_draft_general_provisions_clause_text(data)
             write_json(path, apply_zone_reference_model(refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data))))
             continue
         if document_type == "definitions":
@@ -4646,6 +4760,7 @@ def main() -> None:
             refresh_schema_numeric_values(transformed)
             apply_general_provisions_sign_permit_numeric_context(transformed)
             promote_reviewed_draft_general_provisions_requirements(transformed)
+            repair_reviewed_draft_general_provisions_clause_text(transformed)
             write_json(path, apply_zone_reference_model(refresh_schema_terms(normalizer, transformed)))
 
     for item in manifest.get("supporting_files", []):
