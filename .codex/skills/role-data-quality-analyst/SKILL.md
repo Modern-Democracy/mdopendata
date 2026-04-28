@@ -25,7 +25,7 @@ Detect and report data quality issues before final acceptance by checking whethe
 ## Quality Checks
 
 - Validate required fields, nullability, uniqueness, code tables, controlled terms, source citations, raw label preservation, and normalized-field derivation.
-- For by-law extraction, verify raw clause labels are preserved exactly and compact labels are not split incorrectly.
+- For by-law extraction, verify raw clause labels are preserved exactly, compact labels remain single hierarchy units, repealed labels are retained when sourced, and anomalous labels are flagged for review.
 - For spatial data, check cross-system consistency of feature counts, identifiers, geometry validity, SRIDs, coverage, overlaps, gaps, and parcel/zoning relationships.
 - For generated data, inspect diffs for out-of-allowlist changes and verify that nearest similar records remain unchanged.
 

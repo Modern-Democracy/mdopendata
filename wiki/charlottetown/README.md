@@ -1,6 +1,14 @@
-# Charlottetown LLM Wiki
+---
+type: project
+tags:
+  - charlottetown
+  - wiki
+updated: 2026-04-28
+---
 
 This wiki is the LLM-maintained working knowledge layer for the Charlottetown current and draft zoning workstream. It is documentation-only and does not replace the source PDFs, extracted JSON, maps, spatial files, plans, schemas, scripts, or database imports.
+
+# Charlottetown LLM Wiki
 
 ## Scope
 
@@ -13,6 +21,16 @@ Use this wiki for Charlottetown zoning knowledge only:
 - later parcel, street, map, and neighbourhood comparison notes when approved
 
 Do not use this wiki for HRM, PEI corporate land-use, or unrelated municipal sources unless a later task explicitly expands the scope.
+
+## Active Workstream
+
+The active workstream is the City of Charlottetown current and draft zoning bylaw extraction, including associated zoning maps, parcel layer, and street map.
+
+Use source material under `docs/charlottetown`. Write current zoning bylaw extraction outputs under `data/zoning/charlottetown` and draft zoning bylaw extraction outputs under `data/zoning/charlottetown-draft` unless the task explicitly names another destination.
+
+The current purpose is to enable parcel and neighbourhood comparison between current and draft Charlottetown zoning, with outputs suitable for later PostGIS/QGIS use and a future public web front end.
+
+For the Charlottetown draft zoning validation workstream, keep `plan/chalottetown-draft-zoning-timeline.md` up to date until the plan is complete. Update its active phase, overall status, current progress, and phase statuses whenever work advances, pauses, is blocked, or completes.
 
 ## Source Policy
 
@@ -36,7 +54,7 @@ Every substantive zoning claim added after this scaffold must include source sup
 - clause label exactly as written in the source
 - zone code, schedule name, map layer, JSON file, or object identifier where relevant
 
-Preserve raw clause labels exactly as written in the source. Follow the root `AGENTS.md` Charlottetown extraction rules for clause hierarchy, compact labels, repealed labels, and review flags.
+Preserve raw clause labels exactly as written in the source. Follow `wiki/domain/bylaw-clause-labels.md` for clause hierarchy, compact labels, repealed labels, and review flags.
 
 ## Page Types
 
@@ -86,3 +104,8 @@ File lint reports under a future `questions` or `comparisons` page only when the
 This v1 scaffold contains no substantive bylaw synthesis. It adds only the directory structure, templates, index, log, and maintenance contract.
 
 Do not add scripts, database integration, search tooling, schema changes, extraction changes, Obsidian configuration, or generated zoning output changes as part of this v1 wiki scaffold.
+
+## Sources
+
+- [Charlottetown workstream context](./topics/workstream-context.md)
+- [Root wiki schema](../AGENTS.md)

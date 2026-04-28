@@ -1,10 +1,22 @@
-# Charlottetown Wiki Log
+---
+type: log
+tags:
+  - charlottetown
+  - log
+updated: 2026-04-28
+---
 
 Append new entries in reverse chronological order. Use headings in this format:
+
+# Charlottetown Wiki Log
 
 ```text
 ## [YYYY-MM-DD] type | Short title
 ```
+
+## [2026-04-28] maintenance | Workstream context relocation
+
+Moved durable Charlottetown workstream context from root startup instructions into `README.md` and `topics/workstream-context.md`; updated the index so role skills can look up the context only when relevant.
 
 ## [2026-04-28] extraction | Draft 500 Lot Area, DMS, and DMU Phase 3 review
 
@@ -37,3 +49,7 @@ Added `topics/draft-layout-repair-notes.md` for the verified Charlottetown draft
 ## [2026-04-24] setup | Charlottetown wiki scaffold
 
 Created the v1 scaffold for the Charlottetown LLM Wiki, including the local guide, index, log, page areas, and templates. No substantive bylaw synthesis was added.
+
+## Sources
+
+- [Charlottetown wiki guide](./README.md)

@@ -16,11 +16,12 @@ Build or run reliable data pipelines that convert source documents and spatial i
 ## Workflow
 
 1. Identify source inputs, generated outputs, schemas, pipeline scripts, import targets, and rerun constraints.
-2. Confirm requirements, schema semantics, compatibility rules, and accepted source-pattern variation are already explicit.
-3. Prefer existing extraction, normalization, validation, and import scripts before adding new tooling.
-4. Preserve raw source text, raw labels, provenance, and stable identifiers needed for auditability.
-5. Make transformations deterministic and rerunnable.
-6. Validate counts, required fields, keys, links, schema conformance, and import readiness.
+2. Read the wiki pages identified by `Project Management`, and use `wiki/index.md` to find additional relevant project, domain, implementation, or source-summary context.
+3. Confirm requirements, schema semantics, compatibility rules, and accepted source-pattern variation are already explicit.
+4. Prefer existing extraction, normalization, validation, and import scripts before adding new tooling.
+5. Preserve raw source text, raw labels, provenance, and stable identifiers needed for auditability.
+6. Make transformations deterministic and rerunnable.
+7. Validate counts, required fields, keys, links, schema conformance, and import readiness.
 
 ## Pipeline Rules
 

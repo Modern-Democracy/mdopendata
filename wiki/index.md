@@ -25,11 +25,26 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [implementation](./implementation/.gitkeep) | Durable workflow, extraction, schema, and implementation notes. |
 | [charlottetown](./charlottetown/README.md) | Active Charlottetown current and draft zoning wiki. |
 
+## Domain Pages
+
+| Page | Purpose |
+| --- | --- |
+| [By-law clause labels](./domain/bylaw-clause-labels.md) | Reusable clause-label preservation, hierarchy normalization, compact-label, repealed-label, and review-flag guidance. |
+
 ## Active Project Wikis
 
 | Wiki | Status | Scope |
 | --- | --- | --- |
 | [Charlottetown](./charlottetown/index.md) | Active | Current zoning, draft zoning, validation, comparison, maps, parcels, and future QGIS/PostGIS use. |
+
+## Instruction Placement
+
+| Location | Scope |
+| --- | --- |
+| [Root AGENTS](../AGENTS.md) | Minimal universal startup routing instructions. |
+| [Role skills](../.codex/skills/role-project-management/SKILL.md) | Role-specific universal operating rules and implementation gates. |
+| [Wiki schema](./AGENTS.md) | Wiki structure, page conventions, ingest, query, and lint workflows. |
+| [Charlottetown workstream context](./charlottetown/topics/workstream-context.md) | Active project-specific Charlottetown context. |
 
 ## High-Value Ingest Targets
 
