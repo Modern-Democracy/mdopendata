@@ -516,12 +516,12 @@
                   {
                     "cell_id": "doc-general-provisions-table-3-2-1-row-8-maximum_projection_into_yard",
                     "column_id": "maximum_projection_into_yard",
-                    "cell_text_raw": "Same as minimum Side Yard for the building, except in R-1L R-1S, R-1N, R-2 and R-2S Zones where the Setback is 4.6 m (15.1 ft) from the rear lot line"
+                    "cell_text_raw": ""
                   },
                   {
                     "cell_id": "doc-general-provisions-table-3-2-1-row-8-minimum_distance_from_lot_line",
                     "column_id": "minimum_distance_from_lot_line",
-                    "cell_text_raw": ""
+                    "cell_text_raw": "Same as minimum Side Yard for the building, except in R-1L R-1S, R-1N, R-2 and R-2S Zones where the Setback is 4.6 m (15.1 ft) from the rear lot line"
                   }
                 ]
               },
@@ -4142,30 +4142,7 @@
         "confidence": "medium"
       },
       {
-        "numeric_value_id": "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-8-structure-1",
-        "value_raw": "0.3 m (1.0 ft)",
-        "value": 0.3,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "exact",
-        "alternative_values": [
-          {
-            "value_raw": "1.0 ft",
-            "value": 1,
-            "unit": "ft",
-            "measure_type": "length"
-          }
-        ],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "doc-general-provisions-table-3-2-1-row-8-structure"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-8-maximum-projection-into-yard-1",
+        "numeric_value_id": "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-8-minimum-distance-from-lot-line-1",
         "value_raw": "4.6 m (15.1 ft)",
         "value": 4.6,
         "unit": "m",
@@ -4182,30 +4159,7 @@
         "source_refs": [
           {
             "source_ref_type": "table_cell",
-            "source_ref_id": "doc-general-provisions-table-3-2-1-row-8-maximum_projection_into_yard"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-9-structure-1",
-        "value_raw": "0.3 m (1.0 ft)",
-        "value": 0.3,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "less_than",
-        "alternative_values": [
-          {
-            "value_raw": "1.0 ft",
-            "value": 1,
-            "unit": "ft",
-            "measure_type": "length"
-          }
-        ],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "doc-general-provisions-table-3-2-1-row-9-structure"
+            "source_ref_id": "doc-general-provisions-table-3-2-1-row-8-minimum_distance_from_lot_line"
           }
         ],
         "confidence": "medium"
@@ -4229,29 +4183,6 @@
           {
             "source_ref_type": "table_cell",
             "source_ref_id": "doc-general-provisions-table-3-2-1-row-9-minimum_distance_from_lot_line"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "numeric_value_id": "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-10-structure-1",
-        "value_raw": "0.3 m (1.0 ft)",
-        "value": 0.3,
-        "unit": "m",
-        "measure_type": "length",
-        "comparator": "less_than",
-        "alternative_values": [
-          {
-            "value_raw": "1.0 ft",
-            "value": 1,
-            "unit": "ft",
-            "measure_type": "length"
-          }
-        ],
-        "source_refs": [
-          {
-            "source_ref_type": "table_cell",
-            "source_ref_id": "doc-general-provisions-table-3-2-1-row-10-structure"
           }
         ],
         "confidence": "medium"
@@ -5093,14 +5024,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-1-maximum-projection-into-yard",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Maximum projection into Yard 1.5m",
+        "requirement_category": "maximum_projection_into_yard",
+        "requirement_label_raw": "Maximum projection into Yard",
+        "requirement_text_raw": "Maximum projection into Yard Structure Air Conditioning / Heat Pump units Yard All yards 1.5m",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "maximum_projection_into_yard"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "a"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-1-maximum-projection-into-yard-1"
@@ -5117,14 +5051,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-1-minimum-distance-from-lot-line",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Minimum distance from Lot Line 1 m",
+        "requirement_category": "minimum_distance_from_lot_line",
+        "requirement_label_raw": "Minimum distance from Lot Line",
+        "requirement_text_raw": "Minimum distance from Lot Line Structure Air Conditioning / Heat Pump units Yard All yards 1 m",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "minimum_distance_from_lot_line"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "a"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-1-minimum-distance-from-lot-line-1"
@@ -5141,14 +5078,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-2-maximum-projection-into-yard",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Maximum projection into Yard 1.0 m (3.3 ft)",
+        "requirement_category": "maximum_projection_into_yard",
+        "requirement_label_raw": "Maximum projection into Yard",
+        "requirement_text_raw": "Maximum projection into Yard Structure Awning/Canopy Yard Front, Rear, Flankage 1.0 m (3.3 ft)",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "maximum_projection_into_yard"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "b"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-2-maximum-projection-into-yard-1"
@@ -5165,14 +5105,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-2-minimum-distance-from-lot-line",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Minimum distance from Lot Line 0.3 m (1 ft)",
+        "requirement_category": "minimum_distance_from_lot_line",
+        "requirement_label_raw": "Minimum distance from Lot Line",
+        "requirement_text_raw": "Minimum distance from Lot Line Structure Awning/Canopy Yard Front, Rear, Flankage 0.3 m (1 ft)",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "minimum_distance_from_lot_line"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "b"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-2-minimum-distance-from-lot-line-1"
@@ -5189,14 +5132,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-3-maximum-projection-into-yard",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Maximum projection into Yard 1.2 m (3.9 ft)",
+        "requirement_category": "maximum_projection_into_yard",
+        "requirement_label_raw": "Maximum projection into Yard",
+        "requirement_text_raw": "Maximum projection into Yard Structure Balcony Yard Front, flankage, rear 1.2 m (3.9 ft)",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "maximum_projection_into_yard"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "c"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-3-maximum-projection-into-yard-1"
@@ -5213,14 +5159,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-3-minimum-distance-from-lot-line",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Minimum distance from Lot Line 1 m (3.3 ft)",
+        "requirement_category": "minimum_distance_from_lot_line",
+        "requirement_label_raw": "Minimum distance from Lot Line",
+        "requirement_text_raw": "Minimum distance from Lot Line Structure Balcony Yard Front, flankage, rear 1 m (3.3 ft)",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "minimum_distance_from_lot_line"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "c"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-3-minimum-distance-from-lot-line-1"
@@ -5237,14 +5186,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-4-maximum-projection-into-yard",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Maximum projection into Yard 0.6 m (2.0 ft)",
+        "requirement_category": "maximum_projection_into_yard",
+        "requirement_label_raw": "Maximum projection into Yard",
+        "requirement_text_raw": "Maximum projection into Yard Structure Bay window Yard All Yards 0.6 m (2.0 ft)",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "maximum_projection_into_yard"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "d"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-4-maximum-projection-into-yard-1"
@@ -5261,14 +5213,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-4-minimum-distance-from-lot-line",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Minimum distance from Lot Line 1 m (3.3 ft)",
+        "requirement_category": "minimum_distance_from_lot_line",
+        "requirement_label_raw": "Minimum distance from Lot Line",
+        "requirement_text_raw": "Minimum distance from Lot Line Structure Bay window Yard All Yards 1 m (3.3 ft)",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "minimum_distance_from_lot_line"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "d"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-4-minimum-distance-from-lot-line-1"
@@ -5285,14 +5240,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-5-maximum-projection-into-yard",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Maximum projection into Yard 1.83 m (6 ft)",
+        "requirement_category": "maximum_projection_into_yard",
+        "requirement_label_raw": "Maximum projection into Yard",
+        "requirement_text_raw": "Maximum projection into Yard Structure Ramp Yard All Yards 1.83 m (6 ft)",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "maximum_projection_into_yard"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "e"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-5-maximum-projection-into-yard-1"
@@ -5309,14 +5267,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-5-minimum-distance-from-lot-line",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Minimum distance from Lot Line 1 m (3.3 ft)",
+        "requirement_category": "minimum_distance_from_lot_line",
+        "requirement_label_raw": "Minimum distance from Lot Line",
+        "requirement_text_raw": "Minimum distance from Lot Line Structure Ramp Yard All Yards 1 m (3.3 ft)",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "minimum_distance_from_lot_line"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "e"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-5-minimum-distance-from-lot-line-1"
@@ -5333,14 +5294,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-6-maximum-projection-into-yard",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Maximum projection into Yard 1.83m (6 ft)",
+        "requirement_category": "maximum_projection_into_yard",
+        "requirement_label_raw": "Maximum projection into Yard",
+        "requirement_text_raw": "Maximum projection into Yard Structure Exterior staircase (landing and stairs connecting to the First Storey) Yard All Yards 1.83m (6 ft)",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "maximum_projection_into_yard"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "f"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-6-maximum-projection-into-yard-1"
@@ -5357,14 +5321,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-6-minimum-distance-from-lot-line",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Minimum distance from Lot Line 6 m (19.7 ft) from the front lot line and flankage lot line; 1.2 m (3.9 ft) from the side or rear lot line",
+        "requirement_category": "minimum_distance_from_lot_line",
+        "requirement_label_raw": "Minimum distance from Lot Line",
+        "requirement_text_raw": "Minimum distance from Lot Line Structure Exterior staircase (landing and stairs connecting to the First Storey) Yard All Yards 6 m (19.7 ft) from the front lot line and flankage lot line; 1.2 m (3.9 ft) from the side or rear lot line",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "minimum_distance_from_lot_line"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "f"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-6-minimum-distance-from-lot-line-1",
@@ -5382,14 +5349,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-7-maximum-projection-into-yard",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Maximum projection into Yard 1.2 m (3.9 ft)",
+        "requirement_category": "maximum_projection_into_yard",
+        "requirement_label_raw": "Maximum projection into Yard",
+        "requirement_text_raw": "Maximum projection into Yard Structure Exterior staircase (fire escape and any stairs extending beyond the First Storey) Yard Side and rear 1.2 m (3.9 ft)",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "maximum_projection_into_yard"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "g"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-7-maximum-projection-into-yard-1"
@@ -5406,14 +5376,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-7-minimum-distance-from-lot-line",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Minimum distance from Lot Line 1.2 m (3.9 ft)",
+        "requirement_category": "minimum_distance_from_lot_line",
+        "requirement_label_raw": "Minimum distance from Lot Line",
+        "requirement_text_raw": "Minimum distance from Lot Line Structure Exterior staircase (fire escape and any stairs extending beyond the First Storey) Yard Side and rear 1.2 m (3.9 ft)",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "minimum_distance_from_lot_line"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "g"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-7-minimum-distance-from-lot-line-1"
@@ -5428,73 +5401,28 @@
         "confidence": "medium"
       },
       {
-        "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-8-structure",
+        "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-8-minimum-distance-from-lot-line",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Structure Deck 0.3 m (1.0 ft) or more above Grade",
+        "requirement_category": "minimum_distance_from_lot_line",
+        "requirement_label_raw": "Minimum distance from Lot Line",
+        "requirement_text_raw": "Minimum distance from Lot Line Structure Deck 0.3 m (1.0 ft) or more above Grade Yard Rear, side, Flankage Same as minimum Side Yard for the building, except in R-1L R-1S, R-1N, R-2 and R-2S Zones where the Setback is 4.6 m (15.1 ft) from the rear lot line",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "structure"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "h"
+            }
+          ]
         },
         "numeric_value_refs": [
-          "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-8-structure-1"
+          "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-8-minimum-distance-from-lot-line-1"
         ],
         "term_refs": [],
         "source_refs": [
           {
             "source_ref_type": "table_row",
             "source_ref_id": "doc-general-provisions-table-3-2-1-row-8"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-8-maximum-projection-into-yard",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Maximum projection into Yard Same as minimum Side Yard for the building, except in R-1L R-1S, R-1N, R-2 and R-2S Zones where the Setback is 4.6 m (15.1 ft) from the rear lot line",
-        "applicability": {
-          "applies_to_lot_contexts": [
-            "maximum_projection_into_yard"
-          ],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-8-maximum-projection-into-yard-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "doc-general-provisions-table-3-2-1-row-8"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
-        "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-9-structure",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Structure Deck at Grade or less than 0.3 m (1.0 ft)",
-        "applicability": {
-          "applies_to_lot_contexts": [
-            "structure"
-          ],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-9-structure-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "doc-general-provisions-table-3-2-1-row-9"
           }
         ],
         "confidence": "medium"
@@ -5502,14 +5430,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-9-minimum-distance-from-lot-line",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Minimum distance from Lot Line 1 m (3.3 ft)",
+        "requirement_category": "minimum_distance_from_lot_line",
+        "requirement_label_raw": "Minimum distance from Lot Line",
+        "requirement_text_raw": "Minimum distance from Lot Line Structure Deck at Grade or less than 0.3 m (1.0 ft) Yard Rear, side, Flankage 1 m (3.3 ft)",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "minimum_distance_from_lot_line"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "i"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-9-minimum-distance-from-lot-line-1"
@@ -5524,40 +5455,19 @@
         "confidence": "medium"
       },
       {
-        "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-10-structure",
-        "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Structure Deck at Grade or less than 0.3 m (1.0 ft)",
-        "applicability": {
-          "applies_to_lot_contexts": [
-            "structure"
-          ],
-          "conditions": []
-        },
-        "numeric_value_refs": [
-          "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-10-structure-1"
-        ],
-        "term_refs": [],
-        "source_refs": [
-          {
-            "source_ref_type": "table_row",
-            "source_ref_id": "doc-general-provisions-table-3-2-1-row-10"
-          }
-        ],
-        "confidence": "medium"
-      },
-      {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-10-maximum-projection-into-yard",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Maximum projection into Yard 1.83m (6 ft)",
+        "requirement_category": "maximum_projection_into_yard",
+        "requirement_label_raw": "Maximum projection into Yard",
+        "requirement_text_raw": "Maximum projection into Yard Structure Deck at Grade or less than 0.3 m (1.0 ft) Yard Front Yard 1.83m (6 ft)",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "maximum_projection_into_yard"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "j"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-10-maximum-projection-into-yard-1"
@@ -5574,14 +5484,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-10-minimum-distance-from-lot-line",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Minimum distance from Lot Line 2 m (6.6 ft)",
+        "requirement_category": "minimum_distance_from_lot_line",
+        "requirement_label_raw": "Minimum distance from Lot Line",
+        "requirement_text_raw": "Minimum distance from Lot Line Structure Deck at Grade or less than 0.3 m (1.0 ft) Yard Front Yard 2 m (6.6 ft)",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "minimum_distance_from_lot_line"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "j"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-10-minimum-distance-from-lot-line-1"
@@ -5598,14 +5511,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-11-maximum-projection-into-yard",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Maximum projection into Yard 1.5 m (4.9 ft)",
+        "requirement_category": "maximum_projection_into_yard",
+        "requirement_label_raw": "Maximum projection into Yard",
+        "requirement_text_raw": "Maximum projection into Yard Structure Porch Yard Front, rear, Flankage 1.5 m (4.9 ft)",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "maximum_projection_into_yard"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "k"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-11-maximum-projection-into-yard-1"
@@ -5622,14 +5538,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-11-minimum-distance-from-lot-line",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
-        "requirement_text_raw": "Minimum distance from Lot Line 1 m (3.3 ft)",
+        "requirement_category": "minimum_distance_from_lot_line",
+        "requirement_label_raw": "Minimum distance from Lot Line",
+        "requirement_text_raw": "Minimum distance from Lot Line Structure Porch Yard Front, rear, Flankage 1 m (3.3 ft)",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "minimum_distance_from_lot_line"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "k"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-2-1-row-11-minimum-distance-from-lot-line-1"
@@ -6464,11 +6383,8 @@
           "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-6-minimum-distance-from-lot-line",
           "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-7-maximum-projection-into-yard",
           "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-7-minimum-distance-from-lot-line",
-          "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-8-structure",
-          "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-8-maximum-projection-into-yard",
-          "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-9-structure",
+          "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-8-minimum-distance-from-lot-line",
           "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-9-minimum-distance-from-lot-line",
-          "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-10-structure",
           "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-10-maximum-projection-into-yard",
           "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-10-minimum-distance-from-lot-line",
           "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-11-maximum-projection-into-yard",
@@ -6645,786 +6561,6 @@
         {
           "source_ref_type": "document",
           "source_ref_id": "doc-general-provisions"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-2-1-row-1-structure",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Air Conditioning / Heat Pump units",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-2-1-row-1-structure"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-2-1-row-1-yard-projection-permitted",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: All yards",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-2-1-row-1-yard_projection_permitted"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-2-1-row-2-structure",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Awning/Canopy",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-2-1-row-2-structure"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-2-1-row-2-yard-projection-permitted",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Front, Rear, Flankage",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-2-1-row-2-yard_projection_permitted"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-2-1-row-3-structure",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Balcony",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-2-1-row-3-structure"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-2-1-row-3-yard-projection-permitted",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Front, flankage, rear",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-2-1-row-3-yard_projection_permitted"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-2-1-row-4-structure",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Bay window",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-2-1-row-4-structure"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-2-1-row-4-yard-projection-permitted",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: All Yards",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-2-1-row-4-yard_projection_permitted"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-2-1-row-5-structure",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Ramp",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-2-1-row-5-structure"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-2-1-row-5-yard-projection-permitted",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: All Yards",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-2-1-row-5-yard_projection_permitted"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-2-1-row-6-structure",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Exterior staircase (landing and stairs connecting to the First Storey)",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-2-1-row-6-structure"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-2-1-row-6-yard-projection-permitted",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: All Yards",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-2-1-row-6-yard_projection_permitted"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-2-1-row-7-structure",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Exterior staircase (fire escape and any stairs extending beyond the First Storey)",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-2-1-row-7-structure"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-2-1-row-7-yard-projection-permitted",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Side and rear",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-2-1-row-7-yard_projection_permitted"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-2-1-row-8-yard-projection-permitted",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Rear, side, Flankage",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-2-1-row-8-yard_projection_permitted"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-2-1-row-9-yard-projection-permitted",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Rear, side, Flankage",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-2-1-row-9-yard_projection_permitted"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-2-1-row-10-yard-projection-permitted",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Front Yard",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-2-1-row-10-yard_projection_permitted"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-2-1-row-11-structure",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Porch",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-2-1-row-11-structure"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-2-1-row-11-yard-projection-permitted",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Front, rear, Flankage",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-2-1-row-11-yard_projection_permitted"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-1-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Antenna",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-1-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-1-maximum-height-above-maximum-roof",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Unlimited",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-1-maximum_height_above_maximum_roof"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-2-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Chimney",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-2-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-2-maximum-height-above-maximum-roof",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Unlimited",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-2-maximum_height_above_maximum_roof"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-3-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Clear glass guard and railing system",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-3-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-4-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Clock tower or bell tower",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-4-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-4-maximum-height-above-maximum-roof",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Unlimited",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-4-maximum_height_above_maximum_roof"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-4-roof-coverage-restriction",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: YES",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-4-roof_coverage_restriction"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-5-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Communication tower required to support uses and activities in the building",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-5-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-5-maximum-height-above-maximum-roof",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Unlimited",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-5-maximum_height_above_maximum_roof"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-6-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Cooling Tower",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-6-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-6-maximum-height-above-maximum-roof",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Unlimited",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-6-maximum_height_above_maximum_roof"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-6-roof-coverage-restriction",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: YES",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-6-roof_coverage_restriction"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-7-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Elevator enclosure",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-7-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-7-roof-coverage-restriction",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: YES",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-7-roof_coverage_restriction"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-8-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Flag pole",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-8-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-8-maximum-height-above-maximum-roof",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Unlimited",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-8-maximum_height_above_maximum_roof"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-9-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Heating, ventilation, and air conditioning equipment and enclosure",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-9-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-9-roof-coverage-restriction",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: YES",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-9-roof_coverage_restriction"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-10-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Helipad on a hospital roof",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-10-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-11-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: High-plume laboratory exhaust fan",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-11-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-11-maximum-height-above-maximum-roof",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Unlimited",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-11-maximum_height_above_maximum_roof"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-11-roof-coverage-restriction",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: YES",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-11-roof_coverage_restriction"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-12-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Hard landscaping or soft landscaping",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-12-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-13-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Lighting Rod",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-13-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-13-maximum-height-above-maximum-roof",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Unlimited",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-13-maximum_height_above_maximum_roof"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-14-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Mechanical Penthouse",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-14-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-15-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Parapet",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-15-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-16-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Rooftop Cupola",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-16-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-16-roof-coverage-restriction",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: YES",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-16-roof_coverage_restriction"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-17-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Rooftop Greenhouse",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-17-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-18-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Skylight",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-18-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-19-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Solar collector",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-19-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-20-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Spire, steeple, minaret, and similar features",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-20-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-20-maximum-height-above-maximum-roof",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Unlimited",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-20-maximum_height_above_maximum_roof"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-20-roof-coverage-restriction",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: YES",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-20-roof_coverage_restriction"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-21-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Staircase or staircase enclosure",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-21-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-22-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Windscreen",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-22-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-23-feature",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Window cleaning Platform",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-23-feature"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-23-maximum-height-above-maximum-roof",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Unlimited",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-23-maximum_height_above_maximum_roof"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-6-1-row-23-roof-coverage-restriction",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: YES",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-6-1-row-23-roof_coverage_restriction"
         }
       ]
     }

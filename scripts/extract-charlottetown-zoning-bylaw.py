@@ -1009,7 +1009,7 @@ def repair_charlottetown_draft_general_provisions_tables(data: dict[str, Any]) -
                     make_labeled_table_row(table_id_value, 5, "e", {"structure": "Ramp", "yard_projection_permitted": "All Yards", "maximum_projection_into_yard": "1.83 m (6 ft)", "minimum_distance_from_lot_line": "1 m (3.3 ft)"}),
                     make_labeled_table_row(table_id_value, 6, "f", {"structure": "Exterior staircase (landing and stairs connecting to the First Storey)", "yard_projection_permitted": "All Yards", "maximum_projection_into_yard": "1.83m (6 ft)", "minimum_distance_from_lot_line": "6 m (19.7 ft) from the front lot line and flankage lot line; 1.2 m (3.9 ft) from the side or rear lot line"}),
                     make_labeled_table_row(table_id_value, 7, "g", {"structure": "Exterior staircase (fire escape and any stairs extending beyond the First Storey)", "yard_projection_permitted": "Side and rear", "maximum_projection_into_yard": "1.2 m (3.9 ft)", "minimum_distance_from_lot_line": "1.2 m (3.9 ft)"}),
-                    make_labeled_table_row(table_id_value, 8, "h", {"structure": "Deck 0.3 m (1.0 ft) or more above Grade", "yard_projection_permitted": "Rear, side, Flankage", "maximum_projection_into_yard": "Same as minimum Side Yard for the building, except in R-1L R-1S, R-1N, R-2 and R-2S Zones where the Setback is 4.6 m (15.1 ft) from the rear lot line", "minimum_distance_from_lot_line": ""}),
+                    make_labeled_table_row(table_id_value, 8, "h", {"structure": "Deck 0.3 m (1.0 ft) or more above Grade", "yard_projection_permitted": "Rear, side, Flankage", "maximum_projection_into_yard": "", "minimum_distance_from_lot_line": "Same as minimum Side Yard for the building, except in R-1L R-1S, R-1N, R-2 and R-2S Zones where the Setback is 4.6 m (15.1 ft) from the rear lot line"}),
                     make_labeled_table_row(table_id_value, 9, "i", {"structure": "Deck at Grade or less than 0.3 m (1.0 ft)", "yard_projection_permitted": "Rear, side, Flankage", "maximum_projection_into_yard": "", "minimum_distance_from_lot_line": "1 m (3.3 ft)"}),
                     make_labeled_table_row(table_id_value, 10, "j", {"structure": "Deck at Grade or less than 0.3 m (1.0 ft)", "yard_projection_permitted": "Front Yard", "maximum_projection_into_yard": "1.83m (6 ft)", "minimum_distance_from_lot_line": "2 m (6.6 ft)"}),
                     make_labeled_table_row(table_id_value, 11, "k", {"structure": "Porch", "yard_projection_permitted": "Front, rear, Flankage", "maximum_projection_into_yard": "1.5 m (4.9 ft)", "minimum_distance_from_lot_line": "1 m (3.3 ft)"}),
@@ -3652,8 +3652,15 @@ def grouped_numeric_records(
 
 
 GENERAL_PROVISIONS_COLUMN_REQUIREMENT_TABLES = {
+    "doc-general-provisions-table-3-1-2",
+    "doc-general-provisions-table-3-2-1",
     "doc-general-provisions-table-4-1-2-accessory-buildings",
     "doc-general-provisions-table-4-2-2-projecting-structures",
+}
+
+TABLE_DESCRIPTOR_COLUMNS_BY_TABLE = {
+    "doc-general-provisions-table-3-2-1": {"structure", "yard_projection_permitted"},
+    "doc-general-provisions-table-3-6-1": {"feature"},
 }
 
 
@@ -3661,7 +3668,21 @@ def row_cell_text(row: dict[str, Any], column_id: str) -> str:
     return next((cell.get("cell_text_raw") or "" for cell in row.get("cells_raw") or [] if cell.get("column_id") == column_id), "")
 
 
+def is_reviewable_non_numeric_cell(table_id_value: str, cell_text: str) -> bool:
+    normalized = cell_text.strip().lower()
+    if table_id_value == "doc-general-provisions-table-3-6-1" and normalized in {"yes", "unlimited"}:
+        return False
+    return bool(cell_text)
+
+
 def column_requirement_context(table_id_value: str, row: dict[str, Any], column_id: str, column_label: str, cell_text: str) -> str:
+    if table_id_value == "doc-general-provisions-table-3-1-2":
+        lot_area = row_cell_text(row, "lot_area")
+        return clean_text(f"{column_label} Lot Area {lot_area} {cell_text}")
+    if table_id_value == "doc-general-provisions-table-3-2-1":
+        structure = row_cell_text(row, "structure")
+        yards = row_cell_text(row, "yard_projection_permitted")
+        return clean_text(f"{column_label} Structure {structure} Yard {yards} {cell_text}")
     if table_id_value == "doc-general-provisions-table-4-1-2-accessory-buildings":
         lot_area = row_cell_text(row, "lot_area")
         return clean_text(f"{column_label} Lot Area {lot_area} {cell_text}")
@@ -3683,15 +3704,18 @@ def build_numeric_and_requirements(
     seen_requirement_text: set[str] = set()
 
     for table, row, cell, column in flatten_table_cells(raw_sections):
+        table_id_value = table.get("table_id", "")
         if cell["column_id"] in {"row_number", "row_label", "requirement", "condition"}:
             continue
-        if table.get("table_id") in GENERAL_PROVISIONS_COLUMN_REQUIREMENT_TABLES:
-            if cell["column_id"] in {"structure", "yard_projection_permitted", "accessory_buildings_permitted"}:
+        if cell["column_id"] in TABLE_DESCRIPTOR_COLUMNS_BY_TABLE.get(table_id_value, set()):
+            continue
+        if table_id_value in GENERAL_PROVISIONS_COLUMN_REQUIREMENT_TABLES:
+            if cell["column_id"] in {"accessory_buildings_permitted"}:
                 continue
             row_label = column.get("column_label_raw", "")
             condition_text = row_cell_text(row, "row_label")
             context_text = column_requirement_context(
-                table.get("table_id", ""),
+                table_id_value,
                 row,
                 cell["column_id"],
                 row_label,
@@ -3730,7 +3754,7 @@ def build_numeric_and_requirements(
                         "confidence": "medium",
                     }
                 )
-            elif cell["cell_text_raw"]:
+            elif is_reviewable_non_numeric_cell(table_id_value, cell["cell_text_raw"]):
                 review_flags.append(
                     make_review_flag(
                         f"{prefix}-flag-unparsed-table-value-{slugify(cell['cell_id'])}",
@@ -3778,7 +3802,7 @@ def build_numeric_and_requirements(
                     "confidence": "medium",
                 }
             )
-        elif cell["cell_text_raw"]:
+        elif is_reviewable_non_numeric_cell(table_id_value, cell["cell_text_raw"]):
             review_flags.append(
                 make_review_flag(
                     f"{prefix}-flag-unparsed-table-value-{slugify(cell['cell_id'])}",
