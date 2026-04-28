@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-28] validation | Phase 6 final QA
+
+Completed Phase 6 final QA for the Charlottetown draft zoning validation workstream. Regeneration and schema validation passed, the final scan found 0 `review_flags`, 0 `confidence: "needs_review"` entries, and 0 unresolved new code-table entries, and `plan/chalottetown-draft-zoning-final-qa-summary.md` now records the final QA evidence.
+
 ## [2026-04-28] validation | Phase 5 schedule-map residual closure
 
 Updated `topics/draft-validation-rebaseline.md` after closing the remaining Schedules A through D `schedule_map_review` rows as documented page-text map artifact limits. The refreshed ledger now contains 0 open rows.

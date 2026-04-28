@@ -4,10 +4,10 @@ Reference plan: `plan/chalottetown-draft-zoning-plan.md`
 
 ## Status Summary
 
-- Active phase: Phase 6
+- Active phase: Complete
 - Active phase name: Regeneration and Final QA
-- Overall status: In progress
-- Current progress: Phase 1 has been refreshed from current regenerated outputs in `plan/chalottetown-draft-zoning-issue-ledger.csv`; the ledger now contains 0 open rows after Phase 5 documented Schedules A through D as page-text map artifacts with explicit downstream spatial-QA limits. Phase 2 is complete for the approved code-table normalization pass and current `code-table-match-report.json` still reports 0 `use.new_codes`, 11 `use.semantic_matches`, and 97 `use.exact_matches`. Phase 3 is complete for all current `confidence: "needs_review"` entries. Phase 4 is complete for section, layout, table, figure, and residual review-flag validation. Phase 5 has closed the remaining schedule-map QA rows by preserving schedule page text and map-reference metadata while documenting that the schedule JSON files are not digitized zoning layers and require later spatial QA before parcel overlays, zoning-boundary comparison, or downstream GIS use.
+- Overall status: Complete
+- Current progress: Phase 6 final QA is complete. Regeneration and schema validation completed successfully, the final direct scan found 0 `review_flags`, 0 `confidence: "needs_review"` entries, 0 term new codes, and 0 use new codes across the regenerated draft outputs, and `plan/chalottetown-draft-zoning-final-qa-summary.md` records the final before and after counts. Schedules A through D remain documented page-text map artifacts with explicit downstream spatial-QA limits.
 - Last updated: 2026-04-28
 
 ## Phase Timeline
@@ -20,7 +20,7 @@ Reference plan: `plan/chalottetown-draft-zoning-plan.md`
 | 3 | High-Priority Clause Validation | Validate and normalize the highest-density `needs_review` files and resolve clause text, numeric, and record-type defects. Initial file group: `zones/rn.json`, `zones/rm.json`, `zones/rh.json`, `zones/dms.json`, `general-provisions-parking.json`, `general-provisions-land-use.json`. | Complete | High-priority files no longer contain unresolved `needs_review` entries except documented true residual limits. |
 | 4 | Section and Layout Repair | Resolve extraction-order, section-assignment, zone-boundary, and table or figure bleed defects by checking the visual PDF against normalized outputs. | Complete | Targeted files have corrected section assignment and only justified residual extraction reviews remain. |
 | 5 | Remaining Files and Schedule Review | Review lower-density files and confirm the schedule JSON files remain page-text artifacts with explicit downstream limits. | Complete | Remaining files are reviewed, residual schedule-map limitations are explicit, and low-density issues are closed or intentionally retained. |
-| 6 | Regeneration and Final QA | Re-run regeneration and schema validation, recompute counts, verify resolved items, and write the final QA summary. | Active | Acceptance criteria from `plan/chalottetown-draft-zoning-plan.md` are met. |
+| 6 | Regeneration and Final QA | Re-run regeneration and schema validation, recompute counts, verify resolved items, and write the final QA summary. | Complete | Acceptance criteria from `plan/chalottetown-draft-zoning-plan.md` are met. |
 
 ## Current Phase Detail
 
@@ -115,9 +115,27 @@ Current progress:
 - the final RN/RM/RH layout-order acceptance pass closed the conservative residual layout warnings after regeneration preserved the repaired RN, RM, and RH section/table structure
 - regenerated Phase 4 ledger counts are 0 `numeric_value_review` rows, 0 `extraction_review` rows, 0 `table_parsing_review` rows, 4 `schedule_map_review` rows, 0 `section_assignment_review` rows, and 0 `layout_order_review` rows
 
+### Phase 6: Regeneration and Final QA
+
+Objective:
+
+- re-run regeneration and schema validation
+- recompute final marker, ledger, manifest, and code-table counts
+- write the final QA summary
+
+Result:
+
+- `.venv/Scripts/python.exe scripts/regenerate-charlottetown-draft-zoning-bylaw.py` completed successfully
+- regenerated outputs validate against `schema/json-schema/charlottetown-bylaw-extraction.schema.json`
+- direct scan across 34 generated JSON outputs found 0 `review_flags` and 0 `confidence: "needs_review"` entries
+- `code-table-match-report.json` reports 13 term exact matches, 0 term semantic matches, 0 term new codes, 97 use exact matches, 11 use semantic matches, and 0 use new codes
+- `source-manifest.json` reports 20 zone files, 10 supporting files, and 4 schedule files
+- `plan/chalottetown-draft-zoning-issue-ledger.csv` contains 0 open rows
+- final QA summary written to `plan/chalottetown-draft-zoning-final-qa-summary.md`
+
 Next actions:
 
-1. Begin Phase 6 regeneration and final QA.
+1. Use the regenerated draft outputs for the next approved comparison or GIS workstream.
 
 ## Progress Rules
 

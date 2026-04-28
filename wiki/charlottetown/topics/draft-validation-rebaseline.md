@@ -44,3 +44,12 @@ This page records the 2026-04-24 rebaseline of the Charlottetown draft zoning va
 - Phase 3 is complete for all current `confidence: "needs_review"` records.
 - Phase 4 has completed the RN/RM/RH layout regression and layout-order closure, the four explicit section-assignment files, all numeric table-cell flags, and broad extraction/table-parsing warnings.
 - Phase 5 has completed the residual schedule-map review by documenting the schedule-map limitation in the generated README, source manifest, plan, and wiki while closing the open review-flag rows.
+- Phase 6 has completed final QA. Regeneration and schema validation passed, the final generated-output scan found 0 `review_flags`, 0 `confidence: "needs_review"` entries, 0 term new codes, and 0 use new codes, and the final QA summary is recorded in `plan/chalottetown-draft-zoning-final-qa-summary.md`.
+
+## Sources
+
+- `plan/chalottetown-draft-zoning-plan.md`
+- `plan/chalottetown-draft-zoning-timeline.md`
+- `plan/chalottetown-draft-zoning-final-qa-summary.md`
+- `data/zoning/charlottetown-draft/code-table-match-report.json`
+- `data/zoning/charlottetown-draft/source-manifest.json`
