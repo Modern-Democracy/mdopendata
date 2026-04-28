@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-28] extraction | Draft buildings, BP, DC, I, and RN Phase 3 review
+
+Updated `topics/draft-validation-rebaseline.md` after resolving the Phase 3 `needs_review` entries in `general-provisions-buildings-structures.json`, `zones/bp.json`, `zones/dc.json`, `zones/i.json`, and `zones/rn.json`.
+
 ## [2026-04-28] maintenance | Workstream context relocation
 
 Moved durable Charlottetown workstream context from root startup instructions into `README.md` and `topics/workstream-context.md`; updated the index so role skills can look up the context only when relevant.
