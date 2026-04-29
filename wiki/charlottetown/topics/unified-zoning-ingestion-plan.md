@@ -133,8 +133,8 @@ Vectors are for semantic retrieval, candidate section equivalence, draft update 
 
 1. Complete: design and create the `zoning` schema, import-batch model, document-revision model, coverage-gap table, and section-topic vocabulary.
 2. Complete: build initial JSON ingestion for current and draft records, excluding process fields and preserving granular raw reconstruction records.
-3. Active next milestone: add review-status reporting for comparable current and draft bylaw sections. The first candidate method, `title_topic_token_v1`, is implemented, tuned, populated, reviewed, and applied to `zoning.section_equivalence`.
-4. Pending: register and validate the approved spatial layers, resolve code mismatches, and link spatial features to zones and map references.
+3. Complete: implement, tune, review, and apply the first section-equivalence candidate set for comparable current and draft bylaw sections.
+4. Active next milestone: register and validate the approved spatial layers, resolve code mismatches, and link spatial features to zones and map references.
 5. Pending: add text-vector support after relational IDs and comparison records are stable.
 6. Pending: normalize and ingest deferred current-bylaw chapters and appendices, then re-run equivalence and comparison outputs.
 

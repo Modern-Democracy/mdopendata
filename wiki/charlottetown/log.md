@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-29] validation | Draft pre-import QA gate
+
+Completed the Phase 5 pre-import QA gate for the draft rebaseline timeline. Schema validation, marker scans, code-table report checks, draft importer dry-run, section-equivalence database parity, and schedule-map limit checks passed; the rebaseline timeline is complete and the unified ingestion timeline advances to spatial registration and linkage.
+
 ## [2026-04-29] data-engineering | Section-equivalence ledger applied
 
 Applied all 137 `section-equivalence-review.csv` decisions to `zoning.section_equivalence`. Database verification found 88 accepted rows, 49 rejected `not_equivalent` rows, 0 `candidate` rows, 0 `needs_review` rows, and 0 ledger/database mismatches.

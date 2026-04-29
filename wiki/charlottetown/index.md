@@ -57,7 +57,7 @@ These source families remain outside the wiki and must be referenced in place:
 
 ## Current Status
 
-The wiki contains a scaffold, targeted draft extraction repair and validation notes, and the active unified zoning ingestion plan. The unified zoning schema and initial JSON importer are implemented, the relational core is populated, section-equivalence candidate review has started, and the active post-fix draft validation rebaseline timeline is `plan/charlottetown-draft-zoning-validation-rebaseline-timeline.md`.
+The wiki contains a scaffold, targeted draft extraction repair and validation notes, and the active unified zoning ingestion plan. The unified zoning schema and initial JSON importer are implemented, the relational core is populated, section-equivalence candidate review has been applied to the database, and the post-fix draft validation rebaseline timeline is complete.
 
 ## Sources
 

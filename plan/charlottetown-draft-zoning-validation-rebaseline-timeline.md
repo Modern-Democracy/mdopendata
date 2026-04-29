@@ -8,8 +8,8 @@ Supersedes historical validation status in `plan/chalottetown-draft-zoning-timel
 
 - Active phase: 5
 - Active phase name: Pre-Import QA Gate
-- Overall status: In progress
-- Current progress: Phase 4 validation is complete for the current rebaseline state. Regenerated draft outputs dated `2026-04-29T13:35:30` validate successfully against `schema/json-schema/charlottetown-bylaw-extraction.schema.json`; current extraction-output inventory is 0 `review_flags`, 0 structured `confidence: "needs_review"` entries, 0 term new codes, and 0 use new codes. Section-equivalence ledger decisions have been applied to `zoning.section_equivalence`, leaving 88 accepted rows, 49 rejected `not_equivalent` rows, and 0 `candidate` or `needs_review` rows.
+- Overall status: Complete
+- Current progress: Phase 5 pre-import QA gate passed. Regenerated draft outputs dated `2026-04-29T13:35:30` validate successfully against `schema/json-schema/charlottetown-bylaw-extraction.schema.json`; current extraction-output inventory is 0 `review_flags`, 0 structured `confidence: "needs_review"` entries, 0 term new codes, and 0 use new codes. Draft importer dry-run succeeds for 34 source files, producing 259 sections, 2,095 clauses, 49 raw tables, 654 raw table cells, 33 raw map references, and 2,509 structured facts. Section-equivalence database state matches the ledger with 88 accepted rows, 49 rejected `not_equivalent` rows, and 0 `candidate` or `needs_review` rows. Schedules A through D remain documented page-text map artifacts deferred to spatial QA.
 - Last updated: 2026-04-29
 
 ## Phase Timeline
@@ -21,7 +21,7 @@ Supersedes historical validation status in `plan/chalottetown-draft-zoning-timel
 | 2 | Numeric and Table Value Review | Resolve or intentionally retain nonblocking `numeric_value_review` flags where preserved table text is not a numeric scalar. | Complete | All 41 current numeric/table review flags are either normalized where appropriate or documented as intentionally preserved nonnumeric table cells. |
 | 3 | Section-Equivalence Review Closure | Resolve the 18 `needs_review` section-equivalence candidates before re-importing comparison metadata. | Complete | Every row in `section-equivalence-review.csv` has an accepted or rejected decision, and database-ready review status is consistent with the ledger. |
 | 4 | Regeneration and Validation | Re-run approved regeneration and schema validation after fixes or ledger decisions. Recompute manifest, review flag, confidence, and code-table counts. | Complete | Regenerated outputs validate against `schema/json-schema/charlottetown-bylaw-extraction.schema.json`; inventory counts match expected closure state. |
-| 5 | Pre-Import QA Gate | Confirm draft JSON, review ledgers, known schedule-map limits, and database import prerequisites are ready for re-import. | Active | QA reviewer records acceptance or exact remaining blockers before database re-import begins. |
+| 5 | Pre-Import QA Gate | Confirm draft JSON, review ledgers, known schedule-map limits, and database import prerequisites are ready for re-import. | Complete | QA reviewer records acceptance or exact remaining blockers before database re-import begins. |
 
 ## Phase 1: Inventory and Triage
 
@@ -99,6 +99,20 @@ Result:
 - No further draft JSON regeneration was required after section-equivalence ledger closure.
 - Existing regenerated draft outputs dated `2026-04-29T13:35:30` remain the active validated output set.
 - The section-equivalence ledger was applied to `zoning.section_equivalence`; database verification found 88 accepted rows, 49 rejected `not_equivalent` rows, and 0 `candidate` or `needs_review` rows.
+
+## Phase 5: Pre-Import QA Gate
+
+Acceptance claim checked: the regenerated draft JSON, review ledgers, code-table state, schedule-map limits, and section-equivalence database state are ready for re-import.
+
+Result:
+
+- Accepted for re-import. No extraction-output, code-table, section-equivalence, or importer dry-run blocker remains.
+- Schema validation checked 34 draft bylaw JSON files against `schema/json-schema/charlottetown-bylaw-extraction.schema.json` with 0 errors.
+- Marker scan found 0 `review_flags` and 0 structured `confidence: "needs_review"` entries across the 34 draft bylaw JSON files.
+- Code-table report has 0 term new codes and 0 use new codes.
+- `scripts/import-charlottetown-zoning.py --family draft --dry-run` succeeded with 34 source files and 0 rejected marker counts.
+- `zoning.section_equivalence` matches `section-equivalence-review.csv` with 0 mismatches and 0 open `candidate` or `needs_review` rows.
+- Schedules A through D are accepted only as page-text map artifacts with map-reference metadata; spatial use remains deferred until the spatial QA phase.
 
 ## Progress Rules
 
