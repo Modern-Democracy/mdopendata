@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-29] data-quality | Section-equivalence needs-review closure
+
+Closed the 18 remaining `needs_review` rows in `data/zoning/charlottetown-draft/review/section-equivalence-review.csv` after source comparison. All 18 were rejected, leaving the ledger with 88 accepted, 49 rejected, and 0 `needs_review` decisions before database application.
+
 ## [2026-04-29] data-quality | Draft numeric table review closure
 
 Updated the draft extractor and regenerated draft outputs after closing the 41 post-fix `numeric_value_review` flags. Table 3.1 accessory-building word counts now normalize to building counts, accessible parking and bike-space lead values normalize to parking-space counts, and descriptor/prose table cells no longer create false numeric review flags.

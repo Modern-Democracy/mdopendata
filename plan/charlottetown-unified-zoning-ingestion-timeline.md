@@ -7,7 +7,7 @@ Reference plan: `wiki/charlottetown/topics/unified-zoning-ingestion-plan.md`
 - Active phase: 3
 - Active phase name: Section Equivalence
 - Overall status: In progress
-- Current progress: Phases 1 and 2 are complete. The `zoning` schema migration exists at `schema/sql/005_charlottetown_unified_zoning.sql`, the initial importer exists at `scripts/import-charlottetown-zoning.py`, and the database has populated current and draft bylaw relational-core records. Phase 3 ledger-first manual review has recorded decisions for all 137 section-equivalence candidates. The database still has 35 accepted `same_topic` rows and 102 candidate rows until ledger decisions are applied.
+- Current progress: Phases 1 and 2 are complete. The `zoning` schema migration exists at `schema/sql/005_charlottetown_unified_zoning.sql`, the initial importer exists at `scripts/import-charlottetown-zoning.py`, and the database has populated current and draft bylaw relational-core records. Phase 3 ledger-first manual review has recorded decisions for all 137 section-equivalence candidates: 88 accepted, 49 rejected, and 0 `needs_review`. The database still has 35 accepted `same_topic` rows and 102 candidate rows until ledger decisions are applied.
 - Last updated: 2026-04-29
 
 ## Phase Timeline
@@ -44,7 +44,7 @@ Current evidence:
 - database table inventory confirms the planned `zoning` schema tables exist
 - current and draft import batches are completed
 - populated core counts include 2 bylaw documents, 2 document revisions, 76 source files, 76 bylaw parts, 476 sections, 3,634 clauses, 630 definitions, 113 raw tables, 1,806 raw table cells, 74 raw map references, and 5,127 structured facts
-- `zoning.section_equivalence` contains 137 tuned `title_topic_token_v1` rows. The review ledger records decisions for all candidates: 76 accepted `same_topic`; 10 accepted, 7 rejected, and 9 `needs_review` `renamed_or_restructured`; and 2 accepted, 24 rejected, and 9 `needs_review` `partial_overlap`.
+- `zoning.section_equivalence` contains 137 tuned `title_topic_token_v1` rows. The review ledger records decisions for all candidates: 76 accepted `same_topic`; 10 accepted and 16 rejected `renamed_or_restructured`; and 2 accepted and 33 rejected `partial_overlap`. No ledger rows remain marked `needs_review`.
 - tuning checks matched all 70 exact-title current/draft controls and removed sampled weak false positives from the first candidate set
 - `zoning.coverage_gap`, `zoning.spatial_layer`, `zoning.spatial_feature`, `zoning.zone_spatial_feature`, and `zoning.spatial_reference` currently have 0 rows
 
