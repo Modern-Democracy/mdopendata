@@ -6,10 +6,10 @@ Supersedes historical validation status in `plan/chalottetown-draft-zoning-timel
 
 ## Status Summary
 
-- Active phase: 4
-- Active phase name: Regeneration and Validation
+- Active phase: 5
+- Active phase name: Pre-Import QA Gate
 - Overall status: In progress
-- Current progress: Phase 3 section-equivalence review closure is complete. Regenerated draft outputs dated `2026-04-29T13:35:30` validate successfully against `schema/json-schema/charlottetown-bylaw-extraction.schema.json`; current extraction-output inventory is 0 `review_flags`, 0 structured `confidence: "needs_review"` entries, 0 term new codes, and 0 use new codes. The section-equivalence review ledger now contains decisions for all 137 candidates: 88 accepted, 49 rejected, and 0 `needs_review`.
+- Current progress: Phase 4 validation is complete for the current rebaseline state. Regenerated draft outputs dated `2026-04-29T13:35:30` validate successfully against `schema/json-schema/charlottetown-bylaw-extraction.schema.json`; current extraction-output inventory is 0 `review_flags`, 0 structured `confidence: "needs_review"` entries, 0 term new codes, and 0 use new codes. Section-equivalence ledger decisions have been applied to `zoning.section_equivalence`, leaving 88 accepted rows, 49 rejected `not_equivalent` rows, and 0 `candidate` or `needs_review` rows.
 - Last updated: 2026-04-29
 
 ## Phase Timeline
@@ -20,8 +20,8 @@ Supersedes historical validation status in `plan/chalottetown-draft-zoning-timel
 | 1 | Inventory and Triage | Recompute all open markers from regenerated draft JSON, code-table reports, source manifest, and section-equivalence review files. Classify each open item by blocker status, affected file, issue class, and next disposition. | Complete | Every current open issue is cataloged with file, issue type, count, source refs or review ids, blocker status, and next action. |
 | 2 | Numeric and Table Value Review | Resolve or intentionally retain nonblocking `numeric_value_review` flags where preserved table text is not a numeric scalar. | Complete | All 41 current numeric/table review flags are either normalized where appropriate or documented as intentionally preserved nonnumeric table cells. |
 | 3 | Section-Equivalence Review Closure | Resolve the 18 `needs_review` section-equivalence candidates before re-importing comparison metadata. | Complete | Every row in `section-equivalence-review.csv` has an accepted or rejected decision, and database-ready review status is consistent with the ledger. |
-| 4 | Regeneration and Validation | Re-run approved regeneration and schema validation after fixes or ledger decisions. Recompute manifest, review flag, confidence, and code-table counts. | Active | Regenerated outputs validate against `schema/json-schema/charlottetown-bylaw-extraction.schema.json`; inventory counts match expected closure state. |
-| 5 | Pre-Import QA Gate | Confirm draft JSON, review ledgers, known schedule-map limits, and database import prerequisites are ready for re-import. | Pending | QA reviewer records acceptance or exact remaining blockers before database re-import begins. |
+| 4 | Regeneration and Validation | Re-run approved regeneration and schema validation after fixes or ledger decisions. Recompute manifest, review flag, confidence, and code-table counts. | Complete | Regenerated outputs validate against `schema/json-schema/charlottetown-bylaw-extraction.schema.json`; inventory counts match expected closure state. |
+| 5 | Pre-Import QA Gate | Confirm draft JSON, review ledgers, known schedule-map limits, and database import prerequisites are ready for re-import. | Active | QA reviewer records acceptance or exact remaining blockers before database re-import begins. |
 
 ## Phase 1: Inventory and Triage
 
@@ -91,6 +91,14 @@ Result:
 - Phase 3 closed all 18 section-equivalence rows that were marked `needs_review`.
 - All 18 reviewed rows were rejected after source comparison; no proposed `renamed_or_restructured` or `partial_overlap` relationship was source-supported.
 - `data/zoning/charlottetown-draft/review/section-equivalence-review.csv` now contains 137 reviewed rows: 88 accepted, 49 rejected, and 0 `needs_review`.
+
+## Phase 4: Regeneration and Validation
+
+Result:
+
+- No further draft JSON regeneration was required after section-equivalence ledger closure.
+- Existing regenerated draft outputs dated `2026-04-29T13:35:30` remain the active validated output set.
+- The section-equivalence ledger was applied to `zoning.section_equivalence`; database verification found 88 accepted rows, 49 rejected `not_equivalent` rows, and 0 `candidate` or `needs_review` rows.
 
 ## Progress Rules
 

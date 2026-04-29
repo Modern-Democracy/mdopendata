@@ -23,7 +23,7 @@ The `zoning` schema migration and initial Charlottetown importer have now been i
 - Importer: `scripts/import-charlottetown-zoning.py`.
 - Database schema: the `zoning` schema contains the planned relational, source reconstruction, comparison, coverage-gap, manual-correction, spatial-linkage, and topic tables.
 - Database population: current and draft bylaw records have been imported into the relational core tables. A database check on 2026-04-29 found populated document, source, section, clause, definition, raw table, raw map-reference, and structured-fact tables, with completed import batches for both current and draft inputs.
-- Section-equivalence candidate generation has started. `scripts/generate-charlottetown-section-equivalence.py` now populates 137 tuned `title_topic_token_v1` rows in `zoning.section_equivalence` after exact-title and weak-false-positive controls were checked on 2026-04-29. Manual review has recorded ledger decisions for all 137 candidates. Only 35 `same_topic` decisions have been applied in the database so far.
+- Section-equivalence candidate generation and ledger application are complete for the tuned candidate set. `scripts/generate-charlottetown-section-equivalence.py` populated 137 tuned `title_topic_token_v1` rows in `zoning.section_equivalence` after exact-title and weak-false-positive controls were checked on 2026-04-29. Manual review decisions have been applied in the database: 88 accepted rows, 49 rejected `not_equivalent` rows, and 0 `candidate` or `needs_review` rows.
 - Not yet populated: coverage-gap, spatial layer, spatial feature, zone-spatial-feature, and spatial-reference records.
 
 The database target is a relational-core `zoning` schema. The importer must not store full source-file JSON blobs, top-level aggregate `text_raw` values, `review_flags`, or any `confidence` attributes. Raw text remains in scope only at reconstructable clause, table, page, map-reference, and source-unit granularity.
@@ -133,7 +133,7 @@ Vectors are for semantic retrieval, candidate section equivalence, draft update 
 
 1. Complete: design and create the `zoning` schema, import-batch model, document-revision model, coverage-gap table, and section-topic vocabulary.
 2. Complete: build initial JSON ingestion for current and draft records, excluding process fields and preserving granular raw reconstruction records.
-3. Active next milestone: add review-status reporting and apply ledger-reviewed decisions for comparable current and draft bylaw sections. The first candidate method, `title_topic_token_v1`, is implemented, tuned, populated, and all candidate groups have decisions recorded in the ledger.
+3. Active next milestone: add review-status reporting for comparable current and draft bylaw sections. The first candidate method, `title_topic_token_v1`, is implemented, tuned, populated, reviewed, and applied to `zoning.section_equivalence`.
 4. Pending: register and validate the approved spatial layers, resolve code mismatches, and link spatial features to zones and map references.
 5. Pending: add text-vector support after relational IDs and comparison records are stable.
 6. Pending: normalize and ingest deferred current-bylaw chapters and appendices, then re-run equivalence and comparison outputs.

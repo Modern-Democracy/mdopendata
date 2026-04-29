@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-29] data-engineering | Section-equivalence ledger applied
+
+Applied all 137 `section-equivalence-review.csv` decisions to `zoning.section_equivalence`. Database verification found 88 accepted rows, 49 rejected `not_equivalent` rows, 0 `candidate` rows, 0 `needs_review` rows, and 0 ledger/database mismatches.
+
 ## [2026-04-29] data-quality | Section-equivalence needs-review closure
 
 Closed the 18 remaining `needs_review` rows in `data/zoning/charlottetown-draft/review/section-equivalence-review.csv` after source comparison. All 18 were rejected, leaving the ledger with 88 accepted, 49 rejected, and 0 `needs_review` decisions before database application.
