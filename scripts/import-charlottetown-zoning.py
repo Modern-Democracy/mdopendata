@@ -548,6 +548,44 @@ def supersede_previous(conn: psycopg.Connection, table: str, previous_id: int) -
         cur.execute(f"UPDATE zoning.{table} SET is_active = false WHERE {table}_id = %s", (previous_id,))
 
 
+def relink_unchanged_record(
+    conn: psycopg.Connection,
+    record: Record,
+    active_id: int,
+    id_maps: dict[str, dict[str, int]],
+) -> None:
+    source_file_id = id_maps.get("source_file", {}).get(record.links.get("source_file_key", ""))
+    section_id = id_maps.get("section", {}).get(record.links.get("section_key", ""))
+    bylaw_part_id = id_maps.get("bylaw_part", {}).get(record.links.get("bylaw_part_key", ""))
+    raw_table_id = id_maps.get("raw_table", {}).get(record.links.get("raw_table_key", ""))
+
+    updates = {
+        "bylaw_part": {"source_file_id": source_file_id},
+        "section": {"source_file_id": source_file_id, "bylaw_part_id": bylaw_part_id},
+        "clause": {"source_file_id": source_file_id, "section_id": section_id},
+        "definition": {"source_file_id": source_file_id},
+        "source_unit": {"source_file_id": source_file_id},
+        "raw_page": {"source_file_id": source_file_id},
+        "raw_table": {"source_file_id": source_file_id, "section_id": section_id},
+        "raw_table_cell": {"source_file_id": source_file_id, "raw_table_id": raw_table_id},
+        "raw_map_reference": {"source_file_id": source_file_id},
+        "structured_fact": {"source_file_id": source_file_id},
+    }.get(record.table)
+    if not updates:
+        return
+
+    values = {column: value for column, value in updates.items() if value is not None}
+    if not values:
+        return
+
+    assignments = ", ".join(f"{column} = %s" for column in values)
+    with conn.cursor() as cur:
+        cur.execute(
+            f"UPDATE zoning.{record.table} SET {assignments} WHERE {record.table}_id = %s",
+            (*values.values(), active_id),
+        )
+
+
 def insert_record(
     conn: psycopg.Connection,
     record: Record,
@@ -957,6 +995,7 @@ def load_root(root: Path, dry_run: bool) -> dict[str, Any]:
                 previous = previous_active(conn, record.table, record.natural_key)
                 if previous and previous[1] == record.content_hash:
                     id_maps.setdefault(record.table, {})[record.natural_key] = previous[0]
+                    relink_unchanged_record(conn, record, previous[0], id_maps)
                     insert_event(conn, batch_id, record, "unchanged", previous[1], previous[0])
                     continue
                 if previous:
