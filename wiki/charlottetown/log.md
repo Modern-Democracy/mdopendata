@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-29] data-quality | Remaining same-topic decisions appended to ledger
+
+Appended accepted ledger decisions for the remaining 41 `same_topic` section-equivalence candidates to `data/zoning/charlottetown-draft/review/section-equivalence-review.csv` before database updates. The database still has those 41 rows as `candidate` until a later apply step.
+
 ## [2026-04-29] data-quality | Section-equivalence review ledger created
 
 Created `data/zoning/charlottetown-draft/review/section-equivalence-review.csv` and backfilled the 35 accepted exact-title `same_topic` section-equivalence decisions from `zoning.section_equivalence`.

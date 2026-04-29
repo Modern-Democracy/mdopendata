@@ -7,7 +7,7 @@ Reference plan: `wiki/charlottetown/topics/unified-zoning-ingestion-plan.md`
 - Active phase: 3
 - Active phase name: Section Equivalence
 - Overall status: In progress
-- Current progress: Phases 1 and 2 are complete. The `zoning` schema migration exists at `schema/sql/005_charlottetown_unified_zoning.sql`, the initial importer exists at `scripts/import-charlottetown-zoning.py`, and the database has populated current and draft bylaw relational-core records. Phase 3 manual review has begun; 35 exact-title `same_topic` section-equivalence candidates are accepted, backfilled into a diffable review ledger, and 102 candidates remain for review.
+- Current progress: Phases 1 and 2 are complete. The `zoning` schema migration exists at `schema/sql/005_charlottetown_unified_zoning.sql`, the initial importer exists at `scripts/import-charlottetown-zoning.py`, and the database has populated current and draft bylaw relational-core records. Phase 3 manual review has begun; all 76 `same_topic` section-equivalence candidates are recorded as accepted in the diffable review ledger, with 35 already applied in the database and 41 pending database update. The remaining 61 database candidates are 26 `renamed_or_restructured` and 35 `partial_overlap`.
 - Last updated: 2026-04-29
 
 ## Phase Timeline
@@ -44,7 +44,7 @@ Current evidence:
 - database table inventory confirms the planned `zoning` schema tables exist
 - current and draft import batches are completed
 - populated core counts include 2 bylaw documents, 2 document revisions, 76 source files, 76 bylaw parts, 476 sections, 3,634 clauses, 630 definitions, 113 raw tables, 1,806 raw table cells, 74 raw map references, and 5,127 structured facts
-- `zoning.section_equivalence` contains 137 tuned `title_topic_token_v1` rows. Manual review has accepted 35 exact-title `same_topic` matches and backfilled them into `data/zoning/charlottetown-draft/review/section-equivalence-review.csv`. Remaining candidate rows are 41 `same_topic`, 26 `renamed_or_restructured`, and 35 `partial_overlap`.
+- `zoning.section_equivalence` contains 137 tuned `title_topic_token_v1` rows. The review ledger records accepted decisions for all 76 `same_topic` matches: 35 exact-title rows already applied in the database and 41 remaining `same_topic` rows pending database update. Remaining database candidate rows are 26 `renamed_or_restructured` and 35 `partial_overlap` after the ledger is applied.
 - tuning checks matched all 70 exact-title current/draft controls and removed sampled weak false positives from the first candidate set
 - `zoning.coverage_gap`, `zoning.spatial_layer`, `zoning.spatial_feature`, `zoning.zone_spatial_feature`, and `zoning.spatial_reference` currently have 0 rows
 
