@@ -115,6 +115,17 @@ async function loadSection(sectionKey) {
       citations: clause.citations ?? {},
       sourceOrder: clause.source_order,
     })),
+    tables: (section.tables_raw ?? []).map((table) => ({
+      title: table.table_title_raw,
+      sourceOrder: table.source_order,
+      rows: (table.rows_raw ?? []).map((row) => ({
+        sourceOrder: row.source_order,
+        cells: (row.cells_raw ?? []).map((cell) => ({
+          columnId: cell.column_id,
+          text: cell.cell_text_raw,
+        })),
+      })),
+    })),
   };
 }
 

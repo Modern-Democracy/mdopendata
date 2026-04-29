@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-29] data-engineering | Section-equivalence rerun
+
+Reopened Phase 3 after QA found accepted section-equivalence mismatches and blank-side comparisons. Updated `scripts/generate-charlottetown-section-equivalence.py` to compare linked table-cell text as well as clause text, reset the prior 137 reviewed `title_topic_token_v1` rows, inserted 139 regenerated candidate rows, exported a fresh `section-equivalence-review.csv` with all rows marked `needs_review`, and verified 0 accepted rows and 0 blank-side candidate rows.
+
 ## [2026-04-29] validation | Draft pre-import QA gate
 
 Completed the Phase 5 pre-import QA gate for the draft rebaseline timeline. Schema validation, marker scans, code-table report checks, draft importer dry-run, section-equivalence database parity, and schedule-map limit checks passed; the rebaseline timeline is complete and the unified ingestion timeline advances to spatial registration and linkage.

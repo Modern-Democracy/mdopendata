@@ -112,6 +112,8 @@ function renderPane(element, label, section) {
     element.innerHTML = `<div class="empty">${label} section could not be loaded.</div>`;
     return;
   }
+  const clauses = section.clauses ?? [];
+  const tables = section.tables ?? [];
   element.innerHTML = `
     <div class="pane-header">
       <div class="pane-kicker">${label}</div>
@@ -120,7 +122,7 @@ function renderPane(element, label, section) {
       <div class="source-line">${citationRange(section.citations)}</div>
     </div>
     <div class="clause-list">
-      ${section.clauses
+      ${clauses
         .map(
           (clause) => `
             <div class="clause">
@@ -130,6 +132,26 @@ function renderPane(element, label, section) {
           `,
         )
         .join("")}
+      ${tables
+        .map(
+          (table) => `
+            <div class="clause">
+              <div class="clause-text"><span class="clause-label">${valueOrDash(table.title)}</span></div>
+              ${(table.rows ?? [])
+                .map(
+                  (row) => `
+                    <div class="source-line">${(row.cells ?? [])
+                      .map((cell) => valueOrDash(cell.text))
+                      .filter((value) => value !== "-")
+                      .join(" | ")}</div>
+                  `,
+                )
+                .join("")}
+            </div>
+          `,
+        )
+        .join("")}
+      ${clauses.length === 0 && tables.length === 0 ? '<div class="empty">No clause or table text is available for this section.</div>' : ""}
     </div>
   `;
 }

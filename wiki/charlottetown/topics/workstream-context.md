@@ -15,7 +15,7 @@ This page records the active Charlottetown zoning workstream context formerly ke
 
 The active workstream is the City of Charlottetown current and draft zoning bylaw extraction, including associated zoning maps, parcel layer, and street map.
 
-The active plan is unified relational and PostGIS ingestion for current and draft bylaw comparison, revision-aware draft updates, approved spatial layers, and later text-vector support. The schema migration and initial JSON importer are implemented, section-equivalence candidate review has been applied to the database, and the next active unified-ingestion phase is spatial registration and linkage.
+The active plan is unified relational and PostGIS ingestion for current and draft bylaw comparison, revision-aware draft updates, approved spatial layers, and later text-vector support. The schema migration and initial JSON importer are implemented. Section-equivalence candidate review has been reopened after QA found accepted mismatches and blank-side comparisons; the next active unified-ingestion work is review of the regenerated section-equivalence ledger.
 
 ## Purpose
 

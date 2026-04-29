@@ -110,6 +110,27 @@ def family_sections(conn: psycopg.Connection) -> list[Section]:
     with conn.cursor() as cur:
         cur.execute(
             """
+            WITH clause_text AS (
+              SELECT
+                c.section_id,
+                string_agg(c.clause_text_raw, ' ' ORDER BY c.source_order) AS text_raw
+              FROM zoning.clause c
+              WHERE c.is_active
+              GROUP BY c.section_id
+            ),
+            table_text AS (
+              SELECT
+                rt.section_id,
+                string_agg(rtc.cell_text_raw, ' ' ORDER BY rt.source_order, rtc.row_order, rtc.column_order) AS text_raw
+              FROM zoning.raw_table rt
+              JOIN zoning.raw_table_cell rtc
+                ON rtc.raw_table_id = rt.raw_table_id
+               AND rtc.is_active
+              WHERE rt.is_active
+                AND rt.section_id IS NOT NULL
+                AND nullif(btrim(rtc.cell_text_raw), '') IS NOT NULL
+              GROUP BY rt.section_id
+            )
             SELECT
               s.section_id,
               s.natural_key,
@@ -120,15 +141,16 @@ def family_sections(conn: psycopg.Connection) -> list[Section]:
               s.section_title_raw,
               s.assigned_topic,
               s.source_order,
-              COALESCE(string_agg(c.clause_text_raw, ' ' ORDER BY c.source_order), '') AS clause_text
+              concat_ws(' ', ct.text_raw, tt.text_raw) AS clause_text
             FROM zoning.section s
             JOIN zoning.document_revision dr
               ON dr.document_revision_id = s.document_revision_id
             JOIN zoning.bylaw_document bd
               ON bd.bylaw_document_id = dr.bylaw_document_id
-            LEFT JOIN zoning.clause c
-              ON c.section_id = s.section_id
-             AND c.is_active
+            LEFT JOIN clause_text ct
+              ON ct.section_id = s.section_id
+            LEFT JOIN table_text tt
+              ON tt.section_id = s.section_id
             WHERE s.is_active
               AND bd.document_family IN ('current', 'draft')
             GROUP BY
@@ -140,7 +162,9 @@ def family_sections(conn: psycopg.Connection) -> list[Section]:
               s.section_label_raw,
               s.section_title_raw,
               s.assigned_topic,
-              s.source_order
+              s.source_order,
+              ct.text_raw,
+              tt.text_raw
             ORDER BY bd.document_family, s.source_order, s.section_id
             """
         )
@@ -192,6 +216,8 @@ def candidate_pairs(sections: list[Section]) -> list[tuple[Section, Section, flo
     for current in current_sections:
         scored: list[tuple[float, float, float, Section]] = []
         for draft in draft_sections:
+            if not norm_text(current.clause_text) or not norm_text(draft.clause_text):
+                continue
             if not is_eligible_pair(current, draft):
                 continue
             score, title_similarity, text_similarity = score_pair(current, draft)
@@ -329,7 +355,16 @@ def prune_stale_candidates(
         return len(stale_ids)
 
 
-def run(dry_run: bool) -> dict[str, int]:
+def reset_candidates(conn: psycopg.Connection) -> int:
+    with conn.cursor() as cur:
+        cur.execute(
+            "DELETE FROM zoning.section_equivalence WHERE candidate_method = %s",
+            (METHOD,),
+        )
+        return cur.rowcount
+
+
+def run(dry_run: bool, reset: bool) -> dict[str, int]:
     with psycopg.connect(database_url()) as conn:
         sections = family_sections(conn)
         pairs = candidate_pairs(sections)
@@ -337,6 +372,7 @@ def run(dry_run: bool) -> dict[str, int]:
             "current_sections": sum(1 for section in sections if section.document_family == "current"),
             "draft_sections": sum(1 for section in sections if section.document_family == "draft"),
             "candidate_pairs": len(pairs),
+            "reset_deleted": 0,
             "inserted": 0,
             "updated": 0,
             "preserved_reviewed": 0,
@@ -345,6 +381,8 @@ def run(dry_run: bool) -> dict[str, int]:
         if dry_run:
             return counts
         with conn.transaction():
+            if reset:
+                counts["reset_deleted"] = reset_candidates(conn)
             for current, draft, _score, title_similarity, text_similarity, eq_type in pairs:
                 result = upsert_candidate(conn, current, draft, title_similarity, text_similarity, eq_type)
                 counts[result] += 1
@@ -357,8 +395,13 @@ def main() -> None:
         description="Generate Charlottetown current-vs-draft section-equivalence candidates."
     )
     parser.add_argument("--dry-run", action="store_true", help="Report candidate counts without writing rows.")
+    parser.add_argument(
+        "--reset",
+        action="store_true",
+        help="Delete existing rows for this candidate method before inserting regenerated candidates.",
+    )
     args = parser.parse_args()
-    counts = run(args.dry_run)
+    counts = run(args.dry_run, args.reset)
     for key, value in counts.items():
         print(f"{key}: {value}")
 
