@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-29] planning | Draft validation rebaseline timeline
+
+Created `plan/charlottetown-draft-zoning-validation-rebaseline-timeline.md` for the post-fix draft validation pass and updated `topics/workstream-context.md` to treat it as the active validation timeline while retaining the prior completed timeline as historical context.
+
 ## [2026-04-29] extraction | Draft table reference repair
 
 Updated `topics/draft-layout-repair-notes.md` after restoring missing regenerated `tables_raw` entries for Table 3.1, Table 8.4, Table 8.5, and Tables 9.3 through 9.8 in the Charlottetown draft outputs.

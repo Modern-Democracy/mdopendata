@@ -39,7 +39,9 @@ Do not add wiki entries for purely mechanical edits, failed experiments, or tran
 
 ## Draft Validation Timeline
 
-For the Charlottetown draft zoning validation workstream, keep `plan/chalottetown-draft-zoning-timeline.md` up to date until the plan is complete.
+For the post-fix Charlottetown draft zoning validation rebaseline, keep `plan/charlottetown-draft-zoning-validation-rebaseline-timeline.md` up to date until the plan is complete.
+
+Retain `plan/chalottetown-draft-zoning-timeline.md` as the historical completed validation record from the prior pass.
 
 Update its active phase, overall status, current progress, and phase statuses whenever work advances, pauses, is blocked, or completes.
 
@@ -54,5 +56,6 @@ Update its active phase, overall status, current progress, and phase statuses wh
 - [Charlottetown wiki guide](../README.md)
 - [Unified zoning ingestion plan](./unified-zoning-ingestion-plan.md)
 - [Unified zoning ingestion timeline](../../../plan/charlottetown-unified-zoning-ingestion-timeline.md)
-- [Draft zoning validation timeline](../../../plan/chalottetown-draft-zoning-timeline.md)
+- [Draft zoning validation rebaseline timeline](../../../plan/charlottetown-draft-zoning-validation-rebaseline-timeline.md)
+- [Historical draft zoning validation timeline](../../../plan/chalottetown-draft-zoning-timeline.md)
 - [Draft zoning validation plan](../../../plan/chalottetown-draft-zoning-plan.md)
