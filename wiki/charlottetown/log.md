@@ -3,7 +3,7 @@ type: log
 tags:
   - charlottetown
   - log
-updated: 2026-04-28
+updated: 2026-04-29
 ---
 
 Append new entries in reverse chronological order. Use headings in this format:
@@ -13,6 +13,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ```text
 ## [YYYY-MM-DD] type | Short title
 ```
+
+## [2026-04-29] planning | Unified zoning ingestion status and timeline
+
+Updated `topics/unified-zoning-ingestion-plan.md`, `topics/workstream-context.md`, and `index.md` to reflect that the `zoning` schema migration and initial Charlottetown importer are implemented and populated in the database. Added `plan/charlottetown-unified-zoning-ingestion-timeline.md` to track phases for schema/importer completion, section equivalence, spatial linkage, vector support, and deferred current coverage.
 
 ## [2026-04-28] planning | Unified zoning ingestion contracts
 

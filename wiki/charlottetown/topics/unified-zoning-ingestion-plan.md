@@ -6,16 +6,24 @@ tags:
   - ingestion
   - database
   - spatial
-updated: 2026-04-28
+updated: 2026-04-29
 ---
 
-This page records the next-phase plan for unified relational and spatial ingestion of the Charlottetown current and draft zoning bylaws.
+This page records the active plan and implementation status for unified relational and spatial ingestion of the Charlottetown current and draft zoning bylaws.
 
 # Unified Zoning Ingestion Plan
 
 ## Verified Starting Point
 
-The current and draft generated JSON sets are ready for schema planning. A scan of `data/zoning/charlottetown/**/*.json` and `data/zoning/charlottetown-draft/**/*.json` found 0 non-empty `review_flags` arrays and 0 `confidence: "needs_review"` entries.
+The current and draft generated JSON sets were ready for schema planning after validation. A scan of `data/zoning/charlottetown/**/*.json` and `data/zoning/charlottetown-draft/**/*.json` found 0 non-empty `review_flags` arrays and 0 `confidence: "needs_review"` entries.
+
+The `zoning` schema migration and initial Charlottetown importer have now been implemented:
+
+- Schema migration: `schema/sql/005_charlottetown_unified_zoning.sql`.
+- Importer: `scripts/import-charlottetown-zoning.py`.
+- Database schema: the `zoning` schema contains the planned relational, source reconstruction, comparison, coverage-gap, manual-correction, spatial-linkage, and topic tables.
+- Database population: current and draft bylaw records have been imported into the relational core tables. A database check on 2026-04-29 found populated document, source, section, clause, definition, raw table, raw map-reference, and structured-fact tables, with completed import batches for both current and draft inputs.
+- Not yet populated: section-equivalence, coverage-gap, spatial layer, spatial feature, zone-spatial-feature, and spatial-reference records.
 
 The database target is a relational-core `zoning` schema. The importer must not store full source-file JSON blobs, top-level aggregate `text_raw` values, `review_flags`, or any `confidence` attributes. Raw text remains in scope only at reconstructable clause, table, page, map-reference, and source-unit granularity.
 
@@ -41,7 +49,7 @@ Skipped or not-yet-normalized current-bylaw chapters must be recorded as deferre
 
 ## Implementation Shape
 
-Create implementation artifacts for a new `zoning` schema after this wiki update. The schema should include:
+The first implementation artifacts for the `zoning` schema now exist. The schema includes:
 
 - `bylaw_document`, `document_revision`, and `import_batch` for current and draft versions, draft updates, supersession, and repeatable imports.
 - `source_file`, `bylaw_part`, `section`, `clause`, `definition`, raw table/page/map-reference tables, and reconstruction ordering fields.
@@ -122,12 +130,14 @@ Vectors are for semantic retrieval, candidate section equivalence, draft update 
 
 ## Milestones
 
-1. Design the `zoning` schema, import-batch model, document-revision model, coverage-gap table, and section-topic vocabulary.
-2. Build initial JSON ingestion for current and draft records, excluding process fields and preserving granular raw reconstruction records.
-3. Build section-equivalence candidate generation and manual review storage for comparable current and draft bylaw sections.
-4. Register and validate the approved spatial layers, resolve code mismatches, and link spatial features to zones and map references.
-5. Add text-vector support after relational IDs and comparison records are stable.
-6. Normalize and ingest deferred current-bylaw chapters and appendices, then re-run equivalence and comparison outputs.
+1. Complete: design and create the `zoning` schema, import-batch model, document-revision model, coverage-gap table, and section-topic vocabulary.
+2. Complete: build initial JSON ingestion for current and draft records, excluding process fields and preserving granular raw reconstruction records.
+3. Active next milestone: build section-equivalence candidate generation and manual review storage for comparable current and draft bylaw sections.
+4. Pending: register and validate the approved spatial layers, resolve code mismatches, and link spatial features to zones and map references.
+5. Pending: add text-vector support after relational IDs and comparison records are stable.
+6. Pending: normalize and ingest deferred current-bylaw chapters and appendices, then re-run equivalence and comparison outputs.
+
+Track phase progress in `plan/charlottetown-unified-zoning-ingestion-timeline.md`.
 
 ## Acceptance Checks
 
@@ -155,3 +165,6 @@ Implementation is ready to begin when the schema and importer design can satisfy
 - [Draft zoning extraction outputs](../../../data/zoning/charlottetown-draft/README.md)
 - [Current parcel review schema](../../../data/spatial/charlottetown/current-zoning-parcel-review-schema.json)
 - [Draft map layers summary](../../../data/spatial/charlottetown/charlottetown-draft-map-layers-2026-04-09-municipal-fit.summary.json)
+- [Unified zoning ingestion timeline](../../../plan/charlottetown-unified-zoning-ingestion-timeline.md)
+- [Unified zoning migration](../../../schema/sql/005_charlottetown_unified_zoning.sql)
+- [Charlottetown zoning importer](../../../scripts/import-charlottetown-zoning.py)

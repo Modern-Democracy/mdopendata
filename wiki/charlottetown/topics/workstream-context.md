@@ -4,7 +4,7 @@ tags:
   - charlottetown
   - zoning
   - workstream
-updated: 2026-04-28
+updated: 2026-04-29
 ---
 
 This page records the active Charlottetown zoning workstream context formerly kept in root startup instructions.
@@ -15,7 +15,7 @@ This page records the active Charlottetown zoning workstream context formerly ke
 
 The active workstream is the City of Charlottetown current and draft zoning bylaw extraction, including associated zoning maps, parcel layer, and street map.
 
-The next phase is unified relational and PostGIS ingestion for current and draft bylaw comparison, revision-aware draft updates, approved spatial layers, and later text-vector support.
+The active plan is unified relational and PostGIS ingestion for current and draft bylaw comparison, revision-aware draft updates, approved spatial layers, and later text-vector support. The schema migration and initial JSON importer are implemented, and the next active milestone is section-equivalence candidate generation.
 
 ## Purpose
 
@@ -43,9 +43,16 @@ For the Charlottetown draft zoning validation workstream, keep `plan/chalottetow
 
 Update its active phase, overall status, current progress, and phase statuses whenever work advances, pauses, is blocked, or completes.
 
+## Unified Ingestion Timeline
+
+For the Charlottetown unified zoning ingestion workstream, keep `plan/charlottetown-unified-zoning-ingestion-timeline.md` up to date until the unified ingestion plan is complete or superseded.
+
+Update its active phase, overall status, current progress, and phase statuses whenever schema, importer, section-equivalence, spatial, vector, or deferred-coverage work advances, pauses, is blocked, or completes.
+
 ## Sources
 
 - [Charlottetown wiki guide](../README.md)
 - [Unified zoning ingestion plan](./unified-zoning-ingestion-plan.md)
+- [Unified zoning ingestion timeline](../../../plan/charlottetown-unified-zoning-ingestion-timeline.md)
 - [Draft zoning validation timeline](../../../plan/chalottetown-draft-zoning-timeline.md)
 - [Draft zoning validation plan](../../../plan/chalottetown-draft-zoning-plan.md)
