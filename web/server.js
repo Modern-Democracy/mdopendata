@@ -2,139 +2,206 @@ import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import pg from "pg";
+
+const { Pool } = pg;
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = process.env.REPO_ROOT || path.resolve(__dirname, "..");
 const host = process.env.HOST || "127.0.0.1";
 const port = Number(process.env.PORT || 3000);
 
-const ledgerPath = path.join(
-  repoRoot,
-  "data",
-  "zoning",
-  "charlottetown-draft",
-  "review",
-  "section-equivalence-review.csv",
-);
-
 const publicDir = path.join(__dirname, "public");
-const jsonCache = new Map();
+const pool = new Pool({
+  host: process.env.PGHOST || "localhost",
+  port: Number(process.env.PGPORT || 54329),
+  database: process.env.PGDATABASE || "mdopendata",
+  user: process.env.PGUSER || "mdopendata",
+  password: process.env.PGPASSWORD || "mdopendata_dev",
+});
 
-function parseCsv(text) {
-  const rows = [];
-  let row = [];
-  let field = "";
-  let quoted = false;
-
-  for (let i = 0; i < text.length; i += 1) {
-    const char = text[i];
-    const next = text[i + 1];
-
-    if (quoted) {
-      if (char === '"' && next === '"') {
-        field += '"';
-        i += 1;
-      } else if (char === '"') {
-        quoted = false;
-      } else {
-        field += char;
-      }
-      continue;
-    }
-
-    if (char === '"') {
-      quoted = true;
-    } else if (char === ",") {
-      row.push(field);
-      field = "";
-    } else if (char === "\n") {
-      row.push(field);
-      rows.push(row);
-      row = [];
-      field = "";
-    } else if (char !== "\r") {
-      field += char;
-    }
-  }
-
-  if (field.length > 0 || row.length > 0) {
-    row.push(field);
-    rows.push(row);
-  }
-
-  const [headers, ...records] = rows;
-  return records
-    .filter((record) => record.length === headers.length)
-    .map((record) =>
-      Object.fromEntries(headers.map((header, index) => [header, record[index] ?? ""])),
-    );
+function toStringValue(value) {
+  return value === null || value === undefined ? "" : String(value);
 }
 
-function parseSectionKey(sectionKey) {
-  const parts = sectionKey.split("|");
-  const fileIndex = parts.indexOf("file");
-  const sectionIndex = parts.indexOf("section");
+function toJsonValue(value) {
+  return value ?? {};
+}
+
+function reviewDecision(row) {
+  if (row.review_status === "accepted") {
+    return "accepted";
+  }
+  if (row.review_status === "rejected") {
+    return "rejected";
+  }
+  return "needs_review";
+}
+
+function mapReviewRow(row, index) {
   return {
-    filePath: fileIndex >= 0 ? parts[fileIndex + 1] : "",
-    sectionId: sectionIndex >= 0 ? parts[sectionIndex + 1] : "",
-  };
-}
-
-async function loadJson(repoRelativePath) {
-  const normalized = path.normalize(repoRelativePath);
-  const absolute = path.resolve(repoRoot, normalized);
-  if (!absolute.startsWith(path.resolve(repoRoot))) {
-    throw new Error("Refusing to read outside repository root.");
-  }
-  if (!jsonCache.has(absolute)) {
-    jsonCache.set(absolute, JSON.parse(await readFile(absolute, "utf8")));
-  }
-  return jsonCache.get(absolute);
-}
-
-async function loadSection(sectionKey) {
-  const parsed = parseSectionKey(sectionKey);
-  if (!parsed.filePath || !parsed.sectionId) {
-    return null;
-  }
-  const document = await loadJson(parsed.filePath);
-  const sections = document.raw_data?.sections_raw ?? [];
-  const section = sections.find((candidate) => candidate.section_id === parsed.sectionId);
-  if (!section) {
-    return null;
-  }
-  return {
-    filePath: parsed.filePath,
-    sectionId: parsed.sectionId,
-    label: section.section_label_raw,
-    title: section.section_title_raw,
-    citations: section.citations ?? {},
-    clauses: (section.clauses_raw ?? []).map((clause) => ({
-      label: clause.clause_label_raw,
-      text: clause.clause_text_raw,
-      citations: clause.citations ?? {},
-      sourceOrder: clause.source_order,
-    })),
-    tables: (section.tables_raw ?? []).map((table) => ({
-      title: table.table_title_raw,
-      sourceOrder: table.source_order,
-      rows: (table.rows_raw ?? []).map((row) => ({
-        sourceOrder: row.source_order,
-        cells: (row.cells_raw ?? []).map((cell) => ({
-          columnId: cell.column_id,
-          text: cell.cell_text_raw,
-        })),
-      })),
-    })),
+    row_index: index,
+    review_batch: "database",
+    review_decision: reviewDecision(row),
+    review_decision_source: "zoning.section_equivalence",
+    section_equivalence_id: toStringValue(row.section_equivalence_id),
+    candidate_method: toStringValue(row.candidate_method),
+    candidate_topic: toStringValue(row.candidate_topic),
+    db_equivalence_type: toStringValue(row.db_equivalence_type),
+    db_review_status: toStringValue(row.db_review_status),
+    title_similarity: toStringValue(row.title_similarity),
+    text_similarity: toStringValue(row.text_similarity),
+    current_section_id: toStringValue(row.current_section_id),
+    current_section_key: toStringValue(row.current_section_key),
+    current_section_label: toStringValue(row.current_section_label),
+    current_section_title: toStringValue(row.current_section_title),
+    current_document_type: toStringValue(row.current_document_type),
+    current_zone_code: toStringValue(row.current_zone_code),
+    current_citations: toJsonValue(row.current_citations),
+    draft_section_id: toStringValue(row.draft_section_id),
+    draft_section_key: toStringValue(row.draft_section_key),
+    draft_section_label: toStringValue(row.draft_section_label),
+    draft_section_title: toStringValue(row.draft_section_title),
+    draft_document_type: toStringValue(row.draft_document_type),
+    draft_zone_code: toStringValue(row.draft_zone_code),
+    draft_citations: toJsonValue(row.draft_citations),
+    reviewer_notes: toStringValue(row.reviewer_notes),
+    updated_at: toStringValue(row.updated_at),
   };
 }
 
 async function loadReviewRows() {
-  const csv = await readFile(ledgerPath, "utf8");
-  return parseCsv(csv).map((row, index) => ({
-    ...row,
-    row_index: index,
-  }));
+  const { rows } = await pool.query(`
+    SELECT
+      se.section_equivalence_id,
+      se.current_section_id,
+      se.draft_section_id,
+      se.current_section_key,
+      se.draft_section_key,
+      se.candidate_method,
+      se.assigned_topic AS candidate_topic,
+      se.equivalence_type AS db_equivalence_type,
+      se.review_status AS db_review_status,
+      se.title_similarity,
+      se.text_similarity,
+      se.reviewer_notes,
+      se.updated_at,
+      cs.section_label_raw AS current_section_label,
+      cs.section_title_raw AS current_section_title,
+      cs.document_type AS current_document_type,
+      cs.zone_code AS current_zone_code,
+      cs.citations AS current_citations,
+      ds.section_label_raw AS draft_section_label,
+      ds.section_title_raw AS draft_section_title,
+      ds.document_type AS draft_document_type,
+      ds.zone_code AS draft_zone_code,
+      ds.citations AS draft_citations
+    FROM zoning.section_equivalence se
+    JOIN zoning.section cs
+      ON cs.section_id = se.current_section_id
+    JOIN zoning.section ds
+      ON ds.section_id = se.draft_section_id
+    ORDER BY cs.source_order, ds.source_order, se.section_equivalence_id
+  `);
+  return rows.map(mapReviewRow);
+}
+
+async function loadSection(sectionId) {
+  const sectionResult = await pool.query(
+    `
+    SELECT
+      s.section_id,
+      s.section_source_id,
+      s.section_label_raw,
+      s.section_title_raw,
+      s.citations,
+      sf.repo_relpath
+    FROM zoning.section s
+    JOIN zoning.source_file sf
+      ON sf.source_file_id = s.source_file_id
+    WHERE s.section_id = $1
+    `,
+    [sectionId],
+  );
+  const section = sectionResult.rows[0];
+  if (!section) {
+    return null;
+  }
+
+  const [clausesResult, tablesResult] = await Promise.all([
+    pool.query(
+      `
+      SELECT clause_label_raw, clause_text_raw, citations, source_order
+      FROM zoning.clause
+      WHERE section_id = $1
+        AND is_active
+      ORDER BY source_order, clause_id
+      `,
+      [sectionId],
+    ),
+    pool.query(
+      `
+      SELECT
+        rt.raw_table_id,
+        rt.table_title_raw,
+        rt.source_order AS table_source_order,
+        rtc.row_order,
+        rtc.column_order,
+        rtc.column_id,
+        rtc.cell_text_raw
+      FROM zoning.raw_table rt
+      LEFT JOIN zoning.raw_table_cell rtc
+        ON rtc.raw_table_id = rt.raw_table_id
+       AND rtc.is_active
+      WHERE rt.section_id = $1
+        AND rt.is_active
+      ORDER BY rt.source_order, rt.raw_table_id, rtc.row_order, rtc.column_order
+      `,
+      [sectionId],
+    ),
+  ]);
+
+  const tables = [];
+  const tableById = new Map();
+  for (const row of tablesResult.rows) {
+    if (!tableById.has(row.raw_table_id)) {
+      const table = {
+        title: row.table_title_raw,
+        sourceOrder: row.table_source_order,
+        rows: [],
+      };
+      tableById.set(row.raw_table_id, table);
+      tables.push(table);
+    }
+    if (row.row_order === null) {
+      continue;
+    }
+    const table = tableById.get(row.raw_table_id);
+    let tableRow = table.rows.find((candidate) => candidate.sourceOrder === row.row_order);
+    if (!tableRow) {
+      tableRow = { sourceOrder: row.row_order, cells: [] };
+      table.rows.push(tableRow);
+    }
+    tableRow.cells.push({
+      columnId: row.column_id,
+      text: row.cell_text_raw,
+    });
+  }
+
+  return {
+    filePath: section.repo_relpath,
+    sectionId: section.section_source_id,
+    label: section.section_label_raw,
+    title: section.section_title_raw,
+    citations: toJsonValue(section.citations),
+    clauses: clausesResult.rows.map((clause) => ({
+      label: clause.clause_label_raw,
+      text: clause.clause_text_raw,
+      citations: toJsonValue(clause.citations),
+      sourceOrder: clause.source_order,
+    })),
+    tables,
+  };
 }
 
 function summarizeRows(rows) {
@@ -197,7 +264,7 @@ const server = createServer(async (request, response) => {
     const url = new URL(request.url, `http://${request.headers.host}`);
     if (url.pathname === "/api/section-equivalence") {
       const rows = await loadReviewRows();
-      await sendJson(response, { source: ledgerPath, rows: summarizeRows(rows) });
+      await sendJson(response, { source: "zoning.section_equivalence", rows: summarizeRows(rows) });
       return;
     }
 
@@ -211,8 +278,8 @@ const server = createServer(async (request, response) => {
         return;
       }
       const [currentSection, draftSection] = await Promise.all([
-        loadSection(row.current_section_key),
-        loadSection(row.draft_section_key),
+        loadSection(row.current_section_id),
+        loadSection(row.draft_section_id),
       ]);
       await sendJson(response, { row, currentSection, draftSection });
       return;

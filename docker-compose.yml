@@ -45,5 +45,10 @@ services:
     environment:
       REPO_ROOT: /workspace
       PORT: 3000
+      PGHOST: postgis
+      PGPORT: 5432
+      PGDATABASE: "${PGDATABASE:-mdopendata}"
+      PGUSER: "${PGUSER:-mdopendata}"
+      PGPASSWORD: "${PGPASSWORD:-mdopendata_dev}"
     volumes:
       - ./:/workspace:ro

@@ -15,7 +15,7 @@ This page records the initial web UI stack decision for hosted review tools over
 
 Use a small Node.js HTTP service in Docker as the initial hosted web interface.
 
-For the first Charlottetown review page, the service uses dependency-free server-side JavaScript and static client files:
+For the first Charlottetown review page, the service uses server-side JavaScript with the `pg` driver and static client files:
 
 - Container service: `web` in `docker-compose.yml`.
 - Server entry point: `web/server.js`.
@@ -24,9 +24,9 @@ For the first Charlottetown review page, the service uses dependency-free server
 
 ## Rationale
 
-This stack is intentionally small for the first review milestone. It can serve CSV-backed review screens immediately, expose JSON APIs beside static pages, and later add database-backed endpoints without committing the repository to a frontend build system before the review workflows stabilize.
+This stack is intentionally small for the first review milestone. It exposes JSON APIs beside static pages without committing the repository to a frontend build system before the review workflows stabilize.
 
-The first page reads `data/zoning/charlottetown-draft/review/section-equivalence-review.csv`, resolves current and draft section keys back to their source JSON files, and displays the selected row as a split-pane current-versus-draft section review.
+The first page reads `zoning.section_equivalence`, `zoning.section`, `zoning.clause`, `zoning.raw_table`, and `zoning.raw_table_cell` directly from PostgreSQL and displays the selected row as a split-pane current-versus-draft section review.
 
 ## Near-Term Direction
 
@@ -39,5 +39,5 @@ Use the Node service as the boundary for database access. Browser code should no
 - [Root README](../../README.md)
 - [Docker Compose](../../docker-compose.yml)
 - [Web server](../../web/server.js)
-- [Section-equivalence review ledger](../../data/zoning/charlottetown-draft/review/section-equivalence-review.csv)
+- [Section-equivalence review export](../../data/zoning/charlottetown-draft/review/section-equivalence-review.csv)
 - [Charlottetown unified zoning ingestion plan](../charlottetown/topics/unified-zoning-ingestion-plan.md)
