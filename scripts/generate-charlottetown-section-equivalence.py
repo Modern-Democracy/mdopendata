@@ -12,6 +12,34 @@ import psycopg
 
 METHOD = "title_topic_token_v1"
 
+TITLE_FAMILIES = {
+    "permitted_uses": {
+        "permitted uses",
+        "regulations for permitted uses",
+        "permitted with conditions",
+        "conditional uses",
+    },
+    "built_form": {
+        "built form requirements",
+        "development standards",
+        "bonus height development standards",
+        "lot requirements",
+        "yard requirements",
+        "setback requirements",
+        "building height",
+    },
+    "landscaping": {
+        "landscape requirements",
+        "landscaping",
+        "land use buffers",
+    },
+    "signage": {
+        "sign",
+        "signs",
+        "signage",
+    },
+}
+
 
 @dataclass(frozen=True)
 class Section:
@@ -62,6 +90,22 @@ def jaccard(left: Iterable[str], right: Iterable[str]) -> float:
     return len(left_set & right_set) / len(left_set | right_set)
 
 
+def title_family(value: str | None) -> str | None:
+    normalized = norm_text(value)
+    if not normalized:
+        return None
+    for family, phrases in TITLE_FAMILIES.items():
+        if any(phrase in normalized for phrase in phrases):
+            return family
+    return None
+
+
+def compatible_title_family(current: Section, draft: Section) -> bool:
+    current_family = title_family(current.section_title_raw)
+    draft_family = title_family(draft.section_title_raw)
+    return bool(current_family and current_family == draft_family)
+
+
 def family_sections(conn: psycopg.Connection) -> list[Section]:
     with conn.cursor() as cur:
         cur.execute(
@@ -106,13 +150,18 @@ def family_sections(conn: psycopg.Connection) -> list[Section]:
 def is_eligible_pair(current: Section, draft: Section) -> bool:
     if current.document_type and draft.document_type and current.document_type != draft.document_type:
         return False
+    exact_title = norm_text(current.section_title_raw) == norm_text(draft.section_title_raw)
     if current.zone_code and draft.zone_code and current.zone_code == draft.zone_code:
-        return True
+        return exact_title or compatible_title_family(current, draft)
     if current.zone_code or draft.zone_code:
         return False
-    if current.assigned_topic and draft.assigned_topic and current.assigned_topic == draft.assigned_topic:
+    if exact_title:
         return True
-    return norm_text(current.section_title_raw) == norm_text(draft.section_title_raw)
+    if compatible_title_family(current, draft):
+        return True
+    if current.assigned_topic and draft.assigned_topic and current.assigned_topic == draft.assigned_topic:
+        return ratio(current.section_title_raw, draft.section_title_raw) >= 0.62
+    return False
 
 
 def score_pair(current: Section, draft: Section) -> tuple[float, float, float]:
@@ -146,7 +195,15 @@ def candidate_pairs(sections: list[Section]) -> list[tuple[Section, Section, flo
             if not is_eligible_pair(current, draft):
                 continue
             score, title_similarity, text_similarity = score_pair(current, draft)
-            if score >= 0.48 or title_similarity >= 0.64 or text_similarity >= 0.30:
+            family_match = compatible_title_family(current, draft)
+            exact_title = norm_text(current.section_title_raw) == norm_text(draft.section_title_raw)
+            strong_match = (
+                exact_title
+                or title_similarity >= 0.68
+                or text_similarity >= 0.32
+                or (family_match and score >= 0.50)
+            )
+            if strong_match:
                 scored.append((score, title_similarity, text_similarity, draft))
         scored.sort(key=lambda item: (item[0], item[1], item[2]), reverse=True)
         for score, title_similarity, text_similarity, draft in scored[:3]:
@@ -243,6 +300,35 @@ def upsert_candidate(
         return "updated"
 
 
+def prune_stale_candidates(
+    conn: psycopg.Connection,
+    pairs: list[tuple[Section, Section, float, float, float, str]],
+) -> int:
+    live_pairs = {(current.natural_key, draft.natural_key) for current, draft, *_rest in pairs}
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT section_equivalence_id, current_section_key, draft_section_key
+            FROM zoning.section_equivalence
+            WHERE candidate_method = %s
+              AND review_status = 'candidate'
+            """,
+            (METHOD,),
+        )
+        stale_ids = [
+            row[0]
+            for row in cur.fetchall()
+            if (row[1], row[2]) not in live_pairs
+        ]
+        if not stale_ids:
+            return 0
+        cur.execute(
+            "DELETE FROM zoning.section_equivalence WHERE section_equivalence_id = ANY(%s)",
+            (stale_ids,),
+        )
+        return len(stale_ids)
+
+
 def run(dry_run: bool) -> dict[str, int]:
     with psycopg.connect(database_url()) as conn:
         sections = family_sections(conn)
@@ -254,6 +340,7 @@ def run(dry_run: bool) -> dict[str, int]:
             "inserted": 0,
             "updated": 0,
             "preserved_reviewed": 0,
+            "pruned_stale": 0,
         }
         if dry_run:
             return counts
@@ -261,6 +348,7 @@ def run(dry_run: bool) -> dict[str, int]:
             for current, draft, _score, title_similarity, text_similarity, eq_type in pairs:
                 result = upsert_candidate(conn, current, draft, title_similarity, text_similarity, eq_type)
                 counts[result] += 1
+            counts["pruned_stale"] = prune_stale_candidates(conn, pairs)
         return counts
 
 

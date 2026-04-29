@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-29] implementation | Section-equivalence candidate tuning
+
+Tuned `scripts/generate-charlottetown-section-equivalence.py` against exact-title controls and sampled weak false positives. Repopulated `zoning.section_equivalence` with 137 `title_topic_token_v1` candidate rows: 76 `same_topic`, 26 `renamed_or_restructured`, and 35 `partial_overlap`.
+
 ## [2026-04-29] implementation | Section-equivalence candidate generation started
 
 Implemented `scripts/generate-charlottetown-section-equivalence.py` and populated 300 `title_topic_token_v1` candidate rows in `zoning.section_equivalence`. Updated `topics/unified-zoning-ingestion-plan.md`, `topics/workstream-context.md`, `index.md`, and `plan/charlottetown-unified-zoning-ingestion-timeline.md` to reflect Phase 3 progress.
