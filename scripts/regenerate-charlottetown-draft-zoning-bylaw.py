@@ -179,6 +179,7 @@ def transform_supporting_doc(path: Path, document_type: str) -> dict[str, Any]:
     data = current.transform_sections_doc(NORMALIZER, legacy, document_type)
     current.repair_general_provisions_tables(data)
     current.repair_charlottetown_draft_parking_sections(data)
+    current.repair_charlottetown_draft_signage_sections(data)
     current.refresh_schema_numeric_values(data)
     current.promote_reviewed_draft_general_provisions_requirements(data)
     current.repair_reviewed_draft_general_provisions_clause_text(data)

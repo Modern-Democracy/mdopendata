@@ -1556,6 +1556,179 @@ def repair_charlottetown_draft_parking_sections(data: dict[str, Any]) -> bool:
     return changed
 
 
+def repair_charlottetown_draft_signage_sections(data: dict[str, Any]) -> bool:
+    metadata = data.get("document_metadata") or {}
+    if not str(metadata.get("bylaw_name") or "").startswith("Draft Zoning"):
+        return False
+    if metadata.get("document_type") != "general_provisions":
+        return False
+
+    raw_data = data.get("raw_data") or {}
+    sections = raw_data.get("sections_raw") or []
+    section_9_10 = find_raw_section(sections, "9.10")
+    section_9_11 = find_raw_section(sections, "9.11")
+    section_9_12 = find_raw_section(sections, "9.12")
+    if not (section_9_10 and section_9_11 and section_9_12):
+        return False
+
+    awning_general = (
+        "Signs shall be affixed to, or painted on an Awning / Canopy that is securely attached to a building wall "
+        "that abuts a street; Signs shall be attached to an Awning / Canopy that may extends a maximum of 1 m "
+        "(3.3 ft) over a sidewalk or public Right-of-way; Signs shall be attached to an Awning / Canopy that is "
+        "located below the bottom of the second Storey windows; Signs shall be attached to an Awning / Canopy that "
+        "provides a minimum clearance of 2.2 m (7.2 ft) over a sidewalk and 3 m (9.8 ft) over a Parking Space or "
+        "traffic lane; The owner of a Sign that extends over a public Right-of-way shall: • Carry liability "
+        "insurance that names the City as a third party and provides a minimum coverage of $1,000,000; and • Enter "
+        "into an encroachment agreement with the City to Permit said Sign; and • Signs erected in the 500 Lot Area "
+        "or on a Heritage Resource shall adhere to the Sign design criteria."
+    )
+    projecting_general = (
+        "Signs shall have a maximum of two parallel Sign Faces; Signs shall be erected on a building wall that abuts "
+        "a street or the Business Premise's interior parking lot; Signs shall have a minimum clearance of 2.2 m "
+        "(7.2 ft) from the ground; Signs and their supporting structures shall extend a maximum of 1.1 m (3.6 ft) "
+        "from the building wall. No Sign shall extend over a side property line or the roof of a building; "
+        "Supporting structures shall be designed in proportion to the size of the Sign; The owner of a Sign that "
+        "extends over a public Right-of-way shall carry liability insurance that names the City as a third party and "
+        "provides a minimum coverage of $1,000,000; and Enter into an encroachment agreement with the City."
+    )
+
+    def signage_clause(section: dict[str, Any], label: str, text: str) -> dict[str, Any]:
+        section_label = section["section_label_raw"]
+        suffix = clean_text(label).strip(".") or "section"
+        cid = (
+            f"doc-general-provisions-clause-{slugify(section_label)}"
+            if label == "section"
+            else f"doc-general-provisions-clause-{slugify(section_label)}-{slugify(suffix)}"
+        )
+        return {
+            "clause_id": cid,
+            "clause_label_raw": label,
+            "clause_text_raw": text,
+            "parent_clause_id": None,
+            "source_order": 1,
+            "citations": citation(section.get("citations")),
+        }
+
+    def signage_table(section: dict[str, Any], table_number: str, title: str, rows: list[tuple[str, str, str]]) -> dict[str, Any]:
+        table = {
+            "table_id": f"doc-general-provisions-table-{slugify(table_number)}",
+            "table_title_raw": title,
+            "source_order": 1,
+            "columns_raw": general_provisions_table_columns(
+                [
+                    ("zone", "Zone"),
+                    ("dimensions", "Dimensions"),
+                    ("general_provisions", "General Provisions"),
+                ]
+            ),
+            "rows_raw": [],
+            "citations": citation(section.get("citations")),
+        }
+        for row_order, (zone, dimensions, general_provisions) in enumerate(rows, start=1):
+            table["rows_raw"].append(
+                {
+                    "row_id": f"{table['table_id']}-row-{row_order}",
+                    "source_order": row_order,
+                    "cells_raw": [
+                        {"cell_id": f"{table['table_id']}-row-{row_order}-zone", "column_id": "zone", "cell_text_raw": zone},
+                        {
+                            "cell_id": f"{table['table_id']}-row-{row_order}-dimensions",
+                            "column_id": "dimensions",
+                            "cell_text_raw": dimensions,
+                        },
+                        {
+                            "cell_id": f"{table['table_id']}-row-{row_order}-general-provisions",
+                            "column_id": "general_provisions",
+                            "cell_text_raw": general_provisions,
+                        },
+                    ],
+                }
+            )
+        return table
+
+    section_9_10["clauses_raw"] = [
+        signage_clause(section_9_10, "section", "DEVELOPMENT AGREEMENTS"),
+        {
+            **signage_clause(
+                section_9_10,
+                ".1",
+                "If the Development Agreement specifically notes any signage requirements that do not meet the "
+                "requirements of this bylaw, the DA shall supersede this bylaw; otherwise these signage requirements "
+                "shall be met.",
+            ),
+            "source_order": 2,
+            "parent_clause_id": "doc-general-provisions-clause-9-10",
+        },
+    ]
+    section_9_10["tables_raw"] = []
+
+    section_9_11["clauses_raw"] = [
+        signage_clause(
+            section_9_11,
+            ".1",
+            "Awning / Canopy Signs shall adhere to the following provisions in Table 9.1:",
+        )
+    ]
+    section_9_11["tables_raw"] = [
+        signage_table(
+            section_9_11,
+            "9.1",
+            "Table 9.1 Awning/Canopy Table",
+            [
+                (
+                    "500 Lot Area (Excluding DN Zone)",
+                    "Sign Area shall not exceed 40% of the Awning / Canopy upon which it is attached.",
+                    awning_general,
+                ),
+                (
+                    "Any other Mixed Use Residential/ Commercial, Institutional, Open Space or Employment/ Industrial Zone",
+                    "Sign Area shall not exceed 60% of the Awning / Canopy upon which it is attached.",
+                    awning_general,
+                ),
+            ],
+        )
+    ]
+
+    section_9_12["clauses_raw"] = [
+        signage_clause(
+            section_9_12,
+            ".1",
+            "Projecting signs shall adhere to the following provisions in Table 9.2:",
+        )
+    ]
+    section_9_12["tables_raw"] = [
+        signage_table(
+            section_9_12,
+            "9.2",
+            "Table 9.2 Projecting Sign Table",
+            [
+                ("500 Lot Area (Excluding DN Zone)", "Sign Area shall not exceed 1 m2 (10.8 ft2) per Sign Face.", projecting_general),
+                (
+                    "Any other Mixed Use Residential/ Commercial, Institutional, Open Space or Employment/ Industrial Zone",
+                    "Sign Area shall not exceed 2 m2 (21.5 ft2) per Sign Face.",
+                    projecting_general,
+                ),
+                (
+                    "Designated heritage resource",
+                    "When erected on a designated heritage resource, Sign Area shall not exceed 1 m2 (10.8 ft2) per sign face.",
+                    projecting_general,
+                ),
+            ],
+        )
+    ]
+
+    raw_data["tables_raw"] = [
+        {"table_id": table["table_id"], "section_id": section["section_id"]}
+        for section in sections
+        for table in section.get("tables_raw") or []
+    ]
+    for section in (section_9_10, section_9_11, section_9_12):
+        rebuild_content_refs({"raw_data": {"sections_raw": [section]}})
+    rebuild_clause_refs(data)
+    refresh_source_unit_text_from_raw(data)
+    return True
+
+
 DRAFT_GENERAL_PROVISIONS_REVIEWED_REQUIREMENT_CLAUSES = {
     "doc-design-standards-clause-6-8-3",
     "doc-design-standards-clause-6-8-8",

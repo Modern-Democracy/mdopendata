@@ -42,6 +42,15 @@ This page records durable extraction notes for reported Charlottetown draft zoni
 - The Part 9 source places the `9.1 PURPOSE` heading between the purpose paragraph and the tail of `9.2.5`; regenerated output now assigns the purpose paragraph under `9.1` and returns the liability tail to `9.2.5`.
 - The four explicit section-assignment files now have zero raw `content_blocks` and zero `section_assignment_review` flags.
 
+## 2026-04-29 Part 9 Signage Table Repairs
+
+- Source: `docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf`, bylaw pages 77 and 78.
+- Extractor: `scripts/extract-charlottetown-zoning-bylaw.py` through `scripts/regenerate-charlottetown-draft-zoning-bylaw.py`.
+- Output: `data/zoning/charlottetown-draft/general-provisions-signage.json`.
+- Section `9.10` now keeps only the development-agreement clause under `doc-general-provisions-clause-9-10-1`; the duplicate `9.10.1` row containing awning/canopy text was removed.
+- Section `9.11` now restores clause `9.11.1` as the awning/canopy table intro and stores Table 9.1 as two rows with columns `Zone`, `Dimensions`, and `General Provisions`; the shared third-column text is duplicated into both rows.
+- Section `9.12` now restores clause `9.12.1` as the projecting-sign table intro and stores Table 9.2 as three rows with columns `Zone`, `Dimensions`, and `General Provisions`; the shared third-column text is duplicated into all three rows.
+
 ## Open Limits
 
-- This note covers only the named Part 1, Part 2, Part 3, Part 5, Part 6, Part 8, Part 9, RN, and RH extraction defects verified on 2026-04-24 and 2026-04-28.
+- This note covers only the named Part 1, Part 2, Part 3, Part 5, Part 6, Part 8, Part 9, RN, and RH extraction defects verified on 2026-04-24, 2026-04-28, and 2026-04-29.

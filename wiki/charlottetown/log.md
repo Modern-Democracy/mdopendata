@@ -106,6 +106,10 @@ Updated `topics/draft-validation-rebaseline.md` after resolving the Phase 3 `nee
 
 Updated `topics/draft-validation-rebaseline.md` after resolving the Phase 3 `needs_review` entries in `zones/dw.json` and `general-provisions-signage.json`.
 
+## [2026-04-29] extraction | Draft signage table repair
+
+Updated `topics/draft-layout-repair-notes.md` after repairing Part 9 signage sections `9.10`, `9.11`, and `9.12` so Table 9.1 and Table 9.2 are table rows instead of clause spillover in `general-provisions-signage.json`.
+
 ## [2026-04-24] extraction | Draft parking and land-use Phase 3 repairs
 
 Updated `topics/draft-layout-repair-notes.md` and `topics/draft-validation-rebaseline.md` after resolving the Phase 3 `needs_review` entries in `general-provisions-parking.json` and `general-provisions-land-use.json`.
