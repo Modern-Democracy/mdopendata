@@ -9,3 +9,5 @@ The initial ledger backfills 35 accepted `same_topic` decisions from the databas
 The second ledger batch, `2026-04-29-remaining-same-topic-ledger-review`, records accepted review decisions for the remaining 41 generated `same_topic` candidates before database updates. Rows in this batch intentionally retain `db_review_status` as `candidate` until an apply step updates `zoning.section_equivalence`.
 
 The third ledger batch, `2026-04-29-renamed-or-restructured-ledger-review`, records manual decisions for all 26 generated `renamed_or_restructured` candidates before database updates: 10 accepted, 7 rejected, and 9 marked `needs_review`.
+
+The fourth ledger batch, `2026-04-29-partial-overlap-ledger-review`, records manual decisions for all 35 generated `partial_overlap` candidates before database updates: 2 accepted, 24 rejected, and 9 marked `needs_review`.

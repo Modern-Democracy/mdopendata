@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-29] data-quality | Partial-overlap decisions appended to ledger
+
+Appended manual ledger decisions for all 35 `partial_overlap` section-equivalence candidates to `data/zoning/charlottetown-draft/review/section-equivalence-review.csv` before database updates: 2 accepted, 24 rejected, and 9 marked `needs_review`.
+
 ## [2026-04-29] data-quality | Renamed-or-restructured decisions appended to ledger
 
 Appended manual ledger decisions for all 26 `renamed_or_restructured` section-equivalence candidates to `data/zoning/charlottetown-draft/review/section-equivalence-review.csv` before database updates: 10 accepted, 7 rejected, and 9 marked `needs_review`.
