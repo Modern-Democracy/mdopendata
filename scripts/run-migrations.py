@@ -13,6 +13,7 @@ MIGRATIONS = (
     REPO_ROOT / "schema" / "sql" / "002_zoning_views.sql",
     REPO_ROOT / "schema" / "sql" / "003_rename_zoning_schema_to_hrm.sql",
     REPO_ROOT / "schema" / "sql" / "004_geometry_registry.sql",
+    REPO_ROOT / "schema" / "sql" / "005_charlottetown_unified_zoning.sql",
 )
 
 
