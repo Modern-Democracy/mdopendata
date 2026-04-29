@@ -118,6 +118,35 @@ def enrich_sections_with_clause_paths(sections: list[dict[str, Any]]) -> list[di
     return sections
 
 
+INLINE_NUMBERED_SUBCLAUSE_RE = re.compile(r"(?:(?<=:)|(?<=;)|(?<=\.))\s+(?:and\s+)?(\d+)\)\s+", re.IGNORECASE)
+
+
+def split_inline_numbered_subclauses(sections: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    for section in sections:
+        provisions = section.get("provisions") or []
+        split_provisions: list[dict[str, Any]] = []
+        for provision in provisions:
+            text = clean_text(provision.get("text"))
+            matches = list(INLINE_NUMBERED_SUBCLAUSE_RE.finditer(text))
+            path = list(provision.get("clause_path") or [])
+            if not matches or not path:
+                split_provisions.append(provision)
+                continue
+
+            parent = dict(provision)
+            parent["text"] = clean_text(text[: matches[0].start()])
+            split_provisions.append(parent)
+            for index, match in enumerate(matches):
+                end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
+                child = dict(provision)
+                child["provision_label_raw"] = f"{match.group(1)})"
+                child["text"] = clean_text(text[match.end() : end])
+                child["clause_path"] = path + [match.group(1)]
+                split_provisions.append(child)
+        section["provisions"] = split_provisions
+    return sections
+
+
 def attach_permitted_use_clause_paths(doc: dict[str, Any]) -> dict[str, Any]:
     available: dict[tuple[str, str, tuple[int | None, int | None, int | None, int | None]], list[list[str]]] = defaultdict(list)
     for section in doc.get("requirement_sections") or []:
@@ -153,6 +182,7 @@ def preprocess_zone_legacy(doc: dict[str, Any]) -> dict[str, Any]:
 
 def preprocess_sections_legacy(doc: dict[str, Any]) -> dict[str, Any]:
     enrich_sections_with_clause_paths(doc.get("sections") or [])
+    split_inline_numbered_subclauses(doc.get("sections") or [])
     return doc
 
 

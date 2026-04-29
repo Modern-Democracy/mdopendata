@@ -114,6 +114,10 @@ Updated `topics/draft-layout-repair-notes.md` after repairing Part 9 signage sec
 
 Updated `topics/draft-layout-repair-notes.md` after replacing the draft extractor page-specific wrapped-title allowlist with general uppercase continuation merging and removing the synthetic Part 9 `9.10` title-fragment `section` clause.
 
+## [2026-04-29] extraction | Inline numbered subclause repair
+
+Updated `topics/draft-layout-repair-notes.md` after generalizing draft regeneration to split inline `1)`, `2)`, and `3)` subclauses under `9.3.1(l)(i)` and `9.3.1(l)(ii)` into raw child clauses.
+
 ## [2026-04-29] extraction | Part source-unit text repair
 
 Updated `topics/draft-layout-repair-notes.md` after removing duplicated clause text from Part-level `raw_data.source_units` in regenerated draft outputs while retaining page text for Schedule source units.

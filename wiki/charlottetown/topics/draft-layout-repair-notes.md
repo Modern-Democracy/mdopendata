@@ -67,6 +67,15 @@ This page records durable extraction notes for reported Charlottetown draft zoni
 - Part-level `raw_data.source_units` records are structural containers and do not carry `text_raw`; section and clause text remains in `sections_raw`, `clauses_raw`, `tables_raw`, definitions, and page-level schedule records.
 - Regenerated outputs have zero `source_units` with `label_raw` beginning `PART ` and a `text_raw` attribute; Schedule A through D source units still retain `text_raw` because those files preserve page-text map artifacts.
 
+## 2026-04-29 Inline Numbered Subclause Repair
+
+- Source: `docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf`, bylaw page 71.
+- Extractor: `scripts/regenerate-charlottetown-draft-zoning-bylaw.py`.
+- Output: `data/zoning/charlottetown-draft/general-provisions-signage.json`.
+- Clauses `doc-general-provisions-clause-9-3-1-l-i` and `doc-general-provisions-clause-9-3-1-l-ii` previously preserved inline `1)`, `2)`, and `3)` text inside the roman-level clause body.
+- The regeneration preprocessor now splits inline numbered subclauses after an existing clause path is established, so the output creates child clauses `-1`, `-2`, and `-3` under each roman parent instead of using a clause-specific manual correction.
+- A scan of regenerated draft raw clauses found no remaining `1)` through `9)` inline numbered-label pattern in `clause_text_raw`.
+
 ## Open Limits
 
-- This note covers only the named Part 1, Part 2, Part 3, Part 5, Part 6, Part 8, Part 9, RN, RH, general wrapped-section-title, and Part source-unit text extraction defects verified on 2026-04-24, 2026-04-28, and 2026-04-29.
+- This note covers only the named Part 1, Part 2, Part 3, Part 5, Part 6, Part 8, Part 9, RN, RH, general wrapped-section-title, Part source-unit text, and inline numbered-subclause extraction defects verified on 2026-04-24, 2026-04-28, and 2026-04-29.
