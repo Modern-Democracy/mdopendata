@@ -3900,6 +3900,22 @@
         "confidence": "medium"
       },
       {
+        "numeric_value_id": "doc-general-provisions-source-num-doc-general-provisions-table-3-1-2-a-row-1-accessory-buildings-permitted-1",
+        "value_raw": "One",
+        "value": 1,
+        "unit": "building",
+        "measure_type": "count",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "doc-general-provisions-table-3-1-2-a-row-1-accessory_buildings_permitted"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "numeric_value_id": "doc-general-provisions-source-num-doc-general-provisions-table-3-1-2-a-row-1-total-building-footprint-maximum-1",
         "value_raw": "10%",
         "value": 10,
@@ -3955,6 +3971,22 @@
         "confidence": "medium"
       },
       {
+        "numeric_value_id": "doc-general-provisions-source-num-doc-general-provisions-table-3-1-2-a-row-2-accessory-buildings-permitted-1",
+        "value_raw": "Two",
+        "value": 2,
+        "unit": "building",
+        "measure_type": "count",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "doc-general-provisions-table-3-1-2-a-row-2-accessory_buildings_permitted"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "numeric_value_id": "doc-general-provisions-source-num-doc-general-provisions-table-3-1-2-a-row-2-total-building-footprint-maximum-1",
         "value_raw": "79 m2",
         "value": 79,
@@ -4005,6 +4037,22 @@
           {
             "source_ref_type": "table_cell",
             "source_ref_id": "doc-general-provisions-table-3-1-2-a-row-3-lot_area"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "numeric_value_id": "doc-general-provisions-source-num-doc-general-provisions-table-3-1-2-a-row-3-accessory-buildings-permitted-1",
+        "value_raw": "Three",
+        "value": 3,
+        "unit": "building",
+        "measure_type": "count",
+        "comparator": "exact",
+        "alternative_values": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_cell",
+            "source_ref_id": "doc-general-provisions-table-3-1-2-a-row-3-accessory_buildings_permitted"
           }
         ],
         "confidence": "medium"
@@ -5278,14 +5326,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-1-lot-area",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area",
         "requirement_text_raw": "Lot Area < 0.5 Acres",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "lot_area"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "a"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-1-2-a-row-1-lot-area-1"
@@ -5300,16 +5351,46 @@
         "confidence": "medium"
       },
       {
+        "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-1-accessory-buildings-permitted",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "of_accessory_buildings_permitted",
+        "requirement_label_raw": "# of Accessory Buildings permitted",
+        "requirement_text_raw": "# of Accessory Buildings permitted One",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "a"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "doc-general-provisions-source-num-doc-general-provisions-table-3-1-2-a-row-1-accessory-buildings-permitted-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "doc-general-provisions-table-3-1-2-a-row-1"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-1-total-building-footprint-maximum",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
+        "requirement_category": "total_building_footprint_max",
+        "requirement_label_raw": "Total Building Footprint (max.)",
         "requirement_text_raw": "Total Building Footprint (max.) 10% of the lot area",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "total_building_footprint_max"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "a"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-1-2-a-row-1-total-building-footprint-maximum-1"
@@ -5326,14 +5407,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-1-height-maximum",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (max.)",
         "requirement_text_raw": "Height (max.) 5.3 m (17.5 ft)",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "height_max"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "a"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-1-2-a-row-1-height-maximum-1"
@@ -5350,14 +5434,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-2-lot-area",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area",
         "requirement_text_raw": "Lot Area > 0.5 to 0.99 Acres",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "lot_area"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "b"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-1-2-a-row-2-lot-area-1"
@@ -5372,16 +5459,46 @@
         "confidence": "medium"
       },
       {
+        "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-2-accessory-buildings-permitted",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "of_accessory_buildings_permitted",
+        "requirement_label_raw": "# of Accessory Buildings permitted",
+        "requirement_text_raw": "# of Accessory Buildings permitted Two",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "b"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "doc-general-provisions-source-num-doc-general-provisions-table-3-1-2-a-row-2-accessory-buildings-permitted-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "doc-general-provisions-table-3-1-2-a-row-2"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-2-total-building-footprint-maximum",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
+        "requirement_category": "total_building_footprint_max",
+        "requirement_label_raw": "Total Building Footprint (max.)",
         "requirement_text_raw": "Total Building Footprint (max.) 79 m2 combined",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "total_building_footprint_max"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "b"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-1-2-a-row-2-total-building-footprint-maximum-1"
@@ -5398,14 +5515,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-2-height-maximum",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (max.)",
         "requirement_text_raw": "Height (max.) 6.1 m (20 ft)",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "height_max"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "b"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-1-2-a-row-2-height-maximum-1"
@@ -5422,14 +5542,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-3-lot-area",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
+        "requirement_category": "lot_area",
+        "requirement_label_raw": "Lot Area",
         "requirement_text_raw": "Lot Area > 1 Acre",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "lot_area"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "c"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-1-2-a-row-3-lot-area-1"
@@ -5444,16 +5567,46 @@
         "confidence": "medium"
       },
       {
+        "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-3-accessory-buildings-permitted",
+        "requirement_type": "dimensional_standard",
+        "requirement_category": "of_accessory_buildings_permitted",
+        "requirement_label_raw": "# of Accessory Buildings permitted",
+        "requirement_text_raw": "# of Accessory Buildings permitted Three",
+        "applicability": {
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "c"
+            }
+          ]
+        },
+        "numeric_value_refs": [
+          "doc-general-provisions-source-num-doc-general-provisions-table-3-1-2-a-row-3-accessory-buildings-permitted-1"
+        ],
+        "term_refs": [],
+        "source_refs": [
+          {
+            "source_ref_type": "table_row",
+            "source_ref_id": "doc-general-provisions-table-3-1-2-a-row-3"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-3-total-building-footprint-maximum",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
+        "requirement_category": "total_building_footprint_max",
+        "requirement_label_raw": "Total Building Footprint (max.)",
         "requirement_text_raw": "Total Building Footprint (max.) 111.5 m2 combined; however, no individual accessory building shall exceed 79 m2",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "total_building_footprint_max"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "c"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-1-2-a-row-3-total-building-footprint-maximum-1",
@@ -5471,14 +5624,17 @@
       {
         "requirement_id": "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-3-height-maximum",
         "requirement_type": "dimensional_standard",
-        "requirement_category": "other",
-        "requirement_label_raw": "",
+        "requirement_category": "height",
+        "requirement_label_raw": "Height (max.)",
         "requirement_text_raw": "Height (max.) 6.1 m (20 ft)",
         "applicability": {
-          "applies_to_lot_contexts": [
-            "height_max"
-          ],
-          "conditions": []
+          "applies_to_lot_contexts": [],
+          "conditions": [
+            {
+              "condition_type": "table_row_label",
+              "condition_text_raw": "c"
+            }
+          ]
         },
         "numeric_value_refs": [
           "doc-general-provisions-source-num-doc-general-provisions-table-3-1-2-a-row-3-height-maximum-1"
@@ -6841,12 +6997,15 @@
         "group_title_raw": "General Provisions for Buildings & Structures",
         "requirement_refs": [
           "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-1-lot-area",
+          "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-1-accessory-buildings-permitted",
           "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-1-total-building-footprint-maximum",
           "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-1-height-maximum",
           "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-2-lot-area",
+          "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-2-accessory-buildings-permitted",
           "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-2-total-building-footprint-maximum",
           "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-2-height-maximum",
           "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-3-lot-area",
+          "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-3-accessory-buildings-permitted",
           "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-3-total-building-footprint-maximum",
           "doc-general-provisions-source-req-doc-general-provisions-table-3-1-2-a-row-3-height-maximum",
           "doc-general-provisions-source-req-doc-general-provisions-table-3-2-1-row-1-maximum-projection-into-yard",
@@ -7017,45 +7176,5 @@
     ],
     "cross_references": []
   },
-  "review_flags": [
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-1-2-a-row-1-accessory-buildings-permitted",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: One",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-1-2-a-row-1-accessory_buildings_permitted"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-1-2-a-row-2-accessory-buildings-permitted",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Two",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-1-2-a-row-2-accessory_buildings_permitted"
-        }
-      ]
-    },
-    {
-      "review_flag_id": "doc-general-provisions-source-flag-unparsed-table-value-doc-general-provisions-table-3-1-2-a-row-3-accessory-buildings-permitted",
-      "severity": "warning",
-      "blocking": false,
-      "review_type": "numeric_value_review",
-      "description": "Table cell value was preserved but not normalized: Three",
-      "source_refs": [
-        {
-          "source_ref_type": "table_cell",
-          "source_ref_id": "doc-general-provisions-table-3-1-2-a-row-3-accessory_buildings_permitted"
-        }
-      ]
-    }
-  ]
+  "review_flags": []
 }

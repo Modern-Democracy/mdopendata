@@ -56,10 +56,18 @@ UNIT_MAP = {
     "dwelling units": "dwelling_unit",
     "parking space": "parking_space",
     "parking spaces": "parking_space",
+    "space": "parking_space",
+    "spaces": "parking_space",
     "seat": "seat",
     "seats": "seat",
     "room": "room",
     "rooms": "room",
+}
+
+WORD_NUMBER_VALUES = {
+    "one": 1,
+    "two": 2,
+    "three": 3,
 }
 
 UNIT_RE = "|".join(
@@ -4071,8 +4079,14 @@ def grouped_numeric_records(
 
 
 def measurement_source_text(text: str) -> str:
-    return re.sub(
+    text = re.sub(
         r"\b[A-Za-z-]+\s+\((\d+(?:,\d{3})*(?:\.\d+)?)\)\s+(bedrooms?)\b",
+        r"\1 \2",
+        text,
+        flags=re.IGNORECASE,
+    )
+    return re.sub(
+        r"\b(\d+(?:,\d{3})*(?:\.\d+)?)\s+Accessible\s+(parking spaces?)\b",
         r"\1 \2",
         text,
         flags=re.IGNORECASE,
@@ -4080,6 +4094,7 @@ def measurement_source_text(text: str) -> str:
 
 
 GENERAL_PROVISIONS_COLUMN_REQUIREMENT_TABLES = {
+    "doc-general-provisions-table-3-1-2-a",
     "doc-general-provisions-table-3-1-2",
     "doc-general-provisions-table-3-2-1",
     "doc-general-provisions-table-4-1-2-accessory-buildings",
@@ -4091,6 +4106,9 @@ TABLE_DESCRIPTOR_COLUMNS_BY_TABLE = {
     "doc-general-provisions-table-3-6-1": {"feature"},
     "doc-general-provisions-table-4-11-1-c": {"zone_designation"},
 }
+
+TABLE_DESCRIPTOR_COLUMNS = {"use", "zone"}
+TABLE_PROSE_COLUMNS = {"general_provisions"}
 
 
 def row_cell_text(row: dict[str, Any], column_id: str) -> str:
@@ -4104,6 +4122,29 @@ def is_reviewable_non_numeric_cell(table_id_value: str, cell_text: str) -> bool:
     if table_id_value == "doc-general-provisions-table-3-6-1" and normalized in {"yes", "unlimited"}:
         return False
     return bool(cell_text)
+
+
+def word_count_numeric_record(
+    numeric_id: str,
+    context_text: str,
+    source_text: str,
+    ref: dict[str, str],
+    unit: str,
+) -> dict[str, Any] | None:
+    value = WORD_NUMBER_VALUES.get(clean_text(source_text).lower())
+    if value is None:
+        return None
+    return {
+        "numeric_value_id": numeric_id,
+        "value_raw": source_text,
+        "value": value,
+        "unit": unit,
+        "measure_type": measure_type_for_unit(unit, context_text),
+        "comparator": comparator_from_text(context_text),
+        "alternative_values": [],
+        "source_refs": [ref],
+        "confidence": "medium",
+    }
 
 
 def column_requirement_context(table_id_value: str, row: dict[str, Any], column_id: str, column_label: str, cell_text: str) -> str:
@@ -4138,11 +4179,11 @@ def build_numeric_and_requirements(
         table_id_value = table.get("table_id", "")
         if cell["column_id"] in {"row_number", "row_label", "requirement", "condition"}:
             continue
+        if cell["column_id"] in TABLE_DESCRIPTOR_COLUMNS:
+            continue
         if cell["column_id"] in TABLE_DESCRIPTOR_COLUMNS_BY_TABLE.get(table_id_value, set()):
             continue
         if table_id_value in GENERAL_PROVISIONS_COLUMN_REQUIREMENT_TABLES:
-            if cell["column_id"] in {"accessory_buildings_permitted"}:
-                continue
             row_label = column.get("column_label_raw", "")
             condition_text = row_cell_text(row, "row_label")
             context_text = column_requirement_context(
@@ -4161,6 +4202,16 @@ def build_numeric_and_requirements(
                 source_text,
                 source_ref("table_cell", cell["cell_id"]),
             )
+            if not records and cell["column_id"] == "accessory_buildings_permitted":
+                record = word_count_numeric_record(
+                    f"{prefix}-num-{slugify(row['row_id'])}-{slugify(cell['column_id'])}-1",
+                    context_text,
+                    cell["cell_text_raw"],
+                    source_ref("table_cell", cell["cell_id"]),
+                    "building",
+                )
+                if record:
+                    records.append(record)
             numeric_values.extend(records)
             numeric_refs = [record["numeric_value_id"] for record in records]
             if numeric_refs:
@@ -4186,7 +4237,7 @@ def build_numeric_and_requirements(
                         "confidence": "medium",
                     }
                 )
-            elif is_reviewable_non_numeric_cell(table_id_value, cell["cell_text_raw"]):
+            elif cell["column_id"] not in TABLE_PROSE_COLUMNS and is_reviewable_non_numeric_cell(table_id_value, cell["cell_text_raw"]):
                 review_flags.append(
                     make_review_flag(
                         f"{prefix}-flag-unparsed-table-value-{slugify(cell['cell_id'])}",
@@ -4235,7 +4286,7 @@ def build_numeric_and_requirements(
                     "confidence": "medium",
                 }
             )
-        elif is_reviewable_non_numeric_cell(table_id_value, cell["cell_text_raw"]):
+        elif cell["column_id"] not in TABLE_PROSE_COLUMNS and is_reviewable_non_numeric_cell(table_id_value, cell["cell_text_raw"]):
             review_flags.append(
                 make_review_flag(
                     f"{prefix}-flag-unparsed-table-value-{slugify(cell['cell_id'])}",

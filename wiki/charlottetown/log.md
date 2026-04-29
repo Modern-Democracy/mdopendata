@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-29] data-quality | Draft numeric table review closure
+
+Updated the draft extractor and regenerated draft outputs after closing the 41 post-fix `numeric_value_review` flags. Table 3.1 accessory-building word counts now normalize to building counts, accessible parking and bike-space lead values normalize to parking-space counts, and descriptor/prose table cells no longer create false numeric review flags.
+
 ## [2026-04-29] planning | Draft validation rebaseline timeline
 
 Created `plan/charlottetown-draft-zoning-validation-rebaseline-timeline.md` for the post-fix draft validation pass and updated `topics/workstream-context.md` to treat it as the active validation timeline while retaining the prior completed timeline as historical context.
