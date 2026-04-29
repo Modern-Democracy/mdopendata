@@ -54,6 +54,8 @@ UNIT_MAP = {
     "units": "unit",
     "dwelling unit": "dwelling_unit",
     "dwelling units": "dwelling_unit",
+    "accessible parking space": "accessible_parking_space",
+    "accessible parking spaces": "accessible_parking_space",
     "parking space": "parking_space",
     "parking spaces": "parking_space",
     "space": "parking_space",
@@ -3959,7 +3961,18 @@ def measure_type_for_unit(unit: str, text: str) -> str:
         return "length"
     if unit == "percent":
         return "percentage"
-    if unit in {"storey", "bedroom", "building", "dwelling_unit", "unit", "parking_space", "seat", "room", "sign"}:
+    if unit in {
+        "storey",
+        "bedroom",
+        "building",
+        "dwelling_unit",
+        "unit",
+        "parking_space",
+        "accessible_parking_space",
+        "seat",
+        "room",
+        "sign",
+    }:
         return "count"
     return "unknown"
 
@@ -4085,12 +4098,7 @@ def measurement_source_text(text: str) -> str:
         text,
         flags=re.IGNORECASE,
     )
-    return re.sub(
-        r"\b(\d+(?:,\d{3})*(?:\.\d+)?)\s+Accessible\s+(parking spaces?)\b",
-        r"\1 \2",
-        text,
-        flags=re.IGNORECASE,
-    )
+    return text
 
 
 GENERAL_PROVISIONS_COLUMN_REQUIREMENT_TABLES = {

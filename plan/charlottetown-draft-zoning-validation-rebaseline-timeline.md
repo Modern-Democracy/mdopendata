@@ -9,7 +9,7 @@ Supersedes historical validation status in `plan/chalottetown-draft-zoning-timel
 - Active phase: 3
 - Active phase name: Section-Equivalence Review Closure
 - Overall status: In progress
-- Current progress: Phase 2 numeric and table value review is complete. Regenerated draft outputs dated `2026-04-29T13:35:30` validate successfully against `schema/json-schema/charlottetown-bylaw-extraction.schema.json`. Current extraction-output inventory is 0 `review_flags`, 0 structured `confidence: "needs_review"` entries, 0 term new codes, and 0 use new codes. Table 3.1 accessory-building word counts now normalize to `building` counts, accessible parking and bike-space ratio lead values now normalize to `parking_space` counts, and descriptor/prose table cells no longer create numeric review flags when no scalar value is expected. The remaining blocker is the 18 `needs_review` section-equivalence rows in `data/zoning/charlottetown-draft/review/section-equivalence-review.csv`.
+- Current progress: Phase 2 numeric and table value review is complete. Regenerated draft outputs dated `2026-04-29T13:35:30` validate successfully against `schema/json-schema/charlottetown-bylaw-extraction.schema.json`. Current extraction-output inventory is 0 `review_flags`, 0 structured `confidence: "needs_review"` entries, 0 term new codes, and 0 use new codes. Table 3.1 accessory-building word counts now normalize to `building` counts, accessible parking lead values now normalize to `accessible_parking_space` counts, bike-space ratio lead values normalize to `parking_space` counts, and descriptor/prose table cells no longer create numeric review flags when no scalar value is expected. The remaining blocker is the 18 `needs_review` section-equivalence rows in `data/zoning/charlottetown-draft/review/section-equivalence-review.csv`.
 - Last updated: 2026-04-29
 
 ## Phase Timeline
@@ -80,7 +80,7 @@ Result:
 
 - Phase 2 closed all 41 current `numeric_value_review` flags.
 - `data/zoning/charlottetown-draft/general-provisions-buildings-structures.json` now has 0 review flags and includes normalized `building` count records for Table 3.1.2(a) values `One`, `Two`, and `Three`.
-- `data/zoning/charlottetown-draft/general-provisions-parking.json` now has 0 review flags and includes normalized `parking_space` count records for accessible parking and bike parking ratio lead values.
+- `data/zoning/charlottetown-draft/general-provisions-parking.json` now has 0 review flags and includes normalized `accessible_parking_space` count records for accessible parking lead values and `parking_space` count records for bike parking ratio lead values.
 - `data/zoning/charlottetown-draft/general-provisions-signage.json` now has 0 review flags. Zone descriptor cells and prose cells that do not contain scalar numeric values are no longer misclassified as numeric review items; prose cells with parseable measurements remain parsed into numeric values.
 - Regenerated outputs validate against `schema/json-schema/charlottetown-bylaw-extraction.schema.json`.
 
