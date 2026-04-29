@@ -34,3 +34,16 @@ services:
       PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_DEFAULT_PASSWORD:-mdopendata_admin}"
     volumes:
       - ./data/pgadmin:/var/lib/pgadmin
+
+  web:
+    build:
+      context: ./web
+    container_name: mdopendata-web
+    restart: unless-stopped
+    ports:
+      - "${WEB_PORT:-3000}:3000"
+    environment:
+      REPO_ROOT: /workspace
+      PORT: 3000
+    volumes:
+      - ./:/workspace:ro

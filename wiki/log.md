@@ -3,7 +3,7 @@ type: log
 tags:
   - wiki
   - log
-updated: 2026-04-28
+updated: 2026-04-29
 ---
 
 This page is the append-only chronological record for root wiki changes, ingests, substantive queries, and lint passes.
@@ -13,6 +13,10 @@ Append new entries in reverse chronological order. Use this heading format:
 ```text
 ## [YYYY-MM-DD] type | Short title
 ```
+
+## [2026-04-29] implementation | Web UI stack decision
+
+Added `implementation/web-ui-stack.md` documenting the initial Docker-hosted Node web UI stack and first Charlottetown section-equivalence review page.
 
 ## [2026-04-28] maintenance | Wiki-first role workflows
 

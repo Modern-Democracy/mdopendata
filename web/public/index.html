@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Charlottetown Section Equivalence Review</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>Section Equivalence Review</h1>
+        <p>Charlottetown current and draft zoning bylaw review ledger</p>
+      </div>
+      <div class="metrics" id="metrics"></div>
+    </header>
+
+    <main class="workspace">
+      <aside class="sidebar">
+        <div class="filters">
+          <input id="search" type="search" placeholder="Filter by title, label, decision, topic" />
+          <select id="decisionFilter" aria-label="Decision filter">
+            <option value="">All decisions</option>
+          </select>
+        </div>
+        <div class="row-list" id="rowList"></div>
+      </aside>
+
+      <section class="review-panel">
+        <div class="decision-strip" id="decisionStrip"></div>
+        <div class="split-pane">
+          <article class="section-pane" id="currentPane"></article>
+          <article class="section-pane" id="draftPane"></article>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
