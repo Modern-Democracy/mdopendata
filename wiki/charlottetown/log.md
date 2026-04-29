@@ -14,6 +14,14 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-29] data-quality | Section-equivalence review ledger created
+
+Created `data/zoning/charlottetown-draft/review/section-equivalence-review.csv` and backfilled the 35 accepted exact-title `same_topic` section-equivalence decisions from `zoning.section_equivalence`.
+
+## [2026-04-29] data-quality | Section-equivalence manual review started
+
+Started manual review of the 137 `zoning.section_equivalence` candidates. Accepted 35 exact-title `same_topic` matches with text similarity at or above 0.75, leaving 102 candidate rows for continued review.
+
 ## [2026-04-29] implementation | Section-equivalence candidate tuning
 
 Tuned `scripts/generate-charlottetown-section-equivalence.py` against exact-title controls and sampled weak false positives. Repopulated `zoning.section_equivalence` with 137 `title_topic_token_v1` candidate rows: 76 `same_topic`, 26 `renamed_or_restructured`, and 35 `partial_overlap`.
