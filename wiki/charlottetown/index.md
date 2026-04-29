@@ -57,7 +57,7 @@ These source families remain outside the wiki and must be referenced in place:
 
 ## Current Status
 
-The wiki contains a scaffold, targeted draft extraction repair and validation notes, and the active unified zoning ingestion plan. The unified zoning schema and initial JSON importer are implemented, the relational core is populated, and section-equivalence work is the next active milestone.
+The wiki contains a scaffold, targeted draft extraction repair and validation notes, and the active unified zoning ingestion plan. The unified zoning schema and initial JSON importer are implemented, the relational core is populated, and section-equivalence candidate generation has started.
 
 ## Sources
 
