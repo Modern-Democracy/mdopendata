@@ -945,8 +945,8 @@ def repair_charlottetown_draft_general_provisions_tables(data: dict[str, Any]) -
     sections = raw_data.get("sections_raw") or []
     changed = False
 
-    section_2_19 = find_raw_section(sections, "2.19")
     section_3_1 = find_raw_section(sections, "3.1")
+    section_2_19 = find_raw_section(sections, "2.19")
     if section_2_19 and section_3_1:
         moved = []
         moved_ids = {
@@ -969,6 +969,7 @@ def repair_charlottetown_draft_general_provisions_tables(data: dict[str, Any]) -
             resequence_clauses(section_3_1)
             changed = True
 
+    if section_3_1:
         table_id_value = "doc-general-provisions-table-3-1-2-a"
         replace_section_table(
             section_3_1,
@@ -1507,6 +1508,31 @@ def repair_charlottetown_draft_parking_sections(data: dict[str, Any]) -> bool:
             parking_clause("8.12", "3-a", "(a)", "At least 0.45 m apart for a vertical rack or two-tier rack with a lift assist, or", "doc-general-provisions-clause-8-12-3"),
             parking_clause("8.12", "3-b", "(b)", "At least 0.9 m apart for other types of rack.", "doc-general-provisions-clause-8-12-3"),
         ]
+        table_id_value = "doc-general-provisions-table-8-5"
+        section_8_12["tables_raw"] = [
+            {
+                "table_id": table_id_value,
+                "table_title_raw": "Table 8.5 Required Bicycle Parking Spaces by Use",
+                "source_order": 6,
+                "columns_raw": general_provisions_table_columns(
+                    [
+                        ("use", "Use"),
+                        ("bike_parking_requirement", "Bike Parking Requirement"),
+                        ("ratio_of_class_a_and_b", "Ratio of Class A and B"),
+                    ]
+                ),
+                "rows_raw": [
+                    make_labeled_table_row(table_id_value, 1, "", {"use": "Multi-unit Dwelling", "bike_parking_requirement": "1 space per 4 units", "ratio_of_class_a_and_b": "80% class A, 20% class B"}),
+                    make_labeled_table_row(table_id_value, 2, "", {"use": "Hotels", "bike_parking_requirement": "1 space/30 rooms", "ratio_of_class_a_and_b": "50% class A, 50% class B"}),
+                    make_labeled_table_row(table_id_value, 3, "", {"use": "Commercial/Office", "bike_parking_requirement": "1 space/500 m2 GFA", "ratio_of_class_a_and_b": "50% class A, 50% class B"}),
+                    make_labeled_table_row(table_id_value, 4, "", {"use": "Entertainment Establishment", "bike_parking_requirement": "1 space/25 seats", "ratio_of_class_a_and_b": "20% class A, 80% class B"}),
+                    make_labeled_table_row(table_id_value, 5, "", {"use": "Institutional uses", "bike_parking_requirement": "1 space/250 m2 GFA", "ratio_of_class_a_and_b": "100% class B"}),
+                    make_labeled_table_row(table_id_value, 6, "", {"use": "Parking Structure", "bike_parking_requirement": "1 space/20 parking stalls", "ratio_of_class_a_and_b": "100% class B"}),
+                    make_labeled_table_row(table_id_value, 7, "", {"use": "Any other uses", "bike_parking_requirement": "1 space/500 m2 GFA", "ratio_of_class_a_and_b": "50% class A, 50% class B"}),
+                ],
+                "citations": {"pdf_page_start": 74, "pdf_page_end": 74, "bylaw_page_start": 70, "bylaw_page_end": 70},
+            }
+        ]
         section_8_13 = {
             **section_8_12,
             "section_id": "doc-general-provisions-section-8-13",
@@ -1549,6 +1575,33 @@ def repair_charlottetown_draft_parking_sections(data: dict[str, Any]) -> bool:
             resequence_clauses(section)
         changed = True
 
+    section_8_7 = find_raw_section(sections, "8.7")
+    if section_8_7:
+        table_id_value = "doc-general-provisions-table-8-4"
+        replace_section_table(
+            section_8_7,
+            {
+                "table_id": table_id_value,
+                "table_title_raw": "Table 8.4 Accessible Parking Space Requirements",
+                "source_order": 6,
+                "columns_raw": general_provisions_table_columns(
+                    [
+                        ("use", "Use"),
+                        ("minimum_required_spaces", "Minimum Required Spaces"),
+                    ]
+                ),
+                "rows_raw": [
+                    make_labeled_table_row(table_id_value, 1, "", {"use": "Medical, Health and Dental Office", "minimum_required_spaces": "1 Accessible parking space for the first 10 parking spaces required with 1 additional space for each 30 required spaces or part thereof."}),
+                    make_labeled_table_row(table_id_value, 2, "", {"use": "Seniors Care Facilities", "minimum_required_spaces": "1 Accessible parking space per 20 beds."}),
+                    make_labeled_table_row(table_id_value, 3, "", {"use": "Multi-unit Dwellings", "minimum_required_spaces": "1 Accessible parking space for the first 10 units, and one additional space per 30 units."}),
+                    make_labeled_table_row(table_id_value, 4, "", {"use": "Restaurants and Theatres", "minimum_required_spaces": "1 Accessible parking space for the first 10 required parking spaces, and one additional space per 30 required parking spaces."}),
+                    make_labeled_table_row(table_id_value, 5, "", {"use": "All other uses", "minimum_required_spaces": "1 Accessible parking space for the first 10 required parking spaces, and one additional space per 50 required parking spaces."}),
+                ],
+                "citations": {"pdf_page_start": 71, "pdf_page_end": 71, "bylaw_page_start": 67, "bylaw_page_end": 67},
+            },
+        )
+        changed = True
+
     if changed:
         raw_data["tables_raw"] = [
             {"table_id": table["table_id"], "section_id": section["section_id"]}
@@ -1572,6 +1625,12 @@ def repair_charlottetown_draft_signage_sections(data: dict[str, Any]) -> bool:
     section_9_10 = find_raw_section(sections, "9.10")
     section_9_11 = find_raw_section(sections, "9.11")
     section_9_12 = find_raw_section(sections, "9.12")
+    section_9_13 = find_raw_section(sections, "9.13")
+    section_9_14 = find_raw_section(sections, "9.14")
+    section_9_15 = find_raw_section(sections, "9.15")
+    section_9_16 = find_raw_section(sections, "9.16")
+    section_9_17 = find_raw_section(sections, "9.17")
+    section_9_18 = find_raw_section(sections, "9.18")
     if not (section_9_10 and section_9_11 and section_9_12):
         return False
 
@@ -1594,6 +1653,39 @@ def repair_charlottetown_draft_signage_sections(data: dict[str, Any]) -> bool:
         "Supporting structures shall be designed in proportion to the size of the Sign; The owner of a Sign that "
         "extends over a public Right-of-way shall carry liability insurance that names the City as a third party and "
         "provides a minimum coverage of $1,000,000; and Enter into an encroachment agreement with the City."
+    )
+    fascia_general = (
+        "Signs shall be erected on a building wall that abuts a public street. If a Business Premise is located on a "
+        "corner lot, Signs may be erected on each facade of the building adjacent to a street or in the instance of a "
+        "Shopping Centre, Signs may also be erected on one wall that abuts an interior parking lot; Buildings that "
+        "are four stories and higher can also erect signage on the building facade above the fourth floor provided "
+        "they meet all other provisions of the sign bylaw with regard to maximum sign face area permitted on the "
+        "building; Signs shall be erected on a maximum of three building walls, in accordance with Section 10.6.1(d); "
+        "Signs shall not project more than 0.31 m (1 ft) from the wall upon which it is erected; Signs shall not "
+        "extend beyond the extremities of the wall upon which it is erected; Signs erected in the 500 Lot Area or on "
+        "a Heritage Resource shall not exceed 1.21 m (4 ft) in the vertical dimension unless approved by the Heritage "
+        "Committee."
+    )
+    free_standing_general = (
+        "Signs shall have a maximum of two parallel Sign Faces; Signs shall not impede pedestrian or vehicular "
+        "visibility when accessing a lot; Signs shall be setback a minimum of 1 m (3.3 ft) from the property line and "
+        "a building; Signs erected on a corner lot shall be prohibited within the Sight Triangle Area; Signs shall "
+        "have a minimum clearance of 2.2 m (7.2 ft) above open areas and 4 m (13 ft) above a driveway or vehicular "
+        "traffic area; When a Business Premise(s) is located on a corner lot or through lot, one Sign is permitted on "
+        "each of two lot frontages, provided that the second Sign is 50% of the total Sign Area identified in this "
+        "table, and there is a minimum distance of 30.1 m (99 ft) between the Signs."
+    )
+    sandwich_general = (
+        "Signs shall only be displayed when the advertised Business Premise is open; Signs shall not interfere with "
+        "pedestrian or vehicular circulation, or impede pedestrian or vehicular visibility when accessing the lot; "
+        "Signs shall be placed on private property or on the public Right-of-way abutting the subject building, "
+        "excluding the sidewalk, where possible; Where there is insufficient space to satisfy c., the sign may be "
+        "placed on the sidewalk abutting the subject building or the outermost edge of the sidewalk, as long as a "
+        "minimum pathway of 1.5 m (5 ft) exists on the sidewalk; Signs shall display the City's approval sticker "
+        "indicating that said sign has been approved in accordance with this bylaw; When placed on a public "
+        "Right-of-way, the owner of a sign shall carry liability insurance that names the City as a third party and "
+        "provides a minimum coverage of $1,000,000; and Proof of liability insurance shall be provided on an annual "
+        "basis."
     )
 
     def signage_clause(section: dict[str, Any], label: str, text: str) -> dict[str, Any]:
@@ -1716,12 +1808,154 @@ def repair_charlottetown_draft_signage_sections(data: dict[str, Any]) -> bool:
         )
     ]
 
+    if section_9_13:
+        for clause in section_9_13.get("clauses_raw") or []:
+            if clause.get("clause_id") == "doc-general-provisions-clause-9-13-4":
+                clause["clause_text_raw"] = "Fascia signs shall adhere to the following provisions in Table 9.3."
+        section_9_13["tables_raw"] = [
+            signage_table(
+                section_9_13,
+                "9.3",
+                "Table 9.3 Fascia Sign Table",
+                [
+                    ("DN; RM; RH; PPS; POS; C; UE", "Sign Area shall not exceed 0.30 m2 per linear meter of the building wall upon which the Sign is erected.", fascia_general),
+                    ("DC; DMS; DMU; DW", "Sign Area shall not exceed 0.4 m2 per linear meter of the building wall upon which the sign is erected.", fascia_general),
+                    ("EG; GC; GN; I; BP; P; AP; HI", "Sign Area shall not exceed 0.6 m2 per linear meter of the building wall upon which the sign is erected.", fascia_general),
+                ],
+            )
+        ]
+
+    if section_9_14:
+        for clause in section_9_14.get("clauses_raw") or []:
+            if clause.get("clause_id") == "doc-general-provisions-clause-9-14-2":
+                clause["clause_text_raw"] = (
+                    "When a free standing sign shall be used to advertise multiple business premises a Development "
+                    "Officer shall calculate the permitted sign area for the entire property, and the property owner(s) "
+                    "shall determine which usable sign area is allocated to each business premise."
+                )
+            elif clause.get("clause_id") == "doc-general-provisions-clause-9-14-3":
+                clause["clause_text_raw"] = "Free standing signs shall be adhere to the following provisions in Table 9.4:"
+        section_9_14["tables_raw"] = [
+            signage_table(
+                section_9_14,
+                "9.4",
+                "Table 9.4 Free Standing Sign Table",
+                [
+                    ("DC; DMS; DMU; DW", "Sign Area shall not exceed 2.32 m2 (25 ft2) per Sign Face. Signs shall not exceed 2.5 m (8.2 ft) in Height.", free_standing_general),
+                    ("BP; P; AP", "Sign Area shall not exceed 3.72 m2 (25 ft2) per Sign Face. Signs shall not exceed 3.7 m (12.1 ft) in Height.", free_standing_general),
+                    ("PPS; POS", "Sign Area shall not exceed 4.65 m2 (50 ft2) per Sign Face. Signs shall not exceed 3.7m (12.1 ft) in Height.", free_standing_general),
+                    ("GC; EG; I; HI", "Sign Area shall not exceed 9.29 m2 (100 ft2) per Sign Face. Signs shall not exceed 8 m in Height.", free_standing_general),
+                    ("GA", "Shopping Centres: Sign Area shall not exceed 30 m2 (323 ft2) per Sign Face. Signs shall not exceed 9.75 m (32.0 ft) in Height. Non-Shopping Centres: Sign Area shall not exceed 13.9 m2 (150 ft2) per Sign Face. Signs shall not exceed 8 m (26.2 ft) in Height.", free_standing_general),
+                ],
+            )
+        ]
+
+    if section_9_15:
+        section_9_15["clauses_raw"] = [
+            signage_clause(section_9_15, ".1", "Electronic signs shall be incorporated into a free standing sign or be erected on a building wall."),
+            signage_clause(section_9_15, ".2", "Electronic signs shall occupy a portion of the permitted sign area for fascia signs (Section 9.13.4) or free standing signs (Section 9.14.3), as determined by its classification;"),
+            signage_clause(section_9_15, ".3", "Electronic signs shall not be permitted:"),
+            {**signage_clause(section_9_15, "(a)", "In the 500 Lot Area;"), "clause_id": "doc-general-provisions-clause-9-15-3-a", "parent_clause_id": "doc-general-provisions-clause-9-15-3"},
+            {**signage_clause(section_9_15, "(b)", "On a heritage resource; or"), "clause_id": "doc-general-provisions-clause-9-15-3-b", "parent_clause_id": "doc-general-provisions-clause-9-15-3"},
+            {**signage_clause(section_9_15, "(c)", "In a residential zone; and"), "clause_id": "doc-general-provisions-clause-9-15-3-c", "parent_clause_id": "doc-general-provisions-clause-9-15-3"},
+            {**signage_clause(section_9_15, "(d)", "Electronic signs shall adhere to the following provisions, in addition to the provisions for fascia signs or free standing signs, as determined by its classification in Table 9.5:"), "clause_id": "doc-general-provisions-clause-9-15-3-d", "parent_clause_id": "doc-general-provisions-clause-9-15-3"},
+        ]
+        electronic_general_1 = (
+            "One Electronic Sign shall be permitted per property. When the subject property is a corner lot or "
+            "through lot, one Electronic Sign shall be permitted on each of the two lot frontages; Heritage "
+            "Properties are not permitted"
+        )
+        electronic_general_2 = (
+            "Electronic Signs may have two parallel Sign Faces; Electronic Signs shall not be erected within 30.5 m "
+            "(100 ft) of a residential Zone or the Downtown Neighbourhood (DN) Zone; If installed on a Free Standing "
+            "Sign, an Electronic Sign shall not be located within 9.14 m (30 ft) of the outermost portion of an "
+            "intersection roundabout, or interchange. On undersized lots where this figure cannot be satisfied, "
+            "Signs shall instead be erected at the midpoint of the property lot frontage; If installed on a legal "
+            "non-conforming Free Standing Sign, Section 47.4.3 shall apply; Signs shall be equipped with automatic "
+            "dimming technology to automatically adjust Sign brightness in correlation with ambient light "
+            "conditions. Sign brightness shall not be brighter than 0.3 Foot Candles (equivalent to 0.3 lumen per "
+            "ft2 or 3.58 lux) above ambient light conditions; Messages shall have a minimum duration of 10 seconds, "
+            "and shall not include off-premise advertising; The intensity of illumination of a message shall be "
+            "maintained at a constant level throughout the duration of the message; The transition period between "
+            "messages shall be a maximum of 0.25 seconds. The message transition shall not incorporate blinking, "
+            "flashing, scrolling, bouncing, or other moving effects; and Electronic Signs may include static images, "
+            "however, animation, video, or moving images shall be prohibited."
+        )
+        section_9_15["tables_raw"] = [
+            signage_table(
+                section_9_15,
+                "9.5",
+                "Table 9.5 Electronic Sign Table",
+                [
+                    ("DC; DMS; DMU; DW", "Electronic Signs may occupy a maximum of 2.23 m2 (24 ft2) of the permitted Sign Area for Fascia Signs or Free Standing Signs.", electronic_general_1),
+                    ("All other zones except DN and RN", "Electronic Signs may occupy a maximum of 2.79 m2 (30 ft2) of the permitted Sign Area for Fascia Signs or Free Standing Signs.", electronic_general_2),
+                ],
+            )
+        ]
+
+    if section_9_16:
+        section_9_16["clauses_raw"] = [
+            signage_clause(section_9_16, ".1", "Sandwich board signs shall be adhere to the following provisions in Table 9.6:")
+        ]
+        section_9_16["tables_raw"] = [
+            signage_table(
+                section_9_16,
+                "9.6",
+                "Table 9.6 Sandwich Board Sign Table",
+                [
+                    ("DC; DMS; DMU; DW; DN", "Sign Area shall not exceed 0.6 m2 (6.5 ft2) per Sign Face. Signs shall not exceed 1m (3.3 ft) in Height.", sandwich_general),
+                    ("All other zones except RN", "Placed On Public Right-of-way: Sign Area shall not exceed 0.6 m2 (6.5 ft2) per Sign Face. Signs shall not exceed 1 m (3.3 ft) in Height. Placed On Private Property: Sign Area shall not exceed 1.2 m2 (13 ft2) per Sign Face. Signs shall not exceed 1.21 m (4 ft) in Height.", sandwich_general),
+                ],
+            )
+        ]
+
+    if section_9_17:
+        section_9_17["clauses_raw"] = [
+            signage_clause(section_9_17, ".1", "Banners may be permitted on a temporary basis if they adhere to the following provisions in Table 9.7:")
+        ]
+        section_9_17["tables_raw"] = [
+            signage_table(
+                section_9_17,
+                "9.7",
+                "Table 9.7 Temporary Banner Sign Table",
+                [
+                    (
+                        "All Zones",
+                        "Sign Area shall not exceed 1.95 m2 (21 ft2) per Banner face.",
+                        "In the 500 Lot Area, two Banners are permitted per property. In all other areas a maximum of four Banners are permitted per property; Banners shall be securely attached parallel to a building wall, or to a supporting structure(s); Banners shall not extend over a property line, traffic lane, parking space, or an area used for vehicular and pedestrian accessibility; and Banners shall not be erected for more than 30 consecutive days and 60 days within a calendar year.",
+                    ),
+                ],
+            )
+        ]
+
+    if section_9_18:
+        section_9_18["clauses_raw"] = [
+            signage_clause(section_9_18, ".1", "Roof signs may only be permitted on floating structures if they adhere to the following provisions in Table 9.8.")
+        ]
+        section_9_18["tables_raw"] = [
+            signage_table(
+                section_9_18,
+                "9.8",
+                "Table 9.8 Roof Sign Table",
+                [
+                    (
+                        "DW",
+                        "Sign Area shall not exceed 0.30 m2 (3.3 ft2) per linear meter (1.0 ft2 linear foot) of the structure roof upon which the Sign is erected.",
+                        "Only permitted on floating structures; Only one (1) roof sign per structure; Roof signs may be attached to the sloping portions of the roof, with no portion of the sign shall be located above the highest point of the roof surface, such as the top of the gable, hip, gambrel or peak portion of the roof; In instances where a structure has a roof sign that same structure may only have one (1) additional fascia sign, subject to the regulations therein.",
+                    ),
+                ],
+            )
+        ]
+
     raw_data["tables_raw"] = [
         {"table_id": table["table_id"], "section_id": section["section_id"]}
         for section in sections
         for table in section.get("tables_raw") or []
     ]
-    for section in (section_9_10, section_9_11, section_9_12):
+    for section in (section_9_10, section_9_11, section_9_12, section_9_13, section_9_14, section_9_15, section_9_16, section_9_17, section_9_18):
+        if not section:
+            continue
+        resequence_clauses(section)
         rebuild_content_refs({"raw_data": {"sections_raw": [section]}})
     rebuild_clause_refs(data)
     refresh_source_unit_text_from_raw(data)

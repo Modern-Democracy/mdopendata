@@ -51,6 +51,15 @@ This page records durable extraction notes for reported Charlottetown draft zoni
 - Section `9.11` now restores clause `9.11.1` as the awning/canopy table intro and stores Table 9.1 as two rows with columns `Zone`, `Dimensions`, and `General Provisions`; the shared third-column text is duplicated into both rows.
 - Section `9.12` now restores clause `9.12.1` as the projecting-sign table intro and stores Table 9.2 as three rows with columns `Zone`, `Dimensions`, and `General Provisions`; the shared third-column text is duplicated into all three rows.
 
+## 2026-04-29 Draft Table Reference Repair
+
+- Source: `docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf`, bylaw pages 17, 67, 70, and 79 through 84.
+- Extractor: `scripts/extract-charlottetown-zoning-bylaw.py` through `scripts/regenerate-charlottetown-draft-zoning-bylaw.py`.
+- Outputs: `data/zoning/charlottetown-draft/general-provisions-buildings-structures.json`, `data/zoning/charlottetown-draft/general-provisions-parking.json`, and `data/zoning/charlottetown-draft/general-provisions-signage.json`.
+- Regenerated outputs now include missing `tables_raw` entries for Table 3.1, Table 8.4, Table 8.5, and Tables 9.3 through 9.8.
+- Tables 9.3, 9.4, 9.5, and 9.6 duplicate shared `General Provisions` text into each affected row so row-level database queries do not lose the shared source column value.
+- The accepted draft-source label issue is that section `24.4` references `Table 25.1`, but the intended comparison appears to be the unlabeled requirements list in Part 24 section `24.3.2`; this was not normalized as a table repair.
+
 ## 2026-04-29 General Wrapped Section-Title Repair
 
 - Source: `docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf`, two-column section-heading layout across the draft bylaw.
@@ -78,4 +87,4 @@ This page records durable extraction notes for reported Charlottetown draft zoni
 
 ## Open Limits
 
-- This note covers only the named Part 1, Part 2, Part 3, Part 5, Part 6, Part 8, Part 9, RN, RH, general wrapped-section-title, Part source-unit text, and inline numbered-subclause extraction defects verified on 2026-04-24, 2026-04-28, and 2026-04-29.
+- This note covers only the named Part 1, Part 2, Part 3, Part 5, Part 6, Part 8, Part 9, RN, RH, general wrapped-section-title, Part source-unit text, inline numbered-subclause, and table-reference extraction defects verified on 2026-04-24, 2026-04-28, and 2026-04-29.

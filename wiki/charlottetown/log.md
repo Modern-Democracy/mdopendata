@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-04-29] extraction | Draft table reference repair
+
+Updated `topics/draft-layout-repair-notes.md` after restoring missing regenerated `tables_raw` entries for Table 3.1, Table 8.4, Table 8.5, and Tables 9.3 through 9.8 in the Charlottetown draft outputs.
+
 ## [2026-04-29] data-quality | Partial-overlap decisions appended to ledger
 
 Appended manual ledger decisions for all 35 `partial_overlap` section-equivalence candidates to `data/zoning/charlottetown-draft/review/section-equivalence-review.csv` before database updates: 2 accepted, 24 rejected, and 9 marked `needs_review`.
