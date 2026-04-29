@@ -60,6 +60,13 @@ This page records durable extraction notes for reported Charlottetown draft zoni
 - The Part 9 signage repair no longer injects a synthetic `section` clause for `9.10 DEVELOPMENT AGREEMENTS`; regenerated section `9.10` keeps `SIGN PROVISIONS FOR DEVELOPMENT AGREEMENTS` as the section title and `9.10.1` as the first clause.
 - Targeted controls after regeneration confirmed `1.6`, `1.14`, `2.1`, `2.9`, `2.11`, `8.13`, `8.14`, `9.3`, and `9.10` retain merged titles and have no uppercase title fragments stored as `clause_label_raw: "section"` clauses.
 
+## 2026-04-29 Part Source Unit Text Repair
+
+- Source family: regenerated draft JSON outputs under `data/zoning/charlottetown-draft`.
+- Extractor: `scripts/extract-charlottetown-zoning-bylaw.py` through `scripts/regenerate-charlottetown-draft-zoning-bylaw.py`.
+- Part-level `raw_data.source_units` records are structural containers and do not carry `text_raw`; section and clause text remains in `sections_raw`, `clauses_raw`, `tables_raw`, definitions, and page-level schedule records.
+- Regenerated outputs have zero `source_units` with `label_raw` beginning `PART ` and a `text_raw` attribute; Schedule A through D source units still retain `text_raw` because those files preserve page-text map artifacts.
+
 ## Open Limits
 
-- This note covers only the named Part 1, Part 2, Part 3, Part 5, Part 6, Part 8, Part 9, RN, RH, and general wrapped-section-title extraction defects verified on 2026-04-24, 2026-04-28, and 2026-04-29.
+- This note covers only the named Part 1, Part 2, Part 3, Part 5, Part 6, Part 8, Part 9, RN, RH, general wrapped-section-title, and Part source-unit text extraction defects verified on 2026-04-24, 2026-04-28, and 2026-04-29.

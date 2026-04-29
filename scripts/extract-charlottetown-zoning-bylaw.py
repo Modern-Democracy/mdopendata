@@ -824,6 +824,10 @@ def refresh_source_unit_text_from_raw(data: dict[str, Any]) -> None:
     source_units = raw_data.get("source_units") or []
     if not source_units:
         return
+    source_unit = source_units[0]
+    if clean_text(source_unit.get("label_raw")).upper().startswith("PART "):
+        source_unit.pop("text_raw", None)
+        return
     parts = []
     for raw_section in raw_data.get("sections_raw") or []:
         clauses_by_id = {clause.get("clause_id"): clause for clause in raw_section.get("clauses_raw") or []}
@@ -845,7 +849,7 @@ def refresh_source_unit_text_from_raw(data: dict[str, Any]) -> None:
                 parts.append(clause["clause_text_raw"])
         for table in raw_section.get("tables_raw") or []:
             parts.extend(table_rows_text(table))
-    source_units[0]["text_raw"] = "\n".join(parts)
+    source_unit["text_raw"] = "\n".join(parts)
 
 
 def table_row_label_sort_key(label: str | None) -> tuple[int, int | str]:
@@ -4634,11 +4638,6 @@ def transform_zone(normalizer: Normalizer, legacy: dict[str, Any]) -> dict[str, 
                     "source_unit_type": "zone",
                     "label_raw": str(metadata.get("part_label_raw") or ""),
                     "title_raw": zone_title_from_heading(metadata),
-                    "text_raw": "\n".join(
-                        clause["clause_text_raw"]
-                        for section in raw_sections
-                        for clause in section.get("clauses_raw") or []
-                    ),
                     "source_order": 1,
                     "citations": doc_cite,
                 }
@@ -4706,11 +4705,6 @@ def transform_sections_doc(normalizer: Normalizer, legacy: dict[str, Any], docum
                     "source_unit_type": document_type,
                     "label_raw": source.get("section_range_raw") or "",
                     "title_raw": source.get("title_label_raw") or "",
-                    "text_raw": "\n".join(
-                        clause["clause_text_raw"]
-                        for section in raw_sections
-                        for clause in section.get("clauses_raw") or []
-                    ),
                     "source_order": 1,
                     "citations": citation(source),
                 }
@@ -4796,7 +4790,6 @@ def transform_definitions(normalizer: Normalizer, legacy: dict[str, Any]) -> dic
                     "source_unit_type": "definitions",
                     "label_raw": source.get("section_range_raw") or "APPENDIX A",
                     "title_raw": source.get("title_label_raw") or "DEFINITIONS",
-                    "text_raw": "\n".join(f"{item['term_raw']}: {item['definition_text_raw']}" for item in entries_raw),
                     "source_order": 1,
                     "citations": citation(source),
                 }
