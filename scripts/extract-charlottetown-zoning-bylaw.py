@@ -1647,18 +1647,13 @@ def repair_charlottetown_draft_signage_sections(data: dict[str, Any]) -> bool:
         return table
 
     section_9_10["clauses_raw"] = [
-        signage_clause(section_9_10, "section", "DEVELOPMENT AGREEMENTS"),
-        {
-            **signage_clause(
-                section_9_10,
-                ".1",
-                "If the Development Agreement specifically notes any signage requirements that do not meet the "
-                "requirements of this bylaw, the DA shall supersede this bylaw; otherwise these signage requirements "
-                "shall be met.",
-            ),
-            "source_order": 2,
-            "parent_clause_id": "doc-general-provisions-clause-9-10",
-        },
+        signage_clause(
+            section_9_10,
+            ".1",
+            "If the Development Agreement specifically notes any signage requirements that do not meet the "
+            "requirements of this bylaw, the DA shall supersede this bylaw; otherwise these signage requirements "
+            "shall be met.",
+        )
     ]
     section_9_10["tables_raw"] = []
 

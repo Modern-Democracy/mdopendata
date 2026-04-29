@@ -450,11 +450,11 @@ def extract_clean_lines_for_page(reader: PdfReader, pdf_page: int) -> list[str]:
         for row in ordered_rows:
             lines.extend(line.strip() for line in row["text"].splitlines() if line.strip())
         if lines:
-            return _merge_label_lines(lines, merge_wrapped_section_titles=pdf_page in {7, 8, 9, 13, 15})
+            return _merge_label_lines(lines, merge_wrapped_section_titles=True)
     text = clean_text(reader.pages[pdf_page - 1].extract_text() or "")
     return _merge_label_lines(
         [line.strip() for line in text.splitlines() if line.strip()],
-        merge_wrapped_section_titles=pdf_page in {7, 8, 9, 13, 15},
+        merge_wrapped_section_titles=True,
     )
 
 

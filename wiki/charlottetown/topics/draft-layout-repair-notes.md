@@ -51,6 +51,15 @@ This page records durable extraction notes for reported Charlottetown draft zoni
 - Section `9.11` now restores clause `9.11.1` as the awning/canopy table intro and stores Table 9.1 as two rows with columns `Zone`, `Dimensions`, and `General Provisions`; the shared third-column text is duplicated into both rows.
 - Section `9.12` now restores clause `9.12.1` as the projecting-sign table intro and stores Table 9.2 as three rows with columns `Zone`, `Dimensions`, and `General Provisions`; the shared third-column text is duplicated into all three rows.
 
+## 2026-04-29 General Wrapped Section-Title Repair
+
+- Source: `docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf`, two-column section-heading layout across the draft bylaw.
+- Extractors: `scripts/extract-charlottetown-draft-zoning-bylaw.py`, `scripts/extract-charlottetown-zoning-bylaw.py`, and `scripts/regenerate-charlottetown-draft-zoning-bylaw.py`.
+- Output family: `data/zoning/charlottetown-draft`.
+- The draft extractor now applies wrapped uppercase section-title merging on all pages instead of a fixed page allowlist.
+- The Part 9 signage repair no longer injects a synthetic `section` clause for `9.10 DEVELOPMENT AGREEMENTS`; regenerated section `9.10` keeps `SIGN PROVISIONS FOR DEVELOPMENT AGREEMENTS` as the section title and `9.10.1` as the first clause.
+- Targeted controls after regeneration confirmed `1.6`, `1.14`, `2.1`, `2.9`, `2.11`, `8.13`, `8.14`, `9.3`, and `9.10` retain merged titles and have no uppercase title fragments stored as `clause_label_raw: "section"` clauses.
+
 ## Open Limits
 
-- This note covers only the named Part 1, Part 2, Part 3, Part 5, Part 6, Part 8, Part 9, RN, and RH extraction defects verified on 2026-04-24, 2026-04-28, and 2026-04-29.
+- This note covers only the named Part 1, Part 2, Part 3, Part 5, Part 6, Part 8, Part 9, RN, RH, and general wrapped-section-title extraction defects verified on 2026-04-24, 2026-04-28, and 2026-04-29.
