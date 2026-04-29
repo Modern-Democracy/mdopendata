@@ -19,3 +19,18 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
+
+  pgadmin:
+    image: dpage/pgadmin4:8
+    container_name: mdopendata-pgadmin
+    restart: unless-stopped
+    depends_on:
+      postgis:
+        condition: service_healthy
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "${PGADMIN_DEFAULT_EMAIL:-admin@mdopendata.local}"
+      PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_DEFAULT_PASSWORD:-mdopendata_admin}"
+    volumes:
+      - ./data/pgadmin:/var/lib/pgadmin

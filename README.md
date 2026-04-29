@@ -64,6 +64,15 @@ The repository includes a starter schema at [schema/sql/postgis.sql](/D:/opendat
 The repository includes a local PostGIS Docker service:
 
 - Docker service: [docker-compose.yml](/D:/opendata/mdopendata/docker-compose.yml)
+- pgAdmin: http://localhost:5050 by default, using `PGADMIN_DEFAULT_EMAIL` and `PGADMIN_DEFAULT_PASSWORD` from `.env`
+
+Start the database and pgAdmin with:
+
+```powershell
+docker compose up -d
+```
+
+In pgAdmin, connect to the database with host `postgis`, port `5432`, and the `PGDATABASE`, `PGUSER`, and `PGPASSWORD` values from `.env`.
 
 Use read-only database inspection where possible. Load data through PostgreSQL tools or repository ingestion scripts.
 
