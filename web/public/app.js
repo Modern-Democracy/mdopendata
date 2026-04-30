@@ -38,7 +38,13 @@ function renderMetrics() {
 }
 
 function populateDecisionFilter() {
-  const decisions = [...new Set(state.rows.map((row) => row.review_decision).filter(Boolean))].sort();
+  const preferredDecisions = ["needs_review", "accepted", "rejected"];
+  const decisions = [
+    ...preferredDecisions,
+    ...[...new Set(state.rows.map((row) => row.review_decision).filter(Boolean))]
+      .filter((decision) => !preferredDecisions.includes(decision))
+      .sort(),
+  ];
   decisionFilter.innerHTML = '<option value="">All decisions</option>';
   for (const decision of decisions) {
     const option = document.createElement("option");
@@ -67,6 +73,13 @@ function filterRows() {
     return (!decision || row.review_decision === decision) && (!query || haystack.includes(query));
   });
   renderRowList();
+}
+
+function syncRows(rows) {
+  state.rows = rows;
+  renderMetrics();
+  populateDecisionFilter();
+  filterRows();
 }
 
 function renderRowList() {
@@ -103,8 +116,15 @@ function renderDecision(row) {
       <div class="field"><span>Title similarity</span><strong>${valueOrDash(row.title_similarity)}</strong></div>
       <div class="field"><span>Text similarity</span><strong>${valueOrDash(row.text_similarity)}</strong></div>
     </div>
+    <div class="review-actions">
+      <button class="decision-button accept" type="button" data-decision="accepted">Approve</button>
+      <button class="decision-button reject" type="button" data-decision="rejected">Reject</button>
+    </div>
     <p class="notes">${valueOrDash(row.reviewer_notes)}</p>
   `;
+  for (const button of decisionStrip.querySelectorAll("[data-decision]")) {
+    button.addEventListener("click", () => saveDecision(row, button.dataset.decision));
+  }
 }
 
 function renderPane(element, label, section) {
@@ -169,14 +189,29 @@ async function loadDetail(rowIndex) {
   renderPane(draftPane, "Draft", detail.draftSection);
 }
 
+async function saveDecision(row, decision) {
+  const response = await fetch(`/api/section-equivalence/${row.section_equivalence_id}/decision`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ decision }),
+  });
+  if (!response.ok) {
+    const payload = await response.json().catch(() => ({}));
+    throw new Error(payload.error || `Unable to save ${decision} decision`);
+  }
+  const detail = await response.json();
+  syncRows(detail.rows);
+  state.activeIndex = detail.row.row_index;
+  renderRowList();
+  renderDecision(detail.row);
+  renderPane(currentPane, "Current", detail.currentSection);
+  renderPane(draftPane, "Draft", detail.draftSection);
+}
+
 async function init() {
   const response = await fetch("/api/section-equivalence");
   const payload = await response.json();
-  state.rows = payload.rows;
-  state.filteredRows = payload.rows;
-  renderMetrics();
-  populateDecisionFilter();
-  filterRows();
+  syncRows(payload.rows);
   if (state.filteredRows.length > 0) {
     await loadDetail(state.filteredRows[0].row_index);
   }

@@ -187,6 +187,37 @@ select {
   line-height: 1.45;
 }
 
+.review-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.decision-button {
+  border: 1px solid #9c9c91;
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.decision-button.accept {
+  background: #2f6f4e;
+  border-color: #2f6f4e;
+}
+
+.decision-button.reject {
+  background: #8b3434;
+  border-color: #8b3434;
+}
+
+.decision-button:hover {
+  filter: brightness(0.94);
+}
+
 .split-pane {
   display: grid;
   grid-template-columns: 1fr 1fr;

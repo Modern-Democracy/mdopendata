@@ -29,10 +29,11 @@ function toJsonValue(value) {
 }
 
 function reviewDecision(row) {
-  if (row.review_status === "accepted") {
+  const status = row.db_review_status || row.review_status;
+  if (status === "accepted") {
     return "accepted";
   }
-  if (row.review_status === "rejected") {
+  if (status === "rejected") {
     return "rejected";
   }
   return "needs_review";
@@ -68,6 +69,15 @@ function mapReviewRow(row, index) {
     reviewer_notes: toStringValue(row.reviewer_notes),
     updated_at: toStringValue(row.updated_at),
   };
+}
+
+async function readRequestJson(request) {
+  const chunks = [];
+  for await (const chunk of request) {
+    chunks.push(chunk);
+  }
+  const body = Buffer.concat(chunks).toString("utf8").trim();
+  return body ? JSON.parse(body) : {};
 }
 
 async function loadReviewRows() {
@@ -106,6 +116,41 @@ async function loadReviewRows() {
   return rows.map(mapReviewRow);
 }
 
+async function updateReviewDecision(sectionEquivalenceId, decision) {
+  if (!["accepted", "rejected"].includes(decision)) {
+    const error = new Error("Decision must be accepted or rejected.");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  const accepted = decision === "accepted";
+  const { rows } = await pool.query(
+    `
+    UPDATE zoning.section_equivalence
+    SET review_status = $2,
+        equivalence_type = CASE WHEN $2 = 'rejected' THEN 'not_equivalent' ELSE equivalence_type END,
+        reviewer_notes = concat_ws(
+          E'\n',
+          nullif(reviewer_notes, ''),
+          $3::text
+        ),
+        updated_at = now()
+    WHERE section_equivalence_id = $1
+    RETURNING section_equivalence_id
+    `,
+    [
+      sectionEquivalenceId,
+      accepted ? "accepted" : "rejected",
+      `Web review ${new Date().toISOString()}: ${decision}.`,
+    ],
+  );
+  if (rows.length === 0) {
+    const error = new Error("Review row not found.");
+    error.statusCode = 404;
+    throw error;
+  }
+}
+
 async function loadSection(sectionId) {
   const sectionResult = await pool.query(
     `
@@ -114,6 +159,7 @@ async function loadSection(sectionId) {
       s.section_source_id,
       s.section_label_raw,
       s.section_title_raw,
+      s.natural_key,
       s.citations,
       sf.repo_relpath
     FROM zoning.section s
@@ -153,11 +199,11 @@ async function loadSection(sectionId) {
       LEFT JOIN zoning.raw_table_cell rtc
         ON rtc.raw_table_id = rt.raw_table_id
        AND rtc.is_active
-      WHERE rt.section_id = $1
+      WHERE (rt.section_id = $1 OR rt.natural_key LIKE $2 || '|table|%')
         AND rt.is_active
       ORDER BY rt.source_order, rt.raw_table_id, rtc.row_order, rtc.column_order
       `,
-      [sectionId],
+      [sectionId, section.natural_key],
     ),
   ]);
 
@@ -268,6 +314,33 @@ const server = createServer(async (request, response) => {
       return;
     }
 
+    const decisionMatch = url.pathname.match(/^\/api\/section-equivalence\/(\d+)\/decision$/);
+    if (decisionMatch && request.method === "POST") {
+      const sectionEquivalenceId = Number(decisionMatch[1]);
+      const body = await readRequestJson(request);
+      await updateReviewDecision(sectionEquivalenceId, body.decision);
+      const rows = await loadReviewRows();
+      const row = rows.find(
+        (candidate) => Number(candidate.section_equivalence_id) === sectionEquivalenceId,
+      );
+      if (!row) {
+        response.writeHead(404);
+        response.end("Review row not found");
+        return;
+      }
+      const [currentSection, draftSection] = await Promise.all([
+        loadSection(row.current_section_id),
+        loadSection(row.draft_section_id),
+      ]);
+      await sendJson(response, {
+        row,
+        rows: summarizeRows(rows),
+        currentSection,
+        draftSection,
+      });
+      return;
+    }
+
     if (url.pathname.startsWith("/api/section-equivalence/")) {
       const rowIndex = Number(url.pathname.split("/").at(-1));
       const rows = await loadReviewRows();
@@ -287,7 +360,7 @@ const server = createServer(async (request, response) => {
 
     await serveStatic(response, url.pathname);
   } catch (error) {
-    response.writeHead(500, { "content-type": "application/json; charset=utf-8" });
+    response.writeHead(error.statusCode || 500, { "content-type": "application/json; charset=utf-8" });
     response.end(JSON.stringify({ error: error.message }));
   }
 });
