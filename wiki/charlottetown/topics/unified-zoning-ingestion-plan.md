@@ -105,6 +105,7 @@ The first section-topic vocabulary is owned by the `zoning` schema seed data, no
 Only these live spatial layers are in scope for first ingestion:
 
 - `CHTWN_Draft_Zoning_Boundaries`
+- `CHTWN_Civic_Addresses`
 - `CHTWN_Parcel_Map`
 - `CHTWN_Street_Network`
 - `CHTWN_Zoning_Boundaries`
