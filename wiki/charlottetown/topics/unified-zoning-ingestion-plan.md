@@ -6,7 +6,7 @@ tags:
   - ingestion
   - database
   - spatial
-updated: 2026-04-29
+updated: 2026-04-30
 ---
 
 This page records the active plan and implementation status for unified relational and spatial ingestion of the Charlottetown current and draft zoning bylaws.
@@ -23,8 +23,8 @@ The `zoning` schema migration and initial Charlottetown importer have now been i
 - Importer: `scripts/import-charlottetown-zoning.py`.
 - Database schema: the `zoning` schema contains the planned relational, source reconstruction, comparison, coverage-gap, manual-correction, spatial-linkage, and topic tables.
 - Database population: current and draft bylaw records have been imported into the relational core tables. A database check on 2026-04-29 found populated document, source, section, clause, definition, raw table, raw map-reference, and structured-fact tables, with completed import batches for both current and draft inputs.
-- Section-equivalence candidate generation has been reopened after QA found accepted mismatches and blank-side comparisons in the prior reviewed set. `scripts/generate-charlottetown-section-equivalence.py` now compares clause text plus linked table-cell text and supports an explicit reset rerun. On 2026-04-29, the prior 137 reviewed `title_topic_token_v1` rows were reset and replaced with 139 regenerated `candidate` rows; QA found 0 accepted rows and 0 blank-side candidate rows after the rerun.
-- Not yet populated: coverage-gap, spatial layer, spatial feature, zone-spatial-feature, and spatial-reference records.
+- Section-equivalence candidate generation was reopened after QA found accepted mismatches and blank-side comparisons in the prior reviewed set. `scripts/generate-charlottetown-section-equivalence.py` now compares clause text plus linked table-cell text and supports an explicit reset rerun. On 2026-04-29, the prior 137 reviewed `title_topic_token_v1` rows were reset and replaced with 139 regenerated candidates. Web-app review decisions were applied to the database; a 2026-04-30 check found 83 accepted rows, 56 rejected `not_equivalent` rows, 0 `candidate` rows, 0 `needs_review` rows, and 0 accepted blank-side rows.
+- Not yet populated: coverage-gap, spatial layer, spatial feature, zone-spatial-feature, and spatial-reference records. The seeded zone-code crosswalk table contains 8 active mappings for Phase 4.
 
 The database target is a relational-core `zoning` schema. The importer must not store full source-file JSON blobs, top-level aggregate `text_raw` values, `review_flags`, or any `confidence` attributes. Raw text remains in scope only at reconstructable clause, table, page, map-reference, and source-unit granularity.
 
@@ -133,8 +133,8 @@ Vectors are for semantic retrieval, candidate section equivalence, draft update 
 
 1. Complete: design and create the `zoning` schema, import-batch model, document-revision model, coverage-gap table, and section-topic vocabulary.
 2. Complete: build initial JSON ingestion for current and draft records, excluding process fields and preserving granular raw reconstruction records.
-3. Active: review and apply the regenerated section-equivalence candidate set for comparable current and draft bylaw sections.
-4. Pending: register and validate the approved spatial layers, resolve code mismatches, and link spatial features to zones and map references.
+3. Complete: review and apply the regenerated section-equivalence candidate set for comparable current and draft bylaw sections.
+4. Active: register and validate the approved spatial layers, resolve code mismatches, and link spatial features to zones and map references.
 5. Pending: add text-vector support after relational IDs and comparison records are stable.
 6. Pending: normalize and ingest deferred current-bylaw chapters and appendices, then re-run equivalence and comparison outputs.
 

@@ -3,7 +3,7 @@ type: log
 tags:
   - charlottetown
   - log
-updated: 2026-04-29
+updated: 2026-04-30
 ---
 
 Append new entries in reverse chronological order. Use headings in this format:
@@ -13,6 +13,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ```text
 ## [YYYY-MM-DD] type | Short title
 ```
+
+## [2026-04-30] planning | Unified ingestion Phase 4 activation
+
+Closed Phase 3 in `plan/charlottetown-unified-zoning-ingestion-timeline.md` after database verification found 83 accepted section-equivalence rows, 56 rejected `not_equivalent` rows, 0 `candidate` rows, 0 `needs_review` rows, and 0 accepted blank-side comparisons. Marked Phase 4 spatial registration and linkage active, recorded that spatial layer/link/reference tables are still empty, and noted the seeded 8-row zone-code crosswalk baseline.
 
 ## [2026-04-29] data-engineering | Section-equivalence rerun
 
