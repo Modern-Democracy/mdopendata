@@ -20,6 +20,7 @@
       <category render="true" symbol="15" value="MH" label="MH - Manufactured Housing"/>
       <category render="true" symbol="16" value="MHR" label="MHR - Manufactured Housing Residential"/>
       <category render="true" symbol="17" value="MUC" label="MUC - Mixed-Use Corridor"/>
+      <category render="true" symbol="38" value="MUVC" label="MUVC - Mixed-Use Village Centre"/>
       <category render="true" symbol="18" value="MUR" label="MUR - Mixed-Use Residential"/>
       <category render="true" symbol="19" value="ERMUVC" label="ERMUVC - East Royalty Mixed-Use Village Centre"/>
       <category render="true" symbol="20" value="NA" label="NA - Zoning Not Assigned"/>
@@ -109,6 +110,7 @@
       </symbol>
       <symbol name="36" type="fill" alpha="1"><layer class="SimpleFill" enabled="1"><Option type="Map"><Option name="color" type="QString" value="203,241,253,255"/><Option name="style" type="QString" value="solid"/></Option></layer></symbol>
       <symbol name="37" type="fill" alpha="1"><layer class="SimpleFill" enabled="1"><Option type="Map"><Option name="color" type="QString" value="59,114,175,255"/><Option name="style" type="QString" value="solid"/></Option></layer></symbol>
+      <symbol name="38" type="fill" alpha="1"><layer class="SimpleFill" enabled="1"><Option type="Map"><Option name="color" type="QString" value="199,146,184,255"/><Option name="style" type="QString" value="solid"/></Option></layer></symbol>
     </symbols>
   </renderer-v2>
 </qgis>
