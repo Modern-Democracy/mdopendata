@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use this heading format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-05-01] implementation | Web demo phase 3
+
+Implemented phase 3 of the web demo design-kit plan by adding bbox-filtered GeoJSON APIs for parcel candidates, current zoning boundaries, and draft zoning boundaries in `web/server.js`. Updated [Web demo design kit plan](./implementation/web-demo-design-kit-plan.md) with endpoint behavior, source SRID handling, and feature limits.
+
 ## [2026-05-01] implementation | Web demo phase 2
 
 Implemented phase 2 of the web demo design-kit plan by adding civic address autocomplete and PID-based parcel resolution APIs in `web/server.js`. Updated [Web demo design kit plan](./implementation/web-demo-design-kit-plan.md) with the completed phase status and the provisional parcel identity constraint.

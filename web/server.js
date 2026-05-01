@@ -41,6 +41,31 @@ function normalizeLimit(value, fallback, max) {
   return Math.min(Math.trunc(parsed), max);
 }
 
+function parseBbox(value) {
+  if (!value) {
+    return null;
+  }
+  const parts = value.split(",").map((part) => Number(part.trim()));
+  if (parts.length !== 4 || parts.some((part) => !Number.isFinite(part))) {
+    const error = new Error("bbox must be west,south,east,north.");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  const [west, south, east, north] = parts;
+  if (west >= east || south >= north) {
+    const error = new Error("bbox west/south must be less than east/north.");
+    error.statusCode = 400;
+    throw error;
+  }
+  if (west < -180 || east > 180 || south < -90 || north > 90) {
+    const error = new Error("bbox coordinates must be WGS84 longitude/latitude values.");
+    error.statusCode = 400;
+    throw error;
+  }
+  return { west, south, east, north };
+}
+
 function reviewDecision(row) {
   const status = row.db_review_status || row.review_status;
   if (status === "accepted") {
@@ -292,6 +317,11 @@ async function sendJson(response, payload) {
   response.end(JSON.stringify(payload));
 }
 
+async function sendGeoJson(response, payload) {
+  response.writeHead(200, { "content-type": "application/geo+json; charset=utf-8" });
+  response.end(JSON.stringify(payload));
+}
+
 function mapAddressRow(row) {
   return {
     addressId: toStringValue(row.address_id),
@@ -333,6 +363,227 @@ function mapZoneRow(row) {
       matchMethod: compactText(row.match_method),
       isValid: row.is_valid,
       validationReason: row.validation_reason,
+    },
+  };
+}
+
+async function loadParcelGeoJson(bbox, limit) {
+  const params = [limit];
+  let bboxFilter = "";
+  if (bbox) {
+    params.push(bbox.west, bbox.south, bbox.east, bbox.north);
+    bboxFilter = `
+      WHERE p.geom && ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954)
+        AND ST_Intersects(p.geom, ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954))
+    `;
+  }
+
+  const { rows } = await pool.query(
+    `
+    WITH selected AS (
+      SELECT
+        p.spatial_feature_id,
+        p.feature_key,
+        p.attributes,
+        p.is_valid,
+        p.validation_reason,
+        ST_Area(p.geom) AS area_m2,
+        p.geom
+      FROM zoning.v_charlottetown_parcel_map p
+      ${bboxFilter}
+      ORDER BY p.spatial_feature_id
+      LIMIT $1
+    ),
+    features AS (
+      SELECT jsonb_build_object(
+        'type', 'Feature',
+        'id', feature_key,
+        'geometry', ST_AsGeoJSON(ST_Transform(geom, 4326))::jsonb,
+        'properties', jsonb_build_object(
+          'parcelId', feature_key,
+          'areaM2', area_m2,
+          'attributes', attributes,
+          'source', jsonb_build_object(
+            'table', 'zoning.v_charlottetown_parcel_map',
+            'spatialFeatureId', spatial_feature_id,
+            'featureKey', feature_key,
+            'isValid', is_valid,
+            'validationReason', validation_reason
+          )
+        )
+      ) AS feature
+      FROM selected
+    )
+    SELECT COALESCE(jsonb_agg(feature), '[]'::jsonb) AS features
+    FROM features
+    `,
+    params,
+  );
+
+  return {
+    type: "FeatureCollection",
+    features: rows[0].features,
+    metadata: {
+      source: "zoning.v_charlottetown_parcel_map",
+      bbox,
+      limit,
+      count: rows[0].features.length,
+      geometrySrid: 4326,
+      sourceSrid: 2954,
+    },
+  };
+}
+
+async function loadCurrentZoningGeoJson(bbox, limit) {
+  const params = [limit];
+  let bboxFilter = "";
+  if (bbox) {
+    params.push(bbox.west, bbox.south, bbox.east, bbox.north);
+    bboxFilter = `
+      WHERE z.geom && ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954)
+        AND ST_Intersects(z.geom, ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954))
+    `;
+  }
+
+  const { rows } = await pool.query(
+    `
+    WITH selected AS (
+      SELECT
+        z.spatial_feature_id,
+        z.feature_key,
+        z."ZONING",
+        z.zone_code_raw,
+        z.zone_code_normalized,
+        z.bylaw_zone_code,
+        z.match_method,
+        z.attributes,
+        z.is_valid,
+        z.validation_reason,
+        ST_Area(z.geom) AS area_m2,
+        z.geom
+      FROM zoning.v_charlottetown_current_zoning_boundaries z
+      ${bboxFilter}
+      ORDER BY z.spatial_feature_id
+      LIMIT $1
+    ),
+    features AS (
+      SELECT jsonb_build_object(
+        'type', 'Feature',
+        'id', feature_key,
+        'geometry', ST_AsGeoJSON(ST_Transform(geom, 4326))::jsonb,
+        'properties', jsonb_build_object(
+          'zoneCode', COALESCE(bylaw_zone_code, zone_code_normalized, zone_code_raw, "ZONING"),
+          'zoneCodeRaw', zone_code_raw,
+          'zoneCodeNormalized', zone_code_normalized,
+          'bylawZoneCode', bylaw_zone_code,
+          'matchMethod', match_method,
+          'areaM2', area_m2,
+          'attributes', attributes,
+          'source', jsonb_build_object(
+            'table', 'zoning.v_charlottetown_current_zoning_boundaries',
+            'spatialFeatureId', spatial_feature_id,
+            'featureKey', feature_key,
+            'isValid', is_valid,
+            'validationReason', validation_reason
+          )
+        )
+      ) AS feature
+      FROM selected
+    )
+    SELECT COALESCE(jsonb_agg(feature), '[]'::jsonb) AS features
+    FROM features
+    `,
+    params,
+  );
+
+  return {
+    type: "FeatureCollection",
+    features: rows[0].features,
+    metadata: {
+      source: "zoning.v_charlottetown_current_zoning_boundaries",
+      bbox,
+      limit,
+      count: rows[0].features.length,
+      geometrySrid: 4326,
+      sourceSrid: 2954,
+    },
+  };
+}
+
+async function loadDraftZoningGeoJson(bbox, limit) {
+  const params = [limit];
+  let bboxFilter = "";
+  if (bbox) {
+    params.push(bbox.west, bbox.south, bbox.east, bbox.north);
+    bboxFilter = `
+      WHERE z.geom && ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954)
+        AND ST_Intersects(z.geom, ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954))
+    `;
+  }
+
+  const { rows } = await pool.query(
+    `
+    WITH selected AS (
+      SELECT
+        z.spatial_feature_id,
+        z.feature_key,
+        z.zone_code,
+        z.zone_name,
+        z.zone_code_raw,
+        z.zone_code_normalized,
+        z.bylaw_zone_code,
+        z.match_method,
+        z.attributes,
+        z.is_valid,
+        z.validation_reason,
+        ST_Area(z.geom) AS area_m2,
+        z.geom
+      FROM zoning.v_charlottetown_draft_zoning_boundaries z
+      ${bboxFilter}
+      ORDER BY z.spatial_feature_id
+      LIMIT $1
+    ),
+    features AS (
+      SELECT jsonb_build_object(
+        'type', 'Feature',
+        'id', feature_key,
+        'geometry', ST_AsGeoJSON(ST_Transform(geom, 4326))::jsonb,
+        'properties', jsonb_build_object(
+          'zoneCode', COALESCE(bylaw_zone_code, zone_code_normalized, zone_code_raw, zone_code),
+          'zoneName', zone_name,
+          'zoneCodeRaw', zone_code_raw,
+          'zoneCodeNormalized', zone_code_normalized,
+          'bylawZoneCode', bylaw_zone_code,
+          'matchMethod', match_method,
+          'areaM2', area_m2,
+          'attributes', attributes,
+          'source', jsonb_build_object(
+            'table', 'zoning.v_charlottetown_draft_zoning_boundaries',
+            'spatialFeatureId', spatial_feature_id,
+            'featureKey', feature_key,
+            'isValid', is_valid,
+            'validationReason', validation_reason
+          )
+        )
+      ) AS feature
+      FROM selected
+    )
+    SELECT COALESCE(jsonb_agg(feature), '[]'::jsonb) AS features
+    FROM features
+    `,
+    params,
+  );
+
+  return {
+    type: "FeatureCollection",
+    features: rows[0].features,
+    metadata: {
+      source: "zoning.v_charlottetown_draft_zoning_boundaries",
+      bbox,
+      limit,
+      count: rows[0].features.length,
+      geometrySrid: 4326,
+      sourceSrid: 2954,
     },
   };
 }
@@ -658,6 +909,42 @@ const server = createServer(async (request, response) => {
         query: query.trim(),
         rows,
       });
+      return;
+    }
+
+    if (url.pathname === "/api/parcels.geojson") {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const bbox = parseBbox(url.searchParams.get("bbox"));
+      const limit = normalizeLimit(url.searchParams.get("limit"), 1000, 5000);
+      await sendGeoJson(response, await loadParcelGeoJson(bbox, limit));
+      return;
+    }
+
+    if (url.pathname === "/api/zoning/current.geojson") {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const bbox = parseBbox(url.searchParams.get("bbox"));
+      const limit = normalizeLimit(url.searchParams.get("limit"), 1000, 5000);
+      await sendGeoJson(response, await loadCurrentZoningGeoJson(bbox, limit));
+      return;
+    }
+
+    if (url.pathname === "/api/zoning/draft.geojson") {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const bbox = parseBbox(url.searchParams.get("bbox"));
+      const limit = normalizeLimit(url.searchParams.get("limit"), 1000, 5000);
+      await sendGeoJson(response, await loadDraftZoningGeoJson(bbox, limit));
       return;
     }
 

@@ -97,7 +97,7 @@ Recommended routes:
 | --- | --- | --- | --- |
 | 1. Inventory and routing | Complete | 0.5 day | Route map, kit asset inventory, chosen logo asset, and static page entry points. |
 | 2. Address and parcel APIs | Complete | 1 day | `/api/addresses`, `/api/parcels/:pid`, selected parcel geometry, and address-to-parcel resolution. |
-| 3. Map data APIs | Not started | 1 to 1.5 days | GeoJSON endpoints for parcels, current zoning, draft zoning, and bbox filtering. |
+| 3. Map data APIs | Complete | 1 to 1.5 days | GeoJSON endpoints for parcels, current zoning, draft zoning, and bbox filtering. |
 | 4. Parcel lookup page | Not started | 0.5 to 1 day | Landing page wired to autocomplete and redirect behavior. |
 | 5. Parcel map explorer | Not started | 1 to 1.5 days | Leaflet parcel-centered map, layer controls, selected parcel panel, and comparison redirect. |
 | 6. City-view map | Not started | 0.5 to 1 day | Browse-first Leaflet map with viewport loading and parcel click selection. |
@@ -138,6 +138,18 @@ The web server now exposes the first parcel demo APIs:
 - `/api/parcels/:pid` resolves PID through the civic address layer, finds the containing current parcel candidate polygon, returns WGS84 selected parcel geometry, centroid, current zone, draft zone, and explicit resolution/source status.
 
 Parcel identity remains provisional because `zoning.v_charlottetown_parcel_map` does not expose native PID fields. The API reports `parcelPidNative: false` and uses `address_pid_to_point_in_parcel` when a civic address point resolves to a containing parcel polygon.
+
+## Phase 3 Progress
+
+Completed on 2026-05-01.
+
+The web server now exposes viewport-oriented GeoJSON APIs:
+
+- `/api/parcels.geojson?bbox=west,south,east,north&limit=N` returns parcel candidate polygons from `zoning.v_charlottetown_parcel_map`.
+- `/api/zoning/current.geojson?bbox=west,south,east,north&limit=N` returns current zoning polygons from `zoning.v_charlottetown_current_zoning_boundaries`.
+- `/api/zoning/draft.geojson?bbox=west,south,east,north&limit=N` returns draft zoning polygons from `zoning.v_charlottetown_draft_zoning_boundaries`.
+
+All three endpoints accept WGS84 bboxes, transform the envelope to source SRID 2954 for filtering, and return WGS84 GeoJSON FeatureCollections with source metadata. The default feature limit is 1000 and the maximum accepted limit is 5000.
 
 ## Risks and Open Decisions
 
