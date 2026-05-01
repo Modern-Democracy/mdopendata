@@ -13,7 +13,7 @@
 <body>
 <div id="root"></div>
 <script type="text/babel">
-const { useState, useEffect } = React;
+const { useState, useEffect, useRef } = React;
 
 const EXAMPLES = [
   { addr: "165 Richmond Street", pid: "384712", zone: "R-1L", zoneName: "Single-detached residential", zoneColor: "var(--zone-residential)", ward: "Ward 2 — Brighton", area: "0.08 ha" },
@@ -43,30 +43,150 @@ const USES = [
 function Header({ onHome }) {
   return (
     <header className="app-header">
-      <img src="../../assets/logo-wordmark.svg" alt="Modern Democracy" className="wm" style={{cursor:'pointer'}} onClick={onHome} />
+      <img src="../../assets/logo-island-needle.svg" alt="Modern Democracy" className="wm" style={{cursor:'pointer'}} onClick={onHome} />
       <nav>
-        <a className="active">Parcel lookup</a>
-        <a>Compare bylaws</a>
-        <a>Map</a>
+        <a className="active" href="/parcel-lookup">Parcel lookup</a>
+        <a href="/zoning-comparison">Compare bylaws</a>
+        <a href="/city-view">Map</a>
         <a>About</a>
       </nav>
     </header>
   );
 }
 
-function SearchHero({ onSearch }) {
+function SearchHero({ onSelect }) {
   const [q, setQ] = useState("");
+  const [rows, setRows] = useState([]);
+  const [status, setStatus] = useState("idle");
+  const [error, setError] = useState("");
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const abortRef = useRef(null);
+
+  useEffect(() => {
+    const query = q.trim();
+    setActiveIndex(-1);
+    if (abortRef.current) {
+      abortRef.current.abort();
+    }
+    if (query.length < 2) {
+      setRows([]);
+      setStatus("idle");
+      setError("");
+      return;
+    }
+
+    const controller = new AbortController();
+    abortRef.current = controller;
+    setStatus("loading");
+    setError("");
+    const timer = window.setTimeout(async () => {
+      try {
+        const response = await fetch(`/api/addresses?q=${encodeURIComponent(query)}&limit=8`, {
+          signal: controller.signal,
+        });
+        if (!response.ok) {
+          throw new Error(`Address search failed with HTTP ${response.status}.`);
+        }
+        const payload = await response.json();
+        const matches = payload.rows || [];
+        setRows(matches);
+        setStatus(matches.length === 0 ? "empty" : "ready");
+      } catch (err) {
+        if (err.name === "AbortError") {
+          return;
+        }
+        setRows([]);
+        setStatus("error");
+        setError(err.message || "Address search failed.");
+      }
+    }, 220);
+
+    return () => {
+      window.clearTimeout(timer);
+      controller.abort();
+    };
+  }, [q]);
+
+  const selectRow = (row) => {
+    if (!row?.pid) {
+      setStatus("error");
+      setError("Selected address has no PID.");
+      return;
+    }
+    onSelect(row);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const row = rows[activeIndex] || rows[0];
+    if (row) {
+      selectRow(row);
+    } else if (q.trim().length >= 2) {
+      setStatus("empty");
+    }
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      setActiveIndex((current) => Math.min(current + 1, rows.length - 1));
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault();
+      setActiveIndex((current) => Math.max(current - 1, 0));
+    } else if (event.key === "Escape") {
+      setRows([]);
+      setStatus("idle");
+    }
+  };
+
+  const statusText = {
+    idle: "Enter at least two characters.",
+    loading: "Searching civic address records.",
+    empty: "No matching Charlottetown civic address found.",
+    error,
+    ready: `${rows.length} address match${rows.length === 1 ? "" : "es"} found.`,
+  }[status];
   return (
     <div className="search-hero">
       <h1>Look up zoning for any address in Charlottetown.</h1>
       <p className="lede">See permitted uses, setbacks, height, parking, and the bylaw clauses that govern your parcel — with links back to the source PDF.</p>
-      <form className="search-box" onSubmit={(e)=>{e.preventDefault(); onSearch(q || EXAMPLES[0].addr);}}>
-        <input placeholder="Street address or PID" value={q} onChange={e=>setQ(e.target.value)} />
-        <button type="submit">Look up parcel</button>
+      <form className="search-box" onSubmit={handleSubmit}>
+        <input
+          placeholder="Street address or PID"
+          value={q}
+          onChange={e=>setQ(e.target.value)}
+          onKeyDown={handleKeyDown}
+          aria-label="Street address or PID"
+          aria-controls="address-results"
+          aria-expanded={rows.length > 0}
+          autoComplete="off"
+        />
+        <button type="submit" disabled={status === "loading"}>Look up parcel</button>
       </form>
+      <div className={`search-status search-status-${status}`}>{statusText}</div>
+      {rows.length > 0 && (
+        <div className="address-results" id="address-results" role="listbox">
+          {rows.map((row, index) => (
+            <button
+              type="button"
+              key={row.addressId || `${row.pid}-${index}`}
+              className={index === activeIndex ? "active" : ""}
+              onClick={() => selectRow(row)}
+              onMouseEnter={() => setActiveIndex(index)}
+              role="option"
+              aria-selected={index === activeIndex}
+            >
+              <span className="address-label">{row.label}</span>
+              <span className="address-meta">
+                <span>PID {row.pid || "pending"}</span>
+                <span>{row.confidence} match</span>
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
       <div className="search-examples">
-        <span>Try:</span>
-        {EXAMPLES.map((e,i) => <a key={i} onClick={()=>onSearch(e.addr)}>{e.addr}</a>)}
+        <span>Search examples depend on loaded civic address records.</span>
       </div>
     </div>
   );
@@ -237,15 +357,14 @@ function Results({ parcel, onBack }) {
 function App() {
   const [parcel, setParcel] = useState(null);
   useEffect(() => { lucide.createIcons(); });
-  const handleSearch = (q) => {
-    const match = EXAMPLES.find(e => q.toLowerCase().includes(e.addr.toLowerCase().split(' ')[0])) || EXAMPLES[0];
-    setParcel(match);
+  const handleSelect = (row) => {
+    window.location.assign(`/map-explorer?pid=${encodeURIComponent(row.pid)}`);
   };
   return (
     <div className="app">
       <Header onHome={()=>setParcel(null)} />
       <main className="app-main">
-        {parcel ? <Results parcel={parcel} onBack={()=>setParcel(null)} /> : <SearchHero onSearch={handleSearch} />}
+        {parcel ? <Results parcel={parcel} onBack={()=>setParcel(null)} /> : <SearchHero onSelect={handleSelect} />}
       </main>
       <Footer />
     </div>
