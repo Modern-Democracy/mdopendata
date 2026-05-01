@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 22px; background: var(--paper); display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+  .field { display: grid; gap: 6px; }
+  label { font-family: var(--font-ui); font-size: 12px; font-weight: 600; color: var(--fg-2); }
+  .hint { font-family: var(--font-ui); font-size: 11px; color: var(--fg-3); }
+  input, select { font-family: var(--font-ui); font-size: 14px; color: var(--ink); background: #fff; border: 1px solid var(--border); border-radius: 4px; padding: 9px 12px; transition: border-color var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out); outline: none; }
+  input:focus, select:focus { border-color: var(--harbour); box-shadow: 0 0 0 2px rgba(43,93,117,0.2); }
+  .search { position: relative; }
+  .search input { padding-left: 34px; width: 100%; }
+  .search svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--fg-3); }
+  .error input { border-color: var(--brick); }
+  .error .hint { color: var(--brick-ink); }
+</style></head>
+<body>
+  <div class="field">
+    <label>Street address</label>
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+      <input type="text" value="165 Richmond Street" />
+    </div>
+    <span class="hint">Charlottetown addresses only, for now.</span>
+  </div>
+  <div class="field">
+    <label>Parcel ID (PID)</label>
+    <input type="text" value="PID 384712" style="font-family: var(--font-mono);" />
+    <span class="hint">Find the PID on your tax bill.</span>
+  </div>
+  <div class="field">
+    <label>Bylaw status</label>
+    <select>
+      <option>Current bylaw</option>
+      <option>Draft bylaw</option>
+      <option>Compare both</option>
+    </select>
+  </div>
+  <div class="field error">
+    <label>Clause label</label>
+    <input type="text" value="99.99.99" style="font-family: var(--font-mono);" />
+    <span class="hint">No matching clause. Check the numbering.</span>
+  </div>
+</body></html>

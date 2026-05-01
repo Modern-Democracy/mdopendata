@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 20px; background: var(--paper); }
+  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  .z { border: 1px solid rgba(26,22,18,0.1); border-radius: 4px; overflow: hidden; }
+  .fill { height: 42px; display: flex; align-items: center; justify-content: center; }
+  .code { font-family: var(--font-mono); font-weight: 600; font-size: 12px; color: var(--ink); letter-spacing: 0.02em; }
+  .meta { padding: 6px 8px; background: var(--paper); border-top: 1px solid var(--border-hair); }
+  .name { font-family: var(--font-ui); font-size: 10.5px; color: var(--fg-2); }
+</style></head>
+<body>
+  <div class="grid">
+    <div class="z"><div class="fill" style="background:var(--zone-residential)"><span class="code">R-1L</span></div><div class="meta"><span class="name">Residential</span></div></div>
+    <div class="z"><div class="fill" style="background:var(--zone-commercial)"><span class="code">C-1</span></div><div class="meta"><span class="name">Commercial</span></div></div>
+    <div class="z"><div class="fill" style="background:var(--zone-industrial)"><span class="code">M-1</span></div><div class="meta"><span class="name">Industrial</span></div></div>
+    <div class="z"><div class="fill" style="background:var(--zone-institutional)"><span class="code">I</span></div><div class="meta"><span class="name">Institutional</span></div></div>
+    <div class="z"><div class="fill" style="background:var(--zone-openspace)"><span class="code">OS</span></div><div class="meta"><span class="name">Open Space</span></div></div>
+    <div class="z"><div class="fill" style="background:var(--zone-mixed)"><span class="code">MX</span></div><div class="meta"><span class="name">Mixed Use</span></div></div>
+    <div class="z"><div class="fill" style="background:var(--zone-waterfront)"><span class="code">WF</span></div><div class="meta"><span class="name">Waterfront</span></div></div>
+    <div class="z"><div class="fill" style="background:var(--zone-agricultural)"><span class="code">AG</span></div><div class="meta"><span class="name">Agricultural</span></div></div>
+    <div class="z"><div class="fill" style="background:var(--zone-heritage)"><span class="code">HER</span></div><div class="meta"><span class="name">Heritage</span></div></div>
+    <div class="z"><div class="fill" style="background:var(--zone-special)"><span class="code">SP</span></div><div class="meta"><span class="name">Special</span></div></div>
+  </div>
+</body></html>

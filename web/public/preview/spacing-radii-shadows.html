@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 22px; background: var(--paper); }
+  .row { display: grid; gap: 10px; }
+  .group { display: flex; gap: 14px; align-items: center; }
+  .title { font-family: var(--font-ui); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 4px; }
+  .r { width: 60px; height: 48px; background: var(--paper-2); border: 1px solid var(--border); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 4px; font-family: var(--font-mono); font-size: 10px; color: var(--fg-3); }
+  .s { width: 80px; height: 44px; background: var(--paper); border: 1px solid var(--border-hair); border-radius: 4px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 3px; font-family: var(--font-mono); font-size: 10px; color: var(--fg-3); }
+  .stack { display: grid; gap: 16px; }
+</style></head>
+<body>
+  <div class="stack">
+    <div>
+      <div class="title">Radii</div>
+      <div class="group">
+        <div class="r" style="border-radius:0">0</div>
+        <div class="r" style="border-radius:2px">sm·2</div>
+        <div class="r" style="border-radius:4px">·4</div>
+        <div class="r" style="border-radius:6px">md·6</div>
+        <div class="r" style="border-radius:10px">lg·10</div>
+        <div class="r" style="border-radius:999px">pill</div>
+      </div>
+    </div>
+    <div>
+      <div class="title">Shadows</div>
+      <div class="group">
+        <div class="s" style="box-shadow:var(--shadow-hair)">hair</div>
+        <div class="s" style="box-shadow:var(--shadow-sm)">sm</div>
+        <div class="s" style="box-shadow:var(--shadow)">base</div>
+        <div class="s" style="box-shadow:var(--shadow-md)">md</div>
+        <div class="s" style="box-shadow:var(--shadow-lg)">lg</div>
+      </div>
+    </div>
+  </div>
+</body></html>

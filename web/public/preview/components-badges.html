@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 22px; background: var(--paper); }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
+  .tag { font-family: var(--font-mono); font-size: 10px; color: var(--fg-3); letter-spacing: 0.1em; text-transform: uppercase; min-width: 84px; }
+  .chip { font-family: var(--font-ui); font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: 999px; border: 1px solid transparent; display: inline-flex; align-items: center; gap: 6px; line-height: 1.5; }
+  .chip-current { background: var(--brick-wash); color: var(--brick-ink); border-color: rgba(168,57,28,0.2); }
+  .chip-draft { background: var(--ochre-wash); color: var(--ochre-ink); border-color: rgba(200,148,52,0.25); }
+  .chip-success { background: rgba(63,122,66,0.12); color: #2a5a2d; border-color: rgba(63,122,66,0.25); }
+  .chip-neutral { background: var(--paper-2); color: var(--fg-2); border-color: var(--border-hair); }
+  .chip-info { background: var(--harbour-wash); color: var(--harbour-ink); border-color: rgba(43,93,117,0.2); }
+  .chip::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.7; }
+  .zone-chip { font-family: var(--font-mono); font-weight: 600; font-size: 12px; padding: 4px 9px; border-radius: 3px; color: var(--ink); border: 1px solid rgba(26,22,18,0.12); }
+</style></head>
+<body>
+  <div class="row">
+    <span class="tag">status</span>
+    <span class="chip chip-current">Current bylaw</span>
+    <span class="chip chip-draft">Draft bylaw</span>
+    <span class="chip chip-success">Permitted</span>
+    <span class="chip chip-neutral">Not specified</span>
+    <span class="chip chip-info">Conditional</span>
+  </div>
+  <div class="row">
+    <span class="tag">zone</span>
+    <span class="zone-chip" style="background:var(--zone-residential)">R-1L</span>
+    <span class="zone-chip" style="background:var(--zone-commercial)">C-2</span>
+    <span class="zone-chip" style="background:var(--zone-mixed)">MU-1</span>
+    <span class="zone-chip" style="background:var(--zone-institutional)">I</span>
+    <span class="zone-chip" style="background:var(--zone-openspace)">OS</span>
+    <span class="zone-chip" style="background:var(--zone-heritage)">HER</span>
+  </div>
+</body></html>

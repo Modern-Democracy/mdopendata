@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 22px; background: var(--paper); }
+  .grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 8px; }
+  .ic { display: grid; gap: 6px; justify-items: center; padding: 10px 4px; background: var(--paper-2); border-radius: 4px; border: 1px solid var(--border-hair); }
+  .ic svg { width: 20px; height: 20px; color: var(--ink); }
+  .ic .n { font-family: var(--font-mono); font-size: 9.5px; color: var(--fg-3); }
+  .note { font-family: var(--font-ui); font-size: 11px; color: var(--fg-3); margin-top: 10px; }
+</style>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+  <div class="grid">
+    <div class="ic"><i data-lucide="search"></i><span class="n">search</span></div>
+    <div class="ic"><i data-lucide="map"></i><span class="n">map</span></div>
+    <div class="ic"><i data-lucide="map-pin"></i><span class="n">pin</span></div>
+    <div class="ic"><i data-lucide="layers"></i><span class="n">layers</span></div>
+    <div class="ic"><i data-lucide="compass"></i><span class="n">compass</span></div>
+    <div class="ic"><i data-lucide="file-text"></i><span class="n">file</span></div>
+    <div class="ic"><i data-lucide="bookmark"></i><span class="n">bookmark</span></div>
+    <div class="ic"><i data-lucide="download"></i><span class="n">download</span></div>
+    <div class="ic"><i data-lucide="external-link"></i><span class="n">external</span></div>
+    <div class="ic"><i data-lucide="share-2"></i><span class="n">share</span></div>
+    <div class="ic"><i data-lucide="filter"></i><span class="n">filter</span></div>
+    <div class="ic"><i data-lucide="sliders-horizontal"></i><span class="n">sliders</span></div>
+    <div class="ic"><i data-lucide="info"></i><span class="n">info</span></div>
+    <div class="ic"><i data-lucide="circle-alert"></i><span class="n">alert</span></div>
+    <div class="ic"><i data-lucide="circle-check"></i><span class="n">check</span></div>
+    <div class="ic"><i data-lucide="arrow-right"></i><span class="n">arrow</span></div>
+    <div class="ic"><i data-lucide="chevron-down"></i><span class="n">chevron</span></div>
+    <div class="ic"><i data-lucide="x"></i><span class="n">close</span></div>
+    <div class="ic"><i data-lucide="plus"></i><span class="n">plus</span></div>
+    <div class="ic"><i data-lucide="minus"></i><span class="n">minus</span></div>
+  </div>
+  <script>lucide.createIcons();</script>
+</body></html>

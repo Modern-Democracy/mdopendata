@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Map Explorer (Leaflet) — Modern Democracy</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../parcel-lookup/styles.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="stylesheet" href="../../leaflet-theme.css">
+<style>
+  html, body, #root { height: 100%; margin: 0; }
+  .map-app { display: grid; grid-template-rows: auto 1fr; height: 100vh; }
+  .map-body { display: grid; grid-template-columns: 260px 1fr 320px; height: 100%; overflow: hidden; }
+  .map-panel { background: var(--paper-2); border-right: 1px solid var(--border-hair); overflow-y: auto; padding: 18px 18px 40px; }
+  .map-panel.right { border-right: 0; border-left: 1px solid var(--border-hair); }
+  .panel-title { font-family: var(--font-ui); font-weight: 600; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); margin: 0 0 10px; }
+  .panel-title:not(:first-child) { margin-top: 22px; }
+  .layer { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 4px; cursor: pointer; }
+  .layer:hover { background: var(--paper-3); }
+  .layer input { accent-color: var(--forest); }
+  .layer .sw { width: 16px; height: 16px; border-radius: 3px; border: 1px solid rgba(26,22,18,0.15); flex-shrink: 0; }
+  .layer .name { font-family: var(--font-ui); font-size: 13px; color: var(--ink); }
+  .layer .count { margin-left: auto; font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-3); }
+  #map { width: 100%; height: 100%; }
+  .legend-inline { background: rgba(245,239,225,0.96); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; font-family: var(--font-ui); }
+  .legend-inline h4 { font-weight: 600; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); margin: 0 0 8px; }
+  .legend-inline .row { display:flex; align-items:center; gap:8px; font-size: 12px; color: var(--ink); padding: 2px 0; }
+  .legend-inline .sw { width: 14px; height: 14px; border-radius: 2px; border: 1px solid rgba(26,22,18,0.15); }
+  .selected-card { background: var(--paper); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; margin-bottom: 14px; }
+  .selected-card .addr { font-family: var(--font-display); font-variation-settings: "opsz" 48; font-weight: 500; font-size: 20px; line-height: 1.1; color: var(--ink); margin: 0 0 4px; }
+  .selected-card .pid { font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-3); margin-bottom: 12px; }
+  .selected-card .zchip { font-family: var(--font-mono); font-weight: 600; font-size: 14px; padding: 4px 10px; border-radius: 3px; border: 1px solid rgba(26,22,18,0.12); display:inline-block; margin-bottom: 10px; }
+  .selected-card .mini-rules { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; font-family: var(--font-ui); font-size: 12px; }
+  .selected-card .mini-rules .k { color: var(--fg-3); }
+  .selected-card .mini-rules .v { font-family: var(--font-mono); color: var(--ink); text-align: right; }
+  .tech-note { margin-top: 24px; padding: 12px 14px; background: var(--paper-3); border-left: 3px solid var(--harbour); font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-3); line-height: 1.5; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+  .tech-note b { color: var(--harbour-ink); font-weight: 600; }
+</style>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+<body>
+<div class="map-app">
+  <header class="app-header">
+    <img src="../../assets/logo-wordmark.svg" alt="Modern Democracy" class="wm">
+    <nav>
+      <a href="../parcel-lookup/index.html">Parcel lookup</a>
+      <a href="../zoning-comparison/index.html">Compare bylaws</a>
+      <a class="active">Map</a>
+      <a>About</a>
+    </nav>
+  </header>
+  <div class="map-body">
+    <aside class="map-panel">
+      <h3 class="panel-title">Base layers</h3>
+      <label class="layer"><input type="checkbox" checked id="l-zoning"><span class="sw" style="background: var(--zone-residential)"></span><span class="name">Zoning</span><span class="count">42</span></label>
+      <label class="layer"><input type="checkbox" id="l-parcels"><span class="sw" style="background: var(--paper-2); border-color: var(--ink-3)"></span><span class="name">Parcels</span><span class="count">14,208</span></label>
+      <label class="layer"><input type="checkbox" checked id="l-streets"><span class="sw" style="background: var(--paper); border-color: var(--ink-3)"></span><span class="name">Streets</span><span class="count">612</span></label>
+
+      <h3 class="panel-title">Overlays</h3>
+      <label class="layer"><input type="checkbox" id="l-heritage"><span class="sw" style="background: var(--zone-heritage)"></span><span class="name">Heritage</span><span class="count">186</span></label>
+      <label class="layer"><input type="checkbox" id="l-wards"><span class="sw" style="background: transparent; border-color: var(--harbour)"></span><span class="name">Wards</span><span class="count">8</span></label>
+
+      <h3 class="panel-title">Bylaw version</h3>
+      <label class="layer"><input type="radio" name="bv" checked><span class="sw" style="background: var(--brick)"></span><span class="name">Current</span></label>
+      <label class="layer"><input type="radio" name="bv"><span class="sw" style="background: var(--ochre)"></span><span class="name">Draft</span></label>
+
+      <h3 class="panel-title">Legend</h3>
+      <div class="legend-inline">
+        <div class="row"><span class="sw" style="background: var(--zone-residential)"></span>Residential</div>
+        <div class="row"><span class="sw" style="background: var(--zone-commercial)"></span>Commercial</div>
+        <div class="row"><span class="sw" style="background: var(--zone-mixed)"></span>Mixed use</div>
+        <div class="row"><span class="sw" style="background: var(--zone-institutional)"></span>Institutional</div>
+        <div class="row"><span class="sw" style="background: var(--zone-openspace)"></span>Open space</div>
+        <div class="row"><span class="sw" style="background: var(--zone-waterfront)"></span>Waterfront</div>
+        <div class="row"><span class="sw" style="background: var(--zone-heritage)"></span>Heritage</div>
+      </div>
+
+      <div class="tech-note">
+        <b>Real Leaflet.</b> OSM tiles, GeoJSON parcel layer, themed via <code>leaflet-theme.css</code>. Swap the tile URL + GeoJSON for your own PostGIS-served data.
+      </div>
+    </aside>
+    <div id="map"></div>
+    <aside class="map-panel right">
+      <h3 class="panel-title">Selected parcel</h3>
+      <div id="selected"></div>
+      <div style="display:grid; gap:8px">
+        <button class="btn btn-primary" style="justify-content: center">Open full parcel</button>
+        <button class="btn btn-secondary" style="justify-content: center"><i data-lucide="git-compare" style="width:14px;height:14px"></i> Compare to draft</button>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script>
+// ---- Sample data (stand-in for PostGIS GeoJSON feed) ----
+// Synthetic parcels near Charlottetown City Hall (~46.2382, -63.1311)
+const PARCELS = {
+  type: "FeatureCollection",
+  features: [
+    { type: "Feature", properties: { pid: "421009", addr: "81 University Avenue", zone: "C-2", zoneName: "General commercial", zoneClass: "commercial", area_ha: 0.14, lot_area: "1,400 m²", height_max: "14.0 m", front_yard: "3.0 m", parking: "1 / 30 m²" },
+      geometry: { type: "Polygon", coordinates: [[[-63.1340,46.2388],[-63.1328,46.2388],[-63.1328,46.2396],[-63.1340,46.2396],[-63.1340,46.2388]]] } },
+    { type: "Feature", properties: { pid: "384712", addr: "165 Richmond Street", zone: "R-1L", zoneName: "Single-detached residential", zoneClass: "residential", area_ha: 0.08, lot_area: "840 m²", height_max: "10.5 m", front_yard: "6.0 m", parking: "1 / unit" },
+      geometry: { type: "Polygon", coordinates: [[[-63.1310,46.2378],[-63.1298,46.2378],[-63.1298,46.2385],[-63.1310,46.2385],[-63.1310,46.2378]]] } },
+    { type: "Feature", properties: { pid: "296884", addr: "22 Longworth Avenue", zone: "R-2", zoneName: "Two-unit residential", zoneClass: "residential", area_ha: 0.06, lot_area: "640 m²", height_max: "10.5 m", front_yard: "6.0 m", parking: "2 / unit" },
+      geometry: { type: "Polygon", coordinates: [[[-63.1280,46.2372],[-63.1270,46.2372],[-63.1270,46.2378],[-63.1280,46.2378],[-63.1280,46.2372]]] } },
+    { type: "Feature", properties: { pid: "550021", addr: "Province House", zone: "I", zoneName: "Institutional", zoneClass: "institutional", area_ha: 0.32, lot_area: "3,200 m²", height_max: "12.0 m", front_yard: "0.0 m", parking: "—" },
+      geometry: { type: "Polygon", coordinates: [[[-63.1290,46.2363],[-63.1270,46.2363],[-63.1270,46.2371],[-63.1290,46.2371],[-63.1290,46.2363]]] } },
+    { type: "Feature", properties: { pid: "770404", addr: "Victoria Park", zone: "OS", zoneName: "Open space", zoneClass: "openspace", area_ha: 16.5, lot_area: "165,000 m²", height_max: "6.0 m", front_yard: "—", parking: "—" },
+      geometry: { type: "Polygon", coordinates: [[[-63.1365,46.2340],[-63.1300,46.2340],[-63.1300,46.2365],[-63.1365,46.2365],[-63.1365,46.2340]]] } },
+    { type: "Feature", properties: { pid: "812229", addr: "Great George / Euston", zone: "DMU", zoneName: "Downtown mixed-use", zoneClass: "mixed", area_ha: 0.18, lot_area: "1,800 m²", height_max: "16.0 m", front_yard: "0.0 m", parking: "—" },
+      geometry: { type: "Polygon", coordinates: [[[-63.1262,46.2392],[-63.1250,46.2392],[-63.1250,46.2400],[-63.1262,46.2400],[-63.1262,46.2392]]] } },
+    { type: "Feature", properties: { pid: "901822", addr: "44 Prince Street", zone: "HER", zoneName: "Heritage overlay", zoneClass: "heritage", area_ha: 0.09, lot_area: "880 m²", height_max: "10.5 m", front_yard: "4.5 m", parking: "1 / unit" },
+      geometry: { type: "Polygon", coordinates: [[[-63.1250,46.2378],[-63.1240,46.2378],[-63.1240,46.2385],[-63.1250,46.2385],[-63.1250,46.2378]]] } },
+    { type: "Feature", properties: { pid: "332910", addr: "Charlottetown Harbour", zone: "WF", zoneName: "Waterfront", zoneClass: "waterfront", area_ha: 1.2, lot_area: "12,000 m²", height_max: "8.0 m", front_yard: "—", parking: "—" },
+      geometry: { type: "Polygon", coordinates: [[[-63.1320,46.2355],[-63.1260,46.2355],[-63.1260,46.2365],[-63.1320,46.2365],[-63.1320,46.2355]]] } },
+  ]
+};
+
+const ZONE_COLORS = {
+  residential: getComputedStyle(document.documentElement).getPropertyValue('--zone-residential').trim(),
+  commercial: getComputedStyle(document.documentElement).getPropertyValue('--zone-commercial').trim(),
+  mixed: getComputedStyle(document.documentElement).getPropertyValue('--zone-mixed').trim(),
+  institutional: getComputedStyle(document.documentElement).getPropertyValue('--zone-institutional').trim(),
+  openspace: getComputedStyle(document.documentElement).getPropertyValue('--zone-openspace').trim(),
+  waterfront: getComputedStyle(document.documentElement).getPropertyValue('--zone-waterfront').trim(),
+  heritage: getComputedStyle(document.documentElement).getPropertyValue('--zone-heritage').trim(),
+  agricultural: getComputedStyle(document.documentElement).getPropertyValue('--zone-agricultural').trim(),
+};
+
+// ---- Init map ----
+const map = L.map('map', {
+  center: [46.2382, -63.1297],
+  zoom: 16,
+  zoomControl: true,
+  attributionControl: true,
+  preferCanvas: false,
+});
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  attribution: '© OpenStreetMap contributors · © CARTO · Parcels: synthetic stand-in',
+  subdomains: 'abcd',
+  maxZoom: 19,
+  opacity: 0.55,
+}).addTo(map);
+
+// For production, point at your own tile infra or OSM directly — e.g.
+// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { opacity: 0.55 })
+
+L.control.scale({ imperial: true, metric: true, maxWidth: 140 }).addTo(map);
+
+function styleFor(feature) {
+  const klass = feature.properties.zoneClass;
+  return {
+    color: 'rgba(26,22,18,0.35)',
+    weight: 1,
+    fillColor: ZONE_COLORS[klass] || '#e6dfc8',
+    fillOpacity: 0.78,
+  };
+}
+
+let selectedLayer = null;
+
+function updateSelectedPanel(p) {
+  const panel = document.getElementById('selected');
+  const bg = ZONE_COLORS[p.zoneClass] || '#e6dfc8';
+  panel.innerHTML = `
+    <div class="selected-card">
+      <h4 class="addr">${p.addr}</h4>
+      <div class="pid">PID ${p.pid} · ${p.area_ha} ha</div>
+      <span class="zchip" style="background: ${bg}">${p.zone}</span>
+      <div style="font-family: var(--font-ui); font-size: 12px; color: var(--fg-3); margin-bottom: 12px">${p.zoneName}</div>
+      <div class="mini-rules">
+        <div class="k">Lot area</div><div class="v">${p.lot_area}</div>
+        <div class="k">Height max</div><div class="v">${p.height_max}</div>
+        <div class="k">Front yard</div><div class="v">${p.front_yard}</div>
+        <div class="k">Parking</div><div class="v">${p.parking}</div>
+      </div>
+    </div>
+  `;
+}
+
+const parcelLayer = L.geoJSON(PARCELS, {
+  style: styleFor,
+  onEachFeature: (feature, layer) => {
+    const p = feature.properties;
+    const bg = ZONE_COLORS[p.zoneClass] || '#e6dfc8';
+    layer.bindTooltip(`<b>${p.zone}</b> · ${p.addr}`, { direction: 'top', offset: [0, -4] });
+    layer.bindPopup(`
+      <h3>${p.addr}</h3>
+      <div class="pid">PID ${p.pid}</div>
+      <div class="zchip" style="background: ${bg}">${p.zone}</div>
+      <div>${p.zoneName}</div>
+      <div style="margin-top: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--fg-3)">Max height ${p.height_max} · Front yard ${p.front_yard}</div>
+    `);
+    layer.on('click', () => {
+      if (selectedLayer) selectedLayer.setStyle(styleFor(selectedLayer.feature));
+      layer.setStyle({ color: 'var(--brick)', weight: 3, fillOpacity: 0.85 });
+      selectedLayer = layer;
+      updateSelectedPanel(p);
+    });
+  }
+}).addTo(map);
+
+// Select first feature by default
+const first = parcelLayer.getLayers()[0];
+if (first) {
+  first.setStyle({ color: 'var(--brick)', weight: 3, fillOpacity: 0.85 });
+  selectedLayer = first;
+  updateSelectedPanel(first.feature.properties);
+}
+
+map.fitBounds(parcelLayer.getBounds(), { padding: [40, 40] });
+
+lucide.createIcons();
+</script>
+</body>
+</html>

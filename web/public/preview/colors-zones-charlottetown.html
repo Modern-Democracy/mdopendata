@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Zones — Charlottetown Official Plan</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 32px; background: var(--paper); }
+  h2 { font-family: var(--font-display); font-variation-settings: "opsz" 72; font-weight: 500; font-size: 28px; margin: 0 0 4px; letter-spacing: -0.01em; color: var(--ink); }
+  .lede { font-family: var(--font-ui); font-size: 13px; color: var(--fg-3); margin: 0 0 24px; }
+  .group { margin-bottom: 22px; }
+  .group-head { display: flex; align-items: baseline; gap: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--border-hair); margin-bottom: 10px; }
+  .group-head h3 { font-family: var(--font-ui); font-weight: 600; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); margin: 0; }
+  .group-head .meta { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-left: auto; }
+  .rows { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 6px 16px; }
+  .row { display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 12px; padding: 6px 8px; border-radius: 3px; }
+  .sw { width: 24px; height: 24px; border: 1px solid rgba(26,22,18,0.18); border-radius: 2px; }
+  .nm { font-family: var(--font-ui); font-size: 13px; color: var(--ink); line-height: 1.2; }
+  .cd { font-family: var(--font-mono); font-weight: 600; font-size: 12px; color: var(--fg-2); padding: 2px 6px; background: var(--paper-2); border-radius: 2px; border: 1px solid var(--border-hair); }
+</style>
+</head>
+<body>
+  <h2>Land use categories — Charlottetown</h2>
+  <p class="lede">Sampled from the City's Official Plan legend. Codes mirror the published symbols.</p>
+
+  <div class="group">
+    <div class="group-head"><h3>Neighbourhoods</h3><span class="meta">3 zones · yellow family</span></div>
+    <div class="rows">
+      <div class="row"><div class="sw" style="background: var(--zone-rn)"></div><div class="nm">Neighbourhood</div><div class="cd">RN</div></div>
+      <div class="row"><div class="sw" style="background: var(--zone-rm)"></div><div class="nm">Medium Density Residential</div><div class="cd">RM</div></div>
+      <div class="row"><div class="sw" style="background: var(--zone-rh)"></div><div class="nm">Higher Order Residential</div><div class="cd">RH</div></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-head"><h3>Downtown — Core, Periphery, Waterfront</h3><span class="meta">5 zones · red family</span></div>
+    <div class="rows">
+      <div class="row"><div class="sw" style="background: var(--zone-dc)"></div><div class="nm">Downtown Core</div><div class="cd">DC</div></div>
+      <div class="row"><div class="sw" style="background: var(--zone-dms)"></div><div class="nm">Downtown Main Street</div><div class="cd">DMS</div></div>
+      <div class="row"><div class="sw" style="background: var(--zone-dmu)"></div><div class="nm">Downtown Mixed Use</div><div class="cd">DMU</div></div>
+      <div class="row"><div class="sw" style="background: var(--zone-dn)"></div><div class="nm">Downtown Neighbourhood</div><div class="cd">DN</div></div>
+      <div class="row"><div class="sw" style="background: var(--zone-dw)"></div><div class="nm">Downtown Waterfront</div><div class="cd">DW</div></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-head"><h3>Workscapes</h3><span class="meta">4 zones · purple family</span></div>
+    <div class="rows">
+      <div class="row"><div class="sw" style="background: var(--zone-bp)"></div><div class="nm">Business Park</div><div class="cd">BP</div></div>
+      <div class="row"><div class="sw" style="background: var(--zone-ap)"></div><div class="nm">Airport Periphery</div><div class="cd">AP</div></div>
+      <div class="row"><div class="sw" style="background: var(--zone-hi)"></div><div class="nm">Heavy Industrial</div><div class="cd">HI</div></div>
+      <div class="row"><div class="sw" style="background: var(--zone-port)"></div><div class="nm">Port</div><div class="cd">P</div></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-head"><h3>Corridors, Nodes, Institutional</h3></div>
+    <div class="rows">
+      <div class="row"><div class="sw" style="background: var(--zone-gc)"></div><div class="nm">Growth Corridor</div><div class="cd">GC</div></div>
+      <div class="row"><div class="sw" style="background: var(--zone-gn)"></div><div class="nm">Growth Node</div><div class="cd">GN</div></div>
+      <div class="row"><div class="sw" style="background: var(--zone-i)"></div><div class="nm">Institutional</div><div class="cd">I</div></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-head"><h3>Open space, natural, gateway, expansion</h3></div>
+    <div class="rows">
+      <div class="row"><div class="sw" style="background: var(--zone-pps)"></div><div class="nm">Parks and Public Spaces</div><div class="cd">PPS</div></div>
+      <div class="row"><div class="sw" style="background: var(--zone-pos)"></div><div class="nm">Privately-owned Open Spaces</div><div class="cd">POS</div></div>
+      <div class="row"><div class="sw" style="background: var(--zone-c)"></div><div class="nm">Conservation</div><div class="cd">C</div></div>
+      <div class="row"><div class="sw" style="background: var(--zone-eg)"></div><div class="nm">Eastern Gateway</div><div class="cd">EG</div></div>
+      <div class="row"><div class="sw" style="background: var(--zone-ue)"></div><div class="nm">Urban Expansion</div><div class="cd">UE</div></div>
+    </div>
+  </div>
+</body>
+</html>

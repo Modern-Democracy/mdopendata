@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 20px; background: var(--paper); }
+  .group { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; }
+  .anchor { display: grid; grid-template-rows: auto auto; }
+  .chip-row { display: flex; height: 52px; border-radius: 4px; overflow: hidden; border: 1px solid rgba(26,22,18,0.08); }
+  .c { flex: 1; display: flex; align-items: flex-end; padding: 6px 8px; font-family: var(--font-mono); font-size: 9.5px; color: rgba(255,255,255,0.85); }
+  .c.dark-text { color: rgba(26,22,18,0.7); }
+  .label-row { margin-top: 8px; display: flex; justify-content: space-between; align-items: baseline; }
+  .role { font-family: var(--font-ui); font-weight: 600; font-size: 12px; color: var(--ink); letter-spacing: -0.005em; }
+  .desc { font-family: var(--font-ui); font-size: 10.5px; color: var(--fg-3); }
+</style></head>
+<body>
+  <div class="group">
+    <div class="anchor">
+      <div class="chip-row">
+        <div class="c" style="background:var(--forest-wash);color:rgba(26,22,18,0.6)">wash</div>
+        <div class="c" style="background:var(--forest)">#1e4d3a</div>
+        <div class="c" style="background:var(--forest-ink)">ink</div>
+      </div>
+      <div class="label-row"><span class="role">Forest</span><span class="desc">primary</span></div>
+    </div>
+    <div class="anchor">
+      <div class="chip-row">
+        <div class="c" style="background:var(--brick-wash);color:rgba(26,22,18,0.6)">wash</div>
+        <div class="c" style="background:var(--brick)">#a8391c</div>
+        <div class="c" style="background:var(--brick-ink)">ink</div>
+      </div>
+      <div class="label-row"><span class="role">Brick</span><span class="desc">current bylaw</span></div>
+    </div>
+    <div class="anchor">
+      <div class="chip-row">
+        <div class="c dark-text" style="background:var(--ochre-wash)">wash</div>
+        <div class="c dark-text" style="background:var(--ochre)">#c89434</div>
+        <div class="c" style="background:var(--ochre-ink)">ink</div>
+      </div>
+      <div class="label-row"><span class="role">Ochre</span><span class="desc">draft bylaw</span></div>
+    </div>
+    <div class="anchor">
+      <div class="chip-row">
+        <div class="c" style="background:var(--harbour-wash);color:rgba(26,22,18,0.6)">wash</div>
+        <div class="c" style="background:var(--harbour)">#2b5d75</div>
+        <div class="c" style="background:var(--harbour-ink)">ink</div>
+      </div>
+      <div class="label-row"><span class="role">Harbour</span><span class="desc">link / water</span></div>
+    </div>
+  </div>
+</body></html>

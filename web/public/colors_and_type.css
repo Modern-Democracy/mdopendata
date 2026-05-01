@@ -1,0 +1,340 @@
+/* =====================================================================
+   Modern Democracy — Design Tokens
+   Cartographic heritage palette + condensed serif display / grotesque UI
+   ===================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+:root {
+  /* -----------------------------------------------------------------
+     PAPER & INK — the base ground/figure pair.
+     Cream paper with warm black ink, evocative of survey maps
+     and printed bylaws.
+     ----------------------------------------------------------------- */
+  --paper:         #f5efe1;   /* primary background — warm cream */
+  --paper-2:       #ede5d1;   /* slightly darker paper — cards, sidebars */
+  --paper-3:       #e2d8bf;   /* deeper paper — dividers, fills */
+  --paper-edge:    #d4c8a8;   /* paper edge — hairlines */
+  --ink:           #1a1612;   /* primary ink — warm near-black */
+  --ink-2:         #3b3429;   /* secondary ink — body copy */
+  --ink-3:         #6b6350;   /* tertiary ink — captions, meta */
+  --ink-4:         #938a73;   /* quaternary — placeholder, disabled */
+
+  /* -----------------------------------------------------------------
+     BRAND — the four cartographic anchors.
+     Forest = institutional/primary. Brick = alert/current-state.
+     Ochre = highlight/draft-state. Harbour = cool anchor / links.
+     ----------------------------------------------------------------- */
+  --forest:        #1e4d3a;   /* forest green — primary */
+  --forest-ink:    #0f2a20;   /* forest darker — text on cream */
+  --forest-wash:   #d8e3d6;   /* forest pale — tints, fills */
+
+  --brick:         #a8391c;   /* brick red — alerts, current bylaw */
+  --brick-ink:     #6e2413;
+  --brick-wash:    #f0dccf;
+
+  --ochre:         #c89434;   /* ochre — highlight, draft bylaw */
+  --ochre-ink:     #7a5a1f;
+  --ochre-wash:    #f2e3c2;
+
+  --harbour:       #2b5d75;   /* muted harbour blue — links, water */
+  --harbour-ink:   #14374a;
+  --harbour-wash:  #d7e3ea;
+
+  /* -----------------------------------------------------------------
+     SEMANTIC — map state to cartographic anchors.
+     ----------------------------------------------------------------- */
+  --fg-1: var(--ink);
+  --fg-2: var(--ink-2);
+  --fg-3: var(--ink-3);
+  --fg-4: var(--ink-4);
+
+  --bg-1: var(--paper);
+  --bg-2: var(--paper-2);
+  --bg-3: var(--paper-3);
+
+  --border-hair: var(--paper-edge);
+  --border:      #bfb295;
+  --border-bold: var(--ink-3);
+
+  --primary:     var(--forest);
+  --primary-ink: var(--forest-ink);
+  --accent:      var(--ochre);
+  --link:        var(--harbour-ink);
+
+  --current:     var(--brick);      /* represents "current bylaw" status */
+  --draft:       var(--ochre);      /* represents "draft bylaw" status */
+
+  --success:     #3f7a42;
+  --warn:        var(--ochre);
+  --danger:      var(--brick);
+  --info:        var(--harbour);
+
+  /* -----------------------------------------------------------------
+     ZONING CATEGORY COLORS — Charlottetown Official Plan legend.
+     Sampled directly from the City of Charlottetown's published
+     Land Use Categories table. Use the category-level vars for
+     overview maps; the specific zone vars for detailed views.
+     ----------------------------------------------------------------- */
+
+  /* Neighbourhoods — yellow family */
+  --zone-rn:             #f7eea3;  /* RN  — Neighbourhood */
+  --zone-rm:             #e7d49a;  /* RM  — Medium Density Residential */
+  --zone-rh:             #d8a814;  /* RH  — Higher Order Residential */
+
+  /* Downtown (Core, Periphery and Waterfront) — red family */
+  --zone-dc:             #8a1d20;  /* DC  — Downtown Core */
+  --zone-dms:            #e88d8d;  /* DMS — Downtown Main Street */
+  --zone-dmu:            #b53a2e;  /* DMU — Downtown Mixed Use */
+  --zone-dn:             #d94f1e;  /* DN  — Downtown Neighbourhood */
+  --zone-dw:             #e095a4;  /* DW  — Downtown Waterfront */
+
+  /* Workscapes — purple family */
+  --zone-bp:             #a78ec0;  /* BP  — Business Park */
+  --zone-ap:             #d6c9df;  /* AP  — Airport Periphery */
+  --zone-hi:             #8a5a9b;  /* HI  — Heavy Industrial */
+  --zone-port:           #6e4a82;  /* P   — Port */
+
+  /* Other land-use categories */
+  --zone-gc:             #efb094;  /* GC  — Growth Corridor */
+  --zone-gn:             #d96a4e;  /* GN  — Growth Node */
+  --zone-i:              #6fa9b8;  /* I   — Institutional */
+  --zone-pps:            #6f9d6c;  /* PPS — Parks and Public Spaces */
+  --zone-pos:            #7a8c52;  /* POS — Privately-owned Open Spaces */
+  --zone-c:              #4d5417;  /* C   — Conservation / Natural Areas */
+  --zone-eg:             #4d4a45;  /* EG  — Eastern Gateway */
+  --zone-ue:             #c8c8c8;  /* UE  — Urban Expansion */
+
+  /* Category-level rollups (for overview maps and legends) */
+  --zone-neighbourhoods: var(--zone-rn);
+  --zone-downtown:       var(--zone-dmu);
+  --zone-workscapes:     var(--zone-bp);
+  --zone-corridors:      var(--zone-gc);
+  --zone-nodes:          var(--zone-gn);
+  --zone-institutional:  var(--zone-i);
+  --zone-parks:          var(--zone-pps);
+  --zone-natural:        var(--zone-c);
+  --zone-gateway:        var(--zone-eg);
+  --zone-expansion:      var(--zone-ue);
+
+  /* Back-compat aliases — older preview cards reference these */
+  --zone-residential:    var(--zone-rn);
+  --zone-commercial:     var(--zone-dms);
+  --zone-mixed:          var(--zone-dmu);
+  --zone-openspace:      var(--zone-pps);
+  --zone-waterfront:     var(--zone-dw);
+  --zone-heritage:       var(--zone-dc);
+  --zone-industrial:     var(--zone-hi);
+  --zone-agricultural:   var(--zone-c);
+  --zone-special:        var(--zone-gn);
+
+  /* -----------------------------------------------------------------
+     TYPOGRAPHY — condensed serif for display/labels, grotesque for UI,
+     monospace for data and clause IDs.
+     ----------------------------------------------------------------- */
+  --font-display: "Fraunces", "Playfair Display", Georgia, serif;
+  --font-ui:      "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono:    "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+
+  /* Type scale — modular, cartographic. */
+  --fs-xs:   11px;
+  --fs-sm:   13px;
+  --fs-base: 15px;
+  --fs-md:   17px;
+  --fs-lg:   20px;
+  --fs-xl:   24px;
+  --fs-2xl:  32px;
+  --fs-3xl:  44px;
+  --fs-4xl:  60px;
+  --fs-5xl:  84px;
+
+  /* Fraunces is variable; we expose opsz slots as custom props */
+  --fraunces-display:  "opsz" 144, "SOFT" 20, "WONK" 0;
+  --fraunces-text:     "opsz" 14,  "SOFT" 30, "WONK" 0;
+
+  /* -----------------------------------------------------------------
+     SPACING — 4pt grid with cartographic rhythm
+     ----------------------------------------------------------------- */
+  --space-0:  0;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* -----------------------------------------------------------------
+     RADII — small, print-like. Civic UI shouldn't be overly rounded.
+     ----------------------------------------------------------------- */
+  --radius-0:   0;
+  --radius-sm:  2px;
+  --radius:     4px;
+  --radius-md:  6px;
+  --radius-lg:  10px;
+  --radius-pill: 999px;
+
+  /* -----------------------------------------------------------------
+     SHADOWS — soft, paper-like; not glassy or neon.
+     ----------------------------------------------------------------- */
+  --shadow-hair: 0 0 0 1px rgba(26, 22, 18, 0.08);
+  --shadow-sm:   0 1px 2px rgba(26, 22, 18, 0.06), 0 0 0 1px rgba(26, 22, 18, 0.04);
+  --shadow:      0 2px 4px rgba(26, 22, 18, 0.08), 0 1px 2px rgba(26, 22, 18, 0.04);
+  --shadow-md:   0 6px 14px rgba(26, 22, 18, 0.10), 0 2px 4px rgba(26, 22, 18, 0.06);
+  --shadow-lg:   0 18px 38px rgba(26, 22, 18, 0.14), 0 6px 12px rgba(26, 22, 18, 0.06);
+  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 0 0 1px rgba(26, 22, 18, 0.06);
+
+  /* -----------------------------------------------------------------
+     MOTION — muted, print-like; no bounces. Think paper, not rubber.
+     ----------------------------------------------------------------- */
+  --ease-out:   cubic-bezier(0.2, 0.0, 0.0, 1.0);
+  --ease-inout: cubic-bezier(0.4, 0.0, 0.2, 1.0);
+  --dur-fast:   120ms;
+  --dur:        200ms;
+  --dur-slow:   320ms;
+
+  /* -----------------------------------------------------------------
+     LAYOUT — consistent container & rule widths
+     ----------------------------------------------------------------- */
+  --rule-width: 1px;
+  --rule-bold:  2px;
+  --content-max: 1240px;
+  --reading-max: 72ch;
+}
+
+/* =====================================================================
+   BASE RESET + SEMANTIC TYPE
+   ===================================================================== */
+
+html { -webkit-text-size-adjust: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+body {
+  font-family: var(--font-ui);
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  color: var(--fg-1);
+  background: var(--bg-1);
+  font-feature-settings: "ss01", "cv05";
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Headings — display serif with tight tracking */
+.h-display, h1.display {
+  font-family: var(--font-display);
+  font-variation-settings: var(--fraunces-display);
+  font-weight: 500;
+  font-size: clamp(44px, 6vw, 84px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: var(--fg-1);
+  text-wrap: balance;
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-weight: 500;
+  font-size: var(--fs-3xl);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  color: var(--fg-1);
+  text-wrap: balance;
+  margin: 0;
+}
+
+h2, .h2 {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 48;
+  font-weight: 500;
+  font-size: var(--fs-2xl);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+  margin: 0;
+  text-wrap: balance;
+}
+
+h3, .h3 {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 24;
+  font-weight: 500;
+  font-size: var(--fs-xl);
+  line-height: 1.2;
+  color: var(--fg-1);
+  margin: 0;
+}
+
+h4, .h4 {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: var(--fs-md);
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  color: var(--fg-1);
+  margin: 0;
+}
+
+/* "Eyebrow" — small caps label, cartographic */
+.eyebrow, .label {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+/* Zone code / monospace chips */
+.zone-code, code, kbd, .mono {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.92em;
+  letter-spacing: 0.01em;
+}
+
+p, .p {
+  font-family: var(--font-ui);
+  font-size: var(--fs-base);
+  line-height: 1.55;
+  color: var(--fg-2);
+  margin: 0 0 var(--space-4);
+  max-width: var(--reading-max);
+}
+
+.lede {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 14;
+  font-size: var(--fs-lg);
+  line-height: 1.4;
+  color: var(--fg-2);
+  max-width: var(--reading-max);
+}
+
+small, .small {
+  font-size: var(--fs-sm);
+  color: var(--fg-3);
+}
+
+a {
+  color: var(--harbour-ink);
+  text-decoration: underline;
+  text-decoration-color: rgba(43, 93, 117, 0.35);
+  text-underline-offset: 0.15em;
+  transition: text-decoration-color var(--dur) var(--ease-out);
+}
+a:hover { text-decoration-color: currentColor; }
+
+hr {
+  border: 0;
+  border-top: var(--rule-width) solid var(--border-hair);
+  margin: var(--space-8) 0;
+}
+
+/* Selection matches paper highlight */
+::selection { background: var(--ochre-wash); color: var(--ink); }

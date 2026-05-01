@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Zoning Comparison — Modern Democracy</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../parcel-lookup/styles.css">
+<style>
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border-hair); border-radius: 6px; overflow: hidden; }
+  .col { padding: 20px 22px; }
+  .col.current { background: rgba(168,57,28,0.03); border-right: 1px solid var(--border-hair); }
+  .col.draft { background: rgba(200,148,52,0.04); }
+  .col-head { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--ink); }
+  .col-head .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .col-head .name { font-family: var(--font-ui); font-weight: 600; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); }
+  .col-head .sub { font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-3); margin-left: auto; }
+  .diff-row { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; padding: 0; border-bottom: 1px solid var(--border-hair); }
+  .diff-row:last-child { border-bottom: 0; }
+  .diff-side { padding: 12px 18px; font-family: var(--font-ui); font-size: 14px; color: var(--fg-2); }
+  .diff-side.label { background: var(--paper-3); padding: 12px 14px; font-family: var(--font-ui); font-weight: 500; font-size: 13px; color: var(--ink); border-left: 1px solid var(--border-hair); border-right: 1px solid var(--border-hair); min-width: 180px; }
+  .diff-val { font-family: var(--font-mono); font-weight: 500; color: var(--ink); display: flex; gap: 10px; align-items: center; justify-content: flex-end; }
+  .diff-val.current { justify-content: flex-end; color: var(--brick-ink); }
+  .diff-val.draft { justify-content: flex-start; color: var(--ochre-ink); }
+  .diff-marker { font-family: var(--font-mono); font-size: 11px; padding: 2px 6px; border-radius: 2px; letter-spacing: 0.05em; }
+  .diff-marker.changed { background: var(--ochre-wash); color: var(--ochre-ink); }
+  .diff-marker.same { background: var(--paper-2); color: var(--ink-3); }
+  .diff-marker.removed { background: var(--brick-wash); color: var(--brick-ink); }
+  .summary-bar { background: var(--paper-2); border: 1px solid var(--border-hair); border-radius: 6px; padding: 18px 22px; margin-bottom: 24px; display: flex; gap: 32px; align-items: center; }
+  .summary-stat .n { font-family: var(--font-display); font-variation-settings: "opsz" 72; font-weight: 500; font-size: 28px; line-height: 1; color: var(--ink); }
+  .summary-stat .l { font-family: var(--font-ui); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-3); margin-top: 4px; }
+  .summary-stat.changed .n { color: var(--ochre-ink); }
+  .summary-stat.removed .n { color: var(--brick-ink); }
+</style>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useEffect } = React;
+
+const DIFFS = [
+  { k: "Zone code", c: "R-1L", d: "RN-1", status: "changed" },
+  { k: "Zone name", c: "Single-detached residential", d: "Residential neighbourhood — low", status: "changed" },
+  { k: "Lot area (minimum, interior)", c: "540 m²", d: "460 m²", status: "changed" },
+  { k: "Lot frontage (minimum)", c: "18.0 m", d: "15.0 m", status: "changed" },
+  { k: "Front yard (minimum)", c: "6.0 m", d: "4.5 m", status: "changed" },
+  { k: "Building height (maximum)", c: "10.5 m", d: "10.5 m", status: "same" },
+  { k: "Lot coverage (maximum)", c: "35%", d: "40%", status: "changed" },
+  { k: "Secondary suite", c: "Conditional", d: "Permitted", status: "changed" },
+  { k: "Backyard suite", c: "—", d: "Permitted", status: "added" },
+  { k: "Home occupation — parking", c: "1 additional space required", d: "—", status: "removed" },
+];
+
+function App() {
+  useEffect(() => { lucide.createIcons(); });
+  const changed = DIFFS.filter(d => d.status === 'changed').length;
+  const added   = DIFFS.filter(d => d.status === 'added').length;
+  const removed = DIFFS.filter(d => d.status === 'removed').length;
+  const same    = DIFFS.filter(d => d.status === 'same').length;
+  return (
+    <div className="app">
+      <header className="app-header">
+        <img src="../../assets/logo-wordmark.svg" alt="Modern Democracy" className="wm" />
+        <nav>
+          <a>Parcel lookup</a>
+          <a className="active">Compare bylaws</a>
+          <a>Map</a>
+          <a>About</a>
+        </nav>
+      </header>
+      <main className="app-main">
+        <div style={{marginBottom: 28}}>
+          <div className="eyebrow" style={{fontFamily:'var(--font-ui)', fontWeight:600, fontSize:11, letterSpacing:'0.14em', textTransform:'uppercase', color:'var(--fg-3)', marginBottom:10}}>Comparison</div>
+          <h1 style={{fontFamily:'var(--font-display)', fontVariationSettings:'"opsz" 72', fontWeight:500, fontSize:44, lineHeight:1, letterSpacing:'-0.02em', margin:'0 0 10px'}}>165 Richmond Street</h1>
+          <p style={{fontFamily:'var(--font-ui)', fontSize:15, color:'var(--fg-3)', maxWidth:'60ch'}}>How the draft bylaw changes zoning rules for this parcel. Values that differ are marked in ochre; new rules, in green; removed rules, in brick.</p>
+        </div>
+
+        <div className="summary-bar">
+          <div className="summary-stat changed"><div className="n">{changed}</div><div className="l">Changed</div></div>
+          <div className="summary-stat" style={{color:'#2a5a2d'}}><div className="n" style={{color:'#2a5a2d'}}>{added}</div><div className="l">Added</div></div>
+          <div className="summary-stat removed"><div className="n">{removed}</div><div className="l">Removed</div></div>
+          <div className="summary-stat"><div className="n" style={{color:'var(--fg-3)'}}>{same}</div><div className="l">Unchanged</div></div>
+          <div style={{marginLeft:'auto', display:'flex', gap:8}}>
+            <button className="btn btn-secondary"><i data-lucide="filter" style={{width:14,height:14}}></i> Filter</button>
+            <button className="btn btn-secondary"><i data-lucide="download" style={{width:14,height:14}}></i> Export</button>
+          </div>
+        </div>
+
+        <div className="compare-grid">
+          <div className="col current">
+            <div className="col-head">
+              <span className="dot" style={{background:'var(--brick)'}}></span>
+              <span className="name">Current bylaw</span>
+              <span className="sub">PH-ZD.2 rev 049 · in force</span>
+            </div>
+          </div>
+          <div className="col draft">
+            <div className="col-head">
+              <span className="dot" style={{background:'var(--ochre)'}}></span>
+              <span className="name">Draft bylaw</span>
+              <span className="sub">2026 draft · not in force</span>
+            </div>
+          </div>
+          {DIFFS.map((d,i) => {
+            const isAdded = d.status === 'added';
+            const isRemoved = d.status === 'removed';
+            return (
+              <div className="diff-row" key={i} style={{gridColumn:'1 / -1'}}>
+                <div className={"diff-side diff-val " + (isRemoved ? 'current' : (d.status === 'same' ? '' : 'current'))}>
+                  <span style={{opacity: isAdded ? 0.35 : 1}}>{d.c}</span>
+                  {d.status !== 'same' && !isAdded && (
+                    <span className={"diff-marker " + (isRemoved ? 'removed' : 'changed')}>
+                      {isRemoved ? 'REMOVED' : 'WAS'}
+                    </span>
+                  )}
+                </div>
+                <div className="diff-side label">{d.k}</div>
+                <div className={"diff-side diff-val " + (d.status === 'same' ? '' : 'draft')}>
+                  {d.status !== 'same' && !isRemoved && (
+                    <span className={"diff-marker " + (isAdded ? 'changed' : 'changed')} style={isAdded ? {background:'rgba(63,122,66,0.15)', color:'#2a5a2d'} : {}}>
+                      {isAdded ? 'NEW' : 'NOW'}
+                    </span>
+                  )}
+                  <span style={{opacity: isRemoved ? 0.35 : 1}}>{d.d}</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div style={{marginTop:28, fontFamily:'var(--font-mono)', fontSize:12, color:'var(--fg-3)'}}>
+          Sources: charlottetown-zoning-bylaw.pdf (current) · charlottetown-zoning-bylaw-draft.pdf (draft) · compared March 9, 2026
+        </div>
+      </main>
+      <footer className="app-footer">
+        <div className="row">
+          <div>Compare the current and draft Charlottetown zoning bylaws, parcel by parcel.</div>
+          <div style={{marginLeft:'auto'}}>Source: <a>github.com/Modern-Democracy/mdopendata</a></div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body></html>

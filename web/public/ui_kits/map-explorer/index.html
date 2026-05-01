@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Map Explorer — Modern Democracy</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../parcel-lookup/styles.css">
+<style>
+  html, body, #root { height: 100%; margin: 0; }
+  .map-app { display: grid; grid-template-rows: auto 1fr; height: 100vh; }
+  .map-body { display: grid; grid-template-columns: 280px 1fr 320px; height: 100%; overflow: hidden; }
+  .map-panel { background: var(--paper-2); border-right: 1px solid var(--border-hair); overflow-y: auto; padding: 18px 18px 40px; }
+  .map-panel.right { border-right: 0; border-left: 1px solid var(--border-hair); }
+  .panel-title { font-family: var(--font-ui); font-weight: 600; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); margin: 0 0 10px; }
+  .panel-title:not(:first-child) { margin-top: 22px; }
+  .layer { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 4px; cursor: pointer; }
+  .layer:hover { background: var(--paper-3); }
+  .layer input { accent-color: var(--forest); }
+  .layer .sw { width: 16px; height: 16px; border-radius: 3px; border: 1px solid rgba(26,22,18,0.15); }
+  .layer .name { font-family: var(--font-ui); font-size: 13px; color: var(--ink); }
+  .layer .count { margin-left: auto; font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-3); }
+  .map-canvas { position: relative; background: var(--paper-3); overflow: hidden; }
+  .map-controls { position: absolute; top: 16px; right: 16px; background: var(--paper); border: 1px solid var(--border); border-radius: 4px; box-shadow: var(--shadow-sm); display: grid; }
+  .map-controls button { background: transparent; border: 0; padding: 8px 10px; cursor: pointer; border-bottom: 1px solid var(--border-hair); color: var(--ink); display: flex; align-items:center; justify-content:center; }
+  .map-controls button:last-child { border-bottom: 0; }
+  .map-controls button:hover { background: var(--paper-2); }
+  .scalebar { position: absolute; bottom: 16px; left: 16px; font-family: var(--font-mono); font-size: 11px; color: var(--ink); background: rgba(245,239,225,0.92); padding: 6px 10px; border: 1px solid var(--border); border-radius: 3px; display: flex; align-items: center; gap: 8px; }
+  .scalebar .bar { width: 80px; height: 4px; background: linear-gradient(to right, var(--ink) 50%, #fff 50%); border: 1px solid var(--ink); }
+  .legend { position: absolute; bottom: 16px; right: 16px; background: rgba(245,239,225,0.96); border: 1px solid var(--border); border-radius: 4px; padding: 12px 14px; min-width: 180px; }
+  .legend h4 { font-family: var(--font-ui); font-weight: 600; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); margin: 0 0 8px; }
+  .legend .row { display:flex; align-items:center; gap:8px; font-family: var(--font-ui); font-size: 12px; color: var(--ink); padding: 3px 0; }
+  .legend .sw { width: 14px; height: 14px; border-radius: 2px; border: 1px solid rgba(26,22,18,0.15); }
+  .search-overlay { position: absolute; top: 16px; left: 16px; width: 340px; background: var(--paper); border: 1px solid var(--border); border-radius: 4px; box-shadow: var(--shadow-sm); display: flex; align-items: center; padding: 4px 4px 4px 12px; }
+  .search-overlay svg { color: var(--fg-3); }
+  .search-overlay input { flex: 1; border: 0; outline: none; padding: 8px 10px; font-family: var(--font-ui); font-size: 14px; background: transparent; color: var(--ink); }
+  .selected-card { background: var(--paper); border: 1px solid var(--border); border-radius: 4px; padding: 14px; margin-bottom: 14px; }
+  .selected-card .addr { font-family: var(--font-display); font-variation-settings: "opsz" 48; font-weight: 500; font-size: 20px; line-height: 1.1; color: var(--ink); margin: 0 0 4px; }
+  .selected-card .pid { font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-3); margin-bottom: 12px; }
+  .selected-card .zchip { font-family: var(--font-mono); font-weight: 600; font-size: 14px; padding: 4px 10px; border-radius: 3px; border: 1px solid rgba(26,22,18,0.12); display:inline-block; margin-bottom: 10px; }
+  .selected-card .mini-rules { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 14px; font-family: var(--font-ui); font-size: 12px; }
+  .selected-card .mini-rules .k { color: var(--fg-3); }
+  .selected-card .mini-rules .v { font-family: var(--font-mono); color: var(--ink); text-align: right; }
+</style>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useEffect, useState } = React;
+
+const LEGEND = [
+  { c: 'var(--zone-residential)', n: 'Residential', code: 'R-1L / R-2 / R-3' },
+  { c: 'var(--zone-commercial)', n: 'Commercial', code: 'C-1 / C-2' },
+  { c: 'var(--zone-mixed)', n: 'Mixed use', code: 'DMU / MU' },
+  { c: 'var(--zone-institutional)', n: 'Institutional', code: 'I' },
+  { c: 'var(--zone-openspace)', n: 'Open space', code: 'OS / P' },
+  { c: 'var(--zone-waterfront)', n: 'Waterfront', code: 'WF' },
+  { c: 'var(--zone-heritage)', n: 'Heritage overlay', code: 'HER' },
+];
+
+function MapCanvas({ onSelect, selectedId }) {
+  const parcels = [
+    { id:'a', x:60, y:80, w:120, h:70, c:'var(--zone-residential)' },
+    { id:'b', x:180, y:80, w:120, h:70, c:'var(--zone-residential)' },
+    { id:'c', x:300, y:80, w:140, h:70, c:'var(--zone-mixed)' },
+    { id:'d', x:60, y:150, w:100, h:90, c:'var(--zone-residential)' },
+    { id:'e', x:160, y:150, w:140, h:90, c:'var(--zone-commercial)' },
+    { id:'f', x:300, y:150, w:140, h:90, c:'var(--zone-mixed)' },
+    { id:'g', x:60, y:260, w:180, h:110, c:'var(--zone-openspace)' },
+    { id:'h', x:240, y:260, w:200, h:110, c:'var(--zone-institutional)' },
+    { id:'i', x:460, y:80, w:130, h:70, c:'var(--zone-waterfront)' },
+    { id:'j', x:460, y:150, w:130, h:90, c:'var(--zone-waterfront)' },
+    { id:'k', x:460, y:260, w:130, h:110, c:'var(--zone-heritage)' },
+    { id:'l', x:600, y:80, w:160, h:160, c:'var(--zone-residential)' },
+    { id:'m', x:600, y:260, w:160, h:110, c:'var(--zone-commercial)' },
+    { id:'n', x:60, y:380, w:180, h:100, c:'var(--zone-residential)' },
+    { id:'o', x:240, y:380, w:200, h:100, c:'var(--zone-residential)' },
+    { id:'p', x:460, y:380, w:130, h:100, c:'var(--zone-heritage)' },
+    { id:'q', x:600, y:380, w:160, h:100, c:'var(--zone-residential)' },
+  ];
+  return (
+    <svg viewBox="0 0 820 520" preserveAspectRatio="xMidYMid meet" style={{width:'100%', height:'100%', display:'block'}}>
+      <defs>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M40 0 L0 0 0 40" fill="none" stroke="rgba(26,22,18,0.05)" strokeWidth="0.5"/>
+        </pattern>
+        <pattern id="water" patternUnits="userSpaceOnUse" width="10" height="6">
+          <path d="M0 3 Q2.5 0, 5 3 T10 3" fill="none" stroke="rgba(43,93,117,0.35)" strokeWidth="0.6"/>
+        </pattern>
+      </defs>
+      <rect width="820" height="520" fill="var(--paper-3)"/>
+      <rect width="820" height="520" fill="url(#grid)"/>
+      {/* Harbour to north */}
+      <rect x="0" y="0" width="820" height="60" fill="var(--harbour-wash)"/>
+      <rect x="0" y="0" width="820" height="60" fill="url(#water)"/>
+      <text x="16" y="38" fontFamily="Fraunces, serif" fontStyle="italic" fontSize="18" fill="var(--harbour-ink)" opacity="0.7">Charlottetown Harbour</text>
+      {/* Streets */}
+      <g stroke="var(--paper)" strokeWidth="8" fill="none">
+        <path d="M0 70 L820 70"/>
+        <path d="M170 60 L170 520"/>
+        <path d="M300 60 L300 520"/>
+        <path d="M450 60 L450 520"/>
+        <path d="M590 60 L590 520"/>
+        <path d="M0 250 L820 250"/>
+        <path d="M0 370 L820 370"/>
+      </g>
+      {/* Parcels */}
+      {parcels.map(p => (
+        <g key={p.id}>
+          <rect x={p.x} y={p.y} width={p.w} height={p.h}
+            fill={p.c}
+            stroke={selectedId === p.id ? 'var(--brick)' : 'rgba(26,22,18,0.25)'}
+            strokeWidth={selectedId === p.id ? 2.5 : 0.8}
+            style={{cursor:'pointer', transition: 'stroke 150ms'}}
+            onClick={() => onSelect(p.id)}
+          />
+        </g>
+      ))}
+      {/* Street labels */}
+      <g fontFamily="IBM Plex Sans, sans-serif" fontSize="9" fill="var(--fg-3)" letterSpacing="0.05em">
+        <text x="420" y="77" textAnchor="middle">GREAT GEORGE STREET</text>
+        <text x="420" y="257" textAnchor="middle">EUSTON STREET</text>
+        <text x="420" y="377" textAnchor="middle">KENT STREET</text>
+        <text x="305" y="300" transform="rotate(-90 305 300)" textAnchor="middle">QUEEN ST</text>
+        <text x="455" y="300" transform="rotate(-90 455 300)" textAnchor="middle">UNIVERSITY AVE</text>
+      </g>
+      {/* Neighbourhood label */}
+      <text x="760" y="490" fontFamily="Fraunces, serif" fontStyle="italic" fontSize="14" fill="var(--ink-3)" textAnchor="end" opacity="0.7">DOWNTOWN</text>
+    </svg>
+  );
+}
+
+function App() {
+  const [selectedId, setSelectedId] = useState('e');
+  const [layers, setLayers] = useState({ zoning: true, parcels: true, streets: true, heritage: true, neighbourhoods: false, wards: false, cycling: false });
+  useEffect(() => { lucide.createIcons(); });
+
+  return (
+    <div className="map-app">
+      <header className="app-header">
+        <img src="../../assets/logo-wordmark.svg" alt="Modern Democracy" className="wm" />
+        <nav>
+          <a>Parcel lookup</a>
+          <a>Compare bylaws</a>
+          <a className="active">Map</a>
+          <a>About</a>
+        </nav>
+      </header>
+      <div className="map-body">
+        <aside className="map-panel">
+          <h3 className="panel-title">Base layers</h3>
+          <label className="layer"><input type="checkbox" checked={layers.zoning} onChange={e=>setLayers({...layers, zoning:e.target.checked})}/><span className="sw" style={{background:'var(--zone-residential)'}}></span><span className="name">Zoning</span><span className="count">42</span></label>
+          <label className="layer"><input type="checkbox" checked={layers.parcels} onChange={e=>setLayers({...layers, parcels:e.target.checked})}/><span className="sw" style={{background:'var(--paper-2)', borderColor:'var(--ink-3)'}}></span><span className="name">Parcels</span><span className="count">14,208</span></label>
+          <label className="layer"><input type="checkbox" checked={layers.streets} onChange={e=>setLayers({...layers, streets:e.target.checked})}/><span className="sw" style={{background:'var(--paper)', borderColor:'var(--ink-3)'}}></span><span className="name">Streets</span><span className="count">612</span></label>
+
+          <h3 className="panel-title">Overlays</h3>
+          <label className="layer"><input type="checkbox" checked={layers.heritage} onChange={e=>setLayers({...layers, heritage:e.target.checked})}/><span className="sw" style={{background:'var(--zone-heritage)'}}></span><span className="name">Heritage</span><span className="count">186</span></label>
+          <label className="layer"><input type="checkbox" checked={layers.neighbourhoods} onChange={e=>setLayers({...layers, neighbourhoods:e.target.checked})}/><span className="sw" style={{background:'transparent', borderStyle:'dashed'}}></span><span className="name">Neighbourhoods</span><span className="count">14</span></label>
+          <label className="layer"><input type="checkbox" checked={layers.wards} onChange={e=>setLayers({...layers, wards:e.target.checked})}/><span className="sw" style={{background:'transparent', borderColor:'var(--harbour)'}}></span><span className="name">Wards</span><span className="count">8</span></label>
+          <label className="layer"><input type="checkbox" checked={layers.cycling} onChange={e=>setLayers({...layers, cycling:e.target.checked})}/><span className="sw" style={{background:'var(--harbour-wash)'}}></span><span className="name">Cycling routes</span><span className="count">—</span></label>
+
+          <h3 className="panel-title">Bylaw version</h3>
+          <label className="layer"><input type="radio" name="bv" defaultChecked/><span className="sw" style={{background:'var(--brick)'}}></span><span className="name">Current</span></label>
+          <label className="layer"><input type="radio" name="bv"/><span className="sw" style={{background:'var(--ochre)'}}></span><span className="name">Draft</span></label>
+        </aside>
+        <div className="map-canvas">
+          <MapCanvas onSelect={setSelectedId} selectedId={selectedId} />
+          <div className="search-overlay">
+            <i data-lucide="search" style={{width:16, height:16}}></i>
+            <input placeholder="Find an address or PID" />
+          </div>
+          <div className="map-controls">
+            <button title="Zoom in"><i data-lucide="plus" style={{width:16, height:16}}></i></button>
+            <button title="Zoom out"><i data-lucide="minus" style={{width:16, height:16}}></i></button>
+            <button title="Recenter"><i data-lucide="locate" style={{width:16, height:16}}></i></button>
+            <button title="Layers"><i data-lucide="layers" style={{width:16, height:16}}></i></button>
+          </div>
+          <div className="scalebar"><div className="bar"></div><span>100 m</span></div>
+          <div className="legend">
+            <h4>Zoning</h4>
+            {LEGEND.map((l,i) => (
+              <div className="row" key={i}><span className="sw" style={{background:l.c}}></span><span>{l.n}</span></div>
+            ))}
+          </div>
+        </div>
+        <aside className="map-panel right">
+          <h3 className="panel-title">Selected parcel</h3>
+          <div className="selected-card">
+            <h4 className="addr">81 University Avenue</h4>
+            <div className="pid">PID 421009 · 0.14 ha</div>
+            <span className="zchip" style={{background:'var(--zone-commercial)'}}>C-2</span>
+            <div style={{fontFamily:'var(--font-ui)', fontSize:12, color:'var(--fg-3)', marginBottom:12}}>General commercial</div>
+            <div className="mini-rules">
+              <div className="k">Lot area</div><div className="v">1,400 m²</div>
+              <div className="k">Height max</div><div className="v">14.0 m</div>
+              <div className="k">Front yard</div><div className="v">3.0 m</div>
+              <div className="k">Parking</div><div className="v">1 / 30 m²</div>
+            </div>
+          </div>
+          <div style={{display:'grid', gap:8}}>
+            <button className="btn btn-primary" style={{justifyContent:'center'}}>Open full parcel</button>
+            <button className="btn btn-secondary" style={{justifyContent:'center'}}><i data-lucide="git-compare" style={{width:14, height:14}}></i> Compare to draft</button>
+          </div>
+
+          <h3 className="panel-title">Nearby changes</h3>
+          <div style={{fontFamily:'var(--font-ui)', fontSize:13, color:'var(--fg-2)', lineHeight:1.5}}>
+            <div style={{padding:'10px 0', borderBottom:'1px solid var(--border-hair)'}}>
+              <div style={{color:'var(--ink)', fontWeight:500}}>Great George &amp; Euston</div>
+              <div style={{color:'var(--fg-3)', fontSize:12}}>C-2 → DMU in draft · 8 parcels</div>
+            </div>
+            <div style={{padding:'10px 0', borderBottom:'1px solid var(--border-hair)'}}>
+              <div style={{color:'var(--ink)', fontWeight:500}}>Richmond heritage corridor</div>
+              <div style={{color:'var(--fg-3)', fontSize:12}}>New HER overlay · 24 parcels</div>
+            </div>
+            <div style={{padding:'10px 0'}}>
+              <div style={{color:'var(--ink)', fontWeight:500}}>Kent Street east</div>
+              <div style={{color:'var(--fg-3)', fontSize:12}}>Reduced setbacks · 31 parcels</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body></html>

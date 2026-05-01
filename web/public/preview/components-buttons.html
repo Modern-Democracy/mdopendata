@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 22px; background: var(--paper); }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+  .btn { font-family: var(--font-ui); font-size: 14px; font-weight: 500; line-height: 1; padding: 10px 16px; border-radius: 4px; border: 1px solid transparent; cursor: pointer; transition: background var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out); display: inline-flex; align-items: center; gap: 8px; }
+  .btn-primary { background: var(--forest); color: #f5efe1; }
+  .btn-primary:hover { background: var(--forest-ink); }
+  .btn-secondary { background: var(--paper); color: var(--ink); border-color: var(--border); }
+  .btn-secondary:hover { background: var(--paper-2); border-color: var(--border-bold); }
+  .btn-ghost { background: transparent; color: var(--ink); }
+  .btn-ghost:hover { background: var(--paper-2); }
+  .btn-danger { background: var(--brick); color: #f5efe1; }
+  .btn-danger:hover { background: var(--brick-ink); }
+  .btn-sm { font-size: 12px; padding: 7px 11px; }
+  .btn-lg { font-size: 15px; padding: 13px 20px; }
+  .tag { font-family: var(--font-mono); font-size: 10px; color: var(--fg-3); letter-spacing: 0.1em; text-transform: uppercase; min-width: 72px; }
+</style></head>
+<body>
+  <div class="row">
+    <span class="tag">primary</span>
+    <button class="btn btn-primary btn-lg">Look up parcel</button>
+    <button class="btn btn-primary">Look up parcel</button>
+    <button class="btn btn-primary btn-sm">Look up</button>
+  </div>
+  <div class="row">
+    <span class="tag">secondary</span>
+    <button class="btn btn-secondary btn-lg">View on map</button>
+    <button class="btn btn-secondary">View on map</button>
+    <button class="btn btn-secondary btn-sm">View</button>
+  </div>
+  <div class="row">
+    <span class="tag">ghost</span>
+    <button class="btn btn-ghost">Cancel</button>
+    <button class="btn btn-ghost">Learn more →</button>
+  </div>
+  <div class="row">
+    <span class="tag">danger</span>
+    <button class="btn btn-danger">Remove comparison</button>
+  </div>
+</body></html>
