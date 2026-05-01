@@ -367,6 +367,125 @@ function mapZoneRow(row) {
   };
 }
 
+function mapZoneSectionRow(row) {
+  return {
+    sectionId: toStringValue(row.section_source_id),
+    label: compactText(row.section_label_raw),
+    title: compactText(row.section_title_raw),
+    citations: toJsonValue(row.citations),
+    filePath: compactText(row.repo_relpath),
+  };
+}
+
+function zoneChanged(currentZone, draftZone) {
+  const currentCode = currentZone?.bylawZoneCode || currentZone?.normalizedCode || currentZone?.code || "";
+  const draftCode = draftZone?.bylawZoneCode || draftZone?.normalizedCode || draftZone?.code || "";
+  if (!currentCode && !draftCode) {
+    return "pending";
+  }
+  if (!currentCode) {
+    return "added";
+  }
+  if (!draftCode) {
+    return "removed";
+  }
+  return currentCode === draftCode ? "same" : "changed";
+}
+
+async function loadZoneSections(zoneCode, sourceKind) {
+  if (!zoneCode) {
+    return [];
+  }
+  const sourcePathPattern = sourceKind === "draft"
+    ? "data/zoning/charlottetown-draft/%"
+    : "data/zoning/charlottetown/%";
+  const { rows } = await pool.query(
+    `
+    SELECT
+      s.section_source_id,
+      s.section_label_raw,
+      s.section_title_raw,
+      s.citations,
+      sf.repo_relpath
+    FROM zoning.section s
+    JOIN zoning.source_file sf
+      ON sf.source_file_id = s.source_file_id
+    WHERE s.is_active
+      AND s.document_type = 'zone'
+      AND s.zone_code = $1
+      AND sf.repo_relpath LIKE $2
+    ORDER BY s.source_order, s.section_id
+    LIMIT 12
+    `,
+    [zoneCode, sourcePathPattern],
+  );
+  return rows.map(mapZoneSectionRow);
+}
+
+async function loadZoningComparisonByPid(pid) {
+  const parcel = await loadParcelByPid(pid);
+  if (!parcel) {
+    return null;
+  }
+
+  const currentZone = parcel.zones.current;
+  const draftZone = parcel.zones.draft;
+  const currentLookupCode = currentZone?.bylawZoneCode || currentZone?.normalizedCode || currentZone?.code;
+  const draftLookupCode = draftZone?.bylawZoneCode || draftZone?.normalizedCode || draftZone?.code;
+  const [currentSections, draftSections] = await Promise.all([
+    loadZoneSections(currentLookupCode, "current"),
+    loadZoneSections(draftLookupCode, "draft"),
+  ]);
+
+  return {
+    pid,
+    address: parcel.address,
+    parcel: parcel.parcel,
+    zones: parcel.zones,
+    status: zoneChanged(currentZone, draftZone),
+    rows: [
+      {
+        label: "Zone code",
+        current: currentZone?.code || null,
+        draft: draftZone?.code || null,
+        status: zoneChanged(currentZone, draftZone),
+      },
+      {
+        label: "Zone name",
+        current: currentZone?.name || currentZone?.code || null,
+        draft: draftZone?.name || draftZone?.code || null,
+        status: currentZone?.name === draftZone?.name ? "same" : zoneChanged(currentZone, draftZone),
+      },
+      {
+        label: "Current overlap",
+        current: currentZone?.overlapAreaM2 ?? null,
+        draft: null,
+        status: currentZone?.overlapAreaM2 === null || currentZone?.overlapAreaM2 === undefined ? "pending" : "source",
+      },
+      {
+        label: "Draft overlap",
+        current: null,
+        draft: draftZone?.overlapAreaM2 ?? null,
+        status: draftZone?.overlapAreaM2 === null || draftZone?.overlapAreaM2 === undefined ? "pending" : "source",
+      },
+    ],
+    citations: {
+      current: currentSections,
+      draft: draftSections,
+      status: currentSections.length || draftSections.length ? "available" : "pending",
+      note: currentSections.length || draftSections.length
+        ? "Zone section citations are linked by matched zone code."
+        : "Rule-level comparison is pending because no zone-section citations matched the parcel zones.",
+    },
+    resolution: parcel.resolution,
+    source: {
+      ...parcel.source,
+      currentZoneSections: currentSections.length ? "zoning.section" : null,
+      draftZoneSections: draftSections.length ? "zoning.section" : null,
+    },
+  };
+}
+
 async function loadParcelGeoJson(bbox, limit) {
   const params = [limit];
   let bboxFilter = "";
@@ -1101,6 +1220,24 @@ const server = createServer(async (request, response) => {
         return;
       }
       await sendJson(response, parcel);
+      return;
+    }
+
+    const comparisonMatch = url.pathname.match(/^\/api\/zoning-comparison\/([^/]+)$/);
+    if (comparisonMatch) {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const pid = decodeURIComponent(comparisonMatch[1]).trim();
+      const comparison = await loadZoningComparisonByPid(pid);
+      if (!comparison) {
+        response.writeHead(404, { "content-type": "application/json; charset=utf-8" });
+        response.end(JSON.stringify({ error: "Parcel PID not found.", pid }));
+        return;
+      }
+      await sendJson(response, comparison);
       return;
     }
 

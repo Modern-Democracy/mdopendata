@@ -101,7 +101,7 @@ Recommended routes:
 | 4. Parcel lookup page | Complete | 0.5 to 1 day | Landing page wired to autocomplete and redirect behavior. |
 | 5. Parcel map explorer | Complete | 1 to 1.5 days | Leaflet parcel-centered map, layer controls, selected parcel panel, and comparison redirect. |
 | 6. City-view map | Complete | 0.5 to 1 day | Browse-first Leaflet map with viewport loading and parcel click selection. |
-| 7. Zoning comparison page | Not started | 1 day | Current/draft zone comparison backed by parcel and zone APIs, with citation or pending states. |
+| 7. Zoning comparison page | Complete | 1 day | Current/draft zone comparison backed by parcel and zone APIs, with citation or pending states. |
 | 8. Cleanup and demo hardening | Not started | 1 day | Logo replacement, mockup cleanup, loading/error states, responsive QA, and scripted smoke checks. |
 
 Expected effort for a functional local demo is 6 to 8 working days if the current spatial tables are already loaded, indexed, and geometrically valid enough for viewport and parcel joins.
@@ -174,6 +174,14 @@ Completed on 2026-05-01.
 The city-view map at `/city-view` now loads live Leaflet viewport layers from `/api/parcels.geojson`, `/api/zoning/current.geojson`, and `/api/zoning/draft.geojson`. The page supports current zoning, draft zoning, and parcel-outline toggles with visible feature counts, status messages, and source notes.
 
 Parcel click selection now resolves a clicked WGS84 point through `/api/parcels/point?lon=...&lat=...`, finds the containing parcel, and selects the nearest civic-address PID inside that parcel when available. A resolved PID enables `Open full parcel` routing to `/map-explorer?pid=PID` and `Compare to draft` routing to `/zoning-comparison?pid=PID`.
+
+## Phase 7 Progress
+
+Completed on 2026-05-01.
+
+The zoning comparison route at `/zoning-comparison?pid=PID` now loads live data from `/api/zoning-comparison/:pid`. The API reuses `/api/parcels/:pid` parcel and zone resolution, compares current and draft zone codes and labels, reports current and draft zone overlap areas, and links each zone to available `zoning.section` citations by matched zone code and source path.
+
+The page no longer uses hardcoded mock comparison rows. It shows loading and missing-PID states, current-versus-draft zone fields, source-fact rows for overlap areas, citation cards for current and draft zone sections, explicit pending messages when zone-section citations are unavailable, and route actions back to lookup or the parcel map.
 
 ## Risks and Open Decisions
 
