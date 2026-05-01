@@ -28,6 +28,19 @@ function toJsonValue(value) {
   return value ?? {};
 }
 
+function compactText(value) {
+  const text = toStringValue(value).trim();
+  return text.length === 0 ? null : text;
+}
+
+function normalizeLimit(value, fallback, max) {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed) || parsed <= 0) {
+    return fallback;
+  }
+  return Math.min(Math.trunc(parsed), max);
+}
+
 function reviewDecision(row) {
   const status = row.db_review_status || row.review_status;
   if (status === "accepted") {
@@ -279,6 +292,298 @@ async function sendJson(response, payload) {
   response.end(JSON.stringify(payload));
 }
 
+function mapAddressRow(row) {
+  return {
+    addressId: toStringValue(row.address_id),
+    label: row.label,
+    streetNumber: row.street_number,
+    streetName: row.street_name,
+    unit: row.unit,
+    community: row.community,
+    pid: row.pid === null || row.pid === undefined ? null : toStringValue(row.pid),
+    coordinate: row.lon === null || row.lat === null ? null : {
+      lon: Number(row.lon),
+      lat: Number(row.lat),
+    },
+    confidence: row.confidence,
+    source: {
+      table: "zoning.v_charlottetown_civic_addresses",
+      spatialFeatureId: row.spatial_feature_id,
+      featureKey: row.feature_key,
+      isValid: row.is_valid,
+      validationReason: row.validation_reason,
+    },
+  };
+}
+
+function mapZoneRow(row) {
+  if (!row) {
+    return null;
+  }
+  return {
+    code: compactText(row.zone_code),
+    name: compactText(row.zone_name),
+    normalizedCode: compactText(row.zone_code_normalized),
+    bylawZoneCode: compactText(row.bylaw_zone_code),
+    overlapAreaM2: row.overlap_area_m2 === null ? null : Number(row.overlap_area_m2),
+    source: {
+      table: row.source_table,
+      spatialFeatureId: row.spatial_feature_id,
+      featureKey: row.feature_key,
+      matchMethod: compactText(row.match_method),
+      isValid: row.is_valid,
+      validationReason: row.validation_reason,
+    },
+  };
+}
+
+async function searchAddresses(query, limit) {
+  const normalizedQuery = query.trim();
+  if (normalizedQuery.length < 2) {
+    return [];
+  }
+
+  const { rows } = await pool.query(
+    `
+    WITH address_rows AS (
+      SELECT
+        spatial_feature_id,
+        feature_key,
+        attributes,
+        is_valid,
+        validation_reason,
+        geom,
+        NULLIF(trim(attributes ->> 'APT_NO'), '') AS unit,
+        NULLIF(trim(attributes ->> 'COMM_NM'), '') AS community,
+        NULLIF(trim(attributes ->> 'STREET_NM'), '') AS street_name,
+        NULLIF(trim(attributes ->> 'STREET_NO'), '') AS street_number,
+        NULLIF(trim(attributes ->> 'PID'), '') AS pid
+      FROM zoning.v_charlottetown_civic_addresses
+    ),
+    labelled AS (
+      SELECT
+        *,
+        concat_ws(
+          ', ',
+          concat_ws(
+            ' ',
+            street_number,
+            street_name,
+            CASE WHEN unit IS NOT NULL THEN 'Unit ' || unit END
+          ),
+          community,
+          CASE WHEN pid IS NOT NULL THEN 'PID ' || pid END
+        ) AS label
+      FROM address_rows
+    )
+    SELECT
+      spatial_feature_id,
+      feature_key,
+      is_valid,
+      validation_reason,
+      feature_key AS address_id,
+      label,
+      street_number,
+      street_name,
+      unit,
+      community,
+      pid,
+      ST_X(ST_Transform(geom, 4326)) AS lon,
+      ST_Y(ST_Transform(geom, 4326)) AS lat,
+      CASE
+        WHEN label ILIKE $1 || '%' THEN 'high'
+        WHEN label ILIKE '%' || $1 || '%' THEN 'medium'
+        ELSE 'low'
+      END AS confidence
+    FROM labelled
+    WHERE label ILIKE '%' || $1 || '%'
+       OR pid = $1
+    ORDER BY
+      CASE
+        WHEN pid = $1 THEN 0
+        WHEN label ILIKE $1 || '%' THEN 1
+        WHEN label ILIKE '%' || $1 || '%' THEN 2
+        ELSE 3
+      END,
+      label,
+      spatial_feature_id
+    LIMIT $2
+    `,
+    [normalizedQuery, limit],
+  );
+  return rows.map(mapAddressRow);
+}
+
+async function loadParcelByPid(pid) {
+  const { rows } = await pool.query(
+    `
+    WITH selected_address AS (
+      SELECT
+        spatial_feature_id,
+        feature_key,
+        attributes,
+        is_valid,
+        validation_reason,
+        geom,
+        NULLIF(trim(attributes ->> 'APT_NO'), '') AS unit,
+        NULLIF(trim(attributes ->> 'COMM_NM'), '') AS community,
+        NULLIF(trim(attributes ->> 'STREET_NM'), '') AS street_name,
+        NULLIF(trim(attributes ->> 'STREET_NO'), '') AS street_number,
+        NULLIF(trim(attributes ->> 'PID'), '') AS pid
+      FROM zoning.v_charlottetown_civic_addresses
+      WHERE NULLIF(trim(attributes ->> 'PID'), '') = $1
+         OR NULLIF(trim(attributes ->> 'pid2'), '') = $1
+      ORDER BY spatial_feature_id
+      LIMIT 1
+    ),
+    selected_parcel AS (
+      SELECT
+        p.spatial_feature_id,
+        p.feature_key,
+        p.attributes,
+        p.is_valid,
+        p.validation_reason,
+        p.geom
+      FROM selected_address a
+      JOIN zoning.v_charlottetown_parcel_map p
+        ON ST_Covers(p.geom, a.geom)
+      ORDER BY ST_Area(p.geom), p.spatial_feature_id
+      LIMIT 1
+    ),
+    current_zone AS (
+      SELECT
+        'zoning.v_charlottetown_current_zoning_boundaries' AS source_table,
+        z.spatial_feature_id,
+        z.feature_key,
+        COALESCE(z.bylaw_zone_code, z.zone_code_normalized, z.zone_code_raw, z."ZONING") AS zone_code,
+        NULL::text AS zone_name,
+        z.zone_code_normalized,
+        z.bylaw_zone_code,
+        z.match_method,
+        z.is_valid,
+        z.validation_reason,
+        ST_Area(ST_Intersection(z.geom, p.geom)) AS overlap_area_m2
+      FROM selected_parcel p
+      JOIN zoning.v_charlottetown_current_zoning_boundaries z
+        ON ST_Intersects(z.geom, p.geom)
+      ORDER BY overlap_area_m2 DESC NULLS LAST, z.spatial_feature_id
+      LIMIT 1
+    ),
+    draft_zone AS (
+      SELECT
+        'zoning.v_charlottetown_draft_zoning_boundaries' AS source_table,
+        z.spatial_feature_id,
+        z.feature_key,
+        COALESCE(z.bylaw_zone_code, z.zone_code_normalized, z.zone_code_raw, z.zone_code) AS zone_code,
+        z.zone_name,
+        z.zone_code_normalized,
+        z.bylaw_zone_code,
+        z.match_method,
+        z.is_valid,
+        z.validation_reason,
+        ST_Area(ST_Intersection(z.geom, p.geom)) AS overlap_area_m2
+      FROM selected_parcel p
+      JOIN zoning.v_charlottetown_draft_zoning_boundaries z
+        ON ST_Intersects(z.geom, p.geom)
+      ORDER BY overlap_area_m2 DESC NULLS LAST, z.spatial_feature_id
+      LIMIT 1
+    )
+    SELECT
+      jsonb_build_object(
+        'address', (
+          SELECT jsonb_build_object(
+            'spatial_feature_id', spatial_feature_id,
+            'feature_key', feature_key,
+            'address_id', feature_key,
+            'label', concat_ws(
+              ', ',
+              concat_ws(
+                ' ',
+                street_number,
+                street_name,
+                CASE WHEN unit IS NOT NULL THEN 'Unit ' || unit END
+              ),
+              community,
+              CASE WHEN pid IS NOT NULL THEN 'PID ' || pid END
+            ),
+            'street_number', street_number,
+            'street_name', street_name,
+            'unit', unit,
+            'community', community,
+            'pid', pid,
+            'lon', ST_X(ST_Transform(geom, 4326)),
+            'lat', ST_Y(ST_Transform(geom, 4326)),
+            'is_valid', is_valid,
+            'validation_reason', validation_reason
+          )
+          FROM selected_address
+        ),
+        'parcel', (
+          SELECT jsonb_build_object(
+            'spatial_feature_id', spatial_feature_id,
+            'feature_key', feature_key,
+            'attributes', attributes,
+            'area_m2', ST_Area(geom),
+            'is_valid', is_valid,
+            'validation_reason', validation_reason,
+            'centroid', jsonb_build_object(
+              'lon', ST_X(ST_Transform(ST_Centroid(geom), 4326)),
+              'lat', ST_Y(ST_Transform(ST_Centroid(geom), 4326))
+            ),
+            'geometry', ST_AsGeoJSON(ST_Transform(geom, 4326))::jsonb
+          )
+          FROM selected_parcel
+        ),
+        'current_zone', (SELECT to_jsonb(current_zone) FROM current_zone),
+        'draft_zone', (SELECT to_jsonb(draft_zone) FROM draft_zone)
+      ) AS payload
+    `,
+    [pid],
+  );
+
+  const payload = rows[0]?.payload;
+  if (!payload?.address) {
+    return null;
+  }
+
+  return {
+    pid,
+    address: mapAddressRow({ ...payload.address, confidence: "pid" }),
+    parcel: payload.parcel
+      ? {
+          parcelId: toStringValue(payload.parcel.feature_key),
+          areaM2: Number(payload.parcel.area_m2),
+          centroid: payload.parcel.centroid,
+          geometry: payload.parcel.geometry,
+          attributes: payload.parcel.attributes,
+          source: {
+            table: "zoning.v_charlottetown_parcel_map",
+            spatialFeatureId: payload.parcel.spatial_feature_id,
+            featureKey: payload.parcel.feature_key,
+            isValid: payload.parcel.is_valid,
+            validationReason: payload.parcel.validation_reason,
+          },
+        }
+      : null,
+    zones: {
+      current: mapZoneRow(payload.current_zone),
+      draft: mapZoneRow(payload.draft_zone),
+    },
+    resolution: {
+      method: payload.parcel ? "address_pid_to_point_in_parcel" : "address_pid_only",
+      parcelPidNative: false,
+      status: payload.parcel ? "resolved" : "address_found_no_containing_parcel",
+    },
+    source: {
+      freshness: "database",
+      addressTable: "zoning.v_charlottetown_civic_addresses",
+      parcelTable: "zoning.v_charlottetown_parcel_map",
+      currentZoningTable: "zoning.v_charlottetown_current_zoning_boundaries",
+      draftZoningTable: "zoning.v_charlottetown_draft_zoning_boundaries",
+    },
+  };
+}
+
 const routeEntrypoints = new Map([
   ["/", { file: "/ui_kits/parcel-lookup/index.html", baseHref: "/ui_kits/parcel-lookup/" }],
   ["/parcel-lookup", { file: "/ui_kits/parcel-lookup/index.html", baseHref: "/ui_kits/parcel-lookup/" }],
@@ -336,6 +641,41 @@ const server = createServer(async (request, response) => {
     if (url.pathname === "/api/section-equivalence") {
       const rows = await loadReviewRows();
       await sendJson(response, { source: "zoning.section_equivalence", rows: summarizeRows(rows) });
+      return;
+    }
+
+    if (url.pathname === "/api/addresses") {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const query = url.searchParams.get("q") || "";
+      const limit = normalizeLimit(url.searchParams.get("limit"), 10, 25);
+      const rows = await searchAddresses(query, limit);
+      await sendJson(response, {
+        source: "zoning.v_charlottetown_civic_addresses",
+        query: query.trim(),
+        rows,
+      });
+      return;
+    }
+
+    const parcelMatch = url.pathname.match(/^\/api\/parcels\/([^/]+)$/);
+    if (parcelMatch) {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const pid = decodeURIComponent(parcelMatch[1]).trim();
+      const parcel = await loadParcelByPid(pid);
+      if (!parcel) {
+        response.writeHead(404, { "content-type": "application/json; charset=utf-8" });
+        response.end(JSON.stringify({ error: "Parcel PID not found.", pid }));
+        return;
+      }
+      await sendJson(response, parcel);
       return;
     }
 

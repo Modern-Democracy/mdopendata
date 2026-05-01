@@ -96,7 +96,7 @@ Recommended routes:
 | Phase | Status | Estimate | Deliverable |
 | --- | --- | --- | --- |
 | 1. Inventory and routing | Complete | 0.5 day | Route map, kit asset inventory, chosen logo asset, and static page entry points. |
-| 2. Address and parcel APIs | Not started | 1 day | `/api/addresses`, `/api/parcels/:pid`, selected parcel geometry, and address-to-parcel resolution. |
+| 2. Address and parcel APIs | Complete | 1 day | `/api/addresses`, `/api/parcels/:pid`, selected parcel geometry, and address-to-parcel resolution. |
 | 3. Map data APIs | Not started | 1 to 1.5 days | GeoJSON endpoints for parcels, current zoning, draft zoning, and bbox filtering. |
 | 4. Parcel lookup page | Not started | 0.5 to 1 day | Landing page wired to autocomplete and redirect behavior. |
 | 5. Parcel map explorer | Not started | 1 to 1.5 days | Leaflet parcel-centered map, layer controls, selected parcel panel, and comparison redirect. |
@@ -127,6 +127,17 @@ Current asset inventory:
 - Selected promoted logo asset: `web/public/assets/logo-island-needle.svg`.
 - Kit-specific parcel lookup CSS: `web/public/ui_kits/parcel-lookup/styles.css`.
 - UI kit source pages and notes: the four `web/public/ui_kits/*` folders listed in this plan.
+
+## Phase 2 Progress
+
+Completed on 2026-05-01.
+
+The web server now exposes the first parcel demo APIs:
+
+- `/api/addresses?q=TEXT&limit=N` searches `zoning.v_charlottetown_civic_addresses`, normalizes address labels from civic address attributes, returns PID, WGS84 point coordinates, confidence, and source metadata.
+- `/api/parcels/:pid` resolves PID through the civic address layer, finds the containing current parcel candidate polygon, returns WGS84 selected parcel geometry, centroid, current zone, draft zone, and explicit resolution/source status.
+
+Parcel identity remains provisional because `zoning.v_charlottetown_parcel_map` does not expose native PID fields. The API reports `parcelPidNative: false` and uses `address_pid_to_point_in_parcel` when a civic address point resolves to a containing parcel polygon.
 
 ## Risks and Open Decisions
 
