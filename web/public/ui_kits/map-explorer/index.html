@@ -41,6 +41,7 @@
   .mini-rules .k { color: var(--fg-3); }
   .mini-rules .v { font-family: var(--font-mono); color: var(--ink); text-align: right; }
   .route-actions { display: grid; gap: 8px; }
+  .route-actions a[aria-disabled="true"] { pointer-events: none; opacity: 0.55; }
   .source-list { display: grid; gap: 8px; font-family: var(--font-ui); font-size: 12.5px; color: var(--fg-2); line-height: 1.35; }
   .source-list .item { padding-bottom: 8px; border-bottom: 1px solid var(--border-hair); }
   .source-list .item:last-child { border-bottom: 0; }
@@ -114,7 +115,6 @@ function Header() {
         <a href="/parcel-lookup">Parcel lookup</a>
         <a href="/zoning-comparison">Compare bylaws</a>
         <a className="active" href="/city-view">Map</a>
-        <a>About</a>
       </nav>
     </header>
   );

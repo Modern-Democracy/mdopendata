@@ -38,6 +38,7 @@
   .mini-rules .k { color: var(--fg-3); }
   .mini-rules .v { font-family: var(--font-mono); color: var(--ink); text-align: right; }
   .route-actions { display: grid; gap: 8px; }
+  .route-actions a[aria-disabled="true"] { pointer-events: none; opacity: 0.55; }
   .source-list { display: grid; gap: 8px; font-family: var(--font-ui); font-size: 12.5px; color: var(--fg-2); line-height: 1.35; }
   .source-list .item { padding-bottom: 8px; border-bottom: 1px solid var(--border-hair); }
   .source-list .item:last-child { border-bottom: 0; }
@@ -59,7 +60,6 @@
       <a href="/parcel-lookup">Parcel lookup</a>
       <a href="/zoning-comparison">Compare bylaws</a>
       <a class="active" href="/city-view">Map</a>
-      <a>About</a>
     </nav>
   </header>
   <div class="map-body">
@@ -95,8 +95,8 @@
       <div id="selected" class="status-card">Click a parcel outline to resolve an address PID.</div>
       <div class="route-actions">
         <a class="btn btn-secondary" href="/parcel-lookup" style="justify-content: center">Search by address</a>
-        <a class="btn btn-primary" id="open-parcel" href="#" aria-disabled="true" style="justify-content: center">Open full parcel</a>
-        <a class="btn btn-secondary" id="compare-parcel" href="#" aria-disabled="true" style="justify-content: center"><i data-lucide="git-compare" style="width:14px;height:14px"></i> Compare to draft</a>
+        <a class="btn btn-primary" id="open-parcel" aria-disabled="true" style="justify-content: center">Open full parcel</a>
+        <a class="btn btn-secondary" id="compare-parcel" aria-disabled="true" style="justify-content: center"><i data-lucide="git-compare" style="width:14px;height:14px"></i> Compare to draft</a>
       </div>
     </aside>
   </div>
@@ -184,8 +184,8 @@ function updateActions(pid) {
   const open = document.getElementById('open-parcel');
   const compare = document.getElementById('compare-parcel');
   if (!pid) {
-    open.href = '#';
-    compare.href = '#';
+    open.removeAttribute('href');
+    compare.removeAttribute('href');
     open.setAttribute('aria-disabled', 'true');
     compare.setAttribute('aria-disabled', 'true');
     return;

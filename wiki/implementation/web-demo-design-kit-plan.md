@@ -102,7 +102,7 @@ Recommended routes:
 | 5. Parcel map explorer | Complete | 1 to 1.5 days | Leaflet parcel-centered map, layer controls, selected parcel panel, and comparison redirect. |
 | 6. City-view map | Complete | 0.5 to 1 day | Browse-first Leaflet map with viewport loading and parcel click selection. |
 | 7. Zoning comparison page | Complete | 1 day | Current/draft zone comparison backed by parcel and zone APIs, with citation or pending states. |
-| 8. Cleanup and demo hardening | Not started | 1 day | Logo replacement, mockup cleanup, loading/error states, responsive QA, and scripted smoke checks. |
+| 8. Cleanup and demo hardening | Complete | 1 day | Logo replacement, mockup cleanup, loading/error states, responsive QA, and scripted smoke checks. |
 
 Expected effort for a functional local demo is 6 to 8 working days if the current spatial tables are already loaded, indexed, and geometrically valid enough for viewport and parcel joins.
 
@@ -182,6 +182,14 @@ Completed on 2026-05-01.
 The zoning comparison route at `/zoning-comparison?pid=PID` now loads live data from `/api/zoning-comparison/:pid`. The API reuses `/api/parcels/:pid` parcel and zone resolution, compares current and draft zone codes and labels, reports current and draft zone overlap areas, and links each zone to available `zoning.section` citations by matched zone code and source path.
 
 The page no longer uses hardcoded mock comparison rows. It shows loading and missing-PID states, current-versus-draft zone fields, source-fact rows for overlap areas, citation cards for current and draft zone sections, explicit pending messages when zone-section citations are unavailable, and route actions back to lookup or the parcel map.
+
+## Phase 8 Progress
+
+Completed on 2026-05-01.
+
+The demo cleanup pass removed remaining mock-only lookup result code, inactive `About` navigation entries, and disabled `#` parcel action links from the active design-kit routes. The city-view parcel actions now remain non-clickable until a PID is resolved, and the pages continue to use `web/public/assets/logo-island-needle.svg` as the shared demo logo.
+
+The repository now includes `npm run web:smoke`, backed by `scripts/smoke-web-demo.mjs`, for static route and API-contract smoke checks. The smoke script verifies the parcel lookup, map explorer, city-view, and zoning comparison routes plus the address, parcel GeoJSON, current zoning GeoJSON, and draft zoning GeoJSON APIs against a running web server.
 
 ## Risks and Open Decisions
 

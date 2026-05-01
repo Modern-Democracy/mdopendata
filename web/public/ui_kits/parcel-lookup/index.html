@@ -15,31 +15,6 @@
 <script type="text/babel">
 const { useState, useEffect, useRef } = React;
 
-const EXAMPLES = [
-  { addr: "165 Richmond Street", pid: "384712", zone: "R-1L", zoneName: "Single-detached residential", zoneColor: "var(--zone-residential)", ward: "Ward 2 — Brighton", area: "0.08 ha" },
-  { addr: "81 University Avenue", pid: "421009", zone: "DMU", zoneName: "Downtown mixed-use", zoneColor: "var(--zone-mixed)", ward: "Ward 4 — Downtown", area: "0.14 ha" },
-  { addr: "22 Longworth Avenue", pid: "296884", zone: "R-2", zoneName: "Two-unit residential", zoneColor: "var(--zone-residential)", ward: "Ward 3 — East Royalty", area: "0.06 ha" },
-];
-
-const REGS = [
-  { req: "Lot area (minimum)", interior: "540 m²", corner: "686 m²", cite: "9.2.1" },
-  { req: "Lot frontage (minimum)", interior: "18.0 m", corner: "22.0 m", cite: "9.2.2" },
-  { req: "Front yard (minimum)", interior: "6.0 m", corner: "6.0 m", cite: "9.2.3" },
-  { req: "Side yard (minimum)", interior: "1.5 m", corner: "1.5 m / 3.0 m", cite: "9.2.4" },
-  { req: "Rear yard (minimum)", interior: "7.5 m", corner: "7.5 m", cite: "9.2.5" },
-  { req: "Building height (maximum)", interior: "10.5 m", corner: "10.5 m", cite: "9.2.6" },
-  { req: "Lot coverage (maximum)", interior: "35%", corner: "35%", cite: "9.2.7" },
-  { req: "Parking (minimum)", interior: "1 space / unit", corner: "1 space / unit", cite: "9.2.8" },
-];
-
-const USES = [
-  { name: "Single-detached dwelling", status: "Permitted", cite: "9.1.1" },
-  { name: "Home occupation", status: "Permitted", cite: "9.1.2" },
-  { name: "Accessory building", status: "Permitted", cite: "9.1.3" },
-  { name: "Secondary suite", status: "Conditional", cite: "9.1.4" },
-  { name: "Bed & breakfast", status: "Conditional", cite: "9.1.5" },
-];
-
 function Header({ onHome }) {
   return (
     <header className="app-header">
@@ -48,7 +23,6 @@ function Header({ onHome }) {
         <a className="active" href="/parcel-lookup">Parcel lookup</a>
         <a href="/zoning-comparison">Compare bylaws</a>
         <a href="/city-view">Map</a>
-        <a>About</a>
       </nav>
     </header>
   );
@@ -192,102 +166,6 @@ function SearchHero({ onSelect }) {
   );
 }
 
-function MiniMap({ zoneColor }) {
-  // Schematic parcel plan — cartographic placeholder
-  return (
-    <div className="mini-map">
-      <svg viewBox="0 0 200 200" width="100%" height="100%" style={{display:'block'}}>
-        <defs>
-          <pattern id="hatch" patternUnits="userSpaceOnUse" width="5" height="5" patternTransform="rotate(45)">
-            <line x1="0" y1="0" x2="0" y2="5" stroke="rgba(26,22,18,0.08)" strokeWidth="1" />
-          </pattern>
-        </defs>
-        <rect width="200" height="200" fill="var(--paper-3)" />
-        <rect width="200" height="200" fill="url(#hatch)" />
-        {/* Streets */}
-        <path d="M0 140 L200 140" stroke="#f5efe1" strokeWidth="14" />
-        <path d="M70 0 L70 200" stroke="#f5efe1" strokeWidth="10" />
-        {/* Other parcels */}
-        <g stroke="rgba(26,22,18,0.25)" strokeWidth="0.8" fill="var(--paper-2)">
-          <rect x="12" y="40" width="48" height="38" />
-          <rect x="12" y="80" width="48" height="38" />
-          <rect x="82" y="40" width="42" height="38" />
-          <rect x="130" y="40" width="58" height="38" />
-          <rect x="82" y="80" width="42" height="38" />
-          <rect x="130" y="80" width="58" height="38" />
-          <rect x="12" y="152" width="48" height="36" />
-          <rect x="82" y="152" width="42" height="36" />
-          <rect x="130" y="152" width="58" height="36" />
-        </g>
-        {/* Subject parcel */}
-        <rect x="82" y="40" width="42" height="38" fill={zoneColor} stroke="var(--brick)" strokeWidth="2" />
-        <circle cx="103" cy="59" r="4" fill="var(--brick)" stroke="#f5efe1" strokeWidth="1.5" />
-        {/* Compass */}
-        <g transform="translate(178,18)">
-          <circle r="9" fill="var(--paper-2)" stroke="var(--ink-3)" strokeWidth="0.6" />
-          <path d="M0 -7 L2 0 L0 7 L-2 0 Z" fill="var(--ink)" />
-          <text y="-12" textAnchor="middle" fontSize="6" fontFamily="IBM Plex Mono" fill="var(--ink-3)">N</text>
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function ParcelHero({ p }) {
-  return (
-    <div className="parcel-hero">
-      <div>
-        <div className="eyebrow">Parcel</div>
-        <h1>{p.addr}</h1>
-        <div className="meta"><span>PID {p.pid}</span><span>{p.ward}</span><span>{p.area}</span></div>
-      </div>
-      <div className="zone-block">
-        <span className="zone-big" style={{background: p.zoneColor}}>{p.zone}</span>
-        <div className="zone-name">{p.zoneName}</div>
-      </div>
-    </div>
-  );
-}
-
-function RegulationsTable() {
-  return (
-    <table className="reg-table">
-      <thead><tr><th>Requirement</th><th>Interior lot</th><th>Corner lot</th><th style={{width:'80px'}}>Clause</th></tr></thead>
-      <tbody>
-        {REGS.map((r,i) => (
-          <tr key={i}><td className="req">{r.req}</td><td className="val">{r.interior}</td><td className="val">{r.corner}</td><td className="cite">§ {r.cite}</td></tr>
-        ))}
-      </tbody>
-    </table>
-  );
-}
-
-function UsesList() {
-  return (
-    <div style={{display:'grid', gap: 8}}>
-      {USES.map((u,i) => (
-        <div key={i} style={{display:'flex', justifyContent:'space-between', alignItems:'center', padding:'10px 14px', background:'var(--paper-2)', border:'1px solid var(--border-hair)', borderRadius: 4}}>
-          <div>
-            <div style={{fontFamily:'var(--font-ui)', fontSize:14, color:'var(--ink)', fontWeight:500}}>{u.name}</div>
-            <div style={{fontFamily:'var(--font-mono)', fontSize:11, color:'var(--fg-3)', marginTop:2}}>§ {u.cite}</div>
-          </div>
-          <span className={u.status === 'Permitted' ? 'chip chip-success' : 'chip chip-info'}>{u.status}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function ClauseBlock({label, title, text}) {
-  return (
-    <div className="clause">
-      <div className="head"><span className="label">§ {label}</span><span className="title">{title}</span></div>
-      <p className="text">{text}</p>
-      <div className="cite-line"><a>charlottetown-zoning-bylaw.pdf</a> · page 61 · PH-ZD.2 rev 049</div>
-    </div>
-  );
-}
-
 function Footer() {
   return (
     <footer className="app-footer">
@@ -300,71 +178,16 @@ function Footer() {
   );
 }
 
-function Results({ parcel, onBack }) {
-  return (
-    <>
-      <button className="btn btn-ghost" onClick={onBack} style={{marginBottom:24, padding:'6px 12px'}}>
-        <i data-lucide="arrow-left" style={{width:14, height:14}}></i> New search
-      </button>
-      <ParcelHero p={parcel} />
-      <div className="parcel-grid">
-        <div>
-          <div className="section">
-            <h2 className="section-title">Regulations for permitted uses</h2>
-            <p className="section-lede">Dimensional standards that apply to this parcel under the current bylaw.</p>
-            <RegulationsTable />
-          </div>
-          <div className="section">
-            <h2 className="section-title">Key clauses</h2>
-            <ClauseBlock
-              label="9.2.1"
-              title="Lot area — minimum"
-              text="The minimum lot area for a single-detached dwelling on an interior lot is 540 m² (5,812.5 sq ft); on a corner lot, 686 m² (7,384 sq ft)."
-            />
-            <ClauseBlock
-              label="9.2.6"
-              title="Building height — maximum"
-              text="No building shall exceed 10.5 metres (34.4 feet) measured from average finished grade to the highest point of the roof structure."
-            />
-          </div>
-        </div>
-        <aside>
-          <div className="side-card">
-            <h4>Location</h4>
-            <MiniMap zoneColor={parcel.zoneColor} />
-            <button className="btn btn-secondary" style={{marginTop:12, width:'100%', justifyContent:'center'}}>
-              <i data-lucide="map" style={{width:14, height:14}}></i> Open in map
-            </button>
-          </div>
-          <div className="side-card">
-            <h4>Permitted uses</h4>
-            <UsesList />
-          </div>
-          <div className="side-card">
-            <h4>Actions</h4>
-            <div style={{display:'grid', gap:8}}>
-              <button className="btn btn-secondary" style={{justifyContent:'center'}}><i data-lucide="git-compare" style={{width:14, height:14}}></i> Compare to draft bylaw</button>
-              <button className="btn btn-secondary" style={{justifyContent:'center'}}><i data-lucide="download" style={{width:14, height:14}}></i> Download parcel report</button>
-              <button className="btn btn-secondary" style={{justifyContent:'center'}}><i data-lucide="share-2" style={{width:14, height:14}}></i> Share this parcel</button>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </>
-  );
-}
-
 function App() {
-  const [parcel, setParcel] = useState(null);
   useEffect(() => { lucide.createIcons(); });
   const handleSelect = (row) => {
     window.location.assign(`/map-explorer?pid=${encodeURIComponent(row.pid)}`);
   };
   return (
     <div className="app">
-      <Header onHome={()=>setParcel(null)} />
+      <Header onHome={()=>window.location.assign('/parcel-lookup')} />
       <main className="app-main">
-        {parcel ? <Results parcel={parcel} onBack={()=>setParcel(null)} /> : <SearchHero onSelect={handleSelect} />}
+        <SearchHero onSelect={handleSelect} />
       </main>
       <Footer />
     </div>
