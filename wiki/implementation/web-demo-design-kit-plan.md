@@ -99,7 +99,7 @@ Recommended routes:
 | 2. Address and parcel APIs | Complete | 1 day | `/api/addresses`, `/api/parcels/:pid`, selected parcel geometry, and address-to-parcel resolution. |
 | 3. Map data APIs | Complete | 1 to 1.5 days | GeoJSON endpoints for parcels, current zoning, draft zoning, and bbox filtering. |
 | 4. Parcel lookup page | Complete | 0.5 to 1 day | Landing page wired to autocomplete and redirect behavior. |
-| 5. Parcel map explorer | Not started | 1 to 1.5 days | Leaflet parcel-centered map, layer controls, selected parcel panel, and comparison redirect. |
+| 5. Parcel map explorer | Complete | 1 to 1.5 days | Leaflet parcel-centered map, layer controls, selected parcel panel, and comparison redirect. |
 | 6. City-view map | Not started | 0.5 to 1 day | Browse-first Leaflet map with viewport loading and parcel click selection. |
 | 7. Zoning comparison page | Not started | 1 day | Current/draft zone comparison backed by parcel and zone APIs, with citation or pending states. |
 | 8. Cleanup and demo hardening | Not started | 1 day | Logo replacement, mockup cleanup, loading/error states, responsive QA, and scripted smoke checks. |
@@ -158,6 +158,14 @@ Completed on 2026-05-01.
 The parcel lookup landing page now uses the live `/api/addresses` endpoint for debounced civic address and PID search. The page shows loading, empty, API-error, and result-list states, supports mouse selection and basic keyboard movement through matches, and redirects selected address rows with a PID to `/map-explorer?pid=PID`.
 
 The page also switches the header logo from the mock wordmark asset to `web/public/assets/logo-island-needle.svg` and links the main navigation entries to the planned demo routes.
+
+## Phase 5 Progress
+
+Completed on 2026-05-01.
+
+The parcel-focused map explorer at `/map-explorer?pid=PID` now loads `/api/parcels/:pid`, centers Leaflet on the selected parcel geometry, and displays the selected parcel with current and draft zone summaries. It loads viewport-filtered parcel outlines, current zoning polygons, and draft zoning polygons through the phase 3 GeoJSON APIs, exposes layer toggles with visible feature counts, and keeps the selected parcel highlighted above overlay layers.
+
+The right panel now shows selected-address, PID, parcel area, current zone, draft zone, overlap areas, resolution status, and a `Compare to draft` link to `/zoning-comparison?pid=PID`.
 
 ## Risks and Open Decisions
 
