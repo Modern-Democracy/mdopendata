@@ -95,7 +95,7 @@ Recommended routes:
 
 | Phase | Status | Estimate | Deliverable |
 | --- | --- | --- | --- |
-| 1. Inventory and routing | Not started | 0.5 day | Route map, kit asset inventory, chosen logo asset, and static page entry points. |
+| 1. Inventory and routing | Complete | 0.5 day | Route map, kit asset inventory, chosen logo asset, and static page entry points. |
 | 2. Address and parcel APIs | Not started | 1 day | `/api/addresses`, `/api/parcels/:pid`, selected parcel geometry, and address-to-parcel resolution. |
 | 3. Map data APIs | Not started | 1 to 1.5 days | GeoJSON endpoints for parcels, current zoning, draft zoning, and bbox filtering. |
 | 4. Parcel lookup page | Not started | 0.5 to 1 day | Landing page wired to autocomplete and redirect behavior. |
@@ -105,6 +105,28 @@ Recommended routes:
 | 8. Cleanup and demo hardening | Not started | 1 day | Logo replacement, mockup cleanup, loading/error states, responsive QA, and scripted smoke checks. |
 
 Expected effort for a functional local demo is 6 to 8 working days if the current spatial tables are already loaded, indexed, and geometrically valid enough for viewport and parcel joins.
+
+## Phase 1 Progress
+
+Completed on 2026-05-01.
+
+Route entry points are handled in `web/server.js` and currently map to the existing design-kit HTML without modifying the kit originals:
+
+- `/` and `/parcel-lookup` load `web/public/ui_kits/parcel-lookup/index.html`.
+- `/map-explorer` loads `web/public/ui_kits/map-explorer/index.html`.
+- `/city-view` and `/map` load `web/public/ui_kits/map-explorer-leaflet/index.html`.
+- `/zoning-comparison` loads `web/public/ui_kits/zoning-comparison/index.html`.
+
+The server injects a route-specific `<base>` tag for these aliases so existing relative kit assets continue to resolve.
+
+Current asset inventory:
+
+- Shared design tokens: `web/public/colors_and_type.css`.
+- Shared Leaflet theme: `web/public/leaflet-theme.css`.
+- Existing brand assets: `web/public/assets/logo-mdopendata.svg`, `web/public/assets/logo-monogram.svg`, and `web/public/assets/logo-wordmark.svg`.
+- Selected promoted logo asset: `web/public/assets/logo-island-needle.svg`.
+- Kit-specific parcel lookup CSS: `web/public/ui_kits/parcel-lookup/styles.css`.
+- UI kit source pages and notes: the four `web/public/ui_kits/*` folders listed in this plan.
 
 ## Risks and Open Decisions
 

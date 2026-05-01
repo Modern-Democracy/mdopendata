@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use this heading format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-05-01] implementation | Web demo phase 1
+
+Completed phase 1 of the web demo design-kit plan by adding route entry points for parcel lookup, map explorer, city-view map, and zoning comparison, and promoting the selected `Island as needle` logo to `web/public/assets`.
+
 ## [2026-05-01] implementation | Web demo design kit plan
 
 Added `implementation/web-demo-design-kit-plan.md` documenting the design-kit replacement plan, database API connection steps, UI cleanup tasks, demo acceptance criteria, timeline, risks, and open decisions.

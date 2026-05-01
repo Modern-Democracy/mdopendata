@@ -279,8 +279,30 @@ async function sendJson(response, payload) {
   response.end(JSON.stringify(payload));
 }
 
+const routeEntrypoints = new Map([
+  ["/", { file: "/ui_kits/parcel-lookup/index.html", baseHref: "/ui_kits/parcel-lookup/" }],
+  ["/parcel-lookup", { file: "/ui_kits/parcel-lookup/index.html", baseHref: "/ui_kits/parcel-lookup/" }],
+  ["/parcel-lookup/", { file: "/ui_kits/parcel-lookup/index.html", baseHref: "/ui_kits/parcel-lookup/" }],
+  ["/map-explorer", { file: "/ui_kits/map-explorer/index.html", baseHref: "/ui_kits/map-explorer/" }],
+  ["/map-explorer/", { file: "/ui_kits/map-explorer/index.html", baseHref: "/ui_kits/map-explorer/" }],
+  ["/city-view", { file: "/ui_kits/map-explorer-leaflet/index.html", baseHref: "/ui_kits/map-explorer-leaflet/" }],
+  ["/city-view/", { file: "/ui_kits/map-explorer-leaflet/index.html", baseHref: "/ui_kits/map-explorer-leaflet/" }],
+  ["/map", { file: "/ui_kits/map-explorer-leaflet/index.html", baseHref: "/ui_kits/map-explorer-leaflet/" }],
+  ["/map/", { file: "/ui_kits/map-explorer-leaflet/index.html", baseHref: "/ui_kits/map-explorer-leaflet/" }],
+  ["/zoning-comparison", { file: "/ui_kits/zoning-comparison/index.html", baseHref: "/ui_kits/zoning-comparison/" }],
+  ["/zoning-comparison/", { file: "/ui_kits/zoning-comparison/index.html", baseHref: "/ui_kits/zoning-comparison/" }],
+]);
+
+function htmlWithBase(body, baseHref) {
+  if (!baseHref || !body.includes("<head>")) {
+    return body;
+  }
+  return body.replace("<head>", `<head>\n<base href="${baseHref}">`);
+}
+
 async function serveStatic(response, requestPath) {
-  const safePath = requestPath === "/" ? "/index.html" : requestPath;
+  const routeEntrypoint = routeEntrypoints.get(requestPath);
+  const safePath = routeEntrypoint?.file || (requestPath === "/" ? "/index.html" : requestPath);
   const absolute = path.resolve(publicDir, `.${safePath}`);
   if (!absolute.startsWith(publicDir)) {
     response.writeHead(403);
@@ -296,7 +318,10 @@ async function serveStatic(response, requestPath) {
   };
 
   try {
-    const body = await readFile(absolute);
+    let body = await readFile(absolute);
+    if (routeEntrypoint?.baseHref && ext === ".html") {
+      body = htmlWithBase(body.toString("utf8"), routeEntrypoint.baseHref);
+    }
     response.writeHead(200, { "content-type": contentTypes[ext] || "application/octet-stream" });
     response.end(body);
   } catch {
