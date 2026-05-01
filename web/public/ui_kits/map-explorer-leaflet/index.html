@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Map Explorer (Leaflet) — Modern Democracy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>City View Map - Modern Democracy</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="stylesheet" href="../../colors_and_type.css">
-<link rel="stylesheet" href="../parcel-lookup/styles.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <link rel="stylesheet" href="../../leaflet-theme.css">
+<link rel="stylesheet" href="../parcel-lookup/styles.css">
 <style>
-  html, body, #root { height: 100%; margin: 0; }
-  .map-app { display: grid; grid-template-rows: auto 1fr; height: 100vh; }
-  .map-body { display: grid; grid-template-columns: 260px 1fr 320px; height: 100%; overflow: hidden; }
+  html, body { height: 100%; margin: 0; }
+  .map-app { display: grid; grid-template-rows: auto 1fr; height: 100vh; background: var(--paper); }
+  .map-body { display: grid; grid-template-columns: 290px minmax(0, 1fr) 330px; min-height: 0; overflow: hidden; }
   .map-panel { background: var(--paper-2); border-right: 1px solid var(--border-hair); overflow-y: auto; padding: 18px 18px 40px; }
   .map-panel.right { border-right: 0; border-left: 1px solid var(--border-hair); }
   .panel-title { font-family: var(--font-ui); font-weight: 600; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); margin: 0 0 10px; }
@@ -21,49 +23,51 @@
   .layer .sw { width: 16px; height: 16px; border-radius: 3px; border: 1px solid rgba(26,22,18,0.15); flex-shrink: 0; }
   .layer .name { font-family: var(--font-ui); font-size: 13px; color: var(--ink); }
   .layer .count { margin-left: auto; font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-3); }
-  #map { width: 100%; height: 100%; }
-  .legend-inline { background: rgba(245,239,225,0.96); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; font-family: var(--font-ui); }
-  .legend-inline h4 { font-weight: 600; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); margin: 0 0 8px; }
+  .map-canvas { position: relative; min-width: 0; min-height: 0; background: var(--paper-3); }
+  #map { position: absolute; inset: 0; }
+  .map-status { position: absolute; top: 16px; left: 16px; z-index: 500; max-width: min(380px, calc(100% - 32px)); background: rgba(245,239,225,0.96); border: 1px solid var(--border-hair); border-radius: 4px; padding: 8px 10px; font-family: var(--font-ui); font-size: 12.5px; color: var(--fg-3); box-shadow: var(--shadow-sm); }
+  .legend-inline { background: rgba(245,239,225,0.96); border: 1px solid var(--border); border-radius: 4px; padding: 10px 12px; font-family: var(--font-ui); }
   .legend-inline .row { display:flex; align-items:center; gap:8px; font-size: 12px; color: var(--ink); padding: 2px 0; }
   .legend-inline .sw { width: 14px; height: 14px; border-radius: 2px; border: 1px solid rgba(26,22,18,0.15); }
-  .selected-card { background: var(--paper); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; margin-bottom: 14px; }
+  .selected-card, .status-card { background: var(--paper); border: 1px solid var(--border); border-radius: 4px; padding: 14px; margin-bottom: 14px; }
   .selected-card .addr { font-family: var(--font-display); font-variation-settings: "opsz" 48; font-weight: 500; font-size: 20px; line-height: 1.1; color: var(--ink); margin: 0 0 4px; }
-  .selected-card .pid { font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-3); margin-bottom: 12px; }
-  .selected-card .zchip { font-family: var(--font-mono); font-weight: 600; font-size: 14px; padding: 4px 10px; border-radius: 3px; border: 1px solid rgba(26,22,18,0.12); display:inline-block; margin-bottom: 10px; }
-  .selected-card .mini-rules { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; font-family: var(--font-ui); font-size: 12px; }
-  .selected-card .mini-rules .k { color: var(--fg-3); }
-  .selected-card .mini-rules .v { font-family: var(--font-mono); color: var(--ink); text-align: right; }
-  .tech-note { margin-top: 24px; padding: 12px 14px; background: var(--paper-3); border-left: 3px solid var(--harbour); font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-3); line-height: 1.5; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
-  .tech-note b { color: var(--harbour-ink); font-weight: 600; }
+  .selected-card .pid, .status-card { font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-3); }
+  .selected-card .zchip { font-family: var(--font-mono); font-weight: 600; font-size: 14px; padding: 4px 10px; border-radius: 3px; border: 1px solid rgba(26,22,18,0.12); display:inline-block; margin: 12px 8px 8px 0; }
+  .zone-line { font-family: var(--font-ui); font-size: 12.5px; color: var(--fg-3); margin-bottom: 8px; }
+  .mini-rules { display: grid; grid-template-columns: 1fr auto; gap: 8px 14px; font-family: var(--font-ui); font-size: 12px; margin-top: 12px; }
+  .mini-rules .k { color: var(--fg-3); }
+  .mini-rules .v { font-family: var(--font-mono); color: var(--ink); text-align: right; }
+  .route-actions { display: grid; gap: 8px; }
+  .source-list { display: grid; gap: 8px; font-family: var(--font-ui); font-size: 12.5px; color: var(--fg-2); line-height: 1.35; }
+  .source-list .item { padding-bottom: 8px; border-bottom: 1px solid var(--border-hair); }
+  .source-list .item:last-child { border-bottom: 0; }
+  .source-list .label { color: var(--ink); font-weight: 500; }
+  @media (max-width: 980px) {
+    .map-app { height: auto; min-height: 100vh; }
+    .map-body { grid-template-columns: 1fr; grid-template-rows: auto 540px auto; overflow: visible; }
+    .map-panel, .map-panel.right { border: 0; border-bottom: 1px solid var(--border-hair); }
+  }
 </style>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 </head>
 <body>
 <div class="map-app">
   <header class="app-header">
-    <img src="../../assets/logo-wordmark.svg" alt="Modern Democracy" class="wm">
+    <img src="../../assets/logo-island-needle.svg" alt="Modern Democracy" class="wm">
     <nav>
-      <a href="../parcel-lookup/index.html">Parcel lookup</a>
-      <a href="../zoning-comparison/index.html">Compare bylaws</a>
-      <a class="active">Map</a>
+      <a href="/parcel-lookup">Parcel lookup</a>
+      <a href="/zoning-comparison">Compare bylaws</a>
+      <a class="active" href="/city-view">Map</a>
       <a>About</a>
     </nav>
   </header>
   <div class="map-body">
     <aside class="map-panel">
-      <h3 class="panel-title">Base layers</h3>
-      <label class="layer"><input type="checkbox" checked id="l-zoning"><span class="sw" style="background: var(--zone-residential)"></span><span class="name">Zoning</span><span class="count">42</span></label>
-      <label class="layer"><input type="checkbox" id="l-parcels"><span class="sw" style="background: var(--paper-2); border-color: var(--ink-3)"></span><span class="name">Parcels</span><span class="count">14,208</span></label>
-      <label class="layer"><input type="checkbox" checked id="l-streets"><span class="sw" style="background: var(--paper); border-color: var(--ink-3)"></span><span class="name">Streets</span><span class="count">612</span></label>
-
-      <h3 class="panel-title">Overlays</h3>
-      <label class="layer"><input type="checkbox" id="l-heritage"><span class="sw" style="background: var(--zone-heritage)"></span><span class="name">Heritage</span><span class="count">186</span></label>
-      <label class="layer"><input type="checkbox" id="l-wards"><span class="sw" style="background: transparent; border-color: var(--harbour)"></span><span class="name">Wards</span><span class="count">8</span></label>
-
-      <h3 class="panel-title">Bylaw version</h3>
-      <label class="layer"><input type="radio" name="bv" checked><span class="sw" style="background: var(--brick)"></span><span class="name">Current</span></label>
-      <label class="layer"><input type="radio" name="bv"><span class="sw" style="background: var(--ochre)"></span><span class="name">Draft</span></label>
+      <h3 class="panel-title">Layers</h3>
+      <label class="layer"><input type="checkbox" checked id="l-current"><span class="sw" style="background: var(--brick)"></span><span class="name">Current zoning</span><span class="count" id="c-current">0</span></label>
+      <label class="layer"><input type="checkbox" checked id="l-draft"><span class="sw" style="background: var(--ochre)"></span><span class="name">Draft zoning</span><span class="count" id="c-draft">0</span></label>
+      <label class="layer"><input type="checkbox" checked id="l-parcels"><span class="sw" style="background: var(--paper-2); border-color: var(--ink-3)"></span><span class="name">Parcel outlines</span><span class="count" id="c-parcels">0</span></label>
 
       <h3 class="panel-title">Legend</h3>
       <div class="legend-inline">
@@ -73,145 +77,237 @@
         <div class="row"><span class="sw" style="background: var(--zone-institutional)"></span>Institutional</div>
         <div class="row"><span class="sw" style="background: var(--zone-openspace)"></span>Open space</div>
         <div class="row"><span class="sw" style="background: var(--zone-waterfront)"></span>Waterfront</div>
-        <div class="row"><span class="sw" style="background: var(--zone-heritage)"></span>Heritage</div>
       </div>
 
-      <div class="tech-note">
-        <b>Real Leaflet.</b> OSM tiles, GeoJSON parcel layer, themed via <code>leaflet-theme.css</code>. Swap the tile URL + GeoJSON for your own PostGIS-served data.
+      <h3 class="panel-title">Sources</h3>
+      <div class="source-list">
+        <div class="item"><div class="label">Parcels</div><div>zoning.v_charlottetown_parcel_map</div></div>
+        <div class="item"><div class="label">Current zoning</div><div>zoning.v_charlottetown_current_zoning_boundaries</div></div>
+        <div class="item"><div class="label">Draft zoning</div><div>zoning.v_charlottetown_draft_zoning_boundaries</div></div>
       </div>
     </aside>
-    <div id="map"></div>
+    <main class="map-canvas">
+      <div id="map" aria-label="Charlottetown city map"></div>
+      <div class="map-status" id="status">Loading visible map layers.</div>
+    </main>
     <aside class="map-panel right">
       <h3 class="panel-title">Selected parcel</h3>
-      <div id="selected"></div>
-      <div style="display:grid; gap:8px">
-        <button class="btn btn-primary" style="justify-content: center">Open full parcel</button>
-        <button class="btn btn-secondary" style="justify-content: center"><i data-lucide="git-compare" style="width:14px;height:14px"></i> Compare to draft</button>
+      <div id="selected" class="status-card">Click a parcel outline to resolve an address PID.</div>
+      <div class="route-actions">
+        <a class="btn btn-secondary" href="/parcel-lookup" style="justify-content: center">Search by address</a>
+        <a class="btn btn-primary" id="open-parcel" href="#" aria-disabled="true" style="justify-content: center">Open full parcel</a>
+        <a class="btn btn-secondary" id="compare-parcel" href="#" aria-disabled="true" style="justify-content: center"><i data-lucide="git-compare" style="width:14px;height:14px"></i> Compare to draft</a>
       </div>
     </aside>
   </div>
 </div>
 
 <script>
-// ---- Sample data (stand-in for PostGIS GeoJSON feed) ----
-// Synthetic parcels near Charlottetown City Hall (~46.2382, -63.1311)
-const PARCELS = {
-  type: "FeatureCollection",
-  features: [
-    { type: "Feature", properties: { pid: "421009", addr: "81 University Avenue", zone: "C-2", zoneName: "General commercial", zoneClass: "commercial", area_ha: 0.14, lot_area: "1,400 m²", height_max: "14.0 m", front_yard: "3.0 m", parking: "1 / 30 m²" },
-      geometry: { type: "Polygon", coordinates: [[[-63.1340,46.2388],[-63.1328,46.2388],[-63.1328,46.2396],[-63.1340,46.2396],[-63.1340,46.2388]]] } },
-    { type: "Feature", properties: { pid: "384712", addr: "165 Richmond Street", zone: "R-1L", zoneName: "Single-detached residential", zoneClass: "residential", area_ha: 0.08, lot_area: "840 m²", height_max: "10.5 m", front_yard: "6.0 m", parking: "1 / unit" },
-      geometry: { type: "Polygon", coordinates: [[[-63.1310,46.2378],[-63.1298,46.2378],[-63.1298,46.2385],[-63.1310,46.2385],[-63.1310,46.2378]]] } },
-    { type: "Feature", properties: { pid: "296884", addr: "22 Longworth Avenue", zone: "R-2", zoneName: "Two-unit residential", zoneClass: "residential", area_ha: 0.06, lot_area: "640 m²", height_max: "10.5 m", front_yard: "6.0 m", parking: "2 / unit" },
-      geometry: { type: "Polygon", coordinates: [[[-63.1280,46.2372],[-63.1270,46.2372],[-63.1270,46.2378],[-63.1280,46.2378],[-63.1280,46.2372]]] } },
-    { type: "Feature", properties: { pid: "550021", addr: "Province House", zone: "I", zoneName: "Institutional", zoneClass: "institutional", area_ha: 0.32, lot_area: "3,200 m²", height_max: "12.0 m", front_yard: "0.0 m", parking: "—" },
-      geometry: { type: "Polygon", coordinates: [[[-63.1290,46.2363],[-63.1270,46.2363],[-63.1270,46.2371],[-63.1290,46.2371],[-63.1290,46.2363]]] } },
-    { type: "Feature", properties: { pid: "770404", addr: "Victoria Park", zone: "OS", zoneName: "Open space", zoneClass: "openspace", area_ha: 16.5, lot_area: "165,000 m²", height_max: "6.0 m", front_yard: "—", parking: "—" },
-      geometry: { type: "Polygon", coordinates: [[[-63.1365,46.2340],[-63.1300,46.2340],[-63.1300,46.2365],[-63.1365,46.2365],[-63.1365,46.2340]]] } },
-    { type: "Feature", properties: { pid: "812229", addr: "Great George / Euston", zone: "DMU", zoneName: "Downtown mixed-use", zoneClass: "mixed", area_ha: 0.18, lot_area: "1,800 m²", height_max: "16.0 m", front_yard: "0.0 m", parking: "—" },
-      geometry: { type: "Polygon", coordinates: [[[-63.1262,46.2392],[-63.1250,46.2392],[-63.1250,46.2400],[-63.1262,46.2400],[-63.1262,46.2392]]] } },
-    { type: "Feature", properties: { pid: "901822", addr: "44 Prince Street", zone: "HER", zoneName: "Heritage overlay", zoneClass: "heritage", area_ha: 0.09, lot_area: "880 m²", height_max: "10.5 m", front_yard: "4.5 m", parking: "1 / unit" },
-      geometry: { type: "Polygon", coordinates: [[[-63.1250,46.2378],[-63.1240,46.2378],[-63.1240,46.2385],[-63.1250,46.2385],[-63.1250,46.2378]]] } },
-    { type: "Feature", properties: { pid: "332910", addr: "Charlottetown Harbour", zone: "WF", zoneName: "Waterfront", zoneClass: "waterfront", area_ha: 1.2, lot_area: "12,000 m²", height_max: "8.0 m", front_yard: "—", parking: "—" },
-      geometry: { type: "Polygon", coordinates: [[[-63.1320,46.2355],[-63.1260,46.2355],[-63.1260,46.2365],[-63.1320,46.2365],[-63.1320,46.2355]]] } },
-  ]
-};
-
+const CENTER = [46.2382, -63.1311];
 const ZONE_COLORS = {
-  residential: getComputedStyle(document.documentElement).getPropertyValue('--zone-residential').trim(),
-  commercial: getComputedStyle(document.documentElement).getPropertyValue('--zone-commercial').trim(),
-  mixed: getComputedStyle(document.documentElement).getPropertyValue('--zone-mixed').trim(),
-  institutional: getComputedStyle(document.documentElement).getPropertyValue('--zone-institutional').trim(),
-  openspace: getComputedStyle(document.documentElement).getPropertyValue('--zone-openspace').trim(),
-  waterfront: getComputedStyle(document.documentElement).getPropertyValue('--zone-waterfront').trim(),
-  heritage: getComputedStyle(document.documentElement).getPropertyValue('--zone-heritage').trim(),
-  agricultural: getComputedStyle(document.documentElement).getPropertyValue('--zone-agricultural').trim(),
+  R: 'var(--zone-residential)',
+  C: 'var(--zone-commercial)',
+  D: 'var(--zone-mixed)',
+  M: 'var(--zone-mixed)',
+  I: 'var(--zone-institutional)',
+  O: 'var(--zone-openspace)',
+  P: 'var(--zone-openspace)',
+  W: 'var(--zone-waterfront)',
+  H: 'var(--zone-heritage)',
 };
 
-// ---- Init map ----
-const map = L.map('map', {
-  center: [46.2382, -63.1297],
-  zoom: 16,
-  zoomControl: true,
-  attributionControl: true,
-  preferCanvas: false,
-});
+const state = {
+  layers: { current: true, draft: true, parcels: true },
+  currentLayer: null,
+  draftLayer: null,
+  parcelLayer: null,
+  selectedLayer: null,
+  selectedPid: null,
+  timer: null,
+  requestId: 0,
+};
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-  attribution: '© OpenStreetMap contributors · © CARTO · Parcels: synthetic stand-in',
-  subdomains: 'abcd',
-  maxZoom: 19,
-  opacity: 0.55,
+const map = L.map('map', { zoomControl: true }).setView(CENTER, 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 20,
+  attribution: '&copy; OpenStreetMap contributors',
 }).addTo(map);
+L.control.scale({ metric: true, imperial: false }).addTo(map);
 
-// For production, point at your own tile infra or OSM directly — e.g.
-// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { opacity: 0.55 })
-
-L.control.scale({ imperial: true, metric: true, maxWidth: 140 }).addTo(map);
-
-function styleFor(feature) {
-  const klass = feature.properties.zoneClass;
-  return {
-    color: 'rgba(26,22,18,0.35)',
-    weight: 1,
-    fillColor: ZONE_COLORS[klass] || '#e6dfc8',
-    fillOpacity: 0.78,
-  };
+function zoneColor(code) {
+  const key = String(code || '').trim().charAt(0).toUpperCase();
+  return ZONE_COLORS[key] || 'var(--zone-residential)';
 }
 
-let selectedLayer = null;
+function bboxString() {
+  const bounds = map.getBounds();
+  return [
+    bounds.getWest(),
+    bounds.getSouth(),
+    bounds.getEast(),
+    bounds.getNorth(),
+  ].map((value) => value.toFixed(6)).join(',');
+}
 
-function updateSelectedPanel(p) {
-  const panel = document.getElementById('selected');
-  const bg = ZONE_COLORS[p.zoneClass] || '#e6dfc8';
-  panel.innerHTML = `
+function setStatus(text) {
+  document.getElementById('status').textContent = text;
+}
+
+function setCount(key, count) {
+  document.getElementById(`c-${key}`).textContent = String(count);
+}
+
+function formatArea(areaM2) {
+  if (!Number.isFinite(Number(areaM2))) return 'pending';
+  const hectares = Number(areaM2) / 10000;
+  return hectares >= 1 ? `${hectares.toFixed(2)} ha` : `${Number(areaM2).toFixed(0)} m2`;
+}
+
+function polygonStyle(color, weight, opacity) {
+  return { color, weight, opacity: 0.95, fillColor: color, fillOpacity: opacity };
+}
+
+function clearLayer(key) {
+  if (state[key]) {
+    state[key].remove();
+    state[key] = null;
+  }
+}
+
+async function fetchJson(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`${url} returned HTTP ${response.status}.`);
+  return response.json();
+}
+
+function updateActions(pid) {
+  const open = document.getElementById('open-parcel');
+  const compare = document.getElementById('compare-parcel');
+  if (!pid) {
+    open.href = '#';
+    compare.href = '#';
+    open.setAttribute('aria-disabled', 'true');
+    compare.setAttribute('aria-disabled', 'true');
+    return;
+  }
+  open.href = `/map-explorer?pid=${encodeURIComponent(pid)}`;
+  compare.href = `/zoning-comparison?pid=${encodeURIComponent(pid)}`;
+  open.removeAttribute('aria-disabled');
+  compare.removeAttribute('aria-disabled');
+}
+
+function renderSelected(payload) {
+  const selected = document.getElementById('selected');
+  const pid = payload.address?.pid || null;
+  state.selectedPid = pid;
+  updateActions(pid);
+  if (!pid) {
+    selected.className = 'status-card';
+    selected.textContent = 'Parcel found, but no civic-address PID was available for routing.';
+    return;
+  }
+  selected.className = '';
+  selected.innerHTML = `
     <div class="selected-card">
-      <h4 class="addr">${p.addr}</h4>
-      <div class="pid">PID ${p.pid} · ${p.area_ha} ha</div>
-      <span class="zchip" style="background: ${bg}">${p.zone}</span>
-      <div style="font-family: var(--font-ui); font-size: 12px; color: var(--fg-3); margin-bottom: 12px">${p.zoneName}</div>
+      <h4 class="addr">${payload.address?.label || 'Selected parcel'}</h4>
+      <div class="pid">PID ${pid} / ${formatArea(payload.parcel?.areaM2)}</div>
+      <span class="zchip" style="background: var(--paper-3)">Parcel</span>
+      <div class="zone-line">Resolution: ${payload.resolution?.status || 'pending'}</div>
       <div class="mini-rules">
-        <div class="k">Lot area</div><div class="v">${p.lot_area}</div>
-        <div class="k">Height max</div><div class="v">${p.height_max}</div>
-        <div class="k">Front yard</div><div class="v">${p.front_yard}</div>
-        <div class="k">Parking</div><div class="v">${p.parking}</div>
+        <div class="k">Source</div><div class="v">${payload.resolution?.method || 'pending'}</div>
+        <div class="k">Parcel id</div><div class="v">${payload.parcel?.parcelId || 'pending'}</div>
       </div>
     </div>
   `;
 }
 
-const parcelLayer = L.geoJSON(PARCELS, {
-  style: styleFor,
-  onEachFeature: (feature, layer) => {
-    const p = feature.properties;
-    const bg = ZONE_COLORS[p.zoneClass] || '#e6dfc8';
-    layer.bindTooltip(`<b>${p.zone}</b> · ${p.addr}`, { direction: 'top', offset: [0, -4] });
-    layer.bindPopup(`
-      <h3>${p.addr}</h3>
-      <div class="pid">PID ${p.pid}</div>
-      <div class="zchip" style="background: ${bg}">${p.zone}</div>
-      <div>${p.zoneName}</div>
-      <div style="margin-top: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--fg-3)">Max height ${p.height_max} · Front yard ${p.front_yard}</div>
-    `);
-    layer.on('click', () => {
-      if (selectedLayer) selectedLayer.setStyle(styleFor(selectedLayer.feature));
-      layer.setStyle({ color: 'var(--brick)', weight: 3, fillOpacity: 0.85 });
-      selectedLayer = layer;
-      updateSelectedPanel(p);
-    });
+async function resolveClickedParcel(latlng, layer) {
+  setStatus('Resolving clicked parcel.');
+  try {
+    const payload = await fetchJson(`/api/parcels/point?lon=${latlng.lng.toFixed(7)}&lat=${latlng.lat.toFixed(7)}`);
+    if (state.selectedLayer) state.selectedLayer.setStyle({ color: 'rgba(26,22,18,0.35)', weight: 0.6, fillOpacity: 0 });
+    layer.setStyle({ color: '#8f3d2f', weight: 3, fillOpacity: 0.12 });
+    state.selectedLayer = layer;
+    renderSelected(payload);
+    setStatus(payload.address?.pid ? `Selected PID ${payload.address.pid}.` : 'Parcel selected without routable PID.');
+  } catch (error) {
+    setStatus(error.message || 'Parcel click resolution failed.');
   }
-}).addTo(map);
-
-// Select first feature by default
-const first = parcelLayer.getLayers()[0];
-if (first) {
-  first.setStyle({ color: 'var(--brick)', weight: 3, fillOpacity: 0.85 });
-  selectedLayer = first;
-  updateSelectedPanel(first.feature.properties);
 }
 
-map.fitBounds(parcelLayer.getBounds(), { padding: [40, 40] });
+async function loadViewport() {
+  const requestId = ++state.requestId;
+  const bbox = bboxString();
+  setStatus('Loading visible map layers.');
 
+  const requests = [];
+  if (state.layers.current) requests.push(['current', fetchJson(`/api/zoning/current.geojson?bbox=${bbox}&limit=1000`)]);
+  if (state.layers.draft) requests.push(['draft', fetchJson(`/api/zoning/draft.geojson?bbox=${bbox}&limit=1000`)]);
+  if (state.layers.parcels) requests.push(['parcels', fetchJson(`/api/parcels.geojson?bbox=${bbox}&limit=1500`)]);
+
+  try {
+    const results = await Promise.all(requests.map(async ([key, promise]) => [key, await promise]));
+    if (requestId !== state.requestId) return;
+
+    clearLayer('currentLayer');
+    clearLayer('draftLayer');
+    clearLayer('parcelLayer');
+    setCount('current', 0);
+    setCount('draft', 0);
+    setCount('parcels', 0);
+
+    for (const [key, geojson] of results) {
+      const count = geojson.features?.length || 0;
+      setCount(key, count);
+      if (key === 'current') {
+        state.currentLayer = L.geoJSON(geojson, {
+          style: (feature) => polygonStyle(zoneColor(feature.properties?.zoneCode), 1, 0.28),
+        }).addTo(map);
+      }
+      if (key === 'draft') {
+        state.draftLayer = L.geoJSON(geojson, {
+          style: (feature) => polygonStyle(zoneColor(feature.properties?.zoneCode), 1.4, 0.16),
+        }).addTo(map);
+      }
+      if (key === 'parcels') {
+        state.parcelLayer = L.geoJSON(geojson, {
+          style: { color: 'rgba(26,22,18,0.35)', weight: 0.6, fillOpacity: 0 },
+          onEachFeature: (feature, layer) => {
+            layer.on('click', (event) => resolveClickedParcel(event.latlng, layer));
+          },
+        }).addTo(map);
+        state.parcelLayer.bringToFront();
+      }
+    }
+
+    const total = results.reduce((sum, [, geojson]) => sum + (geojson.features?.length || 0), 0);
+    setStatus(`Loaded ${total} visible features.`);
+  } catch (error) {
+    if (requestId === state.requestId) setStatus(error.message || 'Map layer loading failed.');
+  }
+}
+
+function scheduleLoad() {
+  window.clearTimeout(state.timer);
+  state.timer = window.setTimeout(loadViewport, 180);
+}
+
+document.getElementById('l-current').addEventListener('change', (event) => {
+  state.layers.current = event.target.checked;
+  scheduleLoad();
+});
+document.getElementById('l-draft').addEventListener('change', (event) => {
+  state.layers.draft = event.target.checked;
+  scheduleLoad();
+});
+document.getElementById('l-parcels').addEventListener('change', (event) => {
+  state.layers.parcels = event.target.checked;
+  updateActions(null);
+  scheduleLoad();
+});
+
+map.on('moveend zoomend', scheduleLoad);
+scheduleLoad();
 lucide.createIcons();
 </script>
 </body>

@@ -835,6 +835,144 @@ async function loadParcelByPid(pid) {
   };
 }
 
+async function loadParcelAtPoint(lon, lat) {
+  if (!Number.isFinite(lon) || !Number.isFinite(lat)) {
+    const error = new Error("lon and lat must be valid numbers.");
+    error.statusCode = 400;
+    throw error;
+  }
+  if (lon < -180 || lon > 180 || lat < -90 || lat > 90) {
+    const error = new Error("lon and lat must be WGS84 longitude/latitude values.");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  const { rows } = await pool.query(
+    `
+    WITH click_point AS (
+      SELECT ST_Transform(ST_SetSRID(ST_MakePoint($1, $2), 4326), 2954) AS geom
+    ),
+    selected_parcel AS (
+      SELECT
+        p.spatial_feature_id,
+        p.feature_key,
+        p.attributes,
+        p.is_valid,
+        p.validation_reason,
+        p.geom
+      FROM zoning.v_charlottetown_parcel_map p
+      JOIN click_point c
+        ON ST_Covers(p.geom, c.geom)
+      ORDER BY ST_Area(p.geom), p.spatial_feature_id
+      LIMIT 1
+    ),
+    selected_address AS (
+      SELECT
+        a.spatial_feature_id,
+        a.feature_key,
+        a.attributes,
+        a.is_valid,
+        a.validation_reason,
+        a.geom,
+        NULLIF(trim(a.attributes ->> 'APT_NO'), '') AS unit,
+        NULLIF(trim(a.attributes ->> 'COMM_NM'), '') AS community,
+        NULLIF(trim(a.attributes ->> 'STREET_NM'), '') AS street_name,
+        NULLIF(trim(a.attributes ->> 'STREET_NO'), '') AS street_number,
+        NULLIF(trim(a.attributes ->> 'PID'), '') AS pid
+      FROM selected_parcel p
+      JOIN zoning.v_charlottetown_civic_addresses a
+        ON ST_Covers(p.geom, a.geom)
+      WHERE NULLIF(trim(a.attributes ->> 'PID'), '') IS NOT NULL
+      ORDER BY
+        ST_Distance(a.geom, (SELECT geom FROM click_point)),
+        a.spatial_feature_id
+      LIMIT 1
+    )
+    SELECT jsonb_build_object(
+      'address', (
+        SELECT jsonb_build_object(
+          'spatial_feature_id', spatial_feature_id,
+          'feature_key', feature_key,
+          'address_id', feature_key,
+          'label', concat_ws(
+            ', ',
+            concat_ws(
+              ' ',
+              street_number,
+              street_name,
+              CASE WHEN unit IS NOT NULL THEN 'Unit ' || unit END
+            ),
+            community,
+            CASE WHEN pid IS NOT NULL THEN 'PID ' || pid END
+          ),
+          'street_number', street_number,
+          'street_name', street_name,
+          'unit', unit,
+          'community', community,
+          'pid', pid,
+          'lon', ST_X(ST_Transform(geom, 4326)),
+          'lat', ST_Y(ST_Transform(geom, 4326)),
+          'is_valid', is_valid,
+          'validation_reason', validation_reason
+        )
+        FROM selected_address
+      ),
+      'parcel', (
+        SELECT jsonb_build_object(
+          'spatial_feature_id', spatial_feature_id,
+          'feature_key', feature_key,
+          'attributes', attributes,
+          'area_m2', ST_Area(geom),
+          'is_valid', is_valid,
+          'validation_reason', validation_reason,
+          'centroid', jsonb_build_object(
+            'lon', ST_X(ST_Transform(ST_Centroid(geom), 4326)),
+            'lat', ST_Y(ST_Transform(ST_Centroid(geom), 4326))
+          ),
+          'geometry', ST_AsGeoJSON(ST_Transform(geom, 4326))::jsonb
+        )
+        FROM selected_parcel
+      )
+    ) AS payload
+    `,
+    [lon, lat],
+  );
+
+  const payload = rows[0]?.payload;
+  if (!payload?.parcel) {
+    return null;
+  }
+
+  return {
+    coordinate: { lon, lat },
+    address: payload.address ? mapAddressRow({ ...payload.address, confidence: "parcel_click" }) : null,
+    parcel: {
+      parcelId: toStringValue(payload.parcel.feature_key),
+      areaM2: Number(payload.parcel.area_m2),
+      centroid: payload.parcel.centroid,
+      geometry: payload.parcel.geometry,
+      attributes: payload.parcel.attributes,
+      source: {
+        table: "zoning.v_charlottetown_parcel_map",
+        spatialFeatureId: payload.parcel.spatial_feature_id,
+        featureKey: payload.parcel.feature_key,
+        isValid: payload.parcel.is_valid,
+        validationReason: payload.parcel.validation_reason,
+      },
+    },
+    resolution: {
+      method: payload.address ? "parcel_click_to_address_pid" : "parcel_click_no_address_pid",
+      parcelPidNative: false,
+      status: payload.address?.pid ? "resolved" : "parcel_found_no_address_pid",
+    },
+    source: {
+      freshness: "database",
+      addressTable: "zoning.v_charlottetown_civic_addresses",
+      parcelTable: "zoning.v_charlottetown_parcel_map",
+    },
+  };
+}
+
 const routeEntrypoints = new Map([
   ["/", { file: "/ui_kits/parcel-lookup/index.html", baseHref: "/ui_kits/parcel-lookup/" }],
   ["/parcel-lookup", { file: "/ui_kits/parcel-lookup/index.html", baseHref: "/ui_kits/parcel-lookup/" }],
@@ -945,6 +1083,24 @@ const server = createServer(async (request, response) => {
       const bbox = parseBbox(url.searchParams.get("bbox"));
       const limit = normalizeLimit(url.searchParams.get("limit"), 1000, 5000);
       await sendGeoJson(response, await loadDraftZoningGeoJson(bbox, limit));
+      return;
+    }
+
+    if (url.pathname === "/api/parcels/point") {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const lon = Number(url.searchParams.get("lon"));
+      const lat = Number(url.searchParams.get("lat"));
+      const parcel = await loadParcelAtPoint(lon, lat);
+      if (!parcel) {
+        response.writeHead(404, { "content-type": "application/json; charset=utf-8" });
+        response.end(JSON.stringify({ error: "No parcel found at point.", lon, lat }));
+        return;
+      }
+      await sendJson(response, parcel);
       return;
     }
 

@@ -100,7 +100,7 @@ Recommended routes:
 | 3. Map data APIs | Complete | 1 to 1.5 days | GeoJSON endpoints for parcels, current zoning, draft zoning, and bbox filtering. |
 | 4. Parcel lookup page | Complete | 0.5 to 1 day | Landing page wired to autocomplete and redirect behavior. |
 | 5. Parcel map explorer | Complete | 1 to 1.5 days | Leaflet parcel-centered map, layer controls, selected parcel panel, and comparison redirect. |
-| 6. City-view map | Not started | 0.5 to 1 day | Browse-first Leaflet map with viewport loading and parcel click selection. |
+| 6. City-view map | Complete | 0.5 to 1 day | Browse-first Leaflet map with viewport loading and parcel click selection. |
 | 7. Zoning comparison page | Not started | 1 day | Current/draft zone comparison backed by parcel and zone APIs, with citation or pending states. |
 | 8. Cleanup and demo hardening | Not started | 1 day | Logo replacement, mockup cleanup, loading/error states, responsive QA, and scripted smoke checks. |
 
@@ -166,6 +166,14 @@ Completed on 2026-05-01.
 The parcel-focused map explorer at `/map-explorer?pid=PID` now loads `/api/parcels/:pid`, centers Leaflet on the selected parcel geometry, and displays the selected parcel with current and draft zone summaries. It loads viewport-filtered parcel outlines, current zoning polygons, and draft zoning polygons through the phase 3 GeoJSON APIs, exposes layer toggles with visible feature counts, and keeps the selected parcel highlighted above overlay layers.
 
 The right panel now shows selected-address, PID, parcel area, current zone, draft zone, overlap areas, resolution status, and a `Compare to draft` link to `/zoning-comparison?pid=PID`.
+
+## Phase 6 Progress
+
+Completed on 2026-05-01.
+
+The city-view map at `/city-view` now loads live Leaflet viewport layers from `/api/parcels.geojson`, `/api/zoning/current.geojson`, and `/api/zoning/draft.geojson`. The page supports current zoning, draft zoning, and parcel-outline toggles with visible feature counts, status messages, and source notes.
+
+Parcel click selection now resolves a clicked WGS84 point through `/api/parcels/point?lon=...&lat=...`, finds the containing parcel, and selects the nearest civic-address PID inside that parcel when available. A resolved PID enables `Open full parcel` routing to `/map-explorer?pid=PID` and `Compare to draft` routing to `/zoning-comparison?pid=PID`.
 
 ## Risks and Open Decisions
 
