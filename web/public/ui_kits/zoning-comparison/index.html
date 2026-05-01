@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zoning Comparison - Modern Democracy</title>
+<link rel="icon" href="data:,">
 <link rel="stylesheet" href="../../colors_and_type.css">
 <link rel="stylesheet" href="../parcel-lookup/styles.css">
 <style>
@@ -12,7 +13,7 @@
   .eyebrow { font-family: var(--font-ui); font-weight: 600; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 10px; }
   .page-head h1 { font-family: var(--font-display); font-variation-settings: "opsz" 72; font-weight: 500; font-size: 42px; line-height: 1.02; margin: 0 0 8px; color: var(--ink); }
   .page-head p { font-family: var(--font-ui); font-size: 14px; color: var(--fg-3); line-height: 1.45; margin: 0; max-width: 72ch; }
-  .head-actions { display: flex; gap: 8px; align-items: center; }
+  .head-actions { display: flex; gap: 8px; align-items: center; min-width: 0; }
   .summary-bar { background: var(--paper-2); border: 1px solid var(--border-hair); border-radius: 6px; padding: 16px 18px; margin-bottom: 20px; display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
   .summary-stat .n { font-family: var(--font-display); font-variation-settings: "opsz" 72; font-weight: 500; font-size: 27px; line-height: 1; color: var(--ink); }
   .summary-stat .l { font-family: var(--font-ui); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-3); margin-top: 4px; }
@@ -25,12 +26,12 @@
   .col-head .dot { width: 10px; height: 10px; border-radius: 50%; }
   .col-head .name { font-family: var(--font-ui); font-weight: 600; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); }
   .col-head .sub { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-left: auto; }
-  .diff-cell { min-height: 48px; padding: 13px 16px; border-bottom: 1px solid var(--border-hair); font-family: var(--font-ui); font-size: 14px; color: var(--fg-2); display: flex; align-items: center; gap: 8px; }
+  .diff-cell { min-height: 48px; min-width: 0; padding: 13px 16px; border-bottom: 1px solid var(--border-hair); font-family: var(--font-ui); font-size: 14px; color: var(--fg-2); display: flex; align-items: center; gap: 8px; }
   .diff-cell.current { justify-content: flex-end; text-align: right; border-right: 1px solid var(--border-hair); }
   .diff-cell.label { justify-content: center; text-align: center; background: var(--paper-3); color: var(--ink); font-weight: 500; font-size: 12.5px; border-right: 1px solid var(--border-hair); }
   .diff-cell.draft { justify-content: flex-start; }
   .diff-cell.empty { color: var(--fg-3); opacity: 0.65; }
-  .value { font-family: var(--font-mono); font-weight: 500; color: var(--ink); }
+  .value { font-family: var(--font-mono); font-weight: 500; color: var(--ink); overflow-wrap: anywhere; }
   .marker { font-family: var(--font-mono); font-size: 10.5px; padding: 2px 6px; border-radius: 2px; letter-spacing: 0.05em; white-space: nowrap; }
   .marker.changed { background: var(--ochre-wash); color: var(--ochre-ink); }
   .marker.same, .marker.source { background: var(--paper-2); color: var(--fg-3); }
@@ -45,14 +46,16 @@
   .citation-item .meta { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-top: 3px; }
   .status-card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 18px; font-family: var(--font-ui); font-size: 14px; color: var(--fg-3); }
   @media (max-width: 760px) {
+    .compare-shell { padding: 24px 18px 44px; }
     .page-head { grid-template-columns: 1fr; }
-    .head-actions { justify-content: stretch; }
-    .head-actions .btn { flex: 1; justify-content: center; }
+    .page-head h1 { font-size: 34px; overflow-wrap: anywhere; }
+    .head-actions { justify-content: stretch; flex-wrap: wrap; }
+    .head-actions .btn { flex: 1 1 130px; justify-content: center; min-width: 0; }
     .compare-grid { grid-template-columns: 1fr; }
     .col-head.label, .diff-cell.label { display: none; }
     .diff-cell.current, .diff-cell.draft { justify-content: flex-start; text-align: left; border-right: 0; }
-    .diff-cell.current::before { content: attr(data-label) " current"; font-family: var(--font-ui); font-size: 11px; color: var(--fg-3); text-transform: uppercase; letter-spacing: 0.08em; margin-right: auto; }
-    .diff-cell.draft::before { content: attr(data-label) " draft"; font-family: var(--font-ui); font-size: 11px; color: var(--fg-3); text-transform: uppercase; letter-spacing: 0.08em; margin-right: auto; }
+    .diff-cell.current::before { content: attr(data-label) " current"; flex: 0 1 46%; min-width: 0; font-family: var(--font-ui); font-size: 11px; color: var(--fg-3); text-transform: uppercase; letter-spacing: 0.08em; margin-right: auto; overflow-wrap: anywhere; }
+    .diff-cell.draft::before { content: attr(data-label) " draft"; flex: 0 1 46%; min-width: 0; font-family: var(--font-ui); font-size: 11px; color: var(--fg-3); text-transform: uppercase; letter-spacing: 0.08em; margin-right: auto; overflow-wrap: anywhere; }
     .citation-grid { grid-template-columns: 1fr; }
   }
 </style>
