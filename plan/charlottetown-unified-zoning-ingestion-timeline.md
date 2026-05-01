@@ -7,7 +7,7 @@ Reference plan: `wiki/charlottetown/topics/unified-zoning-ingestion-plan.md`
 - Active phase: 4
 - Active phase name: Spatial Registration and Linkage
 - Overall status: In progress
-- Current progress: Phases 1, 2, and 3 are complete. The `zoning` schema migration exists at `schema/sql/005_charlottetown_unified_zoning.sql`, the initial importer exists at `scripts/import-charlottetown-zoning.py`, and the database has populated current and draft bylaw relational-core records. Draft import batch 34 loaded the rebaseline draft outputs with 34 source files, 259 sections, 2,095 clauses, 49 raw tables, 654 raw table cells, 33 raw map references, and 2,509 structured facts. Phase 3 closed after web-app review updates left `zoning.section_equivalence` with 83 accepted rows, 56 rejected rows, 0 `candidate` rows, 0 `needs_review` rows, and 0 accepted blank-side comparisons. Phase 4 is now active; spatial linkage tables are not yet populated, while `zoning.zone_code_crosswalk` contains 8 seeded rows for the draft `H` to `HI` mismatch and current no-hyphen map-code mappings.
+- Current progress: Phases 1, 2, and 3 are complete. The `zoning` schema migration exists at `schema/sql/005_charlottetown_unified_zoning.sql`, the initial importer exists at `scripts/import-charlottetown-zoning.py`, and the database has populated current and draft bylaw relational-core records. Draft import batch 34 loaded the rebaseline draft outputs with 34 source files, 259 sections, 2,095 clauses, 49 raw tables, 654 raw table cells, 33 raw map references, and 2,509 structured facts. Phase 3 closed after web-app review updates left `zoning.section_equivalence` with 83 accepted rows, 56 rejected rows, 0 `candidate` rows, 0 `needs_review` rows, and 0 accepted blank-side comparisons. Phase 4 is active; `schema/sql/006_charlottetown_spatial_registration.sql` registers the 6 approved spatial layers, loads 34,749 spatial features, links 1,565 current and draft zoning boundary features to bylaw zone codes, classifies 74 raw map references, and expands `zoning.zone_code_crosswalk` to 21 active rows. `schema/sql/007_charlottetown_spatial_gis_views.sql` adds GIS-facing indexed materialized views for the registered layer names.
 - Last updated: 2026-04-30
 
 ## Phase Timeline
@@ -75,16 +75,17 @@ Inputs:
 
 Current evidence:
 
-- `zoning.spatial_layer`, `zoning.spatial_feature`, `zoning.zone_spatial_feature`, and `zoning.spatial_reference` each contain 0 rows.
-- `zoning.zone_code_crosswalk` contains 8 seeded rows, including draft `H` to `HI` and current no-hyphen map-code mappings.
+- `zoning.spatial_layer` contains 6 approved layer contracts, `zoning.spatial_feature` contains 34,749 loaded features, `zoning.zone_spatial_feature` contains 1,565 zone-feature links, and `zoning.spatial_reference` contains 74 classified raw map references.
+- `zoning` now exposes 6 GIS-facing indexed materialized views: `v_charlottetown_civic_addresses`, `v_charlottetown_current_zoning_boundaries`, `v_charlottetown_draft_zoning_boundaries`, `v_charlottetown_parcel_map`, `v_charlottetown_schedule_a_wetlands`, and `v_charlottetown_street_network`.
+- `zoning.zone_code_crosswalk` contains 21 active rows, including draft `H` to `HI`, current legend no-hyphen map-code mappings, `FDA` to `FD`, and source-table `MUVC` to `ER-MUVC`.
+- Current zoning boundary features with raw codes `NA` and `U` remain unlinked to `zoning.zone_spatial_feature` because the current legend has no bylaw zone code for those map codes.
 - the draft Schedule A derived GeoPackage summary reports target CRS `EPSG:2954`, 20 `schedule_a_zoning_areas_municipal_fit` features, 14,256 Schedule A parcel candidates, 16,432 Schedule A linework features, 13,833 Schedule C parcel candidates, 14,536 Schedule C linework features, 64 wetlands-excluded reference features, and 1 municipal-boundary reference feature.
 
 Next actions:
 
-1. Confirm source path, source layer/table, primary feature key, geometry column, expected geometry type, SRID, zone-code field, feature-count baseline, and invalid-geometry baseline for each approved Phase 4 layer.
-2. Register the layer contracts in `zoning.spatial_layer`.
-3. Load spatial features and diagnostics into `zoning.spatial_feature`.
-4. Link zone spatial features and bylaw map references after code normalization and geometry validation pass.
+1. Review whether `NA` and `U` current map features need a non-zone spatial-reference treatment.
+2. Decide whether Schedule C street hierarchy should be digitized into an approved usable spatial layer.
+3. Continue downstream parcel and neighbourhood comparison only after the remaining non-zone spatial references are accepted.
 
 ## Progress Rules
 

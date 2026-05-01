@@ -35,6 +35,7 @@
       <category render="true" symbol="29" value="R2S" label="R2S - Low Density Residential (Small)"/>
       <category render="true" symbol="30" value="R3" label="R3 - Medium Density Residential"/>
       <category render="true" symbol="31" value="R3T" label="R3T - Medium Density Residential Townhouse"/>
+      <category render="true" symbol="39" value="R4" label="R4 - Apartment Residential"/>
       <category render="true" symbol="32" value="R4A" label="R4A - Apartment Residential A"/>
       <category render="true" symbol="33" value="R4B" label="R4B - Apartment Residential B"/>
       <category render="true" symbol="34" value="U" label="U - Infill Area"/>
@@ -99,6 +100,7 @@
       </symbol>
       <symbol name="30" type="fill" alpha="1"><layer class="SimpleFill" enabled="1"><Option type="Map"><Option name="color" type="QString" value="153,160,67,255"/><Option name="style" type="QString" value="solid"/></Option></layer></symbol>
       <symbol name="31" type="fill" alpha="1"><layer class="SimpleFill" enabled="1"><Option type="Map"><Option name="color" type="QString" value="142,94,61,255"/><Option name="style" type="QString" value="solid"/></Option></layer></symbol>
+      <symbol name="39" type="fill" alpha="1"><layer class="SimpleFill" enabled="1"><Option type="Map"><Option name="color" type="QString" value="135,108,70,255"/><Option name="style" type="QString" value="solid"/></Option></layer></symbol>
       <symbol name="32" type="fill" alpha="1"><layer class="SimpleFill" enabled="1"><Option type="Map"><Option name="color" type="QString" value="188,139,56,255"/><Option name="style" type="QString" value="solid"/></Option></layer></symbol>
       <symbol name="33" type="fill" alpha="1"><layer class="SimpleFill" enabled="1"><Option type="Map"><Option name="color" type="QString" value="83,83,83,255"/><Option name="style" type="QString" value="solid"/></Option></layer></symbol>
       <symbol name="34" type="fill" alpha="1">

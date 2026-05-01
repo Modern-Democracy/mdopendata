@@ -186,6 +186,14 @@ Added `topics/draft-layout-repair-notes.md` for the verified Charlottetown draft
 
 Created the v1 scaffold for the Charlottetown LLM Wiki, including the local guide, index, log, page areas, and templates. No substantive bylaw synthesis was added.
 
+## [2026-04-30] spatial | Phase 4 spatial registration
+
+Updated `topics/unified-zoning-ingestion-plan.md` after adding `schema/sql/006_charlottetown_spatial_registration.sql`, expanding current map-code crosswalks, registering approved spatial layer contracts, loading spatial features, linking current and draft zoning boundary features to bylaw zones, and classifying raw map references.
+
+## [2026-04-30] spatial | GIS-facing spatial views
+
+Updated `topics/unified-zoning-ingestion-plan.md` after adding `schema/sql/007_charlottetown_spatial_gis_views.sql`, which exposes one named indexed GIS materialized view for each registered Charlottetown spatial layer while preserving `zoning.spatial_feature` as the normalized storage table.
+
 ## Sources
 
 - [Charlottetown wiki guide](./README.md)

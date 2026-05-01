@@ -459,11 +459,24 @@ ON CONFLICT (topic_key) DO NOTHING;
 
 INSERT INTO zoning.zone_code_crosswalk (context, source_code, target_code, reason) VALUES
   ('charlottetown_draft_schedule_a', 'H', 'HI', 'Draft spatial layer uses H while draft bylaw zone code is HI.'),
+  ('charlottetown_current_map', 'C1', 'C-1', 'Current map code omits hyphen used in bylaw zone code.'),
+  ('charlottetown_current_map', 'C2', 'C-2', 'Current map code omits hyphen used in bylaw zone code.'),
+  ('charlottetown_current_map', 'C3', 'C-3', 'Current map code omits hyphen used in bylaw zone code.'),
+  ('charlottetown_current_map', 'ERMUVC', 'ER-MUVC', 'Current map code omits hyphen used in bylaw zone code.'),
+  ('charlottetown_current_map', 'FDA', 'FD', 'Current map code uses FDA for the Future Development bylaw zone FD.'),
+  ('charlottetown_current_map', 'M1', 'M-1', 'Current map code omits hyphen used in bylaw zone code.'),
+  ('charlottetown_current_map', 'M2', 'M-2', 'Current map code omits hyphen used in bylaw zone code.'),
+  ('charlottetown_current_map', 'M3', 'M-3', 'Current map code omits hyphen used in bylaw zone code.'),
+  ('charlottetown_current_map', 'MUVC', 'ER-MUVC', 'Current source boundary table uses MUVC while the current legend lists ERMUVC for bylaw zone ER-MUVC.'),
   ('charlottetown_current_map', 'R1L', 'R-1L', 'Current map code omits hyphen used in bylaw zone code.'),
   ('charlottetown_current_map', 'R1N', 'R-1N', 'Current map code omits hyphen used in bylaw zone code.'),
   ('charlottetown_current_map', 'R1S', 'R-1S', 'Current map code omits hyphen used in bylaw zone code.'),
+  ('charlottetown_current_map', 'R2', 'R-2', 'Current map code omits hyphen used in bylaw zone code.'),
   ('charlottetown_current_map', 'R2S', 'R-2S', 'Current map code omits hyphen used in bylaw zone code.'),
+  ('charlottetown_current_map', 'R3', 'R-3', 'Current map code omits hyphen used in bylaw zone code.'),
   ('charlottetown_current_map', 'R3T', 'R-3T', 'Current map code omits hyphen used in bylaw zone code.'),
+  ('charlottetown_current_map', 'R4', 'R-4', 'Current map code omits hyphen used in bylaw zone code.'),
   ('charlottetown_current_map', 'R4A', 'R-4A', 'Current map code omits hyphen used in bylaw zone code.'),
-  ('charlottetown_current_map', 'R4B', 'R-4B', 'Current map code omits hyphen used in bylaw zone code.')
+  ('charlottetown_current_map', 'R4B', 'R-4B', 'Current map code omits hyphen used in bylaw zone code.'),
+  ('charlottetown_current_map', 'WLOS', 'WL-OS', 'Current map code omits hyphen used in bylaw zone code.')
 ON CONFLICT (context, source_code, target_code) DO NOTHING;

@@ -24,7 +24,7 @@ The `zoning` schema migration and initial Charlottetown importer have now been i
 - Database schema: the `zoning` schema contains the planned relational, source reconstruction, comparison, coverage-gap, manual-correction, spatial-linkage, and topic tables.
 - Database population: current and draft bylaw records have been imported into the relational core tables. A database check on 2026-04-29 found populated document, source, section, clause, definition, raw table, raw map-reference, and structured-fact tables, with completed import batches for both current and draft inputs.
 - Section-equivalence candidate generation was reopened after QA found accepted mismatches and blank-side comparisons in the prior reviewed set. `scripts/generate-charlottetown-section-equivalence.py` now compares clause text plus linked table-cell text and supports an explicit reset rerun. On 2026-04-29, the prior 137 reviewed `title_topic_token_v1` rows were reset and replaced with 139 regenerated candidates. Web-app review decisions were applied to the database; a 2026-04-30 check found 83 accepted rows, 56 rejected `not_equivalent` rows, 0 `candidate` rows, 0 `needs_review` rows, and 0 accepted blank-side rows.
-- Not yet populated: coverage-gap, spatial layer, spatial feature, zone-spatial-feature, and spatial-reference records. The seeded zone-code crosswalk table contains 8 active mappings for Phase 4.
+- Phase 4 spatial registration is partially populated. The database contains approved layer contracts, spatial features, zone-spatial-feature links for current and draft zoning boundary layers, classified map references, and GIS-facing materialized views for each registered layer. The seeded zone-code crosswalk table contains 21 active mappings for Phase 4: 20 current map-code mappings and the draft `H` to `HI` mapping.
 
 The database target is a relational-core `zoning` schema. The importer must not store full source-file JSON blobs, top-level aggregate `text_raw` values, `review_flags`, or any `confidence` attributes. Raw text remains in scope only at reconstructable clause, table, page, map-reference, and source-unit granularity.
 
@@ -115,12 +115,12 @@ The abandoned parcel-review workflow layers are out of scope for first ingestion
 
 Known spatial preparation items:
 
-- Resolve draft spatial layer code `H` against draft bylaw zone code `HI`.
-- Fix or document the 3 invalid geometries in `CHTWN_Zoning_Boundaries`.
-- Maintain current map-code to bylaw-code crosswalks, such as no-hyphen map codes that correspond to hyphenated bylaw zone codes.
-- Classify referenced maps and diagrams as already spatial, PDF-only image, schedule needing digitization, or text-only reference.
+- Complete: resolve draft spatial layer code `H` against draft bylaw zone code `HI`.
+- Current status: the approved Phase 4 source tables report 0 invalid geometries in the current database load, including `CHTWN_Zoning_Boundaries`.
+- Complete for current source data: maintain current map-code to bylaw-code crosswalks, including no-hyphen map codes, `FDA` to `FD`, and source-table `MUVC` to legend/bylaw `ER-MUVC`.
+- Complete for imported raw map references: classify referenced maps and diagrams as already spatial, PDF-only image, schedule needing digitization, or text-only reference.
 
-Spatial ingestion must pin each approved layer to a source path or database source before coding. The draft Schedule A derived source currently available in repository artifacts is `data/spatial/charlottetown/charlottetown-draft-map-layers-2026-04-09-municipal-fit.gpkg`, summarized by `data/spatial/charlottetown/charlottetown-draft-map-layers-2026-04-09-municipal-fit.summary.json`; its target CRS is `EPSG:2954`. The layer contracts for v1 must name source path or database connection, source layer/table, primary feature key, geometry column, expected geometry type, SRID, zone-code or feature-code field, feature-count baseline, invalid-geometry count, and code crosswalk table.
+Spatial ingestion must pin each approved layer to a source path or database source before coding. The draft Schedule A derived source currently available in repository artifacts is `data/spatial/charlottetown/charlottetown-draft-map-layers-2026-04-09-municipal-fit.gpkg`, summarized by `data/spatial/charlottetown/charlottetown-draft-map-layers-2026-04-09-municipal-fit.summary.json`; its target CRS is `EPSG:2954`. The layer contracts for v1 must name source path or database connection, source layer/table, primary feature key, geometry column, expected geometry type, SRID, zone-code or feature-code field, feature-count baseline, invalid-geometry count, and code crosswalk table. The implemented registration migration is `schema/sql/006_charlottetown_spatial_registration.sql`; the implemented GIS materialized-view migration is `schema/sql/007_charlottetown_spatial_gis_views.sql`.
 
 Spatial loading must not silently repair geometry. Invalid geometries are either loaded into a diagnostic table with their original geometry and validation reason, or repaired through an explicit pre-load step that writes the repair method and before/after validity counts. The known `H` to `HI` draft code mismatch and current no-hyphen to hyphenated map-code mappings must be represented as crosswalk rows, not hard-coded only in importer logic.
 
