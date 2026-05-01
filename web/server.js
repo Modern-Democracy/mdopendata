@@ -370,11 +370,23 @@ function mapZoneRow(row) {
 function mapZoneSectionRow(row) {
   return {
     sectionId: toStringValue(row.section_source_id),
+    databaseSectionId: row.section_id === null || row.section_id === undefined ? null : Number(row.section_id),
     label: compactText(row.section_label_raw),
     title: compactText(row.section_title_raw),
     citations: toJsonValue(row.citations),
     filePath: compactText(row.repo_relpath),
+    clauses: row.clauses || [],
+    tables: row.tables || [],
   };
+}
+
+function zoneNameFromPartTitle(partTitle, zoneCode) {
+  const title = compactText(partTitle);
+  const code = compactText(zoneCode);
+  if (!title || !code) {
+    return title;
+  }
+  return title.replace(new RegExp(`\\s*\\(${code.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\)\\s*$`, "i"), "").trim();
 }
 
 function zoneChanged(currentZone, draftZone) {
@@ -402,11 +414,73 @@ async function loadZoneSections(zoneCode, sourceKind) {
   const { rows } = await pool.query(
     `
     SELECT
+      s.section_id,
       s.section_source_id,
       s.section_label_raw,
       s.section_title_raw,
       s.citations,
-      sf.repo_relpath
+      sf.repo_relpath,
+      COALESCE(
+        (
+          SELECT jsonb_agg(
+            jsonb_build_object(
+              'label', c.clause_label_raw,
+              'text', c.clause_text_raw,
+              'citations', c.citations,
+              'sourceOrder', c.source_order
+            )
+            ORDER BY c.source_order, c.clause_id
+          )
+          FROM zoning.clause c
+          WHERE c.section_id = s.section_id
+            AND c.is_active
+        ),
+        '[]'::jsonb
+      ) AS clauses,
+      COALESCE(
+        (
+          SELECT jsonb_agg(table_payload ORDER BY table_source_order, raw_table_id)
+          FROM (
+            SELECT
+              rt.raw_table_id,
+              rt.source_order AS table_source_order,
+              jsonb_build_object(
+                'title', rt.table_title_raw,
+                'sourceOrder', rt.source_order,
+                'citations', rt.citations,
+                'rows', COALESCE(
+                  (
+                    SELECT jsonb_agg(row_payload ORDER BY row_order)
+                    FROM (
+                      SELECT
+                        rtc.row_order,
+                        jsonb_build_object(
+                          'sourceOrder', rtc.row_order,
+                          'cells', jsonb_agg(
+                            jsonb_build_object(
+                              'columnId', rtc.column_id,
+                              'columnLabel', rtc.column_label_raw,
+                              'text', rtc.cell_text_raw
+                            )
+                            ORDER BY rtc.column_order, rtc.raw_table_cell_id
+                          )
+                        ) AS row_payload
+                      FROM zoning.raw_table_cell rtc
+                      WHERE rtc.raw_table_id = rt.raw_table_id
+                        AND rtc.is_active
+                      GROUP BY rtc.row_order
+                    ) table_rows
+                  ),
+                  '[]'::jsonb
+                )
+              ) AS table_payload
+            FROM zoning.raw_table rt
+            WHERE (rt.section_id = s.section_id OR rt.natural_key LIKE s.natural_key || '|table|%')
+              AND rt.is_active
+          ) section_tables
+        ),
+        '[]'::jsonb
+      ) AS tables
     FROM zoning.section s
     JOIN zoning.source_file sf
       ON sf.source_file_id = s.source_file_id
@@ -415,7 +489,6 @@ async function loadZoneSections(zoneCode, sourceKind) {
       AND s.zone_code = $1
       AND sf.repo_relpath LIKE $2
     ORDER BY s.source_order, s.section_id
-    LIMIT 12
     `,
     [zoneCode, sourcePathPattern],
   );
@@ -455,18 +528,6 @@ async function loadZoningComparisonByPid(pid) {
         current: currentZone?.name || currentZone?.code || null,
         draft: draftZone?.name || draftZone?.code || null,
         status: currentZone?.name === draftZone?.name ? "same" : zoneChanged(currentZone, draftZone),
-      },
-      {
-        label: "Current overlap",
-        current: currentZone?.overlapAreaM2 ?? null,
-        draft: null,
-        status: currentZone?.overlapAreaM2 === null || currentZone?.overlapAreaM2 === undefined ? "pending" : "source",
-      },
-      {
-        label: "Draft overlap",
-        current: null,
-        draft: draftZone?.overlapAreaM2 ?? null,
-        status: draftZone?.overlapAreaM2 === null || draftZone?.overlapAreaM2 === undefined ? "pending" : "source",
       },
     ],
     citations: {
@@ -826,7 +887,20 @@ async function loadParcelByPid(pid) {
         z.spatial_feature_id,
         z.feature_key,
         COALESCE(z.bylaw_zone_code, z.zone_code_normalized, z.zone_code_raw, z."ZONING") AS zone_code,
-        NULL::text AS zone_name,
+        (
+          SELECT bp.part_title_raw
+          FROM zoning.section s
+          JOIN zoning.bylaw_part bp
+            ON bp.bylaw_part_id = s.bylaw_part_id
+          JOIN zoning.source_file sf
+            ON sf.source_file_id = s.source_file_id
+          WHERE s.is_active
+            AND s.document_type = 'zone'
+            AND s.zone_code = COALESCE(z.bylaw_zone_code, z.zone_code_normalized, z.zone_code_raw, z."ZONING")
+            AND sf.repo_relpath LIKE 'data/zoning/charlottetown/%'
+          ORDER BY s.source_order, s.section_id
+          LIMIT 1
+        ) AS zone_name,
         z.zone_code_normalized,
         z.bylaw_zone_code,
         z.match_method,
@@ -936,7 +1010,13 @@ async function loadParcelByPid(pid) {
         }
       : null,
     zones: {
-      current: mapZoneRow(payload.current_zone),
+      current: (() => {
+        const zone = mapZoneRow(payload.current_zone);
+        if (zone) {
+          zone.name = zoneNameFromPartTitle(zone.name, zone.bylawZoneCode || zone.normalizedCode || zone.code);
+        }
+        return zone;
+      })(),
       draft: mapZoneRow(payload.draft_zone),
     },
     resolution: {

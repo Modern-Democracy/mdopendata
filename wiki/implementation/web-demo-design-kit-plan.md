@@ -179,9 +179,9 @@ Parcel click selection now resolves a clicked WGS84 point through `/api/parcels/
 
 Completed on 2026-05-01.
 
-The zoning comparison route at `/zoning-comparison?pid=PID` now loads live data from `/api/zoning-comparison/:pid`. The API reuses `/api/parcels/:pid` parcel and zone resolution, compares current and draft zone codes and labels, reports current and draft zone overlap areas, and links each zone to available `zoning.section` citations by matched zone code and source path.
+The zoning comparison route at `/zoning-comparison?pid=PID` now loads live data from `/api/zoning-comparison/:pid`. The API reuses `/api/parcels/:pid` parcel and zone resolution, compares current and draft zone codes and labels, resolves the current zone name from the bylaw part title when spatial data only carries the code, and links each zone to the full available `zoning.section` citation payload by matched zone code and source path, including section clauses and referenced raw tables.
 
-The page no longer uses hardcoded mock comparison rows. It shows loading and missing-PID states, current-versus-draft zone fields, source-fact rows for overlap areas, citation cards for current and draft zone sections, explicit pending messages when zone-section citations are unavailable, and route actions back to lookup or the parcel map.
+The page no longer uses hardcoded mock comparison rows. It shows loading and missing-PID states, current-versus-draft zone fields, citation cards for current and draft zone sections with clause text and referenced tables, explicit pending messages when zone-section citations are unavailable, and route actions back to lookup or the parcel map.
 
 ## Phase 8 Progress
 

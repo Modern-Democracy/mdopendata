@@ -44,6 +44,11 @@
   .citation-item:last-child { border-bottom: 0; padding-bottom: 0; }
   .citation-item .title { color: var(--ink); font-weight: 500; }
   .citation-item .meta { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-top: 3px; }
+  .citation-item .clause { margin-top: 8px; }
+  .citation-item .clause-label { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-right: 6px; }
+  .citation-item table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
+  .citation-item td { border: 1px solid var(--border-hair); padding: 6px; vertical-align: top; }
+  .table-title { margin-top: 12px; color: var(--ink); font-weight: 500; }
   .status-card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 18px; font-family: var(--font-ui); font-size: 14px; color: var(--fg-3); }
   @media (max-width: 760px) {
     .compare-shell { padding: 24px 18px 44px; }
@@ -106,11 +111,33 @@ function CitationList({ title, sections }) {
       <div className="citation-list">
         {sections.length === 0 && <div className="citation-item">Zone-section citations pending for this parcel zone.</div>}
         {sections.map((section, index) => (
-          <div className="citation-item" key={`${section.sectionId}-${index}`}>
+          <article className="citation-item" key={`${section.sectionId}-${index}`}>
             <div className="title">{section.label} {section.title}</div>
             <div className="meta">{section.filePath || 'source path pending'}</div>
             <div className="meta">Bylaw page {section.citations?.bylaw_page_start || 'pending'}</div>
-          </div>
+            {(section.clauses || []).map((clause, clauseIndex) => (
+              <div className="clause" key={`${section.sectionId}-clause-${clauseIndex}`}>
+                {clause.label && <span className="clause-label">{clause.label}</span>}
+                <span>{clause.text || ''}</span>
+              </div>
+            ))}
+            {(section.tables || []).map((table, tableIndex) => (
+              <div key={`${section.sectionId}-table-${tableIndex}`}>
+                {table.title && <div className="table-title">{table.title}</div>}
+                <table>
+                  <tbody>
+                    {(table.rows || []).map((row, rowIndex) => (
+                      <tr key={`${section.sectionId}-table-${tableIndex}-row-${rowIndex}`}>
+                        {(row.cells || []).map((cell, cellIndex) => (
+                          <td key={`${section.sectionId}-table-${tableIndex}-row-${rowIndex}-cell-${cellIndex}`}>{cell.text || ''}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ))}
+          </article>
         ))}
       </div>
     </section>
