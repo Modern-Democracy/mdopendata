@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use this heading format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-05-01] implementation | Web demo design kit plan
+
+Added `implementation/web-demo-design-kit-plan.md` documenting the design-kit replacement plan, database API connection steps, UI cleanup tasks, demo acceptance criteria, timeline, risks, and open decisions.
+
 ## [2026-04-29] implementation | Web UI stack decision
 
 Added `implementation/web-ui-stack.md` documenting the initial Docker-hosted Node web UI stack and first Charlottetown section-equivalence review page.

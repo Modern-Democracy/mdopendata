@@ -36,6 +36,7 @@ This page catalogs the root wiki structure and links to active project wiki area
 | Page | Purpose |
 | --- | --- |
 | [Web UI stack](./implementation/web-ui-stack.md) | Initial Docker-hosted Node web UI decision and first Charlottetown section-equivalence review page shape. |
+| [Web demo design kit plan](./implementation/web-demo-design-kit-plan.md) | Plan and timeline for replacing the current web page with the design-kit-based Charlottetown parcel lookup, map explorer, city-view map, and zoning comparison demo. |
 
 ## Active Project Wikis
 
