@@ -48,6 +48,7 @@ Each has a UI kit under `ui_kits/<product>/`.
 | `preview/` | Design-system tab cards (colors, type, components, spacing, brand) |
 | `ui_kits/parcel-lookup/` | Public parcel-lookup web app — `index.html` + components |
 | `ui_kits/zoning-comparison/` | Side-by-side current vs. draft bylaw viewer |
+| `ui_kits/provisions-comparison/` | Side-by-side current vs. draft non-zone provision viewer |
 | `ui_kits/map-explorer/` | Schematic SVG map explorer (no JS deps — useful for mocks and slides) |
 | `ui_kits/map-explorer-leaflet/` | **Working Leaflet starter** — OSM tiles + GeoJSON parcels + themed chrome |
 

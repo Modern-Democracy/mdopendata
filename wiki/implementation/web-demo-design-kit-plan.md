@@ -5,7 +5,7 @@ tags:
   - design-kit
   - charlottetown
   - postgis
-updated: 2026-05-01
+updated: 2026-05-03
 ---
 
 This page plans the design-kit replacement of the current web page with a database-backed Charlottetown parcel lookup, map explorer, and zoning comparison demo.
@@ -189,7 +189,15 @@ Completed on 2026-05-01.
 
 The demo cleanup pass removed remaining mock-only lookup result code, inactive `About` navigation entries, and disabled `#` parcel action links from the active design-kit routes. The city-view parcel actions now remain non-clickable until a PID is resolved, and the pages continue to use `web/public/assets/logo-island-needle.svg` as the shared demo logo.
 
-The repository now includes `npm run web:smoke`, backed by `scripts/smoke-web-demo.mjs`, for static route and API-contract smoke checks. The smoke script verifies the parcel lookup, map explorer, city-view, and zoning comparison routes plus the address, parcel GeoJSON, current zoning GeoJSON, and draft zoning GeoJSON APIs against a running web server.
+The repository now includes `npm run web:smoke`, backed by `scripts/smoke-web-demo.mjs`, for static route and API-contract smoke checks. The smoke script verifies the parcel lookup, map explorer, city-view, zoning comparison, and provisions comparison routes plus the address, parcel GeoJSON, current zoning GeoJSON, draft zoning GeoJSON, and provisions comparison APIs against a running web server.
+
+## Provisions Comparison Progress
+
+Completed on 2026-05-03.
+
+The top navigation now includes `Compare provisions` immediately after `Compare bylaws`. The `/provisions-comparison` route loads `web/public/ui_kits/provisions-comparison/index.html`, and `/api/provisions-comparison` returns accepted current-versus-draft `zoning.section_equivalence` pairs where both linked sections are non-zone document types.
+
+The provisions page is not parcel-specific. Its primary left-side menu follows the draft bylaw Part 1 through Part 9 order by title, without displaying `PART X` labels in the menu. Raw mode shows matched current sections on the left and the selected draft part sections on the right. Structured mode lists accepted section pairs for the selected draft part in ascending order without a secondary menu. Structured pair cards can be collapsed by clicking the pair header title.
 
 ## Risks and Open Decisions
 
@@ -209,4 +217,5 @@ The repository now includes `npm run web:smoke`, backed by `scripts/smoke-web-de
 - [Map explorer UI kit](../../web/public/ui_kits/map-explorer/README.md)
 - [Map explorer Leaflet UI kit](../../web/public/ui_kits/map-explorer-leaflet/README.md)
 - [Zoning comparison UI kit](../../web/public/ui_kits/zoning-comparison/README.md)
+- [Provisions comparison UI kit](../../web/public/ui_kits/provisions-comparison/README.md)
 - [Logo explorations](../../web/public/preview/brand-logo-explorations.html)

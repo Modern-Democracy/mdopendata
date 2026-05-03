@@ -30,6 +30,11 @@ const checks = [
     expectText: ["Zoning Comparison", "logo-island-needle.svg", "/api/zoning-comparison/"],
   },
   {
+    name: "provisions comparison route",
+    path: "/provisions-comparison",
+    expectText: ["Provisions Comparison", "logo-island-needle.svg", "/api/provisions-comparison"],
+  },
+  {
     name: "address API contract",
     path: "/api/addresses?q=university&limit=1",
     expectJson: (payload) => Array.isArray(payload.rows) && Boolean(payload.source),
@@ -65,6 +70,12 @@ if (samplePid) {
     },
   );
 }
+
+checks.push({
+  name: "provisions comparison API contract",
+  path: "/api/provisions-comparison",
+  expectJson: (payload) => Array.isArray(payload.parts) && payload.summary?.parts === 9 && payload.parts[0]?.partNumber === "PART 1",
+});
 
 async function runCheck(check) {
   const url = new URL(check.path, baseUrl);

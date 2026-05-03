@@ -116,6 +116,7 @@ function Header() {
       <nav>
         <a href="/parcel-lookup">Parcel lookup</a>
         <a className="active" href="/zoning-comparison">Compare bylaws</a>
+        <a href="/provisions-comparison">Compare provisions</a>
         <a href="/city-view">Map</a>
       </nav>
     </header>
@@ -185,6 +186,7 @@ function ReferencePanel({ references }) {
                   <span>{clause.text || ''}</span>
                 </div>
               ))}
+              <SectionTables section={section} keyPrefix={`${reference.zoneCode}-${section.sectionId}`} />
             </div>
           ))}
         </div>
@@ -207,6 +209,44 @@ function Clause({ clause, clauseKey }) {
   );
 }
 
+function SectionTables({ section, keyPrefix }) {
+  return (
+    <>
+      {(section.tables || []).map((table, tableIndex) => (
+        <div key={`${keyPrefix}-table-${tableIndex}`}>
+          {table.title && <div className="table-title">{table.title}</div>}
+          <table>
+            <thead>
+              <tr>
+                {tableColumns(table).map((column) => (
+                  <th key={`${keyPrefix}-table-${tableIndex}-head-${column.columnId}`}>
+                    {column.columnLabel || humanizeColumnId(column.columnId)}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {(table.rows || []).map((row, rowIndex) => {
+                const cellsByColumn = rowCellsByColumn(row);
+                return (
+                  <tr key={`${keyPrefix}-table-${tableIndex}-row-${rowIndex}`}>
+                    {tableColumns(table).map((column) => {
+                      const text = cellsByColumn.get(column.columnId) || '';
+                      return (
+                        <td className={text ? '' : 'empty'} key={`${keyPrefix}-table-${tableIndex}-row-${rowIndex}-cell-${column.columnId}`}>{text}</td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      ))}
+    </>
+  );
+}
+
 function CitationList({ title, sections }) {
   return (
     <section className="citation-card">
@@ -221,37 +261,7 @@ function CitationList({ title, sections }) {
             {(section.clauses || []).map((clause, clauseIndex) => (
               <Clause clause={clause} clauseKey={`${section.sectionId}-clause-${clauseIndex}`} key={`${section.sectionId}-clause-${clauseIndex}`} />
             ))}
-            {(section.tables || []).map((table, tableIndex) => (
-              <div key={`${section.sectionId}-table-${tableIndex}`}>
-                {table.title && <div className="table-title">{table.title}</div>}
-                <table>
-                  <thead>
-                    <tr>
-                      {tableColumns(table).map((column) => (
-                        <th key={`${section.sectionId}-table-${tableIndex}-head-${column.columnId}`}>
-                          {column.columnLabel || humanizeColumnId(column.columnId)}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {(table.rows || []).map((row, rowIndex) => {
-                      const cellsByColumn = rowCellsByColumn(row);
-                      return (
-                        <tr key={`${section.sectionId}-table-${tableIndex}-row-${rowIndex}`}>
-                          {tableColumns(table).map((column) => {
-                            const text = cellsByColumn.get(column.columnId) || '';
-                            return (
-                              <td className={text ? '' : 'empty'} key={`${section.sectionId}-table-${tableIndex}-row-${rowIndex}-cell-${column.columnId}`}>{text}</td>
-                            );
-                          })}
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            ))}
+            <SectionTables section={section} keyPrefix={section.sectionId} />
           </article>
         ))}
       </div>

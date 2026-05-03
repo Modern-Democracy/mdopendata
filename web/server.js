@@ -900,6 +900,188 @@ async function loadZoningComparisonByPid(pid) {
   };
 }
 
+async function loadProvisionsComparison() {
+  const { rows: partRows } = await pool.query(`
+    WITH part_order(repo_relpath, part_number, display_title, display_order) AS (
+      VALUES
+        ('data/zoning/charlottetown-draft/administration.json', 'PART 1', 'Administration & Operation', 1),
+        ('data/zoning/charlottetown-draft/permit-applications-processes.json', 'PART 2', 'Permit Applications & Processes', 2),
+        ('data/zoning/charlottetown-draft/general-provisions-buildings-structures.json', 'PART 3', 'General Provisions for Buildings & Structures', 3),
+        ('data/zoning/charlottetown-draft/general-provisions-land-use.json', 'PART 4', 'General Provisions for Land Use', 4),
+        ('data/zoning/charlottetown-draft/general-provisions-lots-site-design.json', 'PART 5', 'General Provisions for Lots & Site Design', 5),
+        ('data/zoning/charlottetown-draft/design-standards-500-lot-area.json', 'PART 6', 'Design Standards for 500 Lot Area', 6),
+        ('data/zoning/charlottetown-draft/general-provisions-subdividing-land.json', 'PART 7', 'General Provisions Subdividing Land', 7),
+        ('data/zoning/charlottetown-draft/general-provisions-parking.json', 'PART 8', 'General Provisions for Parking', 8),
+        ('data/zoning/charlottetown-draft/general-provisions-signage.json', 'PART 9', 'General Provisions For Signage', 9)
+    )
+    SELECT
+      bp.bylaw_part_id,
+      po.part_number,
+      po.display_title,
+      po.display_order,
+      bp.part_title_raw,
+      bp.document_type,
+      bp.citations,
+      sf.repo_relpath
+    FROM part_order po
+    JOIN zoning.source_file sf
+      ON sf.repo_relpath = po.repo_relpath
+     AND sf.is_active
+    JOIN zoning.bylaw_part bp
+      ON bp.source_file_id = sf.source_file_id
+     AND bp.is_active
+    ORDER BY po.display_order
+  `);
+
+  const parts = await Promise.all(partRows.map(loadProvisionsPartComparison));
+  const pairCount = parts.reduce((total, part) => total + part.structuredPairs.length, 0);
+  const changedCount = parts.reduce(
+    (total, part) => total + part.structuredPairs.filter((pair) => pair.rows.some((row) => row.status === "changed")).length,
+    0,
+  );
+  return {
+    source: "zoning.bylaw_part, zoning.section, zoning.section_equivalence",
+    scope: "draft non-zone parts 1 through 9 with matched current sections",
+    generatedAt: new Date().toISOString(),
+    summary: {
+      parts: parts.length,
+      structuredPairs: pairCount,
+      changedPairs: changedCount,
+    },
+    parts,
+  };
+}
+
+async function loadProvisionsPartComparison(partRow) {
+  const draftSections = await loadSectionsByPartId(partRow.bylaw_part_id);
+  const { rows: pairRows } = await pool.query(`
+    SELECT
+      se.section_equivalence_id,
+      se.equivalence_type,
+      se.assigned_topic,
+      se.title_similarity,
+      se.text_similarity,
+      cs.section_id AS current_section_id,
+      cs.section_label_raw AS current_section_label,
+      cs.section_title_raw AS current_section_title,
+      cs.document_type AS current_document_type,
+      cs.source_order AS current_source_order,
+      ds.section_id AS draft_section_id,
+      ds.section_label_raw AS draft_section_label,
+      ds.section_title_raw AS draft_section_title,
+      ds.document_type AS draft_document_type,
+      ds.source_order AS draft_source_order
+    FROM zoning.section_equivalence se
+    JOIN zoning.section cs
+      ON cs.section_id = se.current_section_id
+    JOIN zoning.section ds
+      ON ds.section_id = se.draft_section_id
+    WHERE se.review_status = 'accepted'
+      AND cs.is_active
+      AND ds.is_active
+      AND COALESCE(ds.document_type, '') <> 'zone'
+      AND ds.bylaw_part_id = $1
+    ORDER BY ds.source_order, cs.source_order, se.section_equivalence_id
+  `, [partRow.bylaw_part_id]);
+
+  const pairs = await Promise.all(pairRows.map(async (row) => {
+    const [currentSection, draftSection] = await Promise.all([
+      loadSection(row.current_section_id),
+      loadSection(row.draft_section_id),
+    ]);
+    const currentText = sectionComparableText(currentSection);
+    const draftText = sectionComparableText(draftSection);
+    return {
+      sectionEquivalenceId: Number(row.section_equivalence_id),
+      topic: compactText(row.assigned_topic),
+      equivalenceType: compactText(row.equivalence_type),
+      titleSimilarity: row.title_similarity === null ? null : Number(row.title_similarity),
+      textSimilarity: row.text_similarity === null ? null : Number(row.text_similarity),
+      documentTypes: {
+        current: compactText(row.current_document_type),
+        draft: compactText(row.draft_document_type),
+      },
+      current: currentSection,
+      draft: draftSection,
+      rows: [
+        {
+          label: "Document type",
+          current: compactText(row.current_document_type),
+          draft: compactText(row.draft_document_type),
+          status: row.current_document_type === row.draft_document_type ? "same" : "changed",
+        },
+        {
+          label: "Section title",
+          current: compactText(`${row.current_section_label || ""} ${row.current_section_title || ""}`),
+          draft: compactText(`${row.draft_section_label || ""} ${row.draft_section_title || ""}`),
+          status: normalizeComparisonKey(`${row.current_section_label || ""} ${row.current_section_title || ""}`)
+            === normalizeComparisonKey(`${row.draft_section_label || ""} ${row.draft_section_title || ""}`) ? "same" : "changed",
+        },
+        {
+          label: "Clause count",
+          current: currentSection?.clauses?.length ?? null,
+          draft: draftSection?.clauses?.length ?? null,
+          status: (currentSection?.clauses?.length ?? null) === (draftSection?.clauses?.length ?? null) ? "same" : "changed",
+        },
+        {
+          label: "Text signature",
+          current: currentText ? `${currentText.length} chars` : null,
+          draft: draftText ? `${draftText.length} chars` : null,
+          status: currentText === draftText ? "same" : "source",
+        },
+      ],
+    };
+  }));
+  const currentSectionIds = [...new Set(pairRows.map((row) => row.current_section_id))];
+  const currentSections = await Promise.all(currentSectionIds.map((sectionId) => loadSection(sectionId)));
+  currentSections.sort((a, b) => (a?.filePath || "").localeCompare(b?.filePath || "") || toStringValue(a?.sectionId).localeCompare(toStringValue(b?.sectionId)));
+
+  return {
+    partId: Number(partRow.bylaw_part_id),
+    partNumber: partRow.part_number,
+    title: compactText(partRow.display_title) || compactText(partRow.part_title_raw),
+    documentType: compactText(partRow.document_type),
+    filePath: compactText(partRow.repo_relpath),
+    citations: toJsonValue(partRow.citations),
+    summary: {
+      currentSections: currentSections.filter(Boolean).length,
+      draftSections: draftSections.length,
+      structuredPairs: pairs.length,
+    },
+    raw: {
+      current: currentSections.filter(Boolean),
+      draft: draftSections,
+    },
+    structuredPairs: pairs,
+  };
+}
+
+async function loadSectionsByPartId(partId) {
+  const { rows } = await pool.query(`
+    SELECT section_id
+    FROM zoning.section
+    WHERE is_active
+      AND bylaw_part_id = $1
+    ORDER BY source_order, section_id
+  `, [partId]);
+  return Promise.all(rows.map((row) => loadSection(row.section_id)));
+}
+
+function sectionComparableText(section) {
+  if (!section) {
+    return "";
+  }
+  return [
+    section.label,
+    section.title,
+    ...(section.clauses || []).map((clause) => `${clause.label || ""} ${clause.text || ""}`),
+    ...(section.tables || []).flatMap((table) => [
+      table.title,
+      ...(table.rows || []).flatMap((row) => (row.cells || []).map((cell) => cell.text)),
+    ]),
+  ].filter(Boolean).join("\n").replace(/\s+/g, " ").trim();
+}
+
 async function loadParcelGeoJson(bbox, limit) {
   const params = [limit];
   let bboxFilter = "";
@@ -1537,6 +1719,8 @@ const routeEntrypoints = new Map([
   ["/map/", { file: "/ui_kits/map-explorer-leaflet/index.html", baseHref: "/ui_kits/map-explorer-leaflet/" }],
   ["/zoning-comparison", { file: "/ui_kits/zoning-comparison/index.html", baseHref: "/ui_kits/zoning-comparison/" }],
   ["/zoning-comparison/", { file: "/ui_kits/zoning-comparison/index.html", baseHref: "/ui_kits/zoning-comparison/" }],
+  ["/provisions-comparison", { file: "/ui_kits/provisions-comparison/index.html", baseHref: "/ui_kits/provisions-comparison/" }],
+  ["/provisions-comparison/", { file: "/ui_kits/provisions-comparison/index.html", baseHref: "/ui_kits/provisions-comparison/" }],
 ]);
 
 function htmlWithBase(body, baseHref) {
@@ -1672,6 +1856,16 @@ const server = createServer(async (request, response) => {
         return;
       }
       await sendJson(response, comparison);
+      return;
+    }
+
+    if (url.pathname === "/api/provisions-comparison") {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      await sendJson(response, await loadProvisionsComparison());
       return;
     }
 

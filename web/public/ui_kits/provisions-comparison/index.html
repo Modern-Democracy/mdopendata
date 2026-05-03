@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Provisions Comparison - Modern Democracy</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../parcel-lookup/styles.css">
+<style>
+  .compare-shell { max-width: 1240px; margin: 0 auto; padding: 30px 24px 56px; }
+  .page-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: end; margin-bottom: 22px; }
+  .eyebrow { font-family: var(--font-ui); font-weight: 600; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 10px; }
+  .page-head h1 { font-family: var(--font-display); font-variation-settings: "opsz" 72; font-weight: 500; font-size: 40px; line-height: 1.04; margin: 0 0 8px; color: var(--ink); }
+  .page-head p { font-family: var(--font-ui); font-size: 14px; color: var(--fg-3); line-height: 1.45; margin: 0; max-width: 76ch; }
+  .view-toggle { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper); }
+  .view-toggle button { border: 0; border-radius: 4px; background: transparent; color: var(--fg-3); cursor: pointer; font-family: var(--font-ui); font-size: 12px; font-weight: 600; padding: 8px 12px; }
+  .view-toggle button.active { background: var(--ink); color: var(--paper); }
+  .layout { display: grid; grid-template-columns: 360px 1fr; gap: 18px; align-items: start; }
+  .part-list { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper); overflow: hidden; }
+  .part-button { width: 100%; border: 0; border-bottom: 1px solid var(--border-hair); background: transparent; color: var(--fg-2); cursor: pointer; display: grid; gap: 5px; padding: 12px 14px; text-align: left; font-family: var(--font-ui); }
+  .part-button:last-child { border-bottom: 0; }
+  .part-button.active { background: var(--paper-2); color: var(--ink); box-shadow: inset 3px 0 0 var(--brick); }
+  .part-title { font-size: 14px; font-weight: 600; line-height: 1.25; overflow-wrap: anywhere; }
+  .part-meta { color: var(--fg-3); font-family: var(--font-mono); font-size: 11px; }
+  .summary-bar { background: var(--paper-2); border: 1px solid var(--border-hair); border-radius: 6px; padding: 14px 16px; margin-bottom: 16px; display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+  .summary-stat .n { font-family: var(--font-display); font-variation-settings: "opsz" 72; font-weight: 500; font-size: 25px; line-height: 1; color: var(--ink); }
+  .summary-stat .l { font-family: var(--font-ui); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-3); margin-top: 4px; }
+  .raw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .column-card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); overflow: hidden; }
+  .column-head { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid var(--border-hair); background: var(--paper-3); }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .column-head .name { font-family: var(--font-ui); font-weight: 600; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); }
+  .section-list { display: grid; gap: 0; }
+  .section-item { padding: 14px 16px; border-bottom: 1px solid var(--border-hair); font-family: var(--font-ui); font-size: 13px; color: var(--fg-2); line-height: 1.35; }
+  .section-item:last-child { border-bottom: 0; }
+  .section-item .title { color: var(--ink); font-weight: 600; overflow-wrap: anywhere; }
+  .section-item .meta { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-top: 3px; }
+  .clause { margin-top: 8px; }
+  .clause-label { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-right: 6px; }
+  .structured-list { display: grid; gap: 16px; }
+  .structured-pair { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper); overflow: hidden; }
+  .structured-pair-head { width: 100%; border: 0; border-bottom: 1px solid var(--border-hair); background: var(--paper-3); color: var(--ink); cursor: pointer; display: flex; gap: 8px; align-items: flex-start; font-family: var(--font-ui); font-size: 13px; font-weight: 600; padding: 12px 14px; text-align: left; }
+  .structured-pair.collapsed .structured-pair-head { border-bottom: 0; }
+  .structured-pair-head .chevron { color: var(--fg-3); flex: 0 0 auto; font-family: var(--font-mono); font-size: 11px; margin-top: 1px; }
+  .structured-pair-head .title { overflow-wrap: anywhere; }
+  .compare-grid { display: grid; grid-template-columns: 1fr 165px 1fr; border: 1px solid var(--border-hair); border-radius: 6px; overflow: hidden; background: var(--paper); margin-bottom: 16px; }
+  .col-head { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid var(--border-hair); background: var(--paper-2); }
+  .col-head.current, .col-head.label { border-right: 1px solid var(--border-hair); }
+  .col-head.label { justify-content: center; background: var(--paper-3); }
+  .col-head .name { font-family: var(--font-ui); font-weight: 600; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); }
+  .diff-cell { min-height: 44px; min-width: 0; padding: 11px 13px; border-bottom: 1px solid var(--border-hair); font-family: var(--font-ui); font-size: 13px; color: var(--fg-2); display: flex; align-items: center; gap: 8px; }
+  .diff-cell.current { justify-content: flex-end; text-align: right; border-right: 1px solid var(--border-hair); }
+  .diff-cell.label { justify-content: center; text-align: center; background: var(--paper-3); color: var(--ink); font-weight: 500; font-size: 12px; border-right: 1px solid var(--border-hair); }
+  .value { font-family: var(--font-mono); font-weight: 500; color: var(--ink); overflow-wrap: anywhere; }
+  .marker { font-family: var(--font-mono); font-size: 10.5px; padding: 2px 6px; border-radius: 2px; letter-spacing: 0.05em; white-space: nowrap; }
+  .marker.changed { background: var(--ochre-wash); color: var(--ochre-ink); }
+  .marker.same, .marker.source { background: var(--paper-2); color: var(--fg-3); }
+  .status-card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 18px; font-family: var(--font-ui); font-size: 14px; color: var(--fg-3); }
+  @media (max-width: 920px) {
+    .compare-shell { padding: 24px 18px 44px; }
+    .page-head, .layout, .raw-grid { grid-template-columns: 1fr; }
+    .page-head h1 { font-size: 34px; overflow-wrap: anywhere; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .col-head.label, .diff-cell.label { display: none; }
+    .diff-cell.current, .diff-cell.draft { justify-content: flex-start; text-align: left; border-right: 0; }
+  }
+</style>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useEffect, useMemo, useState } = React;
+
+function Header() {
+  return (
+    <header className="app-header">
+      <img src="../../assets/logo-island-needle.svg" alt="Modern Democracy" className="wm" />
+      <nav>
+        <a href="/parcel-lookup">Parcel lookup</a>
+        <a href="/zoning-comparison">Compare bylaws</a>
+        <a className="active" href="/provisions-comparison">Compare provisions</a>
+        <a href="/city-view">Map</a>
+      </nav>
+    </header>
+  );
+}
+
+function formatValue(value) {
+  return value === null || value === undefined || value === '' ? 'pending' : String(value);
+}
+
+function markerText(status, side) {
+  if (status === 'same') return 'SAME';
+  if (status === 'source') return 'SOURCE';
+  return side === 'current' ? 'WAS' : 'NOW';
+}
+
+function PartList({ parts, selectedId, onSelect }) {
+  return (
+    <aside className="part-list" aria-label="Draft bylaw parts">
+      {parts.map((part) => (
+        <button type="button" className={`part-button ${part.partId === selectedId ? 'active' : ''}`} onClick={() => onSelect(part.partId)} key={part.partId}>
+          <span className="part-title">{part.title}</span>
+          <span className="part-meta">{part.summary.currentSections} matched current sections / {part.summary.draftSections} draft sections</span>
+        </button>
+      ))}
+    </aside>
+  );
+}
+
+function SectionItem({ section }) {
+  return (
+    <article className="section-item">
+      <div className="title">{section.label} {section.title}</div>
+      <div className="meta">{section.filePath || 'source path pending'}</div>
+      <div className="meta">Bylaw page {section.citations?.bylaw_page_start || 'pending'}</div>
+      {(section.clauses || []).map((clause, clauseIndex) => (
+        <div className="clause" key={`${section.sectionId}-clause-${clauseIndex}`}>
+          {clause.label && <span className="clause-label">{clause.label}</span>}
+          <span>{clause.text || ''}</span>
+        </div>
+      ))}
+    </article>
+  );
+}
+
+function SectionList({ title, sections, side }) {
+  return (
+    <section className="column-card">
+      <div className="column-head">
+        <span className="dot" style={{background: side === 'current' ? 'var(--brick)' : 'var(--ochre)'}}></span>
+        <span className="name">{title}</span>
+      </div>
+      <div className="section-list">
+        {sections.length === 0 && <div className="section-item">No matched sections.</div>}
+        {sections.map((section, index) => (
+          <SectionItem section={section} key={`${section.sectionId}-${index}`} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function RawView({ part }) {
+  return (
+    <div className="raw-grid">
+      <SectionList title="Current matching part" sections={part.raw.current || []} side="current" />
+      <SectionList title={`${part.partNumber} draft`} sections={part.raw.draft || []} side="draft" />
+    </div>
+  );
+}
+
+function ComparisonRows({ rows }) {
+  return (
+    <div className="compare-grid">
+      <div className="col-head current"><span className="dot" style={{background:'var(--brick)'}}></span><span className="name">Current bylaw</span></div>
+      <div className="col-head label"><span className="name">Field</span></div>
+      <div className="col-head draft"><span className="dot" style={{background:'var(--ochre)'}}></span><span className="name">Draft bylaw</span></div>
+      {rows.map((row, index) => (
+        <React.Fragment key={`${row.label}-${index}`}>
+          <div className="diff-cell current"><span className="value">{formatValue(row.current)}</span><span className={`marker ${row.status}`}>{markerText(row.status, 'current')}</span></div>
+          <div className="diff-cell label">{row.label}</div>
+          <div className="diff-cell draft"><span className={`marker ${row.status}`}>{markerText(row.status, 'draft')}</span><span className="value">{formatValue(row.draft)}</span></div>
+        </React.Fragment>
+      ))}
+    </div>
+  );
+}
+
+function StructuredView({ part }) {
+  const pairs = [...(part.structuredPairs || [])].sort((a, b) => {
+    const aLabel = `${a.draft?.label || a.current?.label || ''} ${a.draft?.title || a.current?.title || ''}`;
+    const bLabel = `${b.draft?.label || b.current?.label || ''} ${b.draft?.title || b.current?.title || ''}`;
+    return aLabel.localeCompare(bLabel, undefined, { numeric: true, sensitivity: 'base' });
+  });
+  if (!pairs.length) {
+    return <div className="status-card">No accepted structured section pairs for this draft part.</div>;
+  }
+  return (
+    <div className="structured-list">
+      {pairs.map((pair) => (
+        <StructuredPair pair={pair} key={pair.sectionEquivalenceId} />
+      ))}
+    </div>
+  );
+}
+
+function StructuredPair({ pair }) {
+  const [collapsed, setCollapsed] = useState(false);
+  const title = `${pair.draft?.label || pair.current?.label || ''} ${pair.draft?.title || pair.current?.title || 'Untitled section'}`;
+  return (
+    <section className={`structured-pair ${collapsed ? 'collapsed' : ''}`}>
+      <button type="button" className="structured-pair-head" onClick={() => setCollapsed(!collapsed)} aria-expanded={!collapsed}>
+        <span className="chevron">{collapsed ? '+' : '-'}</span>
+        <span className="title">{title}</span>
+      </button>
+      {!collapsed && (
+        <>
+          <ComparisonRows rows={pair.rows || []} />
+          <div className="raw-grid" style={{padding:16}}>
+            <SectionList title="Current section" sections={[pair.current].filter(Boolean)} side="current" />
+            <SectionList title="Draft section" sections={[pair.draft].filter(Boolean)} side="draft" />
+          </div>
+        </>
+      )}
+    </section>
+  );
+}
+
+function App() {
+  const [payload, setPayload] = useState(null);
+  const [status, setStatus] = useState('Loading provisions comparison.');
+  const [selectedPartId, setSelectedPartId] = useState(null);
+  const [viewMode, setViewMode] = useState('raw');
+
+  useEffect(() => { lucide.createIcons(); });
+
+  useEffect(() => {
+    let cancelled = false;
+    async function loadComparison() {
+      try {
+        const response = await fetch('/api/provisions-comparison');
+        if (!response.ok) throw new Error(`Provisions comparison failed with HTTP ${response.status}.`);
+        const nextPayload = await response.json();
+        if (!cancelled) {
+          setPayload(nextPayload);
+          setSelectedPartId(nextPayload.parts?.[0]?.partId || null);
+          setStatus(`Loaded ${nextPayload.summary?.parts || 0} draft parts.`);
+        }
+      } catch (error) {
+        if (!cancelled) setStatus(error.message || 'Provisions comparison failed.');
+      }
+    }
+    loadComparison();
+    return () => { cancelled = true; };
+  }, []);
+
+  const parts = payload?.parts || [];
+  const selectedPart = useMemo(() => parts.find((part) => part.partId === selectedPartId) || parts[0], [parts, selectedPartId]);
+
+  return (
+    <div className="app">
+      <Header />
+      <main className="compare-shell">
+        <div className="page-head">
+          <div>
+            <div className="eyebrow">Comparison</div>
+            <h1>{selectedPart ? selectedPart.title : 'General provisions comparison'}</h1>
+            <p>{payload ? 'Select a draft bylaw part, then switch between raw matched text and structured accepted section pairs.' : status}</p>
+          </div>
+          <div className="view-toggle" aria-label="Comparison view">
+            <button type="button" className={viewMode === 'raw' ? 'active' : ''} onClick={() => setViewMode('raw')}>Raw bylaw</button>
+            <button type="button" className={viewMode === 'structured' ? 'active' : ''} onClick={() => setViewMode('structured')}>Structured data</button>
+          </div>
+        </div>
+        {!payload && <div className="status-card">{status}</div>}
+        {payload && selectedPart && (
+          <div className="layout">
+            <PartList parts={parts} selectedId={selectedPart.partId} onSelect={setSelectedPartId} />
+            <section>
+              <div className="summary-bar">
+                <div className="summary-stat"><div className="n">{selectedPart.summary.currentSections}</div><div className="l">Current sections</div></div>
+                <div className="summary-stat"><div className="n">{selectedPart.summary.draftSections}</div><div className="l">Draft sections</div></div>
+                <div className="summary-stat"><div className="n">{selectedPart.summary.structuredPairs}</div><div className="l">Structured pairs</div></div>
+                <div style={{marginLeft:'auto', fontFamily:'var(--font-mono)', fontSize:12, color:'var(--fg-3)'}}>{selectedPart.filePath}</div>
+              </div>
+              {viewMode === 'raw' ? <RawView part={selectedPart} /> : <StructuredView part={selectedPart} />}
+            </section>
+          </div>
+        )}
+      </main>
+      <footer className="app-footer">
+        <div className="row">
+          <div>Compare current and draft Charlottetown non-zone bylaw provisions.</div>
+          <div style={{marginLeft:'auto'}}>Source: <a>github.com/Modern-Democracy/mdopendata</a></div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body></html>
