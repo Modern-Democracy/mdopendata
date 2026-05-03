@@ -41,6 +41,35 @@ function normalizeComparisonKey(value) {
     .replace(/^_+|_+$/g, "");
 }
 
+let knownZoneCodesCache = null;
+
+async function loadKnownZoneCodes() {
+  if (knownZoneCodesCache) {
+    return knownZoneCodesCache;
+  }
+  const { rows } = await pool.query(`
+    SELECT zone_code
+    FROM zoning.section
+    WHERE is_active
+      AND document_type = 'zone'
+      AND zone_code IS NOT NULL
+    GROUP BY zone_code
+    ORDER BY length(zone_code) DESC, zone_code
+  `);
+  knownZoneCodesCache = rows.map((row) => row.zone_code);
+  return knownZoneCodesCache;
+}
+
+function extractReferencedZoneCodes(text, knownZoneCodes, currentZoneCode) {
+  const source = toStringValue(text).toUpperCase();
+  return knownZoneCodes
+    .filter((zoneCode) => zoneCode !== currentZoneCode)
+    .filter((zoneCode) => {
+      const escaped = zoneCode.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      return new RegExp(`\\b${escaped}\\s+ZONE\\b|\\(${escaped}\\)\\s+ZONE\\b`, "i").test(source);
+    });
+}
+
 function normalizeLimit(value, fallback, max) {
   const parsed = Number(value);
   if (!Number.isFinite(parsed) || parsed <= 0) {
@@ -526,6 +555,31 @@ async function loadZoneSections(zoneCode, sourceKind) {
   return rows.map(mapZoneSectionRow);
 }
 
+async function attachReferencedSections(sections, zoneCode, sourceKind) {
+  const knownZoneCodes = await loadKnownZoneCodes();
+  const cache = new Map();
+  for (const section of sections) {
+    for (const clause of section.clauses || []) {
+      const referencedZoneCodes = extractReferencedZoneCodes(clause.text, knownZoneCodes, zoneCode);
+      if (!referencedZoneCodes.length) {
+        continue;
+      }
+      clause.references = [];
+      for (const referencedZoneCode of referencedZoneCodes) {
+        const cacheKey = `${sourceKind}:${referencedZoneCode}`;
+        if (!cache.has(cacheKey)) {
+          cache.set(cacheKey, await loadZoneSections(referencedZoneCode, sourceKind));
+        }
+        clause.references.push({
+          zoneCode: referencedZoneCode,
+          sections: cache.get(cacheKey),
+        });
+      }
+    }
+  }
+  return sections;
+}
+
 function mapStructuredFactRow(row) {
   const payload = toJsonValue(row.value_payload);
   const rawText = compactText(row.raw_text)
@@ -552,7 +606,8 @@ function mapStructuredFactRow(row) {
 
 function structuredValueText(fact) {
   const payload = fact?.value || {};
-  return compactText(payload.use_name_raw)
+  return compactText(fact?.displayText)
+    || compactText(payload.use_name_raw)
     || compactText(payload.requirement_text_raw)
     || compactText(fact?.text)
     || compactText(payload.value_raw)
@@ -633,10 +688,15 @@ function buildStructuredRows(currentFacts, draftFacts, options = {}) {
   });
 }
 
-async function loadZoneStructuredFacts(zoneCode, sourceKind) {
+async function loadZoneStructuredFacts(zoneCode, sourceKind, visitedZoneCodes = new Set()) {
   if (!zoneCode) {
     return { uses: [], requirements: [], otherRequirements: [], numericValues: [], clauses: [] };
   }
+  if (visitedZoneCodes.has(`${sourceKind}:${zoneCode}`)) {
+    return { uses: [], requirements: [], otherRequirements: [], numericValues: [], clauses: [] };
+  }
+  const nextVisitedZoneCodes = new Set(visitedZoneCodes);
+  nextVisitedZoneCodes.add(`${sourceKind}:${zoneCode}`);
   const zonePath = sourceKind === "draft"
     ? `data/zoning/charlottetown-draft/zones/${zoneCode.toLowerCase()}.json`
     : `data/zoning/charlottetown/zones/${zoneCode.toLowerCase()}.json`;
@@ -691,7 +751,7 @@ async function loadZoneStructuredFacts(zoneCode, sourceKind) {
   ]);
 
   const facts = factsResult.rows.map(mapStructuredFactRow);
-  return {
+  const data = {
     uses: facts
       .filter((fact) => fact.family === "uses" && compactText(fact.value?.use_status) === "permitted")
       .map((fact) => ({
@@ -711,6 +771,24 @@ async function loadZoneStructuredFacts(zoneCode, sourceKind) {
       sourceOrder: row.source_order === null || row.source_order === undefined ? null : Number(row.source_order),
     })),
   };
+
+  const knownZoneCodes = await loadKnownZoneCodes();
+  const referencedZoneCodes = [
+    ...new Set(data.clauses.flatMap((clause) => extractReferencedZoneCodes(clause.text, knownZoneCodes, zoneCode))),
+  ];
+  for (const referencedZoneCode of referencedZoneCodes) {
+    const referencedData = await loadZoneStructuredFacts(referencedZoneCode, sourceKind, nextVisitedZoneCodes);
+    for (const use of referencedData.uses) {
+      data.uses.push({
+        ...use,
+        key: normalizeComparisonKey(use.value?.use_name_raw || use.text || use.key),
+        inheritedFromZoneCode: referencedZoneCode,
+        displayText: `${structuredValueText(use)} [from ${referencedZoneCode}]`,
+      });
+    }
+  }
+
+  return data;
 }
 
 function buildStructuredComparison(currentData, draftData) {
@@ -771,9 +849,13 @@ async function loadZoningComparisonByPid(pid) {
   const draftZone = parcel.zones.draft;
   const currentLookupCode = currentZone?.bylawZoneCode || currentZone?.normalizedCode || currentZone?.code;
   const draftLookupCode = draftZone?.bylawZoneCode || draftZone?.normalizedCode || draftZone?.code;
-  const [currentSections, draftSections] = await Promise.all([
+  let [currentSections, draftSections] = await Promise.all([
     loadZoneSections(currentLookupCode, "current"),
     loadZoneSections(draftLookupCode, "draft"),
+  ]);
+  [currentSections, draftSections] = await Promise.all([
+    attachReferencedSections(currentSections, currentLookupCode, "current"),
+    attachReferencedSections(draftSections, draftLookupCode, "draft"),
   ]);
   const [currentStructured, draftStructured] = await Promise.all([
     loadZoneStructuredFacts(currentLookupCode, "current"),

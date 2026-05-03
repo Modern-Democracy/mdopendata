@@ -51,6 +51,11 @@
   .citation-item .meta { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-top: 3px; }
   .citation-item .clause { margin-top: 8px; }
   .citation-item .clause-label { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-right: 6px; }
+  .reference-button { border: 0; background: transparent; color: var(--brick-ink); cursor: pointer; display: inline; font: inherit; padding: 0; text-align: left; text-decoration: underline; text-underline-offset: 3px; }
+  .reference-panel { border-left: 2px solid var(--brick); margin: 8px 0 0 16px; padding: 8px 0 2px 10px; }
+  .reference-panel h3 { color: var(--fg-3); font-family: var(--font-ui); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; margin: 0 0 8px; text-transform: uppercase; }
+  .reference-section { margin-top: 8px; }
+  .reference-section .title { font-size: 12px; }
   .citation-item table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
   .citation-item th, .citation-item td { border: 1px solid var(--border-hair); padding: 6px; vertical-align: top; }
   .citation-item th { background: var(--paper-3); color: var(--ink); font-family: var(--font-ui); font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-align: left; text-transform: uppercase; }
@@ -165,6 +170,43 @@ function rowCellsByColumn(row) {
   return byColumn;
 }
 
+function ReferencePanel({ references }) {
+  return (
+    <div className="reference-panel">
+      {(references || []).map((reference) => (
+        <div key={reference.zoneCode}>
+          <h3>Referenced {reference.zoneCode} sections</h3>
+          {(reference.sections || []).map((section, index) => (
+            <div className="reference-section" key={`${reference.zoneCode}-${section.sectionId}-${index}`}>
+              <div className="title">{section.label} {section.title}</div>
+              {(section.clauses || []).map((clause, clauseIndex) => (
+                <div className="clause" key={`${reference.zoneCode}-${section.sectionId}-clause-${clauseIndex}`}>
+                  {clause.label && <span className="clause-label">{clause.label}</span>}
+                  <span>{clause.text || ''}</span>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Clause({ clause, clauseKey }) {
+  const [expanded, setExpanded] = useState(false);
+  const hasReferences = Boolean(clause.references?.length);
+  return (
+    <div className="clause">
+      {clause.label && <span className="clause-label">{clause.label}</span>}
+      {hasReferences
+        ? <button type="button" className="reference-button" onClick={() => setExpanded(!expanded)} aria-expanded={expanded}>{clause.text || ''}</button>
+        : <span>{clause.text || ''}</span>}
+      {expanded && hasReferences && <ReferencePanel references={clause.references} />}
+    </div>
+  );
+}
+
 function CitationList({ title, sections }) {
   return (
     <section className="citation-card">
@@ -177,10 +219,7 @@ function CitationList({ title, sections }) {
             <div className="meta">{section.filePath || 'source path pending'}</div>
             <div className="meta">Bylaw page {section.citations?.bylaw_page_start || 'pending'}</div>
             {(section.clauses || []).map((clause, clauseIndex) => (
-              <div className="clause" key={`${section.sectionId}-clause-${clauseIndex}`}>
-                {clause.label && <span className="clause-label">{clause.label}</span>}
-                <span>{clause.text || ''}</span>
-              </div>
+              <Clause clause={clause} clauseKey={`${section.sectionId}-clause-${clauseIndex}`} key={`${section.sectionId}-clause-${clauseIndex}`} />
             ))}
             {(section.tables || []).map((table, tableIndex) => (
               <div key={`${section.sectionId}-table-${tableIndex}`}>
