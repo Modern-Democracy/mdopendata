@@ -194,6 +194,10 @@ Updated `topics/unified-zoning-ingestion-plan.md` after adding `schema/sql/006_c
 
 Updated `topics/unified-zoning-ingestion-plan.md` after adding `schema/sql/007_charlottetown_spatial_gis_views.sql`, which exposes one named indexed GIS materialized view for each registered Charlottetown spatial layer while preserving `zoning.spatial_feature` as the normalized storage table.
 
+## [2026-05-03] spatial | OSM building footprints
+
+Created `public."CHTWN_OSM_Buildings"` from OpenStreetMap Overpass API `building=*` way geometries clipped to `public."CHTWN_Municipal_Boundary"`. The loaded PostGIS layer contains 13,144 valid multipolygon features with retained OSM ids and tags.
+
 ## Sources
 
 - [Charlottetown wiki guide](./README.md)

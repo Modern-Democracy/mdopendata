@@ -47,7 +47,10 @@
   .citation-item .clause { margin-top: 8px; }
   .citation-item .clause-label { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-right: 6px; }
   .citation-item table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
-  .citation-item td { border: 1px solid var(--border-hair); padding: 6px; vertical-align: top; }
+  .citation-item th, .citation-item td { border: 1px solid var(--border-hair); padding: 6px; vertical-align: top; }
+  .citation-item th { background: var(--paper-3); color: var(--ink); font-family: var(--font-ui); font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-align: left; text-transform: uppercase; }
+  .citation-item td { white-space: pre-line; }
+  .citation-item td.empty { color: var(--fg-3); opacity: 0.55; }
   .table-title { margin-top: 12px; color: var(--ink); font-weight: 500; }
   .status-card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 18px; font-family: var(--font-ui); font-size: 14px; color: var(--fg-3); }
   @media (max-width: 760px) {
@@ -104,6 +107,54 @@ function Header() {
   );
 }
 
+function humanizeColumnId(columnId) {
+  return String(columnId || 'Column')
+    .replace(/_/g, ' ')
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
+function tableColumns(table) {
+  const columns = Array.isArray(table.columns) ? [...table.columns] : [];
+  if (columns.length) {
+    return columns.map((column, index) => ({
+      columnId: column.columnId || `column-${index}`,
+      columnLabel: column.columnLabel || humanizeColumnId(column.columnId),
+      columnOrder: Number.isFinite(Number(column.columnOrder)) ? Number(column.columnOrder) : index,
+    }));
+  }
+
+  const byId = new Map();
+  (table.rows || []).forEach((row) => {
+    (row.cells || []).forEach((cell, index) => {
+      const columnId = cell.columnId || `column-${index}`;
+      if (!byId.has(columnId)) {
+        byId.set(columnId, {
+          columnId,
+          columnLabel: cell.columnLabel || humanizeColumnId(columnId),
+          columnOrder: Number.isFinite(Number(cell.columnOrder)) ? Number(cell.columnOrder) : index,
+        });
+      }
+    });
+  });
+  return [...byId.values()].sort((a, b) => a.columnOrder - b.columnOrder || a.columnId.localeCompare(b.columnId));
+}
+
+function rowCellsByColumn(row) {
+  const byColumn = new Map();
+  (row.cells || []).forEach((cell) => {
+    const columnId = cell.columnId || '';
+    if (!columnId) return;
+    const prior = byColumn.get(columnId);
+    const text = cell.text || '';
+    if (!prior) {
+      byColumn.set(columnId, text);
+      return;
+    }
+    byColumn.set(columnId, [prior, text].filter(Boolean).join('\n'));
+  });
+  return byColumn;
+}
+
 function CitationList({ title, sections }) {
   return (
     <section className="citation-card">
@@ -125,14 +176,29 @@ function CitationList({ title, sections }) {
               <div key={`${section.sectionId}-table-${tableIndex}`}>
                 {table.title && <div className="table-title">{table.title}</div>}
                 <table>
+                  <thead>
+                    <tr>
+                      {tableColumns(table).map((column) => (
+                        <th key={`${section.sectionId}-table-${tableIndex}-head-${column.columnId}`}>
+                          {column.columnLabel || humanizeColumnId(column.columnId)}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
                   <tbody>
-                    {(table.rows || []).map((row, rowIndex) => (
-                      <tr key={`${section.sectionId}-table-${tableIndex}-row-${rowIndex}`}>
-                        {(row.cells || []).map((cell, cellIndex) => (
-                          <td key={`${section.sectionId}-table-${tableIndex}-row-${rowIndex}-cell-${cellIndex}`}>{cell.text || ''}</td>
-                        ))}
-                      </tr>
-                    ))}
+                    {(table.rows || []).map((row, rowIndex) => {
+                      const cellsByColumn = rowCellsByColumn(row);
+                      return (
+                        <tr key={`${section.sectionId}-table-${tableIndex}-row-${rowIndex}`}>
+                          {tableColumns(table).map((column) => {
+                            const text = cellsByColumn.get(column.columnId) || '';
+                            return (
+                              <td className={text ? '' : 'empty'} key={`${section.sectionId}-table-${tableIndex}-row-${rowIndex}-cell-${column.columnId}`}>{text}</td>
+                            );
+                          })}
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>

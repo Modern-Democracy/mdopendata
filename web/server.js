@@ -448,6 +448,28 @@ async function loadZoneSections(zoneCode, sourceKind) {
                 'title', rt.table_title_raw,
                 'sourceOrder', rt.source_order,
                 'citations', rt.citations,
+                'columns', COALESCE(
+                  (
+                    SELECT jsonb_agg(column_payload ORDER BY first_column_order, first_cell_id)
+                    FROM (
+                      SELECT DISTINCT ON (rtc.column_id)
+                        rtc.column_id,
+                        MIN(rtc.column_order) OVER (PARTITION BY rtc.column_id) AS first_column_order,
+                        MIN(rtc.raw_table_cell_id) OVER (PARTITION BY rtc.column_id) AS first_cell_id,
+                        jsonb_build_object(
+                          'columnId', rtc.column_id,
+                          'columnLabel', rtc.column_label_raw,
+                          'columnOrder', MIN(rtc.column_order) OVER (PARTITION BY rtc.column_id)
+                        ) AS column_payload
+                      FROM zoning.raw_table_cell rtc
+                      WHERE rtc.raw_table_id = rt.raw_table_id
+                        AND rtc.is_active
+                        AND rtc.column_id IS NOT NULL
+                      ORDER BY rtc.column_id, rtc.column_order, rtc.raw_table_cell_id
+                    ) table_columns
+                  ),
+                  '[]'::jsonb
+                ),
                 'rows', COALESCE(
                   (
                     SELECT jsonb_agg(row_payload ORDER BY row_order)
@@ -460,6 +482,7 @@ async function loadZoneSections(zoneCode, sourceKind) {
                             jsonb_build_object(
                               'columnId', rtc.column_id,
                               'columnLabel', rtc.column_label_raw,
+                              'columnOrder', rtc.column_order,
                               'text', rtc.cell_text_raw
                             )
                             ORDER BY rtc.column_order, rtc.raw_table_cell_id
