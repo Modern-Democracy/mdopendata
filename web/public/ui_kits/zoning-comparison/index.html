@@ -19,6 +19,9 @@
   .summary-stat .l { font-family: var(--font-ui); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-3); margin-top: 4px; }
   .summary-stat.changed .n { color: var(--ochre-ink); }
   .summary-stat.pending .n { color: var(--brick-ink); }
+  .view-toggle { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper); }
+  .view-toggle button { border: 0; border-radius: 4px; background: transparent; color: var(--fg-3); cursor: pointer; font-family: var(--font-ui); font-size: 12px; font-weight: 600; padding: 8px 10px; }
+  .view-toggle button.active { background: var(--ink); color: var(--paper); }
   .compare-grid { display: grid; grid-template-columns: 1fr 190px 1fr; border: 1px solid var(--border-hair); border-radius: 6px; overflow: hidden; background: var(--paper); }
   .col-head { display: flex; align-items: center; gap: 10px; padding: 18px 20px; border-bottom: 1px solid var(--border-hair); background: var(--paper-2); }
   .col-head.current { border-right: 1px solid var(--border-hair); }
@@ -31,7 +34,9 @@
   .diff-cell.label { justify-content: center; text-align: center; background: var(--paper-3); color: var(--ink); font-weight: 500; font-size: 12.5px; border-right: 1px solid var(--border-hair); }
   .diff-cell.draft { justify-content: flex-start; }
   .diff-cell.empty { color: var(--fg-3); opacity: 0.65; }
+  .diff-cell.numeric-changed .value { color: var(--brick-ink); }
   .value { font-family: var(--font-mono); font-weight: 500; color: var(--ink); overflow-wrap: anywhere; }
+  .value.multi-line { white-space: pre-line; }
   .marker { font-family: var(--font-mono); font-size: 10.5px; padding: 2px 6px; border-radius: 2px; letter-spacing: 0.05em; white-space: nowrap; }
   .marker.changed { background: var(--ochre-wash); color: var(--ochre-ink); }
   .marker.same, .marker.source { background: var(--paper-2); color: var(--fg-3); }
@@ -52,6 +57,9 @@
   .citation-item td { white-space: pre-line; }
   .citation-item td.empty { color: var(--fg-3); opacity: 0.55; }
   .table-title { margin-top: 12px; color: var(--ink); font-weight: 500; }
+  .structured-view { display: grid; gap: 18px; }
+  .structured-group h2 { font-family: var(--font-ui); font-weight: 600; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 10px; color: var(--fg-3); }
+  .structured-empty { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); color: var(--fg-3); font-family: var(--font-ui); font-size: 13px; padding: 14px; }
   .status-card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 18px; font-family: var(--font-ui); font-size: 14px; color: var(--fg-3); }
   @media (max-width: 760px) {
     .compare-shell { padding: 24px 18px 44px; }
@@ -65,6 +73,8 @@
     .diff-cell.current::before { content: attr(data-label) " current"; flex: 0 1 46%; min-width: 0; font-family: var(--font-ui); font-size: 11px; color: var(--fg-3); text-transform: uppercase; letter-spacing: 0.08em; margin-right: auto; overflow-wrap: anywhere; }
     .diff-cell.draft::before { content: attr(data-label) " draft"; flex: 0 1 46%; min-width: 0; font-family: var(--font-ui); font-size: 11px; color: var(--fg-3); text-transform: uppercase; letter-spacing: 0.08em; margin-right: auto; overflow-wrap: anywhere; }
     .citation-grid { grid-template-columns: 1fr; }
+    .view-toggle { width: 100%; }
+    .view-toggle button { flex: 1; }
   }
 </style>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
@@ -218,16 +228,35 @@ function ComparisonRows({ rows }) {
       <div className="col-head draft"><span className="dot" style={{background:'var(--ochre)'}}></span><span className="name">Draft bylaw</span><span className="sub">2026 draft</span></div>
       {rows.map((row, index) => (
         <React.Fragment key={`${row.label}-${index}`}>
-          <div className={`diff-cell current ${row.current == null ? 'empty' : ''}`} data-label={row.label}>
-            <span className="value">{formatValue(row.current, row.label)}</span>
+          <div className={`diff-cell current ${row.current == null ? 'empty' : ''} ${row.numericChanged ? 'numeric-changed' : ''}`} data-label={row.label}>
+            <span className={`value ${String(row.current || '').includes('\n') ? 'multi-line' : ''}`}>{formatValue(row.current, row.label)}</span>
             <span className={`marker ${row.status}`}>{markerText(row.status, 'current')}</span>
           </div>
           <div className="diff-cell label">{row.label}</div>
-          <div className={`diff-cell draft ${row.draft == null ? 'empty' : ''}`} data-label={row.label}>
+          <div className={`diff-cell draft ${row.draft == null ? 'empty' : ''} ${row.numericChanged ? 'numeric-changed' : ''}`} data-label={row.label}>
             <span className={`marker ${row.status}`}>{markerText(row.status, 'draft')}</span>
-            <span className="value">{formatValue(row.draft, row.label)}</span>
+            <span className={`value ${String(row.draft || '').includes('\n') ? 'multi-line' : ''}`}>{formatValue(row.draft, row.label)}</span>
           </div>
         </React.Fragment>
+      ))}
+    </div>
+  );
+}
+
+function StructuredView({ structuredData }) {
+  const groups = structuredData?.groups || [];
+  if (!groups.length) {
+    return <div className="structured-empty">Structured data is pending for this parcel comparison.</div>;
+  }
+  return (
+    <div className="structured-view">
+      {groups.map((group) => (
+        <section className="structured-group" key={group.key}>
+          <h2>{group.title}</h2>
+          {group.rows?.length
+            ? <ComparisonRows rows={group.rows} />
+            : <div className="structured-empty">No structured rows found.</div>}
+        </section>
       ))}
     </div>
   );
@@ -238,6 +267,7 @@ function App() {
   const pid = params.get('pid') || '';
   const [comparison, setComparison] = useState(null);
   const [status, setStatus] = useState(pid ? 'Loading zoning comparison.' : 'No PID was supplied. Start from parcel lookup or city view.');
+  const [viewMode, setViewMode] = useState('raw');
 
   useEffect(() => { lucide.createIcons(); });
 
@@ -275,6 +305,15 @@ function App() {
     };
   }, [comparison]);
 
+  const structuredCounts = useMemo(() => {
+    const rows = (comparison?.structuredData?.groups || []).flatMap((group) => group.rows || []);
+    return {
+      changed: rows.filter((row) => row.status === 'changed').length,
+      same: rows.filter((row) => row.status === 'same').length,
+      total: rows.length,
+    };
+  }, [comparison]);
+
   return (
     <div className="app">
       <Header />
@@ -299,13 +338,23 @@ function App() {
               <div className="summary-stat"><div className="n">{counts.source}</div><div className="l">Source facts</div></div>
               <div className="summary-stat pending"><div className="n">{counts.pending}</div><div className="l">Pending</div></div>
               <div className="summary-stat"><div className="n" style={{color:'var(--fg-3)'}}>{counts.same}</div><div className="l">Unchanged</div></div>
-              <div style={{marginLeft:'auto', fontFamily:'var(--font-mono)', fontSize:12, color:'var(--fg-3)'}}>Resolution: {comparison.resolution?.status || 'pending'}</div>
+              {viewMode === 'structured' && <div className="summary-stat"><div className="n" style={{color:'var(--fg-3)'}}>{structuredCounts.total}</div><div className="l">Structured rows</div></div>}
+              <div style={{marginLeft:'auto', display:'flex', alignItems:'center', gap:12, flexWrap:'wrap'}}>
+                <div className="view-toggle" aria-label="Comparison view">
+                  <button type="button" className={viewMode === 'raw' ? 'active' : ''} onClick={() => setViewMode('raw')}>Raw bylaw</button>
+                  <button type="button" className={viewMode === 'structured' ? 'active' : ''} onClick={() => setViewMode('structured')}>Structured data</button>
+                </div>
+                <div style={{fontFamily:'var(--font-mono)', fontSize:12, color:'var(--fg-3)'}}>Resolution: {comparison.resolution?.status || 'pending'}</div>
+              </div>
             </div>
             <ComparisonRows rows={comparison.rows} />
-            <div className="citation-grid">
-              <CitationList title="Current citations" sections={comparison.citations?.current || []} />
-              <CitationList title="Draft citations" sections={comparison.citations?.draft || []} />
-            </div>
+            {viewMode === 'raw' && (
+              <div className="citation-grid">
+                <CitationList title="Current citations" sections={comparison.citations?.current || []} />
+                <CitationList title="Draft citations" sections={comparison.citations?.draft || []} />
+              </div>
+            )}
+            {viewMode === 'structured' && <StructuredView structuredData={comparison.structuredData} />}
           </>
         )}
       </main>

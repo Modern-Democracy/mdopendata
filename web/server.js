@@ -33,6 +33,14 @@ function compactText(value) {
   return text.length === 0 ? null : text;
 }
 
+function normalizeComparisonKey(value) {
+  return toStringValue(value)
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+}
+
 function normalizeLimit(value, fallback, max) {
   const parsed = Number(value);
   if (!Number.isFinite(parsed) || parsed <= 0) {
@@ -518,6 +526,241 @@ async function loadZoneSections(zoneCode, sourceKind) {
   return rows.map(mapZoneSectionRow);
 }
 
+function mapStructuredFactRow(row) {
+  const payload = toJsonValue(row.value_payload);
+  const rawText = compactText(row.raw_text)
+    || compactText(payload.requirement_text_raw)
+    || compactText(payload.use_name_raw)
+    || compactText(payload.term_raw)
+    || compactText(row.raw_label);
+  const normalizedKey = compactText(row.normalized_key)
+    || compactText(payload.term_normalized)
+    || compactText(payload.code)
+    || normalizeComparisonKey(rawText);
+  return {
+    factId: row.structured_fact_id === null || row.structured_fact_id === undefined ? null : Number(row.structured_fact_id),
+    family: compactText(row.fact_family),
+    type: compactText(row.fact_type),
+    label: compactText(row.raw_label) || compactText(payload.requirement_label_raw),
+    text: rawText,
+    key: normalizedKey,
+    value: payload,
+    filePath: compactText(row.repo_relpath),
+    sourceOrder: row.source_order === null || row.source_order === undefined ? null : Number(row.source_order),
+  };
+}
+
+function structuredValueText(fact) {
+  const payload = fact?.value || {};
+  return compactText(payload.use_name_raw)
+    || compactText(payload.requirement_text_raw)
+    || compactText(fact?.text)
+    || compactText(payload.value_raw)
+    || compactText(fact?.label);
+}
+
+function structuredNumericSignature(fact) {
+  const payload = fact?.value || {};
+  if (payload.value !== undefined && payload.value !== null) {
+    return JSON.stringify([payload.comparator || "", payload.measure_type || "", payload.unit || "", Number(payload.value)]);
+  }
+  return JSON.stringify(payload.numeric_value_refs || []);
+}
+
+function numericTextSignature(value) {
+  const matches = toStringValue(value).match(/-?\d+(?:\.\d+)?/g) || [];
+  return JSON.stringify(matches.map((match) => Number(match)));
+}
+
+function compareStructuredSides(currentFact, draftFact) {
+  if (!currentFact && !draftFact) {
+    return "pending";
+  }
+  if (!currentFact || !draftFact) {
+    return "changed";
+  }
+  if (currentFact.family === "numeric_values" || draftFact.family === "numeric_values") {
+    return structuredNumericSignature(currentFact) === structuredNumericSignature(draftFact) ? "same" : "changed";
+  }
+  if (currentFact.value?.numeric_value_refs?.length || draftFact.value?.numeric_value_refs?.length) {
+    return numericTextSignature(structuredValueText(currentFact)) === numericTextSignature(structuredValueText(draftFact)) ? "source" : "changed";
+  }
+  return structuredValueText(currentFact) === structuredValueText(draftFact) ? "same" : "source";
+}
+
+function buildStructuredRows(currentFacts, draftFacts, options = {}) {
+  const currentByKey = new Map();
+  const draftByKey = new Map();
+  for (const fact of currentFacts) {
+    const key = options.keyFor ? options.keyFor(fact) : fact.key;
+    if (!key) continue;
+    currentByKey.set(key, [...(currentByKey.get(key) || []), fact]);
+  }
+  for (const fact of draftFacts) {
+    const key = options.keyFor ? options.keyFor(fact) : fact.key;
+    if (!key) continue;
+    draftByKey.set(key, [...(draftByKey.get(key) || []), fact]);
+  }
+
+  const keys = [...new Set([...currentByKey.keys(), ...draftByKey.keys()])].sort((a, b) => {
+    const currentA = currentByKey.get(a)?.[0];
+    const draftA = draftByKey.get(a)?.[0];
+    const currentB = currentByKey.get(b)?.[0];
+    const draftB = draftByKey.get(b)?.[0];
+    const labelA = structuredValueText(currentA || draftA) || a;
+    const labelB = structuredValueText(currentB || draftB) || b;
+    return labelA.localeCompare(labelB);
+  });
+
+  return keys.map((key) => {
+    const current = currentByKey.get(key) || [];
+    const draft = draftByKey.get(key) || [];
+    const currentText = current.map(structuredValueText).filter(Boolean).join("\n");
+    const draftText = draft.map(structuredValueText).filter(Boolean).join("\n");
+    return {
+      key,
+      label: options.labelFor ? options.labelFor(current[0] || draft[0], key) : structuredValueText(current[0] || draft[0]) || key,
+      current: currentText || null,
+      draft: draftText || null,
+      status: compareStructuredSides(current[0], draft[0]),
+      numericChanged: Boolean(current[0] && draft[0] && compareStructuredSides(current[0], draft[0]) === "changed" && (
+        current[0].family === "numeric_values"
+        || draft[0].family === "numeric_values"
+        || current[0].value?.numeric_value_refs?.length
+        || draft[0].value?.numeric_value_refs?.length
+      )),
+    };
+  });
+}
+
+async function loadZoneStructuredFacts(zoneCode, sourceKind) {
+  if (!zoneCode) {
+    return { uses: [], requirements: [], otherRequirements: [], numericValues: [], clauses: [] };
+  }
+  const zonePath = sourceKind === "draft"
+    ? `data/zoning/charlottetown-draft/zones/${zoneCode.toLowerCase()}.json`
+    : `data/zoning/charlottetown/zones/${zoneCode.toLowerCase()}.json`;
+
+  const [factsResult, clausesResult] = await Promise.all([
+    pool.query(
+      `
+      SELECT
+        f.structured_fact_id,
+        f.fact_family,
+        f.fact_type,
+        f.raw_label,
+        f.raw_text,
+        f.normalized_key,
+        f.value_payload,
+        f.citations,
+        sf.repo_relpath,
+        f.structured_fact_id AS source_order
+      FROM zoning.structured_fact f
+      JOIN zoning.source_file sf
+        ON sf.source_file_id = f.source_file_id
+      WHERE f.is_active
+        AND sf.repo_relpath = $1
+        AND f.fact_family IN ('uses', 'requirements', 'other_requirements', 'numeric_values')
+      ORDER BY f.fact_family, f.structured_fact_id
+      `,
+      [zonePath],
+    ),
+    pool.query(
+      `
+      SELECT
+        c.clause_label_raw,
+        c.clause_text_raw,
+        c.source_order,
+        s.section_label_raw,
+        s.section_title_raw,
+        sf.repo_relpath
+      FROM zoning.section s
+      JOIN zoning.source_file sf
+        ON sf.source_file_id = s.source_file_id
+      JOIN zoning.clause c
+        ON c.section_id = s.section_id
+      WHERE s.is_active
+        AND c.is_active
+        AND s.document_type = 'zone'
+        AND s.zone_code = $2
+        AND sf.repo_relpath = $1
+      ORDER BY s.source_order, c.source_order, c.clause_id
+      `,
+      [zonePath, zoneCode],
+    ),
+  ]);
+
+  const facts = factsResult.rows.map(mapStructuredFactRow);
+  return {
+    uses: facts
+      .filter((fact) => fact.family === "uses" && compactText(fact.value?.use_status) === "permitted")
+      .map((fact) => ({
+        ...fact,
+        key: normalizeComparisonKey(fact.value?.use_name_raw || fact.text || fact.key),
+      })),
+    requirements: facts.filter((fact) => fact.family === "requirements"),
+    otherRequirements: facts.filter((fact) => fact.family === "other_requirements"),
+    numericValues: facts.filter((fact) => fact.family === "numeric_values"),
+    clauses: clausesResult.rows.map((row) => ({
+      label: compactText(row.clause_label_raw),
+      text: compactText(row.clause_text_raw),
+      key: normalizeComparisonKey(row.clause_text_raw),
+      sectionLabel: compactText(row.section_label_raw),
+      sectionTitle: compactText(row.section_title_raw),
+      filePath: compactText(row.repo_relpath),
+      sourceOrder: row.source_order === null || row.source_order === undefined ? null : Number(row.source_order),
+    })),
+  };
+}
+
+function buildStructuredComparison(currentData, draftData) {
+  return {
+    groups: [
+      {
+        key: "permitted_uses",
+        title: "Permitted uses",
+        rows: buildStructuredRows(currentData.uses, draftData.uses),
+      },
+      {
+        key: "requirements",
+        title: "Structured requirements",
+        rows: buildStructuredRows(currentData.requirements, draftData.requirements, {
+          keyFor: (fact) => compactText(fact.value?.requirement_category) || compactText(fact.type) || fact.key,
+          labelFor: (fact, key) => humanizeKey(compactText(fact?.value?.requirement_category) || key),
+        }),
+      },
+      {
+        key: "other_requirements",
+        title: "Other structured clauses",
+        rows: buildStructuredRows(currentData.otherRequirements, draftData.otherRequirements, {
+          keyFor: (fact) => compactText(fact.value?.requirement_category) || fact.key,
+          labelFor: (fact, key) => humanizeKey(compactText(fact?.value?.requirement_category) || key),
+        }),
+      },
+      {
+        key: "clauses",
+        title: "Bylaw clauses",
+        rows: buildStructuredRows(currentData.clauses, draftData.clauses, {
+          keyFor: (fact) => fact.key,
+          labelFor: (fact) => compactText(fact?.label) || compactText(fact?.sectionTitle) || "Clause",
+        }),
+      },
+    ],
+    source: {
+      currentFactCount: currentData.uses.length + currentData.requirements.length + currentData.otherRequirements.length + currentData.numericValues.length,
+      draftFactCount: draftData.uses.length + draftData.requirements.length + draftData.otherRequirements.length + draftData.numericValues.length,
+      currentClauseCount: currentData.clauses.length,
+      draftClauseCount: draftData.clauses.length,
+    },
+  };
+}
+
+function humanizeKey(value) {
+  return toStringValue(value)
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
 async function loadZoningComparisonByPid(pid) {
   const parcel = await loadParcelByPid(pid);
   if (!parcel) {
@@ -531,6 +774,10 @@ async function loadZoningComparisonByPid(pid) {
   const [currentSections, draftSections] = await Promise.all([
     loadZoneSections(currentLookupCode, "current"),
     loadZoneSections(draftLookupCode, "draft"),
+  ]);
+  const [currentStructured, draftStructured] = await Promise.all([
+    loadZoneStructuredFacts(currentLookupCode, "current"),
+    loadZoneStructuredFacts(draftLookupCode, "draft"),
   ]);
 
   return {
@@ -561,6 +808,7 @@ async function loadZoningComparisonByPid(pid) {
         ? "Zone section citations are linked by matched zone code."
         : "Rule-level comparison is pending because no zone-section citations matched the parcel zones.",
     },
+    structuredData: buildStructuredComparison(currentStructured, draftStructured),
     resolution: parcel.resolution,
     source: {
       ...parcel.source,
