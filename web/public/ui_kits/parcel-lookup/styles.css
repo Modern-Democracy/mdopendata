@@ -11,10 +11,11 @@
   position: sticky; top: 0; z-index: 10;
   background: rgba(245, 239, 225, 0.96);
   border-bottom: 1px solid var(--border-hair);
-  padding: 14px 32px;
+  height: 52px;
+  padding: 0 32px;
   display: flex; align-items: center; gap: 24px;
 }
-.app-header .wm { height: 22px; }
+.app-header .wm { height: 100%; width: auto; display: block; }
 .app-header nav { margin-left: auto; display: flex; gap: 22px; }
 .app-header nav a {
   font-family: var(--font-ui); font-size: 14px; color: var(--fg-2);
@@ -27,6 +28,12 @@
 
 /* Search hero */
 .search-hero { text-align: center; padding: 40px 0 32px; }
+.search-hero-logo {
+  display: block;
+  width: min(260px, 70vw);
+  height: auto;
+  margin: 0 auto 22px;
+}
 .search-hero h1 {
   font-family: var(--font-display); font-variation-settings: "opsz" 144;
   font-weight: 500; font-size: clamp(40px, 6vw, 68px); line-height: 1;
