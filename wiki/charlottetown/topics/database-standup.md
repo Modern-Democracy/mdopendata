@@ -249,17 +249,26 @@ SELECT root_zone, depth, ancestor_zone, relationship_type
 
 ## Known issues and follow-ups
 
-- **Override semantics in the resolver are not yet wired up.** 21 override
+- **Override semantics in the resolver are not yet wired up.** 46 override
   relationships are now captured in `zoning.structured_fact` with
   `fact_family='cross_references'` and `relationship_type` in
-  {`notwithstanding`, `does_not_apply`, `references_zone`}, but
-  `v_zone_effective_uses` and `v_zone_effective_requirements` do not yet honor
-  override semantics. Implementing exception/supersession requires projecting
-  category-level overrides (e.g. "Notwithstanding the lot area and frontage
-  requirements") down to the specific `requirements` rows they invalidate per
-  zone — non-trivial and deferred to a follow-up migration. Until then the
+  {`notwithstanding`, `does_not_apply`, `exception_to`, `supersedes`,
+  `applies_to_parcel`, `references_zone`}, but `v_zone_effective_uses` and
+  `v_zone_effective_requirements` do not yet honor override semantics.
+  Implementing exception/supersession requires projecting category-level
+  overrides (e.g. "Notwithstanding the lot area and frontage requirements")
+  down to the specific `requirements` rows they invalidate per zone — and
+  doing the same for section-level `exception_to` edges (the EXEMPTION
+  sections). Non-trivial and deferred to a follow-up migration. Until then the
   resolver returns the unconditional inherited set and the override facts are
   surfaceable as an audit/UX side panel.
+- **Appendix C site-specific exemptions are coarse-grained.** 14
+  `applies_to_parcel` facts capture *which zones* have parcel-specific
+  overrides in Appendix C (one fact per affected zone), but per-PID rows are
+  not yet structured: Appendix C is loaded as `pages_raw` text only, with no
+  `structured_data.cross_references` populated. Detailed PID/civic-address
+  extraction (~47 distinct PIDs) is a focused follow-up and a precondition
+  for parcel-resolution in any visualization layer.
 - **`notwithstanding` patterns intentionally not promoted to facts.** Out of
   46 clauses containing 'notwithstanding', only 14 carry a graph-actionable
   target reference. The other 32 are global standalone rules

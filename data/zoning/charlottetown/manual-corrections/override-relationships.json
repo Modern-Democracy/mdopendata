@@ -202,6 +202,235 @@
       "scope": "Minimum finished floor elevation does not apply to parking structures, accessory buildings, or water-related structures within the WF zone.",
       "join_behavior": "exclude_target_values",
       "confidence": "high"
+    },
+    {
+      "source_clause_ref": "doc-general-provisions-clause-48-1-3",
+      "document_family": "current",
+      "relationship_type": "supersedes",
+      "target_ref": {"source_ref_type": "external_source", "source_ref_id": "earlier_existing_law_regulation_contract_or_deed"},
+      "scope": "Where this bylaw imposes a greater restriction than earlier existing law/regulation/contract/deed, this bylaw supersedes the external source.",
+      "join_behavior": "override_target_values",
+      "confidence": "high",
+      "notes": "Target is external; preserved as a typed external_source ref for traceability."
+    },
+    {
+      "source_clause_ref": "doc-general-provisions-clause-7-1-3",
+      "document_family": "draft",
+      "relationship_type": "supersedes",
+      "target_ref": {"source_ref_type": "external_source", "source_ref_id": "earlier_existing_law_regulation_contract_or_deed"},
+      "scope": "Draft-bylaw equivalent of current 48-1-3: where this bylaw imposes a greater restriction than earlier existing external sources, this bylaw supersedes them.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_clause_ref": "doc-general-provisions-clause-9-10-1",
+      "document_family": "draft",
+      "relationship_type": "supersedes",
+      "target_ref": {"source_ref_type": "external_source", "source_ref_id": "development_agreement"},
+      "scope": "Where a Development Agreement notes signage requirements that do not meet the bylaw, the DA supersedes the bylaw for those requirements; otherwise the bylaw applies.",
+      "join_behavior": "override_target_values",
+      "confidence": "high",
+      "notes": "Target represents the controlling Development Agreement; the actual DA is parcel-specific and external to the bylaw text."
+    },
+    {
+      "source_section_ref": "doc-general-provisions-section-47-22",
+      "document_family": "current",
+      "relationship_type": "exception_to",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "current"},
+      "scope": "Section 47.22 (EXEMPTIONS TO SIGN REGULATIONS) carves out exceptions to the sign regulations of Section 47.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high",
+      "notes": "Section-level exception; resolver projection to the specific sign-regulation requirements is deferred."
+    },
+    {
+      "source_section_ref": "doc-general-provisions-section-48-11",
+      "document_family": "current",
+      "relationship_type": "exception_to",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "current"},
+      "scope": "Section 48.11 (EXEMPTIONS TO SUBDIVISION REQUIREMENTS) carves out exceptions to the subdivision requirements of Section 48.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_section_ref": "doc-general-provisions-section-4-8",
+      "document_family": "current",
+      "relationship_type": "exception_to",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "current"},
+      "scope": "Section 4.8 (SETBACK EXEMPTIONS) carves out exceptions to the bylaw's general setback requirements.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_section_ref": "doc-other-section-2-3",
+      "document_family": "draft",
+      "relationship_type": "exception_to",
+      "target_ref": {"source_ref_type": "section", "source_ref_id": "doc-other-section-2-2"},
+      "scope": "Section 2.3 (PERMIT EXEMPTIONS) carves out exceptions to Section 2.2 (UNDERTAKINGS / general permit requirements).",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_section_ref": "doc-general-provisions-section-3-6",
+      "document_family": "draft",
+      "relationship_type": "exception_to",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "draft"},
+      "scope": "Section 3.6 (BUILDING HEIGHT EXEMPTIONS) carves out exceptions to the bylaw's general building-height requirements.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_section_ref": "doc-general-provisions-section-3-7",
+      "document_family": "draft",
+      "relationship_type": "exception_to",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "draft"},
+      "scope": "Section 3.7 (SETBACK EXEMPTIONS) carves out exceptions to the bylaw's general setback requirements.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_section_ref": "doc-general-provisions-section-7-13",
+      "document_family": "draft",
+      "relationship_type": "exception_to",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "draft"},
+      "scope": "Section 7.13 (EXEMPTIONS TO SUBDIVISION REQUIREMENTS) carves out exceptions to the subdivision requirements of Section 7.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_section_ref": "doc-general-provisions-section-9-23",
+      "document_family": "draft",
+      "relationship_type": "exception_to",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "draft"},
+      "scope": "Section 9.23 (EXEMPTIONS TO SIGN REGULATIONS) carves out exceptions to the sign regulations of Section 9.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "C-1"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the C-1 zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high",
+      "notes": "Coarse-grained pointer; per-PID structured rows are not yet extracted from Appendix C's pages_raw text."
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "C-2"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the C-2 zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "DC"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the DC zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "DMUN"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the DMUN zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "DN"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the DN zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "I"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the I zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "M-1"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the M-1 zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "M-2"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the M-2 zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "PC"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the PC zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "R-1L"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the R-1L zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "R-2"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the R-2 zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "R-3"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the R-3 zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "WF"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the WF zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "WLC"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the WLC zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
     }
   ],
   "ignored_patterns": {

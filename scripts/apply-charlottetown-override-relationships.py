@@ -79,14 +79,28 @@ def load_artifact(path: Path) -> tuple[list[dict], dict]:
         raise SystemExit("Malformed file: 'relationships' must be a list")
     seen: set[tuple] = set()
     for entry in relationships:
-        for field in ("source_clause_ref", "relationship_type", "target_ref", "document_family"):
+        for field in ("relationship_type", "target_ref", "document_family"):
             if not entry.get(field):
                 raise SystemExit(f"Relationship missing required field {field!r}: {entry!r}")
+        # Source anchor: exactly one of source_clause_ref / source_section_ref /
+        # source_file_path. The first two are inherited from the original
+        # schema; source_file_path is used for facts attached to a whole source
+        # file (e.g. Appendix C, which is loaded as raw pages with no clauses).
+        source_anchors = [
+            field for field in ("source_clause_ref", "source_section_ref", "source_file_path")
+            if entry.get(field)
+        ]
+        if len(source_anchors) != 1:
+            raise SystemExit(
+                f"Relationship must have exactly one of source_clause_ref / "
+                f"source_section_ref / source_file_path; got {source_anchors}: {entry!r}"
+            )
         target = entry["target_ref"]
         if "source_ref_type" not in target or "source_ref_id" not in target:
             raise SystemExit(f"target_ref must have source_ref_type and source_ref_id: {entry!r}")
         natural_key = (
-            entry["source_clause_ref"],
+            source_anchors[0],
+            entry[source_anchors[0]],
             entry["relationship_type"],
             target["source_ref_type"],
             target["source_ref_id"],
@@ -129,13 +143,28 @@ def ensure_import_batch(conn: psycopg.Connection, document_family: str) -> int:
         return int(cur.fetchone()[0])
 
 
+def source_ref_for_entry(entry: dict) -> dict:
+    """Resolve the entry's source anchor into a {source_ref_type, source_ref_id} pair."""
+    if entry.get("source_clause_ref"):
+        return {"source_ref_type": "clause", "source_ref_id": entry["source_clause_ref"]}
+    if entry.get("source_section_ref"):
+        return {"source_ref_type": "section", "source_ref_id": entry["source_section_ref"]}
+    if entry.get("source_file_path"):
+        return {"source_ref_type": "document", "source_ref_id": entry["source_file_path"]}
+    raise SystemExit(f"Entry has no source anchor: {entry!r}")
+
+
 def build_value_payload(entry: dict) -> dict:
+    source_ref = source_ref_for_entry(entry)
     payload: dict[str, Any] = {
         "relationship_type": entry["relationship_type"],
-        "source_ref": {"source_ref_type": "clause", "source_ref_id": entry["source_clause_ref"]},
+        "source_ref": source_ref,
         "target_ref": dict(entry["target_ref"]),
-        "source_clause_ref": entry["source_clause_ref"],
     }
+    if source_ref["source_ref_type"] == "clause":
+        # Preserve the legacy field on clause-anchored entries so the
+        # original 21 records' content_hash stays stable.
+        payload["source_clause_ref"] = entry["source_clause_ref"]
     for optional in ("scope", "join_behavior", "confidence", "notes"):
         if entry.get(optional) is not None:
             payload[optional] = entry[optional]
@@ -144,9 +173,17 @@ def build_value_payload(entry: dict) -> dict:
 
 def natural_key(entry: dict, revision_id: int) -> str:
     target = entry["target_ref"]
+    src_ref = source_ref_for_entry(entry)
+    if src_ref["source_ref_type"] == "clause":
+        # Legacy format: keep stable so previously-loaded clause-anchored
+        # facts remain unchanged after the multi-anchor refactor.
+        return (
+            f"override|rev{revision_id}|{src_ref['source_ref_id']}|"
+            f"{entry['relationship_type']}|{target['source_ref_type']}|{target['source_ref_id']}"
+        )
     return (
-        f"override|rev{revision_id}|{entry['source_clause_ref']}|"
-        f"{entry['relationship_type']}|{target['source_ref_type']}|{target['source_ref_id']}"
+        f"override|rev{revision_id}|{src_ref['source_ref_type']}:{src_ref['source_ref_id']}|"
+        f"{entry['relationship_type']}|{target['source_ref_type']}:{target['source_ref_id']}"
     )
 
 
@@ -163,23 +200,57 @@ def upsert_fact(
     content_hash = sha256_text(stable_json({"table": "structured_fact", "payload": payload}))
 
     with conn.cursor() as cur:
-        # Resolve the source_file_id from the source clause so the synthetic
+        # Resolve the source_file_id from the source anchor so the synthetic
         # cross-reference fact still has a NOT-NULL provenance link.
-        cur.execute(
-            """
-            SELECT source_file_id FROM zoning.clause
-             WHERE clause_source_id = %s AND document_revision_id = %s AND is_active
-             LIMIT 1
-            """,
-            (entry["source_clause_ref"], revision_id),
-        )
-        source_clause_row = cur.fetchone()
-        if not source_clause_row:
-            raise SystemExit(
-                f"Source clause not found in DB: {entry['source_clause_ref']!r} "
-                f"in revision {revision_id}. Cannot infer source_file_id."
+        if entry.get("source_clause_ref"):
+            cur.execute(
+                """
+                SELECT source_file_id FROM zoning.clause
+                 WHERE clause_source_id = %s AND document_revision_id = %s AND is_active
+                 LIMIT 1
+                """,
+                (entry["source_clause_ref"], revision_id),
             )
-        source_file_id = int(source_clause_row[0])
+            row = cur.fetchone()
+            if not row:
+                raise SystemExit(
+                    f"Source clause not found: {entry['source_clause_ref']!r} "
+                    f"in revision {revision_id}."
+                )
+            source_record_table, source_record_key = "clause", entry["source_clause_ref"]
+        elif entry.get("source_section_ref"):
+            cur.execute(
+                """
+                SELECT source_file_id FROM zoning.section
+                 WHERE section_source_id = %s AND document_revision_id = %s AND is_active
+                 LIMIT 1
+                """,
+                (entry["source_section_ref"], revision_id),
+            )
+            row = cur.fetchone()
+            if not row:
+                raise SystemExit(
+                    f"Source section not found: {entry['source_section_ref']!r} "
+                    f"in revision {revision_id}."
+                )
+            source_record_table, source_record_key = "section", entry["source_section_ref"]
+        else:  # source_file_path
+            cur.execute(
+                """
+                SELECT source_file_id FROM zoning.source_file
+                 WHERE repo_relpath = %s AND document_revision_id = %s AND is_active
+                 LIMIT 1
+                """,
+                (entry["source_file_path"], revision_id),
+            )
+            row = cur.fetchone()
+            if not row:
+                raise SystemExit(
+                    f"Source file not found: {entry['source_file_path']!r} "
+                    f"in revision {revision_id}."
+                )
+            source_record_table, source_record_key = "source_file", entry["source_file_path"]
+        source_file_id = int(row[0])
 
         cur.execute(
             """
@@ -219,8 +290,8 @@ def upsert_fact(
             (
                 revision_id,
                 source_file_id,
-                "clause",
-                entry["source_clause_ref"],
+                source_record_table,
+                source_record_key,
                 FACT_FAMILY,
                 entry["relationship_type"],
                 None,
