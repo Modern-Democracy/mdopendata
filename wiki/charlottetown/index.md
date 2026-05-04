@@ -28,6 +28,7 @@ This index catalogs the Charlottetown LLM Wiki pages and source families. Update
 | [Draft validation rebaseline](topics/draft-validation-rebaseline.md) | Durable notes for the 2026-04-24 validation-plan rebaseline after parser repairs restored or added clauses and sections. |
 | [Unified zoning ingestion plan](topics/unified-zoning-ingestion-plan.md) | Active plan and implementation status for unified relational, spatial, comparison, revision, and vector-ready ingestion of current and draft bylaws. |
 | [Workstream context](topics/workstream-context.md) | Active Charlottetown source paths, output paths, purpose, and maintenance duties. |
+| [Database standup](topics/database-standup.md) | End-to-end instructions for bringing up the Charlottetown zoning database, including manual-decision replay. |
 | [comparisons](comparisons/.gitkeep) | Future current-versus-draft, parcel, zone, or neighbourhood comparison pages. |
 | [questions](questions/.gitkeep) | Future reusable answers generated from user queries. |
 | [templates](templates/source-summary.md) | Templates for future wiki maintenance. |

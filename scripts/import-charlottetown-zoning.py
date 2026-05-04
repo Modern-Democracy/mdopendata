@@ -83,13 +83,29 @@ def content_hash(payload: dict[str, Any]) -> str:
     return sha256_text(stable_json(clean))
 
 
+# Fields that are not part of the bylaw content and must not contribute to the
+# content hash or the stored value_payload. Importantly, this set MUST NOT use
+# `key.endswith("_id")` as a filter: the structured-data schema relies on natural-
+# key id fields (`source_ref_id`, `target_ref.source_ref_id`, `term_id`,
+# `numeric_value_id`, `requirement_id`, `regulation_group_id`, `definition_id`,
+# `clause_id`, `section_id`, `table_id`, ...) to express cross-references between
+# facts. Dropping them silently flattens the relationship graph and breaks
+# inheritance / reverse-query semantics.
+_VOLATILE_KEYS = frozenset({
+    "review_flags",
+    "confidence",
+    "loaded_at",
+    "created_at",
+    "updated_at",
+})
+
+
 def drop_volatile(value: Any) -> Any:
     if isinstance(value, dict):
         return {
             key: drop_volatile(child)
             for key, child in value.items()
-            if key not in {"review_flags", "confidence", "loaded_at", "created_at", "updated_at"}
-            and not key.endswith("_id")
+            if key not in _VOLATILE_KEYS
         }
     if isinstance(value, list):
         return [drop_volatile(child) for child in value]
