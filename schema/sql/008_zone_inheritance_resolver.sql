@@ -2,93 +2,124 @@
 --
 -- Zone inheritance resolver for the bylaw structured data.
 --
--- Builds three views on top of zoning.structured_fact:
---   * v_zone_inheritance_edge      direct source -> target inheritance edges
---   * v_zone_inheritance_closure   transitive closure with full ancestry path
---   * v_zone_effective_uses        flattened "own + inherited" uses per zone
+-- Builds four views on top of zoning.structured_fact:
+--   * v_zone_inheritance_edge       direct source -> target inheritance edges
+--   * v_zone_inheritance_closure    transitive closure with full ancestry path
+--   * v_zone_effective_uses         flattened "own + inherited" uses per zone
 --   * v_zone_effective_requirements analogous for regulation inheritance
 --
--- Background / known data issue
--- -----------------------------
--- The JSON source files carry zone_relationship rows with full source_ref / target_ref
--- objects (each `{source_ref_type, source_ref_id}`). The current importer projects only
--- `source_ref_type` into structured_fact.value_payload, dropping the `source_ref_id`. As
--- a consequence the loaded relationship facts know nothing about which zones are linked.
---
--- This resolver recovers the missing zone codes by:
---   * deriving the source zone from the prefix of `source_clause_ref`
---     (e.g. "zone-muc-clause-24-1-1" -> "MUC")
---   * pattern-matching candidate target zone codes against the underlying clause text
---     in zoning.clause, preferring the longest matching code so "ER-MUVC" wins over "I"
---
--- Once the importer is fixed to populate `source_ref_id`, the recovery layer can be
--- replaced by a direct read of value_payload->'target_ref'->>'source_ref_id'. The
--- closure / effective views downstream will not need to change.
+-- Edge recovery
+-- -------------
+-- The preferred path is a direct read of source_ref_id and target_ref_id from
+-- structured_fact.value_payload (typed `zone` on both ends). A text-recovery
+-- fallback is retained for any rows where the importer landed an extraction
+-- without the natural-key ids: the source zone is parsed from the
+-- source_clause_ref prefix (e.g. "zone-muc-clause-24-1-1" -> "MUC") and the
+-- target zone is matched against zone_code tokens in the clause text, preferring
+-- the longest match so "ER-MUVC" wins over "I". The recovery_source column
+-- flags which path produced each edge so callers can audit completeness.
 
 SET search_path = zoning, public;
 
 -- ---------------------------------------------------------------------------
--- 1) Direct edges: one row per inheritance fact, with recovered source/target
+-- 1) Direct edges: one row per inheritance fact
 -- ---------------------------------------------------------------------------
 CREATE OR REPLACE VIEW zoning.v_zone_inheritance_edge AS
-WITH zone_codes AS (
+WITH
+zone_codes AS (
     SELECT DISTINCT zone_code, document_revision_id
     FROM zoning.section
     WHERE document_type = 'zone'
       AND zone_code IS NOT NULL
       AND is_active
 ),
-rels AS (
+base AS (
     SELECT
         sf.structured_fact_id,
         sf.document_revision_id,
-        sf.fact_type                                                AS relationship_type,
-        sf.value_payload->>'source_clause_ref'                      AS source_clause_ref,
-        sf.value_payload->>'join_behavior'                          AS join_behavior,
-        UPPER(regexp_replace(sf.value_payload->>'source_clause_ref',
-                             '^zone-([a-z0-9-]+?)-clause-.*$', '\1')) AS source_zone
+        sf.fact_type                                                 AS relationship_type,
+        sf.value_payload->>'source_clause_ref'                       AS source_clause_ref,
+        sf.value_payload->>'join_behavior'                           AS join_behavior,
+        sf.value_payload->'source_ref'->>'source_ref_type'           AS source_ref_type,
+        sf.value_payload->'source_ref'->>'source_ref_id'             AS source_ref_id,
+        sf.value_payload->'target_ref'->>'source_ref_type'           AS target_ref_type,
+        sf.value_payload->'target_ref'->>'source_ref_id'             AS target_ref_id
     FROM zoning.structured_fact sf
     WHERE sf.fact_family = 'zone_relationships'
       AND sf.is_active
-      AND sf.value_payload->>'source_clause_ref' LIKE 'zone-%'
 ),
-ranked AS (
+direct AS (
+    -- Preferred path: both endpoints are stored on the fact and typed `zone`.
+    -- Document-sourced rows (e.g. general provisions referencing a zone) are
+    -- intentionally excluded from the inheritance graph.
     SELECT
-        r.*,
-        c.clause_text_raw,
-        z.zone_code AS target_zone,
+        b.structured_fact_id,
+        b.document_revision_id,
+        b.source_ref_id  AS source_zone,
+        b.target_ref_id  AS target_zone,
+        b.relationship_type,
+        b.join_behavior,
+        b.source_clause_ref,
+        'direct'::text   AS recovery_source
+    FROM base b
+    WHERE b.source_ref_type = 'zone'
+      AND b.target_ref_type = 'zone'
+      AND b.source_ref_id IS NOT NULL
+      AND b.target_ref_id IS NOT NULL
+),
+needs_recovery AS (
+    -- Defensive fallback: any zone-source row missing a natural-key id.
+    SELECT
+        b.*,
+        UPPER(regexp_replace(b.source_clause_ref,
+                             '^zone-([a-z0-9-]+?)-clause-.*$', '\1')) AS source_zone_guess
+    FROM base b
+    WHERE b.source_clause_ref LIKE 'zone-%'
+      AND (
+            b.source_ref_id IS NULL
+         OR b.target_ref_id IS NULL
+         OR b.source_ref_type <> 'zone'
+         OR b.target_ref_type <> 'zone'
+      )
+),
+recovered AS (
+    SELECT
+        nr.structured_fact_id,
+        nr.document_revision_id,
+        nr.source_zone_guess  AS source_zone,
+        z.zone_code           AS target_zone,
+        nr.relationship_type,
+        nr.join_behavior,
+        nr.source_clause_ref,
+        'text_recovery'::text AS recovery_source,
         ROW_NUMBER() OVER (
-            PARTITION BY r.structured_fact_id
+            PARTITION BY nr.structured_fact_id
             ORDER BY LENGTH(z.zone_code) DESC
         ) AS rn
-    FROM rels r
+    FROM needs_recovery nr
     JOIN zoning.clause c
-      ON c.clause_source_id     = r.source_clause_ref
-     AND c.document_revision_id = r.document_revision_id
+      ON c.clause_source_id     = nr.source_clause_ref
+     AND c.document_revision_id = nr.document_revision_id
      AND c.is_active
     JOIN zone_codes z
-      ON z.document_revision_id = r.document_revision_id
-     AND z.zone_code           <> r.source_zone
+      ON z.document_revision_id = nr.document_revision_id
+     AND z.zone_code           <> nr.source_zone_guess
      AND (
-            -- "(R-4)" parens form
             c.clause_text_raw ~* ('\(' || z.zone_code || '\)')
-            -- "R-4 Zone" / "R-4 zone" with word boundaries; escape the hyphen.
          OR c.clause_text_raw ~* ('\m' || regexp_replace(z.zone_code, '-', '\\-', 'g') || '\s+Zone\M')
          )
 )
-SELECT
-    structured_fact_id,
-    document_revision_id,
-    source_zone,
-    target_zone,
-    relationship_type,
-    join_behavior,
-    source_clause_ref
-FROM ranked
+SELECT structured_fact_id, document_revision_id, source_zone, target_zone,
+       relationship_type, join_behavior, source_clause_ref, recovery_source
+FROM direct
+UNION ALL
+SELECT structured_fact_id, document_revision_id, source_zone, target_zone,
+       relationship_type, join_behavior, source_clause_ref, recovery_source
+FROM recovered
 WHERE rn = 1;
 
 COMMENT ON VIEW zoning.v_zone_inheritance_edge IS
-    'Direct inheritance edges between zones. Recovers source/target zone codes from clause id and clause text because the importer currently drops source_ref_id from zone_relationships facts. One row per fact; relationship_type is the typed edge (inherits_uses, inherits_regulations, ...).';
+    'Direct inheritance edges between zones. Reads source_ref_id and target_ref_id directly from structured_fact.value_payload when both are populated and typed `zone`; falls back to text recovery (clause id prefix + clause-text token match) for rows missing the natural-key ids. recovery_source column flags which path produced each row so downstream queries can audit completeness.';
 
 -- ---------------------------------------------------------------------------
 -- 2) Transitive closure: every (root, ancestor) pair with the full path
