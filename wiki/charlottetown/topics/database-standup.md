@@ -76,19 +76,22 @@ the decisions JSON is committed first.
 ./scripts/python.ps1 scripts/run-migrations.py
 ```
 
-`run-migrations.py` only enumerates `001`–`005` today. Apply later migrations
-manually until that list is updated:
+The runner autodiscovers every `schema/sql/NNN_*.sql` file in ascending
+numeric order, tracks applied filenames in `public.schema_migrations`, and
+skips any that have already been applied. Add a new migration by dropping a
+correctly numbered file into `schema/sql/`; no code change is required.
+`schema/sql/postgis.sql` is excluded by the numeric-prefix filter — it is
+mounted as the container entrypoint init and runs once on first boot.
+
+Pass `--list` to preview pending migrations without applying them:
 
 ```powershell
-docker exec -i mdopendata-postgis psql -v ON_ERROR_STOP=1 -U mdopendata -d mdopendata < schema/sql/006_charlottetown_spatial_registration.sql
-docker exec -i mdopendata-postgis psql -v ON_ERROR_STOP=1 -U mdopendata -d mdopendata < schema/sql/007_charlottetown_spatial_gis_views.sql
-docker exec -i mdopendata-postgis psql -v ON_ERROR_STOP=1 -U mdopendata -d mdopendata < schema/sql/008_zone_inheritance_resolver.sql
+./scripts/python.ps1 scripts/run-migrations.py --list
 ```
 
 `008_zone_inheritance_resolver.sql` depends only on the `zoning.section`,
-`zoning.clause`, and `zoning.structured_fact` tables, so it can be run before
-or after the JSON import — but the views return rows only after the import
-populates the underlying data.
+`zoning.clause`, and `zoning.structured_fact` tables, so its views return
+rows only after the JSON import populates the underlying data.
 
 ### 3. Import the bylaw JSON
 
@@ -219,9 +222,6 @@ SELECT root_zone, depth, ancestor_zone, relationship_type
 
 ## Known issues and follow-ups
 
-- **`scripts/run-migrations.py` lags the migration list.** It hard-codes `001`
-  through `005`. Update the `MIGRATIONS` tuple when new SQL files are added,
-  or run later files manually as in step 2.
 - **Manual draft spatial corrections are hard-coded.**
   `scripts/apply-charlottetown-draft-zoning-manual-corrections.py` carries its
   parcel-id list in source rather than a versioned data file. Migrating to the
