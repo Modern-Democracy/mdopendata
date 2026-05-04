@@ -555,27 +555,44 @@ async function loadZoneSections(zoneCode, sourceKind) {
   return rows.map(mapZoneSectionRow);
 }
 
+const MAX_REFERENCE_DEPTH = 4;
+
 async function attachReferencedSections(sections, zoneCode, sourceKind) {
   const knownZoneCodes = await loadKnownZoneCodes();
   const cache = new Map();
-  for (const section of sections) {
-    for (const clause of section.clauses || []) {
-      const referencedZoneCodes = extractReferencedZoneCodes(clause.text, knownZoneCodes, zoneCode);
-      if (!referencedZoneCodes.length) {
-        continue;
-      }
-      clause.references = [];
-      for (const referencedZoneCode of referencedZoneCodes) {
-        const cacheKey = `${sourceKind}:${referencedZoneCode}`;
-        if (!cache.has(cacheKey)) {
-          cache.set(cacheKey, await loadZoneSections(referencedZoneCode, sourceKind));
-        }
-        clause.references.push({
-          zoneCode: referencedZoneCode,
-          sections: cache.get(cacheKey),
-        });
-      }
+
+  async function loadCached(referencedZoneCode) {
+    const cacheKey = `${sourceKind}:${referencedZoneCode}`;
+    if (!cache.has(cacheKey)) {
+      cache.set(cacheKey, await loadZoneSections(referencedZoneCode, sourceKind));
     }
+    return cache.get(cacheKey);
+  }
+
+  async function attachToClauses(clauseList, hostZoneCode, visited, depth) {
+    for (const clause of clauseList || []) {
+      const referencedZoneCodes = extractReferencedZoneCodes(clause.text, knownZoneCodes, hostZoneCode);
+      if (!referencedZoneCodes.length) continue;
+      const newRefs = [];
+      for (const referencedZoneCode of referencedZoneCodes) {
+        if (visited.has(referencedZoneCode)) continue;
+        const baseSections = await loadCached(referencedZoneCode);
+        const clonedSections = JSON.parse(JSON.stringify(baseSections));
+        if (depth + 1 < MAX_REFERENCE_DEPTH) {
+          const nextVisited = new Set(visited);
+          nextVisited.add(referencedZoneCode);
+          for (const nestedSection of clonedSections) {
+            await attachToClauses(nestedSection.clauses, referencedZoneCode, nextVisited, depth + 1);
+          }
+        }
+        newRefs.push({ zoneCode: referencedZoneCode, sections: clonedSections });
+      }
+      if (newRefs.length) clause.references = newRefs;
+    }
+  }
+
+  for (const section of sections) {
+    await attachToClauses(section.clauses, zoneCode, new Set([zoneCode]), 0);
   }
   return sections;
 }
