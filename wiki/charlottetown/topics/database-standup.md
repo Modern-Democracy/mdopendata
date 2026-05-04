@@ -30,6 +30,9 @@ unrecoverable from the JSON sources alone.
 | Section-equivalence decisions | `data/zoning/charlottetown/manual-corrections/section-equivalence-decisions.json` |
 | Decisions export script | `scripts/export-charlottetown-section-equivalence-decisions.py` |
 | Decisions apply script | `scripts/apply-charlottetown-section-equivalence-decisions.py` |
+| Override relationships (curated) | `data/zoning/charlottetown/manual-corrections/override-relationships.json` |
+| Override-candidate discovery script | `scripts/extract-charlottetown-override-candidates.py` |
+| Override-relationships apply script | `scripts/apply-charlottetown-override-relationships.py` |
 | Spatial layers | `data/spatial/charlottetown/` |
 | Manual draft zoning-map corrections (data) | `data/spatial/charlottetown/manual-corrections/draft-zoning-map-corrections.json` |
 | Manual draft zoning-map corrections (script) | `scripts/apply-charlottetown-draft-zoning-manual-corrections.py` |
@@ -177,7 +180,30 @@ A non-zero `Missing` count means the section-equivalence generator did not
 produce a candidate for one or more recorded decisions; investigate the
 generator before forcing.
 
-### 7. Capture new reviewer decisions back to the JSON
+### 7. Apply curated override relationships
+
+```powershell
+./scripts/python.ps1 scripts/apply-charlottetown-override-relationships.py
+```
+
+Reads `data/zoning/charlottetown/manual-corrections/override-relationships.json`
+and inserts each entry as a `cross_references` row in
+`zoning.structured_fact` with the appropriate `relationship_type`
+(`notwithstanding`, `does_not_apply`, `references_zone`). Idempotent by
+natural key + content hash; re-running with no JSON changes reports all
+entries unchanged.
+
+`scripts/extract-charlottetown-override-candidates.py` is the
+companion discovery tool: it scans `zoning.clause` for candidate phrasing
+(notwithstanding / does/shall not apply / except as provided / supersedes),
+classifies each by pattern, and writes
+`override-candidates-review.json`. The classification covers patterns that
+should and should not be promoted to facts; only entries with a real graph
+target appear in the curated `override-relationships.json`.
+
+`--dry-run` reports planned changes without writing.
+
+### 8. Capture new reviewer decisions back to the JSON
 
 After any new accept/reject pass through the review UI:
 
@@ -190,7 +216,7 @@ Commit the updated
 so future standups replay the full set. The natural-key fields used for
 matching are recorded in the file header.
 
-### 8. Verification queries
+### 9. Verification queries
 
 Smoke-test the result. All queries use the read-only Postgres MCP server or
 `psql` against the running container.
@@ -223,6 +249,36 @@ SELECT root_zone, depth, ancestor_zone, relationship_type
 
 ## Known issues and follow-ups
 
+- **Override semantics in the resolver are not yet wired up.** 46 override
+  relationships are now captured in `zoning.structured_fact` with
+  `fact_family='cross_references'` and `relationship_type` in
+  {`notwithstanding`, `does_not_apply`, `exception_to`, `supersedes`,
+  `applies_to_parcel`, `references_zone`}, but `v_zone_effective_uses` and
+  `v_zone_effective_requirements` do not yet honor override semantics.
+  Implementing exception/supersession requires projecting category-level
+  overrides (e.g. "Notwithstanding the lot area and frontage requirements")
+  down to the specific `requirements` rows they invalidate per zone — and
+  doing the same for section-level `exception_to` edges (the EXEMPTION
+  sections). Non-trivial and deferred to a follow-up migration. Until then the
+  resolver returns the unconditional inherited set and the override facts are
+  surfaceable as an audit/UX side panel.
+- **Appendix C site-specific exemptions are coarse-grained.** 14
+  `applies_to_parcel` facts capture *which zones* have parcel-specific
+  overrides in Appendix C (one fact per affected zone), but per-PID rows are
+  not yet structured: Appendix C is loaded as `pages_raw` text only, with no
+  `structured_data.cross_references` populated. Detailed PID/civic-address
+  extraction (~47 distinct PIDs) is a focused follow-up and a precondition
+  for parcel-resolution in any visualization layer.
+- **`notwithstanding` patterns intentionally not promoted to facts.** Out of
+  46 clauses containing 'notwithstanding', only 14 carry a graph-actionable
+  target reference. The other 32 are global standalone rules
+  ("Notwithstanding any other provision of this by-law, ..."), within-clause
+  back-references ("notwithstanding the foregoing"), or per-zone accessory-use
+  templates ("Notwithstanding the requirements, the following are permitted as
+  accessory or secondary uses:"). They are captured as `requirements` /
+  `uses` facts elsewhere; promoting them to relationship facts would
+  duplicate. See the `ignored_patterns` section of
+  `override-relationships.json` for the convention details.
 - **TODO: retire the draft zoning-map manual corrections.** The 5 missing-block
   fills in `data/spatial/charlottetown/manual-corrections/draft-zoning-map-corrections.json`
   patch around gaps in the polygonized draft zoning map

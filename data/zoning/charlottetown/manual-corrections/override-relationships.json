@@ -1,0 +1,443 @@
+{
+  "schema_version": 1,
+  "description": "Reviewer-curated cross-reference relationships extracted from notwithstanding / does_not_apply / except_as_provided / supersedes phrasing in the Charlottetown bylaws. Loaded into zoning.structured_fact with fact_family='cross_references'. Out of 46 candidate clauses containing 'notwithstanding' alone, only the subset below carries a graph-actionable target reference; the rest are global standalone rules, within-clause back-references, or per-zone accessory-use templates and are intentionally not promoted to facts. See scripts/extract-charlottetown-override-candidates.py for the discovery/classification pipeline.",
+  "natural_key_fields": ["source_clause_ref", "relationship_type", "target_ref"],
+  "relationships": [
+    {
+      "source_clause_ref": "doc-general-provisions-clause-48-11-4",
+      "document_family": "current",
+      "relationship_type": "notwithstanding",
+      "target_ref": {"source_ref_type": "clause", "source_ref_id": "doc-general-provisions-clause-45-14-1"},
+      "scope": "Allows the Manager of Water & Sewer Utility to grant an unserviced development under unique circumstances; supersedes the prohibition in 45.14.1.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "low",
+      "notes": "Target clause id 45.14.1 not present in the loaded clause table; preserved as the bylaw author's reference. Verify the section number after re-extraction."
+    },
+    {
+      "source_clause_ref": "doc-design-standards-clause-6-4-3",
+      "document_family": "draft",
+      "relationship_type": "notwithstanding",
+      "target_ref": {"source_ref_type": "clause", "source_ref_id": "doc-design-standards-clause-6-6-2"},
+      "scope": "Vinyl siding or cement clap-board may be permitted on rear/side facades in specific conditions; carves out an exception to the material rules in 6.6.2.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_clause_ref": "doc-general-provisions-clause-7-10-3",
+      "document_family": "draft",
+      "relationship_type": "notwithstanding",
+      "target_ref": {"source_ref_type": "clause", "source_ref_id": "doc-general-provisions-clause-7-11-2"},
+      "scope": "City retains sole discretion to accept or reject LPP lands for subdivisions, overriding 7.11.2.",
+      "join_behavior": "override_target_values",
+      "confidence": "medium",
+      "notes": "Clause 7.11.2 not yet verified in clause table; reference text is unambiguous."
+    },
+    {
+      "source_clause_ref": "doc-general-provisions-clause-7-13-4",
+      "document_family": "draft",
+      "relationship_type": "notwithstanding",
+      "target_ref": {"source_ref_type": "clause", "source_ref_id": "doc-general-provisions-clause-7-13-1"},
+      "scope": "Manager of Water & Sewer Utility may grant unserviced development under unique circumstances; carves out an exception to 7.13.1.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_clause_ref": "doc-other-clause-2-3-1",
+      "document_family": "draft",
+      "relationship_type": "notwithstanding",
+      "target_ref": {"source_ref_type": "section", "source_ref_id": "doc-other-section-2-2"},
+      "scope": "Building permit not required in the situations enumerated in 2.3.1; carves out exceptions to Part 2.2 (UNDERTAKINGS).",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_clause_ref": "zone-ap-clause-19-3-4",
+      "document_family": "draft",
+      "relationship_type": "notwithstanding",
+      "target_ref": {"source_ref_type": "clause", "source_ref_id": "zone-ap-clause-20-2-3"},
+      "scope": "Charlottetown Airport Authority facilities exempt from one-building-per-lot and zoning dimensional requirements imposed by 20.2.3.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "medium",
+      "notes": "Target clause 20.2.3 (within zone AP) not yet verified."
+    },
+    {
+      "source_clause_ref": "zone-p-clause-21-4-3",
+      "document_family": "draft",
+      "relationship_type": "notwithstanding",
+      "target_ref": {"source_ref_type": "section", "source_ref_id": "doc-general-provisions-section-3-1"},
+      "scope": "Charlottetown Port Authority port facilities exempt from accessory-building rules in Section 3.1.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "medium",
+      "notes": "Target Section 3.1 referenced loosely; verify whether the citation points to general-provisions section 3.1 or a zone-local section."
+    },
+    {
+      "source_clause_ref": "zone-rh-clause-12-2-2",
+      "document_family": "draft",
+      "relationship_type": "notwithstanding",
+      "target_ref": {"source_ref_type": "clause", "source_ref_id": "zone-rh-clause-13-3-1"},
+      "scope": "Allows rezoning from RH to GC or GN where the Official Plan supports it, despite 13.3.1.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_clause_ref": "zone-rh-clause-12-2-2",
+      "document_family": "draft",
+      "relationship_type": "references_zone",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "GC"},
+      "scope": "Names GC as a permitted rezoning target from RH.",
+      "join_behavior": "reference_only",
+      "confidence": "high"
+    },
+    {
+      "source_clause_ref": "zone-rh-clause-12-2-2",
+      "document_family": "draft",
+      "relationship_type": "references_zone",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "GN"},
+      "scope": "Names GN as a permitted rezoning target from RH.",
+      "join_behavior": "reference_only",
+      "confidence": "high"
+    },
+    {
+      "source_clause_ref": "zone-rn-clause-10-4-7",
+      "document_family": "draft",
+      "relationship_type": "notwithstanding",
+      "target_ref": {"source_ref_type": "clause", "source_ref_id": "zone-rn-clause-10-3-3"},
+      "scope": "Manufactured housing uses permitted in Schedule 10.1 areas, carving out an exception to 10.3.3.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_clause_ref": "doc-general-provisions-clause-48-11-3",
+      "document_family": "current",
+      "relationship_type": "notwithstanding",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "current"},
+      "scope": "Encroachment-relief subdivision approval, despite the bylaw's general Lot Area and Frontage requirements.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high",
+      "notes": "Category-level override (Lot Area and Frontage requirements). Resolver-side projection to specific zone requirements is deferred."
+    },
+    {
+      "source_clause_ref": "doc-general-provisions-clause-7-13-3",
+      "document_family": "draft",
+      "relationship_type": "notwithstanding",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "draft"},
+      "scope": "Encroachment-relief subdivision approval, despite the bylaw's general lot area and frontage requirements.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high",
+      "notes": "Category-level override, parallels current 48-11-3."
+    },
+    {
+      "source_clause_ref": "doc-design-standards-clause-6-3",
+      "document_family": "draft",
+      "relationship_type": "notwithstanding",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "draft"},
+      "scope": "Heritage-resource adjacency overrides the minimum front yard setback in each downtown zone (DC, DMS, DMU, DN, DW).",
+      "join_behavior": "override_target_values",
+      "confidence": "high",
+      "notes": "Category-level override applying to multiple downtown zones; resolver projection deferred."
+    },
+    {
+      "source_clause_ref": "doc-general-provisions-clause-8-12-2",
+      "document_family": "draft",
+      "relationship_type": "notwithstanding",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "draft"},
+      "scope": "Class A bike parking can substitute up to 100% of the class A/B ratio requirements.",
+      "join_behavior": "override_target_values",
+      "confidence": "high",
+      "notes": "Category-level override of bike parking ratios."
+    },
+    {
+      "source_clause_ref": "doc-other-clause-2-10-2",
+      "document_family": "draft",
+      "relationship_type": "notwithstanding",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "draft"},
+      "scope": "Bonus height of up to two additional storeys, in zones enumerated in subsequent clauses, despite the maximum building height in the applicable zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high",
+      "notes": "Category-level override of max building height; affects only the explicitly listed zones."
+    },
+    {
+      "source_clause_ref": "doc-general-provisions-clause-5-10-2",
+      "document_family": "current",
+      "relationship_type": "does_not_apply",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "current"},
+      "scope": "Maximum gross floor area for a Home Occupation does not apply to a Home Daycare.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high",
+      "notes": "Use-level carve-out; targets the Home Occupation GFA rule wherever it applies."
+    },
+    {
+      "source_clause_ref": "doc-general-provisions-clause-4-10-2",
+      "document_family": "draft",
+      "relationship_type": "does_not_apply",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "draft"},
+      "scope": "Maximum gross floor area for a home occupation does not apply to a home daycare.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high",
+      "notes": "Parallels current 5-10-2."
+    },
+    {
+      "source_clause_ref": "doc-general-provisions-clause-46-1-5",
+      "document_family": "current",
+      "relationship_type": "does_not_apply",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "current"},
+      "scope": "Parking requirements do not apply when a building is repaired after a fire/catastrophe and the original spaces remain after reconstruction.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_clause_ref": "doc-general-provisions-clause-46-1-7",
+      "document_family": "current",
+      "relationship_type": "does_not_apply",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "current"},
+      "scope": "Minor and major variance applications do not apply to parking provisions.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_clause_ref": "zone-wf-clause-34-5-1",
+      "document_family": "current",
+      "relationship_type": "does_not_apply",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "WF"},
+      "scope": "Minimum finished floor elevation does not apply to parking structures, accessory buildings, or water-related structures within the WF zone.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_clause_ref": "doc-general-provisions-clause-48-1-3",
+      "document_family": "current",
+      "relationship_type": "supersedes",
+      "target_ref": {"source_ref_type": "external_source", "source_ref_id": "earlier_existing_law_regulation_contract_or_deed"},
+      "scope": "Where this bylaw imposes a greater restriction than earlier existing law/regulation/contract/deed, this bylaw supersedes the external source.",
+      "join_behavior": "override_target_values",
+      "confidence": "high",
+      "notes": "Target is external; preserved as a typed external_source ref for traceability."
+    },
+    {
+      "source_clause_ref": "doc-general-provisions-clause-7-1-3",
+      "document_family": "draft",
+      "relationship_type": "supersedes",
+      "target_ref": {"source_ref_type": "external_source", "source_ref_id": "earlier_existing_law_regulation_contract_or_deed"},
+      "scope": "Draft-bylaw equivalent of current 48-1-3: where this bylaw imposes a greater restriction than earlier existing external sources, this bylaw supersedes them.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_clause_ref": "doc-general-provisions-clause-9-10-1",
+      "document_family": "draft",
+      "relationship_type": "supersedes",
+      "target_ref": {"source_ref_type": "external_source", "source_ref_id": "development_agreement"},
+      "scope": "Where a Development Agreement notes signage requirements that do not meet the bylaw, the DA supersedes the bylaw for those requirements; otherwise the bylaw applies.",
+      "join_behavior": "override_target_values",
+      "confidence": "high",
+      "notes": "Target represents the controlling Development Agreement; the actual DA is parcel-specific and external to the bylaw text."
+    },
+    {
+      "source_section_ref": "doc-general-provisions-section-47-22",
+      "document_family": "current",
+      "relationship_type": "exception_to",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "current"},
+      "scope": "Section 47.22 (EXEMPTIONS TO SIGN REGULATIONS) carves out exceptions to the sign regulations of Section 47.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high",
+      "notes": "Section-level exception; resolver projection to the specific sign-regulation requirements is deferred."
+    },
+    {
+      "source_section_ref": "doc-general-provisions-section-48-11",
+      "document_family": "current",
+      "relationship_type": "exception_to",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "current"},
+      "scope": "Section 48.11 (EXEMPTIONS TO SUBDIVISION REQUIREMENTS) carves out exceptions to the subdivision requirements of Section 48.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_section_ref": "doc-general-provisions-section-4-8",
+      "document_family": "current",
+      "relationship_type": "exception_to",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "current"},
+      "scope": "Section 4.8 (SETBACK EXEMPTIONS) carves out exceptions to the bylaw's general setback requirements.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_section_ref": "doc-other-section-2-3",
+      "document_family": "draft",
+      "relationship_type": "exception_to",
+      "target_ref": {"source_ref_type": "section", "source_ref_id": "doc-other-section-2-2"},
+      "scope": "Section 2.3 (PERMIT EXEMPTIONS) carves out exceptions to Section 2.2 (UNDERTAKINGS / general permit requirements).",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_section_ref": "doc-general-provisions-section-3-6",
+      "document_family": "draft",
+      "relationship_type": "exception_to",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "draft"},
+      "scope": "Section 3.6 (BUILDING HEIGHT EXEMPTIONS) carves out exceptions to the bylaw's general building-height requirements.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_section_ref": "doc-general-provisions-section-3-7",
+      "document_family": "draft",
+      "relationship_type": "exception_to",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "draft"},
+      "scope": "Section 3.7 (SETBACK EXEMPTIONS) carves out exceptions to the bylaw's general setback requirements.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_section_ref": "doc-general-provisions-section-7-13",
+      "document_family": "draft",
+      "relationship_type": "exception_to",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "draft"},
+      "scope": "Section 7.13 (EXEMPTIONS TO SUBDIVISION REQUIREMENTS) carves out exceptions to the subdivision requirements of Section 7.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_section_ref": "doc-general-provisions-section-9-23",
+      "document_family": "draft",
+      "relationship_type": "exception_to",
+      "target_ref": {"source_ref_type": "document", "source_ref_id": "draft"},
+      "scope": "Section 9.23 (EXEMPTIONS TO SIGN REGULATIONS) carves out exceptions to the sign regulations of Section 9.",
+      "join_behavior": "exclude_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "C-1"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the C-1 zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high",
+      "notes": "Coarse-grained pointer; per-PID structured rows are not yet extracted from Appendix C's pages_raw text."
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "C-2"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the C-2 zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "DC"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the DC zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "DMUN"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the DMUN zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "DN"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the DN zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "I"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the I zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "M-1"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the M-1 zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "M-2"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the M-2 zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "PC"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the PC zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "R-1L"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the R-1L zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "R-2"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the R-2 zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "R-3"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the R-3 zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "WF"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the WF zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    },
+    {
+      "source_file_path": "data/zoning/charlottetown/appendix-c-approved-site-specific-exemptions.json",
+      "document_family": "current",
+      "relationship_type": "applies_to_parcel",
+      "target_ref": {"source_ref_type": "zone", "source_ref_id": "WLC"},
+      "scope": "Appendix C lists site-specific exemptions affecting parcels within the WLC zone.",
+      "join_behavior": "override_target_values",
+      "confidence": "high"
+    }
+  ],
+  "ignored_patterns": {
+    "global_standalone": "Clauses introduced by 'Notwithstanding any other provision/section/requirement of this by-law, ...' are standalone rules expressed with a notwithstanding phrase. They do not encode a graph edge to another section or zone; they are captured as `requirements` rows by the bylaw importer. Examples: doc-general-provisions-clause-4-4-1 (fences in yards), 5-17-1 (residential 45 m from sewage lagoon), 5-18-1/2 (cannabis retail 300 m / 1000 m buffers).",
+    "local_foregoing": "Clauses with 'notwithstanding the foregoing' refer to the immediately preceding clause within the same section. They are within-clause qualifiers, not graph edges. Examples: doc-general-provisions-clause-5-9-1-g (commercial vehicle), 6-10-2 (building setback exception).",
+    "accessory_use_template": "13 zone clauses in the current bylaw use the identical phrase 'Notwithstanding the requirements, the following are permitted as accessory or secondary uses:' to introduce per-zone accessory-use lists. These are already captured as `uses` rows with use_status='accessory_or_secondary'; promoting them to relationship facts would duplicate.",
+    "except_as_provided_global": "Most 'except as otherwise permitted in this bylaw' phrasing acknowledges the existence of carve-outs without naming a specific target. Treated as phrasing convention rather than a graph edge. Re-evaluate if an entry names a specific section.",
+    "self_excluding_section": "Clauses such as 'This section shall not apply to lots ... created prior to the effective date of this by-law' (48-1-2 / 7-1-2) self-limit the section in which they appear. They are temporal/applicability conditions, not cross-references."
+  }
+}
