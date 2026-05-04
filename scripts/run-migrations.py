@@ -2,19 +2,32 @@ from __future__ import annotations
 
 import argparse
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-MIGRATIONS = (
-    REPO_ROOT / "schema" / "sql" / "001_zoning_schema.sql",
-    REPO_ROOT / "schema" / "sql" / "002_zoning_views.sql",
-    REPO_ROOT / "schema" / "sql" / "003_rename_zoning_schema_to_hrm.sql",
-    REPO_ROOT / "schema" / "sql" / "004_geometry_registry.sql",
-    REPO_ROOT / "schema" / "sql" / "005_charlottetown_unified_zoning.sql",
-)
+MIGRATIONS_DIR = REPO_ROOT / "schema" / "sql"
+# Migration filenames must start with a numeric prefix (e.g. "008_*.sql"). Files
+# without a numeric prefix (such as schema/sql/postgis.sql, which is mounted as
+# the container entrypoint init) are excluded from the runner.
+MIGRATION_FILENAME_RE = re.compile(r"^\d+_.+\.sql$")
+
+
+def discover_migrations() -> tuple[Path, ...]:
+    """Return migration files in ascending numeric-prefix order.
+
+    The filesystem is the single source of truth: any new schema/sql/NNN_*.sql
+    file is picked up automatically on the next run. Already-applied migrations
+    are filtered later via the public.schema_migrations tracking table.
+    """
+    paths = sorted(
+        (p for p in MIGRATIONS_DIR.glob("*.sql") if MIGRATION_FILENAME_RE.match(p.name)),
+        key=lambda p: p.name,
+    )
+    return tuple(paths)
 
 
 def db_env() -> tuple[str, str, str]:
@@ -95,7 +108,8 @@ def main() -> int:
 
     ensure_migration_table()
     applied = applied_migrations()
-    pending = [path for path in MIGRATIONS if path.name not in applied]
+    migrations = discover_migrations()
+    pending = [path for path in migrations if path.name not in applied]
 
     if args.list:
         for path in pending:
