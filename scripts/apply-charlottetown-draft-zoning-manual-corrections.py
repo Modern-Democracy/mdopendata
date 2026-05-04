@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import geopandas as gpd
@@ -24,123 +25,58 @@ OUT_GPKG = (
     / "charlottetown"
     / "charlottetown-draft-zoning-map-2026-04-09-page-197-vector-municipal-fit-corrected-cleaned-draft.gpkg"
 )
-
-ZONE_NAMES = {
-    "RN": "Neighbourhood",
-    "EG": "Eastern Gateway",
-}
-
-ZONE_RGB = {
-    "RN": "#fbf8bf",
-    "EG": "#4e4e4f",
-}
-
-CORRECTIONS = [
-    {
-        "correction_id": "RN_belfast_brittany_strathmore_edinburgh",
-        "zone_code": "RN",
-        "description": (
-            "Missing RN block south of Belfast Street, east of Brittany Drive, "
-            "north of Strathmore Lane, and west of Edinburgh Drive."
-        ),
-        "parcel_candidate_ids": [
-            23104,
-            23105,
-            23346,
-            23347,
-            23388,
-            23438,
-            23511,
-            23672,
-            23673,
-            23715,
-            23751,
-            23752,
-            23898,
-            23901,
-            23943,
-            24006,
-            24007,
-            24067,
-            24122,
-            24184,
-            24252,
-            24397,
-            24411,
-            24529,
-        ],
-    },
-    {
-        "correction_id": "RN_brittany_strathmore_edinburgh",
-        "zone_code": "RN",
-        "description": (
-            "Missing RN block south of Strathmore Lane, east and north of "
-            "Brittany Drive, and west of Edinburgh Drive."
-        ),
-        "parcel_candidate_ids": [
-            23823,
-            24008,
-            24139,
-            24447,
-            24457,
-        ],
-    },
-    {
-        "correction_id": "RN_edinburgh_westwood_berkeley",
-        "zone_code": "RN",
-        "description": (
-            "Missing RN block east of Edinburgh Drive and within Westwood Crescent, "
-            "including the Berkeley Way cul-de-sac."
-        ),
-        "parcel_candidate_ids": [
-            24860,
-            24934,
-            25009,
-            25011,
-            25113,
-            25168,
-            25276,
-            25296,
-            25351,
-            25495,
-            25519,
-            25537,
-            25607,
-            25620,
-            25621,
-            25706,
-            25707,
-            25792,
-            25798,
-            25822,
-            25954,
-            26088,
-        ],
-    },
-    {
-        "correction_id": "RN_deep_river",
-        "zone_code": "RN",
-        "description": (
-            "Missing RN properties south of Deep River Drive, west of River Ridge Road, "
-            "east of parkland, and north of medium density residential."
-        ),
-        "parcel_candidate_ids": [82693, 82830, 82833, 82875, 82974],
-    },
-    {
-        "correction_id": "EG_water_weymouth_grafton",
-        "zone_code": "EG",
-        "description": (
-            "Missing EG lots east of Water Street between Weymouth Street and Grafton Street, "
-            "north of the Institutional zone."
-        ),
-        "parcel_candidate_ids": [63727, 64156, 64549],
-    },
-]
+CORRECTIONS_JSON = (
+    ROOT
+    / "data"
+    / "spatial"
+    / "charlottetown"
+    / "manual-corrections"
+    / "draft-zoning-map-corrections.json"
+)
+SUPPORTED_SCHEMA_VERSIONS = {1}
 
 
-def build_corrections(parcels: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
+def load_corrections_artifact(path: Path) -> tuple[list[dict], dict[str, dict[str, str]]]:
+    """Load the reviewer-decision JSON and return (corrections, zone_attributes).
+
+    See data/spatial/charlottetown/manual-corrections/draft-zoning-map-corrections.json
+    for the schema. Validates schema_version, presence of the required fields,
+    and that every correction's zone_code has a zone_attributes entry.
+    """
+    if not path.exists():
+        raise SystemExit(f"Corrections file not found: {path}")
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    schema_version = payload.get("schema_version")
+    if schema_version not in SUPPORTED_SCHEMA_VERSIONS:
+        raise SystemExit(
+            f"Unsupported schema_version {schema_version!r}; "
+            f"this script supports {sorted(SUPPORTED_SCHEMA_VERSIONS)}"
+        )
+    corrections = payload.get("corrections") or []
+    zone_attributes = payload.get("zone_attributes") or {}
+    seen_ids: set[str] = set()
+    for entry in corrections:
+        for field in ("correction_id", "zone_code", "description", "parcel_candidate_ids"):
+            if not entry.get(field):
+                raise SystemExit(f"Correction is missing required field {field!r}: {entry!r}")
+        if entry["correction_id"] in seen_ids:
+            raise SystemExit(f"Duplicate correction_id {entry['correction_id']!r}")
+        seen_ids.add(entry["correction_id"])
+        attrs = zone_attributes.get(entry["zone_code"])
+        if not attrs or "zone_name" not in attrs or "legend_rgb" not in attrs:
+            raise SystemExit(
+                f"zone_attributes entry for {entry['zone_code']!r} is missing or incomplete"
+            )
+    return corrections, zone_attributes
+
+
+def build_corrections(
+    parcels: gpd.GeoDataFrame,
+    corrections_data: list[dict],
+    zone_attributes: dict[str, dict[str, str]],
+) -> gpd.GeoDataFrame:
     rows = []
-    for correction in CORRECTIONS:
+    for correction in corrections_data:
         ids = correction["parcel_candidate_ids"]
         selected = parcels[parcels["parcel_candidate_id"].isin(ids)]
         missing = sorted(set(ids) - set(selected["parcel_candidate_id"].astype(int)))
@@ -150,12 +86,13 @@ def build_corrections(parcels: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
             correction["correction_id"],
             unary_union(list(selected.geometry)).buffer(0),
         )
+        attrs = zone_attributes[correction["zone_code"]]
         rows.append(
             {
                 "correction_id": correction["correction_id"],
                 "zone_code": correction["zone_code"],
-                "zone_name": ZONE_NAMES[correction["zone_code"]],
-                "legend_rgb": ZONE_RGB[correction["zone_code"]],
+                "zone_name": attrs["zone_name"],
+                "legend_rgb": attrs["legend_rgb"],
                 "parcel_candidate_ids": ",".join(str(item) for item in ids),
                 "parcel_candidate_count": len(ids),
                 "description": correction["description"],
@@ -358,12 +295,14 @@ def clean_diagonal_parcel_splits(
 
 
 def main() -> None:
+    corrections_data, zone_attributes = load_corrections_artifact(CORRECTIONS_JSON)
+
     zones = pyogrio.read_dataframe(IN_GPKG, layer="draft_zoning_areas_municipal_fit")
     parcels = pyogrio.read_dataframe(IN_GPKG, layer="draft_parcel_polygons_municipal_fit")
     linework = pyogrio.read_dataframe(IN_GPKG, layer="draft_parcel_linework_municipal_fit")
     boundary = pyogrio.read_dataframe(IN_GPKG, layer="municipal_boundary_reference")
 
-    corrections = build_corrections(parcels)
+    corrections = build_corrections(parcels, corrections_data, zone_attributes)
     corrected = build_corrected_zones(zones, corrections)
     cleaned_parcels = clean_diagonal_parcel_splits(parcels, corrections)
 

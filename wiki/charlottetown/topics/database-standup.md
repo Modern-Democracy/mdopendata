@@ -31,7 +31,8 @@ unrecoverable from the JSON sources alone.
 | Decisions export script | `scripts/export-charlottetown-section-equivalence-decisions.py` |
 | Decisions apply script | `scripts/apply-charlottetown-section-equivalence-decisions.py` |
 | Spatial layers | `data/spatial/charlottetown/` |
-| Manual spatial corrections (draft zoning map) | `scripts/apply-charlottetown-draft-zoning-manual-corrections.py` |
+| Manual draft zoning-map corrections (data) | `data/spatial/charlottetown/manual-corrections/draft-zoning-map-corrections.json` |
+| Manual draft zoning-map corrections (script) | `scripts/apply-charlottetown-draft-zoning-manual-corrections.py` |
 
 ## Connection settings
 
@@ -222,21 +223,29 @@ SELECT root_zone, depth, ancestor_zone, relationship_type
 
 ## Known issues and follow-ups
 
-- **Manual draft spatial corrections are hard-coded.**
-  `scripts/apply-charlottetown-draft-zoning-manual-corrections.py` carries its
-  parcel-id list in source rather than a versioned data file. Migrating to the
-  same JSON-artifact pattern as section-equivalence decisions is a future
-  cleanup.
-- **`zone_code_crosswalk` for the draft is incomplete.** 20 polygons are loaded
-  but only 1 crosswalk row exists. Spatial→zone linkage on the draft side is
-  pending.
-- **Importer drops natural-key ids no longer applies.** A previous version of
+- **TODO: retire the draft zoning-map manual corrections.** The 5 missing-block
+  fills in `data/spatial/charlottetown/manual-corrections/draft-zoning-map-corrections.json`
+  patch around gaps in the polygonized draft zoning map
+  (`charlottetown-draft-zoning-map-...-vector-municipal-fit-draft.gpkg`).
+  Long-term, those blocks should be added to the upstream GeoPackage so the
+  source layer is correct from the start, at which point
+  `scripts/apply-charlottetown-draft-zoning-manual-corrections.py` and the
+  corresponding JSON can be deleted. Not a priority; revisit when the
+  polygonization pipeline is next touched.
+- **`NA` and `U` polygons in the current zoning layer are intentionally
+  unlinked.** Of 1,558 polygons in `charlottetown_current_zoning_boundaries`,
+  12 are tagged `ZONING='NA'` (zoning not assigned, e.g. waterways and road
+  allowances) and 1 is tagged `ZONING='U'` (infill area). Neither code appears
+  in the current bylaw, so neither has a `zone_code_crosswalk` row and they
+  remain absent from `zone_spatial_feature`. Treat as unzoned overlays in any
+  visualization; do not add crosswalk rows for them.
+- **Importer drops natural-key ids: fixed.** A previous version of
   `import-charlottetown-zoning.py` stripped every payload key ending in `_id`,
   silently flattening cross-references in `structured_fact.value_payload`.
-  Fixed 2026-05-04. After any re-import, confirm
-  `value_payload->'target_ref'->>'source_ref_id'` is populated on
-  `zone_relationships` facts; the recovery layer in
-  `008_zone_inheritance_resolver.sql` is no longer required once that holds.
+  Fixed 2026-05-04 and the bylaw JSON has been re-imported, so
+  `value_payload->'target_ref'->>'source_ref_id'` is now populated on every
+  active `zone_relationships` fact. The text-recovery branch in
+  `v_zone_inheritance_edge` is retained only as a defensive fallback.
 - **Override relationship facts are unpopulated.** No
   `notwithstanding`, `exception_to`, `supersedes`, or `applies_to_parcel` rows
   exist in `structured_fact`. The inheritance resolver therefore does not yet
