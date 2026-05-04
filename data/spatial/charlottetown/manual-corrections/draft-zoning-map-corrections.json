@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "description": "Reviewer-identified missing draft zoning blocks, expressed as lists of parcel-candidate ids from the municipal-fit polygonization. Consumed by scripts/apply-charlottetown-draft-zoning-manual-corrections.py to synthesize manual zoning polygons. Edit this file to add or revise corrections; re-run the script to regenerate the corrected GeoPackage.",
+  "natural_key_fields": ["correction_id"],
+  "zone_attributes": {
+    "RN": {
+      "zone_name": "Neighbourhood",
+      "legend_rgb": "#fbf8bf"
+    },
+    "EG": {
+      "zone_name": "Eastern Gateway",
+      "legend_rgb": "#4e4e4f"
+    }
+  },
+  "corrections": [
+    {
+      "correction_id": "RN_belfast_brittany_strathmore_edinburgh",
+      "zone_code": "RN",
+      "description": "Missing RN block south of Belfast Street, east of Brittany Drive, north of Strathmore Lane, and west of Edinburgh Drive.",
+      "parcel_candidate_ids": [
+        23104, 23105, 23346, 23347, 23388, 23438, 23511, 23672, 23673, 23715,
+        23751, 23752, 23898, 23901, 23943, 24006, 24007, 24067, 24122, 24184,
+        24252, 24397, 24411, 24529
+      ]
+    },
+    {
+      "correction_id": "RN_brittany_strathmore_edinburgh",
+      "zone_code": "RN",
+      "description": "Missing RN block south of Strathmore Lane, east and north of Brittany Drive, and west of Edinburgh Drive.",
+      "parcel_candidate_ids": [23823, 24008, 24139, 24447, 24457]
+    },
+    {
+      "correction_id": "RN_edinburgh_westwood_berkeley",
+      "zone_code": "RN",
+      "description": "Missing RN block east of Edinburgh Drive and within Westwood Crescent, including the Berkeley Way cul-de-sac.",
+      "parcel_candidate_ids": [
+        24860, 24934, 25009, 25011, 25113, 25168, 25276, 25296, 25351, 25495,
+        25519, 25537, 25607, 25620, 25621, 25706, 25707, 25792, 25798, 25822,
+        25954, 26088
+      ]
+    },
+    {
+      "correction_id": "RN_deep_river",
+      "zone_code": "RN",
+      "description": "Missing RN properties south of Deep River Drive, west of River Ridge Road, east of parkland, and north of medium density residential.",
+      "parcel_candidate_ids": [82693, 82830, 82833, 82875, 82974]
+    },
+    {
+      "correction_id": "EG_water_weymouth_grafton",
+      "zone_code": "EG",
+      "description": "Missing EG lots east of Water Street between Weymouth Street and Grafton Street, north of the Institutional zone.",
+      "parcel_candidate_ids": [63727, 64156, 64549]
+    }
+  ]
+}
