@@ -22,7 +22,7 @@ has not seen the originating conversation can pick it up cold.
 | 1 — Population audit | ✅ delivered | `schema/sql/009_coverage_gap_views.sql`, `scripts/audit-charlottetown-population.py` |
 | 2 — Override-aware resolver | ✅ delivered | `schema/sql/010_override_aware_resolver.sql` |
 | 3 — Parcel resolver | ✅ v1.1 delivered | `schema/sql/012_parcel_resolver.sql`, `schema/sql/013_parcel_resolver_civic_address.sql`, `scripts/extract-charlottetown-appendix-c-exemptions.py`, `scripts/apply-charlottetown-appendix-c-exemptions.py` |
-| 4 — Visualization | ⏳ pending | (frontend; out of scope for a single coding agent) |
+| 4 — Visualization | ✅ local demo delivered; hardening pending | `web/server.js`, `web/public/ui_kits/*`, `scripts/smoke-web-demo.mjs`, [Web demo design kit plan](../../implementation/web-demo-design-kit-plan.md) |
 | 5 — Table-derived facts first-class | ✅ delivered | `schema/sql/011_table_anchored_inheritance.sql`, `scripts/import-charlottetown-zoning.py`, `scripts/audit-charlottetown-population.py` |
 | 6 — Split current `general-provisions.json` | ⏳ pending | — |
 | 7 — Stamp `applies_to_*` at extraction time | ⏳ pending | — |
@@ -32,6 +32,17 @@ Cross-cutting deliverable not in the table: `propagate_group_applicability()`
 in `scripts/import-charlottetown-zoning.py` (Option A from the gap-3
 investigation; closes `requirement_applicability_missing` from 100% to
 ~24/39%, see Task 7 for the extractor-side follow-up).
+
+Audit note from 2026-05-05: the delivered artifacts for Tasks 1, 2, 3, 5,
+and 8 exist, and live database inspection supported the major resolver and
+parcel-smoke claims at audit time. However, the local
+`public.schema_migrations` ledger did not record migrations 010 through
+014 even though their views/functions were present, so rebuild verification
+must confirm that a clean `scripts/run-migrations.py` pass applies and
+records the full migration set. The persisted `coverage_gap` rows may lag
+behind importer changes; a fresh
+`scripts/audit-charlottetown-population.py --dry-run --no-snapshot` run is
+the current baseline check until the audit is re-run and written.
 
 Read first, in order, for context:
 
@@ -514,50 +525,81 @@ intersect the parcel.
 
 ### Current state
 
-- An existing web demo lives under `web/` (build in `build/`,
-  `package.json` at repo root, server logic referenced in `docker-compose.yml`'s
-  `web` service). It does not consume the new resolver views or the
-  override edges; previous iterations were focused on raw bylaw rendering
-  and current-vs-draft comparison.
+- A local browser demo is delivered under `web/`, using the small Node
+  service documented in [Web UI stack](../../implementation/web-ui-stack.md)
+  and [Web demo design kit plan](../../implementation/web-demo-design-kit-plan.md).
+- Delivered routes include parcel lookup, parcel-focused map explorer,
+  city-view map, zoning comparison, and provisions comparison. The demo
+  uses the design-kit pages under `web/public/ui_kits/` and database-backed
+  APIs exposed by `web/server.js`.
+- The repository includes `scripts/smoke-web-demo.mjs` and `npm run
+  web:smoke` for static route and API-contract checks against a running web
+  server.
+- Remaining work is hardening, not first implementation: confirm the UI is
+  aligned with `zoning.parcel_effective_zoning`, resolve parcel identity
+  limitations caused by PID-less parcel polygons, decide whether/when to
+  move large GeoJSON layers to vector tiles, and perform responsive browser
+  QA before public use.
 - The QGIS MCP server is configured but requires the QGIS Desktop plugin
   to be running. Useful for ad-hoc cartographic work, less useful for the
   in-browser app.
 
 ### What to build
 
-This is properly a frontend project, not a single agent task. Suggested
-shape if a single agent does take it:
+The first local demo is complete. Treat the remaining work as product and
+data-quality hardening:
 
-1. A backend endpoint `GET /api/parcel/:pid` that calls
-   `zoning.parcel_effective_zoning` and returns the jsonb document
-   directly.
-2. A parcel search box + map (Leaflet or MapLibre) loading the parcel
-   layer as vector tiles or as a simplified GeoJSON for display.
-3. A side panel that renders the resolver output:
-   - Tab: Permitted uses, grouped by `use_status`, with provenance
-     ("inherited from R-3 via clause `zone-r-4-clause-18-1-1`").
-   - Tab: Dimensional rules, table of `requirements` with units and
-     comparators.
-   - Tab: Overrides, listing `applicable_overrides[]` in plain English
-     using the `scope` field.
-   - Tab: Map overlays toggle (wetlands, schedules, etc.).
-4. A current-vs-draft toggle. The existing demo already handles this
-   pattern; lift the affordance.
+1. Add or adapt an API endpoint that exposes
+   `zoning.parcel_effective_zoning(pid, document_family)` directly, or
+   explicitly document why the current parcel/zoning APIs remain the UI
+   contract instead.
+2. Reconcile displayed parcel zones, exemptions, requirements, overrides,
+   and overlays against resolver output for positive controls such as PIDs
+   `339994`, `338129`, `335307`, and `386557`.
+3. Preserve provenance in the side panel: inherited uses, dimensional
+   requirements, applicable overrides, source clause labels, and map overlay
+   source layers should remain traceable.
+4. Decide whether current GeoJSON viewport endpoints are sufficient for
+   local demo use or whether MapLibre/vector tiles are needed before wider
+   use.
+5. Run browser QA for desktop and mobile layouts, map rendering, empty/error
+   states, and smoke-test coverage.
+
+### Acceptance criteria
+
+- `npm run web:smoke` passes against a running web service.
+- Parcel lookup resolves database-backed address/PID results and routes to
+  the map explorer.
+- The parcel map, city-view map, zoning comparison, and provisions
+  comparison routes load without mock-only data replacing database results.
+- At least four parcel controls are checked against
+  `zoning.parcel_effective_zoning`, including one Appendix-C parcel, one
+  non-Appendix-C parcel, one overlay-intersecting parcel, and one
+  C-2-rooted parcel affected by the Task 8 performance fix.
+- Public-readiness gaps are explicitly labeled in the UI or documented in
+  this backlog before external users see the demo.
 
 ### Open decisions
 
-- **Frontend stack.** Existing web demo's stack (TBD; check `web/`).
-  Don't pick a different framework without a reason.
-- **Map renderer.** MapLibre GL is the natural choice given the spatial
-  data is in PostGIS; vector tiles via pg_tileserv are a clean fit.
+- **Frontend stack.** Keep the existing Node/static stack unless repeated
+  shared state or component complexity justifies a build system.
+- **Resolver API contract.** Decide whether the UI should consume
+  `zoning.parcel_effective_zoning` directly or continue composing existing
+  parcel, zoning, and comparison endpoints.
+- **Map renderer.** Leaflet is already used in the local demo. MapLibre GL
+  plus vector tiles remains the likely path if large GeoJSON responses are
+  too heavy.
 - **Provenance density.** How prominently to show the inheritance
   breadcrumbs vs. the overrides. Probably a collapsible "why" section per
   rule.
+- **Parcel identity.** Civic-address PID resolution is usable for the local
+  demo, but native parcel IDs remain unresolved in the parcel polygon layer.
 
 ### Effort estimate
 
-Out of scope for a single coding agent. Treat as a multi-day frontend
-feature once Task 3 lands. Acceptance is product-shaped, not test-shaped.
+Initial local demo is delivered. Remaining hardening is likely 1 to 3 days,
+depending on whether resolver-output reconciliation exposes API contract
+changes or map-performance work.
 
 ---
 
