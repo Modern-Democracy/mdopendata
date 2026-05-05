@@ -5,7 +5,7 @@ tags:
   - database
   - standup
   - operations
-updated: 2026-05-04
+updated: 2026-05-05
 ---
 
 # Database Standup
@@ -96,6 +96,33 @@ Pass `--list` to preview pending migrations without applying them:
 `008_zone_inheritance_resolver.sql` depends only on the `zoning.section`,
 `zoning.clause`, and `zoning.structured_fact` tables, so its views return
 rows only after the JSON import populates the underlying data.
+
+The resolver stack on top of 008 (apply in numeric order):
+
+- `009_coverage_gap_views.sql` — relaxes the `coverage_gap.gap_type`
+  CHECK and adds `v_coverage_gap_summary` / `v_coverage_gap_by_zone`
+  for the population audit (Task 1).
+- `010_override_aware_resolver.sql` — adds `v_zone_override_edge` and
+  replaces the effective-rule views with override-aware variants
+  (Task 2).
+- `011_table_anchored_inheritance.sql` — extends the `owner_zone`
+  regex from `(clause|section)` to `(clause|section|table)` so
+  table-anchored requirements (e.g. zone I) flow through the resolver
+  (Task 5 sub-piece).
+- `012_parcel_resolver.sql` — adds `zoning.zone_effective_payload`
+  and `zoning.parcel_effective_zoning` (Task 3 v1, Appendix-C-only).
+- `013_parcel_resolver_civic_address.sql` — replaces
+  `parcel_effective_zoning` to resolve a parcel's base zone via the
+  `charlottetown_civic_addresses` point layer (PID attribute) ↔
+  zoning-boundary intersect, plus map-overlay rollups (Task 3 v1.1).
+
+The canonical parcel-lookup API is
+`zoning.parcel_effective_zoning(pid text, document_family text)`. It
+returns a jsonb document with `civic_addresses[]`, `zones[]`,
+`site_specific_exemptions[]`, `zone_payloads[]` (effective uses +
+requirements with override-aware columns), `map_overlays[]`, and a
+`resolution_method` field. Returns NULL when the PID is unknown to
+both the civic-address layer and the Appendix C exemption set.
 
 ### 3. Import the bylaw JSON
 
@@ -203,6 +230,32 @@ target appear in the curated `override-relationships.json`.
 
 `--dry-run` reports planned changes without writing.
 
+### 7b. Apply Appendix C site-specific exemptions
+
+Two scripts, run in order. The extractor parses the raw appendix text;
+the applier promotes the high-confidence rows to `structured_fact`:
+
+```powershell
+./scripts/python.ps1 scripts/extract-charlottetown-appendix-c-exemptions.py
+./scripts/python.ps1 scripts/apply-charlottetown-appendix-c-exemptions.py
+```
+
+The extractor writes
+`data/zoning/charlottetown/manual-corrections/appendix-c-exemptions.json`
+with one entry per (PID, source_page). 36 of the 48 records currently
+parse cleanly (`confidence='high'`); the other 12 are tagged
+`needs_review` with the raw block text preserved in `notes`. The
+applier promotes only `confidence='high'` rows by default; pass
+`--include-needs-review` to promote everything (with the
+`needs_review` confidence carried into the resulting fact's
+`value_payload`).
+
+Each promoted entry becomes a `cross_references` `applies_to_parcel`
+fact keyed on `(zone, pid, source_page)`, so multi-amendment parcels
+(e.g. PID 342790 / 199 Grafton Street has three Appendix C entries on
+pages 3/4/6) stay distinct rather than overwriting each other.
+`zoning.parcel_effective_zoning(pid)` reads these rows directly.
+
 ### 8. Capture new reviewer decisions back to the JSON
 
 After any new accept/reject pass through the review UI:
@@ -245,6 +298,20 @@ SELECT root_zone, depth, ancestor_zone, relationship_type
  ORDER BY depth, ancestor_zone;
 -- Expect rows reaching depth 6 through MUC -> R-4 -> R-3 -> R-2 -> R-1S
 -- and through MUC -> ER-MUVC -> R-4B -> R-3T -> R-3 -> ...
+
+-- Parcel resolver smoke test (requires migrations 010-013)
+SELECT (zoning.parcel_effective_zoning('339994'))->'zones',
+       (zoning.parcel_effective_zoning('339994'))->'resolution_method',
+       jsonb_array_length((zoning.parcel_effective_zoning('339994'))->'site_specific_exemptions') AS n_ex;
+-- Expect: zones=["DMUN"], resolution_method="civic_address_intersect", n_ex=1.
+
+SELECT (zoning.parcel_effective_zoning('338129'))->'zones',
+       jsonb_array_length((zoning.parcel_effective_zoning('338129'))->'zone_payloads') AS n_payloads;
+-- Expect: zones=["DMUN"], n_payloads=1 (non-Appendix-C parcel resolves
+-- via civic-address intersect alone).
+
+SELECT (zoning.parcel_effective_zoning('335307'))->'map_overlays';
+-- Expect a wetland feature_key in map_overlays[].
 ```
 
 #### Population audit (requires migration 009)
@@ -286,9 +353,15 @@ Roll up the result:
 ```sql
 -- Global summary, one row per (revision, gap_type).
 SELECT * FROM zoning.v_coverage_gap_summary;
--- Expect 9 rows on the current local DB (4 for revision 1, 5 for revision 2)
--- with requirement_applicability_missing and raw_table_no_structured_facts
--- both at 100% gap_pct (known structural gaps; see backlog Task 1).
+-- Expect 9 rows on the current local DB (4 for revision 1, 5 for revision 2).
+-- requirement_applicability_missing now sits at ~24% rev 1 / ~39% rev 2
+-- (the importer-side propagation in commit 57b21f1 dropped it from 100%);
+-- the residue is doc-level rules genuinely outside any zone-keyed
+-- regulation_group. raw_table_no_structured_facts sits at ~5% on both
+-- revisions after the metric was tightened in commit e58c127 to match
+-- by synthetic-clause-id prefix; the deeper fix (importer writes
+-- source_record_table='raw_table' directly) is pending under backlog
+-- Task 5.
 
 -- Worst zones for any zone-scoped gap_type, ranked by absolute gap.
 SELECT zone_code, gap_type,
@@ -310,26 +383,23 @@ The seven gap_type families the audit emits are documented in
 
 ## Known issues and follow-ups
 
-- **Override semantics in the resolver are not yet wired up.** 46 override
-  relationships are now captured in `zoning.structured_fact` with
-  `fact_family='cross_references'` and `relationship_type` in
+- **Override semantics: wired up via migration 010.** The 46 override
+  relationships in `zoning.structured_fact`
+  (`fact_family='cross_references'`, `relationship_type` in
   {`notwithstanding`, `does_not_apply`, `exception_to`, `supersedes`,
-  `applies_to_parcel`, `references_zone`}, but `v_zone_effective_uses` and
-  `v_zone_effective_requirements` do not yet honor override semantics.
-  Implementing exception/supersession requires projecting category-level
-  overrides (e.g. "Notwithstanding the lot area and frontage requirements")
-  down to the specific `requirements` rows they invalidate per zone — and
-  doing the same for section-level `exception_to` edges (the EXEMPTION
-  sections). Non-trivial and deferred to a follow-up migration. Until then the
-  resolver returns the unconditional inherited set and the override facts are
-  surfaceable as an audit/UX side panel.
-- **Appendix C site-specific exemptions are coarse-grained.** 14
-  `applies_to_parcel` facts capture *which zones* have parcel-specific
-  overrides in Appendix C (one fact per affected zone), but per-PID rows are
-  not yet structured: Appendix C is loaded as `pages_raw` text only, with no
-  `structured_data.cross_references` populated. Detailed PID/civic-address
-  extraction (~47 distinct PIDs) is a focused follow-up and a precondition
-  for parcel-resolution in any visualization layer.
+  `applies_to_parcel`, `references_zone`}) are now read by
+  `v_zone_override_edge` and surfaced on every row of
+  `v_zone_effective_uses` / `v_zone_effective_requirements` as
+  `applicable_overrides jsonb` plus a `superseded_by_override boolean`
+  flag. The views never physically filter rows; the visualization
+  layer chooses how to render superseded entries. See backlog Task 2
+  for design rationale and Open Decisions.
+- **Appendix C site-specific exemptions: per-PID rows live.** Replaces
+  the earlier coarse 14 zone-level pointer facts. The extractor +
+  applier (step 7b above) promote 36 high-confidence per-(PID,
+  source_page) rows out of 48; the remaining 12 are tagged
+  `needs_review` for curator follow-up. Use `--include-needs-review`
+  to promote everything once the rows are corrected.
 - **`notwithstanding` patterns intentionally not promoted to facts.** Out of
   46 clauses containing 'notwithstanding', only 14 carry a graph-actionable
   target reference. The other 32 are global standalone rules
@@ -363,11 +433,13 @@ The seven gap_type families the audit emits are documented in
   `value_payload->'target_ref'->>'source_ref_id'` is now populated on every
   active `zone_relationships` fact. The text-recovery branch in
   `v_zone_inheritance_edge` is retained only as a defensive fallback.
-- **Override relationship facts are unpopulated.** No
-  `notwithstanding`, `exception_to`, `supersedes`, or `applies_to_parcel` rows
-  exist in `structured_fact`. The inheritance resolver therefore does not yet
-  apply override semantics; visualizations should treat its output as the
-  unconditional inherited set.
+- **C-2-rooted parcel resolver perf: 5+ s.** Pre-existing asymmetry
+  between `inherited_uses` (has `DISTINCT ON`) and `inherited_reqs`
+  (does not) in `v_zone_effective_requirements`, carried through
+  every migration that re-defines the view. C-2's depth-7 / 12-ancestor
+  closure balloons to 6,923 rows of which only a few hundred are
+  distinct. Fix is a one-line `DISTINCT ON` mirror of the
+  `inherited_uses` pattern; tracked as backlog Task 8.
 
 ## Backlog
 

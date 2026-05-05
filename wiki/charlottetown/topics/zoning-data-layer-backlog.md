@@ -5,15 +5,33 @@ tags:
   - backlog
   - resolver
   - visualization
-updated: 2026-05-04
+updated: 2026-05-05
 ---
 
 # Zoning Data Layer Backlog
 
-Self-contained briefs for the four follow-up tasks needed to bring the
-Charlottetown zoning data layer to a state that a parcel-level visualization
-can sit on top of. Each section is written so an agent who has not seen the
-originating conversation can pick it up cold.
+Self-contained briefs for the follow-up tasks needed to bring the
+Charlottetown zoning data layer to a state that a parcel-level
+visualization can sit on top of. Each section is written so an agent who
+has not seen the originating conversation can pick it up cold.
+
+## Status overview
+
+| Task | Status | Key artifact(s) |
+|---|---|---|
+| 1 — Population audit | ✅ delivered | `schema/sql/009_coverage_gap_views.sql`, `scripts/audit-charlottetown-population.py` |
+| 2 — Override-aware resolver | ✅ delivered | `schema/sql/010_override_aware_resolver.sql` |
+| 3 — Parcel resolver | ✅ v1.1 delivered | `schema/sql/012_parcel_resolver.sql`, `schema/sql/013_parcel_resolver_civic_address.sql`, `scripts/extract-charlottetown-appendix-c-exemptions.py`, `scripts/apply-charlottetown-appendix-c-exemptions.py` |
+| 4 — Visualization | ⏳ pending | (frontend; out of scope for a single coding agent) |
+| 5 — Table-derived facts first-class | 🟡 partial: regex sub-piece delivered | `schema/sql/011_table_anchored_inheritance.sql` |
+| 6 — Split current `general-provisions.json` | ⏳ pending | — |
+| 7 — Stamp `applies_to_*` at extraction time | ⏳ pending | — |
+| 8 — Inheritance closure `DISTINCT ON` (perf) | ⏳ pending | — |
+
+Cross-cutting deliverable not in the table: `propagate_group_applicability()`
+in `scripts/import-charlottetown-zoning.py` (Option A from the gap-3
+investigation; closes `requirement_applicability_missing` from 100% to
+~24/39%, see Task 7 for the extractor-side follow-up).
 
 Read first, in order, for context:
 
@@ -24,10 +42,14 @@ Read first, in order, for context:
   natural-key + content-hash discipline, read-only MCP boundary).
 - `schema/json-schema/charlottetown-bylaw-extraction.schema.json` — the
   authoritative schema for raw + structured bylaw data.
-- `schema/sql/008_zone_inheritance_resolver.sql` — the existing resolver
-  views.
+- `schema/sql/008_zone_inheritance_resolver.sql` — the original
+  inheritance resolver. Migrations 010, 011, and 013 layer on top of it
+  for override semantics, table-anchored requirements, and the parcel
+  resolver respectively.
 - `data/zoning/charlottetown/manual-corrections/override-relationships.json`
   — the curated override edges loaded into `zoning.structured_fact`.
+- `data/zoning/charlottetown/manual-corrections/appendix-c-exemptions.json`
+  — per-PID Appendix C exemptions (36 high-confidence + 12 needs_review).
 
 Postgres connection defaults to the local docker container on port 54329
 (see `docker-compose.yml`). Read-only inspection is fine via the configured
@@ -254,6 +276,28 @@ GROUP BY 1, applicable_overrides ORDER BY 1;
 ~1 day, mostly working through edge cases of the SQL semantics and writing
 the test queries. Significantly easier than it would have been pre-PR-#5
 because the override edges are already structured.
+
+### Status (delivered)
+
+Migration `schema/sql/010_override_aware_resolver.sql`. Added
+`zoning.v_zone_override_edge` (44 edges; `references_zone` filtered out
+per Open Decision #3) and `zoning.v_clause_section_lookup`. Replaced
+`v_zone_effective_uses` and `v_zone_effective_requirements` with
+override-aware variants exposing `applicable_overrides jsonb` (every
+override targeting the row's zone/clause/section/document) and
+`superseded_by_override boolean` (clause- or section-targeted overrides
+with `join_behavior IN ('exclude_target_values','override_target_values')`
+that hit the row's source clause). Per Open Decision #2 the views never
+physically filter rows — the visualization layer chooses how to render
+superseded entries.
+
+All four smoke tests in the migration footer pass. WF FFE rule surfaces
+10 applicable overrides (zone-targeted `does_not_apply` + Appendix C +
+others); MUC closure topology unchanged at depth=6 / 10 ancestors;
+Appendix-C zone-targeted overrides reach every requirement of affected
+zones (verified for C-1, DC, WF, and — after migration 011 — I);
+`v_zone_override_edge` excludes `references_zone` (0 rows; 44 other
+edges remain).
 
 ---
 
@@ -521,6 +565,29 @@ feature once Task 3 lands. Acceptance is product-shaped, not test-shaped.
 ---
 
 ## Task 5 — Make table-derived facts first-class in `structured_fact`
+
+### Status (partial — regex sub-piece delivered)
+
+The smallest sub-piece — extending the inheritance-resolver regex from
+`(clause|section)` to `(clause|section|table)` — landed as
+`schema/sql/011_table_anchored_inheritance.sql`. Concrete effects:
+
+- `v_zone_effective_requirements` now returns 41 rows for zone I (was
+  0); Task 2's smoke-test 3 passes for I as well as C-1/DC/WF.
+- C-1 / DC / WF row counts also jumped (2/10/9 → 273/130/131) because
+  their inherited requirements now include table-anchored ancestor
+  rules. This is the "hidden Task 5↔Task 3 dependency" called out
+  during planning — Task 3's parcel resolver consumes this view, so
+  fixing the regex was a real prerequisite for resolver quality, not
+  cosmetic cleanup.
+- The audit metric `raw_table_no_structured_facts` was tightened in
+  commit `e58c127` to match by synthetic clause-id prefix
+  (`<table_source_id>-row-%`), reporting the real lossy-extraction
+  rate (4/86 rev 1, 2/49 rev 2) instead of the spurious 100%.
+
+The remaining sub-pieces (importer writes `source_record_table='raw_table'`
+/ `raw_table_id` directly; audit metric simplified to the cleaner
+match) are still pending and described below.
 
 ### Goal
 
@@ -903,6 +970,77 @@ requirements pipeline needs to be located first (the draft script
 doesn't reference `applicability` today, so the right insertion point
 isn't already obvious). Verification is short because Option A's audit
 numbers serve as the equivalence target.
+
+---
+
+## Task 8 — `DISTINCT ON` shortest-path projection in `inherited_reqs`
+
+### Goal
+
+Stop `v_zone_effective_requirements` from emitting the same inherited
+requirement once per ancestor path. Today a zone with a deep / branchy
+inheritance closure (e.g. C-2 at depth 7 across 12 ancestors) sees
+6,923 requirement rows where the underlying distinct facts number a
+few hundred. Downstream callers (`zoning.parcel_effective_zoning`,
+the future viz layer) iterate that bloated set and pay the cost; the
+parcel resolver climbs from ~150 ms to 5+ seconds for any C-2-rooted
+PID as a result.
+
+### Current state
+
+`schema/sql/008_zone_inheritance_resolver.sql` defined the original
+view with a `DISTINCT ON (root_zone, structured_fact_id)`-style
+projection in `inherited_uses` but **not** in `inherited_reqs` —
+asymmetry that has carried through every subsequent migration that
+re-defines the view (010, 011, 013). Concretely, `inherited_uses`
+ends with:
+
+```sql
+SELECT DISTINCT ON (cl.root_zone, bu.use_name_raw, bu.use_status,
+                    cl.document_revision_id) ...
+ORDER BY cl.root_zone, bu.use_name_raw, bu.use_status,
+         cl.document_revision_id, cl.depth
+```
+
+while `inherited_reqs` has no `DISTINCT ON` clause at all.
+
+### What to build
+
+A small migration (call it `014_inherited_reqs_distinct_on.sql`) that
+re-defines `v_zone_effective_requirements` with `DISTINCT ON (cl.root_zone,
+br.structured_fact_id, cl.document_revision_id)` projecting the
+shortest-path (`ORDER BY cl.depth`) inherited row. Mirror the pattern
+already used by `inherited_uses`. View column list is unchanged so
+`CREATE OR REPLACE VIEW` is sufficient.
+
+### Acceptance criteria
+
+- `SELECT COUNT(*) FROM zoning.v_zone_effective_requirements WHERE
+  root_zone='C-2' AND document_revision_id=1` drops from 6923 to a
+  few hundred (the count of distinct underlying requirement
+  structured_facts in C-2's inheritance closure).
+- `zoning.parcel_effective_zoning('386557')` returns in <300 ms
+  (currently 5+ s).
+- All other zones return the same set of distinct requirements as
+  before (no row dropped that wasn't a duplicate). Verify by spot-
+  checking C-1, DMUN, WF row counts.
+- Task 2's smoke-test 3 still passes for C-1 / DC / WF / I.
+
+### Open decisions
+
+1. **Whether to also de-duplicate by `requirement_label_raw +
+   requirement_text_raw`.** Two distinct structured_facts can describe
+   semantically identical rules (e.g. via the importer's
+   re-extraction supersession). Recommend: no — keep the projection
+   keyed on `structured_fact_id`, since the audit and resolver views
+   want to surface every structurally-distinct fact even if two
+   happen to read identically. A semantic de-dup belongs in the viz
+   layer.
+
+### Effort estimate
+
+~30 minutes including the migration, smoke queries, and applying.
+The fix is a one-line CTE addition.
 
 ---
 
