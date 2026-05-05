@@ -1,0 +1,110 @@
+{
+  "generated_at": "2026-05-05T21:44:08.212254+00:00",
+  "revisions": [
+    {
+      "document_family": "current",
+      "document_revision_id": 1,
+      "gaps": {
+        "map_reference_not_linked": [],
+        "numeric_value_orphan": [
+          {
+            "comparison_effect": "numeric_values_unreferenced_by_any_requirement",
+            "extra_notes": null,
+            "gap": 10,
+            "logical_bylaw_part": "numeric_values",
+            "total": 845
+          }
+        ],
+        "raw_table_no_structured_facts": [
+          {
+            "comparison_effect": "raw_tables_with_no_structured_fact_extraction",
+            "extra_notes": null,
+            "gap": 2,
+            "logical_bylaw_part": "raw_tables",
+            "total": 43
+          },
+          {
+            "comparison_effect": "raw_tables_with_no_structured_fact_extraction",
+            "extra_notes": null,
+            "gap": 1,
+            "logical_bylaw_part": "zone:R-3",
+            "total": 3
+          }
+        ],
+        "relationship_in_text_not_extracted": [
+          {
+            "comparison_effect": "override_phrasings_in_clause_text_with_no_structured_edge",
+            "extra_notes": "sample=doc-general-provisions-clause-4-6-2-b:does_not_apply_specific,doc-general-provisions-clause-6-10-2:category_ref,doc-general-provisions-clause-48-1-2:does_not_apply_specific",
+            "gap": 3,
+            "logical_bylaw_part": "clauses",
+            "total": 9
+          }
+        ],
+        "requirement_applicability_missing": [
+          {
+            "comparison_effect": "requirements_with_no_applicability_predicate",
+            "extra_notes": null,
+            "gap": 167,
+            "logical_bylaw_part": "requirements",
+            "total": 702
+          }
+        ],
+        "requirement_without_numeric_value": [],
+        "use_without_term_id": []
+      }
+    },
+    {
+      "document_family": "draft",
+      "document_revision_id": 2,
+      "gaps": {
+        "map_reference_not_linked": [
+          {
+            "comparison_effect": "map_references_missing_postgis_linkage",
+            "extra_notes": null,
+            "gap": 4,
+            "logical_bylaw_part": "map_layer_references",
+            "total": 33
+          }
+        ],
+        "numeric_value_orphan": [
+          {
+            "comparison_effect": "numeric_values_unreferenced_by_any_requirement",
+            "extra_notes": null,
+            "gap": 97,
+            "logical_bylaw_part": "numeric_values",
+            "total": 749
+          }
+        ],
+        "raw_table_no_structured_facts": [
+          {
+            "comparison_effect": "raw_tables_with_no_structured_fact_extraction",
+            "extra_notes": null,
+            "gap": 1,
+            "logical_bylaw_part": "raw_tables",
+            "total": 34
+          }
+        ],
+        "relationship_in_text_not_extracted": [
+          {
+            "comparison_effect": "override_phrasings_in_clause_text_with_no_structured_edge",
+            "extra_notes": "sample=doc-general-provisions-clause-5-8-3:category_ref,doc-general-provisions-clause-7-1-2:does_not_apply_specific",
+            "gap": 2,
+            "logical_bylaw_part": "clauses",
+            "total": 14
+          }
+        ],
+        "requirement_applicability_missing": [
+          {
+            "comparison_effect": "requirements_with_no_applicability_predicate",
+            "extra_notes": null,
+            "gap": 174,
+            "logical_bylaw_part": "requirements",
+            "total": 443
+          }
+        ],
+        "requirement_without_numeric_value": [],
+        "use_without_term_id": []
+      }
+    }
+  ]
+}
