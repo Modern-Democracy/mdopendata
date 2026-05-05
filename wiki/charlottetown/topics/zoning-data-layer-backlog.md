@@ -548,6 +548,139 @@ table-derived rows having `source_record_table='clause'`.
 
 ---
 
+## Task 6 — Split current `general-provisions.json` into themed parts
+
+### Goal
+
+Restructure `data/zoning/charlottetown/general-provisions.json` (a single
+artifact carrying Parts 4 through 48 of the current bylaw, ~94 sections)
+into themed sibling files mirroring the layout already used by the draft
+folder. The split is a code-organization improvement (smaller artifacts,
+better current↔draft section-equivalence pairing, easier incremental
+re-extraction); it is **not** an applicability-coverage fix and does not
+move the audit's `requirement_applicability_missing` metric.
+
+### Current state
+
+- **Current:** `data/zoning/charlottetown/general-provisions.json` is one
+  document with `document_metadata.document_type='general_provisions'`
+  and 94 entries in `raw_data.sections_raw` spanning section labels
+  4.1 through 48.x. Structured-data totals: 256 numeric_values, 164
+  requirements, 1 regulation_group, 4 terms, 0 uses, 4 zone_relationships.
+  Loaded into the database under a single `zoning.bylaw_part` row.
+- **Draft:** `data/zoning/charlottetown-draft/` already splits the same
+  conceptual content into six themed files:
+  - `general-provisions-buildings-structures.json`
+  - `general-provisions-land-use.json`
+  - `general-provisions-lots-site-design.json`
+  - `general-provisions-parking.json`
+  - `general-provisions-signage.json`
+  - `general-provisions-subdividing-land.json`
+  Plus `administration.json` and `permit-applications-processes.json`
+  siblings.
+
+The draft layout is also what `scripts/generate-charlottetown-section-
+equivalence.py` works against; current↔draft pairing across the
+mismatched layout currently relies on section-label heuristics.
+
+### What to build
+
+1. **A splitter script** (e.g. `scripts/split-charlottetown-general-
+   provisions.py`) that reads the existing artifact and writes six
+   themed siblings, partitioning `raw_data.sections_raw` by section-
+   label range:
+
+   | Target file | Section-label prefixes |
+   |---|---|
+   | `general-provisions-buildings-structures.json` | 4.x |
+   | `general-provisions-land-use.json` | 5.x, 6.x (uses, mixed uses, secondary suites, garden suites, accessory uses) |
+   | `general-provisions-lots-site-design.json` | 7.x (lot regulations), 8.x–9.x (yard / setback overrides not already in Part 4) |
+   | `general-provisions-parking.json` | 46.x |
+   | `general-provisions-signage.json` | 47.x |
+   | `general-provisions-subdividing-land.json` | 48.x |
+
+   The prefix mapping above is a starting point; finalize against the
+   actual draft topic-to-section mapping by inspecting each draft file's
+   `sections_raw[*].section_label_raw` ranges. Any section in the
+   current document that does not fit one of the six buckets goes into
+   a seventh `general-provisions-other.json` rather than getting
+   silently dropped.
+
+2. **Co-partition `structured_data` and `raw_data.tables_raw` /
+   `clause_refs` / `map_references_raw`** so each themed file is
+   self-contained. Concretely: for every `requirement`,
+   `numeric_value`, `regulation_group`, `term`, `zone_relationship`,
+   and `map_layer_reference`, look up its `source_refs[0].source_ref_id`
+   (or equivalent), find which themed file owns the matching section,
+   and write it there. `regulation_groups` whose `requirement_refs[]`
+   span multiple themed files get flagged for review.
+
+3. **Update `data/zoning/charlottetown/source-manifest.json`** to list
+   the six (or seven) new themed files and remove the original
+   `general-provisions.json` entry.
+
+4. **Run `python scripts/import-charlottetown-zoning.py`** on the
+   reorganized layout. Because the source-file natural key includes
+   `repo_relpath`, the rename creates new active rows and supersedes the
+   prior single-file `bylaw_part`. `structured_fact` natural keys also
+   embed `repo_relpath`, so every fact is re-keyed; rows whose payload
+   is unchanged keep the same content_hash but acquire a new active
+   record under the new natural key.
+
+5. **Re-run section-equivalence generation** (`scripts/generate-
+   charlottetown-section-equivalence.py`) against the new layout. The
+   themed-to-themed pairing should yield more confident `same_topic`
+   matches than the current single-file pairing; expect a meaningful
+   uplift in `accepted` candidates.
+
+### Acceptance criteria
+
+- The original `data/zoning/charlottetown/general-provisions.json` is
+  removed and replaced by 6 (or 7 with `-other`) themed siblings, none
+  of which exceeds half the size of the original.
+- Every section in the original `sections_raw` is present in exactly one
+  themed file. Likewise for every `requirements` / `numeric_values` /
+  `terms` / `regulation_groups` / `zone_relationships` /
+  `map_layer_references` entry.
+- `python scripts/import-charlottetown-zoning.py` succeeds; total
+  `structured_fact` count is unchanged (or differs only by entries that
+  spanned themed boundaries and were reviewed).
+- `scripts/audit-charlottetown-population.py` reports the same gap
+  values pre- and post-split; this task should not change the audit
+  metrics.
+- `scripts/generate-charlottetown-section-equivalence.py` produces at
+  least as many `accepted`-candidate rows as the pre-split run, ideally
+  more.
+- The `wiki/charlottetown/topics/database-standup.md` artifact map is
+  updated to list the six themed siblings.
+
+### Open decisions
+
+1. **Whether to keep a `general-provisions-other.json` catch-all bucket
+   or fail the split if a section doesn't map cleanly.** Recommend:
+   keep the catch-all and emit a `review_flags` entry on it, so a
+   human can re-classify in a follow-up rather than blocking the split.
+2. **Whether the splitter is a one-shot script or part of the
+   extractor.** A one-shot script is simpler and reversible; folding
+   into `extract-charlottetown-zoning-bylaw.py` means future
+   re-extractions inherit the layout for free. Recommend: one-shot
+   first, fold into the extractor in a follow-up once the boundary
+   mapping is settled.
+3. **Whether to also split `definitions.json` and the appendix files
+   to mirror the draft.** Out of scope for v1 — the draft's
+   `definitions.json` is already a sibling of the same name, and the
+   appendices have no draft analogue to align with.
+
+### Effort estimate
+
+~half to one day: most of the time is figuring out the section-prefix
+to themed-file mapping by cross-referencing the draft layout, plus
+verifying that `structured_data` co-partitioning doesn't orphan any
+cross-references. The mechanical write-out is small once the mapping is
+locked in.
+
+---
+
 ## Sources
 
 - `schema/json-schema/charlottetown-bylaw-extraction.schema.json`
