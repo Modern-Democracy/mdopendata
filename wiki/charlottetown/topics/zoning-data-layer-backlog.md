@@ -363,6 +363,55 @@ straddles a zone boundary.
   flagged in `map_overlays`.
 - Function executes in <100ms for a single parcel on the local dev DB.
 
+### Status (delivered v1)
+
+Migrations `011_table_anchored_inheritance.sql` and
+`012_parcel_resolver.sql`; scripts
+`scripts/extract-charlottetown-appendix-c-exemptions.py` and
+`scripts/apply-charlottetown-appendix-c-exemptions.py`; data file
+`data/zoning/charlottetown/manual-corrections/appendix-c-exemptions.json`.
+
+The extractor produced 48 records (36 high-confidence, 12 needs_review).
+The applier promoted the 36 high-confidence rows to
+`zoning.structured_fact` with `relationship_type='applies_to_parcel'`
+and a per-`(zone, pid, source_page)` natural key so multi-amendment
+parcels (e.g. 199 Grafton Street has three Appendix C entries on pages
+3/4/6) stay distinct. Re-runs are idempotent.
+
+Migration 012 adds `zoning.zone_effective_payload(zone_code,
+revision_id)` and `zoning.parcel_effective_zoning(pid,
+document_family)`. PID 339994 returns one DMUN exemption + a payload
+with 34 effective uses and 126 effective requirements; PID 342790
+returns two exemptions; non-existent PIDs return NULL.
+
+### Known limitations (v1 → v2 follow-ups)
+
+- **Cadastral PID-to-geometry mapping is missing.** `public.parcels` is
+  empty and `charlottetown_parcel_map` is a polygonized derivation with
+  no PID column. Consequently `parcel_effective_zoning(pid, …)` only
+  returns a non-NULL document for PIDs that appear in Appendix C.
+  Loading a real cadastral parcel layer (PID + geometry) is a
+  prerequisite for parcel-level lookups outside Appendix C and for the
+  spatial-overlay branch (`map_overlays` is currently `[]`). Track as a
+  follow-up Task 3b ("ingest PID-keyed cadastral parcels").
+- **Map overlays not yet wired in.** Even with cadastral data, the
+  resolver currently returns an empty `map_overlays[]`. The
+  `ST_Intersects` machinery against
+  `charlottetown_schedule_a_wetlands` and the not-yet-loaded height
+  schedules / walkable-street grade / storm surge layers is a
+  separate piece of work.
+- **12 needs_review Appendix C rows.** The PDF text-extractor
+  flattened the table into multi-line cells the parser can't always
+  bucket cleanly. Curator workflow: spot-check the 12 rows in
+  `appendix-c-exemptions.json`, hand-correct the `civic_address` /
+  `use_added_or_modified` / `regulation_override_text` fields, and
+  re-run the applier with `--include-needs-review` once the rows are
+  reliable.
+- **Single-mashed-line rows underpopulate `use_added_or_modified`.**
+  E.g. PID 339994's "Fitness Centre" lands in `civic_address` because
+  the source text put PID + address + use on one line. Cosmetic, but
+  worth a follow-up parser pass.
+
 ### Open decisions
 
 1. **Are downtown / Hillsborough height schedules treated as overlay
