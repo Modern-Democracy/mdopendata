@@ -384,22 +384,56 @@ document_family)`. PID 339994 returns one DMUN exemption + a payload
 with 34 effective uses and 126 effective requirements; PID 342790
 returns two exemptions; non-existent PIDs return NULL.
 
-### Known limitations (v1 → v2 follow-ups)
+### v1.1 update — civic-address PID resolution
 
-- **Cadastral PID-to-geometry mapping is missing.** `public.parcels` is
-  empty and `charlottetown_parcel_map` is a polygonized derivation with
-  no PID column. Consequently `parcel_effective_zoning(pid, …)` only
-  returns a non-NULL document for PIDs that appear in Appendix C.
-  Loading a real cadastral parcel layer (PID + geometry) is a
-  prerequisite for parcel-level lookups outside Appendix C and for the
-  spatial-overlay branch (`map_overlays` is currently `[]`). Track as a
-  follow-up Task 3b ("ingest PID-keyed cadastral parcels").
-- **Map overlays not yet wired in.** Even with cadastral data, the
-  resolver currently returns an empty `map_overlays[]`. The
-  `ST_Intersects` machinery against
-  `charlottetown_schedule_a_wetlands` and the not-yet-loaded height
-  schedules / walkable-street grade / storm surge layers is a
-  separate piece of work.
+Migration `013_parcel_resolver_civic_address.sql` replaces
+`parcel_effective_zoning()` to resolve a parcel's base zone via the
+`charlottetown_civic_addresses` point layer (PID attribute) intersected
+against the appropriate zoning-boundary layer, and adds map-overlay
+intersects. The earlier "Appendix-C-only" v1 has been superseded.
+
+The original four acceptance criteria now read:
+
+1. ✓ `parcel_effective_zoning('339994')` resolves to `zones=["DMUN"]`
+   with one Appendix C exemption and a DMUN payload of 34 effective
+   uses + 126 effective requirements. `resolution_method` is
+   `civic_address_intersect`.
+2. ✓ Unaffected parcels (e.g. PID 338129 / 65 Great George Street) now
+   return their base zone (`["DMUN"]`) with empty
+   `site_specific_exemptions` and a populated zone payload.
+3. ✓ A parcel intersecting `charlottetown_schedule_a_wetlands` (e.g.
+   PID 335307) has the layer flagged in
+   `map_overlays=[{"layer_key":"charlottetown_schedule_a_wetlands",
+   "feature_keys":["1"]}]`. Three civic addresses currently intersect
+   wetlands.
+4. ⚠ Performance is on target for most parcels (120–200 ms in the
+   local dev DB) but C-2-rooted parcels can take 5+ seconds. The
+   underlying issue is pre-existing in migration 008 / 010: the
+   `inherited_reqs` CTE in `v_zone_effective_requirements` does not
+   `DISTINCT ON (root_zone, structured_fact_id)`, so the same
+   inherited requirement is emitted once per ancestor path. C-2 has
+   depth=7 / 12 ancestors and balloons to 6923 rows. Tracked as a
+   follow-up; the fix is a one-line `DISTINCT ON` mirror of the
+   pattern already used in `inherited_uses`.
+
+### Known limitations / follow-ups
+
+- **Inheritance-closure duplication (perf).** See acceptance #4 above.
+  Affects `v_zone_effective_requirements` and downstream callers
+  (parcel resolver, future viz). Recommend a small migration adding
+  `DISTINCT ON` shortest-path projection to `inherited_reqs`.
+- **Cadastral PID-to-geometry mapping is missing.** `public.parcels`
+  is empty and `charlottetown_parcel_map` is a polygonized derivation
+  with no PID column. The civic-address resolution path is sufficient
+  for v1 (14,676 civic-address points cover 11,669 distinct PIDs) but
+  some parcels lack a civic address and would need a real cadastral
+  layer to resolve. Track as Task 3b ("ingest PID-keyed cadastral
+  parcels") if that long tail matters.
+- **Overlay layers limited to wetlands.** The not-yet-loaded height
+  schedules / walkable-street grade / storm surge layers will join
+  through the same overlay machinery once registered with
+  `expected_geometry_type IN ('POLYGON','MULTIPOLYGON')` in
+  `zoning.spatial_layer`. No code change needed in the resolver.
 - **12 needs_review Appendix C rows.** The PDF text-extractor
   flattened the table into multi-line cells the parser can't always
   bucket cleanly. Curator workflow: spot-check the 12 rows in
