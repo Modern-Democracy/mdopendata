@@ -19,6 +19,9 @@ Read first, in order, for context:
 
 - [Database standup](database-standup.md) — overall data flow, source-of-truth
   artifact map, applied migrations, and tracked known issues.
+- [Data-layer conventions](data-layer-conventions.md) — operating contract
+  for new scripts that touch the zoning schema (versioned JSON artifacts,
+  natural-key + content-hash discipline, read-only MCP boundary).
 - `schema/json-schema/charlottetown-bylaw-extraction.schema.json` — the
   authoritative schema for raw + structured bylaw data.
 - `schema/sql/008_zone_inheritance_resolver.sql` — the existing resolver
