@@ -26,7 +26,7 @@ has not seen the originating conversation can pick it up cold.
 | 5 — Table-derived facts first-class | 🟡 partial: regex sub-piece delivered | `schema/sql/011_table_anchored_inheritance.sql` |
 | 6 — Split current `general-provisions.json` | ⏳ pending | — |
 | 7 — Stamp `applies_to_*` at extraction time | ⏳ pending | — |
-| 8 — Inheritance closure `DISTINCT ON` (perf) | ⏳ pending | — |
+| 8 — Inheritance closure `DISTINCT ON` (perf) | ✅ delivered | `schema/sql/014_inherited_reqs_distinct_on.sql` |
 
 Cross-cutting deliverable not in the table: `propagate_group_applicability()`
 in `scripts/import-charlottetown-zoning.py` (Option A from the gap-3
@@ -450,22 +450,19 @@ The original four acceptance criteria now read:
    `map_overlays=[{"layer_key":"charlottetown_schedule_a_wetlands",
    "feature_keys":["1"]}]`. Three civic addresses currently intersect
    wetlands.
-4. ⚠ Performance is on target for most parcels (120–200 ms in the
-   local dev DB) but C-2-rooted parcels can take 5+ seconds. The
-   underlying issue is pre-existing in migration 008 / 010: the
-   `inherited_reqs` CTE in `v_zone_effective_requirements` does not
-   `DISTINCT ON (root_zone, structured_fact_id)`, so the same
-   inherited requirement is emitted once per ancestor path. C-2 has
-   depth=7 / 12 ancestors and balloons to 6923 rows. Tracked as a
-   follow-up; the fix is a one-line `DISTINCT ON` mirror of the
-   pattern already used in `inherited_uses`.
+4. ✓ Performance follow-up delivered in Task 8. Migration
+   `014_inherited_reqs_distinct_on.sql` de-duplicates inherited
+   requirements by shortest path; C-2 current requirements now return
+   245 rows / 245 distinct facts, and
+   `parcel_effective_zoning('386557')` returned in 268 ms on a warm
+   local dev DB run.
 
 ### Known limitations / follow-ups
 
-- **Inheritance-closure duplication (perf).** See acceptance #4 above.
-  Affects `v_zone_effective_requirements` and downstream callers
-  (parcel resolver, future viz). Recommend a small migration adding
-  `DISTINCT ON` shortest-path projection to `inherited_reqs`.
+- **Inheritance-closure duplication (perf): fixed in Task 8.** Migration
+  `014_inherited_reqs_distinct_on.sql` adds `DISTINCT ON` shortest-path
+  projection to `inherited_reqs`, reducing C-2 current requirements to
+  245 rows / 245 distinct facts.
 - **Cadastral PID-to-geometry mapping is missing.** `public.parcels`
   is empty and `charlottetown_parcel_map` is a polygonized derivation
   with no PID column. The civic-address resolution path is sufficient
@@ -1036,6 +1033,23 @@ already used by `inherited_uses`. View column list is unchanged so
    want to surface every structurally-distinct fact even if two
    happen to read identically. A semantic de-dup belongs in the viz
    layer.
+
+### Status (delivered)
+
+Migration `schema/sql/014_inherited_reqs_distinct_on.sql` replaces
+`zoning.v_zone_effective_requirements` with a shortest-path
+`DISTINCT ON (root_zone, structured_fact_id, document_revision_id)`
+projection inside `inherited_reqs`. The view column list is unchanged.
+
+Smoke checks after applying the migration:
+
+- C-2 current requirements dropped to 245 rows, matching 245 distinct
+  `structured_fact_id` values.
+- `zoning.parcel_effective_zoning('386557')` returned in 268 ms on a
+  warm local dev DB run.
+- C-1, DMUN, and WF all returned `rows = distinct_facts`.
+- Task 2 Appendix-C override visibility remained true for C-1, DC, WF,
+  and I.
 
 ### Effort estimate
 

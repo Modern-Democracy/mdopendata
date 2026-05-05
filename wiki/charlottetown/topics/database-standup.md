@@ -115,6 +115,11 @@ The resolver stack on top of 008 (apply in numeric order):
   `parcel_effective_zoning` to resolve a parcel's base zone via the
   `charlottetown_civic_addresses` point layer (PID attribute) ↔
   zoning-boundary intersect, plus map-overlay rollups (Task 3 v1.1).
+- `014_inherited_reqs_distinct_on.sql` — replaces
+  `v_zone_effective_requirements` so inherited requirements are
+  de-duplicated by `(root_zone, structured_fact_id,
+  document_revision_id)`, keeping the shortest inheritance path
+  (Task 8).
 
 The canonical parcel-lookup API is
 `zoning.parcel_effective_zoning(pid text, document_family text)`. It
@@ -433,13 +438,13 @@ The seven gap_type families the audit emits are documented in
   `value_payload->'target_ref'->>'source_ref_id'` is now populated on every
   active `zone_relationships` fact. The text-recovery branch in
   `v_zone_inheritance_edge` is retained only as a defensive fallback.
-- **C-2-rooted parcel resolver perf: 5+ s.** Pre-existing asymmetry
-  between `inherited_uses` (has `DISTINCT ON`) and `inherited_reqs`
-  (does not) in `v_zone_effective_requirements`, carried through
-  every migration that re-defines the view. C-2's depth-7 / 12-ancestor
-  closure balloons to 6,923 rows of which only a few hundred are
-  distinct. Fix is a one-line `DISTINCT ON` mirror of the
-  `inherited_uses` pattern; tracked as backlog Task 8.
+- **C-2-rooted parcel resolver perf: fixed in migration 014.**
+  `v_zone_effective_requirements` now de-duplicates inherited
+  requirements by `(root_zone, structured_fact_id, document_revision_id)`
+  and keeps the shortest inheritance path. After applying 014, C-2
+  current requirements return 245 rows / 245 distinct facts, and
+  `zoning.parcel_effective_zoning('386557')` returned in 268 ms on a
+  warm local dev DB run.
 
 ## Backlog
 

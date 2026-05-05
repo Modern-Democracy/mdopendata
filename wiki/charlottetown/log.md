@@ -198,6 +198,10 @@ Updated `topics/unified-zoning-ingestion-plan.md` after adding `schema/sql/007_c
 
 Created `public."CHTWN_OSM_Buildings"` from OpenStreetMap Overpass API `building=*` way geometries clipped to `public."CHTWN_Municipal_Boundary"`. The loaded PostGIS layer contains 13,144 valid multipolygon features with retained OSM ids and tags.
 
+## [2026-05-05] resolver | Inherited requirement de-duplication
+
+Updated `topics/zoning-data-layer-backlog.md` and `topics/database-standup.md` after adding `schema/sql/014_inherited_reqs_distinct_on.sql`, which de-duplicates inherited requirements by `(root_zone, structured_fact_id, document_revision_id)` and restores C-2 parcel resolver performance to the Task 8 target on a warm local dev DB run.
+
 ## Sources
 
 - [Charlottetown wiki guide](./README.md)
