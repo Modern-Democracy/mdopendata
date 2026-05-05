@@ -85,8 +85,7 @@ Suggested `gap_type` values (text; not constrained today):
 Add a SQL view `zoning.v_coverage_gap_summary` that rolls the gaps up by
 `(document_revision_id, gap_type)` and another that pivots by zone for the
 zone-typed scopes. Place this view definition in
-`schema/sql/010_coverage_gap_views.sql` (the next free numeric prefix after
-008 inheritance + 009 was consolidated into 008).
+`schema/sql/009_coverage_gap_views.sql`.
 
 Update `wiki/charlottetown/topics/database-standup.md` step 9 (verification)
 to include `python scripts/audit-charlottetown-population.py` and a sample
@@ -149,7 +148,7 @@ the unconditional inherited set; the 46 override facts are present in
 
 ### What to build
 
-A new migration `schema/sql/011_override_aware_resolver.sql` (or whatever
+A new migration `schema/sql/010_override_aware_resolver.sql` (or whatever
 the next free number is) that:
 
 1. Adds `v_zone_override_edge` — projects every override fact into a

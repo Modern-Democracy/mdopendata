@@ -247,6 +247,35 @@ SELECT root_zone, depth, ancestor_zone, relationship_type
 -- and through MUC -> ER-MUVC -> R-4B -> R-3T -> R-3 -> ...
 ```
 
+#### Population audit (requires migration 009)
+
+Run the per-revision structural-gap audit. It writes
+`is_audit_generated=true` rows into `zoning.coverage_gap` and a JSON
+snapshot under `data/zoning/charlottetown/audits/`. Re-runs are
+idempotent — every run deletes prior audit rows for the touched revisions
+before re-inserting fresh ones; manual gap rows are left alone.
+
+```sh
+python scripts/audit-charlottetown-population.py
+# add --dry-run to see results without writing
+# add --no-snapshot to skip the JSON snapshot
+```
+
+Roll up the result:
+
+```sql
+SELECT * FROM zoning.v_coverage_gap_summary;
+-- Expect 9 rows on the current local DB (4 for revision 1, 5 for revision 2),
+-- with `requirement_applicability_missing` and `raw_table_no_structured_facts`
+-- both at 100% gap_pct (known structural gaps; see backlog Task 1).
+-- A healthy regression baseline keeps the row counts and gap_pct values in
+-- this neighbourhood; large jumps in any (revision, gap_type) cell indicate
+-- the latest import dropped coverage somewhere.
+```
+
+The seven gap_type families the audit emits are documented in
+[zoning-data-layer-backlog.md](zoning-data-layer-backlog.md) (Task 1).
+
 ## Known issues and follow-ups
 
 - **Override semantics in the resolver are not yet wired up.** 46 override
