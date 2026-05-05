@@ -314,6 +314,13 @@ Open follow-up work — population audit, override-aware resolver, parcel
 resolver, and visualization — is captured as agent-pickable briefs in
 [Zoning data-layer backlog](zoning-data-layer-backlog.md).
 
+## Conventions
+
+Operating conventions for new scripts that read or write the zoning schema
+are documented in [Data-layer conventions](data-layer-conventions.md).
+Read this before adding a new manual-decisions artifact or a new mutating
+script.
+
 ## Sources
 
 - `docker-compose.yml`
