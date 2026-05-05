@@ -153,7 +153,10 @@ def source_files(root: Path) -> list[Path]:
     return [
         path
         for path in sorted(root.rglob("*.json"))
-        if path.name not in SKIP_FILES and path.name != "source-manifest.json"
+        if path.name not in SKIP_FILES
+        and path.name != "source-manifest.json"
+        and "manual-corrections" not in path.parts
+        and "audits" not in path.parts
     ]
 
 
@@ -401,7 +404,10 @@ def collect_records(path: Path, payload: dict[str, Any], family: str, doc_revisi
             table_keys[str(table.get("table_id"))] = f"{section_key}|table|{table.get('table_id') or table.get('source_order')}"
 
     for table in raw.get("tables_raw") or []:
+        if str(table.get("table_id")) in table_keys:
+            continue
         add_table_records(records, source_key, "", table, doc_revision_key)
+        table_keys[str(table.get("table_id"))] = f"{source_key}|table|{table.get('table_id') or table.get('source_order')}"
 
     for entry in raw.get("entries_raw") or []:
         term = entry.get("term_raw") or entry.get("entry_label_raw") or entry.get("label_raw")
@@ -467,7 +473,7 @@ def collect_records(path: Path, payload: dict[str, Any], family: str, doc_revisi
         for index, item in enumerate(structured.get(fact_family) or [], start=1):
             if not isinstance(item, dict):
                 continue
-            ref_table, ref_key = resolve_source_ref(item, section_keys, table_keys)
+            ref_table, ref_key, ref_links, value_payload = resolve_source_ref(item, section_keys, table_keys)
             fact_key = f"{source_key}|structured|{fact_family}|{ref_key or ''}|{index}|{sha256_text(stable_json(drop_volatile(item)))[:16]}"
             records.append(
                 make_record(
@@ -482,10 +488,11 @@ def collect_records(path: Path, payload: dict[str, Any], family: str, doc_revisi
                         "raw_label": item.get("label_raw") or item.get("term_raw") or item.get("use_raw"),
                         "raw_text": item.get("text_raw") or item.get("requirement_text_raw") or item.get("description_raw"),
                         "normalized_key": norm_key(item.get("term") or item.get("term_raw") or item.get("use") or item.get("use_raw")),
-                        "value_payload": drop_volatile(item),
+                        "value_payload": value_payload,
                         "citations": citations_of(item),
                     },
                     source_file_key=source_key,
+                    **ref_links,
                 )
             )
 
@@ -589,19 +596,36 @@ def resolve_source_ref(
     item: dict[str, Any],
     section_keys: dict[str, str],
     table_keys: dict[str, str],
-) -> tuple[str | None, str | None]:
+) -> tuple[str | None, str | None, dict[str, str], dict[str, Any]]:
+    value_payload = drop_volatile(item)
     refs = item.get("source_refs") or item.get("source_references") or []
     if isinstance(refs, dict):
         refs = [refs]
     for ref in refs:
         if not isinstance(ref, dict):
             continue
-        target_id = ref.get("content_id") or ref.get("source_id") or ref.get("section_id") or ref.get("table_id")
+        target_id = (
+            ref.get("content_id")
+            or ref.get("source_id")
+            or ref.get("section_id")
+            or ref.get("table_id")
+            or ref.get("source_ref_id")
+        )
         if target_id in section_keys:
-            return "section", section_keys[target_id]
+            return "section", section_keys[target_id], {}, value_payload
         if target_id in table_keys:
-            return "raw_table", table_keys[target_id]
-    return None, None
+            enriched = dict(value_payload)
+            enriched.setdefault("source_clause_ref", target_id)
+            return "raw_table", target_id, {"raw_table_key": table_keys[target_id]}, enriched
+        if isinstance(target_id, str):
+            row_match = re.match(r"^(?P<table_id>.+?)-row-(?P<row_index>\d+)(?:\b|[-_].*)", target_id)
+            if row_match and row_match.group("table_id") in table_keys:
+                table_id = row_match.group("table_id")
+                enriched = dict(value_payload)
+                enriched.setdefault("source_clause_ref", target_id)
+                enriched["raw_table_row_index"] = int(row_match.group("row_index"))
+                return "raw_table", table_id, {"raw_table_key": table_keys[table_id]}, enriched
+    return None, None, {}, value_payload
 
 
 def previous_active(conn: psycopg.Connection, table: str, natural_key: str) -> tuple[int, str] | None:
@@ -675,6 +699,17 @@ def relink_unchanged_record(
             f"UPDATE zoning.{record.table} SET {assignments} WHERE {record.table}_id = %s",
             (*values.values(), active_id),
         )
+        if record.table == "structured_fact" and record.payload.get("source_record_table") == "raw_table":
+            raw_table_id = id_maps.get("raw_table", {}).get(record.links.get("raw_table_key", ""))
+            if raw_table_id is not None:
+                cur.execute(
+                    """
+                    UPDATE zoning.structured_fact
+                       SET value_payload = jsonb_set(value_payload, '{raw_table_id}', to_jsonb(%s::bigint), true)
+                     WHERE structured_fact_id = %s
+                    """,
+                    (raw_table_id, active_id),
+                )
 
 
 def insert_record(
@@ -919,6 +954,10 @@ def insert_record(
                 ),
             )
         elif record.table == "structured_fact":
+            value_payload = payload["value_payload"]
+            if payload["source_record_table"] == "raw_table" and raw_table_id is not None:
+                value_payload = dict(value_payload)
+                value_payload["raw_table_id"] = raw_table_id
             cur.execute(
                 """
                 INSERT INTO zoning.structured_fact
@@ -938,7 +977,7 @@ def insert_record(
                     payload["raw_label"],
                     payload["raw_text"],
                     payload["normalized_key"],
-                    Jsonb(payload["value_payload"]),
+                    Jsonb(value_payload),
                     Jsonb(payload["citations"]),
                     record.natural_key,
                     record.content_hash,

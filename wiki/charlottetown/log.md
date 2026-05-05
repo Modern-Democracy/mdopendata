@@ -202,6 +202,10 @@ Created `public."CHTWN_OSM_Buildings"` from OpenStreetMap Overpass API `building
 
 Updated `topics/zoning-data-layer-backlog.md` and `topics/database-standup.md` after adding `schema/sql/014_inherited_reqs_distinct_on.sql`, which de-duplicates inherited requirements by `(root_zone, structured_fact_id, document_revision_id)` and restores C-2 parcel resolver performance to the Task 8 target on a warm local dev DB run.
 
+## [2026-05-05] importer | Raw table provenance cleanup
+
+Updated `topics/zoning-data-layer-backlog.md` and `topics/database-standup.md` after changing `scripts/import-charlottetown-zoning.py` to write table-derived structured facts with `source_record_table='raw_table'`, table source keys, raw table ids, and row indexes. The population audit now uses direct raw-table links and reports active-table gaps of 2/43 on revision 1 and 1/34 on revision 2 after duplicate top-level raw table rows were retired.
+
 ## Sources
 
 - [Charlottetown wiki guide](./README.md)

@@ -362,11 +362,35 @@ SELECT * FROM zoning.v_coverage_gap_summary;
 -- requirement_applicability_missing now sits at ~24% rev 1 / ~39% rev 2
 -- (the importer-side propagation in commit 57b21f1 dropped it from 100%);
 -- the residue is doc-level rules genuinely outside any zone-keyed
--- regulation_group. raw_table_no_structured_facts sits at ~5% on both
--- revisions after the metric was tightened in commit e58c127 to match
--- by synthetic-clause-id prefix; the deeper fix (importer writes
--- source_record_table='raw_table' directly) is pending under backlog
--- Task 5.
+-- regulation_group. raw_table_no_structured_facts now uses direct
+-- source_record_table='raw_table' / value_payload.raw_table_id links;
+-- after duplicate top-level raw table rows were retired in Task 5, the
+-- expected active-table gaps are 2/43 on revision 1 and 1/34 on
+-- revision 2.
+
+-- Direct raw-table provenance smoke check.
+WITH all_tables AS (
+  SELECT document_revision_id, COUNT(*) AS total
+    FROM zoning.raw_table
+   WHERE is_active
+   GROUP BY document_revision_id
+),
+linked AS (
+  SELECT document_revision_id,
+         COUNT(DISTINCT (value_payload->>'raw_table_id')::bigint) AS linked
+    FROM zoning.structured_fact
+   WHERE is_active
+     AND source_record_table='raw_table'
+     AND value_payload->>'raw_table_id' ~ '^[0-9]+$'
+   GROUP BY document_revision_id
+)
+SELECT a.document_revision_id, a.total, COALESCE(l.linked, 0) AS linked,
+       a.total - COALESCE(l.linked, 0) AS gap
+  FROM all_tables a
+  LEFT JOIN linked l USING (document_revision_id)
+ ORDER BY 1;
+-- Expect revision 1: total=43 linked=41 gap=2.
+-- Expect revision 2: total=34 linked=33 gap=1.
 
 -- Worst zones for any zone-scoped gap_type, ranked by absolute gap.
 SELECT zone_code, gap_type,

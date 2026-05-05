@@ -23,7 +23,7 @@ has not seen the originating conversation can pick it up cold.
 | 2 — Override-aware resolver | ✅ delivered | `schema/sql/010_override_aware_resolver.sql` |
 | 3 — Parcel resolver | ✅ v1.1 delivered | `schema/sql/012_parcel_resolver.sql`, `schema/sql/013_parcel_resolver_civic_address.sql`, `scripts/extract-charlottetown-appendix-c-exemptions.py`, `scripts/apply-charlottetown-appendix-c-exemptions.py` |
 | 4 — Visualization | ⏳ pending | (frontend; out of scope for a single coding agent) |
-| 5 — Table-derived facts first-class | 🟡 partial: regex sub-piece delivered | `schema/sql/011_table_anchored_inheritance.sql` |
+| 5 — Table-derived facts first-class | ✅ delivered | `schema/sql/011_table_anchored_inheritance.sql`, `scripts/import-charlottetown-zoning.py`, `scripts/audit-charlottetown-population.py` |
 | 6 — Split current `general-provisions.json` | ⏳ pending | — |
 | 7 — Stamp `applies_to_*` at extraction time | ⏳ pending | — |
 | 8 — Inheritance closure `DISTINCT ON` (perf) | ✅ delivered | `schema/sql/014_inherited_reqs_distinct_on.sql` |
@@ -584,7 +584,10 @@ The smallest sub-piece — extending the inheritance-resolver regex from
 
 The remaining sub-pieces (importer writes `source_record_table='raw_table'`
 / `raw_table_id` directly; audit metric simplified to the cleaner
-match) are still pending and described below.
+match) were delivered on 2026-05-05. During implementation the importer
+also stopped loading duplicate top-level `raw_data.tables_raw` entries
+when the same `table_id` already exists under a section, reducing the
+active raw-table baseline from 86/49 to 43/34.
 
 ### Goal
 
@@ -670,6 +673,33 @@ that ripple through the rest of the data layer:
   match — i.e. the count is robust to the change in matching method.
 - `wiki/charlottetown/topics/database-standup.md` step 9 documents the
   `source_record_table='raw_table'` smoke check.
+
+### Status (delivered)
+
+`scripts/import-charlottetown-zoning.py` now resolves table-row source
+references to canonical raw-table provenance:
+
+- `source_record_table='raw_table'`
+- `source_record_key=<table_source_id>`
+- `value_payload.source_clause_ref=<synthetic row id>` for compatibility
+- `value_payload.raw_table_row_index=<row index>`
+- `value_payload.raw_table_id=<active zoning.raw_table.raw_table_id>`
+
+The importer also excludes `manual-corrections/` and `audits/` from source
+artifact discovery; those directories are handled by their own apply/audit
+scripts. Duplicate top-level raw-table rows are no longer loaded when the
+same `table_id` is already present inside a section.
+
+`scripts/audit-charlottetown-population.py` now computes
+`raw_table_no_structured_facts` from direct `source_record_table='raw_table'`
+and `value_payload.raw_table_id` links. After re-import and audit:
+
+- Revision 1 has 41 linked raw tables out of 43 active raw tables; gap 2.
+- Revision 2 has 33 linked raw tables out of 34 active raw tables; gap 1.
+- Every active `source_record_table='raw_table'` structured fact has
+  `raw_table_id` and `raw_table_row_index` populated.
+- Zone I effective requirements remain visible at 41 rows, and Task 2's
+  Appendix-C override smoke check remains true for C-1, DC, WF, and I.
 
 ### Open decisions
 
