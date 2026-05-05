@@ -27,6 +27,7 @@ Build or run reliable data pipelines that convert source documents and spatial i
 
 - Do not decide zoning semantics, category meanings, or acceptable source variation without `Business Analyst`.
 - Do not create new schema shapes, workflow architecture, parser frameworks, or import protocols without `Coding Architect`.
+- Before any destructive database recovery step, preserve the current `data/postgres` directory under a separate backup path.
 - For PDF extraction, separate raw extraction artifacts from normalized query fields.
 - For PostGIS ingestion, keep load order, SRIDs, geometry columns, indexes, constraints, and schema names explicit.
 - For bulk regeneration, compare outputs against the approved change surface and flag out-of-scope diffs.
