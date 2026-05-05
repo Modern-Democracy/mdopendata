@@ -91,26 +91,46 @@ Update `wiki/charlottetown/topics/database-standup.md` step 9 (verification)
 to include `python scripts/audit-charlottetown-population.py` and a sample
 roll-up query.
 
+### Status (delivered)
+
+Migration `schema/sql/009_coverage_gap_views.sql` and
+`scripts/audit-charlottetown-population.py` are in place. The audit emits
+two scopes per metric where applicable:
+
+- **Per-revision summary** rows, `logical_bylaw_part='<family>'` (e.g.
+  `requirements`), one per `(document_revision_id, gap_type)`.
+- **Per-zone** rows, `logical_bylaw_part='zone:<CODE>'`, one per zone with
+  a non-zero gap. These feed `zoning.v_coverage_gap_by_zone` and answer
+  the "which zones to re-extract first?" prioritization question.
+
+`numeric_value_orphan` and `map_reference_not_linked` deliberately emit
+only the summary row — orphans have no requirement to attribute a zone
+to, and map references are document-level.
+
+A JSON snapshot is written to `data/zoning/charlottetown/audits/<UTC>.json`
+on every run for diffability.
+
 ### Acceptance criteria
 
 - After a fresh `import-charlottetown-zoning.py` run on the existing local
   DB, executing the audit script produces a non-zero number of
   `coverage_gap` rows and the script reports a per-revision summary on
-  stdout.
+  stdout, plus the worst-5 zones for each zone-scopable metric.
 - Re-running the script with no underlying data changes does not duplicate
   rows.
 - `zoning.v_coverage_gap_summary` returns one row per
   `(document_revision_id, gap_type)` with a count and a percentage where
   meaningful (e.g. requirements without numeric values / total requirements).
-- The wiki standup page documents how to run the audit and what a healthy
-  baseline looks like.
+- `zoning.v_coverage_gap_by_zone` returns at least one row per
+  `(document_revision_id, zone_code, gap_type)` where the zone has a
+  non-zero gap on a zone-scopable metric.
+- The wiki standup page documents how to run the audit, the two scopes,
+  and what a healthy baseline looks like.
 
 ### Open decisions
 
-1. Whether to also write a JSON snapshot of the audit report under
-   `data/zoning/charlottetown/audits/` for diffability across runs. Section
-   equivalence decisions follow that pattern; the spatial corrections do not.
-   Recommend: yes for diffability.
+1. ~~JSON snapshot under `data/zoning/charlottetown/audits/` for
+   diffability across runs.~~ **Resolved: yes** — written on every run.
 2. Whether the audit should fail the script with a non-zero exit code if a
    regression is detected vs. a previous baseline. Probably overkill for v1
    — start as a report.

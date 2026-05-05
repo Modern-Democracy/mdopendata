@@ -250,8 +250,9 @@ SELECT root_zone, depth, ancestor_zone, relationship_type
 #### Population audit (requires migration 009)
 
 Run the per-revision structural-gap audit. It writes
-`is_audit_generated=true` rows into `zoning.coverage_gap` and a JSON
-snapshot under `data/zoning/charlottetown/audits/`. Re-runs are
+`is_audit_generated=true` rows into `zoning.coverage_gap` (a per-revision
+summary row plus per-zone breakdown rows for zone-scopable metrics) and
+a JSON snapshot under `data/zoning/charlottetown/audits/`. Re-runs are
 idempotent — every run deletes prior audit rows for the touched revisions
 before re-inserting fresh ones; manual gap rows are left alone.
 
@@ -261,16 +262,47 @@ python scripts/audit-charlottetown-population.py
 # add --no-snapshot to skip the JSON snapshot
 ```
 
+The audit emits two scopes per metric where applicable:
+
+- **Per-revision summary** (`logical_bylaw_part='<family>'`, e.g.
+  `requirements`) — one row per `(document_revision_id, gap_type)`,
+  carrying the global `population_total` and `population_gap` in `notes`.
+- **Per-zone breakdown** (`logical_bylaw_part='zone:<CODE>'`) — one row
+  per zone with a non-zero gap, for the zone-scopable metrics:
+  `requirement_without_numeric_value`,
+  `requirement_applicability_missing`, `use_without_term_id`,
+  `relationship_in_text_not_extracted`, and
+  `raw_table_no_structured_facts`. These feed
+  `zoning.v_coverage_gap_by_zone` and answer "which zones need
+  re-extraction first?".
+
+Two metrics intentionally emit only the summary row:
+`map_reference_not_linked` (map references are document-level) and
+`numeric_value_orphan` (orphans by definition have no requirement to
+attribute a zone to).
+
 Roll up the result:
 
 ```sql
+-- Global summary, one row per (revision, gap_type).
 SELECT * FROM zoning.v_coverage_gap_summary;
--- Expect 9 rows on the current local DB (4 for revision 1, 5 for revision 2),
--- with `requirement_applicability_missing` and `raw_table_no_structured_facts`
+-- Expect 9 rows on the current local DB (4 for revision 1, 5 for revision 2)
+-- with requirement_applicability_missing and raw_table_no_structured_facts
 -- both at 100% gap_pct (known structural gaps; see backlog Task 1).
--- A healthy regression baseline keeps the row counts and gap_pct values in
--- this neighbourhood; large jumps in any (revision, gap_type) cell indicate
--- the latest import dropped coverage somewhere.
+
+-- Worst zones for any zone-scoped gap_type, ranked by absolute gap.
+SELECT zone_code, gap_type,
+       (substring(notes FROM 'population_gap=(\d+)'))::int AS gap,
+       (substring(notes FROM 'population_total=(\d+)'))::int AS total
+  FROM zoning.v_coverage_gap_by_zone
+ WHERE document_revision_id=1
+   AND gap_type='requirement_applicability_missing'
+ ORDER BY gap DESC LIMIT 10;
+-- Expect rev 1's worst zones to lead with I (41), R-2 / R-2S (34 each),
+-- R-3 / R-3T (30 each). On rev 2 the worst zones are GC (26), GN (24),
+-- RN (20), RH (19), RM (18). A healthy baseline keeps these orders of
+-- magnitude stable; large jumps indicate the latest import dropped
+-- coverage in those zones.
 ```
 
 The seven gap_type families the audit emits are documented in
