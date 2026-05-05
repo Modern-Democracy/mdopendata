@@ -681,6 +681,148 @@ locked in.
 
 ---
 
+## Task 7 — Stamp `applies_to_*` on requirements at extraction time
+
+### Goal
+
+Push the `applicability.applies_to_zone_codes` /
+`applies_to_use_terms` fields onto each `requirement` (and
+`other_requirement`) at extraction time so the on-disk JSON artifacts
+under `data/zoning/charlottetown*/` are self-consistent with the
+extraction schema. Removes the need for the importer-side propagation
+shim added in commit `57b21f1` (see `propagate_group_applicability` in
+`scripts/import-charlottetown-zoning.py`).
+
+### Current state
+
+- The current importer fix (Option A from the gap-3 investigation) does
+  the regulation_group → requirements propagation in memory before
+  content-hash, so the database is correct: 804/1145 requirements now
+  carry `applies_to_zone_codes` and 768/1145 carry
+  `applies_to_use_terms` (rev 1 + rev 2 combined).
+- The on-disk JSON artifacts are unchanged. `requirements[*].applicability`
+  still has only `conditions` (or is missing entirely), and
+  `applies_to_*` lists still live one indirection away on
+  `regulation_groups[*]`. Anything that consumes the artifacts directly
+  (the extractor's own re-runs, the schema validator, or future
+  downstream tooling that bypasses the importer) sees the pre-Option-A
+  shape.
+- Two extractors are involved:
+  - `scripts/extract-charlottetown-zoning-bylaw.py` (5,454 lines).
+    The zone-document branch around line 4884 already has
+    `metadata.zone_code`, builds the per-zone `requirements` list, and
+    constructs the bundling `regulation_group` with
+    `applicability.applies_to_zone_codes=[zone_code]` (line 4891).
+    The piece that's missing is stamping the same `applies_to_zone_codes`
+    onto each requirement before the regulation_group is built — and,
+    where the group's `regulated_use_terms` is the canonical
+    "applies-to-all-permitted-uses-in-zone" list, copying that into
+    each requirement's `applicability.applies_to_use_terms`.
+  - `scripts/extract-charlottetown-draft-zoning-bylaw.py` (1,208 lines)
+    has zero `applicability` references today; the equivalent stamping
+    step needs to be added wherever per-zone requirements are built.
+
+### What to build
+
+1. **Current-bylaw extractor.** Add a small helper (e.g.
+   `stamp_zone_and_use_applicability(requirements, zone_code,
+   regulated_use_terms)`) and call it from the zone-document branch
+   right after `build_numeric_and_requirements()` and before the
+   `regulation_groups` entry is constructed (around line 4884). The
+   helper:
+   - Sets `requirement["applicability"].setdefault("applies_to_zone_codes", []).append(zone_code)` (dedup-preserving order, identical semantics to `propagate_group_applicability`'s union).
+   - If `regulated_use_terms` is non-empty, mirrors it into
+     `requirement["applicability"].setdefault("applies_to_use_terms", [])`.
+   - Leaves `applicability.conditions` untouched so existing
+     narrative-condition population (e.g. `apply_dms_bonus_height_context`)
+     continues to round-trip cleanly.
+2. **Draft-bylaw extractor.** Mirror the same logic in
+   `extract-charlottetown-draft-zoning-bylaw.py`. The draft's per-zone
+   files already carry the zone code in `document_metadata.zone_code`;
+   confirm that `regulated_use_terms` (or its draft analogue) is
+   available at the same scope.
+3. **Doc-level documents stay untouched.** General-provisions,
+   design-standards, appendix-b/c, and definitions don't have a single
+   owning zone or use-term list; their requirements should keep empty
+   `applies_to_*` lists. The audit's residual ~24% (rev 1) /
+   ~39% (rev 2) gap reflects exactly this group and is the expected
+   floor.
+4. **Re-run the extractors and the importer.** The artifacts get
+   rewritten with the `applies_to_*` fields in place; `content_hash`
+   is unchanged for any requirement whose payload was already in the
+   propagated state (because Option A landed the same values into the
+   stored payload), so the importer should report zero `changed` rows
+   for `requirements`. If it reports non-zero, that's a discrepancy
+   worth investigating before merging.
+5. **Retire the importer shim.** Once both extractors stamp the fields
+   directly, delete `propagate_group_applicability()` from
+   `scripts/import-charlottetown-zoning.py` (and its call site in
+   `collect_records`). Re-run the importer one more time to confirm
+   the database state is unchanged. Document the retirement in the
+   commit message and link back to commit `57b21f1`.
+6. **Schema enforcement (optional but recommended).** Tighten
+   `schema/json-schema/charlottetown-bylaw-extraction.schema.json` to
+   require `applicability.applies_to_zone_codes` and
+   `applies_to_use_terms` on `requirements` for `document_type='zone'`
+   artifacts. This converts a soft expectation into a hard contract
+   and catches future extractor regressions at validation time rather
+   than via the audit.
+
+### Acceptance criteria
+
+- After re-running both extractors and the importer:
+  - Every `requirement` in a zone-document JSON artifact has
+    `applicability.applies_to_zone_codes` containing the document's
+    `zone_code`. Spot-check on disk by `jq` over a few zones.
+  - Where the matching `regulation_group` has a non-empty
+    `regulated_use_terms`, every member requirement carries the same
+    list as `applicability.applies_to_use_terms`.
+  - `propagate_group_applicability()` is removed from the importer.
+  - `python scripts/audit-charlottetown-population.py` reports the
+    same `requirement_applicability_missing` gap values as today
+    (~24% rev 1 / ~39% rev 2) — i.e. the extractor-side fix is
+    semantically equivalent to the importer-side shim.
+- `python scripts/import-charlottetown-zoning.py` reports zero
+  `changed` rows for the `requirements` family on the first post-fix
+  run (the values are identical to what Option A had already
+  propagated; only the on-disk JSON moved).
+- If schema enforcement is in scope: the JSON schema validator
+  rejects a zone-document artifact missing
+  `applicability.applies_to_zone_codes` on any requirement.
+
+### Open decisions
+
+1. **Whether to copy `regulated_use_terms` verbatim or attempt
+   per-requirement use specificity.** Verbatim copy says "this rule
+   applies to every permitted use in the zone" — true for zone-wide
+   dimensional rules (lot area, frontage, height) but loose for
+   use-specific rules (e.g. "for a Home Daycare, max GFA is..."). A
+   verbatim copy preserves Option A's semantics; a per-requirement
+   refinement is a deeper extractor change and is out of scope for
+   this task. Recommend: verbatim, and log per-requirement
+   specificity as a follow-up.
+2. **Whether to retire the shim in the same PR as the extractor fix
+   or in a follow-up PR.** Bundling makes the change atomic; splitting
+   makes the audit-equivalence claim independently reviewable.
+   Recommend: split — land the extractor fix first, verify zero
+   importer churn, then drop the shim.
+3. **Whether to schema-enforce the `applies_to_*` fields.** Hard
+   contract catches regressions early; loose contract leaves room for
+   future doc-level documents (design-standards, etc.) to coexist.
+   Recommend: enforce only on `document_type='zone'`, since that's
+   the only case with a single owning zone.
+
+### Effort estimate
+
+~half day. The current-extractor change is one helper plus one call
+site; the draft-extractor change is the same shape but the per-zone
+requirements pipeline needs to be located first (the draft script
+doesn't reference `applicability` today, so the right insertion point
+isn't already obvious). Verification is short because Option A's audit
+numbers serve as the equivalence target.
+
+---
+
 ## Sources
 
 - `schema/json-schema/charlottetown-bylaw-extraction.schema.json`
