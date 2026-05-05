@@ -437,6 +437,117 @@ feature once Task 3 lands. Acceptance is product-shaped, not test-shaped.
 
 ---
 
+## Task 5 — Make table-derived facts first-class in `structured_fact`
+
+### Goal
+
+Have the importer represent every `structured_fact` row that was
+extracted from a `zoning.raw_table` with explicit table provenance:
+`source_record_table='raw_table'`, `source_record_key=<table_source_id>`,
+and `value_payload.raw_table_id=<bigint>`. Stop relying on the implicit
+"synthetic-clause-id-by-naming-convention" pattern that table-derived
+facts use today.
+
+### Current state
+
+The importer extracts table content (e.g. zone I's "Regulations for
+Permitted Uses" table, every per-zone parking table, the
+general-provisions accessory-building table) into `requirements`
+`structured_fact` rows whose `source_clause_ref` is a synthetic id of
+the form `<table_source_id>-row-<N>` (e.g.
+`zone-i-table-regulations-for-permitted-uses-row-1`). Two consequences
+that ripple through the rest of the data layer:
+
+- **Inheritance resolver misses table-anchored zones.** The
+  `owner_zone` regex in `schema/sql/008_zone_inheritance_resolver.sql`
+  (and inherited by `010_override_aware_resolver.sql`) only matches
+  `zone-<code>-clause-...` / `-section-...`. Table-prefixed source ids
+  fall through with `owner_zone=NULL` and are filtered out, so
+  `v_zone_effective_requirements` returns 0 rows for any zone whose
+  requirements live exclusively in tables. Visible symptom on the
+  current local DB: zone `I` has 41 requirement structured_facts but 0
+  rows in the effective-requirements view. Task 2's smoke-test 3 passes
+  for C-1 / DC / WF and silently drops `I` for this reason.
+- **`raw_table_no_structured_facts` audit metric is brittle.** Until
+  this fix lands the metric matches by synthetic clause-id prefix
+  (`<table_source_id>-row-%`); see `scripts/audit-charlottetown-
+  population.py`. After this fix the metric should match by
+  `source_record_table='raw_table'` and `value_payload.raw_table_id`
+  directly, restoring the original brief's intent.
+
+### What to build
+
+1. **Importer change.** Update `scripts/import-charlottetown-zoning.py`
+   so that any structured_fact derived from a `raw_table` row writes:
+   - `source_record_table='raw_table'`
+   - `source_record_key=<table_source_id>` (the `raw_table.table_source_id`
+     value, not the synthetic clause id)
+   - `value_payload.raw_table_id=<raw_table.raw_table_id>`
+   - `value_payload.raw_table_row_index=<integer>` (the row inside the
+     table, so the existing per-row granularity is preserved).
+   The `source_clause_ref` field can stay populated with the synthetic
+   id for back-compat, but the canonical link is the explicit triple
+   above.
+2. **Inheritance regex update.** In
+   `schema/sql/008_zone_inheritance_resolver.sql` (and the duplicated
+   pattern in `010_override_aware_resolver.sql`), extend the
+   `owner_zone` regex to accept `table` as a third anchor type:
+   `^zone-([a-z0-9-]+?)-(?:clause|section|table)`. With Task 5's
+   importer change in place this is the path zone-I-style requirements
+   take into the resolver.
+3. **Audit metric simplification.** Once table-derived facts carry
+   `source_record_table='raw_table'`, restore
+   `metric_raw_table_no_structured_facts` in
+   `scripts/audit-charlottetown-population.py` to match by
+   `source_record_table='raw_table'` / `raw_table_id` directly. Drop
+   the synthetic-prefix workaround and its inline comment.
+4. **Data backfill.** Re-running `import-charlottetown-zoning.py` on
+   the existing artifacts re-derives every `structured_fact` from
+   source JSON, so the natural-key + content-hash importer machinery
+   will refresh the affected rows in place. Add a verification query
+   in `wiki/charlottetown/topics/database-standup.md` step 9 confirming
+   `(SELECT COUNT(*) FROM zoning.structured_fact WHERE
+   source_record_table='raw_table')` is non-zero post-import.
+
+### Acceptance criteria
+
+- After re-import: every `raw_table` row referenced by at least one
+  `structured_fact` (currently 82/86 on rev 1, 47/49 on rev 2) has a
+  matching SF row with `source_record_table='raw_table'` and a
+  populated `value_payload.raw_table_id`.
+- `zoning.v_zone_effective_requirements` returns ≥1 row for zone `I` on
+  revision 1 (today: 0). Task 2's smoke-test 3 passes for `I`.
+- `scripts/audit-charlottetown-population.py` reports
+  `raw_table_no_structured_facts` with the same numeric gap (4 on rev 1,
+  2 on rev 2) using the simplified `source_record_table='raw_table'`
+  match — i.e. the count is robust to the change in matching method.
+- `wiki/charlottetown/topics/database-standup.md` step 9 documents the
+  `source_record_table='raw_table'` smoke check.
+
+### Open decisions
+
+1. **Whether to retire the synthetic `*-row-<N>` clause ids entirely.**
+   Some downstream queries may grep on them. Recommend: keep them in
+   `value_payload.source_clause_ref` for back-compat, but treat the
+   `(source_record_table, source_record_key, raw_table_row_index)`
+   triple as canonical going forward.
+2. **Whether to split the inheritance-regex update into a separate
+   `011_*.sql` migration or fold it into Task 5's importer change.**
+   Folding keeps the change atomic; splitting makes the resolver
+   improvement reviewable on its own. Recommend: separate
+   `011_table_anchored_inheritance.sql` so the SQL change can land
+   independently of the importer change.
+
+### Effort estimate
+
+~half day: importer change is small (single helper that constructs the
+table-derived SF row), regex update is a one-line patch with an
+accompanying smoke query, audit metric simplification is mechanical.
+Most of the time is verifying nothing else in the codebase relies on
+table-derived rows having `source_record_table='clause'`.
+
+---
+
 ## Sources
 
 - `schema/json-schema/charlottetown-bylaw-extraction.schema.json`

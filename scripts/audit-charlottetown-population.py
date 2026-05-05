@@ -374,29 +374,45 @@ def metric_use_without_term_id(
 def metric_raw_table_no_structured_facts(
     conn: psycopg.Connection, revision_id: int
 ) -> list[dict[str, Any]]:
-    # raw_table -> section -> zone_code gives a useful per-zone breakdown.
+    # The importer extracts table content into structured_fact rows whose
+    # `source_refs[0].source_ref_id` (or legacy `source_clause_ref`) is a
+    # synthetic id of the form `<table_source_id>-row-<N>`. We treat a
+    # raw_table as "linked" iff at least one active SF references its
+    # table_source_id by prefix (matches both `<id>` and `<id>-row-%`).
+    # See backlog Task 5 for the deeper fix (have the importer set
+    # source_record_table='raw_table' / value_payload.raw_table_id directly).
     sql = """
     WITH all_tables AS (
-      SELECT rt.raw_table_id, s.zone_code
+      SELECT rt.raw_table_id, rt.table_source_id, UPPER(s.zone_code) AS zone_code
         FROM zoning.raw_table rt
    LEFT JOIN zoning.section s
           ON s.section_id = rt.section_id
          AND s.is_active
        WHERE rt.is_active AND rt.document_revision_id=%s
     ),
-    referenced AS (
-      SELECT DISTINCT (value_payload->>'raw_table_id')::bigint AS raw_table_id
+    fact_refs AS (
+      SELECT DISTINCT
+             COALESCE(value_payload->'source_refs'->0->>'source_ref_id',
+                      value_payload->>'source_clause_ref') AS source_ref_id
         FROM zoning.structured_fact
        WHERE is_active AND document_revision_id=%s
-         AND value_payload ? 'raw_table_id'
+    ),
+    matched AS (
+      SELECT a.raw_table_id, a.zone_code,
+             EXISTS (
+               SELECT 1 FROM fact_refs fr
+                WHERE fr.source_ref_id IS NOT NULL
+                  AND (fr.source_ref_id = a.table_source_id
+                       OR fr.source_ref_id LIKE a.table_source_id || '-row-%%')
+             ) AS has_facts
+        FROM all_tables a
     )
-    SELECT GROUPING(UPPER(a.zone_code)) AS is_total,
-           UPPER(a.zone_code) AS zone_code,
+    SELECT GROUPING(zone_code) AS is_total,
+           zone_code,
            COUNT(*) AS total,
-           COUNT(*) FILTER (WHERE r.raw_table_id IS NULL) AS gap
-      FROM all_tables a
- LEFT JOIN referenced r USING (raw_table_id)
-     GROUP BY ROLLUP (UPPER(a.zone_code))
+           COUNT(*) FILTER (WHERE NOT has_facts) AS gap
+      FROM matched
+     GROUP BY ROLLUP (zone_code)
      ORDER BY is_total, zone_code NULLS FIRST;
     """
     with conn.cursor() as cur:
