@@ -308,6 +308,12 @@ SELECT root_zone, depth, ancestor_zone, relationship_type
   apply override semantics; visualizations should treat its output as the
   unconditional inherited set.
 
+## Backlog
+
+Open follow-up work — population audit, override-aware resolver, parcel
+resolver, and visualization — is captured as agent-pickable briefs in
+[Zoning data-layer backlog](zoning-data-layer-backlog.md).
+
 ## Sources
 
 - `docker-compose.yml`
