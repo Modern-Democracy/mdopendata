@@ -30,6 +30,7 @@ This index catalogs the Charlottetown LLM Wiki pages and source families. Update
 | [Workstream context](topics/workstream-context.md) | Active Charlottetown source paths, output paths, purpose, and maintenance duties. |
 | [Database standup](topics/database-standup.md) | End-to-end instructions for bringing up the Charlottetown zoning database, including manual-decision replay. |
 | [Data-layer conventions](topics/data-layer-conventions.md) | Operating conventions for adding new scripts that touch the zoning schema (versioned JSON artifacts, natural-key + content-hash discipline, read-only MCP boundary). |
+| [Database rebuild incident 2026-05-05](topics/database-rebuild-incident-2026-05-05.md) | Handoff summary for the accidental whole-cluster Postgres rebuild, current database state, missing spatial source tables, and recovery options. |
 | [Zoning data-layer backlog](topics/zoning-data-layer-backlog.md) | Self-contained briefs for the four follow-up tasks (population audit, override-aware resolver, parcel resolver, visualization). Written so a fresh agent can pick one up cold. |
 | [comparisons](comparisons/.gitkeep) | Future current-versus-draft, parcel, zone, or neighbourhood comparison pages. |
 | [questions](questions/.gitkeep) | Future reusable answers generated from user queries. |

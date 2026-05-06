@@ -3,7 +3,7 @@ type: log
 tags:
   - charlottetown
   - log
-updated: 2026-04-30
+updated: 2026-05-05
 ---
 
 Append new entries in reverse chronological order. Use headings in this format:
@@ -13,6 +13,10 @@ Append new entries in reverse chronological order. Use headings in this format:
 ```text
 ## [YYYY-MM-DD] type | Short title
 ```
+
+## [2026-05-05] incident | Whole-cluster database rebuild handoff
+
+Added `topics/database-rebuild-incident-2026-05-05.md` after a requested clean rebuild smoke test was incorrectly run against the whole `data/postgres` cluster volume instead of an isolated zoning-only test target. The page records the destructive action, current rebuilt database state, missing public spatial source tables, replayed zoning data state, uncommitted migration changes, and recovery options.
 
 ## [2026-04-30] planning | Unified ingestion Phase 4 activation
 
@@ -205,6 +209,18 @@ Updated `topics/zoning-data-layer-backlog.md` and `topics/database-standup.md` a
 ## [2026-05-05] importer | Raw table provenance cleanup
 
 Updated `topics/zoning-data-layer-backlog.md` and `topics/database-standup.md` after changing `scripts/import-charlottetown-zoning.py` to write table-derived structured facts with `source_record_table='raw_table'`, table source keys, raw table ids, and row indexes. The population audit now uses direct raw-table links and reports active-table gaps of 2/43 on revision 1 and 1/34 on revision 2 after duplicate top-level raw table rows were retired.
+
+## [2026-05-05] spatial | Charlottetown boundary and OSM building exports
+
+Recreated `public."CHTWN_Municipal_Boundary"` from `maps/pei/PEI_Municipal_Zones.geojson` feature `id=8` / `OBJECTID=8`, rebuilt `public."CHTWN_OSM_Buildings"` from current OpenStreetMap Overpass API `building=*` way geometries clipped to that boundary, and exported both layers to GeoJSON under `maps/pei`.
+
+## [2026-05-05] database | Zoning migration ownership cleanup
+
+Updated `topics/database-standup.md` to define `schema/sql` as the active
+zoning-only rebuild path, moved legacy HRM migrations to `schema/legacy/hrm/`,
+and revised Charlottetown spatial registration status handling so reruns keep
+`zoning.spatial_layer.status` aligned with loaded `zoning.spatial_feature`
+rows.
 
 ## Sources
 

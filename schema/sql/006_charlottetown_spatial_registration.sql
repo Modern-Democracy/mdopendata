@@ -50,78 +50,108 @@ ON CONFLICT (layer_key) DO UPDATE SET
   status = EXCLUDED.status,
   metadata = EXCLUDED.metadata;
 
-INSERT INTO zoning.spatial_feature (spatial_layer_id, feature_key, zone_code_raw, zone_code_normalized, attributes, geom, is_valid, validation_reason)
-SELECT l.spatial_layer_id, t.fid::text, t.zone_code, COALESCE(c.target_code, t.zone_code),
-       to_jsonb(t) - 'geom', t.geom, ST_IsValid(t.geom), ST_IsValidReason(t.geom)
-FROM public."CHTWN_Draft_Zoning_Boundaries" t
-JOIN zoning.spatial_layer l ON l.layer_key = 'charlottetown_draft_zoning_boundaries'
-LEFT JOIN zoning.zone_code_crosswalk c
-  ON c.context = 'charlottetown_draft_schedule_a' AND c.source_code = t.zone_code AND c.status = 'active'
-ON CONFLICT (spatial_layer_id, feature_key) DO UPDATE SET
-  zone_code_raw = EXCLUDED.zone_code_raw,
-  zone_code_normalized = EXCLUDED.zone_code_normalized,
-  attributes = EXCLUDED.attributes,
-  geom = EXCLUDED.geom,
-  is_valid = EXCLUDED.is_valid,
-  validation_reason = EXCLUDED.validation_reason;
+DO $$
+BEGIN
+  IF to_regclass('public."CHTWN_Draft_Zoning_Boundaries"') IS NOT NULL THEN
+    INSERT INTO zoning.spatial_feature (spatial_layer_id, feature_key, zone_code_raw, zone_code_normalized, attributes, geom, is_valid, validation_reason)
+    SELECT l.spatial_layer_id, t.fid::text, t.zone_code, COALESCE(c.target_code, t.zone_code),
+           to_jsonb(t) - 'geom', t.geom, ST_IsValid(t.geom), ST_IsValidReason(t.geom)
+    FROM public."CHTWN_Draft_Zoning_Boundaries" t
+    JOIN zoning.spatial_layer l ON l.layer_key = 'charlottetown_draft_zoning_boundaries'
+    LEFT JOIN zoning.zone_code_crosswalk c
+      ON c.context = 'charlottetown_draft_schedule_a' AND c.source_code = t.zone_code AND c.status = 'active'
+    ON CONFLICT (spatial_layer_id, feature_key) DO UPDATE SET
+      zone_code_raw = EXCLUDED.zone_code_raw,
+      zone_code_normalized = EXCLUDED.zone_code_normalized,
+      attributes = EXCLUDED.attributes,
+      geom = EXCLUDED.geom,
+      is_valid = EXCLUDED.is_valid,
+      validation_reason = EXCLUDED.validation_reason;
+  END IF;
+END $$;
 
-INSERT INTO zoning.spatial_feature (spatial_layer_id, feature_key, attributes, geom, is_valid, validation_reason)
-SELECT l.spatial_layer_id, t.id::text, to_jsonb(t) - 'geom', ST_Transform(t.geom, 2954), ST_IsValid(t.geom), ST_IsValidReason(t.geom)
-FROM public."CHTWN_Civic_Addresses" t
-JOIN zoning.spatial_layer l ON l.layer_key = 'charlottetown_civic_addresses'
-ON CONFLICT (spatial_layer_id, feature_key) DO UPDATE SET
-  attributes = EXCLUDED.attributes,
-  geom = EXCLUDED.geom,
-  is_valid = EXCLUDED.is_valid,
-  validation_reason = EXCLUDED.validation_reason;
+DO $$
+BEGIN
+  IF to_regclass('public."CHTWN_Civic_Addresses"') IS NOT NULL THEN
+    INSERT INTO zoning.spatial_feature (spatial_layer_id, feature_key, attributes, geom, is_valid, validation_reason)
+    SELECT l.spatial_layer_id, t.id::text, to_jsonb(t) - 'geom', ST_Transform(t.geom, 2954), ST_IsValid(t.geom), ST_IsValidReason(t.geom)
+    FROM public."CHTWN_Civic_Addresses" t
+    JOIN zoning.spatial_layer l ON l.layer_key = 'charlottetown_civic_addresses'
+    ON CONFLICT (spatial_layer_id, feature_key) DO UPDATE SET
+      attributes = EXCLUDED.attributes,
+      geom = EXCLUDED.geom,
+      is_valid = EXCLUDED.is_valid,
+      validation_reason = EXCLUDED.validation_reason;
+  END IF;
+END $$;
 
-INSERT INTO zoning.spatial_feature (spatial_layer_id, feature_key, attributes, geom, is_valid, validation_reason)
-SELECT l.spatial_layer_id, t.fid::text, to_jsonb(t) - 'geom', t.geom, ST_IsValid(t.geom), ST_IsValidReason(t.geom)
-FROM public."CHTWN_Parcel_Map" t
-JOIN zoning.spatial_layer l ON l.layer_key = 'charlottetown_parcel_map'
-ON CONFLICT (spatial_layer_id, feature_key) DO UPDATE SET
-  attributes = EXCLUDED.attributes,
-  geom = EXCLUDED.geom,
-  is_valid = EXCLUDED.is_valid,
-  validation_reason = EXCLUDED.validation_reason;
+DO $$
+BEGIN
+  IF to_regclass('public."CHTWN_Parcel_Map"') IS NOT NULL THEN
+    INSERT INTO zoning.spatial_feature (spatial_layer_id, feature_key, attributes, geom, is_valid, validation_reason)
+    SELECT l.spatial_layer_id, t.fid::text, to_jsonb(t) - 'geom', t.geom, ST_IsValid(t.geom), ST_IsValidReason(t.geom)
+    FROM public."CHTWN_Parcel_Map" t
+    JOIN zoning.spatial_layer l ON l.layer_key = 'charlottetown_parcel_map'
+    ON CONFLICT (spatial_layer_id, feature_key) DO UPDATE SET
+      attributes = EXCLUDED.attributes,
+      geom = EXCLUDED.geom,
+      is_valid = EXCLUDED.is_valid,
+      validation_reason = EXCLUDED.validation_reason;
+  END IF;
+END $$;
 
-INSERT INTO zoning.spatial_feature (spatial_layer_id, feature_key, attributes, geom, is_valid, validation_reason)
-SELECT l.spatial_layer_id, t.id::text, to_jsonb(t) - 'geom', ST_Transform(t.geom, 2954), ST_IsValid(t.geom), ST_IsValidReason(t.geom)
-FROM public."CHTWN_Street_Network" t
-JOIN zoning.spatial_layer l ON l.layer_key = 'charlottetown_street_network'
-ON CONFLICT (spatial_layer_id, feature_key) DO UPDATE SET
-  attributes = EXCLUDED.attributes,
-  geom = EXCLUDED.geom,
-  is_valid = EXCLUDED.is_valid,
-  validation_reason = EXCLUDED.validation_reason;
+DO $$
+BEGIN
+  IF to_regclass('public."CHTWN_Street_Network"') IS NOT NULL THEN
+    INSERT INTO zoning.spatial_feature (spatial_layer_id, feature_key, attributes, geom, is_valid, validation_reason)
+    SELECT l.spatial_layer_id, t.id::text, to_jsonb(t) - 'geom', ST_Transform(t.geom, 2954), ST_IsValid(t.geom), ST_IsValidReason(t.geom)
+    FROM public."CHTWN_Street_Network" t
+    JOIN zoning.spatial_layer l ON l.layer_key = 'charlottetown_street_network'
+    ON CONFLICT (spatial_layer_id, feature_key) DO UPDATE SET
+      attributes = EXCLUDED.attributes,
+      geom = EXCLUDED.geom,
+      is_valid = EXCLUDED.is_valid,
+      validation_reason = EXCLUDED.validation_reason;
+  END IF;
+END $$;
 
-INSERT INTO zoning.spatial_feature (spatial_layer_id, feature_key, zone_code_raw, zone_code_normalized, attributes, geom, is_valid, validation_reason)
-SELECT l.spatial_layer_id, t.id::text, t."ZONING", COALESCE(c.target_code, t."ZONING"),
-       to_jsonb(t) - 'geom', t.geom, ST_IsValid(t.geom), ST_IsValidReason(t.geom)
-FROM public."CHTWN_Zoning_Boundaries" t
-JOIN zoning.spatial_layer l ON l.layer_key = 'charlottetown_current_zoning_boundaries'
-LEFT JOIN zoning.zone_code_crosswalk c
-  ON c.context = 'charlottetown_current_map' AND c.source_code = t."ZONING" AND c.status = 'active'
-ON CONFLICT (spatial_layer_id, feature_key) DO UPDATE SET
-  zone_code_raw = EXCLUDED.zone_code_raw,
-  zone_code_normalized = EXCLUDED.zone_code_normalized,
-  attributes = EXCLUDED.attributes,
-  geom = EXCLUDED.geom,
-  is_valid = EXCLUDED.is_valid,
-  validation_reason = EXCLUDED.validation_reason;
+DO $$
+BEGIN
+  IF to_regclass('public."CHTWN_Zoning_Boundaries"') IS NOT NULL THEN
+    INSERT INTO zoning.spatial_feature (spatial_layer_id, feature_key, zone_code_raw, zone_code_normalized, attributes, geom, is_valid, validation_reason)
+    SELECT l.spatial_layer_id, t.id::text, t."ZONING", COALESCE(c.target_code, t."ZONING"),
+           to_jsonb(t) - 'geom', t.geom, ST_IsValid(t.geom), ST_IsValidReason(t.geom)
+    FROM public."CHTWN_Zoning_Boundaries" t
+    JOIN zoning.spatial_layer l ON l.layer_key = 'charlottetown_current_zoning_boundaries'
+    LEFT JOIN zoning.zone_code_crosswalk c
+      ON c.context = 'charlottetown_current_map' AND c.source_code = t."ZONING" AND c.status = 'active'
+    ON CONFLICT (spatial_layer_id, feature_key) DO UPDATE SET
+      zone_code_raw = EXCLUDED.zone_code_raw,
+      zone_code_normalized = EXCLUDED.zone_code_normalized,
+      attributes = EXCLUDED.attributes,
+      geom = EXCLUDED.geom,
+      is_valid = EXCLUDED.is_valid,
+      validation_reason = EXCLUDED.validation_reason;
+  END IF;
+END $$;
 
-INSERT INTO zoning.spatial_feature (spatial_layer_id, feature_key, zone_code_raw, zone_code_normalized, attributes, geom, is_valid, validation_reason)
-SELECT l.spatial_layer_id, t.fid::text, t.feature_type, t.feature_type,
-       to_jsonb(t) - 'geom', t.geom, ST_IsValid(t.geom), ST_IsValidReason(t.geom)
-FROM public."CHTWN_Schedule_A_Wetlands" t
-JOIN zoning.spatial_layer l ON l.layer_key = 'charlottetown_schedule_a_wetlands'
-ON CONFLICT (spatial_layer_id, feature_key) DO UPDATE SET
-  zone_code_raw = EXCLUDED.zone_code_raw,
-  zone_code_normalized = EXCLUDED.zone_code_normalized,
-  attributes = EXCLUDED.attributes,
-  geom = EXCLUDED.geom,
-  is_valid = EXCLUDED.is_valid,
-  validation_reason = EXCLUDED.validation_reason;
+DO $$
+BEGIN
+  IF to_regclass('public."CHTWN_Schedule_A_Wetlands"') IS NOT NULL THEN
+    INSERT INTO zoning.spatial_feature (spatial_layer_id, feature_key, zone_code_raw, zone_code_normalized, attributes, geom, is_valid, validation_reason)
+    SELECT l.spatial_layer_id, t.fid::text, t.feature_type, t.feature_type,
+           to_jsonb(t) - 'geom', t.geom, ST_IsValid(t.geom), ST_IsValidReason(t.geom)
+    FROM public."CHTWN_Schedule_A_Wetlands" t
+    JOIN zoning.spatial_layer l ON l.layer_key = 'charlottetown_schedule_a_wetlands'
+    ON CONFLICT (spatial_layer_id, feature_key) DO UPDATE SET
+      zone_code_raw = EXCLUDED.zone_code_raw,
+      zone_code_normalized = EXCLUDED.zone_code_normalized,
+      attributes = EXCLUDED.attributes,
+      geom = EXCLUDED.geom,
+      is_valid = EXCLUDED.is_valid,
+      validation_reason = EXCLUDED.validation_reason;
+  END IF;
+END $$;
 
 INSERT INTO zoning.zone_spatial_feature (document_revision_id, zone_code, spatial_feature_id, match_method, crosswalk_id)
 SELECT dr.document_revision_id, sf.zone_code_normalized, sf.spatial_feature_id,
@@ -190,5 +220,36 @@ LEFT JOIN zoning.spatial_layer current_layer ON current_layer.layer_key = 'charl
 LEFT JOIN zoning.spatial_layer draft_layer ON draft_layer.layer_key = 'charlottetown_draft_zoning_boundaries'
 WHERE r.is_active
 ON CONFLICT DO NOTHING;
+
+UPDATE zoning.spatial_layer sl
+   SET status = CASE
+                  WHEN EXISTS (
+                         SELECT 1
+                           FROM zoning.spatial_feature sf
+                          WHERE sf.spatial_layer_id = sl.spatial_layer_id
+                       )
+                    THEN 'loaded'
+                  ELSE 'registered'
+                END,
+       metadata = CASE
+                    WHEN EXISTS (
+                           SELECT 1
+                             FROM zoning.spatial_feature sf
+                            WHERE sf.spatial_layer_id = sl.spatial_layer_id
+                         )
+                      THEN sl.metadata
+                           - 'source_table_missing_at_migration'
+                           - 'source_table_missing_checked_at'
+                    WHEN sl.source_schema IS NOT NULL
+                     AND sl.source_table IS NOT NULL
+                     AND to_regclass(format('%I.%I', sl.source_schema, sl.source_table)) IS NULL
+                      THEN sl.metadata
+                           || jsonb_build_object(
+                                'source_table_missing_at_migration', true,
+                                'source_table_missing_checked_at', now()
+                              )
+                    ELSE sl.metadata
+                  END
+ WHERE sl.layer_key LIKE 'charlottetown_%';
 
 COMMIT;

@@ -21,7 +21,7 @@ unrecoverable from the JSON sources alone.
 | Artifact | Repository path |
 | --- | --- |
 | Postgres / PostGIS service definition | `docker-compose.yml` |
-| Schema migrations (ordered) | `schema/sql/00*_*.sql` |
+| Zoning schema migrations (ordered) | `schema/sql/NNN_*.sql` |
 | Migration runner | `scripts/run-migrations.py` |
 | Bylaw JSON (current) | `data/zoning/charlottetown/` |
 | Bylaw JSON (draft) | `data/zoning/charlottetown-draft/` |
@@ -36,6 +36,40 @@ unrecoverable from the JSON sources alone.
 | Spatial layers | `data/spatial/charlottetown/` |
 | Manual draft zoning-map corrections (data) | `data/spatial/charlottetown/manual-corrections/draft-zoning-map-corrections.json` |
 | Manual draft zoning-map corrections (script) | `scripts/apply-charlottetown-draft-zoning-manual-corrections.py` |
+
+## `schema/sql` Ownership Contract
+
+`schema/sql` is the active ordered rebuild path for the Charlottetown zoning
+database. Its purpose is to recreate durable `zoning` schema structure and
+zoning-owned derived objects step by step for local development and eventual
+public-host deployment.
+
+Allowed in `schema/sql`:
+
+- `zoning` schema DDL, constraints, indexes, views, materialized views, and
+  functions.
+- Seed/reference rows required inside `zoning`.
+- `zoning` registration metadata that points to external spatial source
+  tables.
+- Read-only references to externally managed source tables when populating or
+  refreshing `zoning` registration tables.
+
+Not allowed in `schema/sql`:
+
+- `hrm` schema objects or paused HRM project migrations.
+- Creation, replacement, truncation, or ownership of manually managed `public`
+  source tables such as `CHTWN_*`, `HFX_*`, or `PEI_*`.
+- Data loading into `public`.
+
+`schema/sql/postgis.sql` is the bootstrap exception. It is mounted by Docker on
+first database initialization to enable extensions, and may create
+extension-owned support objects in `public`, `tiger`, `tiger_data`, and
+`topology`. Numeric migration files are the zoning rebuild path.
+
+Historical HRM migrations were moved out of the active runner path to
+`schema/legacy/hrm/`. They retain their original numbers for auditability, but
+`scripts/run-migrations.py` no longer applies them because it only discovers
+numeric SQL files under `schema/sql/`.
 
 ## Connection settings
 
@@ -82,10 +116,16 @@ the decisions JSON is committed first.
 
 The runner autodiscovers every `schema/sql/NNN_*.sql` file in ascending
 numeric order, tracks applied filenames in `public.schema_migrations`, and
-skips any that have already been applied. Add a new migration by dropping a
-correctly numbered file into `schema/sql/`; no code change is required.
+skips any that have already been applied. Add a new zoning migration by
+dropping a correctly numbered file into `schema/sql/`; no code change is
+required.
 `schema/sql/postgis.sql` is excluded by the numeric-prefix filter — it is
 mounted as the container entrypoint init and runs once on first boot.
+
+The active zoning sequence currently begins at
+`005_charlottetown_unified_zoning.sql` because earlier numeric migrations were
+legacy HRM migrations and have been moved to `schema/legacy/hrm/`. Do not
+renumber applied migration filenames; the filename is the migration ledger key.
 
 Pass `--list` to preview pending migrations without applying them:
 
@@ -149,14 +189,14 @@ Expected post-import counts (current loaded dataset):
 | `clause` | 3779 |
 | `structured_fact` | 5515 |
 
-### 4. Load the spatial layers
+### 4. Load the public spatial source tables
 
-The spatial datasets are loaded directly into the `public` schema and then
-registered into `zoning.spatial_layer` / `zoning.spatial_feature` /
-`zoning.zone_spatial_feature` by migration `006`. Reload the source GeoPackages
-through your normal `ogr2ogr` or `pyogrio`-driven pipeline (see
-`data/spatial/charlottetown/`) before running migration `006`. Expected
-counts:
+The `public` schema is manually managed. Load or restore the source
+GeoPackage/JSON/CSV-derived spatial tables there before running or rerunning
+the zoning registration SQL. The active zoning migrations may read these
+tables, but they must not create or own them.
+
+Expected public source-table counts for the registered Charlottetown layers:
 
 | `spatial_layer.layer_key` | Features |
 | --- | --- |
@@ -166,6 +206,13 @@ counts:
 | `charlottetown_current_zoning_boundaries` | 1558 |
 | `charlottetown_draft_zoning_boundaries` | 20 |
 | `charlottetown_schedule_a_wetlands` | 64 |
+
+After the source tables are present, rerun
+`schema/sql/006_charlottetown_spatial_registration.sql` to register them into
+`zoning.spatial_layer` / `zoning.spatial_feature` /
+`zoning.zone_spatial_feature`. The SQL is rerunnable: layers with loaded
+features are marked `loaded`, while registered layers with no loaded features
+remain `registered`.
 
 ### 5. Generate section-equivalence candidates
 

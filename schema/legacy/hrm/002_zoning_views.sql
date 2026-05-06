@@ -1,22 +1,50 @@
-CREATE OR REPLACE VIEW hrm.v_zone_geometry_matches AS
-SELECT
-  z.zone_pk,
-  b.bylaw_slug,
-  z.zone_code,
-  z.zone_name,
-  zsm.target_feature_id,
-  hz.description AS target_description,
-  hz.bylaw_id AS target_bylaw_id,
-  hz.geom
-FROM hrm.zone AS z
-JOIN hrm.bylaw AS b
-  ON b.bylaw_pk = z.bylaw_pk
-JOIN hrm.zone_spatial_match AS zsm
-  ON zsm.zone_pk = z.zone_pk
- AND zsm.target_schema = 'public'
- AND zsm.target_table = 'HFX_Halifax_Zoning_Boundaries'
-JOIN public."HFX_Halifax_Zoning_Boundaries" AS hz
-  ON hz.source_feature_id = zsm.target_feature_id;
+DO $$
+BEGIN
+  IF to_regclass('public."HFX_Halifax_Zoning_Boundaries"') IS NOT NULL THEN
+    EXECUTE $view$
+      CREATE OR REPLACE VIEW hrm.v_zone_geometry_matches AS
+      SELECT
+        z.zone_pk,
+        b.bylaw_slug,
+        z.zone_code,
+        z.zone_name,
+        zsm.target_feature_id,
+        hz.description AS target_description,
+        hz.bylaw_id AS target_bylaw_id,
+        hz.geom
+      FROM hrm.zone AS z
+      JOIN hrm.bylaw AS b
+        ON b.bylaw_pk = z.bylaw_pk
+      JOIN hrm.zone_spatial_match AS zsm
+        ON zsm.zone_pk = z.zone_pk
+       AND zsm.target_schema = 'public'
+       AND zsm.target_table = 'HFX_Halifax_Zoning_Boundaries'
+      JOIN public."HFX_Halifax_Zoning_Boundaries" AS hz
+        ON hz.source_feature_id = zsm.target_feature_id
+    $view$;
+  ELSE
+    EXECUTE $view$
+      CREATE OR REPLACE VIEW hrm.v_zone_geometry_matches AS
+      SELECT
+        z.zone_pk,
+        b.bylaw_slug,
+        z.zone_code,
+        z.zone_name,
+        zsm.target_feature_id,
+        NULL::text AS target_description,
+        NULL::text AS target_bylaw_id,
+        NULL::geometry(Geometry, 4326) AS geom
+      FROM hrm.zone AS z
+      JOIN hrm.bylaw AS b
+        ON b.bylaw_pk = z.bylaw_pk
+      JOIN hrm.zone_spatial_match AS zsm
+        ON zsm.zone_pk = z.zone_pk
+       AND zsm.target_schema = 'public'
+       AND zsm.target_table = 'HFX_Halifax_Zoning_Boundaries'
+      WHERE false
+    $view$;
+  END IF;
+END $$;
 
 CREATE OR REPLACE VIEW hrm.v_rule_atom_zone_geometry AS
 SELECT
