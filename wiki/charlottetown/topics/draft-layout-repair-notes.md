@@ -85,6 +85,13 @@ This page records durable extraction notes for reported Charlottetown draft zoni
 - The regeneration preprocessor now splits inline numbered subclauses after an existing clause path is established, so the output creates child clauses `-1`, `-2`, and `-3` under each roman parent instead of using a clause-specific manual correction.
 - A scan of regenerated draft raw clauses found no remaining `1)` through `9)` inline numbered-label pattern in `clause_text_raw`.
 
+## 2026-05-06 RN Clause 10.6.7 Schedule Bleedover Repair
+
+- Source: `docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf`, bylaw page 90.
+- Output: `data/zoning/charlottetown-draft/zones/rn.json`.
+- The source clause `10.6.7` ends after `for every 8 m of abutting side or rear yard shall be installed.`
+- The generated `zone-rn-clause-10-6-7` and derived `zone-rn-req-zone-rn-clause-10-6-7` text previously included Figure 10.2 and Schedule 10.1 map-label bleedover; the targeted output repair removes that trailing non-clause text.
+
 ## Open Limits
 
-- This note covers only the named Part 1, Part 2, Part 3, Part 5, Part 6, Part 8, Part 9, RN, RH, general wrapped-section-title, Part source-unit text, inline numbered-subclause, and table-reference extraction defects verified on 2026-04-24, 2026-04-28, and 2026-04-29.
+- This note covers only the named Part 1, Part 2, Part 3, Part 5, Part 6, Part 8, Part 9, RN, RH, general wrapped-section-title, Part source-unit text, inline numbered-subclause, table-reference, and RN `10.6.7` schedule-bleedover extraction defects verified on 2026-04-24, 2026-04-28, 2026-04-29, and 2026-05-06.

@@ -14,6 +14,14 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-05-06] extraction | RN 10.6.7 schedule bleedover repair
+
+Updated `topics/draft-layout-repair-notes.md` after trimming Figure 10.2 and Schedule 10.1 map-label bleedover from draft RN `zone-rn-clause-10-6-7` and the derived requirement in `data/zoning/charlottetown-draft/zones/rn.json`.
+
+## [2026-05-06] database | RN 10.6.7 repair imported
+
+Ran `scripts/import-charlottetown-zoning.py --family draft` as import batch 15 after the RN `10.6.7` JSON repair. The active `zoning.clause` and `zoning.structured_fact` target records now end at `shall be installed.`, and the prior bleedover records are inactive.
+
 ## [2026-05-06] data-engineering | Task 7 extractor-side applicability stamping
 
 Implemented the extractor-side half of backlog Task 7 by stamping
