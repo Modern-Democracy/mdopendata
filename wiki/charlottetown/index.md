@@ -32,6 +32,7 @@ This index catalogs the Charlottetown LLM Wiki pages and source families. Update
 | [Data-layer conventions](topics/data-layer-conventions.md) | Operating conventions for adding new scripts that touch the zoning schema (versioned JSON artifacts, natural-key + content-hash discipline, read-only MCP boundary). |
 | [Database rebuild incident 2026-05-05](topics/database-rebuild-incident-2026-05-05.md) | Handoff summary for the accidental whole-cluster Postgres rebuild, current database state, missing spatial source tables, and recovery options. |
 | [Zoning data-layer backlog](topics/zoning-data-layer-backlog.md) | Self-contained briefs for the four follow-up tasks (population audit, override-aware resolver, parcel resolver, visualization). Written so a fresh agent can pick one up cold. |
+| [LiDAR building height plan](topics/lidar-building-height-plan.md) | Orchestration plan for deriving Charlottetown building heights from PEI 2020 COPC LAZ tiles and attaching LiDAR-derived height fields to `public."CHTWN_OSM_Buildings"`. |
 | [comparisons](comparisons/.gitkeep) | Future current-versus-draft, parcel, zone, or neighbourhood comparison pages. |
 | [questions](questions/.gitkeep) | Future reusable answers generated from user queries. |
 | [templates](templates/source-summary.md) | Templates for future wiki maintenance. |

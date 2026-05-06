@@ -14,6 +14,16 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-05-06] planning | LiDAR building height orchestration
+
+Added `topics/lidar-building-height-plan.md` for deriving Charlottetown
+building heights from the PEI 2020 COPC LAZ tiles under `maps/pei/lidar` and
+attaching LiDAR-derived height/provenance fields to
+`public."CHTWN_OSM_Buildings"`. The plan records the current target table
+controls of 13,144 valid SRID 4326 multipolygon buildings, 30 OSM height tags,
+and 263 `levels` values, and defines source-metadata, staging, derivation,
+backfill, and QA gates.
+
 ## [2026-05-06] data-quality | Task 6 section-equivalence candidates reviewed
 
 Reviewed all 143 `candidate` rows created after the current general-provisions
