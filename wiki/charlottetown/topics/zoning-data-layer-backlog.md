@@ -5,7 +5,7 @@ tags:
   - backlog
   - resolver
   - visualization
-updated: 2026-05-05
+updated: 2026-05-06
 ---
 
 # Zoning Data Layer Backlog
@@ -25,7 +25,7 @@ has not seen the originating conversation can pick it up cold.
 | 4 — Visualization | ✅ local demo delivered; hardening pending | `web/server.js`, `web/public/ui_kits/*`, `scripts/smoke-web-demo.mjs`, [Web demo design kit plan](../../implementation/web-demo-design-kit-plan.md) |
 | 5 — Table-derived facts first-class | ✅ delivered | `schema/sql/011_table_anchored_inheritance.sql`, `scripts/import-charlottetown-zoning.py`, `scripts/audit-charlottetown-population.py` |
 | 6 — Split current `general-provisions.json` | ⏳ pending | — |
-| 7 — Stamp `applies_to_*` at extraction time | ⏳ pending | — |
+| 7 — Stamp `applies_to_*` at extraction time | 🔶 extractor-side JSON delivered; shim retained | `scripts/extract-charlottetown-zoning-bylaw.py`, `scripts/regenerate-charlottetown-draft-zoning-bylaw.py` |
 | 8 — Inheritance closure `DISTINCT ON` (perf) | ✅ delivered | `schema/sql/014_inherited_reqs_distinct_on.sql` |
 
 Cross-cutting deliverable not in the table: `propagate_group_applicability()`
@@ -911,6 +911,26 @@ under `data/zoning/charlottetown*/` are self-consistent with the
 extraction schema. Removes the need for the importer-side propagation
 shim added in commit `57b21f1` (see `propagate_group_applicability` in
 `scripts/import-charlottetown-zoning.py`).
+
+### Status (partial)
+
+Extractor-side requirement applicability stamping is implemented for current
+and draft zone artifacts. The generated zone JSON now carries
+`applies_to_zone_codes` on every group-linked zone requirement and mirrors
+non-empty `regulated_use_terms` into `applies_to_use_terms`.
+
+Verification on 2026-05-06 checked 535 current and 269 draft group-linked
+requirements with 0 missing zone stamps and 0 mismatched use-term lists. The
+population audit remained at the expected Task 7 floor:
+`requirement_applicability_missing` = 167/702 (23.8%) for current and
+174/443 (39.3%) for draft.
+
+The importer shim remains in place. The apparent 9-row current import churn
+was traced to local database drift from a temporary mojibake import of DC, DMS,
+P, and WF requirement text during line-ending repair. After restoring UTF-8
+JSON and rerunning the current importer on 2026-05-06, batch 10 reported all
+702 current requirements and all 42 current source files as unchanged. Treat
+the churn as local-state noise, not importer behavior.
 
 ### Current state
 

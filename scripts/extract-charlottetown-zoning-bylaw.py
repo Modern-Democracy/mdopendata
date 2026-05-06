@@ -4342,6 +4342,73 @@ def build_numeric_and_requirements(
     return numeric_values, requirements, other_requirements
 
 
+def stamp_zone_and_use_applicability(
+    requirements: list[dict[str, Any]],
+    zone_code: str | None,
+    regulated_use_terms: list[str],
+) -> None:
+    def union_into(target: list[str], extras: list[str]) -> list[str]:
+        seen = set(target)
+        for value in extras:
+            if value and value not in seen:
+                target.append(value)
+                seen.add(value)
+        return target
+
+    zone_codes = [zone_code] if zone_code else []
+    use_terms = [term for term in regulated_use_terms if term]
+    if not zone_codes and not use_terms:
+        return
+
+    for requirement in requirements:
+        applicability = requirement.setdefault("applicability", {})
+        if not isinstance(applicability, dict):
+            continue
+        if zone_codes:
+            applicability["applies_to_zone_codes"] = union_into(
+                list(applicability.get("applies_to_zone_codes") or []),
+                zone_codes,
+            )
+        if use_terms:
+            applicability["applies_to_use_terms"] = union_into(
+                list(applicability.get("applies_to_use_terms") or []),
+                use_terms,
+            )
+
+
+def stamp_zone_document_applicability(data: dict[str, Any]) -> dict[str, Any]:
+    metadata = data.get("document_metadata") or {}
+    if metadata.get("document_type") != "zone":
+        return data
+
+    structured = data.get("structured_data") or {}
+    requirements_by_id = {
+        req.get("requirement_id"): req
+        for req in structured.get("requirements") or []
+        if isinstance(req, dict) and req.get("requirement_id")
+    }
+    zone_code = metadata.get("zone_code")
+    for group in structured.get("regulation_groups") or []:
+        if not isinstance(group, dict):
+            continue
+        group_zone_codes = [
+            code
+            for code in (group.get("applicability") or {}).get("applies_to_zone_codes") or [zone_code]
+            if code
+        ]
+        regulated_use_terms = [term for term in group.get("regulated_use_terms") or [] if term]
+        if not group_zone_codes and not regulated_use_terms:
+            continue
+        group_requirements = [
+            requirements_by_id[ref]
+            for ref in group.get("requirement_refs") or []
+            if ref in requirements_by_id
+        ]
+        for group_zone_code in group_zone_codes or [None]:
+            stamp_zone_and_use_applicability(group_requirements, group_zone_code, regulated_use_terms)
+    return data
+
+
 def term_category_from_entry(table: str, entry: dict[str, Any] | None) -> str:
     if not entry:
         return "unknown"
@@ -4872,6 +4939,8 @@ def transform_zone(normalizer: Normalizer, legacy: dict[str, Any]) -> dict[str, 
     clause_lookup = clause_lookup_from_raw(raw_sections)
     terms, uses = build_terms_and_uses(normalizer, legacy.get("permitted_uses") or [], prefix, clause_lookup, review_flags)
     numeric_values, requirements, other_requirements = build_numeric_and_requirements(raw_sections, prefix, review_flags)
+    regulated_use_terms = [use["use_term_id"] for use in uses if use.get("use_status") == "permitted"]
+    stamp_zone_and_use_applicability(requirements, metadata.get("zone_code"), regulated_use_terms)
     doc_cite = doc_citation_from_legacy(legacy)
     raw_map_refs, structured_map_refs = map_refs(prefix, doc_cite, metadata.get("zone_code"))
     source_unit_id = prefix
@@ -4887,7 +4956,7 @@ def transform_zone(normalizer: Normalizer, legacy: dict[str, Any]) -> dict[str, 
                     "regulation_group_id": f"{prefix}-regulation-group-zone",
                     "group_label_raw": str(metadata.get("part_label_raw") or ""),
                     "group_title_raw": zone_title_from_heading(metadata),
-                    "regulated_use_terms": [use["use_term_id"] for use in uses if use.get("use_status") == "permitted"],
+                    "regulated_use_terms": regulated_use_terms,
                     "applicability": {"applies_to_zone_codes": [metadata.get("zone_code")], "conditions": []},
                     "requirement_refs": [req["requirement_id"] for req in requirements],
                     "source_section_ref": raw_sections[0]["section_id"] if raw_sections else source_unit_id,
@@ -5335,7 +5404,12 @@ def main() -> None:
             apply_pz_land_use_buffer_context(data)
             repair_reviewed_draft_zone_clause_text(data)
             promote_reviewed_draft_zone_requirements(data)
-            write_json(path, apply_zone_reference_model(refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data))))
+            write_json(
+                path,
+                stamp_zone_document_applicability(
+                    apply_zone_reference_model(refresh_schema_terms(normalizer, strip_unreviewed_term_codes(data)))
+                ),
+            )
             continue
         transformed = transform_zone(normalizer, data)
         rebuild_schema_tables_from_pdf(pdf_doc, transformed)
@@ -5354,7 +5428,7 @@ def main() -> None:
         apply_pz_land_use_buffer_context(transformed)
         repair_reviewed_draft_zone_clause_text(transformed)
         promote_reviewed_draft_zone_requirements(transformed)
-        write_json(path, transformed)
+        write_json(path, stamp_zone_document_applicability(transformed))
 
     for item in manifest.get("document_files", []):
         path = OUT / item["file"]

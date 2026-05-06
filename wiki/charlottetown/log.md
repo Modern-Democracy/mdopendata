@@ -3,7 +3,7 @@ type: log
 tags:
   - charlottetown
   - log
-updated: 2026-05-05
+updated: 2026-05-06
 ---
 
 Append new entries in reverse chronological order. Use headings in this format:
@@ -13,6 +13,27 @@ Append new entries in reverse chronological order. Use headings in this format:
 ```text
 ## [YYYY-MM-DD] type | Short title
 ```
+
+## [2026-05-06] data-engineering | Task 7 extractor-side applicability stamping
+
+Implemented the extractor-side half of backlog Task 7 by stamping
+`applicability.applies_to_zone_codes` and mirrored
+`applicability.applies_to_use_terms` onto group-linked current and draft zone
+requirements. Verified 535 current and 269 draft linked requirements with 0
+missing zone stamps and 0 mismatched use-term lists; audit dry-run preserved
+the expected residual applicability gaps of 167/702 current and 174/443 draft.
+Kept the importer shim because current import events still showed 9 added
+requirement rows and 9 removed structured-fact rows while active payloads
+retained propagated applicability.
+
+## [2026-05-06] debugging | Task 7 current import churn resolved
+
+Investigated the 9 current requirement import events from Task 7 verification.
+The duplicate logical keys showed a temporary mojibake variant for DC, DMS, P,
+and WF requirement text introduced during a PowerShell line-ending repair. After
+restoring UTF-8 JSON and rerunning current import batch 10, all 702 current
+requirements and all 42 current source files imported as unchanged. The churn
+was local database drift, not importer behavior.
 
 ## [2026-05-05] incident | Whole-cluster database rebuild handoff
 

@@ -201,6 +201,7 @@ def transform_zone_doc(path: Path) -> dict[str, Any]:
     current.promote_reviewed_draft_zone_requirements(data)
     current.refresh_schema_terms(NORMALIZER, data)
     current.apply_zone_reference_model(data)
+    current.stamp_zone_document_applicability(data)
     return data
 
 
