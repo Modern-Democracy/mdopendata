@@ -369,7 +369,7 @@ function App() {
           <h3 className="panel-title">Layers</h3>
           <LayerToggle checked={layers.current} color="var(--brick)" name="Current zoning" count={counts.current} onChange={(value)=>setLayers({...layers, current:value})} />
           <LayerToggle checked={layers.draft} color="var(--ochre)" name="Draft zoning" count={counts.draft} onChange={(value)=>setLayers({...layers, draft:value})} />
-          <LayerToggle checked={layers.buildings} color="#d8c3a2" name="OSM buildings" count={counts.buildings} onChange={(value)=>setLayers({...layers, buildings:value})} />
+          <LayerToggle checked={layers.buildings} color="#d8c3a2" name="Buildings" count={counts.buildings} onChange={(value)=>setLayers({...layers, buildings:value})} />
           <LayerToggle checked={layers.parcels} color="var(--paper-2)" name="Parcel outlines" count={counts.parcels} onChange={(value)=>setLayers({...layers, parcels:value})} />
 
           <h3 className="panel-title">Map status</h3>
@@ -380,7 +380,7 @@ function App() {
             <div className="item"><div className="label">Parcel</div><div>{parcel?.source?.parcelTable || 'zoning.v_charlottetown_parcel_map'}</div></div>
             <div className="item"><div className="label">Current zoning</div><div>{parcel?.source?.currentZoningTable || 'zoning.v_charlottetown_current_zoning_boundaries'}</div></div>
             <div className="item"><div className="label">Draft zoning</div><div>{parcel?.source?.draftZoningTable || 'zoning.v_charlottetown_draft_zoning_boundaries'}</div></div>
-            <div className="item"><div className="label">OSM buildings</div><div>zoning.v_charlottetown_osm_buildings</div></div>
+            <div className="item"><div className="label">Buildings</div><div>zoning.v_charlottetown_buildings</div></div>
           </div>
         </aside>
         <MapView pid={pid} parcel={parcel} layers={layers} onLayerCounts={setCounts} onStatus={setStatus} />

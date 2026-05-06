@@ -214,6 +214,7 @@ Expected public source-table counts for the registered Charlottetown layers:
 | `charlottetown_current_zoning_boundaries` | 1558 |
 | `charlottetown_draft_zoning_boundaries` | 20 |
 | `charlottetown_schedule_a_wetlands` | 64 |
+| `charlottetown_buildings` | 13144 |
 
 After the source tables are present, rerun
 `schema/sql/006_charlottetown_spatial_registration.sql` to register them into

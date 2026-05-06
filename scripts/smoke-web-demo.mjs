@@ -55,9 +55,9 @@ const checks = [
     expectJson: (payload) => payload.type === "FeatureCollection" && Array.isArray(payload.features) && Boolean(payload.metadata?.source),
   },
   {
-    name: "OSM buildings GeoJSON API contract",
+    name: "Buildings GeoJSON API contract",
     path: "/api/buildings/osm.geojson?bbox=-63.20,46.20,-63.05,46.30&limit=1",
-    expectJson: (payload) => payload.type === "FeatureCollection" && Array.isArray(payload.features) && payload.metadata?.source === "zoning.v_charlottetown_osm_buildings",
+    expectJson: (payload) => payload.type === "FeatureCollection" && Array.isArray(payload.features) && payload.metadata?.source === "zoning.v_charlottetown_buildings",
   },
 ];
 

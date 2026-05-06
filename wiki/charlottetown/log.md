@@ -14,6 +14,24 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-05-06] spatial | Zoning buildings layer refreshed
+
+Added `schema/sql/018_refresh_charlottetown_buildings.sql` to replace the
+zoning-registered OSM building layer with `charlottetown_buildings` sourced
+from `public."CHTWN_Buildings"`. The new
+`zoning.v_charlottetown_buildings` materialized view exposes LiDAR height
+fields for 13,144 building features; the web building GeoJSON API now reports
+`zoning.v_charlottetown_buildings` as its source while retaining the existing
+route path.
+
+## [2026-05-06] planning | Parcel LiDAR metrics plan
+
+Added `topics/parcel-lidar-metrics-plan.md` for a derived
+`public."CHTWN_Parcel_LiDAR_Metrics"` layer keyed to
+`public."CHTWN_Parcel_Map"`. The plan covers building assignment, terrain
+metrics, canopy metrics, QA flags, provenance fields, QGIS styles, and
+acceptance checks while preserving source parcel and building layers.
+
 ## [2026-05-06] spatial | CHTWN buildings layer added to QGIS
 
 Added `public."CHTWN_Buildings"` to `C:/Users/19029/GIS/peiopendata.qgz`

@@ -816,9 +816,12 @@ async function loadParcelRestrictionStack(pid) {
         b.building,
         b.name,
         b.levels,
+        b.height_lidar_m,
+        b.height_lidar_confidence,
+        b.height_lidar_status,
         b.geom
       FROM selected_parcel p
-      JOIN zoning.v_charlottetown_osm_buildings b
+      JOIN zoning.v_charlottetown_buildings b
         ON b.geom && ST_Buffer(p.geom, 55)
        AND ST_Intersects(b.geom, ST_Buffer(p.geom, 55))
       ORDER BY ST_Area(ST_Intersection(b.geom, p.geom)) DESC NULLS LAST, b.spatial_feature_id
@@ -1186,6 +1189,9 @@ async function loadParcelRestrictionStack(pid) {
             'building', b.building,
             'name', b.name,
             'levels', b.levels,
+            'heightLidarM', b.height_lidar_m,
+            'heightLidarConfidence', b.height_lidar_confidence,
+            'heightLidarStatus', b.height_lidar_status,
             'featureKey', b.feature_key
           )
         ) AS feature
@@ -1565,10 +1571,14 @@ async function loadParcelRestrictionBuffers(pid) {
         b.building,
         b.name,
         b.levels,
+        b.height_lidar_m,
+        b.height_lidar_method,
+        b.height_lidar_confidence,
+        b.height_lidar_status,
         b.attributes,
         b.geom
       FROM selected_parcel p
-      JOIN zoning.v_charlottetown_osm_buildings b
+      JOIN zoning.v_charlottetown_buildings b
         ON b.geom && p.geom
        AND ST_Intersects(b.geom, p.geom)
       ORDER BY ST_Area(ST_Intersection(b.geom, p.geom)) DESC, b.spatial_feature_id
@@ -1651,8 +1661,12 @@ async function loadParcelRestrictionBuffers(pid) {
             'levels', b.levels,
             'osmType', b.osm_type,
             'osmId', b.osm_id,
+            'heightLidarM', b.height_lidar_m,
+            'heightLidarMethod', b.height_lidar_method,
+            'heightLidarConfidence', b.height_lidar_confidence,
+            'heightLidarStatus', b.height_lidar_status,
             'source', jsonb_build_object(
-              'table', 'zoning.v_charlottetown_osm_buildings',
+              'table', 'zoning.v_charlottetown_buildings',
               'spatialFeatureId', b.spatial_feature_id,
               'featureKey', b.feature_key
             )
@@ -2090,7 +2104,7 @@ async function loadDraftZoningGeoJson(bbox, limit) {
   };
 }
 
-async function loadOsmBuildingsGeoJson(bbox, limit) {
+async function loadBuildingsGeoJson(bbox, limit) {
   const params = [limit];
   let bboxFilter = "";
   if (bbox) {
@@ -2104,7 +2118,7 @@ async function loadOsmBuildingsGeoJson(bbox, limit) {
     `
     WITH source AS (
       SELECT *
-      FROM zoning.v_charlottetown_osm_buildings b
+      FROM zoning.v_charlottetown_buildings b
       ${bboxFilter}
       ORDER BY spatial_feature_id
       LIMIT $1
@@ -2120,9 +2134,13 @@ async function loadOsmBuildingsGeoJson(bbox, limit) {
           'levels', levels,
           'osmType', osm_type,
           'osmId', osm_id,
+          'heightLidarM', height_lidar_m,
+          'heightLidarMethod', height_lidar_method,
+          'heightLidarConfidence', height_lidar_confidence,
+          'heightLidarStatus', height_lidar_status,
           'attributes', attributes,
           'source', jsonb_build_object(
-            'table', 'zoning.v_charlottetown_osm_buildings',
+            'table', 'zoning.v_charlottetown_buildings',
             'spatialFeatureId', spatial_feature_id,
             'featureKey', feature_key
           )
@@ -2134,7 +2152,7 @@ async function loadOsmBuildingsGeoJson(bbox, limit) {
       'type', 'FeatureCollection',
       'features', COALESCE(jsonb_agg(feature), '[]'::jsonb),
       'metadata', jsonb_build_object(
-        'source', 'zoning.v_charlottetown_osm_buildings',
+        'source', 'zoning.v_charlottetown_buildings',
         'limit', $1
       )
     ) AS geojson
@@ -2145,7 +2163,7 @@ async function loadOsmBuildingsGeoJson(bbox, limit) {
   return rows[0]?.geojson || {
     type: "FeatureCollection",
     features: [],
-    metadata: { source: "zoning.v_charlottetown_osm_buildings", limit },
+    metadata: { source: "zoning.v_charlottetown_buildings", limit },
   };
 }
 
@@ -2679,7 +2697,7 @@ const server = createServer(async (request, response) => {
       }
       const bbox = parseBbox(url.searchParams.get("bbox"));
       const limit = normalizeLimit(url.searchParams.get("limit"), 2000, 8000);
-      await sendGeoJson(response, await loadOsmBuildingsGeoJson(bbox, limit));
+      await sendGeoJson(response, await loadBuildingsGeoJson(bbox, limit));
       return;
     }
 
