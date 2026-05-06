@@ -14,6 +14,33 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-05-06] spatial | CHTWN buildings layer added to QGIS
+
+Added `public."CHTWN_Buildings"` to `C:/Users/19029/GIS/peiopendata.qgz`
+through the existing local PostGIS connection and styled it with a 6-class
+graduated renderer on `height_lidar_m`. QGIS verification found the layer
+visible with 13,144 features, provider `postgres`, renderer
+`QgsGraduatedSymbolRenderer`, class attribute `height_lidar_m`, and 6 ranges.
+
+## [2026-05-06] spatial | CHTWN buildings height style prepared
+
+Prepared `data/spatial/charlottetown/chtwn-buildings-height-lidar.qml` for
+styling `public."CHTWN_Buildings"` by `height_lidar_m` in QGIS. The live QGIS
+MCP endpoint was not connected during this pass, and no saved `.qgs` or `.qgz`
+project file was present in the repository, so the layer could not be inserted
+into an open or saved QGIS project.
+
+## [2026-05-06] spatial | LiDAR building-height layer implemented
+
+Added `scripts/build-charlottetown-lidar-buildings.py`, processed the PEI
+2020 COPC LAZ tiles under `maps/pei/lidar`, and created derived layer
+`public."CHTWN_Buildings"` while leaving source layer
+`public."CHTWN_OSM_Buildings"` unchanged. The full run populated 13,144 of
+13,144 buildings with `height_lidar_m`; confidence counts were 12,462 high,
+17 medium, 5 low, and 660 needs_review. QA found 0 source attribute or
+geometry mismatches between the source and derived layers, 0 invalid derived
+geometries, and 0 empty derived geometries.
+
 ## [2026-05-06] planning | LiDAR building height orchestration
 
 Added `topics/lidar-building-height-plan.md` for deriving Charlottetown

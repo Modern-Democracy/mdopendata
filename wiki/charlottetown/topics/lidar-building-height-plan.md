@@ -9,25 +9,44 @@ tags:
 updated: 2026-05-06
 ---
 
-This page plans the workflow for deriving Charlottetown building heights from PEI 2020 LiDAR and attaching the results to `public."CHTWN_OSM_Buildings"`.
+This page records the implemented workflow for deriving Charlottetown building heights from PEI 2020 LiDAR and attaching the results to a derived `public."CHTWN_Buildings"` layer.
 
 # LiDAR Building Height Plan
 
 ## Objective
 
-Populate building-height attributes for every feature in `public."CHTWN_OSM_Buildings"` using the COPC LAZ tiles in `maps/pei/lidar`, while preserving any existing OSM height or level tags as source attributes rather than overwriting them without provenance.
+Populate building-height attributes for every feature in a derived `public."CHTWN_Buildings"` layer using the COPC LAZ tiles in `maps/pei/lidar`, while preserving `public."CHTWN_OSM_Buildings"` as the unmodified source layer.
+
+## Implementation Status
+
+Implemented on 2026-05-06 by `scripts/build-charlottetown-lidar-buildings.py`.
+
+The script exports source footprints from `public."CHTWN_OSM_Buildings"`, transforms them to EPSG:2961 for LiDAR sampling, reads the COPC LAZ tiles with `laspy`, derives robust roof and ground elevations, writes a reproducible CSV/summary under `data/spatial/charlottetown/lidar-building-heights`, and rebuilds `public."CHTWN_Buildings"` from the source layer plus LiDAR fields.
+
+QA evidence from the initial full run:
+
+| Check | Result |
+| --- | --- |
+| Source rows | 13,144 in `public."CHTWN_OSM_Buildings"`. |
+| Derived rows | 13,144 in `public."CHTWN_Buildings"`. |
+| Derived height coverage | 13,144 with `height_lidar_m`; 0 null. |
+| Confidence distribution | 12,462 high, 17 medium, 5 low, 660 needs_review. |
+| Height distribution | min 0.05 m, median 7.01 m, p95 13.53 m, max 38.42 m. |
+| Geometry QA | 0 invalid geometries, 0 empty geometries. |
+| Source preservation QA | 0 mismatches for copied source attributes or geometry. |
+| OSM height-tag comparison | 30 comparable OSM height tags; median absolute delta 3.99 m. |
 
 ## Current Inputs
 
 | Input | Current known state | Use |
 | --- | --- | --- |
 | `maps/pei/lidar/*.copc.laz` | 68 PEI 2020 COPC LAZ tiles whose filenames encode 1 km tile origins. | Source point cloud for roof and ground elevations. |
-| `public."CHTWN_OSM_Buildings"` | 13,144 valid `MULTIPOLYGON` features, SRID 4326, clipped to `public."CHTWN_Municipal_Boundary"`. | Target building footprint layer. |
+| `public."CHTWN_OSM_Buildings"` | 13,144 valid `MULTIPOLYGON` features, SRID 4326, clipped to `public."CHTWN_Municipal_Boundary"`. | Source building footprint layer. |
 | Existing OSM attributes | 30 features have a non-empty OSM `height` tag and 263 have `levels`; 264 have either height or levels. | QA comparison and fallback context, not the primary LiDAR result. |
 
 ## Output Contract
 
-The target layer should receive LiDAR-derived attributes with explicit provenance and confidence fields. Do not collapse them into the OSM tag fields.
+The derived `public."CHTWN_Buildings"` layer receives LiDAR-derived attributes with explicit provenance and confidence fields. Do not collapse them into the OSM tag fields.
 
 Proposed fields:
 
@@ -36,13 +55,13 @@ Proposed fields:
 | `height_lidar_m` | numeric | Recommended building height in metres. |
 | `height_lidar_method` | text | Method identifier, for example `roof_p95_minus_ground_p05_v1`. |
 | `height_lidar_confidence` | text | `high`, `medium`, `low`, or `needs_review`. |
-| `height_lidar_source_tiles` | text[] or jsonb | COPC LAZ tile names used for the feature. |
+| `height_lidar_source_tiles` | text[] | COPC LAZ tile names used for the feature. |
 | `height_lidar_point_count` | integer | Count of LiDAR points used inside or near the building footprint. |
 | `height_lidar_ground_m` | numeric | Estimated ground elevation used as the base. |
 | `height_lidar_roof_m` | numeric | Estimated roof elevation used as the top. |
+| `height_lidar_status` | text | Derivation status, currently `derived` for every initial row. |
 | `height_lidar_updated_at` | timestamptz | Derivation timestamp. |
-
-If the table must remain simple for QGIS, use scalar columns for the recommended height and confidence, plus one `jsonb` provenance column for detailed statistics.
+| `height_lidar_provenance` | jsonb | Detailed derivation metadata and secondary quantiles. |
 
 ## Orchestration Plan
 
@@ -72,9 +91,9 @@ If the table must remain simple for QGIS, use scalar columns for the recommended
    - Compare LiDAR-derived heights against the 30 OSM height tags and the 263 `levels` values as QA controls, allowing that OSM levels are storeys rather than metres.
 
 6. Write results through a repeatable script.
-   - Add a migration or documented DDL step for the new columns.
-   - Write a Python backfill script that can run in dry-run mode, emits summary counts, and updates only the LiDAR-derived columns.
-   - Keep a staging table or CSV/GeoPackage output so results can be audited before mutating `public."CHTWN_OSM_Buildings"`.
+   - Rebuild `public."CHTWN_Buildings"` from `public."CHTWN_OSM_Buildings"` plus LiDAR-derived fields.
+   - Keep `public."CHTWN_OSM_Buildings"` unchanged as the source layer.
+   - Keep a CSV and JSON summary output so results can be audited before or after database creation.
 
 7. QA the database result.
    - Verify all 13,144 buildings receive either `height_lidar_m` or a non-null confidence/status explaining why no height was derived.
@@ -85,7 +104,7 @@ If the table must remain simple for QGIS, use scalar columns for the recommended
 ## Implementation Notes
 
 - Use explicit schema-qualified names for all database references.
-- Treat `public."CHTWN_OSM_Buildings"` as a public spatial source layer; if future zoning workflows need history or audit events, register a derived building-height layer separately instead of forcing it into the `zoning.*` import model.
+- Treat `public."CHTWN_OSM_Buildings"` as a public spatial source layer; the implemented derived layer is `public."CHTWN_Buildings"`.
 - The Postgres MCP path is read-only. Any database mutation should be done by a script using the repository's normal `psycopg` connection pattern or by an explicit migration runner.
 - Do not use existing OSM height or level fields as replacement data for LiDAR heights. Use them only as independent comparison controls and optional fallback display metadata.
 - Keep raw LAZ files immutable. Generated rasters, staging tables, reports, and QA summaries should be reproducible from the raw tiles and building footprints.
@@ -96,7 +115,7 @@ If the table must remain simple for QGIS, use scalar columns for the recommended
 | --- | --- | --- |
 | Height definition | Roof p95 minus ground p05/DTM median under footprint. | Avoids chimneys, antennas, and isolated outlier returns. |
 | DTM source | Build from LiDAR ground class if available; otherwise derive local ground from neighbourhood low quantiles. | Building height requires a base elevation, not just roof elevation. |
-| Storage location | Add LiDAR-derived columns to `public."CHTWN_OSM_Buildings"` plus generated staging output. | Matches the requested target layer while keeping auditability. |
+| Storage location | Rebuild `public."CHTWN_Buildings"` from `public."CHTWN_OSM_Buildings"` plus generated staging output. | Keeps the OSM source table unchanged while providing a GIS-ready derived layer. |
 | Existing height handling | Preserve OSM tags and add separate LiDAR fields. | Prevents source conflation. |
 | Review artifact | CSV or GeoPackage with all low-confidence and outlier buildings. | Enables QGIS/manual QA before accepting the backfill. |
 
@@ -115,4 +134,7 @@ If the table must remain simple for QGIS, use scalar columns for the recommended
 - [Zoning data-layer conventions](./data-layer-conventions.md)
 - `maps/pei/lidar`
 - `public."CHTWN_OSM_Buildings"`
+- `public."CHTWN_Buildings"`
 - `public."CHTWN_Municipal_Boundary"`
+- `scripts/build-charlottetown-lidar-buildings.py`
+- `data/spatial/charlottetown/lidar-building-heights/chtwn-building-lidar-heights-full.summary.json`
