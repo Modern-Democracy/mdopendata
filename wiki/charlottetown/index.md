@@ -3,7 +3,7 @@ type: index
 tags:
   - charlottetown
   - catalog
-updated: 2026-04-30
+updated: 2026-05-06
 ---
 
 This index catalogs the Charlottetown LLM Wiki pages and source families. Update it whenever wiki pages are added, renamed, or materially changed.
@@ -61,7 +61,7 @@ These source families remain outside the wiki and must be referenced in place:
 
 ## Current Status
 
-The wiki contains a scaffold, targeted draft extraction repair and validation notes, and the active unified zoning ingestion plan. The unified zoning schema and initial JSON importer are implemented, the relational core is populated, section-equivalence candidate review has been applied to the database, Phase 4 spatial registration and linkage is active, and the post-fix draft validation rebaseline timeline is complete.
+The wiki contains a scaffold, targeted draft extraction repair and validation notes, and the active unified zoning ingestion plan. The unified zoning schema and importer are implemented, the relational core is populated, current Chapters 1-3 and split current general-provisions artifacts are imported, Phase 4 spatial registration and linkage is active, and the regenerated section-equivalence candidates are fully reviewed.
 
 ## Sources
 

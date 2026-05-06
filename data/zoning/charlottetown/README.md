@@ -6,8 +6,10 @@ This folder contains a non-normalized source extraction for the City of Charlott
 
 ## Organization
 
+- `administration.json`: current chapters 1-2 preserved as source provisions for draft Part 1 comparison.
+- `permit-applications-processes.json`: current chapter 3 preserved as source provisions for draft Part 2 comparison.
 - `zones/*.json`: one file per zone or zoning district from chapters 9 through 45.
-- `general-provisions.json`: chapters 4-6 and 46-48 preserved as non-normalized source provisions.
+- `general-provisions-*.json`: chapters 4-6 and 46-48 split into themed source-provision files.
 - `design-standards-500-lot-area.json`: chapter 7 design standards preserved as source provisions.
 - `definitions.json`: Appendix A definitions split into source definition entries where the `means` pattern is clear.
 - `appendix-b-cda-parcels-and-permitted-uses.json`: preserved CDA parcel/permitted-use appendix text by PDF page.
@@ -16,7 +18,7 @@ This folder contains a non-normalized source extraction for the City of Charlott
 
 ## Extraction status
 
-- Non-zone extraction scope includes general provisions, 500 Lot Area design standards, and Appendix A definitions.
+- Non-zone extraction scope includes chapters 1-7, chapters 46-48, 500 Lot Area design standards, and Appendix A definitions.
 - Zone chapter scope: chapters 9-45, PDF pages 61-123.
 - Bylaw page numbers are recorded as matching the visible page number in the PDF header.
 - Clear decimal provisions such as `9.1.1` are preserved raw and represented as single clause path units.

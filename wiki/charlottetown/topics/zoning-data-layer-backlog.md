@@ -24,7 +24,7 @@ has not seen the originating conversation can pick it up cold.
 | 3 — Parcel resolver | ✅ v1.1 delivered | `schema/sql/012_parcel_resolver.sql`, `schema/sql/013_parcel_resolver_civic_address.sql`, `scripts/extract-charlottetown-appendix-c-exemptions.py`, `scripts/apply-charlottetown-appendix-c-exemptions.py` |
 | 4 — Visualization | ✅ local demo delivered; hardening pending | `web/server.js`, `web/public/ui_kits/*`, `scripts/smoke-web-demo.mjs`, [Web demo design kit plan](../../implementation/web-demo-design-kit-plan.md) |
 | 5 — Table-derived facts first-class | ✅ delivered | `schema/sql/011_table_anchored_inheritance.sql`, `scripts/import-charlottetown-zoning.py`, `scripts/audit-charlottetown-population.py` |
-| 6 — Split current `general-provisions.json` | ⏳ pending | — |
+| 6 — Split current `general-provisions.json` | delivered | `scripts/split-charlottetown-general-provisions.py`, `scripts/extract-charlottetown-current-admin-permit-chapters.py`, current `general-provisions-*.json`, `administration.json`, and `permit-applications-processes.json` |
 | 7 — Stamp `applies_to_*` at extraction time | ✅ delivered | `scripts/extract-charlottetown-zoning-bylaw.py`, `scripts/regenerate-charlottetown-draft-zoning-bylaw.py`, `scripts/import-charlottetown-zoning.py` |
 | 8 — Inheritance closure `DISTINCT ON` (perf) | ✅ delivered | `schema/sql/014_inherited_reqs_distinct_on.sql` |
 
@@ -33,16 +33,13 @@ in `scripts/import-charlottetown-zoning.py` (Option A from the gap-3
 investigation; closes `requirement_applicability_missing` from 100% to
 ~24/39%, see Task 7 for the extractor-side follow-up).
 
-Audit note from 2026-05-05: the delivered artifacts for Tasks 1, 2, 3, 5,
-and 8 exist, and live database inspection supported the major resolver and
-parcel-smoke claims at audit time. However, the local
-`public.schema_migrations` ledger did not record migrations 010 through
-014 even though their views/functions were present, so rebuild verification
-must confirm that a clean `scripts/run-migrations.py` pass applies and
-records the full migration set. The persisted `coverage_gap` rows may lag
-behind importer changes; a fresh
-`scripts/audit-charlottetown-population.py --dry-run --no-snapshot` run is
-the current baseline check until the audit is re-run and written.
+Audit note from 2026-05-06: the local `public.schema_migrations` ledger now
+records migrations through `016_spatial_layer_missing_source_status.sql`.
+After Task 6 current import batch 14, the active current dataset has 49 source
+files, 250 sections, 1,843 clauses, and 2,862 active structured facts including
+manual current facts. The refreshed audit records current
+`requirement_applicability_missing` at 169/704, reflecting the added
+document-level Chapters 1-3 requirements.
 
 Read first, in order, for context:
 
@@ -872,6 +869,25 @@ mismatched layout currently relies on section-label heuristics.
   more.
 - The `wiki/charlottetown/topics/database-standup.md` artifact map is
   updated to list the six themed siblings.
+
+### Status (delivered)
+
+Task 6 was completed on 2026-05-06. The current `general-provisions.json`
+artifact was replaced by six themed siblings for Chapters 4, 5, 6, 46, 47,
+and 48, preserving all 94 original sections, 863 clause refs, 43 raw tables,
+and 430 structured items. Current Chapters 1-3 were also extracted from
+`docs/charlottetown/charlottetown-zoning-bylaw.pdf` into `administration.json`
+and `permit-applications-processes.json`, adding 23 sections and 259 clause
+refs so draft Parts 1-2 can generate comparison candidates.
+
+Current import batch 14 loaded 49 source files, 250 sections, 1,843 clauses,
+43 raw tables, 1,267 raw table cells, and 2,802 source-derived structured
+facts with zero review flags and zero `confidence: "needs_review"` values.
+Section-equivalence review is complete for the regenerated candidate set. The
+143 post-split candidates were reviewed on 2026-05-06: 107 decisions were
+carried forward from the pre-split general-provisions review, and 36 current
+Chapter 1-3 candidates were reviewed directly. The database now has 183
+accepted rows, 99 rejected rows, and 0 candidate or needs_review rows.
 
 ### Open decisions
 

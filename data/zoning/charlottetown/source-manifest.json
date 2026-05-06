@@ -324,20 +324,81 @@
     "Definitions are split heuristically on term-plus-means patterns and require QA for nested definition blocks.",
     "Generated JSON files use the approved extraction schema and omit legacy importer compatibility fields.",
     "Reviewed term and use code tables are matched through structured_data.terms and linked from uses.use_term_id.",
-    "Unmatched normalized terms, use phrases, table cells, and layout-sensitive content are preserved with review_flags."
+    "Unmatched normalized terms, use phrases, table cells, and layout-sensitive content are preserved with review_flags.",
+    "Current Chapters 1-3 are extracted as document_type other artifacts for comparison with draft Parts 1-2.",
+    "Current general provisions are split into themed Chapter 4, 5, 6, 46, 47, and 48 JSON artifacts."
   ],
   "document_files": [
     {
-      "file": "general-provisions.json",
+      "file": "administration.json",
+      "document_type": "other",
+      "pdf_page_start": 11,
+      "pdf_page_end": 16,
+      "source_sections": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "file": "permit-applications-processes.json",
+      "document_type": "other",
+      "pdf_page_start": 17,
+      "pdf_page_end": 32,
+      "source_sections": [
+        "3"
+      ]
+    },
+    {
+      "file": "general-provisions-buildings-structures.json",
       "document_type": "general_provisions",
       "pdf_page_start": 33,
+      "pdf_page_end": 40,
+      "source_sections": [
+        "4"
+      ]
+    },
+    {
+      "file": "general-provisions-land-use.json",
+      "document_type": "general_provisions",
+      "pdf_page_start": 41,
+      "pdf_page_end": 49,
+      "source_sections": [
+        "5"
+      ]
+    },
+    {
+      "file": "general-provisions-lots-site-design.json",
+      "document_type": "general_provisions",
+      "pdf_page_start": 50,
+      "pdf_page_end": 55,
+      "source_sections": [
+        "6"
+      ]
+    },
+    {
+      "file": "general-provisions-parking.json",
+      "document_type": "general_provisions",
+      "pdf_page_start": 124,
+      "pdf_page_end": 134,
+      "source_sections": [
+        "46"
+      ]
+    },
+    {
+      "file": "general-provisions-signage.json",
+      "document_type": "general_provisions",
+      "pdf_page_start": 135,
+      "pdf_page_end": 151,
+      "source_sections": [
+        "47"
+      ]
+    },
+    {
+      "file": "general-provisions-subdividing-land.json",
+      "document_type": "general_provisions",
+      "pdf_page_start": 152,
       "pdf_page_end": 166,
       "source_sections": [
-        "4",
-        "5",
-        "6",
-        "46",
-        "47",
         "48"
       ]
     },

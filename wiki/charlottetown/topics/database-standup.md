@@ -5,7 +5,7 @@ tags:
   - database
   - standup
   - operations
-updated: 2026-05-05
+updated: 2026-05-06
 ---
 
 # Database Standup
@@ -36,6 +36,8 @@ unrecoverable from the JSON sources alone.
 | Spatial layers | `data/spatial/charlottetown/` |
 | Manual draft zoning-map corrections (data) | `data/spatial/charlottetown/manual-corrections/draft-zoning-map-corrections.json` |
 | Manual draft zoning-map corrections (script) | `scripts/apply-charlottetown-draft-zoning-manual-corrections.py` |
+| Current general-provisions splitter | `scripts/split-charlottetown-general-provisions.py` |
+| Current Chapters 1-3 extractor | `scripts/extract-charlottetown-current-admin-permit-chapters.py` |
 
 ## `schema/sql` Ownership Contract
 
@@ -185,9 +187,15 @@ Expected post-import counts (current loaded dataset):
 | Table | Count |
 | --- | --- |
 | `bylaw_document` | 2 |
-| `section` | 486 |
-| `clause` | 3779 |
-| `structured_fact` | 5515 |
+| `section` | 509 |
+| `clause` | 3938 |
+| `structured_fact` | 5393 |
+
+The active current family after import batch 14 has 49 source files, 250
+sections, 1,843 clauses, and 2,862 active structured facts including manual
+current facts. Current Chapters 1-3 are loaded as `administration.json` and
+`permit-applications-processes.json`; current general provisions are split
+across six `general-provisions-*.json` siblings.
 
 ### 4. Load the public spatial source tables
 
@@ -519,8 +527,7 @@ The seven gap_type families the audit emits are documented in
 
 ## Backlog
 
-Open follow-up work — population audit, override-aware resolver, parcel
-resolver, and visualization — is captured as agent-pickable briefs in
+Remaining follow-up work and completed implementation briefs are captured in
 [Zoning data-layer backlog](zoning-data-layer-backlog.md).
 
 ## Conventions

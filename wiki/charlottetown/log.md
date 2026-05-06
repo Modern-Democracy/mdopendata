@@ -14,6 +14,27 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-05-06] data-quality | Task 6 section-equivalence candidates reviewed
+
+Reviewed all 143 `candidate` rows created after the current general-provisions
+split and current Chapters 1-3 extraction. Carried forward 107 pre-split
+general-provisions decisions by section suffix and draft section key, directly
+reviewed the 36 new Chapter 1-3 candidates, and exported 282 durable decisions
+to `data/zoning/charlottetown/manual-corrections/section-equivalence-decisions.json`.
+Verification found 0 candidate or needs_review rows, 0 accepted blank-side
+rows, and 0 missing decisions on replay dry-run.
+
+## [2026-05-06] data-engineering | Current coverage expansion and general-provisions split
+
+Completed backlog Task 6 by replacing current `general-provisions.json` with
+six themed `general-provisions-*.json` siblings and extracting current
+Chapters 1-3 from `docs/charlottetown/charlottetown-zoning-bylaw.pdf` into
+`administration.json` and `permit-applications-processes.json`. Current import
+batch 14 loaded 49 source files, 250 sections, 1,843 clauses, and 2,802
+source-derived structured facts with zero review flags or `needs_review`
+confidence values. Regenerated section-equivalence candidates now leave 83
+accepted, 56 rejected, and 143 candidate rows for manual review.
+
 ## [2026-05-06] extraction | RN 10.6.7 schedule bleedover repair
 
 Updated `topics/draft-layout-repair-notes.md` after trimming Figure 10.2 and Schedule 10.1 map-label bleedover from draft RN `zone-rn-clause-10-6-7` and the derived requirement in `data/zoning/charlottetown-draft/zones/rn.json`.
