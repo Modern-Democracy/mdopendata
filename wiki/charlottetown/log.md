@@ -35,6 +35,15 @@ restoring UTF-8 JSON and rerunning current import batch 10, all 702 current
 requirements and all 42 current source files imported as unchanged. The churn
 was local database drift, not importer behavior.
 
+## [2026-05-06] data-engineering | Task 7 importer shim removed
+
+Removed `propagate_group_applicability()` from
+`scripts/import-charlottetown-zoning.py` after extractor-side applicability
+stamping was verified. Post-removal import batches 11 and 12 reported all 702
+current requirements and all 443 draft requirements as unchanged, and the
+population audit dry-run retained the expected residual applicability gaps of
+167/702 current and 174/443 draft.
+
 ## [2026-05-05] incident | Whole-cluster database rebuild handoff
 
 Added `topics/database-rebuild-incident-2026-05-05.md` after a requested clean rebuild smoke test was incorrectly run against the whole `data/postgres` cluster volume instead of an isolated zoning-only test target. The page records the destructive action, current rebuilt database state, missing public spatial source tables, replayed zoning data state, uncommitted migration changes, and recovery options.

@@ -222,86 +222,11 @@ def make_record(table: str, family: str, natural_key: str, payload: dict[str, An
     return record
 
 
-def propagate_group_applicability(structured: dict[str, Any]) -> None:
-    """Propagate `applies_to_zone_codes` / `applies_to_use_terms` from each
-    `regulation_groups` entry down to the `requirements` (and
-    `other_requirements`) it references via `requirement_refs[]`.
-
-    The Charlottetown extractors set `applicability.applies_to_zone_codes`
-    and `regulated_use_terms` on the regulation_group that bundles the
-    requirements for a zone, but never on the individual requirement rows
-    those groups link to. The audit metric
-    `requirement_applicability_missing` sees the requirement rows directly
-    and reports a 100% gap as a result. This step performs the join in
-    memory (idempotent union, dedup-preserving order) so the propagated
-    values land on the requirement payload before `content_hash` is
-    computed downstream — re-running the importer is therefore enough to
-    refresh affected rows in place via the natural-key + content-hash
-    discipline.
-
-    Documented as the v1 fix for backlog Task 1's
-    `requirement_applicability_missing` gap; see
-    `wiki/charlottetown/topics/zoning-data-layer-backlog.md`.
-    """
-    groups = structured.get("regulation_groups") or []
-    if not groups:
-        return
-
-    requirements_by_id: dict[str, dict[str, Any]] = {}
-    for family in ("requirements", "other_requirements"):
-        for item in structured.get(family) or []:
-            if not isinstance(item, dict):
-                continue
-            rid = item.get("requirement_id")
-            if rid:
-                requirements_by_id[rid] = item
-
-    if not requirements_by_id:
-        return
-
-    def union_into(target: list[str], extras: list[str]) -> list[str]:
-        seen = set(target)
-        for value in extras:
-            if value and value not in seen:
-                target.append(value)
-                seen.add(value)
-        return target
-
-    for group in groups:
-        if not isinstance(group, dict):
-            continue
-        zone_codes = [
-            z for z in (group.get("applicability") or {}).get("applies_to_zone_codes") or []
-            if z
-        ]
-        use_terms = [u for u in group.get("regulated_use_terms") or [] if u]
-        if not zone_codes and not use_terms:
-            continue
-        for ref in group.get("requirement_refs") or []:
-            req = requirements_by_id.get(ref)
-            if req is None:
-                continue
-            applicability = req.setdefault("applicability", {})
-            if not isinstance(applicability, dict):
-                continue
-            if zone_codes:
-                applicability["applies_to_zone_codes"] = union_into(
-                    list(applicability.get("applies_to_zone_codes") or []),
-                    zone_codes,
-                )
-            if use_terms:
-                applicability["applies_to_use_terms"] = union_into(
-                    list(applicability.get("applies_to_use_terms") or []),
-                    use_terms,
-                )
-
-
 def collect_records(path: Path, payload: dict[str, Any], family: str, doc_revision_key: str) -> list[Record]:
     metadata = doc_metadata(payload, family)
     source_key = f"{doc_revision_key}|file|{relpath(path)}"
     raw = payload.get("raw_data") or {}
     structured = payload.get("structured_data") or {}
-    propagate_group_applicability(structured)
     records: list[Record] = []
 
     source_file_payload = {
