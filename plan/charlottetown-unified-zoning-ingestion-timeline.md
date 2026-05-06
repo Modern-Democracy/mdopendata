@@ -75,7 +75,7 @@ Inputs:
 
 Current evidence:
 
-- `zoning.spatial_layer` contains 6 approved layer contracts, `zoning.spatial_feature` contains 34,749 loaded features, `zoning.zone_spatial_feature` contains 1,565 zone-feature links, and `zoning.spatial_reference` contains 74 classified raw map references.
+- `zoning.spatial_layer` contains 6 approved layer contracts, `zoning.spatial_feature` contains 32,372 loaded features, `zoning.zone_spatial_feature` contains 1,565 zone-feature links, and `zoning.spatial_reference` contains 74 classified raw map references.
 - `zoning` now exposes 6 GIS-facing indexed materialized views: `v_charlottetown_civic_addresses`, `v_charlottetown_current_zoning_boundaries`, `v_charlottetown_draft_zoning_boundaries`, `v_charlottetown_parcel_map`, `v_charlottetown_schedule_a_wetlands`, and `v_charlottetown_street_network`.
 - `zoning.zone_code_crosswalk` contains 21 active rows, including draft `H` to `HI`, current legend no-hyphen map-code mappings, `FDA` to `FD`, and source-table `MUVC` to `ER-MUVC`.
 - Current zoning boundary features with raw codes `NA` and `U` remain unlinked to `zoning.zone_spatial_feature` because the current legend has no bylaw zone code for those map codes.

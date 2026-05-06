@@ -328,7 +328,7 @@ view + helper) that, given a parcel, returns:
 
 - Spatial layers loaded: `charlottetown_parcel_map` (13,833 parcels),
   `charlottetown_civic_addresses` (14,676), `charlottetown_street_network`
-  (4,598), `charlottetown_current_zoning_boundaries` (1,558),
+  (2,221 city-official street features), `charlottetown_current_zoning_boundaries` (1,558),
   `charlottetown_draft_zoning_boundaries` (20),
   `charlottetown_schedule_a_wetlands` (64).
 - `zone_spatial_feature` has 1,565 zone↔polygon links; both bylaws are

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Restriction Stack - Modern Democracy</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../../leaflet-theme.css">
+<link rel="stylesheet" href="../parcel-lookup/styles.css">
+<style>
+  html, body, #root { height: 100%; margin: 0; }
+  .stack-app { display: grid; grid-template-rows: auto 1fr; height: 100vh; background: var(--paper); }
+  .stack-body { display: grid; grid-template-columns: 340px minmax(0, 1fr); min-height: 0; overflow: hidden; }
+  .stack-panel { background: var(--paper-2); border-right: 1px solid var(--border-hair); overflow-y: auto; padding: 18px 18px 40px; }
+  .panel-title { font-family: var(--font-ui); font-weight: 600; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); margin: 0 0 10px; }
+  .panel-title:not(:first-child) { margin-top: 22px; }
+  .status-card, .parcel-card { background: var(--paper); border: 1px solid var(--border); border-radius: 4px; padding: 14px; margin-bottom: 14px; }
+  .parcel-card h2 { font-family: var(--font-display); font-weight: 500; font-size: 22px; line-height: 1.1; margin: 0 0 6px; color: var(--ink); }
+  .mono { font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-3); }
+  .zchip { font-family: var(--font-mono); font-weight: 600; font-size: 14px; padding: 4px 10px; border-radius: 3px; border: 1px solid rgba(26,22,18,0.12); display:inline-block; margin: 12px 8px 4px 0; }
+  .type-list { display: grid; gap: 8px; }
+  .type-toggle { display: grid; grid-template-columns: auto 18px 1fr auto; align-items: center; gap: 9px; padding: 9px 10px; background: var(--paper); border: 1px solid var(--border-hair); border-radius: 4px; cursor: pointer; }
+  .type-toggle input { accent-color: var(--forest); }
+  .sw { width: 16px; height: 16px; border-radius: 3px; border: 1px solid rgba(26,22,18,0.2); }
+  .type-name { font-family: var(--font-ui); font-size: 13px; color: var(--ink); }
+  .type-sides { font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-3); text-transform: uppercase; }
+  .route-actions { display: grid; gap: 8px; margin-bottom: 14px; }
+  .route-actions .btn { width: 100%; justify-content: center; }
+  .map-grid { display: grid; grid-template-columns: 1fr 1fr; min-width: 0; min-height: 0; }
+  .pane { display: grid; grid-template-rows: auto minmax(0, 1fr); min-width: 0; min-height: 0; border-left: 1px solid var(--border-hair); }
+  .pane-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 12px 14px; background: var(--paper); border-bottom: 1px solid var(--border-hair); }
+  .pane-title { font-family: var(--font-ui); font-weight: 600; font-size: 13px; color: var(--ink); }
+  .pane-zone { font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-3); }
+  .map { min-height: 0; background: var(--paper-3); }
+  .legend-note { font-family: var(--font-ui); font-size: 12px; line-height: 1.35; color: var(--fg-3); }
+  .source-list { display: grid; gap: 8px; font-family: var(--font-ui); font-size: 12px; color: var(--fg-2); line-height: 1.35; }
+  .source-list .label { color: var(--ink); font-weight: 500; }
+  .map-label { background: transparent; border: 0; box-shadow: none; pointer-events: none; }
+  .map-label > span { display: inline-block; white-space: nowrap; transform-origin: center; }
+  .road-label-text { color: #050505; font-family: var(--font-ui); font-size: 12px; font-weight: 600; text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff; }
+  .parcel-label-text { color: #1a1612; font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; text-shadow: 0 1px 0 rgba(255,250,240,0.95), 1px 0 0 rgba(255,250,240,0.95), 0 -1px 0 rgba(255,250,240,0.95), -1px 0 0 rgba(255,250,240,0.95); }
+  @media (max-width: 980px) {
+    .stack-body { grid-template-columns: 1fr; grid-template-rows: auto minmax(720px, 1fr); overflow: auto; }
+    .stack-panel { border-right: 0; border-bottom: 1px solid var(--border-hair); }
+    .map-grid { grid-template-columns: 1fr; grid-template-rows: 520px 520px; }
+  }
+</style>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useEffect, useMemo, useRef, useState } = React;
+const CENTER = [46.2382, -63.1311];
+const COLORS = {
+  front_yard: '#8f3d2f',
+  rear_yard: '#36664c',
+  side_yard: '#3f6f95',
+  flankage_yard: '#c68f3d',
+  setback: '#6f5a9e',
+  yard_minimum: '#79803a',
+};
+const ZONE_COLORS = { R: 'var(--zone-residential)', C: 'var(--zone-commercial)', D: 'var(--zone-mixed)', M: 'var(--zone-mixed)', I: 'var(--zone-institutional)', O: 'var(--zone-openspace)', P: 'var(--zone-openspace)', W: 'var(--zone-waterfront)', H: 'var(--zone-heritage)' };
+
+function zoneColor(code) {
+  return ZONE_COLORS[String(code || '').trim().charAt(0).toUpperCase()] || 'var(--zone-residential)';
+}
+
+function Header() {
+  return (
+    <header className="app-header">
+      <img src="../../assets/logo-island-needle.svg" alt="Modern Democracy" className="wm" />
+      <nav>
+        <a href="/parcel-lookup">Parcel lookup</a>
+        <a href="/zoning-comparison">Compare bylaws</a>
+        <a className="active" href="/restriction-stack">View Spatial Restrictions</a>
+        <a href="/provisions-comparison">Compare provisions</a>
+        <a href="/city-view">Map</a>
+      </nav>
+    </header>
+  );
+}
+
+function featureStyle(feature) {
+  const kind = feature.properties?.kind;
+  if (kind === 'selected_parcel') return { color: '#1a1612', weight: 2.4, fillOpacity: 0.04 };
+  if (kind === 'neighbor_parcel') return { color: 'rgba(26,22,18,0.35)', weight: 0.7, fillOpacity: 0 };
+  if (kind === 'building') return { color: '#1a1612', weight: 1, fillColor: '#d8c3a2', fillOpacity: 0.72 };
+  if (kind === 'road') return { color: '#fffaf0', weight: 18, opacity: 0.96, lineCap: 'round', lineJoin: 'round' };
+  const color = COLORS[feature.properties?.regulationType] || '#8f3d2f';
+  return { color, weight: 1.4, fillColor: color, fillOpacity: 0.24, opacity: 0.95 };
+}
+
+const restrictionPaneMaps = new Set();
+let syncingZoom = false;
+
+function allCoordinatePairs(geometry) {
+  const pairs = [];
+  function walk(value) {
+    if (!Array.isArray(value)) return;
+    if (typeof value[0] === 'number' && typeof value[1] === 'number') {
+      pairs.push(value);
+      return;
+    }
+    value.forEach(walk);
+  }
+  walk(geometry?.coordinates);
+  return pairs;
+}
+
+function longestSegmentLabel(geometry, map = null) {
+  const coords = allCoordinatePairs(geometry);
+  if (coords.length < 2) return null;
+  let best = null;
+  const bounds = map?.getBounds?.();
+  const center = map?.getCenter?.();
+  for (let index = 1; index < coords.length; index += 1) {
+    const a = coords[index - 1];
+    const b = coords[index];
+    const midLatLng = L.latLng((a[1] + b[1]) / 2, (a[0] + b[0]) / 2);
+    if (bounds && !bounds.pad(-0.08).contains(midLatLng)) continue;
+    const pa = map ? map.latLngToLayerPoint([a[1], a[0]]) : { x: a[0], y: a[1] };
+    const pb = map ? map.latLngToLayerPoint([b[1], b[0]]) : { x: b[0], y: b[1] };
+    const dx = pb.x - pa.x;
+    const dy = pb.y - pa.y;
+    const length = Math.hypot(dx, dy);
+    const centerPenalty = center ? map.distance(midLatLng, center) / 100000 : 0;
+    const score = length - centerPenalty;
+    if (!best || score > best.score) {
+      let angle = Math.atan2(dy, dx) * 180 / Math.PI;
+      if (angle > 90) angle -= 180;
+      if (angle < -90) angle += 180;
+      best = {
+        score,
+        length,
+        angle,
+        lon: (a[0] + b[0]) / 2,
+        lat: (a[1] + b[1]) / 2,
+      };
+    }
+  }
+  if (best) return best;
+  return map ? longestSegmentLabel(geometry, null) : null;
+}
+
+function polygonCenter(geometry) {
+  const coords = allCoordinatePairs(geometry);
+  if (!coords.length) return null;
+  const sum = coords.reduce((acc, coord) => [acc[0] + coord[0], acc[1] + coord[1]], [0, 0]);
+  return { lon: sum[0] / coords.length, lat: sum[1] / coords.length };
+}
+
+function rotatedLabelMarker(feature, text, className, angle, point, fontSize = null) {
+  const safeText = String(text || '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+  const sizeStyle = fontSize ? ` font-size:${fontSize.toFixed(1)}px;` : '';
+  return L.marker([point.lat, point.lon], {
+    interactive: false,
+    icon: L.divIcon({
+      className: 'map-label',
+      html: `<span class="${className}" style="transform: translate(-50%, -50%) rotate(${angle.toFixed(1)}deg);${sizeStyle}">${safeText}</span>`,
+      iconSize: [1, 1],
+      iconAnchor: [0, 0],
+    }),
+  });
+}
+
+function featureLabelPoint(feature) {
+  const p = feature.properties || {};
+  if (p.addressPoint && Number.isFinite(Number(p.addressPoint.lat)) && Number.isFinite(Number(p.addressPoint.lon))) {
+    return { lat: Number(p.addressPoint.lat), lon: Number(p.addressPoint.lon) };
+  }
+  return polygonCenter(feature.geometry);
+}
+
+function selectedParcelCenter(geojson) {
+  const selected = (geojson?.features || []).find((feature) => feature.properties?.kind === 'selected_parcel');
+  if (!selected) return null;
+  const center = polygonCenter(selected.geometry);
+  return center ? L.latLng(center.lat, center.lon) : null;
+}
+
+function parcelLabelAngle(features) {
+  const candidates = features
+    .filter((feature) => feature.properties?.kind === 'neighbor_parcel' && Number.isFinite(Number(feature.properties?.addressAngle)))
+    .map((feature) => Number(feature.properties.addressAngle))
+    .filter((angle) => Math.abs(angle) <= 45);
+  if (!candidates.length) return 0;
+  return candidates.sort((a, b) => Math.abs(a) - Math.abs(b))[0];
+}
+
+function Pane({ title, zone, geojson, selectedTypes }) {
+  const elementRef = useRef(null);
+  const mapRef = useRef(null);
+  const layerRef = useRef(null);
+  const labelRef = useRef(null);
+  const selectedCenterRef = useRef(null);
+
+  useEffect(() => {
+    if (!elementRef.current || mapRef.current) return;
+    const map = L.map(elementRef.current, {
+      zoomControl: true,
+      attributionControl: false,
+      dragging: false,
+      keyboard: false,
+      touchZoom: true,
+      scrollWheelZoom: 'center',
+      doubleClickZoom: true,
+      boxZoom: false,
+    }).setView(CENTER, 17);
+    mapRef.current = map;
+    restrictionPaneMaps.add(map);
+    map.on('zoomend', () => {
+      if (syncingZoom) return;
+      syncingZoom = true;
+      const center = selectedCenterRef.current;
+      for (const other of restrictionPaneMaps) {
+        if (other !== map && other.getZoom() !== map.getZoom()) {
+          if (center) other.setView(center, map.getZoom(), { animate: false });
+          else other.setZoom(map.getZoom(), { animate: false });
+        }
+      }
+      if (center) map.setView(center, map.getZoom(), { animate: false });
+      syncingZoom = false;
+    });
+    L.control.scale({ metric: true, imperial: false }).addTo(map);
+    return () => {
+      restrictionPaneMaps.delete(map);
+      map.remove();
+    };
+  }, []);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    if (layerRef.current) layerRef.current.remove();
+    if (labelRef.current) labelRef.current.remove();
+    const visible = {
+      type: 'FeatureCollection',
+      features: (geojson?.features || []).filter((feature) => {
+        const type = feature.properties?.regulationType;
+        return !type || selectedTypes.has(type);
+      }).sort((a, b) => {
+        const order = { road: 0, neighbor_parcel: 1, building: 2, selected_parcel: 3, restriction_area: 4 };
+        return (order[a.properties?.kind] ?? 9) - (order[b.properties?.kind] ?? 9);
+      }),
+    };
+    layerRef.current = L.geoJSON(visible, {
+      style: featureStyle,
+      filter: (feature) => Boolean(feature.geometry),
+      onEachFeature: (feature, layer) => {
+        const p = feature.properties || {};
+        const label = p.regulationLabel
+          ? `${p.regulationLabel}: ${p.yardRole}, ${p.distanceM} m`
+          : p.name || p.parcelId || p.kind;
+        if (label) layer.bindTooltip(label, { sticky: true });
+      },
+    }).addTo(map);
+    const labelLayer = L.layerGroup();
+    const commonParcelAngle = parcelLabelAngle(visible.features);
+    const addLabels = () => {
+      labelLayer.clearLayers();
+      const seenRoadNames = new Set();
+      for (const feature of visible.features) {
+        const p = feature.properties || {};
+        if (p.kind === 'road' && p.name && !seenRoadNames.has(p.name)) {
+          const sameName = visible.features.filter((candidate) => candidate.properties?.kind === 'road' && candidate.properties?.name === p.name);
+          const labels = sameName.map((candidate) => longestSegmentLabel(candidate.geometry, map)).filter(Boolean);
+          labels.sort((a, b) => b.score - a.score);
+          if (labels[0]) {
+            labelLayer.addLayer(rotatedLabelMarker(feature, p.name, 'road-label-text', labels[0].angle, labels[0]));
+            seenRoadNames.add(p.name);
+          }
+        }
+        if (p.kind === 'neighbor_parcel' && p.addressLabel) {
+          const center = featureLabelPoint(feature);
+          const fontSize = Math.max(5.5, Math.min(9.5, 84 / String(p.addressLabel).length));
+          if (center) labelLayer.addLayer(rotatedLabelMarker(feature, p.addressLabel, 'parcel-label-text', commonParcelAngle, center, fontSize));
+        }
+      }
+    };
+    addLabels();
+    labelRef.current = labelLayer.addTo(map);
+    map.off('zoom zoomend move moveend', addLabels);
+    map.on('zoom zoomend move moveend', addLabels);
+    const selected = L.geoJSON(visible, { filter: (feature) => feature.properties?.kind === 'selected_parcel' });
+    const bounds = selected.getBounds();
+    if (bounds.isValid()) {
+      selectedCenterRef.current = bounds.getCenter();
+      map.fitBounds(bounds.pad(1.2), { animate: false, padding: [28, 28] });
+      map.setView(selectedCenterRef.current, map.getZoom(), { animate: false });
+    }
+    window.setTimeout(() => map.invalidateSize(), 0);
+  }, [geojson, selectedTypes]);
+
+  return (
+    <section className="pane">
+      <div className="pane-head">
+        <div className="pane-title">{title}</div>
+        <div className="pane-zone">{zone?.code || 'pending'}</div>
+      </div>
+      <div ref={elementRef} className="map" aria-label={`${title} restriction visualization`}></div>
+    </section>
+  );
+}
+
+function App() {
+  const pid = new URLSearchParams(window.location.search).get('pid') || '';
+  const [payload, setPayload] = useState(null);
+  const [status, setStatus] = useState(pid ? 'Loading restriction stack.' : 'No PID was supplied. Start from parcel lookup or city view.');
+  const [enabled, setEnabled] = useState(new Set());
+
+  useEffect(() => { lucide.createIcons(); });
+
+  useEffect(() => {
+    if (!pid) return;
+    let cancelled = false;
+    fetch(`/api/parcels/${encodeURIComponent(pid)}/restriction-stack`)
+      .then((response) => {
+        if (!response.ok) throw new Error(`Restriction stack failed with HTTP ${response.status}.`);
+        return response.json();
+      })
+      .then((data) => {
+        if (cancelled) return;
+        setPayload(data);
+        setEnabled(new Set((data.regulationTypes || []).map((type) => type.key)));
+        setStatus(`${data.regulationTypes?.length || 0} regulation types available for PID ${pid}.`);
+      })
+      .catch((error) => {
+        if (!cancelled) setStatus(error.message || 'Restriction stack failed.');
+      });
+    return () => { cancelled = true; };
+  }, [pid]);
+
+  const types = payload?.regulationTypes || [];
+  const selectedTypes = useMemo(() => enabled, [enabled]);
+  const current = payload?.zones?.current;
+  const draft = payload?.zones?.draft;
+
+  function toggleType(key, checked) {
+    const next = new Set(enabled);
+    if (checked) next.add(key); else next.delete(key);
+    setEnabled(next);
+  }
+
+  return (
+    <div className="stack-app">
+      <Header />
+      <div className="stack-body">
+        <aside className="stack-panel">
+          <div className="parcel-card">
+            <h2>{payload?.address?.label || 'Restriction stack'}</h2>
+            <div className="mono">PID {pid || 'pending'}</div>
+            <span className="zchip" style={{background: zoneColor(current?.code)}}>{current?.code || 'Current pending'}</span>
+            <span className="zchip" style={{background: zoneColor(draft?.code)}}>{draft?.code || 'Draft pending'}</span>
+          </div>
+          <div className="route-actions">
+            <a className="btn btn-secondary" href={`/map-explorer?pid=${encodeURIComponent(pid)}`}><i data-lucide="map" style={{width:14, height:14}}></i> Back to map explorer</a>
+            <a className="btn btn-primary" href={`/zoning-comparison?pid=${encodeURIComponent(pid)}`}><i data-lucide="git-compare" style={{width:14, height:14}}></i> Compare bylaws</a>
+          </div>
+
+          <h3 className="panel-title">Regulation types</h3>
+          <div className="type-list">
+            {types.length ? types.map((type) => (
+              <label className="type-toggle" key={type.key}>
+                <input type="checkbox" checked={enabled.has(type.key)} onChange={(event) => toggleType(type.key, event.target.checked)} />
+                <span className="sw" style={{background: COLORS[type.key] || '#8f3d2f'}}></span>
+                <span className="type-name">{type.label}</span>
+                <span className="type-sides">{type.availableIn.join('+')}</span>
+              </label>
+            )) : <div className="status-card">No dimensional yard or setback options were found for this parcel's current or draft zone.</div>}
+          </div>
+
+          <h3 className="panel-title">Status</h3>
+          <div className="status-card">{status}</div>
+
+          <h3 className="panel-title">Method</h3>
+          <div className="source-list">
+            <div><span className="label">Parcel context</span><br />Selected parcel, neighbouring parcels within 45 m, and roads within 70 m.</div>
+            <div><span className="label">Front / side / rear</span><br />{payload?.metadata?.note || 'Computed after load.'}</div>
+          </div>
+        </aside>
+        <main className="map-grid">
+          <Pane title="Current bylaw restrictions" zone={current} geojson={payload?.current} selectedTypes={selectedTypes} />
+          <Pane title="Draft bylaw restrictions" zone={draft} geojson={payload?.draft} selectedTypes={selectedTypes} />
+        </main>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

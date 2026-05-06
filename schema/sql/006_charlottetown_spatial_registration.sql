@@ -32,7 +32,7 @@ INSERT INTO zoning.spatial_layer (
   ('charlottetown_draft_zoning_boundaries', 'data/spatial/charlottetown/charlottetown-draft-map-layers-2026-04-09-municipal-fit.gpkg', 'public', 'CHTWN_Draft_Zoning_Boundaries', 'schedule_a_zoning_areas_municipal_fit', 'fid', 'geom', 'MULTIPOLYGON', 2954, 'zone_code', 20, 0, 'loaded', '{"approved_phase4_layer": true, "source_pdf": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf"}'::jsonb),
   ('charlottetown_civic_addresses', NULL, 'public', 'CHTWN_Civic_Addresses', 'CHTWN_Civic_Addresses', 'id', 'geom', 'POINT', 4326, NULL, 14676, 0, 'loaded', '{"approved_phase4_layer": true}'::jsonb),
   ('charlottetown_parcel_map', 'data/spatial/charlottetown/charlottetown-draft-map-layers-2026-04-09-municipal-fit.gpkg', 'public', 'CHTWN_Parcel_Map', 'schedule_c_parcel_candidates_municipal_fit', 'fid', 'geom', 'MULTIPOLYGON', 2954, NULL, 13833, 0, 'loaded', '{"approved_phase4_layer": true}'::jsonb),
-  ('charlottetown_street_network', NULL, 'public', 'CHTWN_Street_Network', 'CHTWN_Street_Network', 'id', 'geom', 'MULTILINESTRING', 4326, NULL, 4598, 0, 'loaded', '{"approved_phase4_layer": true}'::jsonb),
+  ('charlottetown_street_network', NULL, 'public', 'CHTWN_Street_Network', 'CHTWN_Street_Network', 'id', 'geom', 'MULTILINESTRING', 2954, NULL, 2221, 0, 'loaded', '{"approved_phase4_layer": true, "source": "city_official_street_network"}'::jsonb),
   ('charlottetown_current_zoning_boundaries', NULL, 'public', 'CHTWN_Zoning_Boundaries', 'CHTWN_Zoning_Boundaries', 'id', 'geom', 'MULTIPOLYGON', 2954, 'ZONING', 1558, 0, 'loaded', '{"approved_phase4_layer": true, "legend_source": "docs/charlottetown/current-zoning-codes-and-map-legend.md"}'::jsonb),
   ('charlottetown_schedule_a_wetlands', 'data/spatial/charlottetown/charlottetown-draft-map-layers-2026-04-09-municipal-fit.gpkg', 'public', 'CHTWN_Schedule_A_Wetlands', 'schedule_a_wetlands_excluded_from_parcels', 'fid', 'geom', 'MULTIPOLYGON', 2954, 'feature_type', 64, 0, 'loaded', '{"approved_phase4_layer": true}'::jsonb)
 ON CONFLICT (layer_key) DO UPDATE SET
@@ -103,6 +103,11 @@ END $$;
 DO $$
 BEGIN
   IF to_regclass('public."CHTWN_Street_Network"') IS NOT NULL THEN
+    DELETE FROM zoning.spatial_feature sf
+    USING zoning.spatial_layer l
+    WHERE sf.spatial_layer_id = l.spatial_layer_id
+      AND l.layer_key = 'charlottetown_street_network';
+
     INSERT INTO zoning.spatial_feature (spatial_layer_id, feature_key, attributes, geom, is_valid, validation_reason)
     SELECT l.spatial_layer_id, t.id::text, to_jsonb(t) - 'geom', ST_Transform(t.geom, 2954), ST_IsValid(t.geom), ST_IsValidReason(t.geom)
     FROM public."CHTWN_Street_Network" t

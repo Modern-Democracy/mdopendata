@@ -17,12 +17,12 @@ const checks = [
   {
     name: "parcel map explorer route",
     path: samplePid ? `/map-explorer?pid=${encodeURIComponent(samplePid)}` : "/map-explorer",
-    expectText: ["Map Explorer", "logo-island-needle.svg", "/api/parcels/"],
+    expectText: ["Map Explorer", "logo-island-needle.svg", "/api/parcels/", "/api/buildings/osm.geojson"],
   },
   {
     name: "city view route",
     path: "/city-view",
-    expectText: ["City View Map", "logo-island-needle.svg", "/api/parcels.geojson", "/api/parcels/point"],
+    expectText: ["City View Map", "logo-island-needle.svg", "/api/parcels.geojson", "/api/parcels/point", "/api/buildings/osm.geojson"],
   },
   {
     name: "zoning comparison route",
@@ -54,6 +54,11 @@ const checks = [
     path: "/api/zoning/draft.geojson?bbox=-63.20,46.20,-63.05,46.30&limit=1",
     expectJson: (payload) => payload.type === "FeatureCollection" && Array.isArray(payload.features) && Boolean(payload.metadata?.source),
   },
+  {
+    name: "OSM buildings GeoJSON API contract",
+    path: "/api/buildings/osm.geojson?bbox=-63.20,46.20,-63.05,46.30&limit=1",
+    expectJson: (payload) => payload.type === "FeatureCollection" && Array.isArray(payload.features) && payload.metadata?.source === "zoning.v_charlottetown_osm_buildings",
+  },
 ];
 
 if (samplePid) {
@@ -62,6 +67,11 @@ if (samplePid) {
       name: "selected parcel API contract",
       path: `/api/parcels/${encodeURIComponent(samplePid)}`,
       expectJson: (payload) => payload.pid && payload.parcel && payload.zones && payload.source,
+    },
+    {
+      name: "parcel restriction buffers API contract",
+      path: `/api/parcels/${encodeURIComponent(samplePid)}/restriction-buffers`,
+      expectJson: (payload) => payload.pid && payload.current?.type === "FeatureCollection" && payload.draft?.type === "FeatureCollection" && payload.metadata?.source,
     },
     {
       name: "zoning comparison API contract",

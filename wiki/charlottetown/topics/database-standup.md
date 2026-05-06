@@ -210,7 +210,7 @@ Expected public source-table counts for the registered Charlottetown layers:
 | --- | --- |
 | `charlottetown_parcel_map` | 13833 |
 | `charlottetown_civic_addresses` | 14676 |
-| `charlottetown_street_network` | 4598 |
+| `charlottetown_street_network` | 2221 |
 | `charlottetown_current_zoning_boundaries` | 1558 |
 | `charlottetown_draft_zoning_boundaries` | 20 |
 | `charlottetown_schedule_a_wetlands` | 64 |

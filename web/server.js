@@ -631,6 +631,601 @@ function structuredValueText(fact) {
     || compactText(fact?.label);
 }
 
+function setbackRowsFromStructuredComparison(comparison, side) {
+  const groups = comparison?.structuredData?.groups || [];
+  return groups
+    .flatMap((group) => group.rows || [])
+    .filter((row) => {
+      const text = `${row.label || ""} ${row[side] || ""}`.toLowerCase();
+      return text.includes("setback") || text.includes("stepback") || text.includes("yard");
+    })
+    .map((row) => ({ label: compactText(row.label) || "Setback", text: compactText(row[side]) || compactText(row.label) }))
+    .filter((row) => row.text);
+}
+
+function parseSetbackDistances(rows) {
+  const distances = [];
+  for (const row of rows) {
+    const text = toStringValue(row.text);
+    const label = toStringValue(row.label).toLowerCase();
+    const relevantLines = text
+      .split(/\n+/)
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .filter((line) => {
+        const lower = line.toLowerCase();
+        if (/\b(fence|tree|buffer|landscape)\b/.test(lower)) return false;
+        return !label || lower.includes(label) || /\b(yard|setback|stepback)\b/.test(lower);
+      });
+    if (!relevantLines.length && /\b(fence|tree|buffer|landscape)\b/i.test(text)) {
+      continue;
+    }
+    const parseText = relevantLines.length ? relevantLines.join("\n") : text;
+    const rangeMatch = parseText.match(/(\d+(?:\.\d+)?)\s*[-\u2013]\s*(\d+(?:\.\d+)?)\s*m\b/i);
+    const minimumMatches = [...parseText.matchAll(/\b(?:min\.?|minimum)\s*:?\s*(\d+(?:\.\d+)?)\s*m\b/gi)];
+    const metreMatches = [...parseText.matchAll(/\b(\d+(?:\.\d+)?)\s*m\b/gi)];
+    const candidates = minimumMatches.length
+      ? minimumMatches.map((match) => Number(match[1]))
+      : rangeMatch
+        ? [Number(rangeMatch[1])]
+        : metreMatches.map((match) => Number(match[1]));
+    for (const value of candidates) {
+      if (!Number.isFinite(value) || value < 0 || value > 100) continue;
+      const key = value.toFixed(2);
+      if (distances.some((item) => item.key === key)) continue;
+      distances.push({
+        key,
+        distanceM: value,
+        label: row.label,
+        basis: parseText,
+      });
+    }
+  }
+  return distances.sort((a, b) => b.distanceM - a.distanceM).slice(0, 1);
+}
+
+const restrictionTypeDefinitions = [
+  { key: "front_yard", label: "Front yard", roles: ["front"], patterns: [/front\s+yard/i, /front.*setback/i] },
+  { key: "rear_yard", label: "Rear yard", roles: ["rear"], patterns: [/rear\s+yard/i, /rear.*setback/i] },
+  { key: "side_yard", label: "Side yard", roles: ["side"], patterns: [/side\s+yard/i, /side.*setback/i, /interior\s+yard/i] },
+  { key: "flankage_yard", label: "Flankage yard", roles: ["flankage"], patterns: [/flankage/i, /flanking/i] },
+  { key: "setback", label: "General setback", roles: ["front", "side", "rear"], patterns: [/setback/i, /stepback/i] },
+  { key: "yard_minimum", label: "Yard minimum", roles: ["front", "side", "rear"], patterns: [/\byard\b/i] },
+];
+
+function restrictionDefinitionForRow(row) {
+  const haystack = `${row.label || ""} ${row.text || ""}`.toLowerCase();
+  return restrictionTypeDefinitions.find((definition) => {
+    if (definition.key !== "setback" && haystack.includes(definition.key.replace(/_/g, " "))) {
+      return true;
+    }
+    return definition.patterns.some((pattern) => pattern.test(haystack));
+  }) || null;
+}
+
+function categorizedRestrictionRows(comparison, side) {
+  const rows = setbackRowsFromStructuredComparison(comparison, side);
+  const byType = new Map();
+  for (const row of rows) {
+    const definition = restrictionDefinitionForRow(row);
+    if (!definition) continue;
+    const distances = parseSetbackDistances([row]);
+    if (!distances.length) continue;
+    const existing = byType.get(definition.key) || {
+      key: definition.key,
+      label: definition.label,
+      roles: definition.roles,
+      rows: [],
+      distances: [],
+    };
+    existing.rows.push(row);
+    for (const distance of distances) {
+      const duplicate = existing.distances.some((candidate) => Math.abs(candidate.distanceM - distance.distanceM) < 0.01);
+      if (!duplicate) {
+        existing.distances.push(distance);
+      }
+    }
+    byType.set(definition.key, existing);
+  }
+  return [...byType.values()].map((entry) => ({
+    ...entry,
+    distances: entry.distances.sort((a, b) => a.distanceM - b.distanceM).slice(0, 4),
+  }));
+}
+
+async function loadParcelRestrictionStack(pid) {
+  const comparison = await loadZoningComparisonByPid(pid);
+  if (!comparison) {
+    return null;
+  }
+
+  const currentTypes = categorizedRestrictionRows(comparison, "current");
+  const draftTypes = categorizedRestrictionRows(comparison, "draft");
+  const typeByKey = new Map();
+  for (const type of [...currentTypes, ...draftTypes]) {
+    const existing = typeByKey.get(type.key) || {
+      key: type.key,
+      label: type.label,
+      roles: type.roles,
+      availableIn: [],
+      examples: {},
+    };
+    if (currentTypes.includes(type)) existing.availableIn.push("current");
+    if (draftTypes.includes(type)) existing.availableIn.push("draft");
+    typeByKey.set(type.key, existing);
+  }
+  for (const side of ["current", "draft"]) {
+    for (const type of side === "current" ? currentTypes : draftTypes) {
+      const entry = typeByKey.get(type.key);
+      entry.examples[side] = type.distances.map((distance) => ({
+        distanceM: distance.distanceM,
+        label: distance.label,
+        basis: distance.basis,
+      }));
+    }
+  }
+
+  const overlayRows = [
+    ...currentTypes.flatMap((type) => type.distances.map((distance) => ({
+      side: "current",
+      type_key: type.key,
+      type_label: type.label,
+      roles: type.roles,
+      distance_m: distance.distanceM,
+      basis: distance.basis,
+      label: distance.label,
+    }))),
+    ...draftTypes.flatMap((type) => type.distances.map((distance) => ({
+      side: "draft",
+      type_key: type.key,
+      type_label: type.label,
+      roles: type.roles,
+      distance_m: distance.distanceM,
+      basis: distance.basis,
+      label: distance.label,
+    }))),
+  ];
+
+  const { rows } = await pool.query(
+    `
+    WITH selected_address AS (
+      SELECT
+        geom,
+        NULLIF(trim(attributes ->> 'STREET_NM'), '') AS street_name
+      FROM zoning.v_charlottetown_civic_addresses
+      WHERE NULLIF(trim(attributes ->> 'PID'), '') = $1
+         OR NULLIF(trim(attributes ->> 'pid2'), '') = $1
+      ORDER BY spatial_feature_id
+      LIMIT 1
+    ),
+    selected_parcel AS (
+      SELECT p.spatial_feature_id, p.feature_key, p.attributes, p.is_valid, p.validation_reason, p.geom
+      FROM selected_address a
+      JOIN zoning.v_charlottetown_parcel_map p
+        ON ST_Covers(p.geom, a.geom)
+      ORDER BY ST_Area(p.geom), p.spatial_feature_id
+      LIMIT 1
+    ),
+    context_extent AS (
+      SELECT ST_Buffer(geom, 130) AS geom FROM selected_parcel
+    ),
+    selected_buildings AS (
+      SELECT
+        b.spatial_feature_id,
+        b.feature_key,
+        b.building,
+        b.name,
+        b.levels,
+        b.geom
+      FROM selected_parcel p
+      JOIN zoning.v_charlottetown_osm_buildings b
+        ON b.geom && ST_Buffer(p.geom, 55)
+       AND ST_Intersects(b.geom, ST_Buffer(p.geom, 55))
+      ORDER BY ST_Area(ST_Intersection(b.geom, p.geom)) DESC NULLS LAST, b.spatial_feature_id
+      LIMIT 40
+    ),
+    parcel_parts AS (
+      SELECT (ST_Dump(ST_ForcePolygonCCW(p.geom))).geom AS geom
+      FROM selected_parcel p
+    ),
+    boundary_segments AS (
+      SELECT
+        row_number() OVER () AS segment_id,
+        segment.geom AS geom
+      FROM parcel_parts
+      CROSS JOIN LATERAL ST_DumpSegments(ST_ExteriorRing(geom)) AS segment
+    ),
+    normalized_address AS (
+      SELECT regexp_replace(
+        regexp_replace(
+          regexp_replace(
+            regexp_replace(
+              regexp_replace(lower(street_name), '[^a-z0-9]+', '', 'g'),
+              'rd$',
+              'road'
+            ),
+            'ave?$',
+            'avenue'
+          ),
+          'cr$',
+          'crescent'
+        ),
+        'st$',
+        'street'
+      ) AS street_key
+      FROM selected_address
+    ),
+    segment_distances AS (
+      SELECT
+        s.segment_id,
+        s.geom,
+        ST_Length(s.geom) AS length_m,
+        degrees(ST_Azimuth(ST_StartPoint(s.geom), ST_EndPoint(s.geom))) AS segment_angle,
+        ST_Buffer(s.geom, 18, 'side=right endcap=flat join=mitre') AS outside_geom,
+        ST_Centroid(s.geom) AS midpoint,
+        COALESCE((
+          SELECT min(ST_Distance(ST_Buffer(s.geom, 18, 'side=right endcap=flat join=mitre'), r.geom))
+          FROM zoning.v_charlottetown_street_network r
+          JOIN context_extent e ON r.geom && e.geom AND ST_Intersects(r.geom, e.geom)
+        ), 999999) AS road_distance,
+        (
+          SELECT COALESCE(r.attributes->>'name', r.attributes->>'STREET_NM', r.attributes->>'NAME')
+          FROM zoning.v_charlottetown_street_network r
+          JOIN context_extent e ON r.geom && e.geom AND ST_Intersects(r.geom, e.geom)
+          ORDER BY ST_Distance(ST_Buffer(s.geom, 18, 'side=right endcap=flat join=mitre'), r.geom), r.spatial_feature_id
+          LIMIT 1
+        ) AS nearest_road_name,
+        (
+          SELECT degrees(ST_Azimuth(ST_StartPoint(d.geom), ST_EndPoint(d.geom)))
+          FROM zoning.v_charlottetown_street_network r
+          CROSS JOIN LATERAL ST_Dump(r.geom) AS d
+          JOIN context_extent e ON r.geom && e.geom AND ST_Intersects(r.geom, e.geom)
+          ORDER BY ST_Distance(ST_Buffer(s.geom, 18, 'side=right endcap=flat join=mitre'), d.geom), r.spatial_feature_id
+          LIMIT 1
+        ) AS nearest_road_angle,
+        COALESCE((
+          SELECT min(ST_Distance(ST_Buffer(s.geom, 18, 'side=right endcap=flat join=mitre'), r.geom))
+          FROM zoning.v_charlottetown_street_network r
+          JOIN context_extent e ON r.geom && e.geom AND ST_Intersects(r.geom, e.geom)
+          WHERE regexp_replace(regexp_replace(regexp_replace(regexp_replace(regexp_replace(lower(COALESCE(r.attributes->>'name', r.attributes->>'STREET_NM', r.attributes->>'NAME', '')), '[^a-z0-9]+', '', 'g'), 'rd$', 'road'), 'ave?$', 'avenue'), 'cr$', 'crescent'), 'st$', 'street') = (SELECT street_key FROM normalized_address)
+        ), 999999) AS address_road_distance,
+        (
+          SELECT degrees(ST_Azimuth(ST_StartPoint(d.geom), ST_EndPoint(d.geom)))
+          FROM zoning.v_charlottetown_street_network r
+          CROSS JOIN LATERAL ST_Dump(r.geom) AS d
+          JOIN context_extent e ON r.geom && e.geom AND ST_Intersects(r.geom, e.geom)
+          WHERE regexp_replace(regexp_replace(regexp_replace(regexp_replace(regexp_replace(lower(COALESCE(r.attributes->>'name', r.attributes->>'STREET_NM', r.attributes->>'NAME', '')), '[^a-z0-9]+', '', 'g'), 'rd$', 'road'), 'ave?$', 'avenue'), 'cr$', 'crescent'), 'st$', 'street') = (SELECT street_key FROM normalized_address)
+          ORDER BY ST_Distance(ST_Buffer(s.geom, 18, 'side=right endcap=flat join=mitre'), d.geom), r.spatial_feature_id
+          LIMIT 1
+        ) AS address_road_angle,
+        ST_Distance(ST_Centroid(s.geom), (SELECT ST_Centroid(geom) FROM selected_parcel)) AS center_distance
+      FROM boundary_segments s
+    ),
+    road_threshold AS (
+      SELECT CASE WHEN min(road_distance) <= 0.5 THEN 0.5 ELSE min(road_distance) + 0.5 END AS distance_m
+      FROM segment_distances
+    ),
+    road_facing_segments AS (
+      SELECT
+        s.*,
+        regexp_replace(regexp_replace(regexp_replace(regexp_replace(regexp_replace(lower(COALESCE(s.nearest_road_name, '')), '[^a-z0-9]+', '', 'g'), 'rd$', 'road'), 'ave?$', 'avenue'), 'cr$', 'crescent'), 'st$', 'street') AS road_key
+      FROM segment_distances s
+      WHERE (
+          road_distance <= (SELECT distance_m FROM road_threshold)
+          AND nearest_road_angle IS NOT NULL
+          AND abs(mod((segment_angle - nearest_road_angle + 270)::numeric, 180) - 90) <= 35
+        )
+        OR (
+          road_distance <= (SELECT distance_m FROM road_threshold)
+          AND length_m <= 2.5
+        )
+         OR (
+           regexp_replace(regexp_replace(regexp_replace(regexp_replace(regexp_replace(lower(COALESCE(s.nearest_road_name, '')), '[^a-z0-9]+', '', 'g'), 'rd$', 'road'), 'ave?$', 'avenue'), 'cr$', 'crescent'), 'st$', 'street') = (SELECT street_key FROM normalized_address)
+           AND road_distance <= 25
+           AND nearest_road_angle IS NOT NULL
+           AND abs(mod((segment_angle - nearest_road_angle + 270)::numeric, 180) - 90) <= 35
+         )
+    ),
+    front_matched_segments AS (
+      SELECT segment_id, midpoint
+      FROM road_facing_segments
+      WHERE address_road_distance <= 25
+        AND address_road_angle IS NOT NULL
+        AND abs(mod((segment_angle - address_road_angle + 270)::numeric, 180) - 90) <= 35
+    ),
+    front_fallback_segments AS (
+      SELECT segment_id, midpoint
+      FROM road_facing_segments
+      WHERE NOT EXISTS (
+        SELECT 1 FROM front_matched_segments
+      )
+      ORDER BY segment_id
+      LIMIT 1
+    ),
+    front_segments AS (
+      SELECT * FROM front_matched_segments
+      UNION ALL
+      SELECT * FROM front_fallback_segments
+    ),
+    flankage_segments AS (
+      SELECT segment_id, midpoint
+      FROM road_facing_segments
+      WHERE NOT EXISTS (
+        SELECT 1 FROM front_segments f WHERE f.segment_id = road_facing_segments.segment_id
+      )
+    ),
+    non_front_segments AS (
+      SELECT
+        s.*,
+        COALESCE((
+          SELECT min(ST_Distance(s.midpoint, f.midpoint))
+          FROM front_segments f
+        ), 0) AS distance_from_front
+      FROM segment_distances s
+      WHERE NOT EXISTS (
+        SELECT 1 FROM front_segments f WHERE f.segment_id = s.segment_id
+      )
+    ),
+    front_axis AS (
+      SELECT COALESCE(avg(s.segment_angle), 0) AS angle
+      FROM front_segments f
+      JOIN segment_distances s
+        ON s.segment_id = f.segment_id
+    ),
+    rear_distance AS (
+      SELECT COALESCE(max(distance_from_front), 0) AS distance_m
+      FROM non_front_segments
+    ),
+    rear_threshold AS (
+      SELECT COALESCE(
+        percentile_cont(0.65) WITHIN GROUP (ORDER BY distance_from_front),
+        999999
+      ) AS distance_m
+      FROM non_front_segments
+    ),
+    rear_segments AS (
+      SELECT nf.segment_id
+      FROM non_front_segments nf
+      CROSS JOIN front_axis fa
+      CROSS JOIN rear_distance rd
+      WHERE rd.distance_m > 0
+        AND nf.distance_from_front >= rd.distance_m * 0.82
+        AND abs(mod((nf.segment_angle - fa.angle + 270)::numeric, 180) - 90) <= 35
+    ),
+    classified_segments AS (
+      SELECT
+        s.segment_id,
+        s.geom,
+        CASE
+          WHEN EXISTS (SELECT 1 FROM front_segments f WHERE f.segment_id = s.segment_id) THEN 'front'
+          WHEN EXISTS (SELECT 1 FROM flankage_segments f WHERE f.segment_id = s.segment_id) THEN 'flankage'
+          WHEN EXISTS (SELECT 1 FROM rear_segments r WHERE r.segment_id = s.segment_id) THEN 'rear'
+          WHEN NOT EXISTS (SELECT 1 FROM rear_segments) AND nf.distance_from_front >= (SELECT distance_m FROM rear_threshold) THEN 'rear'
+          ELSE 'side'
+        END AS role
+      FROM segment_distances s
+      LEFT JOIN non_front_segments nf
+        ON nf.segment_id = s.segment_id
+    ),
+    regulation_rows AS (
+      SELECT *
+      FROM jsonb_to_recordset($2::jsonb) AS d(
+        side text,
+        type_key text,
+        type_label text,
+        roles jsonb,
+        distance_m double precision,
+        basis text,
+        label text
+      )
+    ),
+    selected_segments AS (
+      SELECT
+        r.side,
+        r.type_key,
+        r.type_label,
+        r.distance_m,
+        r.basis,
+        r.label,
+        c.role,
+        ST_Buffer(
+          ST_LineMerge(ST_UnaryUnion(ST_Collect(c.geom))),
+          r.distance_m,
+          'endcap=square join=mitre'
+        ) AS geom
+      FROM regulation_rows r
+      JOIN classified_segments c
+        ON r.roles ? c.role
+      GROUP BY r.side, r.type_key, r.type_label, r.distance_m, r.basis, r.label, c.role
+    ),
+    restriction_features AS (
+      SELECT
+        s.side,
+        jsonb_build_object(
+          'type', 'Feature',
+          'geometry', ST_AsGeoJSON(ST_Transform(ST_Multi(ST_CollectionExtract(ST_Intersection(p.geom, s.geom), 3)), 4326))::jsonb,
+          'properties', jsonb_build_object(
+            'kind', 'restriction_area',
+            'regulationType', s.type_key,
+            'regulationLabel', s.type_label,
+            'yardRole', s.role,
+            'distanceM', s.distance_m,
+            'label', s.label,
+            'basis', s.basis
+          )
+        ) AS feature
+      FROM selected_segments s
+      CROSS JOIN selected_parcel p
+      WHERE s.distance_m > 0
+    ),
+    base_features AS (
+      SELECT
+        'both' AS side,
+        jsonb_build_object(
+          'type', 'Feature',
+          'geometry', ST_AsGeoJSON(ST_Transform(p.geom, 4326))::jsonb,
+          'properties', jsonb_build_object(
+            'kind', 'selected_parcel',
+            'parcelId', p.feature_key
+          )
+        ) AS feature
+      FROM selected_parcel p
+    ),
+    neighbor_parcels AS (
+      SELECT
+        n.spatial_feature_id,
+        n.feature_key,
+        n.geom,
+        nb.geom AS building_geom,
+        (
+          SELECT concat_ws(
+            ' ',
+            NULLIF(trim(a.attributes ->> 'STREET_NO'), ''),
+            NULLIF(trim(a.attributes ->> 'STREET_NM'), '')
+          )
+          FROM zoning.v_charlottetown_civic_addresses a
+          WHERE ST_Covers(n.geom, a.geom)
+          ORDER BY ST_Distance(a.geom, ST_Centroid(n.geom)), a.spatial_feature_id
+          LIMIT 1
+        ) AS address_label,
+        (
+          WITH neighbor_building AS (
+            SELECT nb.geom
+            WHERE nb.geom IS NOT NULL
+          ),
+          envelope AS (
+            SELECT (ST_Dump(ST_OrientedEnvelope(geom))).geom AS geom
+            FROM neighbor_building
+          ),
+          segments AS (
+            SELECT segment.geom
+            FROM envelope
+            CROSS JOIN LATERAL ST_DumpSegments(ST_ExteriorRing(geom)) AS segment
+          ),
+          ranked AS (
+            SELECT
+              degrees(ST_Azimuth(ST_StartPoint(geom), ST_EndPoint(geom))) AS angle,
+              ST_Length(geom) AS length_m
+            FROM segments
+            ORDER BY length_m DESC
+            LIMIT 1
+          )
+          SELECT CASE
+            WHEN angle > 90 AND angle <= 270 THEN angle - 180
+            WHEN angle > 270 THEN angle - 360
+            ELSE angle
+          END
+          FROM ranked
+        ) AS address_angle
+      FROM selected_parcel p
+      JOIN zoning.v_charlottetown_parcel_map n
+        ON n.geom && ST_Buffer(p.geom, 45)
+       AND ST_Intersects(n.geom, ST_Buffer(p.geom, 45))
+       AND n.spatial_feature_id <> p.spatial_feature_id
+      LEFT JOIN LATERAL (
+        SELECT b.geom
+        FROM selected_buildings b
+        WHERE ST_Intersects(b.geom, n.geom)
+        ORDER BY ST_Area(ST_Intersection(b.geom, n.geom)) DESC, b.spatial_feature_id
+        LIMIT 1
+      ) nb ON TRUE
+      ORDER BY ST_Distance(ST_Centroid(n.geom), ST_Centroid(p.geom)), n.spatial_feature_id
+      LIMIT 80
+    ),
+    neighbor_features AS (
+      SELECT
+        'both' AS side,
+        jsonb_build_object(
+          'type', 'Feature',
+          'geometry', ST_AsGeoJSON(ST_Transform(n.geom, 4326))::jsonb,
+          'properties', jsonb_build_object(
+            'kind', 'neighbor_parcel',
+            'parcelId', n.feature_key,
+            'addressLabel', n.address_label,
+            'addressAngle', n.address_angle,
+            'addressPoint', CASE
+              WHEN n.building_geom IS NOT NULL THEN jsonb_build_object(
+                'lon', ST_X(ST_Transform(ST_PointOnSurface(n.building_geom), 4326)),
+                'lat', ST_Y(ST_Transform(ST_PointOnSurface(n.building_geom), 4326))
+              )
+              ELSE jsonb_build_object(
+                'lon', ST_X(ST_Transform(ST_Centroid(n.geom), 4326)),
+                'lat', ST_Y(ST_Transform(ST_Centroid(n.geom), 4326))
+              )
+            END
+          )
+        ) AS feature
+      FROM neighbor_parcels n
+    ),
+    road_features AS (
+      SELECT
+        'both' AS side,
+        jsonb_build_object(
+          'type', 'Feature',
+          'geometry', ST_AsGeoJSON(ST_Transform(r.geom, 4326))::jsonb,
+          'properties', jsonb_build_object(
+            'kind', 'road',
+            'featureKey', r.feature_key,
+            'name', COALESCE(r.attributes->>'name', r.attributes->>'STREET_NM', r.attributes->>'NAME')
+          )
+        ) AS feature
+      FROM context_extent e
+      JOIN zoning.v_charlottetown_street_network r
+        ON r.geom && e.geom
+       AND ST_Intersects(r.geom, e.geom)
+      LIMIT 80
+    ),
+    building_features AS (
+      SELECT
+        'both' AS side,
+        jsonb_build_object(
+          'type', 'Feature',
+          'geometry', ST_AsGeoJSON(ST_Transform(b.geom, 4326))::jsonb,
+          'properties', jsonb_build_object(
+            'kind', 'building',
+            'building', b.building,
+            'name', b.name,
+            'levels', b.levels,
+            'featureKey', b.feature_key
+          )
+        ) AS feature
+      FROM selected_buildings b
+    ),
+    all_features AS (
+      SELECT * FROM restriction_features
+      UNION ALL
+      SELECT * FROM base_features
+      UNION ALL SELECT * FROM neighbor_features
+      UNION ALL SELECT * FROM building_features
+      UNION ALL SELECT * FROM road_features
+    )
+    SELECT side, COALESCE(jsonb_agg(feature), '[]'::jsonb) AS features
+    FROM all_features
+    GROUP BY side
+    `,
+    [pid, JSON.stringify(overlayRows)],
+  );
+
+  const bySide = new Map(rows.map((row) => [row.side, row.features || []]));
+  const sharedFeatures = bySide.get("both") || [];
+  return {
+    pid,
+    address: comparison.address,
+    parcel: comparison.parcel,
+    zones: comparison.zones,
+    regulationTypes: [...typeByKey.values()].map((type) => ({
+      ...type,
+      availableIn: [...new Set(type.availableIn)].sort(),
+    })),
+    current: { type: "FeatureCollection", features: [...sharedFeatures, ...(bySide.get("current") || [])] },
+    draft: { type: "FeatureCollection", features: [...sharedFeatures, ...(bySide.get("draft") || [])] },
+    metadata: {
+      source: "PostGIS parcel boundary segment classification using nearest zoning.v_charlottetown_street_network geometry",
+      note: "Front is inferred from every road-facing parcel edge, including corner lots. Rear is inferred from the non-front edges farthest opposite the front edges. Side is the remaining lot-line edge between front and rear, following the definitions in both bylaw definitions JSON files.",
+    },
+  };
+}
+
 function structuredNumericSignature(fact) {
   const payload = fact?.value || {};
   if (payload.value !== undefined && payload.value !== null) {
@@ -914,6 +1509,181 @@ async function loadZoningComparisonByPid(pid) {
       currentZoneSections: currentSections.length ? "zoning.section" : null,
       draftZoneSections: draftSections.length ? "zoning.section" : null,
     },
+  };
+}
+
+async function loadParcelRestrictionBuffers(pid) {
+  const comparison = await loadZoningComparisonByPid(pid);
+  if (!comparison) {
+    return null;
+  }
+  const currentDistances = parseSetbackDistances(setbackRowsFromStructuredComparison(comparison, "current"));
+  const draftDistances = parseSetbackDistances(setbackRowsFromStructuredComparison(comparison, "draft"));
+  const bufferRows = [
+    ...currentDistances.map((distance) => ({ ...distance, side: "current" })),
+    ...draftDistances.map((distance) => ({ ...distance, side: "draft" })),
+  ];
+
+  const emptyPayload = {
+    pid,
+    zones: comparison.zones,
+    current: { type: "FeatureCollection", features: [] },
+    draft: { type: "FeatureCollection", features: [] },
+    metadata: {
+      source: "PostGIS ST_Buffer on zoning.v_charlottetown_parcel_map in EPSG:2954",
+      note: "Buffers are exact parcel-boundary distances from extracted setback facts. Yard-line orientation is not inferred.",
+    },
+  };
+  if (!bufferRows.length) {
+    return emptyPayload;
+  }
+
+  const { rows } = await pool.query(
+    `
+    WITH selected_address AS (
+      SELECT geom
+      FROM zoning.v_charlottetown_civic_addresses
+      WHERE NULLIF(trim(attributes ->> 'PID'), '') = $1
+         OR NULLIF(trim(attributes ->> 'pid2'), '') = $1
+      ORDER BY spatial_feature_id
+      LIMIT 1
+    ),
+    selected_parcel AS (
+      SELECT p.geom
+      FROM selected_address a
+      JOIN zoning.v_charlottetown_parcel_map p
+        ON ST_Covers(p.geom, a.geom)
+      ORDER BY ST_Area(p.geom), p.spatial_feature_id
+      LIMIT 1
+    ),
+    selected_buildings AS (
+      SELECT
+        b.spatial_feature_id,
+        b.feature_key,
+        b.osm_type,
+        b.osm_id,
+        b.building,
+        b.name,
+        b.levels,
+        b.attributes,
+        b.geom
+      FROM selected_parcel p
+      JOIN zoning.v_charlottetown_osm_buildings b
+        ON b.geom && p.geom
+       AND ST_Intersects(b.geom, p.geom)
+      ORDER BY ST_Area(ST_Intersection(b.geom, p.geom)) DESC, b.spatial_feature_id
+      LIMIT 12
+    ),
+    distances AS (
+      SELECT *
+      FROM jsonb_to_recordset($2::jsonb) AS d(
+        side text,
+        distance_m double precision,
+        label text,
+        basis text
+      )
+    ),
+    buffers AS (
+      SELECT
+        d.side,
+        d.distance_m,
+        d.label,
+        d.basis,
+        p.geom AS parcel_geom,
+        ST_Multi(ST_Buffer(p.geom, -d.distance_m, 'join=mitre')) AS buildable_geom
+      FROM selected_parcel p
+      CROSS JOIN distances d
+    ),
+    features AS (
+      SELECT
+        side,
+        jsonb_build_object(
+          'type', 'Feature',
+          'geometry', ST_AsGeoJSON(ST_Transform(ST_Multi(parcel_geom), 4326))::jsonb,
+          'properties', jsonb_build_object(
+            'kind', 'parcel',
+            'distanceM', distance_m,
+            'label', label,
+            'basis', basis
+          )
+        ) AS feature
+      FROM buffers
+      UNION ALL
+      SELECT
+        side,
+        jsonb_build_object(
+          'type', 'Feature',
+          'geometry', ST_AsGeoJSON(ST_Transform(ST_CollectionExtract(ST_Multi(ST_Difference(parcel_geom, buildable_geom)), 3), 4326))::jsonb,
+          'properties', jsonb_build_object(
+            'kind', 'setback_buffer',
+            'distanceM', distance_m,
+            'label', label,
+            'basis', basis
+          )
+        ) AS feature
+      FROM buffers
+      WHERE NOT ST_IsEmpty(buildable_geom)
+      UNION ALL
+      SELECT
+        side,
+        jsonb_build_object(
+          'type', 'Feature',
+          'geometry', ST_AsGeoJSON(ST_Transform(ST_CollectionExtract(buildable_geom, 3), 4326))::jsonb,
+          'properties', jsonb_build_object(
+            'kind', 'buildable_area',
+            'distanceM', distance_m,
+            'label', label,
+            'basis', basis
+          )
+        ) AS feature
+      FROM buffers
+      WHERE NOT ST_IsEmpty(buildable_geom)
+      UNION ALL
+      SELECT
+        d.side,
+        jsonb_build_object(
+          'type', 'Feature',
+          'geometry', ST_AsGeoJSON(ST_Transform(ST_CollectionExtract(ST_Multi(ST_Intersection(b.geom, p.geom)), 3), 4326))::jsonb,
+          'properties', jsonb_build_object(
+            'kind', 'building',
+            'building', b.building,
+            'name', b.name,
+            'levels', b.levels,
+            'osmType', b.osm_type,
+            'osmId', b.osm_id,
+            'source', jsonb_build_object(
+              'table', 'zoning.v_charlottetown_osm_buildings',
+              'spatialFeatureId', b.spatial_feature_id,
+              'featureKey', b.feature_key
+            )
+          )
+        ) AS feature
+      FROM selected_parcel p
+      CROSS JOIN distances d
+      JOIN selected_buildings b
+        ON TRUE
+      WHERE NOT ST_IsEmpty(ST_Intersection(b.geom, p.geom))
+    )
+    SELECT side, COALESCE(jsonb_agg(feature ORDER BY (feature->'properties'->>'distanceM')::double precision, feature->'properties'->>'kind'), '[]'::jsonb) AS features
+    FROM features
+    GROUP BY side
+    `,
+    [
+      pid,
+      JSON.stringify(bufferRows.map((row) => ({
+        side: row.side,
+        distance_m: row.distanceM,
+        label: row.label,
+        basis: row.basis,
+      }))),
+    ],
+  );
+
+  const bySide = new Map(rows.map((row) => [row.side, row.features || []]));
+  return {
+    ...emptyPayload,
+    current: { type: "FeatureCollection", features: bySide.get("current") || [] },
+    draft: { type: "FeatureCollection", features: bySide.get("draft") || [] },
   };
 }
 
@@ -1317,6 +2087,65 @@ async function loadDraftZoningGeoJson(bbox, limit) {
       geometrySrid: 4326,
       sourceSrid: 2954,
     },
+  };
+}
+
+async function loadOsmBuildingsGeoJson(bbox, limit) {
+  const params = [limit];
+  let bboxFilter = "";
+  if (bbox) {
+    params.push(bbox.west, bbox.south, bbox.east, bbox.north);
+    bboxFilter = `
+      WHERE b.geom && ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954)
+        AND ST_Intersects(b.geom, ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954))
+    `;
+  }
+  const { rows } = await pool.query(
+    `
+    WITH source AS (
+      SELECT *
+      FROM zoning.v_charlottetown_osm_buildings b
+      ${bboxFilter}
+      ORDER BY spatial_feature_id
+      LIMIT $1
+    ),
+    features AS (
+      SELECT jsonb_build_object(
+        'type', 'Feature',
+        'id', feature_key,
+        'geometry', ST_AsGeoJSON(ST_Transform(geom, 4326))::jsonb,
+        'properties', jsonb_build_object(
+          'building', building,
+          'name', name,
+          'levels', levels,
+          'osmType', osm_type,
+          'osmId', osm_id,
+          'attributes', attributes,
+          'source', jsonb_build_object(
+            'table', 'zoning.v_charlottetown_osm_buildings',
+            'spatialFeatureId', spatial_feature_id,
+            'featureKey', feature_key
+          )
+        )
+      ) AS feature
+      FROM source
+    )
+    SELECT jsonb_build_object(
+      'type', 'FeatureCollection',
+      'features', COALESCE(jsonb_agg(feature), '[]'::jsonb),
+      'metadata', jsonb_build_object(
+        'source', 'zoning.v_charlottetown_osm_buildings',
+        'limit', $1
+      )
+    ) AS geojson
+    FROM features
+    `,
+    params,
+  );
+  return rows[0]?.geojson || {
+    type: "FeatureCollection",
+    features: [],
+    metadata: { source: "zoning.v_charlottetown_osm_buildings", limit },
   };
 }
 
@@ -1730,6 +2559,8 @@ const routeEntrypoints = new Map([
   ["/parcel-lookup/", { file: "/ui_kits/parcel-lookup/index.html", baseHref: "/ui_kits/parcel-lookup/" }],
   ["/map-explorer", { file: "/ui_kits/map-explorer/index.html", baseHref: "/ui_kits/map-explorer/" }],
   ["/map-explorer/", { file: "/ui_kits/map-explorer/index.html", baseHref: "/ui_kits/map-explorer/" }],
+  ["/restriction-stack", { file: "/ui_kits/restriction-stack/index.html", baseHref: "/ui_kits/restriction-stack/" }],
+  ["/restriction-stack/", { file: "/ui_kits/restriction-stack/index.html", baseHref: "/ui_kits/restriction-stack/" }],
   ["/city-view", { file: "/ui_kits/map-explorer-leaflet/index.html", baseHref: "/ui_kits/map-explorer-leaflet/" }],
   ["/city-view/", { file: "/ui_kits/map-explorer-leaflet/index.html", baseHref: "/ui_kits/map-explorer-leaflet/" }],
   ["/map", { file: "/ui_kits/map-explorer-leaflet/index.html", baseHref: "/ui_kits/map-explorer-leaflet/" }],
@@ -1840,6 +2671,18 @@ const server = createServer(async (request, response) => {
       return;
     }
 
+    if (url.pathname === "/api/buildings/osm.geojson") {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const bbox = parseBbox(url.searchParams.get("bbox"));
+      const limit = normalizeLimit(url.searchParams.get("limit"), 2000, 8000);
+      await sendGeoJson(response, await loadOsmBuildingsGeoJson(bbox, limit));
+      return;
+    }
+
     if (url.pathname === "/api/parcels/point") {
       if (request.method !== "GET") {
         response.writeHead(405);
@@ -1883,6 +2726,42 @@ const server = createServer(async (request, response) => {
         return;
       }
       await sendJson(response, await loadProvisionsComparison());
+      return;
+    }
+
+    const restrictionBuffersMatch = url.pathname.match(/^\/api\/parcels\/([^/]+)\/restriction-buffers$/);
+    if (restrictionBuffersMatch) {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const pid = decodeURIComponent(restrictionBuffersMatch[1]).trim();
+      const buffers = await loadParcelRestrictionBuffers(pid);
+      if (!buffers) {
+        response.writeHead(404, { "content-type": "application/json; charset=utf-8" });
+        response.end(JSON.stringify({ error: "Parcel PID not found.", pid }));
+        return;
+      }
+      await sendJson(response, buffers);
+      return;
+    }
+
+    const restrictionStackMatch = url.pathname.match(/^\/api\/parcels\/([^/]+)\/restriction-stack$/);
+    if (restrictionStackMatch) {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const pid = decodeURIComponent(restrictionStackMatch[1]).trim();
+      const stack = await loadParcelRestrictionStack(pid);
+      if (!stack) {
+        response.writeHead(404, { "content-type": "application/json; charset=utf-8" });
+        response.end(JSON.stringify({ error: "Parcel PID not found.", pid }));
+        return;
+      }
+      await sendJson(response, stack);
       return;
     }
 

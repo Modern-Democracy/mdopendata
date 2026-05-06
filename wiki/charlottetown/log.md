@@ -291,6 +291,15 @@ and revised Charlottetown spatial registration status handling so reruns keep
 `zoning.spatial_layer.status` aligned with loaded `zoning.spatial_feature`
 rows.
 
+## [2026-05-06] spatial | Official street network refresh
+
+Added `schema/sql/017_refresh_charlottetown_street_network.sql` to discard the
+old registered Charlottetown street network from `zoning.spatial_feature` and
+reload `charlottetown_street_network` from the city-official
+`public."CHTWN_Street_Network"` layer. Updated standup/backlog/timeline notes
+to reflect the 2,221-feature SRID 2954 street layer and refreshed
+`zoning.v_charlottetown_street_network`.
+
 ## Sources
 
 - [Charlottetown wiki guide](./README.md)
