@@ -62,6 +62,16 @@ Display source and status metadata in the parcel 3D panel so users can distingui
 
 Raw LAZ files must never be fetched by the browser. Browser payloads should remain bounded to the selected parcel context radius unless a later terrain tile strategy is approved.
 
+## Implementation Status
+
+The first demo integration is implemented in `web/server.js` and `web/public/ui_kits/parcel-3d/index.html`.
+
+The `/api/parcels/:pid/3d-context` response now includes a `terrain` object sampled from `data/spatial/charlottetown/lidar-terrain-dem/charlottetown-dem-epsg2961-1m.tif` with GDAL. The payload is a compact 41 by 41 elevation grid around the selected parcel context, not raw LAZ or a raw DEM stream. It includes `status`, `usage`, horizontal CRS, unresolved vertical datum, patch valid-cell ratio, base elevation, and the refined DEM QA coverage ratio.
+
+The browser renders the DEM patch as a Three.js terrain mesh when `terrain.available` is true. Parcel boundaries, roads, and building bases sample the terrain height. If sampling fails or the patch has no valid cells, the viewer keeps the flat ground fallback and displays the fallback status.
+
+This first implementation is demo-only. It depends on local GDAL availability through `GDAL_TRANSLATE_PATH` or the default `C:\Program Files\GDAL\gdal_translate.exe`, and it retains the unresolved vertical datum and non-authoritative terrain caveats.
+
 ## QA and Acceptance Checks
 
 Metadata checks:

@@ -73,6 +73,7 @@
         <div class="hud">
           <div class="pill" id="sun-label">Sun pending</div>
           <div class="pill" id="count-label">Loading context</div>
+          <div class="pill" id="terrain-label">Terrain pending</div>
         </div>
       </main>
       <aside class="panel">
@@ -118,8 +119,18 @@
           </div>
         </div>
 
+        <h3 class="panel-title">Terrain</h3>
+        <div class="status-card">
+          <div class="metric-grid">
+            <div class="k">Mode</div><div class="v" id="terrain-mode">pending</div>
+            <div class="k">Coverage</div><div class="v" id="terrain-coverage">pending</div>
+            <div class="k">Datum</div><div class="v" id="terrain-datum">pending</div>
+          </div>
+        </div>
+
         <h3 class="panel-title">Legend</h3>
         <div class="status-card">
+          <div class="legend-row"><span class="sw" style="background:#9fa878"></span>Demo terrain</div>
           <div class="legend-row"><span class="sw" style="background:#8f3d2f"></span>Selected parcel boundary</div>
           <div class="legend-row"><span class="sw" style="background:#d1a63a"></span>Adjacent parcel boundary</div>
           <div class="legend-row"><span class="sw" style="background:#b88b5a"></span>Selected parcel building</div>
@@ -163,6 +174,7 @@ let origin = null;
 let context = null;
 let sunLight = null;
 let shadowPlayTimer = null;
+let terrainData = null;
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xd8d1c4);
@@ -200,19 +212,21 @@ sunLight.shadow.camera.far = 700;
 scene.add(sunLight);
 scene.add(sunLight.target);
 
-const ground = new THREE.Mesh(
+const fallbackGround = new THREE.Mesh(
   new THREE.PlaneGeometry(RADIUS_M * 2.35, RADIUS_M * 2.35),
   new THREE.MeshStandardMaterial({ color: 0xcfc6b5, roughness: 0.9 })
 );
-ground.rotation.x = -Math.PI / 2;
-ground.receiveShadow = true;
-scene.add(ground);
+fallbackGround.rotation.x = -Math.PI / 2;
+fallbackGround.receiveShadow = true;
+scene.add(fallbackGround);
+
+const terrainGroup = new THREE.Group();
 
 const parcelsGroup = new THREE.Group();
 const buildingsGroup = new THREE.Group();
 const roadsGroup = new THREE.Group();
 const directionLabelsGroup = new THREE.Group();
-scene.add(parcelsGroup, buildingsGroup, roadsGroup, directionLabelsGroup);
+scene.add(terrainGroup, parcelsGroup, buildingsGroup, roadsGroup, directionLabelsGroup);
 window.__parcel3dDebug = { buildingMeshes: [] };
 
 function setStatus(text) {
@@ -271,6 +285,87 @@ function project(lon, lat) {
   };
 }
 
+function sampleTerrainHeight(x, z) {
+  if (!terrainData?.available || !Array.isArray(terrainData.values)) return 0;
+  const radius = Number(terrainData.radiusM) || RADIUS_M;
+  const cols = Number(terrainData.cols) || 0;
+  const rows = Number(terrainData.rows) || 0;
+  if (cols < 2 || rows < 2) return 0;
+  const gridCol = ((x + radius) / (radius * 2)) * (cols - 1);
+  const gridRow = ((z + radius) / (radius * 2)) * (rows - 1);
+  if (gridCol < 0 || gridCol > cols - 1 || gridRow < 0 || gridRow > rows - 1) return 0;
+  const col0 = Math.floor(gridCol);
+  const row0 = Math.floor(gridRow);
+  const col1 = Math.min(col0 + 1, cols - 1);
+  const row1 = Math.min(row0 + 1, rows - 1);
+  const tx = gridCol - col0;
+  const ty = gridRow - row0;
+  const samples = [
+    { value: terrainData.values[row0 * cols + col0], weight: (1 - tx) * (1 - ty) },
+    { value: terrainData.values[row0 * cols + col1], weight: tx * (1 - ty) },
+    { value: terrainData.values[row1 * cols + col0], weight: (1 - tx) * ty },
+    { value: terrainData.values[row1 * cols + col1], weight: tx * ty },
+  ].filter((sample) => Number.isFinite(sample.value) && sample.weight > 0);
+  const totalWeight = samples.reduce((sum, sample) => sum + sample.weight, 0);
+  if (totalWeight > 0) {
+    return samples.reduce((sum, sample) => sum + sample.value * sample.weight, 0) / totalWeight;
+  }
+  const nearestCol = Math.round(gridCol);
+  const nearestRow = Math.round(gridRow);
+  const nearest = terrainData.values[nearestRow * cols + nearestCol];
+  return Number.isFinite(nearest) ? nearest : 0;
+}
+
+function addTerrainMesh(terrain) {
+  terrainGroup.clear();
+  terrainData = terrain;
+  if (!terrain?.available || !Array.isArray(terrain.values)) {
+    fallbackGround.visible = true;
+    return false;
+  }
+  const cols = Number(terrain.cols);
+  const rows = Number(terrain.rows);
+  const radius = Number(terrain.radiusM) || RADIUS_M;
+  if (cols < 2 || rows < 2 || terrain.values.length !== cols * rows) {
+    fallbackGround.visible = true;
+    return false;
+  }
+  const positions = [];
+  const indices = [];
+  for (let row = 0; row < rows; row += 1) {
+    for (let col = 0; col < cols; col += 1) {
+      const x = -radius + (col / (cols - 1)) * radius * 2;
+      const z = -radius + (row / (rows - 1)) * radius * 2;
+      const rawY = terrain.values[row * cols + col];
+      positions.push(x, Number.isFinite(rawY) ? rawY : 0, z);
+    }
+  }
+  for (let row = 0; row < rows - 1; row += 1) {
+    for (let col = 0; col < cols - 1; col += 1) {
+      const a = row * cols + col;
+      const b = a + 1;
+      const c = a + cols;
+      const d = c + 1;
+      indices.push(a, c, b, b, c, d);
+    }
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+  geometry.setIndex(indices);
+  geometry.computeVertexNormals();
+  const material = new THREE.MeshStandardMaterial({
+    color: 0x9fa878,
+    roughness: 0.96,
+    metalness: 0,
+    side: THREE.DoubleSide,
+  });
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.receiveShadow = true;
+  terrainGroup.add(mesh);
+  fallbackGround.visible = false;
+  return true;
+}
+
 function ringsFromGeometry(geometry) {
   if (!geometry) return [];
   if (geometry.type === "Polygon") return [geometry.coordinates];
@@ -293,7 +388,7 @@ function makeBoundary(feature) {
     const outer = polygon[0] || [];
     const points = outer.map(([lon, lat]) => {
       const p = project(lon, lat);
-      return new THREE.Vector3(p.x, 0.16, p.z);
+      return new THREE.Vector3(p.x, sampleTerrainHeight(p.x, p.z) + 0.28, p.z);
     });
     if (points.length > 1) {
       parcelsGroup.add(new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(points), material));
@@ -306,7 +401,7 @@ function makeRoad(feature) {
   for (const line of lineStringsFromGeometry(feature.geometry)) {
     const points = line.map(([lon, lat]) => {
       const p = project(lon, lat);
-      return new THREE.Vector3(p.x, 0.24, p.z);
+      return new THREE.Vector3(p.x, sampleTerrainHeight(p.x, p.z) + 0.35, p.z);
     });
     if (points.length > 1) {
       roadsGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), material));
@@ -333,21 +428,52 @@ function buildingHeight(properties) {
   return 8;
 }
 
+function footprintTerrainHeights(points) {
+  if (!points.length) return [0];
+  const samples = points.map((point) => sampleTerrainHeight(point.x, point.z));
+  for (let index = 0; index < points.length - 1; index += 1) {
+    const current = points[index];
+    const next = points[index + 1];
+    samples.push(sampleTerrainHeight((current.x + next.x) / 2, (current.z + next.z) / 2));
+  }
+  const center = points.reduce(
+    (sum, point) => ({ x: sum.x + point.x / points.length, z: sum.z + point.z / points.length }),
+    { x: 0, z: 0 }
+  );
+  samples.push(sampleTerrainHeight(center.x, center.z));
+  return samples.filter(Number.isFinite);
+}
+
 function makeBuilding(feature) {
   const relation = feature.properties?.relation;
   const color = relation === "selected" ? 0xb88b5a : relation === "adjacent" ? 0x6f7f8c : 0x87986a;
   const material = new THREE.MeshStandardMaterial({ color, roughness: 0.72, metalness: 0.02 });
+  const foundationMaterial = new THREE.MeshStandardMaterial({ color: 0x6f6658, roughness: 0.95, metalness: 0 });
   const height = buildingHeight(feature.properties);
   for (const polygon of ringsFromGeometry(feature.geometry)) {
     const outer = polygon[0] || [];
     if (outer.length < 4) continue;
     const shape = shapeFromRing(outer);
+    const projectedOuter = outer.map(([lon, lat]) => project(lon, lat));
+    const terrainHeights = footprintTerrainHeights(projectedOuter);
+    const minTerrainY = Math.min(...terrainHeights);
+    const maxTerrainY = Math.max(...terrainHeights);
+    const baseY = maxTerrainY + 0.08;
     for (const hole of polygon.slice(1)) {
       if (hole.length >= 4) shape.holes.push(shapeFromRing(hole));
     }
+    const foundationDepth = Math.max(0.2, Math.min(6, baseY - minTerrainY));
+    const foundationGeometry = new THREE.ExtrudeGeometry(shape, { depth: foundationDepth, bevelEnabled: false });
+    foundationGeometry.rotateX(Math.PI / 2);
+    foundationGeometry.translate(0, baseY, 0);
+    const foundation = new THREE.Mesh(foundationGeometry, foundationMaterial);
+    foundation.castShadow = false;
+    foundation.receiveShadow = true;
+    buildingsGroup.add(foundation);
+
     const geometry = new THREE.ExtrudeGeometry(shape, { depth: height, bevelEnabled: false });
     geometry.rotateX(Math.PI / 2);
-    geometry.translate(0, height, 0);
+    geometry.translate(0, height + baseY, 0);
     const mesh = new THREE.Mesh(geometry, material);
     mesh.castShadow = true;
     mesh.receiveShadow = true;
@@ -476,6 +602,15 @@ function renderContext(payload) {
   document.getElementById("compare-link").href = `/zoning-comparison?pid=${encodeURIComponent(payload.pid)}`;
   document.getElementById("restrictions-link").href = `/restriction-stack?pid=${encodeURIComponent(payload.pid)}`;
 
+  const terrainRendered = addTerrainMesh(payload.terrain);
+  const terrain = payload.terrain || {};
+  document.getElementById("terrain-mode").textContent = terrainRendered ? "Demo terrain" : "Flat fallback";
+  document.getElementById("terrain-coverage").textContent = Number.isFinite(terrain.validCellRatio)
+    ? `${(terrain.validCellRatio * 100).toFixed(1)}% patch`
+    : "fallback";
+  document.getElementById("terrain-datum").textContent = terrain.verticalDatum ? "unresolved" : "none";
+  document.getElementById("terrain-label").textContent = terrainRendered ? "Demo LIDAR terrain" : "Flat terrain fallback";
+
   (payload.parcels?.features || []).forEach(makeBoundary);
   (payload.roads?.features || []).forEach(makeRoad);
   (payload.buildings?.features || []).forEach(makeBuilding);
@@ -484,7 +619,10 @@ function renderContext(payload) {
   const adjacentCount = (payload.buildings?.features || []).filter((feature) => feature.properties?.relation === "adjacent").length;
   const contextCount = (payload.buildings?.features || []).filter((feature) => feature.properties?.relation === "context").length;
   document.getElementById("count-label").textContent = `${selectedCount} selected, ${adjacentCount} adjacent, ${contextCount} context buildings`;
-  setStatus(payload.metadata?.radiusReason || "Parcel context loaded.");
+  const terrainStatus = terrainRendered
+    ? "Demo LIDAR terrain loaded. Vertical datum and shoreline QA are not finalized."
+    : `Flat terrain fallback. ${terrain.reason || "DEM terrain was unavailable for this parcel."}`;
+  setStatus(`${payload.metadata?.radiusReason || "Parcel context loaded."} ${terrainStatus}`);
   updateSun();
 }
 

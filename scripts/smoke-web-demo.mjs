@@ -22,7 +22,7 @@ const checks = [
   {
     name: "parcel 3D route",
     path: samplePid ? `/parcel-3d?pid=${encodeURIComponent(samplePid)}` : "/parcel-3d",
-    expectText: ["Parcel 3D", "logo-island-needle.svg", "/3d-context", "three"],
+    expectText: ["Parcel 3D", "logo-island-needle.svg", "/3d-context", "three", "Terrain"],
   },
   {
     name: "city view route",
@@ -81,7 +81,14 @@ if (samplePid) {
     {
       name: "parcel 3D context API contract",
       path: `/api/parcels/${encodeURIComponent(samplePid)}/3d-context?radiusM=250`,
-      expectJson: (payload) => payload.pid && payload.parcels?.type === "FeatureCollection" && payload.buildings?.type === "FeatureCollection" && payload.roads?.type === "FeatureCollection" && payload.metadata?.radiusM === 250,
+      expectJson: (payload) =>
+        payload.pid &&
+        payload.parcels?.type === "FeatureCollection" &&
+        payload.buildings?.type === "FeatureCollection" &&
+        payload.roads?.type === "FeatureCollection" &&
+        payload.terrain?.status &&
+        payload.metadata?.radiusM === 250 &&
+        payload.metadata?.terrainStatus === payload.terrain.status,
     },
     {
       name: "zoning comparison API contract",

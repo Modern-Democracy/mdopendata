@@ -23,11 +23,12 @@ ROOT = Path(__file__).resolve().parents[1]
 LIDAR_DIR = ROOT / "maps" / "pei" / "lidar"
 BOUNDARY_PATH = ROOT / "maps" / "pei" / "CHTWN_Municipal_Boundary.geojson"
 OUT_DIR = ROOT / "data" / "spatial" / "charlottetown" / "lidar-terrain-dem"
-METHOD = "pdal_ground_idw_epsg2961_1m_v1"
+METHOD = "pdal_ground_idw_epsg2961_1m_radius5m_v2"
 SOURCE_SRID = 4326
 LIDAR_SRID = 2961
 NODATA = -9999.0
 GROUND_EXPRESSION = "Classification == 2 && Withheld == 0 && Synthetic == 0 && KeyPoint == 0 && Overlap == 0"
+INTERPOLATION_RADIUS_M = 5.0
 
 
 @dataclass(frozen=True)
@@ -163,6 +164,7 @@ def write_pdal_pipeline(tile: Tile, output_tif: Path, pipeline_path: Path, resol
             "type": "writers.gdal",
             "filename": str(output_tif),
             "resolution": resolution,
+            "radius": INTERPOLATION_RADIUS_M,
             "output_type": "idw",
             "gdaldriver": "GTiff",
             "nodata": NODATA,
@@ -279,6 +281,7 @@ def write_summary(
         "usage_status": "visualization_only_until_vertical_datum_confirmed",
         "ground_filter": GROUND_EXPRESSION,
         "resolution_m": resolution,
+        "interpolation_radius_m": INTERPOLATION_RADIUS_M,
         "boundary_buffer_m": buffer_m,
         "selected_tile_count": len(tiles),
         "selected_point_count": sum(tile.point_count for tile in tiles),

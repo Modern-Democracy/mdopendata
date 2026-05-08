@@ -18,6 +18,7 @@
     "db:import:zoning": "powershell -ExecutionPolicy Bypass -Command \"& .\\scripts\\python.ps1 .\\scripts\\import-zoning.py\"",
     "db:import:zoning:dry-run": "powershell -ExecutionPolicy Bypass -Command \"& .\\scripts\\python.ps1 .\\scripts\\import-zoning.py --dry-run\"",
     "lidar:terrain-dem": "powershell -ExecutionPolicy Bypass -Command \"& .\\scripts\\python.ps1 .\\scripts\\build-charlottetown-terrain-dem.py\"",
-    "lidar:terrain-dem:dry-run": "powershell -ExecutionPolicy Bypass -Command \"& .\\scripts\\python.ps1 .\\scripts\\build-charlottetown-terrain-dem.py --dry-run --max-tiles 1 --clean\""
+    "lidar:terrain-dem:dry-run": "powershell -ExecutionPolicy Bypass -Command \"& .\\scripts\\python.ps1 .\\scripts\\build-charlottetown-terrain-dem.py --dry-run --max-tiles 1 --clean\"",
+    "lidar:terrain-dem:qa": "powershell -ExecutionPolicy Bypass -Command \"& .\\scripts\\python.ps1 .\\scripts\\qa-charlottetown-terrain-dem.py\""
   }
 }

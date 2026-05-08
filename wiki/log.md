@@ -90,6 +90,22 @@ Moved non-universal startup instructions out of root `AGENTS.md`: role gates and
 
 Created the root wiki schema, catalog, log, and top-level page areas for source summaries, domain concepts, platform notes, and implementation notes. Linked the existing Charlottetown wiki as the active project wiki.
 
+## [2026-05-08] implementation | Terrain DEM demo acceptance
+
+Updated [Charlottetown terrain DEM pipeline](./implementation/charlottetown-terrain-dem-pipeline.md) to record that the current 97.4905% refined land coverage DEM is acceptable for demo-only parcel 3D and storm-surge visualization, while deferring the 99% refined coverage target to backlog work if demo results are not satisfactory.
+
+## [2026-05-08] implementation | Parcel 3D demo terrain integration
+
+Implemented the first demo terrain integration for `/parcel-3d`: `/api/parcels/:pid/3d-context` now returns a compact GDAL-sampled DEM patch with demo-status metadata and fallback state, and the Three.js viewer renders the terrain mesh when available while preserving flat terrain fallback. Updated [Parcel 3D LIDAR terrain plan](./implementation/parcel-3d-lidar-terrain-plan.md) with the implemented API/UI behavior and local GDAL dependency.
+
+## [2026-05-08] deployment | Parcel 3D terrain Docker redeploy
+
+Rebuilt and redeployed the Docker `web` service for parcel 3D terrain support. The web image now installs GDAL tools, and the normal app port returns `demo_terrain` metadata for `/api/parcels/358960/3d-context?radiusM=250`.
+
+## [2026-05-08] implementation | Parcel 3D building terrain seating
+
+Adjusted the parcel 3D terrain renderer so building bases use bilinear terrain sampling across each footprint and add a short foundation skirt to reduce visible floating and ground intersection on sloped DEM terrain. Rebuilt and redeployed the Docker `web` service after the rendering fix.
+
 ## Sources
 
 - [Wiki schema](./AGENTS.md)

@@ -1,15 +1,38 @@
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
+import { execFile } from "node:child_process";
 import path from "node:path";
+import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 import pg from "pg";
 
 const { Pool } = pg;
+const execFileAsync = promisify(execFile);
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = process.env.REPO_ROOT || path.resolve(__dirname, "..");
 const host = process.env.HOST || "127.0.0.1";
 const port = Number(process.env.PORT || 3000);
+const defaultGdalTranslatePath = process.platform === "win32"
+  ? "C:\\Program Files\\GDAL\\gdal_translate.exe"
+  : "gdal_translate";
+const gdalTranslatePath = process.env.GDAL_TRANSLATE_PATH || defaultGdalTranslatePath;
+const terrainDemPath = path.join(
+  repoRoot,
+  "data",
+  "spatial",
+  "charlottetown",
+  "lidar-terrain-dem",
+  "charlottetown-dem-epsg2961-1m.tif",
+);
+const terrainQaSummaryPath = path.join(
+  repoRoot,
+  "data",
+  "spatial",
+  "charlottetown",
+  "lidar-terrain-dem",
+  "charlottetown-dem-epsg2961-1m.qa.summary.json",
+);
 
 const publicDir = path.join(__dirname, "public");
 const pool = new Pool({
@@ -2233,6 +2256,122 @@ function normalizeRadius(value, fallback = 250, max = 1000) {
   return Math.min(Math.trunc(parsed), max);
 }
 
+function finiteNumber(value) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function percentileNumber(values, p) {
+  if (!values.length) return null;
+  const sorted = [...values].sort((a, b) => a - b);
+  const index = (sorted.length - 1) * p;
+  const lower = Math.floor(index);
+  const upper = Math.ceil(index);
+  if (lower === upper) return sorted[lower];
+  return sorted[lower] + (sorted[upper] - sorted[lower]) * (index - lower);
+}
+
+async function loadJsonFile(filePath, fallback = null) {
+  try {
+    return JSON.parse(await readFile(filePath, "utf8"));
+  } catch {
+    return fallback;
+  }
+}
+
+async function loadTerrainPatch(center, radiusM) {
+  const x = finiteNumber(center?.x);
+  const y = finiteNumber(center?.y);
+  if (x === null || y === null) {
+    return {
+      available: false,
+      status: "fallback_flat",
+      reason: "Parcel centroid in EPSG:2961 was not available.",
+    };
+  }
+
+  const sampleCount = 41;
+  const halfSizeM = Math.min(Math.max(radiusM, 120), 350);
+  const qa = await loadJsonFile(terrainQaSummaryPath, {});
+  try {
+    const { stdout } = await execFileAsync(
+      gdalTranslatePath,
+      [
+        "-q",
+        "-of",
+        "XYZ",
+        "-outsize",
+        String(sampleCount),
+        String(sampleCount),
+        "-projwin",
+        String(x - halfSizeM),
+        String(y + halfSizeM),
+        String(x + halfSizeM),
+        String(y - halfSizeM),
+        terrainDemPath,
+        "/vsistdout/",
+      ],
+      {
+        cwd: repoRoot,
+        maxBuffer: 1024 * 1024 * 4,
+        env: {
+          ...process.env,
+          ...(process.platform === "win32"
+            ? {
+                PROJ_LIB: process.env.PROJ_LIB || "C:\\Program Files\\GDAL\\projlib",
+                GDAL_DATA: process.env.GDAL_DATA || "C:\\Program Files\\GDAL\\gdal-data",
+              }
+            : {}),
+        },
+      },
+    );
+    const cells = stdout
+      .trim()
+      .split(/\r?\n/)
+      .map((line) => {
+        const [rawX, rawY, rawZ] = line.trim().split(/\s+/).map(Number);
+        const z = Number.isFinite(rawZ) && rawZ > -9000 ? rawZ : null;
+        return { x: rawX, y: rawY, z };
+      })
+      .filter((cell) => Number.isFinite(cell.x) && Number.isFinite(cell.y));
+    const validElevations = cells.map((cell) => cell.z).filter((z) => z !== null);
+    if (cells.length !== sampleCount * sampleCount || validElevations.length === 0) {
+      return {
+        available: false,
+        status: "fallback_flat",
+        reason: "DEM sampling returned no valid terrain cells for this parcel context.",
+        qa,
+      };
+    }
+    const baseElevationM = percentileNumber(validElevations, 0.5);
+    return {
+      available: true,
+      status: "demo_terrain",
+      method: "gdal_translate_xyz_sampled_from_epsg2961_dem",
+      source: path.relative(repoRoot, terrainDemPath),
+      horizontalCrs: "EPSG:2961",
+      verticalDatum: "unresolved_source_lidar_vertical_datum",
+      usage: "demo_visualization_only",
+      warning: "Demo terrain only. Do not use for authoritative terrain, flood, tidal, storm-surge, engineering, regulatory, or parcel-specific risk decisions.",
+      cols: sampleCount,
+      rows: sampleCount,
+      radiusM: halfSizeM,
+      center: { x, y },
+      baseElevationM: Number(baseElevationM.toFixed(3)),
+      validCellRatio: Number((validElevations.length / cells.length).toFixed(4)),
+      refinedLandCoverageRatio: qa?.refined_land_coverage_ratio ?? null,
+      values: cells.map((cell) => (cell.z === null ? null : Number((cell.z - baseElevationM).toFixed(3)))),
+    };
+  } catch (error) {
+    return {
+      available: false,
+      status: "fallback_flat",
+      reason: `DEM sampling failed: ${error.message}`,
+      qa,
+    };
+  }
+}
+
 async function loadParcel3dContext(pid, radiusM = 250) {
   const { rows } = await pool.query(
     `
@@ -2434,6 +2573,10 @@ async function loadParcel3dContext(pid, radiusM = 250) {
             'lon', ST_X(ST_Transform(ST_Centroid(geom), 4326)),
             'lat', ST_Y(ST_Transform(ST_Centroid(geom), 4326))
           ),
+          'sourceCentroid2961', jsonb_build_object(
+            'x', ST_X(ST_Transform(ST_Centroid(geom), 2961)),
+            'y', ST_Y(ST_Transform(ST_Centroid(geom), 2961))
+          ),
           'geometry', ST_AsGeoJSON(ST_Transform(geom, 4326))::jsonb
         )
         FROM selected_parcel
@@ -2459,6 +2602,7 @@ async function loadParcel3dContext(pid, radiusM = 250) {
   if (!payload?.address || !payload?.parcel) {
     return null;
   }
+  const terrain = await loadTerrainPatch(payload.parcel.sourceCentroid2961, radiusM);
 
   return {
     pid,
@@ -2467,12 +2611,15 @@ async function loadParcel3dContext(pid, radiusM = 250) {
     parcels: payload.parcels,
     buildings: payload.buildings,
     roads: payload.roads,
+    terrain,
     metadata: {
       source: "PostGIS parcel, building, and street context",
       radiusM,
       radiusReason: "Default 250 m radius provides road and parcel context around the target while keeping browser geometry modest for the static demo.",
       buildingScope: "Buildings are limited to the same context radius used for parcel and road visibility.",
       geometrySrid: 4326,
+      terrainStatus: terrain.status,
+      terrainUsage: terrain.usage || "fallback_flat",
     },
   };
 }

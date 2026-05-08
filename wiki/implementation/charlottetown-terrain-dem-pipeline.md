@@ -122,6 +122,22 @@ Acceptance threshold for v1:
 - Median absolute residual between sampled DEM values and existing parcel ground median metrics is under 0.75 m for parcels with high or medium LIDAR metric confidence.
 - Output summary JSON records that vertical datum is unresolved and that the DEM is visualization-only until confirmed.
 
+## Demo Acceptance Decision
+
+For the first parcel-3D and storm-surge feature demos, the current DEM can proceed as a demo-only terrain surface even though it does not meet the earlier 99% land-coverage target.
+
+The latest refined QA pass reported:
+
+- refined land coverage: 97.4905%
+- excluded water or shoreline artifact parcels: 71
+- excluded wetland or water cells: 662,418
+- median absolute parcel residual: 0.1019 m
+- p95 absolute parcel residual: 0.6068 m
+
+This is acceptable for feature demonstration because the residual checks pass and the remaining coverage gap can be handled with flat-terrain or no-data fallback behavior in the viewer. Do not present the output as authoritative terrain, flood, tidal, storm-surge, engineering, regulatory, or property-specific risk data.
+
+Backlog item: revisit interpolation, masking, and hydro-flattening if the demo visuals are not satisfactory. Raising refined land coverage to at least 99% is deferred future work, not a blocker for the current demo.
+
 ## Integration Path
 
 After the DEM passes QA, derive parcel-3D terrain patches from the EPSG:2961 DEM rather than from raw COPC files. The API should clip or sample around `/api/parcels/:pid/3d-context` parcel contexts and send compact mesh-ready elevation arrays to the browser.
