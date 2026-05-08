@@ -16,6 +16,8 @@
     "db:apply-schema": "powershell -ExecutionPolicy Bypass -Command \"$env:DOCKER_CONFIG=(Join-Path (Get-Location) '.docker-local'); New-Item -ItemType Directory -Force $env:DOCKER_CONFIG | Out-Null; $database=if($env:PGDATABASE){$env:PGDATABASE}else{'mdopendata'}; $user=if($env:PGUSER){$env:PGUSER}else{'mdopendata'}; Get-Content (Join-Path (Get-Location) 'schema/sql/postgis.sql') | docker exec -i mdopendata-postgis psql -U $user -d $database\"",
     "db:migrate": "powershell -ExecutionPolicy Bypass -Command \"& .\\scripts\\python.ps1 .\\scripts\\run-migrations.py\"",
     "db:import:zoning": "powershell -ExecutionPolicy Bypass -Command \"& .\\scripts\\python.ps1 .\\scripts\\import-zoning.py\"",
-    "db:import:zoning:dry-run": "powershell -ExecutionPolicy Bypass -Command \"& .\\scripts\\python.ps1 .\\scripts\\import-zoning.py --dry-run\""
+    "db:import:zoning:dry-run": "powershell -ExecutionPolicy Bypass -Command \"& .\\scripts\\python.ps1 .\\scripts\\import-zoning.py --dry-run\"",
+    "lidar:terrain-dem": "powershell -ExecutionPolicy Bypass -Command \"& .\\scripts\\python.ps1 .\\scripts\\build-charlottetown-terrain-dem.py\"",
+    "lidar:terrain-dem:dry-run": "powershell -ExecutionPolicy Bypass -Command \"& .\\scripts\\python.ps1 .\\scripts\\build-charlottetown-terrain-dem.py --dry-run --max-tiles 1 --clean\""
   }
 }
