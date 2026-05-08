@@ -3,7 +3,7 @@ type: index
 tags:
   - wiki
   - catalog
-updated: 2026-04-28
+updated: 2026-05-08
 ---
 
 This page catalogs the root wiki structure and links to active project wiki areas.
@@ -25,6 +25,12 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [implementation](./implementation/.gitkeep) | Durable workflow, extraction, schema, and implementation notes. |
 | [charlottetown](./charlottetown/README.md) | Active Charlottetown current and draft zoning wiki. |
 
+## Source Pages
+
+| Page | Purpose |
+| --- | --- |
+| [PEI LIDAR and bathymetry metadata](./sources/pei-lidar-bathymetry-metadata.md) | Observed PDAL and GDAL metadata for PEI LIDAR and Charlottetown harbour bathymetry source files. |
+
 ## Domain Pages
 
 | Page | Purpose |
@@ -37,6 +43,7 @@ This page catalogs the root wiki structure and links to active project wiki area
 | --- | --- |
 | [Web UI stack](./implementation/web-ui-stack.md) | Initial Docker-hosted Node web UI decision and first Charlottetown section-equivalence review page shape. |
 | [Web demo design kit plan](./implementation/web-demo-design-kit-plan.md) | Plan and timeline for replacing the current web page with the design-kit-based Charlottetown parcel lookup, map explorer, city-view map, and zoning comparison demo. |
+| [Parcel 3D LIDAR terrain plan](./implementation/parcel-3d-lidar-terrain-plan.md) | Preprocessing and integration plan for using PEI LIDAR as terrain and building-height inputs in the parcel 3D viewer. |
 
 ## Active Project Wikis
 
