@@ -2615,7 +2615,7 @@ async function loadParcel3dContext(pid, radiusM = 250) {
     metadata: {
       source: "PostGIS parcel, building, and street context",
       radiusM,
-      radiusReason: "Default 250 m radius provides road and parcel context around the target while keeping browser geometry modest for the static demo.",
+      radiusReason: `${radiusM} m radius provides road and parcel context around the target while keeping browser geometry modest for the static demo.`,
       buildingScope: "Buildings are limited to the same context radius used for parcel and road visibility.",
       geometrySrid: 4326,
       terrainStatus: terrain.status,
@@ -3082,6 +3082,8 @@ const routeEntrypoints = new Map([
   ["/map-explorer/", { file: "/ui_kits/map-explorer/index.html", baseHref: "/ui_kits/map-explorer/" }],
   ["/parcel-3d", { file: "/ui_kits/parcel-3d/index.html", baseHref: "/ui_kits/parcel-3d/" }],
   ["/parcel-3d/", { file: "/ui_kits/parcel-3d/index.html", baseHref: "/ui_kits/parcel-3d/" }],
+  ["/storm-surge", { file: "/ui_kits/storm-surge/index.html", baseHref: "/ui_kits/storm-surge/" }],
+  ["/storm-surge/", { file: "/ui_kits/storm-surge/index.html", baseHref: "/ui_kits/storm-surge/" }],
   ["/restriction-stack", { file: "/ui_kits/restriction-stack/index.html", baseHref: "/ui_kits/restriction-stack/" }],
   ["/restriction-stack/", { file: "/ui_kits/restriction-stack/index.html", baseHref: "/ui_kits/restriction-stack/" }],
   ["/city-view", { file: "/ui_kits/map-explorer-leaflet/index.html", baseHref: "/ui_kits/map-explorer-leaflet/" }],

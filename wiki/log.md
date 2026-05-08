@@ -102,6 +102,34 @@ Implemented the first demo terrain integration for `/parcel-3d`: `/api/parcels/:
 
 Rebuilt and redeployed the Docker `web` service for parcel 3D terrain support. The web image now installs GDAL tools, and the normal app port returns `demo_terrain` metadata for `/api/parcels/358960/3d-context?radiusM=250`.
 
+## [2026-05-08] implementation | Storm surge demo page
+
+Added the demo-only `/storm-surge` web page, reusing `/api/parcels/:pid/3d-context` to render the existing parcel 3D terrain, parcels, roads, and buildings with a transparent static water plane. Added controls for Charlottetown tide presets, 0-10 m storm surge, storm/category 1/category 2 wind labels, and 0-100 year sea-level-rise scenarios. Added [Storm surge demo plan](./implementation/storm-surge-demo-plan.md) and updated [Root index](./index.md) with the new implementation page.
+
+## [2026-05-08] deployment | Storm surge navigation Docker redeploy
+
+Added the storm-surge top-navigation link across the web UI kit pages and rebuilt/redeployed the Docker `web` service. Verified deployed HTTP 200 responses on port 3000 for `/parcel-lookup`, `/city-view`, `/map-explorer`, `/zoning-comparison`, `/restriction-stack`, `/provisions-comparison`, `/parcel-3d`, and `/storm-surge`, each containing the Storm surge navigation text.
+
+## [2026-05-08] implementation | Storm surge visual datum offset
+
+Adjusted the `/storm-surge` demo water rendering to apply a configurable visual datum offset after composing chart-datum tide height, surge, and sea-level rise. The default offset is `-1.72 m`, matching the CHS Charlottetown station 01700 CGVD28 offset, so the default full/new moon high tide renders at 1.25 m in the current terrain display space rather than 2.97 m. Updated [Storm surge demo plan](./implementation/storm-surge-demo-plan.md) with the offset behavior and continued non-authoritative caveat.
+
+## [2026-05-08] implementation | Storm surge context and water-bed rendering
+
+Expanded the `/storm-surge` demo context radius from 250 m to 350 m, which is the current API terrain-patch cap and gives about 1.96 times the rendered area. Renamed neap-tide controls to half/quarter moon high and low tide. Adjusted terrain rendering so DEM NoData cells in the patch render as a lowered `-4 m` water bed, allowing known water and shoreline gaps to appear immersed under the water plane instead of flat at zero elevation.
+
+## [2026-05-08] fix | Storm surge terrain base normalization
+
+Fixed the `/storm-surge` water plane rendering frame by subtracting the terrain patch `baseElevationM` from the composed water level after the visual datum offset. This matches the API terrain normalization, where DEM elevations are sent to the browser relative to the patch median. Removed the quarter-moon wording from the half-moon tide controls and lowered the NoData water bed from `-4 m` to `-14 m`.
+
+## [2026-05-08] fix | Storm surge datum range and NoData holes
+
+Changed the `/storm-surge` visual datum offset default to `-1.8 m` and narrowed the slider to `-2.8 m` through `-0.8 m` for calibration around the observed plausible baseline. Clarified the wind event control as informational only because surge remains manually controlled by the surge slider. Removed the lowered NoData water bed behavior so terrain gaps no longer fill as isolated water holes before the outer water plane reaches them.
+
+## [2026-05-08] fix | Storm surge wind removal and water-bed restore
+
+Removed the `/storm-surge` wind event control and wind references. Restored lowered NoData terrain rendering at `-14 m` so DEM gaps again appear as submerged water-bed areas.
+
 ## [2026-05-08] implementation | Parcel 3D building terrain seating
 
 Adjusted the parcel 3D terrain renderer so building bases use bilinear terrain sampling across each footprint and add a short foundation skirt to reduce visible floating and ground intersection on sloped DEM terrain. Rebuilt and redeployed the Docker `web` service after the rendering fix.

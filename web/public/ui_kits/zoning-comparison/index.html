@@ -115,6 +115,7 @@ function markerText(status, side) {
 
 function Header({ pid }) {
   const parcel3dHref = pid ? `/parcel-3d?pid=${encodeURIComponent(pid)}` : '/parcel-3d';
+  const stormSurgeHref = pid ? `/storm-surge?pid=${encodeURIComponent(pid)}` : '/storm-surge';
   return (
     <header className="app-header">
       <img src="../../assets/logo-island-needle.svg" alt="Modern Democracy" className="wm" />
@@ -125,6 +126,7 @@ function Header({ pid }) {
         <a href="/provisions-comparison">Compare provisions</a>
         <a href="/city-view">Map</a>
         <a href={parcel3dHref}>3D view</a>
+        <a href={stormSurgeHref}>Storm surge</a>
       </nav>
     </header>
   );

@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Parcel 3D - Modern Democracy</title>
+<title>Storm Surge Demo - Modern Democracy</title>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="../../colors_and_type.css">
 <link rel="stylesheet" href="../parcel-lookup/styles.css">
 <style>
   html, body, #root { height: 100%; margin: 0; }
   .viewer-app { display: grid; grid-template-rows: auto minmax(0, 1fr); height: 100vh; overflow: hidden; background: var(--paper); }
-  .viewer-body { display: grid; grid-template-columns: minmax(0, calc(100vw - 360px)) 360px; min-height: 0; overflow: hidden; }
+  .viewer-body { display: grid; grid-template-columns: minmax(0, calc(100vw - 390px)) 390px; min-height: 0; overflow: hidden; }
   .scene-wrap { position: relative; min-width: 0; min-height: 0; overflow: hidden; background: #d8d1c4; z-index: 0; }
   #scene { position: absolute; inset: 0; overflow: hidden; }
   #scene canvas { display: block; max-width: 100%; max-height: 100%; }
@@ -25,17 +25,16 @@
   .pid { font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-3); }
   .field { display: grid; gap: 7px; margin-bottom: 13px; }
   .field label { font-family: var(--font-ui); font-size: 12px; font-weight: 600; color: var(--fg-2); }
-  .field select, .field input[type="range"] { width: 100%; }
-  .field select { border: 1px solid var(--border-hair); border-radius: 4px; background: var(--paper); color: var(--ink); padding: 8px 9px; font-family: var(--font-ui); font-size: 13px; }
+  .field select, .field input[type="range"], .field input[type="text"] { width: 100%; box-sizing: border-box; }
+  .field select, .field input[type="text"] { border: 1px solid var(--border-hair); border-radius: 4px; background: var(--paper); color: var(--ink); padding: 8px 9px; font-family: var(--font-ui); font-size: 13px; }
   .metric-grid { display: grid; grid-template-columns: 1fr auto; gap: 8px 12px; font-family: var(--font-ui); font-size: 12.5px; }
   .metric-grid .k { color: var(--fg-3); }
   .metric-grid .v { color: var(--ink); font-family: var(--font-mono); text-align: right; }
-  .control-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
-  .control-actions .btn { width: 100%; justify-content: center; }
   .route-actions { display: grid; gap: 8px; }
   .legend-row { display: flex; align-items: center; gap: 8px; font-family: var(--font-ui); font-size: 12.5px; color: var(--fg-2); padding: 5px 0; }
   .sw { width: 15px; height: 15px; border-radius: 3px; border: 1px solid rgba(26,22,18,0.15); flex: 0 0 auto; }
-  @media (max-width: 880px) {
+  .scenario-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+  @media (max-width: 920px) {
     .viewer-app { height: auto; min-height: 100vh; overflow: visible; }
     .viewer-body { grid-template-columns: 1fr; grid-template-rows: minmax(460px, 62vh) auto; overflow: visible; }
     .scene-wrap { min-height: 520px; }
@@ -64,15 +63,15 @@
         <a href="/restriction-stack">View Spatial Restrictions</a>
         <a href="/provisions-comparison">Compare provisions</a>
         <a href="/city-view">Map</a>
-        <a class="active" href="/parcel-3d">3D view</a>
-        <a href="/storm-surge">Storm surge</a>
+        <a href="/parcel-3d">3D view</a>
+        <a class="active" href="/storm-surge">Storm surge</a>
       </nav>
     </header>
     <div class="viewer-body">
       <main class="scene-wrap">
-        <div id="scene" aria-label="3D parcel building viewer"></div>
+        <div id="scene" aria-label="Storm surge water level demo"></div>
         <div class="hud">
-          <div class="pill" id="sun-label">Sun pending</div>
+          <div class="pill" id="level-label">Water level pending</div>
           <div class="pill" id="count-label">Loading context</div>
           <div class="pill" id="terrain-label">Terrain pending</div>
         </div>
@@ -80,43 +79,65 @@
       <aside class="panel">
         <h3 class="panel-title">Selected parcel</h3>
         <div class="status-card">
-          <h1 class="address" id="address">Parcel 3D</h1>
+          <h1 class="address" id="address">Storm surge demo</h1>
           <div class="pid" id="pid">No PID supplied.</div>
         </div>
 
-        <h3 class="panel-title">View</h3>
-        <div class="control-card">
-          <div class="metric-grid" style="margin-bottom:14px">
-            <div class="k">Looking</div><div class="v" id="bearing-label">North</div>
-          </div>
-          <button type="button" class="btn btn-secondary" id="reset-view" style="width:100%;justify-content:center"><i data-lucide="rotate-ccw" style="width:14px;height:14px"></i> Reset to default view</button>
-        </div>
-
-        <h3 class="panel-title">Shadow study</h3>
+        <h3 class="panel-title">Parcel lookup</h3>
         <div class="control-card">
           <div class="field">
-            <label for="date-target">Target date</label>
-            <select id="date-target">
-              <option value="march">March equinox</option>
-              <option value="june">June solstice</option>
-              <option value="september">September equinox</option>
-              <option value="december">December solstice</option>
+            <label for="pid-input">PID</label>
+            <input id="pid-input" type="text" inputmode="numeric" placeholder="358960">
+          </div>
+          <button type="button" class="btn btn-primary" id="load-pid" style="width:100%;justify-content:center"><i data-lucide="search" style="width:14px;height:14px"></i> Load parcel</button>
+        </div>
+
+        <h3 class="panel-title">Water event</h3>
+        <div class="control-card">
+          <div class="field">
+            <label for="tide-event">Tide</label>
+            <select id="tide-event">
+              <option value="hhwlt">Full/new moon high tide</option>
+              <option value="llwlt">Full/new moon low tide</option>
+              <option value="mhw">Half moon high tide</option>
+              <option value="mlw">Half moon low tide</option>
             </select>
           </div>
           <div class="field">
-            <label for="time-scrub">Sunrise to sunset</label>
-            <input id="time-scrub" type="range" min="0" max="100" value="50">
+            <label for="surge-m">Storm surge: <span id="surge-value">0.0 m</span></label>
+            <input id="surge-m" type="range" min="0" max="10" step="0.1" value="0">
           </div>
+          <div class="field">
+            <label for="years-out">Sea-level rise horizon: <span id="years-value">0 years</span></label>
+            <input id="years-out" type="range" min="0" max="100" step="1" value="0">
+          </div>
+          <div class="field">
+            <label for="slr-mode">Sea-level rise scenario</label>
+            <select id="slr-mode">
+              <option value="pei2100">PEI planning guide: 1.0 m by 2100</option>
+              <option value="moderate">Moderate demo: 0.5 m by 2100</option>
+              <option value="high">High demo: 1.5 m by 2100</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="datum-offset">Visual datum offset: <span id="datum-offset-value">-1.72 m</span></label>
+            <input id="datum-offset" type="range" min="-2.8" max="-0.8" step="0.01" value="-1.8">
+          </div>
+          <div class="scenario-actions">
+            <button type="button" class="btn btn-secondary" id="preset-now"><i data-lucide="waves" style="width:14px;height:14px"></i> Current tide</button>
+            <button type="button" class="btn btn-secondary" id="preset-future"><i data-lucide="triangle-alert" style="width:14px;height:14px"></i> Future event</button>
+          </div>
+        </div>
+
+        <h3 class="panel-title">Scenario totals</h3>
+        <div class="status-card">
           <div class="metric-grid">
-            <div class="k">Date</div><div class="v" id="date-label">pending</div>
-            <div class="k">Time</div><div class="v" id="time-label">pending</div>
-            <div class="k">Sun altitude</div><div class="v" id="alt-label">pending</div>
-            <div class="k">Sun azimuth</div><div class="v" id="az-label">pending</div>
-            <div class="k">Context radius</div><div class="v" id="radius-label">250 m</div>
-          </div>
-          <div class="control-actions">
-            <button type="button" class="btn btn-secondary" id="reset-shadow"><i data-lucide="skip-back" style="width:14px;height:14px"></i> Reset</button>
-            <button type="button" class="btn btn-primary" id="play-shadow"><i data-lucide="play" style="width:14px;height:14px"></i> Play</button>
+            <div class="k">Tide above chart datum</div><div class="v" id="tide-level">pending</div>
+            <div class="k">Surge addition</div><div class="v" id="surge-level">pending</div>
+            <div class="k">Sea-level addition</div><div class="v" id="slr-level">pending</div>
+            <div class="k">Chart datum total</div><div class="v" id="water-total">pending</div>
+            <div class="k">Terrain base adjustment</div><div class="v" id="terrain-base-adjustment">pending</div>
+            <div class="k">Rendered water plane</div><div class="v" id="rendered-total">pending</div>
           </div>
         </div>
 
@@ -132,20 +153,17 @@
         <h3 class="panel-title">Legend</h3>
         <div class="status-card">
           <div class="legend-row"><span class="sw" style="background:#9fa878"></span>Demo terrain</div>
+          <div class="legend-row"><span class="sw" style="background:#2f7890"></span>Static water plane</div>
           <div class="legend-row"><span class="sw" style="background:#8f3d2f"></span>Selected parcel boundary</div>
           <div class="legend-row"><span class="sw" style="background:#d1a63a"></span>Adjacent parcel boundary</div>
           <div class="legend-row"><span class="sw" style="background:#b88b5a"></span>Selected parcel building</div>
           <div class="legend-row"><span class="sw" style="background:#6f7f8c"></span>Adjacent parcel building</div>
-          <div class="legend-row"><span class="sw" style="background:#87986a"></span>Context building</div>
-          <div class="legend-row"><span class="sw" style="background:#f7f4ec"></span>Road centerlines</div>
         </div>
 
         <h3 class="panel-title">Routes</h3>
         <div class="route-actions">
           <a class="btn btn-secondary" id="map-link" href="/city-view"><i data-lucide="map" style="width:14px;height:14px"></i> Map</a>
-          <a class="btn btn-secondary" id="surge-link" href="/storm-surge"><i data-lucide="waves" style="width:14px;height:14px"></i> Storm surge</a>
-          <a class="btn btn-secondary" id="compare-link" href="/zoning-comparison"><i data-lucide="git-compare" style="width:14px;height:14px"></i> Compare bylaws</a>
-          <a class="btn btn-secondary" id="restrictions-link" href="/restriction-stack"><i data-lucide="layers-3" style="width:14px;height:14px"></i> Spatial restrictions</a>
+          <a class="btn btn-secondary" id="parcel3d-link" href="/parcel-3d"><i data-lucide="box" style="width:14px;height:14px"></i> 3D view</a>
         </div>
 
         <h3 class="panel-title">Status</h3>
@@ -158,25 +176,32 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
-const RADIUS_M = 250;
+const RADIUS_M = 350;
+const WATER_BED_Y = -14;
 const params = new URLSearchParams(window.location.search);
-const pid = params.get("pid") || "";
+let pid = params.get("pid") || "";
 const container = document.getElementById("scene");
 const statusEl = document.getElementById("status");
-const dateSelect = document.getElementById("date-target");
-const timeScrub = document.getElementById("time-scrub");
-const dateTargets = {
-  march: { label: "March equinox", month: 2, day: 20 },
-  june: { label: "June solstice", month: 5, day: 21 },
-  september: { label: "September equinox", month: 8, day: 22 },
-  december: { label: "December solstice", month: 11, day: 21 },
+const tideSelect = document.getElementById("tide-event");
+const surgeInput = document.getElementById("surge-m");
+const yearsInput = document.getElementById("years-out");
+const slrSelect = document.getElementById("slr-mode");
+const datumOffsetInput = document.getElementById("datum-offset");
+const tideLevels = {
+  hhwlt: { label: "Full/new moon high tide", levelM: 2.97 },
+  llwlt: { label: "Full/new moon low tide", levelM: 0.09 },
+  mhw: { label: "Half moon high tide", levelM: 2.4 },
+  mlw: { label: "Half moon low tide", levelM: 0.6 },
+};
+const slrRates = {
+  pei2100: 1.0,
+  moderate: 0.5,
+  high: 1.5,
 };
 
 let origin = null;
-let context = null;
-let sunLight = null;
-let shadowPlayTimer = null;
 let terrainData = null;
+let waterMesh = null;
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xd8d1c4);
@@ -184,35 +209,18 @@ const camera = new THREE.PerspectiveCamera(48, 1, 1, 2500);
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 container.appendChild(renderer.domElement);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.target.set(0, 0, 0);
-
-function resetView() {
-  controls.target.set(0, 0, 0);
-  camera.position.set(0, 165, 230);
-  camera.up.set(0, 1, 0);
-  camera.lookAt(controls.target);
-  controls.update();
-  updateBearing();
-}
-resetView();
+camera.position.set(0, 165, 230);
+camera.lookAt(controls.target);
 
 scene.add(new THREE.HemisphereLight(0xf7f4ec, 0x5c6a5f, 1.15));
-sunLight = new THREE.DirectionalLight(0xfff2d2, 3.2);
-sunLight.castShadow = true;
-sunLight.shadow.mapSize.set(2048, 2048);
-sunLight.shadow.camera.left = -260;
-sunLight.shadow.camera.right = 260;
-sunLight.shadow.camera.top = 260;
-sunLight.shadow.camera.bottom = -260;
-sunLight.shadow.camera.near = 1;
-sunLight.shadow.camera.far = 700;
-scene.add(sunLight);
-scene.add(sunLight.target);
+const sun = new THREE.DirectionalLight(0xfff2d2, 2.6);
+sun.position.set(-160, 260, -120);
+scene.add(sun);
 
 const fallbackGround = new THREE.Mesh(
   new THREE.PlaneGeometry(RADIUS_M * 2.35, RADIUS_M * 2.35),
@@ -223,13 +231,10 @@ fallbackGround.receiveShadow = true;
 scene.add(fallbackGround);
 
 const terrainGroup = new THREE.Group();
-
 const parcelsGroup = new THREE.Group();
 const buildingsGroup = new THREE.Group();
 const roadsGroup = new THREE.Group();
-const directionLabelsGroup = new THREE.Group();
-scene.add(terrainGroup, parcelsGroup, buildingsGroup, roadsGroup, directionLabelsGroup);
-window.__parcel3dDebug = { buildingMeshes: [] };
+scene.add(terrainGroup, parcelsGroup, buildingsGroup, roadsGroup);
 
 function setStatus(text) {
   statusEl.textContent = text;
@@ -243,40 +248,6 @@ function resize() {
 }
 window.addEventListener("resize", resize);
 resize();
-
-function makeGroundLabel(text, x, z) {
-  const canvas = document.createElement("canvas");
-  canvas.width = 128;
-  canvas.height = 128;
-  const ctx = canvas.getContext("2d");
-  ctx.fillStyle = "rgba(245,239,225,0.92)";
-  ctx.strokeStyle = "rgba(26,22,18,0.32)";
-  ctx.lineWidth = 6;
-  ctx.beginPath();
-  ctx.roundRect(14, 14, 100, 100, 12);
-  ctx.fill();
-  ctx.stroke();
-  ctx.fillStyle = "#1a1612";
-  ctx.font = "700 58px ui-monospace, monospace";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillText(text, 64, 68);
-  const texture = new THREE.CanvasTexture(canvas);
-  const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, depthWrite: false });
-  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(22, 22), material);
-  mesh.rotation.x = -Math.PI / 2;
-  mesh.position.set(x, 0.35, z);
-  directionLabelsGroup.add(mesh);
-}
-
-function addGroundDirectionLabels() {
-  const offset = RADIUS_M * 1.05;
-  makeGroundLabel("N", 0, -offset);
-  makeGroundLabel("E", offset, 0);
-  makeGroundLabel("S", 0, offset);
-  makeGroundLabel("W", -offset, 0);
-}
-addGroundDirectionLabels();
 
 function project(lon, lat) {
   const metersPerDegreeLat = 111320;
@@ -309,13 +280,9 @@ function sampleTerrainHeight(x, z) {
     { value: terrainData.values[row1 * cols + col1], weight: tx * ty },
   ].filter((sample) => Number.isFinite(sample.value) && sample.weight > 0);
   const totalWeight = samples.reduce((sum, sample) => sum + sample.weight, 0);
-  if (totalWeight > 0) {
-    return samples.reduce((sum, sample) => sum + sample.value * sample.weight, 0) / totalWeight;
-  }
-  const nearestCol = Math.round(gridCol);
-  const nearestRow = Math.round(gridRow);
-  const nearest = terrainData.values[nearestRow * cols + nearestCol];
-  return Number.isFinite(nearest) ? nearest : 0;
+  return totalWeight > 0
+    ? samples.reduce((sum, sample) => sum + sample.value * sample.weight, 0) / totalWeight
+    : WATER_BED_Y;
 }
 
 function addTerrainMesh(terrain) {
@@ -339,7 +306,7 @@ function addTerrainMesh(terrain) {
       const x = -radius + (col / (cols - 1)) * radius * 2;
       const z = -radius + (row / (rows - 1)) * radius * 2;
       const rawY = terrain.values[row * cols + col];
-      positions.push(x, Number.isFinite(rawY) ? rawY : 0, z);
+      positions.push(x, Number.isFinite(rawY) ? rawY : WATER_BED_Y, z);
     }
   }
   for (let row = 0; row < rows - 1; row += 1) {
@@ -355,13 +322,7 @@ function addTerrainMesh(terrain) {
   geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
   geometry.setIndex(indices);
   geometry.computeVertexNormals();
-  const material = new THREE.MeshStandardMaterial({
-    color: 0x9fa878,
-    roughness: 0.96,
-    metalness: 0,
-    side: THREE.DoubleSide,
-  });
-  const mesh = new THREE.Mesh(geometry, material);
+  const mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ color: 0x9fa878, roughness: 0.96, side: THREE.DoubleSide }));
   mesh.receiveShadow = true;
   terrainGroup.add(mesh);
   fallbackGround.visible = false;
@@ -390,24 +351,20 @@ function makeBoundary(feature) {
     const outer = polygon[0] || [];
     const points = outer.map(([lon, lat]) => {
       const p = project(lon, lat);
-      return new THREE.Vector3(p.x, sampleTerrainHeight(p.x, p.z) + 0.28, p.z);
+      return new THREE.Vector3(p.x, sampleTerrainHeight(p.x, p.z) + 0.35, p.z);
     });
-    if (points.length > 1) {
-      parcelsGroup.add(new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(points), material));
-    }
+    if (points.length > 1) parcelsGroup.add(new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(points), material));
   }
 }
 
 function makeRoad(feature) {
-  const material = new THREE.LineBasicMaterial({ color: 0xf7f4ec, linewidth: 2 });
+  const material = new THREE.LineBasicMaterial({ color: 0xf7f4ec, transparent: true, opacity: 0.75 });
   for (const line of lineStringsFromGeometry(feature.geometry)) {
     const points = line.map(([lon, lat]) => {
       const p = project(lon, lat);
-      return new THREE.Vector3(p.x, sampleTerrainHeight(p.x, p.z) + 0.35, p.z);
+      return new THREE.Vector3(p.x, sampleTerrainHeight(p.x, p.z) + 0.4, p.z);
     });
-    if (points.length > 1) {
-      roadsGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), material));
-    }
+    if (points.length > 1) roadsGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), material));
   }
 }
 
@@ -416,9 +373,7 @@ function shapeFromRing(ring) {
     const p = project(lon, lat);
     return new THREE.Vector2(p.x, p.z);
   });
-  if (points.length > 1 && points[0].distanceTo(points[points.length - 1]) < 0.001) {
-    points.pop();
-  }
+  if (points.length > 1 && points[0].distanceTo(points[points.length - 1]) < 0.001) points.pop();
   return new THREE.Shape(points);
 }
 
@@ -430,49 +385,20 @@ function buildingHeight(properties) {
   return 8;
 }
 
-function footprintTerrainHeights(points) {
-  if (!points.length) return [0];
-  const samples = points.map((point) => sampleTerrainHeight(point.x, point.z));
-  for (let index = 0; index < points.length - 1; index += 1) {
-    const current = points[index];
-    const next = points[index + 1];
-    samples.push(sampleTerrainHeight((current.x + next.x) / 2, (current.z + next.z) / 2));
-  }
-  const center = points.reduce(
-    (sum, point) => ({ x: sum.x + point.x / points.length, z: sum.z + point.z / points.length }),
-    { x: 0, z: 0 }
-  );
-  samples.push(sampleTerrainHeight(center.x, center.z));
-  return samples.filter(Number.isFinite);
-}
-
 function makeBuilding(feature) {
   const relation = feature.properties?.relation;
   const color = relation === "selected" ? 0xb88b5a : relation === "adjacent" ? 0x6f7f8c : 0x87986a;
   const material = new THREE.MeshStandardMaterial({ color, roughness: 0.72, metalness: 0.02 });
-  const foundationMaterial = new THREE.MeshStandardMaterial({ color: 0x6f6658, roughness: 0.95, metalness: 0 });
   const height = buildingHeight(feature.properties);
   for (const polygon of ringsFromGeometry(feature.geometry)) {
     const outer = polygon[0] || [];
     if (outer.length < 4) continue;
     const shape = shapeFromRing(outer);
-    const projectedOuter = outer.map(([lon, lat]) => project(lon, lat));
-    const terrainHeights = footprintTerrainHeights(projectedOuter);
-    const minTerrainY = Math.min(...terrainHeights);
-    const maxTerrainY = Math.max(...terrainHeights);
-    const baseY = maxTerrainY + 0.08;
     for (const hole of polygon.slice(1)) {
       if (hole.length >= 4) shape.holes.push(shapeFromRing(hole));
     }
-    const foundationDepth = Math.max(0.2, Math.min(6, baseY - minTerrainY));
-    const foundationGeometry = new THREE.ExtrudeGeometry(shape, { depth: foundationDepth, bevelEnabled: false });
-    foundationGeometry.rotateX(Math.PI / 2);
-    foundationGeometry.translate(0, baseY, 0);
-    const foundation = new THREE.Mesh(foundationGeometry, foundationMaterial);
-    foundation.castShadow = false;
-    foundation.receiveShadow = true;
-    buildingsGroup.add(foundation);
-
+    const projectedOuter = outer.map(([lon, lat]) => project(lon, lat));
+    const baseY = Math.max(...projectedOuter.map((point) => sampleTerrainHeight(point.x, point.z)).filter(Number.isFinite), 0) + 0.08;
     const geometry = new THREE.ExtrudeGeometry(shape, { depth: height, bevelEnabled: false });
     geometry.rotateX(Math.PI / 2);
     geometry.translate(0, height + baseY, 0);
@@ -480,130 +406,65 @@ function makeBuilding(feature) {
     mesh.castShadow = true;
     mesh.receiveShadow = true;
     buildingsGroup.add(mesh);
-    window.__parcel3dDebug.buildingMeshes.push(mesh);
   }
 }
 
-function dayOfYear(date) {
-  const start = new Date(date.getFullYear(), 0, 0);
-  return Math.floor((date - start) / 86400000);
+function seaLevelRiseM() {
+  return (Number(yearsInput.value) / 100) * slrRates[slrSelect.value];
 }
 
-function solarForFraction(target, fraction, latDeg) {
-  const date = new Date(2026, target.month, target.day);
-  const n = dayOfYear(date);
-  const decl = 23.44 * Math.sin((2 * Math.PI / 365) * (n - 81));
-  const lat = latDeg * Math.PI / 180;
-  const dec = decl * Math.PI / 180;
-  const cosH = Math.min(1, Math.max(-1, -Math.tan(lat) * Math.tan(dec)));
-  const h0 = Math.acos(cosH);
-  const hourAngle = -h0 + fraction * 2 * h0;
-  const altitude = Math.asin(Math.sin(lat) * Math.sin(dec) + Math.cos(lat) * Math.cos(dec) * Math.cos(hourAngle));
-  const azimuth = Math.atan2(Math.sin(hourAngle), Math.cos(hourAngle) * Math.sin(lat) - Math.tan(dec) * Math.cos(lat));
-  const daylightHours = 2 * h0 * 180 / Math.PI / 15;
-  const localHour = 12 + (hourAngle * 180 / Math.PI) / 15;
-  return { date, altitude, azimuth, daylightHours, localHour };
+function scenarioWaterLevelM() {
+  return tideLevels[tideSelect.value].levelM + Number(surgeInput.value) + seaLevelRiseM();
 }
 
-function formatClock(decimalHour) {
-  const hour = Math.floor(decimalHour);
-  const minute = Math.round((decimalHour - hour) * 60);
-  return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
+function renderedWaterLevelM() {
+  const terrainBase = Number(terrainData?.baseElevationM) || 0;
+  return scenarioWaterLevelM() + Number(datumOffsetInput.value) - terrainBase;
 }
 
-function updateSun() {
-  const target = dateTargets[dateSelect.value];
-  const fraction = Number(timeScrub.value) / 100;
-  const solar = solarForFraction(target, Math.max(0.01, Math.min(0.99, fraction)), origin?.lat || 46.2382);
-  const distance = 310;
-  const horizontal = Math.cos(solar.altitude) * distance;
-  sunLight.position.set(
-    -Math.sin(solar.azimuth) * horizontal,
-    Math.max(8, Math.sin(solar.altitude) * distance),
-    Math.cos(solar.azimuth) * horizontal
-  );
-  sunLight.target.position.set(0, 0, 0);
-  const altDeg = solar.altitude * 180 / Math.PI;
-  const azDeg = (solar.azimuth * 180 / Math.PI + 180 + 360) % 360;
-  document.getElementById("date-label").textContent = target.label;
-  document.getElementById("time-label").textContent = formatClock(solar.localHour);
-  document.getElementById("alt-label").textContent = `${altDeg.toFixed(1)} deg`;
-  document.getElementById("az-label").textContent = `${azDeg.toFixed(0)} deg`;
-  document.getElementById("sun-label").textContent = `${target.label} ${formatClock(solar.localHour)}`;
-}
-
-function bearingName(degrees) {
-  const names = ["North", "Northeast", "East", "Southeast", "South", "Southwest", "West", "Northwest"];
-  return names[Math.round((((degrees % 360) + 360) % 360) / 45) % 8];
-}
-
-function updateBearing() {
-  const dx = controls.target.x - camera.position.x;
-  const dz = controls.target.z - camera.position.z;
-  const degrees = (Math.atan2(dx, -dz) * 180 / Math.PI + 360) % 360;
-  const label = document.getElementById("bearing-label");
-  if (label) {
-    label.textContent = `${bearingName(degrees)} ${degrees.toFixed(0)} deg`;
+function updateWaterPlane() {
+  const chartDatumLevel = scenarioWaterLevelM();
+  const level = renderedWaterLevelM();
+  const tide = tideLevels[tideSelect.value];
+  const slr = seaLevelRiseM();
+  if (!waterMesh) {
+    waterMesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(RADIUS_M * 2.8, RADIUS_M * 2.8),
+      new THREE.MeshStandardMaterial({ color: 0x2f7890, transparent: true, opacity: 0.48, roughness: 0.18, metalness: 0.02, side: THREE.DoubleSide })
+    );
+    waterMesh.rotation.x = -Math.PI / 2;
+    scene.add(waterMesh);
   }
+  waterMesh.position.y = level;
+  document.getElementById("surge-value").textContent = `${Number(surgeInput.value).toFixed(1)} m`;
+  document.getElementById("years-value").textContent = `${yearsInput.value} years`;
+  document.getElementById("datum-offset-value").textContent = `${Number(datumOffsetInput.value).toFixed(2)} m`;
+  document.getElementById("tide-level").textContent = `${tide.levelM.toFixed(2)} m`;
+  document.getElementById("surge-level").textContent = `${Number(surgeInput.value).toFixed(1)} m`;
+  document.getElementById("slr-level").textContent = `${slr.toFixed(2)} m`;
+  document.getElementById("water-total").textContent = `${chartDatumLevel.toFixed(2)} m`;
+  document.getElementById("terrain-base-adjustment").textContent = terrainData?.available && Number.isFinite(Number(terrainData.baseElevationM))
+    ? `-${Number(terrainData.baseElevationM).toFixed(2)} m`
+    : "0.00 m";
+  document.getElementById("rendered-total").textContent = `${level.toFixed(2)} m`;
+  document.getElementById("level-label").textContent = `${level.toFixed(2)} m rendered`;
 }
 
-dateSelect.addEventListener("change", updateSun);
-timeScrub.addEventListener("input", () => {
-  stopShadowPlayback();
-  updateSun();
-});
-
-function stopShadowPlayback() {
-  if (shadowPlayTimer) {
-    window.clearInterval(shadowPlayTimer);
-    shadowPlayTimer = null;
-  }
-  const playButton = document.getElementById("play-shadow");
-  if (playButton) {
-    playButton.innerHTML = '<i data-lucide="play" style="width:14px;height:14px"></i> Play';
-    lucide.createIcons();
-  }
+function clearSceneContext() {
+  terrainGroup.clear();
+  parcelsGroup.clear();
+  buildingsGroup.clear();
+  roadsGroup.clear();
 }
-
-function resetShadowStudy() {
-  stopShadowPlayback();
-  timeScrub.value = "0";
-  updateSun();
-}
-
-function playShadowStudy() {
-  if (shadowPlayTimer) {
-    stopShadowPlayback();
-    return;
-  }
-  const playButton = document.getElementById("play-shadow");
-  playButton.innerHTML = '<i data-lucide="pause" style="width:14px;height:14px"></i> Pause';
-  lucide.createIcons();
-  shadowPlayTimer = window.setInterval(() => {
-    const next = Math.min(100, Number(timeScrub.value) + 1);
-    timeScrub.value = String(next);
-    updateSun();
-    if (next >= 100) {
-      stopShadowPlayback();
-    }
-  }, 90);
-}
-
-document.getElementById("reset-view").addEventListener("click", resetView);
-document.getElementById("reset-shadow").addEventListener("click", resetShadowStudy);
-document.getElementById("play-shadow").addEventListener("click", playShadowStudy);
 
 function renderContext(payload) {
-  context = payload;
-  window.__parcel3dDebug.buildingMeshes = [];
+  clearSceneContext();
   origin = payload.parcel?.centroid || payload.address?.coordinate || { lon: -63.1311, lat: 46.2382 };
   document.getElementById("address").textContent = payload.address?.label || "Selected parcel";
   document.getElementById("pid").textContent = `PID ${payload.pid}`;
-  document.getElementById("radius-label").textContent = `${payload.metadata?.radiusM || RADIUS_M} m`;
+  document.getElementById("pid-input").value = payload.pid;
   document.getElementById("map-link").href = `/map-explorer?pid=${encodeURIComponent(payload.pid)}`;
-  document.getElementById("surge-link").href = `/storm-surge?pid=${encodeURIComponent(payload.pid)}`;
-  document.getElementById("compare-link").href = `/zoning-comparison?pid=${encodeURIComponent(payload.pid)}`;
-  document.getElementById("restrictions-link").href = `/restriction-stack?pid=${encodeURIComponent(payload.pid)}`;
+  document.getElementById("parcel3d-link").href = `/parcel-3d?pid=${encodeURIComponent(payload.pid)}`;
 
   const terrainRendered = addTerrainMesh(payload.terrain);
   const terrain = payload.terrain || {};
@@ -620,39 +481,64 @@ function renderContext(payload) {
 
   const selectedCount = (payload.buildings?.features || []).filter((feature) => feature.properties?.relation === "selected").length;
   const adjacentCount = (payload.buildings?.features || []).filter((feature) => feature.properties?.relation === "adjacent").length;
-  const contextCount = (payload.buildings?.features || []).filter((feature) => feature.properties?.relation === "context").length;
-  document.getElementById("count-label").textContent = `${selectedCount} selected, ${adjacentCount} adjacent, ${contextCount} context buildings`;
-  const terrainStatus = terrainRendered
-    ? "Demo LIDAR terrain loaded. Vertical datum and shoreline QA are not finalized."
-    : `Flat terrain fallback. ${terrain.reason || "DEM terrain was unavailable for this parcel."}`;
-  setStatus(`${payload.metadata?.radiusReason || "Parcel context loaded."} ${terrainStatus}`);
-  updateSun();
+  document.getElementById("count-label").textContent = `${selectedCount} selected, ${adjacentCount} adjacent buildings`;
+  setStatus("Demo visualization only. Water level is a static plane against unresolved vertical datum terrain; it is not hydraulic modeling, regulatory flood mapping, or property-specific risk output.");
+  updateWaterPlane();
 }
 
-async function load() {
-  lucide.createIcons();
-  updateSun();
+async function loadParcel(nextPid) {
+  pid = String(nextPid || "").trim();
   if (!pid) {
     document.getElementById("count-label").textContent = "No PID supplied";
-    setStatus("No PID supplied. Open the 3D view from a selected parcel, or use a URL like /parcel-3d?pid=358960.");
+    setStatus("No PID supplied. Open from a selected parcel, or enter a PID.");
     return;
   }
+  const nextUrl = new URL(window.location.href);
+  nextUrl.searchParams.set("pid", pid);
+  window.history.replaceState({}, "", nextUrl);
   try {
     const response = await fetch(`/api/parcels/${encodeURIComponent(pid)}/3d-context?radiusM=${RADIUS_M}`);
-    if (!response.ok) throw new Error(`3D context failed with HTTP ${response.status}.`);
+    if (!response.ok) throw new Error(`Storm surge context failed with HTTP ${response.status}.`);
     renderContext(await response.json());
   } catch (error) {
-    setStatus(error.message || "3D context loading failed.");
+    setStatus(error.message || "Storm surge context loading failed.");
   }
 }
+
+[tideSelect, surgeInput, yearsInput, slrSelect, datumOffsetInput].forEach((control) => {
+  control.addEventListener("input", updateWaterPlane);
+  control.addEventListener("change", updateWaterPlane);
+});
+document.getElementById("load-pid").addEventListener("click", () => loadParcel(document.getElementById("pid-input").value));
+document.getElementById("pid-input").addEventListener("keydown", (event) => {
+  if (event.key === "Enter") loadParcel(event.currentTarget.value);
+});
+document.getElementById("preset-now").addEventListener("click", () => {
+  tideSelect.value = "hhwlt";
+  surgeInput.value = "0";
+  yearsInput.value = "0";
+  slrSelect.value = "pei2100";
+  datumOffsetInput.value = "-1.8";
+  updateWaterPlane();
+});
+document.getElementById("preset-future").addEventListener("click", () => {
+  tideSelect.value = "hhwlt";
+  surgeInput.value = "2";
+  yearsInput.value = "75";
+  slrSelect.value = "pei2100";
+  datumOffsetInput.value = "-1.8";
+  updateWaterPlane();
+});
 
 function animate() {
   controls.update();
-  updateBearing();
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
 }
-load();
+
+lucide.createIcons();
+updateWaterPlane();
+loadParcel(pid);
 animate();
 </script>
 </body>
