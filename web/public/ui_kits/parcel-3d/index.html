@@ -30,6 +30,8 @@
   .metric-grid { display: grid; grid-template-columns: 1fr auto; gap: 8px 12px; font-family: var(--font-ui); font-size: 12.5px; }
   .metric-grid .k { color: var(--fg-3); }
   .metric-grid .v { color: var(--ink); font-family: var(--font-mono); text-align: right; }
+  .control-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+  .control-actions .btn { width: 100%; justify-content: center; }
   .route-actions { display: grid; gap: 8px; }
   .legend-row { display: flex; align-items: center; gap: 8px; font-family: var(--font-ui); font-size: 12.5px; color: var(--fg-2); padding: 5px 0; }
   .sw { width: 15px; height: 15px; border-radius: 3px; border: 1px solid rgba(26,22,18,0.15); flex: 0 0 auto; }
@@ -80,6 +82,14 @@
           <div class="pid" id="pid">No PID supplied.</div>
         </div>
 
+        <h3 class="panel-title">View</h3>
+        <div class="control-card">
+          <div class="metric-grid" style="margin-bottom:14px">
+            <div class="k">Looking</div><div class="v" id="bearing-label">North</div>
+          </div>
+          <button type="button" class="btn btn-secondary" id="reset-view" style="width:100%;justify-content:center"><i data-lucide="rotate-ccw" style="width:14px;height:14px"></i> Reset to default view</button>
+        </div>
+
         <h3 class="panel-title">Shadow study</h3>
         <div class="control-card">
           <div class="field">
@@ -101,6 +111,10 @@
             <div class="k">Sun altitude</div><div class="v" id="alt-label">pending</div>
             <div class="k">Sun azimuth</div><div class="v" id="az-label">pending</div>
             <div class="k">Context radius</div><div class="v" id="radius-label">250 m</div>
+          </div>
+          <div class="control-actions">
+            <button type="button" class="btn btn-secondary" id="reset-shadow"><i data-lucide="skip-back" style="width:14px;height:14px"></i> Reset</button>
+            <button type="button" class="btn btn-primary" id="play-shadow"><i data-lucide="play" style="width:14px;height:14px"></i> Play</button>
           </div>
         </div>
 
@@ -148,11 +162,11 @@ const dateTargets = {
 let origin = null;
 let context = null;
 let sunLight = null;
+let shadowPlayTimer = null;
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xd8d1c4);
 const camera = new THREE.PerspectiveCamera(48, 1, 1, 2500);
-camera.position.set(140, 130, 170);
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
@@ -162,6 +176,16 @@ container.appendChild(renderer.domElement);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.target.set(0, 0, 0);
+
+function resetView() {
+  controls.target.set(0, 0, 0);
+  camera.position.set(0, 165, 230);
+  camera.up.set(0, 1, 0);
+  camera.lookAt(controls.target);
+  controls.update();
+  updateBearing();
+}
+resetView();
 
 scene.add(new THREE.HemisphereLight(0xf7f4ec, 0x5c6a5f, 1.15));
 sunLight = new THREE.DirectionalLight(0xfff2d2, 3.2);
@@ -187,7 +211,8 @@ scene.add(ground);
 const parcelsGroup = new THREE.Group();
 const buildingsGroup = new THREE.Group();
 const roadsGroup = new THREE.Group();
-scene.add(parcelsGroup, buildingsGroup, roadsGroup);
+const directionLabelsGroup = new THREE.Group();
+scene.add(parcelsGroup, buildingsGroup, roadsGroup, directionLabelsGroup);
 window.__parcel3dDebug = { buildingMeshes: [] };
 
 function setStatus(text) {
@@ -202,6 +227,40 @@ function resize() {
 }
 window.addEventListener("resize", resize);
 resize();
+
+function makeGroundLabel(text, x, z) {
+  const canvas = document.createElement("canvas");
+  canvas.width = 128;
+  canvas.height = 128;
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = "rgba(245,239,225,0.92)";
+  ctx.strokeStyle = "rgba(26,22,18,0.32)";
+  ctx.lineWidth = 6;
+  ctx.beginPath();
+  ctx.roundRect(14, 14, 100, 100, 12);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = "#1a1612";
+  ctx.font = "700 58px ui-monospace, monospace";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(text, 64, 68);
+  const texture = new THREE.CanvasTexture(canvas);
+  const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, depthWrite: false });
+  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(22, 22), material);
+  mesh.rotation.x = -Math.PI / 2;
+  mesh.position.set(x, 0.35, z);
+  directionLabelsGroup.add(mesh);
+}
+
+function addGroundDirectionLabels() {
+  const offset = RADIUS_M * 1.05;
+  makeGroundLabel("N", 0, -offset);
+  makeGroundLabel("E", offset, 0);
+  makeGroundLabel("S", 0, offset);
+  makeGroundLabel("W", -offset, 0);
+}
+addGroundDirectionLabels();
 
 function project(lon, lat) {
   const metersPerDegreeLat = 111320;
@@ -331,7 +390,7 @@ function updateSun() {
   const distance = 310;
   const horizontal = Math.cos(solar.altitude) * distance;
   sunLight.position.set(
-    Math.sin(solar.azimuth) * horizontal,
+    -Math.sin(solar.azimuth) * horizontal,
     Math.max(8, Math.sin(solar.altitude) * distance),
     Math.cos(solar.azimuth) * horizontal
   );
@@ -345,8 +404,66 @@ function updateSun() {
   document.getElementById("sun-label").textContent = `${target.label} ${formatClock(solar.localHour)}`;
 }
 
+function bearingName(degrees) {
+  const names = ["North", "Northeast", "East", "Southeast", "South", "Southwest", "West", "Northwest"];
+  return names[Math.round((((degrees % 360) + 360) % 360) / 45) % 8];
+}
+
+function updateBearing() {
+  const dx = controls.target.x - camera.position.x;
+  const dz = controls.target.z - camera.position.z;
+  const degrees = (Math.atan2(dx, -dz) * 180 / Math.PI + 360) % 360;
+  const label = document.getElementById("bearing-label");
+  if (label) {
+    label.textContent = `${bearingName(degrees)} ${degrees.toFixed(0)} deg`;
+  }
+}
+
 dateSelect.addEventListener("change", updateSun);
-timeScrub.addEventListener("input", updateSun);
+timeScrub.addEventListener("input", () => {
+  stopShadowPlayback();
+  updateSun();
+});
+
+function stopShadowPlayback() {
+  if (shadowPlayTimer) {
+    window.clearInterval(shadowPlayTimer);
+    shadowPlayTimer = null;
+  }
+  const playButton = document.getElementById("play-shadow");
+  if (playButton) {
+    playButton.innerHTML = '<i data-lucide="play" style="width:14px;height:14px"></i> Play';
+    lucide.createIcons();
+  }
+}
+
+function resetShadowStudy() {
+  stopShadowPlayback();
+  timeScrub.value = "0";
+  updateSun();
+}
+
+function playShadowStudy() {
+  if (shadowPlayTimer) {
+    stopShadowPlayback();
+    return;
+  }
+  const playButton = document.getElementById("play-shadow");
+  playButton.innerHTML = '<i data-lucide="pause" style="width:14px;height:14px"></i> Pause';
+  lucide.createIcons();
+  shadowPlayTimer = window.setInterval(() => {
+    const next = Math.min(100, Number(timeScrub.value) + 1);
+    timeScrub.value = String(next);
+    updateSun();
+    if (next >= 100) {
+      stopShadowPlayback();
+    }
+  }, 90);
+}
+
+document.getElementById("reset-view").addEventListener("click", resetView);
+document.getElementById("reset-shadow").addEventListener("click", resetShadowStudy);
+document.getElementById("play-shadow").addEventListener("click", playShadowStudy);
 
 function renderContext(payload) {
   context = payload;
@@ -390,6 +507,7 @@ async function load() {
 
 function animate() {
   controls.update();
+  updateBearing();
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
 }
