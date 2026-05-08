@@ -44,6 +44,7 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [Web UI stack](./implementation/web-ui-stack.md) | Initial Docker-hosted Node web UI decision and first Charlottetown section-equivalence review page shape. |
 | [Web demo design kit plan](./implementation/web-demo-design-kit-plan.md) | Plan and timeline for replacing the current web page with the design-kit-based Charlottetown parcel lookup, map explorer, city-view map, and zoning comparison demo. |
 | [Parcel 3D LIDAR terrain plan](./implementation/parcel-3d-lidar-terrain-plan.md) | Preprocessing and integration plan for using PEI LIDAR as terrain and building-height inputs in the parcel 3D viewer. |
+| [Charlottetown terrain DEM pipeline](./implementation/charlottetown-terrain-dem-pipeline.md) | First repeatable PDAL/GDAL pipeline design for producing a bare-earth DEM from PEI COPC LIDAR tiles. |
 
 ## Active Project Wikis
 
