@@ -71,21 +71,63 @@ const { useEffect, useRef, useState } = React;
 
 const CHARLOTTETOWN_CENTER = [46.2382, -63.1311];
 const ZONE_COLORS = {
+  RN: 'var(--zone-rn)',
+  RM: 'var(--zone-rm)',
+  RH: 'var(--zone-rh)',
+  DC: 'var(--zone-dc)',
+  DMS: 'var(--zone-dms)',
+  DMU: 'var(--zone-dmu)',
+  DN: 'var(--zone-dn)',
+  DW: 'var(--zone-dw)',
+  BP: 'var(--zone-bp)',
+  AP: 'var(--zone-ap)',
+  HI: 'var(--zone-hi)',
+  P: 'var(--zone-port)',
+  GC: 'var(--zone-gc)',
+  GN: 'var(--zone-gn)',
+  I: 'var(--zone-i)',
+  PPS: 'var(--zone-pps)',
+  POS: 'var(--zone-pos)',
+  C: 'var(--zone-c)',
+  EG: 'var(--zone-eg)',
+  UE: 'var(--zone-ue)',
+};
+const LEGACY_ZONE_COLORS = {
   R: 'var(--zone-residential)',
-  C: 'var(--zone-commercial)',
   D: 'var(--zone-mixed)',
   M: 'var(--zone-mixed)',
-  I: 'var(--zone-institutional)',
   O: 'var(--zone-openspace)',
-  P: 'var(--zone-openspace)',
   W: 'var(--zone-waterfront)',
   H: 'var(--zone-heritage)',
 };
 
 function zoneColor(code) {
-  const key = String(code || '').trim().charAt(0).toUpperCase();
-  return ZONE_COLORS[key] || 'var(--zone-residential)';
+  const key = String(code || '').trim().toUpperCase();
+  return ZONE_COLORS[key] || LEGACY_ZONE_COLORS[key.charAt(0)] || 'var(--paper-3)';
 }
+
+const DRAFT_ZONE_LEGEND = [
+  ['RN', 'Neighbourhood'],
+  ['RM', 'Medium Density Residential'],
+  ['RH', 'High Order Residential'],
+  ['DC', 'Downtown Core'],
+  ['DMS', 'Downtown Main Street'],
+  ['DMU', 'Downtown Mixed Use'],
+  ['DN', 'Downtown Neighbourhood'],
+  ['DW', 'Downtown Waterfront'],
+  ['BP', 'Business Park'],
+  ['AP', 'Airport Periphery'],
+  ['HI', 'Heavy Industrial'],
+  ['P', 'Port'],
+  ['GC', 'Growth Corridor'],
+  ['GN', 'Growth Node'],
+  ['I', 'Institutional'],
+  ['PPS', 'Parks and Public Spaces'],
+  ['POS', 'Privately-owned Open Spaces'],
+  ['C', 'Conservation'],
+  ['EG', 'Eastern Gateway'],
+  ['UE', 'Urban Expansion'],
+];
 
 function formatArea(areaM2) {
   if (!Number.isFinite(Number(areaM2))) {
@@ -117,7 +159,8 @@ function buildingStyle() {
   return { color: 'rgba(54,102,76,0.58)', weight: 0.6, opacity: 0.85, fillColor: '#d8c3a2', fillOpacity: 0.2 };
 }
 
-function Header() {
+function Header({ pid }) {
+  const parcel3dHref = pid ? `/parcel-3d?pid=${encodeURIComponent(pid)}` : '/parcel-3d';
   return (
     <header className="app-header">
       <img src="../../assets/logo-island-needle.svg" alt="Modern Democracy" className="wm" />
@@ -127,6 +170,7 @@ function Header() {
         <a href="/restriction-stack">View Spatial Restrictions</a>
         <a href="/provisions-comparison">Compare provisions</a>
         <a className="active" href="/city-view">Map</a>
+        <a href={parcel3dHref}>3D view</a>
       </nav>
     </header>
   );
@@ -281,12 +325,13 @@ function MapView({ pid, parcel, layers, onLayerCounts, onStatus }) {
         <input value={pid || ''} readOnly aria-label="Selected PID" />
       </div>
       <div className="legend">
-        <h4>Zoning</h4>
-        <div className="row"><span className="sw" style={{background:'var(--zone-residential)'}}></span><span>Residential</span></div>
-        <div className="row"><span className="sw" style={{background:'var(--zone-commercial)'}}></span><span>Commercial</span></div>
-        <div className="row"><span className="sw" style={{background:'var(--zone-mixed)'}}></span><span>Mixed use</span></div>
-        <div className="row"><span className="sw" style={{background:'var(--zone-institutional)'}}></span><span>Institutional</span></div>
-        <div className="row"><span className="sw" style={{background:'var(--zone-openspace)'}}></span><span>Open space</span></div>
+        <h4>Draft zoning</h4>
+        {DRAFT_ZONE_LEGEND.map(([code, label]) => (
+          <div className="row" key={code}>
+            <span className="sw" style={{background: zoneColor(code)}}></span>
+            <span>{label} ({code})</span>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -322,6 +367,7 @@ function SelectedParcel({ pid, parcel }) {
         <a className="btn btn-secondary" href="/city-view" style={{justifyContent:'center'}}><i data-lucide="rotate-ccw" style={{width:14, height:14}}></i> Clear Selection</a>
         <a className="btn btn-primary" href={`/zoning-comparison?pid=${encodeURIComponent(parcel.pid)}`} style={{justifyContent:'center'}}><i data-lucide="git-compare" style={{width:14, height:14}}></i> Compare to draft</a>
         <a className="btn btn-primary" href={`/restriction-stack?pid=${encodeURIComponent(parcel.pid)}`} style={{justifyContent:'center'}}><i data-lucide="layers-3" style={{width:14, height:14}}></i> View Spatial Restrictions</a>
+        <a className="btn btn-primary" href={`/parcel-3d?pid=${encodeURIComponent(parcel.pid)}`} style={{justifyContent:'center'}}><i data-lucide="box" style={{width:14, height:14}}></i> 3D view</a>
       </div>
     </div>
   );
@@ -363,7 +409,7 @@ function App() {
 
   return (
     <div className="map-app">
-      <Header />
+      <Header pid={pid} />
       <div className="map-body">
         <aside className="map-panel">
           <h3 className="panel-title">Layers</h3>

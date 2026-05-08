@@ -103,6 +103,25 @@ function parseBbox(value) {
   return { west, south, east, north };
 }
 
+function normalizeZoneFilter(value) {
+  const text = compactText(value);
+  return text ? text.toUpperCase() : null;
+}
+
+function normalizeDetail(value) {
+  return value === "overview" ? "overview" : "detail";
+}
+
+function filteredZoneExpression(alias) {
+  return `upper(COALESCE(${alias}.bylaw_zone_code, ${alias}.zone_code_normalized, ${alias}.zone_code_raw))`;
+}
+
+function geometryExpression(alias, detail, tolerance = 3) {
+  return detail === "overview"
+    ? `ST_SimplifyPreserveTopology(${alias}.geom, ${tolerance})`
+    : `${alias}.geom`;
+}
+
 function reviewDecision(row) {
   const status = row.db_review_status || row.review_status;
   if (status === "accepted") {
@@ -1883,16 +1902,29 @@ function sectionComparableText(section) {
   ].filter(Boolean).join("\n").replace(/\s+/g, " ").trim();
 }
 
-async function loadParcelGeoJson(bbox, limit) {
+async function loadParcelGeoJson(bbox, limit, filters = {}) {
   const params = [limit];
-  let bboxFilter = "";
+  const where = [];
+  const zoneJoin = (filters.currentZone || filters.draftZone)
+    ? "JOIN zoning.v_charlottetown_parcel_zone_assignment za ON za.parcel_spatial_feature_id = p.spatial_feature_id"
+    : "";
   if (bbox) {
     params.push(bbox.west, bbox.south, bbox.east, bbox.north);
-    bboxFilter = `
-      WHERE p.geom && ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954)
-        AND ST_Intersects(p.geom, ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954))
-    `;
+    where.push(`
+      p.geom && ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954)
+      AND ST_Intersects(p.geom, ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954))
+    `);
   }
+  if (filters.currentZone) {
+    params.push(filters.currentZone);
+    where.push(`za.current_zone_code = $${params.length}`);
+  }
+  if (filters.draftZone) {
+    params.push(filters.draftZone);
+    where.push(`za.draft_zone_code = $${params.length}`);
+  }
+  const whereClause = where.length ? `WHERE ${where.join("\n        AND ")}` : "";
+  const geomExpression = geometryExpression("p", filters.detail, 4);
 
   const { rows } = await pool.query(
     `
@@ -1904,9 +1936,10 @@ async function loadParcelGeoJson(bbox, limit) {
         p.is_valid,
         p.validation_reason,
         ST_Area(p.geom) AS area_m2,
-        p.geom
+        ${geomExpression} AS geom
       FROM zoning.v_charlottetown_parcel_map p
-      ${bboxFilter}
+      ${zoneJoin}
+      ${whereClause}
       ORDER BY p.spatial_feature_id
       LIMIT $1
     ),
@@ -1946,20 +1979,31 @@ async function loadParcelGeoJson(bbox, limit) {
       count: rows[0].features.length,
       geometrySrid: 4326,
       sourceSrid: 2954,
+      detail: filters.detail || "detail",
+      filters: {
+        currentZone: filters.currentZone || null,
+        draftZone: filters.draftZone || null,
+      },
     },
   };
 }
 
-async function loadCurrentZoningGeoJson(bbox, limit) {
+async function loadCurrentZoningGeoJson(bbox, limit, filters = {}) {
   const params = [limit];
-  let bboxFilter = "";
+  const where = [];
   if (bbox) {
     params.push(bbox.west, bbox.south, bbox.east, bbox.north);
-    bboxFilter = `
-      WHERE z.geom && ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954)
-        AND ST_Intersects(z.geom, ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954))
-    `;
+    where.push(`
+      z.geom && ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954)
+      AND ST_Intersects(z.geom, ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954))
+    `);
   }
+  if (filters.zone) {
+    params.push(filters.zone);
+    where.push(`${filteredZoneExpression("z")} = $${params.length}`);
+  }
+  const whereClause = where.length ? `WHERE ${where.join("\n        AND ")}` : "";
+  const geomExpression = geometryExpression("z", filters.detail, 8);
 
   const { rows } = await pool.query(
     `
@@ -1976,9 +2020,9 @@ async function loadCurrentZoningGeoJson(bbox, limit) {
         z.is_valid,
         z.validation_reason,
         ST_Area(z.geom) AS area_m2,
-        z.geom
+        ${geomExpression} AS geom
       FROM zoning.v_charlottetown_current_zoning_boundaries z
-      ${bboxFilter}
+      ${whereClause}
       ORDER BY z.spatial_feature_id
       LIMIT $1
     ),
@@ -2022,20 +2066,28 @@ async function loadCurrentZoningGeoJson(bbox, limit) {
       count: rows[0].features.length,
       geometrySrid: 4326,
       sourceSrid: 2954,
+      detail: filters.detail || "detail",
+      filters: { zone: filters.zone || null },
     },
   };
 }
 
-async function loadDraftZoningGeoJson(bbox, limit) {
+async function loadDraftZoningGeoJson(bbox, limit, filters = {}) {
   const params = [limit];
-  let bboxFilter = "";
+  const where = [];
   if (bbox) {
     params.push(bbox.west, bbox.south, bbox.east, bbox.north);
-    bboxFilter = `
-      WHERE z.geom && ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954)
-        AND ST_Intersects(z.geom, ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954))
-    `;
+    where.push(`
+      z.geom && ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954)
+      AND ST_Intersects(z.geom, ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954))
+    `);
   }
+  if (filters.zone) {
+    params.push(filters.zone);
+    where.push(`${filteredZoneExpression("z")} = $${params.length}`);
+  }
+  const whereClause = where.length ? `WHERE ${where.join("\n        AND ")}` : "";
+  const geomExpression = geometryExpression("z", filters.detail, 8);
 
   const { rows } = await pool.query(
     `
@@ -2053,9 +2105,9 @@ async function loadDraftZoningGeoJson(bbox, limit) {
         z.is_valid,
         z.validation_reason,
         ST_Area(z.geom) AS area_m2,
-        z.geom
+        ${geomExpression} AS geom
       FROM zoning.v_charlottetown_draft_zoning_boundaries z
-      ${bboxFilter}
+      ${whereClause}
       ORDER BY z.spatial_feature_id
       LIMIT $1
     ),
@@ -2100,11 +2152,13 @@ async function loadDraftZoningGeoJson(bbox, limit) {
       count: rows[0].features.length,
       geometrySrid: 4326,
       sourceSrid: 2954,
+      detail: filters.detail || "detail",
+      filters: { zone: filters.zone || null },
     },
   };
 }
 
-async function loadBuildingsGeoJson(bbox, limit) {
+async function loadBuildingsGeoJson(bbox, limit, filters = {}) {
   const params = [limit];
   let bboxFilter = "";
   if (bbox) {
@@ -2114,10 +2168,13 @@ async function loadBuildingsGeoJson(bbox, limit) {
         AND ST_Intersects(b.geom, ST_Transform(ST_MakeEnvelope($2, $3, $4, $5, 4326), 2954))
     `;
   }
+  const geomExpression = geometryExpression("b", filters.detail, 3);
   const { rows } = await pool.query(
     `
     WITH source AS (
-      SELECT *
+      SELECT
+        b.*,
+        ${geomExpression} AS render_geom
       FROM zoning.v_charlottetown_buildings b
       ${bboxFilter}
       ORDER BY spatial_feature_id
@@ -2127,7 +2184,7 @@ async function loadBuildingsGeoJson(bbox, limit) {
       SELECT jsonb_build_object(
         'type', 'Feature',
         'id', feature_key,
-        'geometry', ST_AsGeoJSON(ST_Transform(geom, 4326))::jsonb,
+        'geometry', ST_AsGeoJSON(ST_Transform(render_geom, 4326))::jsonb,
         'properties', jsonb_build_object(
           'building', building,
           'name', name,
@@ -2153,17 +2210,316 @@ async function loadBuildingsGeoJson(bbox, limit) {
       'features', COALESCE(jsonb_agg(feature), '[]'::jsonb),
       'metadata', jsonb_build_object(
         'source', 'zoning.v_charlottetown_buildings',
-        'limit', $1
+        'limit', $1,
+        'detail', $${params.length + 1}::text
       )
     ) AS geojson
     FROM features
     `,
-    params,
+    [...params, filters.detail || "detail"],
   );
   return rows[0]?.geojson || {
     type: "FeatureCollection",
     features: [],
     metadata: { source: "zoning.v_charlottetown_buildings", limit },
+  };
+}
+
+function normalizeRadius(value, fallback = 250, max = 1000) {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed) || parsed <= 0) {
+    return fallback;
+  }
+  return Math.min(Math.trunc(parsed), max);
+}
+
+async function loadParcel3dContext(pid, radiusM = 250) {
+  const { rows } = await pool.query(
+    `
+    WITH selected_address AS (
+      SELECT
+        spatial_feature_id,
+        feature_key,
+        attributes,
+        is_valid,
+        validation_reason,
+        geom,
+        NULLIF(trim(attributes ->> 'APT_NO'), '') AS unit,
+        NULLIF(trim(attributes ->> 'COMM_NM'), '') AS community,
+        NULLIF(trim(attributes ->> 'STREET_NM'), '') AS street_name,
+        NULLIF(trim(attributes ->> 'STREET_NO'), '') AS street_number,
+        NULLIF(trim(attributes ->> 'PID'), '') AS pid
+      FROM zoning.v_charlottetown_civic_addresses
+      WHERE NULLIF(trim(attributes ->> 'PID'), '') = $1
+         OR NULLIF(trim(attributes ->> 'pid2'), '') = $1
+      ORDER BY spatial_feature_id
+      LIMIT 1
+    ),
+    selected_parcel AS (
+      SELECT p.spatial_feature_id, p.feature_key, p.attributes, p.is_valid, p.validation_reason, p.geom
+      FROM selected_address a
+      JOIN zoning.v_charlottetown_parcel_map p
+        ON ST_Covers(p.geom, a.geom)
+      ORDER BY ST_Area(p.geom), p.spatial_feature_id
+      LIMIT 1
+    ),
+    context_extent AS (
+      SELECT ST_Buffer(geom, $2) AS geom FROM selected_parcel
+    ),
+    adjacent_parcels AS (
+      SELECT
+        n.spatial_feature_id,
+        n.feature_key,
+        n.attributes,
+        n.is_valid,
+        n.validation_reason,
+        n.geom
+      FROM selected_parcel p
+      JOIN zoning.v_charlottetown_parcel_map n
+        ON n.spatial_feature_id <> p.spatial_feature_id
+       AND n.geom && ST_Buffer(p.geom, 1)
+       AND ST_DWithin(n.geom, p.geom, 1)
+      ORDER BY ST_Distance(ST_Centroid(n.geom), ST_Centroid(p.geom)), n.spatial_feature_id
+      LIMIT 80
+    ),
+    context_parcel_candidates AS (
+      SELECT
+        n.spatial_feature_id,
+        n.feature_key,
+        n.attributes,
+        CASE
+          WHEN EXISTS (SELECT 1 FROM adjacent_parcels a WHERE a.spatial_feature_id = n.spatial_feature_id)
+            THEN 'adjacent'
+          ELSE 'context'
+        END AS relation,
+        n.geom
+      FROM zoning.v_charlottetown_parcel_map n
+      JOIN context_extent e
+        ON n.geom && e.geom
+       AND ST_Intersects(n.geom, e.geom)
+      WHERE NOT EXISTS (SELECT 1 FROM selected_parcel p WHERE p.spatial_feature_id = n.spatial_feature_id)
+      ORDER BY ST_Distance(ST_Centroid(n.geom), (SELECT ST_Centroid(geom) FROM selected_parcel)), n.spatial_feature_id
+      LIMIT 500
+    ),
+    context_parcels AS (
+      SELECT
+        p.spatial_feature_id,
+        p.feature_key,
+        p.attributes,
+        'selected' AS relation,
+        p.geom
+      FROM selected_parcel p
+      UNION ALL
+      SELECT spatial_feature_id, feature_key, attributes, relation, geom
+      FROM context_parcel_candidates
+    ),
+    selected_buildings AS (
+      SELECT DISTINCT ON (b.spatial_feature_id)
+        b.spatial_feature_id,
+        b.feature_key,
+        b.building,
+        b.name,
+        b.levels,
+        b.height_lidar_m,
+        b.height_lidar_confidence,
+        b.height_lidar_status,
+        CASE
+          WHEN EXISTS (
+            SELECT 1 FROM selected_parcel p
+            WHERE ST_Intersects(b.geom, p.geom)
+          ) THEN 'selected'
+          WHEN EXISTS (
+            SELECT 1 FROM adjacent_parcels p
+            WHERE ST_Intersects(b.geom, p.geom)
+          ) THEN 'adjacent'
+          ELSE 'context'
+        END AS relation,
+        b.geom
+      FROM context_extent e
+      JOIN zoning.v_charlottetown_buildings b
+        ON b.geom && e.geom
+       AND ST_Intersects(b.geom, e.geom)
+      ORDER BY b.spatial_feature_id
+      LIMIT 1000
+    ),
+    roads AS (
+      SELECT
+        r.spatial_feature_id,
+        r.feature_key,
+        r.attributes,
+        r.geom
+      FROM context_extent e
+      JOIN zoning.v_charlottetown_street_network r
+        ON r.geom && e.geom
+       AND ST_Intersects(r.geom, e.geom)
+      ORDER BY r.spatial_feature_id
+      LIMIT 250
+    ),
+    parcel_features AS (
+      SELECT jsonb_build_object(
+        'type', 'Feature',
+        'id', feature_key,
+        'geometry', ST_AsGeoJSON(ST_Transform(ST_Multi(ST_CollectionExtract(ST_Intersection(geom, (SELECT geom FROM context_extent)), 3)), 4326))::jsonb,
+        'properties', jsonb_build_object(
+          'kind', 'parcel',
+          'parcelId', feature_key,
+          'relation', relation,
+          'areaM2', ST_Area(geom),
+          'attributes', attributes
+        )
+      ) AS feature
+      FROM context_parcels
+    ),
+    building_features AS (
+      SELECT jsonb_build_object(
+        'type', 'Feature',
+        'id', feature_key,
+        'geometry', ST_AsGeoJSON(ST_Transform(ST_Multi(ST_CollectionExtract(ST_Intersection(geom, (SELECT geom FROM context_extent)), 3)), 4326))::jsonb,
+        'properties', jsonb_build_object(
+          'kind', 'building',
+          'relation', relation,
+          'building', building,
+          'name', name,
+          'levels', levels,
+          'heightLidarM', height_lidar_m,
+          'heightLidarConfidence', height_lidar_confidence,
+          'heightLidarStatus', height_lidar_status,
+          'featureKey', feature_key
+        )
+      ) AS feature
+      FROM selected_buildings
+    ),
+    road_features AS (
+      SELECT jsonb_build_object(
+        'type', 'Feature',
+        'id', feature_key,
+        'geometry', ST_AsGeoJSON(ST_Transform(ST_Multi(ST_CollectionExtract(ST_Intersection(geom, (SELECT geom FROM context_extent)), 2)), 4326))::jsonb,
+        'properties', jsonb_build_object(
+          'kind', 'road',
+          'name', COALESCE(attributes->>'name', attributes->>'STREET_NM', attributes->>'NAME'),
+          'featureKey', feature_key
+        )
+      ) AS feature
+      FROM roads
+    )
+    SELECT jsonb_build_object(
+      'address', (
+        SELECT jsonb_build_object(
+          'spatial_feature_id', spatial_feature_id,
+          'feature_key', feature_key,
+          'address_id', feature_key,
+          'label', concat_ws(
+            ', ',
+            concat_ws(' ', street_number, street_name, CASE WHEN unit IS NOT NULL THEN 'Unit ' || unit END),
+            community,
+            CASE WHEN pid IS NOT NULL THEN 'PID ' || pid END
+          ),
+          'street_number', street_number,
+          'street_name', street_name,
+          'unit', unit,
+          'community', community,
+          'pid', pid,
+          'lon', ST_X(ST_Transform(geom, 4326)),
+          'lat', ST_Y(ST_Transform(geom, 4326)),
+          'is_valid', is_valid,
+          'validation_reason', validation_reason
+        )
+        FROM selected_address
+      ),
+      'parcel', (
+        SELECT jsonb_build_object(
+          'parcelId', feature_key,
+          'areaM2', ST_Area(geom),
+          'centroid', jsonb_build_object(
+            'lon', ST_X(ST_Transform(ST_Centroid(geom), 4326)),
+            'lat', ST_Y(ST_Transform(ST_Centroid(geom), 4326))
+          ),
+          'geometry', ST_AsGeoJSON(ST_Transform(geom, 4326))::jsonb
+        )
+        FROM selected_parcel
+      ),
+      'parcels', jsonb_build_object(
+        'type', 'FeatureCollection',
+        'features', COALESCE((SELECT jsonb_agg(feature) FROM parcel_features), '[]'::jsonb)
+      ),
+      'buildings', jsonb_build_object(
+        'type', 'FeatureCollection',
+        'features', COALESCE((SELECT jsonb_agg(feature) FROM building_features), '[]'::jsonb)
+      ),
+      'roads', jsonb_build_object(
+        'type', 'FeatureCollection',
+        'features', COALESCE((SELECT jsonb_agg(feature) FROM road_features), '[]'::jsonb)
+      )
+    ) AS payload
+    `,
+    [pid, radiusM],
+  );
+
+  const payload = rows[0]?.payload;
+  if (!payload?.address || !payload?.parcel) {
+    return null;
+  }
+
+  return {
+    pid,
+    address: mapAddressRow({ ...payload.address, confidence: "pid" }),
+    parcel: payload.parcel,
+    parcels: payload.parcels,
+    buildings: payload.buildings,
+    roads: payload.roads,
+    metadata: {
+      source: "PostGIS parcel, building, and street context",
+      radiusM,
+      radiusReason: "Default 250 m radius provides road and parcel context around the target while keeping browser geometry modest for the static demo.",
+      buildingScope: "Buildings are limited to the same context radius used for parcel and road visibility.",
+      geometrySrid: 4326,
+    },
+  };
+}
+
+async function loadCityViewZoneFilters(currentZone, draftZone) {
+  const currentSql = draftZone
+    ? `
+      SELECT DISTINCT current_zone_code AS code
+      FROM zoning.v_charlottetown_parcel_zone_assignment
+      WHERE draft_zone_code = $1
+        AND current_zone_code IS NOT NULL
+      ORDER BY code
+    `
+    : `
+      SELECT DISTINCT current_zone_code AS code
+      FROM zoning.v_charlottetown_parcel_zone_assignment
+      WHERE current_zone_code IS NOT NULL
+      ORDER BY code
+    `;
+  const draftSql = currentZone
+    ? `
+      SELECT DISTINCT draft_zone_code AS code
+      FROM zoning.v_charlottetown_parcel_zone_assignment
+      WHERE current_zone_code = $1
+        AND draft_zone_code IS NOT NULL
+      ORDER BY code
+    `
+    : `
+      SELECT DISTINCT draft_zone_code AS code
+      FROM zoning.v_charlottetown_parcel_zone_assignment
+      WHERE draft_zone_code IS NOT NULL
+      ORDER BY code
+    `;
+  const [currentResult, draftResult] = await Promise.all([
+    pool.query(currentSql, draftZone ? [draftZone] : []),
+    pool.query(draftSql, currentZone ? [currentZone] : []),
+  ]);
+  return {
+    filters: {
+      currentZone: currentZone || null,
+      draftZone: draftZone || null,
+    },
+    options: {
+      current: currentResult.rows.map((row) => row.code),
+      draft: draftResult.rows.map((row) => row.code),
+    },
+    source: "zoning.v_charlottetown_parcel_zone_assignment",
   };
 }
 
@@ -2577,6 +2933,8 @@ const routeEntrypoints = new Map([
   ["/parcel-lookup/", { file: "/ui_kits/parcel-lookup/index.html", baseHref: "/ui_kits/parcel-lookup/" }],
   ["/map-explorer", { file: "/ui_kits/map-explorer/index.html", baseHref: "/ui_kits/map-explorer/" }],
   ["/map-explorer/", { file: "/ui_kits/map-explorer/index.html", baseHref: "/ui_kits/map-explorer/" }],
+  ["/parcel-3d", { file: "/ui_kits/parcel-3d/index.html", baseHref: "/ui_kits/parcel-3d/" }],
+  ["/parcel-3d/", { file: "/ui_kits/parcel-3d/index.html", baseHref: "/ui_kits/parcel-3d/" }],
   ["/restriction-stack", { file: "/ui_kits/restriction-stack/index.html", baseHref: "/ui_kits/restriction-stack/" }],
   ["/restriction-stack/", { file: "/ui_kits/restriction-stack/index.html", baseHref: "/ui_kits/restriction-stack/" }],
   ["/city-view", { file: "/ui_kits/map-explorer-leaflet/index.html", baseHref: "/ui_kits/map-explorer-leaflet/" }],
@@ -2660,8 +3018,12 @@ const server = createServer(async (request, response) => {
         return;
       }
       const bbox = parseBbox(url.searchParams.get("bbox"));
-      const limit = normalizeLimit(url.searchParams.get("limit"), 1000, 5000);
-      await sendGeoJson(response, await loadParcelGeoJson(bbox, limit));
+      const limit = normalizeLimit(url.searchParams.get("limit"), 1000, 50000);
+      await sendGeoJson(response, await loadParcelGeoJson(bbox, limit, {
+        currentZone: normalizeZoneFilter(url.searchParams.get("currentZone")),
+        draftZone: normalizeZoneFilter(url.searchParams.get("draftZone")),
+        detail: normalizeDetail(url.searchParams.get("detail")),
+      }));
       return;
     }
 
@@ -2672,8 +3034,11 @@ const server = createServer(async (request, response) => {
         return;
       }
       const bbox = parseBbox(url.searchParams.get("bbox"));
-      const limit = normalizeLimit(url.searchParams.get("limit"), 1000, 5000);
-      await sendGeoJson(response, await loadCurrentZoningGeoJson(bbox, limit));
+      const limit = normalizeLimit(url.searchParams.get("limit"), 1000, 50000);
+      await sendGeoJson(response, await loadCurrentZoningGeoJson(bbox, limit, {
+        zone: normalizeZoneFilter(url.searchParams.get("zone")),
+        detail: normalizeDetail(url.searchParams.get("detail")),
+      }));
       return;
     }
 
@@ -2684,8 +3049,11 @@ const server = createServer(async (request, response) => {
         return;
       }
       const bbox = parseBbox(url.searchParams.get("bbox"));
-      const limit = normalizeLimit(url.searchParams.get("limit"), 1000, 5000);
-      await sendGeoJson(response, await loadDraftZoningGeoJson(bbox, limit));
+      const limit = normalizeLimit(url.searchParams.get("limit"), 1000, 50000);
+      await sendGeoJson(response, await loadDraftZoningGeoJson(bbox, limit, {
+        zone: normalizeZoneFilter(url.searchParams.get("zone")),
+        detail: normalizeDetail(url.searchParams.get("detail")),
+      }));
       return;
     }
 
@@ -2696,8 +3064,23 @@ const server = createServer(async (request, response) => {
         return;
       }
       const bbox = parseBbox(url.searchParams.get("bbox"));
-      const limit = normalizeLimit(url.searchParams.get("limit"), 2000, 8000);
-      await sendGeoJson(response, await loadBuildingsGeoJson(bbox, limit));
+      const limit = normalizeLimit(url.searchParams.get("limit"), 2000, 50000);
+      await sendGeoJson(response, await loadBuildingsGeoJson(bbox, limit, {
+        detail: normalizeDetail(url.searchParams.get("detail")),
+      }));
+      return;
+    }
+
+    if (url.pathname === "/api/city-view/zone-filters") {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      await sendJson(response, await loadCityViewZoneFilters(
+        normalizeZoneFilter(url.searchParams.get("currentZone")),
+        normalizeZoneFilter(url.searchParams.get("draftZone")),
+      ));
       return;
     }
 
@@ -2762,6 +3145,25 @@ const server = createServer(async (request, response) => {
         return;
       }
       await sendJson(response, buffers);
+      return;
+    }
+
+    const parcel3dMatch = url.pathname.match(/^\/api\/parcels\/([^/]+)\/3d-context$/);
+    if (parcel3dMatch) {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const pid = decodeURIComponent(parcel3dMatch[1]).trim();
+      const radiusM = normalizeRadius(url.searchParams.get("radiusM"));
+      const context = await loadParcel3dContext(pid, radiusM);
+      if (!context) {
+        response.writeHead(404, { "content-type": "application/json; charset=utf-8" });
+        response.end(JSON.stringify({ error: "Parcel PID not found.", pid }));
+        return;
+      }
+      await sendJson(response, context);
       return;
     }
 

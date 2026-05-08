@@ -113,7 +113,8 @@ function markerText(status, side) {
   return side === 'current' ? 'WAS' : 'NOW';
 }
 
-function Header() {
+function Header({ pid }) {
+  const parcel3dHref = pid ? `/parcel-3d?pid=${encodeURIComponent(pid)}` : '/parcel-3d';
   return (
     <header className="app-header">
       <img src="../../assets/logo-island-needle.svg" alt="Modern Democracy" className="wm" />
@@ -123,6 +124,7 @@ function Header() {
         <a href="/restriction-stack">View Spatial Restrictions</a>
         <a href="/provisions-comparison">Compare provisions</a>
         <a href="/city-view">Map</a>
+        <a href={parcel3dHref}>3D view</a>
       </nav>
     </header>
   );
@@ -412,7 +414,7 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
+      <Header pid={pid} />
       <main className="compare-shell">
         <div className="page-head">
           <div>
@@ -424,6 +426,7 @@ function App() {
             <a className="btn btn-secondary" href="/parcel-lookup"><i data-lucide="search" style={{width:14,height:14}}></i> Lookup</a>
             {pid && <a className="btn btn-primary" href={`/map-explorer?pid=${encodeURIComponent(pid)}`}><i data-lucide="map" style={{width:14,height:14}}></i> Map</a>}
             {pid && <a className="btn btn-primary" href={`/restriction-stack?pid=${encodeURIComponent(pid)}`}><i data-lucide="layers-3" style={{width:14,height:14}}></i> View Spatial Restrictions</a>}
+            {pid && <a className="btn btn-primary" href={`/parcel-3d?pid=${encodeURIComponent(pid)}`}><i data-lucide="box" style={{width:14,height:14}}></i> 3D view</a>}
           </div>
         </div>
 

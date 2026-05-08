@@ -9,7 +9,7 @@ tags:
 updated: 2026-05-06
 ---
 
-This page plans parcel-level LiDAR-derived metrics for Charlottetown parcels using the existing parcel, building, and PEI 2020 LiDAR inputs.
+This page records the implemented parcel-level LiDAR-derived metrics workflow for Charlottetown parcels using the existing parcel, building, and PEI 2020 LiDAR inputs.
 
 # Parcel LiDAR Metrics Plan
 
@@ -17,18 +17,39 @@ This page plans parcel-level LiDAR-derived metrics for Charlottetown parcels usi
 
 Create a derived parcel layer or table that summarizes terrain, building, canopy, and confidence metrics for every feature in `public."CHTWN_Parcel_Map"` without mutating the source parcel layer.
 
+## Implementation Status
+
+Implemented on 2026-05-06 by `scripts/build-charlottetown-parcel-lidar-metrics.py`.
+
+The first implementation creates `public."CHTWN_Parcel_LiDAR_Metrics"` with one row per source parcel. Building metrics are assigned from `public."CHTWN_Buildings"` by largest parcel overlap. Terrain metrics use sampled classified ground returns inside parcels. Canopy metrics are candidate non-ground height-above-ground summaries from sampled returns and are flagged as classification-limited because v1 does not use a full DTM/CHM raster workflow.
+
+Initial QA evidence:
+
+| Check | Result |
+| --- | --- |
+| Source parcel rows | 13,833 in `public."CHTWN_Parcel_Map"`. |
+| Derived parcel rows | 13,833 in `public."CHTWN_Parcel_LiDAR_Metrics"`. |
+| Source preservation | 0 mismatches for copied parcel fields or geometry. |
+| Geometry QA | 0 invalid derived geometries, 0 empty derived geometries. |
+| Building assignment | 13,144 assigned buildings, matching `public."CHTWN_Buildings"`. |
+| Parcels with buildings | 11,108. |
+| Parcels with sampled terrain points | 13,152. |
+| Confidence distribution | 51 high, 13,101 medium, 681 needs_review. |
+| Main review flags | 13,750 canopy classification-limited, 1,374 building split-overlap, 681 no ground points, 28 no LiDAR points. |
+| QGIS styles | Building height, building coverage, ground relief, canopy cover, and confidence styles written under `data/spatial/charlottetown/lidar-parcel-metrics`. |
+
 ## Current Inputs
 
 | Input | Current known state | Use |
 | --- | --- | --- |
 | `public."CHTWN_Parcel_Map"` | 13,833 valid `MULTIPOLYGON` parcels, SRID 2954. | Source parcel geometry and parcel candidate identifiers. |
 | `public."CHTWN_Buildings"` | 13,144 building features with `height_lidar_m` populated for all rows. | Building-height and built-form summaries by parcel. |
-| `maps/pei/lidar/*.copc.laz` | PEI 2020 COPC LAZ tiles in EPSG:2961 with classified ground points observed. | Raw source for terrain and canopy metrics. |
+| `maps/pei/lidar/*.copc.laz` | PEI 2020 COPC LAZ tiles in EPSG:2961 with classified ground points observed. | Raw source for sampled terrain and candidate canopy metrics. |
 | `public."CHTWN_Municipal_Boundary"` | Municipal boundary used for Charlottetown clipping. | Spatial extent and QA boundary control. |
 
 ## Proposed Output
 
-Preferred output is a new derived layer named `public."CHTWN_Parcel_LiDAR_Metrics"` keyed to `public."CHTWN_Parcel_Map".fid`.
+The implemented output is a derived layer named `public."CHTWN_Parcel_LiDAR_Metrics"` keyed to `public."CHTWN_Parcel_Map".fid`.
 
 Core source fields to carry forward:
 
@@ -76,7 +97,7 @@ Derive parcel terrain from ground-class LiDAR points or a generated DTM. Use EPS
 
 ### Canopy And Vegetation Metrics
 
-Use normalized height above ground from non-building, non-ground returns. The first implementation should keep canopy separate from building returns and mark confidence where classification limits make separation uncertain.
+Use normalized height above ground from non-ground returns. The first implementation marks canopy metrics as classification-limited because it samples non-ground candidate returns directly and does not yet use a full building-masked CHM raster.
 
 | Metric | Meaning |
 | --- | --- |
@@ -172,3 +193,5 @@ Use explicit flags instead of silently accepting weak metrics:
 - `public."CHTWN_Buildings"`
 - `public."CHTWN_Municipal_Boundary"`
 - `maps/pei/lidar`
+- `scripts/build-charlottetown-parcel-lidar-metrics.py`
+- `data/spatial/charlottetown/lidar-parcel-metrics/chtwn-parcel-lidar-metrics-full.summary.json`

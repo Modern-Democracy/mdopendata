@@ -199,6 +199,16 @@ The top navigation now includes `Compare provisions` immediately after `Compare 
 
 The provisions page is not parcel-specific. Its primary left-side menu follows the draft bylaw Part 1 through Part 9 order by title, without displaying `PART X` labels in the menu. Raw mode shows matched current sections on the left and the selected draft part sections on the right. Structured mode lists accepted section pairs for the selected draft part in ascending order without a secondary menu. Structured pair cards can be collapsed by clicking the pair header title.
 
+## Parcel 3D Progress
+
+Completed on 2026-05-08.
+
+The web app now includes a parcel-specific `/parcel-3d?pid=PID` route backed by `/api/parcels/:pid/3d-context`. The endpoint returns the selected parcel, adjacent parcels, nearby parcel boundaries, roads, and buildings on the selected and adjacent parcels from PostGIS. The initial context radius is 250 m, chosen as a browser-friendly neighbourhood context radius that includes parcel fabric and roads around the selected parcel without loading city-scale geometry.
+
+The page renders a Three.js browser scene with orbit controls, extruded building footprints, parcel boundary lines, road centerlines on the ground plane, and real directional-light shadow maps. Side-panel controls select March equinox, June solstice, September equinox, or December solstice and scrub from sunrise to sunset using an approximate solar-position model for Charlottetown latitude.
+
+Top navigation now links to `3D view`, and selected-parcel screens route to `/parcel-3d?pid=PID` where a PID is available.
+
 ## Risks and Open Decisions
 
 - Parcel identity may be unstable if `CHTWN_Parcel_Map` and `CHTWN_Draft_Parcel_Map` do not share PID attributes. The demo should prefer civic-address PID and spatial joins until a durable parcel key is confirmed.
@@ -206,6 +216,7 @@ The provisions page is not parcel-specific. Its primary left-side menu follows t
 - Rule-level comparison depends on a stable link between parcel zone codes and extracted bylaw sections or structured facts. If the link is incomplete, the first demo should compare zones and cite source status rather than invent rule diffs.
 - Autocomplete quality depends on address normalization. Apartment numbers, alternate street names, and duplicate PIDs need explicit handling before public use.
 - Large GeoJSON responses may become slow. If viewport endpoints are too heavy, move zoning and parcel layers to vector tiles or simplify geometries for demo zoom levels.
+- The parcel 3D page uses approximate building heights from lidar-derived height fields when present, then levels, then an 8 m fallback. Shadow output is a visualization aid rather than a certified planning shadow study until roof forms, terrain, wall articulation, timezone equation-of-time handling, and bylaw-specific shadow-study standards are modeled.
 
 ## Sources
 
@@ -218,4 +229,5 @@ The provisions page is not parcel-specific. Its primary left-side menu follows t
 - [Map explorer Leaflet UI kit](../../web/public/ui_kits/map-explorer-leaflet/README.md)
 - [Zoning comparison UI kit](../../web/public/ui_kits/zoning-comparison/README.md)
 - [Provisions comparison UI kit](../../web/public/ui_kits/provisions-comparison/README.md)
+- [Parcel 3D UI](../../web/public/ui_kits/parcel-3d/index.html)
 - [Logo explorations](../../web/public/preview/brand-logo-explorations.html)

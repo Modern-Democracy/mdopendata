@@ -26,6 +26,18 @@
   .sw { width: 16px; height: 16px; border-radius: 3px; border: 1px solid rgba(26,22,18,0.2); }
   .type-name { font-family: var(--font-ui); font-size: 13px; color: var(--ink); }
   .type-sides { font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-3); text-transform: uppercase; }
+  .restriction-list { display: grid; gap: 10px; }
+  .restriction-zone { background: var(--paper); border: 1px solid var(--border-hair); border-radius: 4px; overflow: hidden; }
+  .restriction-zone-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 11px; border-bottom: 1px solid var(--border-hair); }
+  .restriction-zone-name { font-family: var(--font-ui); font-size: 13px; font-weight: 600; color: var(--ink); }
+  .restriction-zone-code { font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-3); }
+  .restriction-items { display: grid; gap: 0; }
+  .restriction-item { display: grid; grid-template-columns: 14px minmax(0, 1fr) auto; gap: 9px; align-items: start; padding: 9px 11px; border-top: 1px solid var(--border-hair); }
+  .restriction-item:first-child { border-top: 0; }
+  .restriction-copy { min-width: 0; }
+  .restriction-label { display: block; font-family: var(--font-ui); font-size: 12.5px; line-height: 1.25; color: var(--ink); }
+  .restriction-meta { display: block; margin-top: 3px; font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-3); text-transform: uppercase; }
+  .restriction-distance { font-family: var(--font-mono); font-size: 11px; color: var(--fg-2); white-space: nowrap; }
   .route-actions { display: grid; gap: 8px; margin-bottom: 14px; }
   .route-actions .btn { width: 100%; justify-content: center; }
   .map-grid { display: grid; grid-template-columns: 1fr 1fr; min-width: 0; min-height: 0; }
@@ -72,7 +84,8 @@ function zoneColor(code) {
   return ZONE_COLORS[String(code || '').trim().charAt(0).toUpperCase()] || 'var(--zone-residential)';
 }
 
-function Header() {
+function Header({ pid }) {
+  const parcel3dHref = pid ? `/parcel-3d?pid=${encodeURIComponent(pid)}` : '/parcel-3d';
   return (
     <header className="app-header">
       <img src="../../assets/logo-island-needle.svg" alt="Modern Democracy" className="wm" />
@@ -82,6 +95,7 @@ function Header() {
         <a className="active" href="/restriction-stack">View Spatial Restrictions</a>
         <a href="/provisions-comparison">Compare provisions</a>
         <a href="/city-view">Map</a>
+        <a href={parcel3dHref}>3D view</a>
       </nav>
     </header>
   );
@@ -192,6 +206,58 @@ function parcelLabelAngle(features) {
     .filter((angle) => Math.abs(angle) <= 45);
   if (!candidates.length) return 0;
   return candidates.sort((a, b) => Math.abs(a) - Math.abs(b))[0];
+}
+
+function formatDistance(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return '';
+  return `${number.toLocaleString(undefined, { maximumFractionDigits: 2 })} m`;
+}
+
+function summarizeRestrictions(geojson, selectedTypes) {
+  const byKey = new Map();
+  for (const feature of geojson?.features || []) {
+    const p = feature.properties || {};
+    if (p.kind !== 'restriction_area') continue;
+    if (p.regulationType && !selectedTypes.has(p.regulationType)) continue;
+    const key = [p.regulationType || '', p.yardRole || '', p.distanceM ?? '', p.label || '', p.basis || ''].join('|');
+    if (!byKey.has(key)) {
+      byKey.set(key, {
+        key,
+        type: p.regulationType || '',
+        label: p.regulationLabel || p.label || 'Spatial restriction',
+        role: p.yardRole || 'restriction',
+        distance: formatDistance(p.distanceM),
+        basis: p.basis || '',
+      });
+    }
+  }
+  return [...byKey.values()].sort((a, b) => (
+    `${a.label} ${a.role} ${a.distance}`.localeCompare(`${b.label} ${b.role} ${b.distance}`)
+  ));
+}
+
+function RestrictionSummary({ title, zone, items }) {
+  return (
+    <section className="restriction-zone">
+      <div className="restriction-zone-head">
+        <div className="restriction-zone-name">{title}</div>
+        <div className="restriction-zone-code">{zone?.code || 'pending'}</div>
+      </div>
+      <div className="restriction-items">
+        {items.length ? items.map((item) => (
+          <div className="restriction-item" key={item.key}>
+            <span className="sw" style={{background: COLORS[item.type] || '#8f3d2f'}}></span>
+            <span className="restriction-copy">
+              <span className="restriction-label">{item.label}</span>
+              <span className="restriction-meta">{item.role}{item.basis ? ` / ${item.basis}` : ''}</span>
+            </span>
+            <span className="restriction-distance">{item.distance}</span>
+          </div>
+        )) : <div className="status-card">No visible spatial restrictions.</div>}
+      </div>
+    </section>
+  );
 }
 
 function Pane({ title, zone, geojson, selectedTypes }) {
@@ -341,6 +407,8 @@ function App() {
   const selectedTypes = useMemo(() => enabled, [enabled]);
   const current = payload?.zones?.current;
   const draft = payload?.zones?.draft;
+  const currentRestrictions = useMemo(() => summarizeRestrictions(payload?.current, selectedTypes), [payload, selectedTypes]);
+  const draftRestrictions = useMemo(() => summarizeRestrictions(payload?.draft, selectedTypes), [payload, selectedTypes]);
 
   function toggleType(key, checked) {
     const next = new Set(enabled);
@@ -350,7 +418,7 @@ function App() {
 
   return (
     <div className="stack-app">
-      <Header />
+      <Header pid={pid} />
       <div className="stack-body">
         <aside className="stack-panel">
           <div className="parcel-card">
@@ -362,6 +430,7 @@ function App() {
           <div className="route-actions">
             <a className="btn btn-secondary" href={`/map-explorer?pid=${encodeURIComponent(pid)}`}><i data-lucide="map" style={{width:14, height:14}}></i> Back to map explorer</a>
             <a className="btn btn-primary" href={`/zoning-comparison?pid=${encodeURIComponent(pid)}`}><i data-lucide="git-compare" style={{width:14, height:14}}></i> Compare bylaws</a>
+            <a className="btn btn-primary" href={`/parcel-3d?pid=${encodeURIComponent(pid)}`}><i data-lucide="box" style={{width:14, height:14}}></i> 3D view</a>
           </div>
 
           <h3 className="panel-title">Regulation types</h3>
@@ -374,6 +443,12 @@ function App() {
                 <span className="type-sides">{type.availableIn.join('+')}</span>
               </label>
             )) : <div className="status-card">No dimensional yard or setback options were found for this parcel's current or draft zone.</div>}
+          </div>
+
+          <h3 className="panel-title">Visualized restrictions</h3>
+          <div className="restriction-list">
+            <RestrictionSummary title="Current zone" zone={current} items={currentRestrictions} />
+            <RestrictionSummary title="Draft zone" zone={draft} items={draftRestrictions} />
           </div>
 
           <h3 className="panel-title">Status</h3>

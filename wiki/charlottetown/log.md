@@ -14,6 +14,19 @@ Append new entries in reverse chronological order. Use headings in this format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-05-06] spatial | Parcel LiDAR metrics implemented
+
+Added `scripts/build-charlottetown-parcel-lidar-metrics.py`, generated
+`data/spatial/charlottetown/lidar-parcel-metrics/chtwn-parcel-lidar-metrics-full.csv`,
+and created `public."CHTWN_Parcel_LiDAR_Metrics"` with 13,833 rows matching
+`public."CHTWN_Parcel_Map"`. QA found 0 copied parcel field or geometry
+mismatches, 0 invalid or empty derived geometries, 13,144 assigned buildings
+matching `public."CHTWN_Buildings"`, 13,152 parcels with sampled terrain
+points, and confidence counts of 51 high, 13,101 medium, and 681 needs_review.
+Added the layer to `C:/Users/19029/GIS/peiopendata.qgz` and wrote QGIS styles
+for building height, building coverage, ground relief, canopy cover, and
+metric confidence.
+
 ## [2026-05-06] spatial | Zoning buildings layer refreshed
 
 Added `schema/sql/018_refresh_charlottetown_buildings.sql` to replace the

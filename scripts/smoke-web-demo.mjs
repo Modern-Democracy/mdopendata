@@ -17,7 +17,12 @@ const checks = [
   {
     name: "parcel map explorer route",
     path: samplePid ? `/map-explorer?pid=${encodeURIComponent(samplePid)}` : "/map-explorer",
-    expectText: ["Map Explorer", "logo-island-needle.svg", "/api/parcels/", "/api/buildings/osm.geojson"],
+    expectText: ["Map Explorer", "logo-island-needle.svg", "/api/parcels/", "/api/buildings/osm.geojson", "/parcel-3d"],
+  },
+  {
+    name: "parcel 3D route",
+    path: samplePid ? `/parcel-3d?pid=${encodeURIComponent(samplePid)}` : "/parcel-3d",
+    expectText: ["Parcel 3D", "logo-island-needle.svg", "/3d-context", "three"],
   },
   {
     name: "city view route",
@@ -72,6 +77,11 @@ if (samplePid) {
       name: "parcel restriction buffers API contract",
       path: `/api/parcels/${encodeURIComponent(samplePid)}/restriction-buffers`,
       expectJson: (payload) => payload.pid && payload.current?.type === "FeatureCollection" && payload.draft?.type === "FeatureCollection" && payload.metadata?.source,
+    },
+    {
+      name: "parcel 3D context API contract",
+      path: `/api/parcels/${encodeURIComponent(samplePid)}/3d-context?radiusM=250`,
+      expectJson: (payload) => payload.pid && payload.parcels?.type === "FeatureCollection" && payload.buildings?.type === "FeatureCollection" && payload.roads?.type === "FeatureCollection" && payload.metadata?.radiusM === 250,
     },
     {
       name: "zoning comparison API contract",
