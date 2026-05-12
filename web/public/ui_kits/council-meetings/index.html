@@ -53,6 +53,14 @@
   .source-select { width: 100%; border: 1px solid var(--border-hair); border-radius: 4px; background: var(--paper); color: var(--ink); padding: 8px; font: 13px var(--font-ui); margin-bottom: 12px; }
   .tool-map, .restriction-map { min-height: 0; height: 100%; background: var(--paper-3); }
   .map-shell { display: grid; grid-template-rows: auto minmax(0, 1fr); height: 100%; min-height: 0; }
+  .parcel-map-body { display: grid; grid-template-columns: minmax(0, 1fr) 260px; min-height: 0; }
+  .parcel-layer-panel { background: var(--paper-2); border-left: 1px solid var(--border-hair); overflow-y: auto; padding: 14px; }
+  .layer { display: flex; align-items: center; gap: 10px; padding: 8px 9px; border-radius: 4px; cursor: pointer; }
+  .layer:hover { background: var(--paper-3); }
+  .layer input { accent-color: var(--forest); }
+  .layer .sw { width: 16px; height: 16px; border-radius: 3px; border: 1px solid rgba(26,22,18,0.15); flex-shrink: 0; }
+  .layer .name { font: 13px var(--font-ui); color: var(--ink); }
+  .layer .count { margin-left: auto; font: 10.5px var(--font-mono); color: var(--fg-3); }
   .tool-status { border-bottom: 1px solid var(--border-hair); background: var(--paper-2); padding: 10px 14px; font: 12.5px var(--font-ui); color: var(--fg-3); }
   .compare-shell { overflow-y: auto; padding: 18px; }
   .compare-actions { display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 12px; }
@@ -70,6 +78,12 @@
   .citation-item:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
   .citation-item .title { color: var(--ink); font-weight: 600; }
   .citation-item .meta { font: 11px var(--font-mono); color: var(--fg-3); margin-top: 3px; }
+  .citation-item .clause { margin-top: 8px; }
+  .citation-item .clause-label { font: 11px var(--font-mono); color: var(--fg-3); margin-right: 6px; }
+  .citation-list { display: grid; gap: 10px; }
+  .structured-view { display: grid; gap: 18px; margin-top: 16px; }
+  .structured-group h2 { font: 700 12px var(--font-ui); letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 10px; color: var(--fg-3); }
+  .structured-empty { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); color: var(--fg-3); font: 13px var(--font-ui); padding: 14px; }
   .restriction-shell { display: grid; grid-template-rows: auto minmax(0, 1fr); height: 100%; min-height: 0; }
   .restriction-grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 0; }
   .restriction-pane { display: grid; grid-template-rows: auto minmax(0, 1fr); min-height: 0; border-left: 1px solid var(--border-hair); }
@@ -80,8 +94,9 @@
     .meeting-workspace { grid-template-columns: 1fr; overflow: visible; }
     .agenda-panel, .context-panel, .content-scroll { overflow: visible; }
     .main-panel { overflow: visible; }
-    .info-grid, .citation-grid, .restriction-grid { grid-template-columns: 1fr; }
+    .info-grid, .citation-grid, .restriction-grid, .parcel-map-body { grid-template-columns: 1fr; }
     .tool-map, .restriction-map { min-height: 520px; }
+    .parcel-layer-panel { border-left: 0; border-top: 1px solid var(--border-hair); }
   }
 </style>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
@@ -95,6 +110,33 @@
 <script type="text/babel">
 const { useEffect, useMemo, useRef, useState } = React;
 const CENTER = [46.2382, -63.1311];
+const DETAIL_ZOOM = 15;
+const ZONE_COLORS = {
+  RN: 'var(--zone-rn)',
+  RM: 'var(--zone-rm)',
+  RH: 'var(--zone-rh)',
+  DC: 'var(--zone-dc)',
+  DMS: 'var(--zone-dms)',
+  DMU: 'var(--zone-dmu)',
+  DN: 'var(--zone-dn)',
+  DW: 'var(--zone-dw)',
+  BP: 'var(--zone-bp)',
+  AP: 'var(--zone-ap)',
+  HI: 'var(--zone-hi)',
+  P: 'var(--zone-port)',
+  GC: 'var(--zone-gc)',
+  GN: 'var(--zone-gn)',
+  I: 'var(--zone-i)',
+  PPS: 'var(--zone-pps)',
+  POS: 'var(--zone-pos)',
+  C: 'var(--zone-c)',
+  EG: 'var(--zone-eg)',
+  UE: 'var(--zone-ue)',
+};
+const CURRENT_ZONE_COLORS = {
+  A: 'var(--zone-ap)', 'C-1': 'var(--zone-dms)', 'C-2': 'var(--zone-gc)', 'C-3': 'var(--zone-gn)', CDA: 'var(--zone-ue)', DC: 'var(--zone-dc)', DMS: 'var(--zone-dms)', DMU: 'var(--zone-dmu)', DMUN: 'var(--zone-dn)', DN: 'var(--zone-dw)', 'ER-MUVC': 'var(--zone-gc)', FD: 'var(--zone-ue)', I: 'var(--zone-i)', 'M-1': 'var(--zone-bp)', 'M-2': 'var(--zone-hi)', 'M-3': 'var(--zone-ap)', MH: 'var(--zone-rm)', MHR: 'var(--zone-rm)', MUC: 'var(--zone-gc)', MUR: 'var(--zone-rh)', NA: 'var(--zone-eg)', OS: 'var(--zone-pps)', P: 'var(--zone-port)', PC: 'var(--zone-pos)', PZ: 'var(--zone-port)', 'R-1L': 'var(--zone-rn)', 'R-1N': 'var(--zone-rn)', 'R-1S': 'var(--zone-rn)', 'R-2': 'var(--zone-rm)', 'R-2S': 'var(--zone-rm)', 'R-3': 'var(--zone-rh)', 'R-3T': 'var(--zone-rh)', 'R-4': 'var(--zone-dn)', 'R-4A': 'var(--zone-dn)', 'R-4B': 'var(--zone-dn)', WF: 'var(--zone-dw)', WLC: 'var(--zone-dw)', 'WL-OS': 'var(--zone-pps)', U: 'var(--zone-ue)',
+};
+const LEGACY_ZONE_COLORS = { R: 'var(--zone-residential)', D: 'var(--zone-mixed)', M: 'var(--zone-mixed)', O: 'var(--zone-openspace)', W: 'var(--zone-waterfront)', H: 'var(--zone-heritage)' };
 const AGENDA_TREE = [
   { group: "Opening", open: true, items: [
     { id: "agenda-1", label: "1", title: "Call to Order", page: 1 },
@@ -147,13 +189,34 @@ function itemPids(record) {
   return [...new Set((record?.property_references || []).flatMap((ref) => ref.pids || []))];
 }
 function zoneColor(code) {
-  const key = String(code || "").trim().charAt(0).toUpperCase();
-  return { R: "var(--zone-residential)", C: "var(--zone-commercial)", D: "var(--zone-mixed)", M: "var(--zone-mixed)", I: "var(--zone-institutional)", O: "var(--zone-openspace)", P: "var(--zone-openspace)", W: "var(--zone-waterfront)" }[key] || "var(--paper-3)";
+  const key = String(code || "").trim().toUpperCase();
+  return ZONE_COLORS[key] || CURRENT_ZONE_COLORS[key] || LEGACY_ZONE_COLORS[key.charAt(0)] || "var(--paper-3)";
 }
 async function fetchJson(url) {
   const response = await fetch(url);
   if (!response.ok) throw new Error(`${url} returned HTTP ${response.status}.`);
   return response.json();
+}
+
+function mapBboxString(map) {
+  const bounds = map.getBounds();
+  return [bounds.getWest(), bounds.getSouth(), bounds.getEast(), bounds.getNorth()].map((value) => value.toFixed(6)).join(",");
+}
+function mapLayerMode(map) {
+  return map.getZoom() >= DETAIL_ZOOM ? "detail" : "overview";
+}
+function mapLayerLimit(map, key) {
+  if (mapLayerMode(map) === "detail") return { buildings: 2500, current: 1000, draft: 1000, parcels: 1500 }[key];
+  return { buildings: 50000, current: 50000, draft: 50000, parcels: 50000 }[key];
+}
+function currentPolygonStyle(color) {
+  return { color, weight: 5, opacity: 1, fillColor: color, fillOpacity: 0.1 };
+}
+function draftPolygonStyle(color) {
+  return { color: "rgba(26,22,18,0)", weight: 0, opacity: 0, fillColor: color, fillOpacity: 0.75 };
+}
+function buildingStyle() {
+  return { color: "rgba(54,102,76,0.58)", weight: 0.6, opacity: 0.85, fillColor: "#d8c3a2", fillOpacity: 0.2 };
 }
 
 function Header() {
@@ -200,8 +263,13 @@ function AgendaPackagePane({ record, treeItem }) {
 function ParcelLookupPane({ itemId }) {
   const mapRef = useRef(null);
   const elementRef = useRef(null);
-  const layerRef = useRef(null);
+  const selectedLayerRef = useRef(null);
+  const visibleLayerRefs = useRef({ current: null, draft: null, buildings: null, parcels: null });
+  const requestRef = useRef(0);
+  const timerRef = useRef(null);
   const [status, setStatus] = useState("Loading item parcels.");
+  const [layers, setLayers] = useState({ current: true, draft: true, buildings: true, parcels: true });
+  const [counts, setCounts] = useState({ current: 0, draft: 0, buildings: 0, parcels: 0 });
   useEffect(() => {
     if (!elementRef.current || mapRef.current) {
       return;
@@ -209,6 +277,8 @@ function ParcelLookupPane({ itemId }) {
     mapRef.current = L.map(elementRef.current).setView(CENTER, 13);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 20, attribution: "&copy; OpenStreetMap contributors" }).addTo(mapRef.current);
     L.control.scale({ metric: true, imperial: false }).addTo(mapRef.current);
+    mapRef.current.createPane("buildingsPane");
+    mapRef.current.createPane("zonesPane");
   }, []);
   useEffect(() => {
     const map = mapRef.current;
@@ -216,28 +286,75 @@ function ParcelLookupPane({ itemId }) {
     let cancelled = false;
     fetchJson(`/api/council-meetings/current/items/${encodeURIComponent(itemId)}/parcels`).then((payload) => {
       if (cancelled) return;
-      if (layerRef.current) layerRef.current.remove();
+      if (selectedLayerRef.current) selectedLayerRef.current.remove();
       const features = (payload.parcels || []).filter((row) => row.parcel?.geometry).map((row) => ({ type: "Feature", geometry: row.parcel.geometry, properties: { pid: row.pid, address: row.address?.label || `PID ${row.pid}`, currentZone: row.zones?.current?.code || "" } }));
-      layerRef.current = L.geoJSON({ type: "FeatureCollection", features }, { style: (feature) => ({ color: "#8f3d2f", weight: 2.4, fillColor: zoneColor(feature.properties.currentZone), fillOpacity: 0.22 }), onEachFeature: (feature, layer) => layer.bindTooltip(`${feature.properties.address}<br>PID ${feature.properties.pid}`, { sticky: true }) }).addTo(map);
-      const bounds = layerRef.current.getBounds();
-      if (bounds.isValid()) map.fitBounds(bounds.pad(0.25));
+      selectedLayerRef.current = L.geoJSON({ type: "FeatureCollection", features }, { style: (feature) => ({ color: "#8f3d2f", weight: 3, fillColor: zoneColor(feature.properties.currentZone), fillOpacity: 0.18 }), onEachFeature: (feature, layer) => layer.bindTooltip(`${feature.properties.address}<br>PID ${feature.properties.pid}`, { sticky: true }) }).addTo(map);
+      const bounds = selectedLayerRef.current.getBounds();
+      if (bounds.isValid()) map.fitBounds(bounds.pad(1.2), { maxZoom: 16, animate: false, padding: [28, 28] });
       setStatus(`${features.length} selected parcel${features.length === 1 ? "" : "s"} loaded: ${payload.pids.join(", ")}.`);
       window.setTimeout(() => map.invalidateSize(), 0);
     }).catch((error) => setStatus(error.message || "Parcel lookup failed."));
     return () => { cancelled = true; };
   }, [itemId]);
-  return <div className="map-shell"><div className="tool-status">{status}</div><div ref={elementRef} className="tool-map" aria-label="Rezoning item parcel map"></div></div>;
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const clearVisibleLayer = (key) => {
+      if (visibleLayerRefs.current[key]) {
+        visibleLayerRefs.current[key].remove();
+        visibleLayerRefs.current[key] = null;
+      }
+    };
+    const loadVisibleLayers = async () => {
+      const requestId = ++requestRef.current;
+      const bbox = mapBboxString(map);
+      const detail = mapLayerMode(map);
+      const requests = [];
+      if (layers.buildings) requests.push(["buildings", fetchJson(`/api/buildings/osm.geojson?bbox=${bbox}&limit=${mapLayerLimit(map, "buildings")}&detail=${detail}`)]);
+      if (layers.current) requests.push(["current", fetchJson(`/api/zoning/current.geojson?bbox=${bbox}&limit=${mapLayerLimit(map, "current")}&detail=${detail}`)]);
+      if (layers.draft) requests.push(["draft", fetchJson(`/api/zoning/draft.geojson?bbox=${bbox}&limit=${mapLayerLimit(map, "draft")}&detail=${detail}`)]);
+      if (layers.parcels) requests.push(["parcels", fetchJson(`/api/parcels.geojson?bbox=${bbox}&limit=${mapLayerLimit(map, "parcels")}&detail=${detail}`)]);
+      const results = await Promise.allSettled(requests.map(async ([key, promise]) => [key, await promise]));
+      if (requestId !== requestRef.current) return;
+      Object.keys(visibleLayerRefs.current).forEach(clearVisibleLayer);
+      const nextCounts = { current: 0, draft: 0, buildings: 0, parcels: 0 };
+      results.forEach((result) => {
+        if (result.status !== "fulfilled") return;
+        const [key, geojson] = result.value;
+        nextCounts[key] = geojson.features?.length || 0;
+        if (key === "buildings") visibleLayerRefs.current.buildings = L.geoJSON(geojson, { pane: "buildingsPane", style: buildingStyle, interactive: false }).addTo(map);
+        if (key === "current") visibleLayerRefs.current.current = L.geoJSON(geojson, { pane: "zonesPane", style: (feature) => currentPolygonStyle(zoneColor(feature.properties?.zoneCode)), interactive: false }).addTo(map);
+        if (key === "draft") visibleLayerRefs.current.draft = L.geoJSON(geojson, { pane: "zonesPane", style: (feature) => draftPolygonStyle(zoneColor(feature.properties?.zoneCode)), interactive: false }).addTo(map);
+        if (key === "parcels") visibleLayerRefs.current.parcels = L.geoJSON(geojson, { style: { color: "rgba(26,22,18,0.35)", weight: 0.6, fillOpacity: 0 }, interactive: false }).addTo(map);
+      });
+      selectedLayerRef.current?.bringToFront();
+      setCounts(nextCounts);
+    };
+    const scheduleLoad = () => {
+      window.clearTimeout(timerRef.current);
+      timerRef.current = window.setTimeout(loadVisibleLayers, 160);
+    };
+    map.on("moveend zoomend", scheduleLoad);
+    scheduleLoad();
+    return () => {
+      map.off("moveend zoomend", scheduleLoad);
+      window.clearTimeout(timerRef.current);
+    };
+  }, [layers]);
+  const toggleLayer = (key) => setLayers((current) => ({ ...current, [key]: !current[key] }));
+  return <div className="map-shell"><div className="tool-status">{status}</div><div className="parcel-map-body"><div ref={elementRef} className="tool-map" aria-label="Rezoning item parcel map"></div><aside className="parcel-layer-panel"><h2 className="section-title">Layers</h2>{[["current", "Current zoning", "var(--brick)"], ["draft", "Draft zoning", "var(--ochre)"], ["buildings", "Buildings", "#d8c3a2"], ["parcels", "Parcel outlines", "var(--paper-2)"]].map(([key, label, color]) => <label className="layer" key={key}><input type="checkbox" checked={layers[key]} onChange={() => toggleLayer(key)} /><span className="sw" style={{background: color}}></span><span className="name">{label}</span><span className="count">{counts[key]}</span></label>)}</aside></div></div>;
 }
 
 function ComparisonRows({ rows }) {
   return <div className="compare-grid"><div className="diff-cell current"><span className="value">Current bylaw from-zone</span></div><div className="diff-cell label">Field</div><div className="diff-cell"><span className="value">Current bylaw to-zone</span></div>{rows.map((row, index) => <React.Fragment key={`${row.label}-${index}`}><div className="diff-cell current"><span className="value">{row.current || "pending"}</span></div><div className="diff-cell label">{row.label}</div><div className="diff-cell"><span className="value">{row.draft || "pending"}</span></div></React.Fragment>)}</div>;
 }
 function CitationList({ title, sections }) {
-  return <section className="citation-card"><h2>{title}</h2>{sections?.length ? sections.map((section, index) => <article className="citation-item" key={`${section.sectionId}-${index}`}><div className="title">{section.label} {section.title}</div><div className="meta">{section.filePath || "source path pending"}</div>{(section.clauses || []).slice(0, 8).map((clause, clauseIndex) => <div key={clauseIndex}><span className="meta">{clause.label}</span> {clause.text}</div>)}</article>) : <div className="status-card">Zone-section citations pending.</div>}</section>;
+  return <section className="citation-card"><h2>{title}</h2><div className="citation-list">{sections?.length ? sections.map((section, index) => <article className="citation-item" key={`${section.sectionId}-${index}`}><div className="title">{section.label} {section.title}</div><div className="meta">{section.filePath || "source path pending"}</div>{(section.clauses || []).map((clause, clauseIndex) => <div className="clause" key={clauseIndex}>{clause.label && <span className="clause-label">{clause.label}</span>}<span>{clause.text || ""}</span></div>)}</article>) : <div className="status-card">Zone-section citations pending.</div>}</div></section>;
 }
 function StructuredView({ structuredData }) {
-  const rows = (structuredData?.groups || []).flatMap((group) => (group.rows || []).map((row) => ({ ...row, label: `${group.title}: ${row.label}` })));
-  return rows.length ? <ComparisonRows rows={rows} /> : <div className="status-card">Structured data is pending for this current-bylaw zone comparison.</div>;
+  const groups = structuredData?.groups || [];
+  if (!groups.length) return <div className="structured-empty">Structured data is pending for this current-bylaw zone comparison.</div>;
+  return <div className="structured-view">{groups.map((group) => <section className="structured-group" key={group.key || group.title}><h2>{group.title}</h2>{group.rows?.length ? <ComparisonRows rows={group.rows} /> : <div className="structured-empty">No structured rows found.</div>}</section>)}</div>;
 }
 function ComparePane({ itemId }) {
   const [payload, setPayload] = useState(null);
@@ -306,7 +423,7 @@ function ContextPanel({ audience, payload, selectedId, toolMode, setToolMode }) 
   return <aside className="context-panel">
     <section className="context-card"><h2>{audience === "public" ? "Public needs" : audience === "council" ? "Council needs" : "Staff needs"}</h2><ul className="workflow-list">{(workflow?.stages || []).flatMap((stage) => stage.tasks).map((task) => <li key={task}>{task}</li>)}</ul></section>
     <section className="context-card"><h2>Agenda Context</h2>{selectedId ? <div className="meta-grid"><div className="k">Item</div><div className="v">{treeItem?.label} {treeItem?.title}</div><div className="k">Stage</div><div className="v">{record?.stage || "not extracted"}</div><div className="k">Decision</div><div className="v">{record?.decision_requested || "not extracted"}</div></div> : <p className="empty-note">Select an agenda item for item-specific context.</p>}</section>
-    {isRezoning && <section className="context-card"><h2>Rezoning Tools</h2><div className="route-actions">{[["package", "View Agenda Package"], ["parcel", "Parcel Lookup"], ["compare", "Compare bylaws"], ["restrictions", "View Spatial Restrictions"], ["shadow", "Shadow Study"]].map(([key, label]) => <button type="button" className={`btn btn-primary ${toolMode === key ? "active" : ""}`} onClick={() => setToolMode(key)} key={key}>{label}</button>)}</div></section>}
+    {isRezoning && <section className="context-card"><h2>Rezoning Tools</h2><div className="route-actions">{[["package", "View Agenda Package"], ["parcel", "View Parcel On Map"], ["compare", "Compare bylaws"], ["restrictions", "View Spatial Restrictions"], ["shadow", "Shadow Study"]].map(([key, label]) => <button type="button" className={`btn btn-primary ${toolMode === key ? "active" : ""}`} onClick={() => setToolMode(key)} key={key}>{label}</button>)}</div></section>}
     <section className="context-card"><h2>Interface Controls</h2><ul className="check-list"><li>Use the left tree to follow agenda order.</li><li>Use View Agenda Package to restore the source page listing.</li><li>Rezoning tools replace the middle pane without leaving this page.</li></ul></section>
   </aside>;
 }
