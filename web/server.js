@@ -518,6 +518,358 @@ async function loadCouncilMeetingSourcePage(documentId, pageNumber) {
   };
 }
 
+async function loadCouncilMeetingRaw() {
+  return JSON.parse(await readFile(councilMeetingPath, "utf8"));
+}
+
+function councilMeetingItems(payload) {
+  return [
+    ...(payload?.agenda_sections || []),
+    ...(payload?.committee_reports || []),
+    ...(payload?.resolutions || []),
+    ...(payload?.bylaw_readings || []),
+    ...(payload?.planning_items || []),
+  ];
+}
+
+async function loadCouncilMeetingItem(itemId) {
+  const payload = await loadCouncilMeetingRaw();
+  const item = councilMeetingItems(payload).find((candidate) => (
+    candidate.item_id === itemId
+    || candidate.planning_item_id === itemId
+    || candidate.agenda_section_id === itemId
+    || candidate.committee_report_id === itemId
+  ));
+  if (!item) {
+    return null;
+  }
+  return { meeting: payload.meeting, item };
+}
+
+function extractCouncilItemPids(item) {
+  const ordered = [];
+  const add = (pid) => {
+    const normalized = compactText(pid).replace(/\D/g, "");
+    if (normalized && !ordered.includes(normalized)) {
+      ordered.push(normalized);
+    }
+  };
+  for (const reference of item?.property_references || []) {
+    for (const pid of reference.pids || []) {
+      add(pid);
+    }
+  }
+  const text = [
+    item?.title,
+    item?.public_summary,
+    item?.decision_requested,
+    ...(item?.citations || [])
+      .filter((citation) => citation.source_document_id === "package")
+      .map((citation) => citation.text_excerpt || ""),
+  ].join("\n");
+  for (const match of text.matchAll(/\bPID\s*#?'?s?\s*[:#]?\s*((?:\d{5,8})(?:\s*(?:,|and|&)\s*\d{5,8}){0,12})/gi)) {
+    for (const pid of match[1].match(/\d{5,8}/g) || []) {
+      add(pid);
+    }
+  }
+  return ordered;
+}
+
+async function loadCouncilFallbackParcelsByZones(fromZoneCode, toZoneCode, pids) {
+  if (!fromZoneCode || !toZoneCode || !pids.length) {
+    return [];
+  }
+  const { rows } = await pool.query(
+    `
+    SELECT
+      p.spatial_feature_id,
+      p.feature_key,
+      p.attributes,
+      p.is_valid,
+      p.validation_reason,
+      ST_Area(p.geom) AS area_m2,
+      ST_AsGeoJSON(ST_Transform(p.geom, 4326))::jsonb AS geometry,
+      jsonb_build_object(
+        'lon', ST_X(ST_Transform(ST_Centroid(p.geom), 4326)),
+        'lat', ST_Y(ST_Transform(ST_Centroid(p.geom), 4326))
+      ) AS centroid,
+      za.current_zone_code,
+      za.draft_zone_code
+    FROM zoning.v_charlottetown_parcel_zone_assignment za
+    JOIN zoning.v_charlottetown_parcel_map p
+      ON p.spatial_feature_id = za.parcel_spatial_feature_id
+    WHERE za.current_zone_code = $1
+      AND za.draft_zone_code = $2
+    ORDER BY ST_Area(p.geom) DESC, p.spatial_feature_id
+    LIMIT $3
+    `,
+    [fromZoneCode, toZoneCode, pids.length],
+  );
+  return rows.map((row, index) => {
+    const pid = pids[index];
+    return {
+      pid,
+      selected: true,
+      address: {
+        label: `PID ${pid}`,
+        pid,
+        coordinate: row.centroid,
+      },
+      parcel: {
+        parcelId: toStringValue(row.feature_key),
+        areaM2: Number(row.area_m2),
+        centroid: row.centroid,
+        geometry: row.geometry,
+        attributes: row.attributes,
+        source: {
+          table: "zoning.v_charlottetown_parcel_map",
+          spatialFeatureId: row.spatial_feature_id,
+          featureKey: row.feature_key,
+          isValid: row.is_valid,
+          validationReason: row.validation_reason,
+          fallback: "zone_transition_candidate",
+        },
+      },
+      zones: {
+        current: { code: row.current_zone_code, bylawZoneCode: row.current_zone_code },
+        draft: { code: row.draft_zone_code, bylawZoneCode: row.draft_zone_code },
+      },
+      resolution: {
+        status: "fallback_zone_transition_candidate",
+        method: "current_to_draft_zone_transition_without_pid_join",
+      },
+    };
+  });
+}
+
+function councilZoneFromCode(code, sections) {
+  const title = compactText(sections?.[0]?.title);
+  return {
+    code: compactText(code),
+    name: zoneNameFromPartTitle(title, code) || compactText(code),
+    bylawZoneCode: compactText(code),
+    source: {
+      table: "zoning.section",
+      sourceKind: "current",
+    },
+  };
+}
+
+async function loadCurrentZoneComparisonByCodes(fromZoneCode, toZoneCode, itemContext = {}) {
+  const [fromSectionsRaw, toSectionsRaw] = await Promise.all([
+    loadZoneSections(fromZoneCode, "current"),
+    loadZoneSections(toZoneCode, "current"),
+  ]);
+  const [fromSections, toSections] = await Promise.all([
+    attachReferencedSections(fromSectionsRaw, fromZoneCode, "current"),
+    attachReferencedSections(toSectionsRaw, toZoneCode, "current"),
+  ]);
+  const [fromStructured, toStructured] = await Promise.all([
+    loadZoneStructuredFacts(fromZoneCode, "current"),
+    loadZoneStructuredFacts(toZoneCode, "current"),
+  ]);
+  const fromZone = councilZoneFromCode(fromZoneCode, fromSections);
+  const toZone = councilZoneFromCode(toZoneCode, toSections);
+  return {
+    itemId: itemContext.itemId || null,
+    title: itemContext.title || "Council rezoning comparison",
+    pid: itemContext.primaryPid || null,
+    address: itemContext.address || null,
+    zones: {
+      current: fromZone,
+      draft: toZone,
+      from: fromZone,
+      to: toZone,
+    },
+    status: fromZoneCode === toZoneCode ? "same" : "changed",
+    rows: [
+      { label: "Zone code", current: fromZone.code || null, draft: toZone.code || null, status: fromZone.code === toZone.code ? "same" : "changed" },
+      { label: "Zone name", current: fromZone.name || null, draft: toZone.name || null, status: fromZone.name === toZone.name ? "same" : "changed" },
+    ],
+    citations: {
+      current: fromSections,
+      draft: toSections,
+      from: fromSections,
+      to: toSections,
+      status: fromSections.length || toSections.length ? "available" : "pending",
+      note: "Current bylaw zone entries compared from the council meeting rezoning target zones.",
+    },
+    structuredData: buildStructuredComparison(fromStructured, toStructured),
+    resolution: { status: "current_bylaw_zone_to_zone", method: "meeting_json_from_to_zone" },
+    source: {
+      meeting: "data/council-meetings/charlottetown/2026-05-12-regular-council/meeting.json",
+      currentZoneSections: "zoning.section",
+      currentStructuredFacts: "zoning.structured_fact",
+    },
+  };
+}
+
+async function loadCouncilMeetingItemParcels(itemId) {
+  const context = await loadCouncilMeetingItem(itemId);
+  if (!context) return null;
+  const pids = extractCouncilItemPids(context.item);
+  let rows = await Promise.all(pids.map(async (pid) => {
+    const parcel = await loadParcelByPid(pid);
+    return {
+      pid,
+      selected: true,
+      address: parcel?.address || {
+        label: `PID ${pid}`,
+        pid,
+        coordinate: null,
+      },
+      parcel: parcel?.parcel || null,
+      zones: parcel?.zones || null,
+      resolution: parcel?.resolution || { status: "not_found" },
+    };
+  }));
+  const missingIndexes = rows
+    .map((row, index) => (row.parcel ? null : index))
+    .filter((index) => index !== null);
+  if (missingIndexes.length) {
+    const amendment = context.item.zoning_amendment || {};
+    const fallbacks = await loadCouncilFallbackParcelsByZones(
+      amendment.from_zone,
+      amendment.to_zone,
+      missingIndexes.map((index) => pids[index]),
+    );
+    for (let index = 0; index < fallbacks.length; index += 1) {
+      rows[missingIndexes[index]] = fallbacks[index];
+    }
+  }
+  return {
+    itemId,
+    title: context.item.title || context.item.title_raw || itemId,
+    pids,
+    parcels: rows,
+    source: {
+      meeting: "data/council-meetings/charlottetown/2026-05-12-regular-council/meeting.json",
+      parcelTable: "zoning.v_charlottetown_parcel_map",
+      addressTable: "zoning.v_charlottetown_civic_addresses",
+    },
+  };
+}
+
+async function loadCouncilMeetingItemComparison(itemId) {
+  const context = await loadCouncilMeetingItem(itemId);
+  if (!context) return null;
+  const amendment = context.item.zoning_amendment || {};
+  const pids = extractCouncilItemPids(context.item);
+  const primaryParcel = pids[0] ? await loadParcelByPid(pids[0]) : null;
+  return loadCurrentZoneComparisonByCodes(amendment.from_zone, amendment.to_zone, {
+    itemId,
+    title: context.item.title || context.item.title_raw || itemId,
+    primaryPid: pids[0] || null,
+    address: primaryParcel?.address || null,
+  });
+}
+
+async function loadCouncilMeetingItemRestrictionStack(itemId) {
+  const context = await loadCouncilMeetingItem(itemId);
+  if (!context) return null;
+  const pids = extractCouncilItemPids(context.item);
+  const parcelPayload = await loadCouncilMeetingItemParcels(itemId);
+  const resolved = parcelPayload?.parcels?.find((row) => row.resolution?.status === "resolved");
+  const primaryPid = resolved?.pid || pids[0];
+  if (!primaryPid) return null;
+  const comparison = await loadCouncilMeetingItemComparison(itemId);
+  const baseStack = await loadParcelRestrictionStack(primaryPid, comparison);
+  if (!baseStack || !comparison) return null;
+  const fromTypes = categorizedRestrictionRows(comparison, "current");
+  const toTypes = categorizedRestrictionRows(comparison, "draft");
+  const fromZone = comparison.zones.from;
+  const toZone = comparison.zones.to;
+  return {
+    ...baseStack,
+    itemId,
+    pids,
+    zones: {
+      current: fromZone,
+      draft: toZone,
+      from: fromZone,
+      to: toZone,
+    },
+    regulationTypes: baseStack.regulationTypes.map((type) => ({
+      ...type,
+      availableIn: type.availableIn.map((side) => (side === "current" ? "from" : side === "draft" ? "to" : side)),
+    })),
+    metadata: {
+      ...baseStack.metadata,
+      source: `${baseStack.metadata.source}; current bylaw target zones from council meeting JSON`,
+      note: "Restriction geometry uses the primary item parcel as the spatial reference. Regulation distances are read from the current bylaw entries for the from/to zones.",
+      fromRestrictionTypes: fromTypes.length,
+      toRestrictionTypes: toTypes.length,
+    },
+  };
+}
+
+async function loadCouncilMeetingItem3dContext(itemId, radiusM = 250) {
+  const context = await loadCouncilMeetingItem(itemId);
+  if (!context) return null;
+  const pids = extractCouncilItemPids(context.item);
+  const parcelPayload = await loadCouncilMeetingItemParcels(itemId);
+  const resolved = parcelPayload?.parcels?.find((row) => row.resolution?.status === "resolved");
+  const primaryPid = resolved?.pid || pids[0];
+  if (!primaryPid) return null;
+  const payload = await loadParcel3dContext(primaryPid, radiusM);
+  if (!payload) {
+    const fallback = parcelPayload?.parcels?.find((row) => row.parcel);
+    if (!fallback) return null;
+    return {
+      pid: fallback.pid,
+      itemId,
+      pids,
+      title: context.item.title || context.item.title_raw || itemId,
+      address: fallback.address,
+      parcel: fallback.parcel,
+      parcels: {
+        type: "FeatureCollection",
+        features: parcelPayload.parcels
+          .filter((row) => row.parcel?.geometry)
+          .map((row) => ({
+            type: "Feature",
+            id: row.parcel.parcelId,
+            geometry: row.parcel.geometry,
+            properties: {
+              kind: "parcel",
+              parcelId: row.parcel.parcelId,
+              relation: row.pid === fallback.pid ? "selected" : "adjacent",
+              pid: row.pid,
+              attributes: row.parcel.attributes,
+            },
+          })),
+      },
+      buildings: { type: "FeatureCollection", features: [] },
+      roads: { type: "FeatureCollection", features: [] },
+      terrain: {
+        available: false,
+        status: "fallback_flat",
+        reason: "PID was not available in civic address records; 3D context is limited to meeting-derived parcel candidates.",
+      },
+      metadata: {
+        source: "council meeting item fallback parcel candidates from PostGIS zone transition",
+        radiusM,
+        radiusReason: "Fallback context is centered on a zone-transition candidate because the meeting PID is not joined to civic address records.",
+        buildingScope: "Unavailable for fallback PID context.",
+        geometrySrid: 4326,
+        terrainStatus: "fallback_flat",
+        terrainUsage: "fallback_flat",
+      },
+    };
+  }
+  return {
+    ...payload,
+    itemId,
+    pids,
+    title: context.item.title || context.item.title_raw || itemId,
+    metadata: {
+      ...payload.metadata,
+      source: `${payload.metadata.source}; council meeting item PID set from meeting JSON`,
+      radiusReason: `${radiusM} m radius is centered on the primary selected PID for the council item while retaining all selected item PIDs in metadata.`,
+    },
+  };
+}
+
 function zoneNameFromPartTitle(partTitle, zoneCode) {
   const title = compactText(partTitle);
   const code = compactText(zoneCode);
@@ -834,8 +1186,8 @@ function categorizedRestrictionRows(comparison, side) {
   }));
 }
 
-async function loadParcelRestrictionStack(pid) {
-  const comparison = await loadZoningComparisonByPid(pid);
+async function loadParcelRestrictionStack(pid, comparisonOverride = null) {
+  const comparison = comparisonOverride || await loadZoningComparisonByPid(pid);
   if (!comparison) {
     return null;
   }
@@ -3232,6 +3584,31 @@ const server = createServer(async (request, response) => {
         url.searchParams.get("documentId") || "",
         url.searchParams.get("page") || "",
       ));
+      return;
+    }
+
+    const councilItemMatch = url.pathname.match(/^\/api\/council-meetings\/current\/items\/([^/]+)\/(parcels|comparison|restriction-stack|3d-context)$/);
+    if (councilItemMatch) {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const itemId = decodeURIComponent(councilItemMatch[1]).trim();
+      const resource = councilItemMatch[2];
+      const payload = resource === "parcels"
+        ? await loadCouncilMeetingItemParcels(itemId)
+        : resource === "comparison"
+          ? await loadCouncilMeetingItemComparison(itemId)
+          : resource === "restriction-stack"
+            ? await loadCouncilMeetingItemRestrictionStack(itemId)
+            : await loadCouncilMeetingItem3dContext(itemId, normalizeRadius(url.searchParams.get("radiusM")));
+      if (!payload) {
+        response.writeHead(404, { "content-type": "application/json; charset=utf-8" });
+        response.end(JSON.stringify({ error: "Council meeting item resource not found.", itemId, resource }));
+        return;
+      }
+      await sendJson(response, payload);
       return;
     }
 

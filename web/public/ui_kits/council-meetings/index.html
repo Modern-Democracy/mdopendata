@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Council Meeting - Modern Democracy</title>
 <link rel="icon" href="data:,">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../../leaflet-theme.css">
 <link rel="stylesheet" href="../parcel-lookup/styles.css">
 <style>
   html, body, #root { height: 100%; margin: 0; }
@@ -31,12 +33,11 @@
   .tree-items { display: grid; gap: 0; padding: 5px; }
   .tree-button { width: 100%; border: 0; border-radius: 4px; background: transparent; color: var(--fg-2); cursor: pointer; display: grid; grid-template-columns: 38px 1fr; gap: 8px; padding: 8px; text-align: left; font: 13px var(--font-ui); }
   .tree-button.active { background: var(--paper-3); color: var(--ink); box-shadow: inset 3px 0 0 var(--brick); }
-  .tree-button .label { font: 700 11px var(--font-mono); color: var(--fg-3); letter-spacing: 0; text-transform: none; }
-  .tree-button .title { overflow-wrap: anywhere; }
+  .tree-button .label { font: 700 11px var(--font-mono); color: var(--fg-3); }
   .info-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-  .info-card, .context-card, .package-card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 14px; }
+  .info-card, .context-card, .package-card, .status-card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 14px; }
   .info-card h2, .context-card h2, .package-card h2 { font: 700 15px var(--font-ui); margin: 0 0 8px; }
-  .info-card p, .context-card p { color: var(--fg-2); font-size: 13px; margin: 0; }
+  .info-card p, .context-card p, .status-card { color: var(--fg-2); font-size: 13px; margin: 0; }
   .workflow-list, .check-list { margin: 0; padding-left: 18px; color: var(--fg-2); font-size: 13px; }
   .workflow-list li, .check-list li { margin-bottom: 7px; }
   .package-text { white-space: pre-wrap; font: 13px/1.55 var(--font-ui); color: var(--fg-2); margin: 0; }
@@ -45,20 +46,46 @@
   .badge.urgent { background: var(--brick-wash); color: var(--brick-ink); border-color: rgba(168,57,28,0.25); }
   .route-actions { display: grid; gap: 8px; }
   .route-actions .btn { width: 100%; justify-content: center; }
+  .route-actions .btn.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   .meta-grid { display: grid; grid-template-columns: 92px 1fr; gap: 7px 10px; font-size: 12.5px; }
   .meta-grid .k { color: var(--fg-3); font-family: var(--font-mono); text-transform: uppercase; font-size: 10.5px; }
   .meta-grid .v { color: var(--ink); font-weight: 600; overflow-wrap: anywhere; }
   .source-select { width: 100%; border: 1px solid var(--border-hair); border-radius: 4px; background: var(--paper); color: var(--ink); padding: 8px; font: 13px var(--font-ui); margin-bottom: 12px; }
-  .empty-note { color: var(--fg-3); font-size: 13px; }
+  .tool-map, .restriction-map { min-height: 0; height: 100%; background: var(--paper-3); }
+  .map-shell { display: grid; grid-template-rows: auto minmax(0, 1fr); height: 100%; min-height: 0; }
+  .tool-status { border-bottom: 1px solid var(--border-hair); background: var(--paper-2); padding: 10px 14px; font: 12.5px var(--font-ui); color: var(--fg-3); }
+  .compare-shell { overflow-y: auto; padding: 18px; }
+  .compare-actions { display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 12px; }
+  .compare-actions button { border: 1px solid var(--border-hair); border-radius: 4px; background: var(--paper); color: var(--fg-2); padding: 7px 10px; font: 700 12px var(--font-ui); cursor: pointer; }
+  .compare-actions button.active { background: var(--ink); color: var(--paper); }
+  .compare-grid { display: grid; grid-template-columns: 1fr 160px 1fr; border: 1px solid var(--border-hair); border-radius: 6px; overflow: hidden; background: var(--paper); }
+  .diff-cell { min-height: 42px; padding: 11px 13px; border-bottom: 1px solid var(--border-hair); font: 13px var(--font-ui); color: var(--fg-2); display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .diff-cell.current { justify-content: flex-end; text-align: right; border-right: 1px solid var(--border-hair); }
+  .diff-cell.label { justify-content: center; background: var(--paper-3); color: var(--ink); font-weight: 600; font-size: 12px; border-right: 1px solid var(--border-hair); text-align: center; }
+  .diff-cell .value { font-family: var(--font-mono); color: var(--ink); overflow-wrap: anywhere; white-space: pre-wrap; }
+  .citation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+  .citation-card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 14px; }
+  .citation-card h2 { font: 700 12px var(--font-ui); letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3); margin: 0 0 10px; }
+  .citation-item { border-bottom: 1px solid var(--border-hair); padding: 0 0 10px; margin-bottom: 10px; font: 13px/1.4 var(--font-ui); color: var(--fg-2); }
+  .citation-item:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+  .citation-item .title { color: var(--ink); font-weight: 600; }
+  .citation-item .meta { font: 11px var(--font-mono); color: var(--fg-3); margin-top: 3px; }
+  .restriction-shell { display: grid; grid-template-rows: auto minmax(0, 1fr); height: 100%; min-height: 0; }
+  .restriction-grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 0; }
+  .restriction-pane { display: grid; grid-template-rows: auto minmax(0, 1fr); min-height: 0; border-left: 1px solid var(--border-hair); }
+  .pane-head { display: flex; justify-content: space-between; gap: 12px; padding: 12px 14px; background: var(--paper); border-bottom: 1px solid var(--border-hair); font: 700 13px var(--font-ui); }
+  .shadow-frame { width: 100%; height: 100%; border: 0; background: var(--paper-3); }
   @media (max-width: 1060px) {
     .meeting-app { height: auto; min-height: 100vh; overflow: visible; }
     .meeting-workspace { grid-template-columns: 1fr; overflow: visible; }
     .agenda-panel, .context-panel, .content-scroll { overflow: visible; }
     .main-panel { overflow: visible; }
-    .info-grid { grid-template-columns: 1fr; }
+    .info-grid, .citation-grid, .restriction-grid { grid-template-columns: 1fr; }
+    .tool-map, .restriction-map { min-height: 520px; }
   }
 </style>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
@@ -66,8 +93,8 @@
 <body>
 <div id="root"></div>
 <script type="text/babel">
-const { useEffect, useMemo, useState } = React;
-
+const { useEffect, useMemo, useRef, useState } = React;
+const CENTER = [46.2382, -63.1311];
 const AGENDA_TREE = [
   { group: "Opening", open: true, items: [
     { id: "agenda-1", label: "1", title: "Call to Order", page: 1 },
@@ -100,259 +127,188 @@ const AGENDA_TREE = [
     { id: "agenda-10", label: "10", title: "Adjournment", page: 2 },
   ]},
 ];
-
 const AUDIENCE_COPY = {
-  public: {
-    title: "Public Meeting Guide",
-    summary: "The public view prioritizes what is being decided, how to follow the agenda, where affected properties are, and what to verify after the meeting.",
-    cards: [
-      ["Before", "Find zoning items, affected PIDs, current/proposed zones, and source package pages."],
-      ["During", "Track the item number, motion wording, amendments, vote, and any questions taken under advisement."],
-      ["After", "Compare against official minutes and check whether maps, bylaws, and parcel context changed."]
-    ],
-  },
-  council: {
-    title: "Council Decision Brief",
-    summary: "The council view prioritizes procedural stage, decision wording, conflicts, source evidence, and questions requiring staff follow-up.",
-    cards: [
-      ["Before", "Review reading stage, legal/property identifiers, current/proposed zones, and Official Plan implications."],
-      ["During", "Confirm conflicts, motion wording, amendments, debate issues, staff answers, and vote result."],
-      ["After", "Confirm adopted wording, implementation instructions, and unresolved questions."]
-    ],
-  },
-  staff: {
-    title: "Staff Meeting Control",
-    summary: "The staff view prioritizes source completeness, procedural capture, implementation tasks, minutes, and data update obligations.",
-    cards: [
-      ["Before", "Verify package completeness, PIDs, maps, bylaw references, and agenda item stage."],
-      ["During", "Capture amendments, deferrals, procedural instructions, vote outcomes, and follow-up ownership."],
-      ["After", "Publish/update minutes, update bylaw status, map layers, structured data, and implementation records."]
-    ],
-  },
+  public: { title: "Public Meeting Guide", summary: "The public view prioritizes what is being decided, affected properties, source package pages, and follow-up checks.", cards: [["Before", "Find zoning items, affected PIDs, current/proposed zones, and source package pages."], ["During", "Track the item number, motion wording, amendments, vote, and questions."], ["After", "Compare against official minutes and check whether maps, bylaws, and parcel context changed."]] },
+  council: { title: "Council Decision Brief", summary: "The council view prioritizes procedural stage, decision wording, source evidence, and staff follow-up.", cards: [["Before", "Review reading stage, property identifiers, zones, and Official Plan implications."], ["During", "Confirm conflicts, motion wording, amendments, staff answers, and vote result."], ["After", "Confirm adopted wording and unresolved questions."]] },
+  staff: { title: "Staff Meeting Control", summary: "The staff view prioritizes source completeness, procedural capture, minutes, and data update obligations.", cards: [["Before", "Verify package completeness, PIDs, maps, bylaw references, and agenda stage."], ["During", "Capture amendments, deferrals, procedural instructions, and vote outcomes."], ["After", "Publish/update minutes, bylaw status, map layers, structured data, and implementation records."]] },
 };
 
-function Header() {
-  return (
-    <header className="app-header">
-      <img src="../../assets/logo-island-needle.svg" alt="Modern Democracy" className="wm" />
-      <nav>
-        <a href="/parcel-lookup">Parcel lookup</a>
-        <a href="/zoning-comparison">Compare bylaws</a>
-        <a className="active" href="/council-meetings">Council meetings</a>
-        <a href="/restriction-stack">View Spatial Restrictions</a>
-        <a href="/city-view">Map</a>
-      </nav>
-    </header>
-  );
-}
-
-function allItems() {
-  return AGENDA_TREE.flatMap((group) => group.items);
-}
-
+function allItems() { return AGENDA_TREE.flatMap((group) => group.items); }
 function findRecord(payload, id) {
-  return [
-    ...(payload?.agendaSections || []),
-    ...(payload?.committeeReports || []),
-    ...(payload?.resolutions || []),
-    ...(payload?.bylawReadings || []),
-    ...(payload?.planningItems || []),
-  ].find((item) => item.agenda_section_id === id || item.item_id === id || item.planning_item_id === id || item.committee_report_id === id);
+  return [...(payload?.agendaSections || []), ...(payload?.committeeReports || []), ...(payload?.resolutions || []), ...(payload?.bylawReadings || []), ...(payload?.planningItems || [])]
+    .find((item) => item.agenda_section_id === id || item.item_id === id || item.planning_item_id === id || item.committee_report_id === id);
 }
-
 function citationPage(record, fallbackItem) {
   const packageCitation = (record?.citations || []).find((citation) => citation.source_document_id === "package");
   if (packageCitation) return { documentId: "package", page: packageCitation.pdf_page_start };
   return { documentId: fallbackItem?.packagePage ? "package" : "agenda", page: fallbackItem?.packagePage || fallbackItem?.page || 1 };
 }
-
-function primaryPid(item) {
-  return item?.property_references?.[0]?.pids?.[0] || "";
+function itemPids(record) {
+  return [...new Set((record?.property_references || []).flatMap((ref) => ref.pids || []))];
+}
+function zoneColor(code) {
+  const key = String(code || "").trim().charAt(0).toUpperCase();
+  return { R: "var(--zone-residential)", C: "var(--zone-commercial)", D: "var(--zone-mixed)", M: "var(--zone-mixed)", I: "var(--zone-institutional)", O: "var(--zone-openspace)", P: "var(--zone-openspace)", W: "var(--zone-waterfront)" }[key] || "var(--paper-3)";
+}
+async function fetchJson(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`${url} returned HTTP ${response.status}.`);
+  return response.json();
 }
 
-function queryForRezoning(item) {
-  const pid = primaryPid(item);
-  const amendment = item?.zoning_amendment || {};
-  const params = new URLSearchParams({
-    pid,
-    title: item?.title || "Rezoning application",
-    fromZone: amendment.from_zone || "",
-    toZone: amendment.to_zone || "",
-    meeting: "charlottetown-2026-05-12-regular-council",
-    item: item?.item_id || "",
-  });
-  return params.toString();
+function Header() {
+  return <header className="app-header"><img src="../../assets/logo-island-needle.svg" alt="Modern Democracy" className="wm" /><nav><a href="/parcel-lookup">Parcel lookup</a><a href="/zoning-comparison">Compare bylaws</a><a className="active" href="/council-meetings">Council meetings</a><a href="/restriction-stack">View Spatial Restrictions</a><a href="/city-view">Map</a></nav></header>;
 }
 
-function AgendaTree({ selectedId, onSelect }) {
-  return (
-    <aside className="agenda-panel">
-      <div className="tabs" aria-label="Audience tabs">
-        {["public", "council", "staff"].map((audience) => (
-          <button type="button" key={audience} className={window.__activeAudience === audience ? "active" : ""} onClick={() => window.__setAudience(audience)}>
-            {audience[0].toUpperCase() + audience.slice(1)}
-          </button>
-        ))}
-      </div>
-      <h2 className="section-title">Agenda Tree</h2>
-      <div className="tree">
-        {AGENDA_TREE.map((group) => (
-          <details className="tree-group" open={group.open} key={group.group}>
-            <summary>{group.group}</summary>
-            <div className="tree-items">
-              {group.items.map((item) => (
-                <button type="button" className={`tree-button ${selectedId === item.id ? "active" : ""}`} onClick={() => onSelect(item.id)} key={item.id}>
-                  <span className="label">{item.label}</span>
-                  <span className="title">{item.title}</span>
-                </button>
-              ))}
-            </div>
-          </details>
-        ))}
-      </div>
-    </aside>
-  );
+function AgendaTree({ audience, setAudience, selectedId, onSelect }) {
+  return <aside className="agenda-panel">
+    <div className="tabs" aria-label="Audience tabs">{["public", "council", "staff"].map((name) => <button type="button" key={name} className={audience === name ? "active" : ""} onClick={() => setAudience(name)}>{name[0].toUpperCase() + name.slice(1)}</button>)}</div>
+    <h2 className="section-title">Agenda Tree</h2>
+    <div className="tree">{AGENDA_TREE.map((group) => <details className="tree-group" open={group.open} key={group.group}><summary>{group.group}</summary><div className="tree-items">{group.items.map((item) => <button type="button" className={`tree-button ${selectedId === item.id ? "active" : ""}`} onClick={() => onSelect(item.id)} key={item.id}><span className="label">{item.label}</span><span className="title">{item.title}</span></button>)}</div></details>)}</div>
+  </aside>;
 }
 
 function GeneralInfo({ audience, payload }) {
   const copy = AUDIENCE_COPY[audience];
-  return (
-    <>
-      <div className="main-header">
-        <div className="section-title">{payload.meeting.date} at {payload.meeting.time}</div>
-        <h1>{copy.title}</h1>
-        <p>{copy.summary}</p>
-      </div>
-      <div className="content-scroll">
-        <div className="info-grid">
-          {copy.cards.map(([title, body]) => (
-            <article className="info-card" key={title}>
-              <h2>{title}</h2>
-              <p>{body}</p>
-            </article>
-          ))}
-        </div>
-        <div className="package-card" style={{marginTop: 14}}>
-          <h2>Meeting Information</h2>
-          <div className="meta-grid">
-            <div className="k">Body</div><div className="v">{payload.meeting.body}</div>
-            <div className="k">Location</div><div className="v">{payload.meeting.location}</div>
-            <div className="k">Stream</div><div className="v"><a href={payload.meeting.livestream_url}>{payload.meeting.livestream_url}</a></div>
-            <div className="k">Sources</div><div className="v">{payload.sourceDocuments.length} PDFs</div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+  return <><div className="main-header"><div className="section-title">{payload.meeting.date} at {payload.meeting.time}</div><h1>{copy.title}</h1><p>{copy.summary}</p></div><div className="content-scroll"><div className="info-grid">{copy.cards.map(([title, body]) => <article className="info-card" key={title}><h2>{title}</h2><p>{body}</p></article>)}</div><div className="package-card" style={{marginTop: 14}}><h2>Meeting Information</h2><div className="meta-grid"><div className="k">Body</div><div className="v">{payload.meeting.body}</div><div className="k">Location</div><div className="v">{payload.meeting.location}</div><div className="k">Stream</div><div className="v"><a href={payload.meeting.livestream_url}>{payload.meeting.livestream_url}</a></div><div className="k">Sources</div><div className="v">{payload.sourceDocuments.length} PDFs</div></div></div></div></>;
 }
 
-function SelectedItemView({ audience, payload, selectedId }) {
-  const treeItem = allItems().find((item) => item.id === selectedId);
-  const record = findRecord(payload, selectedId);
+function ItemHeader({ treeItem, record }) {
+  return <div className="main-header">
+    <div className="section-title">Agenda item {treeItem.label}</div>
+    <h1>{record?.title || record?.title_raw || treeItem.title}</h1>
+    <p>{record?.public_summary || record?.summary || record?.decision_requested || "Agenda source text is shown below."}</p>
+    <div className="badge-row">{record?.stage && <span className="badge urgent">{record.stage.replaceAll("_", " ")}</span>}{record?.zoning_amendment && <span className="badge">{record.zoning_amendment.from_zone} to {record.zoning_amendment.to_zone}</span>}{itemPids(record).map((pid) => <span className="badge" key={pid}>PID {pid}</span>)}</div>
+  </div>;
+}
+
+function AgendaPackagePane({ record, treeItem }) {
   const [sourcePage, setSourcePage] = useState(null);
   const [sourceChoice, setSourceChoice] = useState(() => citationPage(record, treeItem));
-
-  useEffect(() => {
-    if (!treeItem) return;
-    const next = citationPage(record, treeItem);
-    setSourceChoice(next);
-  }, [selectedId]);
-
+  useEffect(() => { setSourceChoice(citationPage(record, treeItem)); }, [record?.item_id, record?.planning_item_id, treeItem?.id]);
   useEffect(() => {
     if (!sourceChoice?.documentId || !sourceChoice?.page) return;
-    fetch(`/api/council-meetings/current/source-page?documentId=${encodeURIComponent(sourceChoice.documentId)}&page=${encodeURIComponent(sourceChoice.page)}`)
-      .then((response) => response.ok ? response.json() : Promise.reject(new Error(`HTTP ${response.status}`)))
+    fetchJson(`/api/council-meetings/current/source-page?documentId=${encodeURIComponent(sourceChoice.documentId)}&page=${encodeURIComponent(sourceChoice.page)}`)
       .then(setSourcePage)
       .catch((error) => setSourcePage({ text: `Unable to load source page: ${error.message}` }));
   }, [sourceChoice.documentId, sourceChoice.page]);
-
-  if (!treeItem) return null;
-  const isRezoning = Boolean(record?.zoning_amendment);
-  const pageOptions = (record?.citations || []).map((citation) => ({
-    documentId: citation.source_document_id,
-    page: citation.pdf_page_start,
-    label: `${citation.source_document_id} page ${citation.pdf_page_start}`,
-  }));
+  const pageOptions = (record?.citations || []).map((citation) => ({ documentId: citation.source_document_id, page: citation.pdf_page_start, label: `${citation.source_document_id} page ${citation.pdf_page_start}` }));
   if (!pageOptions.length) pageOptions.push({ ...sourceChoice, label: `${sourceChoice.documentId} page ${sourceChoice.page}` });
-
-  return (
-    <>
-      <div className="main-header">
-        <div className="section-title">Agenda item {treeItem.label}</div>
-        <h1>{record?.title || record?.title_raw || treeItem.title}</h1>
-        <p>{record?.public_summary || record?.summary || record?.decision_requested || "Agenda source text is shown below."}</p>
-        <div className="badge-row">
-          {record?.stage && <span className="badge urgent">{record.stage.replaceAll("_", " ")}</span>}
-          {record?.zoning_amendment && <span className="badge">{record.zoning_amendment.from_zone} to {record.zoning_amendment.to_zone}</span>}
-          {record?.property_references?.flatMap((ref) => ref.pids || []).map((pid) => <span className="badge" key={pid}>PID {pid}</span>)}
-        </div>
-      </div>
-      <div className="content-scroll">
-        <select className="source-select" value={`${sourceChoice.documentId}:${sourceChoice.page}`} onChange={(event) => {
-          const [documentId, page] = event.target.value.split(":");
-          setSourceChoice({ documentId, page: Number(page) });
-        }}>
-          {pageOptions.map((option) => <option value={`${option.documentId}:${option.page}`} key={`${option.documentId}-${option.page}`}>{option.label}</option>)}
-        </select>
-        <article className="package-card">
-          <h2>{sourceChoice.documentId} package text, page {sourceChoice.page}</h2>
-          <pre className="package-text">{sourcePage?.text || "Loading source page."}</pre>
-        </article>
-      </div>
-    </>
-  );
+  return <div className="content-scroll"><select className="source-select" value={`${sourceChoice.documentId}:${sourceChoice.page}`} onChange={(event) => { const [documentId, page] = event.target.value.split(":"); setSourceChoice({ documentId, page: Number(page) }); }}>{pageOptions.map((option) => <option value={`${option.documentId}:${option.page}`} key={`${option.documentId}-${option.page}`}>{option.label}</option>)}</select><article className="package-card"><h2>{sourceChoice.documentId} package text, page {sourceChoice.page}</h2><pre className="package-text">{sourcePage?.text || "Loading source page."}</pre></article></div>;
 }
 
-function ContextPanel({ audience, payload, selectedId }) {
+function ParcelLookupPane({ itemId }) {
+  const mapRef = useRef(null);
+  const elementRef = useRef(null);
+  const layerRef = useRef(null);
+  const [status, setStatus] = useState("Loading item parcels.");
+  useEffect(() => {
+    if (!elementRef.current || mapRef.current) {
+      return;
+    }
+    mapRef.current = L.map(elementRef.current).setView(CENTER, 13);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 20, attribution: "&copy; OpenStreetMap contributors" }).addTo(mapRef.current);
+    L.control.scale({ metric: true, imperial: false }).addTo(mapRef.current);
+  }, []);
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    let cancelled = false;
+    fetchJson(`/api/council-meetings/current/items/${encodeURIComponent(itemId)}/parcels`).then((payload) => {
+      if (cancelled) return;
+      if (layerRef.current) layerRef.current.remove();
+      const features = (payload.parcels || []).filter((row) => row.parcel?.geometry).map((row) => ({ type: "Feature", geometry: row.parcel.geometry, properties: { pid: row.pid, address: row.address?.label || `PID ${row.pid}`, currentZone: row.zones?.current?.code || "" } }));
+      layerRef.current = L.geoJSON({ type: "FeatureCollection", features }, { style: (feature) => ({ color: "#8f3d2f", weight: 2.4, fillColor: zoneColor(feature.properties.currentZone), fillOpacity: 0.22 }), onEachFeature: (feature, layer) => layer.bindTooltip(`${feature.properties.address}<br>PID ${feature.properties.pid}`, { sticky: true }) }).addTo(map);
+      const bounds = layerRef.current.getBounds();
+      if (bounds.isValid()) map.fitBounds(bounds.pad(0.25));
+      setStatus(`${features.length} selected parcel${features.length === 1 ? "" : "s"} loaded: ${payload.pids.join(", ")}.`);
+      window.setTimeout(() => map.invalidateSize(), 0);
+    }).catch((error) => setStatus(error.message || "Parcel lookup failed."));
+    return () => { cancelled = true; };
+  }, [itemId]);
+  return <div className="map-shell"><div className="tool-status">{status}</div><div ref={elementRef} className="tool-map" aria-label="Rezoning item parcel map"></div></div>;
+}
+
+function ComparisonRows({ rows }) {
+  return <div className="compare-grid"><div className="diff-cell current"><span className="value">Current bylaw from-zone</span></div><div className="diff-cell label">Field</div><div className="diff-cell"><span className="value">Current bylaw to-zone</span></div>{rows.map((row, index) => <React.Fragment key={`${row.label}-${index}`}><div className="diff-cell current"><span className="value">{row.current || "pending"}</span></div><div className="diff-cell label">{row.label}</div><div className="diff-cell"><span className="value">{row.draft || "pending"}</span></div></React.Fragment>)}</div>;
+}
+function CitationList({ title, sections }) {
+  return <section className="citation-card"><h2>{title}</h2>{sections?.length ? sections.map((section, index) => <article className="citation-item" key={`${section.sectionId}-${index}`}><div className="title">{section.label} {section.title}</div><div className="meta">{section.filePath || "source path pending"}</div>{(section.clauses || []).slice(0, 8).map((clause, clauseIndex) => <div key={clauseIndex}><span className="meta">{clause.label}</span> {clause.text}</div>)}</article>) : <div className="status-card">Zone-section citations pending.</div>}</section>;
+}
+function StructuredView({ structuredData }) {
+  const rows = (structuredData?.groups || []).flatMap((group) => (group.rows || []).map((row) => ({ ...row, label: `${group.title}: ${row.label}` })));
+  return rows.length ? <ComparisonRows rows={rows} /> : <div className="status-card">Structured data is pending for this current-bylaw zone comparison.</div>;
+}
+function ComparePane({ itemId }) {
+  const [payload, setPayload] = useState(null);
+  const [status, setStatus] = useState("Loading current bylaw comparison.");
+  const [mode, setMode] = useState("raw");
+  useEffect(() => { let cancelled = false; fetchJson(`/api/council-meetings/current/items/${encodeURIComponent(itemId)}/comparison`).then((data) => { if (!cancelled) { setPayload(data); setStatus(data.citations?.note || "Loaded."); } }).catch((error) => setStatus(error.message || "Comparison failed.")); return () => { cancelled = true; }; }, [itemId]);
+  return <div className="compare-shell"><div className="compare-actions"><button type="button" className={mode === "raw" ? "active" : ""} onClick={() => setMode("raw")}>Raw bylaw</button><button type="button" className={mode === "structured" ? "active" : ""} onClick={() => setMode("structured")}>Structured data</button></div>{!payload ? <div className="status-card">{status}</div> : <><ComparisonRows rows={payload.rows || []} />{mode === "raw" ? <div className="citation-grid"><CitationList title={`${payload.zones?.from?.code || "From"} current bylaw`} sections={payload.citations?.from || payload.citations?.current || []} /><CitationList title={`${payload.zones?.to?.code || "To"} current bylaw`} sections={payload.citations?.to || payload.citations?.draft || []} /></div> : <StructuredView structuredData={payload.structuredData} />}</>}</div>;
+}
+
+function featureStyle(feature) {
+  const kind = feature.properties?.kind;
+  if (kind === "selected_parcel") return { color: "#1a1612", weight: 2.4, fillOpacity: 0.05 };
+  if (kind === "neighbor_parcel") return { color: "rgba(26,22,18,0.35)", weight: 0.7, fillOpacity: 0 };
+  if (kind === "building") return { color: "#1a1612", weight: 1, fillColor: "#d8c3a2", fillOpacity: 0.72 };
+  if (kind === "road") return { color: "#fffaf0", weight: 18, opacity: 0.96, lineCap: "round", lineJoin: "round" };
+  return { color: "#8f3d2f", weight: 1.4, fillColor: "#8f3d2f", fillOpacity: 0.24, opacity: 0.95 };
+}
+function RestrictionMap({ title, zone, geojson }) {
+  const elementRef = useRef(null);
+  const mapRef = useRef(null);
+  const layerRef = useRef(null);
+  useEffect(() => {
+    if (!elementRef.current || mapRef.current) return;
+    mapRef.current = L.map(elementRef.current, { attributionControl: false }).setView(CENTER, 17);
+    L.control.scale({ metric: true, imperial: false }).addTo(mapRef.current);
+    return () => mapRef.current?.remove();
+  }, []);
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    if (layerRef.current) layerRef.current.remove();
+    layerRef.current = L.geoJSON(geojson || { type: "FeatureCollection", features: [] }, { style: featureStyle, onEachFeature: (feature, layer) => { const p = feature.properties || {}; const label = p.regulationLabel ? `${p.regulationLabel}: ${p.yardRole}, ${p.distanceM} m` : p.name || p.parcelId || p.kind; if (label) layer.bindTooltip(label, { sticky: true }); } }).addTo(map);
+    const selected = L.geoJSON(geojson || {}, { filter: (feature) => feature.properties?.kind === "selected_parcel" });
+    const bounds = selected.getBounds();
+    if (bounds.isValid()) map.fitBounds(bounds.pad(1.2), { animate: false, padding: [28, 28] });
+    window.setTimeout(() => map.invalidateSize(), 0);
+  }, [geojson]);
+  return <section className="restriction-pane"><div className="pane-head"><span>{title}</span><span>{zone?.code || "pending"}</span></div><div ref={elementRef} className="restriction-map"></div></section>;
+}
+function RestrictionsPane({ itemId }) {
+  const [payload, setPayload] = useState(null);
+  const [status, setStatus] = useState("Loading current bylaw spatial restrictions.");
+  useEffect(() => { let cancelled = false; fetchJson(`/api/council-meetings/current/items/${encodeURIComponent(itemId)}/restriction-stack`).then((data) => { if (!cancelled) { setPayload(data); setStatus("Loaded current bylaw restriction panes."); } }).catch((error) => setStatus(error.message || "Restrictions failed.")); return () => { cancelled = true; }; }, [itemId]);
+  return <div className="restriction-shell"><div className="tool-status">{status}</div><main className="restriction-grid"><RestrictionMap title="From-zone restrictions" zone={payload?.zones?.from || payload?.zones?.current} geojson={payload?.current} /><RestrictionMap title="To-zone restrictions" zone={payload?.zones?.to || payload?.zones?.draft} geojson={payload?.draft} /></main></div>;
+}
+
+function ShadowPane({ itemId, record }) {
+  const pid = itemPids(record)[0] || "";
+  const src = pid ? `/parcel-3d?pid=${encodeURIComponent(pid)}` : "/parcel-3d";
+  useEffect(() => { fetchJson(`/api/council-meetings/current/items/${encodeURIComponent(itemId)}/3d-context`).catch(() => null); }, [itemId]);
+  return <div className="map-shell"><div className="tool-status">Shadow Study for selected council rezoning item. Primary loaded PID: {pid || "pending"}.</div><iframe className="shadow-frame" title="Shadow Study" src={src}></iframe></div>;
+}
+
+function SelectedItemView({ payload, selectedId, toolMode }) {
   const treeItem = allItems().find((item) => item.id === selectedId);
   const record = findRecord(payload, selectedId);
-  const workflow = payload.audienceWorkflows.find((candidate) => {
-    if (audience === "public") return candidate.audience === "public_member";
-    if (audience === "council") return candidate.audience === "council_or_committee";
-    return candidate.audience === "municipal_staff";
-  });
+  if (!treeItem) return null;
+  return <><ItemHeader treeItem={treeItem} record={record} />{toolMode === "parcel" && record?.zoning_amendment ? <ParcelLookupPane itemId={record.item_id || record.planning_item_id || selectedId} /> : toolMode === "compare" && record?.zoning_amendment ? <ComparePane itemId={record.item_id || record.planning_item_id || selectedId} /> : toolMode === "restrictions" && record?.zoning_amendment ? <RestrictionsPane itemId={record.item_id || record.planning_item_id || selectedId} /> : toolMode === "shadow" && record?.zoning_amendment ? <ShadowPane itemId={record.item_id || record.planning_item_id || selectedId} record={record} /> : <AgendaPackagePane record={record} treeItem={treeItem} />}</>;
+}
+
+function ContextPanel({ audience, payload, selectedId, toolMode, setToolMode }) {
+  const treeItem = allItems().find((item) => item.id === selectedId);
+  const record = findRecord(payload, selectedId);
+  const workflow = payload.audienceWorkflows.find((candidate) => audience === "public" ? candidate.audience === "public_member" : audience === "council" ? candidate.audience === "council_or_committee" : candidate.audience === "municipal_staff");
   const isRezoning = Boolean(record?.zoning_amendment);
-  const rezoningQuery = isRezoning ? queryForRezoning(record) : "";
-  const pid = primaryPid(record);
-  return (
-    <aside className="context-panel">
-      <section className="context-card">
-        <h2>{audience === "public" ? "Public needs" : audience === "council" ? "Council needs" : "Staff needs"}</h2>
-        <ul className="workflow-list">
-          {(workflow?.stages || []).flatMap((stage) => stage.tasks).map((task) => <li key={task}>{task}</li>)}
-        </ul>
-      </section>
-      <section className="context-card">
-        <h2>Agenda Context</h2>
-        {selectedId ? (
-          <div className="meta-grid">
-            <div className="k">Item</div><div className="v">{treeItem?.label} {treeItem?.title}</div>
-            <div className="k">Stage</div><div className="v">{record?.stage || "not extracted"}</div>
-            <div className="k">Decision</div><div className="v">{record?.decision_requested || "not extracted"}</div>
-          </div>
-        ) : <p className="empty-note">Select an agenda item for item-specific context.</p>}
-      </section>
-      {isRezoning && (
-        <section className="context-card">
-          <h2>Rezoning Tools</h2>
-          <div className="route-actions">
-            <a className="btn btn-primary" href={`/rezoning-parcel-lookup?${rezoningQuery}`}>Parcel Lookup</a>
-            <a className="btn btn-primary" href={`/rezoning-zoning-comparison?${rezoningQuery}`}>Compare bylaws</a>
-            <a className="btn btn-primary" href={`/rezoning-restriction-stack?pid=${encodeURIComponent(pid)}&${rezoningQuery}`}>View Spatial Restrictions</a>
-            <a className="btn btn-primary" href={`/rezoning-storm-surge?pid=${encodeURIComponent(pid)}&${rezoningQuery}`}>Storm Surge</a>
-          </div>
-        </section>
-      )}
-      <section className="context-card">
-        <h2>Interface Controls</h2>
-        <ul className="check-list">
-          <li>Use the left tree to follow agenda order.</li>
-          <li>Use the package selector to switch source pages.</li>
-          <li>Use copied rezoning endpoints for meeting-specific experiments.</li>
-        </ul>
-      </section>
-    </aside>
-  );
+  return <aside className="context-panel">
+    <section className="context-card"><h2>{audience === "public" ? "Public needs" : audience === "council" ? "Council needs" : "Staff needs"}</h2><ul className="workflow-list">{(workflow?.stages || []).flatMap((stage) => stage.tasks).map((task) => <li key={task}>{task}</li>)}</ul></section>
+    <section className="context-card"><h2>Agenda Context</h2>{selectedId ? <div className="meta-grid"><div className="k">Item</div><div className="v">{treeItem?.label} {treeItem?.title}</div><div className="k">Stage</div><div className="v">{record?.stage || "not extracted"}</div><div className="k">Decision</div><div className="v">{record?.decision_requested || "not extracted"}</div></div> : <p className="empty-note">Select an agenda item for item-specific context.</p>}</section>
+    {isRezoning && <section className="context-card"><h2>Rezoning Tools</h2><div className="route-actions">{[["package", "View Agenda Package"], ["parcel", "Parcel Lookup"], ["compare", "Compare bylaws"], ["restrictions", "View Spatial Restrictions"], ["shadow", "Shadow Study"]].map(([key, label]) => <button type="button" className={`btn btn-primary ${toolMode === key ? "active" : ""}`} onClick={() => setToolMode(key)} key={key}>{label}</button>)}</div></section>}
+    <section className="context-card"><h2>Interface Controls</h2><ul className="check-list"><li>Use the left tree to follow agenda order.</li><li>Use View Agenda Package to restore the source page listing.</li><li>Rezoning tools replace the middle pane without leaving this page.</li></ul></section>
+  </aside>;
 }
 
 function App() {
@@ -360,34 +316,12 @@ function App() {
   const [status, setStatus] = useState("loading");
   const [audience, setAudience] = useState("public");
   const [selectedId, setSelectedId] = useState("");
-  window.__activeAudience = audience;
-  window.__setAudience = setAudience;
-
-  useEffect(() => {
-    fetch("/api/council-meetings/current")
-      .then((response) => response.ok ? response.json() : Promise.reject(new Error(`HTTP ${response.status}`)))
-      .then((data) => { setPayload(data); setStatus("ready"); })
-      .catch((error) => setStatus(error.message));
-  }, []);
-
-  if (status !== "ready") {
-    return <><Header /><main className="content-scroll">{status === "loading" ? "Loading meeting data." : status}</main></>;
-  }
-
-  return (
-    <div className="meeting-app">
-      <Header />
-      <div className="meeting-workspace">
-        <AgendaTree selectedId={selectedId} onSelect={setSelectedId} />
-        <main className="main-panel">
-          {selectedId
-            ? <SelectedItemView audience={audience} payload={payload} selectedId={selectedId} />
-            : <GeneralInfo audience={audience} payload={payload} />}
-        </main>
-        <ContextPanel audience={audience} payload={payload} selectedId={selectedId} />
-      </div>
-    </div>
-  );
+  const [toolMode, setToolMode] = useState("package");
+  useEffect(() => { lucide.createIcons(); });
+  useEffect(() => { fetchJson("/api/council-meetings/current").then((data) => { setPayload(data); setStatus("ready"); }).catch((error) => setStatus(error.message)); }, []);
+  const selectItem = (id) => { setSelectedId(id); setToolMode("package"); };
+  if (status !== "ready") return <><Header /><main className="content-scroll">{status === "loading" ? "Loading meeting data." : status}</main></>;
+  return <div className="meeting-app"><Header /><div className="meeting-workspace"><AgendaTree audience={audience} setAudience={setAudience} selectedId={selectedId} onSelect={selectItem} /><main className="main-panel">{selectedId ? <SelectedItemView payload={payload} selectedId={selectedId} toolMode={toolMode} /> : <GeneralInfo audience={audience} payload={payload} />}</main><ContextPanel audience={audience} payload={payload} selectedId={selectedId} toolMode={toolMode} setToolMode={setToolMode} /></div></div>;
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
