@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Storm Surge Demo - Modern Democracy</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../parcel-lookup/styles.css">
+<style>
+  html, body, #root { height: 100%; margin: 0; }
+  .viewer-app { display: grid; grid-template-rows: auto minmax(0, 1fr); height: 100vh; overflow: hidden; background: var(--paper); }
+  .viewer-body { display: grid; grid-template-columns: minmax(0, calc(100vw - 390px)) 390px; min-height: 0; overflow: hidden; }
+  .scene-wrap { position: relative; min-width: 0; min-height: 0; overflow: hidden; background: #d8d1c4; z-index: 0; }
+  #scene { position: absolute; inset: 0; overflow: hidden; }
+  #scene canvas { display: block; max-width: 100%; max-height: 100%; }
+  .hud { position: absolute; left: 16px; bottom: 16px; display: flex; gap: 8px; flex-wrap: wrap; z-index: 5; }
+  .pill { background: rgba(245,239,225,0.95); border: 1px solid var(--border-hair); border-radius: 4px; padding: 8px 10px; font-family: var(--font-mono); font-size: 11px; color: var(--fg-2); box-shadow: var(--shadow-sm); }
+  .panel { position: relative; z-index: 2; border-left: 1px solid var(--border-hair); background: var(--paper-2); overflow-y: auto; padding: 18px 18px 34px; min-width: 0; }
+  .panel-title { font-family: var(--font-ui); font-weight: 600; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); margin: 0 0 10px; }
+  .panel-title:not(:first-child) { margin-top: 24px; }
+  .status-card, .control-card { background: var(--paper); border: 1px solid var(--border); border-radius: 4px; padding: 14px; margin-bottom: 14px; }
+  .status-card { font-family: var(--font-ui); font-size: 13px; color: var(--fg-3); line-height: 1.4; }
+  .address { font-family: var(--font-display); font-variation-settings: "opsz" 48; font-weight: 500; font-size: 22px; line-height: 1.12; color: var(--ink); margin: 0 0 8px; }
+  .pid { font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-3); }
+  .field { display: grid; gap: 7px; margin-bottom: 13px; }
+  .field label { font-family: var(--font-ui); font-size: 12px; font-weight: 600; color: var(--fg-2); }
+  .field select, .field input[type="range"], .field input[type="text"] { width: 100%; box-sizing: border-box; }
+  .field select, .field input[type="text"] { border: 1px solid var(--border-hair); border-radius: 4px; background: var(--paper); color: var(--ink); padding: 8px 9px; font-family: var(--font-ui); font-size: 13px; }
+  .metric-grid { display: grid; grid-template-columns: 1fr auto; gap: 8px 12px; font-family: var(--font-ui); font-size: 12.5px; }
+  .metric-grid .k { color: var(--fg-3); }
+  .metric-grid .v { color: var(--ink); font-family: var(--font-mono); text-align: right; }
+  .route-actions { display: grid; gap: 8px; }
+  .legend-row { display: flex; align-items: center; gap: 8px; font-family: var(--font-ui); font-size: 12.5px; color: var(--fg-2); padding: 5px 0; }
+  .sw { width: 15px; height: 15px; border-radius: 3px; border: 1px solid rgba(26,22,18,0.15); flex: 0 0 auto; }
+  .scenario-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+  @media (max-width: 920px) {
+    .viewer-app { height: auto; min-height: 100vh; overflow: visible; }
+    .viewer-body { grid-template-columns: 1fr; grid-template-rows: minmax(460px, 62vh) auto; overflow: visible; }
+    .scene-wrap { min-height: 520px; }
+    .panel { border-left: 0; border-top: 1px solid var(--border-hair); }
+  }
+</style>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script async src="https://unpkg.com/es-module-shims@1.10.0/dist/es-module-shims.js"></script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.165.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.165.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div id="root">
+  <div class="viewer-app">
+    <header class="app-header">
+      <img src="../../assets/logo-island-needle.svg" alt="Modern Democracy" class="wm">
+      <nav>
+        <a href="/parcel-lookup">Parcel lookup</a>
+        <a href="/zoning-comparison">Compare bylaws</a>
+        <a href="/restriction-stack">View Spatial Restrictions</a>
+        <a href="/provisions-comparison">Compare provisions</a>
+        <a href="/city-view">Map</a>
+        <a href="/parcel-3d">3D view</a>
+        <a class="active" href="/storm-surge">Storm surge</a>
+      </nav>
+    </header>
+    <div class="viewer-body">
+      <main class="scene-wrap">
+        <div id="scene" aria-label="Storm surge water level demo"></div>
+        <div class="hud">
+          <div class="pill" id="level-label">Water level pending</div>
+          <div class="pill" id="count-label">Loading context</div>
+          <div class="pill" id="terrain-label">Terrain pending</div>
+        </div>
+      </main>
+      <aside class="panel">
+        <h3 class="panel-title">Selected parcel</h3>
+        <div class="status-card">
+          <h1 class="address" id="address">Storm surge demo</h1>
+          <div class="pid" id="pid">No PID supplied.</div>
+        </div>
+
+        <h3 class="panel-title">Parcel lookup</h3>
+        <div class="control-card">
+          <div class="field">
+            <label for="pid-input">PID</label>
+            <input id="pid-input" type="text" inputmode="numeric" placeholder="358960">
+          </div>
+          <button type="button" class="btn btn-primary" id="load-pid" style="width:100%;justify-content:center"><i data-lucide="search" style="width:14px;height:14px"></i> Load parcel</button>
+        </div>
+
+        <h3 class="panel-title">Water event</h3>
+        <div class="control-card">
+          <div class="field">
+            <label for="tide-event">Tide</label>
+            <select id="tide-event">
+              <option value="hhwlt">Full/new moon high tide</option>
+              <option value="llwlt">Full/new moon low tide</option>
+              <option value="mhw">Half moon high tide</option>
+              <option value="mlw">Half moon low tide</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="surge-m">Storm surge: <span id="surge-value">0.0 m</span></label>
+            <input id="surge-m" type="range" min="0" max="10" step="0.1" value="0">
+          </div>
+          <div class="field">
+            <label for="years-out">Sea-level rise horizon: <span id="years-value">0 years</span></label>
+            <input id="years-out" type="range" min="0" max="100" step="1" value="0">
+          </div>
+          <div class="field">
+            <label for="slr-mode">Sea-level rise scenario</label>
+            <select id="slr-mode">
+              <option value="pei2100">PEI planning guide: 1.0 m by 2100</option>
+              <option value="moderate">Moderate demo: 0.5 m by 2100</option>
+              <option value="high">High demo: 1.5 m by 2100</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="datum-offset">Visual datum offset: <span id="datum-offset-value">-1.72 m</span></label>
+            <input id="datum-offset" type="range" min="-2.8" max="-0.8" step="0.01" value="-1.8">
+          </div>
+          <div class="scenario-actions">
+            <button type="button" class="btn btn-secondary" id="preset-now"><i data-lucide="waves" style="width:14px;height:14px"></i> Current tide</button>
+            <button type="button" class="btn btn-secondary" id="preset-future"><i data-lucide="triangle-alert" style="width:14px;height:14px"></i> Future event</button>
+          </div>
+        </div>
+
+        <h3 class="panel-title">Scenario totals</h3>
+        <div class="status-card">
+          <div class="metric-grid">
+            <div class="k">Tide above chart datum</div><div class="v" id="tide-level">pending</div>
+            <div class="k">Surge addition</div><div class="v" id="surge-level">pending</div>
+            <div class="k">Sea-level addition</div><div class="v" id="slr-level">pending</div>
+            <div class="k">Chart datum total</div><div class="v" id="water-total">pending</div>
+            <div class="k">Terrain base adjustment</div><div class="v" id="terrain-base-adjustment">pending</div>
+            <div class="k">Rendered water plane</div><div class="v" id="rendered-total">pending</div>
+          </div>
+        </div>
+
+        <h3 class="panel-title">Terrain</h3>
+        <div class="status-card">
+          <div class="metric-grid">
+            <div class="k">Mode</div><div class="v" id="terrain-mode">pending</div>
+            <div class="k">Coverage</div><div class="v" id="terrain-coverage">pending</div>
+            <div class="k">Datum</div><div class="v" id="terrain-datum">pending</div>
+          </div>
+        </div>
+
+        <h3 class="panel-title">Legend</h3>
+        <div class="status-card">
+          <div class="legend-row"><span class="sw" style="background:#9fa878"></span>Demo terrain</div>
+          <div class="legend-row"><span class="sw" style="background:#2f7890"></span>Static water plane</div>
+          <div class="legend-row"><span class="sw" style="background:#8f3d2f"></span>Selected parcel boundary</div>
+          <div class="legend-row"><span class="sw" style="background:#d1a63a"></span>Adjacent parcel boundary</div>
+          <div class="legend-row"><span class="sw" style="background:#b88b5a"></span>Selected parcel building</div>
+          <div class="legend-row"><span class="sw" style="background:#6f7f8c"></span>Adjacent parcel building</div>
+        </div>
+
+        <h3 class="panel-title">Routes</h3>
+        <div class="route-actions">
+          <a class="btn btn-secondary" id="map-link" href="/city-view"><i data-lucide="map" style="width:14px;height:14px"></i> Map</a>
+          <a class="btn btn-secondary" id="parcel3d-link" href="/parcel-3d"><i data-lucide="box" style="width:14px;height:14px"></i> 3D view</a>
+        </div>
+
+        <h3 class="panel-title">Status</h3>
+        <div class="status-card" id="status">Loading parcel context.</div>
+      </aside>
+    </div>
+  </div>
+</div>
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
+const RADIUS_M = 350;
+const WATER_BED_Y = -14;
+const params = new URLSearchParams(window.location.search);
+let pid = params.get("pid") || "";
+const container = document.getElementById("scene");
+const statusEl = document.getElementById("status");
+const tideSelect = document.getElementById("tide-event");
+const surgeInput = document.getElementById("surge-m");
+const yearsInput = document.getElementById("years-out");
+const slrSelect = document.getElementById("slr-mode");
+const datumOffsetInput = document.getElementById("datum-offset");
+const tideLevels = {
+  hhwlt: { label: "Full/new moon high tide", levelM: 2.97 },
+  llwlt: { label: "Full/new moon low tide", levelM: 0.09 },
+  mhw: { label: "Half moon high tide", levelM: 2.4 },
+  mlw: { label: "Half moon low tide", levelM: 0.6 },
+};
+const slrRates = {
+  pei2100: 1.0,
+  moderate: 0.5,
+  high: 1.5,
+};
+
+let origin = null;
+let terrainData = null;
+let waterMesh = null;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xd8d1c4);
+const camera = new THREE.PerspectiveCamera(48, 1, 1, 2500);
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+container.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.target.set(0, 0, 0);
+camera.position.set(0, 165, 230);
+camera.lookAt(controls.target);
+
+scene.add(new THREE.HemisphereLight(0xf7f4ec, 0x5c6a5f, 1.15));
+const sun = new THREE.DirectionalLight(0xfff2d2, 2.6);
+sun.position.set(-160, 260, -120);
+scene.add(sun);
+
+const fallbackGround = new THREE.Mesh(
+  new THREE.PlaneGeometry(RADIUS_M * 2.35, RADIUS_M * 2.35),
+  new THREE.MeshStandardMaterial({ color: 0xcfc6b5, roughness: 0.9 })
+);
+fallbackGround.rotation.x = -Math.PI / 2;
+fallbackGround.receiveShadow = true;
+scene.add(fallbackGround);
+
+const terrainGroup = new THREE.Group();
+const parcelsGroup = new THREE.Group();
+const buildingsGroup = new THREE.Group();
+const roadsGroup = new THREE.Group();
+scene.add(terrainGroup, parcelsGroup, buildingsGroup, roadsGroup);
+
+function setStatus(text) {
+  statusEl.textContent = text;
+}
+
+function resize() {
+  const rect = container.getBoundingClientRect();
+  renderer.setSize(rect.width, rect.height, false);
+  camera.aspect = rect.width / Math.max(rect.height, 1);
+  camera.updateProjectionMatrix();
+}
+window.addEventListener("resize", resize);
+resize();
+
+function project(lon, lat) {
+  const metersPerDegreeLat = 111320;
+  const metersPerDegreeLon = Math.cos(origin.lat * Math.PI / 180) * 111320;
+  return {
+    x: (lon - origin.lon) * metersPerDegreeLon,
+    z: -(lat - origin.lat) * metersPerDegreeLat,
+  };
+}
+
+function sampleTerrainHeight(x, z) {
+  if (!terrainData?.available || !Array.isArray(terrainData.values)) return 0;
+  const radius = Number(terrainData.radiusM) || RADIUS_M;
+  const cols = Number(terrainData.cols) || 0;
+  const rows = Number(terrainData.rows) || 0;
+  if (cols < 2 || rows < 2) return 0;
+  const gridCol = ((x + radius) / (radius * 2)) * (cols - 1);
+  const gridRow = ((z + radius) / (radius * 2)) * (rows - 1);
+  if (gridCol < 0 || gridCol > cols - 1 || gridRow < 0 || gridRow > rows - 1) return 0;
+  const col0 = Math.floor(gridCol);
+  const row0 = Math.floor(gridRow);
+  const col1 = Math.min(col0 + 1, cols - 1);
+  const row1 = Math.min(row0 + 1, rows - 1);
+  const tx = gridCol - col0;
+  const ty = gridRow - row0;
+  const samples = [
+    { value: terrainData.values[row0 * cols + col0], weight: (1 - tx) * (1 - ty) },
+    { value: terrainData.values[row0 * cols + col1], weight: tx * (1 - ty) },
+    { value: terrainData.values[row1 * cols + col0], weight: (1 - tx) * ty },
+    { value: terrainData.values[row1 * cols + col1], weight: tx * ty },
+  ].filter((sample) => Number.isFinite(sample.value) && sample.weight > 0);
+  const totalWeight = samples.reduce((sum, sample) => sum + sample.weight, 0);
+  return totalWeight > 0
+    ? samples.reduce((sum, sample) => sum + sample.value * sample.weight, 0) / totalWeight
+    : WATER_BED_Y;
+}
+
+function addTerrainMesh(terrain) {
+  terrainGroup.clear();
+  terrainData = terrain;
+  if (!terrain?.available || !Array.isArray(terrain.values)) {
+    fallbackGround.visible = true;
+    return false;
+  }
+  const cols = Number(terrain.cols);
+  const rows = Number(terrain.rows);
+  const radius = Number(terrain.radiusM) || RADIUS_M;
+  if (cols < 2 || rows < 2 || terrain.values.length !== cols * rows) {
+    fallbackGround.visible = true;
+    return false;
+  }
+  const positions = [];
+  const indices = [];
+  for (let row = 0; row < rows; row += 1) {
+    for (let col = 0; col < cols; col += 1) {
+      const x = -radius + (col / (cols - 1)) * radius * 2;
+      const z = -radius + (row / (rows - 1)) * radius * 2;
+      const rawY = terrain.values[row * cols + col];
+      positions.push(x, Number.isFinite(rawY) ? rawY : WATER_BED_Y, z);
+    }
+  }
+  for (let row = 0; row < rows - 1; row += 1) {
+    for (let col = 0; col < cols - 1; col += 1) {
+      const a = row * cols + col;
+      const b = a + 1;
+      const c = a + cols;
+      const d = c + 1;
+      indices.push(a, c, b, b, c, d);
+    }
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+  geometry.setIndex(indices);
+  geometry.computeVertexNormals();
+  const mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ color: 0x9fa878, roughness: 0.96, side: THREE.DoubleSide }));
+  mesh.receiveShadow = true;
+  terrainGroup.add(mesh);
+  fallbackGround.visible = false;
+  return true;
+}
+
+function ringsFromGeometry(geometry) {
+  if (!geometry) return [];
+  if (geometry.type === "Polygon") return [geometry.coordinates];
+  if (geometry.type === "MultiPolygon") return geometry.coordinates.flatMap((polygon) => [polygon]);
+  return [];
+}
+
+function lineStringsFromGeometry(geometry) {
+  if (!geometry) return [];
+  if (geometry.type === "LineString") return [geometry.coordinates];
+  if (geometry.type === "MultiLineString") return geometry.coordinates;
+  return [];
+}
+
+function makeBoundary(feature) {
+  const relation = feature.properties?.relation;
+  const color = relation === "selected" ? 0x8f3d2f : relation === "adjacent" ? 0xd1a63a : 0x6a6459;
+  const material = new THREE.LineBasicMaterial({ color, transparent: true, opacity: relation === "context" ? 0.32 : 0.95 });
+  for (const polygon of ringsFromGeometry(feature.geometry)) {
+    const outer = polygon[0] || [];
+    const points = outer.map(([lon, lat]) => {
+      const p = project(lon, lat);
+      return new THREE.Vector3(p.x, sampleTerrainHeight(p.x, p.z) + 0.35, p.z);
+    });
+    if (points.length > 1) parcelsGroup.add(new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(points), material));
+  }
+}
+
+function makeRoad(feature) {
+  const material = new THREE.LineBasicMaterial({ color: 0xf7f4ec, transparent: true, opacity: 0.75 });
+  for (const line of lineStringsFromGeometry(feature.geometry)) {
+    const points = line.map(([lon, lat]) => {
+      const p = project(lon, lat);
+      return new THREE.Vector3(p.x, sampleTerrainHeight(p.x, p.z) + 0.4, p.z);
+    });
+    if (points.length > 1) roadsGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), material));
+  }
+}
+
+function shapeFromRing(ring) {
+  const points = ring.map(([lon, lat]) => {
+    const p = project(lon, lat);
+    return new THREE.Vector2(p.x, p.z);
+  });
+  if (points.length > 1 && points[0].distanceTo(points[points.length - 1]) < 0.001) points.pop();
+  return new THREE.Shape(points);
+}
+
+function buildingHeight(properties) {
+  const lidar = Number(properties?.heightLidarM);
+  if (Number.isFinite(lidar) && lidar > 1) return Math.min(lidar, 80);
+  const levels = Number(properties?.levels);
+  if (Number.isFinite(levels) && levels > 0) return Math.min(levels * 3.2, 80);
+  return 8;
+}
+
+function makeBuilding(feature) {
+  const relation = feature.properties?.relation;
+  const color = relation === "selected" ? 0xb88b5a : relation === "adjacent" ? 0x6f7f8c : 0x87986a;
+  const material = new THREE.MeshStandardMaterial({ color, roughness: 0.72, metalness: 0.02 });
+  const height = buildingHeight(feature.properties);
+  for (const polygon of ringsFromGeometry(feature.geometry)) {
+    const outer = polygon[0] || [];
+    if (outer.length < 4) continue;
+    const shape = shapeFromRing(outer);
+    for (const hole of polygon.slice(1)) {
+      if (hole.length >= 4) shape.holes.push(shapeFromRing(hole));
+    }
+    const projectedOuter = outer.map(([lon, lat]) => project(lon, lat));
+    const baseY = Math.max(...projectedOuter.map((point) => sampleTerrainHeight(point.x, point.z)).filter(Number.isFinite), 0) + 0.08;
+    const geometry = new THREE.ExtrudeGeometry(shape, { depth: height, bevelEnabled: false });
+    geometry.rotateX(Math.PI / 2);
+    geometry.translate(0, height + baseY, 0);
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    buildingsGroup.add(mesh);
+  }
+}
+
+function seaLevelRiseM() {
+  return (Number(yearsInput.value) / 100) * slrRates[slrSelect.value];
+}
+
+function scenarioWaterLevelM() {
+  return tideLevels[tideSelect.value].levelM + Number(surgeInput.value) + seaLevelRiseM();
+}
+
+function renderedWaterLevelM() {
+  const terrainBase = Number(terrainData?.baseElevationM) || 0;
+  return scenarioWaterLevelM() + Number(datumOffsetInput.value) - terrainBase;
+}
+
+function updateWaterPlane() {
+  const chartDatumLevel = scenarioWaterLevelM();
+  const level = renderedWaterLevelM();
+  const tide = tideLevels[tideSelect.value];
+  const slr = seaLevelRiseM();
+  if (!waterMesh) {
+    waterMesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(RADIUS_M * 2.8, RADIUS_M * 2.8),
+      new THREE.MeshStandardMaterial({ color: 0x2f7890, transparent: true, opacity: 0.48, roughness: 0.18, metalness: 0.02, side: THREE.DoubleSide })
+    );
+    waterMesh.rotation.x = -Math.PI / 2;
+    scene.add(waterMesh);
+  }
+  waterMesh.position.y = level;
+  document.getElementById("surge-value").textContent = `${Number(surgeInput.value).toFixed(1)} m`;
+  document.getElementById("years-value").textContent = `${yearsInput.value} years`;
+  document.getElementById("datum-offset-value").textContent = `${Number(datumOffsetInput.value).toFixed(2)} m`;
+  document.getElementById("tide-level").textContent = `${tide.levelM.toFixed(2)} m`;
+  document.getElementById("surge-level").textContent = `${Number(surgeInput.value).toFixed(1)} m`;
+  document.getElementById("slr-level").textContent = `${slr.toFixed(2)} m`;
+  document.getElementById("water-total").textContent = `${chartDatumLevel.toFixed(2)} m`;
+  document.getElementById("terrain-base-adjustment").textContent = terrainData?.available && Number.isFinite(Number(terrainData.baseElevationM))
+    ? `-${Number(terrainData.baseElevationM).toFixed(2)} m`
+    : "0.00 m";
+  document.getElementById("rendered-total").textContent = `${level.toFixed(2)} m`;
+  document.getElementById("level-label").textContent = `${level.toFixed(2)} m rendered`;
+}
+
+function clearSceneContext() {
+  terrainGroup.clear();
+  parcelsGroup.clear();
+  buildingsGroup.clear();
+  roadsGroup.clear();
+}
+
+function renderContext(payload) {
+  clearSceneContext();
+  origin = payload.parcel?.centroid || payload.address?.coordinate || { lon: -63.1311, lat: 46.2382 };
+  document.getElementById("address").textContent = payload.address?.label || "Selected parcel";
+  document.getElementById("pid").textContent = `PID ${payload.pid}`;
+  document.getElementById("pid-input").value = payload.pid;
+  document.getElementById("map-link").href = `/map-explorer?pid=${encodeURIComponent(payload.pid)}`;
+  document.getElementById("parcel3d-link").href = `/parcel-3d?pid=${encodeURIComponent(payload.pid)}`;
+
+  const terrainRendered = addTerrainMesh(payload.terrain);
+  const terrain = payload.terrain || {};
+  document.getElementById("terrain-mode").textContent = terrainRendered ? "Demo terrain" : "Flat fallback";
+  document.getElementById("terrain-coverage").textContent = Number.isFinite(terrain.validCellRatio)
+    ? `${(terrain.validCellRatio * 100).toFixed(1)}% patch`
+    : "fallback";
+  document.getElementById("terrain-datum").textContent = terrain.verticalDatum ? "unresolved" : "none";
+  document.getElementById("terrain-label").textContent = terrainRendered ? "Demo LIDAR terrain" : "Flat terrain fallback";
+
+  (payload.parcels?.features || []).forEach(makeBoundary);
+  (payload.roads?.features || []).forEach(makeRoad);
+  (payload.buildings?.features || []).forEach(makeBuilding);
+
+  const selectedCount = (payload.buildings?.features || []).filter((feature) => feature.properties?.relation === "selected").length;
+  const adjacentCount = (payload.buildings?.features || []).filter((feature) => feature.properties?.relation === "adjacent").length;
+  document.getElementById("count-label").textContent = `${selectedCount} selected, ${adjacentCount} adjacent buildings`;
+  setStatus("Demo visualization only. Water level is a static plane against unresolved vertical datum terrain; it is not hydraulic modeling, regulatory flood mapping, or property-specific risk output.");
+  updateWaterPlane();
+}
+
+async function loadParcel(nextPid) {
+  pid = String(nextPid || "").trim();
+  if (!pid) {
+    document.getElementById("count-label").textContent = "No PID supplied";
+    setStatus("No PID supplied. Open from a selected parcel, or enter a PID.");
+    return;
+  }
+  const nextUrl = new URL(window.location.href);
+  nextUrl.searchParams.set("pid", pid);
+  window.history.replaceState({}, "", nextUrl);
+  try {
+    const response = await fetch(`/api/parcels/${encodeURIComponent(pid)}/3d-context?radiusM=${RADIUS_M}`);
+    if (!response.ok) throw new Error(`Storm surge context failed with HTTP ${response.status}.`);
+    renderContext(await response.json());
+  } catch (error) {
+    setStatus(error.message || "Storm surge context loading failed.");
+  }
+}
+
+[tideSelect, surgeInput, yearsInput, slrSelect, datumOffsetInput].forEach((control) => {
+  control.addEventListener("input", updateWaterPlane);
+  control.addEventListener("change", updateWaterPlane);
+});
+document.getElementById("load-pid").addEventListener("click", () => loadParcel(document.getElementById("pid-input").value));
+document.getElementById("pid-input").addEventListener("keydown", (event) => {
+  if (event.key === "Enter") loadParcel(event.currentTarget.value);
+});
+document.getElementById("preset-now").addEventListener("click", () => {
+  tideSelect.value = "hhwlt";
+  surgeInput.value = "0";
+  yearsInput.value = "0";
+  slrSelect.value = "pei2100";
+  datumOffsetInput.value = "-1.8";
+  updateWaterPlane();
+});
+document.getElementById("preset-future").addEventListener("click", () => {
+  tideSelect.value = "hhwlt";
+  surgeInput.value = "2";
+  yearsInput.value = "75";
+  slrSelect.value = "pei2100";
+  datumOffsetInput.value = "-1.8";
+  updateWaterPlane();
+});
+
+function animate() {
+  controls.update();
+  renderer.render(scene, camera);
+  requestAnimationFrame(animate);
+}
+
+lucide.createIcons();
+updateWaterPlane();
+loadParcel(pid);
+animate();
+</script>
+</body>
+</html>

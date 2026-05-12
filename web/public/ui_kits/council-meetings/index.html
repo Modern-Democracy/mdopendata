@@ -8,61 +8,54 @@
 <link rel="stylesheet" href="../../colors_and_type.css">
 <link rel="stylesheet" href="../parcel-lookup/styles.css">
 <style>
-  body { margin: 0; background: var(--paper); color: var(--ink); }
-  .meeting-shell { max-width: 1240px; margin: 0 auto; padding: 28px 24px 56px; }
-  .meeting-head { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 22px; align-items: end; border-bottom: 1px solid var(--border-hair); padding-bottom: 22px; margin-bottom: 22px; }
-  .meeting-head h1 { font-size: 42px; line-height: 1.02; margin-bottom: 10px; }
-  .meeting-head p { font-size: 14px; color: var(--fg-3); max-width: 78ch; }
-  .meeting-meta { display: grid; gap: 8px; padding: 14px; border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); }
-  .meta-row { display: grid; grid-template-columns: 92px 1fr; gap: 10px; font-size: 13px; }
-  .meta-row span:first-child { color: var(--fg-3); font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; }
-  .tabs { display: inline-flex; gap: 2px; padding: 3px; border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); margin-bottom: 20px; }
-  .tabs button { border: 0; border-radius: 4px; background: transparent; color: var(--fg-3); cursor: pointer; font: 600 12px var(--font-ui); padding: 8px 12px; }
+  html, body, #root { height: 100%; margin: 0; }
+  body { background: var(--paper); color: var(--ink); }
+  .meeting-app { display: grid; grid-template-rows: auto minmax(0, 1fr); height: 100vh; overflow: hidden; }
+  .meeting-workspace { display: grid; grid-template-columns: 330px minmax(0, 1fr) 330px; min-height: 0; overflow: hidden; }
+  .agenda-panel, .context-panel { background: var(--paper-2); overflow-y: auto; padding: 16px; }
+  .agenda-panel { border-right: 1px solid var(--border-hair); }
+  .context-panel { border-left: 1px solid var(--border-hair); }
+  .main-panel { display: grid; grid-template-rows: auto minmax(0, 1fr); min-width: 0; min-height: 0; overflow: hidden; background: var(--paper); }
+  .main-header { border-bottom: 1px solid var(--border-hair); background: var(--paper-2); padding: 16px 18px; }
+  .main-header h1 { font-size: 28px; line-height: 1.06; margin: 0 0 8px; overflow-wrap: anywhere; }
+  .main-header p { font-size: 13px; color: var(--fg-3); margin: 0; max-width: 90ch; }
+  .content-scroll { overflow-y: auto; padding: 18px; }
+  .section-title { font: 700 11px var(--font-ui); letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); margin: 0 0 10px; }
+  .tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; padding: 3px; border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper); margin-bottom: 16px; }
+  .tabs button { border: 0; border-radius: 4px; background: transparent; color: var(--fg-3); cursor: pointer; font: 700 12px var(--font-ui); padding: 8px; }
   .tabs button.active { background: var(--ink); color: var(--paper); }
-  .public-grid { display: grid; grid-template-columns: 1fr 340px; gap: 18px; align-items: start; }
-  .audience-grid { display: grid; grid-template-columns: 1fr 340px; gap: 18px; align-items: start; }
-  .item-list { display: grid; gap: 14px; }
-  .item-card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); overflow: hidden; }
-  .item-head { display: grid; gap: 8px; padding: 16px; border-bottom: 1px solid var(--border-hair); background: var(--paper-3); }
-  .item-head h2 { font-size: 24px; overflow-wrap: anywhere; }
-  .badge-row { display: flex; gap: 8px; flex-wrap: wrap; }
-  .badge { border: 1px solid var(--border-hair); border-radius: 3px; background: var(--paper); color: var(--fg-2); font: 600 11px var(--font-mono); padding: 3px 7px; }
-  .badge.urgent { background: var(--brick-wash); color: var(--brick-ink); border-color: rgba(168, 57, 28, 0.25); }
-  .item-body { display: grid; gap: 14px; padding: 16px; }
-  .summary { color: var(--fg-2); font-size: 14px; margin: 0; }
-  .decision-box { display: grid; gap: 6px; padding: 12px; border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper); }
-  .decision-box .label { letter-spacing: 0.12em; }
-  .property-grid { display: grid; gap: 8px; }
-  .property-row { display: grid; gap: 8px; padding: 10px 12px; border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper); }
-  .pid-links { display: flex; gap: 6px; flex-wrap: wrap; }
-  .pid-link { display: inline-flex; align-items: center; gap: 4px; border-radius: 3px; background: var(--harbour-wash); color: var(--harbour-ink); font: 600 12px var(--font-mono); padding: 5px 8px; text-decoration: none; }
-  .source-list { display: grid; gap: 8px; }
-  .source-item { border-left: 3px solid var(--border); padding-left: 10px; color: var(--fg-3); font-size: 12px; }
-  .source-item strong { color: var(--ink); font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; }
-  .side-stack { display: grid; gap: 14px; }
-  .side-panel { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 14px; }
-  .side-panel h2 { font-family: var(--font-ui); font-size: 15px; font-weight: 700; margin-bottom: 10px; }
-  .check-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
-  .check-list li { display: grid; grid-template-columns: 18px 1fr; gap: 8px; color: var(--fg-2); font-size: 13px; }
-  .box { width: 14px; height: 14px; border: 1px solid var(--border); border-radius: 2px; margin-top: 2px; background: var(--paper); }
-  .workflow { display: grid; gap: 12px; }
-  .workflow-stage { display: grid; gap: 7px; }
-  .workflow-stage h3 { font-family: var(--font-ui); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg-3); }
-  .workflow-stage ul { margin: 0; padding-left: 18px; color: var(--fg-2); font-size: 13px; }
-  .brief-list { display: grid; gap: 12px; }
-  .brief-card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); overflow: hidden; }
-  .brief-head { display: flex; gap: 8px; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 12px 14px; border-bottom: 1px solid var(--border-hair); background: var(--paper-3); }
-  .brief-head h2 { font-size: 18px; overflow-wrap: anywhere; }
-  .brief-body { display: grid; gap: 12px; padding: 14px; }
-  .brief-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-  .brief-field { display: grid; gap: 3px; padding: 10px; border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper); }
-  .brief-field span { color: var(--fg-3); font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; }
-  .brief-field strong { font-size: 13px; overflow-wrap: anywhere; }
-  .status-card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 18px; color: var(--fg-3); }
-  @media (max-width: 900px) {
-    .meeting-shell { padding: 22px 16px 42px; }
-    .meeting-head, .public-grid, .audience-grid, .brief-grid { grid-template-columns: 1fr; }
-    .meeting-head h1 { font-size: 34px; }
+  .tree { display: grid; gap: 8px; }
+  details.tree-group { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper); overflow: hidden; }
+  details.tree-group > summary { cursor: pointer; padding: 10px 11px; font: 700 12px var(--font-ui); color: var(--ink); list-style: none; border-bottom: 1px solid var(--border-hair); }
+  details.tree-group > summary::-webkit-details-marker { display: none; }
+  .tree-items { display: grid; gap: 0; padding: 5px; }
+  .tree-button { width: 100%; border: 0; border-radius: 4px; background: transparent; color: var(--fg-2); cursor: pointer; display: grid; grid-template-columns: 38px 1fr; gap: 8px; padding: 8px; text-align: left; font: 13px var(--font-ui); }
+  .tree-button.active { background: var(--paper-3); color: var(--ink); box-shadow: inset 3px 0 0 var(--brick); }
+  .tree-button .label { font: 700 11px var(--font-mono); color: var(--fg-3); letter-spacing: 0; text-transform: none; }
+  .tree-button .title { overflow-wrap: anywhere; }
+  .info-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .info-card, .context-card, .package-card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 14px; }
+  .info-card h2, .context-card h2, .package-card h2 { font: 700 15px var(--font-ui); margin: 0 0 8px; }
+  .info-card p, .context-card p { color: var(--fg-2); font-size: 13px; margin: 0; }
+  .workflow-list, .check-list { margin: 0; padding-left: 18px; color: var(--fg-2); font-size: 13px; }
+  .workflow-list li, .check-list li { margin-bottom: 7px; }
+  .package-text { white-space: pre-wrap; font: 13px/1.55 var(--font-ui); color: var(--fg-2); margin: 0; }
+  .badge-row { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 10px; }
+  .badge { border: 1px solid var(--border-hair); border-radius: 3px; background: var(--paper); color: var(--fg-2); font: 700 11px var(--font-mono); padding: 3px 7px; }
+  .badge.urgent { background: var(--brick-wash); color: var(--brick-ink); border-color: rgba(168,57,28,0.25); }
+  .route-actions { display: grid; gap: 8px; }
+  .route-actions .btn { width: 100%; justify-content: center; }
+  .meta-grid { display: grid; grid-template-columns: 92px 1fr; gap: 7px 10px; font-size: 12.5px; }
+  .meta-grid .k { color: var(--fg-3); font-family: var(--font-mono); text-transform: uppercase; font-size: 10.5px; }
+  .meta-grid .v { color: var(--ink); font-weight: 600; overflow-wrap: anywhere; }
+  .source-select { width: 100%; border: 1px solid var(--border-hair); border-radius: 4px; background: var(--paper); color: var(--ink); padding: 8px; font: 13px var(--font-ui); margin-bottom: 12px; }
+  .empty-note { color: var(--fg-3); font-size: 13px; }
+  @media (max-width: 1060px) {
+    .meeting-app { height: auto; min-height: 100vh; overflow: visible; }
+    .meeting-workspace { grid-template-columns: 1fr; overflow: visible; }
+    .agenda-panel, .context-panel, .content-scroll { overflow: visible; }
+    .main-panel { overflow: visible; }
+    .info-grid { grid-template-columns: 1fr; }
   }
 </style>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
@@ -75,6 +68,69 @@
 <script type="text/babel">
 const { useEffect, useMemo, useState } = React;
 
+const AGENDA_TREE = [
+  { group: "Opening", open: true, items: [
+    { id: "agenda-1", label: "1", title: "Call to Order", page: 1 },
+    { id: "agenda-2", label: "2", title: "Declaration of Conflict of Interest", page: 1 },
+    { id: "agenda-3", label: "3", title: "Approval of Agenda", page: 1 },
+    { id: "agenda-4", label: "4", title: "Adoption of Previous Draft Minutes of Council", page: 1 },
+    { id: "agenda-5", label: "5", title: "Business Arising out of the Minutes", page: 1 },
+    { id: "agenda-6", label: "6", title: "Council Inquiries to be taken Under Consideration", page: 1 },
+  ]},
+  { group: "Reports of Standing Committees", open: true, items: [
+    { id: "agenda-7-1-planning-heritage", label: "7.1", title: "Planning & Heritage", page: 11, packagePage: 11 },
+    { id: "agenda-7-2", label: "7.2", title: "Environment & Sustainability", page: 2 },
+    { id: "agenda-7-3", label: "7.3", title: "Finance, Audit, Tendering & Administration", page: 1 },
+    { id: "agenda-7-4", label: "7.4", title: "Human Resources", page: 1 },
+    { id: "agenda-7-5", label: "7.5", title: "Strategic Priorities, Communications & Intergovernmental Cooperation", page: 1 },
+    { id: "agenda-7-6", label: "7.6", title: "Protective & Emergency Services", page: 2 },
+    { id: "agenda-7-7", label: "7.7", title: "Parks, Recreation & Leisure Activities", page: 2 },
+    { id: "agenda-7-8", label: "7.8", title: "Water & Sewer Utility", page: 2 },
+    { id: "agenda-7-9", label: "7.9", title: "Economic, Tourism & Cultural Development", page: 2 },
+    { id: "agenda-7-10", label: "7.10", title: "Public Works", page: 2 },
+    { id: "agenda-7-11-new-business", label: "7.11", title: "New Business", page: 2 },
+  ]},
+  { group: "Planning & Heritage Rezoning Items", open: true, items: [
+    { id: "bylaw-reading-ph-zd-2-110-231-brackley-point-road", label: "7.1a", title: "231 Brackley Point Road rezoning", page: 6, packagePage: 6, rezoning: true },
+    { id: "bylaw-reading-ph-zd-2-109-king-dorchester", label: "7.1b", title: "King and Dorchester Streets rezoning", page: 5, packagePage: 5, rezoning: true },
+  ]},
+  { group: "Close", open: false, items: [
+    { id: "agenda-8", label: "8", title: "Closed Session Motion", page: 2 },
+    { id: "agenda-9", label: "9", title: "Business Arising from Closed Session", page: 2 },
+    { id: "agenda-10", label: "10", title: "Adjournment", page: 2 },
+  ]},
+];
+
+const AUDIENCE_COPY = {
+  public: {
+    title: "Public Meeting Guide",
+    summary: "The public view prioritizes what is being decided, how to follow the agenda, where affected properties are, and what to verify after the meeting.",
+    cards: [
+      ["Before", "Find zoning items, affected PIDs, current/proposed zones, and source package pages."],
+      ["During", "Track the item number, motion wording, amendments, vote, and any questions taken under advisement."],
+      ["After", "Compare against official minutes and check whether maps, bylaws, and parcel context changed."]
+    ],
+  },
+  council: {
+    title: "Council Decision Brief",
+    summary: "The council view prioritizes procedural stage, decision wording, conflicts, source evidence, and questions requiring staff follow-up.",
+    cards: [
+      ["Before", "Review reading stage, legal/property identifiers, current/proposed zones, and Official Plan implications."],
+      ["During", "Confirm conflicts, motion wording, amendments, debate issues, staff answers, and vote result."],
+      ["After", "Confirm adopted wording, implementation instructions, and unresolved questions."]
+    ],
+  },
+  staff: {
+    title: "Staff Meeting Control",
+    summary: "The staff view prioritizes source completeness, procedural capture, implementation tasks, minutes, and data update obligations.",
+    cards: [
+      ["Before", "Verify package completeness, PIDs, maps, bylaw references, and agenda item stage."],
+      ["During", "Capture amendments, deferrals, procedural instructions, vote outcomes, and follow-up ownership."],
+      ["After", "Publish/update minutes, update bylaw status, map layers, structured data, and implementation records."]
+    ],
+  },
+};
+
 function Header() {
   return (
     <header className="app-header">
@@ -84,243 +140,253 @@ function Header() {
         <a href="/zoning-comparison">Compare bylaws</a>
         <a className="active" href="/council-meetings">Council meetings</a>
         <a href="/restriction-stack">View Spatial Restrictions</a>
-        <a href="/provisions-comparison">Compare provisions</a>
         <a href="/city-view">Map</a>
       </nav>
     </header>
   );
 }
 
-function sourceLabel(citation) {
-  return `${citation.source_document_id} PDF page ${citation.pdf_page_start}`;
+function allItems() {
+  return AGENDA_TREE.flatMap((group) => group.items);
 }
 
-function pidHref(pid) {
-  return `/zoning-comparison/${encodeURIComponent(pid)}`;
+function findRecord(payload, id) {
+  return [
+    ...(payload?.agendaSections || []),
+    ...(payload?.committeeReports || []),
+    ...(payload?.resolutions || []),
+    ...(payload?.bylawReadings || []),
+    ...(payload?.planningItems || []),
+  ].find((item) => item.agenda_section_id === id || item.item_id === id || item.planning_item_id === id || item.committee_report_id === id);
 }
 
-function MeetingMeta({ meeting, sourceDocuments }) {
+function citationPage(record, fallbackItem) {
+  const packageCitation = (record?.citations || []).find((citation) => citation.source_document_id === "package");
+  if (packageCitation) return { documentId: "package", page: packageCitation.pdf_page_start };
+  return { documentId: fallbackItem?.packagePage ? "package" : "agenda", page: fallbackItem?.packagePage || fallbackItem?.page || 1 };
+}
+
+function primaryPid(item) {
+  return item?.property_references?.[0]?.pids?.[0] || "";
+}
+
+function queryForRezoning(item) {
+  const pid = primaryPid(item);
+  const amendment = item?.zoning_amendment || {};
+  const params = new URLSearchParams({
+    pid,
+    title: item?.title || "Rezoning application",
+    fromZone: amendment.from_zone || "",
+    toZone: amendment.to_zone || "",
+    meeting: "charlottetown-2026-05-12-regular-council",
+    item: item?.item_id || "",
+  });
+  return params.toString();
+}
+
+function AgendaTree({ selectedId, onSelect }) {
   return (
-    <aside className="meeting-meta">
-      <div className="meta-row"><span>Date</span><strong>{meeting.date} at {meeting.time}</strong></div>
-      <div className="meta-row"><span>Location</span><strong>{meeting.location}</strong></div>
-      <div className="meta-row"><span>Stream</span><a href={meeting.livestream_url}>{meeting.livestream_url.replace(/^https?:\/\//, "")}</a></div>
-      <div className="meta-row"><span>Sources</span><strong>{sourceDocuments.length} PDFs</strong></div>
+    <aside className="agenda-panel">
+      <div className="tabs" aria-label="Audience tabs">
+        {["public", "council", "staff"].map((audience) => (
+          <button type="button" key={audience} className={window.__activeAudience === audience ? "active" : ""} onClick={() => window.__setAudience(audience)}>
+            {audience[0].toUpperCase() + audience.slice(1)}
+          </button>
+        ))}
+      </div>
+      <h2 className="section-title">Agenda Tree</h2>
+      <div className="tree">
+        {AGENDA_TREE.map((group) => (
+          <details className="tree-group" open={group.open} key={group.group}>
+            <summary>{group.group}</summary>
+            <div className="tree-items">
+              {group.items.map((item) => (
+                <button type="button" className={`tree-button ${selectedId === item.id ? "active" : ""}`} onClick={() => onSelect(item.id)} key={item.id}>
+                  <span className="label">{item.label}</span>
+                  <span className="title">{item.title}</span>
+                </button>
+              ))}
+            </div>
+          </details>
+        ))}
+      </div>
     </aside>
   );
 }
 
-function ItemCard({ item }) {
-  const refs = item.property_references || [];
+function GeneralInfo({ audience, payload }) {
+  const copy = AUDIENCE_COPY[audience];
   return (
-    <article className="item-card">
-      <div className="item-head">
-        <div className="badge-row">
-          <span className="badge urgent">{item.stage.replaceAll("_", " ")}</span>
-          <span className="badge">{item.zoning_amendment.from_zone} to {item.zoning_amendment.to_zone}</span>
-          {item.zoning_amendment.official_plan_amendment && <span className="badge">OPA</span>}
-        </div>
-        <h2>{item.title}</h2>
+    <>
+      <div className="main-header">
+        <div className="section-title">{payload.meeting.date} at {payload.meeting.time}</div>
+        <h1>{copy.title}</h1>
+        <p>{copy.summary}</p>
       </div>
-      <div className="item-body">
-        <p className="summary">{item.public_summary}</p>
-        <div className="decision-box">
-          <div className="label">Decision Tonight</div>
-          <strong>{item.decision_requested}</strong>
-        </div>
-        <div className="property-grid">
-          {refs.map((ref) => (
-            <div className="property-row" key={ref.label}>
-              <strong>{ref.label}</strong>
-              <div className="pid-links">
-                {(ref.pids || []).map((pid) => <a className="pid-link" href={pidHref(pid)} key={pid}>PID {pid}</a>)}
-              </div>
-            </div>
+      <div className="content-scroll">
+        <div className="info-grid">
+          {copy.cards.map(([title, body]) => (
+            <article className="info-card" key={title}>
+              <h2>{title}</h2>
+              <p>{body}</p>
+            </article>
           ))}
         </div>
-        <div className="source-list">
-          {(item.citations || []).map((citation, index) => (
-            <div className="source-item" key={`${citation.source_document_id}-${index}`}>
-              <strong>{sourceLabel(citation)}</strong>
-              <div>{citation.text_excerpt}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </article>
-  );
-}
-
-function WorkflowPanel({ workflow, title = "Workflow" }) {
-  return (
-    <section className="side-panel">
-      <h2>{title}</h2>
-      <div className="workflow">
-        {(workflow?.stages || []).map((stage) => (
-          <div className="workflow-stage" key={stage.stage}>
-            <h3>{stage.stage.replaceAll("_", " ")}</h3>
-            <ul>{stage.tasks.map((task) => <li key={task}>{task}</li>)}</ul>
+        <div className="package-card" style={{marginTop: 14}}>
+          <h2>Meeting Information</h2>
+          <div className="meta-grid">
+            <div className="k">Body</div><div className="v">{payload.meeting.body}</div>
+            <div className="k">Location</div><div className="v">{payload.meeting.location}</div>
+            <div className="k">Stream</div><div className="v"><a href={payload.meeting.livestream_url}>{payload.meeting.livestream_url}</a></div>
+            <div className="k">Sources</div><div className="v">{payload.sourceDocuments.length} PDFs</div>
           </div>
-        ))}
+        </div>
       </div>
-    </section>
+    </>
   );
 }
 
-function FollowUpPanel() {
-  const tasks = [
-    "Record motion wording and vote result.",
-    "Check official minutes when posted.",
-    "Update bylaw reading/adoption status.",
-    "Re-run parcel and zoning context after data changes."
-  ];
-  return (
-    <section className="side-panel">
-      <h2>Post-Meeting Follow-Up</h2>
-      <ul className="check-list">
-        {tasks.map((task) => <li key={task}><span className="box"></span><span>{task}</span></li>)}
-      </ul>
-    </section>
-  );
-}
+function SelectedItemView({ audience, payload, selectedId }) {
+  const treeItem = allItems().find((item) => item.id === selectedId);
+  const record = findRecord(payload, selectedId);
+  const [sourcePage, setSourcePage] = useState(null);
+  const [sourceChoice, setSourceChoice] = useState(() => citationPage(record, treeItem));
 
-function actionSummary(item) {
-  const amendment = item.zoning_amendment || {};
-  return `${amendment.from_zone || "unknown"} to ${amendment.to_zone || "unknown"}`;
-}
+  useEffect(() => {
+    if (!treeItem) return;
+    const next = citationPage(record, treeItem);
+    setSourceChoice(next);
+  }, [selectedId]);
 
-function BriefCard({ item, mode }) {
-  const refs = item.property_references || [];
-  const pids = refs.flatMap((ref) => ref.pids || []);
-  const sourcePages = (item.citations || []).map(sourceLabel).join("; ");
+  useEffect(() => {
+    if (!sourceChoice?.documentId || !sourceChoice?.page) return;
+    fetch(`/api/council-meetings/current/source-page?documentId=${encodeURIComponent(sourceChoice.documentId)}&page=${encodeURIComponent(sourceChoice.page)}`)
+      .then((response) => response.ok ? response.json() : Promise.reject(new Error(`HTTP ${response.status}`)))
+      .then(setSourcePage)
+      .catch((error) => setSourcePage({ text: `Unable to load source page: ${error.message}` }));
+  }, [sourceChoice.documentId, sourceChoice.page]);
+
+  if (!treeItem) return null;
+  const isRezoning = Boolean(record?.zoning_amendment);
+  const pageOptions = (record?.citations || []).map((citation) => ({
+    documentId: citation.source_document_id,
+    page: citation.pdf_page_start,
+    label: `${citation.source_document_id} page ${citation.pdf_page_start}`,
+  }));
+  if (!pageOptions.length) pageOptions.push({ ...sourceChoice, label: `${sourceChoice.documentId} page ${sourceChoice.page}` });
+
   return (
-    <article className="brief-card">
-      <div className="brief-head">
-        <h2>{item.title}</h2>
+    <>
+      <div className="main-header">
+        <div className="section-title">Agenda item {treeItem.label}</div>
+        <h1>{record?.title || record?.title_raw || treeItem.title}</h1>
+        <p>{record?.public_summary || record?.summary || record?.decision_requested || "Agenda source text is shown below."}</p>
         <div className="badge-row">
-          <span className="badge urgent">{item.stage.replaceAll("_", " ")}</span>
-          <span className="badge">{actionSummary(item)}</span>
+          {record?.stage && <span className="badge urgent">{record.stage.replaceAll("_", " ")}</span>}
+          {record?.zoning_amendment && <span className="badge">{record.zoning_amendment.from_zone} to {record.zoning_amendment.to_zone}</span>}
+          {record?.property_references?.flatMap((ref) => ref.pids || []).map((pid) => <span className="badge" key={pid}>PID {pid}</span>)}
         </div>
       </div>
-      <div className="brief-body">
-        <p className="summary">{mode === "staff" ? item.decision_requested : item.public_summary}</p>
-        <div className="brief-grid">
-          <div className="brief-field"><span>Agenda</span><strong>{item.agenda_section_id}</strong></div>
-          <div className="brief-field"><span>Action</span><strong>{item.decision_requested}</strong></div>
-          <div className="brief-field"><span>Properties</span><strong>{refs.map((ref) => ref.label).join("; ")}</strong></div>
-          <div className="brief-field"><span>PIDs</span><strong>{pids.join(", ")}</strong></div>
-          <div className="brief-field"><span>Plan change</span><strong>{item.zoning_amendment.future_land_use_change || "none recorded"}</strong></div>
-          <div className="brief-field"><span>Sources</span><strong>{sourcePages}</strong></div>
-        </div>
-        <div className="pid-links">
-          {pids.map((pid) => <a className="pid-link" href={pidHref(pid)} key={pid}>PID {pid}</a>)}
-        </div>
+      <div className="content-scroll">
+        <select className="source-select" value={`${sourceChoice.documentId}:${sourceChoice.page}`} onChange={(event) => {
+          const [documentId, page] = event.target.value.split(":");
+          setSourceChoice({ documentId, page: Number(page) });
+        }}>
+          {pageOptions.map((option) => <option value={`${option.documentId}:${option.page}`} key={`${option.documentId}-${option.page}`}>{option.label}</option>)}
+        </select>
+        <article className="package-card">
+          <h2>{sourceChoice.documentId} package text, page {sourceChoice.page}</h2>
+          <pre className="package-text">{sourcePage?.text || "Loading source page."}</pre>
+        </article>
       </div>
-    </article>
+    </>
   );
 }
 
-function AudienceView({ payload, audience, title, mode }) {
-  const workflow = payload.audienceWorkflows?.find((candidate) => candidate.audience === audience);
-  const sideTasks = mode === "staff"
-    ? ["Verify PIDs and legal descriptions.", "Capture amendments or deferrals.", "Update minutes, bylaw status, and map data after the meeting."]
-    : ["Check conflict declarations before the item.", "Confirm the exact motion and amendment stage.", "Note questions requiring staff follow-up."];
+function ContextPanel({ audience, payload, selectedId }) {
+  const treeItem = allItems().find((item) => item.id === selectedId);
+  const record = findRecord(payload, selectedId);
+  const workflow = payload.audienceWorkflows.find((candidate) => {
+    if (audience === "public") return candidate.audience === "public_member";
+    if (audience === "council") return candidate.audience === "council_or_committee";
+    return candidate.audience === "municipal_staff";
+  });
+  const isRezoning = Boolean(record?.zoning_amendment);
+  const rezoningQuery = isRezoning ? queryForRezoning(record) : "";
+  const pid = primaryPid(record);
   return (
-    <section className="audience-grid">
-      <div className="brief-list">
-        {payload.bylawReadings.map((item) => <BriefCard item={item} mode={mode} key={item.item_id} />)}
-      </div>
-      <aside className="side-stack">
-        <WorkflowPanel workflow={workflow} title={title} />
-        <section className="side-panel">
-          <h2>{mode === "staff" ? "Staff Controls" : "Council Controls"}</h2>
-          <ul className="check-list">
-            {sideTasks.map((task) => <li key={task}><span className="box"></span><span>{task}</span></li>)}
-          </ul>
+    <aside className="context-panel">
+      <section className="context-card">
+        <h2>{audience === "public" ? "Public needs" : audience === "council" ? "Council needs" : "Staff needs"}</h2>
+        <ul className="workflow-list">
+          {(workflow?.stages || []).flatMap((stage) => stage.tasks).map((task) => <li key={task}>{task}</li>)}
+        </ul>
+      </section>
+      <section className="context-card">
+        <h2>Agenda Context</h2>
+        {selectedId ? (
+          <div className="meta-grid">
+            <div className="k">Item</div><div className="v">{treeItem?.label} {treeItem?.title}</div>
+            <div className="k">Stage</div><div className="v">{record?.stage || "not extracted"}</div>
+            <div className="k">Decision</div><div className="v">{record?.decision_requested || "not extracted"}</div>
+          </div>
+        ) : <p className="empty-note">Select an agenda item for item-specific context.</p>}
+      </section>
+      {isRezoning && (
+        <section className="context-card">
+          <h2>Rezoning Tools</h2>
+          <div className="route-actions">
+            <a className="btn btn-primary" href={`/rezoning-parcel-lookup?${rezoningQuery}`}>Parcel Lookup</a>
+            <a className="btn btn-primary" href={`/rezoning-zoning-comparison?${rezoningQuery}`}>Compare bylaws</a>
+            <a className="btn btn-primary" href={`/rezoning-restriction-stack?pid=${encodeURIComponent(pid)}&${rezoningQuery}`}>View Spatial Restrictions</a>
+            <a className="btn btn-primary" href={`/rezoning-storm-surge?pid=${encodeURIComponent(pid)}&${rezoningQuery}`}>Storm Surge</a>
+          </div>
         </section>
-        <section className="side-panel">
-          <h2>Source Coverage</h2>
-          <p className="summary">{payload.sourceDocuments.length} source PDFs. {payload.reviewFlags.length} review flag recorded.</p>
-        </section>
-      </aside>
-    </section>
+      )}
+      <section className="context-card">
+        <h2>Interface Controls</h2>
+        <ul className="check-list">
+          <li>Use the left tree to follow agenda order.</li>
+          <li>Use the package selector to switch source pages.</li>
+          <li>Use copied rezoning endpoints for meeting-specific experiments.</li>
+        </ul>
+      </section>
+    </aside>
   );
 }
 
 function App() {
   const [payload, setPayload] = useState(null);
   const [status, setStatus] = useState("loading");
-  const [activeTab, setActiveTab] = useState("public");
+  const [audience, setAudience] = useState("public");
+  const [selectedId, setSelectedId] = useState("");
+  window.__activeAudience = audience;
+  window.__setAudience = setAudience;
 
   useEffect(() => {
     fetch("/api/council-meetings/current")
-      .then((response) => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.json();
-      })
-      .then((data) => {
-        setPayload(data);
-        setStatus("ready");
-      })
-      .catch((error) => {
-        setStatus(error.message || "Unable to load meeting data.");
-      });
+      .then((response) => response.ok ? response.json() : Promise.reject(new Error(`HTTP ${response.status}`)))
+      .then((data) => { setPayload(data); setStatus("ready"); })
+      .catch((error) => setStatus(error.message));
   }, []);
 
-  const publicWorkflow = useMemo(() => (
-    payload?.audienceWorkflows?.find((workflow) => workflow.audience === "public_member")
-  ), [payload]);
-
   if (status !== "ready") {
-    return (
-      <>
-        <Header />
-        <main className="meeting-shell"><div className="status-card">{status === "loading" ? "Loading meeting data." : status}</div></main>
-      </>
-    );
+    return <><Header /><main className="content-scroll">{status === "loading" ? "Loading meeting data." : status}</main></>;
   }
 
-  const { meeting, sourceDocuments, bylawReadings } = payload;
   return (
-    <>
+    <div className="meeting-app">
       <Header />
-      <main className="meeting-shell">
-        <section className="meeting-head">
-          <div>
-            <div className="eyebrow">Council Meeting Preparation</div>
-            <h1>{meeting.title}</h1>
-            <p>{meeting.focus}</p>
-          </div>
-          <MeetingMeta meeting={meeting} sourceDocuments={sourceDocuments} />
-        </section>
-        <div className="tabs">
-          <button type="button" className={activeTab === "public" ? "active" : ""} onClick={() => setActiveTab("public")}>Public</button>
-          <button type="button" className={activeTab === "council" ? "active" : ""} onClick={() => setActiveTab("council")}>Council</button>
-          <button type="button" className={activeTab === "staff" ? "active" : ""} onClick={() => setActiveTab("staff")}>Staff</button>
-        </div>
-        {activeTab === "public" && (
-          <section className="public-grid">
-            <div className="item-list">
-              {bylawReadings.map((item) => <ItemCard item={item} key={item.item_id} />)}
-            </div>
-            <aside className="side-stack">
-              <WorkflowPanel workflow={publicWorkflow} title="Public Workflow" />
-              <FollowUpPanel />
-              <section className="side-panel">
-                <h2>Data Status</h2>
-                <p className="summary">JSON-first prototype. Database migration is deferred until the meeting extraction shape stabilizes.</p>
-              </section>
-            </aside>
-          </section>
-        )}
-        {activeTab === "council" && (
-          <AudienceView payload={payload} audience="council_or_committee" title="Council Workflow" mode="council" />
-        )}
-        {activeTab === "staff" && (
-          <AudienceView payload={payload} audience="municipal_staff" title="Staff Workflow" mode="staff" />
-        )}
-      </main>
-    </>
+      <div className="meeting-workspace">
+        <AgendaTree selectedId={selectedId} onSelect={setSelectedId} />
+        <main className="main-panel">
+          {selectedId
+            ? <SelectedItemView audience={audience} payload={payload} selectedId={selectedId} />
+            : <GeneralInfo audience={audience} payload={payload} />}
+        </main>
+        <ContextPanel audience={audience} payload={payload} selectedId={selectedId} />
+      </div>
+    </div>
   );
 }
 

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rezoning Parcel Lookup - Modern Democracy</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../parcel-lookup/styles.css">
+<style>
+  .shell { max-width: 980px; margin: 0 auto; padding: 32px 24px 56px; }
+  .head { display: grid; gap: 10px; border-bottom: 1px solid var(--border-hair); padding-bottom: 18px; margin-bottom: 18px; }
+  .head h1 { font-size: 38px; }
+  .context { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 18px 0; }
+  .field { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 12px; }
+  .field span { display: block; font: 700 11px var(--font-mono); color: var(--fg-3); text-transform: uppercase; margin-bottom: 4px; }
+  .field strong { overflow-wrap: anywhere; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .note { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 14px; color: var(--fg-2); }
+  @media (max-width: 760px) { .context { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header class="app-header">
+  <img src="../../assets/logo-island-needle.svg" alt="Modern Democracy" class="wm">
+  <nav>
+    <a class="active" href="/rezoning-parcel-lookup">Rezoning parcel</a>
+    <a href="/council-meetings">Council meetings</a>
+    <a href="/parcel-lookup">Original parcel lookup</a>
+  </nav>
+</header>
+<main class="shell">
+  <section class="head">
+    <div class="eyebrow">Council Meeting Rezoning Context</div>
+    <h1 id="title">Rezoning parcel lookup</h1>
+    <p class="lede">This copied endpoint keeps the meeting-specific current and future zone context separate from the original parcel lookup implementation.</p>
+  </section>
+  <section class="context">
+    <div class="field"><span>PID</span><strong id="pid">pending</strong></div>
+    <div class="field"><span>Current zone</span><strong id="fromZone">pending</strong></div>
+    <div class="field"><span>Future zone</span><strong id="toZone">pending</strong></div>
+    <div class="field"><span>Meeting item</span><strong id="item">pending</strong></div>
+  </section>
+  <div class="actions">
+    <a class="btn btn-primary" id="compare">Compare bylaws</a>
+    <a class="btn btn-primary" id="restrictions">View Spatial Restrictions</a>
+    <a class="btn btn-primary" id="surge">Storm Surge</a>
+    <a class="btn btn-secondary" id="original">Open original parcel lookup</a>
+  </div>
+  <section class="note" style="margin-top:18px">
+    This view intentionally shows the rezoning application zones supplied by the council meeting record. It does not rewrite the original parcel lookup until the meeting-specific scope is understood.
+  </section>
+</main>
+<script>
+const params = new URLSearchParams(window.location.search);
+const pid = params.get("pid") || "";
+const title = params.get("title") || "Rezoning parcel lookup";
+const fromZone = params.get("fromZone") || "pending";
+const toZone = params.get("toZone") || "pending";
+const item = params.get("item") || "pending";
+document.getElementById("title").textContent = title;
+document.getElementById("pid").textContent = pid || "pending";
+document.getElementById("fromZone").textContent = fromZone;
+document.getElementById("toZone").textContent = toZone;
+document.getElementById("item").textContent = item;
+const query = window.location.search;
+document.getElementById("compare").href = `/rezoning-zoning-comparison${query}`;
+document.getElementById("restrictions").href = `/rezoning-restriction-stack${query}`;
+document.getElementById("surge").href = `/rezoning-storm-surge${query}`;
+document.getElementById("original").href = pid ? `/parcel-lookup?pid=${encodeURIComponent(pid)}` : "/parcel-lookup";
+</script>
+</body>
+</html>

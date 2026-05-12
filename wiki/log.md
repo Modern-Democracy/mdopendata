@@ -142,6 +142,10 @@ Added the [Council and committee meetings](./council-committee-meetings/README.m
 
 Expanded `/council-meetings` from a public-first view to functional public, council, and staff tabs using the same JSON-backed meeting API.
 
+## [2026-05-12] implementation | Agenda tree and rezoning endpoint copies
+
+Reworked `/council-meetings` into a three-pane workspace with an agenda-order left tree, audience-specific general pages, selected-item package text panes, and rezoning tool panels. Added copied meeting-specific rezoning routes for parcel lookup, zoning comparison, spatial restrictions, and storm surge.
+
 ## Sources
 
 - [Wiki schema](./AGENTS.md)

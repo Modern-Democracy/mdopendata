@@ -483,6 +483,41 @@ async function loadCouncilMeeting() {
   };
 }
 
+async function loadCouncilMeetingSourcePage(documentId, pageNumber) {
+  if (!["agenda", "package"].includes(documentId)) {
+    const error = new Error("documentId must be agenda or package.");
+    error.statusCode = 400;
+    throw error;
+  }
+  const page = Number(pageNumber);
+  if (!Number.isInteger(page) || page < 1 || page > 999) {
+    const error = new Error("page must be a positive integer.");
+    error.statusCode = 400;
+    throw error;
+  }
+  const pagePath = path.join(
+    repoRoot,
+    "data",
+    "council-meetings",
+    "charlottetown",
+    "2026-05-12-regular-council",
+    "raw-pages",
+    `${documentId}-page-${String(page).padStart(3, "0")}.txt`,
+  );
+  const absolute = path.resolve(pagePath);
+  const rawRoot = path.resolve(repoRoot, "data", "council-meetings", "charlottetown", "2026-05-12-regular-council", "raw-pages");
+  if (!absolute.startsWith(rawRoot)) {
+    const error = new Error("Invalid source page path.");
+    error.statusCode = 400;
+    throw error;
+  }
+  return {
+    documentId,
+    page,
+    text: await readFile(absolute, "utf8"),
+  };
+}
+
 function zoneNameFromPartTitle(partTitle, zoneCode) {
   const title = compactText(partTitle);
   const code = compactText(zoneCode);
@@ -3110,6 +3145,14 @@ const routeEntrypoints = new Map([
   ["/storm-surge/", { file: "/ui_kits/storm-surge/index.html", baseHref: "/ui_kits/storm-surge/" }],
   ["/council-meetings", { file: "/ui_kits/council-meetings/index.html", baseHref: "/ui_kits/council-meetings/" }],
   ["/council-meetings/", { file: "/ui_kits/council-meetings/index.html", baseHref: "/ui_kits/council-meetings/" }],
+  ["/rezoning-parcel-lookup", { file: "/ui_kits/rezoning-parcel-lookup/index.html", baseHref: "/ui_kits/rezoning-parcel-lookup/" }],
+  ["/rezoning-parcel-lookup/", { file: "/ui_kits/rezoning-parcel-lookup/index.html", baseHref: "/ui_kits/rezoning-parcel-lookup/" }],
+  ["/rezoning-zoning-comparison", { file: "/ui_kits/rezoning-zoning-comparison/index.html", baseHref: "/ui_kits/rezoning-zoning-comparison/" }],
+  ["/rezoning-zoning-comparison/", { file: "/ui_kits/rezoning-zoning-comparison/index.html", baseHref: "/ui_kits/rezoning-zoning-comparison/" }],
+  ["/rezoning-restriction-stack", { file: "/ui_kits/rezoning-restriction-stack/index.html", baseHref: "/ui_kits/rezoning-restriction-stack/" }],
+  ["/rezoning-restriction-stack/", { file: "/ui_kits/rezoning-restriction-stack/index.html", baseHref: "/ui_kits/rezoning-restriction-stack/" }],
+  ["/rezoning-storm-surge", { file: "/ui_kits/rezoning-storm-surge/index.html", baseHref: "/ui_kits/rezoning-storm-surge/" }],
+  ["/rezoning-storm-surge/", { file: "/ui_kits/rezoning-storm-surge/index.html", baseHref: "/ui_kits/rezoning-storm-surge/" }],
   ["/restriction-stack", { file: "/ui_kits/restriction-stack/index.html", baseHref: "/ui_kits/restriction-stack/" }],
   ["/restriction-stack/", { file: "/ui_kits/restriction-stack/index.html", baseHref: "/ui_kits/restriction-stack/" }],
   ["/city-view", { file: "/ui_kits/map-explorer-leaflet/index.html", baseHref: "/ui_kits/map-explorer-leaflet/" }],
@@ -3176,6 +3219,19 @@ const server = createServer(async (request, response) => {
         return;
       }
       await sendJson(response, await loadCouncilMeeting());
+      return;
+    }
+
+    if (url.pathname === "/api/council-meetings/current/source-page") {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      await sendJson(response, await loadCouncilMeetingSourcePage(
+        url.searchParams.get("documentId") || "",
+        url.searchParams.get("page") || "",
+      ));
       return;
     }
 

@@ -27,10 +27,18 @@ This wiki area tracks reusable meeting-preparation knowledge for municipal, regi
 
 The initial prototype is JSON-first and does not add database tables. The canonical generated meeting file is `data/council-meetings/charlottetown/2026-05-12-regular-council/meeting.json`, created by `scripts/extract-charlottetown-council-meeting.py` and validated against `schema/json-schema/council-meeting-extraction.schema.json`.
 
-The current web route is `/council-meetings`. It reads `GET /api/council-meetings/current` and provides public, council, and staff tabs for the two zoning bylaw second readings:
+The current web route is `/council-meetings`. It reads `GET /api/council-meetings/current` and provides a three-pane meeting workspace:
+
+- left agenda tree in agenda order for public, council, and staff views
+- audience-specific general landing page when no item is selected
+- selected-item header, source package scroll pane, and right-side context panels when an item is selected
+
+The two zoning bylaw second readings include rezoning tool links to copied meeting-specific endpoints:
 
 - 231 Brackley Point Road, PID 623090, Institutional `I` to Business Park Industrial `M-3`.
 - King and Dorchester Streets, PIDs 336974, 336909, 336917, 336966, and 1172915, `DMUN` to `DMS`.
+
+The copied endpoints are `/rezoning-parcel-lookup`, `/rezoning-zoning-comparison`, `/rezoning-restriction-stack`, and `/rezoning-storm-surge`. They preserve the original endpoint code paths for later merge decisions while allowing meeting-specific current/future zone context.
 
 ## Schema Notes
 

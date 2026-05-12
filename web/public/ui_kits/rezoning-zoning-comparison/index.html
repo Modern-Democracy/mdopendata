@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rezoning Bylaw Comparison - Modern Democracy</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../parcel-lookup/styles.css">
+<style>
+  .shell { max-width: 1050px; margin: 0 auto; padding: 32px 24px 56px; }
+  .compare { display: grid; grid-template-columns: 1fr 170px 1fr; border: 1px solid var(--border-hair); border-radius: 6px; overflow: hidden; background: var(--paper); margin: 20px 0; }
+  .cell { min-height: 72px; padding: 16px; border-bottom: 1px solid var(--border-hair); display: grid; align-content: center; }
+  .cell.current { background: var(--brick-wash); text-align: right; border-right: 1px solid var(--border-hair); }
+  .cell.label { background: var(--paper-3); text-align: center; border-right: 1px solid var(--border-hair); font: 700 12px var(--font-ui); text-transform: uppercase; color: var(--fg-3); }
+  .cell.future { background: var(--ochre-wash); }
+  .zone { font: 700 34px var(--font-display); color: var(--ink); }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .note { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 14px; color: var(--fg-2); }
+  @media (max-width: 760px) { .compare { grid-template-columns: 1fr; } .cell.current { text-align:left; } .cell.label { display:none; } }
+</style>
+</head>
+<body>
+<header class="app-header">
+  <img src="../../assets/logo-island-needle.svg" alt="Modern Democracy" class="wm">
+  <nav>
+    <a href="/rezoning-parcel-lookup">Rezoning parcel</a>
+    <a class="active" href="/rezoning-zoning-comparison">Rezoning comparison</a>
+    <a href="/council-meetings">Council meetings</a>
+    <a href="/zoning-comparison">Original comparison</a>
+  </nav>
+</header>
+<main class="shell">
+  <div class="eyebrow">Council Meeting Rezoning Context</div>
+  <h1 id="title">Rezoning bylaw comparison</h1>
+  <p class="lede">This copied endpoint compares the application current zone against the proposed future zone recorded for the council meeting item.</p>
+  <section class="compare">
+    <div class="cell current"><span class="eyebrow">Current application zone</span><span class="zone" id="fromZone">pending</span></div>
+    <div class="cell label">Rezoning request</div>
+    <div class="cell future"><span class="eyebrow">Future application zone</span><span class="zone" id="toZone">pending</span></div>
+    <div class="cell current"><strong id="pidLeft">PID pending</strong></div>
+    <div class="cell label">Property</div>
+    <div class="cell future"><strong id="pidRight">PID pending</strong></div>
+  </section>
+  <div class="actions">
+    <a class="btn btn-primary" id="parcel">Parcel Lookup</a>
+    <a class="btn btn-primary" id="restrictions">View Spatial Restrictions</a>
+    <a class="btn btn-primary" id="surge">Storm Surge</a>
+    <a class="btn btn-secondary" id="original">Original Compare bylaws</a>
+  </div>
+  <section class="note" style="margin-top:18px">
+    The original comparison endpoint remains unchanged. This copy is a meeting-specific interpretation layer for the rezoning application and can later be merged once the scope is stable.
+  </section>
+</main>
+<script>
+const params = new URLSearchParams(window.location.search);
+const pid = params.get("pid") || "";
+const title = params.get("title") || "Rezoning bylaw comparison";
+const fromZone = params.get("fromZone") || "pending";
+const toZone = params.get("toZone") || "pending";
+document.getElementById("title").textContent = title;
+document.getElementById("fromZone").textContent = fromZone;
+document.getElementById("toZone").textContent = toZone;
+document.getElementById("pidLeft").textContent = pid ? `PID ${pid}` : "PID pending";
+document.getElementById("pidRight").textContent = pid ? `PID ${pid}` : "PID pending";
+const query = window.location.search;
+document.getElementById("parcel").href = `/rezoning-parcel-lookup${query}`;
+document.getElementById("restrictions").href = `/rezoning-restriction-stack${query}`;
+document.getElementById("surge").href = `/rezoning-storm-surge${query}`;
+document.getElementById("original").href = pid ? `/zoning-comparison?pid=${encodeURIComponent(pid)}` : "/zoning-comparison";
+</script>
+</body>
+</html>
