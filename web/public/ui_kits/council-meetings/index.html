@@ -41,6 +41,11 @@
   .workflow-list, .check-list { margin: 0; padding-left: 18px; color: var(--fg-2); font-size: 13px; }
   .workflow-list li, .check-list li { margin-bottom: 7px; }
   .package-text { white-space: pre-wrap; font: 13px/1.55 var(--font-ui); color: var(--fg-2); margin: 0; }
+  .document-list { display: grid; gap: 10px; margin-bottom: 14px; }
+  .document-item { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 12px; }
+  .document-item h2 { font: 700 14px var(--font-ui); margin: 0 0 6px; }
+  .document-item p { color: var(--fg-2); font-size: 13px; margin: 0; }
+  .document-item .meta { font: 11px var(--font-mono); color: var(--fg-3); margin-top: 7px; }
   .badge-row { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 10px; }
   .badge { border: 1px solid var(--border-hair); border-radius: 3px; background: var(--paper); color: var(--fg-2); font: 700 11px var(--font-mono); padding: 3px 7px; }
   .badge.urgent { background: var(--brick-wash); color: var(--brick-ink); border-color: rgba(168,57,28,0.25); }
@@ -188,6 +193,13 @@ function citationPage(record, fallbackItem) {
 function itemPids(record) {
   return [...new Set((record?.property_references || []).flatMap((ref) => ref.pids || []))];
 }
+function recordId(record, fallbackId) {
+  return record?.item_id || record?.planning_item_id || record?.agenda_section_id || record?.committee_report_id || fallbackId;
+}
+function documentsForItem(payload, selectedId, record) {
+  const ids = new Set([selectedId, recordId(record, selectedId)].filter(Boolean));
+  return (payload?.packageDocuments || []).filter((document) => (document.agenda_item_ids || []).some((id) => ids.has(id)));
+}
 function zoneColor(code) {
   const key = String(code || "").trim().toUpperCase();
   return ZONE_COLORS[key] || CURRENT_ZONE_COLORS[key] || LEGACY_ZONE_COLORS[key.charAt(0)] || "var(--paper-3)";
@@ -245,7 +257,7 @@ function ItemHeader({ treeItem, record }) {
   </div>;
 }
 
-function AgendaPackagePane({ record, treeItem }) {
+function AgendaPackagePane({ payload, record, treeItem }) {
   const [sourcePage, setSourcePage] = useState(null);
   const [sourceChoice, setSourceChoice] = useState(() => citationPage(record, treeItem));
   useEffect(() => { setSourceChoice(citationPage(record, treeItem)); }, [record?.item_id, record?.planning_item_id, treeItem?.id]);
@@ -257,7 +269,12 @@ function AgendaPackagePane({ record, treeItem }) {
   }, [sourceChoice.documentId, sourceChoice.page]);
   const pageOptions = (record?.citations || []).map((citation) => ({ documentId: citation.source_document_id, page: citation.pdf_page_start, label: `${citation.source_document_id} page ${citation.pdf_page_start}` }));
   if (!pageOptions.length) pageOptions.push({ ...sourceChoice, label: `${sourceChoice.documentId} page ${sourceChoice.page}` });
-  return <div className="content-scroll"><select className="source-select" value={`${sourceChoice.documentId}:${sourceChoice.page}`} onChange={(event) => { const [documentId, page] = event.target.value.split(":"); setSourceChoice({ documentId, page: Number(page) }); }}>{pageOptions.map((option) => <option value={`${option.documentId}:${option.page}`} key={`${option.documentId}-${option.page}`}>{option.label}</option>)}</select><article className="package-card"><h2>{sourceChoice.documentId} package text, page {sourceChoice.page}</h2><pre className="package-text">{sourcePage?.text || "Loading source page."}</pre></article></div>;
+  const linkedDocuments = documentsForItem(payload, treeItem?.id, record);
+  return <div className="content-scroll">
+    {linkedDocuments.length > 0 && <div className="document-list">{linkedDocuments.map((document) => <article className="document-item" key={document.document_id}><h2>{document.title}</h2><p>{document.summary}</p><div className="meta">package pages {document.page_start}-{document.page_end} &middot; {document.page_count} page{document.page_count === 1 ? "" : "s"}{document.template_type ? ` \u00b7 ${document.template_type}` : ""}</div></article>)}</div>}
+    <select className="source-select" value={`${sourceChoice.documentId}:${sourceChoice.page}`} onChange={(event) => { const [documentId, page] = event.target.value.split(":"); setSourceChoice({ documentId, page: Number(page) }); }}>{pageOptions.map((option) => <option value={`${option.documentId}:${option.page}`} key={`${option.documentId}-${option.page}`}>{option.label}</option>)}</select>
+    <article className="package-card"><h2>{sourceChoice.documentId} package text, page {sourceChoice.page}</h2><pre className="package-text">{sourcePage?.text || "Loading source page."}</pre></article>
+  </div>;
 }
 
 function ParcelLookupPane({ itemId }) {
@@ -412,7 +429,7 @@ function SelectedItemView({ payload, selectedId, toolMode }) {
   const treeItem = allItems().find((item) => item.id === selectedId);
   const record = findRecord(payload, selectedId);
   if (!treeItem) return null;
-  return <><ItemHeader treeItem={treeItem} record={record} />{toolMode === "parcel" && record?.zoning_amendment ? <ParcelLookupPane itemId={record.item_id || record.planning_item_id || selectedId} /> : toolMode === "compare" && record?.zoning_amendment ? <ComparePane itemId={record.item_id || record.planning_item_id || selectedId} /> : toolMode === "restrictions" && record?.zoning_amendment ? <RestrictionsPane itemId={record.item_id || record.planning_item_id || selectedId} /> : toolMode === "shadow" && record?.zoning_amendment ? <ShadowPane itemId={record.item_id || record.planning_item_id || selectedId} record={record} /> : <AgendaPackagePane record={record} treeItem={treeItem} />}</>;
+  return <><ItemHeader treeItem={treeItem} record={record} />{toolMode === "parcel" && record?.zoning_amendment ? <ParcelLookupPane itemId={record.item_id || record.planning_item_id || selectedId} /> : toolMode === "compare" && record?.zoning_amendment ? <ComparePane itemId={record.item_id || record.planning_item_id || selectedId} /> : toolMode === "restrictions" && record?.zoning_amendment ? <RestrictionsPane itemId={record.item_id || record.planning_item_id || selectedId} /> : toolMode === "shadow" && record?.zoning_amendment ? <ShadowPane itemId={record.item_id || record.planning_item_id || selectedId} record={record} /> : <AgendaPackagePane payload={payload} record={record} treeItem={treeItem} />}</>;
 }
 
 function ContextPanel({ audience, payload, selectedId, toolMode, setToolMode }) {
@@ -420,9 +437,11 @@ function ContextPanel({ audience, payload, selectedId, toolMode, setToolMode }) 
   const record = findRecord(payload, selectedId);
   const workflow = payload.audienceWorkflows.find((candidate) => audience === "public" ? candidate.audience === "public_member" : audience === "council" ? candidate.audience === "council_or_committee" : candidate.audience === "municipal_staff");
   const isRezoning = Boolean(record?.zoning_amendment);
+  const linkedDocuments = documentsForItem(payload, selectedId, record);
   return <aside className="context-panel">
     <section className="context-card"><h2>{audience === "public" ? "Public needs" : audience === "council" ? "Council needs" : "Staff needs"}</h2><ul className="workflow-list">{(workflow?.stages || []).flatMap((stage) => stage.tasks).map((task) => <li key={task}>{task}</li>)}</ul></section>
     <section className="context-card"><h2>Agenda Context</h2>{selectedId ? <div className="meta-grid"><div className="k">Item</div><div className="v">{treeItem?.label} {treeItem?.title}</div><div className="k">Stage</div><div className="v">{record?.stage || "not extracted"}</div><div className="k">Decision</div><div className="v">{record?.decision_requested || "not extracted"}</div></div> : <p className="empty-note">Select an agenda item for item-specific context.</p>}</section>
+    {selectedId && <section className="context-card"><h2>Package Documents</h2>{linkedDocuments.length ? <ul className="check-list">{linkedDocuments.map((document) => <li key={document.document_id}>{document.title}: pages {document.page_start}-{document.page_end}</li>)}</ul> : <p className="empty-note">No package document has been linked to this item yet.</p>}</section>}
     {isRezoning && <section className="context-card"><h2>Rezoning Tools</h2><div className="route-actions">{[["package", "View Agenda Package"], ["parcel", "View Parcel On Map"], ["compare", "Compare bylaws"], ["restrictions", "View Spatial Restrictions"], ["shadow", "Shadow Study"]].map(([key, label]) => <button type="button" className={`btn btn-primary ${toolMode === key ? "active" : ""}`} onClick={() => setToolMode(key)} key={key}>{label}</button>)}</div></section>}
     <section className="context-card"><h2>Interface Controls</h2><ul className="check-list"><li>Use the left tree to follow agenda order.</li><li>Use View Agenda Package to restore the source page listing.</li><li>Rezoning tools replace the middle pane without leaving this page.</li></ul></section>
   </aside>;

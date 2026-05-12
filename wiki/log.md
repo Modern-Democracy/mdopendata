@@ -146,6 +146,10 @@ Expanded `/council-meetings` from a public-first view to functional public, coun
 
 Reworked `/council-meetings` into a three-pane workspace with an agenda-order left tree, audience-specific general pages, selected-item package text panes, and rezoning tool panels. Added copied meeting-specific rezoning routes for parcel lookup, zoning comparison, spatial restrictions, and storm surge.
 
+## [2026-05-12] implementation | Council package ToC and agenda outputs
+
+Extended the May 12 Charlottetown council extraction to emit `agenda.json` and `toc.json` beside `meeting.json`. The ToC covers all 256 package pages as logical documents with page counts, summaries, boundary observations, template categories where known, and non-PDF page reproduction options; full package content extraction remains deferred except for the two rezoning items used by the web endpoints.
+
 ## Sources
 
 - [Wiki schema](./AGENTS.md)

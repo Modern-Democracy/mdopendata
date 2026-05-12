@@ -41,6 +41,22 @@ const councilMeetingPath = path.join(
   "2026-05-12-regular-council",
   "meeting.json",
 );
+const councilMeetingAgendaPath = path.join(
+  repoRoot,
+  "data",
+  "council-meetings",
+  "charlottetown",
+  "2026-05-12-regular-council",
+  "agenda.json",
+);
+const councilMeetingTocPath = path.join(
+  repoRoot,
+  "data",
+  "council-meetings",
+  "charlottetown",
+  "2026-05-12-regular-council",
+  "toc.json",
+);
 
 const publicDir = path.join(__dirname, "public");
 const pool = new Pool({
@@ -468,11 +484,21 @@ function mapZoneSectionRow(row) {
 }
 
 async function loadCouncilMeeting() {
-  const payload = JSON.parse(await readFile(councilMeetingPath, "utf8"));
+  const [payload, agenda, toc] = await Promise.all([
+    readFile(councilMeetingPath, "utf8").then(JSON.parse),
+    readFile(councilMeetingAgendaPath, "utf8").then(JSON.parse),
+    readFile(councilMeetingTocPath, "utf8").then(JSON.parse),
+  ]);
   return {
     source: "data/council-meetings/charlottetown/2026-05-12-regular-council/meeting.json",
+    agendaSource: "data/council-meetings/charlottetown/2026-05-12-regular-council/agenda.json",
+    tocSource: "data/council-meetings/charlottetown/2026-05-12-regular-council/toc.json",
     meeting: payload.meeting,
     sourceDocuments: payload.source_documents,
+    agendaDocuments: agenda.agenda_documents,
+    packageDocuments: toc.documents,
+    documentStructureStandards: toc.document_structure_standards,
+    pageReproductionOptions: toc.page_reproduction_options,
     agendaSections: payload.agenda_sections,
     committeeReports: payload.committee_reports,
     resolutions: payload.resolutions,

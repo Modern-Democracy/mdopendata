@@ -27,6 +27,13 @@ This wiki area tracks reusable meeting-preparation knowledge for municipal, regi
 
 The initial prototype is JSON-first and does not add database tables. The canonical generated meeting file is `data/council-meetings/charlottetown/2026-05-12-regular-council/meeting.json`, created by `scripts/extract-charlottetown-council-meeting.py` and validated against `schema/json-schema/council-meeting-extraction.schema.json`.
 
+The May 12 package extraction also emits:
+
+- `data/council-meetings/charlottetown/2026-05-12-regular-council/agenda.json`: unified agenda view combining the standalone agenda and package agenda pages, with agenda items and linked package documents.
+- `data/council-meetings/charlottetown/2026-05-12-regular-council/toc.json`: logical document table of contents for all 256 package pages, including page counts, summaries, observed boundary basis, template categories where known, document-structure standards, and non-PDF page reproduction options.
+
+The current extraction scope intentionally avoids full package content extraction except for the two rezoning bylaw second-reading items already used by the council-meeting web endpoints. Future reuse of the package segmentation should treat page-boundary rules as reviewable observations, not a universal template.
+
 The current web route is `/council-meetings`. It reads `GET /api/council-meetings/current` and provides a three-pane meeting workspace:
 
 - left agenda tree in agenda order for public, council, and staff views
