@@ -1,0 +1,32 @@
+{
+  "code_table": "follow_up_status",
+  "description": "Post-meeting follow-up states for meeting items and public workflows.",
+  "version": "0.1.0",
+  "seeded_at": "2026-05-12",
+  "entries": [
+    {
+      "code": "not_started",
+      "label": "Not started",
+      "description": "The follow-up item has not started.",
+      "status": "active"
+    },
+    {
+      "code": "waiting_for_minutes",
+      "label": "Waiting for minutes",
+      "description": "The next step depends on official minutes or meeting records.",
+      "status": "active"
+    },
+    {
+      "code": "in_progress",
+      "label": "In progress",
+      "description": "The follow-up item is underway.",
+      "status": "active"
+    },
+    {
+      "code": "complete",
+      "label": "Complete",
+      "description": "The follow-up item is complete.",
+      "status": "active"
+    }
+  ]
+}

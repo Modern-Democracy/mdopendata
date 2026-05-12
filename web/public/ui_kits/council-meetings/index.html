@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Council Meeting - Modern Democracy</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../parcel-lookup/styles.css">
+<style>
+  body { margin: 0; background: var(--paper); color: var(--ink); }
+  .meeting-shell { max-width: 1240px; margin: 0 auto; padding: 28px 24px 56px; }
+  .meeting-head { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 22px; align-items: end; border-bottom: 1px solid var(--border-hair); padding-bottom: 22px; margin-bottom: 22px; }
+  .meeting-head h1 { font-size: 42px; line-height: 1.02; margin-bottom: 10px; }
+  .meeting-head p { font-size: 14px; color: var(--fg-3); max-width: 78ch; }
+  .meeting-meta { display: grid; gap: 8px; padding: 14px; border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); }
+  .meta-row { display: grid; grid-template-columns: 92px 1fr; gap: 10px; font-size: 13px; }
+  .meta-row span:first-child { color: var(--fg-3); font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; }
+  .tabs { display: inline-flex; gap: 2px; padding: 3px; border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); margin-bottom: 20px; }
+  .tabs button { border: 0; border-radius: 4px; background: transparent; color: var(--fg-3); cursor: pointer; font: 600 12px var(--font-ui); padding: 8px 12px; }
+  .tabs button.active { background: var(--ink); color: var(--paper); }
+  .public-grid { display: grid; grid-template-columns: 1fr 340px; gap: 18px; align-items: start; }
+  .audience-grid { display: grid; grid-template-columns: 1fr 340px; gap: 18px; align-items: start; }
+  .item-list { display: grid; gap: 14px; }
+  .item-card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); overflow: hidden; }
+  .item-head { display: grid; gap: 8px; padding: 16px; border-bottom: 1px solid var(--border-hair); background: var(--paper-3); }
+  .item-head h2 { font-size: 24px; overflow-wrap: anywhere; }
+  .badge-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .badge { border: 1px solid var(--border-hair); border-radius: 3px; background: var(--paper); color: var(--fg-2); font: 600 11px var(--font-mono); padding: 3px 7px; }
+  .badge.urgent { background: var(--brick-wash); color: var(--brick-ink); border-color: rgba(168, 57, 28, 0.25); }
+  .item-body { display: grid; gap: 14px; padding: 16px; }
+  .summary { color: var(--fg-2); font-size: 14px; margin: 0; }
+  .decision-box { display: grid; gap: 6px; padding: 12px; border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper); }
+  .decision-box .label { letter-spacing: 0.12em; }
+  .property-grid { display: grid; gap: 8px; }
+  .property-row { display: grid; gap: 8px; padding: 10px 12px; border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper); }
+  .pid-links { display: flex; gap: 6px; flex-wrap: wrap; }
+  .pid-link { display: inline-flex; align-items: center; gap: 4px; border-radius: 3px; background: var(--harbour-wash); color: var(--harbour-ink); font: 600 12px var(--font-mono); padding: 5px 8px; text-decoration: none; }
+  .source-list { display: grid; gap: 8px; }
+  .source-item { border-left: 3px solid var(--border); padding-left: 10px; color: var(--fg-3); font-size: 12px; }
+  .source-item strong { color: var(--ink); font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; }
+  .side-stack { display: grid; gap: 14px; }
+  .side-panel { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 14px; }
+  .side-panel h2 { font-family: var(--font-ui); font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+  .check-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .check-list li { display: grid; grid-template-columns: 18px 1fr; gap: 8px; color: var(--fg-2); font-size: 13px; }
+  .box { width: 14px; height: 14px; border: 1px solid var(--border); border-radius: 2px; margin-top: 2px; background: var(--paper); }
+  .workflow { display: grid; gap: 12px; }
+  .workflow-stage { display: grid; gap: 7px; }
+  .workflow-stage h3 { font-family: var(--font-ui); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg-3); }
+  .workflow-stage ul { margin: 0; padding-left: 18px; color: var(--fg-2); font-size: 13px; }
+  .brief-list { display: grid; gap: 12px; }
+  .brief-card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); overflow: hidden; }
+  .brief-head { display: flex; gap: 8px; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 12px 14px; border-bottom: 1px solid var(--border-hair); background: var(--paper-3); }
+  .brief-head h2 { font-size: 18px; overflow-wrap: anywhere; }
+  .brief-body { display: grid; gap: 12px; padding: 14px; }
+  .brief-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .brief-field { display: grid; gap: 3px; padding: 10px; border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper); }
+  .brief-field span { color: var(--fg-3); font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; }
+  .brief-field strong { font-size: 13px; overflow-wrap: anywhere; }
+  .status-card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 18px; color: var(--fg-3); }
+  @media (max-width: 900px) {
+    .meeting-shell { padding: 22px 16px 42px; }
+    .meeting-head, .public-grid, .audience-grid, .brief-grid { grid-template-columns: 1fr; }
+    .meeting-head h1 { font-size: 34px; }
+  }
+</style>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useEffect, useMemo, useState } = React;
+
+function Header() {
+  return (
+    <header className="app-header">
+      <img src="../../assets/logo-island-needle.svg" alt="Modern Democracy" className="wm" />
+      <nav>
+        <a href="/parcel-lookup">Parcel lookup</a>
+        <a href="/zoning-comparison">Compare bylaws</a>
+        <a className="active" href="/council-meetings">Council meetings</a>
+        <a href="/restriction-stack">View Spatial Restrictions</a>
+        <a href="/provisions-comparison">Compare provisions</a>
+        <a href="/city-view">Map</a>
+      </nav>
+    </header>
+  );
+}
+
+function sourceLabel(citation) {
+  return `${citation.source_document_id} PDF page ${citation.pdf_page_start}`;
+}
+
+function pidHref(pid) {
+  return `/zoning-comparison/${encodeURIComponent(pid)}`;
+}
+
+function MeetingMeta({ meeting, sourceDocuments }) {
+  return (
+    <aside className="meeting-meta">
+      <div className="meta-row"><span>Date</span><strong>{meeting.date} at {meeting.time}</strong></div>
+      <div className="meta-row"><span>Location</span><strong>{meeting.location}</strong></div>
+      <div className="meta-row"><span>Stream</span><a href={meeting.livestream_url}>{meeting.livestream_url.replace(/^https?:\/\//, "")}</a></div>
+      <div className="meta-row"><span>Sources</span><strong>{sourceDocuments.length} PDFs</strong></div>
+    </aside>
+  );
+}
+
+function ItemCard({ item }) {
+  const refs = item.property_references || [];
+  return (
+    <article className="item-card">
+      <div className="item-head">
+        <div className="badge-row">
+          <span className="badge urgent">{item.stage.replaceAll("_", " ")}</span>
+          <span className="badge">{item.zoning_amendment.from_zone} to {item.zoning_amendment.to_zone}</span>
+          {item.zoning_amendment.official_plan_amendment && <span className="badge">OPA</span>}
+        </div>
+        <h2>{item.title}</h2>
+      </div>
+      <div className="item-body">
+        <p className="summary">{item.public_summary}</p>
+        <div className="decision-box">
+          <div className="label">Decision Tonight</div>
+          <strong>{item.decision_requested}</strong>
+        </div>
+        <div className="property-grid">
+          {refs.map((ref) => (
+            <div className="property-row" key={ref.label}>
+              <strong>{ref.label}</strong>
+              <div className="pid-links">
+                {(ref.pids || []).map((pid) => <a className="pid-link" href={pidHref(pid)} key={pid}>PID {pid}</a>)}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="source-list">
+          {(item.citations || []).map((citation, index) => (
+            <div className="source-item" key={`${citation.source_document_id}-${index}`}>
+              <strong>{sourceLabel(citation)}</strong>
+              <div>{citation.text_excerpt}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function WorkflowPanel({ workflow, title = "Workflow" }) {
+  return (
+    <section className="side-panel">
+      <h2>{title}</h2>
+      <div className="workflow">
+        {(workflow?.stages || []).map((stage) => (
+          <div className="workflow-stage" key={stage.stage}>
+            <h3>{stage.stage.replaceAll("_", " ")}</h3>
+            <ul>{stage.tasks.map((task) => <li key={task}>{task}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function FollowUpPanel() {
+  const tasks = [
+    "Record motion wording and vote result.",
+    "Check official minutes when posted.",
+    "Update bylaw reading/adoption status.",
+    "Re-run parcel and zoning context after data changes."
+  ];
+  return (
+    <section className="side-panel">
+      <h2>Post-Meeting Follow-Up</h2>
+      <ul className="check-list">
+        {tasks.map((task) => <li key={task}><span className="box"></span><span>{task}</span></li>)}
+      </ul>
+    </section>
+  );
+}
+
+function actionSummary(item) {
+  const amendment = item.zoning_amendment || {};
+  return `${amendment.from_zone || "unknown"} to ${amendment.to_zone || "unknown"}`;
+}
+
+function BriefCard({ item, mode }) {
+  const refs = item.property_references || [];
+  const pids = refs.flatMap((ref) => ref.pids || []);
+  const sourcePages = (item.citations || []).map(sourceLabel).join("; ");
+  return (
+    <article className="brief-card">
+      <div className="brief-head">
+        <h2>{item.title}</h2>
+        <div className="badge-row">
+          <span className="badge urgent">{item.stage.replaceAll("_", " ")}</span>
+          <span className="badge">{actionSummary(item)}</span>
+        </div>
+      </div>
+      <div className="brief-body">
+        <p className="summary">{mode === "staff" ? item.decision_requested : item.public_summary}</p>
+        <div className="brief-grid">
+          <div className="brief-field"><span>Agenda</span><strong>{item.agenda_section_id}</strong></div>
+          <div className="brief-field"><span>Action</span><strong>{item.decision_requested}</strong></div>
+          <div className="brief-field"><span>Properties</span><strong>{refs.map((ref) => ref.label).join("; ")}</strong></div>
+          <div className="brief-field"><span>PIDs</span><strong>{pids.join(", ")}</strong></div>
+          <div className="brief-field"><span>Plan change</span><strong>{item.zoning_amendment.future_land_use_change || "none recorded"}</strong></div>
+          <div className="brief-field"><span>Sources</span><strong>{sourcePages}</strong></div>
+        </div>
+        <div className="pid-links">
+          {pids.map((pid) => <a className="pid-link" href={pidHref(pid)} key={pid}>PID {pid}</a>)}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function AudienceView({ payload, audience, title, mode }) {
+  const workflow = payload.audienceWorkflows?.find((candidate) => candidate.audience === audience);
+  const sideTasks = mode === "staff"
+    ? ["Verify PIDs and legal descriptions.", "Capture amendments or deferrals.", "Update minutes, bylaw status, and map data after the meeting."]
+    : ["Check conflict declarations before the item.", "Confirm the exact motion and amendment stage.", "Note questions requiring staff follow-up."];
+  return (
+    <section className="audience-grid">
+      <div className="brief-list">
+        {payload.bylawReadings.map((item) => <BriefCard item={item} mode={mode} key={item.item_id} />)}
+      </div>
+      <aside className="side-stack">
+        <WorkflowPanel workflow={workflow} title={title} />
+        <section className="side-panel">
+          <h2>{mode === "staff" ? "Staff Controls" : "Council Controls"}</h2>
+          <ul className="check-list">
+            {sideTasks.map((task) => <li key={task}><span className="box"></span><span>{task}</span></li>)}
+          </ul>
+        </section>
+        <section className="side-panel">
+          <h2>Source Coverage</h2>
+          <p className="summary">{payload.sourceDocuments.length} source PDFs. {payload.reviewFlags.length} review flag recorded.</p>
+        </section>
+      </aside>
+    </section>
+  );
+}
+
+function App() {
+  const [payload, setPayload] = useState(null);
+  const [status, setStatus] = useState("loading");
+  const [activeTab, setActiveTab] = useState("public");
+
+  useEffect(() => {
+    fetch("/api/council-meetings/current")
+      .then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then((data) => {
+        setPayload(data);
+        setStatus("ready");
+      })
+      .catch((error) => {
+        setStatus(error.message || "Unable to load meeting data.");
+      });
+  }, []);
+
+  const publicWorkflow = useMemo(() => (
+    payload?.audienceWorkflows?.find((workflow) => workflow.audience === "public_member")
+  ), [payload]);
+
+  if (status !== "ready") {
+    return (
+      <>
+        <Header />
+        <main className="meeting-shell"><div className="status-card">{status === "loading" ? "Loading meeting data." : status}</div></main>
+      </>
+    );
+  }
+
+  const { meeting, sourceDocuments, bylawReadings } = payload;
+  return (
+    <>
+      <Header />
+      <main className="meeting-shell">
+        <section className="meeting-head">
+          <div>
+            <div className="eyebrow">Council Meeting Preparation</div>
+            <h1>{meeting.title}</h1>
+            <p>{meeting.focus}</p>
+          </div>
+          <MeetingMeta meeting={meeting} sourceDocuments={sourceDocuments} />
+        </section>
+        <div className="tabs">
+          <button type="button" className={activeTab === "public" ? "active" : ""} onClick={() => setActiveTab("public")}>Public</button>
+          <button type="button" className={activeTab === "council" ? "active" : ""} onClick={() => setActiveTab("council")}>Council</button>
+          <button type="button" className={activeTab === "staff" ? "active" : ""} onClick={() => setActiveTab("staff")}>Staff</button>
+        </div>
+        {activeTab === "public" && (
+          <section className="public-grid">
+            <div className="item-list">
+              {bylawReadings.map((item) => <ItemCard item={item} key={item.item_id} />)}
+            </div>
+            <aside className="side-stack">
+              <WorkflowPanel workflow={publicWorkflow} title="Public Workflow" />
+              <FollowUpPanel />
+              <section className="side-panel">
+                <h2>Data Status</h2>
+                <p className="summary">JSON-first prototype. Database migration is deferred until the meeting extraction shape stabilizes.</p>
+              </section>
+            </aside>
+          </section>
+        )}
+        {activeTab === "council" && (
+          <AudienceView payload={payload} audience="council_or_committee" title="Council Workflow" mode="council" />
+        )}
+        {activeTab === "staff" && (
+          <AudienceView payload={payload} audience="municipal_staff" title="Staff Workflow" mode="staff" />
+        )}
+      </main>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

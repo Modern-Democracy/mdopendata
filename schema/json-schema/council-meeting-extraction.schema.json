@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/mdopendata/council-meeting-extraction.schema.json",
+  "title": "Council Meeting Extraction",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "meeting",
+    "source_documents",
+    "agenda_sections",
+    "committee_reports",
+    "resolutions",
+    "bylaw_readings",
+    "planning_items",
+    "audience_workflows",
+    "review_flags"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "type": "integer", "const": 1 },
+    "meeting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "meeting_id",
+        "jurisdiction",
+        "body",
+        "meeting_type",
+        "title",
+        "date",
+        "time",
+        "location",
+        "livestream_url",
+        "focus"
+      ],
+      "properties": {
+        "meeting_id": { "type": "string" },
+        "jurisdiction": { "type": "string" },
+        "body": { "type": "string" },
+        "meeting_type": { "type": "string" },
+        "title": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "time": { "type": "string" },
+        "location": { "type": "string" },
+        "livestream_url": { "type": "string" },
+        "focus": { "type": "string" }
+      }
+    },
+    "source_documents": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/source_document" }
+    },
+    "agenda_sections": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/agenda_section" }
+    },
+    "committee_reports": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/committee_report" }
+    },
+    "resolutions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/action_item" }
+    },
+    "bylaw_readings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/action_item" }
+    },
+    "planning_items": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/planning_item" }
+    },
+    "audience_workflows": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/audience_workflow" }
+    },
+    "review_flags": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/review_flag" }
+    }
+  },
+  "$defs": {
+    "citation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_document_id", "pdf_page_start", "pdf_page_end"],
+      "properties": {
+        "source_document_id": { "type": "string" },
+        "pdf_page_start": { "type": "integer", "minimum": 1 },
+        "pdf_page_end": { "type": "integer", "minimum": 1 },
+        "text_excerpt": { "type": "string" }
+      }
+    },
+    "source_document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_document_id", "document_type", "repo_relpath", "page_count", "sha256"],
+      "properties": {
+        "source_document_id": { "type": "string" },
+        "document_type": { "type": "string" },
+        "repo_relpath": { "type": "string" },
+        "page_count": { "type": "integer", "minimum": 1 },
+        "sha256": { "type": "string" }
+      }
+    },
+    "agenda_section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["agenda_section_id", "label_raw", "title_raw", "summary", "citations"],
+      "properties": {
+        "agenda_section_id": { "type": "string" },
+        "label_raw": { "type": "string" },
+        "title_raw": { "type": "string" },
+        "summary": { "type": "string" },
+        "citations": { "type": "array", "items": { "$ref": "#/$defs/citation" } }
+      }
+    },
+    "committee_report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["committee_report_id", "committee_name", "chair", "summary", "citations"],
+      "properties": {
+        "committee_report_id": { "type": "string" },
+        "committee_name": { "type": "string" },
+        "chair": { "type": "string" },
+        "summary": { "type": "string" },
+        "citations": { "type": "array", "items": { "$ref": "#/$defs/citation" } }
+      }
+    },
+    "property_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "pids"],
+      "properties": {
+        "label": { "type": "string" },
+        "address": { "type": ["string", "null"] },
+        "pids": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "zoning_amendment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from_zone", "to_zone", "bylaw_name"],
+      "properties": {
+        "from_zone": { "type": "string" },
+        "to_zone": { "type": "string" },
+        "bylaw_name": { "type": "string" },
+        "official_plan_amendment": { "type": "boolean" },
+        "future_land_use_change": { "type": ["string", "null"] }
+      }
+    },
+    "action_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "item_id",
+        "agenda_section_id",
+        "item_type",
+        "title",
+        "stage",
+        "decision_requested",
+        "property_references",
+        "zoning_amendment",
+        "public_summary",
+        "citations"
+      ],
+      "properties": {
+        "item_id": { "type": "string" },
+        "agenda_section_id": { "type": "string" },
+        "item_type": { "type": "string" },
+        "title": { "type": "string" },
+        "stage": { "type": "string" },
+        "decision_requested": { "type": "string" },
+        "property_references": { "type": "array", "items": { "$ref": "#/$defs/property_reference" } },
+        "zoning_amendment": { "$ref": "#/$defs/zoning_amendment" },
+        "public_summary": { "type": "string" },
+        "citations": { "type": "array", "items": { "$ref": "#/$defs/citation" } }
+      }
+    },
+    "planning_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["planning_item_id", "title", "item_type", "stage", "property_references", "citations"],
+      "properties": {
+        "planning_item_id": { "type": "string" },
+        "title": { "type": "string" },
+        "item_type": { "type": "string" },
+        "stage": { "type": "string" },
+        "property_references": { "type": "array", "items": { "$ref": "#/$defs/property_reference" } },
+        "citations": { "type": "array", "items": { "$ref": "#/$defs/citation" } }
+      }
+    },
+    "audience_workflow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["audience", "stages"],
+      "properties": {
+        "audience": { "type": "string" },
+        "stages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["stage", "tasks"],
+            "properties": {
+              "stage": { "type": "string" },
+              "tasks": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      }
+    },
+    "review_flag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["review_flag_id", "severity", "message", "citations"],
+      "properties": {
+        "review_flag_id": { "type": "string" },
+        "severity": { "enum": ["info", "warning", "error"] },
+        "message": { "type": "string" },
+        "citations": { "type": "array", "items": { "$ref": "#/$defs/citation" } }
+      }
+    }
+  }
+}

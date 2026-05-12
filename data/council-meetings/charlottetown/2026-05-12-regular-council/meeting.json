@@ -1,0 +1,373 @@
+{
+  "$schema": "../../../schema/json-schema/council-meeting-extraction.schema.json",
+  "schema_version": 1,
+  "meeting": {
+    "meeting_id": "charlottetown-2026-05-12-regular-council",
+    "jurisdiction": "City of Charlottetown",
+    "body": "Council",
+    "meeting_type": "regular_council",
+    "title": "Regular Monthly Meeting of Council",
+    "date": "2026-05-12",
+    "time": "5:00 PM",
+    "location": "Council Chambers, City Hall, 199 Queen Street",
+    "livestream_url": "https://www.charlottetown.ca/video",
+    "focus": "Public preparation for zoning-related agenda items and bylaw readings."
+  },
+  "source_documents": [
+    {
+      "source_document_id": "agenda",
+      "document_type": "agenda",
+      "repo_relpath": "docs/charlottetown/council-meetings/05 Regular Meeting of Council Agenda - May 12, 2026.pdf",
+      "page_count": 2,
+      "sha256": "e930698208f12e9d3c1f3668746b743db849c52752614bfadd4fd76baf635be1"
+    },
+    {
+      "source_document_id": "package",
+      "document_type": "agenda_package",
+      "repo_relpath": "docs/charlottetown/council-meetings/05 Regular Meeting of Council Package - May 12, 2026.pdf",
+      "page_count": 256,
+      "sha256": "0c46f86b9cbab57764fff157ae92b2464f33920f38fa05dced697e8d4e35c9e4"
+    }
+  ],
+  "agenda_sections": [
+    {
+      "agenda_section_id": "agenda-7-1-planning-heritage",
+      "label_raw": "7.1",
+      "title_raw": "Planning & Heritage",
+      "summary": "Planning & Heritage lists a monthly report, five resolutions, and two second readings to amend the Zoning & Development Bylaw.",
+      "citations": [
+        {
+          "source_document_id": "agenda",
+          "pdf_page_start": 1,
+          "pdf_page_end": 1,
+          "text_excerpt": "Previous Draft Minutes of Council\n\n - Regular Meeting of Council - April 14, 2026\n\n5. Business Arising out of the Minutes\n\n6. Council Inquiries to be taken Under Consideration\n\n7. Reports of Standing Committees of Council\n\n 7.1. Planning & Heritage - Deputy Mayor Alanna Jankov, Chair\n - Monthly Report\n - Five (5) Resolutions\n - Two (2) 2nd Readings to amend the Zoning & Development Bylaw\n o 231 Brackley Point Road (PID# 623090) Rezone I Zone to M-3 Zone\n o King & Dorchester Sts. (PID#s 336974, 336909, 336917,336966 and 1172915) DMUN to DMS Zone\n\n 7.2. Environment & Sustainability - Councillor Trevor MacKinnon, Chair\n - Monthly Report\n - Four (4) Resolutions\n\n 7.3. Finance, Audit, Tendering & Administration - Councillor John McAleer, Chair\n - Monthly Report\n - No Resolutions\n\n 7.4. Human Resources - Councillor Norman Beck, Chair\n - Monthly Report\n - No Resolutions\n\n 7.5. Strat. Priorities, Comms & Intergovernmental Cooperation - Councillor Justin Muttart, Chair\n - Summary Page\n - No Resolutions\n\nRegular Meeting of Council Agenda May 12, 2026\n\n 7.6. Protective & Emergency Services - Councillor Julie McCabe, Chair\n - Monthly Report"
+        }
+      ]
+    },
+    {
+      "agenda_section_id": "agenda-7-11-new-business",
+      "label_raw": "7.11",
+      "title_raw": "New Business",
+      "summary": "New Business lists one resolution outside the committee report sequence.",
+      "citations": [
+        {
+          "source_document_id": "agenda",
+          "pdf_page_start": 2,
+          "pdf_page_end": 2,
+          "text_excerpt": "olutions\n\n 7.9. Economic, Tourism & Cultural Development - Councillor Terry Bernard, Chair\n - Monthly Report\n - No Resolutions\n\n 7.10. Public Works - Councillor Mitchell Tweel, Chair\n - Monthly Report\n - One (1) Resolution\n\n 7.11. New Business\n - One (1) Resolution\n\n8. Motion to Move into a Closed Session as per the Municipal Government Act of PEI\n\n 119(1)(e) a matter still under consideration, on which the council has not yet publicly\n announced a decision, and about which discussion in public would likely prejudice a\n municipality's ability to carry out its negotiations;\n\n a) Contract Services Matter\n\n9. Business Arising from the Closed Session (If Applicable)\n\n10. Adjournment\n\n 2"
+        }
+      ]
+    }
+  ],
+  "committee_reports": [
+    {
+      "committee_report_id": "planning-heritage-report-2026-05-12",
+      "committee_name": "Planning & Heritage",
+      "chair": "Deputy Mayor Alanna Jankov",
+      "summary": "The Planning & Heritage report identifies five resolutions and two second readings, including zoning-related items for 231 Brackley Point Road and King/Dorchester Streets.",
+      "citations": [
+        {
+          "source_document_id": "package",
+          "pdf_page_start": 11,
+          "pdf_page_end": 11,
+          "text_excerpt": "Affordable Housing Advisory Committee has not met since the last Regular Meeting of Council.\n\nThe Planning & Heritage Committee met on Tuesday, May 5, 2026; copies of the minutes and report is\nincluded in your package.\n\nThe Planning Board met on Tuesday, May 5, 2026; copies of the minutes and reports are included in your\npackage.\n\nFor information purposes, a listing of Permit applications issued for April 2026 along with YTD has been\nincluded in your package.\n\nResolutions: Five (5)\n\nPlanning & Heritage Committee:\n\n 1. Pedestrian Mall Agreement: This is a request to amend the operational hours outlined in the\n Pedestrian Mall Agreement as it pertains to the Victoria Row Merchants Association.\n\nPlanning Board:\n\n 2. 15 Clonhaven Street (PID1047562): This is a request for a Major Variance for Lots 153, 154,\n and 155 to increase the number of apartment units on each.\n\n 3. 307 Patterson Drive (PID676585): This is a request to proceed to public consultation concerning\n a request to rezone the subject property.\n\n 4. Unaddressed Property (PID390534) and (PID1179670): This is a request to proceed to public\n consultation concerning"
+        }
+      ]
+    }
+  ],
+  "resolutions": [
+    {
+      "item_id": "resolution-planning-board-307-patterson-public-consultation",
+      "agenda_section_id": "agenda-7-1-planning-heritage",
+      "item_type": "resolution",
+      "title": "307 Patterson Drive rezoning request to proceed to public consultation",
+      "stage": "public_consultation_request",
+      "decision_requested": "Proceed to public consultation concerning a request to rezone the subject property.",
+      "property_references": [
+        {
+          "label": "307 Patterson Drive",
+          "address": "307 Patterson Drive",
+          "pids": [
+            "676585"
+          ]
+        }
+      ],
+      "zoning_amendment": {
+        "from_zone": "unknown",
+        "to_zone": "unknown",
+        "bylaw_name": "Zoning & Development Bylaw",
+        "official_plan_amendment": false,
+        "future_land_use_change": null
+      },
+      "public_summary": "This item is at an earlier consultation stage than tonight's second readings.",
+      "citations": [
+        {
+          "source_document_id": "package",
+          "pdf_page_start": 11,
+          "pdf_page_end": 11,
+          "text_excerpt": "Affordable Housing Advisory Committee has not met since the last Regular Meeting of Council.\n\nThe Planning & Heritage Committee met on Tuesday, May 5, 2026; copies of the minutes and report is\nincluded in your package.\n\nThe Planning Board met on Tuesday, May 5, 2026; copies of the minutes and reports are included in your\npackage.\n\nFor information purposes, a listing of Permit applications issued for April 2026 along with YTD has been\nincluded in your package.\n\nResolutions: Five (5)\n\nPlanning & Heritage Committee:\n\n 1. Pedestrian Mall Agreement: This is a request to amend the operational hours outlined in the\n Pedestrian Mall Agreement as it pertains to the Victoria Row Merchants Association.\n\nPlanning Board:\n\n 2. 15 Clonhaven Street (PID1047562): This is a request for a Major Variance for Lots 153, 154,\n and 155 to increase the number of apartment units on each.\n\n 3. 307 Patterson Drive (PID676585): This is a request to proceed to public consultation concerning\n a request to rezone the subject property.\n\n 4. Unaddressed Property (PID390534) and (PID1179670): This is a request to proceed to public\n consultation concerning"
+        }
+      ]
+    },
+    {
+      "item_id": "resolution-planning-board-pid-390534-1179670-public-consultation",
+      "agenda_section_id": "agenda-7-1-planning-heritage",
+      "item_type": "resolution",
+      "title": "Unaddressed properties PID 390534 and PID 1179670 rezoning request to proceed to public consultation",
+      "stage": "public_consultation_request",
+      "decision_requested": "Proceed to public consultation concerning a request to rezone the subject properties.",
+      "property_references": [
+        {
+          "label": "Unaddressed properties",
+          "address": null,
+          "pids": [
+            "390534",
+            "1179670"
+          ]
+        }
+      ],
+      "zoning_amendment": {
+        "from_zone": "unknown",
+        "to_zone": "unknown",
+        "bylaw_name": "Zoning & Development Bylaw",
+        "official_plan_amendment": false,
+        "future_land_use_change": null
+      },
+      "public_summary": "This item is at an earlier consultation stage than tonight's second readings.",
+      "citations": [
+        {
+          "source_document_id": "package",
+          "pdf_page_start": 11,
+          "pdf_page_end": 11,
+          "text_excerpt": "Affordable Housing Advisory Committee has not met since the last Regular Meeting of Council.\n\nThe Planning & Heritage Committee met on Tuesday, May 5, 2026; copies of the minutes and report is\nincluded in your package.\n\nThe Planning Board met on Tuesday, May 5, 2026; copies of the minutes and reports are included in your\npackage.\n\nFor information purposes, a listing of Permit applications issued for April 2026 along with YTD has been\nincluded in your package.\n\nResolutions: Five (5)\n\nPlanning & Heritage Committee:\n\n 1. Pedestrian Mall Agreement: This is a request to amend the operational hours outlined in the\n Pedestrian Mall Agreement as it pertains to the Victoria Row Merchants Association.\n\nPlanning Board:\n\n 2. 15 Clonhaven Street (PID1047562): This is a request for a Major Variance for Lots 153, 154,\n and 155 to increase the number of apartment units on each.\n\n 3. 307 Patterson Drive (PID676585): This is a request to proceed to public consultation concerning\n a request to rezone the subject property.\n\n 4. Unaddressed Property (PID390534) and (PID1179670): This is a request to proceed to public\n consultation concerning"
+        }
+      ]
+    }
+  ],
+  "bylaw_readings": [
+    {
+      "item_id": "bylaw-reading-ph-zd-2-110-231-brackley-point-road",
+      "agenda_section_id": "agenda-7-1-planning-heritage",
+      "item_type": "bylaw_reading",
+      "title": "PH-ZD.2-110 - 231 Brackley Point Road rezoning",
+      "stage": "second_reading",
+      "decision_requested": "Read a second time and approve the bylaw amendment for 231 Brackley Point Road.",
+      "property_references": [
+        {
+          "label": "231 Brackley Point Road",
+          "address": "231 Brackley Point Road",
+          "pids": [
+            "623090"
+          ]
+        }
+      ],
+      "zoning_amendment": {
+        "from_zone": "I",
+        "to_zone": "M-3",
+        "bylaw_name": "Zoning & Development Bylaw",
+        "official_plan_amendment": true,
+        "future_land_use_change": "Neighbourhood to Workscapes"
+      },
+      "public_summary": "Council is considering second reading for a rezoning from Institutional to Business Park Industrial and related Official Plan future land use change.",
+      "citations": [
+        {
+          "source_document_id": "agenda",
+          "pdf_page_start": 1,
+          "pdf_page_end": 1,
+          "text_excerpt": "ration\n\n7. Reports of Standing Committees of Council\n\n 7.1. Planning & Heritage - Deputy Mayor Alanna Jankov, Chair\n - Monthly Report\n - Five (5) Resolutions\n - Two (2) 2nd Readings to amend the Zoning & Development Bylaw\n o 231 Brackley Point Road (PID# 623090) Rezone I Zone to M-3 Zone\n o King & Dorchester Sts. (PID#s 336974, 336909, 336917,336966 and 1172915) DMUN to DMS Zone\n\n 7.2. Environment & Sustainability - Councillor Trevor MacKinnon, Chair\n - Monthly Report\n - Four (4) Resolutions\n\n 7.3. Finance, Audit, Tendering & Administration - Councillor John McAleer, Chair\n - Monthly Report\n - No Resolutions\n\n 7.4. Human Resources - Councillor Norman Beck, Chair\n - Monthly Report\n - No Resolutions\n\n 7.5. Strat. Priorities, Comms & Intergovernmental Cooperation - Councillor Justin Muttart, Chair\n - Summary Page\n - No Resolutions\n\nRegular Meeting of Council Agenda May 12, 2026\n\n 7.6. Protective & Emergency Services - Councillor Julie McCabe, Chair\n - Monthly Report\n - No Resolutions\n - 1st Reading to Amend the Horsedrawn and Rickshaw Vehicle Bylaw\n\n 7.7. Parks, Recreation & Leisure Activities - Councillor Kevin Ramsay, Chair\n - Summ"
+        },
+        {
+          "source_document_id": "package",
+          "pdf_page_start": 6,
+          "pdf_page_end": 6,
+          "text_excerpt": "Regular Meeting of Council Page 4 of 8 April 14, 2026\n\n Moved by Deputy Mayor Alanna Jankov\n Seconded by Councillor Julie McCabe\n\n RESOLVED:\n That Council approve the proposed rezoning for the subject property addressed as 231 Brackley\n Point Road (PID# 623090) to rezone from the Institutional (I) Zone to the Business Park\n Industrial (M-3) Zone and approve an Official Plan Amendment (OPA) to place the subject\n property within the Workscapes Future Land Use designation of the Official Plan.\n CARRIED 10-0\n\n Moved by Deputy Mayor Alanna Jankov\n Seconded by Councillor Julie McCabe\n\n RESOLVED:\n That Council approve the consolidation of PID# 444679 (two parcels) and PID# 600817 (two\n parcels) addressed as 600 North River Road, subject to a final pinned survey plan.\n\n CARRIED 10-0\n\n 1st READING OF THE ZONING & DEVELOPMENT BYLAW (PH-ZD.2) - To adopt Bylaw PH-ZD.2-\n 109, A Bylaw to amend the Zoning & Development Bylaw, to amend Appendix \"G\" - Zoning Map of the\n Charlottetown Zoning and Development Bylaw from Downtown Mixed-Use Neighbourhood (DMUN)\n Zone to Downtown Main Street (DMS) Zone for the properties located on King and Dorchester"
+        }
+      ]
+    },
+    {
+      "item_id": "bylaw-reading-ph-zd-2-109-king-dorchester",
+      "agenda_section_id": "agenda-7-1-planning-heritage",
+      "item_type": "bylaw_reading",
+      "title": "PH-ZD.2-109 - King and Dorchester Streets rezoning",
+      "stage": "second_reading",
+      "decision_requested": "Read a second time and approve the bylaw amendment for the King and Dorchester Streets properties.",
+      "property_references": [
+        {
+          "label": "King and Dorchester Streets",
+          "address": "King and Dorchester Streets",
+          "pids": [
+            "336974",
+            "336909",
+            "336917",
+            "336966",
+            "1172915"
+          ]
+        }
+      ],
+      "zoning_amendment": {
+        "from_zone": "DMUN",
+        "to_zone": "DMS",
+        "bylaw_name": "Zoning & Development Bylaw",
+        "official_plan_amendment": true,
+        "future_land_use_change": "Downtown Mixed-Use Neighbourhood to Downtown Main Street"
+      },
+      "public_summary": "Council is considering second reading for a rezoning from Downtown Mixed-Use Neighbourhood to Downtown Main Street for multiple King/Dorchester properties.",
+      "citations": [
+        {
+          "source_document_id": "agenda",
+          "pdf_page_start": 1,
+          "pdf_page_end": 1,
+          "text_excerpt": "g & Heritage - Deputy Mayor Alanna Jankov, Chair\n - Monthly Report\n - Five (5) Resolutions\n - Two (2) 2nd Readings to amend the Zoning & Development Bylaw\n o 231 Brackley Point Road (PID# 623090) Rezone I Zone to M-3 Zone\n o King & Dorchester Sts. (PID#s 336974, 336909, 336917,336966 and 1172915) DMUN to DMS Zone\n\n 7.2. Environment & Sustainability - Councillor Trevor MacKinnon, Chair\n - Monthly Report\n - Four (4) Resolutions\n\n 7.3. Finance, Audit, Tendering & Administration - Councillor John McAleer, Chair\n - Monthly Report\n - No Resolutions\n\n 7.4. Human Resources - Councillor Norman Beck, Chair\n - Monthly Report\n - No Resolutions\n\n 7.5. Strat. Priorities, Comms & Intergovernmental Cooperation - Councillor Justin Muttart, Chair\n - Summary Page\n - No Resolutions\n\nRegular Meeting of Council Agenda May 12, 2026\n\n 7.6. Protective & Emergency Services - Councillor Julie McCabe, Chair\n - Monthly Report\n - No Resolutions\n - 1st Reading to Amend the Horsedrawn and Rickshaw Vehicle Bylaw\n\n 7.7. Parks, Recreation & Leisure Activities - Councillor Kevin Ramsay, Chair\n - Summary Page\n - No Resolutions\n\n 7.8. Water & Sewer Utility - Cou"
+        },
+        {
+          "source_document_id": "package",
+          "pdf_page_start": 5,
+          "pdf_page_end": 5,
+          "text_excerpt": "Mayor Alanna Jankov\n Seconded by Councillor Julie McCabe\n\n RESOLVED:\n That the request to amend Appendix \"A\" the Future Land Use Map of the City of Charlottetown\n from the Downtown Mixed-Use Neighbourhood (DMUN) Zone to the Downtown Main Street\n (DMS) Zone,\n\n And a request to amend Appendix \"G\" - Zoning Map of the Charlottetown Zoning and\n Development Bylaw from Downtown Mixed-Use Neighbourhood (DMUN) to Downtown Main\n Street (DMS) for the properties located on King and Dorchester Streets being (PID#s 336974,\n 336909, 336917, 336966 and 1172915) be approved;\n\n And further to approve the following:\n\n A lot consolidation of PID#'s 336982, 336974, 336909, 336917, 336966 and 1172915 subject to\n a final pinned survey plan.\n\n - Payment of cash-in-lieu of parking for six (6) parking spaces and;\n\n Approval of the following Variances:\n\n - Step back above the 4th and below the 7th floor on King and Dorchester Streets;\n\n - The Bylaw requires a 3 metre stepback a 2 metre stepback is proposed. Therefore, a 1\n metre variance is required for both sides;\n\n - Step back above the 7th floor on King and Dorchester Streets. The Bylaw requires a\n minimum"
+        }
+      ]
+    }
+  ],
+  "planning_items": [
+    {
+      "planning_item_id": "planning-item-231-brackley-point-road",
+      "title": "231 Brackley Point Road",
+      "item_type": "planning_application",
+      "stage": "second_reading",
+      "property_references": [
+        {
+          "label": "231 Brackley Point Road",
+          "address": "231 Brackley Point Road",
+          "pids": [
+            "623090"
+          ]
+        }
+      ],
+      "citations": [
+        {
+          "source_document_id": "package",
+          "pdf_page_start": 6,
+          "pdf_page_end": 6,
+          "text_excerpt": "Regular Meeting of Council Page 4 of 8 April 14, 2026\n\n Moved by Deputy Mayor Alanna Jankov\n Seconded by Councillor Julie McCabe\n\n RESOLVED:\n That Council approve the proposed rezoning for the subject property addressed as 231 Brackley\n Point Road (PID# 623090) to rezone from the Institutional (I) Zone to the Business Park\n Industrial (M-3) Zone and approve an Official Plan Amendment (OPA) to place the subject\n property within the Workscapes Future Land Use designation of the Official Plan.\n CARRIED 10-0\n\n Moved by Deputy Mayor Alanna Jankov\n Seconded by Councillor Julie McCabe\n\n RESOLVED:\n That Council approve the consolidation of PID# 444679 (two parcels) and PID# 600817 (two\n parcels) addressed as 600 North River Road, subject to a final pinned survey plan.\n\n CARRIED 10-0\n\n 1st READING OF THE ZONING & DEVELOPMENT BYLAW (PH-ZD.2) - To adopt Bylaw PH-ZD.2-\n 109, A Bylaw to amend the Zoning & Development Bylaw, to amend Appendix \"G\" - Zoning Map of the\n Charlottetown Zoning and Development Bylaw from Downtown Mixed-Use Neighbourhood (DMUN)\n Zone to Downtown Main Street (DMS) Zone for the properties located on King and Dorchester"
+        }
+      ]
+    },
+    {
+      "planning_item_id": "planning-item-king-dorchester",
+      "title": "King and Dorchester Streets",
+      "item_type": "planning_application",
+      "stage": "second_reading",
+      "property_references": [
+        {
+          "label": "King and Dorchester Streets",
+          "address": "King and Dorchester Streets",
+          "pids": [
+            "336974",
+            "336909",
+            "336917",
+            "336966",
+            "1172915"
+          ]
+        }
+      ],
+      "citations": [
+        {
+          "source_document_id": "package",
+          "pdf_page_start": 5,
+          "pdf_page_end": 5,
+          "text_excerpt": "Mayor Alanna Jankov\n Seconded by Councillor Julie McCabe\n\n RESOLVED:\n That the request to amend Appendix \"A\" the Future Land Use Map of the City of Charlottetown\n from the Downtown Mixed-Use Neighbourhood (DMUN) Zone to the Downtown Main Street\n (DMS) Zone,\n\n And a request to amend Appendix \"G\" - Zoning Map of the Charlottetown Zoning and\n Development Bylaw from Downtown Mixed-Use Neighbourhood (DMUN) to Downtown Main\n Street (DMS) for the properties located on King and Dorchester Streets being (PID#s 336974,\n 336909, 336917, 336966 and 1172915) be approved;\n\n And further to approve the following:\n\n A lot consolidation of PID#'s 336982, 336974, 336909, 336917, 336966 and 1172915 subject to\n a final pinned survey plan.\n\n - Payment of cash-in-lieu of parking for six (6) parking spaces and;\n\n Approval of the following Variances:\n\n - Step back above the 4th and below the 7th floor on King and Dorchester Streets;\n\n - The Bylaw requires a 3 metre stepback a 2 metre stepback is proposed. Therefore, a 1\n metre variance is required for both sides;\n\n - Step back above the 7th floor on King and Dorchester Streets. The Bylaw requires a\n minimum"
+        }
+      ]
+    }
+  ],
+  "audience_workflows": [
+    {
+      "audience": "public_member",
+      "stages": [
+        {
+          "stage": "prepare",
+          "tasks": [
+            "Identify zoning items on the agenda.",
+            "Check each PID or address against current and draft zoning data.",
+            "Open the source agenda/package pages before the meeting."
+          ]
+        },
+        {
+          "stage": "observe",
+          "tasks": [
+            "Watch for Planning & Heritage item 7.1.",
+            "Record the motion wording, mover, seconder, vote, and any amendments."
+          ]
+        },
+        {
+          "stage": "follow_up",
+          "tasks": [
+            "Compare the outcome against official minutes when posted.",
+            "Update parcel notes, bylaw amendment status, and any appeal or implementation dates."
+          ]
+        }
+      ]
+    },
+    {
+      "audience": "council_or_committee",
+      "stages": [
+        {
+          "stage": "prepare",
+          "tasks": [
+            "Review prior reading status, property references, and zoning/Official Plan implications."
+          ]
+        },
+        {
+          "stage": "observe",
+          "tasks": [
+            "Track amendments, conflicts, questions to staff, and vote outcomes."
+          ]
+        },
+        {
+          "stage": "follow_up",
+          "tasks": [
+            "Confirm adopted wording and direct staff follow-up where required."
+          ]
+        }
+      ]
+    },
+    {
+      "audience": "municipal_staff",
+      "stages": [
+        {
+          "stage": "prepare",
+          "tasks": [
+            "Verify source package completeness, legal descriptions, PIDs, maps, and draft bylaw references."
+          ]
+        },
+        {
+          "stage": "observe",
+          "tasks": [
+            "Capture procedural changes, deferrals, amendments, and implementation instructions."
+          ]
+        },
+        {
+          "stage": "follow_up",
+          "tasks": [
+            "Publish minutes, update bylaw status, update maps/data, and prepare implementation records."
+          ]
+        }
+      ]
+    }
+  ],
+  "review_flags": [
+    {
+      "review_flag_id": "package-page-citation-review",
+      "severity": "info",
+      "message": "Package citations are derived from PDF text search and should be reviewed against the rendered source pages before production use.",
+      "citations": [
+        {
+          "source_document_id": "package",
+          "pdf_page_start": 11,
+          "pdf_page_end": 11,
+          "text_excerpt": "Affordable Housing Advisory Committee has not met since the last Regular Meeting of Council.\n\nThe Planning & Heritage Committee met on Tuesday, May 5, 2026; copies of the minutes and report is\nincluded in your package.\n\nThe Planning Board met on Tuesday, May 5, 2026; copies of the minutes and reports are included in your\npackage.\n\nFor information purposes, a listing of Permit applications issued for April 2026 along with YTD has been\nincluded in your package.\n\nResolutions: Five (5)\n\nPlanning & Heritage Committee:\n\n 1. Pedestrian Mall Agreement: This is a request to amend the operational hours outlined in the\n Pedestrian Mall Agreement as it pertains to the Victoria Row Merchants Association.\n\nPlanning Board:\n\n 2. 15 Clonhaven Street (PID1047562): This is a request for a Major Variance for Lots 153, 154,\n and 155 to increase the number of apartment units on each.\n\n 3. 307 Patterson Drive (PID676585): This is a request to proceed to public consultation concerning\n a request to rezone the subject property.\n\n 4. Unaddressed Property (PID390534) and (PID1179670): This is a request to proceed to public\n consultation concerning"
+        }
+      ]
+    }
+  ]
+}

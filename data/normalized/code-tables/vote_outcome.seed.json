@@ -1,0 +1,32 @@
+{
+  "code_table": "vote_outcome",
+  "description": "Vote outcomes used in meeting minutes and follow-up tracking.",
+  "version": "0.1.0",
+  "seeded_at": "2026-05-12",
+  "entries": [
+    {
+      "code": "carried",
+      "label": "Carried",
+      "description": "The motion or reading passed.",
+      "status": "active"
+    },
+    {
+      "code": "defeated",
+      "label": "Defeated",
+      "description": "The motion or reading did not pass.",
+      "status": "active"
+    },
+    {
+      "code": "deferred",
+      "label": "Deferred",
+      "description": "The item was deferred to a later meeting or process.",
+      "status": "active"
+    },
+    {
+      "code": "pending",
+      "label": "Pending",
+      "description": "The outcome is not yet known from available records.",
+      "status": "active"
+    }
+  ]
+}

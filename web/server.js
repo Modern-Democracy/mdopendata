@@ -33,6 +33,14 @@ const terrainQaSummaryPath = path.join(
   "lidar-terrain-dem",
   "charlottetown-dem-epsg2961-1m.qa.summary.json",
 );
+const councilMeetingPath = path.join(
+  repoRoot,
+  "data",
+  "council-meetings",
+  "charlottetown",
+  "2026-05-12-regular-council",
+  "meeting.json",
+);
 
 const publicDir = path.join(__dirname, "public");
 const pool = new Pool({
@@ -456,6 +464,22 @@ function mapZoneSectionRow(row) {
     filePath: compactText(row.repo_relpath),
     clauses: row.clauses || [],
     tables: row.tables || [],
+  };
+}
+
+async function loadCouncilMeeting() {
+  const payload = JSON.parse(await readFile(councilMeetingPath, "utf8"));
+  return {
+    source: "data/council-meetings/charlottetown/2026-05-12-regular-council/meeting.json",
+    meeting: payload.meeting,
+    sourceDocuments: payload.source_documents,
+    agendaSections: payload.agenda_sections,
+    committeeReports: payload.committee_reports,
+    resolutions: payload.resolutions,
+    bylawReadings: payload.bylaw_readings,
+    planningItems: payload.planning_items,
+    audienceWorkflows: payload.audience_workflows,
+    reviewFlags: payload.review_flags,
   };
 }
 
@@ -3084,6 +3108,8 @@ const routeEntrypoints = new Map([
   ["/parcel-3d/", { file: "/ui_kits/parcel-3d/index.html", baseHref: "/ui_kits/parcel-3d/" }],
   ["/storm-surge", { file: "/ui_kits/storm-surge/index.html", baseHref: "/ui_kits/storm-surge/" }],
   ["/storm-surge/", { file: "/ui_kits/storm-surge/index.html", baseHref: "/ui_kits/storm-surge/" }],
+  ["/council-meetings", { file: "/ui_kits/council-meetings/index.html", baseHref: "/ui_kits/council-meetings/" }],
+  ["/council-meetings/", { file: "/ui_kits/council-meetings/index.html", baseHref: "/ui_kits/council-meetings/" }],
   ["/restriction-stack", { file: "/ui_kits/restriction-stack/index.html", baseHref: "/ui_kits/restriction-stack/" }],
   ["/restriction-stack/", { file: "/ui_kits/restriction-stack/index.html", baseHref: "/ui_kits/restriction-stack/" }],
   ["/city-view", { file: "/ui_kits/map-explorer-leaflet/index.html", baseHref: "/ui_kits/map-explorer-leaflet/" }],
@@ -3140,6 +3166,16 @@ const server = createServer(async (request, response) => {
     if (url.pathname === "/api/section-equivalence") {
       const rows = await loadReviewRows();
       await sendJson(response, { source: "zoning.section_equivalence", rows: summarizeRows(rows) });
+      return;
+    }
+
+    if (url.pathname === "/api/council-meetings/current") {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      await sendJson(response, await loadCouncilMeeting());
       return;
     }
 

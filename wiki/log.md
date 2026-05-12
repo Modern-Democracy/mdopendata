@@ -134,6 +134,14 @@ Removed the `/storm-surge` wind event control and wind references. Restored lowe
 
 Adjusted the parcel 3D terrain renderer so building bases use bilinear terrain sampling across each footprint and add a short foundation skirt to reduce visible floating and ground intersection on sloped DEM terrain. Rebuilt and redeployed the Docker `web` service after the rendering fix.
 
+## [2026-05-12] implementation | Council meeting prototype wiki and extraction
+
+Added the [Council and committee meetings](./council-committee-meetings/README.md) wiki area for meeting-preparation workflows. Added the first JSON-first Charlottetown regular council meeting extraction branch for the May 12, 2026 agenda/package and documented the public, council/committee, and municipal staff workflow model.
+
+## [2026-05-12] implementation | Council meeting audience tabs
+
+Expanded `/council-meetings` from a public-first view to functional public, council, and staff tabs using the same JSON-backed meeting API.
+
 ## Sources
 
 - [Wiki schema](./AGENTS.md)

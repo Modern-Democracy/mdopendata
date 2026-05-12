@@ -3,7 +3,7 @@ type: index
 tags:
   - wiki
   - catalog
-updated: 2026-05-08
+updated: 2026-05-12
 ---
 
 This page catalogs the root wiki structure and links to active project wiki areas.
@@ -24,6 +24,7 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [platform](./platform/.gitkeep) | Durable platform, toolchain, GIS, database, and runtime notes. |
 | [implementation](./implementation/.gitkeep) | Durable workflow, extraction, schema, and implementation notes. |
 | [charlottetown](./charlottetown/README.md) | Active Charlottetown current and draft zoning wiki. |
+| [council-committee-meetings](./council-committee-meetings/README.md) | Meeting-preparation workflows and extraction notes for public, council/committee, and staff audiences. |
 
 ## Source Pages
 
@@ -36,6 +37,12 @@ This page catalogs the root wiki structure and links to active project wiki area
 | Page | Purpose |
 | --- | --- |
 | [By-law clause labels](./domain/bylaw-clause-labels.md) | Reusable clause-label preservation, hierarchy normalization, compact-label, repealed-label, and review-flag guidance. |
+
+## Project Pages
+
+| Page | Purpose |
+| --- | --- |
+| [Council and committee meetings](./council-committee-meetings/README.md) | JSON-first council/committee meeting extraction and audience workflow notes, starting with Charlottetown council on May 12, 2026. |
 
 ## Implementation Pages
 
