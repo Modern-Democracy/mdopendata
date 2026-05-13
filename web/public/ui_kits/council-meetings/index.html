@@ -61,6 +61,15 @@
   .meta-grid .k { color: var(--fg-3); font-family: var(--font-mono); text-transform: uppercase; font-size: 10.5px; }
   .meta-grid .v { color: var(--ink); font-weight: 600; overflow-wrap: anywhere; }
   .source-select { width: 100%; border: 1px solid var(--border-hair); border-radius: 4px; background: var(--paper); color: var(--ink); padding: 8px; font: 13px var(--font-ui); margin-bottom: 12px; }
+  .document-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .document-tabs button, .mode-toggle button, .document-link-button { border: 1px solid var(--border-hair); border-radius: 4px; background: var(--paper); color: var(--fg-2); cursor: pointer; font: 700 12px var(--font-ui); padding: 8px 10px; text-align: left; }
+  .document-tabs button.active, .mode-toggle button.active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .mode-toggle { display: flex; gap: 6px; margin-bottom: 12px; }
+  .page-image-list { display: grid; gap: 16px; }
+  .page-image-card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 12px; }
+  .page-image-card h2 { font: 700 12px var(--font-ui); letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3); margin: 0 0 10px; }
+  .page-image-card img { display: block; width: 100%; height: auto; border: 1px solid var(--border-hair); background: white; }
+  .document-link-button { display: block; width: 100%; margin: 0 0 7px; }
   .tool-map, .restriction-map { min-height: 0; height: 100%; background: var(--paper-3); }
   .map-shell { display: grid; grid-template-rows: auto minmax(0, 1fr); height: 100%; min-height: 0; }
   .parcel-map-body { display: grid; grid-template-columns: minmax(0, 1fr) 260px; min-height: 0; }
@@ -243,6 +252,12 @@ function documentsForItem(payload, selectedId, record) {
   const ids = new Set([selectedId, recordId(record, selectedId), record?.package_document_id].filter(Boolean));
   return (payload?.packageDocuments || []).filter((document) => ids.has(document.document_id) || (document.agenda_item_ids || []).some((id) => ids.has(id)));
 }
+function documentPages(document) {
+  const start = Number(document?.page_start);
+  const end = Number(document?.page_end);
+  if (!Number.isInteger(start) || !Number.isInteger(end) || end < start) return [];
+  return Array.from({ length: end - start + 1 }, (_, index) => start + index);
+}
 function zoneColor(code) {
   const key = String(code || "").trim().toUpperCase();
   return ZONE_COLORS[key] || CURRENT_ZONE_COLORS[key] || LEGACY_ZONE_COLORS[key.charAt(0)] || "var(--paper-3)";
@@ -301,23 +316,54 @@ function ItemHeader({ treeItem, record }) {
   </div>;
 }
 
-function AgendaPackagePane({ payload, record, treeItem }) {
-  const [sourcePage, setSourcePage] = useState(null);
-  const [sourceChoice, setSourceChoice] = useState(() => citationPage(record, treeItem));
-  useEffect(() => { setSourceChoice(citationPage(record, treeItem)); }, [record?.item_id, record?.planning_item_id, treeItem?.id]);
+function DocumentRawText({ document }) {
+  const [pages, setPages] = useState([]);
   useEffect(() => {
-    if (!sourceChoice?.documentId || !sourceChoice?.page) return;
-    fetchJson(`/api/council-meetings/current/source-page?documentId=${encodeURIComponent(sourceChoice.documentId)}&page=${encodeURIComponent(sourceChoice.page)}`)
-      .then(setSourcePage)
-      .catch((error) => setSourcePage({ text: `Unable to load source page: ${error.message}` }));
-  }, [sourceChoice.documentId, sourceChoice.page]);
-  const pageOptions = (record?.citations || []).map((citation) => ({ documentId: citation.source_document_id, page: citation.pdf_page_start, label: `${citation.source_document_id} page ${citation.pdf_page_start}` }));
-  if (!pageOptions.length) pageOptions.push({ ...sourceChoice, label: `${sourceChoice.documentId} page ${sourceChoice.page}` });
+    let cancelled = false;
+    Promise.all(documentPages(document).map((page) => fetchJson(`/api/council-meetings/current/source-page?documentId=package&page=${page}`)
+      .then((payload) => ({ page, text: payload.text }))
+      .catch((error) => ({ page, text: `Unable to load page ${page}: ${error.message}` }))))
+      .then((results) => { if (!cancelled) setPages(results); });
+    return () => { cancelled = true; };
+  }, [document?.document_id]);
+  return <div className="page-image-list">{pages.length ? pages.map((page) => <article className="package-card" key={page.page}><h2>Package page {page.page}</h2><pre className="package-text">{page.text}</pre></article>) : <article className="package-card"><h2>Raw text</h2><pre className="package-text">Loading source text.</pre></article>}</div>;
+}
+
+function DocumentStructuredView({ document }) {
+  return <article className="package-card">
+    <h2>Structured document record</h2>
+    <div className="meta-grid">
+      <div className="k">Document</div><div className="v">{document.document_id}</div>
+      <div className="k">Type</div><div className="v">{document.document_type || "not classified"}</div>
+      <div className="k">Template</div><div className="v">{document.template_type || "none"}</div>
+      <div className="k">Pages</div><div className="v">{document.page_start}-{document.page_end}</div>
+      <div className="k">Agenda ids</div><div className="v">{(document.agenda_item_ids || []).join(", ") || "none"}</div>
+      <div className="k">Boundary</div><div className="v">{document.boundary_basis || "not recorded"}</div>
+    </div>
+    {document.summary && <p style={{marginTop: 12}}>{document.summary}</p>}
+  </article>;
+}
+
+function AgendaPackagePane({ payload, record, treeItem, activeDocumentId, setActiveDocumentId }) {
   const linkedDocuments = documentsForItem(payload, treeItem?.id, record);
+  const [mode, setMode] = useState("pages");
+  const selectedDocument = linkedDocuments.find((document) => document.document_id === activeDocumentId) || linkedDocuments[0] || null;
+  useEffect(() => {
+    if (!linkedDocuments.length) return;
+    if (!linkedDocuments.some((document) => document.document_id === activeDocumentId)) {
+      setActiveDocumentId(linkedDocuments[0].document_id);
+    }
+  }, [treeItem?.id, record?.item_id, record?.planning_item_id, linkedDocuments.map((document) => document.document_id).join("|")]);
+  if (!selectedDocument) {
+    const sourceChoice = citationPage(record, treeItem);
+    return <div className="content-scroll"><article className="package-card"><h2>Package documents</h2><pre className="package-text">No package document has been linked to this item. Fallback citation: {sourceChoice.documentId} page {sourceChoice.page}.</pre></article></div>;
+  }
   return <div className="content-scroll">
-    {linkedDocuments.length > 0 && <div className="document-list">{linkedDocuments.map((document) => <article className="document-item" key={document.document_id}><h2>{document.title}</h2><p>{document.summary}</p><div className="meta">package pages {document.page_start}-{document.page_end} &middot; {document.page_count} page{document.page_count === 1 ? "" : "s"}{document.template_type ? ` \u00b7 ${document.template_type}` : ""}</div></article>)}</div>}
-    <select className="source-select" value={`${sourceChoice.documentId}:${sourceChoice.page}`} onChange={(event) => { const [documentId, page] = event.target.value.split(":"); setSourceChoice({ documentId, page: Number(page) }); }}>{pageOptions.map((option) => <option value={`${option.documentId}:${option.page}`} key={`${option.documentId}-${option.page}`}>{option.label}</option>)}</select>
-    <article className="package-card"><h2>{sourceChoice.documentId} package text, page {sourceChoice.page}</h2><pre className="package-text">{sourcePage?.text || "Loading source page."}</pre></article>
+    <div className="document-tabs" aria-label="Package document tabs">{linkedDocuments.map((document) => <button type="button" className={selectedDocument.document_id === document.document_id ? "active" : ""} key={document.document_id} onClick={() => setActiveDocumentId(document.document_id)}>{document.title}<br /><span className="meta">pages {document.page_start}-{document.page_end}</span></button>)}</div>
+    <div className="mode-toggle" aria-label="Document view mode">{[["pages", "Page images"], ["raw", "Raw text"], ["structured", "Structured"]].map(([key, label]) => <button type="button" className={mode === key ? "active" : ""} key={key} onClick={() => setMode(key)}>{label}</button>)}</div>
+    {mode === "pages" && <div className="page-image-list">{documentPages(selectedDocument).map((page) => <article className="page-image-card" key={page}><h2>Package page {page}</h2><img loading="lazy" alt={`Package page ${page}`} src={`/api/council-meetings/current/page-image?documentId=package&page=${page}`} /></article>)}</div>}
+    {mode === "raw" && <DocumentRawText document={selectedDocument} />}
+    {mode === "structured" && <DocumentStructuredView document={selectedDocument} />}
   </div>;
 }
 
@@ -495,14 +541,14 @@ function ShadowPane({ itemId, record }) {
   return <div className="map-shell"><div className="tool-status">Shadow Study for selected council rezoning item. Primary loaded PID: {pid || "pending"}.</div><iframe className="shadow-frame" title="Shadow Study" src={src}></iframe></div>;
 }
 
-function SelectedItemView({ payload, selectedId, toolMode }) {
+function SelectedItemView({ payload, selectedId, toolMode, activeDocumentId, setActiveDocumentId }) {
   const treeItem = allItems(payload).find((item) => item.id === selectedId);
   const record = findRecord(payload, selectedId);
   if (!treeItem) return null;
-  return <><ItemHeader treeItem={treeItem} record={record} />{treeItem.minutes ? <MeetingMinutesPane record={record} /> : toolMode === "parcel" && record?.zoning_amendment ? <ParcelLookupPane itemId={record.item_id || record.planning_item_id || selectedId} /> : toolMode === "compare" && record?.zoning_amendment ? <ComparePane itemId={record.item_id || record.planning_item_id || selectedId} /> : toolMode === "restrictions" && record?.zoning_amendment ? <RestrictionsPane itemId={record.item_id || record.planning_item_id || selectedId} /> : toolMode === "shadow" && record?.zoning_amendment ? <ShadowPane itemId={record.item_id || record.planning_item_id || selectedId} record={record} /> : <AgendaPackagePane payload={payload} record={record} treeItem={treeItem} />}</>;
+  return <><ItemHeader treeItem={treeItem} record={record} />{toolMode === "parcel" && record?.zoning_amendment ? <ParcelLookupPane itemId={record.item_id || record.planning_item_id || selectedId} /> : toolMode === "compare" && record?.zoning_amendment ? <ComparePane itemId={record.item_id || record.planning_item_id || selectedId} /> : toolMode === "restrictions" && record?.zoning_amendment ? <RestrictionsPane itemId={record.item_id || record.planning_item_id || selectedId} /> : toolMode === "shadow" && record?.zoning_amendment ? <ShadowPane itemId={record.item_id || record.planning_item_id || selectedId} record={record} /> : <AgendaPackagePane payload={payload} record={record} treeItem={treeItem} activeDocumentId={activeDocumentId} setActiveDocumentId={setActiveDocumentId} />}</>;
 }
 
-function ContextPanel({ audience, payload, selectedId, toolMode, setToolMode }) {
+function ContextPanel({ audience, payload, selectedId, toolMode, setToolMode, setActiveDocumentId }) {
   const treeItem = allItems(payload).find((item) => item.id === selectedId);
   const record = findRecord(payload, selectedId);
   const workflow = payload.audienceWorkflows.find((candidate) => audience === "public" ? candidate.audience === "public_member" : audience === "council" ? candidate.audience === "council_or_committee" : candidate.audience === "municipal_staff");
@@ -511,7 +557,7 @@ function ContextPanel({ audience, payload, selectedId, toolMode, setToolMode }) 
   return <aside className="context-panel">
     <section className="context-card"><h2>{audience === "public" ? "Public needs" : audience === "council" ? "Council needs" : "Staff needs"}</h2><ul className="workflow-list">{(workflow?.stages || []).flatMap((stage) => stage.tasks).map((task) => <li key={task}>{task}</li>)}</ul></section>
     <section className="context-card"><h2>Agenda Context</h2>{selectedId ? <div className="meta-grid"><div className="k">Item</div><div className="v">{treeItem?.label} {treeItem?.title}</div><div className="k">Stage</div><div className="v">{record?.stage || "not extracted"}</div><div className="k">Decision</div><div className="v">{record?.decision_requested || "not extracted"}</div></div> : <p className="empty-note">Select an agenda item for item-specific context.</p>}</section>
-    {selectedId && <section className="context-card"><h2>Package Documents</h2>{linkedDocuments.length ? <ul className="check-list">{linkedDocuments.map((document) => <li key={document.document_id}>{document.title}: pages {document.page_start}-{document.page_end}</li>)}</ul> : <p className="empty-note">No package document has been linked to this item yet.</p>}</section>}
+    {selectedId && <section className="context-card"><h2>Package Documents</h2>{linkedDocuments.length ? linkedDocuments.map((document) => <button type="button" className="document-link-button" key={document.document_id} onClick={() => { setToolMode("package"); setActiveDocumentId(document.document_id); }}>{document.title}<br /><span className="meta">pages {document.page_start}-{document.page_end}</span></button>) : <p className="empty-note">No package document has been linked to this item yet.</p>}</section>}
     {record?.source_links?.length > 0 && <section className="context-card"><h2>Related Source Links</h2><ul className="check-list">{record.source_links.map((link) => <li key={`${link.documentId}-${link.page}-${link.label}`}><a href={`/api/council-meetings/current/source-page?documentId=${encodeURIComponent(link.documentId)}&page=${encodeURIComponent(link.page)}`} target="_blank" rel="noreferrer">{link.label}</a></li>)}</ul></section>}
     {isRezoning && <section className="context-card"><h2>Rezoning Tools</h2><div className="route-actions">{[["package", "View Agenda Package"], ["parcel", "View Parcel On Map"], ["compare", "Compare bylaws"], ["restrictions", "View Spatial Restrictions"], ["shadow", "Shadow Study"]].map(([key, label]) => <button type="button" className={`btn btn-primary ${toolMode === key ? "active" : ""}`} onClick={() => setToolMode(key)} key={key}>{label}</button>)}</div></section>}
     <section className="context-card"><h2>Interface Controls</h2><ul className="check-list"><li>Use the left tree to follow agenda order.</li><li>Use View Agenda Package to restore the source page listing.</li><li>Rezoning tools replace the middle pane without leaving this page.</li></ul></section>
@@ -524,11 +570,12 @@ function App() {
   const [audience, setAudience] = useState("public");
   const [selectedId, setSelectedId] = useState("");
   const [toolMode, setToolMode] = useState("package");
+  const [activeDocumentId, setActiveDocumentId] = useState("");
   useEffect(() => { lucide.createIcons(); });
   useEffect(() => { fetchJson("/api/council-meetings/current").then((data) => { setPayload(data); setStatus("ready"); }).catch((error) => setStatus(error.message)); }, []);
-  const selectItem = (id) => { setSelectedId(id); setToolMode("package"); };
+  const selectItem = (id) => { setSelectedId(id); setToolMode("package"); setActiveDocumentId(""); };
   if (status !== "ready") return <><Header /><main className="content-scroll">{status === "loading" ? "Loading meeting data." : status}</main></>;
-  return <div className="meeting-app"><Header /><div className="meeting-workspace"><AgendaTree audience={audience} setAudience={setAudience} selectedId={selectedId} onSelect={selectItem} payload={payload} /><main className="main-panel">{selectedId ? <SelectedItemView payload={payload} selectedId={selectedId} toolMode={toolMode} /> : <GeneralInfo audience={audience} payload={payload} />}</main><ContextPanel audience={audience} payload={payload} selectedId={selectedId} toolMode={toolMode} setToolMode={setToolMode} /></div></div>;
+  return <div className="meeting-app"><Header /><div className="meeting-workspace"><AgendaTree audience={audience} setAudience={setAudience} selectedId={selectedId} onSelect={selectItem} payload={payload} /><main className="main-panel">{selectedId ? <SelectedItemView payload={payload} selectedId={selectedId} toolMode={toolMode} activeDocumentId={activeDocumentId} setActiveDocumentId={setActiveDocumentId} /> : <GeneralInfo audience={audience} payload={payload} />}</main><ContextPanel audience={audience} payload={payload} selectedId={selectedId} toolMode={toolMode} setToolMode={setToolMode} setActiveDocumentId={setActiveDocumentId} /></div></div>;
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);

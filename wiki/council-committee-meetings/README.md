@@ -4,7 +4,7 @@ tags:
   - council-meetings
   - committee-meetings
   - workflows
-updated: 2026-05-12
+updated: 2026-05-13
 ---
 
 This page defines the council and committee meeting wiki area for converting zoning and civic-process data into preparation, observation, and follow-up workflows.
@@ -63,6 +63,10 @@ Meeting JSON separates:
 - review flags
 
 Database migration is deferred. When added, it should follow the existing Charlottetown zoning natural-key, content-hash, supersession, and import-batch conventions.
+
+## Backlog
+
+- Clean up agenda-related blank tables in the PostGIS `public` schema. Confirm which tables are empty, identify whether they were created by meeting extraction experiments or schema bootstrapping, preserve any migration history needed for repeatability, and remove or quarantine the unused tables without affecting current JSON-first meeting outputs.
 
 ## Sources
 

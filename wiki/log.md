@@ -150,6 +150,10 @@ Reworked `/council-meetings` into a three-pane workspace with an agenda-order le
 
 Extended the May 12 Charlottetown council extraction to emit `agenda.json` and `toc.json` beside `meeting.json`. The ToC covers all 256 package pages as logical documents with page counts, summaries, boundary observations, template categories where known, and non-PDF page reproduction options; full package content extraction remains deferred except for the two rezoning items used by the web endpoints.
 
+## [2026-05-13] project | Council meeting database cleanup backlog
+
+Added a council-meetings backlog item to clean up agenda-related blank tables in the PostGIS `public` schema, including confirmation of empty tables, provenance checks, and removal or quarantine without affecting JSON-first meeting outputs.
+
 ## Sources
 
 - [Wiki schema](./AGENTS.md)

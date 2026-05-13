@@ -57,6 +57,14 @@ const councilMeetingTocPath = path.join(
   "2026-05-12-regular-council",
   "toc.json",
 );
+const councilMeetingPageImageRoot = path.join(
+  repoRoot,
+  "data",
+  "council-meetings",
+  "charlottetown",
+  "2026-05-12-regular-council",
+  "page-images",
+);
 
 const publicDir = path.join(__dirname, "public");
 const pool = new Pool({
@@ -542,6 +550,29 @@ async function loadCouncilMeetingSourcePage(documentId, pageNumber) {
     page,
     text: await readFile(absolute, "utf8"),
   };
+}
+
+async function loadCouncilMeetingPageImage(documentId, pageNumber) {
+  if (documentId !== "package") {
+    const error = new Error("documentId must be package.");
+    error.statusCode = 400;
+    throw error;
+  }
+  const page = Number(pageNumber);
+  if (!Number.isInteger(page) || page < 1 || page > 999) {
+    const error = new Error("page must be a positive integer.");
+    error.statusCode = 400;
+    throw error;
+  }
+  const imagePath = path.join(councilMeetingPageImageRoot, `${documentId}-page-${String(page).padStart(3, "0")}.png`);
+  const absolute = path.resolve(imagePath);
+  const imageRoot = path.resolve(councilMeetingPageImageRoot);
+  if (!absolute.startsWith(imageRoot)) {
+    const error = new Error("Invalid page image path.");
+    error.statusCode = 400;
+    throw error;
+  }
+  return readFile(absolute);
 }
 
 async function loadCouncilMeetingRaw() {
@@ -3610,6 +3641,21 @@ const server = createServer(async (request, response) => {
         url.searchParams.get("documentId") || "",
         url.searchParams.get("page") || "",
       ));
+      return;
+    }
+
+    if (url.pathname === "/api/council-meetings/current/page-image") {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const body = await loadCouncilMeetingPageImage(
+        url.searchParams.get("documentId") || "",
+        url.searchParams.get("page") || "",
+      );
+      response.writeHead(200, { "content-type": "image/png" });
+      response.end(body);
       return;
     }
 
