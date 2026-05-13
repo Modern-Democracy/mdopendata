@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Document Import QA - Modern Democracy</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../parcel-lookup/styles.css">
+<style>
+  html, body, #root { height: 100%; margin: 0; }
+  body { background: var(--paper); color: var(--ink); }
+  .import-app { display: grid; grid-template-rows: auto minmax(0, 1fr); height: 100vh; overflow: hidden; }
+  .import-shell { display: grid; grid-template-columns: 280px minmax(420px, 1fr) 390px; min-height: 0; overflow: hidden; }
+  .side, .edit { background: var(--paper-2); overflow-y: auto; padding: 14px; }
+  .side { border-right: 1px solid var(--border-hair); }
+  .edit { border-left: 1px solid var(--border-hair); }
+  .pages { overflow-y: auto; padding: 16px; background: var(--paper); }
+  .section-title { font: 700 11px var(--font-ui); letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); margin: 0 0 10px; }
+  .document-button { width: 100%; border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper); color: var(--fg-2); cursor: pointer; padding: 10px; text-align: left; margin-bottom: 8px; }
+  .document-button.active { box-shadow: inset 3px 0 0 var(--brick); color: var(--ink); background: var(--paper-3); }
+  .document-title { font: 700 13px var(--font-ui); color: var(--ink); margin-bottom: 5px; }
+  .document-meta, .page-meta, .muted { font: 11px var(--font-mono); color: var(--fg-3); }
+  .toolbar, .field-row, .button-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .toolbar { border-bottom: 1px solid var(--border-hair); background: var(--paper-2); padding: 12px 14px; }
+  .toolbar .title { font: 700 14px var(--font-ui); margin-right: auto; }
+  .select, .input, .textarea { width: 100%; border: 1px solid var(--border-hair); border-radius: 4px; background: var(--paper); color: var(--ink); font: 13px var(--font-ui); padding: 8px; }
+  .textarea { min-height: 150px; resize: vertical; line-height: 1.45; }
+  .markdown-editor { min-height: 330px; font-family: var(--font-mono); }
+  .btn-small { border: 1px solid var(--border-hair); border-radius: 4px; background: var(--paper); color: var(--ink); cursor: pointer; font: 700 12px var(--font-ui); padding: 8px 10px; }
+  .btn-small.primary { background: var(--forest); border-color: var(--forest); color: var(--paper); }
+  .btn-small.active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .page-list { display: grid; gap: 16px; max-width: 980px; margin: 0 auto; }
+  .page-card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 12px; }
+  .page-card.selected { outline: 3px solid rgba(30, 77, 58, 0.18); border-color: var(--forest); }
+  .page-head { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: start; margin-bottom: 10px; }
+  .page-head h2 { font: 700 12px var(--font-ui); letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 4px; color: var(--fg-3); }
+  .page-card img { display: block; width: 100%; height: auto; border: 1px solid var(--border-hair); background: white; }
+  .tag { border: 1px solid var(--border-hair); border-radius: 3px; background: var(--paper); color: var(--fg-2); font: 700 11px var(--font-mono); padding: 3px 7px; }
+  .panel { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper); padding: 12px; margin-bottom: 12px; }
+  .panel h2 { font: 700 14px var(--font-ui); margin: 0 0 10px; }
+  .field { display: grid; gap: 5px; margin-bottom: 10px; }
+  .field label { font: 700 11px var(--font-ui); color: var(--fg-3); letter-spacing: 0.08em; text-transform: uppercase; }
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .stat { background: var(--paper-3); border-radius: 4px; padding: 8px; }
+  .stat strong { display: block; font: 700 18px var(--font-mono); color: var(--ink); }
+  .stat span { font: 11px var(--font-ui); color: var(--fg-3); }
+  @media (max-width: 1120px) {
+    .import-app { height: auto; min-height: 100vh; overflow: visible; }
+    .import-shell { grid-template-columns: 1fr; overflow: visible; }
+    .side, .edit, .pages { overflow: visible; }
+  }
+</style>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useEffect, useMemo, useState } = React;
+const PAGE_TYPES = ["meeting_agenda", "resolution_cover_page", "resolution_text_page", "meeting_minutes", "committee_report", "development_permit_application", "staff_report", "map_or_plan", "correspondence", "financial_report", "other"];
+const STORE_KEY = "mdopendata-document-import-qa";
+
+function fetchJson(url) {
+  return fetch(url).then((response) => {
+    if (!response.ok) throw new Error(`Request failed: ${response.status}`);
+    return response.json();
+  });
+}
+function pageRange(document) {
+  if (Array.isArray(document?.page_numbers) && document.page_numbers.length) {
+    return [...document.page_numbers].sort((a, b) => a - b);
+  }
+  const start = Number(document?.page_start || 1);
+  const end = Number(document?.page_end || start);
+  return Array.from({ length: Math.max(0, end - start + 1) }, (_, index) => start + index);
+}
+function pageKey(page) { return `package:${page}`; }
+function normalizeType(value) { return String(value || "").replaceAll("-", "_"); }
+function initialQa(documents) {
+  const pageTags = {};
+  const documentNotes = {};
+  const documentText = {};
+  for (const document of documents) {
+    for (const page of pageRange(document)) {
+      pageTags[pageKey(page)] = normalizeType(document.template_type || document.document_type || "other");
+    }
+    documentNotes[document.document_id] = "";
+    documentText[document.document_id] = "";
+  }
+  return { pageTags, pageComments: {}, documentNotes, documentText, localDocuments: [] };
+}
+function hydrateQa(documents) {
+  const base = initialQa(documents);
+  try {
+    const stored = JSON.parse(localStorage.getItem(STORE_KEY) || "{}");
+    return {
+      pageTags: { ...base.pageTags, ...(stored.pageTags || {}) },
+      pageComments: { ...base.pageComments, ...(stored.pageComments || {}) },
+      documentNotes: { ...base.documentNotes, ...(stored.documentNotes || {}) },
+      documentText: { ...base.documentText, ...(stored.documentText || {}) },
+      localDocuments: stored.localDocuments || [],
+    };
+  } catch {
+    return base;
+  }
+}
+function Header() {
+  return <header className="app-header"><img src="../../assets/logo-island-needle.svg" alt="Modern Democracy" className="wm" /><nav><a href="/parcel-lookup">Parcel lookup</a><a href="/zoning-comparison">Compare bylaws</a><a href="/council-meetings">Council meetings</a><a className="active" href="/document-import">Document import</a><a href="/restriction-stack">View Spatial Restrictions</a><a href="/city-view">Map</a></nav></header>;
+}
+function DocumentList({ documents, activeId, setActiveId }) {
+  return <aside className="side"><h2 className="section-title">Package Documents</h2>{documents.map((document) => <button type="button" className={`document-button ${activeId === document.document_id ? "active" : ""}`} onClick={() => setActiveId(document.document_id)} key={document.document_id}><div className="document-title">{document.title}</div><div className="document-meta">{document.document_type || "untyped"} | pages {document.page_start}-{document.page_end}</div></button>)}</aside>;
+}
+function Toolbar({ meeting, selectedPages, selectionMode, setSelectionMode, tagSelected, clearSelection, exportFeedback }) {
+  return <div className="toolbar"><div className="title">{meeting?.title || "Document Import QA"}</div><button type="button" className={`btn-small ${selectionMode ? "active" : ""}`} onClick={() => setSelectionMode(!selectionMode)}><i data-lucide="check-square"></i> Select pages</button><select className="select" style={{width: 230}} onChange={(event) => { if (event.target.value) tagSelected(event.target.value); event.target.value = ""; }}><option value="">Tag selected pages</option>{PAGE_TYPES.map((type) => <option value={type} key={type}>{type.replaceAll("_", " ")}</option>)}</select><button type="button" className="btn-small" onClick={clearSelection}>Clear {selectedPages.length}</button><button type="button" className="btn-small primary" onClick={exportFeedback}><i data-lucide="download"></i> Export feedback</button></div>;
+}
+function PageCard({ page, document, selected, toggleSelected, tag, setTag, comment, setComment }) {
+  return <article className={`page-card ${selected ? "selected" : ""}`}><div className="page-head"><input type="checkbox" checked={selected} onChange={() => toggleSelected(page)} aria-label={`Select page ${page}`} /><div><h2>Package page {page}</h2><div className="page-meta">{document.title} | {document.document_id} | pages {document.page_start}-{document.page_end}</div></div><span className="tag">{(tag || "other").replaceAll("_", " ")}</span></div><div className="field-row" style={{marginBottom: 10}}><select className="select" style={{width: 260}} value={tag || "other"} onChange={(event) => setTag(page, event.target.value)}>{PAGE_TYPES.map((type) => <option value={type} key={type}>{type.replaceAll("_", " ")}</option>)}</select><input className="input" style={{flex: 1}} value={comment || ""} onChange={(event) => setComment(page, event.target.value)} placeholder="Page interpretation comment" /></div><img loading="lazy" alt={`Package page ${page}`} src={`/api/council-meetings/current/page-image?documentId=package&page=${page}`} /></article>;
+}
+function PageListing({ document, selectedPages, toggleSelected, qa, setQa }) {
+  if (!document) return <main className="pages">No document selected.</main>;
+  const setTag = (page, tag) => setQa((current) => ({ ...current, pageTags: { ...current.pageTags, [pageKey(page)]: tag } }));
+  const setComment = (page, comment) => setQa((current) => ({ ...current, pageComments: { ...current.pageComments, [pageKey(page)]: comment } }));
+  return <main className="pages"><div className="page-list">{pageRange(document).map((page) => <PageCard key={page} page={page} document={document} selected={selectedPages.includes(page)} toggleSelected={toggleSelected} tag={qa.pageTags[pageKey(page)]} setTag={setTag} comment={qa.pageComments[pageKey(page)]} setComment={setComment} />)}</div></main>;
+}
+function EditorPanel({ document, documents, selectedPages, qa, setQa, setActiveId }) {
+  const [targetDocumentId, setTargetDocumentId] = useState("");
+  const [newTitle, setNewTitle] = useState("");
+  const [loadStatus, setLoadStatus] = useState("");
+  useEffect(() => { setTargetDocumentId(document?.document_id || ""); }, [document?.document_id]);
+  if (!document) return <aside className="edit">No document selected.</aside>;
+  const selectedText = selectedPages.length ? selectedPages.join(", ") : "none";
+  const markdown = qa.documentText[document.document_id] || "";
+  const setMarkdown = (text) => setQa((current) => ({ ...current, documentText: { ...current.documentText, [document.document_id]: text } }));
+  const setNote = (text) => setQa((current) => ({ ...current, documentNotes: { ...current.documentNotes, [document.document_id]: text } }));
+  const createDocument = () => {
+    if (!selectedPages.length) return;
+    const sorted = [...selectedPages].sort((a, b) => a - b);
+    const id = `local-${Date.now()}`;
+    const next = { document_id: id, source_document_id: "package", title: newTitle.trim() || `Review document pages ${sorted[0]}-${sorted.at(-1)}`, document_type: "review_created", page_start: sorted[0], page_end: sorted.at(-1), page_numbers: sorted };
+    setQa((current) => ({ ...current, localDocuments: [...current.localDocuments, next], documentNotes: { ...current.documentNotes, [id]: "Created during import QA." }, documentText: { ...current.documentText, [id]: "" } }));
+    setActiveId(id);
+    setNewTitle("");
+  };
+  const movePages = () => {
+    if (!selectedPages.length || !targetDocumentId) return;
+    const sorted = [...selectedPages].sort((a, b) => a - b);
+    setQa((current) => {
+      const existing = current.localDocuments.find((candidate) => candidate.document_id === targetDocumentId) || documents.find((candidate) => candidate.document_id === targetDocumentId);
+      const replacement = { ...(existing || {}), document_id: targetDocumentId, page_start: Math.min(existing?.page_start || sorted[0], sorted[0]), page_end: Math.max(existing?.page_end || sorted.at(-1), sorted.at(-1)), page_numbers: [...new Set([...(existing?.page_numbers || pageRange(existing)), ...sorted])].sort((a, b) => a - b) };
+      const localDocuments = current.localDocuments.some((candidate) => candidate.document_id === targetDocumentId) ? current.localDocuments.map((candidate) => candidate.document_id === targetDocumentId ? replacement : candidate) : [...current.localDocuments, { ...replacement, title: `${existing?.title || targetDocumentId} QA page move`, document_type: existing?.document_type || "review_adjusted" }];
+      return { ...current, localDocuments };
+    });
+  };
+  const loadExtractedText = async () => {
+    setLoadStatus("Loading extracted text.");
+    const pages = pageRange(document);
+    const results = await Promise.all(pages.map((page) => fetchJson(`/api/council-meetings/current/source-page?documentId=package&page=${page}`).then((payload) => `## Package page ${page}\n\n${payload.text || ""}`).catch((error) => `## Package page ${page}\n\nUnable to load page text: ${error.message}`)));
+    setMarkdown(results.join("\n\n"));
+    setLoadStatus(`Loaded ${results.length} page source${results.length === 1 ? "" : "s"}.`);
+  };
+  return <aside className="edit"><section className="panel"><h2>Selected Document</h2><div className="stats"><div className="stat"><strong>{document.page_count || pageRange(document).length}</strong><span>parser pages</span></div><div className="stat"><strong>{selectedPages.length}</strong><span>selected pages</span></div></div><div className="document-meta" style={{marginTop: 10}}>{document.document_id} | {document.document_type || "untyped"} | selected {selectedText}</div></section><section className="panel"><h2>Boundary Operations</h2><div className="field"><label>New document title</label><input className="input" value={newTitle} onChange={(event) => setNewTitle(event.target.value)} placeholder="Optional title for selected pages" /></div><div className="button-row"><button type="button" className="btn-small primary" onClick={createDocument}>Create document from selection</button></div><div className="field" style={{marginTop: 12}}><label>Move or add selected pages to document</label><select className="select" value={targetDocumentId} onChange={(event) => setTargetDocumentId(event.target.value)}>{documents.map((candidate) => <option value={candidate.document_id} key={candidate.document_id}>{candidate.title}</option>)}</select></div><button type="button" className="btn-small" onClick={movePages}>Apply page move</button></section><section className="panel"><h2>Document Markdown</h2><div className="button-row" style={{marginBottom: 10}}><button type="button" className="btn-small" onClick={loadExtractedText}>Load extracted text</button><span className="muted">{loadStatus}</span></div><textarea className="textarea markdown-editor" value={markdown} onChange={(event) => setMarkdown(event.target.value)} placeholder="Editable markdown interpretation for this document. Use Load extracted text to seed this field from page OCR text." /></section><section className="panel"><h2>Parser Feedback</h2><textarea className="textarea" value={qa.documentNotes[document.document_id] || ""} onChange={(event) => setNote(event.target.value)} placeholder="Comment on parser errors, missed boundaries, page type mistakes, or markdown corrections." /></section></aside>;
+}
+function App() {
+  const [payload, setPayload] = useState(null);
+  const [status, setStatus] = useState("Loading import package.");
+  const [activeId, setActiveId] = useState("");
+  const [selectedPages, setSelectedPages] = useState([]);
+  const [selectionMode, setSelectionMode] = useState(true);
+  const [qa, setQa] = useState(null);
+  const documents = useMemo(() => [...(payload?.packageDocuments || []), ...(qa?.localDocuments || [])], [payload, qa]);
+  const activeDocument = documents.find((document) => document.document_id === activeId) || documents[0] || null;
+  useEffect(() => { lucide.createIcons(); });
+  useEffect(() => {
+    fetchJson("/api/council-meetings/current").then((data) => {
+      const hydrated = hydrateQa(data.packageDocuments || []);
+      setPayload(data);
+      setQa(hydrated);
+      setActiveId(data.packageDocuments?.[0]?.document_id || "");
+      setStatus("ready");
+    }).catch((error) => setStatus(error.message));
+  }, []);
+  useEffect(() => { if (qa) localStorage.setItem(STORE_KEY, JSON.stringify(qa)); }, [qa]);
+  const toggleSelected = (page) => {
+    if (!selectionMode) return;
+    setSelectedPages((current) => current.includes(page) ? current.filter((candidate) => candidate !== page) : [...current, page].sort((a, b) => a - b));
+  };
+  const tagSelected = (tag) => setQa((current) => ({ ...current, pageTags: { ...current.pageTags, ...Object.fromEntries(selectedPages.map((page) => [pageKey(page), tag])) } }));
+  const clearSelection = () => setSelectedPages([]);
+  const exportFeedback = () => {
+    const feedback = { meeting_id: payload?.meeting?.meeting_id, source: payload?.tocSource, exported_at: new Date().toISOString(), qa };
+    const blob = new Blob([JSON.stringify(feedback, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "document-import-feedback.json";
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+  if (status !== "ready" || !payload || !qa) return <div className="import-app"><Header /><main className="pages">{status}</main></div>;
+  return <div className="import-app"><Header /><Toolbar meeting={payload.meeting} selectedPages={selectedPages} selectionMode={selectionMode} setSelectionMode={setSelectionMode} tagSelected={tagSelected} clearSelection={clearSelection} exportFeedback={exportFeedback} /><div className="import-shell"><DocumentList documents={documents} activeId={activeDocument?.document_id} setActiveId={(id) => { setActiveId(id); setSelectedPages([]); }} /><PageListing document={activeDocument} selectedPages={selectedPages} toggleSelected={toggleSelected} qa={qa} setQa={setQa} /><EditorPanel document={activeDocument} documents={documents} selectedPages={selectedPages} qa={qa} setQa={setQa} setActiveId={setActiveId} /></div></div>;
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
