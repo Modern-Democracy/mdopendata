@@ -387,6 +387,39 @@ def page_count(record: dict[str, Any]) -> int:
     return int(record["page_end"]) - int(record["page_start"]) + 1
 
 
+def document_category(record: dict[str, Any]) -> str:
+    document_type = record.get("document_type", "")
+    title = f"{record.get('title', '')} {record.get('summary', '')}".lower()
+    template_type = record.get("template_type", "")
+    if document_type == "agenda":
+        return "agenda"
+    if "minutes" in document_type:
+        return "minutes"
+    if document_type == "resolution":
+        return "resolutions"
+    if "reading" in title or "bylaw" in title or "bylaw" in template_type:
+        return "readings"
+    if document_type == "department_summary":
+        return "monthly_reports"
+    if "email" in title:
+        return "emails"
+    if "applicant" in title or "application" in title:
+        return "applicant_submissions"
+    if "developer" in title:
+        return "developer_submissions"
+    if "public submission" in title:
+        return "public_submissions"
+    if "submission" in title:
+        return "document_submissions"
+    if document_type in {
+        "committee_report",
+        "committee_package",
+        "agenda_item_package",
+    }:
+        return "monthly_reports"
+    return "uncategorized"
+
+
 def build_toc(agenda_pages: list[str], package_pages: list[str]) -> dict[str, Any]:
     package_page_count = len(package_pages)
     documents = []
@@ -394,6 +427,7 @@ def build_toc(agenda_pages: list[str], package_pages: list[str]) -> dict[str, An
         if record["page_end"] > package_page_count:
             raise ValueError(f"{record['document_id']} ends after package page count {package_page_count}.")
         entry = dict(record)
+        entry["document_category"] = document_category(entry)
         entry["page_count"] = page_count(record)
         entry["citations"] = [page_range_citation("package", record["page_start"], record["page_end"], package_pages)]
         documents.append(entry)
@@ -471,6 +505,7 @@ def build_agenda(agenda_pages: list[str], package_pages: list[str], meeting_payl
             "source_document_id": "agenda",
             "title": "Standalone Regular Monthly Meeting of Council agenda",
             "document_type": "agenda",
+            "document_category": "agenda",
             "page_start": 1,
             "page_end": len(agenda_pages),
             "page_count": len(agenda_pages),
@@ -496,6 +531,7 @@ def build_agenda(agenda_pages: list[str], package_pages: list[str], meeting_payl
                 "document_id": document["document_id"],
                 "title": document["title"],
                 "document_type": document["document_type"],
+                "document_category": document.get("document_category", "other"),
                 "template_type": document.get("template_type"),
                 "page_start": document["page_start"],
                 "page_end": document["page_end"],

@@ -36,6 +36,9 @@
   details.tree-nested[open] > summary .tree-button .title::after { transform: rotate(90deg); }
   .tree-children { margin: 2px 0 4px 25px; padding-left: 10px; border-left: 2px solid var(--brick-wash); }
   .tree-children .tree-button { grid-template-columns: 48px 1fr; padding: 7px 8px; }
+  .page-index { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  .page-index button { border: 1px solid var(--border-hair); border-radius: 4px; background: var(--paper); color: var(--fg-2); cursor: pointer; font: 700 12px var(--font-mono); padding: 7px 0; }
+  .page-index button.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   .toolbar, .field-row, .button-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
   .toolbar { border-bottom: 1px solid var(--border-hair); background: var(--paper-2); padding: 12px 14px; }
   .toolbar .title { font: 700 14px var(--font-ui); margin-right: auto; }
@@ -45,12 +48,15 @@
   .btn-small { border: 1px solid var(--border-hair); border-radius: 4px; background: var(--paper); color: var(--ink); cursor: pointer; font: 700 12px var(--font-ui); padding: 8px 10px; }
   .btn-small.primary { background: var(--forest); border-color: var(--forest); color: var(--paper); }
   .btn-small.active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .mode-toggle { display: inline-flex; border: 1px solid var(--border-hair); border-radius: 6px; overflow: hidden; }
+  .mode-toggle button { border: 0; border-right: 1px solid var(--border-hair); border-radius: 0; margin: 0; }
+  .mode-toggle button:last-child { border-right: 0; }
   .page-list { display: grid; gap: 16px; max-width: 980px; margin: 0 auto; }
   .page-card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 12px; }
   .page-card.selected { outline: 3px solid rgba(30, 77, 58, 0.18); border-color: var(--forest); }
   .page-head { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: start; margin-bottom: 10px; }
   .page-head h2 { font: 700 12px var(--font-ui); letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 4px; color: var(--fg-3); }
-  .page-card img { display: block; width: 100%; height: auto; border: 1px solid var(--border-hair); background: white; }
+  .page-card img { display: block; width: 100%; aspect-ratio: 8.5 / 11; height: auto; object-fit: contain; border: 1px solid var(--border-hair); background: white; }
   .tag { border: 1px solid var(--border-hair); border-radius: 3px; background: var(--paper); color: var(--fg-2); font: 700 11px var(--font-mono); padding: 3px 7px; }
   .panel { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper); padding: 12px; margin-bottom: 12px; }
   .panel h2 { font: 700 14px var(--font-ui); margin: 0 0 10px; }
@@ -75,9 +81,16 @@
 <body>
 <div id="root"></div>
 <script type="text/babel">
-const { useEffect, useMemo, useState } = React;
-const { AgendaTree } = window.CouncilAgendaTree;
+const { useEffect, useMemo, useRef, useState } = React;
+const { AgendaTree, allItems } = window.CouncilAgendaTree;
 const PAGE_TYPES = ["meeting_agenda", "resolution_cover_page", "resolution_text_page", "meeting_minutes", "committee_report", "development_permit_application", "staff_report", "map_or_plan", "correspondence", "financial_report", "other"];
+const DOCUMENT_CATEGORY_GROUPS = [
+  ["Municipal Sources", [["agenda", "Agenda"], ["minutes", "Minutes"], ["monthly_reports", "Monthly reports"], ["resolutions", "Resolutions"], ["readings", "Readings"]]],
+  ["Received Material", [["emails", "Emails"], ["document_submissions", "Document submissions"], ["applicant_submissions", "Applicant submissions"], ["developer_submissions", "Developer submissions"], ["external_body_submissions", "External body submissions"], ["public_submissions", "Public submissions"]]],
+  ["Other", [["uncategorized", "Uncategorized"]]],
+];
+const DOCUMENT_CATEGORIES = DOCUMENT_CATEGORY_GROUPS.flatMap((group) => group[1]);
+const DEFAULT_AGENDA_TITLE_OVERRIDES = { "agenda-2": "Council Meeting Agenda - May 12, 2026" };
 const STORE_KEY = "mdopendata-document-import-qa";
 
 function fetchJson(url) {
@@ -107,7 +120,7 @@ function initialQa(documents) {
     documentNotes[document.document_id] = "";
     documentText[document.document_id] = "";
   }
-  return { pageTags, pageComments: {}, documentNotes, documentText, localDocuments: [] };
+  return { pageTags, pageComments: {}, documentNotes, documentText, localDocuments: [], agendaItemTitles: DEFAULT_AGENDA_TITLE_OVERRIDES, templateInstructions: {} };
 }
 function hydrateQa(documents) {
   const base = initialQa(documents);
@@ -119,6 +132,8 @@ function hydrateQa(documents) {
       documentNotes: { ...base.documentNotes, ...(stored.documentNotes || {}) },
       documentText: { ...base.documentText, ...(stored.documentText || {}) },
       localDocuments: stored.localDocuments || [],
+      agendaItemTitles: { ...base.agendaItemTitles, ...(stored.agendaItemTitles || {}) },
+      templateInstructions: { ...base.templateInstructions, ...(stored.templateInstructions || {}) },
     };
   } catch {
     return base;
@@ -133,16 +148,40 @@ function documentsForAgendaItem(documents, agendaItemId) {
 function Toolbar({ meeting, selectedPages, selectionMode, setSelectionMode, tagSelected, clearSelection, exportFeedback }) {
   return <div className="toolbar"><div className="title">{meeting?.title || "Document Import QA"}</div><button type="button" className={`btn-small ${selectionMode ? "active" : ""}`} onClick={() => setSelectionMode(!selectionMode)}><i data-lucide="check-square"></i> Select pages</button><select className="select" style={{width: 230}} onChange={(event) => { if (event.target.value) tagSelected(event.target.value); event.target.value = ""; }}><option value="">Tag selected pages</option>{PAGE_TYPES.map((type) => <option value={type} key={type}>{type.replaceAll("_", " ")}</option>)}</select><button type="button" className="btn-small" onClick={clearSelection}>Clear {selectedPages.length}</button><button type="button" className="btn-small primary" onClick={exportFeedback}><i data-lucide="download"></i> Export feedback</button></div>;
 }
-function PageCard({ page, document, selected, toggleSelected, tag, setTag, comment, setComment }) {
-  return <article className={`page-card ${selected ? "selected" : ""}`}><div className="page-head"><input type="checkbox" checked={selected} onChange={() => toggleSelected(page)} aria-label={`Select page ${page}`} /><div><h2>Package page {page}</h2><div className="page-meta">{document.title} | {document.document_id} | pages {document.page_start}-{document.page_end}</div></div><span className="tag">{(tag || "other").replaceAll("_", " ")}</span></div><div className="field-row" style={{marginBottom: 10}}><select className="select" style={{width: 260}} value={tag || "other"} onChange={(event) => setTag(page, event.target.value)}>{PAGE_TYPES.map((type) => <option value={type} key={type}>{type.replaceAll("_", " ")}</option>)}</select><input className="input" style={{flex: 1}} value={comment || ""} onChange={(event) => setComment(page, event.target.value)} placeholder="Page interpretation comment" /></div><img loading="lazy" alt={`Package page ${page}`} src={`/api/council-meetings/current/page-image?documentId=package&page=${page}`} /></article>;
+function documentForPage(documents, page) {
+  return documents.find((document) => pageRange(document).includes(page)) || documents[0] || null;
 }
-function PageListing({ document, selectedPages, toggleSelected, qa, setQa }) {
-  if (!document) return <main className="pages">No document selected.</main>;
+function displayTitleForAgendaItem(item, qa) {
+  return qa?.agendaItemTitles?.[item?.id] || item?.title || "";
+}
+function categoryOptions() {
+  return DOCUMENT_CATEGORY_GROUPS.map(([group, options]) => <optgroup label={group} key={group}>{options.map(([value, label]) => <option value={value} key={value}>{label}</option>)}</optgroup>);
+}
+function PageCard({ page, document, selected, toggleSelected, tag, setTag, comment, setComment }) {
+  return <article id={`package-page-${page}`} data-page={page} className={`page-card ${selected ? "selected" : ""}`}><div className="page-head"><input type="checkbox" checked={selected} onChange={() => toggleSelected(page)} aria-label={`Select page ${page}`} /><div><h2>Package page {page}</h2><div className="page-meta">{document?.title || "Unassigned package page"} | {document?.document_id || "unassigned"} | pages {document?.page_start || page}-{document?.page_end || page}</div></div><span className="tag">{(tag || "other").replaceAll("_", " ")}</span></div><div className="field-row" style={{marginBottom: 10}}><select className="select" style={{width: 260}} value={tag || "other"} onChange={(event) => setTag(page, event.target.value)}>{PAGE_TYPES.map((type) => <option value={type} key={type}>{type.replaceAll("_", " ")}</option>)}</select><input className="input" style={{flex: 1}} value={comment || ""} onChange={(event) => setComment(page, event.target.value)} placeholder="Page interpretation comment" /></div><img loading="lazy" alt={`Package page ${page}`} src={`/api/council-meetings/current/page-image?documentId=package&page=${page}`} /></article>;
+}
+function PageListing({ documents, pageCount, categoryFilter, setActivePage, selectedPages, toggleSelected, qa, setQa }) {
+  const scrollRef = useRef(null);
+  if (!documents.length) return <main className="pages">No package documents loaded.</main>;
+  const listedPages = Array.from({ length: pageCount }, (_, index) => index + 1).filter((page) => {
+    const document = documentForPage(documents, page);
+    return !categoryFilter || document?.document_category === categoryFilter;
+  });
   const setTag = (page, tag) => setQa((current) => ({ ...current, pageTags: { ...current.pageTags, [pageKey(page)]: tag } }));
   const setComment = (page, comment) => setQa((current) => ({ ...current, pageComments: { ...current.pageComments, [pageKey(page)]: comment } }));
-  return <main className="pages"><div className="page-list">{pageRange(document).map((page) => <PageCard key={page} page={page} document={document} selected={selectedPages.includes(page)} toggleSelected={toggleSelected} tag={qa.pageTags[pageKey(page)]} setTag={setTag} comment={qa.pageComments[pageKey(page)]} setComment={setComment} />)}</div></main>;
+  useEffect(() => {
+    const root = scrollRef.current;
+    if (!root) return undefined;
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (visible[0]) setActivePage(Number(visible[0].target.dataset.page));
+    }, { root, rootMargin: "-10% 0px -70% 0px", threshold: 0 });
+    root.querySelectorAll("[data-page]").forEach((node) => observer.observe(node));
+    return () => observer.disconnect();
+  }, [pageCount, categoryFilter, setActivePage]);
+  return <main className="pages" ref={scrollRef}><div className="page-list">{listedPages.map((page) => <PageCard key={page} page={page} document={documentForPage(documents, page)} selected={selectedPages.includes(page)} toggleSelected={toggleSelected} tag={qa.pageTags[pageKey(page)]} setTag={setTag} comment={qa.pageComments[pageKey(page)]} setComment={setComment} />)}</div></main>;
 }
-function EditorPanel({ document, documents, selectedPages, qa, setQa, setActiveId }) {
+function EditorPanel({ document, documents, activePage, agendaItem, selectedPages, qa, setQa, setActiveId }) {
   const [targetDocumentId, setTargetDocumentId] = useState("");
   const [newTitle, setNewTitle] = useState("");
   const [loadStatus, setLoadStatus] = useState("");
@@ -150,8 +189,28 @@ function EditorPanel({ document, documents, selectedPages, qa, setQa, setActiveI
   if (!document) return <aside className="edit">No document selected.</aside>;
   const selectedText = selectedPages.length ? selectedPages.join(", ") : "none";
   const markdown = qa.documentText[document.document_id] || "";
+  const agendaTitle = displayTitleForAgendaItem(agendaItem, qa);
+  const templateRecord = qa.templateInstructions[document.document_id] || { region: { x: "", y: "", width: "", height: "" }, template_category_type: document.template_type || "", title_template: "", extraction_instructions: "", agenda_fields: "", toc_fields: "", processing_actions: "" };
   const setMarkdown = (text) => setQa((current) => ({ ...current, documentText: { ...current.documentText, [document.document_id]: text } }));
   const setNote = (text) => setQa((current) => ({ ...current, documentNotes: { ...current.documentNotes, [document.document_id]: text } }));
+  const setAgendaTitle = (title) => {
+    if (!agendaItem?.id) return;
+    setQa((current) => ({ ...current, agendaItemTitles: { ...current.agendaItemTitles, [agendaItem.id]: title } }));
+  };
+  const setTemplateField = (field, value) => setQa((current) => {
+    const currentTemplate = current.templateInstructions[document.document_id] || templateRecord;
+    return { ...current, templateInstructions: { ...current.templateInstructions, [document.document_id]: { ...currentTemplate, [field]: value } } };
+  });
+  const setTemplateRegion = (field, value) => setQa((current) => {
+    const currentTemplate = current.templateInstructions[document.document_id] || templateRecord;
+    return { ...current, templateInstructions: { ...current.templateInstructions, [document.document_id]: { ...currentTemplate, region: { ...(currentTemplate.region || {}), [field]: value } } } };
+  });
+  const setCategory = (category) => setQa((current) => {
+    const localDocuments = current.localDocuments.some((candidate) => candidate.document_id === document.document_id)
+      ? current.localDocuments.map((candidate) => candidate.document_id === document.document_id ? { ...candidate, document_category: category } : candidate)
+      : [...current.localDocuments, { ...document, document_category: category }];
+    return { ...current, localDocuments };
+  });
   const createDocument = () => {
     if (!selectedPages.length) return;
     const sorted = [...selectedPages].sort((a, b) => a - b);
@@ -178,7 +237,14 @@ function EditorPanel({ document, documents, selectedPages, qa, setQa, setActiveI
     setMarkdown(results.join("\n\n"));
     setLoadStatus(`Loaded ${results.length} page source${results.length === 1 ? "" : "s"}.`);
   };
-  return <aside className="edit"><section className="panel"><h2>Selected Document</h2><div className="stats"><div className="stat"><strong>{document.page_count || pageRange(document).length}</strong><span>parser pages</span></div><div className="stat"><strong>{selectedPages.length}</strong><span>selected pages</span></div></div><div className="document-meta" style={{marginTop: 10}}>{document.document_id} | {document.document_type || "untyped"} | selected {selectedText}</div></section><section className="panel"><h2>Boundary Operations</h2><div className="field"><label>New document title</label><input className="input" value={newTitle} onChange={(event) => setNewTitle(event.target.value)} placeholder="Optional title for selected pages" /></div><div className="button-row"><button type="button" className="btn-small primary" onClick={createDocument}>Create document from selection</button></div><div className="field" style={{marginTop: 12}}><label>Move or add selected pages to document</label><select className="select" value={targetDocumentId} onChange={(event) => setTargetDocumentId(event.target.value)}>{documents.map((candidate) => <option value={candidate.document_id} key={candidate.document_id}>{candidate.title}</option>)}</select></div><button type="button" className="btn-small" onClick={movePages}>Apply page move</button></section><section className="panel"><h2>Document Markdown</h2><div className="button-row" style={{marginBottom: 10}}><button type="button" className="btn-small" onClick={loadExtractedText}>Load extracted text</button><span className="muted">{loadStatus}</span></div><textarea className="textarea markdown-editor" value={markdown} onChange={(event) => setMarkdown(event.target.value)} placeholder="Editable markdown interpretation for this document. Use Load extracted text to seed this field from page OCR text." /></section><section className="panel"><h2>Parser Feedback</h2><textarea className="textarea" value={qa.documentNotes[document.document_id] || ""} onChange={(event) => setNote(event.target.value)} placeholder="Comment on parser errors, missed boundaries, page type mistakes, or markdown corrections." /></section></aside>;
+  return <aside className="edit"><section className="panel"><h2>Visible Page Context</h2><div className="stats"><div className="stat"><strong>{activePage}</strong><span>active page</span></div><div className="stat"><strong>{document.page_count || pageRange(document).length}</strong><span>document pages</span></div></div><div className="field" style={{marginTop: 10}}><label>Agenda item title</label><input className="input" value={agendaTitle} onChange={(event) => setAgendaTitle(event.target.value)} placeholder="Agenda item display title" /></div><div className="field"><label>Parent document</label><div className="document-title">{document.title}</div><div className="document-meta">{document.document_id} | {document.document_type || "untyped"} | pages {document.page_start}-{document.page_end}</div></div><div className="field"><label>Document Category</label><select className="select" value={document.document_category || "uncategorized"} onChange={(event) => setCategory(event.target.value)}>{categoryOptions()}</select></div><div className="document-meta">selected {selectedText}</div></section><section className="panel"><h2>Template Editor</h2><div className="field"><label>Template category type</label><input className="input" value={templateRecord.template_category_type || ""} onChange={(event) => setTemplateField("template_category_type", event.target.value)} placeholder="Example: council-meeting-agenda" /></div><div className="field"><label>Programmatic title</label><input className="input" value={templateRecord.title_template || ""} onChange={(event) => setTemplateField("title_template", event.target.value)} placeholder="Example: Council Meeting Agenda - {meeting_date}" /></div><div className="field-row"><input className="input" style={{width: 75}} value={templateRecord.region?.x || ""} onChange={(event) => setTemplateRegion("x", event.target.value)} placeholder="x %" /><input className="input" style={{width: 75}} value={templateRecord.region?.y || ""} onChange={(event) => setTemplateRegion("y", event.target.value)} placeholder="y %" /><input className="input" style={{width: 75}} value={templateRecord.region?.width || ""} onChange={(event) => setTemplateRegion("width", event.target.value)} placeholder="w %" /><input className="input" style={{width: 75}} value={templateRecord.region?.height || ""} onChange={(event) => setTemplateRegion("height", event.target.value)} placeholder="h %" /></div><div className="field"><label>Extraction instructions</label><textarea className="textarea" value={templateRecord.extraction_instructions || ""} onChange={(event) => setTemplateField("extraction_instructions", event.target.value)} placeholder="Describe the selected image region and exact data to extract." /></div><div className="field"><label>Agenda field population</label><textarea className="textarea" value={templateRecord.agenda_fields || ""} onChange={(event) => setTemplateField("agenda_fields", event.target.value)} placeholder="Map extracted values to agenda item fields." /></div><div className="field"><label>TOC field population and processing actions</label><textarea className="textarea" value={templateRecord.toc_fields || ""} onChange={(event) => setTemplateField("toc_fields", event.target.value)} placeholder="Map extracted values to TOC fields and processing actions." /></div></section><section className="panel"><h2>Boundary Operations</h2><div className="field"><label>New document title</label><input className="input" value={newTitle} onChange={(event) => setNewTitle(event.target.value)} placeholder="Optional title for selected pages" /></div><div className="button-row"><button type="button" className="btn-small primary" onClick={createDocument}>Create document from selection</button></div><div className="field" style={{marginTop: 12}}><label>Move or add selected pages to document</label><select className="select" value={targetDocumentId} onChange={(event) => setTargetDocumentId(event.target.value)}>{documents.map((candidate) => <option value={candidate.document_id} key={candidate.document_id}>{candidate.title}</option>)}</select></div><button type="button" className="btn-small" onClick={movePages}>Apply page move</button></section><section className="panel"><h2>Document Markdown</h2><div className="button-row" style={{marginBottom: 10}}><button type="button" className="btn-small" onClick={loadExtractedText}>Load extracted text</button><span className="muted">{loadStatus}</span></div><textarea className="textarea markdown-editor" value={markdown} onChange={(event) => setMarkdown(event.target.value)} placeholder="Editable markdown interpretation for this document. Use Load extracted text to seed this field from page OCR text." /></section><section className="panel"><h2>Parser Feedback</h2><textarea className="textarea" value={qa.documentNotes[document.document_id] || ""} onChange={(event) => setNote(event.target.value)} placeholder="Comment on parser errors, missed boundaries, page type mistakes, or markdown corrections." /></section></aside>;
+}
+function LeftNavigation({ leftMode, setLeftMode, selectedAgendaId, selectAgendaItem, payload, pageCount, activePage, scrollToPage, documents, categoryFilter, setCategoryFilter, qa }) {
+  const packagePages = Array.from({ length: pageCount }, (_, index) => index + 1).filter((page) => {
+    const document = documentForPage(documents, page);
+    return !categoryFilter || document?.document_category === categoryFilter;
+  });
+  return <aside className="agenda-panel"><div className="mode-toggle" aria-label="Navigation mode" style={{marginBottom: 12}}><button type="button" className={`btn-small ${leftMode === "agenda" ? "active" : ""}`} onClick={() => setLeftMode("agenda")}>Agenda</button><button type="button" className={`btn-small ${leftMode === "package" ? "active" : ""}`} onClick={() => setLeftMode("package")}>Package</button></div>{leftMode === "agenda" ? <AgendaTree selectedId={selectedAgendaId} onSelect={selectAgendaItem} payload={payload} title="Agenda" embedded titleOverrides={qa.agendaItemTitles} /> : <><h2 className="section-title">Package Pages</h2><div className="field"><label>Filter by category</label><select className="select" value={categoryFilter} onChange={(event) => setCategoryFilter(event.target.value)}><option value="">All categories</option>{categoryOptions()}</select></div><div className="page-index">{packagePages.map((page) => <button type="button" key={page} className={activePage === page ? "active" : ""} onClick={() => scrollToPage(page)}>{page}</button>)}</div></>}</aside>;
 }
 function App() {
   const [payload, setPayload] = useState(null);
@@ -188,8 +254,18 @@ function App() {
   const [selectionMode, setSelectionMode] = useState(true);
   const [qa, setQa] = useState(null);
   const [selectedAgendaId, setSelectedAgendaId] = useState("");
-  const documents = useMemo(() => [...(payload?.packageDocuments || []), ...(qa?.localDocuments || [])], [payload, qa]);
-  const activeDocument = documents.find((document) => document.document_id === activeId) || documents[0] || null;
+  const [leftMode, setLeftMode] = useState("agenda");
+  const [activePage, setActivePage] = useState(1);
+  const [categoryFilter, setCategoryFilter] = useState("");
+  const documents = useMemo(() => {
+    const byId = new Map((payload?.packageDocuments || []).map((document) => [document.document_id, document]));
+    for (const document of qa?.localDocuments || []) byId.set(document.document_id, { ...(byId.get(document.document_id) || {}), ...document });
+    return [...byId.values()].sort((a, b) => (a.page_start || 0) - (b.page_start || 0));
+  }, [payload, qa]);
+  const pageCount = payload?.sourceDocuments?.find((document) => document.source_document_id === "package")?.page_count || Math.max(...documents.map((document) => document.page_end || 1), 1);
+  const activeDocument = documentForPage(documents, activePage) || documents.find((document) => document.document_id === activeId) || documents[0] || null;
+  const agendaItems = useMemo(() => payload ? allItems(payload) : [], [payload]);
+  const activeAgendaItem = agendaItems.find((item) => item.id === selectedAgendaId) || agendaItems.find((item) => (activeDocument?.agenda_item_ids || []).includes(item.id)) || null;
   useEffect(() => { lucide.createIcons(); });
   useEffect(() => {
     fetchJson("/api/council-meetings/current").then((data) => {
@@ -198,6 +274,7 @@ function App() {
       setQa(hydrated);
       setActiveId(data.packageDocuments?.[0]?.document_id || "");
       setSelectedAgendaId((data.packageDocuments?.[0]?.agenda_item_ids || [])[0] || "");
+      setActivePage(data.packageDocuments?.[0]?.page_start || 1);
       setStatus("ready");
     }).catch((error) => setStatus(error.message));
   }, []);
@@ -208,6 +285,16 @@ function App() {
   };
   const tagSelected = (tag) => setQa((current) => ({ ...current, pageTags: { ...current.pageTags, ...Object.fromEntries(selectedPages.map((page) => [pageKey(page), tag])) } }));
   const clearSelection = () => setSelectedPages([]);
+  const scrollToPage = (page) => {
+    setActivePage(page);
+    const target = document.getElementById(`package-page-${page}`);
+    const scroller = target?.closest(".pages");
+    if (target && scroller) {
+      scroller.scrollTo({ top: target.offsetTop - scroller.offsetTop, behavior: "smooth" });
+    } else if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
   const exportFeedback = () => {
     const feedback = { meeting_id: payload?.meeting?.meeting_id, source: payload?.tocSource, exported_at: new Date().toISOString(), qa };
     const blob = new Blob([JSON.stringify(feedback, null, 2)], { type: "application/json" });
@@ -221,11 +308,14 @@ function App() {
   const selectAgendaItem = (id) => {
     setSelectedAgendaId(id);
     const linked = documentsForAgendaItem(documents, id);
+    const agendaItem = agendaItems.find((item) => item.id === id);
+    const targetPage = linked[0]?.page_start || agendaItem?.packagePage || agendaItem?.page || 1;
     if (linked[0]) setActiveId(linked[0].document_id);
+    scrollToPage(targetPage);
     setSelectedPages([]);
   };
   if (status !== "ready" || !payload || !qa) return <div className="import-app"><Header /><main className="pages">{status}</main></div>;
-  return <div className="import-app"><Header /><Toolbar meeting={payload.meeting} selectedPages={selectedPages} selectionMode={selectionMode} setSelectionMode={setSelectionMode} tagSelected={tagSelected} clearSelection={clearSelection} exportFeedback={exportFeedback} /><div className="import-shell"><AgendaTree selectedId={selectedAgendaId} onSelect={selectAgendaItem} payload={payload} title="Package Documents" /><PageListing document={activeDocument} selectedPages={selectedPages} toggleSelected={toggleSelected} qa={qa} setQa={setQa} /><EditorPanel document={activeDocument} documents={documents} selectedPages={selectedPages} qa={qa} setQa={setQa} setActiveId={setActiveId} /></div></div>;
+  return <div className="import-app"><Header /><Toolbar meeting={payload.meeting} selectedPages={selectedPages} selectionMode={selectionMode} setSelectionMode={setSelectionMode} tagSelected={tagSelected} clearSelection={clearSelection} exportFeedback={exportFeedback} /><div className="import-shell"><LeftNavigation leftMode={leftMode} setLeftMode={setLeftMode} selectedAgendaId={selectedAgendaId} selectAgendaItem={selectAgendaItem} payload={payload} pageCount={pageCount} activePage={activePage} scrollToPage={scrollToPage} documents={documents} categoryFilter={categoryFilter} setCategoryFilter={setCategoryFilter} qa={qa} /><PageListing documents={documents} pageCount={pageCount} categoryFilter={leftMode === "package" ? categoryFilter : ""} setActivePage={setActivePage} selectedPages={selectedPages} toggleSelected={toggleSelected} qa={qa} setQa={setQa} /><EditorPanel document={activeDocument} documents={documents} activePage={activePage} agendaItem={activeAgendaItem} selectedPages={selectedPages} qa={qa} setQa={setQa} setActiveId={setActiveId} /></div></div>;
 }
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 </script>

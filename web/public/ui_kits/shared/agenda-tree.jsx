@@ -40,11 +40,28 @@ const EXTRA_AGENDA_ITEMS = [
 ];
 
 function buildAgendaTree(payload) {
+  const existingIds = new Set(EXTRA_AGENDA_ITEMS.map((item) => item.id));
+  const packageChildren = (payload?.packageDocuments || [])
+    .filter((document) => !existingIds.has(document.document_id))
+    .filter((document) => {
+      const type = document.document_type || "";
+      const title = document.title || "";
+      return type === "resolution" || type === "agenda_item_package" || /resolution|reading|bylaw|appointment/i.test(title);
+    })
+    .flatMap((document) => (document.agenda_item_ids || []).map((parentId) => ({
+      id: document.document_id,
+      label: "",
+      title: document.title,
+      page: document.page_start,
+      packagePage: document.page_start,
+      parentId,
+    })));
+  const children = [...EXTRA_AGENDA_ITEMS, ...packageChildren];
   return AGENDA_TREE_BASE.map((group) => ({
     ...group,
     items: group.items.map((item) => ({
       ...item,
-      children: EXTRA_AGENDA_ITEMS.filter((child) => child.parentId === item.id),
+      children: children.filter((child) => child.parentId === item.id),
     })),
   }));
 }
@@ -57,23 +74,25 @@ function allItems(payload) {
   return buildAgendaTree(payload).flatMap((group) => flattenAgendaItems(group.items));
 }
 
-function AgendaTreeItem({ item, selectedId, onSelect }) {
+function AgendaTreeItem({ item, selectedId, onSelect, titleOverrides = {} }) {
   const hasChildren = Boolean(item.children?.length);
-  const button = <button type="button" className={`tree-button ${selectedId === item.id ? "active" : ""}`} onClick={() => onSelect(item.id)}><span className="label">{item.label}</span><span className="title">{item.title}</span></button>;
+  const title = titleOverrides[item.id] || item.title;
+  const button = <button type="button" className={`tree-button ${selectedId === item.id ? "active" : ""}`} onClick={() => onSelect(item.id)}><span className="label">{item.label}</span><span className="title">{title}</span></button>;
   if (!hasChildren) return button;
   return <details className="tree-nested" open>
     <summary>{button}</summary>
-    <div className="tree-children">{item.children.map((child) => <AgendaTreeItem item={child} selectedId={selectedId} onSelect={onSelect} key={child.id} />)}</div>
+    <div className="tree-children">{item.children.map((child) => <AgendaTreeItem item={child} selectedId={selectedId} onSelect={onSelect} titleOverrides={titleOverrides} key={child.id} />)}</div>
   </details>;
 }
 
-function AgendaTree({ audience, setAudience, selectedId, onSelect, payload, title = "Agenda Tree" }) {
+function AgendaTree({ audience, setAudience, selectedId, onSelect, payload, title = "Agenda Tree", embedded = false, titleOverrides = {} }) {
   const agendaTree = buildAgendaTree(payload);
-  return <aside className="agenda-panel">
+  const content = <>
     {audience && setAudience && <div className="tabs" aria-label="Audience tabs">{["public", "council", "staff"].map((name) => <button type="button" key={name} className={audience === name ? "active" : ""} onClick={() => setAudience(name)}>{name[0].toUpperCase() + name.slice(1)}</button>)}</div>}
     <h2 className="section-title">{title}</h2>
-    <div className="tree">{agendaTree.map((group) => <details className="tree-group" open={group.open} key={group.group}><summary>{group.group}</summary><div className="tree-items">{group.items.map((item) => <AgendaTreeItem item={item} selectedId={selectedId} onSelect={onSelect} key={item.id} />)}</div></details>)}</div>
-  </aside>;
+    <div className="tree">{agendaTree.map((group) => <details className="tree-group" open={group.open} key={group.group}><summary>{group.group}</summary><div className="tree-items">{group.items.map((item) => <AgendaTreeItem item={item} selectedId={selectedId} onSelect={onSelect} titleOverrides={titleOverrides} key={item.id} />)}</div></details>)}</div>
+  </>;
+  return embedded ? content : <aside className="agenda-panel">{content}</aside>;
 }
 
 window.CouncilAgendaTree = { AgendaTree, allItems, buildAgendaTree };
