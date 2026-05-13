@@ -65,6 +65,7 @@ const councilMeetingPageImageRoot = path.join(
   "2026-05-12-regular-council",
   "page-images",
 );
+const currentCouncilMeetingKey = "charlottetown-2026-05-12-regular-council";
 
 const publicDir = path.join(__dirname, "public");
 const pool = new Pool({
@@ -492,6 +493,10 @@ function mapZoneSectionRow(row) {
 }
 
 async function loadCouncilMeeting() {
+  const databasePayload = await loadCouncilMeetingFromDatabase();
+  if (databasePayload) {
+    return databasePayload;
+  }
   const [payload, agenda, toc] = await Promise.all([
     readFile(councilMeetingPath, "utf8").then(JSON.parse),
     readFile(councilMeetingAgendaPath, "utf8").then(JSON.parse),
@@ -517,6 +522,100 @@ async function loadCouncilMeeting() {
   };
 }
 
+function councilApiPayloadToRaw(payload) {
+  if (!payload) return null;
+  return {
+    meeting: payload.meeting,
+    source_documents: payload.sourceDocuments || [],
+    agenda_sections: payload.agendaSections || [],
+    committee_reports: payload.committeeReports || [],
+    resolutions: payload.resolutions || [],
+    bylaw_readings: payload.bylawReadings || [],
+    planning_items: payload.planningItems || [],
+    audience_workflows: payload.audienceWorkflows || [],
+    review_flags: payload.reviewFlags || [],
+  };
+}
+
+async function loadCouncilMeetingFromDatabase() {
+  try {
+    const { rows } = await pool.query(`
+      SELECT metadata->'api_payload' AS api_payload
+      FROM council.meeting
+      WHERE meeting_key = $1
+        AND is_active
+      LIMIT 1
+    `, [currentCouncilMeetingKey]);
+    return rows[0]?.api_payload || null;
+  } catch {
+    return null;
+  }
+}
+
+async function loadCouncilMeetingRawFromDatabase() {
+  const payload = await loadCouncilMeetingFromDatabase();
+  return councilApiPayloadToRaw(payload);
+}
+
+async function loadCouncilMeetingSourcePageFromDatabase(documentId, pageNumber) {
+  try {
+    const page = Number(pageNumber);
+    const { rows } = await pool.query(`
+      SELECT sp.text_raw
+      FROM council.source_page sp
+      JOIN council.source_document sd ON sd.source_document_id = sp.source_document_id
+      JOIN council.meeting_document md ON md.source_document_id = sd.source_document_id
+      JOIN council.meeting m ON m.meeting_id = md.meeting_id
+      WHERE m.meeting_key = $1
+        AND m.is_active
+        AND sd.is_active
+        AND sp.is_active
+        AND sd.source_document_key = $2
+        AND sp.page_number = $3
+      LIMIT 1
+    `, [currentCouncilMeetingKey, documentId, page]);
+    if (!rows.length || rows[0].text_raw === null || rows[0].text_raw === undefined) {
+      return null;
+    }
+    return { documentId, page, text: rows[0].text_raw };
+  } catch {
+    return null;
+  }
+}
+
+async function loadCouncilMeetingPageImageFromDatabase(documentId, pageNumber) {
+  try {
+    const page = Number(pageNumber);
+    const { rows } = await pool.query(`
+      SELECT sa.repo_relpath
+      FROM council.source_asset sa
+      JOIN council.source_document sd ON sd.source_document_id = sa.source_document_id
+      JOIN council.source_page sp ON sp.source_page_id = sa.source_page_id
+      JOIN council.meeting_document md ON md.source_document_id = sd.source_document_id
+      JOIN council.meeting m ON m.meeting_id = md.meeting_id
+      WHERE m.meeting_key = $1
+        AND m.is_active
+        AND sd.is_active
+        AND sp.is_active
+        AND sa.is_active
+        AND sd.source_document_key = $2
+        AND sp.page_number = $3
+        AND sa.asset_type = 'page_image'
+      LIMIT 1
+    `, [currentCouncilMeetingKey, documentId, page]);
+    const repoRelpath = rows[0]?.repo_relpath;
+    if (!repoRelpath) return null;
+    const imagePath = path.resolve(repoRoot, repoRelpath);
+    const imageRoot = path.resolve(councilMeetingPageImageRoot);
+    if (!imagePath.startsWith(imageRoot)) {
+      return null;
+    }
+    return readFile(imagePath);
+  } catch {
+    return null;
+  }
+}
+
 async function loadCouncilMeetingSourcePage(documentId, pageNumber) {
   if (!["agenda", "package"].includes(documentId)) {
     const error = new Error("documentId must be agenda or package.");
@@ -528,6 +627,10 @@ async function loadCouncilMeetingSourcePage(documentId, pageNumber) {
     const error = new Error("page must be a positive integer.");
     error.statusCode = 400;
     throw error;
+  }
+  const databasePage = await loadCouncilMeetingSourcePageFromDatabase(documentId, page);
+  if (databasePage) {
+    return databasePage;
   }
   const pagePath = path.join(
     repoRoot,
@@ -564,6 +667,10 @@ async function loadCouncilMeetingPageImage(documentId, pageNumber) {
     error.statusCode = 400;
     throw error;
   }
+  const databaseImage = await loadCouncilMeetingPageImageFromDatabase(documentId, page);
+  if (databaseImage) {
+    return databaseImage;
+  }
   const imagePath = path.join(councilMeetingPageImageRoot, `${documentId}-page-${String(page).padStart(3, "0")}.png`);
   const absolute = path.resolve(imagePath);
   const imageRoot = path.resolve(councilMeetingPageImageRoot);
@@ -576,6 +683,10 @@ async function loadCouncilMeetingPageImage(documentId, pageNumber) {
 }
 
 async function loadCouncilMeetingRaw() {
+  const databasePayload = await loadCouncilMeetingRawFromDatabase();
+  if (databasePayload) {
+    return databasePayload;
+  }
   return JSON.parse(await readFile(councilMeetingPath, "utf8"));
 }
 

@@ -25,7 +25,7 @@ This wiki area tracks reusable meeting-preparation knowledge for municipal, regi
 
 ## Current Prototype
 
-The initial prototype is JSON-first and does not add database tables. The canonical generated meeting file is `data/council-meetings/charlottetown/2026-05-12-regular-council/meeting.json`, created by `scripts/extract-charlottetown-council-meeting.py` and validated against `schema/json-schema/council-meeting-extraction.schema.json`.
+The initial prototype is JSON-first, with an added `council` PostgreSQL schema and importer for database-backed endpoint parity. The canonical generated meeting file is `data/council-meetings/charlottetown/2026-05-12-regular-council/meeting.json`, created by `scripts/extract-charlottetown-council-meeting.py` and validated against `schema/json-schema/council-meeting-extraction.schema.json`.
 
 The May 12 package extraction also emits:
 
@@ -62,11 +62,12 @@ Meeting JSON separates:
 - audience workflows
 - review flags
 
-Database migration is deferred. When added, it should follow the existing Charlottetown zoning natural-key, content-hash, supersession, and import-batch conventions.
+The `council` database schema follows the existing Charlottetown zoning natural-key, content-hash, supersession, and import-batch conventions. The current database importer is `scripts/import-council-meeting.py`; it imports the May 12 package into normalized council tables while preserving current API payload parity in meeting metadata until endpoint-specific database queries are expanded.
 
 ## Backlog
 
 - Clean up agenda-related blank tables in the PostGIS `public` schema. Confirm which tables are empty, identify whether they were created by meeting extraction experiments or schema bootstrapping, preserve any migration history needed for repeatability, and remove or quarantine the unused tables without affecting current JSON-first meeting outputs.
+- Decide whether broader city-portal data should be split into additional schemas such as `core`, `documents`, `property`, `planning`, `finance`, `infrastructure`, `environment`, and `public_services`, or kept as explicit cross-schema links from the existing `council` and `zoning` subject areas. This is tabled until there are source documents and endpoint requirements beyond council meetings and zoning.
 
 ## Sources
 

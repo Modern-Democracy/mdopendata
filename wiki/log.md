@@ -154,6 +154,10 @@ Extended the May 12 Charlottetown council extraction to emit `agenda.json` and `
 
 Added a council-meetings backlog item to clean up agenda-related blank tables in the PostGIS `public` schema, including confirmation of empty tables, provenance checks, and removal or quarantine without affecting JSON-first meeting outputs.
 
+## [2026-05-13] implementation | Council meeting database importer and schema backlog
+
+Added the council meeting database importer and database-preferred `/council-meetings` API read path. Updated the council-meetings wiki backlog to table the broader city-portal subject-schema decision until source documents and endpoint requirements are clearer.
+
 ## Sources
 
 - [Wiki schema](./AGENTS.md)
