@@ -158,6 +158,10 @@ Added a council-meetings backlog item to clean up agenda-related blank tables in
 
 Added the council meeting database importer and database-preferred `/council-meetings` API read path. Updated the council-meetings wiki backlog to table the broader city-portal subject-schema decision until source documents and endpoint requirements are clearer.
 
+## [2026-05-13] implementation | Document import agenda tree and taxonomy
+
+Extracted the shared council agenda tree for `/council-meetings` and `/document-import`, with Planning & Heritage and New Business child items nested under their standing-committee parents. Added the agenda/package document taxonomy page for document-import source classes, attachment types, and reusable workflow templates.
+
 ## Sources
 
 - [Wiki schema](./AGENTS.md)

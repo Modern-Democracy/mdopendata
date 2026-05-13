@@ -43,6 +43,7 @@ This page catalogs the root wiki structure and links to active project wiki area
 | Page | Purpose |
 | --- | --- |
 | [Council and committee meetings](./council-committee-meetings/README.md) | JSON-first council/committee meeting extraction and audience workflow notes, starting with Charlottetown council on May 12, 2026. |
+| [Agenda and package document taxonomy](./council-committee-meetings/agenda-document-taxonomy.md) | Agenda item and agenda package attachment type catalogue for document-import review and parser refinement. |
 
 ## Implementation Pages
 

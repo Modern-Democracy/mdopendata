@@ -34,6 +34,8 @@ The May 12 package extraction also emits:
 
 The current extraction scope intentionally avoids full package content extraction except for the two rezoning bylaw second-reading items already used by the council-meeting web endpoints. Future reuse of the package segmentation should treat page-boundary rules as reviewable observations, not a universal template.
 
+[Agenda and package document taxonomy](./agenda-document-taxonomy.md) records the initial category catalogue for agenda items, source classes, attachment types, and reusable document workflow templates used by `/document-import`.
+
 The current web route is `/council-meetings`. It reads `GET /api/council-meetings/current` and provides a three-pane meeting workspace:
 
 - left agenda tree in agenda order for public, council, and staff views

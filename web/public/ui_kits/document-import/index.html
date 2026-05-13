@@ -11,9 +11,10 @@
   html, body, #root { height: 100%; margin: 0; }
   body { background: var(--paper); color: var(--ink); }
   .import-app { display: grid; grid-template-rows: auto minmax(0, 1fr); height: 100vh; overflow: hidden; }
-  .import-shell { display: grid; grid-template-columns: 280px minmax(420px, 1fr) 390px; min-height: 0; overflow: hidden; }
+  .import-shell { display: grid; grid-template-columns: 330px minmax(420px, 1fr) 390px; min-height: 0; overflow: hidden; }
   .side, .edit { background: var(--paper-2); overflow-y: auto; padding: 14px; }
   .side { border-right: 1px solid var(--border-hair); }
+  .agenda-panel { background: var(--paper-2); border-right: 1px solid var(--border-hair); overflow-y: auto; padding: 14px; }
   .edit { border-left: 1px solid var(--border-hair); }
   .pages { overflow-y: auto; padding: 16px; background: var(--paper); }
   .section-title { font: 700 11px var(--font-ui); letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); margin: 0 0 10px; }
@@ -21,6 +22,20 @@
   .document-button.active { box-shadow: inset 3px 0 0 var(--brick); color: var(--ink); background: var(--paper-3); }
   .document-title { font: 700 13px var(--font-ui); color: var(--ink); margin-bottom: 5px; }
   .document-meta, .page-meta, .muted { font: 11px var(--font-mono); color: var(--fg-3); }
+  .tree { display: grid; gap: 8px; }
+  details.tree-group { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper); overflow: hidden; }
+  details.tree-group > summary { cursor: pointer; padding: 10px 11px; font: 700 12px var(--font-ui); color: var(--ink); list-style: none; border-bottom: 1px solid var(--border-hair); }
+  details.tree-group > summary::-webkit-details-marker { display: none; }
+  .tree-items { display: grid; gap: 0; padding: 5px; }
+  .tree-button { width: 100%; border: 0; border-radius: 4px; background: transparent; color: var(--fg-2); cursor: pointer; display: grid; grid-template-columns: 38px 1fr; gap: 8px; padding: 8px; text-align: left; font: 13px var(--font-ui); }
+  .tree-button.active { background: var(--paper-3); color: var(--ink); box-shadow: inset 3px 0 0 var(--brick); }
+  .tree-button .label { font: 700 11px var(--font-mono); color: var(--fg-3); }
+  details.tree-nested > summary { list-style: none; }
+  details.tree-nested > summary::-webkit-details-marker { display: none; }
+  details.tree-nested > summary .tree-button .title::after { content: "\25b8"; float: right; color: var(--brick-ink); font-size: 10px; margin-left: 8px; transition: transform 0.15s; }
+  details.tree-nested[open] > summary .tree-button .title::after { transform: rotate(90deg); }
+  .tree-children { margin: 2px 0 4px 25px; padding-left: 10px; border-left: 2px solid var(--brick-wash); }
+  .tree-children .tree-button { grid-template-columns: 48px 1fr; padding: 7px 8px; }
   .toolbar, .field-row, .button-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
   .toolbar { border-bottom: 1px solid var(--border-hair); background: var(--paper-2); padding: 12px 14px; }
   .toolbar .title { font: 700 14px var(--font-ui); margin-right: auto; }
@@ -48,18 +63,20 @@
   @media (max-width: 1120px) {
     .import-app { height: auto; min-height: 100vh; overflow: visible; }
     .import-shell { grid-template-columns: 1fr; overflow: visible; }
-    .side, .edit, .pages { overflow: visible; }
+    .side, .agenda-panel, .edit, .pages { overflow: visible; }
   }
 </style>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+<script type="text/babel" src="../shared/agenda-tree.jsx"></script>
 </head>
 <body>
 <div id="root"></div>
 <script type="text/babel">
 const { useEffect, useMemo, useState } = React;
+const { AgendaTree } = window.CouncilAgendaTree;
 const PAGE_TYPES = ["meeting_agenda", "resolution_cover_page", "resolution_text_page", "meeting_minutes", "committee_report", "development_permit_application", "staff_report", "map_or_plan", "correspondence", "financial_report", "other"];
 const STORE_KEY = "mdopendata-document-import-qa";
 
@@ -110,8 +127,8 @@ function hydrateQa(documents) {
 function Header() {
   return <header className="app-header"><img src="../../assets/logo-island-needle.svg" alt="Modern Democracy" className="wm" /><nav><a href="/parcel-lookup">Parcel lookup</a><a href="/zoning-comparison">Compare bylaws</a><a href="/council-meetings">Council meetings</a><a className="active" href="/document-import">Document import</a><a href="/restriction-stack">View Spatial Restrictions</a><a href="/city-view">Map</a></nav></header>;
 }
-function DocumentList({ documents, activeId, setActiveId }) {
-  return <aside className="side"><h2 className="section-title">Package Documents</h2>{documents.map((document) => <button type="button" className={`document-button ${activeId === document.document_id ? "active" : ""}`} onClick={() => setActiveId(document.document_id)} key={document.document_id}><div className="document-title">{document.title}</div><div className="document-meta">{document.document_type || "untyped"} | pages {document.page_start}-{document.page_end}</div></button>)}</aside>;
+function documentsForAgendaItem(documents, agendaItemId) {
+  return documents.filter((document) => document.document_id === agendaItemId || (document.agenda_item_ids || []).includes(agendaItemId));
 }
 function Toolbar({ meeting, selectedPages, selectionMode, setSelectionMode, tagSelected, clearSelection, exportFeedback }) {
   return <div className="toolbar"><div className="title">{meeting?.title || "Document Import QA"}</div><button type="button" className={`btn-small ${selectionMode ? "active" : ""}`} onClick={() => setSelectionMode(!selectionMode)}><i data-lucide="check-square"></i> Select pages</button><select className="select" style={{width: 230}} onChange={(event) => { if (event.target.value) tagSelected(event.target.value); event.target.value = ""; }}><option value="">Tag selected pages</option>{PAGE_TYPES.map((type) => <option value={type} key={type}>{type.replaceAll("_", " ")}</option>)}</select><button type="button" className="btn-small" onClick={clearSelection}>Clear {selectedPages.length}</button><button type="button" className="btn-small primary" onClick={exportFeedback}><i data-lucide="download"></i> Export feedback</button></div>;
@@ -170,6 +187,7 @@ function App() {
   const [selectedPages, setSelectedPages] = useState([]);
   const [selectionMode, setSelectionMode] = useState(true);
   const [qa, setQa] = useState(null);
+  const [selectedAgendaId, setSelectedAgendaId] = useState("");
   const documents = useMemo(() => [...(payload?.packageDocuments || []), ...(qa?.localDocuments || [])], [payload, qa]);
   const activeDocument = documents.find((document) => document.document_id === activeId) || documents[0] || null;
   useEffect(() => { lucide.createIcons(); });
@@ -179,6 +197,7 @@ function App() {
       setPayload(data);
       setQa(hydrated);
       setActiveId(data.packageDocuments?.[0]?.document_id || "");
+      setSelectedAgendaId((data.packageDocuments?.[0]?.agenda_item_ids || [])[0] || "");
       setStatus("ready");
     }).catch((error) => setStatus(error.message));
   }, []);
@@ -199,8 +218,14 @@ function App() {
     link.click();
     URL.revokeObjectURL(url);
   };
+  const selectAgendaItem = (id) => {
+    setSelectedAgendaId(id);
+    const linked = documentsForAgendaItem(documents, id);
+    if (linked[0]) setActiveId(linked[0].document_id);
+    setSelectedPages([]);
+  };
   if (status !== "ready" || !payload || !qa) return <div className="import-app"><Header /><main className="pages">{status}</main></div>;
-  return <div className="import-app"><Header /><Toolbar meeting={payload.meeting} selectedPages={selectedPages} selectionMode={selectionMode} setSelectionMode={setSelectionMode} tagSelected={tagSelected} clearSelection={clearSelection} exportFeedback={exportFeedback} /><div className="import-shell"><DocumentList documents={documents} activeId={activeDocument?.document_id} setActiveId={(id) => { setActiveId(id); setSelectedPages([]); }} /><PageListing document={activeDocument} selectedPages={selectedPages} toggleSelected={toggleSelected} qa={qa} setQa={setQa} /><EditorPanel document={activeDocument} documents={documents} selectedPages={selectedPages} qa={qa} setQa={setQa} setActiveId={setActiveId} /></div></div>;
+  return <div className="import-app"><Header /><Toolbar meeting={payload.meeting} selectedPages={selectedPages} selectionMode={selectionMode} setSelectionMode={setSelectionMode} tagSelected={tagSelected} clearSelection={clearSelection} exportFeedback={exportFeedback} /><div className="import-shell"><AgendaTree selectedId={selectedAgendaId} onSelect={selectAgendaItem} payload={payload} title="Package Documents" /><PageListing document={activeDocument} selectedPages={selectedPages} toggleSelected={toggleSelected} qa={qa} setQa={setQa} /><EditorPanel document={activeDocument} documents={documents} selectedPages={selectedPages} qa={qa} setQa={setQa} setActiveId={setActiveId} /></div></div>;
 }
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 </script>
