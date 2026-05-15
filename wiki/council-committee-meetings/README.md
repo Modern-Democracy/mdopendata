@@ -4,7 +4,7 @@ tags:
   - council-meetings
   - committee-meetings
   - workflows
-updated: 2026-05-13
+updated: 2026-05-14
 ---
 
 This page defines the council and committee meeting wiki area for converting zoning and civic-process data into preparation, observation, and follow-up workflows.
@@ -31,6 +31,7 @@ The May 12 package extraction also emits:
 
 - `data/council-meetings/charlottetown/2026-05-12-regular-council/agenda.json`: unified agenda view combining the standalone agenda and package agenda pages, with agenda items and linked package documents.
 - `data/council-meetings/charlottetown/2026-05-12-regular-council/toc.json`: logical document table of contents for all 256 package pages, including page counts, summaries, observed boundary basis, template categories where known, document-structure standards, and non-PDF page reproduction options.
+- `business_items` in `meeting.json` and `agenda_item_id` / `business_item_id` fields in `toc.json`: reviewable bindings between package documents, the meeting agenda item, and the longer-lived business item record.
 
 The current extraction scope intentionally avoids full package content extraction except for the two rezoning bylaw second-reading items already used by the council-meeting web endpoints. Future reuse of the package segmentation should treat page-boundary rules as reviewable observations, not a universal template.
 
@@ -49,6 +50,8 @@ The two zoning bylaw second readings include rezoning tool links to copied meeti
 
 The copied endpoints are `/rezoning-parcel-lookup`, `/rezoning-zoning-comparison`, `/rezoning-restriction-stack`, and `/rezoning-storm-surge`. They preserve the original endpoint code paths for later merge decisions while allowing meeting-specific current/future zone context.
 
+The `/document-import` route uses the same endpoint payload for package review. Its document panel groups package documents into agenda-item panels and exposes editable document title, type, category, page range, agenda item binding, and item-of-business binding fields.
+
 ## Schema Notes
 
 Meeting JSON separates:
@@ -64,7 +67,7 @@ Meeting JSON separates:
 - audience workflows
 - review flags
 
-The `council` database schema follows the existing Charlottetown zoning natural-key, content-hash, supersession, and import-batch conventions. The current database importer is `scripts/import-council-meeting.py`; it imports the May 12 package into normalized council tables while preserving current API payload parity in meeting metadata until endpoint-specific database queries are expanded.
+The `council` database schema follows the existing Charlottetown zoning natural-key, content-hash, supersession, and import-batch conventions. The current database importer is `scripts/import-council-meeting.py`; it imports the May 12 package into normalized council tables while preserving current API payload parity in meeting metadata until endpoint-specific database queries are expanded. Package-level document bindings are stored in `council.package_document`, linked where available to `council.agenda_item` and `council.business_item`.
 
 ## Backlog
 

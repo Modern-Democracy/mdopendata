@@ -4,7 +4,7 @@ tags:
   - council-meetings
   - document-import
   - taxonomy
-updated: 2026-05-13
+updated: 2026-05-14
 ---
 
 This page catalogs agenda item and agenda package attachment types used by the council meeting document-import workflow.
@@ -16,6 +16,8 @@ This page catalogs agenda item and agenda package attachment types used by the c
 The `/document-import` workflow reshapes `agenda.json`, `toc.json`, and `meeting.json` so they match the agenda package PDF. Package segmentation should prioritize the related council resolution or decision item, then separate each item into the 1-n attached documents that appear in the PDF, each with a 1-n page count.
 
 The resulting changelog is expected to feed parser refinement. Repeated document workflow templates, such as the City of Charlottetown `RESOLUTION OF COUNCIL` boilerplate title page, should become reusable detection patterns when they are observed in later document-import runs.
+
+Each package document should identify the agenda item it supports with `agenda_item_id`. When the item represents a matter that may continue across meetings, readings, public consultations, motions, or implementation steps, it should also identify the longer-lived item with `business_item_id`. Review UI edits to these fields should be treated as source-to-model correction candidates for `agenda.json`, `toc.json`, `meeting.json`, and `council.package_document`.
 
 ## Agenda Item Types
 
@@ -55,6 +57,7 @@ The resulting changelog is expected to feed parser refinement. Repeated document
 ## Current Workflow Rules
 
 - Resolution-linked package groups should keep the resolution or agenda decision item as the parent and attach the supporting documents below it.
+- The document-import left document panel should group documents by agenda-item set, one panel per agenda item, while retaining page-order sorting inside each set.
 - Attachment boundaries should preserve the source PDF page order and page counts.
 - Source labels and titles should be preserved as observed unless a separate normalization rule exists.
 - Template reuse should be reviewable: first sightings may be tagged, but repeated application should wait until the pattern is stable across multiple documents.

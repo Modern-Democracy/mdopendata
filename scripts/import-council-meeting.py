@@ -262,6 +262,7 @@ def api_payload(root: Path, meeting_payload: dict[str, Any], agenda: dict[str, A
         "sourceDocuments": meeting_payload["source_documents"],
         "agendaDocuments": agenda.get("agenda_documents", []),
         "packageDocuments": toc.get("documents", []),
+        "businessItems": meeting_payload.get("business_items", []),
         "documentStructureStandards": toc.get("document_structure_standards", []),
         "pageReproductionOptions": toc.get("page_reproduction_options", []),
         "agendaSections": meeting_payload.get("agenda_sections", []),
@@ -552,15 +553,19 @@ def import_meeting(root: Path, apply_schema_first: bool = False) -> dict[str, in
                 cur.execute("SELECT agenda_section_id, agenda_section_key FROM council.agenda_section WHERE meeting_id = %s AND is_active", (meeting_record.record_id,))
                 agenda_section_lookup = {str(row[1]): int(row[0]) for row in cur.fetchall()}
 
+            business_item_lookup: dict[str, StoredRecord] = {}
+            agenda_item_lookup: dict[str, StoredRecord] = {}
+
             def store_business_item(item: dict[str, Any], item_key: str, item_type: str, section_id: int | None, source_order: int) -> tuple[StoredRecord, StoredRecord]:
                 title = item.get("title") or item.get("title_raw") or item_key
-                business = track("business_item", store_record(conn, batch_id, "business_item", "business_item", f"council:business_item:{jurisdiction_key}:{item_key}", {
+                business_key = item.get("business_item_id") or item.get("item_of_business_id") or item_key
+                business = track("business_item", store_record(conn, batch_id, "business_item", "business_item", f"council:business_item:{jurisdiction_key}:{business_key}", {
                     "jurisdiction_id": jurisdiction.record_id,
                     "lead_body_id": council_body.record_id,
-                    "business_item_key": item_key,
+                    "business_item_key": business_key,
                     "business_item_type": item_type,
                     "title_raw": title,
-                    "slug": slug(item_key),
+                    "slug": slug(business_key),
                     "summary": item.get("public_summary") or item.get("summary"),
                     "current_stage": item.get("stage"),
                     "status": "active",
@@ -628,6 +633,9 @@ def import_meeting(root: Path, apply_schema_first: bool = False) -> dict[str, in
                     "metadata": {},
                 }))
                 store_citations(conn, batch_id, source_docs, source_pages, "agenda_item", agenda_item.record_id, agenda_item.natural_key, item.get("citations", []), seen.setdefault("source_citation", set()))
+                business_item_lookup[business_key] = business
+                business_item_lookup[item_key] = business
+                agenda_item_lookup[item_key] = agenda_item
                 return business, agenda_item
 
             source_order = 100
@@ -655,11 +663,79 @@ def import_meeting(root: Path, apply_schema_first: bool = False) -> dict[str, in
                     "source_order": 50 + index,
                     "metadata": {"source_payload": report, "body_id": body.record_id},
                 }))
+                agenda_item_lookup[item_key] = agenda_item
                 store_citations(conn, batch_id, source_docs, source_pages, "agenda_item", agenda_item.record_id, agenda_item.natural_key, report.get("citations", []), seen.setdefault("source_citation", set()))
+
+            for index, item in enumerate(meeting_payload.get("business_items", []), start=1):
+                business_key = item.get("business_item_id")
+                agenda_keys = item.get("related_agenda_item_ids") or []
+                agenda_key = agenda_keys[0] if agenda_keys else business_key
+                if not business_key or business_key in business_item_lookup:
+                    continue
+                title = item.get("title") or business_key
+                business = track("business_item", store_record(conn, batch_id, "business_item", "business_item", f"council:business_item:{jurisdiction_key}:{business_key}", {
+                    "jurisdiction_id": jurisdiction.record_id,
+                    "lead_body_id": council_body.record_id,
+                    "business_item_key": business_key,
+                    "business_item_type": item.get("business_item_type") or "agenda_item",
+                    "title_raw": title,
+                    "slug": slug(business_key),
+                    "summary": item.get("summary"),
+                    "current_stage": item.get("current_stage"),
+                    "status": item.get("status") or "active",
+                    "opened_date": meeting["date"],
+                    "closed_date": None,
+                    "metadata": {"source_payload": item},
+                }))
+                agenda_item = track("agenda_item", store_record(conn, batch_id, "agenda_item", "agenda_item", f"council:agenda_item:{meeting['meeting_id']}:{agenda_key}", {
+                    "meeting_id": meeting_record.record_id,
+                    "agenda_section_id": agenda_section_lookup.get(item.get("agenda_section_id")),
+                    "business_item_id": business.record_id,
+                    "agenda_item_key": agenda_key,
+                    "item_number_raw": item.get("label_raw"),
+                    "item_type": item.get("business_item_type") or "agenda_item",
+                    "title_raw": title,
+                    "description": item.get("summary"),
+                    "decision_requested": item.get("decision_requested"),
+                    "source_order": 200 + index,
+                    "metadata": {"source_payload": item},
+                }))
+                business_item_lookup[business_key] = business
+                agenda_item_lookup[agenda_key] = agenda_item
+
+            package_source_doc = source_docs.get("package")
+            if package_source_doc:
+                for index, document in enumerate(toc.get("documents", []), start=1):
+                    agenda_key = document.get("agenda_item_id") or (document.get("agenda_item_ids") or [None])[0]
+                    business_key = document.get("business_item_id") or document.get("item_of_business_id")
+                    agenda_record = agenda_item_lookup.get(str(agenda_key)) if agenda_key else None
+                    business_record = business_item_lookup.get(str(business_key)) if business_key else None
+                    pages = document.get("page_numbers")
+                    natural = f"council:package_document:{meeting['meeting_id']}:{document['document_id']}"
+                    package_document = track("package_document", store_record(conn, batch_id, "package_document", "package_document", natural, {
+                        "meeting_id": meeting_record.record_id,
+                        "source_document_id": package_source_doc.record_id,
+                        "agenda_item_id": agenda_record.record_id if agenda_record else None,
+                        "business_item_id": business_record.record_id if business_record else None,
+                        "package_document_key": document["document_id"],
+                        "title_raw": document.get("title") or document["document_id"],
+                        "document_type": document.get("document_type"),
+                        "document_category": document.get("document_category"),
+                        "template_type": document.get("template_type"),
+                        "page_start": document.get("page_start"),
+                        "page_end": document.get("page_end"),
+                        "page_numbers": pages if isinstance(pages, list) else None,
+                        "page_count": document.get("page_count"),
+                        "summary": document.get("summary"),
+                        "boundary_basis": document.get("boundary_basis"),
+                        "source_order": index,
+                        "metadata": {"source_payload": document},
+                    }))
+                    store_citations(conn, batch_id, source_docs, source_pages, "package_document", package_document.record_id, natural, document.get("citations", []), seen.setdefault("source_citation", set()))
 
             for table in (
                 "source_citation", "business_item_zoning_amendment", "business_item_property",
-                "business_item_event", "agenda_item", "business_item", "agenda_section",
+                "package_document", "business_item_event", "agenda_item", "business_item", "agenda_section",
                 "meeting_document", "meeting", "body_membership", "office_term", "person",
                 "body", "source_asset", "source_page", "source_document", "jurisdiction",
             ):

@@ -162,6 +162,10 @@ Added the council meeting database importer and database-preferred `/council-mee
 
 Extracted the shared council agenda tree for `/council-meetings` and `/document-import`, with Planning & Heritage and New Business child items nested under their standing-committee parents. Added the agenda/package document taxonomy page for document-import source classes, attachment types, and reusable workflow templates.
 
+## [2026-05-14] implementation | Document import agenda and business bindings
+
+Updated `/document-import` so the document panel groups package documents by agenda-item set and exposes editable agenda-item and item-of-business bindings. Added `business_items` to `meeting.json`, `agenda_item_id` and `business_item_id` to `toc.json`, and `council.package_document` persistence linked to `council.agenda_item` and `council.business_item`.
+
 ## Sources
 
 - [Wiki schema](./AGENTS.md)

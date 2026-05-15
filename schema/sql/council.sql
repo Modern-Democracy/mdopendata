@@ -406,6 +406,52 @@ CREATE INDEX IF NOT EXISTS idx_council_agenda_item_meeting
 CREATE INDEX IF NOT EXISTS idx_council_agenda_item_business
   ON council.agenda_item(business_item_id);
 
+CREATE TABLE IF NOT EXISTS council.package_document (
+  package_document_id bigserial PRIMARY KEY,
+  meeting_id bigint NOT NULL REFERENCES council.meeting(meeting_id) ON DELETE CASCADE,
+  source_document_id bigint NOT NULL REFERENCES council.source_document(source_document_id) ON DELETE CASCADE,
+  agenda_item_id bigint REFERENCES council.agenda_item(agenda_item_id) ON DELETE SET NULL,
+  business_item_id bigint REFERENCES council.business_item(business_item_id) ON DELETE SET NULL,
+  package_document_key text NOT NULL,
+  title_raw text NOT NULL,
+  document_type text,
+  document_category text,
+  template_type text,
+  page_start integer,
+  page_end integer,
+  page_numbers integer[],
+  page_count integer,
+  summary text,
+  boundary_basis text,
+  source_order integer,
+  metadata jsonb NOT NULL DEFAULT '{}'::jsonb,
+  natural_key text NOT NULL,
+  content_hash text NOT NULL,
+  is_active boolean NOT NULL DEFAULT true,
+  superseded_by_id bigint REFERENCES council.package_document(package_document_id),
+  created_at timestamptz NOT NULL DEFAULT now(),
+  CONSTRAINT ck_council_package_document_pages
+    CHECK (
+      (page_start IS NULL OR page_start >= 1)
+      AND (page_end IS NULL OR page_end >= 1)
+      AND (page_start IS NULL OR page_end IS NULL OR page_end >= page_start)
+      AND (page_count IS NULL OR page_count >= 0)
+    )
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS uq_council_package_document_active_key
+  ON council.package_document(natural_key)
+  WHERE is_active;
+
+CREATE INDEX IF NOT EXISTS idx_council_package_document_meeting
+  ON council.package_document(meeting_id, source_order);
+
+CREATE INDEX IF NOT EXISTS idx_council_package_document_agenda_item
+  ON council.package_document(agenda_item_id);
+
+CREATE INDEX IF NOT EXISTS idx_council_package_document_business_item
+  ON council.package_document(business_item_id);
+
 CREATE TABLE IF NOT EXISTS council.attendance (
   attendance_id bigserial PRIMARY KEY,
   meeting_id bigint NOT NULL REFERENCES council.meeting(meeting_id) ON DELETE CASCADE,

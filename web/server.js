@@ -510,6 +510,7 @@ async function loadCouncilMeeting() {
     sourceDocuments: payload.source_documents,
     agendaDocuments: agenda.agenda_documents,
     packageDocuments: toc.documents,
+    businessItems: payload.business_items || [],
     documentStructureStandards: toc.document_structure_standards,
     pageReproductionOptions: toc.page_reproduction_options,
     agendaSections: payload.agenda_sections,
@@ -532,6 +533,7 @@ function councilApiPayloadToRaw(payload) {
     resolutions: payload.resolutions || [],
     bylaw_readings: payload.bylawReadings || [],
     planning_items: payload.planningItems || [],
+    business_items: payload.businessItems || [],
     audience_workflows: payload.audienceWorkflows || [],
     review_flags: payload.reviewFlags || [],
   };
