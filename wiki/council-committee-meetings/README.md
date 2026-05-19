@@ -32,6 +32,7 @@ The May 12 package extraction also emits:
 - `data/council-meetings/charlottetown/2026-05-12-regular-council/agenda.json`: unified agenda view combining the standalone agenda and package agenda pages, with agenda items and linked package documents.
 - `data/council-meetings/charlottetown/2026-05-12-regular-council/toc.json`: logical document table of contents for all 256 package pages, including page counts, summaries, observed boundary basis, template categories where known, document-structure standards, and non-PDF page reproduction options.
 - `business_items` in `meeting.json` and `agenda_item_id` / `business_item_id` fields in `toc.json`: reviewable bindings between package documents, the meeting agenda item, and the longer-lived business item record.
+- `business_item_evidence`, `business_item_relationships`, and `business_item_candidate_links` in `meeting.json`: durable cross-document identity support for observed identifiers, typed item relationships, and conservative reviewer queues when cross-document matches are not yet confirmed.
 
 The current extraction scope intentionally avoids full package content extraction except for the two rezoning bylaw second-reading items already used by the council-meeting web endpoints. Future reuse of the package segmentation should treat page-boundary rules as reviewable observations, not a universal template.
 
@@ -50,7 +51,7 @@ The two zoning bylaw second readings include rezoning tool links to copied meeti
 
 The copied endpoints are `/rezoning-parcel-lookup`, `/rezoning-zoning-comparison`, `/rezoning-restriction-stack`, and `/rezoning-storm-surge`. They preserve the original endpoint code paths for later merge decisions while allowing meeting-specific current/future zone context.
 
-The `/document-import` route uses the same endpoint payload for package review. Its document panel groups package documents into agenda-item panels and exposes editable document title, type, category, page range, agenda item binding, and item-of-business binding fields.
+The `/document-import` route uses the same endpoint payload for package review. Its document panel groups package documents into agenda-item panels and exposes editable document title, type, category, page range, agenda item binding, and item-of-business binding fields. It also exposes an agenda hierarchy view with linked documents, a business-item hierarchy view with meeting-local agenda/document appearances, and a candidate-link queue with reviewer accept/reject decisions captured in exported QA feedback.
 
 ## Schema Notes
 
@@ -68,6 +69,8 @@ Meeting JSON separates:
 - review flags
 
 The `council` database schema follows the existing Charlottetown zoning natural-key, content-hash, supersession, and import-batch conventions. The current database importer is `scripts/import-council-meeting.py`; it imports the May 12 package into normalized council tables while preserving current API payload parity in meeting metadata until endpoint-specific database queries are expanded. Package-level document bindings are stored in `council.package_document`, linked where available to `council.agenda_item` and `council.business_item`.
+
+Durable business-item identity now separates the underlying civic matter from meeting-local appearances. Region-agnostic storage lives in `council.business_item`, `council.business_item_evidence`, `council.business_item_relationship`, `council.business_item_candidate_link`, and `council.business_item_event`; Charlottetown-specific identifier extraction and conservative matching thresholds live in `data/council-meetings/charlottetown/business-item-identity-config.json`. `scripts/build-business-item-identity.py` derives evidence, confirmed same-as links from shared official identifiers, and pending candidate links from weaker property overlap without rewriting issued item IDs.
 
 ## Backlog
 

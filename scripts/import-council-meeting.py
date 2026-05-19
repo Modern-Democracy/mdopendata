@@ -95,6 +95,11 @@ def compact(value: Any) -> str | None:
     return text or None
 
 
+def normalize_evidence_value(value: str | None) -> str | None:
+    text = compact(value)
+    return norm_key(text) if text else None
+
+
 def table_id_column(table: str) -> str:
     return f"{table}_id"
 
@@ -701,6 +706,59 @@ def import_meeting(root: Path, apply_schema_first: bool = False) -> dict[str, in
                     "metadata": {"source_payload": item},
                 }))
                 business_item_lookup[business_key] = business
+
+            for evidence in meeting_payload.get("business_item_evidence", []):
+                business = business_item_lookup.get(evidence.get("business_item_id"))
+                if not business:
+                    continue
+                source_document = source_docs.get(evidence.get("source_document_id"))
+                evidence_key = evidence["business_item_evidence_id"]
+                track("business_item_evidence", store_record(conn, batch_id, "business_item_evidence", "business_item_evidence", f"council:business_item_evidence:{business.natural_key}:{evidence_key}", {
+                    "business_item_id": business.record_id,
+                    "source_document_id": source_document.record_id if source_document else None,
+                    "evidence_key": evidence_key,
+                    "evidence_type": evidence["evidence_type"],
+                    "evidence_value_raw": evidence["evidence_value_raw"],
+                    "evidence_value_normalized": evidence.get("evidence_value_normalized") or normalize_evidence_value(evidence["evidence_value_raw"]),
+                    "signal_weight": evidence["signal_weight"],
+                    "confidence": evidence["confidence"],
+                    "observed_date": evidence.get("observed_date"),
+                    "metadata": evidence.get("metadata", {}),
+                }))
+
+            for relationship in meeting_payload.get("business_item_relationships", []):
+                source_business = business_item_lookup.get(relationship.get("from_business_item_id"))
+                target_business = business_item_lookup.get(relationship.get("to_business_item_id"))
+                if not source_business or not target_business:
+                    continue
+                relationship_key = relationship["business_item_relationship_id"]
+                track("business_item_relationship", store_record(conn, batch_id, "business_item_relationship", "business_item_relationship", f"council:business_item_relationship:{relationship_key}", {
+                    "from_business_item_id": source_business.record_id,
+                    "to_business_item_id": target_business.record_id,
+                    "relationship_key": relationship_key,
+                    "relationship_type": relationship["relationship_type"],
+                    "confidence": relationship["confidence"],
+                    "rationale": relationship.get("rationale"),
+                    "metadata": relationship.get("metadata", {}),
+                }))
+
+            for candidate in meeting_payload.get("business_item_candidate_links", []):
+                source_business = business_item_lookup.get(candidate.get("from_business_item_id"))
+                target_business = business_item_lookup.get(candidate.get("to_business_item_id"))
+                if not source_business or not target_business:
+                    continue
+                candidate_key = candidate["business_item_candidate_link_id"]
+                track("business_item_candidate_link", store_record(conn, batch_id, "business_item_candidate_link", "business_item_candidate_link", f"council:business_item_candidate_link:{candidate_key}", {
+                    "from_business_item_id": source_business.record_id,
+                    "to_business_item_id": target_business.record_id,
+                    "candidate_key": candidate_key,
+                    "proposed_relationship_type": candidate["proposed_relationship_type"],
+                    "score": candidate["score"],
+                    "review_status": candidate["review_status"],
+                    "reason_codes": candidate.get("reason_codes", []),
+                    "explanation": candidate.get("explanation"),
+                    "metadata": candidate.get("metadata", {}),
+                }))
                 agenda_item_lookup[agenda_key] = agenda_item
 
             package_source_doc = source_docs.get("package")
@@ -735,7 +793,7 @@ def import_meeting(root: Path, apply_schema_first: bool = False) -> dict[str, in
 
             for table in (
                 "source_citation", "business_item_zoning_amendment", "business_item_property",
-                "package_document", "business_item_event", "agenda_item", "business_item", "agenda_section",
+                "package_document", "business_item_candidate_link", "business_item_relationship", "business_item_evidence", "business_item_event", "agenda_item", "business_item", "agenda_section",
                 "meeting_document", "meeting", "body_membership", "office_term", "person",
                 "body", "source_asset", "source_page", "source_document", "jurisdiction",
             ):

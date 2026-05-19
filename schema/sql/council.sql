@@ -376,6 +376,108 @@ CREATE UNIQUE INDEX IF NOT EXISTS uq_council_business_item_slug_active
 CREATE INDEX IF NOT EXISTS idx_council_business_item_status
   ON council.business_item(jurisdiction_id, status);
 
+CREATE TABLE IF NOT EXISTS council.business_item_evidence (
+  business_item_evidence_id bigserial PRIMARY KEY,
+  business_item_id bigint NOT NULL REFERENCES council.business_item(business_item_id) ON DELETE CASCADE,
+  source_document_id bigint REFERENCES council.source_document(source_document_id) ON DELETE SET NULL,
+  evidence_key text NOT NULL,
+  evidence_type text NOT NULL,
+  evidence_value_raw text NOT NULL,
+  evidence_value_normalized text,
+  signal_weight numeric(6,3) NOT NULL DEFAULT 0,
+  confidence numeric(6,3) NOT NULL DEFAULT 0,
+  observed_date date,
+  metadata jsonb NOT NULL DEFAULT '{}'::jsonb,
+  natural_key text NOT NULL,
+  content_hash text NOT NULL,
+  is_active boolean NOT NULL DEFAULT true,
+  superseded_by_id bigint REFERENCES council.business_item_evidence(business_item_evidence_id),
+  created_at timestamptz NOT NULL DEFAULT now(),
+  CONSTRAINT ck_council_business_item_evidence_confidence
+    CHECK (confidence >= 0 AND confidence <= 1)
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS uq_council_business_item_evidence_active_key
+  ON council.business_item_evidence(natural_key)
+  WHERE is_active;
+
+CREATE INDEX IF NOT EXISTS idx_council_business_item_evidence_item
+  ON council.business_item_evidence(business_item_id, evidence_type);
+
+CREATE INDEX IF NOT EXISTS idx_council_business_item_evidence_value
+  ON council.business_item_evidence(evidence_type, evidence_value_normalized)
+  WHERE is_active;
+
+CREATE TABLE IF NOT EXISTS council.business_item_relationship (
+  business_item_relationship_id bigserial PRIMARY KEY,
+  from_business_item_id bigint NOT NULL REFERENCES council.business_item(business_item_id) ON DELETE CASCADE,
+  to_business_item_id bigint NOT NULL REFERENCES council.business_item(business_item_id) ON DELETE CASCADE,
+  relationship_key text NOT NULL,
+  relationship_type text NOT NULL,
+  confidence numeric(6,3) NOT NULL DEFAULT 1,
+  rationale text,
+  metadata jsonb NOT NULL DEFAULT '{}'::jsonb,
+  natural_key text NOT NULL,
+  content_hash text NOT NULL,
+  is_active boolean NOT NULL DEFAULT true,
+  superseded_by_id bigint REFERENCES council.business_item_relationship(business_item_relationship_id),
+  created_at timestamptz NOT NULL DEFAULT now(),
+  CONSTRAINT ck_council_business_item_relationship_type
+    CHECK (relationship_type IN ('same_as', 'continuation_of', 'derived_from', 'supersedes', 'split_from', 'related_to')),
+  CONSTRAINT ck_council_business_item_relationship_confidence
+    CHECK (confidence >= 0 AND confidence <= 1),
+  CONSTRAINT ck_council_business_item_relationship_distinct
+    CHECK (from_business_item_id <> to_business_item_id)
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS uq_council_business_item_relationship_active_key
+  ON council.business_item_relationship(natural_key)
+  WHERE is_active;
+
+CREATE INDEX IF NOT EXISTS idx_council_business_item_relationship_from
+  ON council.business_item_relationship(from_business_item_id, relationship_type);
+
+CREATE INDEX IF NOT EXISTS idx_council_business_item_relationship_to
+  ON council.business_item_relationship(to_business_item_id, relationship_type);
+
+CREATE TABLE IF NOT EXISTS council.business_item_candidate_link (
+  business_item_candidate_link_id bigserial PRIMARY KEY,
+  from_business_item_id bigint NOT NULL REFERENCES council.business_item(business_item_id) ON DELETE CASCADE,
+  to_business_item_id bigint NOT NULL REFERENCES council.business_item(business_item_id) ON DELETE CASCADE,
+  candidate_key text NOT NULL,
+  proposed_relationship_type text NOT NULL,
+  score numeric(6,3) NOT NULL,
+  review_status text NOT NULL DEFAULT 'pending',
+  reason_codes jsonb NOT NULL DEFAULT '[]'::jsonb,
+  explanation text,
+  reviewed_at timestamptz,
+  metadata jsonb NOT NULL DEFAULT '{}'::jsonb,
+  natural_key text NOT NULL,
+  content_hash text NOT NULL,
+  is_active boolean NOT NULL DEFAULT true,
+  superseded_by_id bigint REFERENCES council.business_item_candidate_link(business_item_candidate_link_id),
+  created_at timestamptz NOT NULL DEFAULT now(),
+  CONSTRAINT ck_council_business_item_candidate_link_relationship_type
+    CHECK (proposed_relationship_type IN ('same_as', 'continuation_of', 'derived_from', 'supersedes', 'split_from', 'related_to')),
+  CONSTRAINT ck_council_business_item_candidate_link_score
+    CHECK (score >= 0 AND score <= 1),
+  CONSTRAINT ck_council_business_item_candidate_link_review_status
+    CHECK (review_status IN ('pending', 'accepted', 'rejected', 'superseded')),
+  CONSTRAINT ck_council_business_item_candidate_link_distinct
+    CHECK (from_business_item_id <> to_business_item_id)
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS uq_council_business_item_candidate_link_active_key
+  ON council.business_item_candidate_link(natural_key)
+  WHERE is_active;
+
+CREATE INDEX IF NOT EXISTS idx_council_business_item_candidate_link_review
+  ON council.business_item_candidate_link(review_status, score DESC);
+
+ALTER TABLE council.business_item_candidate_link
+  ALTER COLUMN reason_codes TYPE jsonb USING to_jsonb(reason_codes),
+  ALTER COLUMN reason_codes SET DEFAULT '[]'::jsonb;
+
 CREATE TABLE IF NOT EXISTS council.agenda_item (
   agenda_item_id bigserial PRIMARY KEY,
   meeting_id bigint NOT NULL REFERENCES council.meeting(meeting_id) ON DELETE CASCADE,

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "jurisdiction": "City of Charlottetown",
+  "matching_policy": {
+    "auto_link_threshold": 0.95,
+    "candidate_link_threshold": 0.55,
+    "official_identifier_weight": 1.0,
+    "property_identifier_weight": 0.8,
+    "title_similarity_weight": 0.35,
+    "body_context_weight": 0.2,
+    "procedure_context_weight": 0.2
+  },
+  "official_identifier_patterns": [
+    {
+      "name": "zoning_bylaw_amendment",
+      "regex": "\\bPH-ZD\\.\\d+-\\d+\\b"
+    },
+    {
+      "name": "resolution_number",
+      "regex": "\\bRESOLUTION\\s+(?:NO\\.?\\s*)?\\d{4}-\\d+\\b"
+    }
+  ],
+  "property_identifier_patterns": [
+    {
+      "name": "pid",
+      "regex": "\\bPID\\s*#?\\s*(\\d{5,})\\b"
+    }
+  ],
+  "committee_aliases": {
+    "Planning & Heritage": ["Planning and Heritage", "Planning Board"],
+    "Environment & Sustainability": ["Environment and Sustainability"]
+  }
+}

@@ -169,3 +169,5 @@ Updated `/document-import` so the document panel groups package documents by age
 ## Sources
 
 - [Wiki schema](./AGENTS.md)
+Implemented the first durable business-item identity layer for council-meeting ingestion: added evidence, relationship, and candidate-link tables; added Charlottetown identity configuration plus a deterministic evidence builder; exposed identity graph payload fields through the web API and document-import UI; and documented immutable-ID plus conservative-review behavior in the council-meetings wiki.
+Extended `/document-import` with agenda-hierarchy, business-item-hierarchy, and candidate-link review modes. Agenda mode now lists documents linked to the selected agenda item, business mode lists meeting-local appearances and linked documents for the selected durable item, and queue mode records accept/reject decisions in QA feedback.
