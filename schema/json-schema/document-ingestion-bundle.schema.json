@@ -1,0 +1,1566 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/mdopendata/document-ingestion-bundle.schema.json",
+  "title": "Document Ingestion Bundle",
+  "description": "Review/import bundle that maps directly to the documents PostgreSQL schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "ingest_batch",
+    "source_documents",
+    "source_pages",
+    "source_assets",
+    "page_classifications",
+    "model_gaps"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "ingest_batch": {
+      "$ref": "#/$defs/ingest_batch"
+    },
+    "source_documents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source_document"
+      }
+    },
+    "source_pages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source_page"
+      }
+    },
+    "source_assets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source_asset"
+      }
+    },
+    "document_families": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/document_family"
+      },
+      "default": []
+    },
+    "document_types": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/document_type"
+      },
+      "default": []
+    },
+    "section_types": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/section_type"
+      },
+      "default": []
+    },
+    "page_templates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/page_template"
+      },
+      "default": []
+    },
+    "patterns": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/pattern"
+      },
+      "default": []
+    },
+    "pattern_cues": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/pattern_cue"
+      },
+      "default": []
+    },
+    "pattern_examples": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/pattern_example"
+      },
+      "default": []
+    },
+    "pattern_versions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/pattern_version"
+      },
+      "default": []
+    },
+    "document_sections": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/document_section"
+      },
+      "default": []
+    },
+    "page_classifications": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/page_classification"
+      }
+    },
+    "extracted_fields": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/extracted_field"
+      },
+      "default": []
+    },
+    "pipelines": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/pipeline"
+      },
+      "default": []
+    },
+    "pipeline_routes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/pipeline_route"
+      },
+      "default": []
+    },
+    "model_gaps": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/model_gap"
+      }
+    },
+    "review_decisions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/review_decision"
+      },
+      "default": []
+    }
+  },
+  "$defs": {
+    "ingest_batch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "batch_key",
+        "source_root",
+        "ingester_name",
+        "ingester_version",
+        "status",
+        "natural_key",
+        "content_hash"
+      ],
+      "properties": {
+        "batch_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_root": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_manifest_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_manifest_hash": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ingester_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ingester_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "started_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "completed_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "running",
+            "completed",
+            "failed"
+          ]
+        },
+        "diagnostics": {
+          "type": "object"
+        },
+        "natural_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "description": "Keys ending in _key or source_locator resolve to database foreign keys during import."
+    },
+    "source_document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_document_key",
+        "repo_relpath",
+        "source_file_hash",
+        "natural_key",
+        "content_hash"
+      ],
+      "properties": {
+        "source_document_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ingest_batch_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "jurisdiction_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "jurisdiction_name_raw": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "municipality_raw": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "province": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "country": {
+          "type": "string"
+        },
+        "document_family_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "document_type_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "title_raw": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "repo_relpath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "mime_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "page_count": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "source_file_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "published_date": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "acquired_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "natural_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "description": "Keys ending in _key or source_locator resolve to database foreign keys during import."
+    },
+    "source_page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_document_key",
+        "page_number",
+        "source_locator",
+        "text_extraction_status",
+        "natural_key",
+        "content_hash"
+      ],
+      "properties": {
+        "source_document_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "page_number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "page_label_raw": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text_raw": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "text_extraction_status": {
+          "type": "string",
+          "enum": [
+            "embedded",
+            "ocr",
+            "empty",
+            "failed",
+            "not_attempted"
+          ]
+        },
+        "width": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "height": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "render_dpi": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "natural_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "description": "Keys ending in _key or source_locator resolve to database foreign keys during import."
+    },
+    "source_asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "asset_type",
+        "repo_relpath",
+        "natural_key",
+        "content_hash"
+      ],
+      "properties": {
+        "source_document_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_locator": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "asset_type": {
+          "type": "string",
+          "enum": [
+            "page_render",
+            "ocr_image",
+            "embedded_image",
+            "thumbnail",
+            "source_file",
+            "other"
+          ]
+        },
+        "repo_relpath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mime_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "file_hash": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "width": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "height": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "render_dpi": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "natural_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "description": "Keys ending in _key or source_locator resolve to database foreign keys during import."
+    },
+    "document_family": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "document_family_key",
+        "name",
+        "status",
+        "natural_key",
+        "content_hash"
+      ],
+      "properties": {
+        "document_family_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "review",
+            "deprecated"
+          ]
+        },
+        "natural_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "description": "Keys ending in _key or source_locator resolve to database foreign keys during import."
+    },
+    "document_type": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "document_type_key",
+        "name",
+        "status",
+        "natural_key",
+        "content_hash"
+      ],
+      "properties": {
+        "document_family_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "document_type_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "review",
+            "deprecated"
+          ]
+        },
+        "natural_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "description": "Keys ending in _key or source_locator resolve to database foreign keys during import."
+    },
+    "section_type": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "section_type_key",
+        "name",
+        "status",
+        "natural_key",
+        "content_hash"
+      ],
+      "properties": {
+        "section_type_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "review",
+            "deprecated"
+          ]
+        },
+        "natural_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "description": "Keys ending in _key or source_locator resolve to database foreign keys during import."
+    },
+    "page_template": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "page_template_key",
+        "name",
+        "status",
+        "natural_key",
+        "content_hash"
+      ],
+      "properties": {
+        "page_template_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "review",
+            "deprecated"
+          ]
+        },
+        "natural_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "description": "Keys ending in _key or source_locator resolve to database foreign keys during import."
+    },
+    "pattern": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pattern_key",
+        "pattern_scope",
+        "pattern_name",
+        "jurisdiction_scope",
+        "status",
+        "natural_key",
+        "content_hash"
+      ],
+      "properties": {
+        "pattern_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pattern_scope": {
+          "type": "string",
+          "enum": [
+            "document",
+            "section",
+            "page"
+          ]
+        },
+        "pattern_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "jurisdiction_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "document_family_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "document_type_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "section_type_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "page_template_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "observed",
+            "candidate",
+            "approved",
+            "deprecated"
+          ]
+        },
+        "confidence_rule": {
+          "type": "object"
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "natural_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "description": "Keys ending in _key or source_locator resolve to database foreign keys during import."
+    },
+    "pattern_cue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pattern_key",
+        "cue_type",
+        "required",
+        "natural_key",
+        "content_hash"
+      ],
+      "properties": {
+        "pattern_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cue_type": {
+          "type": "string",
+          "enum": [
+            "text",
+            "regex",
+            "layout",
+            "visual",
+            "metadata",
+            "page_position"
+          ]
+        },
+        "cue_value": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cue_config": {
+          "type": "object"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "weight": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "natural_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "description": "Keys ending in _key or source_locator resolve to database foreign keys during import."
+    },
+    "pattern_example": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pattern_key",
+        "source_locator",
+        "example_type",
+        "reviewer_status",
+        "natural_key",
+        "content_hash"
+      ],
+      "properties": {
+        "pattern_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "example_type": {
+          "type": "string",
+          "enum": [
+            "positive",
+            "negative",
+            "edge_case"
+          ]
+        },
+        "evidence_note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reviewer_status": {
+          "type": "string",
+          "enum": [
+            "unreviewed",
+            "accepted",
+            "rejected",
+            "needs_review"
+          ]
+        },
+        "natural_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "description": "Keys ending in _key or source_locator resolve to database foreign keys during import."
+    },
+    "pattern_version": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pattern_key",
+        "version_label",
+        "status",
+        "change_reason"
+      ],
+      "properties": {
+        "pattern_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version_label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prior_status": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "observed",
+            "candidate",
+            "approved",
+            "deprecated",
+            null
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "observed",
+            "candidate",
+            "approved",
+            "deprecated"
+          ]
+        },
+        "change_reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "changed_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "changed_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "metadata": {
+          "type": "object"
+        }
+      },
+      "description": "Keys ending in _key or source_locator resolve to database foreign keys during import."
+    },
+    "document_section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_document_key",
+        "section_key",
+        "page_start",
+        "page_end",
+        "review_status",
+        "natural_key",
+        "content_hash"
+      ],
+      "properties": {
+        "source_document_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parent_section_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "section_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "section_type_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "title_raw": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "page_start": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "page_end": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "boundary_basis": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "review_status": {
+          "type": "string",
+          "enum": [
+            "accepted",
+            "rejected",
+            "needs_review"
+          ]
+        },
+        "natural_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "description": "Keys ending in _key or source_locator resolve to database foreign keys during import."
+    },
+    "page_classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_locator",
+        "classification_source",
+        "review_status",
+        "natural_key",
+        "content_hash"
+      ],
+      "properties": {
+        "source_locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "section_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "pattern_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "document_family_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "document_type_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "section_type_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "page_template_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "classification_source": {
+          "type": "string",
+          "enum": [
+            "parser",
+            "reviewer",
+            "imported",
+            "model"
+          ]
+        },
+        "confidence": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "review_status": {
+          "type": "string",
+          "enum": [
+            "accepted",
+            "rejected",
+            "needs_review"
+          ]
+        },
+        "evidence": {
+          "type": "object"
+        },
+        "natural_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "description": "Keys ending in _key or source_locator resolve to database foreign keys during import."
+    },
+    "extracted_field": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_document_key",
+        "field_key",
+        "extraction_source",
+        "review_status",
+        "natural_key",
+        "content_hash"
+      ],
+      "properties": {
+        "source_document_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_locator": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "section_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "field_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "field_label_raw": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "value_raw": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "value_normalized": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "value_json": true,
+        "bbox": true,
+        "extraction_source": {
+          "type": "string",
+          "enum": [
+            "parser",
+            "ocr",
+            "reviewer",
+            "imported",
+            "model"
+          ]
+        },
+        "confidence": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "review_status": {
+          "type": "string",
+          "enum": [
+            "accepted",
+            "rejected",
+            "needs_review"
+          ]
+        },
+        "natural_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "description": "Keys ending in _key or source_locator resolve to database foreign keys during import."
+    },
+    "pipeline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pipeline_key",
+        "pipeline_name",
+        "pipeline_scope",
+        "status",
+        "natural_key",
+        "content_hash"
+      ],
+      "properties": {
+        "pipeline_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pipeline_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pipeline_scope": {
+          "type": "string",
+          "enum": [
+            "document",
+            "section",
+            "page",
+            "field"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "review",
+            "deprecated"
+          ]
+        },
+        "natural_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "description": "Keys ending in _key or source_locator resolve to database foreign keys during import."
+    },
+    "pipeline_route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pipeline_key",
+        "route_source",
+        "route_status",
+        "natural_key",
+        "content_hash"
+      ],
+      "properties": {
+        "pipeline_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_document_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_locator": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "section_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "page_classification_natural_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "route_source": {
+          "type": "string",
+          "enum": [
+            "parser",
+            "reviewer",
+            "imported",
+            "model"
+          ]
+        },
+        "route_status": {
+          "type": "string",
+          "enum": [
+            "accepted",
+            "rejected",
+            "needs_review",
+            "blocked"
+          ]
+        },
+        "route_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence": {
+          "type": "object"
+        },
+        "natural_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "description": "Keys ending in _key or source_locator resolve to database foreign keys during import."
+    },
+    "model_gap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gap_type",
+        "observed_content_summary",
+        "blocking_reason",
+        "blocking_status",
+        "proposed_owner_role",
+        "status",
+        "natural_key",
+        "content_hash"
+      ],
+      "properties": {
+        "source_document_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_locator": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "section_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gap_type": {
+          "type": "string",
+          "enum": [
+            "new_document_type",
+            "new_section_type",
+            "new_page_template",
+            "new_pipeline",
+            "new_field_model",
+            "ambiguous_taxonomy",
+            "source_quality_blocker"
+          ]
+        },
+        "observed_content_summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "blocking_reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "blocking_status": {
+          "type": "string",
+          "enum": [
+            "blocks_ingestion",
+            "blocks_normalization",
+            "blocks_routing",
+            "non_blocking_review"
+          ]
+        },
+        "proposed_owner_role": {
+          "type": "string",
+          "enum": [
+            "Business Analyst",
+            "Coding Architect",
+            "Data Engineer",
+            "Data Quality Analyst",
+            "Debugger",
+            "QA Reviewer",
+            "Project Management"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "open",
+            "accepted",
+            "rejected",
+            "resolved",
+            "deferred"
+          ]
+        },
+        "evidence": {
+          "type": "object"
+        },
+        "natural_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "description": "Keys ending in _key or source_locator resolve to database foreign keys during import."
+    },
+    "review_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reviewed_table",
+        "reviewed_natural_key",
+        "decision"
+      ],
+      "properties": {
+        "reviewed_table": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reviewed_natural_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "accepted",
+            "rejected",
+            "needs_review",
+            "deferred",
+            "superseded"
+          ]
+        },
+        "reviewer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "decision_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence": {
+          "type": "object"
+        },
+        "decided_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "metadata": {
+          "type": "object"
+        }
+      },
+      "description": "Keys ending in _key or source_locator resolve to database foreign keys during import."
+    }
+  }
+}
