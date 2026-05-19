@@ -27,6 +27,9 @@ The first-pass artifacts are under `data/budget/charlottetown/2026-2027/`:
 | `page_inventory.json` | One page-level classification record per source page. |
 | `table_manifest.json` | Candidate structured tables and capital project profiles with page provenance. |
 | `ingestion_summary.json` | Counts by section, content type, and table type. |
+| `raw-tables/source_table_rows.json` | Raw line-level rows extracted from each table/profile manifest record. |
+| `raw-tables/source_values.json` | Raw numeric, currency, percent, and rate tokens detected in extracted rows. |
+| `raw-tables/raw_row_value_summary.json` | Counts by manifest table type and detected value kind. |
 
 ## First-Pass Counts
 
@@ -76,7 +79,27 @@ This is not a normalized budget import. It does not create database tables, stab
 
 The table manifest is page-granular. Multi-page detailed breakdowns remain separate candidate records until a later schema and extraction pass defines how sections, sub-sections, subtotal rows, and continuation pages should be joined.
 
+## Raw Row And Value Extraction
+
+The raw row/value pass reads the 114 manifest records and emits row/value JSON without normalized budget semantics.
+
+| Metric | Count |
+| --- | ---: |
+| Manifest table/profile records | 114 |
+| Raw row records | 3,233 |
+| Raw value records | 2,420 |
+
+Detected values by kind:
+
+| Kind | Count |
+| --- | ---: |
+| currency | 124 |
+| number | 2,194 |
+| percent | 98 |
+| rate | 4 |
+
 ## Sources
 
 - `docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf`
 - `data/budget/charlottetown/2026-2027/ingestion_summary.json`
+- `data/budget/charlottetown/2026-2027/raw-tables/raw_row_value_summary.json`

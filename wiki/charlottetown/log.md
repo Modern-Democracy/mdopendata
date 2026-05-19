@@ -366,6 +366,8 @@ Corrected continuation-page table detection after page 33 was found misclassifie
 
 Added [Municipal budget data model](../implementation/municipal-budget-data-model.md) as the first schema-design note for storing municipal operating, capital, rate, tax, debt, reserve, and funding data.
 
+Added `scripts/extract-charlottetown-budget-raw-rows.py` and generated raw row/value artifacts under `data/budget/charlottetown/2026-2027/raw-tables/`. The raw pass produced 3,233 source-table row records and 2,420 source-value records from 114 manifest records.
+
 ## Sources
 
 - [Charlottetown wiki guide](./README.md)
