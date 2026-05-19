@@ -3,7 +3,7 @@ type: index
 tags:
   - charlottetown
   - catalog
-updated: 2026-05-06
+updated: 2026-05-19
 ---
 
 This index catalogs the Charlottetown LLM Wiki pages and source families. Update it whenever wiki pages are added, renamed, or materially changed.
@@ -22,6 +22,7 @@ This index catalogs the Charlottetown LLM Wiki pages and source families. Update
 | Area | Purpose |
 | --- | --- |
 | [sources](sources/.gitkeep) | Future source-summary pages for approved Charlottetown source artifacts. |
+| [Budget 2026/2027 first pass](sources/budget-2026-2027-first-pass.md) | First-pass page inventory and table manifest notes for the current proposed budget PDF. |
 | [entities](entities/.gitkeep) | Future pages for zones, bylaws, maps, schedules, parcels, streets, and neighbourhoods. |
 | [topics](topics/.gitkeep) | Future pages for zoning concepts, provisions, definitions, and review themes. |
 | [Draft layout repair notes](topics/draft-layout-repair-notes.md) | Durable notes for draft bylaw section-title and two-column clause-assignment repairs. |

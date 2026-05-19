@@ -358,6 +358,14 @@ reload `charlottetown_street_network` from the city-official
 to reflect the 2,221-feature SRID 2954 street layer and refreshed
 `zoning.v_charlottetown_street_network`.
 
+## [2026-05-19] budget | 2026/2027 first-pass ingestion
+
+Added `scripts/extract-charlottetown-budget-first-pass.py` and generated first-pass artifacts for `docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf` under `data/budget/charlottetown/2026-2027/`. The run produced 154 raw page text files, 154 page inventory records, and 107 table/profile manifest records for later schema design.
+
+Corrected continuation-page table detection after page 33 was found misclassified as text. The refreshed run now reports 114 table/profile manifest records, including continuation pages with amount lines but without repeated headers.
+
+Added [Municipal budget data model](../implementation/municipal-budget-data-model.md) as the first schema-design note for storing municipal operating, capital, rate, tax, debt, reserve, and funding data.
+
 ## Sources
 
 - [Charlottetown wiki guide](./README.md)

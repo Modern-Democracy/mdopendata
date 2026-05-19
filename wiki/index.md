@@ -3,7 +3,7 @@ type: index
 tags:
   - wiki
   - catalog
-updated: 2026-05-12
+updated: 2026-05-19
 ---
 
 This page catalogs the root wiki structure and links to active project wiki areas.
@@ -54,6 +54,7 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [Parcel 3D LIDAR terrain plan](./implementation/parcel-3d-lidar-terrain-plan.md) | Preprocessing and integration plan for using PEI LIDAR as terrain and building-height inputs in the parcel 3D viewer. |
 | [Charlottetown terrain DEM pipeline](./implementation/charlottetown-terrain-dem-pipeline.md) | First repeatable PDAL/GDAL pipeline design for producing a bare-earth DEM from PEI COPC LIDAR tiles. |
 | [Storm surge demo plan](./implementation/storm-surge-demo-plan.md) | Demo-only Charlottetown tidal and storm-surge visualization scope, controls, source assumptions, limits, and upgrade path. |
+| [Municipal budget data model](./implementation/municipal-budget-data-model.md) | Initial scalable schema design for raw and normalized municipal operating, capital, rate, tax, debt, reserve, and funding data. |
 
 ## Active Project Wikis
 
