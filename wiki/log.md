@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use this heading format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-05-20] implementation | Agenda tree component split
+
+Refactored `web/public/ui_kits/shared/agenda-tree.jsx` into a generic `PortalTreeView`, `RolePresetTabs`, and a meeting-specific `buildMeetingAgendaTree` adapter while preserving the existing `window.CouncilAgendaTree.AgendaTree`, `allItems`, and `buildAgendaTree` API used by `/council-meetings`. Updated [Municipal portal UI component architecture](./product/municipal-portal-ui-component-architecture.md) with the agenda tree contract.
+
 ## [2026-05-20] implementation | Municipal portal component architecture
 
 Added [Municipal portal UI component architecture](./product/municipal-portal-ui-component-architecture.md) to define the reusable view-component contract, dependency posture, page-context expectations, first component families, and implementation-independence rules. Updated [Municipal portal UI architecture](./product/municipal-portal-ui-architecture.md) to reframe the basic-HTML feasibility study around component contracts rather than a blanket rewrite.

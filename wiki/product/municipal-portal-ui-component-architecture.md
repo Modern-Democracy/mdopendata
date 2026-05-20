@@ -76,6 +76,19 @@ Do not make a shared component until at least two pages need the same behavior o
 | Entity summary | Render selected municipal objects consistently. | Parcel summary, meeting item summary, document summary, business item summary. |
 | Action set | Render context-aware links and commands. | Public action links, local-admin action group, lab-tool links. |
 
+## Meeting Agenda Tree Contract
+
+The first entity-summary refactor is `web/public/ui_kits/shared/agenda-tree.jsx`. It now separates a generic tree view from the current council-meeting adapter while preserving the existing `/council-meetings` API.
+
+| Layer | Responsibility |
+| --- | --- |
+| `PortalTreeView` | Generic grouped tree rendering, selection state, empty state, and optional custom item rendering. |
+| `RolePresetTabs` | Role-preset tab UI for pages that still need local preset switching. |
+| `buildMeetingAgendaTree` | Meeting-specific adapter that combines the static Charlottetown May 12 agenda skeleton with package-document children. |
+| `AgendaTree` | Backward-compatible council-meeting wrapper that accepts the existing `audience`, `setAudience`, `selectedId`, `onSelect`, and `payload` props. |
+
+Future agenda work should move meeting-specific skeleton data out of the shared view file once a second meeting source is wired. The reusable tree view should not own source parsing, package-document filtering, or meeting-specific hierarchy decisions.
+
 ## Implementation Independence
 
 Current implementations may be React/Babel, but component contracts should stay implementation-independent:
