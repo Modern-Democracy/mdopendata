@@ -3,7 +3,7 @@ type: log
 tags:
   - wiki
   - log
-updated: 2026-05-08
+updated: 2026-05-20
 ---
 
 This page is the append-only chronological record for root wiki changes, ingests, substantive queries, and lint passes.
@@ -13,6 +13,14 @@ Append new entries in reverse chronological order. Use this heading format:
 ```text
 ## [YYYY-MM-DD] type | Short title
 ```
+
+## [2026-05-20] implementation | Municipal portal component architecture
+
+Added [Municipal portal UI component architecture](./product/municipal-portal-ui-component-architecture.md) to define the reusable view-component contract, dependency posture, page-context expectations, first component families, and implementation-independence rules. Updated [Municipal portal UI architecture](./product/municipal-portal-ui-architecture.md) to reframe the basic-HTML feasibility study around component contracts rather than a blanket rewrite.
+
+## [2026-05-20] product | Municipal portal 1.0 shell
+
+Added the municipal portal product wiki area with product purpose, 1.0 roadmap, role model, UI architecture, and domain inventory pages. Added a React/Babel portal shell at `/`, route stubs for meetings, business items, documents, planning, budgets, maps, validation, and lab tools, a Charlottetown theme stylesheet, and `/api/portal/context` for the stable page-context contract. Updated [Root index](./index.md) and [Web UI stack](./implementation/web-ui-stack.md) to record the retained React/Babel stack and the basic-HTML feasibility-study gate before new reusable component coding.
 
 ## [2026-05-08] implementation | Charlottetown terrain DEM pipeline
 

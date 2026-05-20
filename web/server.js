@@ -3662,7 +3662,25 @@ async function loadParcelAtPoint(lon, lat) {
 }
 
 const routeEntrypoints = new Map([
-  ["/", { file: "/ui_kits/parcel-lookup/index.html", baseHref: "/ui_kits/parcel-lookup/" }],
+  ["/", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
+  ["/portal", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
+  ["/portal/", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
+  ["/meetings", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
+  ["/meetings/", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
+  ["/business-items", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
+  ["/business-items/", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
+  ["/documents", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
+  ["/documents/", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
+  ["/planning", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
+  ["/planning/", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
+  ["/budgets", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
+  ["/budgets/", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
+  ["/maps", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
+  ["/maps/", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
+  ["/validation", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
+  ["/validation/", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
+  ["/lab", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
+  ["/lab/", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
   ["/parcel-lookup", { file: "/ui_kits/parcel-lookup/index.html", baseHref: "/ui_kits/parcel-lookup/" }],
   ["/parcel-lookup/", { file: "/ui_kits/parcel-lookup/index.html", baseHref: "/ui_kits/parcel-lookup/" }],
   ["/map-explorer", { file: "/ui_kits/map-explorer/index.html", baseHref: "/ui_kits/map-explorer/" }],
@@ -3736,6 +3754,28 @@ async function serveStatic(response, requestPath) {
 const server = createServer(async (request, response) => {
   try {
     const url = new URL(request.url, `http://${request.headers.host}`);
+    if (url.pathname === "/api/portal/context") {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      await sendJson(response, {
+        municipality: { id: "charlottetown", label: "Charlottetown" },
+        theme: { id: "charlottetown", stylesheet: "/themes/charlottetown.css" },
+        rolePreset: url.searchParams.get("role") || "public",
+        route: url.searchParams.get("route") || "/",
+        selectedEntity: null,
+        sourceStatus: "portal_shell",
+        availableActions: [
+          { label: "Open meetings workspace", href: "/council-meetings" },
+          { label: "Look up a parcel", href: "/parcel-lookup" },
+          { label: "Open city map", href: "/city-view" },
+        ],
+      });
+      return;
+    }
+
     if (url.pathname === "/api/section-equivalence") {
       const rows = await loadReviewRows();
       await sendJson(response, { source: "zoning.section_equivalence", rows: summarizeRows(rows) });

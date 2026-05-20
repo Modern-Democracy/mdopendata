@@ -4,7 +4,7 @@ tags:
   - web-ui
   - docker
   - charlottetown
-updated: 2026-04-29
+updated: 2026-05-20
 ---
 
 This page records the initial web UI stack decision for hosted review tools over the mdopendata database and zoning review artifacts.
@@ -30,7 +30,7 @@ The first page reads `zoning.section_equivalence`, `zoning.section`, `zoning.cla
 
 ## Near-Term Direction
 
-Keep the client as static HTML, CSS, and JavaScript until the UI needs shared components, routing, or complex state. Revisit a compiled framework such as React plus Vite only after there are multiple database-backed screens with repeated UI patterns.
+Keep the current React/Babel page pattern while the municipal portal 1.0 shell and route stubs are established. Before writing new reusable components, complete the basic-HTML feasibility study described in the portal UI architecture page to decide whether to stay with React/Babel, migrate gradually, or switch to basic HTML/CSS/first-party JavaScript before component buildout.
 
 Use the Node service as the boundary for database access. Browser code should not connect directly to PostGIS.
 
@@ -41,3 +41,4 @@ Use the Node service as the boundary for database access. Browser code should no
 - [Web server](../../web/server.js)
 - [Section-equivalence review export](../../data/zoning/charlottetown-draft/review/section-equivalence-review.csv)
 - [Charlottetown unified zoning ingestion plan](../charlottetown/topics/unified-zoning-ingestion-plan.md)
+- [Municipal portal UI architecture](../product/municipal-portal-ui-architecture.md)

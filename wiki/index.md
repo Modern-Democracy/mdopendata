@@ -3,7 +3,7 @@ type: index
 tags:
   - wiki
   - catalog
-updated: 2026-05-19
+updated: 2026-05-20
 ---
 
 This page catalogs the root wiki structure and links to active project wiki areas.
@@ -42,6 +42,10 @@ This page catalogs the root wiki structure and links to active project wiki area
 
 | Page | Purpose |
 | --- | --- |
+| [Municipal portal product purpose](./product/municipal-portal-purpose.md) | 1.0 product definition for the Charlottetown municipal public-data portal. |
+| [Municipal portal 1.0 roadmap](./product/municipal-portal-v1-roadmap.md) | Route map, ordered work, backlog, and acceptance criteria for portal 1.0. |
+| [Municipal portal role model](./product/municipal-portal-role-model.md) | Public role-preset model for the portal without creating a permission model. |
+| [Municipal portal domain inventory](./product/municipal-portal-domain-inventory.md) | Current implementation depth and 1.0 treatment for each municipal portal domain. |
 | [Council and committee meetings](./council-committee-meetings/README.md) | JSON-first council/committee meeting extraction and audience workflow notes, starting with Charlottetown council on May 12, 2026. |
 | [Agenda and package document taxonomy](./council-committee-meetings/agenda-document-taxonomy.md) | Agenda item and agenda package attachment type catalogue for document-import review and parser refinement. |
 
@@ -49,6 +53,8 @@ This page catalogs the root wiki structure and links to active project wiki area
 
 | Page | Purpose |
 | --- | --- |
+| [Municipal portal UI architecture](./product/municipal-portal-ui-architecture.md) | React/Babel portal-shell architecture, page context contract, theming, and basic-HTML feasibility gate. |
+| [Municipal portal UI component architecture](./product/municipal-portal-ui-component-architecture.md) | Reusable view-component contract, dependency posture, and implementation-independence guidance for portal UI. |
 | [Web UI stack](./implementation/web-ui-stack.md) | Initial Docker-hosted Node web UI decision and first Charlottetown section-equivalence review page shape. |
 | [Web demo design kit plan](./implementation/web-demo-design-kit-plan.md) | Plan and timeline for replacing the current web page with the design-kit-based Charlottetown parcel lookup, map explorer, city-view map, and zoning comparison demo. |
 | [Parcel 3D LIDAR terrain plan](./implementation/parcel-3d-lidar-terrain-plan.md) | Preprocessing and integration plan for using PEI LIDAR as terrain and building-height inputs in the parcel 3D viewer. |

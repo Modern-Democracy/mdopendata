@@ -5,9 +5,9 @@ const samplePid = process.env.WEB_SMOKE_PID || "";
 
 const checks = [
   {
-    name: "parcel lookup route",
+    name: "portal route",
     path: "/",
-    expectText: ["Parcel lookup", "logo-island-needle.svg", "/api/addresses"],
+    expectText: ["Municipal portal", "Charlottetown municipal portal", "/api/portal/context", "View preset"],
   },
   {
     name: "parcel lookup alias",
@@ -38,6 +38,31 @@ const checks = [
     name: "provisions comparison route",
     path: "/provisions-comparison",
     expectText: ["Provisions Comparison", "logo-island-needle.svg", "/api/provisions-comparison"],
+  },
+  {
+    name: "business items stub route",
+    path: "/business-items",
+    expectText: ["Business items", "Page contract", "planned: /api/business-items"],
+  },
+  {
+    name: "budget stub route",
+    path: "/budgets",
+    expectText: ["Budgets", "Contract stub", "budget schema APIs"],
+  },
+  {
+    name: "lab tools route",
+    path: "/lab",
+    expectText: ["Lab tools", "Demo-only lab area", "/api/parcels/:pid/3d-context"],
+  },
+  {
+    name: "portal context API contract",
+    path: "/api/portal/context?role=staff&route=/documents",
+    expectJson: (payload) =>
+      payload.municipality?.id === "charlottetown" &&
+      payload.theme?.stylesheet === "/themes/charlottetown.css" &&
+      payload.rolePreset === "staff" &&
+      payload.route === "/documents" &&
+      Array.isArray(payload.availableActions),
   },
   {
     name: "address API contract",

@@ -1,0 +1,12 @@
+:root {
+  --municipal-accent: var(--forest);
+  --municipal-accent-ink: var(--forest-ink);
+  --municipal-highlight: var(--ochre);
+  --municipal-alert: var(--brick);
+  --municipal-map-water: var(--harbour);
+}
+
+.theme-badge {
+  border-color: color-mix(in srgb, var(--municipal-accent), transparent 72%);
+  color: var(--municipal-accent-ink);
+}

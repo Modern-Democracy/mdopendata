@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Municipal portal - Modern Democracy</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../../themes/charlottetown.css" id="municipal-theme">
+<style>
+  html, body, #root { min-height: 100%; margin: 0; }
+  body { background: var(--paper); color: var(--ink); }
+  .portal { min-height: 100vh; display: grid; grid-template-rows: auto 1fr; }
+  .portal-header { display: flex; align-items: center; gap: 20px; padding: 14px 18px; border-bottom: 1px solid var(--border-hair); background: var(--paper-2); position: sticky; top: 0; z-index: 5; }
+  .brand { display: flex; align-items: center; gap: 10px; min-width: 220px; color: var(--ink); text-decoration: none; font-weight: 800; }
+  .brand img { width: 36px; height: 36px; }
+  .brand span { display: grid; line-height: 1.05; }
+  .brand small { color: var(--fg-3); font: 11px var(--font-mono); text-transform: uppercase; }
+  .portal-nav { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
+  .portal-nav a { border: 1px solid transparent; border-radius: 4px; color: var(--fg-2); font: 700 13px var(--font-ui); padding: 8px 9px; text-decoration: none; }
+  .portal-nav a:hover, .portal-nav a.active { border-color: var(--border-hair); background: var(--paper); color: var(--ink); }
+  .role-select { display: grid; gap: 4px; }
+  .role-select label { color: var(--fg-3); font: 10px var(--font-mono); text-transform: uppercase; }
+  .role-select select { background: var(--paper); border: 1px solid var(--border-hair); border-radius: 4px; color: var(--ink); font: 13px var(--font-ui); padding: 7px 8px; }
+  .portal-main { display: grid; grid-template-columns: 280px minmax(0, 1fr); min-height: 0; }
+  .side { background: var(--paper-2); border-right: 1px solid var(--border-hair); padding: 18px; }
+  .side h2 { font: 800 15px var(--font-ui); margin: 0 0 8px; }
+  .side p { color: var(--fg-2); font-size: 13px; margin: 0 0 14px; }
+  .side-list { display: grid; gap: 8px; margin-top: 16px; }
+  .side-list a { border: 1px solid var(--border-hair); border-radius: 4px; background: var(--paper); color: var(--fg-2); font: 700 12px var(--font-ui); padding: 9px 10px; text-decoration: none; }
+  .side-list a.active { box-shadow: inset 3px 0 0 var(--municipal-accent); color: var(--ink); }
+  .content { padding: 24px; min-width: 0; }
+  .eyebrow { color: var(--fg-3); font: 11px var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 9px; }
+  h1 { font-size: 40px; line-height: 1.02; margin: 0 0 10px; max-width: 900px; }
+  .lede { color: var(--fg-2); font-size: 16px; line-height: 1.5; margin: 0; max-width: 900px; }
+  .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; }
+  .badge { border: 1px solid var(--border-hair); border-radius: 4px; background: var(--paper-2); color: var(--fg-2); font: 700 11px var(--font-mono); padding: 5px 8px; }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 24px; }
+  .card { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 16px; min-width: 0; }
+  .card h2 { font: 800 18px var(--font-ui); margin: 0 0 8px; }
+  .card p { color: var(--fg-2); font-size: 13px; line-height: 1.45; margin: 0 0 12px; }
+  .card a { color: var(--harbour-ink); font-weight: 800; text-decoration: none; }
+  .contract { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 24px; }
+  .contract h2 { font: 800 16px var(--font-ui); margin: 0 0 10px; }
+  .contract dl { display: grid; grid-template-columns: 120px 1fr; gap: 8px 12px; margin: 0; font-size: 13px; }
+  .contract dt { color: var(--fg-3); font-family: var(--font-mono); text-transform: uppercase; font-size: 10.5px; }
+  .contract dd { color: var(--fg-2); margin: 0; overflow-wrap: anywhere; }
+  .status-list { margin: 0; padding-left: 18px; color: var(--fg-2); font-size: 13px; line-height: 1.5; }
+  .actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
+  .actions a { align-items: center; border: 1px solid var(--border-hair); border-radius: 4px; background: var(--paper-2); color: var(--ink); display: inline-flex; font: 800 13px var(--font-ui); min-height: 36px; padding: 0 12px; text-decoration: none; }
+  .actions a.primary { background: var(--municipal-accent); border-color: var(--municipal-accent); color: var(--paper); }
+  .notice { border: 1px solid rgba(168, 57, 28, 0.3); border-radius: 6px; background: var(--brick-wash); color: var(--brick-ink); font-size: 13px; line-height: 1.45; margin-top: 16px; padding: 12px; }
+  @media (max-width: 980px) {
+    .portal-header, .portal-main { display: block; }
+    .portal-header { position: static; }
+    .brand { margin-bottom: 10px; }
+    .side { border-right: 0; border-bottom: 1px solid var(--border-hair); }
+    .grid, .contract { grid-template-columns: 1fr; }
+    h1 { font-size: 32px; }
+  }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useMemo, useState } = React;
+
+const ROLES = [
+  { id: "public", label: "Public", summary: "Plain-language status, source pages, maps, and parcel or item context." },
+  { id: "applicant", label: "Applicant/follower", summary: "Process stage, required evidence, related documents, and next checkpoints." },
+  { id: "official", label: "Elected official", summary: "Decision context, source package, affected properties, and follow-up obligations." },
+  { id: "staff", label: "Municipal staff", summary: "Completeness checks, implementation status, publication tasks, and local-admin tools." },
+  { id: "validation", label: "Data validation", summary: "Extraction status, provenance, review queues, and source-to-model gaps." },
+];
+
+const ROUTES = [
+  { id: "home", label: "Home", path: "/", area: "Home" },
+  { id: "meetings", label: "Meetings", path: "/meetings", area: "Meetings" },
+  { id: "business-items", label: "Business items", path: "/business-items", area: "Business items" },
+  { id: "documents", label: "Documents", path: "/documents", area: "Documents" },
+  { id: "planning", label: "Planning and land use", path: "/planning", area: "Planning and land use" },
+  { id: "budgets", label: "Budgets", path: "/budgets", area: "Budgets" },
+  { id: "maps", label: "Maps", path: "/maps", area: "Maps" },
+  { id: "validation", label: "Validation", path: "/validation", area: "Validation" },
+  { id: "lab", label: "Lab tools", path: "/lab", area: "Lab tools" },
+];
+
+const PAGES = {
+  "/": {
+    title: "Charlottetown municipal portal",
+    summary: "A public-data portal over municipal meetings, business items, documents, planning records, budgets, maps, validation status, and lab tools.",
+    status: "Portal shell started",
+    purpose: "Orient public users and route them into domain tools or contract stubs.",
+    inputs: "municipality, rolePreset, route",
+    outputs: "domain overview, public links, role-specific emphasis",
+    api: "/api/portal/context",
+    unavailable: "Domain cards show contract status until their APIs are implemented.",
+    actions: [
+      ["Open meetings workspace", "/council-meetings", true],
+      ["Look up a parcel", "/parcel-lookup", false],
+      ["Open city map", "/city-view", false],
+    ],
+  },
+  "/meetings": {
+    title: "Meetings",
+    summary: "Follow council and committee meetings from agenda items through source documents, decisions, and follow-up.",
+    status: "Functional prototype linked",
+    purpose: "Expose meeting agendas, package pages, audience workflows, and selected item context.",
+    inputs: "meeting key, rolePreset, selected agenda or business item",
+    outputs: "agenda tree, item summary, package sources, related parcels, decision status",
+    api: "/api/council-meetings/current",
+    unavailable: "Only the current Charlottetown May 12, 2026 council meeting is wired.",
+    actions: [["Open current meeting", "/council-meetings", true]],
+  },
+  "/business-items": {
+    title: "Business items",
+    summary: "Track municipal matters that can span meetings, documents, bylaws, parcels, and implementation steps.",
+    status: "Contract stub",
+    purpose: "Define durable civic matter pages before broader item APIs are finalized.",
+    inputs: "businessItemId, municipality, related meeting/document identifiers",
+    outputs: "status, timeline, linked meetings, source evidence, related parcels or policies",
+    api: "planned: /api/business-items/:id and /api/business-items",
+    unavailable: "Use meeting pages for current item-level context until the business-item API is promoted.",
+    actions: [["Open meetings", "/meetings", true]],
+  },
+  "/documents": {
+    title: "Documents",
+    summary: "Browse, segment, and cite public municipal source documents.",
+    status: "Stub plus local-admin prototype",
+    purpose: "Separate public document discovery from local-admin document import and correction tools.",
+    inputs: "documentId, sourceDocumentId, page, rolePreset",
+    outputs: "document metadata, page inventory, citations, related agenda or business items",
+    api: "planned: /api/documents and current local-admin /document-import payloads",
+    unavailable: "Public document browsing is not yet separated from the document-import prototype.",
+    actions: [["Open local document import", "/document-import", false]],
+    notice: "Document import is a local-admin prototype, not a public write workflow.",
+  },
+  "/planning": {
+    title: "Planning and land use",
+    summary: "Look up parcels, zoning, bylaw provisions, map overlays, and current-versus-draft planning context.",
+    status: "Functional route family linked",
+    purpose: "Collect parcel, zoning, provisions, restrictions, and planning map tools under one public domain.",
+    inputs: "PID, address, bbox, zone code, rolePreset",
+    outputs: "parcel summary, zoning, citations, map layers, comparison links",
+    api: "/api/addresses, /api/parcels/:pid, /api/zoning-comparison/:pid, GeoJSON endpoints",
+    unavailable: "Rule-level completeness and parcel identity limitations remain labeled in source routes.",
+    actions: [
+      ["Parcel lookup", "/parcel-lookup", true],
+      ["Compare bylaws", "/zoning-comparison", false],
+      ["Compare provisions", "/provisions-comparison", false],
+      ["Restrictions", "/restriction-stack", false],
+    ],
+  },
+  "/budgets": {
+    title: "Budgets",
+    summary: "Prepare a public path from municipal budget source tables to operating, capital, rate, tax, debt, and reserve views.",
+    status: "Contract stub",
+    purpose: "Declare budget page expectations while the budget schema and ingestion workflow mature.",
+    inputs: "fiscal period, source document, fund, department, service area, budget item",
+    outputs: "source table references, normalized amounts, comparisons, provenance",
+    api: "planned: budget schema APIs after ingestion contracts are approved",
+    unavailable: "Budget data is not yet exposed through the web API.",
+    actions: [],
+  },
+  "/maps": {
+    title: "Maps",
+    summary: "Browse municipal spatial layers, parcels, zoning, buildings, and future domain overlays.",
+    status: "Functional city map linked",
+    purpose: "Provide the public map entrypoint while future layers get explicit API contracts.",
+    inputs: "bbox, layer filters, selected parcel or feature",
+    outputs: "visible layers, feature counts, selected feature context, source metadata",
+    api: "/api/parcels.geojson, /api/zoning/current.geojson, /api/zoning/draft.geojson, /api/buildings/osm.geojson",
+    unavailable: "Large-layer performance may require vector tiles before wider deployment.",
+    actions: [["Open city map", "/city-view", true]],
+  },
+  "/validation": {
+    title: "Validation",
+    summary: "Inspect extraction status, source-to-model gaps, review queues, and public-readiness blockers.",
+    status: "Contract stub",
+    purpose: "Make data quality visible while keeping correction workflows local-admin only.",
+    inputs: "domain, source document, import batch, review status, rolePreset",
+    outputs: "gap summaries, review queues, provenance, known limitations",
+    api: "planned: domain validation summary APIs",
+    unavailable: "Validation summaries are currently distributed across scripts, wiki pages, and local review tools.",
+    actions: [["Open document import", "/document-import", false]],
+    notice: "Correction and review actions are local-admin scope for 1.0.",
+  },
+  "/lab": {
+    title: "Lab tools",
+    summary: "Experimental parcel 3D and storm-surge visualizations that show potential future capabilities.",
+    status: "Demo-only lab area",
+    purpose: "Separate exploratory visual tools from core public workflows.",
+    inputs: "PID, terrain context, scenario controls",
+    outputs: "visualization-only 3D, terrain, shadow, and water-level scenes",
+    api: "/api/parcels/:pid/3d-context",
+    unavailable: "Terrain vertical datum and storm-surge modeling are not authoritative.",
+    actions: [
+      ["Parcel 3D", "/parcel-3d", true],
+      ["Storm surge demo", "/storm-surge", false],
+    ],
+    notice: "Lab tools are not regulatory, engineering, flood-risk, or property-specific decision products.",
+  },
+};
+
+function currentPage() {
+  const normalized = window.location.pathname.length > 1 ? window.location.pathname.replace(/\/$/, "") : "/";
+  return PAGES[normalized] || PAGES["/"];
+}
+
+function App() {
+  const [role, setRole] = useState(new URLSearchParams(window.location.search).get("role") || "public");
+  const page = currentPage();
+  const roleCopy = ROLES.find((candidate) => candidate.id === role) || ROLES[0];
+  const normalizedPath = window.location.pathname.length > 1 ? window.location.pathname.replace(/\/$/, "") : "/";
+  const route = ROUTES.find((candidate) => candidate.path === normalizedPath) || ROUTES[0];
+  const pageContext = useMemo(() => ({
+    municipality: { id: "charlottetown", label: "Charlottetown" },
+    theme: { id: "charlottetown", stylesheet: "/themes/charlottetown.css" },
+    rolePreset: role,
+    route: route.path,
+    selectedEntity: null,
+    sourceStatus: page.status,
+    availableActions: page.actions.map(([label, href]) => ({ label, href })),
+  }), [role, route.path, page]);
+
+  return (
+    <div className="portal">
+      <header className="portal-header">
+        <a className="brand" href="/">
+          <img src="../../assets/logo-island-needle.svg" alt="Modern Democracy" />
+          <span>Municipal portal<small>Charlottetown 1.0</small></span>
+        </a>
+        <nav className="portal-nav" aria-label="Portal sections">
+          {ROUTES.map((item) => <a key={item.id} className={item.path === route.path ? "active" : ""} href={item.path}>{item.label}</a>)}
+        </nav>
+        <div className="role-select">
+          <label htmlFor="role">View preset</label>
+          <select id="role" value={role} onChange={(event) => setRole(event.target.value)}>
+            {ROLES.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}
+          </select>
+        </div>
+      </header>
+      <div className="portal-main">
+        <aside className="side">
+          <h2>{roleCopy.label}</h2>
+          <p>{roleCopy.summary}</p>
+          <span className="badge theme-badge">Theme: Charlottetown</span>
+          <div className="side-list">
+            {ROUTES.map((item) => <a key={item.id} className={item.path === route.path ? "active" : ""} href={item.path}>{item.area}</a>)}
+          </div>
+        </aside>
+        <main className="content">
+          <p className="eyebrow">{route.area}</p>
+          <h1>{page.title}</h1>
+          <p className="lede">{page.summary}</p>
+          <div className="badge-row">
+            <span className="badge">Municipality: {pageContext.municipality.label}</span>
+            <span className="badge">Role preset: {roleCopy.label}</span>
+            <span className="badge">Status: {page.status}</span>
+          </div>
+          {page.notice && <div className="notice">{page.notice}</div>}
+          <div className="actions">
+            {page.actions.map(([label, href, primary]) => <a key={`${label}-${href}`} className={primary ? "primary" : ""} href={href}>{label}</a>)}
+          </div>
+          {route.path === "/" && <DomainGrid />}
+          <PageContract page={page} context={pageContext} />
+        </main>
+      </div>
+    </div>
+  );
+}
+
+function DomainGrid() {
+  return (
+    <section className="grid" aria-label="Portal domains">
+      {ROUTES.filter((item) => item.path !== "/").map((item) => {
+        const page = PAGES[item.path];
+        return (
+          <article className="card" key={item.id}>
+            <h2>{item.label}</h2>
+            <p>{page.summary}</p>
+            <a href={item.path}>Open {item.label.toLowerCase()}</a>
+          </article>
+        );
+      })}
+    </section>
+  );
+}
+
+function PageContract({ page, context }) {
+  return (
+    <section className="contract" aria-label="Page contract">
+      <article className="card">
+        <h2>Page contract</h2>
+        <dl>
+          <dt>Purpose</dt><dd>{page.purpose}</dd>
+          <dt>Inputs</dt><dd>{page.inputs}</dd>
+          <dt>Outputs</dt><dd>{page.outputs}</dd>
+          <dt>API</dt><dd>{page.api}</dd>
+          <dt>Unavailable</dt><dd>{page.unavailable}</dd>
+        </dl>
+      </article>
+      <article className="card">
+        <h2>States and provenance</h2>
+        <ul className="status-list">
+          <li>Loading: show the domain, selected role preset, and pending source status.</li>
+          <li>Empty: state which source or entity is missing.</li>
+          <li>Error: preserve the route and show the failed data contract.</li>
+          <li>Provenance: show source document, table, API, or wiki-backed status before claims are treated as complete.</li>
+        </ul>
+        <pre hidden id="page-context">{JSON.stringify(context)}</pre>
+      </article>
+    </section>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
