@@ -46,6 +46,10 @@ Completed the Chapter 10 regulatory and development functions review for `docs/L
 
 Completed the Chapter 12 finance review for `docs/LGBC-All.pdf`, adding [LGBC Chapter 12: Finance](./sources/lgbc/chapter-12-finance.md) with source claims, revenue/tax/fee/transfer/debt/reserve process candidates, Charlottetown prototype implications, required data inventory, and review limits.
 
+## [2026-05-25] source | Local Government in British Columbia Chapter 7 review
+
+Completed the Chapter 7 protective services review for `docs/LGBC-All.pdf`, adding [LGBC Chapter 7: Protective Services](./sources/lgbc/chapter-7-protective-services.md) with source claims, police/fire/emergency performance candidates, Charlottetown prototype implications, required data inventory, and review limits.
+
 ## [2026-05-20] implementation | Agenda tree component split
 
 Refactored `web/public/ui_kits/shared/agenda-tree.jsx` into a generic `PortalTreeView`, `RolePresetTabs`, and a meeting-specific `buildMeetingAgendaTree` adapter while preserving the existing `window.CouncilAgendaTree.AgendaTree`, `allItems`, and `buildAgendaTree` API used by `/council-meetings`. Updated [Municipal portal UI component architecture](./product/municipal-portal-ui-component-architecture.md) with the agenda tree contract.
