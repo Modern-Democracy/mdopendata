@@ -21,6 +21,14 @@
 | `exhibit_index.json` | registered | Skeleton only; exhibit extraction is Phase 2. |
 | `chapter_review_queue.json` | registered | Skeleton only; queue population is Phase 3. |
 
+## Phase 2 Artifacts
+
+| Artifact | Status | Notes |
+| --- | --- | --- |
+| `structure_index.json` | complete | Populated from the extracted table of contents with front matter, 13 chapters, 78 numbered chapter sections, appendix sections, and back matter. |
+| `exhibit_index.json` | complete | Populated from the extracted exhibit list with 41 listed exhibits. |
+| `chapter_review_queue.json` | pending | Queue population remains Phase 3. |
+
 ## PDF Metadata Observations
 
 - The PDF is unencrypted.
@@ -39,7 +47,9 @@ Use PDF page as the stable raw extraction locator. Add visible page when it is d
 - The source is untagged, so table and heading structure must be reconstructed from layout text.
 - Tables and exhibits may need manual review after automated extraction.
 - BC-specific governance concepts must not be generalized to Charlottetown or PEI without separate jurisdiction review.
+- The extracted front-matter exhibit ids show mojibake for en dashes; `exhibit_index.json` normalizes exhibit ids to ASCII hyphen.
+- The original ingestion plan expected 76 numbered chapter sections and 45 exhibits. The extracted table of contents lists 78 numbered chapter sections and the extracted exhibit list contains 41 exhibits.
 
 ## Next Phase
 
-Phase 2 should extract the table of contents, chapter headings, section headings, exhibit list, appendix headings, chapter notes, bibliography, and legislation index into `structure_index.json` and `exhibit_index.json`.
+Phase 3 should populate `chapter_review_queue.json` from `structure_index.json`, preserving the priority order in the ingestion plan.

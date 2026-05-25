@@ -1,5 +1,5 @@
 ---
-status: phase_1_complete
+status: phase_2_complete
 updated: 2026-05-25
 source: docs/LGBC-All.pdf
 ---
@@ -97,6 +97,8 @@ Acceptance criteria:
 - OCR limitations are listed before any semantic extraction.
 
 ### Phase 2: Structure Extraction
+
+Status: complete as of 2026-05-25.
 
 Extract the table of contents, chapter headings, section headings, exhibit list, appendix headings, notes, bibliography, and legislation index.
 
@@ -226,8 +228,8 @@ Stop and route to Coding Architect before:
 After Phase 2, verify:
 
 - count of chapters equals 13;
-- count of listed numbered chapter sections equals 76;
-- count of listed exhibits equals 45;
+- count of listed numbered chapter sections equals 78;
+- count of listed exhibits equals 41;
 - all extracted exhibit ids match the visible exhibit list;
 - no generated locator points outside the 250 PDF pages.
 

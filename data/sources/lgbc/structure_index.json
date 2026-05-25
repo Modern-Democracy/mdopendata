@@ -1,38 +1,1270 @@
-{
-  "source_id": "lgbc-2008-4th-edition",
-  "source_file": "docs/LGBC-All.pdf",
-  "title": "Local Government in British Columbia - 4th Edition",
-  "phase": "phase_1_source_registration",
-  "status": "registered_pending_phase_2_structure_extraction",
-  "pdf_pages": 250,
-  "visible_page_locator": {
-    "status": "pending_phase_2",
-    "known_range": "front matter plus visible pages 1-231",
-    "rule": "Use PDF page for stable extraction locator; add visible page when detected from extracted page text or table of contents."
-  },
-  "source_hash": {
-    "algorithm": "SHA256",
-    "value": "57D8C1762E354BA871B4408C85FD6B76A8F895A8926BDA0951C21600D16F9D8E"
-  },
-  "raw_artifacts": {
-    "pdfinfo": "data/sources/lgbc/pdfinfo.txt",
-    "full_text_layout": "data/sources/lgbc/full_text_layout.txt",
-    "pages_text_dir": "data/sources/lgbc/pages_text"
-  },
-  "chapters": [],
-  "sections": [],
-  "appendices": [],
-  "back_matter": [],
-  "review_flags": [
-    {
-      "flag": "ocr_derived_pdf",
-      "severity": "expected",
-      "note": "PDF producer is Adobe Acrobat Paper Capture and the document is untagged. Heading and page locator extraction require review."
-    },
-    {
-      "flag": "structure_not_extracted",
-      "severity": "pending",
-      "note": "Chapter, section, appendix, and back-matter records are intentionally deferred to Phase 2."
-    }
-  ]
+﻿{
+    "source_id":  "lgbc-2008-4th-edition",
+    "source_file":  "docs/LGBC-All.pdf",
+    "title":  "Local Government in British Columbia - 4th Edition",
+    "phase":  "phase_2_structure_extraction",
+    "status":  "structure_extracted_pending_chapter_review_queue",
+    "pdf_pages":  250,
+    "visible_page_locator":  {
+                                 "status":  "derived_from_table_of_contents",
+                                 "known_range":  "front matter plus visible pages 1-235 in extracted text",
+                                 "rule":  "For body and back matter, PDF page is visible page plus 13. Front matter uses PDF page only unless roman visible page is present.",
+                                 "body_pdf_page_offset":  13
+                             },
+    "source_hash":  {
+                        "algorithm":  "SHA256",
+                        "value":  "57D8C1762E354BA871B4408C85FD6B76A8F895A8926BDA0951C21600D16F9D8E"
+                    },
+    "raw_artifacts":  {
+                          "pdfinfo":  "data/sources/lgbc/pdfinfo.txt",
+                          "full_text_layout":  "data/sources/lgbc/full_text_layout.txt",
+                          "pages_text_dir":  "data/sources/lgbc/pages_text"
+                      },
+    "front_matter":  [
+                         {
+                             "unit_id":  "contents",
+                             "type":  "front_matter",
+                             "source_title":  "Contents",
+                             "pdf_start_page":  7,
+                             "visible_start_page":  "vii",
+                             "extraction_status":  "extracted_from_table_of_contents"
+                         },
+                         {
+                             "unit_id":  "exhibits",
+                             "type":  "front_matter",
+                             "source_title":  "Exhibits",
+                             "pdf_start_page":  11,
+                             "visible_start_page":  "x",
+                             "extraction_status":  "extracted_from_table_of_contents"
+                         },
+                         {
+                             "unit_id":  "preface",
+                             "type":  "front_matter",
+                             "source_title":  "Preface",
+                             "pdf_start_page":  12,
+                             "visible_start_page":  "xi",
+                             "extraction_status":  "extracted_from_table_of_contents"
+                         }
+                     ],
+    "chapters":  [
+                     {
+                         "unit_id":  "chapter_1",
+                         "type":  "chapter",
+                         "chapter_number":  1,
+                         "source_label":  "CHAPTER ONE",
+                         "source_title":  "INTRODUCTION",
+                         "normalized_title":  "Introduction",
+                         "visible_start_page":  1,
+                         "pdf_start_page":  14,
+                         "review_priority":  "high",
+                         "initial_municipal_portal_relevance":  "Fiscal equivalence, local government definition, evaluation criteria.",
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "chapter_2",
+                         "type":  "chapter",
+                         "chapter_number":  2,
+                         "source_label":  "CHAPTER TWO",
+                         "source_title":  "THE PROVINCIAL SETTING",
+                         "normalized_title":  "The Provincial Setting",
+                         "visible_start_page":  11,
+                         "pdf_start_page":  24,
+                         "review_priority":  "medium",
+                         "initial_municipal_portal_relevance":  "Province-local relations and oversight context.",
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "chapter_3",
+                         "type":  "chapter",
+                         "chapter_number":  3,
+                         "source_label":  "CHAPTER THREE",
+                         "source_title":  "MUNICIPAL GOVERNMENTS",
+                         "normalized_title":  "Municipal Governments",
+                         "visible_start_page":  21,
+                         "pdf_start_page":  34,
+                         "review_priority":  "high",
+                         "initial_municipal_portal_relevance":  "Municipal structure, functions, governance, elections, reporting.",
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "chapter_4",
+                         "type":  "chapter",
+                         "chapter_number":  4,
+                         "source_label":  "CHAPTER FOUR",
+                         "source_title":  "REGIONAL DISTRICT GOVERNMENTS",
+                         "normalized_title":  "Regional District Governments",
+                         "visible_start_page":  45,
+                         "pdf_start_page":  58,
+                         "review_priority":  "medium",
+                         "initial_municipal_portal_relevance":  "Intermunicipal service scale and regional governance.",
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "chapter_5",
+                         "type":  "chapter",
+                         "chapter_number":  5,
+                         "source_label":  "CHAPTER FIVE",
+                         "source_title":  "OTHER LOCAL GOVERNMENTS",
+                         "normalized_title":  "Other Local Governments",
+                         "visible_start_page":  65,
+                         "pdf_start_page":  78,
+                         "review_priority":  "medium",
+                         "initial_municipal_portal_relevance":  "Special-purpose local bodies and service fragmentation.",
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "chapter_6",
+                         "type":  "chapter",
+                         "chapter_number":  6,
+                         "source_label":  "CHAPTER SIX",
+                         "source_title":  "SERVICE DELIVERY",
+                         "normalized_title":  "Service Delivery",
+                         "visible_start_page":  81,
+                         "pdf_start_page":  94,
+                         "review_priority":  "critical",
+                         "initial_municipal_portal_relevance":  "Performance measures, benchmarking, program evaluation, cost-benefit analysis.",
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "chapter_7",
+                         "type":  "chapter",
+                         "chapter_number":  7,
+                         "source_label":  "CHAPTER SEVEN",
+                         "source_title":  "PROTECTIVE SERVICES",
+                         "normalized_title":  "Protective Services",
+                         "visible_start_page":  97,
+                         "pdf_start_page":  110,
+                         "review_priority":  "high",
+                         "initial_municipal_portal_relevance":  "Police, fire, emergency service benchmark candidates.",
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "chapter_8",
+                         "type":  "chapter",
+                         "chapter_number":  8,
+                         "source_label":  "CHAPTER EIGHT",
+                         "source_title":  "ENGINEERING SERVICES",
+                         "normalized_title":  "Engineering Services",
+                         "visible_start_page":  115,
+                         "pdf_start_page":  128,
+                         "review_priority":  "high",
+                         "initial_municipal_portal_relevance":  "Water, wastewater, solid waste, transportation, transit benchmark candidates.",
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "chapter_9",
+                         "type":  "chapter",
+                         "chapter_number":  9,
+                         "source_label":  "CHAPTER NINE",
+                         "source_title":  "HUMAN SERVICES",
+                         "normalized_title":  "Human Services",
+                         "visible_start_page":  137,
+                         "pdf_start_page":  150,
+                         "review_priority":  "medium",
+                         "initial_municipal_portal_relevance":  "Education, parks, libraries, museums, public health, housing context.",
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "chapter_10",
+                         "type":  "chapter",
+                         "chapter_number":  10,
+                         "source_label":  "CHAPTER TEN",
+                         "source_title":  "REGULATORY AND DEVELOPMENT FUNCTIONS",
+                         "normalized_title":  "Regulatory And Development Functions",
+                         "visible_start_page":  151,
+                         "pdf_start_page":  164,
+                         "review_priority":  "critical",
+                         "initial_municipal_portal_relevance":  "Planning, zoning, subdivision, enforcement, fiscal equivalence.",
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "chapter_11",
+                         "type":  "chapter",
+                         "chapter_number":  11,
+                         "source_label":  "CHAPTER ELEVEN",
+                         "source_title":  "LABOUR RELATIONS",
+                         "normalized_title":  "Labour Relations",
+                         "visible_start_page":  173,
+                         "pdf_start_page":  186,
+                         "review_priority":  "medium",
+                         "initial_municipal_portal_relevance":  "Workforce, unionization, bargaining-unit context.",
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "chapter_12",
+                         "type":  "chapter",
+                         "chapter_number":  12,
+                         "source_label":  "CHAPTER TWELVE",
+                         "source_title":  "FINANCE",
+                         "normalized_title":  "Finance",
+                         "visible_start_page":  179,
+                         "pdf_start_page":  192,
+                         "review_priority":  "critical",
+                         "initial_municipal_portal_relevance":  "Revenue, property tax, fees, transfers, debt, reserves.",
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "chapter_13",
+                         "type":  "chapter",
+                         "chapter_number":  13,
+                         "source_label":  "CHAPTER THIRTEEN",
+                         "source_title":  "CONCLUDING OBSERVATIONS",
+                         "normalized_title":  "Concluding Observations",
+                         "visible_start_page":  207,
+                         "pdf_start_page":  220,
+                         "review_priority":  "medium",
+                         "initial_municipal_portal_relevance":  "System-level synthesis.",
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     }
+                 ],
+    "sections":  [
+                     {
+                         "unit_id":  "section_1_1",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_1",
+                         "section_number":  "1.1",
+                         "source_title":  "The Role of Local Government",
+                         "normalized_title":  "The Role of Local Government",
+                         "visible_start_page":  1,
+                         "pdf_start_page":  14,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_1_2",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_1",
+                         "section_number":  "1.2",
+                         "source_title":  "Basic Concepts and Objectives",
+                         "normalized_title":  "Basic Concepts and Objectives",
+                         "visible_start_page":  2,
+                         "pdf_start_page":  15,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_1_3",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_1",
+                         "section_number":  "1.3",
+                         "source_title":  "Collective Problems",
+                         "normalized_title":  "Collective Problems",
+                         "visible_start_page":  3,
+                         "pdf_start_page":  16,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_1_4",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_1",
+                         "section_number":  "1.4",
+                         "source_title":  "Overview of Local Governments in British Columbia",
+                         "normalized_title":  "Overview of Local Governments in British Columbia",
+                         "visible_start_page":  4,
+                         "pdf_start_page":  17,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_1_5",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_1",
+                         "section_number":  "1.5",
+                         "source_title":  "Observations",
+                         "normalized_title":  "Observations",
+                         "visible_start_page":  7,
+                         "pdf_start_page":  20,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_1_6",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_1",
+                         "section_number":  "1.6",
+                         "source_title":  "Organization of this Book",
+                         "normalized_title":  "Organization of this Book",
+                         "visible_start_page":  8,
+                         "pdf_start_page":  21,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_2_1",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_2",
+                         "section_number":  "2.1",
+                         "source_title":  "The Provincial Government",
+                         "normalized_title":  "The Provincial Government",
+                         "visible_start_page":  11,
+                         "pdf_start_page":  24,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_2_2",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_2",
+                         "section_number":  "2.2",
+                         "source_title":  "Local Government Organizations and Interest Groups",
+                         "normalized_title":  "Local Government Organizations and Interest Groups",
+                         "visible_start_page":  12,
+                         "pdf_start_page":  25,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_2_3",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_2",
+                         "section_number":  "2.3",
+                         "source_title":  "Provincial Ministry and Agency Functions Related to Local Government",
+                         "normalized_title":  "Provincial Ministry and Agency Functions Related to Local Government",
+                         "visible_start_page":  13,
+                         "pdf_start_page":  26,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_2_4",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_2",
+                         "section_number":  "2.4",
+                         "source_title":  "Statutory Officers of the Legislature Related to Local Government",
+                         "normalized_title":  "Statutory Officers of the Legislature Related to Local Government",
+                         "visible_start_page":  18,
+                         "pdf_start_page":  31,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_2_5",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_2",
+                         "section_number":  "2.5",
+                         "source_title":  "Judicial Review",
+                         "normalized_title":  "Judicial Review",
+                         "visible_start_page":  19,
+                         "pdf_start_page":  32,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_2_6",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_2",
+                         "section_number":  "2.6",
+                         "source_title":  "Observations on the Provincial Setting",
+                         "normalized_title":  "Observations on the Provincial Setting",
+                         "visible_start_page":  19,
+                         "pdf_start_page":  32,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_3_1",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_3",
+                         "section_number":  "3.1",
+                         "source_title":  "History",
+                         "normalized_title":  "History",
+                         "visible_start_page":  21,
+                         "pdf_start_page":  34,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_3_2",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_3",
+                         "section_number":  "3.2",
+                         "source_title":  "Incorporation, Expansion, and Amalgamation",
+                         "normalized_title":  "Incorporation, Expansion, and Amalgamation",
+                         "visible_start_page":  24,
+                         "pdf_start_page":  37,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_3_3",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_3",
+                         "section_number":  "3.3",
+                         "source_title":  "Municipal Functions and Expenditures",
+                         "normalized_title":  "Municipal Functions and Expenditures",
+                         "visible_start_page":  29,
+                         "pdf_start_page":  42,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_3_4",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_3",
+                         "section_number":  "3.4",
+                         "source_title":  "Municipal Governance",
+                         "normalized_title":  "Municipal Governance",
+                         "visible_start_page":  32,
+                         "pdf_start_page":  45,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_3_5",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_3",
+                         "section_number":  "3.5",
+                         "source_title":  "Municipal Elections and Referenda",
+                         "normalized_title":  "Municipal Elections and Referenda",
+                         "visible_start_page":  35,
+                         "pdf_start_page":  48,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_3_6",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_3",
+                         "section_number":  "3.6",
+                         "source_title":  "Examples of Municipal Organization",
+                         "normalized_title":  "Examples of Municipal Organization",
+                         "visible_start_page":  38,
+                         "pdf_start_page":  51,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_3_7",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_3",
+                         "section_number":  "3.7",
+                         "source_title":  "Observations on Municipal Governments",
+                         "normalized_title":  "Observations on Municipal Governments",
+                         "visible_start_page":  42,
+                         "pdf_start_page":  55,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_4_1",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_4",
+                         "section_number":  "4.1",
+                         "source_title":  "History and Structure",
+                         "normalized_title":  "History and Structure",
+                         "visible_start_page":  45,
+                         "pdf_start_page":  58,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_4_2",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_4",
+                         "section_number":  "4.2",
+                         "source_title":  "Regional District Functions and Expenditures",
+                         "normalized_title":  "Regional District Functions and Expenditures",
+                         "visible_start_page":  49,
+                         "pdf_start_page":  62,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_4_3",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_4",
+                         "section_number":  "4.3",
+                         "source_title":  "Regional District Governance",
+                         "normalized_title":  "Regional District Governance",
+                         "visible_start_page":  53,
+                         "pdf_start_page":  66,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_4_4",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_4",
+                         "section_number":  "4.4",
+                         "source_title":  "Examples of Regional District Organization",
+                         "normalized_title":  "Examples of Regional District Organization",
+                         "visible_start_page":  57,
+                         "pdf_start_page":  70,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_4_5",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_4",
+                         "section_number":  "4.5",
+                         "source_title":  "Observations on Regional District Governments",
+                         "normalized_title":  "Observations on Regional District Governments",
+                         "visible_start_page":  61,
+                         "pdf_start_page":  74,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_5_1",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_5",
+                         "section_number":  "5.1",
+                         "source_title":  "School Districts",
+                         "normalized_title":  "School Districts",
+                         "visible_start_page":  65,
+                         "pdf_start_page":  78,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_5_2",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_5",
+                         "section_number":  "5.2",
+                         "source_title":  "Improvement Districts",
+                         "normalized_title":  "Improvement Districts",
+                         "visible_start_page":  68,
+                         "pdf_start_page":  81,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_5_3",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_5",
+                         "section_number":  "5.3",
+                         "source_title":  "Regional Hospital Districts",
+                         "normalized_title":  "Regional Hospital Districts",
+                         "visible_start_page":  72,
+                         "pdf_start_page":  85,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_5_4",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_5",
+                         "section_number":  "5.4",
+                         "source_title":  "Regional Library Districts",
+                         "normalized_title":  "Regional Library Districts",
+                         "visible_start_page":  73,
+                         "pdf_start_page":  86,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_5_5",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_5",
+                         "section_number":  "5.5",
+                         "source_title":  "The Islands Trust",
+                         "normalized_title":  "The Islands Trust",
+                         "visible_start_page":  74,
+                         "pdf_start_page":  87,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_5_6",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_5",
+                         "section_number":  "5.6",
+                         "source_title":  "Sechelt Indian Government District",
+                         "normalized_title":  "Sechelt Indian Government District",
+                         "visible_start_page":  76,
+                         "pdf_start_page":  89,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_5_7",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_5",
+                         "section_number":  "5.7",
+                         "source_title":  "South Coast British Columbia Transportation Authority (TransLink)",
+                         "normalized_title":  "South Coast British Columbia Transportation Authority (TransLink)",
+                         "visible_start_page":  77,
+                         "pdf_start_page":  90,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_5_8",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_5",
+                         "section_number":  "5.8",
+                         "source_title":  "Other Small Local Government Bodies",
+                         "normalized_title":  "Other Small Local Government Bodies",
+                         "visible_start_page":  78,
+                         "pdf_start_page":  91,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_5_9",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_5",
+                         "section_number":  "5.9",
+                         "source_title":  "Observations on Other Local Governments",
+                         "normalized_title":  "Observations on Other Local Governments",
+                         "visible_start_page":  79,
+                         "pdf_start_page":  92,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_6_1",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_6",
+                         "section_number":  "6.1",
+                         "source_title":  "Economies of Scope and Scale",
+                         "normalized_title":  "Economies of Scope and Scale",
+                         "visible_start_page":  81,
+                         "pdf_start_page":  94,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_6_2",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_6",
+                         "section_number":  "6.2",
+                         "source_title":  "Characteristics of Services",
+                         "normalized_title":  "Characteristics of Services",
+                         "visible_start_page":  82,
+                         "pdf_start_page":  95,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_6_3",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_6",
+                         "section_number":  "6.3",
+                         "source_title":  "Service Delivery Options",
+                         "normalized_title":  "Service Delivery Options",
+                         "visible_start_page":  84,
+                         "pdf_start_page":  97,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_6_4",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_6",
+                         "section_number":  "6.4",
+                         "source_title":  "Service Delivery Performance",
+                         "normalized_title":  "Service Delivery Performance",
+                         "visible_start_page":  89,
+                         "pdf_start_page":  102,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_6_5",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_6",
+                         "section_number":  "6.5",
+                         "source_title":  "Local Government Service Delivery Systems",
+                         "normalized_title":  "Local Government Service Delivery Systems",
+                         "visible_start_page":  95,
+                         "pdf_start_page":  108,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_7_1",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_7",
+                         "section_number":  "7.1",
+                         "source_title":  "Police Protection",
+                         "normalized_title":  "Police Protection",
+                         "visible_start_page":  97,
+                         "pdf_start_page":  110,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_7_2",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_7",
+                         "section_number":  "7.2",
+                         "source_title":  "Fire Protection",
+                         "normalized_title":  "Fire Protection",
+                         "visible_start_page":  107,
+                         "pdf_start_page":  120,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_7_3",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_7",
+                         "section_number":  "7.3",
+                         "source_title":  "Emergency Protection",
+                         "normalized_title":  "Emergency Protection",
+                         "visible_start_page":  111,
+                         "pdf_start_page":  124,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_7_4",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_7",
+                         "section_number":  "7.4",
+                         "source_title":  "Observations on Protective Services",
+                         "normalized_title":  "Observations on Protective Services",
+                         "visible_start_page":  114,
+                         "pdf_start_page":  127,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_8_1",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_8",
+                         "section_number":  "8.1",
+                         "source_title":  "Water Supply",
+                         "normalized_title":  "Water Supply",
+                         "visible_start_page":  115,
+                         "pdf_start_page":  128,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_8_2",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_8",
+                         "section_number":  "8.2",
+                         "source_title":  "Liquid Waste Management",
+                         "normalized_title":  "Liquid Waste Management",
+                         "visible_start_page":  119,
+                         "pdf_start_page":  132,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_8_3",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_8",
+                         "section_number":  "8.3",
+                         "source_title":  "Solid Waste Management",
+                         "normalized_title":  "Solid Waste Management",
+                         "visible_start_page":  122,
+                         "pdf_start_page":  135,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_8_4",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_8",
+                         "section_number":  "8.4",
+                         "source_title":  "Transportation System Management",
+                         "normalized_title":  "Transportation System Management",
+                         "visible_start_page":  127,
+                         "pdf_start_page":  140,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_8_5",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_8",
+                         "section_number":  "8.5",
+                         "source_title":  "Public Transit",
+                         "normalized_title":  "Public Transit",
+                         "visible_start_page":  130,
+                         "pdf_start_page":  143,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_8_6",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_8",
+                         "section_number":  "8.6",
+                         "source_title":  "Emerging Engineering Service Activities",
+                         "normalized_title":  "Emerging Engineering Service Activities",
+                         "visible_start_page":  135,
+                         "pdf_start_page":  148,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_8_7",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_8",
+                         "section_number":  "8.7",
+                         "source_title":  "Observations on Engineering Services",
+                         "normalized_title":  "Observations on Engineering Services",
+                         "visible_start_page":  136,
+                         "pdf_start_page":  149,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_9_1",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_9",
+                         "section_number":  "9.1",
+                         "source_title":  "Education",
+                         "normalized_title":  "Education",
+                         "visible_start_page":  137,
+                         "pdf_start_page":  150,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_9_2",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_9",
+                         "section_number":  "9.2",
+                         "source_title":  "Parks and Recreation",
+                         "normalized_title":  "Parks and Recreation",
+                         "visible_start_page":  140,
+                         "pdf_start_page":  153,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_9_3",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_9",
+                         "section_number":  "9.3",
+                         "source_title":  "Libraries",
+                         "normalized_title":  "Libraries",
+                         "visible_start_page":  142,
+                         "pdf_start_page":  155,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_9_4",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_9",
+                         "section_number":  "9.4",
+                         "source_title":  "Museums",
+                         "normalized_title":  "Museums",
+                         "visible_start_page":  143,
+                         "pdf_start_page":  156,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_9_5",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_9",
+                         "section_number":  "9.5",
+                         "source_title":  "Public Health",
+                         "normalized_title":  "Public Health",
+                         "visible_start_page":  145,
+                         "pdf_start_page":  158,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_9_6",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_9",
+                         "section_number":  "9.6",
+                         "source_title":  "Social Housing",
+                         "normalized_title":  "Social Housing",
+                         "visible_start_page":  146,
+                         "pdf_start_page":  159,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_9_7",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_9",
+                         "section_number":  "9.7",
+                         "source_title":  "Summary Observations on Human Services",
+                         "normalized_title":  "Summary Observations on Human Services",
+                         "visible_start_page":  149,
+                         "pdf_start_page":  162,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_10_1",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_10",
+                         "section_number":  "10.1",
+                         "source_title":  "Regulatory Functions",
+                         "normalized_title":  "Regulatory Functions",
+                         "visible_start_page":  151,
+                         "pdf_start_page":  164,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_10_2",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_10",
+                         "section_number":  "10.2",
+                         "source_title":  "Building Regulation",
+                         "normalized_title":  "Building Regulation",
+                         "visible_start_page":  153,
+                         "pdf_start_page":  166,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_10_3",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_10",
+                         "section_number":  "10.3",
+                         "source_title":  "Land Use Regulation",
+                         "normalized_title":  "Land Use Regulation",
+                         "visible_start_page":  155,
+                         "pdf_start_page":  168,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_10_4",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_10",
+                         "section_number":  "10.4",
+                         "source_title":  "Planning",
+                         "normalized_title":  "Planning",
+                         "visible_start_page":  157,
+                         "pdf_start_page":  170,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_10_5",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_10",
+                         "section_number":  "10.5",
+                         "source_title":  "Zoning and Related Activities",
+                         "normalized_title":  "Zoning and Related Activities",
+                         "visible_start_page":  163,
+                         "pdf_start_page":  176,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_10_6",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_10",
+                         "section_number":  "10.6",
+                         "source_title":  "Subdivision Control",
+                         "normalized_title":  "Subdivision Control",
+                         "visible_start_page":  168,
+                         "pdf_start_page":  181,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_10_7",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_10",
+                         "section_number":  "10.7",
+                         "source_title":  "General Bylaw Enforcement",
+                         "normalized_title":  "General Bylaw Enforcement",
+                         "visible_start_page":  170,
+                         "pdf_start_page":  183,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_10_8",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_10",
+                         "section_number":  "10.8",
+                         "source_title":  "Performance Measures and Fiscal Equivalence",
+                         "normalized_title":  "Performance Measures and Fiscal Equivalence",
+                         "visible_start_page":  171,
+                         "pdf_start_page":  184,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_10_9",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_10",
+                         "section_number":  "10.9",
+                         "source_title":  "Summary Observations",
+                         "normalized_title":  "Summary Observations",
+                         "visible_start_page":  172,
+                         "pdf_start_page":  185,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_11_1",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_11",
+                         "section_number":  "11.1",
+                         "source_title":  "Policy Framework",
+                         "normalized_title":  "Policy Framework",
+                         "visible_start_page":  173,
+                         "pdf_start_page":  186,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_11_2",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_11",
+                         "section_number":  "11.2",
+                         "source_title":  "Local Government Employee Unionization",
+                         "normalized_title":  "Local Government Employee Unionization",
+                         "visible_start_page":  174,
+                         "pdf_start_page":  187,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_11_3",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_11",
+                         "section_number":  "11.3",
+                         "source_title":  "Private Market Labour Law and Local Government",
+                         "normalized_title":  "Private Market Labour Law and Local Government",
+                         "visible_start_page":  177,
+                         "pdf_start_page":  190,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_11_4",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_11",
+                         "section_number":  "11.4",
+                         "source_title":  "Summary Observations on Labour Relations",
+                         "normalized_title":  "Summary Observations on Labour Relations",
+                         "visible_start_page":  178,
+                         "pdf_start_page":  191,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_12_1",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_12",
+                         "section_number":  "12.1",
+                         "source_title":  "Local Government Revenue Principles",
+                         "normalized_title":  "Local Government Revenue Principles",
+                         "visible_start_page":  179,
+                         "pdf_start_page":  192,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_12_2",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_12",
+                         "section_number":  "12.2",
+                         "source_title":  "Budgeting and Financial Reporting",
+                         "normalized_title":  "Budgeting and Financial Reporting",
+                         "visible_start_page":  180,
+                         "pdf_start_page":  193,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_12_3",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_12",
+                         "section_number":  "12.3",
+                         "source_title":  "Revenue Sources",
+                         "normalized_title":  "Revenue Sources",
+                         "visible_start_page":  182,
+                         "pdf_start_page":  195,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_12_4",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_12",
+                         "section_number":  "12.4",
+                         "source_title":  "Property Taxes",
+                         "normalized_title":  "Property Taxes",
+                         "visible_start_page":  185,
+                         "pdf_start_page":  198,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_12_5",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_12",
+                         "section_number":  "12.5",
+                         "source_title":  "Service Charges and Special Assessments",
+                         "normalized_title":  "Service Charges and Special Assessments",
+                         "visible_start_page":  197,
+                         "pdf_start_page":  210,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_12_6",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_12",
+                         "section_number":  "12.6",
+                         "source_title":  "Developer Contributions and Other Own-Source Revenues",
+                         "normalized_title":  "Developer Contributions and Other Own-Source Revenues",
+                         "visible_start_page":  199,
+                         "pdf_start_page":  212,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_12_7",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_12",
+                         "section_number":  "12.7",
+                         "source_title":  "Government Transfers",
+                         "normalized_title":  "Government Transfers",
+                         "visible_start_page":  200,
+                         "pdf_start_page":  213,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_12_8",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_12",
+                         "section_number":  "12.8",
+                         "source_title":  "Debt Finance and Reserve Funding",
+                         "normalized_title":  "Debt Finance and Reserve Funding",
+                         "visible_start_page":  202,
+                         "pdf_start_page":  215,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     },
+                     {
+                         "unit_id":  "section_12_9",
+                         "type":  "section",
+                         "parent_unit_id":  "chapter_12",
+                         "section_number":  "12.9",
+                         "source_title":  "Observations on Local Government Finance",
+                         "normalized_title":  "Observations on Local Government Finance",
+                         "visible_start_page":  205,
+                         "pdf_start_page":  218,
+                         "extraction_status":  "extracted_from_table_of_contents"
+                     }
+                 ],
+    "appendices":  [
+                       {
+                           "unit_id":  "appendix_first_nations_governments",
+                           "type":  "appendix",
+                           "source_label":  "APPENDIX",
+                           "source_title":  "FIRST NATIONS GOVERNMENTS",
+                           "normalized_title":  "First Nations Governments",
+                           "visible_start_page":  209,
+                           "pdf_start_page":  222,
+                           "extraction_status":  "extracted_from_table_of_contents",
+                           "sections":  [
+                                            {
+                                                "unit_id":  "appendix_indian_bands",
+                                                "type":  "appendix_section",
+                                                "parent_unit_id":  "appendix_first_nations_governments",
+                                                "source_title":  "Indian Bands",
+                                                "normalized_title":  "Indian Bands",
+                                                "visible_start_page":  209,
+                                                "pdf_start_page":  222,
+                                                "extraction_status":  "extracted_from_table_of_contents"
+                                            },
+                                            {
+                                                "unit_id":  "appendix_sechelt_indian_band",
+                                                "type":  "appendix_section",
+                                                "parent_unit_id":  "appendix_first_nations_governments",
+                                                "source_title":  "Sechelt Indian Band",
+                                                "normalized_title":  "Sechelt Indian Band",
+                                                "visible_start_page":  210,
+                                                "pdf_start_page":  223,
+                                                "extraction_status":  "extracted_from_table_of_contents"
+                                            },
+                                            {
+                                                "unit_id":  "appendix_indian_self_government_enabling_act_1990",
+                                                "type":  "appendix_section",
+                                                "parent_unit_id":  "appendix_first_nations_governments",
+                                                "source_title":  "Indian Self Government Enabling Act, 1990",
+                                                "normalized_title":  "Indian Self Government Enabling Act, 1990",
+                                                "visible_start_page":  211,
+                                                "pdf_start_page":  224,
+                                                "extraction_status":  "extracted_from_table_of_contents"
+                                            },
+                                            {
+                                                "unit_id":  "appendix_first_nations_land_management_act_1999",
+                                                "type":  "appendix_section",
+                                                "parent_unit_id":  "appendix_first_nations_governments",
+                                                "source_title":  "First Nations Land Management Act, 1999",
+                                                "normalized_title":  "First Nations Land Management Act, 1999",
+                                                "visible_start_page":  211,
+                                                "pdf_start_page":  224,
+                                                "extraction_status":  "extracted_from_table_of_contents"
+                                            },
+                                            {
+                                                "unit_id":  "appendix_nisgaa_final_agreement",
+                                                "type":  "appendix_section",
+                                                "parent_unit_id":  "appendix_first_nations_governments",
+                                                "source_title":  "Nisga\u0027a Final Agreement",
+                                                "normalized_title":  "Nisga\u0027a Final Agreement",
+                                                "visible_start_page":  212,
+                                                "pdf_start_page":  225,
+                                                "extraction_status":  "extracted_from_table_of_contents"
+                                            },
+                                            {
+                                                "unit_id":  "appendix_westbank_first_nation",
+                                                "type":  "appendix_section",
+                                                "parent_unit_id":  "appendix_first_nations_governments",
+                                                "source_title":  "Westbank First Nation",
+                                                "normalized_title":  "Westbank First Nation",
+                                                "visible_start_page":  215,
+                                                "pdf_start_page":  228,
+                                                "extraction_status":  "extracted_from_table_of_contents"
+                                            },
+                                            {
+                                                "unit_id":  "appendix_first_nations_fiscal_and_statistical_management",
+                                                "type":  "appendix_section",
+                                                "parent_unit_id":  "appendix_first_nations_governments",
+                                                "source_title":  "First Nations Fiscal and Statistical Management",
+                                                "normalized_title":  "First Nations Fiscal and Statistical Management",
+                                                "visible_start_page":  216,
+                                                "pdf_start_page":  229,
+                                                "extraction_status":  "extracted_from_table_of_contents"
+                                            },
+                                            {
+                                                "unit_id":  "appendix_british_columbia_treaty_commission",
+                                                "type":  "appendix_section",
+                                                "parent_unit_id":  "appendix_first_nations_governments",
+                                                "source_title":  "British Columbia Treaty Commission",
+                                                "normalized_title":  "British Columbia Treaty Commission",
+                                                "visible_start_page":  217,
+                                                "pdf_start_page":  230,
+                                                "extraction_status":  "extracted_from_table_of_contents"
+                                            },
+                                            {
+                                                "unit_id":  "appendix_tsawwassen_first_nation_final_agreement_2007",
+                                                "type":  "appendix_section",
+                                                "parent_unit_id":  "appendix_first_nations_governments",
+                                                "source_title":  "Tsawwassen First Nation Final Agreement (2007)",
+                                                "normalized_title":  "Tsawwassen First Nation Final Agreement (2007)",
+                                                "visible_start_page":  218,
+                                                "pdf_start_page":  231,
+                                                "extraction_status":  "extracted_from_table_of_contents"
+                                            },
+                                            {
+                                                "unit_id":  "appendix_maa_nulth_first_nation_final_agreement_2007",
+                                                "type":  "appendix_section",
+                                                "parent_unit_id":  "appendix_first_nations_governments",
+                                                "source_title":  "Maa-nulth First Nation Final Agreement (2007)",
+                                                "normalized_title":  "Maa-nulth First Nation Final Agreement (2007)",
+                                                "visible_start_page":  219,
+                                                "pdf_start_page":  232,
+                                                "extraction_status":  "extracted_from_table_of_contents"
+                                            },
+                                            {
+                                                "unit_id":  "appendix_tribal_councils",
+                                                "type":  "appendix_section",
+                                                "parent_unit_id":  "appendix_first_nations_governments",
+                                                "source_title":  "Tribal Councils",
+                                                "normalized_title":  "Tribal Councils",
+                                                "visible_start_page":  222,
+                                                "pdf_start_page":  235,
+                                                "extraction_status":  "extracted_from_table_of_contents"
+                                            },
+                                            {
+                                                "unit_id":  "appendix_observations",
+                                                "type":  "appendix_section",
+                                                "parent_unit_id":  "appendix_first_nations_governments",
+                                                "source_title":  "Observations",
+                                                "normalized_title":  "Observations",
+                                                "visible_start_page":  222,
+                                                "pdf_start_page":  235,
+                                                "extraction_status":  "extracted_from_table_of_contents"
+                                            }
+                                        ]
+                       }
+                   ],
+    "back_matter":  [
+                        {
+                            "unit_id":  "chapter_notes",
+                            "type":  "back_matter",
+                            "source_title":  "CHAPTER NOTES",
+                            "normalized_title":  "Chapter Notes",
+                            "visible_start_page":  223,
+                            "pdf_start_page":  236,
+                            "extraction_status":  "extracted_from_table_of_contents"
+                        },
+                        {
+                            "unit_id":  "legislation_regulations_index",
+                            "type":  "back_matter",
+                            "source_title":  "INDEX TO LEGISLATION AND REGULATIONS",
+                            "normalized_title":  "Index To Legislation And Regulations",
+                            "visible_start_page":  226,
+                            "pdf_start_page":  239,
+                            "extraction_status":  "extracted_from_table_of_contents"
+                        },
+                        {
+                            "unit_id":  "selected_bibliography",
+                            "type":  "back_matter",
+                            "source_title":  "SELECTED BIBLIOGRAPHY",
+                            "normalized_title":  "Selected Bibliography",
+                            "visible_start_page":  227,
+                            "pdf_start_page":  240,
+                            "extraction_status":  "extracted_from_table_of_contents"
+                        },
+                        {
+                            "unit_id":  "acknowledgements",
+                            "type":  "back_matter",
+                            "source_title":  "ACKNOWLEDGEMENTS",
+                            "normalized_title":  "Acknowledgements",
+                            "visible_start_page":  231,
+                            "pdf_start_page":  244,
+                            "extraction_status":  "extracted_from_table_of_contents"
+                        }
+                    ],
+    "counts":  {
+                   "chapters":  13,
+                   "numbered_chapter_sections":  78,
+                   "appendix_sections":  12,
+                   "back_matter_units":  4
+               },
+    "review_flags":  [
+                         {
+                             "flag":  "ocr_derived_pdf",
+                             "severity":  "expected",
+                             "note":  "PDF producer is Adobe Acrobat Paper Capture and the document is untagged. Structure is derived from layout text and should be reviewed."
+                         },
+                         {
+                             "flag":  "plan_expected_section_count_mismatch",
+                             "severity":  "review",
+                             "note":  "Plan expected 76 numbered chapter sections, but the extracted table of contents lists 78."
+                         }
+                     ]
 }

@@ -67,7 +67,9 @@ Direct benchmark seed exhibits include:
 
 The active plan is [Local Government in British Columbia ingestion plan](../../plan/lgbc-ingestion-plan.md).
 
-Phase 1 source registration is complete under `data/sources/lgbc/`. The registered artifacts are `pdfinfo.txt`, `full_text_layout.txt`, `pages_text/`, `structure_index.json`, `exhibit_index.json`, `chapter_review_queue.json`, and `extraction_notes.md`.
+Phase 2 structure extraction is complete under `data/sources/lgbc/`. The registered artifacts are `pdfinfo.txt`, `full_text_layout.txt`, `pages_text/`, `structure_index.json`, `exhibit_index.json`, `chapter_review_queue.json`, and `extraction_notes.md`.
+
+The extracted structure index contains 13 chapters, 78 numbered chapter sections, 12 appendix sections, and 4 back-matter units. The extracted exhibit index contains 41 listed exhibits.
 
 Benchmark schemas, scoring models, and portal routes should remain deferred until source structure and priority chapter reviews are complete.
 
