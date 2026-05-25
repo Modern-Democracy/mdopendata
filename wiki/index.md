@@ -31,6 +31,7 @@ This page catalogs the root wiki structure and links to active project wiki area
 | Page | Purpose |
 | --- | --- |
 | [PEI LIDAR and bathymetry metadata](./sources/pei-lidar-bathymetry-metadata.md) | Observed PDAL and GDAL metadata for PEI LIDAR and Charlottetown harbour bathymetry source files. |
+| [Local Government in British Columbia](./sources/lgbc-local-government-bc.md) | Source profile and ingestion plan link for the BC local-government handbook used as a municipal-performance prototype source. |
 
 ## Domain Pages
 
@@ -61,6 +62,12 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [Charlottetown terrain DEM pipeline](./implementation/charlottetown-terrain-dem-pipeline.md) | First repeatable PDAL/GDAL pipeline design for producing a bare-earth DEM from PEI COPC LIDAR tiles. |
 | [Storm surge demo plan](./implementation/storm-surge-demo-plan.md) | Demo-only Charlottetown tidal and storm-surge visualization scope, controls, source assumptions, limits, and upgrade path. |
 | [Municipal budget data model](./implementation/municipal-budget-data-model.md) | Initial scalable schema design for raw and normalized municipal operating, capital, rate, tax, debt, reserve, and funding data. |
+
+## Plans
+
+| Page | Purpose |
+| --- | --- |
+| [Local Government in British Columbia ingestion plan](../plan/lgbc-ingestion-plan.md) | Staged source-indexing, chapter-review, benchmark-candidate, and Charlottetown-prototype mapping plan for `docs/LGBC-All.pdf`. |
 
 ## Active Project Wikis
 

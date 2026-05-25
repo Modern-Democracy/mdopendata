@@ -1,0 +1,86 @@
+---
+type: source
+tags:
+  - source
+  - municipal-governance
+  - performance
+  - ingestion
+updated: 2026-05-25
+---
+
+This page summarizes `docs/LGBC-All.pdf` as a source for municipal-governance structure, service-performance concepts, and benchmark discovery.
+
+# Local Government in British Columbia
+
+## Source
+
+| Field | Value |
+| --- | --- |
+| Source file | `docs/LGBC-All.pdf` |
+| Title | `Local Government in British Columbia - 4th Edition` |
+| Authors | Robert L. Bish; Eric G. Clemens |
+| Publisher | Union of British Columbia Municipalities |
+| Copyright edition | 2008 UBCM |
+| PDF pages | 250 |
+| Source condition | OCR-derived, untagged PDF with extractable layout text |
+| SHA-256 | `57D8C1762E354BA871B4408C85FD6B76A8F895A8926BDA0951C21600D16F9D8E` |
+
+## Project Relevance
+
+The book is a prototype source for turning municipal-governance concepts into portal workflows, municipal dataset checklists, and performance-analysis candidates.
+
+The strongest initial relevance is:
+
+- Chapter 1 for fiscal equivalence and evaluation criteria.
+- Chapter 6 for service performance, benchmarking, program evaluation, and cost-benefit framing.
+- Chapter 10 for planning, zoning, subdivision, enforcement, and land-use regulation.
+- Chapter 12 for municipal finance, revenue, property taxation, service charges, transfers, debt, and reserves.
+- Chapters 7 and 8 for protective-service and engineering-service performance-measure examples.
+
+## Structure
+
+The source contains front matter, 13 chapters, an appendix on First Nations governments, chapter notes, legislation/regulation index, selected bibliography, and acknowledgements.
+
+Priority chapters for first-pass analysis:
+
+| Chapter | Title | Visible start page | Reason |
+| --- | --- | ---: | --- |
+| 1 | Introduction | 1 | Defines local government, fiscal equivalence, and general evaluation criteria. |
+| 6 | Service Delivery | 81 | Defines service performance, benchmarking, program evaluation, and cost-benefit analysis. |
+| 10 | Regulatory and Development Functions | 151 | Connects directly to planning, zoning, permits, subdivision, and enforcement workflows. |
+| 12 | Finance | 179 | Connects directly to budget, revenue, tax, fee, debt, and reserve ingestion. |
+| 7 | Protective Services | 97 | Contains police, fire, and emergency service performance candidates. |
+| 8 | Engineering Services | 115 | Contains water, wastewater, solid waste, transportation, and transit performance candidates. |
+
+## Exhibit Families
+
+The source has an exhibit list with 45 listed exhibits. High-value exhibit families include local-government inventories, municipal and regional functions, expenditure and revenue tables, service-performance measures, planning and land-use exhibits, labour relations tables, and property-tax/service-charge vocabulary.
+
+Direct benchmark seed exhibits include:
+
+- `7-2` Fire Service Performance Measures.
+- `8-1` Waterworks Utility Performance Measures.
+- `8-2` Transportation Service Performance Measures.
+- `8-3` Public Transit Service Performance Measures.
+
+## Ingestion Plan
+
+The active plan is [Local Government in British Columbia ingestion plan](../../plan/lgbc-ingestion-plan.md).
+
+The first durable outputs should be a raw-first structure index, exhibit index, chapter review queue, and extraction notes under `data/sources/lgbc/`. Benchmark schemas, scoring models, and portal routes should remain deferred until source structure and priority chapter reviews are complete.
+
+## Caveats
+
+The source is British Columbia-specific and should not be generalized to Charlottetown or PEI without an explicit jurisdiction-mapping review.
+
+The PDF is OCR-derived and untagged. Stable locators should include both PDF page and visible page when available.
+
+The source is from 2008. It can support governance and evaluation prototypes, but current legal requirements, municipal counts, and contemporary standards require separate source verification before public-facing claims.
+
+## Sources
+
+- `docs/LGBC-All.pdf`
+- [Local Government in British Columbia ingestion plan](../../plan/lgbc-ingestion-plan.md)
+- [Municipal portal product purpose](../product/municipal-portal-purpose.md)
+- [Municipal portal domain inventory](../product/municipal-portal-domain-inventory.md)
+
