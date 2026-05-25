@@ -2,7 +2,7 @@
     "source_id":  "lgbc-2008-4th-edition",
     "source_file":  "docs/LGBC-All.pdf",
     "phase":  "phase_3_chapter_review_queue",
-    "status":  "queue_populated_pending_chapter_review",
+    "status":  "chapter_6_reviewed_pending_remaining_priority_chapters",
     "queue":  [
                   {
                       "unit_id":  "chapter_1",
@@ -189,8 +189,9 @@
                                                         "municipal dataset availability notes"
                                                     ],
                       "output_decision":  "review_for_benchmark_and_process_candidates",
-                      "review_status":  "pending",
-                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                      "review_status":  "reviewed",
+                      "notes":  "Chapter 6 source review completed in wiki/sources/lgbc/chapter-6-service-delivery.md. Candidate topics remain unapproved until benchmark catalogue review.",
+                      "output_path":  "wiki/sources/lgbc/chapter-6-service-delivery.md"
                   },
                   {
                       "unit_id":  "chapter_7",
@@ -432,10 +433,7 @@
                                          "pdf_start_page":  222,
                                          "pdf_end_page":  235
                                      },
-                      "review_priority":  [
-                                              null,
-                                              "medium"
-                                          ],
+                      "review_priority":  "medium",
                       "portal_domains":  [
                                              "first_nations_relations",
                                              "jurisdiction",
@@ -549,12 +547,13 @@
                                          "pdf_start_page":  244,
                                          "pdf_end_page":  250
                                      },
-                      "review_priority":  [
-                                              null,
-                                              "medium"
-                                          ],
-                      "portal_domains":  "source_context",
-                      "candidate_benchmark_topics":  "contributor and source-context review",
+                      "review_priority":  "medium",
+                      "portal_domains":  [
+                                             "source_context"
+                                         ],
+                      "candidate_benchmark_topics":  [
+                                                         "contributor and source-context review"
+                                                     ],
                       "required_municipal_inputs":  [
                                                         "source unit text",
                                                         "existing municipal portal domain inventory"
@@ -575,7 +574,7 @@
     "counts":  {
                    "queue_records":  18,
                    "chapters":  13,
-                   "appendices":  12,
+                   "appendices":  1,
                    "back_matter":  4,
                    "first_pass":  4,
                    "service_benchmark":  2
