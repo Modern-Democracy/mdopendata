@@ -1,5 +1,5 @@
 ---
-status: phase_5_candidate_catalogue_created
+status: phase_6_charlottetown_mapping_started
 updated: 2026-05-25
 source: docs/LGBC-All.pdf
 ---
@@ -194,6 +194,8 @@ The first catalogue contains 86 candidates from Chapters 1, 6, 7, 8, 9, 10, 11, 
 
 ### Phase 6: Charlottetown Prototype Mapping
 
+Status: started as of 2026-05-25 with `data/sources/lgbc/charlottetown_prototype_mapping.json`.
+
 Map benchmark candidates to currently available or planned Charlottetown data sources.
 
 Initial target domains:
@@ -211,6 +213,13 @@ Acceptance criteria:
 - Do not mark a candidate as implementable without identifying available source data.
 - Record missing datasets as portal gaps, not metric failures.
 - Separate municipal-performance evaluation from source-ingestion completeness evaluation.
+
+Initial mapping output:
+
+- `data/sources/lgbc/charlottetown_prototype_mapping.json`
+- [LGBC Charlottetown Prototype Mapping](../wiki/sources/lgbc/charlottetown-prototype-mapping.md)
+
+The first mapping covers all 86 Phase 5 candidates. It classifies 10 candidates as `strong_source_family_identified`, 56 as `partial_source_family_identified`, and 20 as `source_gap`. No candidate is marked ready for public metric, score, or cross-municipality comparison.
 
 ## Stop Conditions
 

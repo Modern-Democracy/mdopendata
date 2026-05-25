@@ -1,0 +1,2899 @@
+{
+  "source_id": "lgbc-2008-4th-edition",
+  "target_municipality": "Charlottetown",
+  "phase": "phase_6_charlottetown_prototype_mapping",
+  "status": "first_pass_source_family_mapping_created_pending_dataset_review",
+  "generated_on": "2026-05-25",
+  "generated_from": [
+    "data/sources/lgbc/benchmark_process_candidate_catalogue.json",
+    "wiki/index.md",
+    "wiki/product/municipal-portal-domain-inventory.md",
+    "wiki/charlottetown/index.md",
+    "repository file inventory"
+  ],
+  "use_rules": [
+    "This is a source-family mapping, not an implementation approval.",
+    "No candidate is ready for public metric, score, or cross-municipality comparison.",
+    "A candidate can move beyond mapping only after local source documents, jurisdiction fit, definitions, and disclosure limits are reviewed."
+  ],
+  "counts": {
+    "total_mapped": 86,
+    "by_domain": {
+      "governance": 8,
+      "service_delivery": 12,
+      "protective_services": 12,
+      "engineering_services": 12,
+      "human_services": 12,
+      "planning_land_use": 10,
+      "labour_relations": 8,
+      "finance": 12
+    },
+    "by_mapping_status": {
+      "partial_source_family_identified": 56,
+      "source_gap": 20,
+      "strong_source_family_identified": 10
+    },
+    "by_candidate_use": {
+      "source_gap_analysis_candidate": 56,
+      "backlog_source_discovery_candidate": 20,
+      "prototype_mapping_candidate": 10
+    }
+  },
+  "domain_source_family_mapping": {
+    "governance": {
+      "readiness": "partial_source_family_identified",
+      "source_families": [
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/",
+        "docs/charlottetown/council-meetings/",
+        "wiki/council-committee-meetings/"
+      ],
+      "available_inputs": [
+        "council agenda/package extraction",
+        "business item identity config",
+        "agenda and package document taxonomy"
+      ],
+      "missing_inputs": [
+        "complete governance body inventory",
+        "committee roster history",
+        "referenda/hearing catalogue outside current meeting sources",
+        "service-benefit and affected-party records"
+      ],
+      "mapping_notes": "Useful for participation and decision-channel candidates, but not enough for full fiscal-equivalence or polycentric governance analysis."
+    },
+    "service_delivery": {
+      "readiness": "partial_source_family_identified",
+      "source_families": [
+        "wiki/product/municipal-portal-domain-inventory.md",
+        "wiki/implementation/municipal-budget-data-model.md",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs": [
+        "portal domain inventory",
+        "budget source tables",
+        "budget page inventory",
+        "municipal budget data model"
+      ],
+      "missing_inputs": [
+        "service catalogue with producers",
+        "contracts",
+        "service standards",
+        "recurring output/outcome records",
+        "activity-level cost normalization"
+      ],
+      "mapping_notes": "Good for source-completeness planning, not ready for service performance calculation."
+    },
+    "protective_services": {
+      "readiness": "source_gap",
+      "source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs": [
+        "possible budget line context after budget normalization"
+      ],
+      "missing_inputs": [
+        "police provider records",
+        "fire incident records",
+        "response times",
+        "emergency plans",
+        "inspection/prevention records",
+        "protective-service contracts"
+      ],
+      "mapping_notes": "No direct protective-service operating dataset is currently identified in the repository search results."
+    },
+    "engineering_services": {
+      "readiness": "partial_source_family_identified",
+      "source_families": [
+        "maps/FINAL City of Charlottetown Street Map A1 Landscape.pdf",
+        "maps/pei/CHTWN_Street_Network.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/spatial/charlottetown/",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs": [
+        "street network",
+        "parcel map",
+        "terrain DEM outputs",
+        "building/parcel spatial layers",
+        "budget source tables"
+      ],
+      "missing_inputs": [
+        "water utility operations",
+        "wastewater operations",
+        "solid waste tonnage/contracts",
+        "road condition and maintenance records",
+        "transit operating statistics"
+      ],
+      "mapping_notes": "Spatial and budget source families exist, but utility and operations data are not yet identified."
+    },
+    "human_services": {
+      "readiness": "partial_source_family_identified",
+      "source_families": [
+        "maps/parks.gif",
+        "data/budget/charlottetown/2026-2027/",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf"
+      ],
+      "available_inputs": [
+        "parks map artifact",
+        "budget source tables",
+        "Official Plan source for policy context"
+      ],
+      "missing_inputs": [
+        "parks asset inventory",
+        "recreation program participation",
+        "library operating statistics",
+        "museum visitor statistics",
+        "public-health records",
+        "housing stock and affordability records"
+      ],
+      "mapping_notes": "Useful for responsibility and policy-source mapping, not ready for human-service performance measures."
+    },
+    "planning_land_use": {
+      "readiness": "strong_source_family_identified",
+      "source_families": [
+        "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+        "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf",
+        "docs/charlottetown/ocp/Future Land Use Map - October 24 2025.pdf",
+        "maps/Charlottetown Zoning Map - March 9, 2026.pdf",
+        "maps/pei/CHTWN_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Draft_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/zoning/charlottetown/",
+        "data/zoning/charlottetown-draft/",
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/"
+      ],
+      "available_inputs": [
+        "current and draft zoning bylaws",
+        "current and draft zoning spatial layers",
+        "parcel map",
+        "OCP and future land use map",
+        "meeting package extraction for rezoning examples"
+      ],
+      "missing_inputs": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ],
+      "mapping_notes": "Strongest Phase 6 target; still process-oriented unless permit, subdivision, and enforcement datasets are added."
+    },
+    "labour_relations": {
+      "readiness": "source_gap",
+      "source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs": [
+        "possible aggregate labour-cost context after budget normalization"
+      ],
+      "missing_inputs": [
+        "workforce records",
+        "collective agreements",
+        "bargaining units",
+        "HR policies",
+        "labour-relations events",
+        "service-continuity records"
+      ],
+      "mapping_notes": "No direct HR or labour-relations source family is currently identified."
+    },
+    "finance": {
+      "readiness": "partial_source_family_identified",
+      "source_families": [
+        "docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf",
+        "docs/charlottetown/budget/2025-2026 Financial Plan Capital and Operational Budgets.pdf",
+        "data/budget/charlottetown/2026-2027/",
+        "wiki/charlottetown/sources/budget-2026-2027-first-pass.md",
+        "wiki/implementation/municipal-budget-data-model.md"
+      ],
+      "available_inputs": [
+        "budget PDFs",
+        "page inventory",
+        "table manifest",
+        "raw source rows",
+        "raw source values",
+        "budget ingestion summary"
+      ],
+      "missing_inputs": [
+        "audited statements",
+        "tax/assessment detail",
+        "fee bylaws",
+        "debt instruments",
+        "reserve transactions",
+        "reviewed budget normalization decisions"
+      ],
+      "mapping_notes": "Good source-family match for budget and revenue candidates; not ready for finance conclusions until normalization and supporting finance sources are reviewed."
+    }
+  },
+  "candidates": [
+    {
+      "candidate_id": "chapter_1_fiscal_equivalence_review",
+      "source_unit_id": "chapter_1",
+      "domain": "governance",
+      "benchmark_or_process_name": "Fiscal-equivalence review",
+      "comparison_mode": "fiscal-equivalence review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/",
+        "docs/charlottetown/council-meetings/",
+        "wiki/council-committee-meetings/"
+      ],
+      "available_inputs_observed": [
+        "council agenda/package extraction",
+        "business item identity config",
+        "agenda and package document taxonomy"
+      ],
+      "missing_inputs_to_resolve": [
+        "complete governance body inventory",
+        "committee roster history",
+        "referenda/hearing catalogue outside current meeting sources",
+        "service-benefit and affected-party records"
+      ],
+      "mapping_notes": "Useful for participation and decision-channel candidates, but not enough for full fiscal-equivalence or polycentric governance analysis.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_1_local_government_definition_mapping",
+      "source_unit_id": "chapter_1",
+      "domain": "governance",
+      "benchmark_or_process_name": "Local-government definition mapping",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/",
+        "docs/charlottetown/council-meetings/",
+        "wiki/council-committee-meetings/"
+      ],
+      "available_inputs_observed": [
+        "council agenda/package extraction",
+        "business item identity config",
+        "agenda and package document taxonomy"
+      ],
+      "missing_inputs_to_resolve": [
+        "complete governance body inventory",
+        "committee roster history",
+        "referenda/hearing catalogue outside current meeting sources",
+        "service-benefit and affected-party records"
+      ],
+      "mapping_notes": "Useful for participation and decision-channel candidates, but not enough for full fiscal-equivalence or polycentric governance analysis.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_1_collective_problem_classification",
+      "source_unit_id": "chapter_1",
+      "domain": "governance",
+      "benchmark_or_process_name": "Collective-problem classification",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/",
+        "docs/charlottetown/council-meetings/",
+        "wiki/council-committee-meetings/"
+      ],
+      "available_inputs_observed": [
+        "council agenda/package extraction",
+        "business item identity config",
+        "agenda and package document taxonomy"
+      ],
+      "missing_inputs_to_resolve": [
+        "complete governance body inventory",
+        "committee roster history",
+        "referenda/hearing catalogue outside current meeting sources",
+        "service-benefit and affected-party records"
+      ],
+      "mapping_notes": "Useful for participation and decision-channel candidates, but not enough for full fiscal-equivalence or polycentric governance analysis.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_1_participation_and_decision_channel_inventory",
+      "source_unit_id": "chapter_1",
+      "domain": "governance",
+      "benchmark_or_process_name": "Participation and decision-channel inventory",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/",
+        "docs/charlottetown/council-meetings/",
+        "wiki/council-committee-meetings/"
+      ],
+      "available_inputs_observed": [
+        "council agenda/package extraction",
+        "business item identity config",
+        "agenda and package document taxonomy"
+      ],
+      "missing_inputs_to_resolve": [
+        "complete governance body inventory",
+        "committee roster history",
+        "referenda/hearing catalogue outside current meeting sources",
+        "service-benefit and affected-party records"
+      ],
+      "mapping_notes": "Useful for participation and decision-channel candidates, but not enough for full fiscal-equivalence or polycentric governance analysis.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_1_benefit_cost_accountability_trace",
+      "source_unit_id": "chapter_1",
+      "domain": "governance",
+      "benchmark_or_process_name": "Benefit-cost accountability trace",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/",
+        "docs/charlottetown/council-meetings/",
+        "wiki/council-committee-meetings/"
+      ],
+      "available_inputs_observed": [
+        "council agenda/package extraction",
+        "business item identity config",
+        "agenda and package document taxonomy"
+      ],
+      "missing_inputs_to_resolve": [
+        "complete governance body inventory",
+        "committee roster history",
+        "referenda/hearing catalogue outside current meeting sources",
+        "service-benefit and affected-party records"
+      ],
+      "mapping_notes": "Useful for participation and decision-channel candidates, but not enough for full fiscal-equivalence or polycentric governance analysis.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_1_polycentric_governance_map",
+      "source_unit_id": "chapter_1",
+      "domain": "governance",
+      "benchmark_or_process_name": "Polycentric governance map",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/",
+        "docs/charlottetown/council-meetings/",
+        "wiki/council-committee-meetings/"
+      ],
+      "available_inputs_observed": [
+        "council agenda/package extraction",
+        "business item identity config",
+        "agenda and package document taxonomy"
+      ],
+      "missing_inputs_to_resolve": [
+        "complete governance body inventory",
+        "committee roster history",
+        "referenda/hearing catalogue outside current meeting sources",
+        "service-benefit and affected-party records"
+      ],
+      "mapping_notes": "Useful for participation and decision-channel candidates, but not enough for full fiscal-equivalence or polycentric governance analysis.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_1_local_government_risk_caution_review",
+      "source_unit_id": "chapter_1",
+      "domain": "governance",
+      "benchmark_or_process_name": "Local-government risk/caution review",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/",
+        "docs/charlottetown/council-meetings/",
+        "wiki/council-committee-meetings/"
+      ],
+      "available_inputs_observed": [
+        "council agenda/package extraction",
+        "business item identity config",
+        "agenda and package document taxonomy"
+      ],
+      "missing_inputs_to_resolve": [
+        "complete governance body inventory",
+        "committee roster history",
+        "referenda/hearing catalogue outside current meeting sources",
+        "service-benefit and affected-party records"
+      ],
+      "mapping_notes": "Useful for participation and decision-channel candidates, but not enough for full fiscal-equivalence or polycentric governance analysis.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_1_municipal_source_domain_orientation",
+      "source_unit_id": "chapter_1",
+      "domain": "governance",
+      "benchmark_or_process_name": "Municipal source-domain orientation",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/",
+        "docs/charlottetown/council-meetings/",
+        "wiki/council-committee-meetings/"
+      ],
+      "available_inputs_observed": [
+        "council agenda/package extraction",
+        "business item identity config",
+        "agenda and package document taxonomy"
+      ],
+      "missing_inputs_to_resolve": [
+        "complete governance body inventory",
+        "committee roster history",
+        "referenda/hearing catalogue outside current meeting sources",
+        "service-benefit and affected-party records"
+      ],
+      "mapping_notes": "Useful for participation and decision-channel candidates, but not enough for full fiscal-equivalence or polycentric governance analysis.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_6_service_production_fit_review",
+      "source_unit_id": "chapter_6",
+      "domain": "service_delivery",
+      "benchmark_or_process_name": "Service production fit review",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "wiki/product/municipal-portal-domain-inventory.md",
+        "wiki/implementation/municipal-budget-data-model.md",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "portal domain inventory",
+        "budget source tables",
+        "budget page inventory",
+        "municipal budget data model"
+      ],
+      "missing_inputs_to_resolve": [
+        "service catalogue with producers",
+        "contracts",
+        "service standards",
+        "recurring output/outcome records",
+        "activity-level cost normalization"
+      ],
+      "mapping_notes": "Good for source-completeness planning, not ready for service performance calculation.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_6_activity_measurability_profile",
+      "source_unit_id": "chapter_6",
+      "domain": "service_delivery",
+      "benchmark_or_process_name": "Activity measurability profile",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "wiki/product/municipal-portal-domain-inventory.md",
+        "wiki/implementation/municipal-budget-data-model.md",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "portal domain inventory",
+        "budget source tables",
+        "budget page inventory",
+        "municipal budget data model"
+      ],
+      "missing_inputs_to_resolve": [
+        "service catalogue with producers",
+        "contracts",
+        "service standards",
+        "recurring output/outcome records",
+        "activity-level cost normalization"
+      ],
+      "mapping_notes": "Good for source-completeness planning, not ready for service performance calculation.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_6_own_forces_versus_contracted_delivery_comparison",
+      "source_unit_id": "chapter_6",
+      "domain": "service_delivery",
+      "benchmark_or_process_name": "Own-forces versus contracted delivery comparison",
+      "comparison_mode": "cross-sectional or local alternative comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "wiki/product/municipal-portal-domain-inventory.md",
+        "wiki/implementation/municipal-budget-data-model.md",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "portal domain inventory",
+        "budget source tables",
+        "budget page inventory",
+        "municipal budget data model"
+      ],
+      "missing_inputs_to_resolve": [
+        "service catalogue with producers",
+        "contracts",
+        "service standards",
+        "recurring output/outcome records",
+        "activity-level cost normalization"
+      ],
+      "mapping_notes": "Good for source-completeness planning, not ready for service performance calculation.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_6_performance_measure_inventory",
+      "source_unit_id": "chapter_6",
+      "domain": "service_delivery",
+      "benchmark_or_process_name": "Performance measure inventory",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "wiki/product/municipal-portal-domain-inventory.md",
+        "wiki/implementation/municipal-budget-data-model.md",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "portal domain inventory",
+        "budget source tables",
+        "budget page inventory",
+        "municipal budget data model"
+      ],
+      "missing_inputs_to_resolve": [
+        "service catalogue with producers",
+        "contracts",
+        "service standards",
+        "recurring output/outcome records",
+        "activity-level cost normalization"
+      ],
+      "mapping_notes": "Good for source-completeness planning, not ready for service performance calculation.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_6_longitudinal_performance_trend",
+      "source_unit_id": "chapter_6",
+      "domain": "service_delivery",
+      "benchmark_or_process_name": "Longitudinal performance trend",
+      "comparison_mode": "longitudinal comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "wiki/product/municipal-portal-domain-inventory.md",
+        "wiki/implementation/municipal-budget-data-model.md",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "portal domain inventory",
+        "budget source tables",
+        "budget page inventory",
+        "municipal budget data model"
+      ],
+      "missing_inputs_to_resolve": [
+        "service catalogue with producers",
+        "contracts",
+        "service standards",
+        "recurring output/outcome records",
+        "activity-level cost normalization"
+      ],
+      "mapping_notes": "Good for source-completeness planning, not ready for service performance calculation.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_6_benchmark_against_local_objective",
+      "source_unit_id": "chapter_6",
+      "domain": "service_delivery",
+      "benchmark_or_process_name": "Benchmark against local objective",
+      "comparison_mode": "benchmark against stated local objective",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "wiki/product/municipal-portal-domain-inventory.md",
+        "wiki/implementation/municipal-budget-data-model.md",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "portal domain inventory",
+        "budget source tables",
+        "budget page inventory",
+        "municipal budget data model"
+      ],
+      "missing_inputs_to_resolve": [
+        "service catalogue with producers",
+        "contracts",
+        "service standards",
+        "recurring output/outcome records",
+        "activity-level cost normalization"
+      ],
+      "mapping_notes": "Good for source-completeness planning, not ready for service performance calculation.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_6_cross_municipality_benchmark",
+      "source_unit_id": "chapter_6",
+      "domain": "service_delivery",
+      "benchmark_or_process_name": "Cross-municipality benchmark",
+      "comparison_mode": "cross-sectional comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "wiki/product/municipal-portal-domain-inventory.md",
+        "wiki/implementation/municipal-budget-data-model.md",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "portal domain inventory",
+        "budget source tables",
+        "budget page inventory",
+        "municipal budget data model"
+      ],
+      "missing_inputs_to_resolve": [
+        "service catalogue with producers",
+        "contracts",
+        "service standards",
+        "recurring output/outcome records",
+        "activity-level cost normalization"
+      ],
+      "mapping_notes": "Good for source-completeness planning, not ready for service performance calculation.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_6_program_evaluation_readiness",
+      "source_unit_id": "chapter_6",
+      "domain": "service_delivery",
+      "benchmark_or_process_name": "Program evaluation readiness",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "wiki/product/municipal-portal-domain-inventory.md",
+        "wiki/implementation/municipal-budget-data-model.md",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "portal domain inventory",
+        "budget source tables",
+        "budget page inventory",
+        "municipal budget data model"
+      ],
+      "missing_inputs_to_resolve": [
+        "service catalogue with producers",
+        "contracts",
+        "service standards",
+        "recurring output/outcome records",
+        "activity-level cost normalization"
+      ],
+      "mapping_notes": "Good for source-completeness planning, not ready for service performance calculation.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_6_benefit_cost_analysis_readiness",
+      "source_unit_id": "chapter_6",
+      "domain": "service_delivery",
+      "benchmark_or_process_name": "Benefit-cost analysis readiness",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "wiki/product/municipal-portal-domain-inventory.md",
+        "wiki/implementation/municipal-budget-data-model.md",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "portal domain inventory",
+        "budget source tables",
+        "budget page inventory",
+        "municipal budget data model"
+      ],
+      "missing_inputs_to_resolve": [
+        "service catalogue with producers",
+        "contracts",
+        "service standards",
+        "recurring output/outcome records",
+        "activity-level cost normalization"
+      ],
+      "mapping_notes": "Good for source-completeness planning, not ready for service performance calculation.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_6_sustainability_measure_inclusion",
+      "source_unit_id": "chapter_6",
+      "domain": "service_delivery",
+      "benchmark_or_process_name": "Sustainability measure inclusion",
+      "comparison_mode": "benchmark against stated local objective",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "wiki/product/municipal-portal-domain-inventory.md",
+        "wiki/implementation/municipal-budget-data-model.md",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "portal domain inventory",
+        "budget source tables",
+        "budget page inventory",
+        "municipal budget data model"
+      ],
+      "missing_inputs_to_resolve": [
+        "service catalogue with producers",
+        "contracts",
+        "service standards",
+        "recurring output/outcome records",
+        "activity-level cost normalization"
+      ],
+      "mapping_notes": "Good for source-completeness planning, not ready for service performance calculation.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_6_activity_based_budget_readiness",
+      "source_unit_id": "chapter_6",
+      "domain": "service_delivery",
+      "benchmark_or_process_name": "Activity-based budget readiness",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "wiki/product/municipal-portal-domain-inventory.md",
+        "wiki/implementation/municipal-budget-data-model.md",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "portal domain inventory",
+        "budget source tables",
+        "budget page inventory",
+        "municipal budget data model"
+      ],
+      "missing_inputs_to_resolve": [
+        "service catalogue with producers",
+        "contracts",
+        "service standards",
+        "recurring output/outcome records",
+        "activity-level cost normalization"
+      ],
+      "mapping_notes": "Good for source-completeness planning, not ready for service performance calculation.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_6_service_delivery_system_map",
+      "source_unit_id": "chapter_6",
+      "domain": "service_delivery",
+      "benchmark_or_process_name": "Service delivery system map",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "wiki/product/municipal-portal-domain-inventory.md",
+        "wiki/implementation/municipal-budget-data-model.md",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "portal domain inventory",
+        "budget source tables",
+        "budget page inventory",
+        "municipal budget data model"
+      ],
+      "missing_inputs_to_resolve": [
+        "service catalogue with producers",
+        "contracts",
+        "service standards",
+        "recurring output/outcome records",
+        "activity-level cost normalization"
+      ],
+      "mapping_notes": "Good for source-completeness planning, not ready for service performance calculation.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_7_police_service_arrangement_inventory",
+      "source_unit_id": "chapter_7",
+      "domain": "protective_services",
+      "benchmark_or_process_name": "Police service arrangement inventory",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible budget line context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "police provider records",
+        "fire incident records",
+        "response times",
+        "emergency plans",
+        "inspection/prevention records",
+        "protective-service contracts"
+      ],
+      "mapping_notes": "No direct protective-service operating dataset is currently identified in the repository search results.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_7_police_environmental_context_profile",
+      "source_unit_id": "chapter_7",
+      "domain": "protective_services",
+      "benchmark_or_process_name": "Police environmental context profile",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible budget line context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "police provider records",
+        "fire incident records",
+        "response times",
+        "emergency plans",
+        "inspection/prevention records",
+        "protective-service contracts"
+      ],
+      "mapping_notes": "No direct protective-service operating dataset is currently identified in the repository search results.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_7_police_agency_statistics_caution_review",
+      "source_unit_id": "chapter_7",
+      "domain": "protective_services",
+      "benchmark_or_process_name": "Police agency-statistics caution review",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible budget line context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "police provider records",
+        "fire incident records",
+        "response times",
+        "emergency plans",
+        "inspection/prevention records",
+        "protective-service contracts"
+      ],
+      "mapping_notes": "No direct protective-service operating dataset is currently identified in the repository search results.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_7_police_survey_readiness_review",
+      "source_unit_id": "chapter_7",
+      "domain": "protective_services",
+      "benchmark_or_process_name": "Police survey-readiness review",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible budget line context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "police provider records",
+        "fire incident records",
+        "response times",
+        "emergency plans",
+        "inspection/prevention records",
+        "protective-service contracts"
+      ],
+      "mapping_notes": "No direct protective-service operating dataset is currently identified in the repository search results.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_7_police_cost_effectiveness_candidate",
+      "source_unit_id": "chapter_7",
+      "domain": "protective_services",
+      "benchmark_or_process_name": "Police cost-effectiveness candidate",
+      "comparison_mode": "longitudinal or cross-sectional comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible budget line context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "police provider records",
+        "fire incident records",
+        "response times",
+        "emergency plans",
+        "inspection/prevention records",
+        "protective-service contracts"
+      ],
+      "mapping_notes": "No direct protective-service operating dataset is currently identified in the repository search results.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_7_fire_performance_measure_inventory",
+      "source_unit_id": "chapter_7",
+      "domain": "protective_services",
+      "benchmark_or_process_name": "Fire performance measure inventory",
+      "comparison_mode": "benchmark against stated local objective",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible budget line context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "police provider records",
+        "fire incident records",
+        "response times",
+        "emergency plans",
+        "inspection/prevention records",
+        "protective-service contracts"
+      ],
+      "mapping_notes": "No direct protective-service operating dataset is currently identified in the repository search results.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_7_fire_environmental_context_profile",
+      "source_unit_id": "chapter_7",
+      "domain": "protective_services",
+      "benchmark_or_process_name": "Fire environmental context profile",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible budget line context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "police provider records",
+        "fire incident records",
+        "response times",
+        "emergency plans",
+        "inspection/prevention records",
+        "protective-service contracts"
+      ],
+      "mapping_notes": "No direct protective-service operating dataset is currently identified in the repository search results.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_7_fire_cost_effectiveness_candidate",
+      "source_unit_id": "chapter_7",
+      "domain": "protective_services",
+      "benchmark_or_process_name": "Fire cost-effectiveness candidate",
+      "comparison_mode": "longitudinal or cross-sectional comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible budget line context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "police provider records",
+        "fire incident records",
+        "response times",
+        "emergency plans",
+        "inspection/prevention records",
+        "protective-service contracts"
+      ],
+      "mapping_notes": "No direct protective-service operating dataset is currently identified in the repository search results.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_7_fire_insurance_value_comparison",
+      "source_unit_id": "chapter_7",
+      "domain": "protective_services",
+      "benchmark_or_process_name": "Fire insurance value comparison",
+      "comparison_mode": "requires_external_standard",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible budget line context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "police provider records",
+        "fire incident records",
+        "response times",
+        "emergency plans",
+        "inspection/prevention records",
+        "protective-service contracts"
+      ],
+      "mapping_notes": "No direct protective-service operating dataset is currently identified in the repository search results.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_7_emergency_preparedness_completeness_review",
+      "source_unit_id": "chapter_7",
+      "domain": "protective_services",
+      "benchmark_or_process_name": "Emergency preparedness completeness review",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible budget line context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "police provider records",
+        "fire incident records",
+        "response times",
+        "emergency plans",
+        "inspection/prevention records",
+        "protective-service contracts"
+      ],
+      "mapping_notes": "No direct protective-service operating dataset is currently identified in the repository search results.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_7_emergency_response_performance_review",
+      "source_unit_id": "chapter_7",
+      "domain": "protective_services",
+      "benchmark_or_process_name": "Emergency response performance review",
+      "comparison_mode": "longitudinal comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible budget line context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "police provider records",
+        "fire incident records",
+        "response times",
+        "emergency plans",
+        "inspection/prevention records",
+        "protective-service contracts"
+      ],
+      "mapping_notes": "No direct protective-service operating dataset is currently identified in the repository search results.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_7_protective_service_production_map",
+      "source_unit_id": "chapter_7",
+      "domain": "protective_services",
+      "benchmark_or_process_name": "Protective-service production map",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible budget line context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "police provider records",
+        "fire incident records",
+        "response times",
+        "emergency plans",
+        "inspection/prevention records",
+        "protective-service contracts"
+      ],
+      "mapping_notes": "No direct protective-service operating dataset is currently identified in the repository search results.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_8_engineering_service_inventory",
+      "source_unit_id": "chapter_8",
+      "domain": "engineering_services",
+      "benchmark_or_process_name": "Engineering service inventory",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/FINAL City of Charlottetown Street Map A1 Landscape.pdf",
+        "maps/pei/CHTWN_Street_Network.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/spatial/charlottetown/",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "street network",
+        "parcel map",
+        "terrain DEM outputs",
+        "building/parcel spatial layers",
+        "budget source tables"
+      ],
+      "missing_inputs_to_resolve": [
+        "water utility operations",
+        "wastewater operations",
+        "solid waste tonnage/contracts",
+        "road condition and maintenance records",
+        "transit operating statistics"
+      ],
+      "mapping_notes": "Spatial and budget source families exist, but utility and operations data are not yet identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_8_water_utility_performance_inventory",
+      "source_unit_id": "chapter_8",
+      "domain": "engineering_services",
+      "benchmark_or_process_name": "Water utility performance inventory",
+      "comparison_mode": "longitudinal or cross-sectional comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/FINAL City of Charlottetown Street Map A1 Landscape.pdf",
+        "maps/pei/CHTWN_Street_Network.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/spatial/charlottetown/",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "street network",
+        "parcel map",
+        "terrain DEM outputs",
+        "building/parcel spatial layers",
+        "budget source tables"
+      ],
+      "missing_inputs_to_resolve": [
+        "water utility operations",
+        "wastewater operations",
+        "solid waste tonnage/contracts",
+        "road condition and maintenance records",
+        "transit operating statistics"
+      ],
+      "mapping_notes": "Spatial and budget source families exist, but utility and operations data are not yet identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_8_water_conservation_performance_review",
+      "source_unit_id": "chapter_8",
+      "domain": "engineering_services",
+      "benchmark_or_process_name": "Water conservation performance review",
+      "comparison_mode": "longitudinal comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/FINAL City of Charlottetown Street Map A1 Landscape.pdf",
+        "maps/pei/CHTWN_Street_Network.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/spatial/charlottetown/",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "street network",
+        "parcel map",
+        "terrain DEM outputs",
+        "building/parcel spatial layers",
+        "budget source tables"
+      ],
+      "missing_inputs_to_resolve": [
+        "water utility operations",
+        "wastewater operations",
+        "solid waste tonnage/contracts",
+        "road condition and maintenance records",
+        "transit operating statistics"
+      ],
+      "mapping_notes": "Spatial and budget source families exist, but utility and operations data are not yet identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_8_wastewater_utility_performance_inventory",
+      "source_unit_id": "chapter_8",
+      "domain": "engineering_services",
+      "benchmark_or_process_name": "Wastewater utility performance inventory",
+      "comparison_mode": "longitudinal or cross-sectional comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/FINAL City of Charlottetown Street Map A1 Landscape.pdf",
+        "maps/pei/CHTWN_Street_Network.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/spatial/charlottetown/",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "street network",
+        "parcel map",
+        "terrain DEM outputs",
+        "building/parcel spatial layers",
+        "budget source tables"
+      ],
+      "missing_inputs_to_resolve": [
+        "water utility operations",
+        "wastewater operations",
+        "solid waste tonnage/contracts",
+        "road condition and maintenance records",
+        "transit operating statistics"
+      ],
+      "mapping_notes": "Spatial and budget source families exist, but utility and operations data are not yet identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_8_wastewater_reuse_sustainability_review",
+      "source_unit_id": "chapter_8",
+      "domain": "engineering_services",
+      "benchmark_or_process_name": "Wastewater reuse/sustainability review",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/FINAL City of Charlottetown Street Map A1 Landscape.pdf",
+        "maps/pei/CHTWN_Street_Network.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/spatial/charlottetown/",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "street network",
+        "parcel map",
+        "terrain DEM outputs",
+        "building/parcel spatial layers",
+        "budget source tables"
+      ],
+      "missing_inputs_to_resolve": [
+        "water utility operations",
+        "wastewater operations",
+        "solid waste tonnage/contracts",
+        "road condition and maintenance records",
+        "transit operating statistics"
+      ],
+      "mapping_notes": "Spatial and budget source families exist, but utility and operations data are not yet identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_8_solid_waste_cost_and_diversion_review",
+      "source_unit_id": "chapter_8",
+      "domain": "engineering_services",
+      "benchmark_or_process_name": "Solid waste cost and diversion review",
+      "comparison_mode": "longitudinal or cross-sectional comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/FINAL City of Charlottetown Street Map A1 Landscape.pdf",
+        "maps/pei/CHTWN_Street_Network.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/spatial/charlottetown/",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "street network",
+        "parcel map",
+        "terrain DEM outputs",
+        "building/parcel spatial layers",
+        "budget source tables"
+      ],
+      "missing_inputs_to_resolve": [
+        "water utility operations",
+        "wastewater operations",
+        "solid waste tonnage/contracts",
+        "road condition and maintenance records",
+        "transit operating statistics"
+      ],
+      "mapping_notes": "Spatial and budget source families exist, but utility and operations data are not yet identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_8_solid_waste_production_arrangement_review",
+      "source_unit_id": "chapter_8",
+      "domain": "engineering_services",
+      "benchmark_or_process_name": "Solid waste production arrangement review",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/FINAL City of Charlottetown Street Map A1 Landscape.pdf",
+        "maps/pei/CHTWN_Street_Network.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/spatial/charlottetown/",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "street network",
+        "parcel map",
+        "terrain DEM outputs",
+        "building/parcel spatial layers",
+        "budget source tables"
+      ],
+      "missing_inputs_to_resolve": [
+        "water utility operations",
+        "wastewater operations",
+        "solid waste tonnage/contracts",
+        "road condition and maintenance records",
+        "transit operating statistics"
+      ],
+      "mapping_notes": "Spatial and budget source families exist, but utility and operations data are not yet identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_8_transportation_condition_and_safety_review",
+      "source_unit_id": "chapter_8",
+      "domain": "engineering_services",
+      "benchmark_or_process_name": "Transportation condition and safety review",
+      "comparison_mode": "longitudinal comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/FINAL City of Charlottetown Street Map A1 Landscape.pdf",
+        "maps/pei/CHTWN_Street_Network.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/spatial/charlottetown/",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "street network",
+        "parcel map",
+        "terrain DEM outputs",
+        "building/parcel spatial layers",
+        "budget source tables"
+      ],
+      "missing_inputs_to_resolve": [
+        "water utility operations",
+        "wastewater operations",
+        "solid waste tonnage/contracts",
+        "road condition and maintenance records",
+        "transit operating statistics"
+      ],
+      "mapping_notes": "Spatial and budget source families exist, but utility and operations data are not yet identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_8_transportation_congestion_environment_review",
+      "source_unit_id": "chapter_8",
+      "domain": "engineering_services",
+      "benchmark_or_process_name": "Transportation congestion/environment review",
+      "comparison_mode": "requires_external_standard",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/FINAL City of Charlottetown Street Map A1 Landscape.pdf",
+        "maps/pei/CHTWN_Street_Network.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/spatial/charlottetown/",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "street network",
+        "parcel map",
+        "terrain DEM outputs",
+        "building/parcel spatial layers",
+        "budget source tables"
+      ],
+      "missing_inputs_to_resolve": [
+        "water utility operations",
+        "wastewater operations",
+        "solid waste tonnage/contracts",
+        "road condition and maintenance records",
+        "transit operating statistics"
+      ],
+      "mapping_notes": "Spatial and budget source families exist, but utility and operations data are not yet identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_8_transit_benchmark_review",
+      "source_unit_id": "chapter_8",
+      "domain": "engineering_services",
+      "benchmark_or_process_name": "Transit benchmark review",
+      "comparison_mode": "longitudinal or cross-sectional comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/FINAL City of Charlottetown Street Map A1 Landscape.pdf",
+        "maps/pei/CHTWN_Street_Network.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/spatial/charlottetown/",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "street network",
+        "parcel map",
+        "terrain DEM outputs",
+        "building/parcel spatial layers",
+        "budget source tables"
+      ],
+      "missing_inputs_to_resolve": [
+        "water utility operations",
+        "wastewater operations",
+        "solid waste tonnage/contracts",
+        "road condition and maintenance records",
+        "transit operating statistics"
+      ],
+      "mapping_notes": "Spatial and budget source families exist, but utility and operations data are not yet identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_8_engineering_contract_efficiency_review",
+      "source_unit_id": "chapter_8",
+      "domain": "engineering_services",
+      "benchmark_or_process_name": "Engineering contract efficiency review",
+      "comparison_mode": "local alternative comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/FINAL City of Charlottetown Street Map A1 Landscape.pdf",
+        "maps/pei/CHTWN_Street_Network.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/spatial/charlottetown/",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "street network",
+        "parcel map",
+        "terrain DEM outputs",
+        "building/parcel spatial layers",
+        "budget source tables"
+      ],
+      "missing_inputs_to_resolve": [
+        "water utility operations",
+        "wastewater operations",
+        "solid waste tonnage/contracts",
+        "road condition and maintenance records",
+        "transit operating statistics"
+      ],
+      "mapping_notes": "Spatial and budget source families exist, but utility and operations data are not yet identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_8_district_energy_and_recovery_inventory",
+      "source_unit_id": "chapter_8",
+      "domain": "engineering_services",
+      "benchmark_or_process_name": "District energy and recovery inventory",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/FINAL City of Charlottetown Street Map A1 Landscape.pdf",
+        "maps/pei/CHTWN_Street_Network.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/spatial/charlottetown/",
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "street network",
+        "parcel map",
+        "terrain DEM outputs",
+        "building/parcel spatial layers",
+        "budget source tables"
+      ],
+      "missing_inputs_to_resolve": [
+        "water utility operations",
+        "wastewater operations",
+        "solid waste tonnage/contracts",
+        "road condition and maintenance records",
+        "transit operating statistics"
+      ],
+      "mapping_notes": "Spatial and budget source families exist, but utility and operations data are not yet identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_9_human_services_responsibility_map",
+      "source_unit_id": "chapter_9",
+      "domain": "human_services",
+      "benchmark_or_process_name": "Human-services responsibility map",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/parks.gif",
+        "data/budget/charlottetown/2026-2027/",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf"
+      ],
+      "available_inputs_observed": [
+        "parks map artifact",
+        "budget source tables",
+        "Official Plan source for policy context"
+      ],
+      "missing_inputs_to_resolve": [
+        "parks asset inventory",
+        "recreation program participation",
+        "library operating statistics",
+        "museum visitor statistics",
+        "public-health records",
+        "housing stock and affordability records"
+      ],
+      "mapping_notes": "Useful for responsibility and policy-source mapping, not ready for human-service performance measures.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_9_education_governance_context_review",
+      "source_unit_id": "chapter_9",
+      "domain": "human_services",
+      "benchmark_or_process_name": "Education governance context review",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/parks.gif",
+        "data/budget/charlottetown/2026-2027/",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf"
+      ],
+      "available_inputs_observed": [
+        "parks map artifact",
+        "budget source tables",
+        "Official Plan source for policy context"
+      ],
+      "missing_inputs_to_resolve": [
+        "parks asset inventory",
+        "recreation program participation",
+        "library operating statistics",
+        "museum visitor statistics",
+        "public-health records",
+        "housing stock and affordability records"
+      ],
+      "mapping_notes": "Useful for responsibility and policy-source mapping, not ready for human-service performance measures.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_9_parks_and_recreation_service_inventory",
+      "source_unit_id": "chapter_9",
+      "domain": "human_services",
+      "benchmark_or_process_name": "Parks and recreation service inventory",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/parks.gif",
+        "data/budget/charlottetown/2026-2027/",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf"
+      ],
+      "available_inputs_observed": [
+        "parks map artifact",
+        "budget source tables",
+        "Official Plan source for policy context"
+      ],
+      "missing_inputs_to_resolve": [
+        "parks asset inventory",
+        "recreation program participation",
+        "library operating statistics",
+        "museum visitor statistics",
+        "public-health records",
+        "housing stock and affordability records"
+      ],
+      "mapping_notes": "Useful for responsibility and policy-source mapping, not ready for human-service performance measures.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_9_parks_and_recreation_performance_review",
+      "source_unit_id": "chapter_9",
+      "domain": "human_services",
+      "benchmark_or_process_name": "Parks and recreation performance review",
+      "comparison_mode": "longitudinal or cross-sectional comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/parks.gif",
+        "data/budget/charlottetown/2026-2027/",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf"
+      ],
+      "available_inputs_observed": [
+        "parks map artifact",
+        "budget source tables",
+        "Official Plan source for policy context"
+      ],
+      "missing_inputs_to_resolve": [
+        "parks asset inventory",
+        "recreation program participation",
+        "library operating statistics",
+        "museum visitor statistics",
+        "public-health records",
+        "housing stock and affordability records"
+      ],
+      "mapping_notes": "Useful for responsibility and policy-source mapping, not ready for human-service performance measures.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_9_recreation_subsidy_and_user_fee_review",
+      "source_unit_id": "chapter_9",
+      "domain": "human_services",
+      "benchmark_or_process_name": "Recreation subsidy and user-fee review",
+      "comparison_mode": "fiscal-equivalence review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/parks.gif",
+        "data/budget/charlottetown/2026-2027/",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf"
+      ],
+      "available_inputs_observed": [
+        "parks map artifact",
+        "budget source tables",
+        "Official Plan source for policy context"
+      ],
+      "missing_inputs_to_resolve": [
+        "parks asset inventory",
+        "recreation program participation",
+        "library operating statistics",
+        "museum visitor statistics",
+        "public-health records",
+        "housing stock and affordability records"
+      ],
+      "mapping_notes": "Useful for responsibility and policy-source mapping, not ready for human-service performance measures.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_9_library_service_and_usage_review",
+      "source_unit_id": "chapter_9",
+      "domain": "human_services",
+      "benchmark_or_process_name": "Library service and usage review",
+      "comparison_mode": "longitudinal or cross-sectional comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/parks.gif",
+        "data/budget/charlottetown/2026-2027/",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf"
+      ],
+      "available_inputs_observed": [
+        "parks map artifact",
+        "budget source tables",
+        "Official Plan source for policy context"
+      ],
+      "missing_inputs_to_resolve": [
+        "parks asset inventory",
+        "recreation program participation",
+        "library operating statistics",
+        "museum visitor statistics",
+        "public-health records",
+        "housing stock and affordability records"
+      ],
+      "mapping_notes": "Useful for responsibility and policy-source mapping, not ready for human-service performance measures.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_9_library_governance_and_funding_inventory",
+      "source_unit_id": "chapter_9",
+      "domain": "human_services",
+      "benchmark_or_process_name": "Library governance and funding inventory",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/parks.gif",
+        "data/budget/charlottetown/2026-2027/",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf"
+      ],
+      "available_inputs_observed": [
+        "parks map artifact",
+        "budget source tables",
+        "Official Plan source for policy context"
+      ],
+      "missing_inputs_to_resolve": [
+        "parks asset inventory",
+        "recreation program participation",
+        "library operating statistics",
+        "museum visitor statistics",
+        "public-health records",
+        "housing stock and affordability records"
+      ],
+      "mapping_notes": "Useful for responsibility and policy-source mapping, not ready for human-service performance measures.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_9_museum_and_cultural_asset_performance_review",
+      "source_unit_id": "chapter_9",
+      "domain": "human_services",
+      "benchmark_or_process_name": "Museum and cultural-asset performance review",
+      "comparison_mode": "longitudinal comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/parks.gif",
+        "data/budget/charlottetown/2026-2027/",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf"
+      ],
+      "available_inputs_observed": [
+        "parks map artifact",
+        "budget source tables",
+        "Official Plan source for policy context"
+      ],
+      "missing_inputs_to_resolve": [
+        "parks asset inventory",
+        "recreation program participation",
+        "library operating statistics",
+        "museum visitor statistics",
+        "public-health records",
+        "housing stock and affordability records"
+      ],
+      "mapping_notes": "Useful for responsibility and policy-source mapping, not ready for human-service performance measures.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_9_public_health_role_inventory",
+      "source_unit_id": "chapter_9",
+      "domain": "human_services",
+      "benchmark_or_process_name": "Public-health role inventory",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/parks.gif",
+        "data/budget/charlottetown/2026-2027/",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf"
+      ],
+      "available_inputs_observed": [
+        "parks map artifact",
+        "budget source tables",
+        "Official Plan source for policy context"
+      ],
+      "missing_inputs_to_resolve": [
+        "parks asset inventory",
+        "recreation program participation",
+        "library operating statistics",
+        "museum visitor statistics",
+        "public-health records",
+        "housing stock and affordability records"
+      ],
+      "mapping_notes": "Useful for responsibility and policy-source mapping, not ready for human-service performance measures.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_9_public_health_outcome_caution_register",
+      "source_unit_id": "chapter_9",
+      "domain": "human_services",
+      "benchmark_or_process_name": "Public-health outcome caution register",
+      "comparison_mode": "requires_external_standard",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/parks.gif",
+        "data/budget/charlottetown/2026-2027/",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf"
+      ],
+      "available_inputs_observed": [
+        "parks map artifact",
+        "budget source tables",
+        "Official Plan source for policy context"
+      ],
+      "missing_inputs_to_resolve": [
+        "parks asset inventory",
+        "recreation program participation",
+        "library operating statistics",
+        "museum visitor statistics",
+        "public-health records",
+        "housing stock and affordability records"
+      ],
+      "mapping_notes": "Useful for responsibility and policy-source mapping, not ready for human-service performance measures.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_9_social_housing_policy_inventory",
+      "source_unit_id": "chapter_9",
+      "domain": "human_services",
+      "benchmark_or_process_name": "Social-housing policy inventory",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/parks.gif",
+        "data/budget/charlottetown/2026-2027/",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf"
+      ],
+      "available_inputs_observed": [
+        "parks map artifact",
+        "budget source tables",
+        "Official Plan source for policy context"
+      ],
+      "missing_inputs_to_resolve": [
+        "parks asset inventory",
+        "recreation program participation",
+        "library operating statistics",
+        "museum visitor statistics",
+        "public-health records",
+        "housing stock and affordability records"
+      ],
+      "mapping_notes": "Useful for responsibility and policy-source mapping, not ready for human-service performance measures.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_9_social_housing_affordability_and_stock_review",
+      "source_unit_id": "chapter_9",
+      "domain": "human_services",
+      "benchmark_or_process_name": "Social-housing affordability and stock review",
+      "comparison_mode": "requires_external_standard",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "maps/parks.gif",
+        "data/budget/charlottetown/2026-2027/",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf"
+      ],
+      "available_inputs_observed": [
+        "parks map artifact",
+        "budget source tables",
+        "Official Plan source for policy context"
+      ],
+      "missing_inputs_to_resolve": [
+        "parks asset inventory",
+        "recreation program participation",
+        "library operating statistics",
+        "museum visitor statistics",
+        "public-health records",
+        "housing stock and affordability records"
+      ],
+      "mapping_notes": "Useful for responsibility and policy-source mapping, not ready for human-service performance measures.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_10_regulatory_cost_visibility_review",
+      "source_unit_id": "chapter_10",
+      "domain": "planning_land_use",
+      "benchmark_or_process_name": "Regulatory-cost visibility review",
+      "comparison_mode": "fiscal-equivalence review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "candidate_use_in_charlottetown": "prototype_mapping_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+        "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf",
+        "docs/charlottetown/ocp/Future Land Use Map - October 24 2025.pdf",
+        "maps/Charlottetown Zoning Map - March 9, 2026.pdf",
+        "maps/pei/CHTWN_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Draft_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/zoning/charlottetown/",
+        "data/zoning/charlottetown-draft/",
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/"
+      ],
+      "available_inputs_observed": [
+        "current and draft zoning bylaws",
+        "current and draft zoning spatial layers",
+        "parcel map",
+        "OCP and future land use map",
+        "meeting package extraction for rezoning examples"
+      ],
+      "missing_inputs_to_resolve": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ],
+      "mapping_notes": "Strongest Phase 6 target; still process-oriented unless permit, subdivision, and enforcement datasets are added.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_10_building_permit_process_benchmark",
+      "source_unit_id": "chapter_10",
+      "domain": "planning_land_use",
+      "benchmark_or_process_name": "Building permit process benchmark",
+      "comparison_mode": "longitudinal comparison or benchmark against stated local objective",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "candidate_use_in_charlottetown": "prototype_mapping_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+        "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf",
+        "docs/charlottetown/ocp/Future Land Use Map - October 24 2025.pdf",
+        "maps/Charlottetown Zoning Map - March 9, 2026.pdf",
+        "maps/pei/CHTWN_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Draft_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/zoning/charlottetown/",
+        "data/zoning/charlottetown-draft/",
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/"
+      ],
+      "available_inputs_observed": [
+        "current and draft zoning bylaws",
+        "current and draft zoning spatial layers",
+        "parcel map",
+        "OCP and future land use map",
+        "meeting package extraction for rezoning examples"
+      ],
+      "missing_inputs_to_resolve": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ],
+      "mapping_notes": "Strongest Phase 6 target; still process-oriented unless permit, subdivision, and enforcement datasets are added.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_10_planning_document_completeness_review",
+      "source_unit_id": "chapter_10",
+      "domain": "planning_land_use",
+      "benchmark_or_process_name": "Planning document completeness review",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "candidate_use_in_charlottetown": "prototype_mapping_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+        "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf",
+        "docs/charlottetown/ocp/Future Land Use Map - October 24 2025.pdf",
+        "maps/Charlottetown Zoning Map - March 9, 2026.pdf",
+        "maps/pei/CHTWN_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Draft_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/zoning/charlottetown/",
+        "data/zoning/charlottetown-draft/",
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/"
+      ],
+      "available_inputs_observed": [
+        "current and draft zoning bylaws",
+        "current and draft zoning spatial layers",
+        "parcel map",
+        "OCP and future land use map",
+        "meeting package extraction for rezoning examples"
+      ],
+      "missing_inputs_to_resolve": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ],
+      "mapping_notes": "Strongest Phase 6 target; still process-oriented unless permit, subdivision, and enforcement datasets are added.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_10_regional_strategic_planning_relationship_map",
+      "source_unit_id": "chapter_10",
+      "domain": "planning_land_use",
+      "benchmark_or_process_name": "Regional/strategic planning relationship map",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "candidate_use_in_charlottetown": "prototype_mapping_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+        "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf",
+        "docs/charlottetown/ocp/Future Land Use Map - October 24 2025.pdf",
+        "maps/Charlottetown Zoning Map - March 9, 2026.pdf",
+        "maps/pei/CHTWN_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Draft_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/zoning/charlottetown/",
+        "data/zoning/charlottetown-draft/",
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/"
+      ],
+      "available_inputs_observed": [
+        "current and draft zoning bylaws",
+        "current and draft zoning spatial layers",
+        "parcel map",
+        "OCP and future land use map",
+        "meeting package extraction for rezoning examples"
+      ],
+      "missing_inputs_to_resolve": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ],
+      "mapping_notes": "Strongest Phase 6 target; still process-oriented unless permit, subdivision, and enforcement datasets are added.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_10_zoning_complexity_inventory",
+      "source_unit_id": "chapter_10",
+      "domain": "planning_land_use",
+      "benchmark_or_process_name": "Zoning complexity inventory",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "candidate_use_in_charlottetown": "prototype_mapping_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+        "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf",
+        "docs/charlottetown/ocp/Future Land Use Map - October 24 2025.pdf",
+        "maps/Charlottetown Zoning Map - March 9, 2026.pdf",
+        "maps/pei/CHTWN_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Draft_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/zoning/charlottetown/",
+        "data/zoning/charlottetown-draft/",
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/"
+      ],
+      "available_inputs_observed": [
+        "current and draft zoning bylaws",
+        "current and draft zoning spatial layers",
+        "parcel map",
+        "OCP and future land use map",
+        "meeting package extraction for rezoning examples"
+      ],
+      "missing_inputs_to_resolve": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ],
+      "mapping_notes": "Strongest Phase 6 target; still process-oriented unless permit, subdivision, and enforcement datasets are added.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_10_rezoning_and_variance_process_trace",
+      "source_unit_id": "chapter_10",
+      "domain": "planning_land_use",
+      "benchmark_or_process_name": "Rezoning and variance process trace",
+      "comparison_mode": "longitudinal comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "candidate_use_in_charlottetown": "prototype_mapping_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+        "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf",
+        "docs/charlottetown/ocp/Future Land Use Map - October 24 2025.pdf",
+        "maps/Charlottetown Zoning Map - March 9, 2026.pdf",
+        "maps/pei/CHTWN_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Draft_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/zoning/charlottetown/",
+        "data/zoning/charlottetown-draft/",
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/"
+      ],
+      "available_inputs_observed": [
+        "current and draft zoning bylaws",
+        "current and draft zoning spatial layers",
+        "parcel map",
+        "OCP and future land use map",
+        "meeting package extraction for rezoning examples"
+      ],
+      "missing_inputs_to_resolve": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ],
+      "mapping_notes": "Strongest Phase 6 target; still process-oriented unless permit, subdivision, and enforcement datasets are added.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_10_subdivision_approval_process_trace",
+      "source_unit_id": "chapter_10",
+      "domain": "planning_land_use",
+      "benchmark_or_process_name": "Subdivision approval process trace",
+      "comparison_mode": "longitudinal comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "candidate_use_in_charlottetown": "prototype_mapping_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+        "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf",
+        "docs/charlottetown/ocp/Future Land Use Map - October 24 2025.pdf",
+        "maps/Charlottetown Zoning Map - March 9, 2026.pdf",
+        "maps/pei/CHTWN_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Draft_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/zoning/charlottetown/",
+        "data/zoning/charlottetown-draft/",
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/"
+      ],
+      "available_inputs_observed": [
+        "current and draft zoning bylaws",
+        "current and draft zoning spatial layers",
+        "parcel map",
+        "OCP and future land use map",
+        "meeting package extraction for rezoning examples"
+      ],
+      "missing_inputs_to_resolve": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ],
+      "mapping_notes": "Strongest Phase 6 target; still process-oriented unless permit, subdivision, and enforcement datasets are added.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_10_development_cost_charge_linkage_review",
+      "source_unit_id": "chapter_10",
+      "domain": "planning_land_use",
+      "benchmark_or_process_name": "Development cost charge linkage review",
+      "comparison_mode": "fiscal-equivalence review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "candidate_use_in_charlottetown": "prototype_mapping_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+        "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf",
+        "docs/charlottetown/ocp/Future Land Use Map - October 24 2025.pdf",
+        "maps/Charlottetown Zoning Map - March 9, 2026.pdf",
+        "maps/pei/CHTWN_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Draft_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/zoning/charlottetown/",
+        "data/zoning/charlottetown-draft/",
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/"
+      ],
+      "available_inputs_observed": [
+        "current and draft zoning bylaws",
+        "current and draft zoning spatial layers",
+        "parcel map",
+        "OCP and future land use map",
+        "meeting package extraction for rezoning examples"
+      ],
+      "missing_inputs_to_resolve": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ],
+      "mapping_notes": "Strongest Phase 6 target; still process-oriented unless permit, subdivision, and enforcement datasets are added.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_10_bylaw_enforcement_workflow_inventory",
+      "source_unit_id": "chapter_10",
+      "domain": "planning_land_use",
+      "benchmark_or_process_name": "Bylaw enforcement workflow inventory",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "candidate_use_in_charlottetown": "prototype_mapping_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+        "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf",
+        "docs/charlottetown/ocp/Future Land Use Map - October 24 2025.pdf",
+        "maps/Charlottetown Zoning Map - March 9, 2026.pdf",
+        "maps/pei/CHTWN_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Draft_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/zoning/charlottetown/",
+        "data/zoning/charlottetown-draft/",
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/"
+      ],
+      "available_inputs_observed": [
+        "current and draft zoning bylaws",
+        "current and draft zoning spatial layers",
+        "parcel map",
+        "OCP and future land use map",
+        "meeting package extraction for rezoning examples"
+      ],
+      "missing_inputs_to_resolve": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ],
+      "mapping_notes": "Strongest Phase 6 target; still process-oriented unless permit, subdivision, and enforcement datasets are added.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_10_land_use_regulation_outcome_caution",
+      "source_unit_id": "chapter_10",
+      "domain": "planning_land_use",
+      "benchmark_or_process_name": "Land-use regulation outcome caution",
+      "comparison_mode": "requires_external_standard",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "candidate_use_in_charlottetown": "prototype_mapping_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+        "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf",
+        "docs/charlottetown/ocp/Future Land Use Map - October 24 2025.pdf",
+        "maps/Charlottetown Zoning Map - March 9, 2026.pdf",
+        "maps/pei/CHTWN_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Draft_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/zoning/charlottetown/",
+        "data/zoning/charlottetown-draft/",
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/"
+      ],
+      "available_inputs_observed": [
+        "current and draft zoning bylaws",
+        "current and draft zoning spatial layers",
+        "parcel map",
+        "OCP and future land use map",
+        "meeting package extraction for rezoning examples"
+      ],
+      "missing_inputs_to_resolve": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ],
+      "mapping_notes": "Strongest Phase 6 target; still process-oriented unless permit, subdivision, and enforcement datasets are added.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_11_workforce_and_unionization_profile",
+      "source_unit_id": "chapter_11",
+      "domain": "labour_relations",
+      "benchmark_or_process_name": "Workforce and unionization profile",
+      "comparison_mode": "longitudinal comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible aggregate labour-cost context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "workforce records",
+        "collective agreements",
+        "bargaining units",
+        "HR policies",
+        "labour-relations events",
+        "service-continuity records"
+      ],
+      "mapping_notes": "No direct HR or labour-relations source family is currently identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_11_collective_agreement_inventory",
+      "source_unit_id": "chapter_11",
+      "domain": "labour_relations",
+      "benchmark_or_process_name": "Collective agreement inventory",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible aggregate labour-cost context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "workforce records",
+        "collective agreements",
+        "bargaining units",
+        "HR policies",
+        "labour-relations events",
+        "service-continuity records"
+      ],
+      "mapping_notes": "No direct HR or labour-relations source family is currently identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_11_bargaining_unit_map",
+      "source_unit_id": "chapter_11",
+      "domain": "labour_relations",
+      "benchmark_or_process_name": "Bargaining-unit map",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible aggregate labour-cost context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "workforce records",
+        "collective agreements",
+        "bargaining units",
+        "HR policies",
+        "labour-relations events",
+        "service-continuity records"
+      ],
+      "mapping_notes": "No direct HR or labour-relations source family is currently identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_11_labour_relations_governance_map",
+      "source_unit_id": "chapter_11",
+      "domain": "labour_relations",
+      "benchmark_or_process_name": "Labour-relations governance map",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible aggregate labour-cost context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "workforce records",
+        "collective agreements",
+        "bargaining units",
+        "HR policies",
+        "labour-relations events",
+        "service-continuity records"
+      ],
+      "mapping_notes": "No direct HR or labour-relations source family is currently identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_11_service_continuity_labour_risk_review",
+      "source_unit_id": "chapter_11",
+      "domain": "labour_relations",
+      "benchmark_or_process_name": "Service-continuity labour-risk review",
+      "comparison_mode": "benchmark against stated local objective",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible aggregate labour-cost context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "workforce records",
+        "collective agreements",
+        "bargaining units",
+        "HR policies",
+        "labour-relations events",
+        "service-continuity records"
+      ],
+      "mapping_notes": "No direct HR or labour-relations source family is currently identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_11_labour_cost_service_linkage",
+      "source_unit_id": "chapter_11",
+      "domain": "labour_relations",
+      "benchmark_or_process_name": "Labour-cost service linkage",
+      "comparison_mode": "longitudinal comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible aggregate labour-cost context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "workforce records",
+        "collective agreements",
+        "bargaining units",
+        "HR policies",
+        "labour-relations events",
+        "service-continuity records"
+      ],
+      "mapping_notes": "No direct HR or labour-relations source family is currently identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_11_bargaining_capacity_review",
+      "source_unit_id": "chapter_11",
+      "domain": "labour_relations",
+      "benchmark_or_process_name": "Bargaining capacity review",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible aggregate labour-cost context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "workforce records",
+        "collective agreements",
+        "bargaining units",
+        "HR policies",
+        "labour-relations events",
+        "service-continuity records"
+      ],
+      "mapping_notes": "No direct HR or labour-relations source family is currently identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_11_contracting_and_workforce_boundary_review",
+      "source_unit_id": "chapter_11",
+      "domain": "labour_relations",
+      "benchmark_or_process_name": "Contracting and workforce boundary review",
+      "comparison_mode": "local alternative comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "source_gap",
+      "candidate_use_in_charlottetown": "backlog_source_discovery_candidate",
+      "identified_source_families": [
+        "data/budget/charlottetown/2026-2027/"
+      ],
+      "available_inputs_observed": [
+        "possible aggregate labour-cost context after budget normalization"
+      ],
+      "missing_inputs_to_resolve": [
+        "workforce records",
+        "collective agreements",
+        "bargaining units",
+        "HR policies",
+        "labour-relations events",
+        "service-continuity records"
+      ],
+      "mapping_notes": "No direct HR or labour-relations source family is currently identified.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_12_fiscal_equivalence_finance_review",
+      "source_unit_id": "chapter_12",
+      "domain": "finance",
+      "benchmark_or_process_name": "Fiscal-equivalence finance review",
+      "comparison_mode": "fiscal-equivalence review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf",
+        "docs/charlottetown/budget/2025-2026 Financial Plan Capital and Operational Budgets.pdf",
+        "data/budget/charlottetown/2026-2027/",
+        "wiki/charlottetown/sources/budget-2026-2027-first-pass.md",
+        "wiki/implementation/municipal-budget-data-model.md"
+      ],
+      "available_inputs_observed": [
+        "budget PDFs",
+        "page inventory",
+        "table manifest",
+        "raw source rows",
+        "raw source values",
+        "budget ingestion summary"
+      ],
+      "missing_inputs_to_resolve": [
+        "audited statements",
+        "tax/assessment detail",
+        "fee bylaws",
+        "debt instruments",
+        "reserve transactions",
+        "reviewed budget normalization decisions"
+      ],
+      "mapping_notes": "Good source-family match for budget and revenue candidates; not ready for finance conclusions until normalization and supporting finance sources are reviewed.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_12_direct_benefit_user_charge_review",
+      "source_unit_id": "chapter_12",
+      "domain": "finance",
+      "benchmark_or_process_name": "Direct-benefit user-charge review",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf",
+        "docs/charlottetown/budget/2025-2026 Financial Plan Capital and Operational Budgets.pdf",
+        "data/budget/charlottetown/2026-2027/",
+        "wiki/charlottetown/sources/budget-2026-2027-first-pass.md",
+        "wiki/implementation/municipal-budget-data-model.md"
+      ],
+      "available_inputs_observed": [
+        "budget PDFs",
+        "page inventory",
+        "table manifest",
+        "raw source rows",
+        "raw source values",
+        "budget ingestion summary"
+      ],
+      "missing_inputs_to_resolve": [
+        "audited statements",
+        "tax/assessment detail",
+        "fee bylaws",
+        "debt instruments",
+        "reserve transactions",
+        "reviewed budget normalization decisions"
+      ],
+      "mapping_notes": "Good source-family match for budget and revenue candidates; not ready for finance conclusions until normalization and supporting finance sources are reviewed.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_12_group_benefit_service_area_review",
+      "source_unit_id": "chapter_12",
+      "domain": "finance",
+      "benchmark_or_process_name": "Group-benefit service-area review",
+      "comparison_mode": "fiscal-equivalence review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf",
+        "docs/charlottetown/budget/2025-2026 Financial Plan Capital and Operational Budgets.pdf",
+        "data/budget/charlottetown/2026-2027/",
+        "wiki/charlottetown/sources/budget-2026-2027-first-pass.md",
+        "wiki/implementation/municipal-budget-data-model.md"
+      ],
+      "available_inputs_observed": [
+        "budget PDFs",
+        "page inventory",
+        "table manifest",
+        "raw source rows",
+        "raw source values",
+        "budget ingestion summary"
+      ],
+      "missing_inputs_to_resolve": [
+        "audited statements",
+        "tax/assessment detail",
+        "fee bylaws",
+        "debt instruments",
+        "reserve transactions",
+        "reviewed budget normalization decisions"
+      ],
+      "mapping_notes": "Good source-family match for budget and revenue candidates; not ready for finance conclusions until normalization and supporting finance sources are reviewed.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_12_temporal_fiscal_equivalence_review",
+      "source_unit_id": "chapter_12",
+      "domain": "finance",
+      "benchmark_or_process_name": "Temporal fiscal-equivalence review",
+      "comparison_mode": "fiscal-equivalence review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf",
+        "docs/charlottetown/budget/2025-2026 Financial Plan Capital and Operational Budgets.pdf",
+        "data/budget/charlottetown/2026-2027/",
+        "wiki/charlottetown/sources/budget-2026-2027-first-pass.md",
+        "wiki/implementation/municipal-budget-data-model.md"
+      ],
+      "available_inputs_observed": [
+        "budget PDFs",
+        "page inventory",
+        "table manifest",
+        "raw source rows",
+        "raw source values",
+        "budget ingestion summary"
+      ],
+      "missing_inputs_to_resolve": [
+        "audited statements",
+        "tax/assessment detail",
+        "fee bylaws",
+        "debt instruments",
+        "reserve transactions",
+        "reviewed budget normalization decisions"
+      ],
+      "mapping_notes": "Good source-family match for budget and revenue candidates; not ready for finance conclusions until normalization and supporting finance sources are reviewed.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_12_budget_process_completeness_review",
+      "source_unit_id": "chapter_12",
+      "domain": "finance",
+      "benchmark_or_process_name": "Budget process completeness review",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf",
+        "docs/charlottetown/budget/2025-2026 Financial Plan Capital and Operational Budgets.pdf",
+        "data/budget/charlottetown/2026-2027/",
+        "wiki/charlottetown/sources/budget-2026-2027-first-pass.md",
+        "wiki/implementation/municipal-budget-data-model.md"
+      ],
+      "available_inputs_observed": [
+        "budget PDFs",
+        "page inventory",
+        "table manifest",
+        "raw source rows",
+        "raw source values",
+        "budget ingestion summary"
+      ],
+      "missing_inputs_to_resolve": [
+        "audited statements",
+        "tax/assessment detail",
+        "fee bylaws",
+        "debt instruments",
+        "reserve transactions",
+        "reviewed budget normalization decisions"
+      ],
+      "mapping_notes": "Good source-family match for budget and revenue candidates; not ready for finance conclusions until normalization and supporting finance sources are reviewed.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_12_financial_reporting_completeness_review",
+      "source_unit_id": "chapter_12",
+      "domain": "finance",
+      "benchmark_or_process_name": "Financial reporting completeness review",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf",
+        "docs/charlottetown/budget/2025-2026 Financial Plan Capital and Operational Budgets.pdf",
+        "data/budget/charlottetown/2026-2027/",
+        "wiki/charlottetown/sources/budget-2026-2027-first-pass.md",
+        "wiki/implementation/municipal-budget-data-model.md"
+      ],
+      "available_inputs_observed": [
+        "budget PDFs",
+        "page inventory",
+        "table manifest",
+        "raw source rows",
+        "raw source values",
+        "budget ingestion summary"
+      ],
+      "missing_inputs_to_resolve": [
+        "audited statements",
+        "tax/assessment detail",
+        "fee bylaws",
+        "debt instruments",
+        "reserve transactions",
+        "reviewed budget normalization decisions"
+      ],
+      "mapping_notes": "Good source-family match for budget and revenue candidates; not ready for finance conclusions until normalization and supporting finance sources are reviewed.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_12_revenue_composition_comparison",
+      "source_unit_id": "chapter_12",
+      "domain": "finance",
+      "benchmark_or_process_name": "Revenue composition comparison",
+      "comparison_mode": "longitudinal or cross-sectional comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf",
+        "docs/charlottetown/budget/2025-2026 Financial Plan Capital and Operational Budgets.pdf",
+        "data/budget/charlottetown/2026-2027/",
+        "wiki/charlottetown/sources/budget-2026-2027-first-pass.md",
+        "wiki/implementation/municipal-budget-data-model.md"
+      ],
+      "available_inputs_observed": [
+        "budget PDFs",
+        "page inventory",
+        "table manifest",
+        "raw source rows",
+        "raw source values",
+        "budget ingestion summary"
+      ],
+      "missing_inputs_to_resolve": [
+        "audited statements",
+        "tax/assessment detail",
+        "fee bylaws",
+        "debt instruments",
+        "reserve transactions",
+        "reviewed budget normalization decisions"
+      ],
+      "mapping_notes": "Good source-family match for budget and revenue candidates; not ready for finance conclusions until normalization and supporting finance sources are reviewed.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_12_property_tax_class_burden_review",
+      "source_unit_id": "chapter_12",
+      "domain": "finance",
+      "benchmark_or_process_name": "Property-tax class burden review",
+      "comparison_mode": "longitudinal or cross-sectional comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf",
+        "docs/charlottetown/budget/2025-2026 Financial Plan Capital and Operational Budgets.pdf",
+        "data/budget/charlottetown/2026-2027/",
+        "wiki/charlottetown/sources/budget-2026-2027-first-pass.md",
+        "wiki/implementation/municipal-budget-data-model.md"
+      ],
+      "available_inputs_observed": [
+        "budget PDFs",
+        "page inventory",
+        "table manifest",
+        "raw source rows",
+        "raw source values",
+        "budget ingestion summary"
+      ],
+      "missing_inputs_to_resolve": [
+        "audited statements",
+        "tax/assessment detail",
+        "fee bylaws",
+        "debt instruments",
+        "reserve transactions",
+        "reviewed budget normalization decisions"
+      ],
+      "mapping_notes": "Good source-family match for budget and revenue candidates; not ready for finance conclusions until normalization and supporting finance sources are reviewed.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_12_tax_policy_disclosure_review",
+      "source_unit_id": "chapter_12",
+      "domain": "finance",
+      "benchmark_or_process_name": "Tax policy disclosure review",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf",
+        "docs/charlottetown/budget/2025-2026 Financial Plan Capital and Operational Budgets.pdf",
+        "data/budget/charlottetown/2026-2027/",
+        "wiki/charlottetown/sources/budget-2026-2027-first-pass.md",
+        "wiki/implementation/municipal-budget-data-model.md"
+      ],
+      "available_inputs_observed": [
+        "budget PDFs",
+        "page inventory",
+        "table manifest",
+        "raw source rows",
+        "raw source values",
+        "budget ingestion summary"
+      ],
+      "missing_inputs_to_resolve": [
+        "audited statements",
+        "tax/assessment detail",
+        "fee bylaws",
+        "debt instruments",
+        "reserve transactions",
+        "reviewed budget normalization decisions"
+      ],
+      "mapping_notes": "Good source-family match for budget and revenue candidates; not ready for finance conclusions until normalization and supporting finance sources are reviewed.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_12_transfer_dependency_review",
+      "source_unit_id": "chapter_12",
+      "domain": "finance",
+      "benchmark_or_process_name": "Transfer dependency review",
+      "comparison_mode": "longitudinal comparison",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf",
+        "docs/charlottetown/budget/2025-2026 Financial Plan Capital and Operational Budgets.pdf",
+        "data/budget/charlottetown/2026-2027/",
+        "wiki/charlottetown/sources/budget-2026-2027-first-pass.md",
+        "wiki/implementation/municipal-budget-data-model.md"
+      ],
+      "available_inputs_observed": [
+        "budget PDFs",
+        "page inventory",
+        "table manifest",
+        "raw source rows",
+        "raw source values",
+        "budget ingestion summary"
+      ],
+      "missing_inputs_to_resolve": [
+        "audited statements",
+        "tax/assessment detail",
+        "fee bylaws",
+        "debt instruments",
+        "reserve transactions",
+        "reviewed budget normalization decisions"
+      ],
+      "mapping_notes": "Good source-family match for budget and revenue candidates; not ready for finance conclusions until normalization and supporting finance sources are reviewed.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_12_debt_capacity_and_debt_use_review",
+      "source_unit_id": "chapter_12",
+      "domain": "finance",
+      "benchmark_or_process_name": "Debt capacity and debt-use review",
+      "comparison_mode": "benchmark against statutory/local limits",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf",
+        "docs/charlottetown/budget/2025-2026 Financial Plan Capital and Operational Budgets.pdf",
+        "data/budget/charlottetown/2026-2027/",
+        "wiki/charlottetown/sources/budget-2026-2027-first-pass.md",
+        "wiki/implementation/municipal-budget-data-model.md"
+      ],
+      "available_inputs_observed": [
+        "budget PDFs",
+        "page inventory",
+        "table manifest",
+        "raw source rows",
+        "raw source values",
+        "budget ingestion summary"
+      ],
+      "missing_inputs_to_resolve": [
+        "audited statements",
+        "tax/assessment detail",
+        "fee bylaws",
+        "debt instruments",
+        "reserve transactions",
+        "reviewed budget normalization decisions"
+      ],
+      "mapping_notes": "Good source-family match for budget and revenue candidates; not ready for finance conclusions until normalization and supporting finance sources are reviewed.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    },
+    {
+      "candidate_id": "chapter_12_reserve_funding_review",
+      "source_unit_id": "chapter_12",
+      "domain": "finance",
+      "benchmark_or_process_name": "Reserve funding review",
+      "comparison_mode": "source-completeness review",
+      "phase_5_charlottetown_readiness": "requires_phase_6_mapping",
+      "phase_6_mapping_status": "partial_source_family_identified",
+      "candidate_use_in_charlottetown": "source_gap_analysis_candidate",
+      "identified_source_families": [
+        "docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf",
+        "docs/charlottetown/budget/2025-2026 Financial Plan Capital and Operational Budgets.pdf",
+        "data/budget/charlottetown/2026-2027/",
+        "wiki/charlottetown/sources/budget-2026-2027-first-pass.md",
+        "wiki/implementation/municipal-budget-data-model.md"
+      ],
+      "available_inputs_observed": [
+        "budget PDFs",
+        "page inventory",
+        "table manifest",
+        "raw source rows",
+        "raw source values",
+        "budget ingestion summary"
+      ],
+      "missing_inputs_to_resolve": [
+        "audited statements",
+        "tax/assessment detail",
+        "fee bylaws",
+        "debt instruments",
+        "reserve transactions",
+        "reviewed budget normalization decisions"
+      ],
+      "mapping_notes": "Good source-family match for budget and revenue candidates; not ready for finance conclusions until normalization and supporting finance sources are reviewed.",
+      "public_use_status": "not_ready_for_public_metric_or_score"
+    }
+  ]
+}

@@ -74,9 +74,11 @@ The extracted structure index contains 13 chapters, 78 numbered chapter sections
 
 The chapter review queue contains 18 records: 13 chapters, 1 appendix, and 4 back-matter units. The first-pass priority order was Chapter 6, Chapter 1, Chapter 10, Chapter 12, Chapter 7, and Chapter 8. Completed Phase 4 reviews are [Chapter 6: Service Delivery](./lgbc/chapter-6-service-delivery.md), [Chapter 1: Introduction](./lgbc/chapter-1-introduction.md), [Chapter 10: Regulatory And Development Functions](./lgbc/chapter-10-regulatory-development-functions.md), [Chapter 12: Finance](./lgbc/chapter-12-finance.md), [Chapter 7: Protective Services](./lgbc/chapter-7-protective-services.md), [Chapter 8: Engineering Services](./lgbc/chapter-8-engineering-services.md), [Chapter 9: Human Services](./lgbc/chapter-9-human-services.md), and [Chapter 11: Labour Relations](./lgbc/chapter-11-labour-relations.md).
 
-Phase 5 has started with [LGBC Benchmark And Process Candidate Catalogue](./lgbc/benchmark-process-candidate-catalogue.md), which summarizes `data/sources/lgbc/benchmark_process_candidate_catalogue.json`. The initial catalogue contains 86 source-derived candidates from Chapters 1, 6, 7, 8, 9, 10, 11, and 12.
+Phase 5 created [LGBC Benchmark And Process Candidate Catalogue](./lgbc/benchmark-process-candidate-catalogue.md), which summarizes `data/sources/lgbc/benchmark_process_candidate_catalogue.json`. The initial catalogue contains 86 source-derived candidates from Chapters 1, 6, 7, 8, 9, 10, 11, and 12.
 
-Benchmark schemas, scoring models, and portal routes should remain deferred until Phase 6 Charlottetown source mapping is complete.
+Phase 6 has started with [LGBC Charlottetown Prototype Mapping](./lgbc/charlottetown-prototype-mapping.md), which summarizes `data/sources/lgbc/charlottetown_prototype_mapping.json`. The first mapping identifies planning and land use as the strongest source-family match, finance as a partial source-family match, and protective services plus labour relations as source-discovery gaps.
+
+Benchmark schemas, scoring models, and portal routes should remain deferred until Phase 6 dataset review and jurisdiction mapping are complete.
 
 ## Caveats
 

@@ -41,6 +41,7 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [LGBC Chapter 9: Human Services](./sources/lgbc/chapter-9-human-services.md) | Chapter 9 review notes for parks, recreation, libraries, museums, public health, social housing, responsibility mapping, and municipal data needs. |
 | [LGBC Chapter 11: Labour Relations](./sources/lgbc/chapter-11-labour-relations.md) | Chapter 11 review notes for workforce, unionization, bargaining units, labour relations, service-continuity context, and municipal data needs. |
 | [LGBC Benchmark And Process Candidate Catalogue](./sources/lgbc/benchmark-process-candidate-catalogue.md) | Phase 5 catalogue summary for 86 source-derived benchmark and process candidates from reviewed LGBC chapters. |
+| [LGBC Charlottetown Prototype Mapping](./sources/lgbc/charlottetown-prototype-mapping.md) | Phase 6 first-pass mapping from 86 LGBC candidates to known Charlottetown source families and source gaps. |
 
 ## Domain Pages
 
