@@ -2,7 +2,7 @@
     "source_id":  "lgbc-2008-4th-edition",
     "source_file":  "docs/LGBC-All.pdf",
     "phase":  "phase_3_chapter_review_queue",
-    "status":  "priority_chapter_reviews_complete_pending_benchmark_catalogue",
+    "status":  "priority_plus_chapters_9_11_reviews_complete_pending_benchmark_catalogue",
     "queue":  [
                   {
                       "unit_id":  "chapter_1",
@@ -272,7 +272,7 @@
                                          "pdf_start_page":  150,
                                          "pdf_end_page":  163
                                      },
-                      "review_priority":  "medium",
+                      "review_priority":  "phase_4_extended",
                       "portal_domains":  [
                                              "human_services",
                                              "parks_recreation",
@@ -288,9 +288,10 @@
                                                         "source unit text",
                                                         "existing municipal portal domain inventory"
                                                     ],
-                      "output_decision":  "review_for_domain_context_and_mapping_decision",
-                      "review_status":  "pending",
-                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                      "output_decision":  "review_for_benchmark_and_process_candidates",
+                      "review_status":  "reviewed",
+                      "notes":  "Chapter 9 source review completed in wiki/sources/lgbc/chapter-9-human-services.md. Candidate topics remain unapproved until benchmark catalogue review.",
+                      "output_path":  "wiki/sources/lgbc/chapter-9-human-services.md"
                   },
                   {
                       "unit_id":  "chapter_10",
@@ -340,7 +341,7 @@
                                          "pdf_start_page":  186,
                                          "pdf_end_page":  191
                                      },
-                      "review_priority":  "medium",
+                      "review_priority":  "phase_4_extended",
                       "portal_domains":  [
                                              "labour_relations",
                                              "workforce",
@@ -356,9 +357,10 @@
                                                         "source unit text",
                                                         "existing municipal portal domain inventory"
                                                     ],
-                      "output_decision":  "review_for_domain_context_and_mapping_decision",
-                      "review_status":  "pending",
-                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                      "output_decision":  "review_for_benchmark_and_process_candidates",
+                      "review_status":  "reviewed",
+                      "notes":  "Chapter 11 source review completed in wiki/sources/lgbc/chapter-11-labour-relations.md. Candidate topics remain unapproved until benchmark catalogue review.",
+                      "output_path":  "wiki/sources/lgbc/chapter-11-labour-relations.md"
                   },
                   {
                       "unit_id":  "chapter_12",
@@ -574,7 +576,9 @@
                                    "chapter_10",
                                    "chapter_12",
                                    "chapter_7",
-                                   "chapter_8"
+                                   "chapter_8",
+                                   "chapter_9",
+                                   "chapter_11"
                                ],
     "counts":  {
                    "queue_records":  18,

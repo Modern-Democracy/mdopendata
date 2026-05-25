@@ -36,6 +36,7 @@ The strongest initial relevance is:
 - Chapter 10 for planning, zoning, subdivision, enforcement, and land-use regulation.
 - Chapter 12 for municipal finance, revenue, property taxation, service charges, transfers, debt, and reserves.
 - Chapters 7 and 8 for protective-service and engineering-service performance-measure examples.
+- Chapters 9 and 11 for human-service responsibility mapping and workforce/labour-relations context.
 
 ## Structure
 
@@ -71,7 +72,7 @@ Phase 3 chapter review queue setup is complete under `data/sources/lgbc/`. The r
 
 The extracted structure index contains 13 chapters, 78 numbered chapter sections, 12 appendix sections, and 4 back-matter units. The extracted exhibit index contains 41 listed exhibits.
 
-The chapter review queue contains 18 records: 13 chapters, 1 appendix, and 4 back-matter units. The first-pass priority order is Chapter 6, Chapter 1, Chapter 10, Chapter 12, Chapter 7, and Chapter 8. Completed priority reviews are [Chapter 6: Service Delivery](./lgbc/chapter-6-service-delivery.md), [Chapter 1: Introduction](./lgbc/chapter-1-introduction.md), [Chapter 10: Regulatory And Development Functions](./lgbc/chapter-10-regulatory-development-functions.md), [Chapter 12: Finance](./lgbc/chapter-12-finance.md), [Chapter 7: Protective Services](./lgbc/chapter-7-protective-services.md), and [Chapter 8: Engineering Services](./lgbc/chapter-8-engineering-services.md).
+The chapter review queue contains 18 records: 13 chapters, 1 appendix, and 4 back-matter units. The first-pass priority order was Chapter 6, Chapter 1, Chapter 10, Chapter 12, Chapter 7, and Chapter 8. Completed Phase 4 reviews are [Chapter 6: Service Delivery](./lgbc/chapter-6-service-delivery.md), [Chapter 1: Introduction](./lgbc/chapter-1-introduction.md), [Chapter 10: Regulatory And Development Functions](./lgbc/chapter-10-regulatory-development-functions.md), [Chapter 12: Finance](./lgbc/chapter-12-finance.md), [Chapter 7: Protective Services](./lgbc/chapter-7-protective-services.md), [Chapter 8: Engineering Services](./lgbc/chapter-8-engineering-services.md), [Chapter 9: Human Services](./lgbc/chapter-9-human-services.md), and [Chapter 11: Labour Relations](./lgbc/chapter-11-labour-relations.md).
 
 Benchmark schemas, scoring models, and portal routes should remain deferred until source structure and priority chapter reviews are complete.
 

@@ -1,5 +1,5 @@
 ---
-status: phase_4_priority_reviews_complete
+status: phase_4_priority_plus_chapters_9_11_reviews_complete
 updated: 2026-05-25
 source: docs/LGBC-All.pdf
 ---
@@ -136,7 +136,7 @@ Acceptance criteria:
 
 ### Phase 4: Prototype Chapter Analysis
 
-Status: priority chapter reviews complete as of 2026-05-25.
+Status: priority chapter reviews plus Chapters 9 and 11 complete as of 2026-05-25.
 
 Review chapters in this order:
 
@@ -145,6 +145,7 @@ Review chapters in this order:
 3. Chapter 10, because it maps directly to planning, zoning, subdivision, and enforcement workflows.
 4. Chapter 12, because it maps to budgets, taxes, fees, debt, and reserves.
 5. Chapters 7 and 8, because they contain concrete service-performance exhibit candidates.
+6. Chapters 9 and 11, because they add human-service responsibility mapping and labour/workforce context for the initial Phase 4 process.
 
 For each chapter, produce a chapter note under `wiki/sources/lgbc/` only after review. Use one page per chapter if summaries become long.
 

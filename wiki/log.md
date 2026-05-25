@@ -54,6 +54,14 @@ Completed the Chapter 7 protective services review for `docs/LGBC-All.pdf`, addi
 
 Completed the Chapter 8 engineering services review for `docs/LGBC-All.pdf`, adding [LGBC Chapter 8: Engineering Services](./sources/lgbc/chapter-8-engineering-services.md) with source claims, water/wastewater/solid-waste/transportation/transit performance candidates, Charlottetown prototype implications, required data inventory, and review limits.
 
+## [2026-05-25] source | Local Government in British Columbia Chapter 9 review
+
+Completed the Chapter 9 human services review for `docs/LGBC-All.pdf`, adding [LGBC Chapter 9: Human Services](./sources/lgbc/chapter-9-human-services.md) with source claims, parks/recreation/library/museum/public-health/social-housing candidates, Charlottetown prototype implications, required data inventory, and review limits.
+
+## [2026-05-25] source | Local Government in British Columbia Chapter 11 review
+
+Completed the Chapter 11 labour relations review for `docs/LGBC-All.pdf`, adding [LGBC Chapter 11: Labour Relations](./sources/lgbc/chapter-11-labour-relations.md) with source claims, workforce/unionization/bargaining-unit/service-continuity candidates, Charlottetown prototype implications, required data inventory, and review limits.
+
 ## [2026-05-20] implementation | Agenda tree component split
 
 Refactored `web/public/ui_kits/shared/agenda-tree.jsx` into a generic `PortalTreeView`, `RolePresetTabs`, and a meeting-specific `buildMeetingAgendaTree` adapter while preserving the existing `window.CouncilAgendaTree.AgendaTree`, `allItems`, and `buildAgendaTree` API used by `/council-meetings`. Updated [Municipal portal UI component architecture](./product/municipal-portal-ui-component-architecture.md) with the agenda tree contract.
