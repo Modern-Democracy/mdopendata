@@ -1,5 +1,5 @@
 ---
-status: phase_4_chapters_1_6_7_10_and_12_complete
+status: phase_4_priority_reviews_complete
 updated: 2026-05-25
 source: docs/LGBC-All.pdf
 ---
@@ -136,7 +136,7 @@ Acceptance criteria:
 
 ### Phase 4: Prototype Chapter Analysis
 
-Status: Chapters 6, 1, 10, 12, and 7 complete as of 2026-05-25.
+Status: priority chapter reviews complete as of 2026-05-25.
 
 Review chapters in this order:
 

@@ -37,6 +37,7 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [LGBC Chapter 10: Regulatory And Development Functions](./sources/lgbc/chapter-10-regulatory-development-functions.md) | Chapter 10 review notes for planning, zoning, subdivision, enforcement, fiscal-equivalence limits, and municipal data needs. |
 | [LGBC Chapter 12: Finance](./sources/lgbc/chapter-12-finance.md) | Chapter 12 review notes for municipal finance, fiscal equivalence, revenue sources, taxation, fees, transfers, debt, reserves, and municipal data needs. |
 | [LGBC Chapter 7: Protective Services](./sources/lgbc/chapter-7-protective-services.md) | Chapter 7 review notes for police, fire, emergency protection, performance-measure caveats, and municipal data needs. |
+| [LGBC Chapter 8: Engineering Services](./sources/lgbc/chapter-8-engineering-services.md) | Chapter 8 review notes for water, wastewater, solid waste, transportation, transit, infrastructure performance, and municipal data needs. |
 
 ## Domain Pages
 
