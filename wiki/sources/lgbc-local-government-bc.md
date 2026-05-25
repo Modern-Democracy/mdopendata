@@ -71,7 +71,7 @@ Phase 3 chapter review queue setup is complete under `data/sources/lgbc/`. The r
 
 The extracted structure index contains 13 chapters, 78 numbered chapter sections, 12 appendix sections, and 4 back-matter units. The extracted exhibit index contains 41 listed exhibits.
 
-The chapter review queue contains 18 records: 13 chapters, 1 appendix, and 4 back-matter units. The first-pass priority order is Chapter 6, Chapter 1, Chapter 10, Chapter 12, Chapter 7, and Chapter 8. Chapter 6 review is recorded in [Chapter 6: Service Delivery](./lgbc/chapter-6-service-delivery.md).
+The chapter review queue contains 18 records: 13 chapters, 1 appendix, and 4 back-matter units. The first-pass priority order is Chapter 6, Chapter 1, Chapter 10, Chapter 12, Chapter 7, and Chapter 8. Completed reviews are [Chapter 6: Service Delivery](./lgbc/chapter-6-service-delivery.md) and [Chapter 1: Introduction](./lgbc/chapter-1-introduction.md).
 
 Benchmark schemas, scoring models, and portal routes should remain deferred until source structure and priority chapter reviews are complete.
 
