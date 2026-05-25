@@ -1,5 +1,5 @@
 ---
-status: draft
+status: phase_1_complete
 updated: 2026-05-25
 source: docs/LGBC-All.pdf
 ---
@@ -77,6 +77,8 @@ Initial high-value exhibit families:
 ## Ingestion Phases
 
 ### Phase 1: Source Registration
+
+Status: complete as of 2026-05-25.
 
 Create `data/sources/lgbc/` and store raw extraction artifacts separately from normalized outputs:
 
@@ -230,4 +232,3 @@ After Phase 2, verify:
 - no generated locator points outside the 250 PDF pages.
 
 After each chapter review, finish with QA Reviewer and update the relevant wiki source page, root wiki index if pages are added, and root wiki log.
-

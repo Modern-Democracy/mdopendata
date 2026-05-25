@@ -67,7 +67,9 @@ Direct benchmark seed exhibits include:
 
 The active plan is [Local Government in British Columbia ingestion plan](../../plan/lgbc-ingestion-plan.md).
 
-The first durable outputs should be a raw-first structure index, exhibit index, chapter review queue, and extraction notes under `data/sources/lgbc/`. Benchmark schemas, scoring models, and portal routes should remain deferred until source structure and priority chapter reviews are complete.
+Phase 1 source registration is complete under `data/sources/lgbc/`. The registered artifacts are `pdfinfo.txt`, `full_text_layout.txt`, `pages_text/`, `structure_index.json`, `exhibit_index.json`, `chapter_review_queue.json`, and `extraction_notes.md`.
+
+Benchmark schemas, scoring models, and portal routes should remain deferred until source structure and priority chapter reviews are complete.
 
 ## Caveats
 
@@ -83,4 +85,3 @@ The source is from 2008. It can support governance and evaluation prototypes, bu
 - [Local Government in British Columbia ingestion plan](../../plan/lgbc-ingestion-plan.md)
 - [Municipal portal product purpose](../product/municipal-portal-purpose.md)
 - [Municipal portal domain inventory](../product/municipal-portal-domain-inventory.md)
-

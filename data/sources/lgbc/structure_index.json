@@ -1,0 +1,38 @@
+{
+  "source_id": "lgbc-2008-4th-edition",
+  "source_file": "docs/LGBC-All.pdf",
+  "title": "Local Government in British Columbia - 4th Edition",
+  "phase": "phase_1_source_registration",
+  "status": "registered_pending_phase_2_structure_extraction",
+  "pdf_pages": 250,
+  "visible_page_locator": {
+    "status": "pending_phase_2",
+    "known_range": "front matter plus visible pages 1-231",
+    "rule": "Use PDF page for stable extraction locator; add visible page when detected from extracted page text or table of contents."
+  },
+  "source_hash": {
+    "algorithm": "SHA256",
+    "value": "57D8C1762E354BA871B4408C85FD6B76A8F895A8926BDA0951C21600D16F9D8E"
+  },
+  "raw_artifacts": {
+    "pdfinfo": "data/sources/lgbc/pdfinfo.txt",
+    "full_text_layout": "data/sources/lgbc/full_text_layout.txt",
+    "pages_text_dir": "data/sources/lgbc/pages_text"
+  },
+  "chapters": [],
+  "sections": [],
+  "appendices": [],
+  "back_matter": [],
+  "review_flags": [
+    {
+      "flag": "ocr_derived_pdf",
+      "severity": "expected",
+      "note": "PDF producer is Adobe Acrobat Paper Capture and the document is untagged. Heading and page locator extraction require review."
+    },
+    {
+      "flag": "structure_not_extracted",
+      "severity": "pending",
+      "note": "Chapter, section, appendix, and back-matter records are intentionally deferred to Phase 2."
+    }
+  ]
+}

@@ -18,6 +18,10 @@ Append new entries in reverse chronological order. Use this heading format:
 
 Added [Local Government in British Columbia](./sources/lgbc-local-government-bc.md) as a source summary for `docs/LGBC-All.pdf` and added [Local Government in British Columbia ingestion plan](../plan/lgbc-ingestion-plan.md) for raw-first structure indexing, exhibit extraction, chapter review, benchmark-candidate discovery, and Charlottetown prototype mapping.
 
+## [2026-05-25] source | Local Government in British Columbia source registration
+
+Completed Phase 1 source registration for `docs/LGBC-All.pdf` under `data/sources/lgbc/`, including PDF metadata, full layout text, 250 per-page text files, registration skeletons for structure, exhibits, and chapter review, and extraction notes.
+
 ## [2026-05-20] implementation | Agenda tree component split
 
 Refactored `web/public/ui_kits/shared/agenda-tree.jsx` into a generic `PortalTreeView`, `RolePresetTabs`, and a meeting-specific `buildMeetingAgendaTree` adapter while preserving the existing `window.CouncilAgendaTree.AgendaTree`, `allItems`, and `buildAgendaTree` API used by `/council-meetings`. Updated [Municipal portal UI component architecture](./product/municipal-portal-ui-component-architecture.md) with the agenda tree contract.
