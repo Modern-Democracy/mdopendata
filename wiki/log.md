@@ -62,6 +62,10 @@ Completed the Chapter 9 human services review for `docs/LGBC-All.pdf`, adding [L
 
 Completed the Chapter 11 labour relations review for `docs/LGBC-All.pdf`, adding [LGBC Chapter 11: Labour Relations](./sources/lgbc/chapter-11-labour-relations.md) with source claims, workforce/unionization/bargaining-unit/service-continuity candidates, Charlottetown prototype implications, required data inventory, and review limits.
 
+## [2026-05-25] source | Local Government in British Columbia Phase 5 candidate catalogue
+
+Started Phase 5 by generating `data/sources/lgbc/benchmark_process_candidate_catalogue.json` and adding [LGBC Benchmark And Process Candidate Catalogue](./sources/lgbc/benchmark-process-candidate-catalogue.md). The initial catalogue contains 86 source-derived candidates from Chapters 1, 6, 7, 8, 9, 10, 11, and 12, all pending Phase 6 Charlottetown source mapping.
+
 ## [2026-05-20] implementation | Agenda tree component split
 
 Refactored `web/public/ui_kits/shared/agenda-tree.jsx` into a generic `PortalTreeView`, `RolePresetTabs`, and a meeting-specific `buildMeetingAgendaTree` adapter while preserving the existing `window.CouncilAgendaTree.AgendaTree`, `allItems`, and `buildAgendaTree` API used by `/council-meetings`. Updated [Municipal portal UI component architecture](./product/municipal-portal-ui-component-architecture.md) with the agenda tree contract.

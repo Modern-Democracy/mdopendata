@@ -1,5 +1,5 @@
 ---
-status: phase_4_priority_plus_chapters_9_11_reviews_complete
+status: phase_5_candidate_catalogue_created
 updated: 2026-05-25
 source: docs/LGBC-All.pdf
 ---
@@ -157,6 +157,8 @@ Acceptance criteria:
 
 ### Phase 5: Benchmark And Process Candidate Catalogue
 
+Status: started as of 2026-05-25 with `data/sources/lgbc/benchmark_process_candidate_catalogue.json`.
+
 Build a catalogue after the priority chapters are reviewed.
 
 Candidate record fields:
@@ -182,6 +184,13 @@ Initial comparison modes:
 - benchmark against external standard
 - fiscal-equivalence review
 - source-completeness review
+
+Initial catalogue output:
+
+- `data/sources/lgbc/benchmark_process_candidate_catalogue.json`
+- [LGBC Benchmark And Process Candidate Catalogue](../wiki/sources/lgbc/benchmark-process-candidate-catalogue.md)
+
+The first catalogue contains 86 candidates from Chapters 1, 6, 7, 8, 9, 10, 11, and 12. All candidates remain pending Phase 6 Charlottetown source mapping.
 
 ### Phase 6: Charlottetown Prototype Mapping
 
