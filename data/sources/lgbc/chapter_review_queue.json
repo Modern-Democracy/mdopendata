@@ -1,22 +1,595 @@
-{
-  "source_id": "lgbc-2008-4th-edition",
-  "source_file": "docs/LGBC-All.pdf",
-  "phase": "phase_1_source_registration",
-  "status": "registered_pending_phase_3_review_queue",
-  "queue": [],
-  "planned_priority_order": [
-    "chapter_6",
-    "chapter_1",
-    "chapter_10",
-    "chapter_12",
-    "chapter_7",
-    "chapter_8"
-  ],
-  "review_flags": [
-    {
-      "flag": "queue_not_populated",
-      "severity": "pending",
-      "note": "Chapter review records depend on Phase 2 structure extraction."
-    }
-  ]
+﻿{
+    "source_id":  "lgbc-2008-4th-edition",
+    "source_file":  "docs/LGBC-All.pdf",
+    "phase":  "phase_3_chapter_review_queue",
+    "status":  "queue_populated_pending_chapter_review",
+    "queue":  [
+                  {
+                      "unit_id":  "chapter_1",
+                      "type":  "chapter",
+                      "title":  "Introduction",
+                      "source_title":  "INTRODUCTION",
+                      "page_range":  {
+                                         "visible_start_page":  1,
+                                         "visible_end_page":  10,
+                                         "pdf_start_page":  14,
+                                         "pdf_end_page":  23
+                                     },
+                      "review_priority":  "first_pass",
+                      "portal_domains":  [
+                                             "governance",
+                                             "performance",
+                                             "public_reporting"
+                                         ],
+                      "candidate_benchmark_topics":  [
+                                                         "fiscal equivalence",
+                                                         "evaluation criteria",
+                                                         "local government definition"
+                                                     ],
+                      "required_municipal_inputs":  [
+                                                        "source unit text",
+                                                        "existing municipal portal domain inventory"
+                                                    ],
+                      "output_decision":  "review_for_benchmark_and_process_candidates",
+                      "review_status":  "pending",
+                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                  },
+                  {
+                      "unit_id":  "chapter_2",
+                      "type":  "chapter",
+                      "title":  "The Provincial Setting",
+                      "source_title":  "THE PROVINCIAL SETTING",
+                      "page_range":  {
+                                         "visible_start_page":  11,
+                                         "visible_end_page":  20,
+                                         "pdf_start_page":  24,
+                                         "pdf_end_page":  33
+                                     },
+                      "review_priority":  "medium",
+                      "portal_domains":  [
+                                             "governance",
+                                             "provincial_relations",
+                                             "oversight"
+                                         ],
+                      "candidate_benchmark_topics":  [
+                                                         "provincial-local responsibility map",
+                                                         "oversight actors",
+                                                         "judicial review context"
+                                                     ],
+                      "required_municipal_inputs":  [
+                                                        "source unit text",
+                                                        "existing municipal portal domain inventory"
+                                                    ],
+                      "output_decision":  "review_for_domain_context_and_mapping_decision",
+                      "review_status":  "pending",
+                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                  },
+                  {
+                      "unit_id":  "chapter_3",
+                      "type":  "chapter",
+                      "title":  "Municipal Governments",
+                      "source_title":  "MUNICIPAL GOVERNMENTS",
+                      "page_range":  {
+                                         "visible_start_page":  21,
+                                         "visible_end_page":  44,
+                                         "pdf_start_page":  34,
+                                         "pdf_end_page":  57
+                                     },
+                      "review_priority":  "high",
+                      "portal_domains":  [
+                                             "governance",
+                                             "municipal_structure",
+                                             "public_reporting"
+                                         ],
+                      "candidate_benchmark_topics":  [
+                                                         "municipal functions",
+                                                         "municipal expenditures",
+                                                         "governance and elections",
+                                                         "annual reporting"
+                                                     ],
+                      "required_municipal_inputs":  [
+                                                        "source unit text",
+                                                        "existing municipal portal domain inventory"
+                                                    ],
+                      "output_decision":  "review_for_domain_context_and_mapping_decision",
+                      "review_status":  "pending",
+                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                  },
+                  {
+                      "unit_id":  "chapter_4",
+                      "type":  "chapter",
+                      "title":  "Regional District Governments",
+                      "source_title":  "REGIONAL DISTRICT GOVERNMENTS",
+                      "page_range":  {
+                                         "visible_start_page":  45,
+                                         "visible_end_page":  64,
+                                         "pdf_start_page":  58,
+                                         "pdf_end_page":  77
+                                     },
+                      "review_priority":  "medium",
+                      "portal_domains":  [
+                                             "regional_services",
+                                             "governance",
+                                             "intermunicipal_cooperation"
+                                         ],
+                      "candidate_benchmark_topics":  [
+                                                         "regional service scale",
+                                                         "benefiting areas",
+                                                         "regional district expenditures",
+                                                         "board voting"
+                                                     ],
+                      "required_municipal_inputs":  [
+                                                        "source unit text",
+                                                        "existing municipal portal domain inventory"
+                                                    ],
+                      "output_decision":  "review_for_domain_context_and_mapping_decision",
+                      "review_status":  "pending",
+                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                  },
+                  {
+                      "unit_id":  "chapter_5",
+                      "type":  "chapter",
+                      "title":  "Other Local Governments",
+                      "source_title":  "OTHER LOCAL GOVERNMENTS",
+                      "page_range":  {
+                                         "visible_start_page":  65,
+                                         "visible_end_page":  80,
+                                         "pdf_start_page":  78,
+                                         "pdf_end_page":  93
+                                     },
+                      "review_priority":  "medium",
+                      "portal_domains":  [
+                                             "special_purpose_bodies",
+                                             "service_delivery",
+                                             "governance"
+                                         ],
+                      "candidate_benchmark_topics":  [
+                                                         "special-purpose local bodies",
+                                                         "school districts",
+                                                         "improvement districts",
+                                                         "service fragmentation"
+                                                     ],
+                      "required_municipal_inputs":  [
+                                                        "source unit text",
+                                                        "existing municipal portal domain inventory"
+                                                    ],
+                      "output_decision":  "review_for_domain_context_and_mapping_decision",
+                      "review_status":  "pending",
+                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                  },
+                  {
+                      "unit_id":  "chapter_6",
+                      "type":  "chapter",
+                      "title":  "Service Delivery",
+                      "source_title":  "SERVICE DELIVERY",
+                      "page_range":  {
+                                         "visible_start_page":  81,
+                                         "visible_end_page":  96,
+                                         "pdf_start_page":  94,
+                                         "pdf_end_page":  109
+                                     },
+                      "review_priority":  "first_pass",
+                      "portal_domains":  [
+                                             "service_delivery",
+                                             "performance",
+                                             "benchmarking"
+                                         ],
+                      "candidate_benchmark_topics":  [
+                                                         "service delivery options",
+                                                         "technical efficiency",
+                                                         "cost effectiveness",
+                                                         "benchmarking",
+                                                         "program evaluation",
+                                                         "cost-benefit analysis"
+                                                     ],
+                      "required_municipal_inputs":  [
+                                                        "source chapter text",
+                                                        "exhibit records",
+                                                        "Charlottetown source inventory",
+                                                        "municipal dataset availability notes"
+                                                    ],
+                      "output_decision":  "review_for_benchmark_and_process_candidates",
+                      "review_status":  "pending",
+                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                  },
+                  {
+                      "unit_id":  "chapter_7",
+                      "type":  "chapter",
+                      "title":  "Protective Services",
+                      "source_title":  "PROTECTIVE SERVICES",
+                      "page_range":  {
+                                         "visible_start_page":  97,
+                                         "visible_end_page":  114,
+                                         "pdf_start_page":  110,
+                                         "pdf_end_page":  127
+                                     },
+                      "review_priority":  "service_benchmark",
+                      "portal_domains":  [
+                                             "protective_services",
+                                             "performance",
+                                             "service_delivery"
+                                         ],
+                      "candidate_benchmark_topics":  [
+                                                         "police performance",
+                                                         "fire response measures",
+                                                         "emergency protection measures"
+                                                     ],
+                      "required_municipal_inputs":  [
+                                                        "source chapter text",
+                                                        "exhibit records",
+                                                        "Charlottetown source inventory",
+                                                        "municipal dataset availability notes"
+                                                    ],
+                      "output_decision":  "review_for_benchmark_and_process_candidates",
+                      "review_status":  "pending",
+                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                  },
+                  {
+                      "unit_id":  "chapter_8",
+                      "type":  "chapter",
+                      "title":  "Engineering Services",
+                      "source_title":  "ENGINEERING SERVICES",
+                      "page_range":  {
+                                         "visible_start_page":  115,
+                                         "visible_end_page":  136,
+                                         "pdf_start_page":  128,
+                                         "pdf_end_page":  149
+                                     },
+                      "review_priority":  "service_benchmark",
+                      "portal_domains":  [
+                                             "engineering_services",
+                                             "infrastructure",
+                                             "performance"
+                                         ],
+                      "candidate_benchmark_topics":  [
+                                                         "water utility measures",
+                                                         "wastewater and solid waste measures",
+                                                         "transportation measures",
+                                                         "public transit measures"
+                                                     ],
+                      "required_municipal_inputs":  [
+                                                        "source chapter text",
+                                                        "exhibit records",
+                                                        "Charlottetown source inventory",
+                                                        "municipal dataset availability notes"
+                                                    ],
+                      "output_decision":  "review_for_benchmark_and_process_candidates",
+                      "review_status":  "pending",
+                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                  },
+                  {
+                      "unit_id":  "chapter_9",
+                      "type":  "chapter",
+                      "title":  "Human Services",
+                      "source_title":  "HUMAN SERVICES",
+                      "page_range":  {
+                                         "visible_start_page":  137,
+                                         "visible_end_page":  150,
+                                         "pdf_start_page":  150,
+                                         "pdf_end_page":  163
+                                     },
+                      "review_priority":  "medium",
+                      "portal_domains":  [
+                                             "human_services",
+                                             "parks_recreation",
+                                             "housing"
+                                         ],
+                      "candidate_benchmark_topics":  [
+                                                         "parks and recreation measures",
+                                                         "library service context",
+                                                         "housing service context",
+                                                         "public health context"
+                                                     ],
+                      "required_municipal_inputs":  [
+                                                        "source unit text",
+                                                        "existing municipal portal domain inventory"
+                                                    ],
+                      "output_decision":  "review_for_domain_context_and_mapping_decision",
+                      "review_status":  "pending",
+                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                  },
+                  {
+                      "unit_id":  "chapter_10",
+                      "type":  "chapter",
+                      "title":  "Regulatory And Development Functions",
+                      "source_title":  "REGULATORY AND DEVELOPMENT FUNCTIONS",
+                      "page_range":  {
+                                         "visible_start_page":  151,
+                                         "visible_end_page":  172,
+                                         "pdf_start_page":  164,
+                                         "pdf_end_page":  185
+                                     },
+                      "review_priority":  "first_pass",
+                      "portal_domains":  [
+                                             "planning_land_use",
+                                             "regulation",
+                                             "zoning",
+                                             "enforcement"
+                                         ],
+                      "candidate_benchmark_topics":  [
+                                                         "planning process",
+                                                         "official community plans",
+                                                         "zoning",
+                                                         "subdivision control",
+                                                         "bylaw enforcement",
+                                                         "fiscal equivalence"
+                                                     ],
+                      "required_municipal_inputs":  [
+                                                        "source chapter text",
+                                                        "exhibit records",
+                                                        "Charlottetown source inventory",
+                                                        "municipal dataset availability notes"
+                                                    ],
+                      "output_decision":  "review_for_benchmark_and_process_candidates",
+                      "review_status":  "pending",
+                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                  },
+                  {
+                      "unit_id":  "chapter_11",
+                      "type":  "chapter",
+                      "title":  "Labour Relations",
+                      "source_title":  "LABOUR RELATIONS",
+                      "page_range":  {
+                                         "visible_start_page":  173,
+                                         "visible_end_page":  178,
+                                         "pdf_start_page":  186,
+                                         "pdf_end_page":  191
+                                     },
+                      "review_priority":  "medium",
+                      "portal_domains":  [
+                                             "labour_relations",
+                                             "workforce",
+                                             "operations"
+                                         ],
+                      "candidate_benchmark_topics":  [
+                                                         "unionization",
+                                                         "bargaining units",
+                                                         "labour-law context",
+                                                         "workforce comparison"
+                                                     ],
+                      "required_municipal_inputs":  [
+                                                        "source unit text",
+                                                        "existing municipal portal domain inventory"
+                                                    ],
+                      "output_decision":  "review_for_domain_context_and_mapping_decision",
+                      "review_status":  "pending",
+                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                  },
+                  {
+                      "unit_id":  "chapter_12",
+                      "type":  "chapter",
+                      "title":  "Finance",
+                      "source_title":  "FINANCE",
+                      "page_range":  {
+                                         "visible_start_page":  179,
+                                         "visible_end_page":  206,
+                                         "pdf_start_page":  192,
+                                         "pdf_end_page":  219
+                                     },
+                      "review_priority":  "first_pass",
+                      "portal_domains":  [
+                                             "finance",
+                                             "taxation",
+                                             "fees",
+                                             "debt_reserves"
+                                         ],
+                      "candidate_benchmark_topics":  [
+                                                         "revenue principles",
+                                                         "budgeting and reporting",
+                                                         "property tax classes",
+                                                         "service charges",
+                                                         "developer contributions",
+                                                         "transfers",
+                                                         "debt and reserves"
+                                                     ],
+                      "required_municipal_inputs":  [
+                                                        "source chapter text",
+                                                        "exhibit records",
+                                                        "Charlottetown source inventory",
+                                                        "municipal dataset availability notes"
+                                                    ],
+                      "output_decision":  "review_for_benchmark_and_process_candidates",
+                      "review_status":  "pending",
+                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                  },
+                  {
+                      "unit_id":  "chapter_13",
+                      "type":  "chapter",
+                      "title":  "Concluding Observations",
+                      "source_title":  "CONCLUDING OBSERVATIONS",
+                      "page_range":  {
+                                         "visible_start_page":  207,
+                                         "visible_end_page":  208,
+                                         "pdf_start_page":  220,
+                                         "pdf_end_page":  221
+                                     },
+                      "review_priority":  "medium",
+                      "portal_domains":  [
+                                             "governance",
+                                             "system_synthesis",
+                                             "performance"
+                                         ],
+                      "candidate_benchmark_topics":  [
+                                                         "system-level observations",
+                                                         "prototype synthesis"
+                                                     ],
+                      "required_municipal_inputs":  [
+                                                        "source unit text",
+                                                        "existing municipal portal domain inventory"
+                                                    ],
+                      "output_decision":  "review_for_domain_context_and_mapping_decision",
+                      "review_status":  "pending",
+                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                  },
+                  {
+                      "unit_id":  "appendix_first_nations_governments",
+                      "type":  "appendix",
+                      "title":  "First Nations Governments",
+                      "source_title":  "FIRST NATIONS GOVERNMENTS",
+                      "page_range":  {
+                                         "visible_start_page":  209,
+                                         "visible_end_page":  222,
+                                         "pdf_start_page":  222,
+                                         "pdf_end_page":  235
+                                     },
+                      "review_priority":  [
+                                              null,
+                                              "medium"
+                                          ],
+                      "portal_domains":  [
+                                             "first_nations_relations",
+                                             "jurisdiction",
+                                             "governance"
+                                         ],
+                      "candidate_benchmark_topics":  [
+                                                         "First Nations government relationships",
+                                                         "jurisdiction caveats",
+                                                         "treaty-government references"
+                                                     ],
+                      "required_municipal_inputs":  [
+                                                        "source unit text",
+                                                        "existing municipal portal domain inventory"
+                                                    ],
+                      "output_decision":  "review_for_domain_context_and_mapping_decision",
+                      "review_status":  "pending",
+                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                  },
+                  {
+                      "unit_id":  "chapter_notes",
+                      "type":  "back_matter",
+                      "title":  "Chapter Notes",
+                      "source_title":  "CHAPTER NOTES",
+                      "page_range":  {
+                                         "visible_start_page":  223,
+                                         "visible_end_page":  225,
+                                         "pdf_start_page":  236,
+                                         "pdf_end_page":  238
+                                     },
+                      "review_priority":  "source_support",
+                      "portal_domains":  [
+                                             "citations",
+                                             "source_discovery"
+                                         ],
+                      "candidate_benchmark_topics":  [
+                                                         "citation extraction",
+                                                         "external source triage"
+                                                     ],
+                      "required_municipal_inputs":  [
+                                                        "source back-matter text",
+                                                        "existing wiki source pages"
+                                                    ],
+                      "output_decision":  "review_for_source_support_and_references",
+                      "review_status":  "pending",
+                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                  },
+                  {
+                      "unit_id":  "legislation_regulations_index",
+                      "type":  "back_matter",
+                      "title":  "Index To Legislation And Regulations",
+                      "source_title":  "INDEX TO LEGISLATION AND REGULATIONS",
+                      "page_range":  {
+                                         "visible_start_page":  226,
+                                         "visible_end_page":  226,
+                                         "pdf_start_page":  239,
+                                         "pdf_end_page":  239
+                                     },
+                      "review_priority":  "source_support",
+                      "portal_domains":  [
+                                             "legal_references",
+                                             "source_discovery"
+                                         ],
+                      "candidate_benchmark_topics":  [
+                                                         "legislation reference extraction",
+                                                         "legal-source lookup"
+                                                     ],
+                      "required_municipal_inputs":  [
+                                                        "source back-matter text",
+                                                        "existing wiki source pages"
+                                                    ],
+                      "output_decision":  "review_for_source_support_and_references",
+                      "review_status":  "pending",
+                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                  },
+                  {
+                      "unit_id":  "selected_bibliography",
+                      "type":  "back_matter",
+                      "title":  "Selected Bibliography",
+                      "source_title":  "SELECTED BIBLIOGRAPHY",
+                      "page_range":  {
+                                         "visible_start_page":  227,
+                                         "visible_end_page":  230,
+                                         "pdf_start_page":  240,
+                                         "pdf_end_page":  243
+                                     },
+                      "review_priority":  "source_support",
+                      "portal_domains":  [
+                                             "source_discovery",
+                                             "research_backlog"
+                                         ],
+                      "candidate_benchmark_topics":  [
+                                                         "bibliographic source candidates",
+                                                         "research follow-up"
+                                                     ],
+                      "required_municipal_inputs":  [
+                                                        "source back-matter text",
+                                                        "existing wiki source pages"
+                                                    ],
+                      "output_decision":  "review_for_source_support_and_references",
+                      "review_status":  "pending",
+                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                  },
+                  {
+                      "unit_id":  "acknowledgements",
+                      "type":  "back_matter",
+                      "title":  "Acknowledgements",
+                      "source_title":  "ACKNOWLEDGEMENTS",
+                      "page_range":  {
+                                         "visible_start_page":  231,
+                                         "visible_end_page":  235,
+                                         "pdf_start_page":  244,
+                                         "pdf_end_page":  250
+                                     },
+                      "review_priority":  [
+                                              null,
+                                              "medium"
+                                          ],
+                      "portal_domains":  "source_context",
+                      "candidate_benchmark_topics":  "contributor and source-context review",
+                      "required_municipal_inputs":  [
+                                                        "source unit text",
+                                                        "existing municipal portal domain inventory"
+                                                    ],
+                      "output_decision":  "review_for_source_support_and_references",
+                      "review_status":  "pending",
+                      "notes":  "Do not create benchmark schemas, scoring methods, or portal routes from this queue record before chapter review."
+                  }
+              ],
+    "planned_priority_order":  [
+                                   "chapter_6",
+                                   "chapter_1",
+                                   "chapter_10",
+                                   "chapter_12",
+                                   "chapter_7",
+                                   "chapter_8"
+                               ],
+    "counts":  {
+                   "queue_records":  18,
+                   "chapters":  13,
+                   "appendices":  12,
+                   "back_matter":  4,
+                   "first_pass":  4,
+                   "service_benchmark":  2
+               },
+    "review_flags":  [
+                         {
+                             "flag":  "interpretation_deferred",
+                             "severity":  "expected",
+                             "note":  "Candidate topics are review prompts only, not approved metrics or schemas."
+                         },
+                         {
+                             "flag":  "jurisdiction_mapping_required",
+                             "severity":  "review",
+                             "note":  "BC-specific content must be mapped before use for Charlottetown or PEI."
+                         }
+                     ]
 }

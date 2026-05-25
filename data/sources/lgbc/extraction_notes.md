@@ -27,7 +27,7 @@
 | --- | --- | --- |
 | `structure_index.json` | complete | Populated from the extracted table of contents with front matter, 13 chapters, 78 numbered chapter sections, appendix sections, and back matter. |
 | `exhibit_index.json` | complete | Populated from the extracted exhibit list with 41 listed exhibits. |
-| `chapter_review_queue.json` | pending | Queue population remains Phase 3. |
+| `chapter_review_queue.json` | complete | Populated with 18 review records: 13 chapters, 1 appendix, and 4 back-matter units. |
 
 ## PDF Metadata Observations
 
@@ -52,4 +52,4 @@ Use PDF page as the stable raw extraction locator. Add visible page when it is d
 
 ## Next Phase
 
-Phase 3 should populate `chapter_review_queue.json` from `structure_index.json`, preserving the priority order in the ingestion plan.
+Phase 4 should begin with Chapter 6 and keep source claims separate from proposed portal metrics.

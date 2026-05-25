@@ -1,5 +1,5 @@
 ---
-status: phase_2_complete
+status: phase_3_complete
 updated: 2026-05-25
 source: docs/LGBC-All.pdf
 ---
@@ -110,6 +110,8 @@ Acceptance criteria:
 - Ambiguous or OCR-damaged headings are flagged for review instead of silently corrected.
 
 ### Phase 3: Chapter Review Queue
+
+Status: complete as of 2026-05-25.
 
 Create a review queue with one record per chapter or back-matter unit.
 

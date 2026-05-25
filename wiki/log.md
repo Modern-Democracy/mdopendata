@@ -26,6 +26,10 @@ Completed Phase 1 source registration for `docs/LGBC-All.pdf` under `data/source
 
 Completed Phase 2 structure extraction for `docs/LGBC-All.pdf`, populating `data/sources/lgbc/structure_index.json` with front matter, 13 chapters, 78 numbered chapter sections, appendix sections, and back matter, and `data/sources/lgbc/exhibit_index.json` with 41 listed exhibits. Recorded that these observed counts supersede the initial plan estimates of 76 sections and 45 exhibits.
 
+## [2026-05-25] source | Local Government in British Columbia chapter review queue
+
+Completed Phase 3 chapter review queue setup for `docs/LGBC-All.pdf`, populating `data/sources/lgbc/chapter_review_queue.json` with 18 pending records for 13 chapters, 1 appendix, and 4 back-matter units. The queue preserves the first-pass review order of Chapter 6, Chapter 1, Chapter 10, Chapter 12, Chapter 7, and Chapter 8.
+
 ## [2026-05-20] implementation | Agenda tree component split
 
 Refactored `web/public/ui_kits/shared/agenda-tree.jsx` into a generic `PortalTreeView`, `RolePresetTabs`, and a meeting-specific `buildMeetingAgendaTree` adapter while preserving the existing `window.CouncilAgendaTree.AgendaTree`, `allItems`, and `buildAgendaTree` API used by `/council-meetings`. Updated [Municipal portal UI component architecture](./product/municipal-portal-ui-component-architecture.md) with the agenda tree contract.
