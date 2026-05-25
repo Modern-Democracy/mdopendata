@@ -34,6 +34,7 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [Local Government in British Columbia](./sources/lgbc-local-government-bc.md) | Source profile and ingestion plan link for the BC local-government handbook used as a municipal-performance prototype source. |
 | [LGBC Chapter 6: Service Delivery](./sources/lgbc/chapter-6-service-delivery.md) | Chapter 6 review notes for service-delivery concepts, performance-analysis candidates, and municipal data needs. |
 | [LGBC Chapter 1: Introduction](./sources/lgbc/chapter-1-introduction.md) | Chapter 1 review notes for local-government purpose, fiscal equivalence, collective problems, and municipal data needs. |
+| [LGBC Chapter 10: Regulatory And Development Functions](./sources/lgbc/chapter-10-regulatory-development-functions.md) | Chapter 10 review notes for planning, zoning, subdivision, enforcement, fiscal-equivalence limits, and municipal data needs. |
 
 ## Domain Pages
 
