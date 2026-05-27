@@ -50,6 +50,8 @@ No candidate is marked ready for public metric, score, or cross-municipality com
 
 Planning and land use is the only strong Phase 6 source-family match because the repository already contains current and draft zoning bylaws, zoning spatial layers, parcel data, OCP material, future land use mapping, and meeting-package extraction for rezoning examples.
 
+The planning and land-use dataset review is tracked in [LGBC Charlottetown Planning And Land-Use Dataset Review](./charlottetown-planning-land-use-dataset-review.md). It finds that 2 of 10 candidates are ready for source-completeness review, 2 are partial, 1 is sample-only, and 5 lack the required process datasets.
+
 Finance is the next practical mapping area because budget source extraction exists, but candidate use should remain limited to source-completeness and normalization review until audited statements, tax/assessment records, fee bylaws, debt records, and reserve records are identified.
 
 Engineering, human services, governance, and service delivery are useful for gap analysis and source inventory planning. Protective services and labour relations require source discovery before candidate analysis.
@@ -70,6 +72,7 @@ Candidate readiness remains constrained by:
 ## Sources
 
 - `data/sources/lgbc/charlottetown_prototype_mapping.json`
+- `data/sources/lgbc/charlottetown_planning_land_use_dataset_review.json`
 - [LGBC Benchmark And Process Candidate Catalogue](./benchmark-process-candidate-catalogue.md)
 - [Municipal portal domain inventory](../../product/municipal-portal-domain-inventory.md)
 - [Municipal portal product purpose](../../product/municipal-portal-purpose.md)

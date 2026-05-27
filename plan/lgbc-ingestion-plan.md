@@ -221,6 +221,13 @@ Initial mapping output:
 
 The first mapping covers all 86 Phase 5 candidates. It classifies 10 candidates as `strong_source_family_identified`, 56 as `partial_source_family_identified`, and 20 as `source_gap`. No candidate is marked ready for public metric, score, or cross-municipality comparison.
 
+Planning and land-use dataset review:
+
+- `data/sources/lgbc/charlottetown_planning_land_use_dataset_review.json`
+- [LGBC Charlottetown Planning And Land-Use Dataset Review](../wiki/sources/lgbc/charlottetown-planning-land-use-dataset-review.md)
+
+The planning and land-use review covers 10 Chapter 10 candidates. It finds 2 ready for source-completeness review, 2 partial, 1 sample-only, and 5 source gaps for required datasets.
+
 ## Stop Conditions
 
 Stop and route back to Business Analyst when:

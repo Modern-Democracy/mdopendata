@@ -1,0 +1,293 @@
+{
+  "source_id": "lgbc-2008-4th-edition",
+  "target_municipality": "Charlottetown",
+  "domain": "planning_land_use",
+  "phase": "phase_6_planning_land_use_dataset_review",
+  "status": "planning_land_use_dataset_review_created_pending_candidate_selection",
+  "generated_on": "2026-05-25",
+  "generated_from": [
+    "data/sources/lgbc/charlottetown_prototype_mapping.json",
+    "wiki/sources/lgbc/chapter-10-regulatory-development-functions.md",
+    "wiki/charlottetown/topics/unified-zoning-ingestion-plan.md",
+    "repository source inventory"
+  ],
+  "counts": {
+    "total": 10,
+    "by_dataset_readiness": {
+      "partial_dataset_ready": 2,
+      "source_gap_for_required_dataset": 5,
+      "dataset_ready_for_source_completeness_review": 2,
+      "sample_dataset_ready_only": 1
+    }
+  },
+  "source_inventory": [
+    {
+      "source_family": "current_zoning_bylaw_extraction",
+      "paths": [
+        "docs/charlottetown/charlottetown-zoning-bylaw.pdf",
+        "data/zoning/charlottetown/source-manifest.json",
+        "data/zoning/charlottetown/"
+      ],
+      "observed_evidence": [
+        "223-page source manifest",
+        "37 current zones",
+        "administration and permit-applications process JSON",
+        "general provisions split into themed JSON artifacts",
+        "definitions, design standards, appendices, and manual corrections"
+      ],
+      "supports": [
+        "planning_document_completeness",
+        "zoning_complexity",
+        "process_text_context"
+      ]
+    },
+    {
+      "source_family": "draft_zoning_bylaw_extraction",
+      "paths": [
+        "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+        "data/zoning/charlottetown-draft/source-manifest.json",
+        "data/zoning/charlottetown-draft/"
+      ],
+      "observed_evidence": [
+        "20 draft zones",
+        "permit applications and processes JSON",
+        "general provisions, definitions, schedules, section-equivalence review files"
+      ],
+      "supports": [
+        "planning_document_completeness",
+        "zoning_complexity",
+        "draft_process_context"
+      ]
+    },
+    {
+      "source_family": "ocp_and_future_land_use",
+      "paths": [
+        "docs/charlottetown/ocp/Charlottetown Official Plan 2026.pdf",
+        "docs/charlottetown/ocp/Future Land Use Map - October 24 2025.pdf",
+        "data/spatial/charlottetown/charlottetown-future-land-use-map-2025-10-24-raster.tif"
+      ],
+      "observed_evidence": [
+        "Official Plan source and future land use map artifact identified"
+      ],
+      "supports": [
+        "planning_document_completeness",
+        "strategic_planning_context"
+      ]
+    },
+    {
+      "source_family": "spatial_zoning_and_parcels",
+      "paths": [
+        "maps/Charlottetown Zoning Map - March 9, 2026.pdf",
+        "maps/pei/CHTWN_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Draft_Zoning_Boundaries.geojson",
+        "maps/pei/CHTWN_Parcel_Map.geojson",
+        "data/spatial/charlottetown/"
+      ],
+      "observed_evidence": [
+        "current legend lookup includes 37 bylaw zones plus pseudo-zone classes",
+        "draft Schedule A municipal-fit layer summary has 20 zoning areas and parcel candidate layers",
+        "unified ingestion notes report approved spatial layer registration and zero invalid geometries in current database load"
+      ],
+      "supports": [
+        "zoning_complexity",
+        "parcel_zone_relationships",
+        "map_source_completeness"
+      ]
+    },
+    {
+      "source_family": "council_meeting_rezoning_sample",
+      "paths": [
+        "docs/charlottetown/council-meetings/05 Regular Meeting of Council Package - May 12, 2026.pdf",
+        "data/council-meetings/charlottetown/2026-05-12-regular-council/"
+      ],
+      "observed_evidence": [
+        "meeting extraction contains 21 business items and package document segmentation",
+        "wiki records two zoning bylaw second-reading examples"
+      ],
+      "supports": [
+        "rezoning_sample_trace",
+        "public_meeting_context"
+      ]
+    }
+  ],
+  "readiness_summary": {
+    "strongest_candidates": [
+      "chapter_10_planning_document_completeness_review",
+      "chapter_10_zoning_complexity_inventory"
+    ],
+    "sample_only_candidates": [
+      "chapter_10_rezoning_and_variance_process_trace"
+    ],
+    "main_gaps": [
+      "complete permit applications",
+      "building inspection records",
+      "subdivision applications and decisions",
+      "DCC and development finance linkage records",
+      "bylaw enforcement case records",
+      "approval timeline dataset",
+      "market and housing outcome indicators"
+    ]
+  },
+  "candidates": [
+    {
+      "candidate_id": "chapter_10_regulatory_cost_visibility_review",
+      "benchmark_or_process_name": "Regulatory-cost visibility review",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "dataset_readiness": "partial_dataset_ready",
+      "readiness_note": "Zoning and meeting sources can expose some affected-party and decision context, but permit fees, applicant costs, compliance costs, and full approval timeline data are not identified.",
+      "usable_now_for": "source gap documentation only",
+      "public_metric_status": "not_ready",
+      "required_next_evidence": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ]
+    },
+    {
+      "candidate_id": "chapter_10_building_permit_process_benchmark",
+      "benchmark_or_process_name": "Building permit process benchmark",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "dataset_readiness": "source_gap_for_required_dataset",
+      "readiness_note": "Bylaw process text exists, but building permit applications, processing dates, inspection requests, inspection response dates, permit fees, and staffing costs are not identified.",
+      "usable_now_for": "source gap documentation only",
+      "public_metric_status": "not_ready",
+      "required_next_evidence": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ]
+    },
+    {
+      "candidate_id": "chapter_10_planning_document_completeness_review",
+      "benchmark_or_process_name": "Planning document completeness review",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "dataset_readiness": "dataset_ready_for_source_completeness_review",
+      "readiness_note": "OCP, future land use map, current zoning bylaw, draft zoning bylaw, zoning map, extracted JSON, and spatial layers are identified.",
+      "usable_now_for": "source-completeness review only",
+      "public_metric_status": "not_ready",
+      "required_next_evidence": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ]
+    },
+    {
+      "candidate_id": "chapter_10_regional_strategic_planning_relationship_map",
+      "benchmark_or_process_name": "Regional/strategic planning relationship map",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "dataset_readiness": "partial_dataset_ready",
+      "readiness_note": "OCP and future land use map are identified, but intergovernmental referrals, regional strategy analogues, and consultation record sets are not identified.",
+      "usable_now_for": "source gap documentation only",
+      "public_metric_status": "not_ready",
+      "required_next_evidence": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ]
+    },
+    {
+      "candidate_id": "chapter_10_zoning_complexity_inventory",
+      "benchmark_or_process_name": "Zoning complexity inventory",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "dataset_readiness": "dataset_ready_for_source_completeness_review",
+      "readiness_note": "Current and draft bylaw source manifests, zone JSON files, zoning boundaries, parcel map, code crosswalks, and section-equivalence outputs are identified.",
+      "usable_now_for": "source-completeness review only",
+      "public_metric_status": "not_ready",
+      "required_next_evidence": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ]
+    },
+    {
+      "candidate_id": "chapter_10_rezoning_and_variance_process_trace",
+      "benchmark_or_process_name": "Rezoning and variance process trace",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "dataset_readiness": "sample_dataset_ready_only",
+      "readiness_note": "The May 12, 2026 council package contains two rezoning examples, but complete rezoning, variance, public notice, hearing, and decision history datasets are not identified.",
+      "usable_now_for": "sample trace only",
+      "public_metric_status": "not_ready",
+      "required_next_evidence": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ]
+    },
+    {
+      "candidate_id": "chapter_10_subdivision_approval_process_trace",
+      "benchmark_or_process_name": "Subdivision approval process trace",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "dataset_readiness": "source_gap_for_required_dataset",
+      "readiness_note": "Subdivision-related bylaw provisions exist, but subdivision applications, approving officer decisions, servicing requirements, DCC records, dedications, and Land Title references are not identified as datasets.",
+      "usable_now_for": "source gap documentation only",
+      "public_metric_status": "not_ready",
+      "required_next_evidence": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ]
+    },
+    {
+      "candidate_id": "chapter_10_development_cost_charge_linkage_review",
+      "benchmark_or_process_name": "Development cost charge linkage review",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "dataset_readiness": "source_gap_for_required_dataset",
+      "readiness_note": "Budget and bylaw source families exist, but DCC bylaws, reserve funds, infrastructure project linkages, development approvals, and capital cost basis datasets are not identified.",
+      "usable_now_for": "source gap documentation only",
+      "public_metric_status": "not_ready",
+      "required_next_evidence": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ]
+    },
+    {
+      "candidate_id": "chapter_10_bylaw_enforcement_workflow_inventory",
+      "benchmark_or_process_name": "Bylaw enforcement workflow inventory",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "dataset_readiness": "source_gap_for_required_dataset",
+      "readiness_note": "Bylaw text exists, but complaint, inspection, notice, ticket, penalty, court action, and compliance outcome records are not identified.",
+      "usable_now_for": "source gap documentation only",
+      "public_metric_status": "not_ready",
+      "required_next_evidence": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ]
+    },
+    {
+      "candidate_id": "chapter_10_land_use_regulation_outcome_caution",
+      "benchmark_or_process_name": "Land-use regulation outcome caution",
+      "phase_6_mapping_status": "strong_source_family_identified",
+      "dataset_readiness": "source_gap_for_required_dataset",
+      "readiness_note": "Zoning, OCP, and spatial sources exist, but housing price indicators, land supply measures, complete approval timelines, and infrastructure availability datasets are not identified.",
+      "usable_now_for": "source gap documentation only",
+      "public_metric_status": "not_ready",
+      "required_next_evidence": [
+        "complete permit applications",
+        "building inspection records",
+        "subdivision application records",
+        "full enforcement records",
+        "approval timeline dataset"
+      ]
+    }
+  ]
+}
