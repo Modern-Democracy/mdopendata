@@ -3,7 +3,7 @@ type: schema
 tags:
   - wiki
   - schema
-updated: 2026-04-28
+updated: 2026-05-27
 ---
 
 This document defines the schema, directory layout, and maintenance workflows for the repository markdown wiki.
@@ -31,6 +31,7 @@ wiki/
   domain/
   platform/
   implementation/
+  generated/
   charlottetown/
 ```
 
@@ -43,6 +44,7 @@ wiki/
 | [domain/](./domain/.gitkeep) | Variable domain categories for concepts that apply across projects or municipalities. |
 | [platform/](./platform/.gitkeep) | Durable notes about tools, runtime constraints, QGIS/PostGIS behavior, environment quirks, and ingestion issues. |
 | [implementation/](./implementation/.gitkeep) | Durable notes about extraction workflows, schema decisions, packing constraints, scripts, and repeatable technical patterns. |
+| [generated/](./generated/schema/index.md) | Generated reference pages. Do not hand-edit generated pages; regenerate them from source artifacts. |
 | [charlottetown/](./charlottetown/README.md) | Active Charlottetown zoning wiki for current and draft zoning extraction, validation, comparison, and GIS preparation. |
 
 Domain subdirectories may be added when there is enough durable content to justify them. Use plural, lowercase, hyphenated names.

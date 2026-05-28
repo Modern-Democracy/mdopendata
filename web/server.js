@@ -2382,6 +2382,238 @@ async function loadProvisionsComparison() {
   };
 }
 
+function isMissingHelpSchema(error) {
+  return error?.code === "42P01" || error?.code === "3F000";
+}
+
+function mapHelpTerm(row) {
+  return {
+    termKey: row.term_key,
+    termType: row.term_type,
+    label: row.display_label,
+    rawLabel: compactText(row.raw_label),
+    shortHelp: row.short_help,
+    longHelp: compactText(row.long_help),
+    audience: row.audience,
+    source: {
+      schema: compactText(row.source_schema),
+      table: compactText(row.source_table),
+      id: compactText(row.source_id),
+      citations: toJsonValue(row.citations),
+    },
+  };
+}
+
+function mapHelpCodeValue(row) {
+  return {
+    valueKey: row.value_key,
+    rawValue: row.raw_value,
+    label: row.display_label,
+    description: compactText(row.description),
+    sortOrder: row.sort_order === null ? null : Number(row.sort_order),
+    audience: row.audience,
+    source: {
+      schema: compactText(row.source_schema),
+      table: compactText(row.source_table),
+      id: compactText(row.source_id),
+      citations: toJsonValue(row.citations),
+    },
+  };
+}
+
+async function loadHelpTerms() {
+  try {
+    const { rows } = await pool.query(`
+      SELECT term_key, term_type, display_label, raw_label, short_help, long_help,
+             audience, source_schema, source_table, source_id, citations
+      FROM help.term
+      WHERE is_active
+        AND audience = 'public'
+        AND status = 'active'
+        AND review_status = 'release_ready'
+      ORDER BY display_label, term_key
+    `);
+    return {
+      source: "help.term",
+      rows: rows.map(mapHelpTerm),
+    };
+  } catch (error) {
+    if (isMissingHelpSchema(error)) {
+      return { source: "help.term", rows: [], warning: "help schema is not available" };
+    }
+    throw error;
+  }
+}
+
+async function loadHelpTerm(termKey) {
+  try {
+    const { rows } = await pool.query(`
+      SELECT term_key, term_type, display_label, raw_label, short_help, long_help,
+             audience, source_schema, source_table, source_id, citations
+      FROM help.term
+      WHERE term_key = $1
+        AND is_active
+        AND audience = 'public'
+        AND status = 'active'
+        AND review_status = 'release_ready'
+      LIMIT 1
+    `, [termKey]);
+    return rows[0] ? mapHelpTerm(rows[0]) : null;
+  } catch (error) {
+    if (isMissingHelpSchema(error)) {
+      return null;
+    }
+    throw error;
+  }
+}
+
+async function loadHelpCodeTable(tableKey) {
+  try {
+    const { rows } = await pool.query(`
+      SELECT
+        ct.table_key,
+        ct.display_label AS table_label,
+        ct.description AS table_description,
+        cv.value_key,
+        cv.raw_value,
+        cv.display_label,
+        cv.description,
+        cv.sort_order,
+        cv.audience,
+        cv.source_schema,
+        cv.source_table,
+        cv.source_id,
+        cv.citations
+      FROM help.code_table ct
+      LEFT JOIN help.code_value cv
+        ON cv.code_table_id = ct.code_table_id
+       AND cv.is_active
+       AND cv.audience = 'public'
+       AND cv.status = 'active'
+       AND cv.review_status = 'release_ready'
+      WHERE ct.table_key = $1
+        AND ct.is_active
+        AND ct.audience = 'public'
+        AND ct.status = 'active'
+        AND ct.review_status = 'release_ready'
+      ORDER BY cv.sort_order NULLS LAST, cv.display_label, cv.value_key
+    `, [tableKey]);
+    if (rows.length === 0) {
+      return null;
+    }
+    return {
+      source: "help.code_table, help.code_value",
+      tableKey: rows[0].table_key,
+      label: rows[0].table_label,
+      description: compactText(rows[0].table_description),
+      values: rows.filter((row) => row.value_key !== null).map(mapHelpCodeValue),
+    };
+  } catch (error) {
+    if (isMissingHelpSchema(error)) {
+      return null;
+    }
+    throw error;
+  }
+}
+
+async function loadHelpContext(contextKey) {
+  try {
+    const { rows } = await pool.query(`
+      SELECT
+        cb.context_key,
+        cb.context_type,
+        cb.display_order,
+        t.term_key,
+        t.term_type,
+        t.display_label AS term_label,
+        t.raw_label,
+        t.short_help,
+        t.long_help,
+        t.audience AS term_audience,
+        t.source_schema AS term_source_schema,
+        t.source_table AS term_source_table,
+        t.source_id AS term_source_id,
+        t.citations AS term_citations,
+        cv.value_key,
+        cv.raw_value,
+        cv.display_label AS value_label,
+        cv.description AS value_description,
+        cv.sort_order,
+        cv.audience AS value_audience,
+        cv.source_schema AS value_source_schema,
+        cv.source_table AS value_source_table,
+        cv.source_id AS value_source_id,
+        cv.citations AS value_citations,
+        ct.table_key
+      FROM help.context_binding cb
+      LEFT JOIN help.term t
+        ON t.term_id = cb.term_id
+       AND t.is_active
+       AND t.audience = 'public'
+       AND t.status = 'active'
+       AND t.review_status = 'release_ready'
+      LEFT JOIN help.code_value cv
+        ON cv.code_value_id = cb.code_value_id
+       AND cv.is_active
+       AND cv.audience = 'public'
+       AND cv.status = 'active'
+       AND cv.review_status = 'release_ready'
+      LEFT JOIN help.code_table ct
+        ON ct.code_table_id = cv.code_table_id
+       AND ct.is_active
+      WHERE cb.context_key = $1
+        AND cb.is_active
+        AND cb.audience = 'public'
+        AND cb.status = 'active'
+        AND cb.review_status = 'release_ready'
+      ORDER BY cb.display_order NULLS LAST, cb.context_binding_id
+    `, [contextKey]);
+    return {
+      source: "help.context_binding",
+      contextKey,
+      rows: rows
+        .filter((row) => row.term_key !== null || row.value_key !== null)
+        .map((row) => ({
+          contextType: row.context_type,
+          displayOrder: row.display_order === null ? null : Number(row.display_order),
+          term: row.term_key === null ? null : mapHelpTerm({
+            term_key: row.term_key,
+            term_type: row.term_type,
+            display_label: row.term_label,
+            raw_label: row.raw_label,
+            short_help: row.short_help,
+            long_help: row.long_help,
+            audience: row.term_audience,
+            source_schema: row.term_source_schema,
+            source_table: row.term_source_table,
+            source_id: row.term_source_id,
+            citations: row.term_citations,
+          }),
+          codeValue: row.value_key === null ? null : {
+            tableKey: row.table_key,
+            ...mapHelpCodeValue({
+              value_key: row.value_key,
+              raw_value: row.raw_value,
+              display_label: row.value_label,
+              description: row.value_description,
+              sort_order: row.sort_order,
+              audience: row.value_audience,
+              source_schema: row.value_source_schema,
+              source_table: row.value_source_table,
+              source_id: row.value_source_id,
+              citations: row.value_citations,
+            }),
+          },
+        })),
+    };
+  } catch (error) {
+    if (isMissingHelpSchema(error)) {
+      return { source: "help.context_binding", contextKey, rows: [], warning: "help schema is not available" };
+    }
+    throw error;
+  }
+}
+
 async function loadProvisionsPartComparison(partRow) {
   const draftSections = await loadSectionsByPartId(partRow.bylaw_part_id);
   const { rows: pairRows } = await pool.query(`
@@ -3711,6 +3943,8 @@ const routeEntrypoints = new Map([
   ["/zoning-comparison/", { file: "/ui_kits/zoning-comparison/index.html", baseHref: "/ui_kits/zoning-comparison/" }],
   ["/provisions-comparison", { file: "/ui_kits/provisions-comparison/index.html", baseHref: "/ui_kits/provisions-comparison/" }],
   ["/provisions-comparison/", { file: "/ui_kits/provisions-comparison/index.html", baseHref: "/ui_kits/provisions-comparison/" }],
+  ["/help", { file: "/ui_kits/help/index.html", baseHref: "/ui_kits/help/" }],
+  ["/help/", { file: "/ui_kits/help/index.html", baseHref: "/ui_kits/help/" }],
 ]);
 
 function htmlWithBase(body, baseHref) {
@@ -3978,6 +4212,64 @@ const server = createServer(async (request, response) => {
         return;
       }
       await sendJson(response, await loadProvisionsComparison());
+      return;
+    }
+
+    if (url.pathname === "/api/help/terms") {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      await sendJson(response, await loadHelpTerms());
+      return;
+    }
+
+    const helpTermMatch = url.pathname.match(/^\/api\/help\/terms\/([^/]+)$/);
+    if (helpTermMatch) {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const termKey = decodeURIComponent(helpTermMatch[1]).trim();
+      const term = await loadHelpTerm(termKey);
+      if (!term) {
+        response.writeHead(404, { "content-type": "application/json; charset=utf-8" });
+        response.end(JSON.stringify({ error: "Help term not found.", termKey }));
+        return;
+      }
+      await sendJson(response, term);
+      return;
+    }
+
+    const helpCodeTableMatch = url.pathname.match(/^\/api\/help\/code-tables\/([^/]+)$/);
+    if (helpCodeTableMatch) {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const tableKey = decodeURIComponent(helpCodeTableMatch[1]).trim();
+      const table = await loadHelpCodeTable(tableKey);
+      if (!table) {
+        response.writeHead(404, { "content-type": "application/json; charset=utf-8" });
+        response.end(JSON.stringify({ error: "Help code table not found.", tableKey }));
+        return;
+      }
+      await sendJson(response, table);
+      return;
+    }
+
+    const helpContextMatch = url.pathname.match(/^\/api\/help\/context\/(.+)$/);
+    if (helpContextMatch) {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const contextKey = decodeURIComponent(helpContextMatch[1]).trim();
+      await sendJson(response, await loadHelpContext(contextKey));
       return;
     }
 

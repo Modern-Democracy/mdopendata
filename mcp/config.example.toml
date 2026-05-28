@@ -1,0 +1,13 @@
+[database]
+url = "postgresql+psycopg://mdopendata:mdopendata_dev@127.0.0.1:55432/mdopendata"
+max_rows = 1000
+
+[paths]
+schema_sql_dir = "../schema/sql"
+wiki_dir = "../wiki"
+web_public_dir = "../web/public"
+
+[rendering]
+chart_style = "seaborn-v0_8-whitegrid"
+figure_size = [8.0, 5.0]
+dpi = 120

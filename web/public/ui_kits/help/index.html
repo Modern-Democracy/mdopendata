@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Help</title>
+  <link rel="stylesheet" href="/colors_and_type.css">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    body {
+      margin: 0;
+      background: #f7f8fa;
+      color: #20242c;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+
+    header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid #d7dce3;
+      padding-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 650;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 17px;
+      font-weight: 650;
+    }
+
+    a {
+      color: #185a9d;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+      gap: 18px;
+    }
+
+    .panel {
+      background: #fff;
+      border: 1px solid #d7dce3;
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .item {
+      border: 1px solid #dde2e8;
+      border-radius: 6px;
+      padding: 12px;
+      background: #fbfcfd;
+    }
+
+    .item h3 {
+      margin: 0 0 6px;
+      font-size: 15px;
+    }
+
+    .item p {
+      margin: 0;
+      color: #4a5362;
+      line-height: 1.45;
+    }
+
+    .meta {
+      margin-top: 8px;
+      color: #667085;
+      font-size: 12px;
+    }
+
+    @media (max-width: 760px) {
+      header {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>Context Help</h1>
+        <p class="meta">Release-facing terms and code values from the help schema.</p>
+      </div>
+      <a href="/">Portal</a>
+    </header>
+
+    <section class="grid">
+      <div class="panel">
+        <h2>Terms</h2>
+        <div id="terms" class="list"></div>
+      </div>
+      <div class="panel">
+        <h2>Zoning Comparison Help</h2>
+        <div id="context" class="list"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function text(value) {
+      return value === null || value === undefined ? "" : String(value);
+    }
+
+    function item(title, body, meta) {
+      const node = document.createElement("article");
+      node.className = "item";
+      node.innerHTML = `
+        <h3></h3>
+        <p></p>
+        <div class="meta"></div>
+      `;
+      node.querySelector("h3").textContent = title;
+      node.querySelector("p").textContent = body;
+      node.querySelector(".meta").textContent = meta;
+      return node;
+    }
+
+    async function loadJson(url) {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+      return response.json();
+    }
+
+    async function render() {
+      const [terms, context] = await Promise.all([
+        loadJson("/api/help/terms"),
+        loadJson(`/api/help/context/${encodeURIComponent("route:/zoning-comparison")}`),
+      ]);
+
+      const termsNode = document.getElementById("terms");
+      const contextNode = document.getElementById("context");
+
+      termsNode.replaceChildren(...(terms.rows || []).map((term) => item(
+        term.label,
+        term.shortHelp,
+        `${term.termType} · ${term.termKey}`,
+      )));
+
+      contextNode.replaceChildren(...(context.rows || []).map((row) => {
+        if (row.term) {
+          return item(row.term.label, row.term.shortHelp, `term · ${row.term.termKey}`);
+        }
+        return item(
+          row.codeValue.label,
+          text(row.codeValue.description),
+          `code · ${row.codeValue.tableKey} · ${row.codeValue.valueKey}`,
+        );
+      }));
+
+      if (!termsNode.children.length) {
+        termsNode.append(item("No release terms", "Run the help migration and seed script to populate release help.", "help.term"));
+      }
+      if (!contextNode.children.length) {
+        contextNode.append(item("No context bindings", "No release help is bound to the zoning comparison route.", "help.context_binding"));
+      }
+    }
+
+    render().catch((error) => {
+      document.getElementById("terms").append(item("Help API error", error.message, "web"));
+    });
+  </script>
+</body>
+</html>

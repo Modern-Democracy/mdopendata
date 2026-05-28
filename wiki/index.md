@@ -3,7 +3,7 @@ type: index
 tags:
   - wiki
   - catalog
-updated: 2026-05-20
+updated: 2026-05-27
 ---
 
 This page catalogs the root wiki structure and links to active project wiki areas.
@@ -23,6 +23,7 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [domain](./domain/.gitkeep) | Shared domain concepts and cross-project terminology. |
 | [platform](./platform/.gitkeep) | Durable platform, toolchain, GIS, database, and runtime notes. |
 | [implementation](./implementation/.gitkeep) | Durable workflow, extraction, schema, and implementation notes. |
+| [generated](./generated/schema/index.md) | Generated wiki reference outputs, starting with MCP-generated database schema pages. |
 | [charlottetown](./charlottetown/README.md) | Active Charlottetown current and draft zoning wiki. |
 | [council-committee-meetings](./council-committee-meetings/README.md) | Meeting-preparation workflows and extraction notes for public, council/committee, and staff audiences. |
 
@@ -73,6 +74,7 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [Charlottetown terrain DEM pipeline](./implementation/charlottetown-terrain-dem-pipeline.md) | First repeatable PDAL/GDAL pipeline design for producing a bare-earth DEM from PEI COPC LIDAR tiles. |
 | [Storm surge demo plan](./implementation/storm-surge-demo-plan.md) | Demo-only Charlottetown tidal and storm-surge visualization scope, controls, source assumptions, limits, and upgrade path. |
 | [Municipal budget data model](./implementation/municipal-budget-data-model.md) | Initial scalable schema design for raw and normalized municipal operating, capital, rate, tax, debt, reserve, and funding data. |
+| [Release help and MCP plan](./implementation/release-help-and-mcp-plan.md) | Implementation pattern for release-facing contextual help, the `help` schema, web help APIs, and the repo-local `mdopendata-mcp` package. |
 
 ## Plans
 
