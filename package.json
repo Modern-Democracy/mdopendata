@@ -22,5 +22,12 @@
     "lidar:terrain-dem:dry-run": "powershell -ExecutionPolicy Bypass -Command \"& .\\scripts\\python.ps1 .\\scripts\\build-charlottetown-terrain-dem.py --dry-run --max-tiles 1 --clean\"",
     "lidar:terrain-dem:qa": "powershell -ExecutionPolicy Bypass -Command \"& .\\scripts\\python.ps1 .\\scripts\\qa-charlottetown-terrain-dem.py\"",
     "erd:pgadmin:zoning": "powershell -ExecutionPolicy Bypass -Command \"$env:NODE_PATH=(Join-Path $env:USERPROFILE 'node_modules'); node .\\scripts\\export-pgadmin-erd.mjs --schema=zoning --output=wiki/shared/assets/zoning-schema-erd.png\""
-  }
+  },
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
