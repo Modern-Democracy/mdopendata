@@ -5,7 +5,7 @@ tags:
   - mcp
   - wiki
   - web-ui
-updated: 2026-05-27
+updated: 2026-05-28
 ---
 
 This page records the first implementation pattern for release-facing contextual help and the repo-local `mdopendata-mcp` server.
@@ -59,6 +59,21 @@ The package is project-aware:
 
 Schema or data mutations still go through SQL migrations and Python scripts, not MCP tools.
 
+## ERD Export Workflow
+
+The release ERD image for the zoning schema is exported from pgAdmin rather than the MCP fallback renderer. The repeatable path is:
+
+```powershell
+$env:NODE_PATH = Join-Path $env:USERPROFILE 'node_modules'
+$env:PGADMIN_EMAIL = '<pgAdmin email>'
+$env:PGADMIN_PASSWORD = '<pgAdmin password>'
+npm run erd:pgadmin:zoning
+```
+
+The script opens pgAdmin in Playwright, connects the registered `mdopendata PostGIS` server, selects the `zoning` schema, opens pgAdmin's generated ERD tool, clicks Zoom to Fit, clicks Download image, and saves the PNG to `wiki/shared/assets/zoning-schema-erd.png`.
+
+The MCP Graphviz/matplotlib renderer remains available only as a lightweight fallback for quick diagrams and charts. pgAdmin is the preferred workflow for release ERD assets when its richer table layout and relationship rendering are required.
+
 ## Sources
 
 - [Wiki schema](../AGENTS.md)
@@ -67,3 +82,4 @@ Schema or data mutations still go through SQL migrations and Python scripts, not
 - [MCP config](../../.codex/mcp.json)
 - [Help schema migration](../../schema/sql/021_help_schema.sql)
 - [Help seed script](../../scripts/seed-help-context.py)
+- [pgAdmin ERD export script](../../scripts/export-pgadmin-erd.mjs)
