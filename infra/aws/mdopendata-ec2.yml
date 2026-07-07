@@ -1,0 +1,123 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: EC2 host for mdopendata Docker Compose deployment.
+
+Parameters:
+  InstanceType:
+    Type: String
+    Default: t3.large
+    Description: EC2 instance type for the Docker Compose host.
+  KeyName:
+    Type: AWS::EC2::KeyPair::KeyName
+    Description: EC2 key pair used for SSH access.
+  SSHLocation:
+    Type: String
+    Default: 0.0.0.0/0
+    Description: CIDR allowed to connect over SSH.
+  WebLocation:
+    Type: String
+    Default: 0.0.0.0/0
+    Description: CIDR allowed to connect to the web application.
+  VolumeSizeGiB:
+    Type: Number
+    Default: 80
+    Description: Root EBS volume size in GiB.
+  VpcId:
+    Type: String
+    Default: ""
+    Description: Optional VPC id. Leave blank to use the account default VPC.
+  SubnetId:
+    Type: String
+    Default: ""
+    Description: Optional public subnet id. Leave blank to use the account default subnet selection.
+  LatestAmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64
+
+Conditions:
+  HasVpcId: !Not [!Equals [!Ref VpcId, ""]]
+  HasSubnetId: !Not [!Equals [!Ref SubnetId, ""]]
+
+Resources:
+  InstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+
+  InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref InstanceRole
+
+  SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: mdopendata web and SSH access
+      VpcId: !If [HasVpcId, !Ref VpcId, !Ref "AWS::NoValue"]
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: !Ref SSHLocation
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: !Ref WebLocation
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          CidrIp: 0.0.0.0/0
+
+  Host:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref LatestAmiId
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyName
+      IamInstanceProfile: !Ref InstanceProfile
+      SubnetId: !If [HasSubnetId, !Ref SubnetId, !Ref "AWS::NoValue"]
+      SecurityGroupIds:
+        - !Ref SecurityGroup
+      BlockDeviceMappings:
+        - DeviceName: /dev/xvda
+          Ebs:
+            VolumeSize: !Ref VolumeSizeGiB
+            VolumeType: gp3
+            DeleteOnTermination: true
+      Tags:
+        - Key: Name
+          Value: mdopendata
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          set -euxo pipefail
+          dnf update -y
+          dnf install -y docker git unzip
+          systemctl enable --now docker
+          usermod -aG docker ec2-user
+          mkdir -p /opt/mdopendata/releases /opt/mdopendata/shared/backups
+          chown -R ec2-user:ec2-user /opt/mdopendata
+
+  ElasticIp:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+      InstanceId: !Ref Host
+
+Outputs:
+  InstanceId:
+    Description: EC2 instance id.
+    Value: !Ref Host
+  PublicIp:
+    Description: Elastic public IP for SSH and HTTP.
+    Value: !Ref ElasticIp
+  WebUrl:
+    Description: HTTP URL for the deployed web application.
+    Value: !Sub "http://${ElasticIp}/"

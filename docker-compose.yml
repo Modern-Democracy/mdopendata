@@ -52,3 +52,4 @@ services:
       PGPASSWORD: "${PGPASSWORD:-mdopendata_dev}"
     volumes:
       - ./:/workspace:ro
+      - ./data/document-ingestion:/workspace/data/document-ingestion

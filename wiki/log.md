@@ -3,7 +3,7 @@ type: log
 tags:
   - wiki
   - log
-updated: 2026-05-27
+updated: 2026-07-06
 ---
 
 This page is the append-only chronological record for root wiki changes, ingests, substantive queries, and lint passes.
@@ -13,6 +13,34 @@ Append new entries in reverse chronological order. Use this heading format:
 ```text
 ## [YYYY-MM-DD] type | Short title
 ```
+
+## [2026-07-06] implementation | Page-template classification and unknown detection
+
+Added approved-pattern page classification with required and weighted cues, ambiguous-match handling, rerunnable page classifications, blocking `new_page_template` gaps, package approval-state transitions, classification APIs, and browser template-status badges.
+
+## [2026-07-06] implementation | Agenda package page traversal
+
+Added Poppler-based page counting, PNG rendering, embedded-text extraction, transactional source-page and source-asset persistence, idempotent traversal, page APIs, and a rendered-page grid on `/agenda-package-ingestion`.
+
+## [2026-07-06] correction | Separate agenda package ingestion endpoint
+
+Restored the fixed-package `/document-import` demo and moved browser PDF selection to the dedicated `/agenda-package-ingestion` workflow endpoint.
+
+## [2026-07-06] implementation | Agenda package browser upload
+
+Applied migration `022_agenda_package_extraction.sql` and added streamed PDF upload, signature and hash validation, duplicate detection, transactional source/package registration, status retrieval, writable Docker upload storage, and the `/document-import` file selector.
+
+## [2026-07-06] correction | Active local Postgres port
+
+Updated the database standup, data-layer conventions, and zoning backlog to use active local host port `55432` and identify `54329` as obsolete.
+
+## [2026-07-06] implementation | Agenda package ingestion contract
+
+Defined the canonical package JSON as an ordered logical-document array, with the agenda first and one primary agenda-item key on each following document. Added PostgreSQL package extraction/result tables and blocked completion until all unknown templates have approved definitions.
+
+## [2026-06-23] implementation | AWS deployment workflow
+
+Added [AWS deployment](./implementation/aws-deployment.md), `infra/aws/mdopendata-ec2.yml`, `docker-compose.aws.yml`, `scripts/aws-deploy.ps1`, and `scripts/aws-sync-db.ps1` for repeatable EC2 Docker Compose deployment and local-to-AWS PostGIS synchronization.
 
 ## [2026-05-27] implementation | Release help and MCP scaffold
 
@@ -251,3 +279,23 @@ Extended `/document-import` with agenda-hierarchy, business-item-hierarchy, and 
 ## [2026-05-28] implementation | pgAdmin zoning ERD export workflow
 
 Replaced the release zoning ERD asset workflow with pgAdmin browser automation. Added a Playwright script that opens the pgAdmin ERD tool for the `zoning` schema, uses pgAdmin's Download image action, and writes `wiki/shared/assets/zoning-schema-erd.png`.
+
+## [2026-07-06] implementation | Agenda package template drafting and approval
+
+Added persisted model-generated page-template drafts, editable browser review controls, and explicit transactional approval. Approval creates the active template, approved pattern, and cues, resolves the associated page gaps, and reruns classification while remaining unknown pages continue to block extraction. API, database, and browser QA used the six-page February 3 public-meeting package; one approved template matched only its intended page and five drafts remained pending.
+
+## [2026-07-06] implementation | Multi-page package document assembly
+
+Added package-specific logical-document assembly plans with exact contiguous page coverage, agenda-first validation, primary agenda-item bindings, multi-template page ranges, approval gating, and browser editing. QA approved all six page templates and assembled pages 5–6 into one of five logical documents; the package advanced to `ready_for_extraction` only after assembly approval.
+
+## [2026-07-06] implementation | Deterministic agenda package extraction
+
+Added final template-driven extraction with explicit field strategies, safe JSON Pointer assignment, multi-page text assembly, package-level JSON persistence, queryable logical-document rows, provenance, failure diagnostics, rerun idempotency, and browser result rendering. The six-page QA package produced five schema-valid logical documents, including one object covering pages 5–6, and reached `completed` with zero unresolved gaps.
+
+## [2026-07-06] implementation | Visual deterministic field mappings
+
+Added a synchronized visual editor for template field keys, JSON Pointers, value types, required flags, instructions, deterministic strategies, normalization, regex capture, and constants. Approved mappings render read-only; editable drafts support adding and removing rows plus advanced JSON round trips. Server validation rejects malformed and duplicate mappings before persistence.
+
+## [2026-07-06] implementation | Visual field regions and coordinate extraction
+
+Added a rendered-page region picker with drag selection, direct normalized coordinates, preview-page selection, visual overlays, full-page reset, JSON synchronization, and bounds validation. Deterministic extraction now uses Poppler word bounding boxes for region-limited strategies. QA isolated the second agenda heading as `PUBLIC MEETING OF COUNCIL`, then restored and reproduced the canonical full-page result.

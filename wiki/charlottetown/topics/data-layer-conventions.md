@@ -4,7 +4,7 @@ tags:
   - charlottetown
   - conventions
   - operations
-updated: 2026-05-04
+updated: 2026-07-06
 ---
 
 # Zoning Data-Layer Conventions
@@ -71,8 +71,8 @@ copyable reference implementation, including the `import_batch` +
 server backed by `@modelcontextprotocol/server-postgres`, which only
 exposes read SQL. All write paths go through Python scripts that open
 their own `psycopg` connection using credentials from `PG*` environment
-variables, defaulting to the local docker container on port 54329 (see
-`docker-compose.yml`).
+variables, defaulting to the active local Docker container on host port
+`55432`. Port `54329` is obsolete for the current workspace.
 
 Idiomatic skeleton, copied from existing scripts:
 
@@ -81,7 +81,7 @@ import os, psycopg
 
 def database_url() -> str:
     host = os.environ.get("PGHOST", "localhost")
-    port = os.environ.get("PGPORT", "54329")
+    port = os.environ.get("PGPORT", "55432")
     database = os.environ.get("PGDATABASE", "mdopendata")
     user = os.environ.get("PGUSER", "mdopendata")
     password = os.environ.get("PGPASSWORD", "mdopendata_dev")

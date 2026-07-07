@@ -5,7 +5,7 @@ tags:
   - database
   - standup
   - operations
-updated: 2026-05-06
+updated: 2026-07-06
 ---
 
 # Database Standup
@@ -80,11 +80,14 @@ numeric SQL files under `schema/sql/`.
 
 ```
 PGHOST=localhost
-PGPORT=54329
+PGPORT=55432
 PGDATABASE=mdopendata
 PGUSER=mdopendata
 PGPASSWORD=mdopendata_dev
 ```
+
+The active local host port is `55432`. Port `54329` is an obsolete local
+mapping retained in older notes and must not be used for current connections.
 
 Connection inside the `mdopendata-postgis` container uses port `5432`. The
 runner `scripts/run-migrations.py` calls `docker exec` against the container,

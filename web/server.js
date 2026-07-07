@@ -1,6 +1,7 @@
 import { createServer } from "node:http";
-import { readFile } from "node:fs/promises";
+import { mkdir, open, readFile, rename, unlink } from "node:fs/promises";
 import { execFile } from "node:child_process";
+import { createHash, randomUUID } from "node:crypto";
 import path from "node:path";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
@@ -66,11 +67,17 @@ const councilMeetingPageImageRoot = path.join(
   "page-images",
 );
 const currentCouncilMeetingKey = "charlottetown-2026-05-12-regular-council";
+const documentIngestionRoot = path.join(repoRoot, "data", "document-ingestion");
+const packageUploadRoot = path.join(documentIngestionRoot, "uploads");
+const packageArtifactRoot = path.join(documentIngestionRoot, "packages");
+const maxPackageUploadBytes = Number(process.env.DOCUMENT_UPLOAD_MAX_BYTES || 500 * 1024 * 1024);
+const packageRenderDpi = Number(process.env.DOCUMENT_RENDER_DPI || 120);
+const packageTraversalJobs = new Map();
 
 const publicDir = path.join(__dirname, "public");
 const pool = new Pool({
   host: process.env.PGHOST || "localhost",
-  port: Number(process.env.PGPORT || 54329),
+  port: Number(process.env.PGPORT || 55432),
   database: process.env.PGDATABASE || "mdopendata",
   user: process.env.PGUSER || "mdopendata",
   password: process.env.PGPASSWORD || "mdopendata_dev",
@@ -2382,6 +2389,1390 @@ async function loadProvisionsComparison() {
   };
 }
 
+function packageUploadFilename(request) {
+  const encoded = toStringValue(request.headers["x-file-name"]);
+  let name;
+  try {
+    name = decodeURIComponent(encoded);
+  } catch {
+    const error = new Error("x-file-name must be URI encoded.");
+    error.statusCode = 400;
+    throw error;
+  }
+  name = path.basename(name).trim();
+  if (!name || path.extname(name).toLowerCase() !== ".pdf") {
+    const error = new Error("A PDF filename is required.");
+    error.statusCode = 400;
+    throw error;
+  }
+  return name;
+}
+
+async function receivePackageUpload(request) {
+  if (toStringValue(request.headers["content-type"]).split(";", 1)[0].trim() !== "application/pdf") {
+    const error = new Error("Content-Type must be application/pdf.");
+    error.statusCode = 415;
+    throw error;
+  }
+  const originalFilename = packageUploadFilename(request);
+  const declaredLength = Number(request.headers["content-length"] || 0);
+  if (declaredLength > maxPackageUploadBytes) {
+    const error = new Error(`PDF exceeds the ${maxPackageUploadBytes}-byte upload limit.`);
+    error.statusCode = 413;
+    throw error;
+  }
+
+  await mkdir(packageUploadRoot, { recursive: true });
+  const uploadId = randomUUID();
+  const temporaryPath = path.join(packageUploadRoot, `.${uploadId}.uploading`);
+  const file = await open(temporaryPath, "wx");
+  const hash = createHash("sha256");
+  let size = 0;
+  let signature = Buffer.alloc(0);
+  try {
+    for await (const chunk of request) {
+      size += chunk.length;
+      if (size > maxPackageUploadBytes) {
+        const error = new Error(`PDF exceeds the ${maxPackageUploadBytes}-byte upload limit.`);
+        error.statusCode = 413;
+        throw error;
+      }
+      if (signature.length < 5) {
+        signature = Buffer.concat([signature, chunk.subarray(0, 5 - signature.length)]);
+      }
+      hash.update(chunk);
+      await file.write(chunk);
+    }
+  } catch (error) {
+    await file.close();
+    await unlink(temporaryPath).catch(() => {});
+    throw error;
+  }
+  await file.close();
+  if (size === 0 || signature.toString("ascii") !== "%PDF-") {
+    await unlink(temporaryPath).catch(() => {});
+    const error = new Error("Uploaded file does not have a PDF signature.");
+    error.statusCode = 400;
+    throw error;
+  }
+  return { originalFilename, size, sha256: hash.digest("hex"), temporaryPath };
+}
+
+function mapPackageExtraction(row, duplicate = false) {
+  return {
+    packageKey: row.source_document_key,
+    sourceDocumentId: toStringValue(row.source_document_id),
+    packageExtractionId: toStringValue(row.package_extraction_id),
+    originalFilename: row.title_raw,
+    sourceFileHash: row.source_file_hash,
+    pageCount: row.page_count,
+    extractionStatus: row.extraction_status,
+    unresolvedTemplateCount: row.unresolved_template_count,
+    pipelineVersion: row.pipeline_version,
+    createdAt: row.created_at,
+    duplicate,
+  };
+}
+
+async function registerPackageUpload(upload) {
+  const client = await pool.connect();
+  const packageKey = `agenda-package-${upload.sha256.slice(0, 24)}`;
+  const repoRelpath = `data/document-ingestion/uploads/${upload.sha256}.pdf`;
+  const finalPath = path.join(packageUploadRoot, `${upload.sha256}.pdf`);
+  let moved = false;
+  try {
+    await client.query("BEGIN");
+    const existing = await client.query(`
+      SELECT sd.source_document_id, sd.source_document_key, sd.title_raw,
+             sd.source_file_hash, sd.page_count, pe.package_extraction_id,
+             pe.extraction_status, pe.unresolved_template_count,
+             pe.pipeline_version, pe.created_at
+      FROM documents.source_document sd
+      JOIN documents.package_extraction pe ON pe.source_document_id = sd.source_document_id AND pe.is_active
+      WHERE sd.source_file_hash = $1 AND sd.is_active
+      ORDER BY pe.created_at DESC
+      LIMIT 1
+    `, [upload.sha256]);
+    if (existing.rows[0]) {
+      await client.query("COMMIT");
+      await unlink(upload.temporaryPath).catch(() => {});
+      return mapPackageExtraction(existing.rows[0], true);
+    }
+
+    await rename(upload.temporaryPath, finalPath);
+    moved = true;
+    const batchKey = `package-upload-${randomUUID()}`;
+    const naturalDocumentKey = `documents:source-document:${packageKey}`;
+    const inserted = await client.query(`
+      WITH batch AS (
+        INSERT INTO documents.ingest_batch (
+          batch_key, source_root, ingester_name, ingester_version,
+          completed_at, status, diagnostics, natural_key, content_hash
+        ) VALUES ($1, $2, 'web-package-upload', '1', now(), 'completed', $3::jsonb, $4, $5)
+        RETURNING ingest_batch_id
+      ), source AS (
+        INSERT INTO documents.source_document (
+          ingest_batch_id, source_document_key, jurisdiction_key,
+          jurisdiction_name_raw, municipality_raw, province, country,
+          document_family_key, document_type_key, title_raw, repo_relpath,
+          mime_type, source_file_hash, metadata, natural_key, content_hash
+        )
+        SELECT ingest_batch_id, $6, 'charlottetown-pe', 'City of Charlottetown',
+          'Charlottetown', 'PE', 'Canada', 'council-meeting', 'agenda-package',
+          $7, $8, 'application/pdf', $5, $9::jsonb, $10, $5
+        FROM batch
+        RETURNING *
+      ), extraction AS (
+        INSERT INTO documents.package_extraction (
+          source_document_id, extraction_status, unresolved_template_count,
+          pipeline_version, diagnostics, natural_key, content_hash
+        )
+        SELECT source_document_id, 'discovering_templates', 0,
+          'agenda-package-upload-v1', '{}'::jsonb,
+          'documents:package-extraction:' || source_document_key || ':1', $5
+        FROM source
+        RETURNING *
+      )
+      SELECT source.source_document_id, source.source_document_key,
+             source.title_raw, source.source_file_hash, source.page_count,
+             extraction.package_extraction_id, extraction.extraction_status,
+             extraction.unresolved_template_count, extraction.pipeline_version,
+             extraction.created_at
+      FROM source CROSS JOIN extraction
+    `, [
+      batchKey,
+      "data/document-ingestion/uploads",
+      JSON.stringify({ upload_bytes: upload.size }),
+      `documents:ingest-batch:${batchKey}`,
+      upload.sha256,
+      packageKey,
+      upload.originalFilename,
+      repoRelpath,
+      JSON.stringify({ original_filename: upload.originalFilename, upload_bytes: upload.size }),
+      naturalDocumentKey,
+    ]);
+    await client.query("COMMIT");
+    return mapPackageExtraction(inserted.rows[0]);
+  } catch (error) {
+    await client.query("ROLLBACK").catch(() => {});
+    if (moved) await unlink(finalPath).catch(() => {});
+    else await unlink(upload.temporaryPath).catch(() => {});
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
+async function loadPackageExtraction(packageKey) {
+  const { rows } = await pool.query(`
+    SELECT sd.source_document_id, sd.source_document_key, sd.title_raw,
+           sd.source_file_hash, sd.page_count, pe.package_extraction_id,
+           pe.extraction_status, pe.unresolved_template_count,
+           pe.pipeline_version, pe.created_at
+    FROM documents.source_document sd
+    JOIN documents.package_extraction pe ON pe.source_document_id = sd.source_document_id AND pe.is_active
+    WHERE sd.source_document_key = $1 AND sd.is_active
+    ORDER BY pe.created_at DESC
+    LIMIT 1
+  `, [packageKey]);
+  return rows[0] ? mapPackageExtraction(rows[0]) : null;
+}
+
+async function packageSourceRecord(packageKey) {
+  const { rows } = await pool.query(`
+    SELECT source_document_id, source_document_key, repo_relpath,
+           source_file_hash, page_count
+    FROM documents.source_document
+    WHERE source_document_key = $1 AND is_active
+    LIMIT 1
+  `, [packageKey]);
+  if (!rows[0]) {
+    const error = new Error("Agenda package not found.");
+    error.statusCode = 404;
+    throw error;
+  }
+  return rows[0];
+}
+
+function parsePdfPageCount(pdfInfoOutput) {
+  const match = pdfInfoOutput.match(/^Pages:\s+(\d+)\s*$/mi);
+  const pageCount = Number(match?.[1]);
+  if (!Number.isInteger(pageCount) || pageCount < 1) {
+    throw new Error("Unable to determine PDF page count.");
+  }
+  return pageCount;
+}
+
+async function sha256File(filePath) {
+  const body = await readFile(filePath);
+  return createHash("sha256").update(body).digest("hex");
+}
+
+async function loadPackagePages(packageKey) {
+  const { rows } = await pool.query(`
+    SELECT sp.page_number, sp.page_label_raw, sp.source_locator,
+           sp.text_raw, sp.text_extraction_status, sp.render_dpi,
+           sa.repo_relpath AS image_repo_relpath
+    FROM documents.source_document sd
+    JOIN documents.source_page sp ON sp.source_document_id = sd.source_document_id AND sp.is_active
+    LEFT JOIN documents.source_asset sa
+      ON sa.source_page_id = sp.source_page_id
+     AND sa.asset_type = 'page_render'
+     AND sa.is_active
+    WHERE sd.source_document_key = $1 AND sd.is_active
+    ORDER BY sp.page_number
+  `, [packageKey]);
+  return rows.map((row) => ({
+    pageNumber: row.page_number,
+    pageLabel: row.page_label_raw,
+    sourceLocator: row.source_locator,
+    textStatus: row.text_extraction_status,
+    textLength: row.text_raw?.length || 0,
+    textPreview: compactText(row.text_raw)?.slice(0, 280) || "",
+    renderDpi: row.render_dpi,
+    imageUrl: row.image_repo_relpath
+      ? `/api/document-ingestion/packages/${encodeURIComponent(packageKey)}/pages/${row.page_number}/image`
+      : null,
+  }));
+}
+
+async function traversePackageNow(packageKey) {
+  const source = await packageSourceRecord(packageKey);
+  const currentPages = await loadPackagePages(packageKey);
+  if (source.page_count && currentPages.length === source.page_count && currentPages.every((page) => page.imageUrl)) {
+    return { packageKey, pageCount: source.page_count, pages: currentPages, reused: true };
+  }
+
+  const sourcePath = path.resolve(repoRoot, source.repo_relpath);
+  const uploadRootResolved = path.resolve(packageUploadRoot);
+  if (!sourcePath.startsWith(`${uploadRootResolved}${path.sep}`)) {
+    throw new Error("Package source path is outside the upload root.");
+  }
+  const artifactDir = path.join(packageArtifactRoot, source.source_file_hash);
+  const pageDir = path.join(artifactDir, "pages");
+  await mkdir(pageDir, { recursive: true });
+
+  const { stdout: pdfInfo } = await execFileAsync("pdfinfo", [sourcePath], { maxBuffer: 1024 * 1024 });
+  const pageCount = parsePdfPageCount(pdfInfo);
+  await execFileAsync("pdftoppm", [
+    "-png", "-r", String(packageRenderDpi), sourcePath, path.join(pageDir, "page"),
+  ], { maxBuffer: 8 * 1024 * 1024, timeout: 20 * 60 * 1000 });
+
+  const pages = [];
+  for (let pageNumber = 1; pageNumber <= pageCount; pageNumber += 1) {
+    const imagePath = path.join(pageDir, `page-${pageNumber}.png`);
+    const { stdout: textRaw } = await execFileAsync("pdftotext", [
+      "-f", String(pageNumber), "-l", String(pageNumber), "-layout", sourcePath, "-",
+    ], { maxBuffer: 4 * 1024 * 1024 });
+    const imageHash = await sha256File(imagePath);
+    pages.push({ pageNumber, imagePath, imageHash, textRaw });
+  }
+
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN");
+    await client.query(`
+      UPDATE documents.source_document
+      SET page_count = $2,
+          metadata = metadata || jsonb_build_object('traversed_at', now(), 'render_dpi', $3::integer)
+      WHERE source_document_id = $1
+    `, [source.source_document_id, pageCount, packageRenderDpi]);
+    await client.query(`
+      DELETE FROM documents.source_page
+      WHERE source_document_id = $1
+    `, [source.source_document_id]);
+    for (const page of pages) {
+      const sourceLocator = `${packageKey}#page=${page.pageNumber}`;
+      const textStatus = page.textRaw.trim() ? "embedded" : "empty";
+      const pageHash = createHash("sha256").update(page.textRaw).digest("hex");
+      const insertedPage = await client.query(`
+        INSERT INTO documents.source_page (
+          source_document_id, page_number, page_label_raw, source_locator,
+          text_raw, text_extraction_status, render_dpi, metadata,
+          natural_key, content_hash
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, '{}'::jsonb, $8, $9)
+        RETURNING source_page_id
+      `, [
+        source.source_document_id,
+        page.pageNumber,
+        String(page.pageNumber),
+        sourceLocator,
+        page.textRaw,
+        textStatus,
+        packageRenderDpi,
+        `documents:source-page:${packageKey}:${page.pageNumber}`,
+        pageHash,
+      ]);
+      const imageRepoRelpath = path.relative(repoRoot, page.imagePath).replaceAll(path.sep, "/");
+      await client.query(`
+        INSERT INTO documents.source_asset (
+          source_document_id, source_page_id, asset_type, repo_relpath,
+          mime_type, file_hash, render_dpi, metadata, natural_key, content_hash
+        ) VALUES ($1, $2, 'page_render', $3, 'image/png', $4, $5,
+                  '{}'::jsonb, $6, $4)
+      `, [
+        source.source_document_id,
+        insertedPage.rows[0].source_page_id,
+        imageRepoRelpath,
+        page.imageHash,
+        packageRenderDpi,
+        `documents:source-asset:${packageKey}:${page.pageNumber}:page-render`,
+      ]);
+    }
+    await client.query(`
+      UPDATE documents.package_extraction
+      SET diagnostics = diagnostics || jsonb_build_object(
+        'traversal_status', 'completed',
+        'page_count', $2::integer,
+        'render_dpi', $3::integer,
+        'traversed_at', now()
+      )
+      WHERE source_document_id = $1 AND is_active
+    `, [source.source_document_id, pageCount, packageRenderDpi]);
+    await client.query("COMMIT");
+  } catch (error) {
+    await client.query("ROLLBACK").catch(() => {});
+    throw error;
+  } finally {
+    client.release();
+  }
+  return { packageKey, pageCount, pages: await loadPackagePages(packageKey), reused: false };
+}
+
+async function traversePackage(packageKey) {
+  if (!packageTraversalJobs.has(packageKey)) {
+    const job = traversePackageNow(packageKey).finally(() => packageTraversalJobs.delete(packageKey));
+    packageTraversalJobs.set(packageKey, job);
+  }
+  return packageTraversalJobs.get(packageKey);
+}
+
+async function loadPackagePageAsset(packageKey, pageNumber) {
+  const { rows } = await pool.query(`
+    SELECT sp.text_raw, sa.repo_relpath
+    FROM documents.source_document sd
+    JOIN documents.source_page sp ON sp.source_document_id = sd.source_document_id AND sp.is_active
+    LEFT JOIN documents.source_asset sa
+      ON sa.source_page_id = sp.source_page_id
+     AND sa.asset_type = 'page_render'
+     AND sa.is_active
+    WHERE sd.source_document_key = $1 AND sd.is_active AND sp.page_number = $2
+    LIMIT 1
+  `, [packageKey, pageNumber]);
+  if (!rows[0]) {
+    const error = new Error("Package page not found.");
+    error.statusCode = 404;
+    throw error;
+  }
+  return rows[0];
+}
+
+async function loadApprovedPagePatterns() {
+  const { rows } = await pool.query(`
+    SELECT p.pattern_id, p.pattern_key, p.pattern_name, p.confidence_rule,
+           pt.page_template_id, pt.page_template_key, pt.name AS page_template_name,
+           COALESCE(jsonb_agg(jsonb_build_object(
+             'cue_type', pc.cue_type,
+             'cue_value', pc.cue_value,
+             'cue_config', pc.cue_config,
+             'required', pc.required,
+             'weight', pc.weight
+           ) ORDER BY pc.pattern_cue_id) FILTER (WHERE pc.pattern_cue_id IS NOT NULL), '[]'::jsonb) AS cues
+    FROM documents.pattern p
+    JOIN documents.page_template pt
+      ON pt.page_template_id = p.page_template_id
+     AND pt.is_active
+     AND pt.status = 'active'
+    LEFT JOIN documents.pattern_cue pc
+      ON pc.pattern_id = p.pattern_id
+     AND pc.is_active
+    WHERE p.is_active
+      AND p.pattern_scope = 'page'
+      AND p.status = 'approved'
+    GROUP BY p.pattern_id, pt.page_template_id
+    ORDER BY p.pattern_key
+  `);
+  return rows;
+}
+
+function pageCueMatches(cue, page, pageCount) {
+  const value = toStringValue(cue.cue_value);
+  const config = cue.cue_config || {};
+  if (cue.cue_type === "text") {
+    return page.text_raw.normalize("NFKC").toLocaleLowerCase().includes(value.normalize("NFKC").toLocaleLowerCase());
+  }
+  if (cue.cue_type === "regex") {
+    try {
+      const flags = toStringValue(config.flags || "i").replace(/[^gimsuy]/g, "");
+      return new RegExp(value, flags).test(page.text_raw);
+    } catch {
+      return false;
+    }
+  }
+  if (cue.cue_type === "page_position") {
+    const position = toStringValue(config.position || value).toLowerCase();
+    if (position === "first") return page.page_number === 1;
+    if (position === "last") return page.page_number === pageCount;
+    if (Number.isInteger(Number(config.page_number))) return page.page_number === Number(config.page_number);
+    const minimum = Number(config.minimum || 1);
+    const maximum = Number(config.maximum || pageCount);
+    return page.page_number >= minimum && page.page_number <= maximum;
+  }
+  return false;
+}
+
+function scorePagePattern(pattern, page, pageCount) {
+  const cues = Array.isArray(pattern.cues) ? pattern.cues : [];
+  if (!cues.length) return { eligible: false, confidence: 0, cueEvidence: [] };
+  const cueEvidence = cues.map((cue) => {
+    const matched = pageCueMatches(cue, page, pageCount);
+    const weight = Number(cue.weight ?? 1);
+    return { type: cue.cue_type, value: cue.cue_value, required: cue.required, weight, matched };
+  });
+  const requiredMatched = cueEvidence.filter((cue) => cue.required).every((cue) => cue.matched);
+  const totalWeight = cueEvidence.reduce((sum, cue) => sum + Math.max(cue.weight, 0), 0);
+  const matchedWeight = cueEvidence.filter((cue) => cue.matched).reduce((sum, cue) => sum + Math.max(cue.weight, 0), 0);
+  const confidence = totalWeight > 0 ? matchedWeight / totalWeight : 0;
+  const threshold = Number(pattern.confidence_rule?.minimum_score ?? 0.75);
+  return { eligible: requiredMatched && confidence >= threshold, confidence, threshold, cueEvidence };
+}
+
+function classificationHash(payload) {
+  return createHash("sha256").update(JSON.stringify(payload)).digest("hex");
+}
+
+async function classifyPackagePages(packageKey) {
+  const source = await packageSourceRecord(packageKey);
+  const { rows: sourcePages } = await pool.query(`
+    SELECT source_page_id, page_number, COALESCE(text_raw, '') AS text_raw
+    FROM documents.source_page
+    WHERE source_document_id = $1 AND is_active
+    ORDER BY page_number
+  `, [source.source_document_id]);
+  if (!sourcePages.length || sourcePages.length !== source.page_count) {
+    const error = new Error("Package traversal must complete before classification.");
+    error.statusCode = 409;
+    throw error;
+  }
+  const patterns = await loadApprovedPagePatterns();
+  const results = sourcePages.map((page) => {
+    const candidates = patterns.map((pattern) => ({
+      pattern,
+      ...scorePagePattern(pattern, page, source.page_count),
+    })).filter((candidate) => candidate.eligible)
+      .sort((a, b) => b.confidence - a.confidence || a.pattern.pattern_key.localeCompare(b.pattern.pattern_key));
+    const best = candidates[0] || null;
+    const tied = best
+      ? candidates.filter((candidate) => Math.abs(candidate.confidence - best.confidence) <= 0.01
+          && candidate.pattern.page_template_id !== best.pattern.page_template_id)
+      : [];
+    const matched = best && tied.length === 0;
+    const reason = patterns.length === 0
+      ? "no_approved_templates"
+      : tied.length > 0
+        ? "ambiguous_template_match"
+        : best
+          ? "approved_template_match"
+          : "no_template_match";
+    return { page, matched, best, reason, candidateCount: candidates.length };
+  });
+
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN");
+    const unknownPageIds = [];
+    for (const result of results) {
+      const pattern = result.matched ? result.best.pattern : null;
+      const evidence = {
+        reason: result.reason,
+        approved_pattern_count: patterns.length,
+        eligible_candidate_count: result.candidateCount,
+        cue_evidence: result.best?.cueEvidence || [],
+      };
+      const naturalKey = `documents:page-classification:${packageKey}:${result.page.page_number}`;
+      const payload = {
+        page: result.page.page_number,
+        pattern: pattern?.pattern_key || null,
+        template: pattern?.page_template_key || null,
+        evidence,
+      };
+      await client.query(`
+        INSERT INTO documents.page_classification (
+          source_page_id, pattern_id, page_template_id, classification_source,
+          confidence, review_status, evidence, metadata, natural_key, content_hash
+        ) VALUES ($1, $2, $3, 'parser', $4, $5, $6::jsonb, '{}'::jsonb, $7, $8)
+        ON CONFLICT (natural_key) WHERE is_active DO UPDATE SET
+          pattern_id = EXCLUDED.pattern_id,
+          page_template_id = EXCLUDED.page_template_id,
+          classification_source = EXCLUDED.classification_source,
+          confidence = EXCLUDED.confidence,
+          review_status = EXCLUDED.review_status,
+          evidence = EXCLUDED.evidence,
+          content_hash = EXCLUDED.content_hash,
+          created_at = now()
+      `, [
+        result.page.source_page_id,
+        pattern?.pattern_id || null,
+        pattern?.page_template_id || null,
+        result.best?.confidence || 0,
+        result.matched ? "accepted" : "needs_review",
+        JSON.stringify(evidence),
+        naturalKey,
+        classificationHash(payload),
+      ]);
+      if (!result.matched) {
+        unknownPageIds.push(result.page.source_page_id);
+        const summary = compactText(result.page.text_raw)?.slice(0, 500)
+          || `Page ${result.page.page_number} has no extractable embedded text.`;
+        const gapNaturalKey = `documents:model-gap:${packageKey}:${result.page.page_number}:new-page-template`;
+        const gapEvidence = {
+          page_number: result.page.page_number,
+          source_locator: `${packageKey}#page=${result.page.page_number}`,
+          classification_reason: result.reason,
+          approved_pattern_count: patterns.length,
+        };
+        await client.query(`
+          INSERT INTO documents.model_gap (
+            source_document_id, source_page_id, gap_type,
+            observed_content_summary, blocking_reason, blocking_status,
+            proposed_owner_role, status, evidence, metadata,
+            natural_key, content_hash
+          ) VALUES ($1, $2, 'new_page_template', $3,
+                    'No approved page template matched this page.',
+                    'blocks_normalization', 'Business Analyst', 'open',
+                    $4::jsonb, '{}'::jsonb, $5, $6)
+          ON CONFLICT (natural_key) WHERE is_active DO UPDATE SET
+            observed_content_summary = EXCLUDED.observed_content_summary,
+            blocking_reason = EXCLUDED.blocking_reason,
+            blocking_status = EXCLUDED.blocking_status,
+            proposed_owner_role = EXCLUDED.proposed_owner_role,
+            status = 'open',
+            evidence = EXCLUDED.evidence,
+            content_hash = EXCLUDED.content_hash,
+            created_at = now()
+        `, [
+          source.source_document_id,
+          result.page.source_page_id,
+          summary,
+          JSON.stringify(gapEvidence),
+          gapNaturalKey,
+          classificationHash(gapEvidence),
+        ]);
+      }
+    }
+    if (unknownPageIds.length) {
+      await client.query(`
+        UPDATE documents.model_gap
+        SET status = 'resolved', is_active = false
+        WHERE source_document_id = $1
+          AND gap_type = 'new_page_template'
+          AND is_active
+          AND NOT (source_page_id = ANY($2::bigint[]))
+      `, [source.source_document_id, unknownPageIds]);
+    } else {
+      await client.query(`
+        UPDATE documents.model_gap
+        SET status = 'resolved', is_active = false
+        WHERE source_document_id = $1 AND gap_type = 'new_page_template' AND is_active
+      `, [source.source_document_id]);
+    }
+    await client.query(`
+      UPDATE documents.package_extraction
+          SET extraction_status = CASE
+            WHEN $2::integer > 0 THEN 'awaiting_template_approval'
+            WHEN extraction_status = 'completed' THEN 'completed'
+            WHEN EXISTS (
+              SELECT 1 FROM documents.package_document_assembly pda
+              WHERE pda.source_document_id = $1 AND pda.is_active AND pda.status = 'approved'
+            ) THEN 'ready_for_extraction'
+            ELSE 'awaiting_document_assembly'
+          END,
+          unresolved_template_count = $2,
+          diagnostics = diagnostics || jsonb_build_object(
+            'classification_status', 'completed',
+            'approved_pattern_count', $3::integer,
+            'matched_page_count', $4::integer,
+            'unknown_page_count', $2::integer,
+            'classified_at', now()
+          )
+      WHERE source_document_id = $1 AND is_active
+    `, [
+      source.source_document_id,
+      unknownPageIds.length,
+      patterns.length,
+      results.length - unknownPageIds.length,
+    ]);
+    await client.query("COMMIT");
+  } catch (error) {
+    await client.query("ROLLBACK").catch(() => {});
+    throw error;
+  } finally {
+    client.release();
+  }
+  return loadPackageClassifications(packageKey);
+}
+
+async function loadPackageClassifications(packageKey) {
+  const source = await packageSourceRecord(packageKey);
+  const [{ rows }, packageExtraction] = await Promise.all([
+    pool.query(`
+      SELECT sp.page_number, pc.confidence, pc.review_status, pc.evidence,
+             pt.page_template_key, pt.name AS page_template_name,
+             mg.model_gap_id, mg.status AS gap_status
+      FROM documents.source_page sp
+      LEFT JOIN documents.page_classification pc
+        ON pc.source_page_id = sp.source_page_id AND pc.is_active
+      LEFT JOIN documents.page_template pt ON pt.page_template_id = pc.page_template_id
+      LEFT JOIN documents.model_gap mg
+        ON mg.source_page_id = sp.source_page_id
+       AND mg.gap_type = 'new_page_template'
+       AND mg.is_active
+      WHERE sp.source_document_id = $1 AND sp.is_active
+      ORDER BY sp.page_number
+    `, [source.source_document_id]),
+    loadPackageExtraction(packageKey),
+  ]);
+  return {
+    packageKey,
+    extractionStatus: packageExtraction.extractionStatus,
+    unresolvedTemplateCount: packageExtraction.unresolvedTemplateCount,
+    pages: rows.map((row) => ({
+      pageNumber: row.page_number,
+      classificationStatus: row.page_template_key ? "matched" : row.review_status ? "unknown" : "not_classified",
+      pageTemplateKey: row.page_template_key,
+      pageTemplateName: row.page_template_name,
+      confidence: row.confidence === null ? null : Number(row.confidence),
+      reason: row.evidence?.reason || null,
+      modelGapId: row.model_gap_id ? toStringValue(row.model_gap_id) : null,
+      gapStatus: row.gap_status,
+    })),
+  };
+}
+
+function templateDraftOutput(page, packagePages) {
+  const lines = toStringValue(page.text_raw).split(/\r?\n/).map(compactText).filter(Boolean);
+  const candidateLines = lines.filter((line) => line.length >= 8 && line.length <= 120);
+  const heading = candidateLines.find((line) => packagePages.filter((other) =>
+    toStringValue(other.text_raw).toLocaleLowerCase().includes(line.toLocaleLowerCase())).length === 1)
+    || candidateLines[0] || `Package page ${page.page_number}`;
+  const cueValue = heading.normalize("NFKC").slice(0, 120);
+  return {
+    schema_version: "1.0",
+    page_role: page.page_number === 1 ? "agenda" : "supporting_document",
+    detection_cues: [{ type: "text", value: cueValue, required: true, weight: 1 }],
+    document_assembly: { mode: "single_or_contiguous_pages", continuation_cues: [] },
+    field_mappings: [
+      { field_key: "title", json_pointer: "/title", value_type: "string", required: true, extraction_instruction: "Extract the primary page heading.", extraction: { strategy: "first_nonempty_line" }, normalization: { trim: true } },
+      { field_key: "body_text", json_pointer: "/body_text", value_type: "string", required: false, extraction_instruction: "Preserve the page body text in reading order.", extraction: { strategy: "full_text" }, normalization: { trim: true } },
+    ],
+  };
+}
+
+function validateTemplateDraftInput(input) {
+  const name = compactText(input?.name);
+  const draftKey = compactText(input?.draftKey).toLowerCase();
+  const modelOutput = input?.modelOutput;
+  if (!name || !/^[a-z0-9][a-z0-9-]{2,79}$/.test(draftKey)) {
+    const error = new Error("Template name and a 3-80 character lowercase key are required.");
+    error.statusCode = 400;
+    throw error;
+  }
+  if (!modelOutput || !Array.isArray(modelOutput.detection_cues) || !modelOutput.detection_cues.length
+      || !Array.isArray(modelOutput.field_mappings) || !modelOutput.field_mappings.length) {
+    const error = new Error("Draft configuration requires detection_cues and field_mappings arrays.");
+    error.statusCode = 400;
+    throw error;
+  }
+  for (const cue of modelOutput.detection_cues) {
+    if (!["text", "regex", "page_position"].includes(cue?.type) || !compactText(cue?.value)) {
+      const error = new Error("Each detection cue requires a supported type and non-empty value.");
+      error.statusCode = 400;
+      throw error;
+    }
+  }
+  const fieldKeys = new Set();
+  const pointers = new Set();
+  const valueTypes = new Set(["string", "number", "integer", "boolean", "date", "array", "object"]);
+  const strategies = new Set(["first_nonempty_line", "full_text", "regex_capture", "constant", "page_texts"]);
+  for (const mapping of modelOutput.field_mappings) {
+    const fieldKey = compactText(mapping?.field_key);
+    const pointer = compactText(mapping?.json_pointer);
+    const strategy = compactText(mapping?.extraction?.strategy)
+      || (fieldKey === "title" ? "first_nonempty_line" : fieldKey === "body_text" ? "full_text" : "");
+    if (!/^[a-z][a-z0-9_]{1,79}$/.test(fieldKey) || !/^\/(?:[^/]+)(?:\/[^/]+)*$/.test(pointer)
+        || !valueTypes.has(mapping?.value_type) || typeof mapping?.required !== "boolean"
+        || !compactText(mapping?.extraction_instruction) || !strategies.has(strategy)) {
+      const error = new Error("Each field mapping requires a valid key, JSON Pointer, value type, required flag, instruction, and deterministic strategy.");
+      error.statusCode = 400;
+      throw error;
+    }
+    if (fieldKeys.has(fieldKey) || pointers.has(pointer)) {
+      const error = new Error("Field mapping keys and JSON Pointers must be unique within a template.");
+      error.statusCode = 400;
+      throw error;
+    }
+    if (strategy === "regex_capture") {
+      try { new RegExp(toStringValue(mapping.extraction?.pattern), toStringValue(mapping.extraction?.flags || "im").replace(/[^gimsuy]/g, "")); }
+      catch {
+        const error = new Error(`Field mapping ${fieldKey} contains an invalid regular expression.`);
+        error.statusCode = 400;
+        throw error;
+      }
+      if (!compactText(mapping.extraction?.pattern)) {
+        const error = new Error(`Field mapping ${fieldKey} requires a regular-expression pattern.`);
+        error.statusCode = 400;
+        throw error;
+      }
+    }
+    if (mapping.region !== undefined && mapping.region !== null) {
+      const region = mapping.region;
+      const values = [region.x, region.y, region.width, region.height].map(Number);
+      if (region.coordinate_space !== "normalized" || values.some((value) => !Number.isFinite(value) || value < 0 || value > 1)
+          || values[2] <= 0 || values[3] <= 0 || values[0] + values[2] > 1.000001 || values[1] + values[3] > 1.000001) {
+        const error = new Error(`Field mapping ${fieldKey} contains an invalid normalized page region.`);
+        error.statusCode = 400;
+        throw error;
+      }
+    }
+    fieldKeys.add(fieldKey);
+    pointers.add(pointer);
+  }
+  return { name, draftKey, description: compactText(input?.description), modelOutput };
+}
+
+async function loadTemplateDrafts(packageKey) {
+  const source = await packageSourceRecord(packageKey);
+  const { rows } = await pool.query(`
+    SELECT page_template_draft_id, draft_key, name, description, model_name,
+           model_output, source_page_numbers, status, approved_page_template_id,
+           approved_pattern_id, created_at, updated_at, approved_at
+    FROM documents.page_template_draft
+    WHERE source_document_id = $1
+    ORDER BY source_page_numbers[1], page_template_draft_id
+  `, [source.source_document_id]);
+  return {
+    packageKey,
+    drafts: rows.map((row) => ({
+      draftId: toStringValue(row.page_template_draft_id), draftKey: row.draft_key,
+      name: row.name, description: row.description, modelName: row.model_name,
+      modelOutput: row.model_output, sourcePageNumbers: row.source_page_numbers,
+      status: row.status, approvedPageTemplateId: row.approved_page_template_id && toStringValue(row.approved_page_template_id),
+      approvedPatternId: row.approved_pattern_id && toStringValue(row.approved_pattern_id),
+      createdAt: row.created_at, updatedAt: row.updated_at, approvedAt: row.approved_at,
+    })),
+  };
+}
+
+async function generateTemplateDrafts(packageKey) {
+  const source = await packageSourceRecord(packageKey);
+  const { rows } = await pool.query(`
+    SELECT sp.page_number, COALESCE(sp.text_raw, '') AS text_raw
+    FROM documents.source_page sp
+    JOIN documents.model_gap mg ON mg.source_page_id = sp.source_page_id
+      AND mg.gap_type = 'new_page_template' AND mg.is_active AND mg.status = 'open'
+    WHERE sp.source_document_id = $1 AND sp.is_active
+    ORDER BY sp.page_number
+  `, [source.source_document_id]);
+  if (!rows.length) {
+    const error = new Error("No unresolved page-template gaps are available for draft generation.");
+    error.statusCode = 409;
+    throw error;
+  }
+  for (const page of rows) {
+    const modelOutput = templateDraftOutput(page, rows);
+    const draftKey = `${packageKey}-page-${page.page_number}`.toLowerCase().replace(/[^a-z0-9-]/g, "-").slice(0, 80);
+    const naturalKey = `documents:page-template-draft:${packageKey}:${page.page_number}`;
+    const payload = { draftKey, modelOutput, sourcePageNumbers: [page.page_number] };
+    await pool.query(`
+      INSERT INTO documents.page_template_draft (
+        source_document_id, draft_key, name, description, model_name, model_output,
+        source_page_numbers, natural_key, content_hash
+      ) VALUES ($1, $2, $3, $4, 'local-template-drafter-v1', $5::jsonb, $6::integer[], $7, $8)
+      ON CONFLICT (natural_key) DO UPDATE SET
+        draft_key = CASE WHEN documents.page_template_draft.status = 'draft' THEN EXCLUDED.draft_key ELSE documents.page_template_draft.draft_key END,
+        model_output = CASE WHEN documents.page_template_draft.status = 'draft' THEN EXCLUDED.model_output ELSE documents.page_template_draft.model_output END,
+        content_hash = CASE WHEN documents.page_template_draft.status = 'draft' THEN EXCLUDED.content_hash ELSE documents.page_template_draft.content_hash END,
+        updated_at = CASE WHEN documents.page_template_draft.status = 'draft' THEN now() ELSE documents.page_template_draft.updated_at END
+    `, [source.source_document_id, draftKey, `Draft template for page ${page.page_number}`,
+      `Model-generated first pass for package page ${page.page_number}.`, JSON.stringify(modelOutput),
+      [page.page_number], naturalKey, classificationHash(payload)]);
+  }
+  return loadTemplateDrafts(packageKey);
+}
+
+async function updateTemplateDraft(packageKey, draftId, input) {
+  const source = await packageSourceRecord(packageKey);
+  const value = validateTemplateDraftInput(input);
+  const payload = { draftKey: value.draftKey, name: value.name, description: value.description, modelOutput: value.modelOutput };
+  const { rowCount } = await pool.query(`
+    UPDATE documents.page_template_draft
+    SET draft_key = $3, name = $4, description = $5, model_output = $6::jsonb,
+        content_hash = $7, updated_at = now()
+    WHERE page_template_draft_id = $1 AND source_document_id = $2 AND status = 'draft'
+  `, [draftId, source.source_document_id, value.draftKey, value.name, value.description,
+    JSON.stringify(value.modelOutput), classificationHash(payload)]);
+  if (!rowCount) {
+    const error = new Error("Editable template draft not found.");
+    error.statusCode = 404;
+    throw error;
+  }
+  return loadTemplateDrafts(packageKey);
+}
+
+async function approveTemplateDraft(packageKey, draftId, input) {
+  const source = await packageSourceRecord(packageKey);
+  const value = validateTemplateDraftInput(input);
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN");
+    const { rows } = await client.query(`
+      SELECT * FROM documents.page_template_draft
+      WHERE page_template_draft_id = $1 AND source_document_id = $2 AND status = 'draft'
+      FOR UPDATE
+    `, [draftId, source.source_document_id]);
+    const draft = rows[0];
+    if (!draft) {
+      const error = new Error("Approvable template draft not found.");
+      error.statusCode = 404;
+      throw error;
+    }
+    const templateNaturalKey = `documents:page-template:${value.draftKey}`;
+    const templatePayload = { name: value.name, description: value.description, configuration: value.modelOutput };
+    const templateResult = await client.query(`
+      INSERT INTO documents.page_template (
+        page_template_key, name, description, status, metadata, natural_key, content_hash
+      ) VALUES ($1, $2, $3, 'active', jsonb_build_object('configuration', $4::jsonb, 'approved_from_draft_id', $5::bigint), $6, $7)
+      RETURNING page_template_id
+    `, [value.draftKey, value.name, value.description, JSON.stringify(value.modelOutput), draftId,
+      templateNaturalKey, classificationHash(templatePayload)]);
+    const templateId = templateResult.rows[0].page_template_id;
+    const patternKey = `${value.draftKey}-page-pattern`;
+    const patternResult = await client.query(`
+      INSERT INTO documents.pattern (
+        pattern_key, pattern_scope, pattern_name, jurisdiction_scope, page_template_id,
+        status, confidence_rule, metadata, natural_key, content_hash
+      ) VALUES ($1, 'page', $2, 'global', $3, 'approved', '{"minimum_score":1}'::jsonb,
+        jsonb_build_object('approved_from_draft_id', $4::bigint), $5, $6)
+      RETURNING pattern_id
+    `, [patternKey, `${value.name} detection`, templateId, draftId,
+      `documents:pattern:${patternKey}`, classificationHash({ patternKey, cues: value.modelOutput.detection_cues })]);
+    const patternId = patternResult.rows[0].pattern_id;
+    for (const [index, cue] of value.modelOutput.detection_cues.entries()) {
+      const cueConfig = cue.config || {};
+      const cuePayload = { type: cue.type, value: cue.value, config: cueConfig, required: cue.required !== false, weight: Number(cue.weight ?? 1) };
+      await client.query(`
+        INSERT INTO documents.pattern_cue (
+          pattern_id, cue_type, cue_value, cue_config, required, weight,
+          natural_key, content_hash
+        ) VALUES ($1, $2, $3, $4::jsonb, $5, $6, $7, $8)
+      `, [patternId, cue.type, compactText(cue.value), JSON.stringify(cueConfig), cue.required !== false,
+        Number(cue.weight ?? 1), `documents:pattern-cue:${patternKey}:${index + 1}`, classificationHash(cuePayload)]);
+    }
+    await client.query(`
+      UPDATE documents.page_template_draft
+      SET draft_key = $2, name = $3, description = $4, model_output = $5::jsonb,
+          status = 'approved', approved_page_template_id = $6, approved_pattern_id = $7,
+          approved_at = now(), updated_at = now(), content_hash = $8
+      WHERE page_template_draft_id = $1
+    `, [draftId, value.draftKey, value.name, value.description, JSON.stringify(value.modelOutput),
+      templateId, patternId, classificationHash(templatePayload)]);
+    await client.query(`
+      UPDATE documents.model_gap mg
+      SET status = 'resolved', is_active = false,
+          metadata = mg.metadata || jsonb_build_object('approved_page_template_id', $3::bigint, 'approved_draft_id', $4::bigint)
+      FROM documents.source_page sp
+      WHERE mg.source_page_id = sp.source_page_id AND mg.source_document_id = $1
+        AND sp.page_number = ANY($2::integer[]) AND mg.gap_type = 'new_page_template' AND mg.is_active
+    `, [source.source_document_id, draft.source_page_numbers, templateId, draftId]);
+    await client.query("COMMIT");
+  } catch (error) {
+    await client.query("ROLLBACK").catch(() => {});
+    throw error;
+  } finally {
+    client.release();
+  }
+  const classifications = await classifyPackagePages(packageKey);
+  return { ...(await loadTemplateDrafts(packageKey)), classifications };
+}
+
+function validateAssemblyDocuments(input, pageCount) {
+  const documents = input?.documents;
+  if (!Array.isArray(documents) || !documents.length) {
+    const error = new Error("Assembly plan requires at least one logical document.");
+    error.statusCode = 400;
+    throw error;
+  }
+  const normalized = documents.map((document, index) => ({
+    documentKey: compactText(document?.documentKey).toLowerCase(),
+    title: compactText(document?.title),
+    pageStart: Number(document?.pageStart),
+    pageEnd: Number(document?.pageEnd),
+    isAgenda: Boolean(document?.isAgenda),
+    primaryAgendaItemKey: compactText(document?.primaryAgendaItemKey) || null,
+    documentOrder: index + 1,
+  }));
+  for (const document of normalized) {
+    if (!/^[a-z0-9][a-z0-9-]{2,119}$/.test(document.documentKey) || !document.title
+        || !Number.isInteger(document.pageStart) || !Number.isInteger(document.pageEnd)
+        || document.pageStart < 1 || document.pageEnd < document.pageStart) {
+      const error = new Error("Each assembly document requires a valid key, title, and inclusive page range.");
+      error.statusCode = 400;
+      throw error;
+    }
+  }
+  if (new Set(normalized.map((document) => document.documentKey)).size !== normalized.length) {
+    const error = new Error("Assembly document keys must be unique.");
+    error.statusCode = 400;
+    throw error;
+  }
+  const agendaDocuments = normalized.filter((document) => document.isAgenda);
+  if (agendaDocuments.length !== 1 || !normalized[0].isAgenda || normalized[0].pageStart !== 1
+      || normalized[0].primaryAgendaItemKey) {
+    const error = new Error("The first logical document must be the sole agenda, begin on page 1, and have no agenda-item binding.");
+    error.statusCode = 400;
+    throw error;
+  }
+  let expectedPage = 1;
+  for (const document of normalized) {
+    if (document.pageStart !== expectedPage) {
+      const error = new Error("Assembly page ranges must be ordered, contiguous, and non-overlapping.");
+      error.statusCode = 400;
+      throw error;
+    }
+    expectedPage = document.pageEnd + 1;
+  }
+  if (expectedPage !== pageCount + 1) {
+    const error = new Error(`Assembly plan must cover all ${pageCount} package pages exactly once.`);
+    error.statusCode = 400;
+    throw error;
+  }
+  return normalized;
+}
+
+async function loadPackageAssembly(packageKey) {
+  const source = await packageSourceRecord(packageKey);
+  const { rows } = await pool.query(`
+    SELECT document_key, document_order, title, page_start, page_end, is_agenda,
+           primary_agenda_item_key, page_template_keys, assembly_rule, status,
+           created_at, updated_at, approved_at
+    FROM documents.package_document_assembly
+    WHERE source_document_id = $1 AND is_active
+    ORDER BY document_order
+  `, [source.source_document_id]);
+  return {
+    packageKey,
+    status: rows.length && rows.every((row) => row.status === "approved") ? "approved" : rows.length ? "draft" : "missing",
+    documents: rows.map((row) => ({
+      documentKey: row.document_key, documentOrder: row.document_order, title: row.title,
+      pageStart: row.page_start, pageEnd: row.page_end, isAgenda: row.is_agenda,
+      primaryAgendaItemKey: row.primary_agenda_item_key, pageTemplateKeys: row.page_template_keys,
+      assemblyRule: row.assembly_rule, status: row.status, approvedAt: row.approved_at,
+    })),
+  };
+}
+
+async function generatePackageAssembly(packageKey) {
+  const source = await packageSourceRecord(packageKey);
+  const { rows } = await pool.query(`
+    SELECT sp.page_number, pt.page_template_key
+    FROM documents.source_page sp
+    LEFT JOIN documents.page_classification pc ON pc.source_page_id = sp.source_page_id AND pc.is_active
+    LEFT JOIN documents.page_template pt ON pt.page_template_id = pc.page_template_id
+    WHERE sp.source_document_id = $1 AND sp.is_active
+    ORDER BY sp.page_number
+  `, [source.source_document_id]);
+  if (rows.length !== source.page_count) {
+    const error = new Error("Package traversal must complete before document assembly.");
+    error.statusCode = 409;
+    throw error;
+  }
+  const existing = await loadPackageAssembly(packageKey);
+  if (existing.documents.length) return existing;
+  const documents = rows.map((page) => ({
+    documentKey: page.page_number === 1 ? `${packageKey}-agenda` : `${packageKey}-document-${page.page_number}`,
+    title: page.page_number === 1 ? "Agenda" : `Supporting document beginning on page ${page.page_number}`,
+    pageStart: page.page_number, pageEnd: page.page_number, isAgenda: page.page_number === 1,
+    primaryAgendaItemKey: null,
+  }));
+  return savePackageAssembly(packageKey, { documents }, false);
+}
+
+async function savePackageAssembly(packageKey, input, approve) {
+  const source = await packageSourceRecord(packageKey);
+  const documents = validateAssemblyDocuments(input, source.page_count);
+  const { rows: pages } = await pool.query(`
+    SELECT sp.page_number, pc.review_status, pt.page_template_key
+    FROM documents.source_page sp
+    LEFT JOIN documents.page_classification pc ON pc.source_page_id = sp.source_page_id AND pc.is_active
+    LEFT JOIN documents.page_template pt ON pt.page_template_id = pc.page_template_id
+    WHERE sp.source_document_id = $1 AND sp.is_active
+    ORDER BY sp.page_number
+  `, [source.source_document_id]);
+  if (approve) {
+    const unresolved = pages.filter((page) => page.review_status !== "accepted" || !page.page_template_key);
+    if (unresolved.length) {
+      const error = new Error(`Assembly approval is blocked by ${unresolved.length} unresolved page classifications.`);
+      error.statusCode = 409;
+      throw error;
+    }
+    const missingBindings = documents.filter((document) => !document.isAgenda && !document.primaryAgendaItemKey);
+    if (missingBindings.length) {
+      const error = new Error("Every supporting document requires one primary agenda-item key before approval.");
+      error.statusCode = 400;
+      throw error;
+    }
+  }
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN");
+    await client.query(`
+      UPDATE documents.package_document_assembly SET is_active = false, updated_at = now()
+      WHERE source_document_id = $1 AND is_active
+    `, [source.source_document_id]);
+    for (const document of documents) {
+      const documentPages = pages.filter((page) => page.page_number >= document.pageStart && page.page_number <= document.pageEnd);
+      const templateKeys = [...new Set(documentPages.map((page) => page.page_template_key || `unresolved-page-${page.page_number}`))];
+      const assemblyRule = {
+        mode: document.pageStart === document.pageEnd ? "single_page" : "contiguous_page_range",
+        start_page_role: document.isAgenda ? "agenda_start" : "document_start",
+        continuation_page_role: document.pageStart === document.pageEnd ? null : "document_continuation",
+        end_page_role: document.pageStart === document.pageEnd ? null : "document_end",
+      };
+      const payload = { ...document, templateKeys, assemblyRule, status: approve ? "approved" : "draft" };
+      await client.query(`
+        INSERT INTO documents.package_document_assembly (
+          source_document_id, document_key, document_order, title, page_start, page_end,
+          is_agenda, primary_agenda_item_key, page_template_keys, assembly_rule,
+          status, natural_key, content_hash, approved_at
+        ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9::text[],$10::jsonb,$11,$12,$13,
+          CASE WHEN $11 = 'approved' THEN now() ELSE NULL END)
+      `, [source.source_document_id, document.documentKey, document.documentOrder, document.title,
+        document.pageStart, document.pageEnd, document.isAgenda, document.primaryAgendaItemKey,
+        templateKeys, JSON.stringify(assemblyRule), approve ? "approved" : "draft",
+        `documents:package-assembly:${packageKey}:${document.documentKey}:${Date.now()}`,
+        classificationHash(payload)]);
+    }
+    const unresolvedCount = pages.filter((page) => page.review_status !== "accepted" || !page.page_template_key).length;
+    await client.query(`
+      UPDATE documents.package_extraction
+      SET extraction_status = CASE
+        WHEN $2::integer > 0 THEN 'awaiting_template_approval'
+        WHEN $3::boolean THEN 'ready_for_extraction'
+        ELSE 'awaiting_document_assembly' END,
+        diagnostics = diagnostics || jsonb_build_object(
+          'assembly_status', CASE WHEN $3::boolean THEN 'approved' ELSE 'draft' END,
+          'logical_document_count', $4::integer,
+          'assembly_updated_at', now())
+      WHERE source_document_id = $1 AND is_active
+    `, [source.source_document_id, unresolvedCount, approve, documents.length]);
+    await client.query("COMMIT");
+  } catch (error) {
+    await client.query("ROLLBACK").catch(() => {});
+    throw error;
+  } finally {
+    client.release();
+  }
+  return loadPackageAssembly(packageKey);
+}
+
+function setJsonPointer(target, pointer, value) {
+  if (!/^\/(?:[^/]+)(?:\/[^/]+)*$/.test(pointer)) throw new Error(`Invalid extraction JSON Pointer: ${pointer}`);
+  const tokens = pointer.slice(1).split("/").map((token) => token.replace(/~1/g, "/").replace(/~0/g, "~"));
+  if (tokens.some((token) => ["__proto__", "prototype", "constructor"].includes(token))) {
+    throw new Error(`Unsafe extraction JSON Pointer: ${pointer}`);
+  }
+  let cursor = target;
+  for (const token of tokens.slice(0, -1)) {
+    if (!cursor[token] || typeof cursor[token] !== "object" || Array.isArray(cursor[token])) cursor[token] = {};
+    cursor = cursor[token];
+  }
+  cursor[tokens[tokens.length - 1]] = value;
+}
+
+function normalizedExtractedValue(value, normalization = {}) {
+  if (typeof value !== "string") return value;
+  let result = value.normalize("NFKC");
+  if (normalization.collapse_whitespace) result = result.replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n");
+  if (normalization.lowercase) result = result.toLocaleLowerCase();
+  if (normalization.uppercase) result = result.toLocaleUpperCase();
+  return normalization.trim === false ? result : result.trim();
+}
+
+function convertExtractedValue(value, valueType) {
+  if (value === null || value === undefined) return null;
+  if (valueType === "string" || valueType === "date") return toStringValue(value);
+  if (valueType === "number") {
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+  if (valueType === "integer") {
+    const parsed = Number(value);
+    return Number.isInteger(parsed) ? parsed : null;
+  }
+  if (valueType === "boolean") {
+    if (typeof value === "boolean") return value;
+    if (/^(true|yes|1)$/i.test(toStringValue(value))) return true;
+    if (/^(false|no|0)$/i.test(toStringValue(value))) return false;
+    return null;
+  }
+  if (valueType === "array") return Array.isArray(value) ? value : [value];
+  if (valueType === "object") return value && typeof value === "object" && !Array.isArray(value) ? value : null;
+  return value;
+}
+
+function extractMappedValue(mapping, documentPages, documentText, regionText = null) {
+  const extraction = mapping.extraction || {};
+  const strategy = extraction.strategy
+    || (mapping.field_key === "title" ? "first_nonempty_line" : null)
+    || (mapping.field_key === "body_text" ? "full_text" : null);
+  let value = null;
+  const sourceText = regionText === null ? documentText : regionText;
+  if (strategy === "first_nonempty_line") {
+    value = sourceText.split(/\r?\n/).map(compactText).find(Boolean) || null;
+  } else if (strategy === "full_text") {
+    value = sourceText;
+  } else if (strategy === "page_texts") {
+    value = regionText === null
+      ? documentPages.map((page) => ({ page_number: page.page_number, text: page.text_raw }))
+      : [{ page_number: mapping._source_page_number, text: regionText }];
+  } else if (strategy === "constant") {
+    value = extraction.value;
+  } else if (strategy === "regex_capture") {
+    try {
+      const flags = toStringValue(extraction.flags || "im").replace(/[^gimsuy]/g, "");
+      const match = new RegExp(toStringValue(extraction.pattern), flags).exec(sourceText);
+      value = match?.[Number(extraction.group ?? 1)] ?? null;
+    } catch (error) {
+      throw new Error(`Invalid regex extraction for ${mapping.field_key}: ${error.message}`);
+    }
+  } else {
+    throw new Error(`Field ${mapping.field_key} has no supported deterministic extraction strategy.`);
+  }
+  return convertExtractedValue(normalizedExtractedValue(value, mapping.normalization || {}), mapping.value_type);
+}
+
+function decodeXmlText(value) {
+  return value.replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(Number.parseInt(code, 16)))
+    .replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'").replace(/&amp;/g, "&");
+}
+
+async function loadPdfPageWords(sourcePath, pageNumber) {
+  const { stdout } = await execFileAsync("pdftotext", [
+    "-f", String(pageNumber), "-l", String(pageNumber), "-bbox-layout", sourcePath, "-",
+  ], { maxBuffer: 8 * 1024 * 1024 });
+  const pageMatch = stdout.match(/<page\s+width="([^"]+)"\s+height="([^"]+)"[^>]*>/i);
+  if (!pageMatch) throw new Error(`Poppler did not return page dimensions for page ${pageNumber}.`);
+  const width = Number(pageMatch[1]);
+  const height = Number(pageMatch[2]);
+  const words = [];
+  const wordPattern = /<word\s+xMin="([^"]+)"\s+yMin="([^"]+)"\s+xMax="([^"]+)"\s+yMax="([^"]+)"[^>]*>([\s\S]*?)<\/word>/gi;
+  let match;
+  while ((match = wordPattern.exec(stdout))) {
+    words.push({
+      xMin: Number(match[1]) / width, yMin: Number(match[2]) / height,
+      xMax: Number(match[3]) / width, yMax: Number(match[4]) / height,
+      text: decodeXmlText(match[5]),
+    });
+  }
+  return words;
+}
+
+function textWithinRegion(words, region) {
+  const right = Number(region.x) + Number(region.width);
+  const bottom = Number(region.y) + Number(region.height);
+  return words.filter((word) => {
+    const centerX = (word.xMin + word.xMax) / 2;
+    const centerY = (word.yMin + word.yMax) / 2;
+    return centerX >= Number(region.x) && centerX <= right && centerY >= Number(region.y) && centerY <= bottom;
+  }).map((word) => word.text).join(" ");
+}
+
+function templateConfiguration(row) {
+  const configuration = row.template_configuration || {};
+  return configuration && typeof configuration === "object" ? configuration : {};
+}
+
+async function loadPackageExtractionResult(packageKey) {
+  const extraction = await loadPackageExtraction(packageKey);
+  if (!extraction) {
+    const error = new Error("Agenda package not found.");
+    error.statusCode = 404;
+    throw error;
+  }
+  const { rows } = await pool.query(`
+    SELECT result_json FROM documents.package_extraction pe
+    JOIN documents.source_document sd USING(source_document_id)
+    WHERE sd.source_document_key = $1 AND sd.is_active AND pe.is_active
+    LIMIT 1
+  `, [packageKey]);
+  return { ...extraction, result: rows[0]?.result_json || null };
+}
+
+async function extractAgendaPackage(packageKey) {
+  const source = await packageSourceRecord(packageKey);
+  const sourcePath = path.resolve(repoRoot, source.repo_relpath);
+  const uploadRootResolved = path.resolve(packageUploadRoot);
+  if (!sourcePath.startsWith(`${uploadRootResolved}${path.sep}`)) throw new Error("Package source path is outside the upload root.");
+  const [{ rows: assemblyRows }, { rows: pageRows }, extraction] = await Promise.all([
+    pool.query(`
+      SELECT * FROM documents.package_document_assembly
+      WHERE source_document_id = $1 AND is_active AND status = 'approved'
+      ORDER BY document_order
+    `, [source.source_document_id]),
+    pool.query(`
+      SELECT sp.source_page_id, sp.page_number, COALESCE(sp.text_raw, '') AS text_raw,
+             pc.page_classification_id, pc.review_status, pt.page_template_key,
+             pt.metadata->'configuration' AS template_configuration
+      FROM documents.source_page sp
+      LEFT JOIN documents.page_classification pc ON pc.source_page_id = sp.source_page_id AND pc.is_active
+      LEFT JOIN documents.page_template pt ON pt.page_template_id = pc.page_template_id AND pt.is_active AND pt.status = 'active'
+      WHERE sp.source_document_id = $1 AND sp.is_active
+      ORDER BY sp.page_number
+    `, [source.source_document_id]),
+    loadPackageExtraction(packageKey),
+  ]);
+  if (extraction?.extractionStatus === "completed") return loadPackageExtractionResult(packageKey);
+  if (!extraction || !["ready_for_extraction", "failed"].includes(extraction.extractionStatus)) {
+    const error = new Error("Package must have approved templates and an approved assembly plan before extraction.");
+    error.statusCode = 409;
+    throw error;
+  }
+  if (!assemblyRows.length || pageRows.length !== source.page_count
+      || pageRows.some((page) => page.review_status !== "accepted" || !page.page_template_key)) {
+    const error = new Error("Approved assembly or page classifications are incomplete.");
+    error.statusCode = 409;
+    throw error;
+  }
+  await pool.query(`
+    UPDATE documents.package_extraction SET extraction_status = 'extracting'
+    WHERE source_document_id = $1 AND is_active
+  `, [source.source_document_id]);
+  try {
+    const pageWords = new Map();
+    const wordsForPage = (pageNumber) => {
+      if (!pageWords.has(pageNumber)) pageWords.set(pageNumber, loadPdfPageWords(sourcePath, pageNumber));
+      return pageWords.get(pageNumber);
+    };
+    const extractedDocuments = await Promise.all(assemblyRows.map(async (assembly) => {
+      const documentPages = pageRows.filter((page) => page.page_number >= assembly.page_start && page.page_number <= assembly.page_end);
+      const documentText = documentPages.map((page) => page.text_raw.trim()).join("\n\f\n").trim();
+      const mappingsByPointer = new Map();
+      for (const page of documentPages) {
+        const configuration = templateConfiguration(page);
+        for (const mapping of configuration.field_mappings || []) {
+          const existing = mappingsByPointer.get(mapping.json_pointer);
+          if (existing && existing.value_type !== mapping.value_type) {
+            throw new Error(`Conflicting value types for ${mapping.json_pointer} in ${assembly.document_key}.`);
+          }
+          if (!existing) mappingsByPointer.set(mapping.json_pointer, { ...mapping, _source_page_number: page.page_number });
+        }
+      }
+      const content = {};
+      for (const mapping of mappingsByPointer.values()) {
+        const regionText = mapping.region
+          ? textWithinRegion(await wordsForPage(mapping._source_page_number), mapping.region)
+          : null;
+        const value = extractMappedValue(mapping, documentPages, documentText, regionText);
+        if (mapping.required && (value === null || value === "" || (Array.isArray(value) && !value.length))) {
+          throw new Error(`Required field ${mapping.field_key} was not extracted for ${assembly.document_key}.`);
+        }
+        if (value !== null && value !== "") setJsonPointer(content, mapping.json_pointer, value);
+      }
+      const firstConfiguration = templateConfiguration(documentPages[0]);
+      const pageNumbers = documentPages.map((page) => page.page_number);
+      const pageTemplateKeys = [...new Set(documentPages.map((page) => page.page_template_key))];
+      return {
+        document_key: assembly.document_key,
+        document_role: assembly.is_agenda ? "agenda" : "agenda_item_document",
+        source_order: assembly.document_order,
+        primary_agenda_item_key: assembly.primary_agenda_item_key,
+        document_type_key: compactText(firstConfiguration.document_type_key)
+          || (assembly.is_agenda ? "agenda" : "supporting-document"),
+        title_raw: content.title || assembly.title,
+        page_numbers: pageNumbers,
+        page_template_keys: pageTemplateKeys,
+        content,
+        provenance: {
+          source_document_key: packageKey,
+          source_file_hash: source.source_file_hash,
+          pages: documentPages.map((page) => ({
+            page_number: page.page_number,
+            source_page_id: toStringValue(page.source_page_id),
+            page_classification_id: toStringValue(page.page_classification_id),
+            page_template_key: page.page_template_key,
+          })),
+          assembly_rule: assembly.assembly_rule,
+        },
+      };
+    }));
+    if (extractedDocuments[0]?.document_role !== "agenda") throw new Error("Extracted package does not begin with an agenda document.");
+    const packageResult = {
+      schema_version: 1,
+      package_key: packageKey,
+      source_document_key: packageKey,
+      pipeline_version: "agenda-package-deterministic-v1",
+      extraction_status: "completed",
+      unresolved_template_gaps: [],
+      documents: extractedDocuments,
+      diagnostics: {
+        extraction_method: "approved_deterministic_templates",
+        logical_document_count: extractedDocuments.length,
+        source_page_count: pageRows.length,
+      },
+    };
+    const client = await pool.connect();
+    try {
+      await client.query("BEGIN");
+      await client.query(`
+        UPDATE documents.package_extracted_document
+        SET is_active = false
+        WHERE package_extraction_id = $1 AND is_active
+      `, [extraction.packageExtractionId]);
+      for (const document of extractedDocuments) {
+        const payloadHash = classificationHash(document);
+        await client.query(`
+          INSERT INTO documents.package_extracted_document (
+            package_extraction_id, document_key, document_role, source_order,
+            primary_agenda_item_key, document_type_key, title_raw, page_numbers,
+            page_template_keys, content_json, provenance, natural_key, content_hash
+          ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8::integer[],$9::text[],$10::jsonb,$11::jsonb,$12,$13)
+        `, [extraction.packageExtractionId, document.document_key, document.document_role,
+          document.source_order, document.primary_agenda_item_key, document.document_type_key,
+          document.title_raw, document.page_numbers, document.page_template_keys,
+          JSON.stringify(document.content), JSON.stringify(document.provenance),
+          `documents:package-extracted-document:${packageKey}:${document.document_key}:${Date.now()}`,
+          payloadHash]);
+      }
+      await client.query(`
+        UPDATE documents.package_extraction
+        SET extraction_status = 'completed', agenda_document_key = $2,
+            unresolved_template_count = 0, result_json = $3::jsonb,
+            pipeline_version = $4, completed_at = now(), content_hash = $5,
+            diagnostics = diagnostics || $6::jsonb
+        WHERE source_document_id = $1 AND is_active
+      `, [source.source_document_id, extractedDocuments[0].document_key, JSON.stringify(packageResult),
+        packageResult.pipeline_version, classificationHash(packageResult),
+        JSON.stringify(packageResult.diagnostics)]);
+      await client.query("COMMIT");
+    } catch (error) {
+      await client.query("ROLLBACK").catch(() => {});
+      throw error;
+    } finally {
+      client.release();
+    }
+    return loadPackageExtractionResult(packageKey);
+  } catch (error) {
+    await pool.query(`
+      UPDATE documents.package_extraction
+      SET extraction_status = 'failed', diagnostics = diagnostics || jsonb_build_object('extraction_error', $2, 'failed_at', now())
+      WHERE source_document_id = $1 AND is_active
+    `, [source.source_document_id, error.message]).catch(() => {});
+    throw error;
+  }
+}
+
 function isMissingHelpSchema(error) {
   return error?.code === "42P01" || error?.code === "3F000";
 }
@@ -3925,6 +5316,8 @@ const routeEntrypoints = new Map([
   ["/council-meetings/", { file: "/ui_kits/council-meetings/index.html", baseHref: "/ui_kits/council-meetings/" }],
   ["/document-import", { file: "/ui_kits/document-import/index.html", baseHref: "/ui_kits/document-import/" }],
   ["/document-import/", { file: "/ui_kits/document-import/index.html", baseHref: "/ui_kits/document-import/" }],
+  ["/agenda-package-ingestion", { file: "/ui_kits/agenda-package-ingestion/index.html", baseHref: "/ui_kits/agenda-package-ingestion/" }],
+  ["/agenda-package-ingestion/", { file: "/ui_kits/agenda-package-ingestion/index.html", baseHref: "/ui_kits/agenda-package-ingestion/" }],
   ["/rezoning-parcel-lookup", { file: "/ui_kits/rezoning-parcel-lookup/index.html", baseHref: "/ui_kits/rezoning-parcel-lookup/" }],
   ["/rezoning-parcel-lookup/", { file: "/ui_kits/rezoning-parcel-lookup/index.html", baseHref: "/ui_kits/rezoning-parcel-lookup/" }],
   ["/rezoning-zoning-comparison", { file: "/ui_kits/rezoning-zoning-comparison/index.html", baseHref: "/ui_kits/rezoning-zoning-comparison/" }],
@@ -4013,6 +5406,190 @@ const server = createServer(async (request, response) => {
     if (url.pathname === "/api/section-equivalence") {
       const rows = await loadReviewRows();
       await sendJson(response, { source: "zoning.section_equivalence", rows: summarizeRows(rows) });
+      return;
+    }
+
+    if (url.pathname === "/api/document-ingestion/packages") {
+      if (request.method !== "POST") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const upload = await receivePackageUpload(request);
+      await sendJson(response, await registerPackageUpload(upload));
+      return;
+    }
+
+    const packageTraverseMatch = url.pathname.match(/^\/api\/document-ingestion\/packages\/([^/]+)\/traverse$/);
+    if (packageTraverseMatch) {
+      if (request.method !== "POST") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const packageKey = decodeURIComponent(packageTraverseMatch[1]).trim();
+      await sendJson(response, await traversePackage(packageKey));
+      return;
+    }
+
+    const packagePagesMatch = url.pathname.match(/^\/api\/document-ingestion\/packages\/([^/]+)\/pages$/);
+    if (packagePagesMatch) {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const packageKey = decodeURIComponent(packagePagesMatch[1]).trim();
+      const source = await packageSourceRecord(packageKey);
+      await sendJson(response, { packageKey, pageCount: source.page_count, pages: await loadPackagePages(packageKey) });
+      return;
+    }
+
+    const packageClassifyMatch = url.pathname.match(/^\/api\/document-ingestion\/packages\/([^/]+)\/classify$/);
+    if (packageClassifyMatch) {
+      if (request.method !== "POST") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const packageKey = decodeURIComponent(packageClassifyMatch[1]).trim();
+      await sendJson(response, await classifyPackagePages(packageKey));
+      return;
+    }
+
+    const packageClassificationsMatch = url.pathname.match(/^\/api\/document-ingestion\/packages\/([^/]+)\/classifications$/);
+    if (packageClassificationsMatch) {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const packageKey = decodeURIComponent(packageClassificationsMatch[1]).trim();
+      await sendJson(response, await loadPackageClassifications(packageKey));
+      return;
+    }
+
+    const packageDraftsMatch = url.pathname.match(/^\/api\/document-ingestion\/packages\/([^/]+)\/template-drafts$/);
+    if (packageDraftsMatch) {
+      const packageKey = decodeURIComponent(packageDraftsMatch[1]).trim();
+      if (request.method === "GET") {
+        await sendJson(response, await loadTemplateDrafts(packageKey));
+        return;
+      }
+      if (request.method === "POST") {
+        await sendJson(response, await generateTemplateDrafts(packageKey));
+        return;
+      }
+      response.writeHead(405);
+      response.end("Method not allowed");
+      return;
+    }
+
+    const packageDraftMatch = url.pathname.match(/^\/api\/document-ingestion\/packages\/([^/]+)\/template-drafts\/(\d+)(?:\/(approve))?$/);
+    if (packageDraftMatch) {
+      if (request.method !== "PUT" && !(request.method === "POST" && packageDraftMatch[3] === "approve")) {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const packageKey = decodeURIComponent(packageDraftMatch[1]).trim();
+      const draftId = packageDraftMatch[2];
+      const input = await readRequestJson(request);
+      await sendJson(response, packageDraftMatch[3] === "approve"
+        ? await approveTemplateDraft(packageKey, draftId, input)
+        : await updateTemplateDraft(packageKey, draftId, input));
+      return;
+    }
+
+    const packageAssemblyMatch = url.pathname.match(/^\/api\/document-ingestion\/packages\/([^/]+)\/assembly-plan(?:\/(approve))?$/);
+    if (packageAssemblyMatch) {
+      const packageKey = decodeURIComponent(packageAssemblyMatch[1]).trim();
+      if (request.method === "GET" && !packageAssemblyMatch[2]) {
+        await sendJson(response, await loadPackageAssembly(packageKey));
+        return;
+      }
+      if (request.method === "POST" && !packageAssemblyMatch[2]) {
+        await sendJson(response, await generatePackageAssembly(packageKey));
+        return;
+      }
+      if (request.method === "PUT" || (request.method === "POST" && packageAssemblyMatch[2] === "approve")) {
+        const input = await readRequestJson(request);
+        await sendJson(response, await savePackageAssembly(packageKey, input, packageAssemblyMatch[2] === "approve"));
+        return;
+      }
+      response.writeHead(405);
+      response.end("Method not allowed");
+      return;
+    }
+
+    const packageExtractionRunMatch = url.pathname.match(/^\/api\/document-ingestion\/packages\/([^/]+)\/extract$/);
+    if (packageExtractionRunMatch) {
+      if (request.method !== "POST") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const packageKey = decodeURIComponent(packageExtractionRunMatch[1]).trim();
+      await sendJson(response, await extractAgendaPackage(packageKey));
+      return;
+    }
+
+    const packageExtractionResultMatch = url.pathname.match(/^\/api\/document-ingestion\/packages\/([^/]+)\/result$/);
+    if (packageExtractionResultMatch) {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const packageKey = decodeURIComponent(packageExtractionResultMatch[1]).trim();
+      await sendJson(response, await loadPackageExtractionResult(packageKey));
+      return;
+    }
+
+    const packagePageAssetMatch = url.pathname.match(/^\/api\/document-ingestion\/packages\/([^/]+)\/pages\/(\d+)\/(image|text)$/);
+    if (packagePageAssetMatch) {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const packageKey = decodeURIComponent(packagePageAssetMatch[1]).trim();
+      const pageNumber = Number(packagePageAssetMatch[2]);
+      const asset = await loadPackagePageAsset(packageKey, pageNumber);
+      if (packagePageAssetMatch[3] === "text") {
+        await sendJson(response, { packageKey, pageNumber, text: asset.text_raw || "" });
+        return;
+      }
+      if (!asset.repo_relpath) {
+        const error = new Error("Package page image not found.");
+        error.statusCode = 404;
+        throw error;
+      }
+      const imagePath = path.resolve(repoRoot, asset.repo_relpath);
+      const artifactRootResolved = path.resolve(packageArtifactRoot);
+      if (!imagePath.startsWith(`${artifactRootResolved}${path.sep}`)) {
+        throw new Error("Package page image path is outside the artifact root.");
+      }
+      response.writeHead(200, { "content-type": "image/png", "cache-control": "private, max-age=3600" });
+      response.end(await readFile(imagePath));
+      return;
+    }
+
+    const packageIngestionMatch = url.pathname.match(/^\/api\/document-ingestion\/packages\/([^/]+)$/);
+    if (packageIngestionMatch) {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const packageKey = decodeURIComponent(packageIngestionMatch[1]).trim();
+      const packageExtraction = await loadPackageExtraction(packageKey);
+      if (!packageExtraction) {
+        response.writeHead(404, { "content-type": "application/json; charset=utf-8" });
+        response.end(JSON.stringify({ error: "Agenda package not found." }));
+        return;
+      }
+      await sendJson(response, packageExtraction);
       return;
     }
 

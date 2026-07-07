@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/mdopendata/agenda-package-extraction.schema.json",
+  "title": "Agenda Package Extraction",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "package_key", "source_document_key", "extraction_status", "pipeline_version", "unresolved_template_gaps", "documents"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "package_key": { "type": "string", "minLength": 1 },
+    "source_document_key": { "type": "string", "minLength": 1 },
+    "pipeline_version": { "type": "string", "minLength": 1 },
+    "extraction_status": {
+      "enum": ["discovering_templates", "awaiting_template_approval", "awaiting_document_assembly", "ready_for_extraction", "extracting", "completed", "failed"]
+    },
+    "unresolved_template_gaps": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/template_gap" }
+    },
+    "documents": {
+      "type": "array",
+      "minItems": 1,
+      "prefixItems": [{ "$ref": "#/$defs/agenda_document" }],
+      "items": { "$ref": "#/$defs/agenda_item_document" }
+    },
+    "diagnostics": { "type": "object" }
+  },
+  "allOf": [{
+    "if": { "properties": { "extraction_status": { "const": "completed" } }, "required": ["extraction_status"] },
+    "then": { "properties": { "unresolved_template_gaps": { "maxItems": 0 } } }
+  }],
+  "$defs": {
+    "template_gap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gap_key", "page_numbers", "status", "draft_template"],
+      "properties": {
+        "gap_key": { "type": "string", "minLength": 1 },
+        "page_numbers": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "integer", "minimum": 1 } },
+        "status": { "enum": ["model_draft", "user_editing", "awaiting_approval"] },
+        "draft_template": { "$ref": "#/$defs/template_definition" },
+        "evidence": { "type": "object" }
+      }
+    },
+    "template_definition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["page_template_key", "name", "approval_status", "page_roles", "field_mappings", "assembly_rules"],
+      "properties": {
+        "page_template_key": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "description": { "type": ["string", "null"] },
+        "approval_status": { "const": "review" },
+        "page_roles": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "field_mappings": { "type": "array", "items": { "$ref": "#/$defs/field_mapping" } },
+        "assembly_rules": { "type": "object" },
+        "detection_cues": { "type": "array", "items": { "type": "object" } }
+      }
+    },
+    "field_mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field_key", "json_pointer", "value_type", "required", "extraction_instruction"],
+      "properties": {
+        "field_key": { "type": "string", "minLength": 1 },
+        "json_pointer": { "type": "string", "pattern": "^/" },
+        "value_type": { "enum": ["string", "number", "integer", "boolean", "date", "array", "object"] },
+        "required": { "type": "boolean" },
+        "extraction_instruction": { "type": "string", "minLength": 1 },
+        "region": {
+          "type": ["object", "null"],
+          "properties": {
+            "coordinate_space": { "const": "normalized" },
+            "page_scope": { "const": "template_page" },
+            "preview_page_number": { "type": "integer", "minimum": 1 },
+            "x": { "type": "number", "minimum": 0, "maximum": 1 },
+            "y": { "type": "number", "minimum": 0, "maximum": 1 },
+            "width": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+            "height": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
+          },
+          "required": ["coordinate_space", "x", "y", "width", "height"]
+        },
+        "normalization": { "type": ["object", "null"] }
+        ,"extraction": {
+          "type": ["object", "null"],
+          "properties": {
+            "strategy": { "enum": ["first_nonempty_line", "full_text", "regex_capture", "constant", "page_texts"] },
+            "pattern": { "type": "string" },
+            "flags": { "type": "string" },
+            "group": { "type": "integer", "minimum": 0 },
+            "value": {}
+          }
+        }
+      }
+    },
+    "base_document": {
+      "type": "object",
+      "required": ["document_key", "document_role", "source_order", "document_type_key", "title_raw", "page_numbers", "page_template_keys", "content", "provenance"],
+      "properties": {
+        "document_key": { "type": "string", "minLength": 1 },
+        "document_role": { "type": "string" },
+        "source_order": { "type": "integer", "minimum": 1 },
+        "primary_agenda_item_key": { "type": ["string", "null"] },
+        "document_type_key": { "type": "string", "minLength": 1 },
+        "title_raw": { "type": ["string", "null"] },
+        "page_numbers": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "integer", "minimum": 1 } },
+        "page_template_keys": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "content": { "type": "object" },
+        "provenance": { "type": "object" }
+      }
+    },
+    "agenda_document": {
+      "allOf": [
+        { "$ref": "#/$defs/base_document" },
+        { "properties": { "document_role": { "const": "agenda" }, "source_order": { "const": 1 }, "primary_agenda_item_key": { "type": "null" } } }
+      ]
+    },
+    "agenda_item_document": {
+      "allOf": [
+        { "$ref": "#/$defs/base_document" },
+        { "required": ["primary_agenda_item_key"], "properties": { "document_role": { "const": "agenda_item_document" }, "source_order": { "minimum": 2 }, "primary_agenda_item_key": { "type": "string", "minLength": 1 } } }
+      ]
+    }
+  }
+}

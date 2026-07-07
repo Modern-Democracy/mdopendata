@@ -1,0 +1,42 @@
+name: mdopendata
+
+services:
+  postgis:
+    image: postgis/postgis:16-3.4
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "${PGDATABASE:?PGDATABASE is required}"
+      POSTGRES_USER: "${PGUSER:?PGUSER is required}"
+      POSTGRES_PASSWORD: "${PGPASSWORD:?PGPASSWORD is required}"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./schema/sql/postgis.sql:/docker-entrypoint-initdb.d/001-postgis.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PGUSER:?PGUSER is required} -d ${PGDATABASE:?PGDATABASE is required}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  web:
+    build:
+      context: ./web
+    restart: unless-stopped
+    depends_on:
+      postgis:
+        condition: service_healthy
+    ports:
+      - "${WEB_PORT:-80}:3000"
+    environment:
+      REPO_ROOT: /workspace
+      HOST: 0.0.0.0
+      PORT: 3000
+      PGHOST: postgis
+      PGPORT: 5432
+      PGDATABASE: "${PGDATABASE:?PGDATABASE is required}"
+      PGUSER: "${PGUSER:?PGUSER is required}"
+      PGPASSWORD: "${PGPASSWORD:?PGPASSWORD is required}"
+    volumes:
+      - ./:/workspace:ro
+
+volumes:
+  postgres-data:

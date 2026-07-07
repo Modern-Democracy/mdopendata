@@ -2,7 +2,7 @@ FROM node:22-alpine
 
 WORKDIR /app
 
-RUN apk add --no-cache gdal-tools proj
+RUN apk add --no-cache gdal-tools proj poppler-utils
 
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev

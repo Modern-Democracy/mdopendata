@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agenda Package Ingestion - Modern Democracy</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../parcel-lookup/styles.css">
+<style>
+  body { margin: 0; background: var(--paper); color: var(--ink); }
+  .shell { width: min(1080px, calc(100% - 32px)); margin: 0 auto; padding: 38px 0 64px; }
+  .eyebrow { margin: 0 0 8px; color: var(--brick-ink); font: 700 11px var(--font-ui); letter-spacing: .14em; text-transform: uppercase; }
+  h1 { margin: 0; font: 700 clamp(30px, 5vw, 52px)/1.02 var(--font-display); max-width: 760px; }
+  .lede { max-width: 700px; color: var(--fg-2); font: 16px/1.55 var(--font-ui); }
+  .grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr); gap: 22px; align-items: start; margin-top: 32px; }
+  .card { border: 1px solid var(--border-hair); border-radius: 8px; background: var(--paper-2); padding: 24px; }
+  .card h2 { margin: 0 0 8px; font: 700 20px var(--font-ui); }
+  .card p { color: var(--fg-2); font: 14px/1.5 var(--font-ui); }
+  .picker { display: grid; gap: 14px; margin-top: 22px; padding: 24px; border: 2px dashed var(--border-hair); border-radius: 8px; background: var(--paper); }
+  .picker input { width: 100%; color: var(--ink); font: 14px var(--font-ui); }
+  .picker input::file-selector-button, .primary { border: 1px solid var(--forest); border-radius: 5px; background: var(--forest); color: var(--paper); cursor: pointer; font: 700 13px var(--font-ui); padding: 10px 14px; }
+  .picker input::file-selector-button { margin-right: 12px; }
+  .primary:disabled { cursor: not-allowed; opacity: .55; }
+  .selection { min-height: 20px; color: var(--fg-3); font: 12px var(--font-mono); overflow-wrap: anywhere; }
+  .status { margin-top: 18px; border-left: 4px solid var(--border-hair); padding: 12px 14px; background: var(--paper-3); color: var(--fg-2); font: 13px/1.5 var(--font-ui); }
+  .status.active { border-color: var(--forest); color: var(--ink); }
+  .status.error { border-color: var(--brick); color: var(--brick-ink); }
+  .result { display: none; margin-top: 18px; }
+  .result.visible { display: grid; gap: 8px; }
+  .result-row { display: grid; grid-template-columns: 150px 1fr; gap: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border-hair); font: 12px/1.4 var(--font-mono); }
+  .result-row span:first-child { color: var(--fg-3); }
+  .result-row span:last-child { overflow-wrap: anywhere; }
+  .stages { display: grid; gap: 10px; margin-top: 18px; }
+  .stage { display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: start; color: var(--fg-3); font: 13px/1.4 var(--font-ui); }
+  .stage b { color: var(--ink); }
+  .stage-number { display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid var(--border-hair); border-radius: 50%; background: var(--paper); font: 700 11px var(--font-mono); }
+  .stage.current .stage-number { background: var(--forest); border-color: var(--forest); color: var(--paper); }
+  .notice { margin-top: 18px; color: var(--fg-3); font: 12px/1.5 var(--font-ui); }
+  .pages-section { display: none; margin-top: 28px; }
+  .pages-section.visible { display: block; }
+  .pages-head { display: flex; justify-content: space-between; gap: 16px; align-items: end; margin-bottom: 14px; }
+  .pages-head h2 { margin: 0; font: 700 22px var(--font-ui); }
+  .page-count { color: var(--fg-3); font: 12px var(--font-mono); }
+  .page-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+  .page-card { border: 1px solid var(--border-hair); border-radius: 7px; background: var(--paper-2); overflow: hidden; }
+  .page-card img { display: block; width: 100%; aspect-ratio: 8.5 / 11; object-fit: contain; background: white; border-bottom: 1px solid var(--border-hair); }
+  .page-info { padding: 12px; }
+  .page-info h3 { margin: 0 0 7px; font: 700 14px var(--font-ui); }
+  .page-info p { margin: 0; color: var(--fg-3); font: 11px/1.45 var(--font-mono); display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+  .classification-summary { display: none; margin-bottom: 14px; padding: 12px 14px; border-left: 4px solid var(--brick); background: var(--paper-3); font: 13px/1.45 var(--font-ui); }
+  .classification-summary.visible { display: block; }
+  .template-tag { display: inline-block; margin-left: 7px; border-radius: 3px; padding: 3px 6px; background: var(--forest); color: var(--paper); font: 700 10px var(--font-mono); vertical-align: middle; }
+  .template-tag.unknown { background: var(--brick); }
+  .drafts-section { display: none; margin-top: 28px; }
+  .drafts-section.visible { display: block; }
+  .draft-list { display: grid; gap: 16px; margin-top: 14px; }
+  .draft-card { border: 1px solid var(--border-hair); border-radius: 7px; background: var(--paper-2); padding: 18px; }
+  .draft-card.approved { border-color: var(--forest); }
+  .draft-form { display: grid; gap: 10px; }
+  .draft-form label { color: var(--fg-3); font: 700 11px var(--font-ui); text-transform: uppercase; }
+  .draft-form input, .draft-form textarea { box-sizing: border-box; width: 100%; border: 1px solid var(--border-hair); border-radius: 4px; background: var(--paper); color: var(--ink); padding: 9px; font: 12px/1.45 var(--font-mono); }
+  .draft-form textarea { min-height: 280px; resize: vertical; }
+  .draft-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .secondary { border: 1px solid var(--forest); border-radius: 5px; background: transparent; color: var(--forest); cursor: pointer; font: 700 13px var(--font-ui); padding: 9px 13px; }
+  .draft-meta { color: var(--fg-3); font: 11px var(--font-mono); }
+  .assembly-section { display: none; margin-top: 28px; }
+  .assembly-section.visible { display: block; }
+  .assembly-editor { width: 100%; min-height: 320px; box-sizing: border-box; border: 1px solid var(--border-hair); border-radius: 5px; background: var(--paper-2); color: var(--ink); padding: 14px; font: 12px/1.5 var(--font-mono); resize: vertical; }
+  .assembly-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  .extraction-section { display: none; margin-top: 28px; }
+  .extraction-section.visible { display: block; }
+  .json-result { max-height: 620px; overflow: auto; border: 1px solid var(--border-hair); border-radius: 5px; background: var(--ink); color: var(--paper); padding: 16px; white-space: pre-wrap; overflow-wrap: anywhere; font: 11px/1.5 var(--font-mono); }
+  .mapping-editor { border-top: 1px solid var(--border-hair); padding-top: 14px; }
+  .mapping-editor h4 { margin: 0 0 4px; font: 700 15px var(--font-ui); }
+  .mapping-list { display: grid; gap: 12px; margin: 12px 0; }
+  .mapping-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper); padding: 13px; }
+  .mapping-row .wide { grid-column: 1 / -1; }
+  .mapping-row label { display: grid; gap: 4px; }
+  .mapping-row select, .mapping-row input, .mapping-row textarea { box-sizing: border-box; width: 100%; border: 1px solid var(--border-hair); border-radius: 4px; background: var(--paper-2); color: var(--ink); padding: 8px; font: 12px var(--font-mono); }
+  .mapping-row textarea { min-height: 58px; resize: vertical; }
+  .mapping-checks { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; font: 12px var(--font-ui); }
+  .mapping-checks label { display: flex; gap: 6px; align-items: center; text-transform: none; }
+  .mapping-checks input { width: auto; }
+  .advanced-config { margin-top: 12px; }
+  .advanced-config summary { cursor: pointer; color: var(--forest); font: 700 12px var(--font-ui); }
+  .region-controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .region-summary { color: var(--fg-3); font: 11px var(--font-mono); }
+  .region-dialog { width: min(900px, calc(100% - 32px)); max-height: calc(100vh - 32px); border: 1px solid var(--border-hair); border-radius: 8px; background: var(--paper); color: var(--ink); padding: 20px; }
+  .region-dialog::backdrop { background: rgba(20, 24, 20, .72); }
+  .region-dialog h3 { margin: 0 0 6px; font: 700 20px var(--font-ui); }
+  .region-picker-grid { display: grid; grid-template-columns: minmax(0, 1fr) 210px; gap: 16px; margin-top: 14px; }
+  .region-image-wrap { position: relative; user-select: none; touch-action: none; background: white; border: 1px solid var(--border-hair); line-height: 0; }
+  .region-image-wrap img { display: block; width: 100%; height: auto; }
+  .region-box { position: absolute; display: none; border: 2px solid var(--brick); background: rgba(155, 54, 38, .18); box-sizing: border-box; pointer-events: none; }
+  .region-fields { display: grid; gap: 9px; align-content: start; }
+  .region-fields label { display: grid; gap: 4px; color: var(--fg-3); font: 700 11px var(--font-ui); text-transform: uppercase; }
+  .region-fields input, .region-fields select { width: 100%; box-sizing: border-box; border: 1px solid var(--border-hair); border-radius: 4px; padding: 8px; background: var(--paper-2); color: var(--ink); font: 12px var(--font-mono); }
+  @media (max-width: 700px) { .region-picker-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 780px) { .grid { grid-template-columns: 1fr; } .result-row { grid-template-columns: 1fr; gap: 3px; } }
+</style>
+</head>
+<body>
+<header class="app-header">
+  <img src="../../assets/logo-island-needle.svg" alt="Modern Democracy" class="wm">
+  <nav><a href="/council-meetings">Council meetings</a><a href="/document-import">Document import demo</a><a class="active" href="/agenda-package-ingestion">Agenda package ingestion</a></nav>
+</header>
+<main class="shell">
+  <p class="eyebrow">Document pipeline</p>
+  <h1>Ingest an agenda package</h1>
+  <p class="lede">Select a package PDF to preserve the source, register it in PostgreSQL, and begin template discovery. Final content extraction remains blocked until every page template is identified and approved.</p>
+  <div class="grid">
+    <section class="card" aria-labelledby="upload-heading">
+      <h2 id="upload-heading">Select source PDF</h2>
+      <p>This creates or reuses a package record based on the file SHA-256. The source PDF is not modified.</p>
+      <div class="picker">
+        <input id="package-file" type="file" accept="application/pdf,.pdf">
+        <div id="selection" class="selection">No PDF selected.</div>
+        <button id="upload" class="primary" type="button" disabled>Upload and begin discovery</button>
+      </div>
+      <div id="status" class="status" role="status" aria-live="polite">Waiting for a package PDF.</div>
+      <div id="result" class="result" aria-label="Registered package details"></div>
+    </section>
+    <aside class="card">
+      <h2>Pipeline state</h2>
+      <p>The current implementation completes the first stage and records the handoff to template discovery.</p>
+      <div class="stages">
+        <div id="stage-register" class="stage current"><span class="stage-number">1</span><div><b>Register source</b><br>Validate, hash, preserve, and create the package record.</div></div>
+        <div id="stage-discover" class="stage"><span class="stage-number">2</span><div><b>Discover templates</b><br>Traverse pages and match approved page templates.</div></div>
+        <div id="stage-approve" class="stage"><span class="stage-number">3</span><div><b>Approve unknown templates</b><br>Review model-generated template drafts.</div></div>
+        <div id="stage-assemble" class="stage"><span class="stage-number">4</span><div><b>Assemble documents</b><br>Group contiguous pages and assign primary agenda items.</div></div>
+        <div id="stage-extract" class="stage"><span class="stage-number">5</span><div><b>Extract and import</b><br>Extract document JSON and persist agenda-package content.</div></div>
+      </div>
+      <p class="notice">The existing Document Import page remains a fixed-package UI and workflow reference. It is not used by this ingestion endpoint.</p>
+    </aside>
+  </div>
+  <section id="pages-section" class="pages-section" aria-labelledby="pages-heading">
+    <div class="pages-head"><h2 id="pages-heading">Rendered package pages</h2><div><span id="page-count" class="page-count"></span> <button id="classify" class="primary" type="button">Run classification</button></div></div>
+    <div id="classification-summary" class="classification-summary"></div>
+    <div id="page-grid" class="page-grid"></div>
+  </section>
+  <section id="drafts-section" class="drafts-section" aria-labelledby="drafts-heading">
+    <div class="pages-head"><h2 id="drafts-heading">Template approval</h2><button id="generate-drafts" class="primary" type="button">Generate draft templates</button></div>
+    <div id="draft-list" class="draft-list"></div>
+  </section>
+  <section id="assembly-section" class="assembly-section" aria-labelledby="assembly-heading">
+    <div class="pages-head"><div><h2 id="assembly-heading">Logical document assembly</h2><span id="assembly-status" class="page-count">No plan</span></div><button id="generate-assembly" class="primary" type="button">Generate assembly plan</button></div>
+    <p class="notice">Edit inclusive page ranges. Ranges must cover every page exactly once. Page 1 must begin the sole agenda. Every later document requires one primary agenda-item key before approval.</p>
+    <textarea id="assembly-editor" class="assembly-editor" spellcheck="false" aria-label="Logical document assembly JSON"></textarea>
+    <div class="assembly-actions"><button id="save-assembly" class="secondary" type="button">Save assembly draft</button><button id="approve-assembly" class="primary" type="button">Approve assembly plan</button></div>
+  </section>
+  <section id="extraction-section" class="extraction-section" aria-labelledby="extraction-heading">
+    <div class="pages-head"><div><h2 id="extraction-heading">Extracted package JSON</h2><span id="extraction-status" class="page-count">Ready</span></div><button id="run-extraction" class="primary" type="button">Run deterministic extraction</button></div>
+    <pre id="extraction-result" class="json-result">Extraction has not run.</pre>
+  </section>
+  <dialog id="region-dialog" class="region-dialog">
+    <h3>Select extraction region</h3>
+    <div class="draft-meta">Drag over the rendered page or enter normalized coordinates from 0 to 1.</div>
+    <div class="region-picker-grid">
+      <div id="region-image-wrap" class="region-image-wrap"><img id="region-image" alt="Template source page"><div id="region-box" class="region-box"></div></div>
+      <div class="region-fields">
+        <label>Preview page<select id="region-page"></select></label>
+        <label>X<input id="region-x" type="number" min="0" max="1" step="0.001"></label>
+        <label>Y<input id="region-y" type="number" min="0" max="1" step="0.001"></label>
+        <label>Width<input id="region-width" type="number" min="0.001" max="1" step="0.001"></label>
+        <label>Height<input id="region-height" type="number" min="0.001" max="1" step="0.001"></label>
+        <div class="draft-actions"><button id="region-cancel" class="secondary" type="button">Cancel</button><button id="region-use" class="primary" type="button">Use region</button></div>
+      </div>
+    </div>
+  </dialog>
+</main>
+<script>
+  const fileInput = document.getElementById("package-file");
+  const uploadButton = document.getElementById("upload");
+  const selection = document.getElementById("selection");
+  const status = document.getElementById("status");
+  const result = document.getElementById("result");
+  const pagesSection = document.getElementById("pages-section");
+  const pageCount = document.getElementById("page-count");
+  const pageGrid = document.getElementById("page-grid");
+  const classifyButton = document.getElementById("classify");
+  const classificationSummary = document.getElementById("classification-summary");
+  const draftsSection = document.getElementById("drafts-section");
+  const draftList = document.getElementById("draft-list");
+  const generateDraftsButton = document.getElementById("generate-drafts");
+  const assemblySection = document.getElementById("assembly-section");
+  const assemblyStatus = document.getElementById("assembly-status");
+  const assemblyEditor = document.getElementById("assembly-editor");
+  const generateAssemblyButton = document.getElementById("generate-assembly");
+  const saveAssemblyButton = document.getElementById("save-assembly");
+  const approveAssemblyButton = document.getElementById("approve-assembly");
+  const extractionSection = document.getElementById("extraction-section");
+  const extractionStatus = document.getElementById("extraction-status");
+  const extractionResult = document.getElementById("extraction-result");
+  const runExtractionButton = document.getElementById("run-extraction");
+  const regionDialog = document.getElementById("region-dialog");
+  const regionImageWrap = document.getElementById("region-image-wrap");
+  const regionImage = document.getElementById("region-image");
+  const regionBox = document.getElementById("region-box");
+  const regionPage = document.getElementById("region-page");
+  const regionInputs = {
+    x: document.getElementById("region-x"), y: document.getElementById("region-y"),
+    width: document.getElementById("region-width"), height: document.getElementById("region-height"),
+  };
+  let activeRegionCard = null;
+  let activeRegionRow = null;
+  let regionDragStart = null;
+
+  function setStatus(message, kind = "") {
+    status.textContent = message;
+    status.className = `status ${kind}`.trim();
+  }
+
+  function showResult(payload) {
+    const rows = [
+      ["Package key", payload.packageKey],
+      ["File", payload.originalFilename],
+      ["State", payload.extractionStatus.replaceAll("_", " ")],
+      ["SHA-256", payload.sourceFileHash],
+      ["Source document", payload.sourceDocumentId],
+      ["Extraction record", payload.packageExtractionId],
+    ];
+    result.replaceChildren(...rows.map(([label, value]) => {
+      const row = document.createElement("div");
+      row.className = "result-row";
+      const key = document.createElement("span");
+      key.textContent = label;
+      const content = document.createElement("span");
+      content.textContent = value;
+      row.append(key, content);
+      return row;
+    }));
+    result.classList.add("visible");
+  }
+
+  function showPages(payload) {
+    pageCount.textContent = `${payload.pageCount} page${payload.pageCount === 1 ? "" : "s"}`;
+    pageGrid.replaceChildren(...payload.pages.map((page) => {
+      const card = document.createElement("article");
+      card.className = "page-card";
+      card.dataset.page = page.pageNumber;
+      const image = document.createElement("img");
+      image.loading = "lazy";
+      image.src = page.imageUrl;
+      image.alt = `Rendered package page ${page.pageNumber}`;
+      const info = document.createElement("div");
+      info.className = "page-info";
+      const heading = document.createElement("h3");
+      heading.textContent = `Page ${page.pageNumber}`;
+      const text = document.createElement("p");
+      text.textContent = page.textPreview || `No embedded text detected. Status: ${page.textStatus}.`;
+      info.append(heading, text);
+      card.append(image, info);
+      return card;
+    }));
+    pagesSection.classList.add("visible");
+    document.getElementById("stage-register").classList.remove("current");
+    document.getElementById("stage-discover").classList.add("current");
+    classifyButton.dataset.packageKey = payload.packageKey;
+  }
+
+  function showClassifications(payload) {
+    for (const page of payload.pages) {
+      const card = pageGrid.querySelector(`[data-page="${page.pageNumber}"]`);
+      const heading = card?.querySelector("h3");
+      if (!heading) continue;
+      heading.querySelector(".template-tag")?.remove();
+      const tag = document.createElement("span");
+      tag.className = `template-tag ${page.classificationStatus === "unknown" ? "unknown" : ""}`.trim();
+      tag.textContent = page.classificationStatus === "matched" ? page.pageTemplateName || page.pageTemplateKey : "unknown template";
+      heading.append(tag);
+    }
+    const unknown = payload.pages.filter((page) => page.classificationStatus === "unknown").length;
+    const matched = payload.pages.filter((page) => page.classificationStatus === "matched").length;
+    classificationSummary.textContent = unknown
+      ? `${unknown} page${unknown === 1 ? "" : "s"} require approved templates. ${matched} page${matched === 1 ? "" : "s"} matched approved templates. Final extraction is blocked.`
+      : `${matched} page${matched === 1 ? "" : "s"} matched approved templates. The package is ready for extraction.`;
+    classificationSummary.classList.add("visible");
+    for (const id of ["stage-register", "stage-discover", "stage-approve", "stage-assemble", "stage-extract"]) {
+      document.getElementById(id).classList.remove("current");
+    }
+    document.getElementById(unknown ? "stage-approve" : "stage-assemble").classList.add("current");
+    draftsSection.classList.toggle("visible", unknown > 0);
+    loadDrafts(classifyButton.dataset.packageKey);
+    assemblySection.classList.add("visible");
+    loadAssembly(classifyButton.dataset.packageKey);
+  }
+
+  function showAssembly(payload) {
+    assemblySection.classList.add("visible");
+    assemblyStatus.textContent = `${payload.status} | ${payload.documents.length} logical document${payload.documents.length === 1 ? "" : "s"}`;
+    assemblyEditor.value = JSON.stringify({ documents: payload.documents.map((document) => ({
+      documentKey: document.documentKey, title: document.title, pageStart: document.pageStart,
+      pageEnd: document.pageEnd, isAgenda: document.isAgenda,
+      primaryAgendaItemKey: document.primaryAgendaItemKey,
+    })) }, null, 2);
+    const approved = payload.status === "approved";
+    assemblyEditor.disabled = approved;
+    saveAssemblyButton.disabled = approved;
+    approveAssemblyButton.disabled = approved;
+    if (approved) {
+      for (const id of ["stage-register", "stage-discover", "stage-approve", "stage-assemble", "stage-extract"]) document.getElementById(id).classList.remove("current");
+      document.getElementById("stage-extract").classList.add("current");
+      extractionSection.classList.add("visible");
+      runExtractionButton.disabled = false;
+      loadExtractionResult(classifyButton.dataset.packageKey);
+    }
+  }
+
+  function showExtractionResult(payload) {
+    extractionSection.classList.add("visible");
+    const completed = payload.extractionStatus === "completed" && payload.result;
+    extractionStatus.textContent = completed ? `${payload.result.documents.length} documents | completed` : payload.extractionStatus.replaceAll("_", " ");
+    extractionResult.textContent = completed ? JSON.stringify(payload.result, null, 2) : "Extraction has not run.";
+    runExtractionButton.textContent = completed ? "Extraction completed" : "Run deterministic extraction";
+    runExtractionButton.disabled = completed;
+  }
+
+  async function loadExtractionResult(packageKey) {
+    if (!packageKey) return;
+    const response = await fetch(`/api/document-ingestion/packages/${encodeURIComponent(packageKey)}/result`);
+    const payload = await response.json();
+    if (response.ok) showExtractionResult(payload);
+  }
+
+  async function runExtraction() {
+    const packageKey = classifyButton.dataset.packageKey;
+    if (!packageKey) return;
+    runExtractionButton.disabled = true;
+    setStatus("Running approved deterministic field mappings.", "active");
+    try {
+      const response = await fetch(`/api/document-ingestion/packages/${encodeURIComponent(packageKey)}/extract`, { method: "POST" });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "Package extraction failed.");
+      showExtractionResult(payload);
+      setStatus(`Extraction completed. ${payload.result.documents.length} logical documents were persisted.`, "active");
+    } catch (error) {
+      setStatus(error.message, "error");
+      runExtractionButton.disabled = false;
+    }
+  }
+
+  async function loadAssembly(packageKey) {
+    if (!packageKey) return;
+    const response = await fetch(`/api/document-ingestion/packages/${encodeURIComponent(packageKey)}/assembly-plan`);
+    const payload = await response.json();
+    if (response.ok) showAssembly(payload);
+  }
+
+  function assemblyRequestBody() {
+    try { return JSON.parse(assemblyEditor.value); }
+    catch { throw new Error("Assembly plan must be valid JSON."); }
+  }
+
+  async function persistAssembly(approve) {
+    const packageKey = classifyButton.dataset.packageKey;
+    try {
+      const body = assemblyRequestBody();
+      setStatus(approve ? "Approving logical document assembly." : "Saving logical document assembly draft.", "active");
+      const response = await fetch(`/api/document-ingestion/packages/${encodeURIComponent(packageKey)}/assembly-plan${approve ? "/approve" : ""}`, {
+        method: approve ? "POST" : "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(body),
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "Assembly plan update failed.");
+      showAssembly(payload);
+      setStatus(approve ? "Assembly plan approved. Package is ready for extraction." : "Assembly draft saved.", "active");
+    } catch (error) { setStatus(error.message, "error"); }
+  }
+
+  function draftRequestBody(card) {
+    syncMappingJson(card);
+    let modelOutput;
+    try { modelOutput = JSON.parse(card.querySelector(".template-json").value); }
+    catch { throw new Error("Draft configuration must be valid JSON."); }
+    return {
+      draftKey: card.querySelector('[name="draftKey"]').value,
+      name: card.querySelector('[name="name"]').value,
+      description: card.querySelector('[name="description"]').value,
+      modelOutput,
+    };
+  }
+
+  const mappingValueTypes = ["string", "number", "integer", "boolean", "date", "array", "object"];
+  const mappingStrategies = ["first_nonempty_line", "full_text", "regex_capture", "constant", "page_texts"];
+
+  function defaultMappingStrategy(mapping) {
+    return mapping.extraction?.strategy || (mapping.field_key === "title" ? "first_nonempty_line" : mapping.field_key === "body_text" ? "full_text" : "full_text");
+  }
+
+  function mappingFromRow(row) {
+    const strategy = row.querySelector('[data-field="strategy"]').value;
+    const extraction = { strategy };
+    if (strategy === "regex_capture") {
+      extraction.pattern = row.querySelector('[data-field="pattern"]').value;
+      extraction.flags = row.querySelector('[data-field="flags"]').value || "im";
+      extraction.group = Number(row.querySelector('[data-field="group"]').value || 1);
+    } else if (strategy === "constant") {
+      const raw = row.querySelector('[data-field="constant"]').value;
+      try { extraction.value = JSON.parse(raw); } catch { extraction.value = raw; }
+    }
+    const result = {
+      field_key: row.querySelector('[data-field="key"]').value.trim(),
+      json_pointer: row.querySelector('[data-field="pointer"]').value.trim(),
+      value_type: row.querySelector('[data-field="type"]').value,
+      required: row.querySelector('[data-field="required"]').checked,
+      extraction_instruction: row.querySelector('[data-field="instruction"]').value.trim(),
+      extraction,
+      normalization: {
+        trim: row.querySelector('[data-field="trim"]').checked,
+        collapse_whitespace: row.querySelector('[data-field="collapse"]').checked,
+      },
+    };
+    if (row._mappingRegion) result.region = row._mappingRegion;
+    return result;
+  }
+
+  function regionSummary(region) {
+    if (!region) return "Full page";
+    return `x ${Number(region.x).toFixed(3)}, y ${Number(region.y).toFixed(3)}, w ${Number(region.width).toFixed(3)}, h ${Number(region.height).toFixed(3)}`;
+  }
+
+  function currentRegionValues() {
+    return Object.fromEntries(Object.entries(regionInputs).map(([key, input]) => [key, Math.max(0, Math.min(1, Number(input.value) || 0))]));
+  }
+
+  function renderRegionBox() {
+    const region = currentRegionValues();
+    regionBox.style.display = region.width > 0 && region.height > 0 ? "block" : "none";
+    regionBox.style.left = `${region.x * 100}%`; regionBox.style.top = `${region.y * 100}%`;
+    regionBox.style.width = `${region.width * 100}%`; regionBox.style.height = `${region.height * 100}%`;
+  }
+
+  function setRegionInputs(region) {
+    for (const [key, input] of Object.entries(regionInputs)) input.value = Number(region?.[key] ?? (key === "width" || key === "height" ? 0.2 : 0)).toFixed(3);
+    renderRegionBox();
+  }
+
+  function loadRegionPreview() {
+    const packageKey = classifyButton.dataset.packageKey;
+    regionImage.src = `/api/document-ingestion/packages/${encodeURIComponent(packageKey)}/pages/${regionPage.value}/image`;
+  }
+
+  function openRegionPicker(card, row) {
+    activeRegionCard = card; activeRegionRow = row;
+    const pages = JSON.parse(card.dataset.sourcePages || "[]");
+    regionPage.replaceChildren(...pages.map((page) => new Option(`Page ${page}`, page)));
+    regionPage.value = String(row._mappingRegion?.preview_page_number || pages[0]);
+    setRegionInputs(row._mappingRegion);
+    loadRegionPreview();
+    regionDialog.showModal();
+  }
+
+  function pointerPosition(event) {
+    const rect = regionImageWrap.getBoundingClientRect();
+    return { x: Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width)), y: Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height)) };
+  }
+
+  function syncMappingJson(card) {
+    const json = card.querySelector(".template-json");
+    if (!json) return;
+    let configuration;
+    try { configuration = JSON.parse(json.value); }
+    catch { throw new Error("Advanced template configuration must be valid JSON before field mappings can be synchronized."); }
+    configuration.field_mappings = [...card.querySelectorAll(".field-mapping-row")].map(mappingFromRow);
+    json.value = JSON.stringify(configuration, null, 2);
+  }
+
+  function updateMappingOptions(row) {
+    const strategy = row.querySelector('[data-field="strategy"]').value;
+    row.querySelector(".regex-options").hidden = strategy !== "regex_capture";
+    row.querySelector(".constant-options").hidden = strategy !== "constant";
+  }
+
+  function createMappingRow(card, mapping, editable) {
+    const row = document.createElement("div");
+    row.className = "mapping-row field-mapping-row";
+    row.innerHTML = `<label>Field key<input data-field="key"></label>
+      <label>JSON Pointer<input data-field="pointer"></label>
+      <label>Value type<select data-field="type"></select></label>
+      <label>Extraction strategy<select data-field="strategy"></select></label>
+      <label class="wide">Extraction instruction<textarea data-field="instruction"></textarea></label>
+      <div class="mapping-checks wide"><label><input data-field="required" type="checkbox"> Required</label><label><input data-field="trim" type="checkbox"> Trim</label><label><input data-field="collapse" type="checkbox"> Collapse whitespace</label></div>
+      <div class="region-controls wide"><span class="region-summary"></span></div>
+      <div class="regex-options wide"><div class="mapping-row"><label class="wide">Regular expression<input data-field="pattern"></label><label>Flags<input data-field="flags"></label><label>Capture group<input data-field="group" type="number" min="0"></label></div></div>
+      <label class="constant-options wide">Constant value as JSON or text<textarea data-field="constant"></textarea></label>`;
+    const typeSelect = row.querySelector('[data-field="type"]');
+    const strategySelect = row.querySelector('[data-field="strategy"]');
+    typeSelect.replaceChildren(...mappingValueTypes.map((value) => new Option(value, value)));
+    strategySelect.replaceChildren(...mappingStrategies.map((value) => new Option(value.replaceAll("_", " "), value)));
+    row.querySelector('[data-field="key"]').value = mapping.field_key || "new_field";
+    row.querySelector('[data-field="pointer"]').value = mapping.json_pointer || "/new_field";
+    typeSelect.value = mapping.value_type || "string";
+    strategySelect.value = defaultMappingStrategy(mapping);
+    row.querySelector('[data-field="instruction"]').value = mapping.extraction_instruction || "Extract this field deterministically.";
+    row.querySelector('[data-field="required"]').checked = Boolean(mapping.required);
+    row.querySelector('[data-field="trim"]').checked = mapping.normalization?.trim !== false;
+    row.querySelector('[data-field="collapse"]').checked = Boolean(mapping.normalization?.collapse_whitespace);
+    row.querySelector('[data-field="pattern"]').value = mapping.extraction?.pattern || "";
+    row.querySelector('[data-field="flags"]').value = mapping.extraction?.flags || "im";
+    row.querySelector('[data-field="group"]').value = mapping.extraction?.group ?? 1;
+    row.querySelector('[data-field="constant"]').value = mapping.extraction?.value === undefined ? "" : JSON.stringify(mapping.extraction.value);
+    row._mappingRegion = mapping.region || null;
+    row.querySelector(".region-summary").textContent = regionSummary(row._mappingRegion);
+    if (editable) {
+      const selectRegion = document.createElement("button");
+      selectRegion.type = "button"; selectRegion.className = "secondary"; selectRegion.textContent = "Select page region";
+      selectRegion.addEventListener("click", () => openRegionPicker(card, row));
+      const clearRegion = document.createElement("button");
+      clearRegion.type = "button"; clearRegion.className = "secondary"; clearRegion.textContent = "Use full page";
+      clearRegion.addEventListener("click", () => { row._mappingRegion = null; row.querySelector(".region-summary").textContent = regionSummary(null); syncMappingJson(card); });
+      row.querySelector(".region-controls").append(selectRegion, clearRegion);
+      const remove = document.createElement("button");
+      remove.type = "button"; remove.className = "secondary"; remove.textContent = "Remove field";
+      remove.addEventListener("click", () => { row.remove(); syncMappingJson(card); });
+      row.append(remove);
+      row.querySelectorAll("input, select, textarea").forEach((control) => control.addEventListener("change", () => { updateMappingOptions(row); syncMappingJson(card); }));
+    } else {
+      row.querySelectorAll("input, select, textarea").forEach((control) => { control.disabled = true; });
+    }
+    updateMappingOptions(row);
+    return row;
+  }
+
+  function renderFieldMappings(card, configuration, editable) {
+    const list = card.querySelector(".mapping-list");
+    list.replaceChildren(...(configuration.field_mappings || []).map((mapping) => createMappingRow(card, mapping, editable)));
+  }
+
+  function showDrafts(payload) {
+    draftsSection.classList.add("visible");
+    draftList.replaceChildren(...payload.drafts.map((draft) => {
+      const card = document.createElement("article");
+      card.className = `draft-card ${draft.status}`;
+      card.dataset.draftId = draft.draftId;
+      card.dataset.sourcePages = JSON.stringify(draft.sourcePageNumbers);
+      const form = document.createElement("div");
+      form.className = "draft-form";
+      form.innerHTML = `<div class="draft-meta">Pages ${draft.sourcePageNumbers.join(", ")} | ${draft.modelName} | ${draft.status}</div>
+        <label>Template key<input name="draftKey"></label>
+        <label>Name<input name="name"></label>
+        <label>Description<input name="description"></label>
+        <section class="mapping-editor"><h4>Deterministic field mappings</h4><div class="draft-meta">Map extracted values into the document JSON object.</div><div class="mapping-list"></div><div class="mapping-toolbar"></div></section>
+        <details class="advanced-config"><summary>Advanced template JSON</summary><label>Template configuration<textarea class="template-json" spellcheck="false"></textarea></label><div class="advanced-actions"></div></details>`;
+      form.querySelector('[name="draftKey"]').value = draft.draftKey;
+      form.querySelector('[name="name"]').value = draft.name;
+      form.querySelector('[name="description"]').value = draft.description || "";
+      form.querySelector(".template-json").value = JSON.stringify(draft.modelOutput, null, 2);
+      card.append(form);
+      renderFieldMappings(card, draft.modelOutput, draft.status === "draft");
+      const actions = document.createElement("div");
+      actions.className = "draft-actions";
+      if (draft.status === "draft") {
+        const addField = document.createElement("button");
+        addField.className = "secondary"; addField.type = "button"; addField.textContent = "Add field mapping";
+        addField.addEventListener("click", () => {
+          form.querySelector(".mapping-list").append(createMappingRow(card, {}, true)); syncMappingJson(card);
+        });
+        form.querySelector(".mapping-toolbar").append(addField);
+        const applyJson = document.createElement("button");
+        applyJson.className = "secondary"; applyJson.type = "button"; applyJson.textContent = "Apply advanced JSON";
+        applyJson.addEventListener("click", () => {
+          try { renderFieldMappings(card, JSON.parse(form.querySelector(".template-json").value), true); setStatus("Advanced JSON applied to the visual field editor.", "active"); }
+          catch { setStatus("Advanced template configuration must be valid JSON.", "error"); }
+        });
+        form.querySelector(".advanced-actions").append(applyJson);
+        const save = document.createElement("button");
+        save.className = "secondary"; save.type = "button"; save.textContent = "Save draft";
+        save.addEventListener("click", () => persistDraft(card, false));
+        const approve = document.createElement("button");
+        approve.className = "primary"; approve.type = "button"; approve.textContent = "Approve template";
+        approve.addEventListener("click", () => persistDraft(card, true));
+        actions.append(save, approve);
+      } else {
+        form.querySelectorAll("input, select, textarea").forEach((control) => { control.disabled = true; });
+      }
+      form.append(actions); return card;
+    }));
+    const editableDrafts = payload.drafts.filter((draft) => draft.status === "draft").length;
+    generateDraftsButton.hidden = editableDrafts === 0;
+    generateDraftsButton.textContent = payload.drafts.length ? "Regenerate unapproved drafts" : "Generate draft templates";
+  }
+
+  async function loadDrafts(packageKey) {
+    if (!packageKey) return;
+    const response = await fetch(`/api/document-ingestion/packages/${encodeURIComponent(packageKey)}/template-drafts`);
+    const payload = await response.json();
+    if (response.ok) showDrafts(payload);
+  }
+
+  async function persistDraft(card, approve) {
+    const packageKey = classifyButton.dataset.packageKey;
+    try {
+      const body = draftRequestBody(card);
+      setStatus(approve ? "Approving template and reclassifying pages." : "Saving template draft.", "active");
+      const response = await fetch(`/api/document-ingestion/packages/${encodeURIComponent(packageKey)}/template-drafts/${card.dataset.draftId}${approve ? "/approve" : ""}`, {
+        method: approve ? "POST" : "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(body),
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "Template draft update failed.");
+      showDrafts(payload);
+      if (payload.classifications) showClassifications(payload.classifications);
+      setStatus(approve ? "Template approved. Package pages were reclassified." : "Template draft saved.", "active");
+    } catch (error) { setStatus(error.message, "error"); }
+  }
+
+  async function runClassification(packageKey) {
+    classifyButton.disabled = true;
+    setStatus("Classifying pages against approved templates.", "active");
+    try {
+      const response = await fetch(`/api/document-ingestion/packages/${encodeURIComponent(packageKey)}/classify`, { method: "POST" });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || `Classification failed with HTTP ${response.status}.`);
+      showClassifications(payload);
+      setStatus(payload.unresolvedTemplateCount
+        ? `Classification completed. ${payload.unresolvedTemplateCount} unknown page templates require approval.`
+        : "Classification completed. All pages matched approved templates.", "active");
+    } catch (error) {
+      setStatus(error.message, "error");
+    } finally {
+      classifyButton.disabled = false;
+    }
+  }
+
+  async function loadExistingPackage(packageKey) {
+    setStatus("Loading registered package pages.", "active");
+    try {
+      const [packageResponse, pagesResponse] = await Promise.all([
+        fetch(`/api/document-ingestion/packages/${encodeURIComponent(packageKey)}`),
+        fetch(`/api/document-ingestion/packages/${encodeURIComponent(packageKey)}/pages`),
+      ]);
+      const packagePayload = await packageResponse.json();
+      const pagesPayload = await pagesResponse.json();
+      if (!packageResponse.ok) throw new Error(packagePayload.error || "Unable to load package.");
+      if (!pagesResponse.ok) throw new Error(pagesPayload.error || "Unable to load package pages.");
+      showResult(packagePayload);
+      if (pagesPayload.pages.length) showPages(pagesPayload);
+      if (pagesPayload.pages.length) await runClassification(packageKey);
+      else setStatus("No rendered pages are available. Traverse the package first.", "error");
+    } catch (error) {
+      setStatus(error.message, "error");
+    }
+  }
+
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+    selection.textContent = file ? `${file.name} | ${file.size.toLocaleString()} bytes` : "No PDF selected.";
+    uploadButton.disabled = !file;
+    result.classList.remove("visible");
+    pagesSection.classList.remove("visible");
+    setStatus(file ? "PDF selected. Ready to upload." : "Waiting for a package PDF.", file ? "active" : "");
+  });
+
+  uploadButton.addEventListener("click", async () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+    uploadButton.disabled = true;
+    fileInput.disabled = true;
+    setStatus("Uploading and registering package.", "active");
+    try {
+      const response = await fetch("/api/document-ingestion/packages", {
+        method: "POST",
+        headers: { "content-type": "application/pdf", "x-file-name": encodeURIComponent(file.name) },
+        body: file,
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || `Upload failed with HTTP ${response.status}.`);
+      showResult(payload);
+      setStatus("Package registered. Traversing and rendering pages.", "active");
+      const traversalResponse = await fetch(`/api/document-ingestion/packages/${encodeURIComponent(payload.packageKey)}/traverse`, { method: "POST" });
+      const traversal = await traversalResponse.json();
+      if (!traversalResponse.ok) throw new Error(traversal.error || `Traversal failed with HTTP ${traversalResponse.status}.`);
+      showPages(traversal);
+      history.replaceState(null, "", `?package=${encodeURIComponent(payload.packageKey)}`);
+      await runClassification(payload.packageKey);
+    } catch (error) {
+      setStatus(error.message, "error");
+    } finally {
+      fileInput.disabled = false;
+      uploadButton.disabled = !fileInput.files[0];
+    }
+  });
+
+  classifyButton.addEventListener("click", () => {
+    const packageKey = classifyButton.dataset.packageKey;
+    if (packageKey) runClassification(packageKey);
+  });
+
+  generateDraftsButton.addEventListener("click", async () => {
+    const packageKey = classifyButton.dataset.packageKey;
+    if (!packageKey) return;
+    generateDraftsButton.disabled = true;
+    setStatus("Generating first-pass template drafts from unknown pages.", "active");
+    try {
+      const response = await fetch(`/api/document-ingestion/packages/${encodeURIComponent(packageKey)}/template-drafts`, { method: "POST" });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "Draft generation failed.");
+      showDrafts(payload);
+      setStatus(`${payload.drafts.filter((draft) => draft.status === "draft").length} draft templates require review.`, "active");
+    } catch (error) { setStatus(error.message, "error"); }
+    finally { generateDraftsButton.disabled = false; }
+  });
+
+  generateAssemblyButton.addEventListener("click", async () => {
+    const packageKey = classifyButton.dataset.packageKey;
+    if (!packageKey) return;
+    try {
+      const response = await fetch(`/api/document-ingestion/packages/${encodeURIComponent(packageKey)}/assembly-plan`, { method: "POST" });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "Assembly generation failed.");
+      showAssembly(payload); setStatus("Assembly draft generated. Review page ranges and agenda-item bindings.", "active");
+    } catch (error) { setStatus(error.message, "error"); }
+  });
+  saveAssemblyButton.addEventListener("click", () => persistAssembly(false));
+  approveAssemblyButton.addEventListener("click", () => persistAssembly(true));
+  runExtractionButton.addEventListener("click", runExtraction);
+  regionPage.addEventListener("change", loadRegionPreview);
+  Object.values(regionInputs).forEach((input) => input.addEventListener("input", renderRegionBox));
+  regionImageWrap.addEventListener("pointerdown", (event) => {
+    regionDragStart = pointerPosition(event); regionImageWrap.setPointerCapture(event.pointerId);
+    setRegionInputs({ ...regionDragStart, width: 0.001, height: 0.001 });
+  });
+  regionImageWrap.addEventListener("pointermove", (event) => {
+    if (!regionDragStart) return;
+    const current = pointerPosition(event);
+    setRegionInputs({ x: Math.min(regionDragStart.x, current.x), y: Math.min(regionDragStart.y, current.y), width: Math.abs(current.x - regionDragStart.x), height: Math.abs(current.y - regionDragStart.y) });
+  });
+  regionImageWrap.addEventListener("pointerup", () => { regionDragStart = null; });
+  document.getElementById("region-cancel").addEventListener("click", () => regionDialog.close());
+  document.getElementById("region-use").addEventListener("click", () => {
+    const region = currentRegionValues();
+    if (!activeRegionRow || region.width <= 0 || region.height <= 0 || region.x + region.width > 1.000001 || region.y + region.height > 1.000001) {
+      setStatus("Select a valid region inside the page.", "error"); return;
+    }
+    activeRegionRow._mappingRegion = {
+      coordinate_space: "normalized", page_scope: "template_page",
+      preview_page_number: Number(regionPage.value), ...region,
+    };
+    activeRegionRow.querySelector(".region-summary").textContent = regionSummary(activeRegionRow._mappingRegion);
+    syncMappingJson(activeRegionCard); regionDialog.close(); setStatus("Page region added to the field mapping.", "active");
+  });
+
+  const initialPackageKey = new URLSearchParams(location.search).get("package");
+  if (initialPackageKey) loadExistingPackage(initialPackageKey);
+</script>
+</body>
+</html>

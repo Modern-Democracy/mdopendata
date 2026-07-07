@@ -69,12 +69,14 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [Municipal portal UI architecture](./product/municipal-portal-ui-architecture.md) | React/Babel portal-shell architecture, page context contract, theming, and basic-HTML feasibility gate. |
 | [Municipal portal UI component architecture](./product/municipal-portal-ui-component-architecture.md) | Reusable view-component contract, dependency posture, and implementation-independence guidance for portal UI. |
 | [Web UI stack](./implementation/web-ui-stack.md) | Initial Docker-hosted Node web UI decision and first Charlottetown section-equivalence review page shape. |
+| [AWS deployment](./implementation/aws-deployment.md) | Repeatable single-host AWS EC2 deployment and local-to-AWS database synchronization workflow for the web application and PostGIS database. |
 | [Web demo design kit plan](./implementation/web-demo-design-kit-plan.md) | Plan and timeline for replacing the current web page with the design-kit-based Charlottetown parcel lookup, map explorer, city-view map, and zoning comparison demo. |
 | [Parcel 3D LIDAR terrain plan](./implementation/parcel-3d-lidar-terrain-plan.md) | Preprocessing and integration plan for using PEI LIDAR as terrain and building-height inputs in the parcel 3D viewer. |
 | [Charlottetown terrain DEM pipeline](./implementation/charlottetown-terrain-dem-pipeline.md) | First repeatable PDAL/GDAL pipeline design for producing a bare-earth DEM from PEI COPC LIDAR tiles. |
 | [Storm surge demo plan](./implementation/storm-surge-demo-plan.md) | Demo-only Charlottetown tidal and storm-surge visualization scope, controls, source assumptions, limits, and upgrade path. |
 | [Municipal budget data model](./implementation/municipal-budget-data-model.md) | Initial scalable schema design for raw and normalized municipal operating, capital, rate, tax, debt, reserve, and funding data. |
 | [Release help and MCP plan](./implementation/release-help-and-mcp-plan.md) | Implementation pattern for release-facing contextual help, the `help` schema, web help APIs, and the repo-local `mdopendata-mcp` package. |
+| [Agenda package ingestion contract](./implementation/agenda-package-ingestion-contract.md) | Package JSON, logical-document ordering, agenda-item binding, template discovery, and approval gates. |
 
 ## Plans
 

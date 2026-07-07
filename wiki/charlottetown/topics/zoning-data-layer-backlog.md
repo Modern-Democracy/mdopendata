@@ -5,7 +5,7 @@ tags:
   - backlog
   - resolver
   - visualization
-updated: 2026-05-06
+updated: 2026-07-06
 ---
 
 # Zoning Data Layer Backlog
@@ -59,9 +59,10 @@ Read first, in order, for context:
 - `data/zoning/charlottetown/manual-corrections/appendix-c-exemptions.json`
   — per-PID Appendix C exemptions (36 high-confidence + 12 needs_review).
 
-Postgres connection defaults to the local docker container on port 54329
-(see `docker-compose.yml`). Read-only inspection is fine via the configured
-MCP server; mutation should go through scripts that use psycopg directly.
+Postgres connections use the active local Docker container on host port
+`55432`. Port `54329` is obsolete for the current workspace. Read-only
+inspection is fine via the configured MCP server; mutation should go through
+scripts that use psycopg directly.
 
 ---
 
