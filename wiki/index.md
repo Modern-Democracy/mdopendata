@@ -3,7 +3,7 @@ type: index
 tags:
   - wiki
   - catalog
-updated: 2026-05-27
+updated: 2026-07-07
 ---
 
 This page catalogs the root wiki structure and links to active project wiki areas.
@@ -26,6 +26,7 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [generated](./generated/schema/index.md) | Generated wiki reference outputs, starting with MCP-generated database schema pages. |
 | [charlottetown](./charlottetown/README.md) | Active Charlottetown current and draft zoning wiki. |
 | [council-committee-meetings](./council-committee-meetings/README.md) | Meeting-preparation workflows and extraction notes for public, council/committee, and staff audiences. |
+| [budgets](./budgets/README.md) | Municipal budget requirements, database schema, API/UI contract, and implementation/test plan. |
 
 ## Source Pages
 
@@ -60,6 +61,7 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [Municipal portal role model](./product/municipal-portal-role-model.md) | Public role-preset model for the portal without creating a permission model. |
 | [Municipal portal domain inventory](./product/municipal-portal-domain-inventory.md) | Current implementation depth and 1.0 treatment for each municipal portal domain. |
 | [Council and committee meetings](./council-committee-meetings/README.md) | JSON-first council/committee meeting extraction and audience workflow notes, starting with Charlottetown council on May 12, 2026. |
+| [Municipal budgets](./budgets/README.md) | Product and delivery contract for operating and capital budget ingestion, publication, explanation, and comparison. |
 | [Agenda and package document taxonomy](./council-committee-meetings/agenda-document-taxonomy.md) | Agenda item and agenda package attachment type catalogue for document-import review and parser refinement. |
 
 ## Implementation Pages

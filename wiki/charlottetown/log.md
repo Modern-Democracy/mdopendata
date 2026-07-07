@@ -3,7 +3,7 @@ type: log
 tags:
   - charlottetown
   - log
-updated: 2026-05-06
+updated: 2026-07-07
 ---
 
 Append new entries in reverse chronological order. Use headings in this format:
@@ -372,3 +372,7 @@ Added `scripts/extract-charlottetown-budget-raw-rows.py` and generated raw row/v
 
 - [Charlottetown wiki guide](./README.md)
 - [Unified zoning ingestion plan](./topics/unified-zoning-ingestion-plan.md)
+
+## [2026-07-07] budget | Prototype requirements and plan
+
+Linked the Charlottetown budget source area to the new cross-municipality budget contracts. The prototype plan starts with schema validation against representative pages of the 2026/2027 financial plan, then normalizes that document before adapting reviewed rules to the 2025/2026 and 2024/2025 PDFs.

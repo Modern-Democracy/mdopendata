@@ -5,7 +5,7 @@ tags:
   - roadmap
   - municipal-portal
   - v1
-updated: 2026-05-20
+updated: 2026-07-07
 ---
 
 This page tracks the 1.0 roadmap for the Charlottetown municipal portal.
@@ -25,7 +25,7 @@ Version 1.0 should ship a portal shell, role-preset filtering, domain route stub
 | Business items | `/business-items` | Contract stub for durable municipal matters. |
 | Documents | `/documents` and `/document-import` | Stub plus local-admin document-import prototype. |
 | Planning and land use | `/planning` plus parcel/zoning routes | Stub plus parcel lookup, map, zoning comparison, provisions comparison, and restrictions. |
-| Budgets | `/budgets` | Contract stub using the budget data model as planning input. |
+| Budgets | `/budgets` | Requirements, schema, API/UI, and eight-week prototype contracts defined; implementation pending approval. |
 | Maps | `/maps` and `/city-view` | Stub plus current Leaflet city map. |
 | Validation | `/validation` | Contract stub for extraction/data QA; local-admin only for write paths. |
 | Lab tools | `/lab`, `/parcel-3d`, `/storm-surge` | Lab index plus demo-only 3D and storm-surge tools. |
@@ -48,6 +48,7 @@ Version 1.0 should ship a portal shell, role-preset filtering, domain route stub
 | Existing page migration | Planned | Keep current functional routes stable during migration. |
 | Public/staff write boundary | Planned | Public routes stay read-oriented; local-admin write tools need explicit labels. |
 | Domain API contracts | Planned | Required before turning stubs into functional pages. |
+| Budget prototype | Planned | Implement the approved [budget contracts](../budgets/README.md) against three Charlottetown financial plans. |
 
 ## Acceptance Criteria
 

@@ -3,7 +3,7 @@ type: log
 tags:
   - wiki
   - log
-updated: 2026-07-06
+updated: 2026-07-07
 ---
 
 This page is the append-only chronological record for root wiki changes, ingests, substantive queries, and lint passes.
@@ -13,6 +13,10 @@ Append new entries in reverse chronological order. Use this heading format:
 ```text
 ## [YYYY-MM-DD] type | Short title
 ```
+
+## [2026-07-07] budget | Requirements and architecture contracts
+
+Added the municipal budget wiki section with prototype scope, source-aware requirements, a proposed raw-to-normalized PostgreSQL schema, public website/API contracts, and an eight-week implementation and test plan. The contracts use the three Charlottetown budget PDFs as the initial source family and identify representative 2026/2027 operating, capital, tax, facility, and debt layouts as the pre-migration architecture gate.
 
 ## [2026-07-06] implementation | Page-template classification and unknown detection
 

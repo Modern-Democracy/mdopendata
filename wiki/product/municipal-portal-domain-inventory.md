@@ -4,7 +4,7 @@ tags:
   - product
   - domains
   - municipal-portal
-updated: 2026-05-20
+updated: 2026-07-07
 ---
 
 This page inventories 1.0 municipal portal domains and their current implementation depth.
@@ -19,7 +19,7 @@ This page inventories 1.0 municipal portal domains and their current implementat
 | Business items | Emerging from meeting extraction. | Contract stub for durable civic matters across meetings. |
 | Documents | Document-import prototype and extraction schemas. | Stub plus local-admin document import route. |
 | Planning and land use | Strongest current domain: parcels, zoning, bylaws, maps, comparison APIs. | Functional route family plus portal stub summary. |
-| Budgets | Initial data model and raw-table work. | Contract stub until APIs are defined. |
+| Budgets | First-pass 2026/2027 artifacts plus requirements, schema, API/UI, and test-plan contracts. | Implement the three-document Charlottetown prototype after contract approval. |
 | Maps | Leaflet city map plus parcel/zoning APIs. | Functional city-view link and map-domain stub. |
 | Validation | Existing extraction review patterns and smoke checks. | Contract stub plus local-admin boundary. |
 | Lab tools | Parcel 3D and storm-surge demos. | Lab-only routes with demo caveats. |
@@ -32,4 +32,5 @@ Do not turn a stub into a functional 1.0 page until the page has an explicit sou
 
 - [Council and committee meetings](../council-committee-meetings/README.md)
 - [Municipal budget data model](../implementation/municipal-budget-data-model.md)
+- [Municipal budget contracts](../budgets/README.md)
 - [Web demo design kit plan](../implementation/web-demo-design-kit-plan.md)
