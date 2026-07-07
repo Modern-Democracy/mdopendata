@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "status": "ready_for_draft_migration",
+  "purpose": "Validate the proposed municipal budget schema against representative Charlottetown source layouts before SQL migrations.",
+  "primary_document": "2026-2027",
+  "cases": [
+    {
+      "case_key": "operating_detail",
+      "source": {"document": "2026-2027", "pdf_pages": [30]},
+      "cross_year_controls": [{"document": "2025-2026", "pdf_pages": [25]}],
+      "proposed_records": ["statement", "line_item", "fact", "document_period", "source_table_row", "source_table_cell"],
+      "required_value_states": ["reported", "dash_unresolved"],
+      "assertions": [
+        "Heading and label rows can exist without facts.",
+        "A displayed dash must not be converted to zero.",
+        "Notes/comments are source cells and not financial facts."
+      ],
+      "status": "reviewed"
+    },
+    {
+      "case_key": "facility_operating_summary",
+      "source": {"document": "2026-2027", "pdf_pages": [105]},
+      "cross_year_controls": [
+        {"document": "2025-2026", "pdf_pages": [103]},
+        {"document": "2024-2025", "pdf_pages": [78]}
+      ],
+      "proposed_records": ["reporting_entity", "statement", "line_item", "fact", "document_period"],
+      "required_value_states": ["reported", "dash_unresolved"],
+      "assertions": [
+        "Bell Aliant Centre is the statement entity even when City of Charlottetown appears as a grant line.",
+        "Current and prior budgets are separate document-period observations.",
+        "Parenthesized allocation values remain reported negative facts.",
+        "Reported earnings/loss dashes remain unresolved until reviewed."
+      ],
+      "status": "reviewed"
+    },
+    {
+      "case_key": "ocr_facility_detail",
+      "source": {"document": "2024-2025", "pdf_pages": [82, 83, 84, 85, 86, 87]},
+      "cross_year_controls": [],
+      "proposed_records": ["source_page", "source_table", "source_table_row", "source_table_cell", "statement"],
+      "required_value_states": ["reported", "reported_zero"],
+      "assertions": [
+        "OCR extraction method must remain explicit in provenance.",
+        "The table spans pages and page 87 supplies the final net-income row.",
+        "Repeated zero values are reported zeros, not missing values."
+      ],
+      "status": "reviewed"
+    },
+    {
+      "case_key": "capital_partner_funding",
+      "source": {"document": "2026-2027", "pdf_pages": [111]},
+      "cross_year_controls": [
+        {"document": "2025-2026", "pdf_pages": [109]},
+        {"document": "2024-2025", "pdf_pages": [46]}
+      ],
+      "proposed_records": ["statement", "line_item", "fact", "capital_project", "capital_project_fact"],
+      "required_value_states": ["reported"],
+      "assertions": [
+        "Gross total, external-partner funding, and net total are distinct reported facts.",
+        "Parenthesized partner funding is a negative funding-deduction fact.",
+        "Reported totals are reconciliation controls and must not be summed with details."
+      ],
+      "status": "reviewed"
+    },
+    {
+      "case_key": "capital_project_profile",
+      "source": {"document": "2026-2027", "pdf_pages": [112]},
+      "cross_year_controls": [
+        {"document": "2025-2026", "pdf_pages": [110]},
+        {"document": "2024-2025", "pdf_pages": [47]}
+      ],
+      "proposed_records": ["capital_project", "capital_project_profile", "source_table_row"],
+      "required_value_states": [],
+      "assertions": [
+        "Narrative quantities, dates, and years are not financial facts without an explicit financial field label.",
+        "Department, project, description, and strategic alignment preserve raw labels and source rows."
+      ],
+      "status": "reviewed"
+    },
+    {
+      "case_key": "property_tax_calculation",
+      "source": {"document": "2026-2027", "pdf_pages": [149]},
+      "cross_year_controls": [{"document": "2025-2026", "pdf_pages": [145]}],
+      "proposed_records": ["tax_class", "line_item", "fact", "rate_fact", "measure_unit"],
+      "required_value_states": ["reported"],
+      "assertions": [
+        "Each detail row can report assessment base, rate per 100 dollars, and tax revenue.",
+        "Residency, property class, and business-improvement-area scope form separate dimensions or hierarchy levels.",
+        "Reported revenue remains distinct from a derived assessment-times-rate check."
+      ],
+      "status": "reviewed"
+    },
+    {
+      "case_key": "long_term_debt",
+      "source": {"document": "2026-2027", "pdf_pages": [151]},
+      "cross_year_controls": [{"document": "2025-2026", "pdf_pages": [147]}],
+      "proposed_records": ["debt_instrument", "line_item", "fact", "debt_fact", "document_period"],
+      "required_value_states": ["reported", "reported_zero", "dash_unresolved"],
+      "assertions": [
+        "Maturity year belongs to the debt instrument and is not a fiscal-period observation.",
+        "Balance, principal, and interest are separate amount types.",
+        "A dash in interest must remain distinct from a reported numeric zero.",
+        "Total principal plus interest reconciles to the reported combined total."
+      ],
+      "status": "reviewed"
+    }
+  ],
+  "schema_gaps": [
+    {
+      "gap_key": "document_period_primary_key",
+      "severity": "blocking",
+      "finding": "budget.fact references document_period_id but the proposed budget.document_period definition does not declare an id.",
+      "status": "resolved",
+      "resolution": "Add document_period.id and bind each document period to a reviewed source_table_column."
+    },
+    {
+      "gap_key": "text_extraction_provenance",
+      "severity": "blocking",
+      "finding": "OCR-backed source pages require extraction_method, extractor_version, and confidence or review status in source provenance.",
+      "status": "resolved",
+      "resolution": "Add extraction_method, extractor_version, extraction_confidence, and review_status to source_page while retaining row/cell parser confidence."
+    },
+    {
+      "gap_key": "tax_expression_multi_fact",
+      "severity": "blocking",
+      "finding": "One property-tax source expression reports assessment, rate, denominator, and revenue; the model must allow multiple cited facts from one source cell or expression.",
+      "status": "resolved",
+      "resolution": "Add fact_source as a many-to-many fact-to-cell evidence junction with explicit source roles."
+    },
+    {
+      "gap_key": "table_page_membership",
+      "severity": "required",
+      "finding": "Multi-page OCR and continuation cases require explicit source-table-to-page membership rather than only page_start/page_end.",
+      "status": "resolved",
+      "resolution": "Add source_table_page with page order, role, page-local bounding box, and optional extraction-method override."
+    },
+    {
+      "gap_key": "raw_period_label_variants",
+      "severity": "required",
+      "finding": "Document-period uniqueness cannot rely only on raw column label because equivalent labels vary and repeated labels can occur in separate statement scopes.",
+      "status": "resolved",
+      "resolution": "Add source_table_column and make document-period uniqueness depend on document, source column, and period role rather than raw label."
+    }
+  ],
+  "materialization": {
+    "page_count": 12,
+    "row_count": 408,
+    "cell_count": 837,
+    "reconciliation_count": 7,
+    "reconciliation_passed": 4,
+    "reconciliation_review": 3,
+    "outputs": [
+      "representative-source-pages.json",
+      "representative-source-rows.json",
+      "representative-source-cells.json",
+      "reconciliation-results.json",
+      "review-issues.json",
+      "spike-summary.json"
+    ],
+    "review_issue_count": 3,
+    "open_review_issue_count": 3,
+    "ocr_word_coordinates": {
+      "page_count": 6,
+      "row_count": 221,
+      "cell_count": 442,
+      "null_bbox_count": 0,
+      "minimum_row_confidence": 47.068,
+      "mean_row_confidence": 91.742,
+      "low_confidence_row_count": 17,
+      "low_confidence_cell_count": 47
+    }
+  }
+}

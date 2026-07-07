@@ -22,6 +22,26 @@ Added the municipal budget wiki section with prototype scope, source-aware requi
 
 Added a repeatable discovery profiler and page/table inventories for all 392 pages across the three Charlottetown financial plans. Documented table families, column and fiscal-label patterns, reporting entities, OCR requirements, continuation candidates, material annual variations, and representative tables for the schema spike.
 
+## [2026-07-07] budget | Representative-table schema spike started
+
+Mapped seven representative operating, facility, OCR, capital, tax, and debt source patterns to the proposed budget schema. Recorded confirmed schema fits and blocking gaps for document-period identity, extraction provenance, and multi-fact tax expressions before SQL migrations.
+
+## [2026-07-07] budget | Representative schema gaps resolved
+
+Resolved all five structural gaps found by the representative-table spike. Added source table columns, explicit table-page membership, keyed document periods, OCR extraction provenance, and a many-to-many fact-source evidence model to the proposed budget schema; SQL migrations remain gated on materialized source rows and reconciliations.
+
+## [2026-07-07] budget | Representative rows, cells, and reconciliations
+
+Materialized 408 source rows and 616 source cells across 12 representative pages with stable keys and normalized embedded-text coordinates. Four of seven reconciliation controls passed; the displayed property-tax calculation and two facility earnings dashes remain explicit source-review findings.
+
+## [2026-07-07] budget | Reconciliation review records
+
+Designed three stable review issues for the property-tax arithmetic variance and facility earnings dashes. Added controlled severity, publication effects, allowed decisions, prohibited transformations, evidence links, and append-only decision requirements to the proposed budget schema and spike outputs.
+
+## [2026-07-07] budget | Word-level facility OCR coordinates
+
+Replaced line-only OCR evidence for 2024/2025 facility pages 82-87 with Tesseract word-TSV materialization at 180 DPI. All 221 OCR rows and 442 OCR cells now have normalized bounding boxes and confidence values; the representative spike is ready for a draft SQL migration.
+
 ## [2026-07-06] implementation | Page-template classification and unknown detection
 
 Added approved-pattern page classification with required and weighted cues, ambiguous-match handling, rerunnable page classifications, blocking `new_page_template` gaps, package approval-state transitions, classification APIs, and browser template-status badges.

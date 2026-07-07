@@ -77,6 +77,7 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [Charlottetown terrain DEM pipeline](./implementation/charlottetown-terrain-dem-pipeline.md) | First repeatable PDAL/GDAL pipeline design for producing a bare-earth DEM from PEI COPC LIDAR tiles. |
 | [Storm surge demo plan](./implementation/storm-surge-demo-plan.md) | Demo-only Charlottetown tidal and storm-surge visualization scope, controls, source assumptions, limits, and upgrade path. |
 | [Municipal budget data model](./implementation/municipal-budget-data-model.md) | Initial scalable schema design for raw and normalized municipal operating, capital, rate, tax, debt, reserve, and funding data. |
+| [Budget representative-table schema spike](./budgets/representative-table-schema-spike.md) | Source-pattern validation, blocking schema gaps, and migration-gate evidence for municipal budgets. |
 | [Release help and MCP plan](./implementation/release-help-and-mcp-plan.md) | Implementation pattern for release-facing contextual help, the `help` schema, web help APIs, and the repo-local `mdopendata-mcp` package. |
 | [Agenda package ingestion contract](./implementation/agenda-package-ingestion-contract.md) | Package JSON, logical-document ordering, agenda-item binding, template discovery, and approval gates. |
 

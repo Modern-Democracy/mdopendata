@@ -32,6 +32,10 @@ The three annual PDFs are one source family, not assumed to be one layout templa
 
 Week 1 completed on 2026-07-07. The [three-year source profile](../charlottetown/sources/budget-three-year-source-profile.md) inventories 392 pages, 288 table/profile candidates, 160 continuation candidates, material source variations, and the representative-table set for Week 2.
 
+Week 2 started on 2026-07-07. The [representative-table schema spike](./representative-table-schema-spike.md) maps seven source patterns and has resolved all five recorded structural schema gaps. Migrations remain gated on representative row/cell materialization and reconciliation tests.
+
+Representative materialization completed on 2026-07-07 with 408 rows, 837 cells, and seven reconciliation checks. Four checks pass; the property-tax calculation and two facility earnings dashes have designed open review records. Word-level OCR coordinates now cover all 221 rows and 442 cells on the six rasterized facility pages; 17 rows and 47 cells below confidence 80 remain review-flagged. The spike is ready for a draft migration.
+
 ## Representative-Table Spike
 
 The schema gate must use these 2026/2027 layouts:
@@ -113,4 +117,5 @@ Stop and return to requirements or architecture when:
 - [API and UI contract](./api-and-ui-contract.md)
 - [Charlottetown 2026/2027 first pass](../charlottetown/sources/budget-2026-2027-first-pass.md)
 - [Charlottetown three-year source profile](../charlottetown/sources/budget-three-year-source-profile.md)
+- [Representative-table schema spike](./representative-table-schema-spike.md)
 - `docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf`, PDF pages 30, 105, 111, 149, and 151

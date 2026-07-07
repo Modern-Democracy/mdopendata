@@ -24,6 +24,7 @@ Charlottetown is the prototype municipality. The initial source set is the three
 | [Database schema](./database-schema.md) | Proposed PostgreSQL `budget` schema, keys, fact model, provenance, and publication views. |
 | [API and UI contract](./api-and-ui-contract.md) | Website routes, read APIs, filters, visualizations, and response behavior. |
 | [Implementation and test plan](./implementation-plan.md) | Ordered eight-week prototype plan, gates, test strategy, and completion criteria. |
+| [Representative-table schema spike](./representative-table-schema-spike.md) | Source-pattern mapping, confirmed schema fits, blocking gaps, and migration gate status. |
 
 ## Current Evidence
 

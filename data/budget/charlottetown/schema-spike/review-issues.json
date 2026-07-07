@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "review_key": "budget-review-2026-2027-tax-pei-resident-residential",
+      "issue_code": "reported_calculation_variance",
+      "subject_type": "reconciliation_result",
+      "subject_key": "tax_pei_resident_residential",
+      "municipality": "charlottetown",
+      "document": "2026-2027",
+      "pdf_pages": [
+        149
+      ],
+      "severity": "high",
+      "status": "open",
+      "title": "Displayed residential tax calculation does not reconcile",
+      "description": "The displayed assessment multiplied by the displayed rate per $100 does not equal the displayed tax revenue.",
+      "observed": {
+        "check_key": "tax_pei_resident_residential",
+        "formula": "assessment * rate / 100 = reported revenue",
+        "inputs": {
+          "assessment": "2747064500",
+          "rate": "0.67"
+        },
+        "calculated_value": "18405332.15",
+        "reported_value": "19991891",
+        "reported_value_state": "reported",
+        "difference": "-1586558.85",
+        "tolerance": "1",
+        "passed": false,
+        "status": "source_variance_review"
+      },
+      "publication_effect": "allow_reported_facts_with_warning_block_derived_tax_check",
+      "required_resolution": "Obtain authoritative clarification or approve the three displayed values as independent reported facts with a persistent variance warning.",
+      "allowed_decisions": [
+        "clarified_by_authoritative_source",
+        "accept_reported_values_with_warning",
+        "superseded_by_corrected_source"
+      ],
+      "prohibited_action": "Do not alter any reported value to force reconciliation."
+    },
+    {
+      "review_key": "budget-review-2026-2027-facility-current-earnings-dash",
+      "issue_code": "reported_dash_with_calculated_balance",
+      "subject_type": "reconciliation_result",
+      "subject_key": "facility_current_balance",
+      "municipality": "charlottetown",
+      "document": "2026-2027",
+      "pdf_pages": [
+        105
+      ],
+      "severity": "medium",
+      "status": "open",
+      "title": "Current-period facility earnings is displayed as a dash",
+      "description": "Revenue and expense both equal 4,073,224, producing a calculated zero, while the source displays a dash for earnings/loss.",
+      "observed": {
+        "check_key": "facility_current_balance",
+        "formula": "operating revenue - operating expense = earnings",
+        "inputs": {
+          "revenue": "4073224",
+          "expense": "4073224"
+        },
+        "calculated_value": "0",
+        "reported_value": null,
+        "reported_value_state": "dash_unresolved",
+        "difference": null,
+        "tolerance": "1",
+        "passed": false,
+        "status": "reported_dash_review"
+      },
+      "publication_effect": "publish_dash_unresolved_allow_derived_zero_with_label",
+      "required_resolution": "Confirm whether the dash means zero or not applicable; until then preserve the dash and label zero as derived.",
+      "allowed_decisions": [
+        "dash_means_zero",
+        "dash_means_not_applicable",
+        "retain_dash_unresolved"
+      ],
+      "prohibited_action": "Do not convert the reported dash to a reported zero without review."
+    },
+    {
+      "review_key": "budget-review-2026-2027-facility-prior-earnings-dash",
+      "issue_code": "reported_dash_with_nonzero_calculated_balance",
+      "subject_type": "reconciliation_result",
+      "subject_key": "facility_prior_balance",
+      "municipality": "charlottetown",
+      "document": "2026-2027",
+      "pdf_pages": [
+        105
+      ],
+      "severity": "high",
+      "status": "open",
+      "title": "Prior-period facility earnings dash conflicts with calculated balance",
+      "description": "Reported prior-period revenue exceeds reported expense by 3,250, while the source displays a dash for earnings/loss.",
+      "observed": {
+        "check_key": "facility_prior_balance",
+        "formula": "operating revenue - operating expense = earnings",
+        "inputs": {
+          "revenue": "3822876",
+          "expense": "3819626"
+        },
+        "calculated_value": "3250",
+        "reported_value": null,
+        "reported_value_state": "dash_unresolved",
+        "difference": null,
+        "tolerance": "1",
+        "passed": false,
+        "status": "reported_dash_review"
+      },
+      "publication_effect": "publish_dash_unresolved_block_derived_earnings_without_warning",
+      "required_resolution": "Confirm whether a source line is omitted, the dash has a special meaning, or a corrected statement exists.",
+      "allowed_decisions": [
+        "clarified_by_authoritative_source",
+        "accept_calculated_balance_as_derived_with_warning",
+        "retain_dash_unresolved",
+        "superseded_by_corrected_source"
+      ],
+      "prohibited_action": "Do not publish 3,250 as a reported earnings value."
+    }
+  ]
+}
