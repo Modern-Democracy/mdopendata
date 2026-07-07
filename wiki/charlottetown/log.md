@@ -376,3 +376,7 @@ Added `scripts/extract-charlottetown-budget-raw-rows.py` and generated raw row/v
 ## [2026-07-07] budget | Prototype requirements and plan
 
 Linked the Charlottetown budget source area to the new cross-municipality budget contracts. The prototype plan starts with schema validation against representative pages of the 2026/2027 financial plan, then normalizes that document before adapting reviewed rules to the 2025/2026 and 2024/2025 PDFs.
+
+## [2026-07-07] budget | Three-year source profiling
+
+Profiled all 392 pages in the 2024/2025, 2025/2026, and 2026/2027 financial plans. Added raw page text, JSON/CSV page and table inventories, OCR fallback for rasterized 2024/2025 facility tables, a source-variation matrix, unresolved continuation queues, and representative tables for the schema spike.

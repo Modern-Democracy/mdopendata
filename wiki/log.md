@@ -18,6 +18,10 @@ Append new entries in reverse chronological order. Use this heading format:
 
 Added the municipal budget wiki section with prototype scope, source-aware requirements, a proposed raw-to-normalized PostgreSQL schema, public website/API contracts, and an eight-week implementation and test plan. The contracts use the three Charlottetown budget PDFs as the initial source family and identify representative 2026/2027 operating, capital, tax, facility, and debt layouts as the pre-migration architecture gate.
 
+## [2026-07-07] budget | Three-year source profiling
+
+Added a repeatable discovery profiler and page/table inventories for all 392 pages across the three Charlottetown financial plans. Documented table families, column and fiscal-label patterns, reporting entities, OCR requirements, continuation candidates, material annual variations, and representative tables for the schema spike.
+
 ## [2026-07-06] implementation | Page-template classification and unknown detection
 
 Added approved-pattern page classification with required and weighted cues, ambiguous-match handling, rerunnable page classifications, blocking `new_page_template` gaps, package approval-state transitions, classification APIs, and browser template-status badges.

@@ -30,6 +30,8 @@ The three annual PDFs are one source family, not assumed to be one layout templa
 | 7 | Implement `/budgets` landing, operating, capital, revenue, comparison, and sources views with accessible tables and source links. | Browser tests pass for primary public tasks, empty states, and source tracing. |
 | 8 | Full reconciliation, accessibility, regression, performance, backup/rebuild, and reviewer acceptance. Correct defects and freeze the first publication snapshot. | Prototype release checklist passes with no unresolved critical issue. |
 
+Week 1 completed on 2026-07-07. The [three-year source profile](../charlottetown/sources/budget-three-year-source-profile.md) inventories 392 pages, 288 table/profile candidates, 160 continuation candidates, material source variations, and the representative-table set for Week 2.
+
 ## Representative-Table Spike
 
 The schema gate must use these 2026/2027 layouts:
@@ -110,5 +112,5 @@ Stop and return to requirements or architecture when:
 - [Database schema](./database-schema.md)
 - [API and UI contract](./api-and-ui-contract.md)
 - [Charlottetown 2026/2027 first pass](../charlottetown/sources/budget-2026-2027-first-pass.md)
+- [Charlottetown three-year source profile](../charlottetown/sources/budget-three-year-source-profile.md)
 - `docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf`, PDF pages 30, 105, 111, 149, and 151
-

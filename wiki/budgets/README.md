@@ -31,6 +31,8 @@ The first pass of the 2026/2027 PDF found 154 pages, 114 table or project-profil
 
 The existing artifacts are discovery inputs, not publishable normalized facts. Their page-granular manifests do not yet join continuation pages or reliably distinguish detail rows, headings, subtotals, deductions, and totals.
 
+Week 1 profiling is complete for all 392 pages. See the [three-year Charlottetown source profile](../charlottetown/sources/budget-three-year-source-profile.md) for the source-pattern matrix and representative schema-spike tables.
+
 ## Decisions
 
 - Fiscal periods are modeled with dates and source labels. The product must not relabel municipal fiscal periods as calendar years.
@@ -43,6 +45,6 @@ The existing artifacts are discovery inputs, not publishable normalized facts. T
 
 - [Requirements](./requirements.md)
 - [Charlottetown 2026/2027 first pass](../charlottetown/sources/budget-2026-2027-first-pass.md)
+- [Charlottetown three-year source profile](../charlottetown/sources/budget-three-year-source-profile.md)
 - [Initial municipal budget data model](../implementation/municipal-budget-data-model.md)
 - `docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf`, PDF pages 10, 19, 30, 105, 111, 149, and 151
-

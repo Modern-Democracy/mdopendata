@@ -79,6 +79,8 @@ This is not a normalized budget import. It does not create database tables, stab
 
 The table manifest is page-granular. Multi-page detailed breakdowns remain separate candidate records until a later schema and extraction pass defines how sections, sub-sections, subtotal rows, and continuation pages should be joined.
 
+A later generic three-year profiler reports 116 discovery candidates for this document rather than 114. The counts are not equivalent: the generic profile includes a broader overview/rate candidate set and uses different family rules. Neither count represents approved normalized tables.
+
 ## Raw Row And Value Extraction
 
 The raw row/value pass reads the 114 manifest records and emits row/value JSON without normalized budget semantics.
@@ -103,3 +105,4 @@ Detected values by kind:
 - `docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf`
 - `data/budget/charlottetown/2026-2027/ingestion_summary.json`
 - `data/budget/charlottetown/2026-2027/raw-tables/raw_row_value_summary.json`
+- [Three-year budget source profile](./budget-three-year-source-profile.md)
