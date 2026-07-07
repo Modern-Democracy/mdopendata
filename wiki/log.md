@@ -299,3 +299,7 @@ Added a synchronized visual editor for template field keys, JSON Pointers, value
 ## [2026-07-06] implementation | Visual field regions and coordinate extraction
 
 Added a rendered-page region picker with drag selection, direct normalized coordinates, preview-page selection, visual overlays, full-page reset, JSON synchronization, and bounds validation. Deterministic extraction now uses Poppler word bounding boxes for region-limited strategies. QA isolated the second agenda heading as `PUBLIC MEETING OF COUNCIL`, then restored and reproduced the canonical full-page result.
+
+## [2026-07-07] implementation | Non-blocking agenda package traversal
+
+Changed agenda-package traversal from a request-blocking operation to a background job with browser polling and failure reporting. New PDF selection clears all downstream workflow output, and the Docker web service now reaps Poppler child processes. Follow-up QA restored PostgreSQL after crash recovery, made duplicate temporary-file cleanup non-blocking, handled Poppler zero-padded filenames, and reused complete render sets. The 453-page January 13 package uploaded, traversed, classified, and generated 453 review drafts; extraction remains correctly blocked pending explicit template approval.

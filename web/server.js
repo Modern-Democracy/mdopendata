@@ -1,5 +1,5 @@
 import { createServer } from "node:http";
-import { mkdir, open, readFile, rename, unlink } from "node:fs/promises";
+import { mkdir, open, readFile, readdir, rename, unlink } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import { createHash, randomUUID } from "node:crypto";
 import path from "node:path";
@@ -73,6 +73,7 @@ const packageArtifactRoot = path.join(documentIngestionRoot, "packages");
 const maxPackageUploadBytes = Number(process.env.DOCUMENT_UPLOAD_MAX_BYTES || 500 * 1024 * 1024);
 const packageRenderDpi = Number(process.env.DOCUMENT_RENDER_DPI || 120);
 const packageTraversalJobs = new Map();
+const packageTraversalErrors = new Map();
 
 const publicDir = path.join(__dirname, "public");
 const pool = new Pool({
@@ -2495,7 +2496,7 @@ async function registerPackageUpload(upload) {
     `, [upload.sha256]);
     if (existing.rows[0]) {
       await client.query("COMMIT");
-      await unlink(upload.temporaryPath).catch(() => {});
+      unlink(upload.temporaryPath).catch(() => {});
       return mapPackageExtraction(existing.rows[0], true);
     }
 
@@ -2578,6 +2579,51 @@ async function loadPackageExtraction(packageKey) {
   return rows[0] ? mapPackageExtraction(rows[0]) : null;
 }
 
+async function loadAdminPackages() {
+  const { rows } = await pool.query(`
+    SELECT sd.source_document_key, sd.title_raw, sd.municipality_raw, sd.published_date,
+           sd.page_count, sd.created_at, pe.extraction_status, pe.unresolved_template_count,
+           pe.completed_at, count(ped.package_extracted_document_id)::integer AS document_count
+    FROM documents.source_document sd
+    JOIN documents.package_extraction pe ON pe.source_document_id = sd.source_document_id AND pe.is_active
+    LEFT JOIN documents.package_extracted_document ped ON ped.package_extraction_id = pe.package_extraction_id AND ped.is_active
+    WHERE sd.is_active AND sd.document_type_key = 'agenda-package'
+    GROUP BY sd.source_document_id, pe.package_extraction_id
+    ORDER BY coalesce(sd.published_date, sd.created_at::date) DESC, sd.created_at DESC
+  `);
+  return { packages: rows.map((row) => ({
+    packageKey: row.source_document_key, title: row.title_raw, municipality: row.municipality_raw,
+    publishedDate: row.published_date, pageCount: row.page_count, uploadedAt: row.created_at,
+    status: row.extraction_status, unresolvedTemplateCount: row.unresolved_template_count,
+    completedAt: row.completed_at, documentCount: row.document_count,
+  })) };
+}
+
+async function loadAdminTemplates() {
+  const { rows } = await pool.query(`
+    SELECT pt.page_template_id, pt.page_template_key, pt.name, pt.description, pt.status, pt.created_at,
+           count(pc.page_classification_id)::integer AS match_count,
+           max(pc.created_at) AS last_matched_at,
+           coalesce(jsonb_agg(jsonb_build_object(
+             'packageKey', sd.source_document_key, 'packageTitle', sd.title_raw,
+             'pageNumber', sp.page_number, 'confidence', pc.confidence,
+             'reviewStatus', pc.review_status, 'matchedAt', pc.created_at
+           ) ORDER BY pc.created_at DESC) FILTER (WHERE pc.page_classification_id IS NOT NULL), '[]'::jsonb) AS matches
+    FROM documents.page_template pt
+    LEFT JOIN documents.page_classification pc ON pc.page_template_id = pt.page_template_id AND pc.is_active
+    LEFT JOIN documents.source_page sp ON sp.source_page_id = pc.source_page_id AND sp.is_active
+    LEFT JOIN documents.source_document sd ON sd.source_document_id = sp.source_document_id AND sd.is_active
+    WHERE pt.is_active
+    GROUP BY pt.page_template_id
+    ORDER BY pt.name, pt.page_template_key
+  `);
+  return { templates: rows.map((row) => ({
+    templateKey: row.page_template_key, name: row.name, description: row.description,
+    status: row.status, createdAt: row.created_at, matchCount: row.match_count,
+    lastMatchedAt: row.last_matched_at, matches: row.matches,
+  })) };
+}
+
 async function packageSourceRecord(packageKey) {
   const { rows } = await pool.query(`
     SELECT source_document_id, source_document_key, repo_relpath,
@@ -2654,13 +2700,21 @@ async function traversePackageNow(packageKey) {
 
   const { stdout: pdfInfo } = await execFileAsync("pdfinfo", [sourcePath], { maxBuffer: 1024 * 1024 });
   const pageCount = parsePdfPageCount(pdfInfo);
-  await execFileAsync("pdftoppm", [
-    "-png", "-r", String(packageRenderDpi), sourcePath, path.join(pageDir, "page"),
-  ], { maxBuffer: 8 * 1024 * 1024, timeout: 20 * 60 * 1000 });
+  const loadRenderedPagePaths = async () => new Map((await readdir(pageDir))
+    .map((filename) => [Number(filename.match(/^page-(\d+)\.png$/)?.[1]), path.join(pageDir, filename)])
+    .filter(([pageNumber]) => Number.isInteger(pageNumber) && pageNumber >= 1 && pageNumber <= pageCount));
+  let renderedPagePaths = await loadRenderedPagePaths();
+  if (renderedPagePaths.size !== pageCount) {
+    await execFileAsync("pdftoppm", [
+      "-png", "-r", String(packageRenderDpi), sourcePath, path.join(pageDir, "page"),
+    ], { maxBuffer: 8 * 1024 * 1024, timeout: 20 * 60 * 1000 });
+    renderedPagePaths = await loadRenderedPagePaths();
+  }
 
   const pages = [];
   for (let pageNumber = 1; pageNumber <= pageCount; pageNumber += 1) {
-    const imagePath = path.join(pageDir, `page-${pageNumber}.png`);
+    const imagePath = renderedPagePaths.get(pageNumber);
+    if (!imagePath) throw new Error(`Rendered package page ${pageNumber} is missing.`);
     const { stdout: textRaw } = await execFileAsync("pdftotext", [
       "-f", String(pageNumber), "-l", String(pageNumber), "-layout", sourcePath, "-",
     ], { maxBuffer: 4 * 1024 * 1024 });
@@ -2741,10 +2795,22 @@ async function traversePackageNow(packageKey) {
 
 async function traversePackage(packageKey) {
   if (!packageTraversalJobs.has(packageKey)) {
-    const job = traversePackageNow(packageKey).finally(() => packageTraversalJobs.delete(packageKey));
+    packageTraversalErrors.delete(packageKey);
+    const job = traversePackageNow(packageKey)
+      .catch((error) => {
+        packageTraversalErrors.set(packageKey, error.message);
+        throw error;
+      })
+      .finally(() => packageTraversalJobs.delete(packageKey));
     packageTraversalJobs.set(packageKey, job);
   }
   return packageTraversalJobs.get(packageKey);
+}
+
+function packageTraversalStatus(packageKey) {
+  if (packageTraversalJobs.has(packageKey)) return { status: "running" };
+  if (packageTraversalErrors.has(packageKey)) return { status: "failed", error: packageTraversalErrors.get(packageKey) };
+  return { status: "idle" };
 }
 
 async function loadPackagePageAsset(packageKey, pageNumber) {
@@ -5318,6 +5384,8 @@ const routeEntrypoints = new Map([
   ["/document-import/", { file: "/ui_kits/document-import/index.html", baseHref: "/ui_kits/document-import/" }],
   ["/agenda-package-ingestion", { file: "/ui_kits/agenda-package-ingestion/index.html", baseHref: "/ui_kits/agenda-package-ingestion/" }],
   ["/agenda-package-ingestion/", { file: "/ui_kits/agenda-package-ingestion/index.html", baseHref: "/ui_kits/agenda-package-ingestion/" }],
+  ["/admin/agenda-packages", { file: "/ui_kits/agenda-package-admin/packages.html", baseHref: "/ui_kits/agenda-package-admin/" }],
+  ["/admin/page-templates", { file: "/ui_kits/agenda-package-admin/templates.html", baseHref: "/ui_kits/agenda-package-admin/" }],
   ["/rezoning-parcel-lookup", { file: "/ui_kits/rezoning-parcel-lookup/index.html", baseHref: "/ui_kits/rezoning-parcel-lookup/" }],
   ["/rezoning-parcel-lookup/", { file: "/ui_kits/rezoning-parcel-lookup/index.html", baseHref: "/ui_kits/rezoning-parcel-lookup/" }],
   ["/rezoning-zoning-comparison", { file: "/ui_kits/rezoning-zoning-comparison/index.html", baseHref: "/ui_kits/rezoning-zoning-comparison/" }],
@@ -5420,6 +5488,18 @@ const server = createServer(async (request, response) => {
       return;
     }
 
+    if (url.pathname === "/api/admin/agenda-packages") {
+      if (request.method !== "GET") { response.writeHead(405); response.end("Method not allowed"); return; }
+      await sendJson(response, await loadAdminPackages());
+      return;
+    }
+
+    if (url.pathname === "/api/admin/page-templates") {
+      if (request.method !== "GET") { response.writeHead(405); response.end("Method not allowed"); return; }
+      await sendJson(response, await loadAdminTemplates());
+      return;
+    }
+
     const packageTraverseMatch = url.pathname.match(/^\/api\/document-ingestion\/packages\/([^/]+)\/traverse$/);
     if (packageTraverseMatch) {
       if (request.method !== "POST") {
@@ -5428,7 +5508,8 @@ const server = createServer(async (request, response) => {
         return;
       }
       const packageKey = decodeURIComponent(packageTraverseMatch[1]).trim();
-      await sendJson(response, await traversePackage(packageKey));
+      traversePackage(packageKey).catch(() => {});
+      await sendJson(response, { packageKey, traversal: packageTraversalStatus(packageKey) });
       return;
     }
 
@@ -5589,7 +5670,7 @@ const server = createServer(async (request, response) => {
         response.end(JSON.stringify({ error: "Agenda package not found." }));
         return;
       }
-      await sendJson(response, packageExtraction);
+      await sendJson(response, { ...packageExtraction, traversal: packageTraversalStatus(packageKey) });
       return;
     }
 

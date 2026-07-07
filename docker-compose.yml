@@ -39,6 +39,7 @@ services:
     build:
       context: ./web
     container_name: mdopendata-web
+    init: true
     restart: unless-stopped
     ports:
       - "${WEB_PORT:-3000}:3000"
