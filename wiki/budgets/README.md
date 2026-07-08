@@ -26,6 +26,8 @@ Charlottetown is the prototype municipality. The initial source set is the three
 | [Implementation and test plan](./implementation-plan.md) | Ordered eight-week prototype plan, gates, test strategy, and completion criteria. |
 | [Representative-table schema spike](./representative-table-schema-spike.md) | Source-pattern mapping, confirmed schema fits, blocking gaps, and migration gate status. |
 | [Representative-spike normalized mapping](./representative-spike-normalized-mapping.md) | Reviewed raw and normalized import identities, manifest contract, sequencing, and stop conditions. |
+| [2026/2027 normalization status](./2026-normalization-status.md) | Full raw import, canonical dispositions, continuation decisions, coverage, and blocked normalization review queue. |
+| [2026/2027 normalized import gap report](./2026-normalized-import-gap-report.md) | Database-import blockers, vocabulary translations, provenance requirements, reconciliation coverage, and acceptance criteria. |
 
 ## Current Evidence
 

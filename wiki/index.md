@@ -3,7 +3,7 @@ type: index
 tags:
   - wiki
   - catalog
-updated: 2026-07-07
+updated: 2026-07-08
 ---
 
 This page catalogs the root wiki structure and links to active project wiki areas.
@@ -85,8 +85,11 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [Municipal budget data model](./implementation/municipal-budget-data-model.md) | Initial scalable schema design for raw and normalized municipal operating, capital, rate, tax, debt, reserve, and funding data. |
 | [Budget representative-table schema spike](./budgets/representative-table-schema-spike.md) | Source-pattern validation, blocking schema gaps, and migration-gate evidence for municipal budgets. |
 | [Budget representative-spike normalized mapping](./budgets/representative-spike-normalized-mapping.md) | Reviewed mapping contract and import gate for representative raw and normalized budget records. |
+| [2026/2027 budget normalization status](./budgets/2026-normalization-status.md) | Full-document raw import and canonical normalization-review status. |
+| [2026/2027 normalized import gap report](./budgets/2026-normalized-import-gap-report.md) | Quantified gaps between reviewed normalization artifacts and the PostgreSQL import contract. |
 | [Release help and MCP plan](./implementation/release-help-and-mcp-plan.md) | Implementation pattern for release-facing contextual help, the `help` schema, web help APIs, and the repo-local `mdopendata-mcp` package. |
 | [Agenda package ingestion contract](./implementation/agenda-package-ingestion-contract.md) | Package JSON, logical-document ordering, agenda-item binding, template discovery, and approval gates. |
+| [Document extraction engineering](./implementation/document-extraction-engineering.md) | Project-wide reuse, variation, exception, regeneration, and QA contract for maintainable document extraction. |
 
 ## Plans
 

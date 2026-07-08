@@ -3,7 +3,7 @@ type: log
 tags:
   - wiki
   - log
-updated: 2026-07-07
+updated: 2026-07-08
 ---
 
 This page is the append-only chronological record for root wiki changes, ingests, substantive queries, and lint passes.
@@ -17,6 +17,26 @@ Append new entries in reverse chronological order. Use this heading format:
 ## [2026-07-08] platform | DevOps role and environment ownership
 
 Added the DevOps role as the exclusive owner of dependency installation, project environment and toolchain mutation, infrastructure, CI/CD, and deployment-target changes. Added an explicit pre-change user approval gate, Project Management routing, and a canonical project-environment wiki page covering `.venv`, the separate QGIS runtime, current deployment surfaces, and documentation requirements.
+
+## [2026-07-08] query | 2026/2027 normalized import gap audit
+
+Audited 28 normalization files containing 1,157 rows, 2,159 facts, and 24 profiles against the PostgreSQL schema and representative importer. Confirmed complete raw-value provenance but identified blocking gaps in manifest identities, controlled vocabularies, amount types, source-cell periods, extension links, reconciliation coverage, importer mode, and representative-data coexistence. No database writes were performed.
+
+## [2026-07-08] implementation | Complete 2026/2027 normalization review
+
+Classified Funding and Taxation page 15 as non-financial narrative, mapped 109 Civic Centre single-period rows, and mapped 52 Bell Aliant departmental rows into 104 two-period facts while excluding variance percentages. All 116 candidates now have final dispositions and the unresolved review report is empty.
+
+## [2026-07-08] implementation | Capital profiles, schedules, and debt normalization
+
+Mapped 13 capital schedules into 216 reviewed rows and 240 facts, structured 24 capital project profiles as narrative-only records, and mapped ten Water and Sewer debt instruments with balance, principal, interest, and maturity metadata. Regeneration leaves three section reviews covering eight candidates.
+
+## [2026-07-08] fix | Charlottetown budget page 87 staggered rows
+
+Verified the rendered page 87 Municipal Buildings labels and values against raw text, source rows, source values, and normalization logic. Preserved raw physical extraction and added an isolated reviewed logical-row reconstruction for the unique five-row staggered chain. Regenerated normalization artifacts; Public Works and Municipal Buildings is approved, leaving 14 section reviews.
+
+## [2026-07-07] budget | Full 2026/2027 raw import and normalization gate
+
+Reconciled 114 first-pass tables with 116 profile candidates, recorded dispositions for every candidate and non-join decisions for all 63 continuation flags, imported 154 pages with 3,233 rows and 2,420 values, and produced coverage, reconciliation, and unresolved-review reports. Full fact normalization remains blocked for 112 candidates pending semantic review; no publication snapshot was created.
 
 ## [2026-07-07] budget | Representative normalized mapping design
 
@@ -339,3 +359,39 @@ Added a rendered-page region picker with drag selection, direct normalized coord
 ## [2026-07-07] implementation | Non-blocking agenda package traversal
 
 Changed agenda-package traversal from a request-blocking operation to a background job with browser polling and failure reporting. New PDF selection clears all downstream workflow output, and the Docker web service now reaps Poppler child processes. Follow-up QA restored PostgreSQL after crash recovery, made duplicate temporary-file cleanup non-blocking, handled Poppler zero-padded filenames, and reused complete render sets. The 453-page January 13 package uploaded, traversed, classified, and generated 453 review drafts; extraction remains correctly blocked pending explicit template approval.
+
+## [2026-07-08] implementation | Budget section-based normalization review
+
+Grouped all 116 Charlottetown 2026/2027 budget candidates into 31 source-defined sections while preserving page-level identities and normalization gates. Replaced profiler continuation guesses with 85 explicit section relationships and reduced the machine review queue from 112 repetitive page records to 28 section records covering the same 112 blocked candidates.
+
+## [2026-07-08] implementation | Consolidated operating row mapping
+
+Reviewed pages 18–20 as one consolidated operating section. Classified pages 18 and 19 as duplicate presentation summaries and mapped page 20 into 31 approved lines and 91 reported facts across the 2025/2026 budget, 2025/2026 forecast, and 2026/2027 budget periods for the City and Water and Sewer entities.
+
+## [2026-07-08] implementation | Operating supporting schedules mapping
+
+Mapped 59 extracted revenue-detail lines and 177 reported facts from pages 21–22, retaining five exact extraction blockers for missing dash or small-value tokens. Approved 15 property-tax and utility-rate rows from page 23 with separate City and Water and Sewer entities and explicit assessed-value, annual, daily, and consumption units.
+
+## [2026-07-08] fix | Budget small-value and dash extraction
+
+Added reviewed token overrides for five exact rows on pages 21–22, recovering ten omitted plain-integer or dash tokens without broadening numeric matching into narrative text. The completed supporting mapping contains 64 lines and 192 facts, including four explicit `dash_unresolved` values; the full raw import now contains 2,430 detected values.
+
+## [2026-07-08] implementation | City Government budget mapping
+
+Approved the City Government section on pages 28–33. Page 28 maps 31 authoritative lines and 93 three-period facts; five supporting pages map 27 explicit 2026/2027 breakdown amounts while excluding parenthetical staff counts and layout zeros/dashes. Seven reviewed tokens were recovered, bringing the full raw import to 2,437 values.
+
+## [2026-07-08] fix | Document-wide aligned budget value recovery
+
+Replaced section-specific token overrides with a table-aware second extraction pass. Financial column anchors are inferred from complete rows; plain integers and dash variants are recovered only when aligned to those anchors. Regeneration recovered 672 tokens across the document, produced 3,092 raw values, and excluded narrative four-digit years from aligned recovery.
+
+## [2026-07-08] implementation | Economic, tourism and culture budget mapping
+
+Added a reusable departmental operating mapper and approved pages 35–41. The two summary pages map 37 lines and 111 facts; five supporting pages map 29 explicit 2026/2027 breakdown amounts. The document-wide numeric parser now accepts whitespace inside grouped numbers and correctly parses `2, 250,000` as 2,250,000.
+
+## [2026-07-08] implementation | Document extraction engineering contract
+
+Added a project-wide engineering contract requiring full-document recurrence audits, reusable extraction and mapping mechanisms, explicit variation boundaries, tightly gated one-off exceptions, deterministic regeneration, reimport controls, and invariant-level QA. The contract applies across document sections and across materially equivalent document families.
+
+## [2026-07-08] implementation | Reusable departmental budget mapping
+
+Applied the shared departmental operating mapper to nine equivalent sections covering Environment, Finance, Fire, Human Resources, Mayor and Council, Parks, Planning, Police, and Water and Sewer. Approved 249 authoritative lines, 747 facts, and 209 supporting breakdown rows. Public Works was excluded because an unlabeled three-period row on page 87 violates the mapper's source-label invariant.

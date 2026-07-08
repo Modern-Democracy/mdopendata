@@ -10,8 +10,10 @@ from __future__ import annotations
 import argparse
 import json
 import re
+from collections import defaultdict
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
+from statistics import median
 
 
 VALUE_RE = re.compile(
@@ -20,10 +22,12 @@ VALUE_RE = re.compile(
     |(?P<currency>\$\s*\(?-?\d[\d,]*(?:\.\d+)?\)?)
     |(?P<paren>\(-?\d[\d,]*(?:\.\d+)?\))
     |(?P<percent>-?\d+(?:\.\d+)?%)
-    |(?P<number>\b-?\d{1,3}(?:,\d{3})+(?:\.\d+)?\b|\b-?\d+\.\d+\b)
+    |(?P<number>\b-?\d{1,3}(?:,\s*\d{3})+(?:\.\d+)?\b|\b-?\d+\.\d+\b)
     """,
     re.IGNORECASE | re.VERBOSE,
 )
+
+ALIGNED_VALUE_RE = re.compile(r"(?<![\w,.(])(?:- -|--|-|\d{1,3})(?![\w,.%)])")
 
 
 def load_json(path: Path) -> object:
@@ -43,18 +47,22 @@ def classify_value(raw: str) -> str:
         return "rate"
     if "$" in raw:
         return "currency"
+    if raw in {"-", "- -"}:
+        return "dash"
     return "number"
 
 
 def parse_decimal(raw: str) -> str | None:
     cleaned = raw.strip()
+    if cleaned in {"-", "- -"}:
+        return None
     negative = False
     if cleaned.startswith("(") and cleaned.endswith(")"):
         negative = True
         cleaned = cleaned[1:-1]
     cleaned = re.sub(r"[$,%]", "", cleaned)
     cleaned = re.sub(r"\s*/\s*(day|metre3|meter|100)$", "", cleaned, flags=re.IGNORECASE)
-    cleaned = cleaned.replace(",", "").strip()
+    cleaned = cleaned.replace(",", "").replace(" ", "").strip()
     try:
         value = Decimal(cleaned)
     except InvalidOperation:
@@ -88,6 +96,60 @@ def row_kind(raw_text: str, values: list[dict[str, object]]) -> str:
     return "label_or_heading"
 
 
+def recover_aligned_values(
+    rows: list[dict[str, object]], values: list[dict[str, object]], manifest_records: list[dict[str, object]]
+) -> tuple[list[dict[str, object]], list[dict[str, object]]]:
+    """Recover small integers and dashes only at inferred financial columns."""
+    values_by_row: dict[str, list[dict[str, object]]] = defaultdict(list)
+    for value in values:
+        values_by_row[str(value["row_id"])].append(value)
+    rows_by_table: dict[str, list[dict[str, object]]] = defaultdict(list)
+    for row in rows:
+        rows_by_table[str(row["table_id"])].append(row)
+
+    for table in manifest_records:
+        table_id = str(table["table_id"])
+        expected = max(1, len(table.get("columns_observed") or []) - 1)
+        complete = []
+        for row in rows_by_table[table_id]:
+            current = sorted(values_by_row[str(row["row_id"])], key=lambda item: int(item["char_start"]))
+            if len(current) == expected:
+                complete.append(current)
+        if not complete:
+            continue
+        anchors = [median(int(row_values[index]["char_end"]) for row_values in complete) for index in range(expected)]
+        tolerance = 4 if len(anchors) == 1 else max(4, int(min(b - a for a, b in zip(anchors, anchors[1:])) / 2) + 1)
+        for row in rows_by_table[table_id]:
+            row_id = str(row["row_id"])
+            raw_line = str(row["raw_text"])
+            current = values_by_row[row_id]
+            occupied = [(int(item["char_start"]), int(item["char_end"])) for item in current]
+            candidates = []
+            for match in ALIGNED_VALUE_RE.finditer(raw_line):
+                if any(match.start() < end and match.end() > start for start, end in occupied):
+                    continue
+                nearest = min(range(len(anchors)), key=lambda index: abs(match.end() - anchors[index]))
+                if abs(match.end() - anchors[nearest]) <= tolerance:
+                    candidates.append((match.group(0), match.start(), match.end()))
+            for raw_value, char_start, char_end in candidates:
+                current.append({
+                    "row_id": row_id, "table_id": table_id, "page_number": row["page_number"],
+                    "row_index": row["row_index"], "physical_line_number": row["physical_line_number"],
+                    "raw_value": raw_value, "parsed_decimal": parse_decimal(raw_value),
+                    "value_kind": classify_value(raw_value), "char_start": char_start, "char_end": char_end,
+                    "detection_method": "aligned_column_recovery",
+                })
+            current.sort(key=lambda item: int(item["char_start"]))
+            for index, item in enumerate(current, start=1):
+                item["value_index"] = index
+                item["value_id"] = f"{row_id}_v{index:02d}"
+            row["value_count"] = len(current)
+            row["value_ids"] = [item["value_id"] for item in current]
+            row["row_kind"] = row_kind(raw_line, current)
+    rebuilt = [item for row in rows for item in values_by_row[str(row["row_id"])]]
+    return rows, rebuilt
+
+
 def extract_rows(manifest_path: Path, raw_pages_dir: Path) -> tuple[list[dict[str, object]], list[dict[str, object]]]:
     manifest = load_json(manifest_path)
     rows: list[dict[str, object]] = []
@@ -105,8 +167,9 @@ def extract_rows(manifest_path: Path, raw_pages_dir: Path) -> tuple[list[dict[st
             row_index += 1
             row_id = f"{table_id}_r{row_index:03d}"
             detected_values: list[dict[str, object]] = []
-            for value_index, match in enumerate(VALUE_RE.finditer(raw_line), start=1):
-                raw_value = match.group(0).strip()
+            matches = list(VALUE_RE.finditer(raw_line))
+            token_positions = [(match.group(0).strip(), match.start(), match.end()) for match in matches]
+            for value_index, (raw_value, char_start, char_end) in enumerate(token_positions, start=1):
                 value_record = {
                     "value_id": f"{row_id}_v{value_index:02d}",
                     "row_id": row_id,
@@ -118,8 +181,9 @@ def extract_rows(manifest_path: Path, raw_pages_dir: Path) -> tuple[list[dict[st
                     "raw_value": raw_value,
                     "parsed_decimal": parse_decimal(raw_value),
                     "value_kind": classify_value(raw_value),
-                    "char_start": match.start(),
-                    "char_end": match.end(),
+                    "char_start": char_start,
+                    "char_end": char_end,
+                    "detection_method": "regex",
                 }
                 detected_values.append(value_record)
                 values.append(value_record)
@@ -141,7 +205,7 @@ def extract_rows(manifest_path: Path, raw_pages_dir: Path) -> tuple[list[dict[st
                 }
             )
 
-    return rows, values
+    return recover_aligned_values(rows, values, manifest["records"])
 
 
 def main() -> None:
@@ -180,6 +244,7 @@ def main() -> None:
         "value_count": len(values),
         "rows_by_table_type": count_rows_by_table_type(rows, manifest_records),
         "values_by_kind": count_by(values, "value_kind"),
+        "values_by_detection_method": count_by(values, "detection_method"),
     }
 
     write_json(args.out / "source_table_rows.json", row_payload)

@@ -1,0 +1,660 @@
+{
+  "schema_version": 1,
+  "section_count": 31,
+  "records": [
+    {
+      "section_key": "budget-overview",
+      "title": "Budget overview",
+      "page_start": 12,
+      "page_end": 12,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p012"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p012": "context"
+      },
+      "families": [
+        "overview_summary"
+      ]
+    },
+    {
+      "section_key": "funding-taxation",
+      "title": "Funding and taxation",
+      "page_start": 15,
+      "page_end": 15,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p015"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p015": "statement"
+      },
+      "families": [
+        "tax_assessment_rate"
+      ]
+    },
+    {
+      "section_key": "consolidated-operating",
+      "title": "Consolidated operating budget",
+      "page_start": 18,
+      "page_end": 20,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p018",
+        "ctown-2026-2027-2026-2027-p019",
+        "ctown-2026-2027-2026-2027-p020"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p018": "summary",
+        "ctown-2026-2027-2026-2027-p019": "summary",
+        "ctown-2026-2027-2026-2027-p020": "statement"
+      },
+      "families": [
+        "operating_statement"
+      ]
+    },
+    {
+      "section_key": "operating-supporting-schedules",
+      "title": "Operating supporting schedules",
+      "page_start": 21,
+      "page_end": 23,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p021",
+        "ctown-2026-2027-2026-2027-p022",
+        "ctown-2026-2027-2026-2027-p023"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p021": "detail",
+        "ctown-2026-2027-2026-2027-p022": "detail",
+        "ctown-2026-2027-2026-2027-p023": "statement"
+      },
+      "families": [
+        "operating_detail",
+        "tax_assessment_rate"
+      ]
+    },
+    {
+      "section_key": "city-government",
+      "title": "City Government Services",
+      "page_start": 28,
+      "page_end": 33,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p028",
+        "ctown-2026-2027-2026-2027-p029",
+        "ctown-2026-2027-2026-2027-p030",
+        "ctown-2026-2027-2026-2027-p031",
+        "ctown-2026-2027-2026-2027-p032",
+        "ctown-2026-2027-2026-2027-p033"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p028": "statement",
+        "ctown-2026-2027-2026-2027-p029": "detail",
+        "ctown-2026-2027-2026-2027-p030": "detail",
+        "ctown-2026-2027-2026-2027-p031": "detail",
+        "ctown-2026-2027-2026-2027-p032": "detail",
+        "ctown-2026-2027-2026-2027-p033": "statement"
+      },
+      "families": [
+        "operating_detail",
+        "operating_statement"
+      ]
+    },
+    {
+      "section_key": "economic-tourism-culture",
+      "title": "Economic, Tourism and Cultural Development",
+      "page_start": 35,
+      "page_end": 41,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p035",
+        "ctown-2026-2027-2026-2027-p036",
+        "ctown-2026-2027-2026-2027-p037",
+        "ctown-2026-2027-2026-2027-p038",
+        "ctown-2026-2027-2026-2027-p039",
+        "ctown-2026-2027-2026-2027-p040",
+        "ctown-2026-2027-2026-2027-p041"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p035": "statement",
+        "ctown-2026-2027-2026-2027-p036": "statement",
+        "ctown-2026-2027-2026-2027-p037": "detail",
+        "ctown-2026-2027-2026-2027-p038": "detail",
+        "ctown-2026-2027-2026-2027-p039": "detail",
+        "ctown-2026-2027-2026-2027-p040": "detail",
+        "ctown-2026-2027-2026-2027-p041": "detail"
+      },
+      "families": [
+        "operating_detail",
+        "operating_statement"
+      ]
+    },
+    {
+      "section_key": "environment-sustainability-transit",
+      "title": "Environment, Sustainability and Transit",
+      "page_start": 43,
+      "page_end": 46,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p043",
+        "ctown-2026-2027-2026-2027-p044",
+        "ctown-2026-2027-2026-2027-p045",
+        "ctown-2026-2027-2026-2027-p046"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p043": "statement",
+        "ctown-2026-2027-2026-2027-p044": "detail",
+        "ctown-2026-2027-2026-2027-p045": "detail",
+        "ctown-2026-2027-2026-2027-p046": "detail"
+      },
+      "families": [
+        "operating_detail",
+        "operating_statement"
+      ]
+    },
+    {
+      "section_key": "finance-audit-fiscal",
+      "title": "Finance, Audit and Fiscal Services",
+      "page_start": 48,
+      "page_end": 50,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p048",
+        "ctown-2026-2027-2026-2027-p049",
+        "ctown-2026-2027-2026-2027-p050"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p048": "statement",
+        "ctown-2026-2027-2026-2027-p049": "detail",
+        "ctown-2026-2027-2026-2027-p050": "detail"
+      },
+      "families": [
+        "operating_detail",
+        "operating_statement"
+      ]
+    },
+    {
+      "section_key": "fire-services",
+      "title": "Fire Services",
+      "page_start": 52,
+      "page_end": 55,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p052",
+        "ctown-2026-2027-2026-2027-p053",
+        "ctown-2026-2027-2026-2027-p054",
+        "ctown-2026-2027-2026-2027-p055"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p052": "statement",
+        "ctown-2026-2027-2026-2027-p053": "detail",
+        "ctown-2026-2027-2026-2027-p054": "detail",
+        "ctown-2026-2027-2026-2027-p055": "detail"
+      },
+      "families": [
+        "operating_detail",
+        "operating_statement"
+      ]
+    },
+    {
+      "section_key": "human-resources",
+      "title": "Human Resources",
+      "page_start": 57,
+      "page_end": 60,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p057",
+        "ctown-2026-2027-2026-2027-p058",
+        "ctown-2026-2027-2026-2027-p059",
+        "ctown-2026-2027-2026-2027-p060"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p057": "statement",
+        "ctown-2026-2027-2026-2027-p058": "detail",
+        "ctown-2026-2027-2026-2027-p059": "detail",
+        "ctown-2026-2027-2026-2027-p060": "detail"
+      },
+      "families": [
+        "operating_detail",
+        "operating_statement"
+      ]
+    },
+    {
+      "section_key": "mayor-council",
+      "title": "Mayor and Council",
+      "page_start": 62,
+      "page_end": 64,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p062",
+        "ctown-2026-2027-2026-2027-p063",
+        "ctown-2026-2027-2026-2027-p064"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p062": "statement",
+        "ctown-2026-2027-2026-2027-p063": "detail",
+        "ctown-2026-2027-2026-2027-p064": "detail"
+      },
+      "families": [
+        "operating_detail",
+        "operating_statement"
+      ]
+    },
+    {
+      "section_key": "parks-recreation",
+      "title": "Parks and Recreation",
+      "page_start": 66,
+      "page_end": 74,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p066",
+        "ctown-2026-2027-2026-2027-p067",
+        "ctown-2026-2027-2026-2027-p068",
+        "ctown-2026-2027-2026-2027-p069",
+        "ctown-2026-2027-2026-2027-p070",
+        "ctown-2026-2027-2026-2027-p071",
+        "ctown-2026-2027-2026-2027-p072",
+        "ctown-2026-2027-2026-2027-p074"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p066": "statement",
+        "ctown-2026-2027-2026-2027-p067": "statement",
+        "ctown-2026-2027-2026-2027-p068": "detail",
+        "ctown-2026-2027-2026-2027-p069": "statement",
+        "ctown-2026-2027-2026-2027-p070": "statement",
+        "ctown-2026-2027-2026-2027-p071": "statement",
+        "ctown-2026-2027-2026-2027-p072": "statement",
+        "ctown-2026-2027-2026-2027-p074": "statement"
+      },
+      "families": [
+        "operating_detail",
+        "operating_statement"
+      ]
+    },
+    {
+      "section_key": "planning-heritage",
+      "title": "Planning and Heritage",
+      "page_start": 76,
+      "page_end": 80,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p076",
+        "ctown-2026-2027-2026-2027-p077",
+        "ctown-2026-2027-2026-2027-p078",
+        "ctown-2026-2027-2026-2027-p079",
+        "ctown-2026-2027-2026-2027-p080"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p076": "statement",
+        "ctown-2026-2027-2026-2027-p077": "detail",
+        "ctown-2026-2027-2026-2027-p078": "detail",
+        "ctown-2026-2027-2026-2027-p079": "detail",
+        "ctown-2026-2027-2026-2027-p080": "detail"
+      },
+      "families": [
+        "operating_detail",
+        "operating_statement"
+      ]
+    },
+    {
+      "section_key": "police-services",
+      "title": "Police Services",
+      "page_start": 82,
+      "page_end": 85,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p082",
+        "ctown-2026-2027-2026-2027-p083",
+        "ctown-2026-2027-2026-2027-p084",
+        "ctown-2026-2027-2026-2027-p085"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p082": "statement",
+        "ctown-2026-2027-2026-2027-p083": "detail",
+        "ctown-2026-2027-2026-2027-p084": "detail",
+        "ctown-2026-2027-2026-2027-p085": "detail"
+      },
+      "families": [
+        "operating_detail",
+        "operating_statement"
+      ]
+    },
+    {
+      "section_key": "public-works-buildings",
+      "title": "Public Works and Municipal Buildings",
+      "page_start": 87,
+      "page_end": 92,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p087",
+        "ctown-2026-2027-2026-2027-p088",
+        "ctown-2026-2027-2026-2027-p089",
+        "ctown-2026-2027-2026-2027-p090",
+        "ctown-2026-2027-2026-2027-p091",
+        "ctown-2026-2027-2026-2027-p092"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p087": "statement",
+        "ctown-2026-2027-2026-2027-p088": "detail",
+        "ctown-2026-2027-2026-2027-p089": "detail",
+        "ctown-2026-2027-2026-2027-p090": "detail",
+        "ctown-2026-2027-2026-2027-p091": "detail",
+        "ctown-2026-2027-2026-2027-p092": "detail"
+      },
+      "families": [
+        "operating_detail",
+        "operating_statement"
+      ]
+    },
+    {
+      "section_key": "water-sewer-operating",
+      "title": "Charlottetown Water and Sewer Services",
+      "page_start": 94,
+      "page_end": 99,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p094",
+        "ctown-2026-2027-2026-2027-p095",
+        "ctown-2026-2027-2026-2027-p096",
+        "ctown-2026-2027-2026-2027-p097",
+        "ctown-2026-2027-2026-2027-p098",
+        "ctown-2026-2027-2026-2027-p099"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p094": "statement",
+        "ctown-2026-2027-2026-2027-p095": "detail",
+        "ctown-2026-2027-2026-2027-p096": "detail",
+        "ctown-2026-2027-2026-2027-p097": "detail",
+        "ctown-2026-2027-2026-2027-p098": "detail",
+        "ctown-2026-2027-2026-2027-p099": "detail"
+      },
+      "families": [
+        "operating_detail",
+        "operating_statement"
+      ]
+    },
+    {
+      "section_key": "civic-centre-operating",
+      "title": "Charlottetown Civic Centre Management Inc.",
+      "page_start": 101,
+      "page_end": 104,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p101",
+        "ctown-2026-2027-2026-2027-p102",
+        "ctown-2026-2027-2026-2027-p103",
+        "ctown-2026-2027-2026-2027-p104"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p101": "statement",
+        "ctown-2026-2027-2026-2027-p102": "statement",
+        "ctown-2026-2027-2026-2027-p103": "statement",
+        "ctown-2026-2027-2026-2027-p104": "statement"
+      },
+      "families": [
+        "operating_statement"
+      ]
+    },
+    {
+      "section_key": "bell-aliant-operating",
+      "title": "Bell Aliant Centre operating budget",
+      "page_start": 105,
+      "page_end": 108,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p105",
+        "ctown-2026-2027-2026-2027-p106",
+        "ctown-2026-2027-2026-2027-p107",
+        "ctown-2026-2027-2026-2027-p108"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p105": "summary",
+        "ctown-2026-2027-2026-2027-p106": "statement",
+        "ctown-2026-2027-2026-2027-p107": "statement",
+        "ctown-2026-2027-2026-2027-p108": "statement"
+      },
+      "families": [
+        "facility_operating_statement"
+      ]
+    },
+    {
+      "section_key": "capital-consolidated",
+      "title": "Consolidated capital budget",
+      "page_start": 110,
+      "page_end": 110,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p110"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p110": "summary"
+      },
+      "families": [
+        "capital_budget_schedule"
+      ]
+    },
+    {
+      "section_key": "capital-environment-transit",
+      "title": "Environment, Sustainability and Transit capital",
+      "page_start": 111,
+      "page_end": 116,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p111",
+        "ctown-2026-2027-2026-2027-p112",
+        "ctown-2026-2027-2026-2027-p113",
+        "ctown-2026-2027-2026-2027-p114",
+        "ctown-2026-2027-2026-2027-p115",
+        "ctown-2026-2027-2026-2027-p116"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p111": "statement",
+        "ctown-2026-2027-2026-2027-p112": "profile",
+        "ctown-2026-2027-2026-2027-p113": "profile",
+        "ctown-2026-2027-2026-2027-p114": "profile",
+        "ctown-2026-2027-2026-2027-p115": "profile",
+        "ctown-2026-2027-2026-2027-p116": "profile"
+      },
+      "families": [
+        "capital_budget_schedule",
+        "capital_project_profile"
+      ]
+    },
+    {
+      "section_key": "capital-fire",
+      "title": "Fire and Emergency Preparedness capital",
+      "page_start": 117,
+      "page_end": 119,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p117",
+        "ctown-2026-2027-2026-2027-p118",
+        "ctown-2026-2027-2026-2027-p119"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p117": "statement",
+        "ctown-2026-2027-2026-2027-p118": "profile",
+        "ctown-2026-2027-2026-2027-p119": "profile"
+      },
+      "families": [
+        "capital_budget_schedule",
+        "capital_project_profile"
+      ]
+    },
+    {
+      "section_key": "capital-information-technology",
+      "title": "Information Technology capital",
+      "page_start": 120,
+      "page_end": 121,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p120",
+        "ctown-2026-2027-2026-2027-p121"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p120": "statement",
+        "ctown-2026-2027-2026-2027-p121": "profile"
+      },
+      "families": [
+        "capital_budget_schedule",
+        "capital_project_profile"
+      ]
+    },
+    {
+      "section_key": "capital-parks-recreation",
+      "title": "Parks and Recreation capital",
+      "page_start": 122,
+      "page_end": 126,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p122",
+        "ctown-2026-2027-2026-2027-p123",
+        "ctown-2026-2027-2026-2027-p124",
+        "ctown-2026-2027-2026-2027-p125",
+        "ctown-2026-2027-2026-2027-p126"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p122": "statement",
+        "ctown-2026-2027-2026-2027-p123": "statement",
+        "ctown-2026-2027-2026-2027-p124": "profile",
+        "ctown-2026-2027-2026-2027-p125": "profile",
+        "ctown-2026-2027-2026-2027-p126": "profile"
+      },
+      "families": [
+        "capital_budget_schedule",
+        "capital_project_profile"
+      ]
+    },
+    {
+      "section_key": "capital-police",
+      "title": "Police capital",
+      "page_start": 127,
+      "page_end": 132,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p127",
+        "ctown-2026-2027-2026-2027-p128",
+        "ctown-2026-2027-2026-2027-p129",
+        "ctown-2026-2027-2026-2027-p130",
+        "ctown-2026-2027-2026-2027-p131",
+        "ctown-2026-2027-2026-2027-p132"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p127": "statement",
+        "ctown-2026-2027-2026-2027-p128": "profile",
+        "ctown-2026-2027-2026-2027-p129": "profile",
+        "ctown-2026-2027-2026-2027-p130": "profile",
+        "ctown-2026-2027-2026-2027-p131": "profile",
+        "ctown-2026-2027-2026-2027-p132": "profile"
+      },
+      "families": [
+        "capital_budget_schedule",
+        "capital_project_profile"
+      ]
+    },
+    {
+      "section_key": "capital-public-works",
+      "title": "Public Works capital",
+      "page_start": 133,
+      "page_end": 143,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p133",
+        "ctown-2026-2027-2026-2027-p134",
+        "ctown-2026-2027-2026-2027-p135",
+        "ctown-2026-2027-2026-2027-p136",
+        "ctown-2026-2027-2026-2027-p137",
+        "ctown-2026-2027-2026-2027-p138",
+        "ctown-2026-2027-2026-2027-p139",
+        "ctown-2026-2027-2026-2027-p140",
+        "ctown-2026-2027-2026-2027-p141",
+        "ctown-2026-2027-2026-2027-p142",
+        "ctown-2026-2027-2026-2027-p143"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p133": "statement",
+        "ctown-2026-2027-2026-2027-p134": "statement",
+        "ctown-2026-2027-2026-2027-p135": "statement",
+        "ctown-2026-2027-2026-2027-p136": "profile",
+        "ctown-2026-2027-2026-2027-p137": "profile",
+        "ctown-2026-2027-2026-2027-p138": "profile",
+        "ctown-2026-2027-2026-2027-p139": "profile",
+        "ctown-2026-2027-2026-2027-p140": "profile",
+        "ctown-2026-2027-2026-2027-p141": "profile",
+        "ctown-2026-2027-2026-2027-p142": "profile",
+        "ctown-2026-2027-2026-2027-p143": "profile"
+      },
+      "families": [
+        "capital_budget_schedule",
+        "capital_project_profile"
+      ]
+    },
+    {
+      "section_key": "capital-water-sewer",
+      "title": "Charlottetown Water and Sewer capital",
+      "page_start": 144,
+      "page_end": 144,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p144"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p144": "statement"
+      },
+      "families": [
+        "capital_budget_schedule"
+      ]
+    },
+    {
+      "section_key": "capital-eastlink",
+      "title": "Charlottetown Eastlink Centre capital",
+      "page_start": 146,
+      "page_end": 146,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p146"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p146": "statement"
+      },
+      "families": [
+        "capital_budget_schedule"
+      ]
+    },
+    {
+      "section_key": "capital-bell-aliant",
+      "title": "Charlottetown Bell Aliant Centre capital",
+      "page_start": 147,
+      "page_end": 147,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p147"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p147": "statement"
+      },
+      "families": [
+        "capital_budget_schedule"
+      ]
+    },
+    {
+      "section_key": "appendix-tax",
+      "title": "Property tax appendix",
+      "page_start": 149,
+      "page_end": 149,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p149"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p149": "statement"
+      },
+      "families": [
+        "tax_assessment_rate"
+      ]
+    },
+    {
+      "section_key": "appendix-city-debt",
+      "title": "City long-term debt appendix",
+      "page_start": 151,
+      "page_end": 151,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p151"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p151": "statement"
+      },
+      "families": [
+        "debt_schedule"
+      ]
+    },
+    {
+      "section_key": "appendix-water-sewer-debt",
+      "title": "Water and Sewer long-term debt appendix",
+      "page_start": 153,
+      "page_end": 153,
+      "candidate_keys": [
+        "ctown-2026-2027-2026-2027-p153"
+      ],
+      "page_roles": {
+        "ctown-2026-2027-2026-2027-p153": "statement"
+      },
+      "families": [
+        "debt_schedule"
+      ]
+    }
+  ]
+}

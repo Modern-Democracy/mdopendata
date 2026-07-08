@@ -15,6 +15,7 @@ from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
 SPIKE = ROOT / "data/budget/charlottetown/schema-spike"
+FULL = ROOT / "data/budget/charlottetown/2026-2027"
 VERSION = "1"
 
 
@@ -245,26 +246,127 @@ def import_data(cur: psycopg.Cursor, manifest: dict, pages: list, rows: list, ce
           (document_ids[document["key"]], document["sha256"], VERSION, Jsonb({"manifest_sha256": manifest_hash, "pages": len(pages), "rows": len(rows), "cells": len(cells), "facts": len(manifest["facts"])}), document_ids[document["key"]], document["sha256"], VERSION))
 
 
+def load_full(name: str) -> dict:
+    return json.loads((FULL / name).read_text(encoding="utf-8"))
+
+
+def import_full_raw(cur: psycopg.Cursor) -> None:
+    manifest = load("normalized-mapping.json")
+    document = next(item for item in manifest["documents"] if item["key"] == "2026-2027")
+    source_path = ROOT / document["local_path"]
+    if hashlib.sha256(source_path.read_bytes()).hexdigest() != document["sha256"]:
+        raise SystemExit("PDF hash mismatch: 2026-2027")
+    pages = load_full("page_inventory.json")["records"]
+    tables = load_full("table_manifest.json")["records"]
+    rows = load_full("raw-tables/source_table_rows.json")["records"]
+    values = load_full("raw-tables/source_values.json")["records"]
+    canonical = load_full("canonical-table-inventory.json")
+    if (len(pages), len(tables), len(rows), len(values), canonical["canonical_candidate_count"]) != (154, 114, 3233, 3092, 116):
+        raise SystemExit("Full-document source control count mismatch")
+
+    municipality = manifest["municipality"]
+    cur.execute("""INSERT INTO budget.municipality(slug,legal_name,province_code,country_code,effective_from)
+      VALUES(%s,%s,%s,%s,'1900-01-01') ON CONFLICT(slug) DO NOTHING""",
+      (municipality["key"], municipality["legal_name"], municipality["province_code"], municipality["country_code"]))
+    municipality_id = one(cur, "SELECT id FROM budget.municipality WHERE slug=%s", (municipality["key"],))
+    cur.execute("""INSERT INTO budget.source_document
+      (municipality_id,title,document_kind,local_path,sha256,page_count,status)
+      VALUES(%s,%s,'financial_plan',%s,%s,154,'reviewed') ON CONFLICT(sha256) DO NOTHING""",
+      (municipality_id, source_path.stem, document["local_path"], document["sha256"]))
+    document_id = one(cur, "SELECT id FROM budget.source_document WHERE sha256=%s", (document["sha256"],))
+    page_ids: dict[int, int] = {}
+    for page in pages:
+        cur.execute("""INSERT INTO budget.source_page
+          (document_id,pdf_page_number,printed_page_label,section_label,content_type,extraction_method,review_status)
+          VALUES(%s,%s,%s,%s,%s,'embedded_text','unreviewed') ON CONFLICT(document_id,pdf_page_number) DO NOTHING""",
+          (document_id, page["page_number"], page.get("source_page_label"), page.get("section"), page.get("content_type")))
+        page_ids[page["page_number"]] = one(cur, "SELECT id FROM budget.source_page WHERE document_id=%s AND pdf_page_number=%s", (document_id, page["page_number"]))
+
+    canonical_by_first = {item["first_pass_table_id"]: item for item in canonical["records"] if item["first_pass_table_id"]}
+    table_ids: dict[str, int] = {}
+    for table in tables:
+        disposition = canonical_by_first[table["table_id"]]["disposition"]
+        review_status = "approved" if disposition in {"normalize", "duplicate_summary", "non_financial", "excluded"} else "needs_review"
+        cur.execute("""INSERT INTO budget.source_table
+          (document_id,table_key,raw_title,table_type,extraction_status,review_status)
+          VALUES(%s,%s,%s,%s,'extracted',%s) ON CONFLICT(document_id,table_key) DO NOTHING""",
+          (document_id, table["table_id"], table.get("title"), table["table_type"], review_status))
+        table_id = one(cur, "SELECT id FROM budget.source_table WHERE document_id=%s AND table_key=%s", (document_id, table["table_id"]))
+        table_ids[table["table_id"]] = table_id
+        for page_number in range(int(table["page_start"]), int(table["page_end"]) + 1):
+            cur.execute("""INSERT INTO budget.source_table_page(source_table_id,source_page_id,page_order,page_role)
+              VALUES(%s,%s,%s,%s) ON CONFLICT(source_table_id,source_page_id) DO NOTHING""",
+              (table_id, page_ids[page_number], page_number - int(table["page_start"]) + 1,
+               "single_page" if table["page_start"] == table["page_end"] else ("start" if page_number == table["page_start"] else "continuation")))
+
+    values_by_row: dict[str, list[dict]] = {}
+    for value in values:
+        values_by_row.setdefault(value["row_id"], []).append(value)
+    column_ids: dict[tuple[int, int], int] = {}
+    for table_id in table_ids.values():
+        for index, role in [(0, "label"), *[(i, "value") for i in range(1, 10)]]:
+            cur.execute("""INSERT INTO budget.source_table_column(source_table_id,column_key,column_index,column_role,review_status)
+              VALUES(%s,%s,%s,%s,'unreviewed') ON CONFLICT(source_table_id,column_index) DO NOTHING""",
+              (table_id, f"column-{index}", index, role))
+            column_ids[(table_id, index)] = one(cur, "SELECT id FROM budget.source_table_column WHERE source_table_id=%s AND column_index=%s", (table_id, index))
+
+    for row in rows:
+        table_id = table_ids[row["table_id"]]
+        row_values = sorted(values_by_row.get(row["row_id"], []), key=lambda item: item["value_index"])
+        row_style = {
+            "physical_line_number": row["physical_line_number"],
+            "indentation_spaces": row["indentation_spaces"],
+            "row_kind": row["row_kind"],
+            "cells": row["cells"],
+            "value_tokens": [{"value_id": value["value_id"], "char_start": value["char_start"], "char_end": value["char_end"], "value_kind": value["value_kind"]} for value in row_values],
+            "bbox_status": "unavailable",
+        }
+        cur.execute("""INSERT INTO budget.source_table_row
+          (source_table_id,row_key,row_index,raw_text,raw_label,indent_level,row_style)
+          VALUES(%s,%s,%s,%s,%s,%s,%s) ON CONFLICT(source_table_id,row_key) DO NOTHING""",
+          (table_id, row["row_id"], row["row_index"], row["raw_text"], row["trimmed_text"], row["indentation_spaces"], Jsonb(row_style)))
+        row_id = one(cur, "SELECT id FROM budget.source_table_row WHERE source_table_id=%s AND row_key=%s", (table_id, row["row_id"]))
+        cur.execute("""INSERT INTO budget.source_table_cell(source_row_id,source_table_column_id,raw_text,parsed_text,parse_status)
+          VALUES(%s,%s,%s,%s,'parsed') ON CONFLICT(source_row_id,source_table_column_id) DO NOTHING""",
+          (row_id, column_ids[(table_id, 0)], row["trimmed_text"], row["trimmed_text"]))
+        for value in row_values:
+            index = int(value["value_index"])
+            cur.execute("""INSERT INTO budget.source_table_cell
+              (source_row_id,source_table_column_id,raw_text,parsed_numeric,parse_status)
+              VALUES(%s,%s,%s,%s,%s) ON CONFLICT(source_row_id,source_table_column_id) DO NOTHING""",
+              (row_id, column_ids[(table_id, index)], value["raw_value"], value.get("parsed_decimal"), "parsed" if value.get("parsed_decimal") is not None else "ambiguous"))
+
+    metrics = {"mode": "full", "pages": len(pages), "canonical_candidates": 116, "source_tables": len(tables), "rows": len(rows), "values": len(values), "missing_bbox_rows": len(rows), "missing_bbox_values": len(values)}
+    cur.execute("""INSERT INTO budget.import_batch(document_id,source_sha256,extractor_version,completed_at,status,metrics_json)
+      SELECT %s,%s,%s,now(),'completed',%s WHERE NOT EXISTS
+      (SELECT 1 FROM budget.import_batch WHERE document_id=%s AND source_sha256=%s AND extractor_version=%s AND status='completed')""",
+      (document_id, document["sha256"], "full-1", Jsonb(metrics), document_id, document["sha256"], "full-1"))
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--mode", choices=("representative", "full"), default="representative")
     args = parser.parse_args()
-    manifest = load("normalized-mapping.json")
-    pages = load("representative-source-pages.json")["records"]
-    rows = load("representative-source-rows.json")["records"]
-    cells = load("representative-source-cells.json")["records"]
-    reconciliations = load("reconciliation-results.json")["records"]
-    issues = load("review-issues.json")["records"]
-    validate(manifest, pages, rows, cells, reconciliations, issues)
     with psycopg.connect(db_url()) as connection:
         with connection.cursor() as cursor:
-            import_data(cursor, manifest, pages, rows, cells, reconciliations, issues)
+            if args.mode == "full":
+                import_full_raw(cursor)
+            else:
+                manifest = load("normalized-mapping.json")
+                pages = load("representative-source-pages.json")["records"]
+                rows = load("representative-source-rows.json")["records"]
+                cells = load("representative-source-cells.json")["records"]
+                reconciliations = load("reconciliation-results.json")["records"]
+                issues = load("review-issues.json")["records"]
+                validate(manifest, pages, rows, cells, reconciliations, issues)
+                import_data(cursor, manifest, pages, rows, cells, reconciliations, issues)
         if args.dry_run:
             connection.rollback()
-            print("Budget spike import validated; transaction rolled back.")
+            print(f"Budget {args.mode} import validated; transaction rolled back.")
         else:
             connection.commit()
-            print("Budget spike import completed.")
+            print(f"Budget {args.mode} import completed.")
     return 0
 
 

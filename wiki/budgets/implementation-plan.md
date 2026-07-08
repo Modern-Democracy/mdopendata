@@ -36,6 +36,10 @@ Week 2 started on 2026-07-07. The [representative-table schema spike](./represen
 
 Representative materialization completed on 2026-07-07 with 408 rows, 837 cells, and seven reconciliation checks. Four checks pass; the property-tax calculation and two facility earnings dashes have designed open review records. Word-level OCR coordinates now cover all 221 rows and 442 cells on the six rasterized facility pages; 17 rows and 47 cells below confidence 80 remain review-flagged. The spike is ready for a draft migration.
 
+Week 3 completed on 2026-07-07 with the `budget` migration, constraints, views, regression controls, reviewed representative mapping, and idempotent representative importer.
+
+Week 4 full raw ingestion completed on 2026-07-07 for all 154 pages, 114 first-pass tables, 3,233 rows, and 2,420 values. The canonical review reconciles these with 116 profile candidates and records 63 continuation decisions. Normalized completion remains review-blocked for 112 candidates; three standalone candidates are approved for normalization and one overview is a duplicate summary. No publication snapshot exists.
+
 ## Representative-Table Spike
 
 The schema gate must use these 2026/2027 layouts:

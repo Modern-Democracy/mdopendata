@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "scope": "reviewed representative facts within 2026-2027",
+  "check_count": 7,
+  "passed_count": 4,
+  "review_count": 3,
+  "records": [
+    {
+      "check_key": "capital_environment_net",
+      "formula": "gross + funding_deduction = net",
+      "inputs": {
+        "gross": "1482450",
+        "funding_deduction": "-803335"
+      },
+      "calculated_value": "679115",
+      "reported_value": "679115",
+      "reported_value_state": "reported",
+      "difference": "0",
+      "tolerance": "1",
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "check_key": "capital_transit_net",
+      "formula": "gross + funding_deduction = net",
+      "inputs": {
+        "gross": "10399961",
+        "funding_deduction": "-6392577"
+      },
+      "calculated_value": "4007384",
+      "reported_value": "4007384",
+      "reported_value_state": "reported",
+      "difference": "0",
+      "tolerance": "1",
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "check_key": "capital_combined_net",
+      "formula": "component nets sum to combined net",
+      "inputs": {
+        "environment_net": "679115",
+        "transit_net": "4007384"
+      },
+      "calculated_value": "4686499",
+      "reported_value": "4686499",
+      "reported_value_state": "reported",
+      "difference": "0",
+      "tolerance": "1",
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "check_key": "tax_pei_resident_residential",
+      "formula": "assessment * rate / 100 = reported revenue",
+      "inputs": {
+        "assessment": "2747064500",
+        "rate": "0.67"
+      },
+      "calculated_value": "18405332.15",
+      "reported_value": "19991891",
+      "reported_value_state": "reported",
+      "difference": "-1586558.85",
+      "tolerance": "1",
+      "passed": false,
+      "status": "source_variance_review"
+    },
+    {
+      "check_key": "debt_principal_interest",
+      "formula": "principal + interest = combined total",
+      "inputs": {
+        "principal": "5871868",
+        "interest": "5150182"
+      },
+      "calculated_value": "11022050",
+      "reported_value": "11022050",
+      "reported_value_state": "reported",
+      "difference": "0",
+      "tolerance": "1",
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "check_key": "facility_current_balance",
+      "formula": "operating revenue - operating expense = earnings",
+      "inputs": {
+        "revenue": "4073224",
+        "expense": "4073224"
+      },
+      "calculated_value": "0",
+      "reported_value": null,
+      "reported_value_state": "dash_unresolved",
+      "difference": null,
+      "tolerance": "1",
+      "passed": false,
+      "status": "reported_dash_review"
+    },
+    {
+      "check_key": "facility_prior_balance",
+      "formula": "operating revenue - operating expense = earnings",
+      "inputs": {
+        "revenue": "3822876",
+        "expense": "3819626"
+      },
+      "calculated_value": "3250",
+      "reported_value": null,
+      "reported_value_state": "dash_unresolved",
+      "difference": null,
+      "tolerance": "1",
+      "passed": false,
+      "status": "reported_dash_review"
+    }
+  ]
+}

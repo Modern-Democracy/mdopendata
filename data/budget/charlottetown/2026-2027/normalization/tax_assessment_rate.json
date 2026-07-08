@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "document_key": "2026-2027",
+  "family": "tax_assessment_rate",
+  "mapping_status": "reviewed_family_gate",
+  "candidates": [
+    {
+      "canonical_key": "ctown-2026-2027-2026-2027-p015",
+      "profile_table_key": "2026-2027-p015",
+      "first_pass_table_id": null,
+      "page_start": 15,
+      "page_end": 15,
+      "family": "tax_assessment_rate",
+      "section_key": "funding-taxation",
+      "section_title": "Funding and taxation",
+      "page_role": "statement",
+      "entity_candidates": [
+        "Charlottetown Water and Sewer"
+      ],
+      "column_pattern": "class | assessment | rate | revenue",
+      "disposition": "non_financial",
+      "disposition_reason": "family rule approved",
+      "review_reasons": []
+    },
+    {
+      "canonical_key": "ctown-2026-2027-2026-2027-p023",
+      "profile_table_key": "2026-2027-p023",
+      "first_pass_table_id": "ctown_budget_2026_2027_p023",
+      "page_start": 23,
+      "page_end": 23,
+      "family": "tax_assessment_rate",
+      "section_key": "operating-supporting-schedules",
+      "section_title": "Operating supporting schedules",
+      "page_role": "statement",
+      "entity_candidates": [],
+      "column_pattern": "class | assessment | rate | revenue",
+      "disposition": "normalize",
+      "disposition_reason": "family rule approved",
+      "review_reasons": []
+    },
+    {
+      "canonical_key": "ctown-2026-2027-2026-2027-p149",
+      "profile_table_key": "2026-2027-p149",
+      "first_pass_table_id": "ctown_budget_2026_2027_p149",
+      "page_start": 149,
+      "page_end": 149,
+      "family": "tax_assessment_rate",
+      "section_key": "appendix-tax",
+      "section_title": "Property tax appendix",
+      "page_role": "statement",
+      "entity_candidates": [
+        "City of Charlottetown"
+      ],
+      "column_pattern": "class | assessment | rate | revenue",
+      "disposition": "normalize",
+      "disposition_reason": "family rule approved",
+      "review_reasons": []
+    }
+  ],
+  "normalization_rule": "Only candidates with disposition normalize may produce records; row semantics still require explicit reviewed mappings."
+}

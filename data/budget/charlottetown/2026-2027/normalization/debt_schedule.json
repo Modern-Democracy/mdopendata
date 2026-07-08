@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "document_key": "2026-2027",
+  "family": "debt_schedule",
+  "mapping_status": "reviewed_family_gate",
+  "candidates": [
+    {
+      "canonical_key": "ctown-2026-2027-2026-2027-p151",
+      "profile_table_key": "2026-2027-p151",
+      "first_pass_table_id": "ctown_budget_2026_2027_p151",
+      "page_start": 151,
+      "page_end": 151,
+      "family": "debt_schedule",
+      "section_key": "appendix-city-debt",
+      "section_title": "City long-term debt appendix",
+      "page_role": "statement",
+      "entity_candidates": [
+        "City of Charlottetown"
+      ],
+      "column_pattern": "instrument | balance | principal | interest",
+      "disposition": "normalize",
+      "disposition_reason": "family rule approved",
+      "review_reasons": []
+    },
+    {
+      "canonical_key": "ctown-2026-2027-2026-2027-p153",
+      "profile_table_key": "2026-2027-p153",
+      "first_pass_table_id": "ctown_budget_2026_2027_p153",
+      "page_start": 153,
+      "page_end": 153,
+      "family": "debt_schedule",
+      "section_key": "appendix-water-sewer-debt",
+      "section_title": "Water and Sewer long-term debt appendix",
+      "page_role": "statement",
+      "entity_candidates": [
+        "City of Charlottetown"
+      ],
+      "column_pattern": "instrument | balance | principal | interest",
+      "disposition": "normalize",
+      "disposition_reason": "family rule approved",
+      "review_reasons": []
+    }
+  ],
+  "normalization_rule": "Only candidates with disposition normalize may produce records; row semantics still require explicit reviewed mappings."
+}

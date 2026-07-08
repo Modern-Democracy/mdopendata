@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "document_key": "2026-2027",
+  "family": "facility_operating_statement",
+  "mapping_status": "reviewed_family_gate",
+  "candidates": [
+    {
+      "canonical_key": "ctown-2026-2027-2026-2027-p105",
+      "profile_table_key": "2026-2027-p105",
+      "first_pass_table_id": "ctown_budget_2026_2027_p105",
+      "page_start": 105,
+      "page_end": 105,
+      "family": "facility_operating_statement",
+      "section_key": "bell-aliant-operating",
+      "section_title": "Bell Aliant Centre operating budget",
+      "page_role": "summary",
+      "entity_candidates": [
+        "Bell Aliant Centre",
+        "City of Charlottetown"
+      ],
+      "column_pattern": "item | budget (2025-2026, 2026-2027, 2026-27)",
+      "disposition": "normalize",
+      "disposition_reason": "family rule approved",
+      "review_reasons": []
+    },
+    {
+      "canonical_key": "ctown-2026-2027-2026-2027-p106",
+      "profile_table_key": "2026-2027-p106",
+      "first_pass_table_id": "ctown_budget_2026_2027_p106",
+      "page_start": 106,
+      "page_end": 106,
+      "family": "facility_operating_statement",
+      "section_key": "bell-aliant-operating",
+      "section_title": "Bell Aliant Centre operating budget",
+      "page_role": "statement",
+      "entity_candidates": [
+        "Bell Aliant Centre"
+      ],
+      "column_pattern": "item | budget | variance (2025-26, 2026-27)",
+      "disposition": "normalize",
+      "disposition_reason": "family rule approved",
+      "review_reasons": [
+        "adjacent same-family page; continuation requires visual review"
+      ]
+    },
+    {
+      "canonical_key": "ctown-2026-2027-2026-2027-p107",
+      "profile_table_key": "2026-2027-p107",
+      "first_pass_table_id": "ctown_budget_2026_2027_p107",
+      "page_start": 107,
+      "page_end": 107,
+      "family": "facility_operating_statement",
+      "section_key": "bell-aliant-operating",
+      "section_title": "Bell Aliant Centre operating budget",
+      "page_role": "statement",
+      "entity_candidates": [
+        "Bell Aliant Centre"
+      ],
+      "column_pattern": "item | budget | variance (2025-26, 2026-27)",
+      "disposition": "normalize",
+      "disposition_reason": "family rule approved",
+      "review_reasons": [
+        "adjacent same-family page; continuation requires visual review"
+      ]
+    },
+    {
+      "canonical_key": "ctown-2026-2027-2026-2027-p108",
+      "profile_table_key": "2026-2027-p108",
+      "first_pass_table_id": "ctown_budget_2026_2027_p108",
+      "page_start": 108,
+      "page_end": 108,
+      "family": "facility_operating_statement",
+      "section_key": "bell-aliant-operating",
+      "section_title": "Bell Aliant Centre operating budget",
+      "page_role": "statement",
+      "entity_candidates": [
+        "Bell Aliant Centre"
+      ],
+      "column_pattern": "item | budget | variance (2025-26, 2026-2027, 2026-27)",
+      "disposition": "normalize",
+      "disposition_reason": "family rule approved",
+      "review_reasons": [
+        "adjacent same-family page; continuation requires visual review"
+      ]
+    }
+  ],
+  "normalization_rule": "Only candidates with disposition normalize may produce records; row semantics still require explicit reviewed mappings."
+}
