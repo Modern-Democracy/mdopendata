@@ -46,6 +46,22 @@ Historical `.python` paths and Codex bundled-runtime paths in generated manifest
 - The documented remote deployment target is a single-host AWS EC2 Docker Compose deployment described in `wiki/implementation/aws-deployment.md`.
 - Adding or changing a deployment target requires DevOps review and explicit user approval.
 
+## Budget Raw Import Versioning
+
+Budget raw tables are append-only. When reviewed extraction artifacts change after import, do not update or delete existing raw rows or cells. Use `scripts/sync-budget-2026-raw-content.py` to append a versioned raw namespace after explicit approval. The current Charlottetown 2026/2027 normalized manifest targets `full-2`; `full-1` remains immutable historical extraction evidence.
+
+Run a rollback-only validation before mutation:
+
+```powershell
+.\scripts\python.ps1 .\scripts\sync-budget-2026-raw-content.py --dry-run
+```
+
+Run the approved append-only import without `--dry-run`, then validate provenance with:
+
+```powershell
+.\scripts\python.ps1 .\scripts\validate-budget-2026-normalized-provenance.py --database
+```
+
 ## Required Documentation for Changes
 
 Every environment or deployment change must record:

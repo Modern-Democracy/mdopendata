@@ -14,6 +14,14 @@ Append new entries in reverse chronological order. Use this heading format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-07-08] implementation | Append-only budget full-2 raw import
+
+Created a pre-import database dump, dry-ran and applied an append-only `full-2` import containing 114 source tables, 3,233 rows, and 3,092 value cells, and repointed the normalized manifest. PostgreSQL validation resolved all 2,165 fact-source links with zero token or numeric mismatches and zero publication snapshots. Gate 4 is approved; immutable `full-1` records remain unchanged.
+
+## [2026-07-08] implementation | Normalized import Phase 3 provenance validation
+
+Validated 2,165 fact-source links, 2,165 unique source cells, 253 capital-profile field-row links, and page 87 text-extraction row reconstruction with zero file-level mismatches. Visual PDF review confirmed Snow Removal is one aligned source row; the two extracted rows are a text-order artifact. PostgreSQL resolves every natural key but contains 23 stale raw-cell values from before aligned-column recovery; Gate 4 remains blocked and no database writes were performed.
+
 ## [2026-07-08] implementation | Normalized import Gate 3 approval
 
 Applied the approved capital profile decisions: 22 one-to-one links, one profile linked to two intersection projects, and one reviewed Vehicle Equipment narrative-only exception. The regenerated manifest has zero unresolved decisions, zero identity collisions, 1,163 lines, 2,165 facts, and deterministic output. Gate 3 is approved.

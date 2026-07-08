@@ -400,6 +400,13 @@ def build_capital_mappings(schedule_pages: set[int], profile_pages: set[int]) ->
         profiles.append({
             "page_number": page, "candidate_key": f"ctown-2026-2027-2026-2027-p{page:03d}",
             "title": title, "department": department, "project": project,
+            "source_row_ids": {
+                "title": [row["row_id"] for row in page_rows[:department_index]],
+                "department": [row["row_id"] for row in page_rows[department_index:project_index]],
+                "project": [row["row_id"] for row in page_rows[project_index:description_start - 1]],
+                "description": [row["row_id"] for row in page_rows[description_start:alignment_start]],
+                "strategic_alignment": [row["row_id"] for row in page_rows[alignment_start + 1:]],
+            },
             "description_lines": text[description_start:alignment_start] if description_start is not None else [],
             "strategic_alignment": text[alignment_start + 1:] if alignment_start < len(text) else [],
             "review_status": "approved_narrative_only",

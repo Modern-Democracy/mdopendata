@@ -17,6 +17,7 @@ REPORT = BASE / "normalized-import-manifest-report.json"
 
 DOCUMENT_KEY = "2026-2027"
 DOCUMENT_SHA = "d926634427e80aa2b06b6425bdbb117424fe53567ae344980cd10791f8e39bac"
+RAW_IMPORT_VERSION = "full-2"
 PERIODS = {
     "2025-2026-budget": ("2025-05-01", "2026-04-30", "budget"),
     "2025-2026-forecast": ("2025-05-01", "2026-04-30", "forecast"),
@@ -120,6 +121,7 @@ def main() -> int:
         profiles.append({"key": key, "capital_project_keys": [key], "page_number": profile["page_number"],
                          "candidate_key": profile["candidate_key"], "title": profile["title"],
                          "department": profile["department"], "project": profile["project"],
+                         "source_row_ids": profile["source_row_ids"],
                          "description_lines": profile["description_lines"],
                          "strategic_alignment": profile["strategic_alignment"],
                          "review_status": profile["review_status"]})
@@ -171,7 +173,7 @@ def main() -> int:
         for fact in wrapped["facts"]:
             source_id = fact["source_value_id"]
             source = values[source_id]
-            table_key = source["table_id"]
+            table_key = f"{source['table_id']}:{RAW_IMPORT_VERSION}"
             source_tables.setdefault(table_key, {"key": table_key, "document_key": DOCUMENT_KEY,
                                                   "page_number": source["page_number"]})
             period = fact.get("document_period_key")
@@ -192,7 +194,9 @@ def main() -> int:
                           "value_numeric": fact.get("numeric_value"), "value_text": None,
                           "value_state": value_state, "review_status": row.get("review_status")})
             fact_sources.append({"key": f"{fact_key}:{source_id}:reported_value:1", "fact_key": fact_key,
-                                 "source_value_id": source_id, "source_role": "reported_value", "source_order": 1})
+                                 "source_value_id": source_id,
+                                 "source_cell_key": f"{source['table_id']}:{RAW_IMPORT_VERSION}:{source['row_id']}:column-{source['value_index']}",
+                                 "source_role": "reported_value", "source_order": 1})
             if "capital_project_key" in ext: capital_facts.append({"project_key": ext["capital_project_key"], "fact_key": fact_key})
             if "debt_instrument_key" in ext: debt_facts.append({"instrument_key": ext["debt_instrument_key"], "fact_key": fact_key})
 
