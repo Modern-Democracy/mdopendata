@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "mapping_status": "reviewed",
+  "review_scope": "Explicit facts required by the seven representative reconciliation checks; all other rows remain raw_only.",
+  "expected_counts": {"pages": 12, "rows": 408, "cells": 837, "reconciliations": 7, "review_issues": 3},
+  "municipality": {"key": "charlottetown", "legal_name": "City of Charlottetown", "province_code": "PE", "country_code": "CA"},
+  "documents": [
+    {"key": "2024-2025", "local_path": "docs/charlottetown/budget/2024-2025 Financial Plan Capital and Operational Budgets.pdf", "sha256": "873b011970ea4042d107f7b0c4b8d58c5b5ef49ce5531f8f25f46de9270f37f6"},
+    {"key": "2025-2026", "local_path": "docs/charlottetown/budget/2025-2026 Financial Plan Capital and Operational Budgets.pdf", "sha256": "d6d3fa419756eaa482a67ab42b3acdab4bf0d0329c0649fea108e4c1aaad1631"},
+    {"key": "2026-2027", "local_path": "docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf", "sha256": "d926634427e80aa2b06b6425bdbb117424fe53567ae344980cd10791f8e39bac"}
+  ],
+  "reporting_entities": [
+    {"key": "city-of-charlottetown", "display_name": "City of Charlottetown", "entity_type": "municipality"},
+    {"key": "bell-aliant-centre", "display_name": "Bell Aliant Centre", "entity_type": "facility"},
+    {"key": "charlottetown-civic-centre-management", "display_name": "Charlottetown Civic Centre Management Inc.", "entity_type": "facility"}
+  ],
+  "fiscal_periods": [
+    {"key": "fy-2024-2025", "label": "2024-2025", "start_date": "2024-04-01", "end_date": "2025-03-31", "period_kind": "fiscal_year"},
+    {"key": "fy-2025-2026", "label": "2025-2026", "start_date": "2025-04-01", "end_date": "2026-03-31", "period_kind": "fiscal_year"},
+    {"key": "fy-2026-2027", "label": "2026-2027", "start_date": "2026-04-01", "end_date": "2027-03-31", "period_kind": "fiscal_year"}
+  ],
+  "cases": [
+    {"case_key": "operating_detail", "document_key": "2026-2027", "statement_key": "city-operating-detail", "statement_kind": "operating", "reporting_entity_key": "city-of-charlottetown", "normalization_status": "raw_only"},
+    {"case_key": "facility_operating_summary", "document_key": "2026-2027", "statement_key": "bell-aliant-centre-operating-summary", "statement_kind": "operating", "reporting_entity_key": "bell-aliant-centre", "normalization_status": "partial_reviewed"},
+    {"case_key": "ocr_facility_detail", "document_key": "2024-2025", "statement_key": "civic-centre-operating-detail", "statement_kind": "operating", "reporting_entity_key": "charlottetown-civic-centre-management", "normalization_status": "raw_only"},
+    {"case_key": "capital_partner_funding", "document_key": "2026-2027", "statement_key": "environment-transit-capital", "statement_kind": "capital", "reporting_entity_key": "city-of-charlottetown", "normalization_status": "partial_reviewed"},
+    {"case_key": "capital_project_profile", "document_key": "2026-2027", "statement_key": "downtown-tree-planters-profile", "statement_kind": "capital_profile", "reporting_entity_key": "city-of-charlottetown", "normalization_status": "raw_only"},
+    {"case_key": "property_tax_calculation", "document_key": "2026-2027", "statement_key": "property-tax-calculation", "statement_kind": "tax", "reporting_entity_key": "city-of-charlottetown", "normalization_status": "partial_reviewed"},
+    {"case_key": "long_term_debt", "document_key": "2026-2027", "statement_key": "long-term-debt", "statement_kind": "debt", "reporting_entity_key": "city-of-charlottetown", "normalization_status": "partial_reviewed"}
+  ],
+  "document_periods": [
+    {"key": "facility-current-budget", "case_key": "facility_operating_summary", "column_index": 2, "fiscal_period_key": "fy-2026-2027", "period_role": "current_budget", "raw_column_label": "2026-2027"},
+    {"key": "facility-prior-budget", "case_key": "facility_operating_summary", "column_index": 3, "fiscal_period_key": "fy-2025-2026", "period_role": "prior_budget", "raw_column_label": "2025-2026"},
+    {"key": "capital-current-budget", "case_key": "capital_partner_funding", "column_index": 2, "fiscal_period_key": "fy-2026-2027", "period_role": "current_budget", "raw_column_label": "Budget"},
+    {"key": "tax-current-budget", "case_key": "property_tax_calculation", "column_index": 3, "fiscal_period_key": "fy-2026-2027", "period_role": "current_budget", "raw_column_label": "Property Taxes"},
+    {"key": "debt-current-balance", "case_key": "long_term_debt", "column_index": 2, "fiscal_period_key": "fy-2026-2027", "period_role": "balance", "raw_column_label": "2026 Balance"},
+    {"key": "debt-current-principal", "case_key": "long_term_debt", "column_index": 3, "fiscal_period_key": "fy-2026-2027", "period_role": "current_budget", "raw_column_label": "2026/2027 Principal"},
+    {"key": "debt-current-interest", "case_key": "long_term_debt", "column_index": 4, "fiscal_period_key": "fy-2026-2027", "period_role": "current_budget", "raw_column_label": "2026/2027 Interest"}
+  ],
+  "facts": [
+    {"key":"capital-environment-gross","case_key":"capital_partner_funding","line_key":"environment-total","raw_label":"Total Environment and Sustainability","aggregation_role":"total","document_period_key":"capital-current-budget","amount_type":"gross","measure_unit":"cad","value_numeric":"1482450","value_state":"reported","source_cell_key":"2026-2027-p111-r-95cfa289d1da38ca7058-c-bb790fa7c821b54c2201"},
+    {"key":"capital-environment-funding","case_key":"capital_partner_funding","line_key":"environment-partner-funding","raw_label":"Less: External Partner Funding","aggregation_role":"non_additive","document_period_key":"capital-current-budget","amount_type":"funding_deduction","measure_unit":"cad","value_numeric":"-803335","value_state":"reported","source_cell_key":"2026-2027-p111-r-628f6bf065681190f008-c-d95a3fbf905094fdd01c"},
+    {"key":"capital-environment-net","case_key":"capital_partner_funding","line_key":"environment-net","raw_label":"Net Total Environment Sustainability","aggregation_role":"total","document_period_key":"capital-current-budget","amount_type":"net","measure_unit":"cad","value_numeric":"679115","value_state":"reported","source_cell_key":"2026-2027-p111-r-66672f8914221a380792-c-873907985ffd593bf5dd"},
+    {"key":"capital-transit-gross","case_key":"capital_partner_funding","line_key":"transit-total","raw_label":"Total Transit","aggregation_role":"total","document_period_key":"capital-current-budget","amount_type":"gross","measure_unit":"cad","value_numeric":"10399961","value_state":"reported","source_cell_key":"2026-2027-p111-r-7e46fdabb8f4aef6e6e9-c-8e029e6a70721fe2ec21"},
+    {"key":"capital-transit-funding","case_key":"capital_partner_funding","line_key":"transit-partner-funding","raw_label":"Less: External Partner Funding","aggregation_role":"non_additive","document_period_key":"capital-current-budget","amount_type":"funding_deduction","measure_unit":"cad","value_numeric":"-6392577","value_state":"reported","source_cell_key":"2026-2027-p111-r-0839a674c0516de5f298-c-b62b1af08494deb9e0f4"},
+    {"key":"capital-transit-net","case_key":"capital_partner_funding","line_key":"transit-net","raw_label":"Net Total Transit","aggregation_role":"total","document_period_key":"capital-current-budget","amount_type":"net","measure_unit":"cad","value_numeric":"4007384","value_state":"reported","source_cell_key":"2026-2027-p111-r-1223dde40d8e00a90502-c-73afd6a15f8f2fbb4aed"},
+    {"key":"capital-combined-net","case_key":"capital_partner_funding","line_key":"combined-net","raw_label":"Net Total Environment Sustainability and Transit","aggregation_role":"total","document_period_key":"capital-current-budget","amount_type":"net","measure_unit":"cad","value_numeric":"4686499","value_state":"reported","source_cell_key":"2026-2027-p111-r-d7b0506fd5da3a4d19fc-c-7373f0d9868dd286c435"},
+    {"key":"tax-pei-residential-assessment","case_key":"property_tax_calculation","line_key":"pei-resident-residential","raw_label":"Residential","aggregation_role":"detail","document_period_key":"tax-current-budget","amount_type":"balance","measure_unit":"cad","value_numeric":"2747064500","value_state":"reported","source_cell_key":"2026-2027-p149-r-8eaa59e21bb158db96ae-c-a067eb0d165be7cc47f2","source_roles":["reported_value","assessment_operand"]},
+    {"key":"tax-pei-residential-rate","case_key":"property_tax_calculation","line_key":"pei-resident-residential-rate","raw_label":"Residential rate per $100","aggregation_role":"detail","document_period_key":"tax-current-budget","amount_type":"actual","measure_unit":"cad_per_100_assessed","value_numeric":"0.67","value_state":"reported","source_cell_key":"2026-2027-p149-r-8eaa59e21bb158db96ae-c-a067eb0d165be7cc47f2","source_roles":["reported_value","rate_operand"]},
+    {"key":"tax-pei-residential-revenue","case_key":"property_tax_calculation","line_key":"pei-resident-residential-revenue","raw_label":"Residential reported tax revenue","aggregation_role":"detail","document_period_key":"tax-current-budget","amount_type":"budget","measure_unit":"cad","value_numeric":"19991891","value_state":"reported","source_cell_key":"2026-2027-p149-r-8eaa59e21bb158db96ae-c-eb46011c64169fdfb7b2"},
+    {"key":"debt-total-principal","case_key":"long_term_debt","line_key":"total-debt-servicing-principal","raw_label":"Total Debt Servicing Principal","aggregation_role":"total","document_period_key":"debt-current-principal","amount_type":"principal","measure_unit":"cad","value_numeric":"5871868","value_state":"reported","source_cell_key":"2026-2027-p151-r-c3c2ca99854a8267e1f9-c-727a14291395dc94fe46"},
+    {"key":"debt-total-interest","case_key":"long_term_debt","line_key":"total-debt-servicing-interest","raw_label":"Total Debt Servicing Interest","aggregation_role":"total","document_period_key":"debt-current-interest","amount_type":"interest","measure_unit":"cad","value_numeric":"5150182","value_state":"reported","source_cell_key":"2026-2027-p151-r-c3c2ca99854a8267e1f9-c-be1f72ec1eaf0c7a44f7"},
+    {"key":"debt-total-combined","case_key":"long_term_debt","line_key":"total-principal-interest","raw_label":"Total Interest and Principal","aggregation_role":"total","document_period_key":"debt-current-principal","amount_type":"net","measure_unit":"cad","value_numeric":"11022050","value_state":"reported","source_cell_key":"2026-2027-p151-r-5c5df98aa0f6db465fc0-c-9631a2b98b28cd4150e3"},
+    {"key":"facility-current-revenue","case_key":"facility_operating_summary","line_key":"total-operating-revenue","raw_label":"Total Operating Revenue","aggregation_role":"total","document_period_key":"facility-current-budget","amount_type":"budget","measure_unit":"cad","value_numeric":"4073224","value_state":"reported","source_cell_key":"2026-2027-p105-r-12e5fc9c65a2243495bd-c-09c1dae75f32e06740c8"},
+    {"key":"facility-current-expense","case_key":"facility_operating_summary","line_key":"total-operating-expenses","raw_label":"Total Operating Expenses","aggregation_role":"total","document_period_key":"facility-current-budget","amount_type":"budget","measure_unit":"cad","value_numeric":"4073224","value_state":"reported","source_cell_key":"2026-2027-p105-r-71ec4e3768ec8491be2c-c-09c1dae75f32e06740c8"},
+    {"key":"facility-current-earnings","case_key":"facility_operating_summary","line_key":"operating-earnings-loss","raw_label":"Operating Earnings (Loss)","aggregation_role":"total","document_period_key":"facility-current-budget","amount_type":"net","measure_unit":"cad","value_state":"dash_unresolved","source_cell_key":"2026-2027-p105-r-d39d673a82ec572a8c10-c-319c98a8b84e14459a3d"},
+    {"key":"facility-prior-revenue","case_key":"facility_operating_summary","line_key":"total-operating-revenue","raw_label":"Total Operating Revenue","aggregation_role":"total","document_period_key":"facility-prior-budget","amount_type":"budget","measure_unit":"cad","value_numeric":"3822876","value_state":"reported","source_cell_key":"2026-2027-p105-r-12e5fc9c65a2243495bd-c-ff986eb416a491d8adc0"},
+    {"key":"facility-prior-expense","case_key":"facility_operating_summary","line_key":"total-operating-expenses","raw_label":"Total Operating Expenses","aggregation_role":"total","document_period_key":"facility-prior-budget","amount_type":"budget","measure_unit":"cad","value_numeric":"3819626","value_state":"reported","source_cell_key":"2026-2027-p105-r-71ec4e3768ec8491be2c-c-e99d219458f0d3d88bd8"},
+    {"key":"facility-prior-earnings","case_key":"facility_operating_summary","line_key":"operating-earnings-loss","raw_label":"Operating Earnings (Loss)","aggregation_role":"total","document_period_key":"facility-prior-budget","amount_type":"net","measure_unit":"cad","value_state":"dash_unresolved","source_cell_key":"2026-2027-p105-r-d39d673a82ec572a8c10-c-953dc60e90056005a4fa"}
+  ],
+  "reconciliation_fact_keys": {
+    "capital_environment_net": ["capital-environment-gross","capital-environment-funding","capital-environment-net"],
+    "capital_transit_net": ["capital-transit-gross","capital-transit-funding","capital-transit-net"],
+    "capital_combined_net": ["capital-environment-net","capital-transit-net","capital-combined-net"],
+    "tax_pei_resident_residential": ["tax-pei-residential-assessment","tax-pei-residential-rate","tax-pei-residential-revenue"],
+    "debt_principal_interest": ["debt-total-principal","debt-total-interest","debt-total-combined"],
+    "facility_current_balance": ["facility-current-revenue","facility-current-expense","facility-current-earnings"],
+    "facility_prior_balance": ["facility-prior-revenue","facility-prior-expense","facility-prior-earnings"]
+  },
+  "review_issue_reconciliation_keys": {
+    "budget-review-2026-2027-tax-pei-resident-residential": "tax_pei_resident_residential",
+    "budget-review-2026-2027-facility-current-earnings-dash": "facility_current_balance",
+    "budget-review-2026-2027-facility-prior-earnings-dash": "facility_prior_balance"
+  }
+}

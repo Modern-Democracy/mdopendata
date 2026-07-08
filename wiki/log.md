@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use this heading format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-07-07] budget | Representative normalized mapping design
+
+Defined stable raw and normalized identities for the representative Charlottetown budget spike. Added a reviewed mapping-manifest contract, import order, reconciliation linkage rules, and explicit stop conditions. Normalized import remains blocked until row-level and cell-level assignments are materialized in `normalized-mapping.json`.
+
 ## [2026-07-07] budget | Requirements and architecture contracts
 
 Added the municipal budget wiki section with prototype scope, source-aware requirements, a proposed raw-to-normalized PostgreSQL schema, public website/API contracts, and an eight-week implementation and test plan. The contracts use the three Charlottetown budget PDFs as the initial source family and identify representative 2026/2027 operating, capital, tax, facility, and debt layouts as the pre-migration architecture gate.

@@ -25,6 +25,7 @@ Charlottetown is the prototype municipality. The initial source set is the three
 | [API and UI contract](./api-and-ui-contract.md) | Website routes, read APIs, filters, visualizations, and response behavior. |
 | [Implementation and test plan](./implementation-plan.md) | Ordered eight-week prototype plan, gates, test strategy, and completion criteria. |
 | [Representative-table schema spike](./representative-table-schema-spike.md) | Source-pattern mapping, confirmed schema fits, blocking gaps, and migration gate status. |
+| [Representative-spike normalized mapping](./representative-spike-normalized-mapping.md) | Reviewed raw and normalized import identities, manifest contract, sequencing, and stop conditions. |
 
 ## Current Evidence
 
