@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use this heading format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-07-08] platform | DevOps role and environment ownership
+
+Added the DevOps role as the exclusive owner of dependency installation, project environment and toolchain mutation, infrastructure, CI/CD, and deployment-target changes. Added an explicit pre-change user approval gate, Project Management routing, and a canonical project-environment wiki page covering `.venv`, the separate QGIS runtime, current deployment surfaces, and documentation requirements.
+
 ## [2026-07-07] budget | Representative normalized mapping design
 
 Defined stable raw and normalized identities for the representative Charlottetown budget spike. Added a reviewed mapping-manifest contract, import order, reconciliation linkage rules, and explicit stop conditions. Normalized import remains blocked until row-level and cell-level assignments are materialized in `normalized-mapping.json`.

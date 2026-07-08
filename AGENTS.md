@@ -7,6 +7,7 @@
   - `GIS Specialist`: `.codex/skills/role-gis-specialist/SKILL.md`
   - `Data Quality Analyst`: `.codex/skills/role-data-quality-analyst/SKILL.md`
   - `Debugger`: `.codex/skills/role-debugger/SKILL.md`
+  - `DevOps`: `.codex/skills/role-dev-ops/SKILL.md`
   - `QA Reviewer`: `.codex/skills/role-qa-reviewer/SKILL.md`
 - Follow the active role skill before implementation, generation, verification,
   or review.

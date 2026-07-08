@@ -78,6 +78,8 @@ Use read-only database inspection where possible. Load data through PostgreSQL t
 
 ## Python Environment
 
+Environment, dependency, and deployment changes are governed by the DevOps role and require explicit user approval before mutation. See [the canonical project environment page](wiki/platform/project-environment.md).
+
 Use `.venv` as the canonical project Python environment for PDF extraction, JSON conversion, schema validation, GIS processing, and database import scripts. QGIS MCP remains separate because it runs under QGIS's bundled Python and uses `.qgis-mcp-packages` plus `qgis_mcp_vendor`.
 
 Create or refresh the project environment from the root `pyproject.toml`:

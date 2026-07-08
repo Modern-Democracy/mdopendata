@@ -64,6 +64,12 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [Municipal budgets](./budgets/README.md) | Product and delivery contract for operating and capital budget ingestion, publication, explanation, and comparison. |
 | [Agenda and package document taxonomy](./council-committee-meetings/agenda-document-taxonomy.md) | Agenda item and agenda package attachment type catalogue for document-import review and parser refinement. |
 
+## Platform Pages
+
+| Page | Purpose |
+| --- | --- |
+| [Project environment](./platform/project-environment.md) | Canonical runtimes, dependency ownership, DevOps approval gate, deployment surfaces, and setup documentation contract. |
+
 ## Implementation Pages
 
 | Page | Purpose |
