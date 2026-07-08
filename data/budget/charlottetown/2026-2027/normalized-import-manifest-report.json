@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "manifest_hash": "7330a2a48cdde247527fd47e9216c75053cce408b08944b10d6fa327c40d0c07",
+  "counts": {
+    "source_documents": 1,
+    "source_tables": 85,
+    "reporting_entities": 4,
+    "organization_units": 13,
+    "funds": 0,
+    "fiscal_periods": 3,
+    "document_periods": 128,
+    "statements": 30,
+    "statement_relationships": 0,
+    "line_items": 1163,
+    "facts": 2165,
+    "fact_sources": 2165,
+    "capital_projects": 169,
+    "capital_project_aliases": 173,
+    "capital_project_profiles": 24,
+    "capital_project_facts": 192,
+    "debt_instruments": 10,
+    "debt_facts": 30,
+    "reconciliations": 0,
+    "review_issues": 0,
+    "expected_counts": 0
+  },
+  "fact_counts_by_amount_type": {
+    "actual": 15,
+    "balance": 11,
+    "budget": 1419,
+    "forecast": 452,
+    "funding_deduction": 11,
+    "gross": 222,
+    "interest": 11,
+    "net": 13,
+    "principal": 11
+  },
+  "fact_counts_by_measure_unit": {
+    "cad": 2150,
+    "cad_per_100_assessed": 8,
+    "cad_per_cubic_metre": 2,
+    "cad_per_day": 2,
+    "cad_per_year": 3
+  },
+  "fact_counts_by_value_state": {
+    "dash_unresolved": 41,
+    "reported": 2124
+  },
+  "identity_collisions": [],
+  "unresolved_decisions": [],
+  "extension_links": {
+    "capital_profiles": 24,
+    "capital_profiles_linked": 23,
+    "capital_profile_project_links": 24,
+    "capital_profiles_unresolved": 0,
+    "debt_instruments": 10,
+    "debt_facts": 30
+  },
+  "capital_profile_alias_review": [
+    {
+      "profile_key": "vehicle-equipment",
+      "page_number": 128,
+      "title": "Vehicle Equipment",
+      "department": "Charlottetown Police Services",
+      "project": "Vehicle Equipment",
+      "candidate_schedule_projects": [
+        {
+          "capital_project_key": "specialized-equipment",
+          "schedule_label": "Specialized Equipment",
+          "similarity": 0.7368
+        },
+        {
+          "capital_project_key": "communication-equipment",
+          "schedule_label": "Communication Equipment",
+          "similarity": 0.6
+        },
+        {
+          "capital_project_key": "investigative-tools-tech",
+          "schedule_label": "Investigative Tools & Tech",
+          "similarity": 0.2927
+        },
+        {
+          "capital_project_key": "community-safety",
+          "schedule_label": "Community Safety",
+          "similarity": 0.1212
+        }
+      ]
+    }
+  ],
+  "review_exceptions": [
+    {
+      "profile_key": "vehicle-equipment",
+      "reason": "awaiting_city_clarification_no_schedule_residual"
+    }
+  ],
+  "representative_retirement_fact_count": 19
+}

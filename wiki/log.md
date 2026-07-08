@@ -14,6 +14,34 @@ Append new entries in reverse chronological order. Use this heading format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-07-08] implementation | Normalized import Gate 3 approval
+
+Applied the approved capital profile decisions: 22 one-to-one links, one profile linked to two intersection projects, and one reviewed Vehicle Equipment narrative-only exception. The regenerated manifest has zero unresolved decisions, zero identity collisions, 1,163 lines, 2,165 facts, and deterministic output. Gate 3 is approved.
+
+## [2026-07-08] implementation | Recovered omitted row-4 capital items
+
+Corrected the capital schedule mapper's row-4 exclusion and recovered six source-backed projects and facts, including New Fire Station Build ($6,000,000) and Police Specialized Equipment ($128,000). Regenerated Phase 2 at 1,163 lines and 2,165 facts. Police detail reconciles exactly to $494,000 with no Vehicle Equipment residual; drafted a City clarification request after confirming official budget approval on March 31, 2026.
+
+## [2026-07-08] query | Capital profile alias review
+
+Reviewed 14 non-exact capital profile mappings against their section-scoped schedule rows and profile descriptions. Proposed ten direct aliases, one composite link to two intersection schedule projects, and three explicit narrative-only exceptions where no defensible schedule row exists. No mappings were applied.
+
+## [2026-07-08] implementation | Capital profile wrapped-field repair
+
+Corrected capital profile extraction to join wrapped title, department, and project rows using explicit field boundaries. Regenerated the profile mapping, deterministic manifest, and section-scoped alias review; no aliases were inferred and Gate 3 remains pending review of 14 non-exact mappings.
+
+## [2026-07-08] implementation | Normalized import Phase 2 review manifest
+
+Recorded Gate 1 and Gate 2 approval and generated a deterministic full-document review manifest with 1,157 lines, 2,159 facts, 2,159 source-value references, and zero identity collisions. Gate 3 remains blocked because 14 of 24 capital profiles require reviewed aliases to capital schedule projects. No SQL or database changes were performed.
+
+## [2026-07-08] implementation | Normalized import Phase 1 evidence
+
+Defined the proposed full-document manifest protocol, deterministic identity rules, entity/unit/fund/family inventories, vocabulary translations, representative-data collision treatment, and Gate 1/2 decisions. No SQL, importer, normalized data, or database records were changed; both gates remain pending explicit approval.
+
+## [2026-07-08] implementation | Normalized import implementation plan
+
+Converted `wiki/budgets/2026-normalized-import-gap-report.md` into a seven-phase implementation plan with eight approval gates. Preserved the audited scope and blockers as scoped work, evidence requirements, pass criteria, dependencies, and stop conditions. Publication remains outside the plan, and publication snapshots must remain at zero.
+
 ## [2026-07-08] platform | DevOps role and environment ownership
 
 Added the DevOps role as the exclusive owner of dependency installation, project environment and toolchain mutation, infrastructure, CI/CD, and deployment-target changes. Added an explicit pre-change user approval gate, Project Management routing, and a canonical project-environment wiki page covering `.venv`, the separate QGIS runtime, current deployment surfaces, and documentation requirements.

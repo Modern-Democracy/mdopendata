@@ -109,8 +109,18 @@ def main() -> int:
     capital = load("normalization/capital-budget-schedule-mapping.json")
     profiles = load("normalization/capital-project-profile-mapping.json")
     assert len(capital["schedules"]) == 13
-    assert sum(len(schedule["rows"]) for schedule in capital["schedules"]) == 216
-    assert sum(len(row["facts"]) for schedule in capital["schedules"] for row in schedule["rows"]) == 240
+    assert sum(len(schedule["rows"]) for schedule in capital["schedules"]) == 222
+    assert sum(len(row["facts"]) for schedule in capital["schedules"] for row in schedule["rows"]) == 246
+    recovered_row_4 = {
+        row["raw_label"]: row["facts"][0]["numeric_value"]
+        for schedule in capital["schedules"] for row in schedule["rows"]
+        if row["row_id"].endswith("_r004")
+    }
+    assert recovered_row_4 == {
+        "New Fire Station Build": "6000000", "Computers": "160000",
+        "Specialized Equipment": "128000", "Miltonvale Wellfield Reservoir": "135000",
+        "Concert rigging grid": "500000", "Contingency": "60000",
+    }
     assert len(profiles["profiles"]) == 24
     assert all(profile["review_status"] == "approved_narrative_only" for profile in profiles["profiles"])
     assert reviews["records"] == []

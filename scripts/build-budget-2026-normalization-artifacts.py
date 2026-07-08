@@ -357,7 +357,7 @@ def build_capital_mappings(schedule_pages: set[int], profile_pages: set[int]) ->
         mapped_rows = []
         for row in (item for item in rows if item["page_number"] == page):
             financial = [values[value_id] for value_id in row["value_ids"] if values[value_id]["value_kind"] in {"number", "currency", "dash"}]
-            if not financial or row["row_index"] <= 4:
+            if not financial or row["row_index"] <= 3:
                 continue
             label = row["cells"][0]
             role = "deduction" if label.startswith("Less:") else "reported_total" if label.startswith(("Total ", "Net Total ")) else "additive_detail"
@@ -382,13 +382,24 @@ def build_capital_mappings(schedule_pages: set[int], profile_pages: set[int]) ->
     for page in sorted(profile_pages):
         page_rows = [row for row in rows if row["page_number"] == page]
         text = [row["trimmed_text"] for row in page_rows]
-        department = next((line.removeprefix("Department:").strip() for line in text if line.startswith("Department:")), None)
-        project = next((line.removeprefix("Project:").strip() for line in text if line.startswith("Project:")), text[0] if text else None)
+        department_index = next((i for i, line in enumerate(text) if line.startswith("Department:")), None)
+        project_index = next((i for i, line in enumerate(text) if line.startswith("Project:")), None)
         description_start = text.index("Project Description") + 1 if "Project Description" in text else None
         alignment_start = text.index("Strategic Alignment") if "Strategic Alignment" in text else len(text)
+        if department_index is None or project_index is None or description_start is None:
+            raise ValueError(f"Capital profile page {page} lacks required field boundaries")
+        if not (0 < department_index < project_index < description_start - 1):
+            raise ValueError(f"Capital profile page {page} has invalid field ordering")
+        title = " ".join(text[:department_index])
+        department = " ".join(
+            [text[department_index].removeprefix("Department:").strip(), *text[department_index + 1:project_index]]
+        )
+        project = " ".join(
+            [text[project_index].removeprefix("Project:").strip(), *text[project_index + 1:description_start - 1]]
+        )
         profiles.append({
             "page_number": page, "candidate_key": f"ctown-2026-2027-2026-2027-p{page:03d}",
-            "title": text[0] if text else None, "department": department, "project": project,
+            "title": title, "department": department, "project": project,
             "description_lines": text[description_start:alignment_start] if description_start is not None else [],
             "strategic_alignment": text[alignment_start + 1:] if alignment_start < len(text) else [],
             "review_status": "approved_narrative_only",

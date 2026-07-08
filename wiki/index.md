@@ -87,6 +87,9 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [Budget representative-spike normalized mapping](./budgets/representative-spike-normalized-mapping.md) | Reviewed mapping contract and import gate for representative raw and normalized budget records. |
 | [2026/2027 budget normalization status](./budgets/2026-normalization-status.md) | Full-document raw import and canonical normalization-review status. |
 | [2026/2027 normalized import gap report](./budgets/2026-normalized-import-gap-report.md) | Quantified gaps between reviewed normalization artifacts and the PostgreSQL import contract. |
+| [2026/2027 normalized import Phase 1 decisions](./budgets/2026-normalized-import-phase-1-decisions.md) | Manifest, identity, coexistence, vocabulary, and schema-seed proposals for approval Gates 1 and 2. |
+| [2026/2027 normalized import Phase 2 status](./budgets/2026-normalized-import-phase-2-status.md) | Generated manifest evidence and unresolved capital-profile aliases blocking Gate 3. |
+| [Vehicle Equipment clarification draft](./budgets/2026-vehicle-equipment-clarification-draft.md) | Draft request concerning the Police Vehicle Equipment profile and approved schedule discrepancy. |
 | [Release help and MCP plan](./implementation/release-help-and-mcp-plan.md) | Implementation pattern for release-facing contextual help, the `help` schema, web help APIs, and the repo-local `mdopendata-mcp` package. |
 | [Agenda package ingestion contract](./implementation/agenda-package-ingestion-contract.md) | Package JSON, logical-document ordering, agenda-item binding, template discovery, and approval gates. |
 | [Document extraction engineering](./implementation/document-extraction-engineering.md) | Project-wide reuse, variation, exception, regeneration, and QA contract for maintainable document extraction. |

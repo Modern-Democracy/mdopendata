@@ -28,6 +28,9 @@ Charlottetown is the prototype municipality. The initial source set is the three
 | [Representative-spike normalized mapping](./representative-spike-normalized-mapping.md) | Reviewed raw and normalized import identities, manifest contract, sequencing, and stop conditions. |
 | [2026/2027 normalization status](./2026-normalization-status.md) | Full raw import, canonical dispositions, continuation decisions, coverage, and blocked normalization review queue. |
 | [2026/2027 normalized import gap report](./2026-normalized-import-gap-report.md) | Database-import blockers, vocabulary translations, provenance requirements, reconciliation coverage, and acceptance criteria. |
+| [2026/2027 normalized import Phase 1 decisions](./2026-normalized-import-phase-1-decisions.md) | Proposed manifest protocol, identity rules, inventories, vocabulary mappings, coexistence rule, and Gate 1/2 decisions. |
+| [2026/2027 normalized import Phase 2 status](./2026-normalized-import-phase-2-status.md) | Deterministic manifest counts, Gate 3 evidence, and blocking capital-profile alias review. |
+| [Vehicle Equipment clarification draft](./2026-vehicle-equipment-clarification-draft.md) | Draft request about the Police project profile missing from the approved capital schedule. |
 
 ## Current Evidence
 
