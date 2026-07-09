@@ -88,6 +88,9 @@ An entity mention does not prove statement ownership. For example, a facility st
 - Facility statements span summary and department-specific pages that must not be joined solely by adjacency.
 - Debt and tax divider pages precede single-page schedules and are not table continuations.
 - OCR-backed 2024/2025 facility detail spans PDF pages 82-87; pages 82-86 contain table data and page 87 contains a final net-income line.
+- The 2025/2026 operating budget uses departmental overview tables associated with `Detailed Breakdown of Budget Item` tables. The detail pages are line items organized under the expense categories from the overview table, and the totals are primarily in the overview table.
+- The 2024/2025 operating budget generally uses a single detailed department table pattern with totals embedded in that table and no separate preceding overview table.
+- These presentation variants must normalize to the same department operating statement with line items. The source relationship record decides whether totals come from an overview table or from the detail table itself.
 
 The generated continuation flags are review queues. No continuation group is approved by this profiling pass.
 
@@ -114,7 +117,10 @@ The generated continuation flags are review queues. No continuation group is app
 - Bell Aliant Centre and CARI labels vary; Charlottetown Civic Centre Management Inc. introduces another facility-level scope.
 - Capital rollups mix gross amounts, negative/parenthesized partner funding, and net totals.
 - Summary tables duplicate values represented at more detailed levels and must not be summed together.
+- Budget documents often repeat the same numbers across pages for visualization or overview purposes. Treat duplicate visualization-backed fact sets as `duplicate_summary` for normalization unless they are approved summary/detail relationships such as department summaries versus line-item department or project tables.
+- Overview chart pages may include a visual chart and the backing data table on the same page. Treat the chart as duplicate presentation for normalization and let the public UI reproduce charts from reviewed facts.
 - Project profiles contain years, quantities, and dates that are not financial periods or facts.
+- Large-font titles, departments, project names, and profile `Project:` fields are high-risk line-wrap fields when they appear in narrow columns. The 2025/2026 and 2024/2025 capital profiles include examples where `title_guess` truncates the visible heading or differs from the wrapped `Project:` field; extraction must reconstruct the full string before identity matching, alias review, or normalized label assignment.
 
 ## Quality Status
 

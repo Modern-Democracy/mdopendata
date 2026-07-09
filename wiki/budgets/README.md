@@ -39,6 +39,7 @@ Charlottetown is the prototype municipality. The initial source set is the three
 | [Week 5 raw ingestion status](./week-5-raw-ingestion-status.md) | Raw database ingestion status for the 2025/2026 and 2024/2025 budget PDFs before normalized comparability approval. |
 | [Week 5 normalized mapping review](./week-5-normalized-mapping-review.md) | Prior-year normalized mapping review classifications, raw coverage blockers, and remaining approval gates. |
 | [Prior-year normalized import gap report](./prior-year-normalized-import-gap-report.md) | Step-through normalization, review, import, QA, and compatibility gates for 2025/2026 and 2024/2025. |
+| [Prior-year normalized import Phase 1 status](./prior-year-normalized-import-phase-1-status.md) | Period-label and section-continuation review artifacts and remaining Phase 1 blockers for prior-year normalization. |
 | [Budget ingestion refactor tracker](./budget-ingestion-refactor-tracker.md) | Deferred refactor tracker for separating reusable budget ingestion code from document-specific mappings after prior-year completion. |
 
 ## Current Evidence

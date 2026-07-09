@@ -471,3 +471,35 @@ Resolved prior-year budget raw coverage blockers by adding supplemental full-2 r
 ## [2026-07-09] planning | Prior-year budget normalization and refactor tracking
 
 Added a prior-year normalized import gap report for completing the 2025/2026 and 2024/2025 budget normalization, import, reconciliation, QA, and compatibility gates. Added a deferred budget ingestion refactor tracker to preserve lessons from prior-year completion before generalizing the 2026/2027 scripts across other budget documents.
+
+## [2026-07-09] analysis | Prior-year budget Phase 1 review start
+
+Started Phase 1 period-label and section-continuation review for the 2025/2026 and 2024/2025 budget normalization work. Generated period-label review artifacts with zero remaining period-label blockers, proposed 33 section groups, marked nine adjacent capital project profile groups as do-not-merge records, and documented remaining Phase 1 blockers for candidate dispositions, project aliases, tax/rate operands, and debt identities.
+
+## [2026-07-09] fix | Prior-year overview chart-source table handling
+
+Recorded the source-pattern rule that overview pie charts are duplicate presentation when followed by a backing data table. Regenerated the prior-year Phase 1 section-continuation review so 2025/2026 pages 14 and 15 are `duplicate_summary` records, matching the 2026/2027 page 18 and 19 precedent, instead of continuations with the operating summary; normalization should ignore the chart graphic.
+
+## [2026-07-09] analysis | Prior-year Phase 1 candidate dispositions
+
+Recorded the universal budget extraction rule that duplicate visualization-backed fact sets are `duplicate_summary` inputs for normalization unless they are approved summary/detail relationships. Generated prior-year Phase 1 candidate dispositions: 85 normalize, two duplicate-summary, and 27 review-blocked records for 2025/2026; 38 normalize and 20 review-blocked records for 2024/2025. Remaining blockers are project aliases, tax/rate operands, and debt identities.
+
+## [2026-07-09] analysis | Prior-year capital project alias review
+
+Generated Phase 1 capital project alias decisions for 43 prior-year profile candidates. Mapped 30 profiles to existing 2026/2027 capital project keys, assigned eight document-only prior-year identities, and left five 2024/2025 profiles review-blocked for split/merge decisions. Candidate dispositions now stand at 161 normalize, two duplicate-summary, and nine review-blocked records across both prior-year documents.
+
+## [2026-07-09] fix | Prior-year wrapped capital profile identity review
+
+Added a Phase 1 capital project profile identity review that reconstructs wrapped source titles and `Project:` values from raw page text instead of relying on truncated `title_guess` values. Reviewed 43 prior-year profiles, found 14 incomplete wrapped title guesses and 18 wrapped or differing `Project:` values, and left 2025/2026 page 130 blocked because the heading and `Project:` line conflict. Candidate dispositions now stand at 160 normalize, two duplicate-summary, and ten review-blocked records.
+
+## [2026-07-09] analysis | Budget operating detail pattern variation
+
+Documented the operating-detail variation between 2025/2026 and 2024/2025. The 2025/2026 document uses departmental overview tables followed by multi-page `Detailed Breakdown of Budget Item` line-item tables, with totals in the overview table. The 2024/2025 document generally embeds totals in the department detail table and lacks a separate overview table. Also recorded line-wrapped large-font text reconstruction as a universal extraction requirement for titles, departments, and project names.
+
+## [2026-07-09] generation | Prior-year operating relationship artifact
+
+Patched the prior-year Phase 1 generator to emit `operating-detail-relationship-review.json` for 2025/2026 and 2024/2025. The artifact records 14 2025/2026 `overview_to_detail` relationships and 16 2024/2025 `total_in_detail` relationships, both targeting the same normalized department operating statement with line items. Updated budget requirements and the Charlottetown three-year budget source profile to note that large-font text in narrow columns is prone to line-wrapping and must be reconstructed before identity matching or normalized label assignment.
+
+## [2026-07-09] qa | 2026/2027 operating relationship verification
+
+Verified the 2026/2027 departmental operating normalization against the overview/detail pattern. The row-mapping artifacts preserve overview pages as `summary_candidate_keys` and detail pages as `supporting_candidate_keys`, with detail rows marked `supporting_breakdown`; however, the normalized import manifest currently has zero `statement_relationships`, so explicit summary/detail relationship records remain a follow-up normalization gap.

@@ -4,7 +4,7 @@ tags:
   - budget
   - normalization
   - charlottetown
-updated: 2026-07-08
+updated: 2026-07-09
 ---
 
 This page records implementation and review status for complete 2026/2027 Charlottetown budget normalization.
@@ -40,6 +40,10 @@ This page records implementation and review status for complete 2026/2027 Charlo
 The full raw layer and normalization review are complete. Document section membership and disposition are reviewed for all 116 candidates. No candidate remains `review_blocked`.
 
 Current dispositions are 112 `normalize`, three `duplicate_summary`, and one `non_financial` narrative page. No publication snapshot has been created.
+
+## Relationship Verification
+
+The 2026/2027 departmental operating row mappings preserve the overview/detail presentation pattern through `summary_candidate_keys`, `supporting_candidate_keys`, `summary_rows`, and `supporting_rows`. The generated manifest does not yet materialize those relationships as explicit `statement_relationship` records; `statement_relationships` is currently zero in `normalized-import-manifest.json`. Follow-up normalization work should emit explicit summary/detail relationships so the 2026/2027 structure matches the new prior-year Phase 1 relationship artifact contract.
 
 ## Required Next Review
 

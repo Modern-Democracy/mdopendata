@@ -96,6 +96,7 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [2026/2027 normalized import Phase 7 status](./budgets/2026-normalized-import-phase-7-status.md) | Source-fidelity QA, review-decision resolution, representative exclusion, and Gate 8 readiness. |
 | [Vehicle Equipment clarification draft](./budgets/2026-vehicle-equipment-clarification-draft.md) | Draft request concerning the Police Vehicle Equipment profile and approved schedule discrepancy. |
 | [Prior-year normalized import gap report](./budgets/prior-year-normalized-import-gap-report.md) | Step-through normalization, review, import, QA, and compatibility gates for 2025/2026 and 2024/2025. |
+| [Prior-year normalized import Phase 1 status](./budgets/prior-year-normalized-import-phase-1-status.md) | Period-label and section-continuation review artifacts and remaining Phase 1 blockers for prior-year normalization. |
 | [Budget ingestion refactor tracker](./budgets/budget-ingestion-refactor-tracker.md) | Deferred refactor tracker for separating reusable budget ingestion code from document-specific mappings after prior-year completion. |
 | [Release help and MCP plan](./implementation/release-help-and-mcp-plan.md) | Implementation pattern for release-facing contextual help, the `help` schema, web help APIs, and the repo-local `mdopendata-mcp` package. |
 | [Agenda package ingestion contract](./implementation/agenda-package-ingestion-contract.md) | Package JSON, logical-document ordering, agenda-item binding, template discovery, and approval gates. |

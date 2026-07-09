@@ -138,9 +138,12 @@ Work:
 - create document-period mapping tables for 2025/2026 and 2024/2025
 - create section inventories and continuation decisions
 - create candidate dispositions for normalize, duplicate summary, non-financial, review-blocked, or excluded
+- encode operating overview-to-detail and total-in-detail source relationships so different document layouts produce the same normalized operating structure
 - record project alias, tax/rate, and debt review decisions
 
 Gate: no review-blocked candidate may enter manifest generation unless it has a mapped review issue that intentionally blocks import.
+
+Status: started on 2026-07-09 for period-label, section-continuation, operating-detail relationship, capital-project-profile-identity, capital-project-alias, and candidate-disposition review. See [Prior-year normalized import Phase 1 status](./prior-year-normalized-import-phase-1-status.md). The generated artifacts map fiscal-period labels, exclude false-positive calendar-year labels from document-period mapping, classify duplicate visualization-backed overview pages as `duplicate_summary`, propose operating/facility/capital schedule section groups, encode 14 2025/2026 `overview_to_detail` relationships and 16 2024/2025 `total_in_detail` relationships to the same normalized operating target, mark adjacent capital project profiles as separate records rather than continuation tables, reconstruct wrapped capital profile titles and `Project:` fields from raw page text, map or document-only classify 37 of 43 capital project profile aliases, and classify 160 candidates as `normalize`, two as `duplicate_summary`, and ten as `review_blocked`.
 
 ### Phase 2: Build Normalization Artifacts
 
@@ -251,6 +254,7 @@ Both prior-year documents are complete when:
 - [Week 5 raw ingestion status](./week-5-raw-ingestion-status.md)
 - [Week 5 normalized mapping review](./week-5-normalized-mapping-review.md)
 - [Budget ingestion refactor tracker](./budget-ingestion-refactor-tracker.md)
+- [Prior-year normalized import Phase 1 status](./prior-year-normalized-import-phase-1-status.md)
 - `data/budget/charlottetown/week-5-normalized-mapping-review.json`
 - `data/budget/charlottetown/2025-2026/raw-tables/raw_row_value_summary.json`
 - `data/budget/charlottetown/2024-2025/raw-tables/raw_row_value_summary.json`

@@ -4,7 +4,7 @@ tags:
   - budget
   - requirements
   - municipal-portal
-updated: 2026-07-07
+updated: 2026-07-09
 ---
 
 This page defines the approved prototype requirements for municipal budget ingestion, publication, explanation, and comparison.
@@ -92,6 +92,10 @@ Out of scope for the prototype:
 - A label can recur under different departments or statement sections and must not be globally merged by text alone.
 - Multi-page schedules may omit repeated headers.
 - Overview tables may duplicate detailed facts. Mark summary/detail relationships to prevent double counting.
+- Department operating sections can use materially different summary/detail layouts across budget years. In 2025/2026, a mostly single-page departmental overview table is associated with one or more `Detailed Breakdown of Budget Item` pages that provide line items for the overview expense categories; totals are presented in the overview table. In 2024/2025, the operating department table pattern generally embeds totals in the department detail table and does not provide a separate overview table. Future extraction must detect which pattern is present, encode the source relationship, and normalize both patterns to the same department operating statement with line items before assigning reconciliation totals.
+- Budget documents commonly repeat the same numbers across visualizations, overview pages, and backing tables to help human readers. Treat duplicate visualization or overview presentations as `duplicate_summary` unless they are approved summary/detail relationships such as department summaries versus line-item department or project tables. Do not normalize duplicate fact sets because they can corrupt totals and comparisons through double counting.
+- Large-font headings, department names, project titles, and profile `Project:` fields are prone to line-wrapping, especially in narrow page columns. Extraction must reconstruct the complete string from adjacent wrapped lines before normalization, alias matching, statement naming, or project identity decisions.
+- Overview chart pages can contain a visual chart followed by the backing data table. Ignore the chart graphic for normalization; public UI charts should be reproduced later from reviewed normalized facts.
 - Capital profiles contain dates and narrative numbers that are not budget amounts.
 - Municipality names, department structures, fiscal calendars, and accounting classifications can change over time.
 - Restated prior-year figures must remain document-specific and must not overwrite the value reported in an earlier document.
@@ -121,4 +125,3 @@ Out of scope for the prototype:
 - [Database schema](./database-schema.md)
 - [Charlottetown 2026/2027 first pass](../charlottetown/sources/budget-2026-2027-first-pass.md)
 - `docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf`, PDF pages 10, 19, 30, 105, 111, 149, and 151
-
