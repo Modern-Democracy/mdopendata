@@ -58,6 +58,32 @@ class TableRecord:
     notes: list[str]
 
 
+def fiscal_period_slug(pdf: Path, out_dir: Path, explicit: str | None) -> str:
+    if explicit:
+        candidate = explicit
+    elif re.fullmatch(r"\d{4}-\d{4}", out_dir.name):
+        candidate = out_dir.name
+    else:
+        match = re.search(r"(20\d{2})\s*[-_/]\s*(20\d{2})", pdf.stem)
+        if not match:
+            raise ValueError(
+                "Could not infer fiscal period. Use an output directory named YYYY-YYYY "
+                "or pass --fiscal-period YYYY-YYYY."
+            )
+        candidate = f"{match.group(1)}-{match.group(2)}"
+    if not re.fullmatch(r"20\d{2}-20\d{2}", candidate):
+        raise ValueError(f"Invalid fiscal period {candidate!r}; expected YYYY-YYYY.")
+    return candidate.replace("-", "_")
+
+
+def municipality_key(explicit: str) -> str:
+    if not re.fullmatch(r"[a-z][a-z0-9_]*", explicit):
+        raise ValueError(
+            f"Invalid municipality key {explicit!r}; expected lowercase letters, digits, and underscores."
+        )
+    return explicit
+
+
 def run_text_command(pdf: Path, first_page: int, last_page: int) -> str:
     result = subprocess.run(
         ["pdftotext", "-f", str(first_page), "-l", str(last_page), "-layout", str(pdf), "-"],
@@ -305,7 +331,7 @@ def entity_for(record: PageRecord) -> str | None:
     return None
 
 
-def table_manifest(page_records: list[PageRecord], page_text: dict[int, str]) -> list[TableRecord]:
+def table_manifest(page_records: list[PageRecord], page_text: dict[int, str], table_id_prefix: str) -> list[TableRecord]:
     tables: list[TableRecord] = []
     for record in page_records:
         if not record.has_table and not record.has_project_profile:
@@ -316,7 +342,7 @@ def table_manifest(page_records: list[PageRecord], page_text: dict[int, str]) ->
         ttype = table_type(record, text)
         tables.append(
             TableRecord(
-                table_id=f"ctown_budget_2026_2027_p{record.page_number:03d}",
+                table_id=f"{table_id_prefix}_p{record.page_number:03d}",
                 page_start=record.page_number,
                 page_end=record.page_number,
                 title=record.title_guess or f"Page {record.page_number}",
@@ -344,10 +370,17 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--pdf", required=True, type=Path)
     parser.add_argument("--out", required=True, type=Path)
+    parser.add_argument("--fiscal-period", help="Fiscal period for generated IDs, formatted YYYY-YYYY.")
+    parser.add_argument(
+        "--municipality-key",
+        default="ctown",
+        help="Municipality key for generated IDs. Defaults to ctown.",
+    )
     args = parser.parse_args()
 
     pdf = args.pdf
     out_dir = args.out
+    table_id_prefix = f"{municipality_key(args.municipality_key)}_budget_{fiscal_period_slug(pdf, out_dir, args.fiscal_period)}"
     raw_dir = out_dir / "raw-pages"
     raw_dir.mkdir(parents=True, exist_ok=True)
 
@@ -360,7 +393,7 @@ def main() -> None:
         (raw_dir / f"page-{page:03d}.txt").write_text(text + "\n", encoding="utf-8")
         records.append(classify_page(page, text))
 
-    tables = table_manifest(records, page_text)
+    tables = table_manifest(records, page_text, table_id_prefix)
     inventory_payload = {
         "schema_version": 1,
         "source_pdf": str(pdf.as_posix()),

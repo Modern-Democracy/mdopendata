@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import re
+import argparse
 from pathlib import Path
 
 
@@ -29,6 +31,18 @@ def write(path: Path, payload: object) -> None:
     path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
+def municipality_key(value: str) -> str:
+    if not re.fullmatch(r"[a-z][a-z0-9_]*", value):
+        raise ValueError(f"Invalid municipality key {value!r}; expected lowercase letters, digits, and underscores.")
+    return value
+
+
+def table_id_prefix(municipality: str, document_key: str) -> str:
+    if not re.fullmatch(r"20\d{2}-20\d{2}", document_key):
+        raise ValueError(f"Invalid document key {document_key!r}; expected YYYY-YYYY.")
+    return f"{municipality}_budget_{document_key.replace('-', '_')}"
+
+
 def line_count(path: Path) -> int:
     return sum(1 for line in path.read_text(encoding="utf-8").splitlines() if line.strip())
 
@@ -43,10 +57,19 @@ def ensure_page_text(document_dir: Path, page: int) -> None:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--municipality-key",
+        default="ctown",
+        help="Municipality key for generated IDs. Defaults to ctown.",
+    )
+    args = parser.parse_args()
+    municipality = municipality_key(args.municipality_key)
     review = load(REVIEW)
     changes = []
     for document in review["documents"]:
         document_key = document["document_key"]
+        table_prefix = table_id_prefix(municipality, document_key)
         document_dir = BASE / document_key
         table_manifest_path = document_dir / "table_manifest.json"
         page_inventory_path = document_dir / "page_inventory.json"
@@ -78,7 +101,7 @@ def main() -> int:
             table_type = TABLE_TYPE_BY_FAMILY[record["table_family"]]
             tables.append(
                 {
-                    "table_id": f"ctown_budget_2026_2027_p{page:03d}",
+                    "table_id": f"{table_prefix}_p{page:03d}",
                     "page_start": page,
                     "page_end": page,
                     "title": record["table_key"],

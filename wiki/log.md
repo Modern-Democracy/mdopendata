@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use this heading format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-07-09] fix | Budget raw identity contract
+
+Audited budget scripts for hardcoded `ctown` and `2026_2027` identifier stems. Parameterized raw artifact generation so first-pass extraction and Week 5 supplemental raw coverage use a configurable municipality key with document-derived fiscal-period stems; documented that remaining `ctown_budget_2026_2027` constants are document-specific normalization, reconciliation, validation, and test controls pending the deferred budget ingestion refactor.
+
 ## [2026-07-09] implementation | Normalized import Phase 5 dry-run importer
 
 Implemented `normalized-full-1`, a dry-run-capable full normalized importer for the 2026/2027 manifest and reconciliation catalogue. Two consecutive dry runs produced the same plan hash, rolled back successfully, left zero persisted normalized-full batches, and kept publication snapshots at zero. The dry-run plan covers 2,165 facts, 2,165 fact-source links, 161 reconciliations, one review issue, capital/debt links, and profile extension events. Gate 6 is ready for review.

@@ -45,9 +45,10 @@ The 2025/2026 and 2024/2025 documents already show useful variation:
 
 | Area | Current state | Refactor direction |
 | --- | --- | --- |
-| PDF profiling | Scripted and mostly reusable, but Charlottetown-named and family heuristics are embedded. | Promote to configurable budget PDF profiler with municipality/document metadata inputs. |
+| PDF profiling | Scripted and mostly reusable, but Charlottetown-named and family heuristics are embedded. `extract-charlottetown-budget-first-pass.py` now accepts `--municipality-key` and derives the fiscal-period stem for raw table IDs. | Promote to configurable budget PDF profiler with municipality/document metadata inputs. |
 | Raw rows and values | `extract-charlottetown-budget-raw-rows.py` already accepts manifest, raw page, and output paths. | Extract shared parser functions for rows, values, aligned-column recovery, value states, and summaries. |
-| Raw database sync | Current sync scripts are tied to document directories and importer versions. | Parameterize document key, source hash, source metadata, manifest path, and raw version. |
+| Raw coverage repair | `resolve-budget-week5-raw-coverage-blockers.py` is Charlottetown-specific but now generates supplemental table IDs from `--municipality-key` and each document key, instead of reusing the 2026/2027 stem. | Fold this behavior into reusable raw coverage tooling with source metadata inputs and explicit review provenance. |
+| Raw database sync | Current sync scripts are tied to document directories and importer versions. | Parameterize document key, municipality key, source hash, source metadata, manifest path, and raw version. |
 | Normalization artifacts | `build-budget-2026-normalization-artifacts.py` is strongly document-specific. | Keep semantic mappings as document review artifacts and use shared builders only after template fit is proven. |
 | Manifest generation | `build-budget-2026-normalized-manifest.py` has reusable shape but hard-coded periods, counts, aliases, and source hash. | Convert to manifest builder driven by approved document mapping packages. |
 | Reconciliation | Reconciliation code mixes generic formulas with 2026/2027 named checks. | Separate formula engine and tolerance handling from document-specific check catalogue. |
@@ -70,6 +71,7 @@ The 2025/2026 and 2024/2025 documents already show useful variation:
 
 ## Document-Specific Inputs To Isolate
 
+- municipality key used in raw IDs, such as `ctown`, and the authoritative municipality record it maps to
 - source document metadata, PDF path, SHA-256 hash, page count, document kind, and title
 - fiscal-period source labels, fiscal dates, and amount-type roles
 - page ranges, section keys, and section titles
@@ -88,6 +90,7 @@ The 2025/2026 and 2024/2025 documents already show useful variation:
 
 | Lesson area | Evidence to add while working |
 | --- | --- |
+| Raw identity contract | Confirm every generated table, row, and value ID uses `<municipality_key>_budget_<fiscal_period_slug>` and that prior-year artifacts do not reuse the 2026/2027 stem. |
 | Continuation review | Which section grouping rules repeated from 2026/2027 and which changed. |
 | Fiscal periods | Exact raw labels that map to fiscal periods and amount types. |
 | Capital aliases | Cross-year project labels that map cleanly, split, merge, or remain unmatched. |
@@ -112,6 +115,7 @@ The 2025/2026 and 2024/2025 documents already show useful variation:
 
 | Item | Status | Notes |
 | --- | --- | --- |
+| Audit remaining hardcoded budget identifiers | Started | Current scan found expected 2026/2027 constants in document-specific normalization, reconciliation, validation, and test scripts; reusable raw artifact generation has been parameterized for municipality key and fiscal period. |
 | Define document mapping package schema | Deferred | Should wait for prior-year mapping artifacts. |
 | Extract raw parser module | Deferred | Low risk, but prior-year raw coverage should finish first. |
 | Convert manifest builder to config input | Deferred | Needs 25/26 and 24/25 manifest lessons. |

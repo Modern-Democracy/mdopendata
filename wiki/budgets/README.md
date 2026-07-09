@@ -58,6 +58,8 @@ The [prior-year normalized import gap report](./prior-year-normalized-import-gap
 ## Decisions
 
 - Fiscal periods are modeled with dates and source labels. The product must not relabel municipal fiscal periods as calendar years.
+- Raw table, row, and value IDs use the contract `<municipality_key>_budget_<fiscal_period_slug>_pNNN`, with rows and values extending the same stem as `_rNNN` and `_vNN`. For Charlottetown the current municipality key is `ctown`, and fiscal-period slugs use underscores, for example `ctown_budget_2024_2025_p014`.
+- Budget extraction scripts that generate reusable raw artifacts must accept or derive the municipality key and fiscal period instead of hard-coding `ctown` or `2026_2027`. Document-specific 2026/2027 normalization, reconciliation, import, validation, and test scripts may retain `ctown_budget_2026_2027` controls until they are refactored behind approved mapping packages.
 - Reported values and derived values remain distinguishable.
 - Cross-municipality comparisons require approved normalized categories and visible coverage differences.
 - Raw source labels, cells, table structure, and page coordinates remain available for audit.
