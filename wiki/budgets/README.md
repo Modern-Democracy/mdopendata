@@ -3,7 +3,7 @@ type: index
 tags:
   - budget
   - municipal-portal
-updated: 2026-07-07
+updated: 2026-07-09
 ---
 
 This section defines the municipal budget ingestion, data, API, user-interface, and delivery contracts.
@@ -31,6 +31,10 @@ Charlottetown is the prototype municipality. The initial source set is the three
 | [2026/2027 normalized import Phase 1 decisions](./2026-normalized-import-phase-1-decisions.md) | Proposed manifest protocol, identity rules, inventories, vocabulary mappings, coexistence rule, and Gate 1/2 decisions. |
 | [2026/2027 normalized import Phase 2 status](./2026-normalized-import-phase-2-status.md) | Deterministic manifest counts, Gate 3 evidence, and blocking capital-profile alias review. |
 | [2026/2027 normalized import Phase 3 status](./2026-normalized-import-phase-3-status.md) | Source-cell provenance results and stale raw-database cell blocker for Gate 4. |
+| [2026/2027 normalized import Phase 4 status](./2026-normalized-import-phase-4-status.md) | Reconciliation catalogue coverage, input resolution, exclusions, and Gate 5 readiness. |
+| [2026/2027 normalized import Phase 5 status](./2026-normalized-import-phase-5-status.md) | Dry-run importer mode, deterministic plan evidence, rollback proof, and Gate 6 readiness. |
+| [2026/2027 normalized import Phase 6 status](./2026-normalized-import-phase-6-status.md) | Controlled import evidence, idempotence rerun, accepted exception, and Gate 7 readiness. |
+| [2026/2027 normalized import Phase 7 status](./2026-normalized-import-phase-7-status.md) | Source-fidelity QA, review-decision resolution, representative exclusion, and Gate 8 readiness. |
 | [Vehicle Equipment clarification draft](./2026-vehicle-equipment-clarification-draft.md) | Draft request about the Police project profile missing from the approved capital schedule. |
 
 ## Current Evidence

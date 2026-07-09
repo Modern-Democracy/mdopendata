@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "phase": 7,
+  "status": "pass",
+  "source_sha256": "d926634427e80aa2b06b6425bdbb117424fe53567ae344980cd10791f8e39bac",
+  "counts": {
+    "manifest_facts": 2165,
+    "database_facts_matched_by_key": 2165,
+    "non_manifest_same_document_facts": 0,
+    "manifest_fact_sources": 2165,
+    "database_fact_source_links_for_manifest": 2165,
+    "reconciliation_records": 161,
+    "review_issues": 1,
+    "manifest_review_issues": 1,
+    "non_manifest_review_issues": 0,
+    "publication_snapshots": 0
+  },
+  "representative_disposition": {
+    "status": "test_only_excluded_from_phase_7_publication_candidate",
+    "non_manifest_same_document_fact_count": 0,
+    "non_manifest_same_document_review_issue_count": 0,
+    "open_high_or_critical_non_manifest_review_issue_count": 0,
+    "requires_retirement_before_publication_snapshot": true
+  },
+  "family_stratified_results": {
+    "capital": {
+      "facts": 246,
+      "source_links": 246,
+      "reconciliation_checks": 36,
+      "mismatches": 0
+    },
+    "debt": {
+      "facts": 33,
+      "source_links": 33,
+      "reconciliation_checks": 3,
+      "mismatches": 0
+    },
+    "operating": {
+      "facts": 1886,
+      "source_links": 1886,
+      "reconciliation_checks": 122,
+      "mismatches": 0
+    }
+  },
+  "value_state_counts": {
+    "dash_unresolved": 41,
+    "reported": 2124
+  },
+  "dash_zero_preservation": {
+    "dash_unresolved_fact_count": 41,
+    "dash_source_link_count": 41,
+    "dash_raw_values": {
+      "-": 40,
+      "- -": 1
+    },
+    "numeric_zero_substitution_in_database": false
+  },
+  "unit_counts": {
+    "cad": 2150,
+    "cad_per_100_assessed": 8,
+    "cad_per_cubic_metre": 2,
+    "cad_per_day": 2,
+    "cad_per_year": 3
+  },
+  "amount_type_counts": {
+    "actual": 15,
+    "balance": 11,
+    "budget": 1419,
+    "forecast": 452,
+    "funding_deduction": 11,
+    "gross": 222,
+    "interest": 11,
+    "net": 13,
+    "principal": 11
+  },
+  "aggregation_role_counts": {
+    "detail": 717,
+    "non_additive": 325,
+    "subtotal": 27,
+    "total": 94
+  },
+  "reconciliation_summary": {
+    "total": 161,
+    "passed": 160,
+    "failed": 1,
+    "accepted_failures": [
+      {
+        "check_key": "debt_total:balance",
+        "check_type": "debt_total:balance",
+        "difference": "-2",
+        "status": "source_document_discrepancy"
+      }
+    ]
+  },
+  "open_issue_register": [
+    {
+      "review_key": "reconciliation:debt_total:balance",
+      "issue_code": "reported_calculation_variance",
+      "severity": "high",
+      "status": "resolved",
+      "publication_effect": "Block publication unless shown as an approved source discrepancy."
+    }
+  ],
+  "mismatch_counts": {
+    "fact": 0,
+    "source_fidelity": 0,
+    "reconciliation": 0,
+    "review_issue": 0,
+    "open_high_or_critical_issue": 0,
+    "open_high_or_critical_non_manifest_issue": 0
+  },
+  "mismatches": {
+    "fact": [],
+    "source_fidelity": [],
+    "reconciliation": [],
+    "review_issue": [],
+    "open_high_or_critical_issue": [],
+    "open_high_or_critical_non_manifest_issue": []
+  },
+  "gate_8_readiness": {
+    "ready": true,
+    "publication_eligible_after_gate_8_approval": true,
+    "publication_authorized": false
+  }
+}

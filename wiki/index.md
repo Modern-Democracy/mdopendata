@@ -3,7 +3,7 @@ type: index
 tags:
   - wiki
   - catalog
-updated: 2026-07-08
+updated: 2026-07-09
 ---
 
 This page catalogs the root wiki structure and links to active project wiki areas.
@@ -90,6 +90,10 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [2026/2027 normalized import Phase 1 decisions](./budgets/2026-normalized-import-phase-1-decisions.md) | Manifest, identity, coexistence, vocabulary, and schema-seed proposals for approval Gates 1 and 2. |
 | [2026/2027 normalized import Phase 2 status](./budgets/2026-normalized-import-phase-2-status.md) | Generated manifest evidence and unresolved capital-profile aliases blocking Gate 3. |
 | [2026/2027 normalized import Phase 3 status](./budgets/2026-normalized-import-phase-3-status.md) | File and database provenance validation results for Gate 4. |
+| [2026/2027 normalized import Phase 4 status](./budgets/2026-normalized-import-phase-4-status.md) | Reconciliation catalogue coverage, input resolution, exclusions, and Gate 5 readiness. |
+| [2026/2027 normalized import Phase 5 status](./budgets/2026-normalized-import-phase-5-status.md) | Dry-run importer mode, deterministic plan evidence, rollback proof, and Gate 6 readiness. |
+| [2026/2027 normalized import Phase 6 status](./budgets/2026-normalized-import-phase-6-status.md) | Controlled import evidence, idempotence rerun, accepted exception, and Gate 7 readiness. |
+| [2026/2027 normalized import Phase 7 status](./budgets/2026-normalized-import-phase-7-status.md) | Source-fidelity QA, review-decision resolution, representative exclusion, and Gate 8 readiness. |
 | [Vehicle Equipment clarification draft](./budgets/2026-vehicle-equipment-clarification-draft.md) | Draft request concerning the Police Vehicle Equipment profile and approved schedule discrepancy. |
 | [Release help and MCP plan](./implementation/release-help-and-mcp-plan.md) | Implementation pattern for release-facing contextual help, the `help` schema, web help APIs, and the repo-local `mdopendata-mcp` package. |
 | [Agenda package ingestion contract](./implementation/agenda-package-ingestion-contract.md) | Package JSON, logical-document ordering, agenda-item binding, template discovery, and approval gates. |

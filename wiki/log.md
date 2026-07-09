@@ -3,7 +3,7 @@ type: log
 tags:
   - wiki
   - log
-updated: 2026-07-08
+updated: 2026-07-09
 ---
 
 This page is the append-only chronological record for root wiki changes, ingests, substantive queries, and lint passes.
@@ -14,9 +14,17 @@ Append new entries in reverse chronological order. Use this heading format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-07-09] implementation | Normalized import Phase 5 dry-run importer
+
+Implemented `normalized-full-1`, a dry-run-capable full normalized importer for the 2026/2027 manifest and reconciliation catalogue. Two consecutive dry runs produced the same plan hash, rolled back successfully, left zero persisted normalized-full batches, and kept publication snapshots at zero. The dry-run plan covers 2,165 facts, 2,165 fact-source links, 161 reconciliations, one review issue, capital/debt links, and profile extension events. Gate 6 is ready for review.
+
 ## [2026-07-08] implementation | Append-only budget full-2 raw import
 
 Created a pre-import database dump, dry-ran and applied an append-only `full-2` import containing 114 source tables, 3,233 rows, and 3,092 value cells, and repointed the normalized manifest. PostgreSQL validation resolved all 2,165 fact-source links with zero token or numeric mismatches and zero publication snapshots. Gate 4 is approved; immutable `full-1` records remain unchanged.
+
+## [2026-07-08] implementation | Normalized import Phase 4 reconciliation design
+
+Generated the full-document reconciliation catalogue for the 2026/2027 normalized import manifest. The catalogue contains 161 exact fact-key checks, 160 passes, one source-document discrepancy, zero unresolved inputs, and zero adjacent-block exclusions. Dashes are treated as zero for reconciliation arithmetic, page 110 uses title-scoped city, water/sewer, and combined net checks, Civic Centre/Public Works nested totals use explicit component checks, and page 22 totals reconcile as a continued page 21/22 table. Gate 5 is ready for review; no database writes or publication snapshots were created.
 
 ## [2026-07-08] implementation | Normalized import Phase 3 provenance validation
 
@@ -431,3 +439,15 @@ Added a project-wide engineering contract requiring full-document recurrence aud
 ## [2026-07-08] implementation | Reusable departmental budget mapping
 
 Applied the shared departmental operating mapper to nine equivalent sections covering Environment, Finance, Fire, Human Resources, Mayor and Council, Parks, Planning, Police, and Water and Sewer. Approved 249 authoritative lines, 747 facts, and 209 supporting breakdown rows. Public Works was excluded because an unlabeled three-period row on page 87 violates the mapper's source-label invariant.
+
+## [2026-07-09] implementation | Budget normalized controlled import
+
+Applied Charlottetown 2026/2027 normalized importer version `normalized-full-1` after Gate 6 approval. Created pre-import backup `backups/database/mdopendata-before-budget-normalized-full-20260709.dump`, completed import batches `17` and `18`, verified the second run produced zero added events, retained zero publication snapshots, and documented Gate 7 readiness in the budget wiki.
+
+## [2026-07-09] qa | Budget normalized source-fidelity completion
+
+Ran Phase 7 QA for the Charlottetown 2026/2027 full normalized budget dataset. Verified 2,165 manifest facts, 2,165 source links, 161 reconciliations, family-stratified zero mismatches, dash preservation, and zero publication snapshots. Recorded the approved $2 debt discrepancy review decision, excluded 19 representative-spike facts from the publication candidate, and documented Gate 8 readiness without authorizing publication.
+
+## [2026-07-09] cleanup | Budget representative normalized spike removal
+
+Removed test-only representative-spike normalized records from the 2026/2027 same-document budget scope: 19 facts, 21 fact-source links, 16 line items, four statements, six document periods, seven reconciliations, three review issues, and three review-issue evidence rows. Reran Phase 7 QA and confirmed 2,165 manifest facts, zero non-manifest same-document facts, one manifest review issue, and zero publication snapshots.

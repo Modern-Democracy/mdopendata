@@ -1,0 +1,110 @@
+{
+  "phase": 6,
+  "status": "controlled_import_complete",
+  "verified_at": "2026-07-09",
+  "importer_version": "normalized-full-1",
+  "backup": "backups/database/mdopendata-before-budget-normalized-full-20260709.dump",
+  "backup_size_bytes": 109157546,
+  "source_sha256": "d926634427e80aa2b06b6425bdbb117424fe53567ae344980cd10791f8e39bac",
+  "import_batches": [
+    {
+      "id": 17,
+      "status": "completed",
+      "event_counts": {
+        "added": 6523,
+        "unchanged": 7,
+        "review_needed": 1
+      }
+    },
+    {
+      "id": 18,
+      "status": "completed",
+      "event_counts": {
+        "unchanged": 6530,
+        "review_needed": 1
+      }
+    }
+  ],
+  "second_run_record_events": {
+    "capital_project": {
+      "unchanged": 169
+    },
+    "capital_project_alias": {
+      "unchanged": 173
+    },
+    "capital_project_fact": {
+      "unchanged": 192
+    },
+    "capital_project_profile": {
+      "unchanged": 120
+    },
+    "capital_project_profile_exception": {
+      "review_needed": 1
+    },
+    "debt_fact": {
+      "unchanged": 30
+    },
+    "debt_instrument": {
+      "unchanged": 10
+    },
+    "document_period": {
+      "unchanged": 128
+    },
+    "fact": {
+      "unchanged": 2165
+    },
+    "fact_source": {
+      "unchanged": 2165
+    },
+    "fiscal_period": {
+      "unchanged": 3
+    },
+    "line_item": {
+      "unchanged": 1163
+    },
+    "measure_unit": {
+      "unchanged": 3
+    },
+    "organization_unit": {
+      "unchanged": 13
+    },
+    "reconciliation_result": {
+      "unchanged": 161
+    },
+    "reporting_entity": {
+      "unchanged": 4
+    },
+    "review_issue": {
+      "unchanged": 1
+    },
+    "statement": {
+      "unchanged": 30
+    }
+  },
+  "keyed_database_counts": {
+    "source_documents": 1,
+    "source_tables": 85,
+    "statements": 30,
+    "line_items": 1163,
+    "capital_projects": 169,
+    "capital_project_profile_rows": 120,
+    "capital_project_facts": 192,
+    "debt_instruments": 10,
+    "debt_facts": 30,
+    "reconciliations": 161,
+    "review_issues": 1,
+    "publication_snapshots": 0
+  },
+  "accepted_exception": {
+    "check_type": "debt_total:balance",
+    "calculated_value": "39008541.0000",
+    "reported_value": "39008543.0000",
+    "difference": "-2.0000",
+    "passed": false,
+    "classification": "source_document_discrepancy"
+  },
+  "gate_7_readiness": {
+    "ready": true,
+    "reason": "Controlled import completed, idempotent rerun produced no duplicate logical inserts, publication snapshots remain absent, and the only failed reconciliation is the approved source-document discrepancy."
+  }
+}

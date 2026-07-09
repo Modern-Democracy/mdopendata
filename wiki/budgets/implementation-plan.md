@@ -4,7 +4,7 @@ tags:
   - budget
   - implementation-plan
   - testing
-updated: 2026-07-07
+updated: 2026-07-09
 ---
 
 This page defines the estimated implementation sequence and test gates for the Charlottetown budget prototype.
@@ -39,6 +39,14 @@ Representative materialization completed on 2026-07-07 with 408 rows, 837 cells,
 Week 3 completed on 2026-07-07 with the `budget` migration, constraints, views, regression controls, reviewed representative mapping, and idempotent representative importer.
 
 Week 4 full raw ingestion completed on 2026-07-07 for all 154 pages, 114 first-pass tables, 3,233 rows, and 2,420 values. The canonical review reconciles these with 116 profile candidates and records 63 continuation decisions. Normalized completion remains review-blocked for 112 candidates; three standalone candidates are approved for normalization and one overview is a duplicate summary. No publication snapshot exists.
+
+Normalized import Phase 4 reached Gate 5 review readiness on 2026-07-08. The [Phase 4 status](./2026-normalized-import-phase-4-status.md) records 161 exact fact-key reconciliation checks, 160 passes, one source-document discrepancy, zero unresolved inputs, and zero excluded adjacent-block candidates.
+
+Normalized import Phase 5 reached Gate 6 review readiness on 2026-07-09. The [Phase 5 status](./2026-normalized-import-phase-5-status.md) records importer version `normalized-full-1`, deterministic dry-run plan hash `5FFB51AA0977CA1A218ED9236D64EFB134D3DB5143A325DEEA1094643FD19176`, rollback proof, zero publication snapshots, and no persisted normalized-full import batch after dry run.
+
+Normalized import Phase 6 completed on 2026-07-09 after Gate 6 approval. The [Phase 6 status](./2026-normalized-import-phase-6-status.md) records the pre-import backup, completed import batches `17` and `18`, idempotence rerun evidence with zero added records on the second run, keyed database counts, zero publication snapshots, and Gate 7 readiness.
+
+Normalized import Phase 7 reached Gate 8 review readiness on 2026-07-09 after Gate 7 approval. The [Phase 7 status](./2026-normalized-import-phase-7-status.md) records source-fidelity QA across 2,165 manifest facts and 2,165 source links, family-stratified zero-mismatch results, the approved debt discrepancy review decision, representative test-only cleanup, zero publication snapshots, and no publication authorization.
 
 ## Representative-Table Spike
 

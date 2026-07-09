@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "importer_version": "normalized-full-1",
+  "manifest_hash": "176bff6896125f00af095805e471d5681bdab20ef4b5221419f1f408f93335d4",
+  "reconciliation_hash": "48857c8064ad2eb28da309c818d6d3d302fcc3bd384bd516f54cf7de18b7a273",
+  "expected_counts": {
+    "source_documents": 1,
+    "source_tables": 85,
+    "reporting_entities": 4,
+    "organization_units": 13,
+    "fiscal_periods": 3,
+    "document_periods": 128,
+    "statements": 30,
+    "line_items": 1163,
+    "facts": 2165,
+    "fact_sources": 2165,
+    "capital_projects": 169,
+    "capital_project_aliases": 173,
+    "capital_project_profiles": 24,
+    "capital_project_facts": 192,
+    "debt_instruments": 10,
+    "debt_facts": 30,
+    "reconciliations": 161,
+    "review_issues": 1
+  },
+  "event_counts": [
+    {
+      "record_type": "capital_project",
+      "event_type": "unchanged",
+      "count": 169
+    },
+    {
+      "record_type": "capital_project_alias",
+      "event_type": "unchanged",
+      "count": 173
+    },
+    {
+      "record_type": "capital_project_fact",
+      "event_type": "unchanged",
+      "count": 192
+    },
+    {
+      "record_type": "capital_project_profile",
+      "event_type": "unchanged",
+      "count": 120
+    },
+    {
+      "record_type": "capital_project_profile_exception",
+      "event_type": "review_needed",
+      "count": 1
+    },
+    {
+      "record_type": "debt_fact",
+      "event_type": "unchanged",
+      "count": 30
+    },
+    {
+      "record_type": "debt_instrument",
+      "event_type": "unchanged",
+      "count": 10
+    },
+    {
+      "record_type": "document_period",
+      "event_type": "unchanged",
+      "count": 128
+    },
+    {
+      "record_type": "fact",
+      "event_type": "unchanged",
+      "count": 2165
+    },
+    {
+      "record_type": "fact_source",
+      "event_type": "unchanged",
+      "count": 2165
+    },
+    {
+      "record_type": "fiscal_period",
+      "event_type": "unchanged",
+      "count": 3
+    },
+    {
+      "record_type": "line_item",
+      "event_type": "unchanged",
+      "count": 1163
+    },
+    {
+      "record_type": "measure_unit",
+      "event_type": "unchanged",
+      "count": 3
+    },
+    {
+      "record_type": "organization_unit",
+      "event_type": "unchanged",
+      "count": 13
+    },
+    {
+      "record_type": "reconciliation_result",
+      "event_type": "unchanged",
+      "count": 161
+    },
+    {
+      "record_type": "reporting_entity",
+      "event_type": "unchanged",
+      "count": 4
+    },
+    {
+      "record_type": "review_issue",
+      "event_type": "unchanged",
+      "count": 1
+    },
+    {
+      "record_type": "statement",
+      "event_type": "unchanged",
+      "count": 30
+    }
+  ],
+  "publication_snapshot_count": 0
+}

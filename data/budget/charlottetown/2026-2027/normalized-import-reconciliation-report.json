@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "phase": 4,
+  "check_count": 161,
+  "passed_count": 160,
+  "review_count": 1,
+  "family_counts": {
+    "capital_gross_less_partner_funding": 7,
+    "capital_page_110_title_scoped_net": 6,
+    "continued_table_page_21_22_total": 3,
+    "debt_component_total": 3,
+    "explicit_source_component_sum": 7,
+    "revenue_less_expense": 6,
+    "segment_sum_to_reported_total": 129
+  },
+  "status_counts": {
+    "pass": 160,
+    "source_document_discrepancy": 1
+  },
+  "duplicate_check_keys": [],
+  "input_resolution": {
+    "unresolved_input_count": 0,
+    "unresolved_inputs": [],
+    "reported_fact_resolution_count": 161
+  },
+  "statement_family_coverage": {
+    "operating": [
+      "appendix-water-sewer-debt-statement",
+      "bell-aliant-operating-statement",
+      "city-government-statement",
+      "civic-centre-operating-statement",
+      "economic-tourism-culture-statement",
+      "environment-sustainability-transit-statement",
+      "finance-audit-fiscal-statement",
+      "operating-supporting-schedules-statement",
+      "parks-recreation-statement",
+      "planning-heritage-statement",
+      "police-services-statement",
+      "public-works-buildings-statement",
+      "water-sewer-operating-statement"
+    ],
+    "capital": [
+      "capital-page-110-capital",
+      "capital-page-111-capital",
+      "capital-page-117-capital",
+      "capital-page-120-capital",
+      "capital-page-122-capital",
+      "capital-page-123-capital",
+      "capital-page-127-capital",
+      "capital-page-133-capital",
+      "capital-page-134-capital",
+      "capital-page-135-capital",
+      "capital-page-144-capital",
+      "capital-page-146-capital",
+      "capital-page-147-capital"
+    ],
+    "debt": [
+      "appendix-water-sewer-debt-statement"
+    ]
+  },
+  "double_counting_exclusions": [
+    "supporting_breakdown/non_additive rows are excluded from adjacent segment sum checks",
+    "consolidated operating summary is excluded from segment checks until department-summary equivalence is approved",
+    "capital project profile narrative fields are excluded because they contain no financial fact operands"
+  ],
+  "candidate_exclusions": [],
+  "candidate_exclusion_count": 0,
+  "gate_5_ready": true
+}
