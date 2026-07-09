@@ -36,6 +36,10 @@ Charlottetown is the prototype municipality. The initial source set is the three
 | [2026/2027 normalized import Phase 6 status](./2026-normalized-import-phase-6-status.md) | Controlled import evidence, idempotence rerun, accepted exception, and Gate 7 readiness. |
 | [2026/2027 normalized import Phase 7 status](./2026-normalized-import-phase-7-status.md) | Source-fidelity QA, review-decision resolution, representative exclusion, and Gate 8 readiness. |
 | [Vehicle Equipment clarification draft](./2026-vehicle-equipment-clarification-draft.md) | Draft request about the Police project profile missing from the approved capital schedule. |
+| [Week 5 raw ingestion status](./week-5-raw-ingestion-status.md) | Raw database ingestion status for the 2025/2026 and 2024/2025 budget PDFs before normalized comparability approval. |
+| [Week 5 normalized mapping review](./week-5-normalized-mapping-review.md) | Prior-year normalized mapping review classifications, raw coverage blockers, and remaining approval gates. |
+| [Prior-year normalized import gap report](./prior-year-normalized-import-gap-report.md) | Step-through normalization, review, import, QA, and compatibility gates for 2025/2026 and 2024/2025. |
+| [Budget ingestion refactor tracker](./budget-ingestion-refactor-tracker.md) | Deferred refactor tracker for separating reusable budget ingestion code from document-specific mappings after prior-year completion. |
 
 ## Current Evidence
 
@@ -44,6 +48,12 @@ The first pass of the 2026/2027 PDF found 154 pages, 114 table or project-profil
 The existing artifacts are discovery inputs, not publishable normalized facts. Their page-granular manifests do not yet join continuation pages or reliably distinguish detail rows, headings, subtotals, deductions, and totals.
 
 Week 1 profiling is complete for all 392 pages. See the [three-year Charlottetown source profile](../charlottetown/sources/budget-three-year-source-profile.md) for the source-pattern matrix and representative schema-spike tables.
+
+Week 5 raw ingestion has appended the 2025/2026 and 2024/2025 source pages, tables, rows, and cells to the database, including supplemental raw coverage for prior raw-blocked pages. See the [Week 5 raw ingestion status](./week-5-raw-ingestion-status.md). Normalized cross-period comparability remains gated by document-specific mapping and review.
+
+Week 5 normalized mapping review has classified 114 profile candidates for 2025/2026 and 58 profile candidates for 2024/2025. See the [Week 5 normalized mapping review](./week-5-normalized-mapping-review.md). Normalized import remains blocked by document-specific mapping approvals.
+
+The [prior-year normalized import gap report](./prior-year-normalized-import-gap-report.md) defines the step-through gates for completing 2025/2026 and 2024/2025. The [budget ingestion refactor tracker](./budget-ingestion-refactor-tracker.md) records lessons to preserve while deferring generalization until the two prior-year imports are complete and tested against other budget documents.
 
 ## Decisions
 

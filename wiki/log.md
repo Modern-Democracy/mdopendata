@@ -451,3 +451,19 @@ Ran Phase 7 QA for the Charlottetown 2026/2027 full normalized budget dataset. V
 ## [2026-07-09] cleanup | Budget representative normalized spike removal
 
 Removed test-only representative-spike normalized records from the 2026/2027 same-document budget scope: 19 facts, 21 fact-source links, 16 line items, four statements, six document periods, seven reconciliations, three review issues, and three review-issue evidence rows. Reran Phase 7 QA and confirmed 2,165 manifest facts, zero non-manifest same-document facts, one manifest review issue, and zero publication snapshots.
+
+## [2026-07-09] implementation | Budget Week 5 raw ingestion
+
+Generated first-pass manifests, raw page text, raw table rows, and value-token artifacts for the 2025/2026 and 2024/2025 Charlottetown budget PDFs. Appended full-2 raw database records for 150 2025/2026 pages, 110 tables, 3,711 rows, 4,811 values, and 88 2024/2025 pages, 44 tables, 1,200 rows, 1,352 values. Confirmed zero publication snapshots and documented that normalized comparability remains gated by document-specific mapping review.
+
+## [2026-07-09] analysis | Budget Week 5 normalized mapping review
+
+Generated the prior-year normalized mapping review artifact for 2025/2026 and 2024/2025. Classified 34 2025/2026 and 17 2024/2025 candidates as baseline-equivalent review inputs; recorded 76 and 27 review-blocked candidates and 4 and 14 raw-blocked candidates respectively. Documented that prior-year normalized import remains blocked by raw coverage gaps and document-specific mapping approvals.
+
+## [2026-07-09] fix | Budget Week 5 raw coverage blockers
+
+Resolved prior-year budget raw coverage blockers by adding supplemental full-2 raw table coverage for 2025/2026 pages 14-17 and 2024/2025 pages 14-16, 62-63, and 78-86. Appended 4 source tables, 160 rows, and 280 values for 2025/2026, plus 14 source tables, 501 rows, and 637 values for 2024/2025. Rebuilt the Week 5 normalized mapping review with zero raw-blocked candidates and zero publication snapshots.
+
+## [2026-07-09] planning | Prior-year budget normalization and refactor tracking
+
+Added a prior-year normalized import gap report for completing the 2025/2026 and 2024/2025 budget normalization, import, reconciliation, QA, and compatibility gates. Added a deferred budget ingestion refactor tracker to preserve lessons from prior-year completion before generalizing the 2026/2027 scripts across other budget documents.

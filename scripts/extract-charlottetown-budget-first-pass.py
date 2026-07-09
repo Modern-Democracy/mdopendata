@@ -171,6 +171,10 @@ def classify_page(page: int, text: str) -> PageRecord:
         for signal in [
             "2025/2026",
             "2026/2027",
+            "2023/2024",
+            "2024/2025",
+            "2023/24",
+            "2024/25",
             "2025/26",
             "2026/27",
             "Budget",
@@ -244,8 +248,20 @@ def observed_columns(text: str, content_type: str) -> list[str]:
         return ["rate_label", "rate_or_amount"]
     if "2025/2026" in text and "Forecast" in text and "2026/2027" in text:
         return ["item", "2025_2026_budget", "2025_2026_forecast", "2026_2027_budget"]
+    if "2024/2025" in text and "Forecast" in text and "2025/2026" in text:
+        return ["item", "2024_2025_budget", "2024_2025_forecast", "2025_2026_budget"]
+    if "2023/2024" in text and "Forecast" in text and "2024/2025" in text:
+        return ["item", "2023_2024_budget", "2023_2024_forecast", "2024_2025_budget"]
     if "2025/26" in text and "Forecast" in text and "2026/27" in text:
         return ["item", "2025_2026_budget", "2025_2026_forecast", "2026_2027_budget"]
+    if "2024/25" in text and "Forecast" in text and "2025/26" in text:
+        return ["item", "2024_2025_budget", "2024_2025_forecast", "2025_2026_budget"]
+    if "2023/24" in text and "Forecast" in text and "2024/25" in text:
+        return ["item", "2023_2024_budget", "2023_2024_forecast", "2024_2025_budget"]
+    if "2024/25" in text and "2025/26" in text:
+        return ["item", "2024_2025_capital_budget", "2025_2026_capital_budget"]
+    if "2023/24" in text and "2024/25" in text:
+        return ["item", "2023_2024_capital_budget", "2024_2025_capital_budget"]
     if "2025/26" in text and "2026/27" in text:
         return ["item", "2025_2026_capital_budget", "2026_2027_capital_budget"]
     if "Budget" in text and "Variance" in text:

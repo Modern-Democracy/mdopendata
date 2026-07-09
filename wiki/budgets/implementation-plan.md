@@ -48,6 +48,10 @@ Normalized import Phase 6 completed on 2026-07-09 after Gate 6 approval. The [Ph
 
 Normalized import Phase 7 reached Gate 8 review readiness on 2026-07-09 after Gate 7 approval. The [Phase 7 status](./2026-normalized-import-phase-7-status.md) records source-fidelity QA across 2,165 manifest facts and 2,165 source links, family-stratified zero-mismatch results, the approved debt discrepancy review decision, representative test-only cleanup, zero publication snapshots, and no publication authorization.
 
+Week 5 raw ingestion started on 2026-07-09 for the 2025/2026 and 2024/2025 documents. The [Week 5 raw ingestion status](./week-5-raw-ingestion-status.md) records appended database raw records for 150 2025/2026 pages, 114 full-2 tables, 3,871 rows, and 5,182 detected values, plus 88 2024/2025 pages, 58 full-2 tables, 1,701 rows, and 2,019 detected values. Prior-year normalized facts, restatement handling, project aliases, and compatibility records remain gated by document-specific mapping review.
+
+Week 5 normalized mapping review on 2026-07-09 classified 36 2025/2026 candidates and 21 2024/2025 candidates as baseline-equivalent review inputs, while leaving 78 2025/2026 and 37 2024/2025 candidates review-blocked and zero raw-blocked candidates. The [Week 5 normalized mapping review](./week-5-normalized-mapping-review.md) records that normalized prior-year import is not ready.
+
 ## Representative-Table Spike
 
 The schema gate must use these 2026/2027 layouts:
