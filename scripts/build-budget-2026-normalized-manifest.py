@@ -72,7 +72,7 @@ def canonical_hash(value: object) -> str:
 def main() -> int:
     values = {x["value_id"]: x for x in load(BASE / "raw-tables/source_values.json")["records"]}
     candidates = {x["canonical_key"]: x for x in load(BASE / "canonical-table-inventory.json")["records"]}
-    rows, profiles, instruments = [], [], []
+    rows, profiles, instruments, statement_relationships = [], [], [], []
 
     def add(section: str, row: dict, fact_list: list[dict], entity: str | None = None,
             statement_key: str | None = None, extension: dict | None = None) -> None:
@@ -82,8 +82,18 @@ def main() -> int:
     for path in sorted(NORM.glob("*-row-mapping.json")):
         data = load(path); section = data["section_key"]
         if "summary_rows" in data:
-            for row in data["summary_rows"]: add(section, row, row["facts"])
-            for row in data.get("supporting_rows", []): add(section, row, [row])
+            summary_statement_key = f"{section}-statement"
+            detail_statement_key = f"{section}-detail-statement"
+            for row in data["summary_rows"]:
+                add(section, row, row["facts"], statement_key=summary_statement_key)
+            for row in data.get("supporting_rows", []):
+                add(section, row, [row], statement_key=detail_statement_key)
+            if data.get("supporting_rows"):
+                statement_relationships.append({
+                    "parent_statement_key": summary_statement_key,
+                    "child_statement_key": detail_statement_key,
+                    "relationship_type": "summary_detail",
+                })
         elif path.name == "bell-aliant-department-row-mapping.json":
             for page in data["pages"]:
                 for row in page["rows"]: add(section, row, row["facts"])
@@ -235,6 +245,21 @@ def main() -> int:
             unresolved_profiles.append(profile["key"])
             profile["capital_project_keys"] = []
 
+    statement_keys = set(statements)
+    for relationship in statement_relationships:
+        if relationship["parent_statement_key"] not in statement_keys:
+            raise ValueError(f"Missing relationship parent statement: {relationship}")
+        if relationship["child_statement_key"] not in statement_keys:
+            raise ValueError(f"Missing relationship child statement: {relationship}")
+        if relationship["parent_statement_key"] == relationship["child_statement_key"]:
+            raise ValueError(f"Statement relationship cannot self-reference: {relationship}")
+    relationship_keys = {
+        (x["parent_statement_key"], x["child_statement_key"], x["relationship_type"])
+        for x in statement_relationships
+    }
+    if len(relationship_keys) != len(statement_relationships):
+        raise ValueError("Duplicate statement relationship")
+
     manifest = {
         "manifest_metadata": {"schema_version": 1, "document_key": DOCUMENT_KEY, "status": "gate_3_review",
                               "generator": "build-budget-2026-normalized-manifest.py"},
@@ -250,7 +275,8 @@ def main() -> int:
         "fiscal_periods": [{"key": k, "start_date": v[0], "end_date": v[1], "period_kind": v[2]} for k, v in PERIODS.items()],
         "document_periods": sorted(document_periods.values(), key=lambda x: x["key"]),
         "statements": sorted(statements.values(), key=lambda x: x["key"]),
-        "statement_relationships": [],
+        "statement_relationships": sorted(statement_relationships, key=lambda x: (
+            x["parent_statement_key"], x["child_statement_key"], x["relationship_type"])),
         "line_items": sorted(line_items, key=lambda x: x["key"]),
         "facts": sorted(facts, key=lambda x: x["key"]),
         "fact_sources": sorted(fact_sources, key=lambda x: x["key"]),

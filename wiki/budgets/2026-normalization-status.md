@@ -43,7 +43,7 @@ Current dispositions are 112 `normalize`, three `duplicate_summary`, and one `no
 
 ## Relationship Verification
 
-The 2026/2027 departmental operating row mappings preserve the overview/detail presentation pattern through `summary_candidate_keys`, `supporting_candidate_keys`, `summary_rows`, and `supporting_rows`. The generated manifest does not yet materialize those relationships as explicit `statement_relationship` records; `statement_relationships` is currently zero in `normalized-import-manifest.json`. Follow-up normalization work should emit explicit summary/detail relationships so the 2026/2027 structure matches the new prior-year Phase 1 relationship artifact contract.
+The 2026/2027 departmental operating row mappings preserve the overview/detail presentation pattern through `summary_candidate_keys`, `supporting_candidate_keys`, `summary_rows`, and `supporting_rows`. The generated manifest now materializes 12 explicit `summary_detail` statement relationships. Each relationship connects a reviewed overview statement to a distinct supporting-detail statement, preserving the 1,163 mapped lines and 2,165 facts while preventing summary/detail double counting.
 
 ## Required Next Review
 

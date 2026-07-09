@@ -503,3 +503,7 @@ Patched the prior-year Phase 1 generator to emit `operating-detail-relationship-
 ## [2026-07-09] qa | 2026/2027 operating relationship verification
 
 Verified the 2026/2027 departmental operating normalization against the overview/detail pattern. The row-mapping artifacts preserve overview pages as `summary_candidate_keys` and detail pages as `supporting_candidate_keys`, with detail rows marked `supporting_breakdown`; however, the normalized import manifest currently has zero `statement_relationships`, so explicit summary/detail relationship records remain a follow-up normalization gap.
+
+## [2026-07-09] generation | 2026/2027 explicit summary-detail statements
+
+Patched the 2026/2027 normalized manifest generator to create distinct supporting-detail statements and 12 deterministic `summary_detail` relationship records for reviewed departmental overview/detail mappings. Regeneration preserved all 1,163 mapped lines and 2,165 facts while increasing the statement count from 30 to 42.
