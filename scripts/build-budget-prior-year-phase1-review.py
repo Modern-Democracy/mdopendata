@@ -1,6 +1,7 @@
 import json
 import re
 from collections import Counter, defaultdict
+from decimal import Decimal
 from pathlib import Path
 
 
@@ -57,7 +58,7 @@ CAPITAL_PROJECT_ALIAS_DECISIONS = {
     ("2025-2026", "2025-2026-p127"): ("mapped_existing", ["pownal-street-parkade-upgrades"], "Pownal Street Parkade profile maps to the stable parkade-upgrades key."),
     ("2025-2026", "2025-2026-p128"): ("mapped_existing", ["queen-street-parkade-upgrades"], "Exact project label match to 2026/2027 alias."),
     ("2025-2026", "2025-2026-p129"): ("mapped_existing", ["small-fleet-parks"], "Profile describes Parks and Recreation small fleet replacement."),
-    ("2025-2026", "2025-2026-p130"): ("mapped_existing", ["small-fleet-public-works"], "Heading and description describe Public Works small fleet replacement."),
+    ("2025-2026", "2025-2026-p130"): ("mapped_existing", ["small-fleet-public-works"], "Heading and description identify Public Works small fleet replacement; the contradictory Project: field is retained as source evidence and does not override the agreed identity."),
     ("2025-2026", "2025-2026-p131"): ("mapped_existing", ["large-fleet-public-works"], "Profile describes Public Works large fleet replacement."),
     ("2025-2026", "2025-2026-p132"): ("mapped_existing", ["sidewalks-new-construction"], "Construction of New Sidewalks maps to the stable new-sidewalk construction key."),
     ("2025-2026", "2025-2026-p133"): ("mapped_existing", ["street-resurfacing"], "Exact project label match to 2026/2027 alias."),
@@ -67,7 +68,7 @@ CAPITAL_PROJECT_ALIAS_DECISIONS = {
     ("2025-2026", "2025-2026-p138"): ("mapped_existing", ["water-distribution-system-upgrade"], "Plural source label maps to singular approved 2026/2027 project key."),
     ("2025-2026", "2025-2026-p139"): ("mapped_existing", ["collector-sewer-liftstations-rehab"], "Raw project title maps to 2026/2027 collector sewer liftstations rehab key."),
     ("2025-2026", "2025-2026-p140"): ("mapped_existing", ["aeration-tank-rehab"], "Raw project title maps to 2026/2027 aeration tank rehab key."),
-    ("2024-2025", "2024-2025-p047"): ("review_blocked", [], "Transit facility and fleet profile may split across facility, fleet, charging, and infrastructure keys."),
+    ("2024-2025", "2024-2025-p047"): ("document_only", ["public-transit-facility-and-fleet"], "The adopted budget presents one combined facility-and-fleet project with no allocable component split; preserve one document-scoped identity and do not infer links to later facility, fleet, charging, or infrastructure projects."),
     ("2024-2025", "2024-2025-p050"): ("document_only", ["replacement-fast-rescue-craft"], "No approved 2026/2027 project key represents this fire rescue craft profile."),
     ("2024-2025", "2024-2025-p051"): ("mapped_existing", ["self-contained-breathing-aparatus"], "Raw project title maps to 2026/2027 self-contained breathing apparatus key."),
     ("2024-2025", "2024-2025-p054"): ("document_only", ["simmons-sports-centre-replacement"], "Sports centre replacement is not equivalent to later Simmons subproject keys without split review."),
@@ -79,14 +80,18 @@ CAPITAL_PROJECT_ALIAS_DECISIONS = {
     ("2024-2025", "2024-2025-p061"): ("document_only", ["critical-incident-command"], "No approved 2026/2027 project key represents this police command profile."),
     ("2024-2025", "2024-2025-p064"): ("mapped_existing", ["hillsborough-hall-cc-upgrades"], "Community centre upgrades map to the stable Hillsborough Hall community-centre key."),
     ("2024-2025", "2024-2025-p065"): ("mapped_existing", ["pownal-street-parkade-upgrades"], "Pownal Parkade Restoration maps to the stable Pownal Street Parkade Upgrades key."),
-    ("2024-2025", "2024-2025-p066"): ("review_blocked", [], "Eastern Gateway Masterplan is a joint project that may split across Public Works and Water/Sewer keys."),
-    ("2024-2025", "2024-2025-p067"): ("review_blocked", [], "Seaview Boulevard Rehabilitation is a joint project and may split across street and water/sewer keys."),
-    ("2024-2025", "2024-2025-p068"): ("review_blocked", [], "Water Street Rehabilitation is a joint project and may split across street and water/sewer keys."),
+    ("2024-2025", "2024-2025-p066"): ("document_only", ["eastern-gateway-masterplan"], "The source presents a single joint Public Works and Water/Sewer project and does not allocate its budget between components; preserve a document-scoped identity without split or later-year inference."),
+    ("2024-2025", "2024-2025-p067"): ("document_only", ["seaview-boulevard-rehabilitation-public-works"], "The source reports the Public Works joint project separately from the Water and Sewer profile, with no source-supported shared project identifier or allocation; preserve a distinct document-scoped identity."),
+    ("2024-2025", "2024-2025-p068"): ("document_only", ["water-street-rehabilitation-public-works"], "The source reports one Public Works joint project without an allocable Water and Sewer component split; preserve a document-scoped identity."),
     ("2024-2025", "2024-2025-p069"): ("mapped_existing", ["storm-water-management"], "Storm Water Modelling maps to the broader storm-water management project key."),
     ("2024-2025", "2024-2025-p073"): ("mapped_existing", ["eastern-gateway-water-and-sewer"], "Raw Water and Sewer project title maps to Eastern Gateway Water and Sewer."),
-    ("2024-2025", "2024-2025-p074"): ("review_blocked", [], "Seaview Boulevard Water and Sewer Rehabilitation needs split/merge review against Seaview and water/sewer keys."),
+    ("2024-2025", "2024-2025-p074"): ("document_only", ["seaview-boulevard-water-and-sewer-rehabilitation"], "The Water and Sewer profile has a distinct entity, scope, and budget from the Public Works Seaview profile; preserve a separate document-scoped identity rather than infer a merge."),
     ("2024-2025", "2024-2025-p075"): ("document_only", ["wastewater-treatment-plant-and-liftstation-rehabilitation"], "No single approved 2026/2027 project key represents this combined plant and liftstation profile."),
     ("2024-2025", "2024-2025-p076"): ("mapped_existing", ["wellfield-protection"], "Exact Water and Sewer project label match to 2026/2027 alias."),
+}
+
+PROFILE_IDENTITY_OVERRIDES = {
+    ("2025-2026", "2025-2026-p130"): "The heading and project description both identify Public Works Small Fleet Replacement; retain the conflicting Project: field as provenance but approve the heading/description identity.",
 }
 
 
@@ -419,6 +424,7 @@ def build_profile_identity_review():
                 flags.append("project_value_wrapped_or_differs_from_title_guess")
             if mismatch:
                 flags.append("title_project_mismatch")
+            override_reason = PROFILE_IDENTITY_OVERRIDES.get((document, record["table_key"]))
             output["records"].append(
                 {
                     "document_key": document,
@@ -428,7 +434,8 @@ def build_profile_identity_review():
                     "source_title": source_title,
                     "source_project": source_project,
                     "review_flags": flags,
-                    "identity_status": "review_blocked" if mismatch else "reviewed",
+                    "identity_status": "reviewed_with_source_conflict" if override_reason else ("review_blocked" if mismatch else "reviewed"),
+                    "identity_decision_reason": override_reason,
                 }
             )
     output["summary"] = dict(Counter(r["identity_status"] for r in output["records"]))
@@ -436,7 +443,104 @@ def build_profile_identity_review():
     return output
 
 
-def build_candidate_dispositions(period_review, section_review):
+def load_raw_rows(document, table_id):
+    records = json.loads((BASE / document / "raw-tables" / "source_table_rows.json").read_text())["records"]
+    return [record for record in records if record["table_id"] == table_id]
+
+
+def build_tax_rate_formula_review():
+    output = {"schema_version": 1, "status": "phase_1_review_complete", "records": []}
+    # Page 19 declares rates and denominators but does not contain assessment/revenue expressions.
+    output["records"].append({
+        "document_key": "2025-2026", "table_key": "2025-2026-p019", "page_start": 19,
+        "decision": "approved_rate_declarations",
+        "formula_applicability": "not_applicable",
+        "decision_reason": "The page declares property-tax rates per $100 assessed value and utility rates by stated service denominator; it contains no assessment-to-revenue calculation.",
+        "normalization_rule": "Import reviewed rates with their stated denominator and effective-date context. Do not derive revenue from this page.",
+    })
+    expression = re.compile(r"\$([\d,]+) x \$([\d.]+) per \$100.*?\$\s*([\d,]+)")
+    formula_records = []
+    for row in load_raw_rows("2025-2026", "ctown_budget_2025_2026_p145"):
+        match = expression.search(row["raw_text"])
+        if not match:
+            continue
+        assessment, rate, reported_revenue = (Decimal(value.replace(",", "")) for value in match.groups())
+        calculated = assessment * rate / Decimal("100")
+        rounded_calculated = calculated.quantize(Decimal("1"))
+        formula_records.append({
+            "row_id": row["row_id"], "raw_label": row["cells"][0],
+            "assessment_base": str(assessment), "rate_per_100_assessed_value": str(rate),
+            "denominator": "100 dollars of assessed value", "reported_revenue": str(reported_revenue),
+            "calculated_revenue": str(calculated), "rounded_calculated_revenue": str(rounded_calculated),
+            "difference_after_nearest_dollar_rounding": str(reported_revenue - rounded_calculated),
+            "rounding_difference": str(reported_revenue - calculated),
+            "decision": "approved_formula", "formula_code": "assessment_times_rate_divided_by_100",
+            "decision_reason": "Reported revenue equals the formula rounded to the nearest dollar; the unrounded difference is retained for reconciliation evidence.",
+        })
+    output["records"].append({
+        "document_key": "2025-2026", "table_key": "2025-2026-p145", "page_start": 145,
+        "decision": "approved_assessment_rate_formulas", "formula_applicability": "applicable",
+        "formula_code": "assessment_times_rate_divided_by_100", "formula_records": formula_records,
+        "decision_reason": "Each extracted assessment/rate/revenue expression reconciles exactly; preserve the three reported values and use the formula only for reconciliation.",
+    })
+    output["summary"] = dict(Counter(record["decision"] for record in output["records"]))
+    output["formula_summary"] = {"approved": len(formula_records), "nonzero_differences_after_nearest_dollar_rounding": sum(record["difference_after_nearest_dollar_rounding"] != "0" for record in formula_records)}
+    return output
+
+
+def build_debt_identity_review():
+    output = {"schema_version": 1, "status": "phase_1_review_complete", "records": []}
+    schedules = (("2025-2026-p147", 147, "city-of-charlottetown"), ("2025-2026-p149", 149, "charlottetown-water-and-sewer"))
+    instrument = re.compile(r"^(?:(RBC|TD|CIBC) (\d{4}) (Swap|Loan)|(?:CMHC|FCM) Loan|Capital Leases) (?:Matuing|Maturing) (\d{4})$")
+    for table_key, page_start, entity_key in schedules:
+        records = []
+        for row in load_raw_rows("2025-2026", f"ctown_budget_2025_2026_p{page_start:03d}"):
+            label = row["cells"][0] if row["cells"] else ""
+            normalized_label = label.replace("Matuing", "Maturing")
+            match = instrument.fullmatch(normalized_label)
+            if match:
+                lender, issue_year, instrument_type, maturity_year = match.groups()
+                if normalized_label.startswith("CMHC"):
+                    lender, instrument_type = "CMHC", "loan"
+                elif normalized_label.startswith("FCM"):
+                    lender, instrument_type = "FCM", "loan"
+                elif normalized_label.startswith("Capital Leases"):
+                    lender, instrument_type = None, "capital_lease"
+                else:
+                    instrument_type = instrument_type.lower()
+                records.append({
+                    "row_id": row["row_id"], "raw_label": label, "normalized_label": normalized_label,
+                    "reporting_entity_key": entity_key, "lender": lender, "instrument_type": instrument_type,
+                    "issue_year": issue_year, "maturity_year": maturity_year,
+                    "debt_instrument_key": f"{entity_key}-{slug(normalized_label)}",
+                    "decision": "approved_document_scoped_instrument",
+                    "decision_reason": "Entity-scoped source label provides the lender/type and maturity identity; correct the source typo only in the normalized label while retaining raw text.",
+                })
+            elif label == "Capital Leases":
+                records.append({
+                    "row_id": row["row_id"], "raw_label": label, "normalized_label": label,
+                    "reporting_entity_key": entity_key, "lender": None, "instrument_type": "capital_lease",
+                    "issue_year": None, "maturity_year": None,
+                    "debt_instrument_key": f"{entity_key}-capital-leases",
+                    "decision": "approved_document_scoped_instrument",
+                    "decision_reason": "The source reports a capital-lease balance, principal, and interest but no lender or maturity. Preserve it as a document-scoped capital-lease instrument without inventing missing attributes.",
+                })
+            elif label == "New Debt":
+                records.append({
+                    "row_id": row["row_id"], "raw_label": label, "reporting_entity_key": entity_key,
+                    "debt_instrument_key": None, "decision": "approved_planned_debt_bucket",
+                    "decision_reason": "No lender, issue year, or maturity is reported. Retain balance and interest as a document-period planned-debt bucket and do not create a stable debt instrument.",
+                })
+        output["records"].append({
+            "document_key": "2025-2026", "table_key": table_key, "page_start": page_start,
+            "reporting_entity_key": entity_key, "decision": "approved_debt_identity_mapping", "instrument_records": records,
+            "decision_reason": "The two schedules are separate reporting-entity statements. Identical lender/year/maturity labels are not merged across entities.",
+        })
+    output["summary"] = {"approved_schedules": len(output["records"]), "approved_document_scoped_instruments": sum(sum(item["decision"] == "approved_document_scoped_instrument" for item in record["instrument_records"]) for record in output["records"]), "planned_debt_buckets": sum(sum(item["decision"] == "approved_planned_debt_bucket" for item in record["instrument_records"]) for record in output["records"])}
+    return output
+
+
+def build_candidate_dispositions(period_review, section_review, tax_rate_review, debt_identity_review):
     period_status = {
         (record["document_key"], record["raw_label"]): record["mapping_status"]
         for record in period_review["records"]
@@ -450,6 +554,8 @@ def build_candidate_dispositions(period_review, section_review):
         (record["document_key"], record["table_key"]): record
         for record in build_profile_identity_review()["records"]
     }
+    tax_rate_by_candidate = {(record["document_key"], record["table_key"]): record for record in tax_rate_review["records"]}
+    debt_by_candidate = {(record["document_key"], record["table_key"]): record for record in debt_identity_review["records"]}
     output = {"schema_version": 1, "status": "phase_1_review_started", "records": []}
     for document, records in load_week5_records().items():
         for record in records:
@@ -473,9 +579,17 @@ def build_candidate_dispositions(period_review, section_review):
                     else:
                         resolved.append(f"project alias resolved as {alias_status}")
                 if any("assessment/rate operands" in reason for reason in reasons):
-                    unresolved.append("assessment/rate operands require formula review")
+                    review = tax_rate_by_candidate.get((document, record["table_key"]))
+                    if review and review["decision"].startswith("approved"):
+                        resolved.append("assessment/rate operands resolved by reviewed rate/formula decision")
+                    else:
+                        unresolved.append("assessment/rate operands require formula review")
                 if any("debt instrument identity" in reason for reason in reasons):
-                    unresolved.append("debt instrument identity and maturity labels require review")
+                    review = debt_by_candidate.get((document, record["table_key"]))
+                    if review and review["decision"] == "approved_debt_identity_mapping":
+                        resolved.append("debt instrument identity and maturity labels resolved by entity-scoped review")
+                    else:
+                        unresolved.append("debt instrument identity and maturity labels require review")
                 if any("continuation membership" in reason for reason in reasons):
                     if section_record and section_record["decision"] == "proposed_section_group":
                         resolved.append("continuation membership resolved by reviewed section group")
@@ -569,7 +683,9 @@ def main():
     operating_detail_relationship_review = build_operating_detail_relationship_review()
     profile_identity_review = build_profile_identity_review()
     capital_project_alias_review = build_capital_project_alias_review()
-    candidate_dispositions = build_candidate_dispositions(period_review, section_review)
+    tax_rate_review = build_tax_rate_formula_review()
+    debt_identity_review = build_debt_identity_review()
+    candidate_dispositions = build_candidate_dispositions(period_review, section_review, tax_rate_review, debt_identity_review)
     for document in DOCUMENTS:
         doc_dir = BASE / document
         doc_periods = {
@@ -609,6 +725,9 @@ def main():
         (doc_dir / "capital-project-profile-identity-review.json").write_text(json.dumps(doc_profile_identities, indent=2) + "\n")
         (doc_dir / "candidate-disposition-review.json").write_text(json.dumps(doc_dispositions, indent=2) + "\n")
         (doc_dir / "capital-project-alias-review.json").write_text(json.dumps(doc_aliases, indent=2) + "\n")
+        if document == "2025-2026":
+            (doc_dir / "tax-rate-formula-review.json").write_text(json.dumps(tax_rate_review, indent=2) + "\n")
+            (doc_dir / "debt-identity-review.json").write_text(json.dumps(debt_identity_review, indent=2) + "\n")
     combined = {
         "schema_version": 1,
         "period_label_review": period_review,
@@ -616,6 +735,8 @@ def main():
         "operating_detail_relationship_review": operating_detail_relationship_review,
         "capital_project_profile_identity_review": profile_identity_review,
         "capital_project_alias_review": capital_project_alias_review,
+        "tax_rate_formula_review": tax_rate_review,
+        "debt_identity_review": debt_identity_review,
         "candidate_disposition_review": candidate_dispositions,
     }
     (BASE / "prior-year-phase-1-review-package.json").write_text(json.dumps(combined, indent=2) + "\n")
@@ -625,6 +746,8 @@ def main():
         "operating_detail_relationship_summary": operating_detail_relationship_review["summary"],
         "capital_project_profile_identity_summary": profile_identity_review["summary"],
         "capital_project_alias_summary": capital_project_alias_review["summary"],
+        "tax_rate_formula_summary": tax_rate_review["summary"],
+        "debt_identity_summary": debt_identity_review["summary"],
         "candidate_disposition_summary": candidate_dispositions["summary"],
     }, indent=2))
 

@@ -75,8 +75,9 @@ Coordinates should use normalized page coordinates so the UI can highlight a sou
 
 | Table | Purpose and key fields |
 | --- | --- |
-| `budget.capital_project` | Stable project identity: municipality, reporting entity, project key, name, description, status, location text, organization unit, effective dates. |
-| `budget.capital_project_alias` | Document-specific raw project label mapped to a project after review. |
+| `budget.capital_project` | Stable municipality-scoped project identity with source-supported lifecycle status; it has no budget-year ownership. |
+| `budget.capital_project_reference` | Source-document-owned project reference with raw label, source table/row, adoption state, identity evidence, and review state. |
+| `budget.capital_project_alias` | Legacy label convenience record derived only from an approved project reference. |
 | `budget.capital_project_fact` | Links a `fact` to a project and optional funding-source category; keeps gross, deduction, and net facts distinct. |
 | `budget.capital_project_profile` | Structured narrative fields, source row/page, raw value, normalized value, and review status. |
 | `budget.tax_class` | Municipality, parent class, residency, property/use class, special district, raw label, normalized key, effective dates. |

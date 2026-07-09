@@ -11,6 +11,9 @@
   - `QA Reviewer`: `.codex/skills/role-qa-reviewer/SKILL.md`
 - Follow the active role skill before implementation, generation, verification,
   or review.
+- Run every repository Python command through `scripts/python.ps1`; it resolves
+  the canonical `.venv\Scripts\python.exe`. Do not use a global `python`
+  interpreter unless the task explicitly requires a separate runtime.
 - After implementation, finish in `QA Reviewer`.
 - Keep durable project knowledge in the wiki. Start with `wiki/AGENTS.md`,
   then use `wiki/index.md` and any project-specific wiki index relevant to the

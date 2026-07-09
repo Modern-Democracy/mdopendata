@@ -507,3 +507,27 @@ Verified the 2026/2027 departmental operating normalization against the overview
 ## [2026-07-09] generation | 2026/2027 explicit summary-detail statements
 
 Patched the 2026/2027 normalized manifest generator to create distinct supporting-detail statements and 12 deterministic `summary_detail` relationship records for reviewed departmental overview/detail mappings. Regeneration preserved all 1,163 mapped lines and 2,165 facts while increasing the statement count from 30 to 42.
+
+## [2026-07-09] generation | Prior-year Phase 1 tax/rate and debt decisions
+
+Generated deterministic 2025/2026 tax/rate and debt review artifacts. The review approves page 19 rate declarations with stated denominators, validates 22 page 145 assessment × rate ÷ 100 expressions against reported revenues after nearest-dollar rounding, and identifies 20 entity-scoped debt instruments plus two planned-debt buckets across the City and Water and Sewer schedules. Candidate dispositions now total 164 normalize, two duplicate-summary, and six capital-identity review-blocked records.
+
+## [2026-07-09] generation | Capital project registry and budget references
+
+Defined source-limited project lifecycle rules and generated the first three-document capital-project registry. It contains 52 municipality-scoped project identities and 67 document-owned references across 2024/2025, 2025/2026, and 2026/2027; six conflicting split/merge or identity references remain blocked. The 2026/2027 normalized manifest now emits 173 adopted-budget project references, independent of project identity ownership.
+
+## [2026-07-09] fix | Canonical Python and budget full-2 regression controls
+
+Updated root instructions to require `scripts/python.ps1` for repository Python commands, ensuring use of `.venv\\Scripts\\python.exe` and its installed `psycopg` dependency. Corrected the 2026/2027 database-backed normalization test to validate only the canonical append-only `:full-2` raw tables and require a `full-2` import batch rather than asserting the obsolete `full-1` count. The wrapper-run test passes against PostgreSQL.
+
+## [2026-07-09] review | Prior-year capital identity resolution
+
+Resolved all six remaining prior-year capital identity records. Five combined or joint 2024/2025 profiles are retained as separate document-scoped projects because their source budgets contain no allocable split; the 2025/2026 Public Works small-fleet profile uses its matching heading and description while preserving the contradictory `Project:` source field. Phase 1 now has 170 normalization candidates, two duplicate summaries, and zero review-blocked candidates.
+
+## [2026-07-09] generation | Prior-year Phase 2 row-mapping inputs
+
+Generated deterministic source-linked Phase 2 inputs for every approved prior-year candidate: 58 candidates and 1,701 rows for 2024/2025, plus 112 candidates and 3,808 rows for 2025/2026. No row semantics or normalized facts were inferred; all 5,509 rows remain explicitly `needs_review` pending family-specific hierarchy, aggregation, amount-type, unit, entity, and period decisions.
+
+## [2026-07-09] review | Prior-year Phase 2 first family approvals
+
+Approved 514 rows in 14 standard 2024/2025 City department operating tables with detail/total roles, CAD, reporting entity, and reviewed period roles. Approved 43 capital profiles covering 288 rows as narrative-only source fields. The remaining 4,707 rows remain in the family-specific review queue.

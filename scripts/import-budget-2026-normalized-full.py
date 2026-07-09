@@ -76,6 +76,7 @@ def all_counts(manifest: dict, reconciliations: dict) -> dict[str, int]:
         "facts": len(manifest["facts"]),
         "fact_sources": len(manifest["fact_sources"]),
         "capital_projects": len(manifest["capital_projects"]),
+        "capital_project_references": len(manifest.get("capital_project_references", [])),
         "capital_project_aliases": len(manifest["capital_project_aliases"]),
         "capital_project_profiles": len(manifest["capital_project_profiles"]),
         "capital_project_facts": len(manifest["capital_project_facts"]),
@@ -105,6 +106,7 @@ def validate_files(manifest: dict, reconciliations: dict, source_document: dict)
         "facts": 2165,
         "fact_sources": 2165,
         "capital_projects": 169,
+        "capital_project_references": 173,
         "capital_project_aliases": 173,
         "capital_project_profiles": 24,
         "capital_project_facts": 192,
@@ -482,6 +484,22 @@ def import_normalized(cur: psycopg.Cursor, manifest: dict, reconciliations: dict
                VALUES(%s,%s,%s,%s,'1900-01-01') RETURNING id""",
             (municipality_id, entity_ids[project["reporting_entity_key"]], project["key"], project["display_name"]),
             project,
+        )
+    for reference in manifest.get("capital_project_references", []):
+        natural_key = reference["key"]
+        source_table_id = table_ids[reference["source_table_key"]]
+        cur.execute("SELECT id FROM budget.source_table_row WHERE source_table_id=%s AND row_key=%s", (source_table_id, reference["source_row_id"]))
+        source_row = cur.fetchone()
+        if source_row is None:
+            raise ValueError(f"Missing source row for capital project reference: {natural_key}")
+        ensure_dimension(
+            cur, batch_id, "capital_project_reference", natural_key,
+            "SELECT id FROM budget.capital_project_reference WHERE document_id=%s AND source_table_id=%s AND source_row_id=%s AND raw_label=%s",
+            (document_id, source_table_id, source_row[0], reference["raw_label"]),
+            """INSERT INTO budget.capital_project_reference(document_id,capital_project_id,source_table_id,source_row_id,raw_label,reference_kind,document_adoption_state,identity_evidence,review_status)
+               VALUES(%s,%s,%s,%s,%s,%s,%s,%s,'approved') RETURNING id""",
+            (document_id, capital_project_ids[reference["project_key"]], source_table_id, source_row[0], reference["raw_label"], reference["reference_kind"], reference["document_adoption_state"], reference["identity_evidence"]),
+            reference,
         )
     for alias in manifest["capital_project_aliases"]:
         natural_key = f"{alias['project_key']}:{alias['source_row_id']}:{alias['raw_label']}"

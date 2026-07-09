@@ -281,6 +281,13 @@ def main() -> int:
         "facts": sorted(facts, key=lambda x: x["key"]),
         "fact_sources": sorted(fact_sources, key=lambda x: x["key"]),
         "capital_projects": sorted(capital_projects.values(), key=lambda x: x["key"]),
+        "capital_project_references": sorted([
+            {"key": f"{DOCUMENT_KEY}:{alias['source_row_id']}:{alias['project_key']}",
+             "project_key": alias["project_key"], "source_table_key": alias["source_row_id"].rsplit("_r", 1)[0] + ":full-2",
+             "source_row_id": alias["source_row_id"], "raw_label": alias["raw_label"],
+             "reference_kind": "capital_schedule", "document_adoption_state": "adopted", "identity_evidence": "exact"}
+            for alias in capital_aliases
+        ], key=lambda x: x["key"]),
         "capital_project_aliases": sorted(capital_aliases, key=lambda x: (x["project_key"], x["source_row_id"])),
         "capital_project_profiles": sorted(profiles, key=lambda x: (x["key"], x["page_number"])),
         "capital_project_facts": sorted(capital_facts, key=lambda x: (x["project_key"], x["fact_key"])),

@@ -22,11 +22,14 @@ Generated artifacts:
 | --- | --- |
 | `scripts/build-budget-prior-year-phase1-review.py` | Builds the prior-year Phase 1 period-label and section-continuation review package. |
 | `data/budget/charlottetown/prior-year-phase-1-review-package.json` | Combined review package for both prior-year documents. |
+| `data/budget/charlottetown/capital-project-registry.json` | Three-document municipality-scoped project registry and budget-reference evidence. |
 | `data/budget/charlottetown/2025-2026/period-label-review.json` | 2025/2026 period-label decisions and exclusions. |
 | `data/budget/charlottetown/2025-2026/section-continuation-review.json` | 2025/2026 section-continuation review decisions. |
 | `data/budget/charlottetown/2025-2026/operating-detail-relationship-review.json` | 2025/2026 overview-to-detail operating relationship decisions. |
 | `data/budget/charlottetown/2025-2026/capital-project-profile-identity-review.json` | 2025/2026 wrapped title and `Project:` identity review for capital profiles. |
 | `data/budget/charlottetown/2025-2026/capital-project-alias-review.json` | 2025/2026 capital project alias decisions for prior-year profiles. |
+| `data/budget/charlottetown/2025-2026/tax-rate-formula-review.json` | 2025/2026 rate declaration and property-tax formula decisions. |
+| `data/budget/charlottetown/2025-2026/debt-identity-review.json` | 2025/2026 entity-scoped debt instrument and planned-debt decisions. |
 | `data/budget/charlottetown/2025-2026/candidate-disposition-review.json` | 2025/2026 candidate dispositions after Phase 1 period and continuation decisions. |
 | `data/budget/charlottetown/2024-2025/period-label-review.json` | 2024/2025 period-label decisions and exclusions. |
 | `data/budget/charlottetown/2024-2025/section-continuation-review.json` | 2024/2025 section-continuation review decisions. |
@@ -74,43 +77,49 @@ Budget documents commonly repeat the same numbers across visualizations, overvie
 
 | Document | Normalize | Duplicate summary | Review-blocked |
 | --- | ---: | ---: | ---: |
-| 2025/2026 | 107 | 2 | 5 |
-| 2024/2025 | 53 | 0 | 5 |
-| Total | 160 | 2 | 10 |
+| 2025/2026 | 112 | 2 | 0 |
+| 2024/2025 | 58 | 0 | 0 |
+| Total | 170 | 2 | 0 |
 
-The remaining `review_blocked` records are limited to five 2024/2025 capital project alias split/merge questions, one 2025/2026 capital profile title/project mismatch, two tax/rate formula operand records, and two debt instrument identity or maturity records. Period-label-only and continuation-only blockers have been resolved or intentionally excluded from document-period mapping.
+Period-label-only and continuation-only blockers have been resolved or intentionally excluded from document-period mapping. No Phase 1 candidate remains review-blocked.
+
+## Tax/Rate Formula Review
+
+The 2025/2026 page 19 rate declarations are approved as rate facts with their source denominators and effective-date context. They do not contain assessment-to-revenue formulas and must not be used to derive revenue.
+
+The 22 property-tax expressions on page 145 are approved as `assessment × rate ÷ 100`, with reported revenue rounded to the nearest dollar. Each rounded calculated result matches its reported revenue. Assessment, rate, and reported revenue remain separate reported facts with source-cell evidence; the formula is retained for reconciliation only.
+
+## Debt Identity Review
+
+The 2025/2026 City and Water and Sewer schedules are approved as separate reporting-entity debt statements. The review identifies 20 document-scoped debt instruments by entity, source label, lender/type where reported, and maturity year where reported. `Matuing` is preserved in raw text and corrected only in the normalized label. The City `Capital Leases` row remains an entity-scoped instrument with unknown lender and maturity.
+
+The two `New Debt` rows are approved as document-period planned-debt buckets, not stable debt instruments, because the source supplies no lender, issue year, or maturity. They may carry reported balance and interest facts but cannot create a cross-period instrument identity.
 
 ## Capital Project Profile Identity Review
 
 | Document | Profile identities reviewed | Identity review-blocked | Wrapped/incomplete title guesses | Wrapped or differing `Project:` values |
 | --- | ---: | ---: | ---: | ---: |
-| 2025/2026 | 22 | 1 | 3 | 4 |
+| 2025/2026 | 22 | 0 | 3 | 4 |
 | 2024/2025 | 20 | 0 | 11 | 14 |
 | Total | 42 | 1 | 14 | 18 |
 
-Capital profile alias decisions use reconstructed source titles and `Project:` values from raw page text instead of `title_guess` alone. The remaining identity-blocked record is 2025/2026 page 130: the heading is `Public Works Small Fleet Replacement`, but the source `Project:` line says `Parks and Recreation Small Fleet Replacement`. That contradiction is left blocked because choosing either value silently would corrupt project identity.
+Capital profile alias decisions use reconstructed source titles and `Project:` values from raw page text instead of `title_guess` alone. For 2025/2026 page 130, the heading and description identify Public Works Small Fleet Replacement while the `Project:` line says Parks and Recreation. The review retains the conflicting source field but approves the heading-and-description identity.
 
 The line-wrapping check is a durable extraction requirement, not a one-off prior-year correction. Large-font titles, department names, and project names, especially when placed in narrow columns, are prone to wrapping and must be reconstructed from adjacent wrapped lines before normalization, because truncated headings can produce wrong statement labels, wrong project aliases, and false cross-year matches.
 
 ## Capital Project Alias Review
 
-| Document | Mapped to existing 2026/2027 key | Document-only identity | Review-blocked |
+| Document | Approved project reference | Document-only identity | Review-blocked |
 | --- | ---: | ---: | ---: |
-| 2025/2026 | 20 | 2 | 1 |
-| 2024/2025 | 9 | 6 | 5 |
-| Total | 29 | 8 | 6 |
+| 2025/2026 | 21 | 2 | 0 |
+| 2024/2025 | 9 | 11 | 0 |
+| Total | 30 | 13 | 0 |
 
-`mapped_existing` records use an approved 2026/2027 capital project key where the source label and profile text support the cross-year identity. `document_only` records create stable prior-year identities without claiming cross-period compatibility. The remaining blocked records are 2025/2026 page 130 and 2024/2025 pages 47, 66, 67, 68, and 74, where the profile identity is contradictory or appears to combine, split, or overlap later Public Works, Water and Sewer, fleet, facility, or infrastructure project keys.
-
-## Remaining Phase 1 Work
-
-- Tax/rate formula operand decisions remain unresolved.
-- Debt instrument identity and maturity decisions remain unresolved.
-- Capital project identity and split/merge decisions remain unresolved for one 2025/2026 profile and five 2024/2025 profiles.
+Approved records reference a municipality-scoped project identity using reviewed source evidence. `document_only` records create a valid project identity with a single budget reference and do not claim cross-period compatibility. The three-document registry contains 58 projects and 67 references: 20 from 2024/2025, 23 from 2025/2026, and 24 from 2026/2027. The five 2024/2025 combined or joint profiles remain separate document-scoped identities because the source does not allocate their budgets between components. This preserves the reported project without inventing split, merge, or later-year links.
 
 ## Gate Status
 
-Gate status: Phase 1 is partially complete. Period-label, section-continuation, capital-project-profile-identity, capital-project-alias, and candidate-disposition artifacts exist, but no review-blocked candidate may enter manifest generation until the remaining identity, split/merge, tax/rate, and debt decisions are recorded.
+Gate status: Phase 1 is complete. Period-label, section-continuation, tax/rate, debt, capital-project-profile-identity, capital-project-alias, candidate-disposition, and three-document project-reference artifacts are approved for manifest generation.
 
 ## Sources
 

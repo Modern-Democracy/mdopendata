@@ -153,16 +153,16 @@ def main() -> int:
     with psycopg.connect(url) as connection, connection.cursor() as cursor:
         cursor.execute("""WITH d AS (
           SELECT id FROM budget.source_document WHERE sha256='d926634427e80aa2b06b6425bdbb117424fe53567ae344980cd10791f8e39bac'
-        ), t AS (SELECT id FROM budget.source_table WHERE document_id=(SELECT id FROM d) AND table_key LIKE 'ctown_budget_2026_2027_%')
+        ), t AS (SELECT id FROM budget.source_table WHERE document_id=(SELECT id FROM d) AND table_key LIKE 'ctown_budget_2026_2027_%:full-2')
         SELECT
           (SELECT count(*) FROM budget.source_page WHERE document_id=(SELECT id FROM d)),
           (SELECT count(*) FROM t),
           (SELECT count(*) FROM budget.source_table_row WHERE source_table_id IN (SELECT id FROM t)),
           (SELECT count(*) FROM budget.source_table_cell c JOIN budget.source_table_column col ON col.id=c.source_table_column_id WHERE c.source_row_id IN (SELECT r.id FROM budget.source_table_row r WHERE r.source_table_id IN (SELECT id FROM t)) AND col.column_index>0),
           (SELECT count(*) FROM budget.publication_snapshot),
-          (SELECT count(*) FROM budget.import_batch WHERE extractor_version='full-1')""")
-        assert cursor.fetchone() == (154, 114, 3233, 3092, 0, 1)
-    print("2026/2027 normalization controls passed: 116 candidates in 31 sections, zero section reviews, exact raw counts, no publication snapshot.")
+          (SELECT EXISTS(SELECT 1 FROM budget.import_batch WHERE extractor_version='full-2'))""")
+        assert cursor.fetchone() == (154, 114, 3233, 3092, 0, True)
+    print("2026/2027 normalization controls passed: 116 candidates in 31 sections, canonical full-2 raw counts, no publication snapshot.")
     return 0
 
 

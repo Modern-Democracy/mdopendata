@@ -233,9 +233,11 @@
       "title_guess": "Public Works Small Fleet Replacement",
       "source_title": "Public Works Small Fleet Replacement",
       "source_project": "Parks and Recreation Small Fleet Replacement",
-      "alias_decision": "review_blocked",
-      "capital_project_keys": [],
-      "decision_reason": "Wrapped profile identity review found a title/project mismatch; alias mapping is blocked until source identity is resolved.",
+      "alias_decision": "mapped_existing",
+      "capital_project_keys": [
+        "small-fleet-public-works"
+      ],
+      "decision_reason": "Heading and description identify Public Works small fleet replacement; the contradictory Project: field is retained as source evidence and does not override the agreed identity.",
       "profile_identity_flags": [
         "project_value_wrapped_or_differs_from_title_guess",
         "title_project_mismatch"
@@ -410,8 +412,7 @@
     }
   ],
   "summary": {
-    "mapped_existing": 20,
-    "document_only": 2,
-    "review_blocked": 1
+    "mapped_existing": 21,
+    "document_only": 2
   }
 }

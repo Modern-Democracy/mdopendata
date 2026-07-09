@@ -95,18 +95,17 @@
       "page_start": 19,
       "table_family": "tax_assessment_rate",
       "source_disposition": "review_blocked",
-      "candidate_disposition": "review_blocked",
-      "disposition_reason": "assessment/rate operands require formula review",
+      "candidate_disposition": "normalize",
+      "disposition_reason": "Phase 1 mapping blockers resolved for manifest-generation input.",
       "source_review_reasons": [
         "period labels require review: 2025",
         "assessment/rate operands require formula review"
       ],
       "resolved_reasons": [
+        "assessment/rate operands resolved by reviewed rate/formula decision",
         "period labels resolved or excluded: 2025"
       ],
-      "unresolved_reasons": [
-        "assessment/rate operands require formula review"
-      ],
+      "unresolved_reasons": [],
       "section_key": null,
       "section_decision": null
     },
@@ -1726,18 +1725,17 @@
       "page_start": 130,
       "table_family": "capital_project_profile",
       "source_disposition": "review_blocked",
-      "candidate_disposition": "review_blocked",
-      "disposition_reason": "project alias requires cross-year review",
+      "candidate_disposition": "normalize",
+      "disposition_reason": "Phase 1 mapping blockers resolved for manifest-generation input.",
       "source_review_reasons": [
         "continuation membership requires section-level review",
         "project alias requires cross-year review"
       ],
       "resolved_reasons": [
+        "project alias resolved as mapped_existing",
         "profile pages are separate records, not continuation tables"
       ],
-      "unresolved_reasons": [
-        "project alias requires cross-year review"
-      ],
+      "unresolved_reasons": [],
       "section_key": "2025-2026-continuation-026-1-capital-project-profile",
       "section_decision": "do_not_merge_profiles"
     },
@@ -1975,15 +1973,15 @@
       "page_start": 145,
       "table_family": "tax_assessment_rate",
       "source_disposition": "review_blocked",
-      "candidate_disposition": "review_blocked",
-      "disposition_reason": "assessment/rate operands require formula review",
+      "candidate_disposition": "normalize",
+      "disposition_reason": "Phase 1 mapping blockers resolved for manifest-generation input.",
       "source_review_reasons": [
         "assessment/rate operands require formula review"
       ],
-      "resolved_reasons": [],
-      "unresolved_reasons": [
-        "assessment/rate operands require formula review"
+      "resolved_reasons": [
+        "assessment/rate operands resolved by reviewed rate/formula decision"
       ],
+      "unresolved_reasons": [],
       "section_key": null,
       "section_decision": null
     },
@@ -1993,15 +1991,15 @@
       "page_start": 147,
       "table_family": "debt_schedule",
       "source_disposition": "review_blocked",
-      "candidate_disposition": "review_blocked",
-      "disposition_reason": "debt instrument identity and maturity labels require review",
+      "candidate_disposition": "normalize",
+      "disposition_reason": "Phase 1 mapping blockers resolved for manifest-generation input.",
       "source_review_reasons": [
         "debt instrument identity and maturity labels require review"
       ],
-      "resolved_reasons": [],
-      "unresolved_reasons": [
-        "debt instrument identity and maturity labels require review"
+      "resolved_reasons": [
+        "debt instrument identity and maturity labels resolved by entity-scoped review"
       ],
+      "unresolved_reasons": [],
       "section_key": null,
       "section_decision": null
     },
@@ -2011,22 +2009,21 @@
       "page_start": 149,
       "table_family": "debt_schedule",
       "source_disposition": "review_blocked",
-      "candidate_disposition": "review_blocked",
-      "disposition_reason": "debt instrument identity and maturity labels require review",
+      "candidate_disposition": "normalize",
+      "disposition_reason": "Phase 1 mapping blockers resolved for manifest-generation input.",
       "source_review_reasons": [
         "debt instrument identity and maturity labels require review"
       ],
-      "resolved_reasons": [],
-      "unresolved_reasons": [
-        "debt instrument identity and maturity labels require review"
+      "resolved_reasons": [
+        "debt instrument identity and maturity labels resolved by entity-scoped review"
       ],
+      "unresolved_reasons": [],
       "section_key": null,
       "section_decision": null
     }
   ],
   "summary": {
     "duplicate_summary": 2,
-    "normalize": 107,
-    "review_blocked": 5
+    "normalize": 112
   }
 }

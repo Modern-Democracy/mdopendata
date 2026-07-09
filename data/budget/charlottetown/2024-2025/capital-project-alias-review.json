@@ -8,9 +8,11 @@
       "title_guess": "Public Transit Facility",
       "source_title": "Public Transit Facility and Fleet",
       "source_project": "Public Transit Facility and Fleet",
-      "alias_decision": "review_blocked",
-      "capital_project_keys": [],
-      "decision_reason": "Transit facility and fleet profile may split across facility, fleet, charging, and infrastructure keys.",
+      "alias_decision": "document_only",
+      "capital_project_keys": [
+        "public-transit-facility-and-fleet"
+      ],
+      "decision_reason": "The adopted budget presents one combined facility-and-fleet project with no allocable component split; preserve one document-scoped identity and do not infer links to later facility, fleet, charging, or infrastructure projects.",
       "profile_identity_flags": [
         "title_guess_incomplete_or_wrapped",
         "project_value_wrapped_or_differs_from_title_guess"
@@ -263,9 +265,11 @@
       "title_guess": "Eastern Gateway Masterplan",
       "source_title": "Eastern Gateway Masterplan",
       "source_project": "Eastern Gateway Masterplan joint project with Water and Sewer Utility",
-      "alias_decision": "review_blocked",
-      "capital_project_keys": [],
-      "decision_reason": "Eastern Gateway Masterplan is a joint project that may split across Public Works and Water/Sewer keys.",
+      "alias_decision": "document_only",
+      "capital_project_keys": [
+        "eastern-gateway-masterplan"
+      ],
+      "decision_reason": "The source presents a single joint Public Works and Water/Sewer project and does not allocate its budget between components; preserve a document-scoped identity without split or later-year inference.",
       "profile_identity_flags": [
         "project_value_wrapped_or_differs_from_title_guess"
       ],
@@ -282,9 +286,11 @@
       "title_guess": "Seaview Boulevard Rehabilitation",
       "source_title": "Seaview Boulevard Rehabilitation",
       "source_project": "Seaview Boulevard Rehabilitation- joint project with Water and Sewer Utility",
-      "alias_decision": "review_blocked",
-      "capital_project_keys": [],
-      "decision_reason": "Seaview Boulevard Rehabilitation is a joint project and may split across street and water/sewer keys.",
+      "alias_decision": "document_only",
+      "capital_project_keys": [
+        "seaview-boulevard-rehabilitation-public-works"
+      ],
+      "decision_reason": "The source reports the Public Works joint project separately from the Water and Sewer profile, with no source-supported shared project identifier or allocation; preserve a distinct document-scoped identity.",
       "profile_identity_flags": [
         "project_value_wrapped_or_differs_from_title_guess"
       ],
@@ -300,9 +306,11 @@
       "title_guess": "Water Street Rehabilitation",
       "source_title": "Water Street Rehabilitation",
       "source_project": "Water Street Rehabilitation- joint project with Water and Sewer Utility",
-      "alias_decision": "review_blocked",
-      "capital_project_keys": [],
-      "decision_reason": "Water Street Rehabilitation is a joint project and may split across street and water/sewer keys.",
+      "alias_decision": "document_only",
+      "capital_project_keys": [
+        "water-street-rehabilitation-public-works"
+      ],
+      "decision_reason": "The source reports one Public Works joint project without an allocable Water and Sewer component split; preserve a document-scoped identity.",
       "profile_identity_flags": [
         "project_value_wrapped_or_differs_from_title_guess"
       ],
@@ -359,9 +367,11 @@
       "title_guess": "Seaview Boulevard Water",
       "source_title": "Seaview Boulevard Water and Sewer Rehabilitation",
       "source_project": "Seaview Boulevard Water and Sewer Rehabilitation- joint project with Public Works",
-      "alias_decision": "review_blocked",
-      "capital_project_keys": [],
-      "decision_reason": "Seaview Boulevard Water and Sewer Rehabilitation needs split/merge review against Seaview and water/sewer keys.",
+      "alias_decision": "document_only",
+      "capital_project_keys": [
+        "seaview-boulevard-water-and-sewer-rehabilitation"
+      ],
+      "decision_reason": "The Water and Sewer profile has a distinct entity, scope, and budget from the Public Works Seaview profile; preserve a separate document-scoped identity rather than infer a merge.",
       "profile_identity_flags": [
         "title_guess_incomplete_or_wrapped",
         "project_value_wrapped_or_differs_from_title_guess"
@@ -418,8 +428,7 @@
     }
   ],
   "summary": {
-    "review_blocked": 5,
-    "document_only": 6,
+    "document_only": 11,
     "mapped_existing": 9
   }
 }
