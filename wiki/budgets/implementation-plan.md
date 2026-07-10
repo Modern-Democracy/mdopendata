@@ -66,7 +66,9 @@ The schema gate must use these 2026/2027 layouts:
 
 ### Extraction Tests
 
-- golden tests for page/table boundaries, headers, row order, cells, coordinates, signs, dashes, and continuation joins
+- golden tests for page/table boundaries, headers, row order, cells, coordinates, signs, dashes, explicit blank currency cells, and continuation joins
+- currency-column tests that preserve blank, dash, and explicit-zero source displays while normalizing each to numeric zero and `reported_zero` after reviewed column classification
+- per-value facts-contract tests requiring source value ID, document period, amount type, unit, value state, and numeric value for every approved fact
 - source-hash and stable-key tests across reruns
 - regression fixtures for each materially different table family in each annual PDF
 - explicit tests that narrative dates and project-profile numbers are not imported as financial facts

@@ -531,3 +531,27 @@ Generated deterministic source-linked Phase 2 inputs for every approved prior-ye
 ## [2026-07-09] review | Prior-year Phase 2 first family approvals
 
 Approved 514 rows in 14 standard 2024/2025 City department operating tables with detail/total roles, CAD, reporting entity, and reviewed period roles. Approved 43 capital profiles covering 288 rows as narrative-only source fields. The remaining 4,707 rows remain in the family-specific review queue.
+
+## [2026-07-09] generation | Prior-year coordinate raw extraction regeneration
+
+Replaced transparent-glyph-sensitive text-line extraction with visible-PDF coordinate text extraction for the 2024/2025 and 2025/2026 budget artifacts. Regeneration produced 1,300 rows and 1,448 values for 2024/2025, plus 3,112 rows and 2,578 values for 2025/2026; exact visible-line matches retained 587 and 514 prior row IDs respectively. Source-level QA confirmed the 2025/2026 page 25 total is no longer detached onto a `0` layout row and restored the Phase 1 debt review to 20 instruments plus two planned-debt buckets. Database raw records were not changed.
+
+## [2026-07-09] review | Prior-year Phase 2 regenerated operating approvals
+
+Corrected the Phase 2 source-column map to use one-based value indexes and approved only contiguous, header-aligned operating rows. This approves 359 2024/2025 and 719 2025/2026 City operating rows, including current-budget-only detailed-breakdown rows with one source value. It leaves 3,084 rows in the family-specific queue rather than inferring a period for omitted or shifted columns.
+
+## [2026-07-10] generation | Prior-year Phase 2 per-value fact contract
+
+Replaced the provisional row-level period, amount-type, and unit fields in approved prior-year Phase 2 mappings with the 2026/2027-style per-value `facts` array. The reviewed operating mappings now contain 1,015 2024/2025 and 1,556 2025/2026 source-linked facts. This preserves one normalized contract while retaining document-specific mapping rules.
+
+## [2026-07-10] decision | Currency zero and per-value facts contract
+
+Approved a general rule for reviewed currency columns: explicit zero, blank, and dash cells normalize to numeric zero with `reported_zero`, while retaining the original source display and column provenance. Also established the per-value facts contract as the required normalized mapping form for future budget extractions.
+
+## [2026-07-10] review | Prior-year Phase 2 debt schedules
+
+Approved all 40 row mappings in the 2025/2026 City and Water and Sewer debt schedules. The review maps 20 instrument rows and two schedule totals to balance, principal, and interest facts, represents both `New Debt` rows as planned-debt buckets with balance and interest only, and retains comments-column values plus combined interest-and-principal totals as non-additive source evidence.
+
+## [2026-07-10] review | Prior-year Phase 2 tax, capital, and facility mappings
+
+Applied 2026/2027 precedents to 2025/2026 tax/rate formulas, property-tax subtotal inheritance, capital schedule context rows, and Bell Aliant facility statements. Operating-detail rows remain the active Phase 2 review queue.

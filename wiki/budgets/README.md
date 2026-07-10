@@ -37,6 +37,7 @@ Charlottetown is the prototype municipality. The initial source set is the three
 | [2026/2027 normalized import Phase 7 status](./2026-normalized-import-phase-7-status.md) | Source-fidelity QA, review-decision resolution, representative exclusion, and Gate 8 readiness. |
 | [Vehicle Equipment clarification draft](./2026-vehicle-equipment-clarification-draft.md) | Draft request about the Police project profile missing from the approved capital schedule. |
 | [Week 5 raw ingestion status](./week-5-raw-ingestion-status.md) | Raw database ingestion status for the 2025/2026 and 2024/2025 budget PDFs before normalized comparability approval. |
+| [Prior-year coordinate raw extraction status](./prior-year-coordinate-raw-extraction-status.md) | Visible-PDF raw artifact regeneration, identifier reconciliation, QA evidence, and raw-database boundary. |
 | [Week 5 normalized mapping review](./week-5-normalized-mapping-review.md) | Prior-year normalized mapping review classifications, raw coverage blockers, and remaining approval gates. |
 | [Prior-year normalized import gap report](./prior-year-normalized-import-gap-report.md) | Step-through normalization, review, import, QA, and compatibility gates for 2025/2026 and 2024/2025. |
 | [Prior-year normalized import Phase 1 status](./prior-year-normalized-import-phase-1-status.md) | Period-label and section-continuation review artifacts and remaining Phase 1 blockers for prior-year normalization. |

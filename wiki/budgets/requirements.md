@@ -65,6 +65,8 @@ Out of scope for the prototype:
 - Model hierarchy for departments, services, account groups, line items, capital programs, and projects.
 - Store fiscal values in long form rather than year-specific columns.
 - Store currency as fixed-precision numeric values and never binary floating point.
+- For a reviewed currency table, an explicit `0`, blank cell, or dash cell represents a normalized numeric zero with `value_state: reported_zero`. Preserve the original source-cell display (`0`, blank, or `-`) and its physical column identity as provenance; do not apply this rule to non-currency columns without an explicit reviewed mapping.
+- Approved row mappings must use the shared per-value `facts` contract: each source value carries its own source value ID, document period, amount type, measure unit, value state, and numeric value. Document layout may vary, but this normalized fact contract does not.
 
 ### Review And Reconciliation
 
@@ -87,7 +89,7 @@ Out of scope for the prototype:
 ## Source Variations And Edge Cases
 
 - A document can contain current budget, prior budget, forecast, balance, and maturity years on the same page.
-- A dash can mean zero, not applicable, unavailable, or a display convention. Preserve it raw until reviewed.
+- A dash remains raw source evidence. In a reviewed currency column it normalizes to numeric zero and `reported_zero`; otherwise it remains unresolved until reviewed.
 - Parentheses can indicate negative values or deductions, as on the capital partner-funding schedule at PDF page 111.
 - A label can recur under different departments or statement sections and must not be globally merged by text alone.
 - Multi-page schedules may omit repeated headers.
