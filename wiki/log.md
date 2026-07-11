@@ -555,3 +555,7 @@ Approved all 40 row mappings in the 2025/2026 City and Water and Sewer debt sche
 ## [2026-07-10] review | Prior-year Phase 2 tax, capital, and facility mappings
 
 Applied 2026/2027 precedents to 2025/2026 tax/rate formulas, property-tax subtotal inheritance, capital schedule context rows, and Bell Aliant facility statements. Operating-detail rows remain the active Phase 2 review queue.
+
+## [2026-07-10] review | Prior-year Phase 2 user-reviewed structural decisions
+
+Applied user decisions for department hierarchy and totals, zero-display calculation treatment, facility statement periods and variance context, capital funding deductions and totals, property-tax totals, and Water and Sewer debt entity context. Regeneration produced 1,433 approved source-linked facts with 317 open rows for 2024/2025, and 2,355 approved facts with 44 open rows for 2025/2026. No database import, compatibility record, or publication snapshot was created.

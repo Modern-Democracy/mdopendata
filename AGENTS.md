@@ -18,6 +18,10 @@
 - Keep durable project knowledge in the wiki. Start with `wiki/AGENTS.md`,
   then use `wiki/index.md` and any project-specific wiki index relevant to the
   active task.
+- When requesting user review of extracted or normalized data, identify every
+  row precisely by source page, table or section, raw label, and value(s).
+  Do not group unresolved rows behind vague descriptions. State the exact
+  ambiguity and the proposed normalization for each cited row.
 - When asked to prepare a prompt for a new conversation, do not include
   instructions already present in `AGENTS.md`, role skill `SKILL.md` files, or
   wiki schema pages. Reference those files instead.
