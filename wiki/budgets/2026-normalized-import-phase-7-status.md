@@ -77,6 +77,12 @@ The database now has 2,165 same-document normalized facts, and all 2,165 are man
 
 Gate 8 is ready for review. The dataset is eligible for a separate publication decision after Gate 8 approval, but this status page does not authorize publication and no snapshot was created.
 
+Gate 8 review commenced on 2026-07-12. Current validation confirms all 2,165 manifest facts and source links match, the 161 reconciliation records retain one approved source-document discrepancy, no high- or critical-severity issues are open, and publication snapshots remain zero.
+
+### Gate 8 Approval Record
+
+On 2026-07-12, the project owner approved Gate 8 based on the evidence above. The 2026/2027 dataset is now publication-eligible. This approval does not create a `budget.publication_snapshot`, does not authorize a public release, and does not alter the requirement for a separate publication decision.
+
 ## Post-Import Identity Migration
 
 On 2026-07-12, `normalized-import-manifest.json` was found to contain 301 operating line items under twelve `*-detail-statement` identities added after the original normalized import. The database still held the same facts and source links under the prior summary-statement identities, causing Phase 7 to report 301 missing and 301 non-manifest facts.

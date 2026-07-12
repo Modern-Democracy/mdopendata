@@ -583,3 +583,11 @@ Corrected a post-import identity divergence between the 2026/2027 normalized man
 ## [2026-07-12] correction | Isolated budget migration regression database
 
 Changed the budget migration regression test to create a unique empty PostgreSQL database from `template0`, run migration 025 and its regression controls there, and remove it on success or failure. The active `mdopendata` database is no longer a test target. The configured `mdopendata` role has verified `CREATEDB` permission.
+
+## [2026-07-12] review | 2026/2027 budget Gate 8 commenced
+
+Started the Gate 8 QA-completion and publication-eligibility review without authorizing publication. Current Phase 7 QA matches all 2,165 facts and source links, retains 161 reconciliations with one accepted source-document discrepancy, confirms zero unresolved high- or critical-severity issues, and confirms zero publication snapshots. Gate 8 approval remains pending.
+
+## [2026-07-12] decision | 2026/2027 budget Gate 8 approval
+
+The project owner approved Gate 8 after reviewing the current QA evidence. The 2026/2027 normalized dataset is publication-eligible. No publication snapshot, public release authorization, or public API/UI exposure was created by this decision.
