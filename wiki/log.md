@@ -579,3 +579,7 @@ Established the budget-ingestion rule that charts and similar visualizations are
 ## [2026-07-12] correction | 2026/2027 operating summary-detail identities
 
 Corrected a post-import identity divergence between the 2026/2027 normalized manifest and PostgreSQL. A transactional migration created twelve manifest-defined operating detail statements, moved 301 existing line items and their facts, retained all 301 source links, and created the approved summary-detail relationships. Batch 53 records the migration. Phase 7 source-fidelity QA subsequently matched all 2,165 facts and source links with zero publication snapshots.
+
+## [2026-07-12] correction | Isolated budget migration regression database
+
+Changed the budget migration regression test to create a unique empty PostgreSQL database from `template0`, run migration 025 and its regression controls there, and remove it on success or failure. The active `mdopendata` database is no longer a test target. The configured `mdopendata` role has verified `CREATEDB` permission.

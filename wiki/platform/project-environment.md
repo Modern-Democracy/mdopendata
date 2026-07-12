@@ -66,6 +66,10 @@ Run the approved append-only import without `--dry-run`, then validate provenanc
 
 Migration `026_budget_capital_project_reference.sql` restores the approved document-to-project reference table when migration 025 was recorded before that table reached the active database. It is additive and preserves project identity independently of fiscal-year documents. The pre-migration rollback artifact is `backups/database/mdopendata-before-prior-year-normalized-20260712.dump`.
 
+## Isolated Budget Migration Regression Test
+
+`scripts/test-budget-migration.py` creates a uniquely named empty PostgreSQL database from `template0` in `mdopendata-postgis`, applies migration 025 and its regression controls, then drops the temporary database. It never applies DDL to the active `mdopendata` database. The test uses `PGCONTAINER`, `PGUSER`, and optional `PGADMIN_DATABASE` environment variables; the configured database role must have `CREATEDB` permission.
+
 ## Required Documentation for Changes
 
 Every environment or deployment change must record:
@@ -83,6 +87,7 @@ Every environment or deployment change must record:
 - [Python project configuration](../../pyproject.toml)
 - [Locked Python dependencies](../../requirements.lock.txt)
 - [Python wrapper](../../scripts/python.ps1)
+- [Budget migration regression test](../../scripts/test-budget-migration.py)
 - [QGIS MCP launcher](../../scripts/start-qgis-mcp.ps1)
 - [AWS deployment](../implementation/aws-deployment.md)
 - [Repository instructions](../../AGENTS.md)
