@@ -599,3 +599,7 @@ Started Gate 8 QA-completion and publication-eligibility review for the 2024/202
 ## [2026-07-12] decision | Prior-year budget Gate 8 approval
 
 The project owner approved Gate 8 for the 2024/2025 and 2025/2026 normalized datasets. Both datasets are publication-eligible. No publication snapshot, public-release authorization, or cross-period publication scope was created by this decision.
+
+## [2026-07-12] proposal | Three-year Charlottetown budget publication snapshot
+
+Prepared a non-executing proposal for one draft Charlottetown snapshot covering all 6,256 approved facts from the three Gate 8-approved financial-plan documents. The proposal requires an exact approved taxonomy-version label before execution, preserves the accepted 2026/2027 debt discrepancy as a warning, and separates draft creation from the later decision to publish.

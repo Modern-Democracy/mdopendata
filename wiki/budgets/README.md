@@ -45,6 +45,7 @@ Charlottetown is the prototype municipality. The initial source set is the three
 | [Prior-year normalized import completion status](./prior-year-normalized-import-completion-status.md) | Completed manifests, reconciliations, controlled imports, idempotence, project references, and source-fidelity QA for both prior years. |
 | [Capital project lifecycle and references](./capital-project-lifecycle.md) | Source-limited lifecycle rules and municipality-scoped project identity with document-owned references. |
 | [Budget ingestion refactor tracker](./budget-ingestion-refactor-tracker.md) | Deferred refactor tracker for separating reusable budget ingestion code from document-specific mappings after prior-year completion. |
+| [Three-year publication-snapshot proposal](./three-year-publication-snapshot-proposal.md) | Draft scope, required taxonomy decision, source documents, fact counts, and acceptance checks for the first Charlottetown three-year snapshot. |
 
 ## Current Evidence
 
