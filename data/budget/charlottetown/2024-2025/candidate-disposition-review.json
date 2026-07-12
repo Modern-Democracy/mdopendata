@@ -14,7 +14,7 @@
       ],
       "resolved_reasons": [],
       "unresolved_reasons": [],
-      "section_key": "2024-2025-continuation-001-1-operating-statement",
+      "section_key": "2024-2025-continuation-001-3-operating-statement",
       "section_decision": "proposed_section_group"
     },
     {
@@ -23,17 +23,17 @@
       "page_start": 15,
       "table_family": "operating_statement",
       "source_disposition": "review_blocked",
-      "candidate_disposition": "normalize",
-      "disposition_reason": "Phase 1 mapping blockers resolved for manifest-generation input.",
+      "candidate_disposition": "duplicate_summary",
+      "disposition_reason": "Chart-backed overview table duplicates normalized detail/summary facts; chart visual is ignored.",
       "source_review_reasons": [
         "continuation membership requires section-level review"
       ],
       "resolved_reasons": [
-        "continuation membership resolved by reviewed section group"
+        "duplicate visualization summary excluded from normalization"
       ],
       "unresolved_reasons": [],
       "section_key": "2024-2025-continuation-001-1-operating-statement",
-      "section_decision": "proposed_section_group"
+      "section_decision": "duplicate_summary"
     },
     {
       "document_key": "2024-2025",
@@ -41,17 +41,17 @@
       "page_start": 16,
       "table_family": "operating_statement",
       "source_disposition": "review_blocked",
-      "candidate_disposition": "normalize",
-      "disposition_reason": "Phase 1 mapping blockers resolved for manifest-generation input.",
+      "candidate_disposition": "duplicate_summary",
+      "disposition_reason": "Chart-backed overview table duplicates normalized detail/summary facts; chart visual is ignored.",
       "source_review_reasons": [
         "continuation membership requires section-level review"
       ],
       "resolved_reasons": [
-        "continuation membership resolved by reviewed section group"
+        "duplicate visualization summary excluded from normalization"
       ],
       "unresolved_reasons": [],
-      "section_key": "2024-2025-continuation-001-1-operating-statement",
-      "section_decision": "proposed_section_group"
+      "section_key": "2024-2025-continuation-001-2-operating-statement",
+      "section_decision": "duplicate_summary"
     },
     {
       "document_key": "2024-2025",
@@ -1033,6 +1033,7 @@
     }
   ],
   "summary": {
-    "normalize": 58
+    "normalize": 56,
+    "duplicate_summary": 2
   }
 }

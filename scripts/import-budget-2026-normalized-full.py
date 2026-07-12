@@ -1,4 +1,4 @@
-"""Dry-run-capable full normalized import for Charlottetown 2026/2027 budget."""
+"""Dry-run-capable full normalized import for a reviewed Charlottetown budget."""
 
 from __future__ import annotations
 
@@ -94,28 +94,10 @@ def document_metadata() -> tuple[dict, dict]:
 
 
 def validate_files(manifest: dict, reconciliations: dict, source_document: dict) -> None:
-    expected_counts = {
-        "source_documents": 1,
-        "source_tables": 85,
-        "reporting_entities": 4,
-        "organization_units": 13,
-        "fiscal_periods": 3,
-        "document_periods": 128,
-        "statements": 30,
-        "line_items": 1163,
-        "facts": 2165,
-        "fact_sources": 2165,
-        "capital_projects": 169,
-        "capital_project_references": 173,
-        "capital_project_aliases": 173,
-        "capital_project_profiles": 24,
-        "capital_project_facts": 192,
-        "debt_instruments": 10,
-        "debt_facts": 30,
-        "reconciliations": 161,
-        "review_issues": 1,
-    }
     actual = all_counts(manifest, reconciliations)
+    expected_counts = {item["record_type"]: item["count"] for item in manifest["expected_counts"] if item["record_type"] in actual}
+    expected_counts["reconciliations"] = len(reconciliations["records"])
+    expected_counts["review_issues"] = len(reconciliations["review_issues"])
     if actual != expected_counts:
         raise SystemExit(f"Full normalized count mismatch: expected {expected_counts}, got {actual}")
     source_path = ROOT / source_document["local_path"]
@@ -124,8 +106,8 @@ def validate_files(manifest: dict, reconciliations: dict, source_document: dict)
         raise SystemExit("Manifest source hash mismatch")
     if source_hash != source_document["sha256"]:
         raise SystemExit("Representative source hash mismatch")
-    if len(PdfReader(str(source_path)).pages) != 154:
-        raise SystemExit("Unexpected source PDF page count")
+    if not PdfReader(str(source_path)).pages:
+        raise SystemExit("Source PDF has no pages")
     for key in ["facts", "fact_sources", "line_items", "document_periods"]:
         keys = [item["key"] for item in manifest[key]]
         if len(keys) != len(set(keys)):
@@ -487,7 +469,7 @@ def import_normalized(cur: psycopg.Cursor, manifest: dict, reconciliations: dict
         )
     for reference in manifest.get("capital_project_references", []):
         natural_key = reference["key"]
-        source_table_id = table_ids[reference["source_table_key"]]
+        source_table_id = raw["tables"][reference["source_table_key"]]
         cur.execute("SELECT id FROM budget.source_table_row WHERE source_table_id=%s AND row_key=%s", (source_table_id, reference["source_row_id"]))
         source_row = cur.fetchone()
         if source_row is None:
@@ -574,10 +556,10 @@ def import_normalized(cur: psycopg.Cursor, manifest: dict, reconciliations: dict
         debt_instrument_ids[instrument["key"]] = ensure_dimension(
             cur, batch_id, "debt_instrument", instrument["key"],
             "SELECT id FROM budget.debt_instrument WHERE reporting_entity_id=%s AND raw_label=%s AND effective_from='1900-01-01'",
-            (entity_ids["charlottetown-water-sewer"], instrument["raw_label"]),
+            (entity_ids[instrument.get("reporting_entity_key", "charlottetown-water-sewer")], instrument["raw_label"]),
             """INSERT INTO budget.debt_instrument(reporting_entity_id,raw_label,normalized_label,maturity_date,effective_from)
                VALUES(%s,%s,%s,%s,'1900-01-01') RETURNING id""",
-            (entity_ids["charlottetown-water-sewer"], instrument["raw_label"], instrument["key"],
+            (entity_ids[instrument.get("reporting_entity_key", "charlottetown-water-sewer")], instrument["raw_label"], instrument.get("normalized_label", instrument["key"]),
              f"{instrument['maturity_year']}-12-31" if instrument.get("maturity_year") else None),
             instrument,
         )
@@ -710,9 +692,16 @@ def import_normalized(cur: psycopg.Cursor, manifest: dict, reconciliations: dict
 
 
 def main() -> int:
+    global BASE, MANIFEST_PATH, RECONCILIATION_PATH, PLAN_PATH, DOCUMENT_KEY
     parser = argparse.ArgumentParser()
+    parser.add_argument("--document-key", default="2026-2027")
     parser.add_argument("--dry-run", action="store_true", help="roll back after producing the import plan")
     args = parser.parse_args()
+    DOCUMENT_KEY = args.document_key
+    BASE = ROOT / "data/budget/charlottetown" / DOCUMENT_KEY
+    MANIFEST_PATH = BASE / "normalized-import-manifest.json"
+    RECONCILIATION_PATH = BASE / "normalized-import-reconciliation-catalogue.json"
+    PLAN_PATH = BASE / "normalized-import-dry-run-plan.json"
     manifest = load(MANIFEST_PATH)
     reconciliations = load(RECONCILIATION_PATH)
     municipality, source_document = document_metadata()

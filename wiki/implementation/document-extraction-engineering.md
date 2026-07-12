@@ -56,6 +56,10 @@ Reuse is appropriate only for materially equivalent structures. Stop and produce
 
 Templates and shared mappers may accept parameters for documented variation. They must not infer unsupported semantics from visual similarity alone.
 
+## Duplicate Visualizations
+
+Charts, bubbles, pies, graphs, and other visual presentations are not normalization sources when the same figures appear in an authoritative source table elsewhere in the budget document. Preserve their raw extraction evidence and classify the page or table as `duplicate_summary`; exclude it from fact mapping, reconciliation inputs, and unresolved row-review registers. Only use a visualization as a source when the document contains no authoritative tabular equivalent; retain a source-linked decision identifying that absence before mapping any value.
+
 ## QA Contract
 
 Every extraction change must verify:

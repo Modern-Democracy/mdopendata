@@ -42,6 +42,7 @@ Charlottetown is the prototype municipality. The initial source set is the three
 | [Prior-year normalized import gap report](./prior-year-normalized-import-gap-report.md) | Step-through normalization, review, import, QA, and compatibility gates for 2025/2026 and 2024/2025. |
 | [Prior-year normalized import Phase 1 status](./prior-year-normalized-import-phase-1-status.md) | Period-label and section-continuation review artifacts and remaining Phase 1 blockers for prior-year normalization. |
 | [Prior-year normalized import Phase 2 status](./prior-year-normalized-import-phase-2-status.md) | Source-linked row-mapping inputs and remaining row-semantic review for both prior-year documents. |
+| [Prior-year normalized import completion status](./prior-year-normalized-import-completion-status.md) | Completed manifests, reconciliations, controlled imports, idempotence, project references, and source-fidelity QA for both prior years. |
 | [Capital project lifecycle and references](./capital-project-lifecycle.md) | Source-limited lifecycle rules and municipality-scoped project identity with document-owned references. |
 | [Budget ingestion refactor tracker](./budget-ingestion-refactor-tracker.md) | Deferred refactor tracker for separating reusable budget ingestion code from document-specific mappings after prior-year completion. |
 

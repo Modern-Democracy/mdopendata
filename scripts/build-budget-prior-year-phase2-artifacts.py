@@ -5,7 +5,11 @@ from pathlib import Path
 
 BASE = Path("data/budget/charlottetown")
 DOCUMENTS = ("2024-2025", "2025-2026")
-STANDARD_2024_OPERATING_PAGES = {19, 21, 22, 24, 26, 28, 30, 32, 34, 35, 37, 39, 41, 43}
+# Page 14 is the City operating-budget summary.  Its title, period headings,
+# entity label, and Revenue/Expenses labels are structural source context;
+# the numeric rows beneath them are a standard three-period statement.
+STANDARD_2024_OPERATING_PAGES = {14, 19, 21, 22, 24, 26, 28, 30, 32, 34, 35, 37, 39, 41, 43}
+STANDARD_2024_CIVIC_CENTRE_PAGES = {82, 83, 84, 85, 86}
 STANDARD_2024_PERIODS = {1: "2023-2024-budget", 2: "2023-2024-forecast", 3: "2024-2025-budget"}
 STANDARD_2025_PERIODS = {1: "2024-2025-budget", 2: "2024-2025-forecast", 3: "2025-2026-budget"}
 STANDARD_2025_MULTI_PERIOD_OPERATING_DETAIL_PAGES = {17, 18, 89}
@@ -20,6 +24,12 @@ TAX_SUBTOTAL_GROUPS = {
 CAPITAL_UNLABELED_TOTAL_LABELS = {
     "ctown_budget_2025_2026_p123_coord_r040": "Total Urban Beautification",
     "ctown_budget_2025_2026_p123_coord_r042": "Total Public Works",
+}
+PARTIAL_THREE_PERIOD_ROWS = {
+    "ctown_budget_2025_2026_p017_coord_r022": ("2025-2026-budget",),
+    "ctown_budget_2025_2026_p018_coord_r009": ("2024-2025-forecast",),
+    "ctown_budget_2025_2026_p018_coord_r016": ("2024-2025-budget",),
+    "ctown_budget_2025_2026_p018_coord_r030": ("2024-2025-budget", "2024-2025-forecast"),
 }
 
 
@@ -46,7 +56,7 @@ def main():
         for candidate in candidates:
             table_id = f"ctown_budget_{document.replace('-', '_')}_p{candidate['page_start']:03d}"
             source_rows = rows_by_table.get(table_id, [])
-            approved_standard_2024 = document == "2024-2025" and candidate["table_family"] == "operating_statement" and candidate["page_start"] in STANDARD_2024_OPERATING_PAGES
+            approved_standard_2024 = document == "2024-2025" and candidate["table_family"] == "operating_statement" and candidate["page_start"] in (STANDARD_2024_OPERATING_PAGES | STANDARD_2024_CIVIC_CENTRE_PAGES)
             approved_standard_2025 = document == "2025-2026" and candidate["table_family"] in {"operating_statement", "operating_detail"}
             approved_standard = approved_standard_2024 or approved_standard_2025
             approved_profile = candidate["table_family"] == "capital_project_profile"
@@ -56,6 +66,16 @@ def main():
             for row in source_rows:
                 values = [{"value_id": value_id, "raw_value": raw_values[value_id]["raw_value"], "parsed_decimal": raw_values[value_id]["parsed_decimal"], "value_kind": raw_values[value_id]["value_kind"], "value_index": raw_values[value_id]["value_index"]} for value_id in row["value_ids"]]
                 label = row["cells"][0] if row["cells"] else ""
+                row_sequence = int(row["row_id"].rsplit("_r", 1)[1])
+                water_and_sewer_statement = (
+                    candidate["page_start"] == 89
+                    or (
+                        document == "2024-2025"
+                        and candidate["page_start"] == 14
+                        and row_sequence >= 34
+                    )
+                )
+                reporting_entity_key = "charlottetown-water-and-sewer" if water_and_sewer_statement else "city-of-charlottetown"
                 if candidate["table_family"] == "facility_operating_statement" and not values:
                     facility_match = re.match(r"(Operating (?:Revenue|Grants|Expenses))", label)
                     if facility_match:
@@ -68,14 +88,25 @@ def main():
                     and candidate["page_start"] == 25
                     and bool(re.search(r"\(\d+\)$", label))
                 )
+                embedded_nonfinancial_context = (
+                    candidate["table_family"] in {"operating_statement", "operating_detail"}
+                    and values
+                    and all(value["value_kind"] == "percent" or re.fullmatch(r"\(?\d+\)?", value["raw_value"]) for value in values)
+                    and ("%" in row["trimmed_text"] or re.search(r"\(\d+\)", row["trimmed_text"]) or (label.startswith("Budget ") and " to " in label))
+                )
                 if staff_count_context:
                     mapped_rows.append({"row_id": row["row_id"], "raw_label": label, "raw_text": row["trimmed_text"], "source_value_ids": row["value_ids"], "source_values": values, "row_semantics": "source_context", "aggregation_role": "non_additive", "reporting_entity_key": "city-of-charlottetown", "facts": [], "review_status": "approved"})
+                elif embedded_nonfinancial_context:
+                    mapped_rows.append({"row_id": row["row_id"], "raw_label": label, "raw_text": row["trimmed_text"], "source_value_ids": row["value_ids"], "source_values": values, "row_semantics": "source_context", "aggregation_role": "non_additive", "reporting_entity_key": reporting_entity_key, "facts": [], "review_status": "approved"})
                 elif approved_profile:
                     mapped_rows.append({"row_id": row["row_id"], "raw_label": label, "raw_text": row["trimmed_text"], "source_value_ids": row["value_ids"], "source_values": values, "row_semantics": "profile_narrative_or_source_field", "aggregation_role": "non_additive", "financial_fact_treatment": "exclude_narrative_numbers", "review_status": "approved_narrative_only"})
                 elif approved_standard and not values:
                     source_display_zero = label.lower().startswith("net ") and "-" in row["trimmed_text"]
-                    mapped_rows.append({"row_id": row["row_id"], "raw_label": label, "raw_text": row["trimmed_text"], "source_value_ids": row["value_ids"], "source_values": values, "row_semantics": "total" if source_display_zero else "source_context", "aggregation_role": "total" if source_display_zero else "non_additive", "reporting_entity_key": "charlottetown-water-and-sewer" if candidate["page_start"] == 89 else "city-of-charlottetown", "facts": [], "source_display_zero_for_calculation": source_display_zero, "review_status": "approved"})
+                    mapped_rows.append({"row_id": row["row_id"], "raw_label": label, "raw_text": row["trimmed_text"], "source_value_ids": row["value_ids"], "source_values": values, "row_semantics": "total" if source_display_zero else "source_context", "aggregation_role": "total" if source_display_zero else "non_additive", "reporting_entity_key": reporting_entity_key, "facts": [], "source_display_zero_for_calculation": source_display_zero, "review_status": "approved"})
                 elif approved_standard and values:
+                    effective_operating_label = label
+                    if not effective_operating_label and any(value["value_kind"] == "percent" for value in values):
+                        effective_operating_label = re.sub(r"\s+-?\d+(?:,\d{3})*(?:\.\d+)?$", "", row["trimmed_text"])
                     inferred_subtotal = (
                         document == "2025-2026"
                         and candidate["table_family"] == "operating_detail"
@@ -83,30 +114,47 @@ def main():
                         and operating_detail_group_label is not None
                     )
                     is_total = label.lower().startswith(("total ", "net ")) or inferred_subtotal
-                    periods = STANDARD_2024_PERIODS if approved_standard_2024 else STANDARD_2025_PERIODS
+                    civic_centre_2024 = document == "2024-2025" and candidate["page_start"] in STANDARD_2024_CIVIC_CENTRE_PAGES
+                    financial_values = [value for value in values if value["value_kind"] != "percent"]
+                    if len(financial_values) > 1 and financial_values[0]["value_kind"] == "dash":
+                        financial_values = financial_values[1:]
+                    if "$" in row["trimmed_text"] and "per year" in row["trimmed_text"] and len(financial_values) > 1:
+                        financial_values = financial_values[-1:]
+                    if document == "2024-2025" and candidate["page_start"] == 84 and row["row_id"].endswith("_r011"):
+                        financial_values = financial_values[:1]
+                    periods = ({1: "2024-2025-budget"} if civic_centre_2024 else (STANDARD_2024_PERIODS if approved_standard_2024 else STANDARD_2025_PERIODS))
                     # Later 2025/2026 detailed-breakdown pages report only the
                     # current budget; their first numeric column is not the prior-year column.
                     if document == "2025-2026" and candidate["table_family"] == "operating_detail" and candidate["page_start"] >= 25 and len(values) == 1:
                         periods = {1: "2025-2026-budget"}
+                    partial_periods = PARTIAL_THREE_PERIOD_ROWS.get(row["row_id"])
+                    if partial_periods:
+                        periods = {index: period for index, period in enumerate(partial_periods, 1)}
+                    detached_category_total = (
+                        document == "2025-2026"
+                        and candidate["table_family"] == "operating_detail"
+                        and candidate["page_start"] >= 25
+                        and not label
+                        and len(financial_values) == 1
+                    )
                     detail_shape_approved = True
                     if document == "2025-2026" and candidate["table_family"] == "operating_detail":
-                        detail_shape_approved = len(values) == (3 if candidate["page_start"] in STANDARD_2025_MULTI_PERIOD_OPERATING_DETAIL_PAGES else 1)
+                        detail_shape_approved = bool(partial_periods) or len(financial_values) == (3 if candidate["page_start"] in STANDARD_2025_MULTI_PERIOD_OPERATING_DETAIL_PAGES else 1)
                     approved = (
-                        (bool(label) or inferred_subtotal)
+                        (bool(effective_operating_label) or inferred_subtotal or detached_category_total)
                         and detail_shape_approved
-                        and [value["value_index"] for value in values] == list(range(1, len(values) + 1))
-                        and all(value["value_index"] in periods for value in values)
+                        and len(financial_values) <= len(periods)
                     )
                     facts = [{
                         "source_value_id": value["value_id"],
-                        "document_period_key": periods[value["value_index"]],
+                        "document_period_key": periods[index],
                         "amount_type": "reported_amount",
                         "measure_unit": "CAD",
                         "value_state": "dash_unresolved" if value["value_kind"] == "dash" else "reported_value",
                         "numeric_value": value["parsed_decimal"],
-                    } for value in values] if approved else []
-                    reporting_entity_key = "charlottetown-water-and-sewer" if candidate["page_start"] == 89 else "city-of-charlottetown"
-                    mapped_rows.append({"row_id": row["row_id"], "raw_label": label, "raw_text": row["trimmed_text"], "source_group_label": operating_detail_group_label if inferred_subtotal else None, "source_value_ids": row["value_ids"], "source_values": values, "row_semantics": "subtotal" if inferred_subtotal else ("total" if is_total else "detail"), "aggregation_role": "subtotal" if inferred_subtotal else ("total" if is_total else "detail"), "reporting_entity_key": reporting_entity_key, "facts": facts, "review_status": "approved" if approved else "needs_review"})
+                    } for index, value in enumerate(financial_values, 1)] if approved else []
+                    subtotal_row = inferred_subtotal or detached_category_total
+                    mapped_rows.append({"row_id": row["row_id"], "raw_label": label, "normalized_label": effective_operating_label if effective_operating_label != label else None, "raw_text": row["trimmed_text"], "source_group_label": operating_detail_group_label if subtotal_row else None, "source_value_ids": row["value_ids"], "source_values": values, "row_semantics": "subtotal" if subtotal_row else ("total" if is_total else "detail"), "aggregation_role": "subtotal" if subtotal_row else ("total" if is_total else "detail"), "reporting_entity_key": reporting_entity_key, "facts": facts, "review_status": "approved" if approved else "needs_review"})
                 elif document == "2025-2026" and candidate["table_family"] == "operating_detail" and candidate["page_start"] == 89:
                     mapped_rows.append({"row_id": row["row_id"], "raw_label": label, "raw_text": row["trimmed_text"], "source_value_ids": row["value_ids"], "source_values": values, "row_semantics": "source_context", "aggregation_role": "non_additive", "reporting_entity_key": "charlottetown-water-and-sewer", "facts": [], "review_status": "approved"})
                 elif document == "2025-2026" and candidate["table_family"] == "debt_schedule":
@@ -149,11 +197,13 @@ def main():
                     financial = [value for value in values if value["value_kind"] in {"number", "currency", "dash"}]
                     subtotal = facility_group_label is not None and (not label or not re.search(r"[A-Za-z]", label))
                     missing_leading_dash = document == "2024-2025" and label.startswith("Training ") and len(financial) == 1 and "-" in row["trimmed_text"]
-                    approved = (bool(label) or subtotal) and (len(financial) == 2 or missing_leading_dash)
+                    missing_trailing_dash = len(financial) == 1 and "-" in row["trimmed_text"] and any(value["value_kind"] == "percent" for value in values)
+                    all_dash_variance_row = not financial and any(value["value_kind"] == "dash" for value in values) and any(value["value_kind"] == "percent" for value in values)
+                    approved = (bool(label) or subtotal) and (len(financial) == 2 or missing_leading_dash or missing_trailing_dash or all_dash_variance_row)
                     periods = ("2024-2025-budget", "2023-2024-budget") if document == "2024-2025" else ("2025-2026-budget", "2024-2025-budget")
                     fact_periods = (periods[1],) if missing_leading_dash else periods
                     facts = [{"source_value_id": value["value_id"], "document_period_key": period, "amount_type": "budget", "measure_unit": "CAD", "value_state": "reported_zero" if value["value_kind"] == "dash" else "reported_value", "numeric_value": "0" if value["value_kind"] == "dash" else value["parsed_decimal"]} for value, period in zip(financial, fact_periods)] if approved else []
-                    display_zero = (not values and label.startswith("Operating Earnings (Loss)") and "-" in row["trimmed_text"]) or missing_leading_dash
+                    display_zero = (not values and label.startswith("Operating Earnings (Loss)") and "-" in row["trimmed_text"]) or missing_leading_dash or missing_trailing_dash or all_dash_variance_row
                     mapped_rows.append({"row_id": row["row_id"], "raw_label": label, "raw_text": row["trimmed_text"], "source_group_label": facility_group_label if subtotal else None, "source_value_ids": row["value_ids"], "source_values": values, "row_semantics": "source_context" if not values else ("subtotal" if subtotal else ("total" if label.startswith("Total ") else "detail")), "aggregation_role": "non_additive" if not values else ("subtotal" if subtotal else ("total" if label.startswith("Total ") else "detail")), "reporting_entity_key": "bell-aliant-centre", "facts": facts, "source_display_zero_for_calculation": display_zero, "missing_reported_zero_period": periods[0] if missing_leading_dash else None, "review_status": "approved" if approved or not values else "needs_review"})
                 elif document == "2025-2026" and candidate["table_family"] == "tax_assessment_rate":
                     formula = tax_formula_rows.get(row["row_id"])
@@ -197,12 +247,15 @@ def main():
                     comparison_page = (document == "2024-2025" and candidate["page_start"] == 45) or (document == "2025-2026" and candidate["page_start"] == 108)
                     periods = ({1: f"{int(document[:4]) - 1}-{document[:4]}-budget", 2: f"{document}-budget"}
                                if comparison_page else {1: f"{document}-budget"})
+                    if document == "2024-2025" and candidate["page_start"] in {62, 63} and len(values) == 2:
+                        values = values[-1:]
+                        periods = {values[0]["value_index"]: f"{document}-budget"}
                     inferred_label = CAPITAL_UNLABELED_TOTAL_LABELS.get(row["row_id"])
                     effective_label = inferred_label or label
                     lower = effective_label.lower()
                     deduction = lower.startswith(("less:", "less ")) or "partner funding" in lower
                     is_total = lower.startswith(("total ", "net "))
-                    approved = bool(effective_label) and [value["value_index"] for value in values] == list(range(1, len(values) + 1)) and all(value["value_index"] in periods for value in values)
+                    approved = bool(effective_label) and len({value["value_index"] for value in values}) == len(values) and all(value["value_index"] in periods for value in values)
                     facts = [{"source_value_id": value["value_id"], "document_period_key": periods[value["value_index"]], "amount_type": "partner_funding" if deduction else "reported_amount", "measure_unit": "CAD", "value_state": "dash_unresolved" if value["value_kind"] == "dash" else "reported_value", "numeric_value": value["parsed_decimal"]} for value in values] if approved else []
                     mapped_rows.append({"row_id": row["row_id"], "raw_label": label, "raw_text": row["trimmed_text"], "normalized_label": inferred_label, "source_value_ids": row["value_ids"], "source_values": values, "row_semantics": "total" if is_total else "detail", "aggregation_role": "deduction" if deduction else ("total" if is_total else "detail"), "reporting_entity_key": "city-of-charlottetown", "facts": facts, "review_status": "approved" if approved else "needs_review"})
                 else:

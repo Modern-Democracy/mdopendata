@@ -5,7 +5,7 @@ tags:
   - normalization
   - prior-year
   - phase-1
-updated: 2026-07-09
+updated: 2026-07-11
 ---
 
 This page records the Phase 1 period-label, section-continuation, operating-detail relationship, capital-project-profile-identity, capital-project-alias, and candidate-disposition review start for the 2025/2026 and 2024/2025 Charlottetown budget normalization work.
@@ -52,7 +52,7 @@ The review maps fiscal-year labels and aliases to fiscal-period date ranges and 
 | Document | Duplicate summaries | Proposed section groups | Do-not-merge profile groups | Review-blocked groups |
 | --- | ---: | ---: | ---: | ---: |
 | 2025/2026 | 2 | 23 | 5 | 0 |
-| 2024/2025 | 0 | 10 | 4 | 0 |
+| 2024/2025 | 2 | 9 | 4 | 0 |
 
 Operating, facility, and capital schedule continuation groups are retained as proposed source-section groups for row-level normalization. Adjacent capital project profile groups are explicitly marked `do_not_merge_profiles`; those pages remain separate project records and are deferred to capital project alias review.
 
@@ -69,6 +69,8 @@ Both source patterns must normalize to the same target structure. The 2025/2026 
 
 The 2025/2026 overview pages 14 and 15 contain a pie chart followed by the backing data table. Matching the reviewed 2026/2027 page 18 and 19 precedent, these pages are classified as `duplicate_summary` for normalization. The chart visual is duplicate presentation for human readers and is ignored; later user-interface charts should be reproduced from reviewed normalized facts rather than extracted from the source PDF chart graphic.
 
+The 2024/2025 bubble-chart pages 15 and 16 are also `duplicate_summary`: page 15 presents revenue and page 16 presents expenses already reported in the operating-budget summary on page 14. Their raw evidence is retained, but neither page can create normalized facts or unresolved row-review work.
+
 ## Universal Duplicate-Visualization Rule
 
 Budget documents commonly repeat the same numbers across visualizations, overview pages, and backing tables to help human readers understand the source. For normalization, duplicate visualization or overview fact sets must be classified as `duplicate_summary` and excluded from normalized facts unless they are approved summary/detail relationships, such as department summaries versus line-item department or project tables. The public UI should reproduce charts from reviewed normalized facts, not from extracted source chart graphics.
@@ -78,8 +80,8 @@ Budget documents commonly repeat the same numbers across visualizations, overvie
 | Document | Normalize | Duplicate summary | Review-blocked |
 | --- | ---: | ---: | ---: |
 | 2025/2026 | 112 | 2 | 0 |
-| 2024/2025 | 58 | 0 | 0 |
-| Total | 170 | 2 | 0 |
+| 2024/2025 | 56 | 2 | 0 |
+| Total | 168 | 4 | 0 |
 
 Period-label-only and continuation-only blockers have been resolved or intentionally excluded from document-period mapping. No Phase 1 candidate remains review-blocked.
 

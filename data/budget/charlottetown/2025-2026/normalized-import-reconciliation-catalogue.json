@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "phase": 4,
+  "status": "approved",
+  "tolerance_policy": {
+    "currency_absolute": "1"
+  },
+  "records": [
+    {
+      "check_key": "capital_net:2025-2026-capital_budget_schedule-p109:ctown_budget_2025_2026_p109_coord_r013:2025-2026:ctown_budget_2025_2026_p109:full-3:column-1:budget:net:cad:1",
+      "family": "capital_gross_less_partner_funding",
+      "statement_key": "2025-2026-capital_budget_schedule-p109",
+      "formula": "reported gross + funding deductions = reported net",
+      "input_fact_keys": [
+        "2025-2026-capital_budget_schedule-p109:ctown_budget_2025_2026_p109_coord_r011:2025-2026:ctown_budget_2025_2026_p109:full-3:column-1:budget:gross:cad:1",
+        "2025-2026-capital_budget_schedule-p109:ctown_budget_2025_2026_p109_coord_r012:2025-2026:ctown_budget_2025_2026_p109:full-3:column-1:budget:funding_deduction:cad:1"
+      ],
+      "reported_fact_key": "2025-2026-capital_budget_schedule-p109:ctown_budget_2025_2026_p109_coord_r013:2025-2026:ctown_budget_2025_2026_p109:full-3:column-1:budget:net:cad:1",
+      "calculated_value": "329750",
+      "reported_value": "329750",
+      "reported_value_state": "reported",
+      "difference": "0",
+      "tolerance": "1",
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "check_key": "capital_net:2025-2026-capital_budget_schedule-p109:ctown_budget_2025_2026_p109_coord_r019:2025-2026:ctown_budget_2025_2026_p109:full-3:column-1:budget:net:cad:1",
+      "family": "capital_gross_less_partner_funding",
+      "statement_key": "2025-2026-capital_budget_schedule-p109",
+      "formula": "reported gross + funding deductions = reported net",
+      "input_fact_keys": [
+        "2025-2026-capital_budget_schedule-p109:ctown_budget_2025_2026_p109_coord_r017:2025-2026:ctown_budget_2025_2026_p109:full-3:column-1:budget:gross:cad:1",
+        "2025-2026-capital_budget_schedule-p109:ctown_budget_2025_2026_p109_coord_r018:2025-2026:ctown_budget_2025_2026_p109:full-3:column-1:budget:funding_deduction:cad:1"
+      ],
+      "reported_fact_key": "2025-2026-capital_budget_schedule-p109:ctown_budget_2025_2026_p109_coord_r019:2025-2026:ctown_budget_2025_2026_p109:full-3:column-1:budget:net:cad:1",
+      "calculated_value": "2503230",
+      "reported_value": "2503230",
+      "reported_value_state": "reported",
+      "difference": "0",
+      "tolerance": "1",
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "check_key": "capital_net:2025-2026-capital_budget_schedule-p123:ctown_budget_2025_2026_p123_coord_r044:2025-2026:ctown_budget_2025_2026_p123:full-3:column-1:budget:net:cad:1",
+      "family": "capital_gross_less_partner_funding",
+      "statement_key": "2025-2026-capital_budget_schedule-p123",
+      "formula": "reported gross + funding deductions = reported net",
+      "input_fact_keys": [
+        "2025-2026-capital_budget_schedule-p123:ctown_budget_2025_2026_p123_coord_r042:2025-2026:ctown_budget_2025_2026_p123:full-3:column-1:budget:gross:cad:1",
+        "2025-2026-capital_budget_schedule-p123:ctown_budget_2025_2026_p123_coord_r043:2025-2026:ctown_budget_2025_2026_p123:full-3:column-1:budget:funding_deduction:cad:1"
+      ],
+      "reported_fact_key": "2025-2026-capital_budget_schedule-p123:ctown_budget_2025_2026_p123_coord_r044:2025-2026:ctown_budget_2025_2026_p123:full-3:column-1:budget:net:cad:1",
+      "calculated_value": "30452000",
+      "reported_value": "30452000",
+      "reported_value_state": "reported",
+      "difference": "0",
+      "tolerance": "1",
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "check_key": "capital_net:2025-2026-capital_budget_schedule-p143:ctown_budget_2025_2026_p143_coord_r013:2025-2026:ctown_budget_2025_2026_p143:full-3:column-1:budget:net:cad:1",
+      "family": "capital_gross_less_partner_funding",
+      "statement_key": "2025-2026-capital_budget_schedule-p143",
+      "formula": "reported gross + funding deductions = reported net",
+      "input_fact_keys": [
+        "2025-2026-capital_budget_schedule-p143:ctown_budget_2025_2026_p143_coord_r011:2025-2026:ctown_budget_2025_2026_p143:full-3:column-1:budget:gross:cad:1",
+        "2025-2026-capital_budget_schedule-p143:ctown_budget_2025_2026_p143_coord_r012:2025-2026:ctown_budget_2025_2026_p143:full-3:column-1:budget:funding_deduction:cad:1"
+      ],
+      "reported_fact_key": "2025-2026-capital_budget_schedule-p143:ctown_budget_2025_2026_p143_coord_r013:2025-2026:ctown_budget_2025_2026_p143:full-3:column-1:budget:net:cad:1",
+      "calculated_value": "6362912",
+      "reported_value": "6362912",
+      "reported_value_state": "reported",
+      "difference": "0",
+      "tolerance": "1",
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "check_key": "debt_total:2025-2026-debt_schedule-p147:principal",
+      "family": "debt_instrument_total",
+      "statement_key": "2025-2026-debt_schedule-p147",
+      "formula": "sum of reported instrument amounts = reported schedule total",
+      "input_fact_keys": [
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r008:2025-2026:ctown_budget_2025_2026_p147:full-3:column-2:budget:principal:cad:2",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r009:2025-2026:ctown_budget_2025_2026_p147:full-3:column-2:budget:principal:cad:2",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r010:2025-2026:ctown_budget_2025_2026_p147:full-3:column-2:budget:principal:cad:2",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r011:2025-2026:ctown_budget_2025_2026_p147:full-3:column-2:budget:principal:cad:2",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r012:2025-2026:ctown_budget_2025_2026_p147:full-3:column-2:budget:principal:cad:2",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r013:2025-2026:ctown_budget_2025_2026_p147:full-3:column-2:budget:principal:cad:2",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r014:2025-2026:ctown_budget_2025_2026_p147:full-3:column-2:budget:principal:cad:2",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r015:2025-2026:ctown_budget_2025_2026_p147:full-3:column-2:budget:principal:cad:2",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r016:2025-2026:ctown_budget_2025_2026_p147:full-3:column-2:budget:principal:cad:2",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r017:2025-2026:ctown_budget_2025_2026_p147:full-3:column-2:budget:principal:cad:2",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r018:2025-2026:ctown_budget_2025_2026_p147:full-3:column-2:budget:principal:cad:2",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r019:2025-2026:ctown_budget_2025_2026_p147:full-3:column-2:budget:principal:cad:2"
+      ],
+      "reported_fact_key": "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r021:2025-2026:ctown_budget_2025_2026_p147:full-3:column-2:budget:principal:cad:2",
+      "calculated_value": "4723083",
+      "reported_value": "4723084",
+      "reported_value_state": "reported",
+      "difference": "-1",
+      "tolerance": "1",
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "check_key": "debt_total:2025-2026-debt_schedule-p147:interest",
+      "family": "debt_instrument_total",
+      "statement_key": "2025-2026-debt_schedule-p147",
+      "formula": "sum of reported instrument amounts = reported schedule total",
+      "input_fact_keys": [
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r008:2025-2026:ctown_budget_2025_2026_p147:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r009:2025-2026:ctown_budget_2025_2026_p147:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r010:2025-2026:ctown_budget_2025_2026_p147:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r011:2025-2026:ctown_budget_2025_2026_p147:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r012:2025-2026:ctown_budget_2025_2026_p147:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r013:2025-2026:ctown_budget_2025_2026_p147:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r014:2025-2026:ctown_budget_2025_2026_p147:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r015:2025-2026:ctown_budget_2025_2026_p147:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r016:2025-2026:ctown_budget_2025_2026_p147:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r017:2025-2026:ctown_budget_2025_2026_p147:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r018:2025-2026:ctown_budget_2025_2026_p147:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r019:2025-2026:ctown_budget_2025_2026_p147:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r020:2025-2026:ctown_budget_2025_2026_p147:full-3:column-3:budget:interest:cad:2"
+      ],
+      "reported_fact_key": "2025-2026-debt_schedule-p147:ctown_budget_2025_2026_p147_coord_r021:2025-2026:ctown_budget_2025_2026_p147:full-3:column-3:budget:interest:cad:3",
+      "calculated_value": "5220022",
+      "reported_value": "5220023",
+      "reported_value_state": "reported",
+      "difference": "-1",
+      "tolerance": "1",
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "check_key": "debt_total:2025-2026-debt_schedule-p149:principal",
+      "family": "debt_instrument_total",
+      "statement_key": "2025-2026-debt_schedule-p149",
+      "formula": "sum of reported instrument amounts = reported schedule total",
+      "input_fact_keys": [
+        "2025-2026-debt_schedule-p149:ctown_budget_2025_2026_p149_coord_r008:2025-2026:ctown_budget_2025_2026_p149:full-3:column-2:budget:principal:cad:2",
+        "2025-2026-debt_schedule-p149:ctown_budget_2025_2026_p149_coord_r009:2025-2026:ctown_budget_2025_2026_p149:full-3:column-2:budget:principal:cad:2",
+        "2025-2026-debt_schedule-p149:ctown_budget_2025_2026_p149_coord_r010:2025-2026:ctown_budget_2025_2026_p149:full-3:column-2:budget:principal:cad:2",
+        "2025-2026-debt_schedule-p149:ctown_budget_2025_2026_p149_coord_r011:2025-2026:ctown_budget_2025_2026_p149:full-3:column-2:budget:principal:cad:2",
+        "2025-2026-debt_schedule-p149:ctown_budget_2025_2026_p149_coord_r012:2025-2026:ctown_budget_2025_2026_p149:full-3:column-2:budget:principal:cad:2",
+        "2025-2026-debt_schedule-p149:ctown_budget_2025_2026_p149_coord_r013:2025-2026:ctown_budget_2025_2026_p149:full-3:column-2:budget:principal:cad:2",
+        "2025-2026-debt_schedule-p149:ctown_budget_2025_2026_p149_coord_r014:2025-2026:ctown_budget_2025_2026_p149:full-3:column-2:budget:principal:cad:2",
+        "2025-2026-debt_schedule-p149:ctown_budget_2025_2026_p149_coord_r015:2025-2026:ctown_budget_2025_2026_p149:full-3:column-2:budget:principal:cad:2"
+      ],
+      "reported_fact_key": "2025-2026-debt_schedule-p149:ctown_budget_2025_2026_p149_coord_r017:2025-2026:ctown_budget_2025_2026_p149:full-3:column-2:budget:principal:cad:2",
+      "calculated_value": "2359414",
+      "reported_value": "2359413",
+      "reported_value_state": "reported",
+      "difference": "1",
+      "tolerance": "1",
+      "passed": true,
+      "status": "pass"
+    },
+    {
+      "check_key": "debt_total:2025-2026-debt_schedule-p149:interest",
+      "family": "debt_instrument_total",
+      "statement_key": "2025-2026-debt_schedule-p149",
+      "formula": "sum of reported instrument amounts = reported schedule total",
+      "input_fact_keys": [
+        "2025-2026-debt_schedule-p149:ctown_budget_2025_2026_p149_coord_r008:2025-2026:ctown_budget_2025_2026_p149:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p149:ctown_budget_2025_2026_p149_coord_r009:2025-2026:ctown_budget_2025_2026_p149:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p149:ctown_budget_2025_2026_p149_coord_r010:2025-2026:ctown_budget_2025_2026_p149:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p149:ctown_budget_2025_2026_p149_coord_r011:2025-2026:ctown_budget_2025_2026_p149:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p149:ctown_budget_2025_2026_p149_coord_r012:2025-2026:ctown_budget_2025_2026_p149:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p149:ctown_budget_2025_2026_p149_coord_r013:2025-2026:ctown_budget_2025_2026_p149:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p149:ctown_budget_2025_2026_p149_coord_r014:2025-2026:ctown_budget_2025_2026_p149:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p149:ctown_budget_2025_2026_p149_coord_r015:2025-2026:ctown_budget_2025_2026_p149:full-3:column-3:budget:interest:cad:3",
+        "2025-2026-debt_schedule-p149:ctown_budget_2025_2026_p149_coord_r016:2025-2026:ctown_budget_2025_2026_p149:full-3:column-3:budget:interest:cad:2"
+      ],
+      "reported_fact_key": "2025-2026-debt_schedule-p149:ctown_budget_2025_2026_p149_coord_r017:2025-2026:ctown_budget_2025_2026_p149:full-3:column-3:budget:interest:cad:3",
+      "calculated_value": "1533580",
+      "reported_value": "1533579",
+      "reported_value_state": "reported",
+      "difference": "1",
+      "tolerance": "1",
+      "passed": true,
+      "status": "pass"
+    }
+  ],
+  "review_issues": [],
+  "catalogue_hash_without_hash_field": "e7f2eff8d1d812c4074a89f7c8fd0b9be0278fd3ecc88e7f28f15cc074ddf493"
+}

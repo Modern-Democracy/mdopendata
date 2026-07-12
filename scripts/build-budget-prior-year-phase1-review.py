@@ -95,6 +95,15 @@ PROFILE_IDENTITY_OVERRIDES = {
 }
 
 
+# Visualizations are retained in raw extraction for audit, but never create
+# normalized facts when their underlying values are already represented by an
+# authoritative source table in the same budget document.
+DUPLICATE_VISUALIZATION_PAGES = {
+    ("2024-2025", 15): "Revenue bubble chart duplicates the operating-budget summary on page 14.",
+    ("2024-2025", 16): "Expenditure bubble chart duplicates the operating-budget summary on page 14.",
+}
+
+
 def slug(value):
     return (
         value.lower()
@@ -153,7 +162,10 @@ def extract_profile_identity(document, page):
 
 
 def is_chart_source_table(record):
-    text = raw_page_text(record["table_key"][:9], record["page_start"])
+    document = record["table_key"][:9]
+    if (document, record["page_start"]) in DUPLICATE_VISUALIZATION_PAGES:
+        return True
+    text = raw_page_text(document, record["page_start"])
     if record["section"] != "Operating Budget":
         return False
     if record["table_family"] != "operating_statement":

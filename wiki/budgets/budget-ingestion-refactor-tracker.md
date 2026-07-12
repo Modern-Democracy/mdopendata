@@ -14,7 +14,7 @@ This page tracks deferred refactor lessons from Charlottetown budget ingestion s
 
 ## Status
 
-The refactor is deferred. The current priority is completing normalized review, import, and QA for the 2025/2026 and 2024/2025 Charlottetown budget documents to the same level reached by 2026/2027.
+The prior-year normalized review, import, and QA prerequisite is complete. General pipeline refactoring remains a separate future task and was not performed as part of the prior-year imports.
 
 This page should be updated while those two prior-year documents are normalized. The purpose is to preserve lessons that would otherwise be lost if the code were generalized before the prior-year edge cases are fully understood.
 
@@ -100,6 +100,8 @@ The 2025/2026 and 2024/2025 documents already show useful variation:
 | Facility statements | Whether Civic Centre, Bell Aliant, or other facility layouts match the 2026/2027 mappers. |
 | Expected-count controls | Which counts should be generated from mappings rather than hard-coded in scripts. |
 | QA controls | Which positive and negative controls are document-independent versus document-specific. |
+
+Completed prior-year evidence confirms that manifest counts must be generated from approved mappings, raw corrections must use append-only import versions, mixed-entity source tables must create entity-specific statements, and project identity must remain separate from document-owned references and fiscal-period facts.
 
 ## Initial Refactor Acceptance Criteria
 

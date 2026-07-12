@@ -13,7 +13,7 @@ from psycopg.types.json import Jsonb
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "data/budget/charlottetown/2026-2027"
 METADATA = ROOT / "data/budget/charlottetown/schema-spike/normalized-mapping.json"
-VERSION = "full-2"
+DEFAULT_VERSION = "full-2"
 
 
 def load(path: Path) -> dict:
@@ -36,9 +36,11 @@ def db_url() -> str:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--document-key", default="2026-2027")
+    parser.add_argument("--version", default=DEFAULT_VERSION)
     parser.add_argument("--append-missing", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
+    version = args.version
     base = ROOT / "data/budget/charlottetown" / args.document_key
     document = document_metadata(args.document_key)
     document_sha = document["sha256"]
@@ -58,10 +60,10 @@ def main() -> int:
         cursor.execute("SELECT count(*) FROM budget.publication_snapshot")
         if cursor.fetchone()[0] != 0: raise ValueError("Publication snapshots must remain zero")
         cursor.execute("SELECT table_key FROM budget.source_table WHERE document_id=%s AND table_key LIKE %s",
-                       (document_id, f"%:{VERSION}"))
+                       (document_id, f"%:{version}"))
         existing_table_keys = {row[0] for row in cursor.fetchall()}
         if existing_table_keys and not args.append_missing:
-            raise ValueError(f"{VERSION} raw tables already exist")
+            raise ValueError(f"{version} raw tables already exist")
         for page in pages:
             cursor.execute(
                 """INSERT INTO budget.source_page
@@ -75,7 +77,7 @@ def main() -> int:
                     page.get("section"),
                     page.get("content_type"),
                     f"data/budget/charlottetown/{args.document_key}/raw-pages/page-{page['page_number']:03d}.txt",
-                    VERSION,
+                    version,
                 ),
             )
         cursor.execute("SELECT pdf_page_number,id FROM budget.source_page WHERE document_id=%s", (document_id,))
@@ -84,7 +86,7 @@ def main() -> int:
 
         table_ids = {}
         for table in tables:
-            key = f"{table['table_id']}:{VERSION}"
+            key = f"{table['table_id']}:{version}"
             if key in existing_table_keys:
                 continue
             cursor.execute("""INSERT INTO budget.source_table
@@ -114,7 +116,7 @@ def main() -> int:
             style = {"physical_line_number": row["physical_line_number"], "indentation_spaces": row["indentation_spaces"],
                      "row_kind": row["row_kind"], "cells": row["cells"],
                      "value_tokens": [{"value_id": v["value_id"], "char_start": v["char_start"], "char_end": v["char_end"], "value_kind": v["value_kind"]} for v in row_values],
-                     "bbox_status": "unavailable", "raw_import_version": VERSION}
+                     "bbox_status": "unavailable", "raw_import_version": version}
             cursor.execute("""INSERT INTO budget.source_table_row
               (source_table_id,row_key,row_index,raw_text,raw_label,indent_level,row_style)
               VALUES(%s,%s,%s,%s,%s,%s,%s) RETURNING id""",
@@ -132,10 +134,10 @@ def main() -> int:
 
         inserted_rows = [row for row in rows if row["table_id"] in table_ids]
         inserted_values = [value for value in values if value["table_id"] in table_ids]
-        metrics={"mode":"append_only_full_raw","source_tables":len(table_ids),"rows":len(inserted_rows),"values":len(inserted_values),"version":VERSION}
+        metrics={"mode":"append_only_full_raw","source_tables":len(table_ids),"rows":len(inserted_rows),"values":len(inserted_values),"version":version}
         cursor.execute("""INSERT INTO budget.import_batch
           (document_id,source_sha256,extractor_version,completed_at,status,metrics_json)
-          VALUES(%s,%s,%s,now(),'completed',%s)""",(document_id,document_sha,VERSION,Jsonb(metrics)))
+          VALUES(%s,%s,%s,now(),'completed',%s)""",(document_id,document_sha,version,Jsonb(metrics)))
         if args.dry_run: connection.rollback()
         else: connection.commit()
     print(json.dumps({"dry_run":args.dry_run,"source_tables":len(table_ids),"rows":len(inserted_rows),"values":len(inserted_values)},sort_keys=True))

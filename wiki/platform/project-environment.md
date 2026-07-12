@@ -5,7 +5,7 @@ tags:
   - python
   - dependencies
   - deployment
-updated: 2026-07-08
+updated: 2026-07-12
 ---
 
 This page records the canonical project runtime, dependency, and environment-management contract.
@@ -48,7 +48,7 @@ Historical `.python` paths and Codex bundled-runtime paths in generated manifest
 
 ## Budget Raw Import Versioning
 
-Budget raw tables are append-only. When reviewed extraction artifacts change after import, do not update or delete existing raw rows or cells. Use `scripts/sync-budget-2026-raw-content.py` to append a versioned raw namespace after explicit approval. The current Charlottetown 2026/2027 normalized manifest targets `full-2`; `full-1` remains immutable historical extraction evidence.
+Budget raw tables are append-only. When reviewed extraction artifacts change after import, do not update or delete existing raw rows or cells. Use `scripts/sync-budget-2026-raw-content.py` to append a versioned raw namespace after explicit approval. The Charlottetown 2026/2027 normalized manifest targets `full-2`; the two prior-year manifests target corrected `full-3` namespaces. Earlier imports remain immutable historical extraction evidence.
 
 Run a rollback-only validation before mutation:
 
@@ -61,6 +61,10 @@ Run the approved append-only import without `--dry-run`, then validate provenanc
 ```powershell
 .\scripts\python.ps1 .\scripts\validate-budget-2026-normalized-provenance.py --database
 ```
+
+## Budget Migration Repair
+
+Migration `026_budget_capital_project_reference.sql` restores the approved document-to-project reference table when migration 025 was recorded before that table reached the active database. It is additive and preserves project identity independently of fiscal-year documents. The pre-migration rollback artifact is `backups/database/mdopendata-before-prior-year-normalized-20260712.dump`.
 
 ## Required Documentation for Changes
 

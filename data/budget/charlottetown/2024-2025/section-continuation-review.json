@@ -5,28 +5,64 @@
       "document_key": "2024-2025",
       "source_continuation_group": "continuation-001",
       "section_key": "2024-2025-continuation-001-1-operating-statement",
-      "page_start": 14,
+      "page_start": 15,
+      "page_end": 15,
+      "candidate_keys": [
+        "2024-2025-p015"
+      ],
+      "families": [
+        "operating_statement"
+      ],
+      "titles": [
+        "Charlottetown Water and Sewer"
+      ],
+      "page_roles": {
+        "2024-2025-p015": "summary"
+      },
+      "decision": "duplicate_summary",
+      "decision_reason": "Overview chart-backed table page is treated like the 2026/2027 page 18/19 precedent: duplicate_summary for normalization; chart visual ignored."
+    },
+    {
+      "document_key": "2024-2025",
+      "source_continuation_group": "continuation-001",
+      "section_key": "2024-2025-continuation-001-2-operating-statement",
+      "page_start": 16,
       "page_end": 16,
       "candidate_keys": [
-        "2024-2025-p014",
-        "2024-2025-p015",
         "2024-2025-p016"
       ],
       "families": [
         "operating_statement"
       ],
       "titles": [
-        "2024/2025 Operating Budget",
-        "Charlottetown Water and Sewer",
         "Charlottetown Water and Sewer"
       ],
       "page_roles": {
-        "2024-2025-p014": "section_start",
-        "2024-2025-p015": "section_continuation",
-        "2024-2025-p016": "section_continuation"
+        "2024-2025-p016": "summary"
+      },
+      "decision": "duplicate_summary",
+      "decision_reason": "Overview chart-backed table page is treated like the 2026/2027 page 18/19 precedent: duplicate_summary for normalization; chart visual ignored."
+    },
+    {
+      "document_key": "2024-2025",
+      "source_continuation_group": "continuation-001",
+      "section_key": "2024-2025-continuation-001-3-operating-statement",
+      "page_start": 14,
+      "page_end": 14,
+      "candidate_keys": [
+        "2024-2025-p014"
+      ],
+      "families": [
+        "operating_statement"
+      ],
+      "titles": [
+        "2024/2025 Operating Budget"
+      ],
+      "page_roles": {
+        "2024-2025-p014": "section_start"
       },
       "decision": "proposed_section_group",
-      "decision_reason": "Profile continuation group is accepted as a Phase 1 source-section candidate pending row-level normalization."
+      "decision_reason": "Overview chart-backed table pages are duplicate summaries; chart visuals are duplicate presentation and are ignored for normalization."
     },
     {
       "document_key": "2024-2025",
@@ -384,6 +420,7 @@
     }
   ],
   "summary": {
+    "duplicate_summary": 2,
     "proposed_section_group": 10,
     "do_not_merge_profiles": 4
   }

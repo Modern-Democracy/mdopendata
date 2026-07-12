@@ -266,11 +266,21 @@ def debt_grid_anchors(word_lines: list[list[dict[str, object]]]) -> list[float] 
 def debt_grid_cells(words_on_line: list[dict[str, object]], anchors: list[float]) -> list[str]:
     """Return non-empty numeric debt cells using header-derived coordinate columns."""
     first_column_left = anchors[0] - (anchors[1] - anchors[0])
-    return [
-        str(word["text"])
-        for word in sorted(words_on_line, key=lambda item: float(item["x0"]))
+    numeric_words = [
+        word for word in sorted(words_on_line, key=lambda item: float(item["x0"]))
         if float(word["x0"]) >= first_column_left and GRID_VALUE_RE.fullmatch(str(word["text"]))
     ]
+    cells: list[tuple[str, float]] = []
+    for word in numeric_words:
+        text = str(word["text"])
+        x0, x1 = float(word["x0"]), float(word["x1"])
+        # PDF column rules can split the leading digit from the remainder of
+        # a comma-formatted value at the exact same x coordinate boundary.
+        if cells and x0 - cells[-1][1] <= 1.5 and "," in text and cells[-1][0].isdigit():
+            cells[-1] = (cells[-1][0] + text, x1)
+        else:
+            cells.append((text, x1))
+    return [text for text, _ in cells]
 
 
 def coordinate_rows(

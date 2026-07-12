@@ -14,6 +14,14 @@ Append new entries in reverse chronological order. Use this heading format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-07-12] implementation | Prior-year budget normalized imports complete
+
+Completed deterministic manifests, reconciliation catalogues, controlled normalized imports, idempotence reruns, and source-fidelity QA for the 2024/2025 and 2025/2026 Charlottetown budgets. Imported 4,091 facts with 4,091 verified source links and 14 passing reconciliations. Migration 026 restored `budget.capital_project_reference`; 173 approved 2026/2027 references were backfilled, producing 27 project identities referenced by multiple budget documents. Publication snapshots remain zero.
+
+## [2026-07-12] implementation | Prior-year normalization Phase 2 complete
+
+Completed prior-year budget normalization Phase 2 row review. The deterministic artifacts now contain 1,717 approved source-linked facts for 2024/2025 and 2,374 for 2025/2026, with zero unresolved rows. Verified mixed monetary/percentage/count rows and omitted fiscal-period cells against rendered PDF pages; no 2026/2027 data refactor or schema change was required.
+
 ## [2026-07-09] fix | Budget raw identity contract
 
 Audited budget scripts for hardcoded `ctown` and `2026_2027` identifier stems. Parameterized raw artifact generation so first-pass extraction and Week 5 supplemental raw coverage use a configurable municipality key with document-derived fiscal-period stems; documented that remaining `ctown_budget_2026_2027` constants are document-specific normalization, reconciliation, validation, and test controls pending the deferred budget ingestion refactor.
@@ -559,3 +567,11 @@ Applied 2026/2027 precedents to 2025/2026 tax/rate formulas, property-tax subtot
 ## [2026-07-10] review | Prior-year Phase 2 user-reviewed structural decisions
 
 Applied user decisions for department hierarchy and totals, zero-display calculation treatment, facility statement periods and variance context, capital funding deductions and totals, property-tax totals, and Water and Sewer debt entity context. Regeneration produced 1,433 approved source-linked facts with 317 open rows for 2024/2025, and 2,355 approved facts with 44 open rows for 2025/2026. No database import, compatibility record, or publication snapshot was created.
+
+## [2026-07-11] correction | 2024/2025 operating-summary structural roles
+
+Classified PDF page 14 as a standard three-period operating statement rather than a row-semantic exception. Its nine title, header, entity, and section rows are non-additive context; 31 City and six Water and Sewer monetary rows create 91 source-linked facts. This removes all 40 page-14 rows from the unresolved register, leaving 1,524 approved facts and 277 open rows for 2024/2025. No database import, compatibility record, or publication snapshot was created.
+
+## [2026-07-11] decision | Budget duplicate-visualization exclusion
+
+Established the budget-ingestion rule that charts and similar visualizations are excluded from normalization when an authoritative table elsewhere in the document reports the same figures. The 2024/2025 revenue and expenditure bubble charts on PDF pages 15 and 16 are retained as raw evidence but classified as `duplicate_summary`, removing 60 non-tabular rows from Phase 2 review. No database import, compatibility record, or publication snapshot was created.
