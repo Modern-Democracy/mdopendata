@@ -37,7 +37,7 @@ Default municipality is selected through portal context, not hard-coded into dat
 | `GET /api/budgets/revenue` | municipality, period(s), revenue category, tax class | Revenue facts, rates, assessments, and reported calculations. |
 | `GET /api/budgets/debt` | municipality, period(s), entity, instrument | Debt balances, principal, interest, maturity, and source totals. |
 | `GET /api/budgets/reserves` | municipality, period(s), entity, reserve | Reserve balances and movements where reported. |
-| `GET /api/budgets/compare` | municipality list, period list, metric/category, basis | Compatible values, change measures, coverage, and incompatibility reasons. |
+| `GET /api/budgets/compare` | municipality, prior period, current period, optional entity/metric/category, basis | Exact-identity nominal values, numeric and percentage change, matched/unmatched coverage, and incompatibility reasons. |
 | `GET /api/budgets/facts/:factId` | fact id | One fact with hierarchy, review status, derivation, and exact source citation. |
 | `GET /api/budgets/sources` | municipality, period | Documents, pages, tables, extraction counts, and publication state. |
 | `GET /api/budgets/sources/:documentId/pages/:pageNumber` | document and page | Page metadata and authorized rendered-page asset location. |
@@ -94,12 +94,17 @@ Aggregates include `aggregation_method`, `input_fact_count`, and `excludes_repor
 - Disable comparisons with incompatible units or scopes and display the specific reason.
 - Show coverage side by side so missing categories are not rendered as zero.
 - Per-capita and inflation-adjusted bases remain unavailable until approved denominator/index datasets exist.
+- The first implemented comparison slice matches only identical municipality, taxonomy version, reporting entity, statement key, line key, amount type, and measure unit within one published snapshot.
+- Unmatched facts are excluded with visible coverage counts and must never be converted to zero.
+- Percentage change is unavailable when the prior value is zero.
 
 ### Source And Trust Controls
 
 - Each chart and row links to a fact detail and highlighted source page/cell when coordinates exist.
 - Visible badges distinguish reported, derived, restated, partial, and review-exception values.
 - The sources page reports extraction and reconciliation completeness, not a generic confidence score alone.
+- A rendered source page is available only when its document belongs to the selected published snapshot and its page number is within the registered PDF bounds.
+- Rendered pages validate repository-local PDF paths and expose immutable document-hash headers; source paths are never returned publicly.
 
 ## Visualization Rules
 

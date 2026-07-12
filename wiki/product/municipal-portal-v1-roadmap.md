@@ -48,7 +48,7 @@ Version 1.0 should ship a portal shell, role-preset filtering, domain route stub
 | Existing page migration | Planned | Keep current functional routes stable during migration. |
 | Public/staff write boundary | Planned | Public routes stay read-oriented; local-admin write tools need explicit labels. |
 | Domain API contracts | Planned | Required before turning stubs into functional pages. |
-| Budget prototype | Started | Published API and visualization slice implemented; comparison compatibility and source-page rendering remain. |
+| Budget prototype | Started | Published API, visualization, exact-identity comparison, and source-page rendering implemented; normalized-category comparison and cell overlays remain. |
 
 ## Acceptance Criteria
 

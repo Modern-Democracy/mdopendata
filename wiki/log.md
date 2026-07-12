@@ -639,3 +639,15 @@ Added published-snapshot-gated capital-project list and detail APIs, including m
 ## [2026-07-12] qa | Public projects and budget visualization
 
 Rebuilt the approved local web container and passed all 21 repository web smoke checks. Live browser QA for 2026/2027 rendered five financial bars, $252,143,798 in capital detail, and 169 published projects; the Aeration Tank Rehab detail returned two published facts, two approved references, four approved profile fields through the API, and no UI errors. Invalid project status returned `400`, an absent published project returned `404`, and source syntax and diff checks passed.
+
+## [2026-07-12] implementation | Exact-identity comparison and source pages
+
+Implemented nominal cross-period comparison for exact published fact identities with numeric and percentage change, zero-baseline suppression, stable pagination, and visible matched and unmatched coverage. Added fact citation metadata and authorized single-page PNG rendering for documents in the selected published snapshot, with repository path and page-bound validation. Extended `/budgets` with prior-period controls, comparison bars and tables, source-document links, and explicit compatibility limits.
+
+## [2026-07-12] qa | Exact-identity comparison and source pages
+
+Rebuilt the approved local web container and passed all 24 web smoke checks. The 2025/2026-to-2026/2027 query returned 440 exact detail matches against 1,296 prior and 729 current detail facts, with unmatched facts explicitly excluded rather than zero-filled. Browser QA rendered ten comparison bars and table rows without errors. Published document 9 page 1 rendered as a 1237 by 1600 PNG; unpublished document and out-of-range page requests returned `404`, same-period and malformed-entity comparisons returned `400`, and syntax and diff checks passed.
+
+## [2026-07-12] correction | Filter-scoped comparison coverage
+
+Corrected comparison coverage so matched, current-period, and prior-period counts use the same entity, metric, and category filters as returned rows, while the total matched count remains independent of pagination. QA confirmed 440 unfiltered matches and 362 City of Charlottetown matches with 528 current and 1,100 prior detail facts.

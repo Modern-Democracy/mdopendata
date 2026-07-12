@@ -72,7 +72,7 @@ const checks = [
   {
     name: "budget fact warning API contract",
     path: "/api/budgets/facts/13067?municipality=charlottetown",
-    expectJson: (payload) => payload.data?.fact_id === "13067" && payload.warnings?.some((warning) => warning.issue_key === "reconciliation:debt_total:balance"),
+    expectJson: (payload) => payload.data?.fact_id === "13067" && Array.isArray(payload.data?.citations) && payload.warnings?.some((warning) => warning.issue_key === "reconciliation:debt_total:balance"),
   },
   {
     name: "budget unknown filter rejection",
@@ -88,6 +88,28 @@ const checks = [
       payload.data.length === 2 &&
       payload.data.every((project) => project.project_key && Array.isArray(project.periods)) &&
       payload.pagination?.limit === 2,
+  },
+  {
+    name: "budget exact-identity comparison API contract",
+    path: "/api/budgets/compare?municipality=charlottetown&prior_period=2025-2026-budget&current_period=2026-2027-budget&basis=nominal&limit=2",
+    expectJson: (payload) =>
+      Array.isArray(payload.data) &&
+      payload.data.length === 2 &&
+      payload.data.every((row) => row.prior_fact_id && row.current_fact_id && row.numeric_change !== undefined) &&
+      payload.warnings?.includes("exact_identity_matches_only") &&
+      payload.coverage?.current_fact_count > 0 &&
+      payload.coverage?.matched_fact_count === 440,
+  },
+  {
+    name: "budget comparison invalid entity rejection",
+    path: "/api/budgets/compare?municipality=charlottetown&prior_period=2025-2026-budget&current_period=2026-2027-budget&entity=bad",
+    expectStatus: 400,
+    expectJson: (payload) => /positive integer/.test(payload.error || ""),
+  },
+  {
+    name: "published budget source page render",
+    path: "/api/budgets/sources/9/pages/1?municipality=charlottetown",
+    expectContentType: "image/png",
   },
   {
     name: "address API contract",
@@ -169,6 +191,14 @@ async function runCheck(check) {
     const missing = check.expectText.filter((fragment) => !text.includes(fragment));
     if (missing.length) {
       throw new Error(`${check.name}: missing text ${missing.join(", ")}`);
+    }
+    return;
+  }
+
+  if (check.expectContentType) {
+    const contentType = response.headers.get("content-type") || "";
+    if (!contentType.startsWith(check.expectContentType) || (await response.arrayBuffer()).byteLength < 1000) {
+      throw new Error(`${check.name}: expected non-empty ${check.expectContentType}`);
     }
     return;
   }

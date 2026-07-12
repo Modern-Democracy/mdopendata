@@ -44,8 +44,8 @@ All JSON endpoints return the standard envelope fields: `data`, `filters`, `peri
 
 ## Explicitly Deferred
 
-- Source-page rendering and highlighted source-cell images.
-- Cross-period aggregate comparisons until compatibility logic and coverage notices are implemented.
+- Highlighted source-cell overlays; rendered full pages and fact-to-page candidate citations are implemented.
+- Normalized-category aggregate comparisons beyond exact published fact identities.
 - Cross-municipality comparisons, per-capita calculations, inflation adjustments, writes, authentication, and administrative review actions.
 
 ## Implemented Follow-On Slice
@@ -54,6 +54,8 @@ All JSON endpoints return the standard envelope fields: `data`, `filters`, `peri
 - `/api/projects` and `/api/projects/:projectKey` expose only projects connected to published facts and retain source-supported lifecycle state.
 - `/budgets` provides period selection, exploratory summary metrics, accessible sorted bars with a canonical table, published project filtering and detail, source inventory access, and CSV download.
 - The UI labels summed detail values as exploratory rather than audited statement totals and keeps funding deductions separate from positive spending.
+- `/compare` provides nominal prior/current values for exact identity matches, numeric and percentage changes, explicit coverage, and non-zero treatment of unmatched facts.
+- `/sources/:documentId/pages/:pageNumber` renders one authorized published PDF page through Poppler without exposing filesystem paths or persisting derived assets.
 
 ## Acceptance Criteria
 
@@ -66,8 +68,8 @@ All JSON endpoints return the standard envelope fields: `data`, `filters`, `peri
 
 ## Remaining Sequence
 
-1. Implement comparison and coverage warnings only after compatibility rules are executable.
-2. Add authorized source-page rendering and highlighted source-cell navigation.
+1. Add normalized-category aggregate comparisons only after a reviewed category taxonomy is populated.
+2. Add highlighted source-cell overlays after source cells have unambiguous page ownership.
 3. Add automated accessibility coverage beyond the route and API smoke checks.
 
 ## Sources

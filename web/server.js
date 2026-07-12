@@ -2390,8 +2390,8 @@ async function loadProvisionsComparison() {
   };
 }
 
-function budgetPayload(data, filters = {}, warnings = [], pagination = null) {
-  return { data, filters, periods: [], scope: {}, units: {}, coverage: {}, provenance: {}, warnings, pagination };
+function budgetPayload(data, filters = {}, warnings = [], pagination = null, metadata = {}) {
+  return { data, filters, periods: metadata.periods || [], scope: metadata.scope || {}, units: metadata.units || {}, coverage: metadata.coverage || {}, provenance: metadata.provenance || {}, warnings, pagination };
 }
 
 function budgetQuery(url, allowed) {
@@ -2492,6 +2492,7 @@ async function loadPublishedBudgetMunicipality(slug) {
 async function handleBudgetApi(request, response, url) {
   if (request.method !== "GET") { response.writeHead(405); response.end("Method not allowed"); return true; }
   const factMatch = url.pathname.match(/^\/api\/budgets\/facts\/(\d+)$/);
+  const sourcePageMatch = url.pathname.match(/^\/api\/budgets\/sources\/(\d+)\/pages\/(\d+)$/);
   const projectMatch = url.pathname.match(/^\/api\/projects\/([^/]+)$/);
   const allowedFilters = url.pathname === "/api/budgets/municipalities" ? ["limit", "cursor"]
     : url.pathname === "/api/budgets/periods" ? ["municipality", "limit", "cursor"]
@@ -2504,9 +2505,9 @@ async function handleBudgetApi(request, response, url) {
                   : url.pathname === "/api/budgets/revenue" ? ["municipality", "period", "revenue_category", "tax_class", "limit", "cursor"]
                     : url.pathname === "/api/budgets/debt" ? ["municipality", "period", "entity", "instrument", "limit", "cursor"]
                       : url.pathname === "/api/budgets/reserves" ? ["municipality", "period", "entity", "reserve", "limit", "cursor"]
-                      : url.pathname === "/api/budgets/compare" ? ["municipality", "period", "metric", "category", "basis", "limit", "cursor"]
+                      : url.pathname === "/api/budgets/compare" ? ["municipality", "prior_period", "current_period", "entity", "metric", "category", "basis", "limit", "cursor"]
                         : url.pathname === "/api/projects" ? ["municipality", "period", "status", "q", "limit", "cursor"]
-                          : projectMatch ? ["municipality"]
+                          : projectMatch || sourcePageMatch ? ["municipality"]
             : null;
   if (allowedFilters) budgetQuery(url, allowedFilters);
   if (url.pathname === "/api/budgets/municipalities") {
@@ -2519,6 +2520,38 @@ async function handleBudgetApi(request, response, url) {
   const slug = budgetFilter(url, "municipality") || "charlottetown";
   const municipality = await loadPublishedBudgetMunicipality(slug);
   if (!municipality) { await sendJson(response, budgetPayload([], { municipality: slug }, ["no_published_snapshot"])); return true; }
+  if (sourcePageMatch) {
+    const documentId = Number(sourcePageMatch[1]);
+    const pageNumber = Number(sourcePageMatch[2]);
+    const { rows } = await pool.query(
+      `SELECT d.id,d.title,d.local_path,d.sha256,d.page_count
+         FROM budget.publication_snapshot ps
+         JOIN budget.source_document d ON d.id=ANY(ps.source_document_ids)
+        WHERE ps.id=$1 AND d.id=$2`,
+      [municipality.snapshot_id, documentId],
+    );
+    const document = rows[0];
+    if (!document || !Number.isInteger(pageNumber) || pageNumber < 1 || pageNumber > document.page_count) {
+      response.writeHead(404, { "content-type": "application/json; charset=utf-8" });
+      response.end(JSON.stringify({ error: "Published budget source page not found." })); return true;
+    }
+    const sourcePath = path.resolve(repoRoot, document.local_path || "");
+    const relativeSourcePath = path.relative(repoRoot, sourcePath);
+    if (!document.local_path || relativeSourcePath.startsWith("..") || path.isAbsolute(relativeSourcePath) || path.extname(sourcePath).toLowerCase() !== ".pdf") {
+      throw new Error("Published budget source path is invalid.");
+    }
+    const { stdout } = await execFileAsync("pdftocairo", [
+      "-f", String(pageNumber), "-l", String(pageNumber), "-singlefile", "-scale-to", "1600", "-png", sourcePath, "-",
+    ], { encoding: "buffer", maxBuffer: 24 * 1024 * 1024, timeout: 30000 });
+    response.writeHead(200, {
+      "content-type": "image/png",
+      "cache-control": "public, max-age=86400, immutable",
+      "x-budget-document-id": String(document.id),
+      "x-budget-document-sha256": document.sha256,
+      "x-budget-page-number": String(pageNumber),
+    });
+    response.end(stdout); return true;
+  }
   if (url.pathname === "/api/projects") {
     const period = budgetFilter(url, "period");
     const status = budgetFilter(url, "status");
@@ -2592,8 +2625,26 @@ async function handleBudgetApi(request, response, url) {
     budgetQuery(url, ["municipality"]);
     const { rows } = await pool.query(`SELECT * FROM budget.v_published_facts WHERE snapshot_id=$1 AND fact_id=$2`, [municipality.snapshot_id, Number(factMatch[1])]);
     if (!rows[0]) { response.writeHead(404, { "content-type": "application/json; charset=utf-8" }); response.end(JSON.stringify({ error: "Budget fact not found." })); return true; }
-    const warnings = selectBudgetWarnings(await loadBudgetWarnings(municipality.snapshot_id), { factIds: [rows[0].fact_id] });
-    await sendJson(response, budgetPayload(rows[0], { municipality: slug }, warnings)); return true;
+    const fact = rows[0];
+    const { rows: citations } = await pool.query(
+      `SELECT fs.source_cell_id,fs.source_role,c.raw_text,c.bbox,r.row_key,r.row_index,t.id AS source_table_id,t.table_key,
+              d.id AS document_id,d.title AS document_title,
+              array_agg(DISTINCT sp.pdf_page_number ORDER BY sp.pdf_page_number) AS page_numbers
+         FROM budget.fact_source fs
+         JOIN budget.source_table_cell c ON c.id=fs.source_cell_id
+         JOIN budget.source_table_row r ON r.id=c.source_row_id
+         JOIN budget.source_table t ON t.id=r.source_table_id
+         JOIN budget.source_document d ON d.id=t.document_id
+         JOIN budget.publication_snapshot ps ON ps.id=$2 AND d.id=ANY(ps.source_document_ids)
+         LEFT JOIN budget.source_table_page stp ON stp.source_table_id=t.id
+         LEFT JOIN budget.source_page sp ON sp.id=stp.source_page_id
+        WHERE fs.fact_id=$1
+        GROUP BY fs.source_cell_id,fs.source_role,fs.source_order,c.raw_text,c.bbox,r.row_key,r.row_index,t.id,t.table_key,d.id,d.title
+        ORDER BY fs.source_order,fs.source_cell_id`,
+      [fact.fact_id, municipality.snapshot_id],
+    );
+    const warnings = selectBudgetWarnings(await loadBudgetWarnings(municipality.snapshot_id), { factIds: [fact.fact_id] });
+    await sendJson(response, budgetPayload({ ...fact, citations }, { municipality: slug }, warnings, null, { provenance: { snapshot_id: municipality.snapshot_id, release_label: municipality.release_label, taxonomy_version: municipality.taxonomy_version } })); return true;
   }
   if (url.pathname === "/api/budgets/download.csv") {
     budgetQuery(url, ["municipality", "period", "statement_kind", "amount_type", "measure_unit", "limit", "cursor"]);
@@ -2611,8 +2662,73 @@ async function handleBudgetApi(request, response, url) {
     response.end([header.join(","), ...page.data.map((row) => header.map((key) => quote(row[key])).join(","))].join("\n")); return true;
   }
   if (url.pathname === "/api/budgets/compare") {
-    const filters = Object.fromEntries(["period", "metric", "category", "basis"].map((name) => [name, budgetFilter(url, name)]).filter(([, value]) => value));
-    await sendJson(response, budgetPayload([], { municipality: slug, ...filters }, ["comparison_not_available_without_approved_normalized_categories"])); return true;
+    const priorPeriod = budgetFilter(url, "prior_period");
+    const currentPeriod = budgetFilter(url, "current_period");
+    const entity = budgetFilter(url, "entity");
+    const metric = budgetFilter(url, "metric");
+    const category = budgetFilter(url, "category");
+    const basis = budgetFilter(url, "basis") || "nominal";
+    const pagination = budgetPagination(url);
+    if (!priorPeriod || !currentPeriod || priorPeriod === currentPeriod) {
+      const error = new Error("prior_period and current_period must be distinct non-empty fiscal-period labels.");
+      error.statusCode = 400;
+      throw error;
+    }
+    if (basis !== "nominal") {
+      await sendJson(response, budgetPayload([], { municipality: slug, prior_period: priorPeriod, current_period: currentPeriod, basis }, ["comparison_basis_not_available"], { ...pagination, next_cursor: null })); return true;
+    }
+    if (entity && (!Number.isSafeInteger(Number(entity)) || Number(entity) < 1)) {
+      const error = new Error("entity must be a positive integer reporting-entity identifier.");
+      error.statusCode = 400;
+      throw error;
+    }
+    const { rows } = await pool.query(
+      `SELECT current_fact.reporting_entity_name,current_fact.statement_key,current_fact.statement_title,
+              current_fact.line_key,current_fact.display_label,current_fact.raw_label,current_fact.category_key,
+              current_fact.amount_type,current_fact.measure_unit,
+              prior_fact.fact_id AS prior_fact_id,prior_fact.value_numeric AS prior_value,
+              current_fact.fact_id AS current_fact_id,current_fact.value_numeric AS current_value,
+              current_fact.value_numeric-prior_fact.value_numeric AS numeric_change,
+              CASE WHEN prior_fact.value_numeric=0 THEN NULL
+                   ELSE ((current_fact.value_numeric-prior_fact.value_numeric)/abs(prior_fact.value_numeric))*100 END AS percentage_change,
+              count(*) OVER()::integer AS matched_fact_count
+         FROM budget.v_published_facts current_fact
+         JOIN budget.v_published_facts prior_fact
+           ON prior_fact.snapshot_id=current_fact.snapshot_id
+          AND prior_fact.taxonomy_version=current_fact.taxonomy_version
+          AND prior_fact.municipality_id=current_fact.municipality_id
+          AND prior_fact.reporting_entity_id=current_fact.reporting_entity_id
+          AND prior_fact.statement_key=current_fact.statement_key
+          AND prior_fact.line_key=current_fact.line_key
+          AND prior_fact.amount_type=current_fact.amount_type
+          AND prior_fact.measure_unit=current_fact.measure_unit
+        WHERE current_fact.snapshot_id=$1
+          AND current_fact.fiscal_period_label=$2 AND prior_fact.fiscal_period_label=$3
+          AND current_fact.aggregation_role='detail' AND prior_fact.aggregation_role='detail'
+          AND current_fact.value_numeric IS NOT NULL AND prior_fact.value_numeric IS NOT NULL
+          AND ($4::bigint IS NULL OR current_fact.reporting_entity_id=$4)
+          AND ($5::text IS NULL OR current_fact.amount_type=$5)
+          AND ($6::text IS NULL OR current_fact.category_key=$6)
+        ORDER BY abs(current_fact.value_numeric-prior_fact.value_numeric) DESC,current_fact.fact_id
+        LIMIT $7 OFFSET $8`,
+      [municipality.snapshot_id, currentPeriod, priorPeriod, entity, metric, category, pagination.limit + 1, pagination.cursor],
+    );
+    const matchedFactCount = rows[0]?.matched_fact_count || 0;
+    const page = budgetPage(rows.map(({ matched_fact_count, ...row }) => row), pagination);
+    const [{ rows: coverageRows }] = await Promise.all([pool.query(
+      `SELECT
+         count(*) FILTER (WHERE fiscal_period_label=$2 AND aggregation_role='detail' AND value_numeric IS NOT NULL
+           AND ($4::bigint IS NULL OR reporting_entity_id=$4) AND ($5::text IS NULL OR amount_type=$5) AND ($6::text IS NULL OR category_key=$6))::integer AS current_fact_count,
+         count(*) FILTER (WHERE fiscal_period_label=$3 AND aggregation_role='detail' AND value_numeric IS NOT NULL
+           AND ($4::bigint IS NULL OR reporting_entity_id=$4) AND ($5::text IS NULL OR amount_type=$5) AND ($6::text IS NULL OR category_key=$6))::integer AS prior_fact_count
+       FROM budget.v_published_facts WHERE snapshot_id=$1`, [municipality.snapshot_id, currentPeriod, priorPeriod, entity, metric, category],
+    )]);
+    const filters = { municipality: slug, prior_period: priorPeriod, current_period: currentPeriod, basis, ...(entity ? { entity } : {}), ...(metric ? { metric } : {}), ...(category ? { category } : {}) };
+    await sendJson(response, budgetPayload(page.data, filters, ["exact_identity_matches_only", "unmatched_facts_are_not_zero"], page.pagination, {
+      periods: [priorPeriod, currentPeriod], units: { basis: "nominal", percentage_change: "suppressed_when_prior_is_zero" },
+      coverage: { ...coverageRows[0], matched_fact_count: matchedFactCount },
+      provenance: { snapshot_id: municipality.snapshot_id, release_label: municipality.release_label, taxonomy_version: municipality.taxonomy_version },
+    })); return true;
   }
   const families = {
     "/api/budgets/operating": ["operating", "operating_detail", "operating_statement", "facility_operating_statement"],

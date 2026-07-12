@@ -54,7 +54,7 @@ The first pass of the 2026/2027 PDF found 154 pages, 114 table or project-profil
 
 The first Charlottetown publication snapshot is published with 6,256 approved facts from the three financial-plan documents. Raw discovery artifacts remain non-publication inputs; public APIs must read through `budget.v_published_facts`.
 
-The public web implementation includes published budget discovery and fact APIs, operating/capital/revenue/debt/reserve reads, capital-project list and detail APIs, and an accessible `/budgets` visualization page. Cross-period compatibility comparisons and rendered source-page highlighting remain deferred.
+The public web implementation includes published budget discovery and fact APIs, operating/capital/revenue/debt/reserve reads, capital-project list and detail APIs, exact-identity cross-period comparison, authorized PDF page rendering, and an accessible `/budgets` visualization page. Normalized-category comparison and source-cell highlighting remain deferred.
 
 Week 1 profiling is complete for all 392 pages. See the [three-year Charlottetown source profile](../charlottetown/sources/budget-three-year-source-profile.md) for the source-pattern matrix and representative schema-spike tables.
 
