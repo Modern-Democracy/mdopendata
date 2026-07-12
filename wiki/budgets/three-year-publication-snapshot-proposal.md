@@ -73,6 +73,24 @@ The plan records counts by source document, fiscal period, statement kind, amoun
 5. No fact, source link, raw record, reconciliation, review decision, or prior snapshot is changed.
 6. Re-run attempts with the same release label fail visibly through the unique municipality/release-label constraint.
 
+## Draft Snapshot Creation Record
+
+The approved draft snapshot was created on 2026-07-12.
+
+| Field | Result |
+| --- | --- |
+| Snapshot ID | `1` |
+| Release label | `charlottetown-budget-2024-2027-initial` |
+| Taxonomy version | `charlottetown-budget-v1` |
+| Status | `draft` |
+| Source document IDs | `7`, `8`, `9` |
+| Publication facts | `6,256` |
+| Published-view rows | `0` |
+| Unapproved member facts | `0` |
+| Out-of-scope member facts | `0` |
+
+The draft snapshot is not visible through `budget.v_published_facts`. A separate publication decision remains required.
+
 ## Publication And Comparison Limits
 
 - Changing the snapshot from `draft` to `published` is a separate approval and must occur only after the acceptance checks pass.
@@ -95,3 +113,4 @@ The plan records counts by source document, fiscal period, statement kind, amoun
 - [Prior-year completion status](./prior-year-normalized-import-completion-status.md)
 - `budget.source_document` database records 7, 8, and 9 queried on 2026-07-12
 - `data/budget/charlottetown/publication-snapshot-three-year-dry-run-plan.json`
+- `data/budget/charlottetown/publication-snapshot-three-year-draft-report.json`

@@ -611,3 +611,7 @@ The project owner approved `charlottetown-budget-v1` as immutable metadata for t
 ## [2026-07-12] generation | Three-year Charlottetown snapshot dry-run plan
 
 Generated a non-mutating plan for draft release label `charlottetown-budget-2024-2027-initial` using taxonomy version `charlottetown-budget-v1`. It selects all 6,256 approved facts from source documents 7, 8, and 9, reports zero open high- or critical-severity issues and zero existing snapshots, and has SHA-256 `33a5aefbdb0778f26d9cec74add218e6dee3424f044bd7ed4e8382120dd88a91`.
+
+## [2026-07-12] generation | Three-year Charlottetown draft publication snapshot
+
+Created draft snapshot 1, `charlottetown-budget-2024-2027-initial`, with taxonomy version `charlottetown-budget-v1`. It contains 6,256 approved facts from source documents 7, 8, and 9. Validation confirms zero unapproved or out-of-scope members and zero rows in `budget.v_published_facts`; no public release was authorized.
