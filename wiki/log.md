@@ -615,3 +615,7 @@ Generated a non-mutating plan for draft release label `charlottetown-budget-2024
 ## [2026-07-12] generation | Three-year Charlottetown draft publication snapshot
 
 Created draft snapshot 1, `charlottetown-budget-2024-2027-initial`, with taxonomy version `charlottetown-budget-v1`. It contains 6,256 approved facts from source documents 7, 8, and 9. Validation confirms zero unapproved or out-of-scope members and zero rows in `budget.v_published_facts`; no public release was authorized.
+
+## [2026-07-12] scope | Public budget API first slice
+
+Defined the initial read-only API scope for published snapshots: municipality and period discovery, source inventory, single-fact provenance, and filtered CSV export. Draft snapshots remain invisible; aggregates, explorers, comparisons, and public pages are deferred pending implementation and compatibility controls.
