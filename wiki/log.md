@@ -591,3 +591,11 @@ Started the Gate 8 QA-completion and publication-eligibility review without auth
 ## [2026-07-12] decision | 2026/2027 budget Gate 8 approval
 
 The project owner approved Gate 8 after reviewing the current QA evidence. The 2026/2027 normalized dataset is publication-eligible. No publication snapshot, public release authorization, or public API/UI exposure was created by this decision.
+
+## [2026-07-12] review | Prior-year budget Gate 8 commenced
+
+Started Gate 8 QA-completion and publication-eligibility review for the 2024/2025 and 2025/2026 normalized datasets. Current provenance QA confirms 1,717 and 2,374 facts respectively, zero source mismatches, 14 passing reconciliations across both documents, zero unresolved high- or critical-severity issues, and zero publication snapshots. Approval remains pending.
+
+## [2026-07-12] decision | Prior-year budget Gate 8 approval
+
+The project owner approved Gate 8 for the 2024/2025 and 2025/2026 normalized datasets. Both datasets are publication-eligible. No publication snapshot, public-release authorization, or cross-period publication scope was created by this decision.

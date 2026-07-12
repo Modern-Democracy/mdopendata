@@ -43,6 +43,14 @@ Migration 026 restored the missing reference table. The approved 2026/2027 manif
 - zero publication snapshots
 - 173-reference 2026/2027 backfill followed by an unchanged-only rerun
 
+## Gate 8 Review
+
+Gate 8 review commenced on 2026-07-12 for both prior-year datasets. The review evidence confirms exact manifest-to-database fact and source-link counts, zero artifact or database source mismatches, six passing reconciliations for 2024/2025, eight passing reconciliations for 2025/2026, zero unresolved high- or critical-severity issues, and zero publication snapshots.
+
+### Gate 8 Approval Record
+
+On 2026-07-12, the project owner approved Gate 8 for both the 2024/2025 and 2025/2026 datasets. Both are now publication-eligible. This approval does not create a `budget.publication_snapshot`, authorize a public release, or establish a cross-period publication scope; each requires a separate decision.
+
 ## Sources
 
 - [Prior-year Phase 2 status](./prior-year-normalized-import-phase-2-status.md)
@@ -50,4 +58,3 @@ Migration 026 restored the missing reference table. The approved 2026/2027 manif
 - [Capital project lifecycle](./capital-project-lifecycle.md)
 - `data/budget/charlottetown/2024-2025/normalized-import-provenance-report.json`
 - `data/budget/charlottetown/2025-2026/normalized-import-provenance-report.json`
-
