@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "mode": "dry_run",
+  "operation": "create_draft_publication_snapshot",
+  "snapshot": {
+    "municipality_slug": "charlottetown",
+    "release_label": "charlottetown-budget-2024-2027-initial",
+    "taxonomy_version": "charlottetown-budget-v1",
+    "status": "draft",
+    "source_document_ids": [
+      7,
+      8,
+      9
+    ]
+  },
+  "source_documents": [
+    {
+      "document_id": 7,
+      "title": "2024-2025 Financial Plan Capital and Operational Budgets",
+      "sha256": "873b011970ea4042d107f7b0c4b8d58c5b5ef49ce5531f8f25f46de9270f37f6",
+      "approved_fact_count": 1717
+    },
+    {
+      "document_id": 8,
+      "title": "2025-2026 Financial Plan Capital and Operational Budgets",
+      "sha256": "d6d3fa419756eaa482a67ab42b3acdab4bf0d0329c0649fea108e4c1aaad1631",
+      "approved_fact_count": 2374
+    },
+    {
+      "document_id": 9,
+      "title": "2026-2027 Financial Plan Capital and Operating Budgets",
+      "sha256": "d926634427e80aa2b06b6425bdbb117424fe53567ae344980cd10791f8e39bac",
+      "approved_fact_count": 2165
+    }
+  ],
+  "expected": {
+    "publication_snapshot_count_before": 0,
+    "publication_fact_count": 6256,
+    "open_high_or_critical_issue_count": 0,
+    "counts": {
+      "fiscal_period": [
+        {
+          "key": "2023-2024-budget",
+          "fact_count": 500
+        },
+        {
+          "key": "2023-2024-forecast",
+          "fact_count": 372
+        },
+        {
+          "key": "2024-2025-budget",
+          "fact_count": 1560
+        },
+        {
+          "key": "2024-2025-forecast",
+          "fact_count": 439
+        },
+        {
+          "key": "2025-2026-budget",
+          "fact_count": 1749
+        },
+        {
+          "key": "2025-2026-forecast",
+          "fact_count": 452
+        },
+        {
+          "key": "2026-2027-budget",
+          "fact_count": 1184
+        }
+      ],
+      "statement_kind": [
+        {
+          "key": "capital",
+          "fact_count": 246
+        },
+        {
+          "key": "capital_budget_schedule",
+          "fact_count": 472
+        },
+        {
+          "key": "debt",
+          "fact_count": 33
+        },
+        {
+          "key": "debt_schedule",
+          "fact_count": 70
+        },
+        {
+          "key": "facility_operating_statement",
+          "fact_count": 341
+        },
+        {
+          "key": "operating",
+          "fact_count": 1886
+        },
+        {
+          "key": "operating_detail",
+          "fact_count": 567
+        },
+        {
+          "key": "operating_statement",
+          "fact_count": 2547
+        },
+        {
+          "key": "tax_assessment_rate",
+          "fact_count": 94
+        }
+      ],
+      "amount_type": [
+        {
+          "key": "actual",
+          "fact_count": 53
+        },
+        {
+          "key": "balance",
+          "fact_count": 57
+        },
+        {
+          "key": "budget",
+          "fact_count": 4097
+        },
+        {
+          "key": "forecast",
+          "fact_count": 1263
+        },
+        {
+          "key": "funding_deduction",
+          "fact_count": 31
+        },
+        {
+          "key": "gross",
+          "fact_count": 647
+        },
+        {
+          "key": "interest",
+          "fact_count": 35
+        },
+        {
+          "key": "net",
+          "fact_count": 40
+        },
+        {
+          "key": "principal",
+          "fact_count": 33
+        }
+      ],
+      "measure_unit": [
+        {
+          "key": "cad",
+          "fact_count": 6203
+        },
+        {
+          "key": "cad_per_100_assessed",
+          "fact_count": 39
+        },
+        {
+          "key": "cad_per_cubic_metre",
+          "fact_count": 4
+        },
+        {
+          "key": "cad_per_day",
+          "fact_count": 4
+        },
+        {
+          "key": "cad_per_year",
+          "fact_count": 6
+        }
+      ],
+      "value_state": [
+        {
+          "key": "dash_unresolved",
+          "fact_count": 41
+        },
+        {
+          "key": "reported",
+          "fact_count": 6213
+        },
+        {
+          "key": "reported_zero",
+          "fact_count": 2
+        }
+      ]
+    }
+  },
+  "prohibitions": [
+    "Do not create a publication snapshot in dry-run mode.",
+    "Do not modify facts, source links, raw records, reconciliations, or review decisions.",
+    "Do not change snapshot status to published without separate approval."
+  ],
+  "plan_sha256": "33a5aefbdb0778f26d9cec74add218e6dee3424f044bd7ed4e8382120dd88a91"
+}

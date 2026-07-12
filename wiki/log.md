@@ -603,3 +603,11 @@ The project owner approved Gate 8 for the 2024/2025 and 2025/2026 normalized dat
 ## [2026-07-12] proposal | Three-year Charlottetown budget publication snapshot
 
 Prepared a non-executing proposal for one draft Charlottetown snapshot covering all 6,256 approved facts from the three Gate 8-approved financial-plan documents. The proposal requires an exact approved taxonomy-version label before execution, preserves the accepted 2026/2027 debt discrepancy as a warning, and separates draft creation from the later decision to publish.
+
+## [2026-07-12] decision | Charlottetown budget snapshot taxonomy version
+
+The project owner approved `charlottetown-budget-v1` as immutable metadata for the first three-year Charlottetown budget snapshot. The label does not claim a cross-municipality taxonomy or enable cross-municipality comparison.
+
+## [2026-07-12] generation | Three-year Charlottetown snapshot dry-run plan
+
+Generated a non-mutating plan for draft release label `charlottetown-budget-2024-2027-initial` using taxonomy version `charlottetown-budget-v1`. It selects all 6,256 approved facts from source documents 7, 8, and 9, reports zero open high- or critical-severity issues and zero existing snapshots, and has SHA-256 `33a5aefbdb0778f26d9cec74add218e6dee3424f044bd7ed4e8382120dd88a91`.

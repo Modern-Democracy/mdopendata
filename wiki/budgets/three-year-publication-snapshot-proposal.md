@@ -22,7 +22,7 @@ Create one draft `budget.publication_snapshot` for Charlottetown containing all 
 | --- | --- | --- |
 | Municipality | `charlottetown` | Confirmed |
 | Release label | `charlottetown-budget-2024-2027-initial` | Proposed |
-| Taxonomy version | Exact approved label required | Blocking decision |
+| Taxonomy version | `charlottetown-budget-v1` | Approved |
 | Status at creation | `draft` | Proposed |
 | Source documents | Three documents listed below | Confirmed |
 | Fact membership | All 6,256 approved facts from the three documents | Proposed |
@@ -37,9 +37,9 @@ Create one draft `budget.publication_snapshot` for Charlottetown containing all 
 | 2026/2027 | 9 | `d926634427e80aa2b06b6425bdbb117424fe53567ae344980cd10791f8e39bac` | 2,165 | Approved |
 | **Total** |  |  | **6,256** |  |
 
-## Required Decision
+## Taxonomy Decision
 
-Approve the exact `taxonomy_version` value. The database currently has no `budget.normalized_category` rows, so the proposal must not invent a taxonomy label. The approved label becomes immutable snapshot metadata and must be carried by future public API responses and comparison warnings.
+The project owner approved `charlottetown-budget-v1` as the snapshot taxonomy-version label on 2026-07-12. The database currently has no `budget.normalized_category` rows; this label is immutable snapshot metadata and must be carried by future public API responses and comparison warnings. It does not claim that a cross-municipality taxonomy exists.
 
 ## Preconditions
 
@@ -49,6 +49,20 @@ Approve the exact `taxonomy_version` value. The database currently has no `budge
 - There are zero publication snapshots before creation.
 - The 2026/2027 accepted `debt_total:balance` source-document discrepancy remains included as a visible warning, not silently recalculated.
 - The operation is one transaction: create the draft snapshot, add memberships, verify counts and source scope, then commit.
+
+## Dry-Run Evidence
+
+`scripts/plan-budget-charlottetown-three-year-publication-snapshot.py` generated the deterministic dry-run plan at `data/budget/charlottetown/publication-snapshot-three-year-dry-run-plan.json`.
+
+| Check | Result |
+| --- | ---: |
+| Candidate publication facts | 6,256 |
+| Source documents | 7, 8, 9 |
+| Existing snapshots | 0 |
+| Open high/critical issues | 0 |
+| Plan SHA-256 | `33a5aefbdb0778f26d9cec74add218e6dee3424f044bd7ed4e8382120dd88a91` |
+
+The plan records counts by source document, fiscal period, statement kind, amount type, measure unit, and value state. It creates no database records.
 
 ## Acceptance Checks
 
@@ -68,8 +82,7 @@ Approve the exact `taxonomy_version` value. The database currently has no `budge
 
 ## Execution Plan After Approval
 
-1. Record the selected taxonomy version and approved release label.
-2. Generate a dry-run membership plan with fact counts by source document, fiscal period, statement family, unit, amount type, and value state.
+1. Generate a dry-run membership plan with fact counts by source document, fiscal period, statement family, unit, amount type, and value state.
 3. Review the plan against this proposal and the Gate 8 evidence.
 4. Create the draft snapshot transactionally and rerun the membership checks.
 5. Request the separate decision to publish the snapshot or retain it as an internal release candidate.
@@ -81,3 +94,4 @@ Approve the exact `taxonomy_version` value. The database currently has no `budge
 - [2026/2027 Phase 7 status](./2026-normalized-import-phase-7-status.md)
 - [Prior-year completion status](./prior-year-normalized-import-completion-status.md)
 - `budget.source_document` database records 7, 8, and 9 queried on 2026-07-12
+- `data/budget/charlottetown/publication-snapshot-three-year-dry-run-plan.json`
