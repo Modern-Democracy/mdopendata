@@ -28,7 +28,9 @@ Snapshot 1 is currently `draft`. Until a snapshot is separately approved and cha
 | `GET /api/budgets/facts/:factId` | Return one published fact with hierarchy, units, review state, snapshot provenance, source-cell citations, and warnings. Unpublished or unknown fact IDs return `404`. |
 | `GET /api/budgets/download.csv` | Export filtered published facts and required provenance columns using the same filters, stable sort, cursor, and limit rules as collection endpoints. |
 
-All endpoints return the standard envelope fields: `data`, `filters`, `periods`, `scope`, `units`, `coverage`, `provenance`, and `warnings`.
+JSON collection endpoints accept only their documented query parameters and reject unknown, repeated, empty, or malformed values with `400`. They accept `limit` from 1 through 1,000 and a non-negative numeric `cursor` offset, use a stable route-specific sort, and return `pagination.limit`, `pagination.cursor`, and `pagination.next_cursor`. CSV downloads use the same pagination controls and return the next cursor in `X-Next-Cursor`.
+
+All JSON endpoints return the standard envelope fields: `data`, `filters`, `periods`, `scope`, `units`, `coverage`, `provenance`, `warnings`, and `pagination`. CSV downloads return applicable warnings in `X-Budget-Warnings`.
 
 ## Required Controls
 

@@ -65,6 +65,22 @@ const checks = [
       Array.isArray(payload.availableActions),
   },
   {
+    name: "budget municipality pagination API contract",
+    path: "/api/budgets/municipalities?limit=1&cursor=0",
+    expectJson: (payload) => Array.isArray(payload.data) && payload.pagination?.limit === 1 && payload.pagination?.cursor === "0",
+  },
+  {
+    name: "budget fact warning API contract",
+    path: "/api/budgets/facts/13067?municipality=charlottetown",
+    expectJson: (payload) => payload.data?.fact_id === "13067" && payload.warnings?.some((warning) => warning.issue_key === "reconciliation:debt_total:balance"),
+  },
+  {
+    name: "budget unknown filter rejection",
+    path: "/api/budgets/periods?municipality=charlottetown&unsupported=test",
+    expectStatus: 400,
+    expectJson: (payload) => /Unsupported budget filter/.test(payload.error || ""),
+  },
+  {
     name: "address API contract",
     path: "/api/addresses?q=university&limit=1",
     expectJson: (payload) => Array.isArray(payload.rows) && Boolean(payload.source),
@@ -132,7 +148,10 @@ checks.push({
 async function runCheck(check) {
   const url = new URL(check.path, baseUrl);
   const response = await fetch(url);
-  if (!response.ok) {
+  if (check.expectStatus && response.status !== check.expectStatus) {
+    throw new Error(`${check.name}: ${url} returned HTTP ${response.status}, expected ${check.expectStatus}`);
+  }
+  if (!check.expectStatus && !response.ok) {
     throw new Error(`${check.name}: ${url} returned HTTP ${response.status}`);
   }
 

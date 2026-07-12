@@ -2390,8 +2390,94 @@ async function loadProvisionsComparison() {
   };
 }
 
-function budgetPayload(data, filters = {}, warnings = []) {
-  return { data, filters, periods: [], scope: {}, units: {}, coverage: {}, provenance: {}, warnings };
+function budgetPayload(data, filters = {}, warnings = [], pagination = null) {
+  return { data, filters, periods: [], scope: {}, units: {}, coverage: {}, provenance: {}, warnings, pagination };
+}
+
+function budgetQuery(url, allowed) {
+  const unsupported = [...new Set([...url.searchParams.keys()].filter((name) => !allowed.includes(name)))];
+  if (unsupported.length) {
+    const error = new Error(`Unsupported budget filter${unsupported.length === 1 ? "" : "s"}: ${unsupported.join(", ")}.`);
+    error.statusCode = 400;
+    throw error;
+  }
+  const repeated = allowed.filter((name) => url.searchParams.getAll(name).length > 1);
+  if (repeated.length) {
+    const error = new Error(`Budget filters may be specified only once: ${repeated.join(", ")}.`);
+    error.statusCode = 400;
+    throw error;
+  }
+}
+
+function budgetFilter(url, name) {
+  if (!url.searchParams.has(name)) return null;
+  const value = url.searchParams.get(name).trim();
+  if (!value) {
+    const error = new Error(`${name} must not be empty.`);
+    error.statusCode = 400;
+    throw error;
+  }
+  return value;
+}
+
+function budgetPagination(url) {
+  const limitValue = budgetFilter(url, "limit");
+  const cursorValue = budgetFilter(url, "cursor");
+  const limit = limitValue === null ? 100 : Number(limitValue);
+  const cursor = cursorValue === null ? 0 : Number(cursorValue);
+  if (!Number.isSafeInteger(limit) || limit < 1 || limit > 1000) {
+    const error = new Error("limit must be an integer from 1 through 1000.");
+    error.statusCode = 400;
+    throw error;
+  }
+  if (!Number.isSafeInteger(cursor) || cursor < 0) {
+    const error = new Error("cursor must be a non-negative integer offset.");
+    error.statusCode = 400;
+    throw error;
+  }
+  return { limit, cursor };
+}
+
+function budgetPage(rows, { limit, cursor }) {
+  const hasMore = rows.length > limit;
+  const data = hasMore ? rows.slice(0, limit) : rows;
+  return { data, pagination: { limit, cursor: String(cursor), next_cursor: hasMore ? String(cursor + limit) : null } };
+}
+
+async function loadBudgetWarnings(snapshotId) {
+  const { rows } = await pool.query(
+    `SELECT ri.review_key,ri.title,ri.description,rr.difference,rr.input_fact_ids,
+            array_agg(DISTINCT s.document_id) FILTER (WHERE s.document_id IS NOT NULL) AS document_ids
+       FROM budget.review_issue ri
+       JOIN budget.reconciliation_result rr ON rr.id=ri.reconciliation_result_id
+       JOIN budget.review_decision rd ON rd.review_issue_id=ri.id AND rd.decision_code='accept_reported_with_warning'
+       JOIN unnest(rr.input_fact_ids) affected_fact_id ON true
+       JOIN budget.publication_fact pf ON pf.fact_id=affected_fact_id AND pf.snapshot_id=$1
+       JOIN budget.fact f ON f.id=pf.fact_id
+       JOIN budget.line_item li ON li.id=f.line_item_id
+       JOIN budget.statement s ON s.id=li.statement_id
+      WHERE ri.status='resolved'
+      GROUP BY ri.review_key,ri.title,ri.description,rr.difference,rr.input_fact_ids`,
+    [snapshotId],
+  );
+  return rows.map((row) => ({
+    code: "accepted_source_discrepancy",
+    issue_key: row.review_key,
+    title: row.title,
+    description: row.description,
+    decision: "accept_reported_with_warning",
+    difference: String(row.difference),
+    affected_fact_ids: row.input_fact_ids.map(String),
+    affected_document_ids: (row.document_ids || []).map(String),
+  }));
+}
+
+function selectBudgetWarnings(warnings, { factIds = [], documentIds = [] } = {}) {
+  const facts = new Set(factIds.map(String));
+  const documents = new Set(documentIds.map(String));
+  return warnings
+    .filter((warning) => warning.affected_fact_ids.some((id) => facts.has(id)) || warning.affected_document_ids.some((id) => documents.has(id)))
+    .map(({ affected_document_ids, ...warning }) => warning);
 }
 
 async function loadPublishedBudgetMunicipality(slug) {
@@ -2405,34 +2491,61 @@ async function loadPublishedBudgetMunicipality(slug) {
 
 async function handleBudgetApi(request, response, url) {
   if (request.method !== "GET") { response.writeHead(405); response.end("Method not allowed"); return true; }
-  const slug = url.searchParams.get("municipality") || "charlottetown";
+  const factMatch = url.pathname.match(/^\/api\/budgets\/facts\/(\d+)$/);
+  const allowedFilters = url.pathname === "/api/budgets/municipalities" ? ["limit", "cursor"]
+    : url.pathname === "/api/budgets/periods" ? ["municipality", "limit", "cursor"]
+      : url.pathname === "/api/budgets/sources" ? ["municipality", "period", "limit", "cursor"]
+        : factMatch ? ["municipality"]
+          : url.pathname === "/api/budgets/download.csv" ? ["municipality", "period", "statement_kind", "amount_type", "measure_unit", "limit", "cursor"]
+            : null;
+  if (allowedFilters) budgetQuery(url, allowedFilters);
   if (url.pathname === "/api/budgets/municipalities") {
-    const { rows } = await pool.query(`SELECT DISTINCT m.slug,m.legal_name FROM budget.publication_snapshot ps JOIN budget.municipality m ON m.id=ps.municipality_id WHERE ps.status='published' ORDER BY m.slug`);
-    await sendJson(response, budgetPayload(rows)); return true;
+    budgetQuery(url, ["limit", "cursor"]);
+    const pagination = budgetPagination(url);
+    const { rows } = await pool.query(`SELECT DISTINCT m.slug,m.legal_name FROM budget.publication_snapshot ps JOIN budget.municipality m ON m.id=ps.municipality_id WHERE ps.status='published' ORDER BY m.slug LIMIT $1 OFFSET $2`, [pagination.limit + 1, pagination.cursor]);
+    const page = budgetPage(rows, pagination);
+    await sendJson(response, budgetPayload(page.data, {}, [], page.pagination)); return true;
   }
+  const slug = budgetFilter(url, "municipality") || "charlottetown";
   const municipality = await loadPublishedBudgetMunicipality(slug);
   if (!municipality) { await sendJson(response, budgetPayload([], { municipality: slug }, ["no_published_snapshot"])); return true; }
   if (url.pathname === "/api/budgets/periods") {
-    const { rows } = await pool.query(`SELECT DISTINCT fiscal_period_label AS label,start_date,end_date,amount_type FROM budget.v_published_facts WHERE snapshot_id=$1 ORDER BY start_date,amount_type`, [municipality.snapshot_id]);
-    await sendJson(response, budgetPayload(rows, { municipality: slug }, [])); return true;
+    budgetQuery(url, ["municipality", "limit", "cursor"]);
+    const pagination = budgetPagination(url);
+    const { rows } = await pool.query(`SELECT DISTINCT fiscal_period_label AS label,start_date,end_date,amount_type FROM budget.v_published_facts WHERE snapshot_id=$1 ORDER BY start_date,amount_type,label LIMIT $2 OFFSET $3`, [municipality.snapshot_id, pagination.limit + 1, pagination.cursor]);
+    const page = budgetPage(rows, pagination);
+    await sendJson(response, budgetPayload(page.data, { municipality: slug }, [], page.pagination)); return true;
   }
   if (url.pathname === "/api/budgets/sources") {
-    const { rows } = await pool.query(`SELECT d.id,d.title,d.sha256,count(pf.fact_id)::integer AS fact_count FROM budget.publication_snapshot ps JOIN unnest(ps.source_document_ids) source_id ON true JOIN budget.source_document d ON d.id=source_id LEFT JOIN budget.statement s ON s.document_id=d.id LEFT JOIN budget.line_item li ON li.statement_id=s.id LEFT JOIN budget.fact f ON f.line_item_id=li.id LEFT JOIN budget.publication_fact pf ON pf.snapshot_id=ps.id AND pf.fact_id=f.id WHERE ps.id=$1 GROUP BY d.id,d.title,d.sha256 ORDER BY d.id`, [municipality.snapshot_id]);
-    await sendJson(response, budgetPayload(rows, { municipality: slug }, [])); return true;
+    budgetQuery(url, ["municipality", "period", "limit", "cursor"]);
+    const period = budgetFilter(url, "period");
+    const pagination = budgetPagination(url);
+    const { rows } = await pool.query(`SELECT d.id,d.title,d.sha256,count(pf.fact_id)::integer AS fact_count FROM budget.publication_snapshot ps JOIN unnest(ps.source_document_ids) source_id ON true JOIN budget.source_document d ON d.id=source_id LEFT JOIN budget.statement s ON s.document_id=d.id LEFT JOIN budget.line_item li ON li.statement_id=s.id LEFT JOIN budget.fact f ON f.line_item_id=li.id LEFT JOIN budget.publication_fact pf ON pf.snapshot_id=ps.id AND pf.fact_id=f.id WHERE ps.id=$1 AND ($2::text IS NULL OR EXISTS (SELECT 1 FROM budget.v_published_facts published_fact JOIN budget.statement published_statement ON published_statement.id=published_fact.statement_id WHERE published_fact.snapshot_id=ps.id AND published_statement.document_id=d.id AND published_fact.fiscal_period_label=$2)) GROUP BY d.id,d.title,d.sha256 ORDER BY d.id LIMIT $3 OFFSET $4`, [municipality.snapshot_id, period, pagination.limit + 1, pagination.cursor]);
+    const page = budgetPage(rows, pagination);
+    const warnings = selectBudgetWarnings(await loadBudgetWarnings(municipality.snapshot_id), { documentIds: page.data.map((row) => row.id) });
+    await sendJson(response, budgetPayload(page.data, { municipality: slug, ...(period ? { period } : {}) }, warnings, page.pagination)); return true;
   }
-  const factMatch = url.pathname.match(/^\/api\/budgets\/facts\/(\d+)$/);
   if (factMatch) {
+    budgetQuery(url, ["municipality"]);
     const { rows } = await pool.query(`SELECT * FROM budget.v_published_facts WHERE snapshot_id=$1 AND fact_id=$2`, [municipality.snapshot_id, Number(factMatch[1])]);
     if (!rows[0]) { response.writeHead(404, { "content-type": "application/json; charset=utf-8" }); response.end(JSON.stringify({ error: "Budget fact not found." })); return true; }
-    await sendJson(response, budgetPayload(rows[0], { municipality: slug }, [])); return true;
+    const warnings = selectBudgetWarnings(await loadBudgetWarnings(municipality.snapshot_id), { factIds: [rows[0].fact_id] });
+    await sendJson(response, budgetPayload(rows[0], { municipality: slug }, warnings)); return true;
   }
   if (url.pathname === "/api/budgets/download.csv") {
-    const limit = normalizeLimit(url.searchParams.get("limit"), 100, 1000);
-    const { rows } = await pool.query(`SELECT fact_id,fiscal_period_label,statement_kind,raw_label,amount_type,measure_unit,value_numeric,value_text,value_state FROM budget.v_published_facts WHERE snapshot_id=$1 ORDER BY fact_id LIMIT $2`, [municipality.snapshot_id, limit]);
-    const header = Object.keys(rows[0] || { fact_id: "" });
+    budgetQuery(url, ["municipality", "period", "statement_kind", "amount_type", "measure_unit", "limit", "cursor"]);
+    const period = budgetFilter(url, "period");
+    const statementKind = budgetFilter(url, "statement_kind");
+    const amountType = budgetFilter(url, "amount_type");
+    const measureUnit = budgetFilter(url, "measure_unit");
+    const pagination = budgetPagination(url);
+    const { rows } = await pool.query(`SELECT fact_id,fiscal_period_label,statement_kind,raw_label,amount_type,measure_unit,value_numeric,value_text,value_state FROM budget.v_published_facts WHERE snapshot_id=$1 AND ($2::text IS NULL OR fiscal_period_label=$2) AND ($3::text IS NULL OR statement_kind=$3) AND ($4::text IS NULL OR amount_type=$4) AND ($5::text IS NULL OR measure_unit=$5) ORDER BY fact_id LIMIT $6 OFFSET $7`, [municipality.snapshot_id, period, statementKind, amountType, measureUnit, pagination.limit + 1, pagination.cursor]);
+    const page = budgetPage(rows, pagination);
+    const warnings = selectBudgetWarnings(await loadBudgetWarnings(municipality.snapshot_id), { factIds: page.data.map((row) => row.fact_id) });
+    const header = Object.keys(page.data[0] || { fact_id: "" });
     const quote = (value) => `"${String(value ?? "").replaceAll('"', '""')}"`;
-    response.writeHead(200, { "content-type": "text/csv; charset=utf-8", "content-disposition": "attachment; filename=budget-facts.csv" });
-    response.end([header.join(","), ...rows.map((row) => header.map((key) => quote(row[key])).join(","))].join("\n")); return true;
+    response.writeHead(200, { "content-type": "text/csv; charset=utf-8", "content-disposition": "attachment; filename=budget-facts.csv", "x-next-cursor": page.pagination.next_cursor || "", "x-budget-warnings": JSON.stringify(warnings) });
+    response.end([header.join(","), ...page.data.map((row) => header.map((key) => quote(row[key])).join(","))].join("\n")); return true;
   }
   return false;
 }

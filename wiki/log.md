@@ -14,6 +14,14 @@ Append new entries in reverse chronological order. Use this heading format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-07-12] implementation | Budget API pagination, validation, and warnings
+
+Added bounded cursor pagination, strict allowlisted query-filter validation, and accepted debt-balance discrepancy warning coverage to the first budget API slice. Updated the Bruno collection with paginated and filtered requests plus an unknown-filter rejection request, rebuilt the local Docker web service, and passed the expanded API smoke checks.
+
+## [2026-07-12] operations | Local web container rebuild for budget API validation
+
+Rebuilt and recreated the local Docker Compose `web` service from the current `web/server.js` source after the stale image returned `404` for budget API routes. The refreshed service returned `200` for municipalities, periods, sources, fact detail, and CSV download using the Bruno Local environment; `factId` was set to published fact `13067`.
+
 ## [2026-07-12] implementation | Prior-year budget normalized imports complete
 
 Completed deterministic manifests, reconciliation catalogues, controlled normalized imports, idempotence reruns, and source-fidelity QA for the 2024/2025 and 2025/2026 Charlottetown budgets. Imported 4,091 facts with 4,091 verified source links and 14 passing reconciliations. Migration 026 restored `budget.capital_project_reference`; 173 approved 2026/2027 references were backfilled, producing 27 project identities referenced by multiple budget documents. Publication snapshots remain zero.
