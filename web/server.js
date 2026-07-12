@@ -2390,6 +2390,53 @@ async function loadProvisionsComparison() {
   };
 }
 
+function budgetPayload(data, filters = {}, warnings = []) {
+  return { data, filters, periods: [], scope: {}, units: {}, coverage: {}, provenance: {}, warnings };
+}
+
+async function loadPublishedBudgetMunicipality(slug) {
+  const { rows } = await pool.query(
+    `SELECT m.id,m.slug,m.legal_name,ps.id AS snapshot_id,ps.release_label,ps.taxonomy_version
+       FROM budget.publication_snapshot ps JOIN budget.municipality m ON m.id=ps.municipality_id
+      WHERE ps.status='published' AND m.slug=$1 ORDER BY ps.id DESC LIMIT 1`, [slug],
+  );
+  return rows[0] || null;
+}
+
+async function handleBudgetApi(request, response, url) {
+  if (request.method !== "GET") { response.writeHead(405); response.end("Method not allowed"); return true; }
+  const slug = url.searchParams.get("municipality") || "charlottetown";
+  if (url.pathname === "/api/budgets/municipalities") {
+    const { rows } = await pool.query(`SELECT DISTINCT m.slug,m.legal_name FROM budget.publication_snapshot ps JOIN budget.municipality m ON m.id=ps.municipality_id WHERE ps.status='published' ORDER BY m.slug`);
+    await sendJson(response, budgetPayload(rows)); return true;
+  }
+  const municipality = await loadPublishedBudgetMunicipality(slug);
+  if (!municipality) { await sendJson(response, budgetPayload([], { municipality: slug }, ["no_published_snapshot"])); return true; }
+  if (url.pathname === "/api/budgets/periods") {
+    const { rows } = await pool.query(`SELECT DISTINCT fiscal_period_label AS label,start_date,end_date,amount_type FROM budget.v_published_facts WHERE snapshot_id=$1 ORDER BY start_date,amount_type`, [municipality.snapshot_id]);
+    await sendJson(response, budgetPayload(rows, { municipality: slug }, [])); return true;
+  }
+  if (url.pathname === "/api/budgets/sources") {
+    const { rows } = await pool.query(`SELECT d.id,d.title,d.sha256,count(pf.fact_id)::integer AS fact_count FROM budget.publication_snapshot ps JOIN unnest(ps.source_document_ids) source_id ON true JOIN budget.source_document d ON d.id=source_id LEFT JOIN budget.statement s ON s.document_id=d.id LEFT JOIN budget.line_item li ON li.statement_id=s.id LEFT JOIN budget.fact f ON f.line_item_id=li.id LEFT JOIN budget.publication_fact pf ON pf.snapshot_id=ps.id AND pf.fact_id=f.id WHERE ps.id=$1 GROUP BY d.id,d.title,d.sha256 ORDER BY d.id`, [municipality.snapshot_id]);
+    await sendJson(response, budgetPayload(rows, { municipality: slug }, [])); return true;
+  }
+  const factMatch = url.pathname.match(/^\/api\/budgets\/facts\/(\d+)$/);
+  if (factMatch) {
+    const { rows } = await pool.query(`SELECT * FROM budget.v_published_facts WHERE snapshot_id=$1 AND fact_id=$2`, [municipality.snapshot_id, Number(factMatch[1])]);
+    if (!rows[0]) { response.writeHead(404, { "content-type": "application/json; charset=utf-8" }); response.end(JSON.stringify({ error: "Budget fact not found." })); return true; }
+    await sendJson(response, budgetPayload(rows[0], { municipality: slug }, [])); return true;
+  }
+  if (url.pathname === "/api/budgets/download.csv") {
+    const limit = normalizeLimit(url.searchParams.get("limit"), 100, 1000);
+    const { rows } = await pool.query(`SELECT fact_id,fiscal_period_label,statement_kind,raw_label,amount_type,measure_unit,value_numeric,value_text,value_state FROM budget.v_published_facts WHERE snapshot_id=$1 ORDER BY fact_id LIMIT $2`, [municipality.snapshot_id, limit]);
+    const header = Object.keys(rows[0] || { fact_id: "" });
+    const quote = (value) => `"${String(value ?? "").replaceAll('"', '""')}"`;
+    response.writeHead(200, { "content-type": "text/csv; charset=utf-8", "content-disposition": "attachment; filename=budget-facts.csv" });
+    response.end([header.join(","), ...rows.map((row) => header.map((key) => quote(row[key])).join(","))].join("\n")); return true;
+  }
+  return false;
+}
+
 function packageUploadFilename(request) {
   const encoded = toStringValue(request.headers["x-file-name"]);
   let name;
@@ -5449,6 +5496,9 @@ async function serveStatic(response, requestPath) {
 const server = createServer(async (request, response) => {
   try {
     const url = new URL(request.url, `http://${request.headers.host}`);
+    if (url.pathname.startsWith("/api/budgets/")) {
+      if (await handleBudgetApi(request, response, url)) return;
+    }
     if (url.pathname === "/api/portal/context") {
       if (request.method !== "GET") {
         response.writeHead(405);
