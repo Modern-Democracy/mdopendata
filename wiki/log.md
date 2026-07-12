@@ -575,3 +575,7 @@ Classified PDF page 14 as a standard three-period operating statement rather tha
 ## [2026-07-11] decision | Budget duplicate-visualization exclusion
 
 Established the budget-ingestion rule that charts and similar visualizations are excluded from normalization when an authoritative table elsewhere in the document reports the same figures. The 2024/2025 revenue and expenditure bubble charts on PDF pages 15 and 16 are retained as raw evidence but classified as `duplicate_summary`, removing 60 non-tabular rows from Phase 2 review. No database import, compatibility record, or publication snapshot was created.
+
+## [2026-07-12] correction | 2026/2027 operating summary-detail identities
+
+Corrected a post-import identity divergence between the 2026/2027 normalized manifest and PostgreSQL. A transactional migration created twelve manifest-defined operating detail statements, moved 301 existing line items and their facts, retained all 301 source links, and created the approved summary-detail relationships. Batch 53 records the migration. Phase 7 source-fidelity QA subsequently matched all 2,165 facts and source links with zero publication snapshots.
