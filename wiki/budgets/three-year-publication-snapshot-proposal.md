@@ -8,25 +8,25 @@ tags:
 updated: 2026-07-12
 ---
 
-This draft defines the approval required to create the first three-year Charlottetown budget publication snapshot without authorizing public release.
+This page records the creation and publication state of the first three-year Charlottetown budget publication snapshot.
 
 # Three-Year Charlottetown Publication-Snapshot Proposal
 
-## Proposed Outcome
+## Outcome
 
-Create one draft `budget.publication_snapshot` for Charlottetown containing all reviewed facts from the 2024/2025, 2025/2026, and 2026/2027 financial-plan documents. The snapshot freezes approved fact membership for a later read-only release. It does not implement APIs or UI, make the snapshot public, or imply that every cross-period comparison is compatible.
+Snapshot `1` contains all reviewed facts from the 2024/2025, 2025/2026, and 2026/2027 Charlottetown financial-plan documents. It is published for read-only API access. Publication does not imply that every cross-period comparison is compatible.
 
 ## Proposed Snapshot Record
 
-| Field | Draft value | Status |
+| Field | Value | Status |
 | --- | --- | --- |
 | Municipality | `charlottetown` | Confirmed |
-| Release label | `charlottetown-budget-2024-2027-initial` | Proposed |
+| Release label | `charlottetown-budget-2024-2027-initial` | Confirmed |
 | Taxonomy version | `charlottetown-budget-v1` | Approved |
-| Status at creation | `draft` | Proposed |
+| Status | `published` | Confirmed |
 | Source documents | Three documents listed below | Confirmed |
-| Fact membership | All 6,256 approved facts from the three documents | Proposed |
-| Public-release state | No public release | Confirmed exclusion |
+| Fact membership | All 6,256 approved facts from the three documents | Confirmed |
+| Public-release state | Published read-only snapshot | Confirmed |
 
 ## Source Scope And Counts
 
@@ -69,41 +69,34 @@ The plan records counts by source document, fiscal period, statement kind, amoun
 1. Snapshot municipality is Charlottetown and source-document membership is exactly IDs 7, 8, and 9.
 2. Snapshot has exactly 6,256 `publication_fact` memberships, with no duplicate fact IDs.
 3. Every member fact is approved and belongs to one listed source document.
-4. `budget.v_published_facts` returns 6,256 rows for the snapshot only after a separate status change to `published`; the draft snapshot remains absent from that view.
+4. `budget.v_published_facts` returns exactly 6,256 rows for the published snapshot.
 5. No fact, source link, raw record, reconciliation, review decision, or prior snapshot is changed.
 6. Re-run attempts with the same release label fail visibly through the unique municipality/release-label constraint.
 
-## Draft Snapshot Creation Record
+## Snapshot Publication Record
 
-The approved draft snapshot was created on 2026-07-12.
+The approved draft snapshot was created and subsequently published on 2026-07-12.
 
 | Field | Result |
 | --- | --- |
 | Snapshot ID | `1` |
 | Release label | `charlottetown-budget-2024-2027-initial` |
 | Taxonomy version | `charlottetown-budget-v1` |
-| Status | `draft` |
+| Status | `published` |
 | Source document IDs | `7`, `8`, `9` |
 | Publication facts | `6,256` |
-| Published-view rows | `0` |
+| Published-view rows | `6,256` |
 | Unapproved member facts | `0` |
 | Out-of-scope member facts | `0` |
 
-The draft snapshot is not visible through `budget.v_published_facts`. A separate publication decision remains required.
+Database verification on 2026-07-12 confirmed status `published` and 6,256 rows for snapshot `1` in `budget.v_published_facts`.
 
 ## Publication And Comparison Limits
 
-- Changing the snapshot from `draft` to `published` is a separate approval and must occur only after the acceptance checks pass.
-- Snapshot publication does not create the planned budget APIs or web pages.
+- Snapshot publication authorizes read-only exposure through APIs that enforce the published-snapshot boundary.
+- Snapshot publication does not by itself establish comparison compatibility or create web pages.
 - Cross-period comparison remains limited to facts with approved compatible identity, period, entity, amount-type, unit, and aggregation semantics. Missing or incompatible coverage must remain visible and must not render as zero.
 - Cross-municipality comparison is out of scope because no cross-municipality taxonomy has been approved.
-
-## Execution Plan After Approval
-
-1. Generate a dry-run membership plan with fact counts by source document, fiscal period, statement family, unit, amount type, and value state.
-3. Review the plan against this proposal and the Gate 8 evidence.
-4. Create the draft snapshot transactionally and rerun the membership checks.
-5. Request the separate decision to publish the snapshot or retain it as an internal release candidate.
 
 ## Sources
 
@@ -114,3 +107,4 @@ The draft snapshot is not visible through `budget.v_published_facts`. A separate
 - `budget.source_document` database records 7, 8, and 9 queried on 2026-07-12
 - `data/budget/charlottetown/publication-snapshot-three-year-dry-run-plan.json`
 - `data/budget/charlottetown/publication-snapshot-three-year-draft-report.json`
+- `budget.publication_snapshot` snapshot `1` and `budget.v_published_facts`, queried on 2026-07-12

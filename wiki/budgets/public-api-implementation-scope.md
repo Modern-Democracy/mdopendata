@@ -8,7 +8,7 @@ tags:
 updated: 2026-07-12
 ---
 
-This page defines the first implementation slice for read-only public budget APIs backed only by published snapshots.
+This page records the implemented read-only public budget and capital-project API slices backed only by published snapshots.
 
 # Public Budget API Implementation Scope
 
@@ -16,7 +16,7 @@ This page defines the first implementation slice for read-only public budget API
 
 Implement a read-only API that lets a public user discover available published budget coverage, inspect source documents, retrieve an individual fact with provenance, and download filtered published facts. The initial implementation serves only `budget.v_published_facts`; it must not query raw or draft-snapshot facts for public responses.
 
-Snapshot 1 is currently `draft`. Until a snapshot is separately approved and changed to `published`, every public budget endpoint returns an empty valid result with the machine-readable reason `no_published_snapshot`.
+Snapshot `1` is published and exposes 6,256 facts from source documents `7`, `8`, and `9` through `budget.v_published_facts`. Municipalities without a published snapshot receive an empty valid result with the machine-readable reason `no_published_snapshot`.
 
 ## In Scope: First Slice
 
@@ -35,7 +35,7 @@ All JSON endpoints return the standard envelope fields: `data`, `filters`, `peri
 ## Required Controls
 
 - Read only from `budget.v_published_facts` and related source metadata for the same published snapshot.
-- Do not expose snapshot 1 while it remains `draft`.
+- Expose snapshot `1` only through `budget.v_published_facts`; draft snapshots remain excluded.
 - Enforce `limit` and cursor pagination, stable sort, and `400` for unknown filters.
 - Preserve fiscal-period labels and date ranges; do not relabel them as calendar years.
 - Include the accepted 2026/2027 debt-balance discrepancy as a warning wherever its affected source or fact is returned.
@@ -44,26 +44,31 @@ All JSON endpoints return the standard envelope fields: `data`, `filters`, `peri
 
 ## Explicitly Deferred
 
-- `/summary`, `/operating`, `/capital`, `/revenue`, `/debt`, `/reserves`, and `/compare` aggregate/explorer endpoints.
-- Public `/budgets` pages, charts, and source-page rendering.
+- Source-page rendering and highlighted source-cell images.
 - Cross-period aggregate comparisons until compatibility logic and coverage notices are implemented.
 - Cross-municipality comparisons, per-capita calculations, inflation adjustments, writes, authentication, and administrative review actions.
 
+## Implemented Follow-On Slice
+
+- `/summary`, `/operating`, `/capital`, `/revenue`, `/debt`, and `/reserves` read from the published snapshot; `/compare` returns a machine-readable compatibility limitation.
+- `/api/projects` and `/api/projects/:projectKey` expose only projects connected to published facts and retain source-supported lifecycle state.
+- `/budgets` provides period selection, exploratory summary metrics, accessible sorted bars with a canonical table, published project filtering and detail, source inventory access, and CSV download.
+- The UI labels summed detail values as exploratory rather than audited statement totals and keeps funding deductions separate from positive spending.
+
 ## Acceptance Criteria
 
-1. With no published snapshot, all in-scope collection endpoints return empty data and `no_published_snapshot`; no draft facts are leaked.
-2. After a snapshot is published, discovery and source endpoints return only its documents, periods, and facts.
+1. With no published snapshot for a requested municipality, all in-scope collection endpoints return empty data and `no_published_snapshot`; no draft facts are leaked.
+2. Discovery and source endpoints return only snapshot `1` documents, periods, and facts for Charlottetown.
 3. Fact-detail and CSV provenance exactly match `budget.fact_source` and source-cell records.
 4. Pagination has no duplicates or omissions across a stable snapshot.
 5. API tests cover draft exclusion, unknown filters, missing fact IDs, source-scope isolation, CSV schema, and the accepted debt warning.
 6. The p95 target remains under 500 ms for a single-municipality filtered request against the three-year snapshot.
 
-## Follow-On Sequence
+## Remaining Sequence
 
-1. Implement the first slice and automated tests against a published test fixture or approved published snapshot.
-2. Implement summary and operating/capital aggregate endpoints with explicit no-double-counting controls.
-3. Implement comparison and coverage warnings only after compatibility rules are executable.
-4. Add public pages after their API contracts and accessibility tests pass.
+1. Implement comparison and coverage warnings only after compatibility rules are executable.
+2. Add authorized source-page rendering and highlighted source-cell navigation.
+3. Add automated accessibility coverage beyond the route and API smoke checks.
 
 ## Sources
 

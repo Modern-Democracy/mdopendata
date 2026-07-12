@@ -45,9 +45,9 @@ const checks = [
     expectText: ["Business items", "Page contract", "planned: /api/business-items"],
   },
   {
-    name: "budget stub route",
+    name: "published budget visualization route",
     path: "/budgets",
-    expectText: ["Budgets", "Contract stub", "budget schema APIs"],
+    expectText: ["Municipal budgets", "Published financial detail", "/api/projects", "Capital projects"],
   },
   {
     name: "lab tools route",
@@ -79,6 +79,15 @@ const checks = [
     path: "/api/budgets/periods?municipality=charlottetown&unsupported=test",
     expectStatus: 400,
     expectJson: (payload) => /Unsupported budget filter/.test(payload.error || ""),
+  },
+  {
+    name: "published projects API contract",
+    path: "/api/projects?municipality=charlottetown&limit=2&cursor=0",
+    expectJson: (payload) =>
+      Array.isArray(payload.data) &&
+      payload.data.length === 2 &&
+      payload.data.every((project) => project.project_key && Array.isArray(project.periods)) &&
+      payload.pagination?.limit === 2,
   },
   {
     name: "address API contract",

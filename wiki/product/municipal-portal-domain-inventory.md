@@ -4,7 +4,7 @@ tags:
   - product
   - domains
   - municipal-portal
-updated: 2026-07-07
+updated: 2026-07-12
 ---
 
 This page inventories 1.0 municipal portal domains and their current implementation depth.
@@ -19,7 +19,7 @@ This page inventories 1.0 municipal portal domains and their current implementat
 | Business items | Emerging from meeting extraction. | Contract stub for durable civic matters across meetings. |
 | Documents | Document-import prototype and extraction schemas. | Stub plus local-admin document import route. |
 | Planning and land use | Strongest current domain: parcels, zoning, bylaws, maps, comparison APIs. | Functional route family plus portal stub summary. |
-| Budgets | First-pass 2026/2027 artifacts plus requirements, schema, API/UI, and test-plan contracts. | Implement the three-document Charlottetown prototype after contract approval. |
+| Budgets | Published three-document snapshot, read APIs, capital-project APIs, CSV export, and accessible visualization page. | Retain published-snapshot isolation; add compatible comparisons and rendered source-page navigation later. |
 | Maps | Leaflet city map plus parcel/zoning APIs. | Functional city-view link and map-domain stub. |
 | Validation | Existing extraction review patterns and smoke checks. | Contract stub plus local-admin boundary. |
 | Lab tools | Parcel 3D and storm-surge demos. | Lab-only routes with demo caveats. |

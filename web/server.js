@@ -2492,6 +2492,7 @@ async function loadPublishedBudgetMunicipality(slug) {
 async function handleBudgetApi(request, response, url) {
   if (request.method !== "GET") { response.writeHead(405); response.end("Method not allowed"); return true; }
   const factMatch = url.pathname.match(/^\/api\/budgets\/facts\/(\d+)$/);
+  const projectMatch = url.pathname.match(/^\/api\/projects\/([^/]+)$/);
   const allowedFilters = url.pathname === "/api/budgets/municipalities" ? ["limit", "cursor"]
     : url.pathname === "/api/budgets/periods" ? ["municipality", "limit", "cursor"]
       : url.pathname === "/api/budgets/sources" ? ["municipality", "period", "limit", "cursor"]
@@ -2503,7 +2504,9 @@ async function handleBudgetApi(request, response, url) {
                   : url.pathname === "/api/budgets/revenue" ? ["municipality", "period", "revenue_category", "tax_class", "limit", "cursor"]
                     : url.pathname === "/api/budgets/debt" ? ["municipality", "period", "entity", "instrument", "limit", "cursor"]
                       : url.pathname === "/api/budgets/reserves" ? ["municipality", "period", "entity", "reserve", "limit", "cursor"]
-                        : url.pathname === "/api/budgets/compare" ? ["municipality", "period", "metric", "category", "basis", "limit", "cursor"]
+                      : url.pathname === "/api/budgets/compare" ? ["municipality", "period", "metric", "category", "basis", "limit", "cursor"]
+                        : url.pathname === "/api/projects" ? ["municipality", "period", "status", "q", "limit", "cursor"]
+                          : projectMatch ? ["municipality"]
             : null;
   if (allowedFilters) budgetQuery(url, allowedFilters);
   if (url.pathname === "/api/budgets/municipalities") {
@@ -2516,6 +2519,59 @@ async function handleBudgetApi(request, response, url) {
   const slug = budgetFilter(url, "municipality") || "charlottetown";
   const municipality = await loadPublishedBudgetMunicipality(slug);
   if (!municipality) { await sendJson(response, budgetPayload([], { municipality: slug }, ["no_published_snapshot"])); return true; }
+  if (url.pathname === "/api/projects") {
+    const period = budgetFilter(url, "period");
+    const status = budgetFilter(url, "status");
+    const search = budgetFilter(url, "q");
+    const pagination = budgetPagination(url);
+    if (status && !["active", "proposed", "complete", "dormant", "unknown"].includes(status)) {
+      const error = new Error("status must be active, proposed, complete, dormant, or unknown.");
+      error.statusCode = 400;
+      throw error;
+    }
+    const { rows } = await pool.query(
+      `SELECT cp.project_key,cp.name,cp.description,COALESCE(cp.status,'unknown') AS status,
+              cp.location_text,re.display_name AS reporting_entity,
+              array_agg(DISTINCT pf.fiscal_period_label ORDER BY pf.fiscal_period_label) AS periods,
+              count(DISTINCT pf.fact_id)::integer AS fact_count,
+              sum(pf.value_numeric) FILTER (WHERE pf.amount_type='gross') AS gross_amount,
+              sum(pf.value_numeric) FILTER (WHERE pf.amount_type='funding_deduction') AS external_funding,
+              sum(pf.value_numeric) FILTER (WHERE pf.amount_type='net') AS net_amount
+         FROM budget.capital_project cp
+         JOIN budget.reporting_entity re ON re.id=cp.reporting_entity_id
+         JOIN budget.capital_project_fact cpf ON cpf.capital_project_id=cp.id
+         JOIN budget.v_published_facts pf ON pf.fact_id=cpf.fact_id AND pf.snapshot_id=$1
+        WHERE ($2::text IS NULL OR pf.fiscal_period_label=$2)
+          AND ($3::text IS NULL OR COALESCE(cp.status,'unknown')=$3)
+          AND ($4::text IS NULL OR cp.name ILIKE '%' || $4 || '%' OR cp.project_key ILIKE '%' || $4 || '%')
+        GROUP BY cp.id,re.display_name
+        ORDER BY cp.name,cp.project_key LIMIT $5 OFFSET $6`,
+      [municipality.snapshot_id, period, status, search, pagination.limit + 1, pagination.cursor],
+    );
+    const page = budgetPage(rows, pagination);
+    await sendJson(response, budgetPayload(page.data, { municipality: slug, ...(period ? { period } : {}), ...(status ? { status } : {}), ...(search ? { q: search } : {}) }, [], page.pagination)); return true;
+  }
+  if (projectMatch) {
+    const projectKey = decodeURIComponent(projectMatch[1]);
+    const { rows } = await pool.query(
+      `SELECT cp.id,cp.project_key,cp.name,cp.description,COALESCE(cp.status,'unknown') AS status,
+              cp.location_text,re.display_name AS reporting_entity
+         FROM budget.capital_project cp
+         JOIN budget.reporting_entity re ON re.id=cp.reporting_entity_id
+        WHERE cp.municipality_id=$1 AND cp.project_key=$2
+          AND EXISTS (SELECT 1 FROM budget.capital_project_fact cpf JOIN budget.v_published_facts pf ON pf.fact_id=cpf.fact_id WHERE cpf.capital_project_id=cp.id AND pf.snapshot_id=$3)`,
+      [municipality.id, projectKey, municipality.snapshot_id],
+    );
+    if (!rows[0]) { response.writeHead(404, { "content-type": "application/json; charset=utf-8" }); response.end(JSON.stringify({ error: "Published project not found." })); return true; }
+    const project = rows[0];
+    const [factsResult, referencesResult, profilesResult] = await Promise.all([
+      pool.query(`SELECT pf.* FROM budget.capital_project_fact cpf JOIN budget.v_published_facts pf ON pf.fact_id=cpf.fact_id WHERE cpf.capital_project_id=$1 AND pf.snapshot_id=$2 ORDER BY pf.start_date,pf.fact_id`, [project.id, municipality.snapshot_id]),
+      pool.query(`SELECT r.raw_label,r.reference_kind,r.document_adoption_state,r.identity_evidence,r.review_status,d.id AS document_id,d.title AS document_title FROM budget.capital_project_reference r JOIN budget.source_document d ON d.id=r.document_id JOIN budget.publication_snapshot ps ON ps.id=$2 AND r.document_id=ANY(ps.source_document_ids) WHERE r.capital_project_id=$1 AND r.review_status='approved' ORDER BY d.id,r.id`, [project.id, municipality.snapshot_id]),
+      pool.query(`SELECT p.field_key,p.raw_value,p.normalized_value,d.id AS document_id,d.title AS document_title,sp.pdf_page_number AS page_number FROM budget.capital_project_profile p JOIN budget.source_document d ON d.id=p.document_id LEFT JOIN budget.source_page sp ON sp.id=p.source_page_id JOIN budget.publication_snapshot ps ON ps.id=$2 AND p.document_id=ANY(ps.source_document_ids) WHERE p.capital_project_id=$1 AND p.review_status='approved' ORDER BY d.id,p.field_key`, [project.id, municipality.snapshot_id]),
+    ]);
+    delete project.id;
+    await sendJson(response, budgetPayload({ ...project, facts: factsResult.rows, references: referencesResult.rows, profiles: profilesResult.rows }, { municipality: slug }, [], null)); return true;
+  }
   if (url.pathname === "/api/budgets/periods") {
     budgetQuery(url, ["municipality", "limit", "cursor"]);
     const pagination = budgetPagination(url);
@@ -5579,8 +5635,8 @@ const routeEntrypoints = new Map([
   ["/documents/", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
   ["/planning", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
   ["/planning/", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
-  ["/budgets", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
-  ["/budgets/", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
+  ["/budgets", { file: "/ui_kits/budgets/index.html", baseHref: "/ui_kits/budgets/" }],
+  ["/budgets/", { file: "/ui_kits/budgets/index.html", baseHref: "/ui_kits/budgets/" }],
   ["/maps", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
   ["/maps/", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
   ["/validation", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
@@ -5666,7 +5722,7 @@ async function serveStatic(response, requestPath) {
 const server = createServer(async (request, response) => {
   try {
     const url = new URL(request.url, `http://${request.headers.host}`);
-    if (url.pathname.startsWith("/api/budgets/")) {
+    if (url.pathname.startsWith("/api/budgets/") || url.pathname === "/api/projects" || url.pathname.startsWith("/api/projects/")) {
       if (await handleBudgetApi(request, response, url)) return;
     }
     if (url.pathname === "/api/portal/context") {

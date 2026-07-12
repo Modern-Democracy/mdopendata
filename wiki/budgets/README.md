@@ -3,7 +3,7 @@ type: index
 tags:
   - budget
   - municipal-portal
-updated: 2026-07-09
+updated: 2026-07-12
 ---
 
 This section defines the municipal budget ingestion, data, API, user-interface, and delivery contracts.
@@ -45,14 +45,16 @@ Charlottetown is the prototype municipality. The initial source set is the three
 | [Prior-year normalized import completion status](./prior-year-normalized-import-completion-status.md) | Completed manifests, reconciliations, controlled imports, idempotence, project references, and source-fidelity QA for both prior years. |
 | [Capital project lifecycle and references](./capital-project-lifecycle.md) | Source-limited lifecycle rules and municipality-scoped project identity with document-owned references. |
 | [Budget ingestion refactor tracker](./budget-ingestion-refactor-tracker.md) | Deferred refactor tracker for separating reusable budget ingestion code from document-specific mappings after prior-year completion. |
-| [Three-year publication-snapshot proposal](./three-year-publication-snapshot-proposal.md) | Draft scope, required taxonomy decision, source documents, fact counts, and acceptance checks for the first Charlottetown three-year snapshot. |
+| [Three-year publication snapshot](./three-year-publication-snapshot-proposal.md) | Creation, publication status, source documents, fact counts, and acceptance checks for the first Charlottetown three-year snapshot. |
 | [Public budget API implementation scope](./public-api-implementation-scope.md) | First read-only published-snapshot API slice, response behavior, exclusions, and acceptance criteria. |
 
 ## Current Evidence
 
 The first pass of the 2026/2027 PDF found 154 pages, 114 table or project-profile candidates, 3,233 raw rows, and 2,420 detected value tokens. The document includes overview charts with source tables, operating summaries and detailed breakdowns, third-party facility budgets, capital schedules and project profiles, property and utility rates, assessment calculations, and debt schedules.
 
-The existing artifacts are discovery inputs, not publishable normalized facts. Their page-granular manifests do not yet join continuation pages or reliably distinguish detail rows, headings, subtotals, deductions, and totals.
+The first Charlottetown publication snapshot is published with 6,256 approved facts from the three financial-plan documents. Raw discovery artifacts remain non-publication inputs; public APIs must read through `budget.v_published_facts`.
+
+The public web implementation includes published budget discovery and fact APIs, operating/capital/revenue/debt/reserve reads, capital-project list and detail APIs, and an accessible `/budgets` visualization page. Cross-period compatibility comparisons and rendered source-page highlighting remain deferred.
 
 Week 1 profiling is complete for all 392 pages. See the [three-year Charlottetown source profile](../charlottetown/sources/budget-three-year-source-profile.md) for the source-pattern matrix and representative schema-spike tables.
 
@@ -60,7 +62,7 @@ Week 5 raw ingestion has appended the 2025/2026 and 2024/2025 source pages, tabl
 
 Week 5 normalized mapping review has classified 114 profile candidates for 2025/2026 and 58 profile candidates for 2024/2025. See the [Week 5 normalized mapping review](./week-5-normalized-mapping-review.md). Normalized import remains blocked by document-specific mapping approvals.
 
-The [prior-year normalized import gap report](./prior-year-normalized-import-gap-report.md) defines the step-through gates for completing 2025/2026 and 2024/2025. The [budget ingestion refactor tracker](./budget-ingestion-refactor-tracker.md) records lessons to preserve while deferring generalization until the two prior-year imports are complete and tested against other budget documents.
+The prior-year normalized imports and source-fidelity QA are complete. The [budget ingestion refactor tracker](./budget-ingestion-refactor-tracker.md) records deferred generalization work after the three-year normalization and publication process.
 
 ## Decisions
 

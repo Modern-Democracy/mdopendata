@@ -4,7 +4,7 @@ tags:
   - budget
   - api
   - web-ui
-updated: 2026-07-07
+updated: 2026-07-12
 ---
 
 This page defines the public budget routes, read APIs, filters, visualization rules, and unavailable-data behavior.
@@ -42,6 +42,8 @@ Default municipality is selected through portal context, not hard-coded into dat
 | `GET /api/budgets/sources` | municipality, period | Documents, pages, tables, extraction counts, and publication state. |
 | `GET /api/budgets/sources/:documentId/pages/:pageNumber` | document and page | Page metadata and authorized rendered-page asset location. |
 | `GET /api/budgets/download.csv` | same filters as fact endpoints | Reviewed filtered facts with provenance columns. |
+| `GET /api/projects` | municipality, period, status, text query | Municipality-scoped capital projects linked to the selected published snapshot, with periods and reported gross, funding, and net facts. |
+| `GET /api/projects/:projectKey` | municipality | One published capital project with lifecycle status, multi-year facts, approved source references, and approved profile fields. |
 
 All collection endpoints support `limit`, `cursor`, and stable sort. Unknown filters return `400`; missing resources return `404`; unavailable or incompatible comparisons return `200` with an empty data array and machine-readable reasons because the query itself is valid.
 
@@ -82,6 +84,8 @@ Aggregates include `aggregation_method`, `input_fact_count`, and `excludes_repor
 - Show gross project/program cost, each reported funding deduction/source, and net municipal cost separately.
 - Distinguish a capital schedule line from a narrative project-profile number.
 - Allow filtering by department, program, project, funding source, and period.
+- Exclude registry projects that have no fact in the selected published snapshot.
+- Display `unknown` when the registry contains no source-supported lifecycle status; do not infer a lifecycle state in the API or UI.
 
 ### Comparison
 
@@ -119,4 +123,3 @@ Aggregates include `aggregation_method`, `input_fact_count`, and `excludes_repor
 - [Municipal portal product purpose](../product/municipal-portal-purpose.md)
 - [Web UI stack](../implementation/web-ui-stack.md)
 - `docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf`, PDF pages 19, 105, 111, 149, and 151
-

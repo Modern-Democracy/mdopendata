@@ -627,3 +627,15 @@ Created draft snapshot 1, `charlottetown-budget-2024-2027-initial`, with taxonom
 ## [2026-07-12] scope | Public budget API first slice
 
 Defined the initial read-only API scope for published snapshots: municipality and period discovery, source inventory, single-fact provenance, and filtered CSV export. Draft snapshots remain invisible; aggregates, explorers, comparisons, and public pages are deferred pending implementation and compatibility controls.
+
+## [2026-07-12] correction | Published budget snapshot documentation
+
+Verified snapshot 1 directly in `budget.publication_snapshot` as `published` and confirmed 6,256 rows in `budget.v_published_facts`. Corrected the snapshot record, public API scope, budget index, and root index so they no longer describe the live snapshot as draft or awaiting publication.
+
+## [2026-07-12] implementation | Public projects and budget visualization
+
+Added published-snapshot-gated capital-project list and detail APIs, including multi-year facts, approved references, and profile fields. Replaced the `/budgets` contract stub with a fiscal-period budget view containing exploratory summary metrics, accessible sorted bars and tables, project browsing, fact provenance links, source inventory access, CSV download, and explicit comparison and lifecycle limits. No schema or dependency changes were introduced.
+
+## [2026-07-12] qa | Public projects and budget visualization
+
+Rebuilt the approved local web container and passed all 21 repository web smoke checks. Live browser QA for 2026/2027 rendered five financial bars, $252,143,798 in capital detail, and 169 published projects; the Aeration Tank Rehab detail returned two published facts, two approved references, four approved profile fields through the API, and no UI errors. Invalid project status returned `400`, an absent published project returned `404`, and source syntax and diff checks passed.
