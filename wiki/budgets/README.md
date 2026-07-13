@@ -47,6 +47,7 @@ Charlottetown is the prototype municipality. The initial source set is the three
 | [Budget ingestion refactor tracker](./budget-ingestion-refactor-tracker.md) | Deferred refactor tracker for separating reusable budget ingestion code from document-specific mappings after prior-year completion. |
 | [Three-year publication snapshot](./three-year-publication-snapshot-proposal.md) | Creation, publication status, source documents, fact counts, and acceptance checks for the first Charlottetown three-year snapshot. |
 | [Public budget API implementation scope](./public-api-implementation-scope.md) | First read-only published-snapshot API slice, response behavior, exclusions, and acceptance criteria. |
+| [Normalized category taxonomy proposal](./normalized-category-taxonomy-proposal.md) | Reviewed Charlottetown vocabulary candidate, versioned assignment architecture, mapping cohorts, review register, and approval gates. |
 
 ## Current Evidence
 

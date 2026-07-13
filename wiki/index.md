@@ -62,6 +62,7 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [Municipal portal domain inventory](./product/municipal-portal-domain-inventory.md) | Current implementation depth and 1.0 treatment for each municipal portal domain. |
 | [Council and committee meetings](./council-committee-meetings/README.md) | JSON-first council/committee meeting extraction and audience workflow notes, starting with Charlottetown council on May 12, 2026. |
 | [Municipal budgets](./budgets/README.md) | Published three-year Charlottetown snapshot plus operating and capital budget API, UI, provenance, and comparison contracts. |
+| [Normalized budget category proposal](./budgets/normalized-category-taxonomy-proposal.md) | Charlottetown taxonomy candidate, versioned fact-mapping architecture, review contract, and implementation gates. |
 | [Agenda and package document taxonomy](./council-committee-meetings/agenda-document-taxonomy.md) | Agenda item and agenda package attachment type catalogue for document-import review and parser refinement. |
 
 ## Platform Pages

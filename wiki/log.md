@@ -651,3 +651,7 @@ Rebuilt the approved local web container and passed all 24 web smoke checks. The
 ## [2026-07-12] correction | Filter-scoped comparison coverage
 
 Corrected comparison coverage so matched, current-period, and prior-period counts use the same entity, metric, and category filters as returned rows, while the total matched count remains independent of pagination. QA confirmed 440 unfiltered matches and 362 City of Charlottetown matches with 528 current and 1,100 prior detail facts.
+
+## [2026-07-12] proposal | Normalized category taxonomy and mapping
+
+Prepared a non-mutating `charlottetown-budget-category-v1` vocabulary and mapping proposal covering 2,420 eligible detail line items and 4,941 facts. The proposal excludes 956 non-detail lines from first aggregate mapping, requires context-aware review for 325 repeated-label cohorts, defines exact per-row review evidence, and blocks implementation until a versioned assignment relation preserves snapshot 1 semantics.
