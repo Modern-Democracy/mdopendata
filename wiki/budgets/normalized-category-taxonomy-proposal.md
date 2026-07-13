@@ -6,16 +6,18 @@ tags:
   - taxonomy
   - comparison
   - review
-updated: 2026-07-12
+updated: 2026-07-13
 ---
 
-This page proposes a reviewed, versioned category vocabulary and fact-mapping workflow without authorizing schema or data changes.
+This page records the original category proposal and its 2026-07-13 transition into an authorized browser-review implementation.
 
 # Normalized Budget Category Taxonomy And Fact-Mapping Proposal
 
-## Decision Requested
+## Decision Status
 
-Approve the proposed vocabulary and mapping architecture for a Charlottetown-only taxonomy candidate named `charlottetown-budget-category-v1`. Approval would authorize detailed mapping-plan preparation, not database migration, line-item assignment, snapshot creation, or public release.
+The project owner authorized the Charlottetown-only candidate `charlottetown-budget-category-v1`, the versioned assignment architecture, database migration, assignment writes, and changing snapshot `1` for browser review on 2026-07-13.
+
+Migration 027 implements a taxonomy revision overlay instead of mutating the snapshot row or legacy line-item foreign key. Snapshot `1` retains exactly 6,256 fact memberships, but its effective taxonomy version is now `charlottetown-budget-category-v1`; 667 controlled-label assignments are exposed as `proposed`, not approved.
 
 ## Verified Starting State
 
@@ -50,7 +52,7 @@ Do not populate `line_item.normalized_category_id` or `capital_project_fact.fund
 | `normalization_decision_id` | Required for approved assignments. |
 | `created_at` | Required timestamp. |
 
-The line-item relation must enforce one active approved category per line item and taxonomy version. The capital-funding relation must enforce one active approved funding category per fact and taxonomy version and accept only facts whose amount type represents a funding source or deduction. Category-aware publication views must join through snapshot taxonomy metadata rather than either existing mutable foreign key. Snapshot `1` must continue returning null categories permanently.
+The line-item relation enforces one active approved category per line item and taxonomy version. The capital-funding relation enforces one active approved funding category per fact and taxonomy version and accepts only facts whose amount type represents a funding source or deduction. The publication view joins through effective snapshot taxonomy metadata rather than either legacy mutable foreign key. Snapshot `1` now exposes proposed candidates under the separately recorded taxonomy revision, as explicitly authorized.
 
 ## Taxonomy Design Rules
 
@@ -180,26 +182,26 @@ Rows must be presented individually for user review. Do not group unresolved ass
 4. **Gate 4: Source-fidelity review.** Review every proposed assignment and every ambiguity using the exact review-register fields.
 5. **Gate 5: Negative controls.** Confirm that nearby same-label rows outside each rule remain unmapped.
 6. **Gate 6: Dry run.** Generate deterministic category, assignment, and decision plans with hashes and zero database writes.
-7. **Gate 7: Controlled migration.** Add schema objects and approved records transactionally after separate DevOps and data-migration approval.
-8. **Gate 8: Publication QA.** Verify assignment uniqueness, domain integrity, aggregate reconciliation, coverage, idempotence, and unchanged snapshot `1` semantics.
-9. **Gate 9: New snapshot approval.** Create and separately approve a category-aware snapshot with a new immutable taxonomy version.
+7. **Gate 7: Controlled migration.** Completed after explicit DevOps and data-migration authorization; migration 027 and the assignment script were applied transactionally.
+8. **Gate 8: Browser-review QA.** Completed for schema integrity, row uniqueness, fact-membership stability, idempotence, API filtering, and proposed-status visibility. Category source-fidelity approval remains open.
+9. **Gate 9: Publication decision.** Replaced by the explicitly authorized snapshot `1` taxonomy revision overlay. No new fact membership or source document was added.
 
-## Acceptance Criteria
+## Browser-Review Acceptance Criteria
 
-- Snapshot `1` continues returning 6,256 facts with null category fields.
+- Snapshot `1` continues returning exactly 6,256 facts without duplicate fact rows.
 - Every approved assignment has one normalization decision and exact source evidence.
 - No line item has more than one approved economic category in a taxonomy version, and no capital funding fact has more than one approved funding category in a taxonomy version.
 - Category domain, hierarchy, amount type, statement scope, and measure unit are compatible.
 - Category aggregates include detail facts only and reconcile to their mapped inputs exactly.
 - Coverage reports eligible, proposed, approved, rejected, unresolved, and excluded line and fact counts.
 - Repeated-label negative controls show zero unintended mappings.
-- A new category-aware snapshot is not public until separately approved.
+- Proposed assignments are visibly distinguished from approved assignments and raw labels remain available.
 
 ## Data Quality Review
 
-The vocabulary is suitable as a Charlottetown prototype candidate, but it is not ready for import. Blocking findings are the absent versioned assignment relation, zero existing categories, zero categorized published facts, 325 context-sensitive repeated-label cohorts, and the risk of changing snapshot `1` indirectly through the current line-item foreign key.
+The versioned assignment relations and explicit snapshot revision remove the original schema blocker. The 667 controlled-label assignments remain proposed because repeated labels and context-sensitive matches can produce false positives; browser review is required before any approval conversion.
 
-No source fidelity claim is made for individual assignments until the exact review register is generated and reviewed.
+No source-fidelity approval claim is made for the proposed category assignments. Approved project-department, capital-program, and subsequent-forecast writes use separate explicit evidence rules documented in the implementation status.
 
 ## Sources
 
@@ -208,4 +210,5 @@ No source fidelity claim is made for individual assignments until the exact revi
 - [Budget API and UI contract](./api-and-ui-contract.md)
 - [Representative normalized mapping](./representative-spike-normalized-mapping.md)
 - [Prior-year normalized import completion](./prior-year-normalized-import-completion-status.md)
+- [Budget web and taxonomy implementation status](./budget-web-taxonomy-implementation-status.md)
 - `budget.v_published_facts`, `budget.normalized_category`, `budget.line_item`, and `budget.normalization_decision`, queried on 2026-07-12

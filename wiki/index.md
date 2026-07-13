@@ -3,7 +3,7 @@ type: index
 tags:
   - wiki
   - catalog
-updated: 2026-07-12
+updated: 2026-07-13
 ---
 
 This page catalogs the root wiki structure and links to active project wiki areas.
@@ -63,6 +63,7 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [Council and committee meetings](./council-committee-meetings/README.md) | JSON-first council/committee meeting extraction and audience workflow notes, starting with Charlottetown council on May 12, 2026. |
 | [Municipal budgets](./budgets/README.md) | Published three-year Charlottetown snapshot plus operating and capital budget API, UI, provenance, and comparison contracts. |
 | [Normalized budget category proposal](./budgets/normalized-category-taxonomy-proposal.md) | Charlottetown taxonomy candidate, versioned fact-mapping architecture, review contract, and implementation gates. |
+| [Dedicated budget page views plan](./budgets/dedicated-page-views-plan.md) | Review-gated plan for useful budget-year, department, project, and municipal-analysis views. |
 | [Agenda and package document taxonomy](./council-committee-meetings/agenda-document-taxonomy.md) | Agenda item and agenda package attachment type catalogue for document-import review and parser refinement. |
 
 ## Platform Pages
@@ -100,6 +101,7 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [Prior-year normalized import Phase 1 status](./budgets/prior-year-normalized-import-phase-1-status.md) | Period-label and section-continuation review artifacts and remaining Phase 1 blockers for prior-year normalization. |
 | [Prior-year normalized import completion status](./budgets/prior-year-normalized-import-completion-status.md) | Completed prior-year manifests, imports, cross-year project references, idempotence, and source-fidelity QA. |
 | [Budget ingestion refactor tracker](./budgets/budget-ingestion-refactor-tracker.md) | Deferred refactor tracker for separating reusable budget ingestion code from document-specific mappings after prior-year completion. |
+| [Budget web and taxonomy implementation status](./budgets/budget-web-taxonomy-implementation-status.md) | Applied budget-edition migration, taxonomy revision, assignments, forecast links, filtering, browser pages, QA evidence, and known limits. |
 | [Release help and MCP plan](./implementation/release-help-and-mcp-plan.md) | Implementation pattern for release-facing contextual help, the `help` schema, web help APIs, and the repo-local `mdopendata-mcp` package. |
 | [Agenda package ingestion contract](./implementation/agenda-package-ingestion-contract.md) | Package JSON, logical-document ordering, agenda-item binding, template discovery, and approval gates. |
 | [Document extraction engineering](./implementation/document-extraction-engineering.md) | Project-wide reuse, variation, exception, regeneration, and QA contract for maintainable document extraction. |

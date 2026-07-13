@@ -4,7 +4,7 @@ tags:
   - budget
   - api
   - web-ui
-updated: 2026-07-12
+updated: 2026-07-13
 ---
 
 This page defines the public budget routes, read APIs, filters, visualization rules, and unavailable-data behavior.
@@ -15,7 +15,8 @@ This page defines the public budget routes, read APIs, filters, visualization ru
 
 | Route | Purpose |
 | --- | --- |
-| `/budgets` | Municipality budget landing page with period selector, headline totals, spending, revenue, capital, and coverage summary. |
+| `/budgets` | Implemented annual budget-edition page scoped to one source PDF, with proposed revenue/expense classifications, source totals, projects, capital, rates, debt, external funding, and evidence. |
+| `/budgets/facts` | Implemented fact and assignment explorer with edition, department, program, project, category, statement, amount, role, and text filters. |
 | `/budgets/operating` | Operating revenue and expense explorer with hierarchy and period comparison. |
 | `/budgets/capital` | Capital programs, projects, gross cost, funding sources, and net municipal cost. |
 | `/budgets/revenue` | Revenue-source, tax, assessment, utility-rate, grant, fee, transfer, and financing explorer. |
@@ -31,6 +32,9 @@ Default municipality is selected through portal context, not hard-coded into dat
 | --- | --- | --- |
 | `GET /api/budgets/municipalities` | none | Municipalities with published snapshots and available periods. |
 | `GET /api/budgets/periods` | `municipality` | Fiscal periods, source labels, dates, and available amount types. |
+| `GET /api/budgets/editions` | `municipality` | Approved annual budget documents, their primary fiscal period, subsequent document, and fact counts. |
+| `GET /api/budgets/dimensions` | `municipality`, optional `document` | Filter dimensions available in the selected published budget edition. |
+| `GET /api/budgets/facts` | `municipality`, optional document, period, entity, department, program, project, category, status, statement, amount, role, and text filters | Paginated published facts with effective assignments and approved subsequent observations. |
 | `GET /api/budgets/summary` | `municipality`, `period`, optional `entity` | Reviewed headline operating revenue/expense, capital gross/net, debt service, and coverage. |
 | `GET /api/budgets/operating` | municipality, period(s), entity, department, category, amount type | Hierarchical operating facts and totals without summary/detail duplication. |
 | `GET /api/budgets/capital` | municipality, period(s), entity, program, project, funding category | Project/program gross, funding, financing, and net facts. |
@@ -42,7 +46,7 @@ Default municipality is selected through portal context, not hard-coded into dat
 | `GET /api/budgets/sources` | municipality, period | Documents, pages, tables, extraction counts, and publication state. |
 | `GET /api/budgets/sources/:documentId/pages/:pageNumber` | document and page | Page metadata and authorized rendered-page asset location. |
 | `GET /api/budgets/download.csv` | same filters as fact endpoints | Reviewed filtered facts with provenance columns. |
-| `GET /api/projects` | municipality, period, status, text query | Municipality-scoped capital projects linked to the selected published snapshot, with periods and reported gross, funding, and net facts. |
+| `GET /api/projects` | municipality, optional document, period, department, program, status, text query | Municipality-scoped capital projects linked to the selected published snapshot, with periods, assignments, and reported gross, funding, and net facts. |
 | `GET /api/projects/:projectKey` | municipality | One published capital project with lifecycle status, multi-year facts, approved source references, and approved profile fields. |
 
 All collection endpoints support `limit`, `cursor`, and stable sort. Unknown filters return `400`; missing resources return `404`; unavailable or incompatible comparisons return `200` with an empty data array and machine-readable reasons because the query itself is valid.

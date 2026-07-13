@@ -4,7 +4,7 @@ tags:
   - budget
   - database
   - schema
-updated: 2026-07-07
+updated: 2026-07-13
 ---
 
 This page defines the proposed PostgreSQL `budget` schema for raw extraction, reviewed facts, provenance, and comparison.
@@ -99,6 +99,23 @@ Coordinates should use normalized page coordinates so the UI can highlight a sou
 | `budget.publication_snapshot` | Municipality, release label, taxonomy version, created timestamp, source document ids, status. |
 | `budget.publication_fact` | Snapshot and reviewed fact ids; freezes the public release without copying fact values. |
 
+## Budget Web Taxonomy Extensions
+
+Migration 027 adds the following applied tables without populating the legacy `line_item.normalized_category_id` or `capital_project_fact.funding_source_category_id` fields.
+
+| Table | Purpose |
+| --- | --- |
+| `budget.budget_edition` | Owns one annual budget PDF, its primary fiscal period, and optional subsequent document. |
+| `budget.publication_snapshot_taxonomy_revision` | Records an explicitly authorized effective taxonomy revision without rewriting snapshot membership. |
+| `budget.line_item_category_assignment` | Versioned proposed, approved, rejected, or superseded category assignment with mapping basis. |
+| `budget.capital_funding_category_assignment` | Versioned category assignment for eligible capital funding facts. |
+| `budget.project_organization_assignment` | Source-evidenced project-to-organization-unit assignment. |
+| `budget.capital_program` | Municipality-scoped capital program identity. |
+| `budget.capital_program_line_assignment` | Explicit source-page program assignment for capital line items. |
+| `budget.fact_followup_observation` | Exact original-fact to later-document observation link, including `forecast`. |
+
+`budget.v_published_facts` remains one row per published fact and now exposes effective taxonomy, category candidate, organization, project, program, and source-document fields.
+
 Review issue statuses are `open`, `in_review`, `resolved`, and `superseded`. Severity values are `low`, `medium`, `high`, and `critical`. Closing an issue requires a decision code allowed by its issue type; free-text notes alone do not resolve an issue.
 
 Initial reconciliation issue codes are `reported_calculation_variance`, `reported_dash_with_calculated_balance`, and `reported_dash_with_nonzero_calculated_balance`. An unresolved issue can permit reported facts while blocking or warning on derived metrics through `publication_effect`.
@@ -129,7 +146,7 @@ Initial reconciliation issue codes are `reported_calculation_variance`, `reporte
 
 ## Compatibility Gate
 
-This remains a proposed schema. The representative-table spike resolved the structural gaps for document-period identity, extraction provenance, multi-page membership, raw period labels, and multi-fact source expressions. SQL migrations remain gated on materialized representative rows/cells and the required reconciliation checks.
+The core schema originated as a proposal and is materialized through the current budget migrations. Migration 027 is applied to the active database and covered by isolated regression SQL; later schema extensions still require the same representative-source and reconciliation controls.
 
 ## Sources
 
@@ -137,4 +154,5 @@ This remains a proposed schema. The representative-table spike resolved the stru
 - [Initial municipal budget data model](../implementation/municipal-budget-data-model.md)
 - [Charlottetown 2026/2027 first pass](../charlottetown/sources/budget-2026-2027-first-pass.md)
 - [Representative-table schema spike](./representative-table-schema-spike.md)
+- [Budget web and taxonomy implementation status](./budget-web-taxonomy-implementation-status.md)
 - `docs/charlottetown/budget/2026-2027 Financial Plan Capital and Operating Budgets.pdf`, PDF pages 30, 105, 111, 149, and 151

@@ -3,7 +3,7 @@ type: log
 tags:
   - wiki
   - log
-updated: 2026-07-09
+updated: 2026-07-13
 ---
 
 This page is the append-only chronological record for root wiki changes, ingests, substantive queries, and lint passes.
@@ -655,3 +655,21 @@ Corrected comparison coverage so matched, current-period, and prior-period count
 ## [2026-07-12] proposal | Normalized category taxonomy and mapping
 
 Prepared a non-mutating `charlottetown-budget-category-v1` vocabulary and mapping proposal covering 2,420 eligible detail line items and 4,941 facts. The proposal excludes 956 non-detail lines from first aggregate mapping, requires context-aware review for 325 repeated-label cohorts, defines exact per-row review evidence, and blocks implementation until a versioned assignment relation preserves snapshot 1 semantics.
+
+## [2026-07-13] plan | Dedicated budget page views
+
+Reevaluated the combined `/budgets` page and prepared a review-gated plan for budget-year, department, project, and municipal-analysis routes. Read-only inventory confirmed 6,256 published facts, 182 capital projects, only 389 published facts with organization-unit assignments, and duplicate fiscal-period labels across annual source documents; the plan therefore gates implementation on canonical observation, authoritative measure, department coverage, and analysis metric contracts.
+
+## [2026-07-13] query | Budget edition and department-assignment coverage
+
+Clarified that a budget-year page must use the corresponding annual PDF and its own budget observations rather than merging same-label values from later documents. Database review found 207 published facts linked to 172 published projects, zero project organization-unit assignments, 24 published projects with an approved department profile field, 389 department-assigned non-project operating facts, and 5,660 non-project facts without a department assignment. Recorded tentative acceptance of the normalized-category proposal for a visibly non-published browser preview while retaining its migration and publication gates.
+
+## [2026-07-13] implementation | Budget edition, taxonomy, and fact explorer
+
+Applied migration 027 and the authorized taxonomy/assignment workflow after creating `backups/database/mdopendata-before-budget-web-taxonomy-20260713.dump`. Added three budget editions, 34 category candidates, 667 proposed controlled-label assignments, 24 approved project-department assignments, nine capital programs with 577 line assignments, and 333 approved exact one-to-one subsequent-forecast links. Snapshot 1 retains 6,256 members and published fact rows while using the explicitly authorized `charlottetown-budget-category-v1` revision overlay.
+
+Replaced `/budgets` with a source-document-scoped annual view and added `/budgets/facts` for fact and assignment review. The API now enforces document, department, program, and project filters; the annual page separates proposed revenue and expenses, source totals, capital, tax/rates, debt, and external funding, and displays exact subsequent forecasts for matched prior-year facts.
+
+## [2026-07-13] qa | Budget web taxonomy and filtering
+
+Passed the isolated migration regression, Python compilation, idempotent zero-write rerun, server syntax validation, and all 30 web smoke checks. Data-quality review removed 265 ambiguous many-to-one forecast links and enforced unique targets for the remaining 333 exact matches. Browser QA confirmed that 2025/2026 loads 1,220 primary-period facts, fact 33415 renders its matched $155,000 subsequent forecast, project URL filtering returns one `street-resurfacing` fact, edition requests cannot overwrite a newer selection, and no browser console errors occur.

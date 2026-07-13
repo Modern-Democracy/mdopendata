@@ -3,7 +3,7 @@ type: index
 tags:
   - budget
   - municipal-portal
-updated: 2026-07-12
+updated: 2026-07-13
 ---
 
 This section defines the municipal budget ingestion, data, API, user-interface, and delivery contracts.
@@ -48,6 +48,8 @@ Charlottetown is the prototype municipality. The initial source set is the three
 | [Three-year publication snapshot](./three-year-publication-snapshot-proposal.md) | Creation, publication status, source documents, fact counts, and acceptance checks for the first Charlottetown three-year snapshot. |
 | [Public budget API implementation scope](./public-api-implementation-scope.md) | First read-only published-snapshot API slice, response behavior, exclusions, and acceptance criteria. |
 | [Normalized category taxonomy proposal](./normalized-category-taxonomy-proposal.md) | Reviewed Charlottetown vocabulary candidate, versioned assignment architecture, mapping cohorts, review register, and approval gates. |
+| [Dedicated budget page views plan](./dedicated-page-views-plan.md) | Review-gated year, department, project, and municipal-analysis route plan with data-contract prerequisites and QA gates. |
+| [Budget web and taxonomy implementation status](./budget-web-taxonomy-implementation-status.md) | Applied migration, snapshot revision, assignments, subsequent forecasts, filter enforcement, browser-review pages, counts, and known limits. |
 
 ## Current Evidence
 
@@ -55,7 +57,7 @@ The first pass of the 2026/2027 PDF found 154 pages, 114 table or project-profil
 
 The first Charlottetown publication snapshot is published with 6,256 approved facts from the three financial-plan documents. Raw discovery artifacts remain non-publication inputs; public APIs must read through `budget.v_published_facts`.
 
-The public web implementation includes published budget discovery and fact APIs, operating/capital/revenue/debt/reserve reads, capital-project list and detail APIs, exact-identity cross-period comparison, authorized PDF page rendering, and an accessible `/budgets` visualization page. Normalized-category comparison and source-cell highlighting remain deferred.
+The public web implementation now scopes `/budgets` to one annual PDF, displays separate proposed revenue and expense tables, source totals, capital, tax/rate, debt, external-funding, and exact subsequent-forecast evidence, and provides `/budgets/facts` for assignment review. Department, program, and project filters are enforced. Dedicated cross-year department, project-detail, municipal-analysis, normalized-category comparison, and source-cell highlighting work remains deferred.
 
 Week 1 profiling is complete for all 392 pages. See the [three-year Charlottetown source profile](../charlottetown/sources/budget-three-year-source-profile.md) for the source-pattern matrix and representative schema-spike tables.
 

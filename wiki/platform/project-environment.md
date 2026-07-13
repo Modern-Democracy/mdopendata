@@ -5,7 +5,7 @@ tags:
   - python
   - dependencies
   - deployment
-updated: 2026-07-12
+updated: 2026-07-13
 ---
 
 This page records the canonical project runtime, dependency, and environment-management contract.
@@ -68,7 +68,13 @@ Migration `026_budget_capital_project_reference.sql` restores the approved docum
 
 ## Isolated Budget Migration Regression Test
 
-`scripts/test-budget-migration.py` creates a uniquely named empty PostgreSQL database from `template0` in `mdopendata-postgis`, applies migration 025 and its regression controls, then drops the temporary database. It never applies DDL to the active `mdopendata` database. The test uses `PGCONTAINER`, `PGUSER`, and optional `PGADMIN_DATABASE` environment variables; the configured database role must have `CREATEDB` permission.
+`scripts/test-budget-migration.py` creates a uniquely named empty PostgreSQL database from `template0` in `mdopendata-postgis`, applies migrations 025 and 027 with their regression controls, then drops the temporary database. It never applies DDL to the active `mdopendata` database. The test uses `PGCONTAINER`, `PGUSER`, and optional `PGADMIN_DATABASE` environment variables; the configured database role must have `CREATEDB` permission.
+
+## Budget Web Taxonomy Migration
+
+Migration 027 and `scripts/apply-budget-web-taxonomy.py` implement the authorized budget-edition, assignment, taxonomy-revision, capital-program, and subsequent-forecast records. The verified pre-migration backup is `backups/database/mdopendata-before-budget-web-taxonomy-20260713.dump`. Run the assignment script without `--apply` for rollback-only validation; use `--apply` only after explicit authorization. A verified repeat apply writes zero records.
+
+The local `web` service was rebuilt from the existing Docker Compose definition after the server and static UI changes. No dependency, lockfile, runtime, secret, port, or deployment-target change was made.
 
 ## Required Documentation for Changes
 

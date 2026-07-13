@@ -47,7 +47,12 @@ const checks = [
   {
     name: "published budget visualization route",
     path: "/budgets",
-    expectText: ["Municipal budgets", "Published financial detail", "/api/projects", "Capital projects"],
+    expectText: ["Municipal budget by year", "Operating revenues and expenses", "/api/budgets/editions", "Capital programs and projects", "External funding and partner contributions"],
+  },
+  {
+    name: "budget fact explorer route",
+    path: "/budgets/facts",
+    expectText: ["Budget fact explorer", "What is a fact", "Filter and iterate", "/api/budgets/facts"],
   },
   {
     name: "lab tools route",
@@ -73,6 +78,46 @@ const checks = [
     name: "budget fact warning API contract",
     path: "/api/budgets/facts/13067?municipality=charlottetown",
     expectJson: (payload) => payload.data?.fact_id === "13067" && Array.isArray(payload.data?.citations) && payload.warnings?.some((warning) => warning.issue_key === "reconciliation:debt_total:balance"),
+  },
+  {
+    name: "budget editions API contract",
+    path: "/api/budgets/editions?municipality=charlottetown&limit=10",
+    expectJson: (payload) =>
+      Array.isArray(payload.data) &&
+      payload.data.length === 3 &&
+      payload.data.every((edition) => edition.document_id && edition.fiscal_period_label && edition.document_fact_count > 0),
+  },
+  {
+    name: "budget facts document filter contract",
+    path: "/api/budgets/facts?municipality=charlottetown&document=8&limit=20",
+    expectJson: (payload) =>
+      Array.isArray(payload.data) &&
+      payload.data.length === 20 &&
+      payload.data.every((fact) => Number(fact.source_document_id) === 8),
+  },
+  {
+    name: "budget department filter contract",
+    path: "/api/budgets/facts?municipality=charlottetown&document=8&department=public-works&limit=100",
+    expectJson: (payload) =>
+      Array.isArray(payload.data) &&
+      payload.data.length > 0 &&
+      payload.data.every((fact) => fact.effective_organization_unit_key === "public-works"),
+  },
+  {
+    name: "budget program filter contract",
+    path: "/api/budgets/facts?municipality=charlottetown&document=8&program=public-works&limit=100",
+    expectJson: (payload) =>
+      Array.isArray(payload.data) &&
+      payload.data.length > 0 &&
+      payload.data.every((fact) => fact.program_key === "public-works"),
+  },
+  {
+    name: "budget project filter contract",
+    path: "/api/budgets/facts?municipality=charlottetown&document=8&project=street-resurfacing&limit=100",
+    expectJson: (payload) =>
+      Array.isArray(payload.data) &&
+      payload.data.length > 0 &&
+      payload.data.every((fact) => fact.project_key === "street-resurfacing"),
   },
   {
     name: "budget unknown filter rejection",
