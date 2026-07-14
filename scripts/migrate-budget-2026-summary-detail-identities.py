@@ -113,7 +113,7 @@ def main() -> int:
 
             cur.execute(
                 """SELECT count(*)
-                   FROM budget.fact f JOIN budget.line_item li ON li.id=f.line_item_id
+                   FROM budget.financial_observation f JOIN budget.line_item li ON li.id=f.line_item_id
                   WHERE li.id = ANY(%s)""",
                 (sorted(moved_ids),),
             )
@@ -123,7 +123,7 @@ def main() -> int:
 
             cur.execute(
                 """SELECT count(*)
-                   FROM budget.fact_source fs JOIN budget.fact f ON f.id=fs.fact_id
+                   FROM budget.financial_observation_source fs JOIN budget.financial_observation f ON f.id=fs.observation_id
                    JOIN budget.line_item li ON li.id=f.line_item_id
                   WHERE li.id = ANY(%s)""",
                 (sorted(moved_ids),),

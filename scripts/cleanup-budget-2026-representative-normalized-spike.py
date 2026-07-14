@@ -47,7 +47,7 @@ def fetch_cleanup_scope(cur: psycopg.Cursor, manifest_fact_keys: set[str]) -> di
                   li.id AS line_item_id,
                   s.id AS statement_id,
                   dp.id AS document_period_id
-           FROM budget.fact f
+           FROM budget.financial_observation f
            JOIN budget.line_item li ON li.id=f.line_item_id
            JOIN budget.statement s ON s.id=li.statement_id
            JOIN budget.document_period dp ON dp.id=f.document_period_id
@@ -61,18 +61,18 @@ def fetch_cleanup_scope(cur: psycopg.Cursor, manifest_fact_keys: set[str]) -> di
     )
     rows = cur.fetchall()
     non_manifest = [row for row in rows if row[1] not in manifest_fact_keys]
-    fact_ids = [int(row[0]) for row in non_manifest]
+    observation_ids = [int(row[0]) for row in non_manifest]
     line_item_ids = sorted({int(row[2]) for row in non_manifest})
     statement_ids = sorted({int(row[3]) for row in non_manifest})
     document_period_ids = sorted({int(row[4]) for row in non_manifest})
 
-    if fact_ids:
+    if observation_ids:
         cur.execute(
             """SELECT DISTINCT rr.id
                FROM budget.reconciliation_result rr
-              WHERE rr.input_fact_ids && %s::bigint[]
+              WHERE rr.input_observation_ids && %s::bigint[]
               ORDER BY rr.id""",
-            (fact_ids,),
+            (observation_ids,),
         )
         reconciliation_ids = [int(row[0]) for row in cur.fetchall()]
     else:
@@ -91,18 +91,18 @@ def fetch_cleanup_scope(cur: psycopg.Cursor, manifest_fact_keys: set[str]) -> di
 
     counts = {}
     for name, sql, params in [
-        ("fact_sources", "SELECT count(*) FROM budget.fact_source WHERE fact_id = ANY(%s)", (fact_ids,)),
-        ("publication_facts", "SELECT count(*) FROM budget.publication_fact WHERE fact_id = ANY(%s)", (fact_ids,)),
-        ("capital_project_facts", "SELECT count(*) FROM budget.capital_project_fact WHERE fact_id = ANY(%s)", (fact_ids,)),
-        ("debt_facts", "SELECT count(*) FROM budget.debt_fact WHERE fact_id = ANY(%s)", (fact_ids,)),
-        ("rate_facts", "SELECT count(*) FROM budget.rate_fact WHERE fact_id = ANY(%s)", (fact_ids,)),
+        ("observation_sources", "SELECT count(*) FROM budget.financial_observation_source WHERE observation_id = ANY(%s)", (observation_ids,)),
+        ("publication_observations", "SELECT count(*) FROM budget.publication_observation WHERE observation_id = ANY(%s)", (observation_ids,)),
+        ("capital_project_observations", "SELECT count(*) FROM budget.capital_project_observation WHERE observation_id = ANY(%s)", (observation_ids,)),
+        ("debt_facts", "SELECT count(*) FROM budget.debt_observation WHERE observation_id = ANY(%s)", (observation_ids,)),
+        ("rate_facts", "SELECT count(*) FROM budget.rate_observation WHERE observation_id = ANY(%s)", (observation_ids,)),
     ]:
         cur.execute(sql, params)
         counts[name] = int(cur.fetchone()[0])
 
     return {
         "document_id": document_id,
-        "fact_ids": fact_ids,
+        "observation_ids": observation_ids,
         "fact_keys": [row[1] for row in non_manifest],
         "line_item_ids": line_item_ids,
         "statement_ids": statement_ids,
@@ -140,11 +140,11 @@ def apply_cleanup(cur: psycopg.Cursor, scope: dict[str, Any]) -> dict[str, int]:
     else:
         counts["reconciliations"] = 0
 
-    if scope["fact_ids"]:
+    if scope["observation_ids"]:
         for table in ["capital_project_fact", "debt_fact", "rate_fact", "reserve_fact", "publication_fact", "fact_source"]:
-            cur.execute(f"DELETE FROM budget.{table} WHERE fact_id = ANY(%s)", (scope["fact_ids"],))
+            cur.execute(f"DELETE FROM budget.{table} WHERE observation_id = ANY(%s)", (scope["observation_ids"],))
             counts[table] = cur.rowcount
-        cur.execute("DELETE FROM budget.fact WHERE id = ANY(%s)", (scope["fact_ids"],))
+        cur.execute("DELETE FROM budget.financial_observation WHERE id = ANY(%s)", (scope["observation_ids"],))
         counts["facts"] = cur.rowcount
     else:
         for table in ["capital_project_fact", "debt_fact", "rate_fact", "reserve_fact", "publication_fact", "fact_source"]:
@@ -188,7 +188,7 @@ def main() -> int:
     with psycopg.connect(db_url()) as connection:
         with connection.cursor() as cur:
             scope = fetch_cleanup_scope(cur, manifest_fact_keys)
-            if scope["dependent_counts"]["publication_facts"] != 0:
+            if scope["dependent_counts"]["publication_observations"] != 0:
                 raise RuntimeError("Refusing cleanup because representative facts have publication membership")
             deleted_counts = apply_cleanup(cur, scope) if args.apply else {}
         if args.apply:
@@ -201,13 +201,13 @@ def main() -> int:
         "status": "applied" if args.apply else "dry_run",
         "source_sha256": SOURCE_SHA,
         "scope": {
-            "facts": len(scope["fact_ids"]),
+            "facts": len(scope["observation_ids"]),
             "line_items": len(scope["line_item_ids"]),
             "statements": len(scope["statement_ids"]),
             "document_periods": len(scope["document_period_ids"]),
             "reconciliations": len(scope["reconciliation_ids"]),
             "review_issues": len(scope["review_issue_ids"]),
-            "publication_fact_links": scope["dependent_counts"]["publication_facts"],
+            "publication_fact_links": scope["dependent_counts"]["publication_observations"],
         },
         "deleted_counts": deleted_counts,
         "fact_keys": scope["fact_keys"],

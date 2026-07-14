@@ -40,7 +40,7 @@ Out of scope for the prototype:
 | User | Required outcome |
 | --- | --- |
 | Public reader | Understand total revenue, spending, capital investment, funding sources, and major changes in plain language. |
-| Researcher or journalist | Download filtered facts and trace each value to its exact source. |
+| Researcher or journalist | Download filtered financial observations and trace each value to its exact source. |
 | Municipal comparator | Compare equivalent periods and normalized categories while seeing coverage and accounting differences. |
 | Data validator | Inspect extraction status, confidence, reconciliations, normalization decisions, and unresolved rows. |
 
@@ -53,7 +53,7 @@ Out of scope for the prototype:
 - Preserve raw text, row order, cell text, indentation, coordinates, table headings, footnotes, signs, blank values, dashes, and parenthesized values.
 - Assign stable source identifiers independent of rerun order.
 - Store parser version, input hash, run status, confidence, and review state.
-- Never publish a normalized fact without a source-cell or source-row citation, except an explicitly labeled derived metric.
+- Never publish a normalized financial observation without a source-cell or source-row citation, except an explicitly labeled derived metric.
 
 ### Financial Semantics
 
@@ -66,7 +66,19 @@ Out of scope for the prototype:
 - Store fiscal values in long form rather than year-specific columns.
 - Store currency as fixed-precision numeric values and never binary floating point.
 - For a reviewed currency table, an explicit `0`, blank cell, or dash cell represents a normalized numeric zero with `value_state: reported_zero`. Preserve the original source-cell display (`0`, blank, or `-`) and its physical column identity as provenance; do not apply this rule to non-currency columns without an explicit reviewed mapping.
-- Approved row mappings must use the shared per-value `facts` contract: each source value carries its own source value ID, document period, amount type, measure unit, value state, and numeric value. Document layout may vary, but this normalized fact contract does not.
+- Approved row mappings must use the shared per-value financial-observation contract: each source value carries its own source value ID, document period, amount type, measure unit, value state, and numeric value. Document layout may vary, but this contract does not.
+
+### Context And Document Structure
+
+- Reserve `fact` exclusively for contextual source-authored narrative, attribute, or list content. Numeric and textual table values are financial observations.
+- Use the 2026/2027 table of contents as the canonical cross-edition hierarchy: introduction, strategic plan, budget overview, operating budget, capital budget, appendices, and document information.
+- Preserve source order and source page ranges. Represent a canonical section missing from an edition as absent rather than synthesizing source content.
+- Keep universal explanations of municipal budgeting in versioned editorial guides, separate from source facts.
+- Standardize Strategic Plan 2022 to 2026 content from the standalone City source document and reuse it across the three budget editions.
+- Combine each operating department's summary, programs/services, and highlights with its reported operating observations.
+- Keep projects exclusively within capital budget views and associate them with departments only through source-supported assignments.
+- Combine each capital project profile's name, department, description, and strategic alignment where reported with its capital observations.
+- Keep property-tax and long-term-debt appendices separate from operating and capital budgets.
 
 ### Review And Reconciliation
 
@@ -84,7 +96,7 @@ Out of scope for the prototype:
 - Compare selected fiscal periods using absolute change and percentage change, with division-by-zero and missing-data states.
 - Compare municipalities only on compatible fiscal periods, units, accounting scopes, and approved normalized categories.
 - Provide source links and definitions beside every chart and table.
-- Allow CSV and JSON downloads of the filtered, reviewed fact set with provenance identifiers.
+- Allow CSV and JSON downloads of the filtered, reviewed financial-observation set with provenance identifiers.
 
 ## Source Variations And Edge Cases
 
@@ -93,11 +105,11 @@ Out of scope for the prototype:
 - Parentheses can indicate negative values or deductions, as on the capital partner-funding schedule at PDF page 111.
 - A label can recur under different departments or statement sections and must not be globally merged by text alone.
 - Multi-page schedules may omit repeated headers.
-- Overview tables may duplicate detailed facts. Mark summary/detail relationships to prevent double counting.
+- Overview tables may duplicate detailed observations. Mark summary/detail relationships to prevent double counting.
 - Department operating sections can use materially different summary/detail layouts across budget years. In 2025/2026, a mostly single-page departmental overview table is associated with one or more `Detailed Breakdown of Budget Item` pages that provide line items for the overview expense categories; totals are presented in the overview table. In 2024/2025, the operating department table pattern generally embeds totals in the department detail table and does not provide a separate overview table. Future extraction must detect which pattern is present, encode the source relationship, and normalize both patterns to the same department operating statement with line items before assigning reconciliation totals.
-- Budget documents commonly repeat the same numbers across visualizations, overview pages, and backing tables to help human readers. Treat duplicate visualization or overview presentations as `duplicate_summary` unless they are approved summary/detail relationships such as department summaries versus line-item department or project tables. Do not normalize duplicate fact sets because they can corrupt totals and comparisons through double counting.
+- Budget documents commonly repeat the same numbers across visualizations, overview pages, and backing tables to help human readers. Treat duplicate visualization or overview presentations as `duplicate_summary` unless they are approved summary/detail relationships such as department summaries versus line-item department or project tables. Do not normalize duplicate financial-observation sets because they can corrupt totals and comparisons through double counting.
 - Large-font headings, department names, project titles, and profile `Project:` fields are prone to line-wrapping, especially in narrow page columns. Extraction must reconstruct the complete string from adjacent wrapped lines before normalization, alias matching, statement naming, or project identity decisions.
-- Overview chart pages can contain a visual chart followed by the backing data table. Ignore the chart graphic for normalization; public UI charts should be reproduced later from reviewed normalized facts.
+- Overview chart pages can contain a visual chart followed by the backing data table. Ignore the chart graphic for normalization; public UI charts should be reproduced later from reviewed normalized financial observations.
 - Capital profiles contain dates and narrative numbers that are not budget amounts.
 - Municipality names, department structures, fiscal calendars, and accounting classifications can change over time.
 - Restated prior-year figures must remain document-specific and must not overwrite the value reported in an earlier document.

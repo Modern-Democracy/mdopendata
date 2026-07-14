@@ -109,7 +109,7 @@ def fetch_database_state(cur: psycopg.Cursor) -> dict[str, Any]:
         """SELECT li.line_key || ':' || dkey.key || ':' || at.code || ':' || mu.code AS fact_key,
                   f.value_numeric::text, f.value_text, f.value_state, f.review_status, f.is_reported,
                   li.aggregation_role, s.statement_kind, s.statement_key
-           FROM budget.fact f
+           FROM budget.financial_observation f
            JOIN budget.line_item li ON li.id=f.line_item_id
            JOIN budget.statement s ON s.id=li.statement_id
            JOIN budget.document_period dp ON dp.id=f.document_period_id
@@ -143,8 +143,8 @@ def fetch_database_state(cur: psycopg.Cursor) -> dict[str, Any]:
         """SELECT li.line_key || ':' || dkey.key || ':' || at.code || ':' || mu.code AS fact_key,
                   fs.source_role, fs.source_order, cell.raw_text, cell.parsed_numeric::text,
                   table_record.table_key, row_record.row_key, col.column_index
-           FROM budget.fact_source fs
-           JOIN budget.fact f ON f.id=fs.fact_id
+           FROM budget.financial_observation_source fs
+           JOIN budget.financial_observation f ON f.id=fs.observation_id
            JOIN budget.line_item li ON li.id=f.line_item_id
            JOIN budget.statement s ON s.id=li.statement_id
            JOIN budget.document_period dp ON dp.id=f.document_period_id
@@ -164,9 +164,9 @@ def fetch_database_state(cur: psycopg.Cursor) -> dict[str, Any]:
           ORDER BY fact_key, fs.source_order, fs.source_cell_id""",
         (DOCUMENT_KEY, document_id),
     )
-    fact_sources = defaultdict(list)
+    observation_sources = defaultdict(list)
     for fact_key, role, order, raw_text, parsed_numeric, table_key, row_key, column_index in cur.fetchall():
-        fact_sources[fact_key].append(
+        observation_sources[fact_key].append(
             {
                 "source_role": role,
                 "source_order": order,
@@ -221,7 +221,7 @@ def fetch_database_state(cur: psycopg.Cursor) -> dict[str, Any]:
         "statements": statements,
         "lines": lines,
         "facts": facts,
-        "fact_sources": fact_sources,
+        "observation_sources": observation_sources,
         "reconciliations": reconciliations,
         "review_issues": review_issues,
         "publication_snapshot_count": publication_snapshot_count,
@@ -269,7 +269,7 @@ def main() -> int:
     non_manifest_facts = sorted(set(db["facts"]) - set(expected_facts))
 
     source_mismatches: list[dict[str, Any]] = []
-    for link in manifest["fact_sources"]:
+    for link in manifest["observation_sources"]:
         expected_fact = expected_facts[link["fact_key"]]
         value = raw_values[link["source_value_id"]]
         row = raw_rows[value["row_id"]]
@@ -280,7 +280,7 @@ def main() -> int:
             "parsed_numeric": value["parsed_decimal"],
             "source_cell_key": link["source_cell_key"],
         }
-        actual_links = db["fact_sources"].get(link["fact_key"], [])
+        actual_links = db["observation_sources"].get(link["fact_key"], [])
         actual_match = [
             actual for actual in actual_links
             if actual["source_role"] == expected_cell["source_role"]
@@ -337,7 +337,7 @@ def main() -> int:
         family = statement_kinds[statement_key]
         family_counts.setdefault(family, {"facts": 0, "source_links": 0, "reconciliation_checks": 0})
         family_counts[family]["facts"] += 1
-    for link in manifest["fact_sources"]:
+    for link in manifest["observation_sources"]:
         fact = expected_facts[link["fact_key"]]
         statement_key = line_statements[fact["line_key"]]
         family_counts[statement_kinds[statement_key]]["source_links"] += 1
@@ -355,7 +355,7 @@ def main() -> int:
 
     value_state_counts = Counter(fact["value_state"] for fact in manifest["facts"])
     dash_source_links = [
-        link for link in manifest["fact_sources"]
+        link for link in manifest["observation_sources"]
         if expected_facts[link["fact_key"]]["value_state"] == "dash_unresolved"
     ]
     dash_raw_values = Counter(raw_values[link["source_value_id"]]["raw_value"] for link in dash_source_links)
@@ -385,8 +385,8 @@ def main() -> int:
             "manifest_facts": len(manifest["facts"]),
             "database_facts_matched_by_key": len(set(db["facts"]) & set(expected_facts)),
             "non_manifest_same_document_facts": len(non_manifest_facts),
-            "manifest_fact_sources": len(manifest["fact_sources"]),
-            "database_fact_source_links_for_manifest": sum(len(db["fact_sources"].get(key, [])) for key in expected_facts),
+            "manifest_observation_sources": len(manifest["observation_sources"]),
+            "database_fact_source_links_for_manifest": sum(len(db["observation_sources"].get(key, [])) for key in expected_facts),
             "reconciliation_records": len(reconciliations["records"]),
             "review_issues": len(db["review_issues"]),
             "manifest_review_issues": len(expected_issue_keys),
@@ -458,7 +458,7 @@ def main() -> int:
         "Phase 7 QA {status}: facts={facts}, source_links={links}, reconciliations={recons}, snapshots={snapshots}".format(
             status=report["status"],
             facts=report["counts"]["manifest_facts"],
-            links=report["counts"]["manifest_fact_sources"],
+            links=report["counts"]["manifest_observation_sources"],
             recons=report["counts"]["reconciliation_records"],
             snapshots=report["counts"]["publication_snapshots"],
         )

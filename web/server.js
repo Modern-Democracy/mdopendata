@@ -2458,18 +2458,18 @@ function budgetPage(rows, { limit, cursor }) {
 
 async function loadBudgetWarnings(snapshotId) {
   const { rows } = await pool.query(
-    `SELECT ri.review_key,ri.title,ri.description,rr.difference,rr.input_fact_ids,
+    `SELECT ri.review_key,ri.title,ri.description,rr.difference,rr.input_observation_ids,
             array_agg(DISTINCT s.document_id) FILTER (WHERE s.document_id IS NOT NULL) AS document_ids
        FROM budget.review_issue ri
        JOIN budget.reconciliation_result rr ON rr.id=ri.reconciliation_result_id
        JOIN budget.review_decision rd ON rd.review_issue_id=ri.id AND rd.decision_code='accept_reported_with_warning'
-       JOIN unnest(rr.input_fact_ids) affected_fact_id ON true
-       JOIN budget.publication_fact pf ON pf.fact_id=affected_fact_id AND pf.snapshot_id=$1
-       JOIN budget.fact f ON f.id=pf.fact_id
+       JOIN unnest(rr.input_observation_ids) affected_observation_id ON true
+       JOIN budget.publication_observation pf ON pf.observation_id=affected_observation_id AND pf.snapshot_id=$1
+       JOIN budget.financial_observation f ON f.id=pf.observation_id
        JOIN budget.line_item li ON li.id=f.line_item_id
        JOIN budget.statement s ON s.id=li.statement_id
       WHERE ri.status='resolved'
-      GROUP BY ri.review_key,ri.title,ri.description,rr.difference,rr.input_fact_ids`,
+      GROUP BY ri.review_key,ri.title,ri.description,rr.difference,rr.input_observation_ids`,
     [snapshotId],
   );
   return rows.map((row) => ({
@@ -2479,16 +2479,16 @@ async function loadBudgetWarnings(snapshotId) {
     description: row.description,
     decision: "accept_reported_with_warning",
     difference: String(row.difference),
-    affected_fact_ids: row.input_fact_ids.map(String),
+    affected_observation_ids: row.input_observation_ids.map(String),
     affected_document_ids: (row.document_ids || []).map(String),
   }));
 }
 
-function selectBudgetWarnings(warnings, { factIds = [], documentIds = [] } = {}) {
-  const facts = new Set(factIds.map(String));
+function selectBudgetWarnings(warnings, { observationIds = [], documentIds = [] } = {}) {
+  const observations = new Set(observationIds.map(String));
   const documents = new Set(documentIds.map(String));
   return warnings
-    .filter((warning) => warning.affected_fact_ids.some((id) => facts.has(id)) || warning.affected_document_ids.some((id) => documents.has(id)))
+    .filter((warning) => warning.affected_observation_ids.some((id) => observations.has(id)) || warning.affected_document_ids.some((id) => documents.has(id)))
     .map(({ affected_document_ids, ...warning }) => warning);
 }
 
@@ -2505,17 +2505,20 @@ async function loadPublishedBudgetMunicipality(slug) {
 
 async function handleBudgetApi(request, response, url) {
   if (request.method !== "GET") { response.writeHead(405); response.end("Method not allowed"); return true; }
-  const factMatch = url.pathname.match(/^\/api\/budgets\/facts\/(\d+)$/);
+  const contextualFactMatch = url.pathname.match(/^\/api\/budgets\/facts\/(\d+)$/);
+  const observationMatch = url.pathname.match(/^\/api\/budgets\/observations\/(\d+)$/);
   const sourcePageMatch = url.pathname.match(/^\/api\/budgets\/sources\/(\d+)\/pages\/(\d+)$/);
   const projectMatch = url.pathname.match(/^\/api\/projects\/([^/]+)$/);
   const allowedFilters = url.pathname === "/api/budgets/municipalities" ? ["limit", "cursor"]
     : url.pathname === "/api/budgets/periods" ? ["municipality", "limit", "cursor"]
       : url.pathname === "/api/budgets/editions" ? ["municipality", "limit", "cursor"]
+        : url.pathname === "/api/budgets/structure" ? ["municipality", "document"]
+          : url.pathname === "/api/budgets/facts" ? ["municipality", "document", "section", "department", "project", "q", "limit", "cursor"]
         : url.pathname === "/api/budgets/dimensions" ? ["municipality", "document"]
-          : url.pathname === "/api/budgets/facts" ? ["municipality", "document", "period", "entity", "department", "program", "project", "category", "category_status", "statement_kind", "amount_type", "aggregation_role", "q", "limit", "cursor"]
+          : url.pathname === "/api/budgets/observations" ? ["municipality", "document", "period", "entity", "section", "department", "program", "project", "category", "category_status", "statement_kind", "amount_type", "aggregation_role", "q", "limit", "cursor"]
       : url.pathname === "/api/budgets/sources" ? ["municipality", "period", "limit", "cursor"]
-        : factMatch ? ["municipality"]
-          : url.pathname === "/api/budgets/download.csv" ? ["municipality", "document", "period", "statement_kind", "amount_type", "measure_unit", "department", "program", "project", "limit", "cursor"]
+        : contextualFactMatch || observationMatch ? ["municipality"]
+          : url.pathname === "/api/budgets/observations.csv" ? ["municipality", "document", "period", "statement_kind", "amount_type", "measure_unit", "department", "program", "project", "limit", "cursor"]
             : url.pathname === "/api/budgets/summary" ? ["municipality", "document", "period", "entity", "limit", "cursor"]
               : url.pathname === "/api/budgets/operating" ? ["municipality", "document", "period", "entity", "department", "category", "amount_type", "limit", "cursor"]
                 : url.pathname === "/api/budgets/capital" ? ["municipality", "document", "period", "entity", "department", "program", "project", "funding_category", "limit", "cursor"]
@@ -2537,20 +2540,85 @@ async function handleBudgetApi(request, response, url) {
   const slug = budgetFilter(url, "municipality") || "charlottetown";
   const municipality = await loadPublishedBudgetMunicipality(slug);
   if (!municipality) { await sendJson(response, budgetPayload([], { municipality: slug }, ["no_published_snapshot"])); return true; }
+  if (url.pathname === "/api/budgets/structure") {
+    const documentId = budgetPositiveIntegerFilter(url, "document");
+    if (!documentId) { const error = new Error("document is required."); error.statusCode = 400; throw error; }
+    const { rows } = await pool.query(
+      `SELECT ds.id,ds.parent_id,ds.section_key,ds.canonical_role,ds.title,ds.source_order,ds.display_order,
+              ds.start_page,ds.end_page,ds.mapping_basis,
+              count(DISTINCT dsf.fact_id)::integer AS fact_count,
+              COALESCE(jsonb_agg(DISTINCT jsonb_build_object('key',eg.guide_key,'title',eg.title,'body',eg.body_markdown,'version',eg.version))
+                FILTER (WHERE eg.id IS NOT NULL),'[]'::jsonb) AS guides
+         FROM budget.document_section ds
+         JOIN budget.publication_snapshot ps ON ps.id=$1 AND ds.document_id=ANY(ps.source_document_ids)
+         LEFT JOIN budget.document_section_fact dsf ON dsf.document_section_id=ds.id
+         LEFT JOIN budget.document_section_guide dsg ON dsg.document_section_id=ds.id
+         LEFT JOIN budget.editorial_guide eg ON eg.id=dsg.editorial_guide_id AND eg.review_status='approved'
+        WHERE ds.document_id=$2 AND ds.review_status='approved'
+        GROUP BY ds.id ORDER BY ds.display_order,ds.source_order,ds.id`,
+      [municipality.snapshot_id, documentId],
+    );
+    await sendJson(response, budgetPayload(rows, { municipality: slug, document: String(documentId) }, [], null)); return true;
+  }
+  if (url.pathname === "/api/budgets/facts") {
+    const documentId = budgetPositiveIntegerFilter(url, "document");
+    const section = budgetFilter(url, "section");
+    const department = budgetFilter(url, "department");
+    const project = budgetFilter(url, "project");
+    const search = budgetFilter(url, "q");
+    const pagination = budgetPagination(url);
+    const { rows } = await pool.query(
+      `SELECT pf.*,d.title AS source_document_title,count(*) OVER()::integer AS filtered_fact_count
+         FROM budget.v_published_facts pf JOIN budget.source_document d ON d.id=pf.source_document_id
+        WHERE pf.snapshot_id=$1
+          AND ($2::bigint IS NULL OR pf.edition_document_id=$2)
+          AND ($3::text IS NULL OR pf.document_section_id IN (
+            WITH RECURSIVE section_tree AS (
+              SELECT id FROM budget.document_section WHERE document_id=pf.edition_document_id AND section_key=$3
+              UNION ALL
+              SELECT child.id FROM budget.document_section child JOIN section_tree parent ON child.parent_id=parent.id
+            ) SELECT id FROM section_tree
+          ))
+          AND ($4::text IS NULL OR pf.organization_unit_key=$4)
+          AND ($5::text IS NULL OR pf.project_key=$5)
+          AND ($6::text IS NULL OR pf.title ILIKE '%' || $6 || '%' OR COALESCE(pf.body_text,'') ILIKE '%' || $6 || '%')
+        ORDER BY pf.edition_document_id,pf.section_display_order,pf.fact_display_order,pf.fact_id LIMIT $7 OFFSET $8`,
+      [municipality.snapshot_id, documentId, section, department, project, search, pagination.limit + 1, pagination.cursor],
+    );
+    const filteredFactCount = rows[0]?.filtered_fact_count || 0;
+    const page = budgetPage(rows.map(({ filtered_fact_count, ...row }) => row), pagination);
+    await sendJson(response, budgetPayload(page.data, {
+      municipality: slug, ...(documentId ? { document: String(documentId) } : {}), ...(section ? { section } : {}),
+      ...(department ? { department } : {}), ...(project ? { project } : {}), ...(search ? { q: search } : {}),
+    }, [], page.pagination, { coverage: { filtered_fact_count: filteredFactCount } })); return true;
+  }
+  if (contextualFactMatch) {
+    const { rows } = await pool.query(`SELECT * FROM budget.v_published_facts WHERE snapshot_id=$1 AND fact_id=$2`, [municipality.snapshot_id, Number(contextualFactMatch[1])]);
+    if (!rows[0]) { response.writeHead(404, { "content-type": "application/json; charset=utf-8" }); response.end(JSON.stringify({ error: "Budget fact not found." })); return true; }
+    const fact = rows[0];
+    const { rows: citations } = await pool.query(
+      `SELECT d.id AS document_id,d.title AS document_title,sp.id AS source_page_id,sp.pdf_page_number,
+              fs.source_role,fs.source_order
+         FROM budget.fact_source fs JOIN budget.source_page sp ON sp.id=fs.source_page_id
+         JOIN budget.source_document d ON d.id=sp.document_id WHERE fs.fact_id=$1 ORDER BY fs.source_order,sp.pdf_page_number`,
+      [fact.fact_id],
+    );
+    await sendJson(response, budgetPayload({ ...fact, citations }, { municipality: slug }, [], null)); return true;
+  }
   if (url.pathname === "/api/budgets/editions") {
     const pagination = budgetPagination(url);
     const { rows } = await pool.query(
       `SELECT be.document_id,be.edition_label,d.title,d.sha256,
               fp.id AS fiscal_period_id,fp.label AS fiscal_period_label,fp.start_date,fp.end_date,
               be.subsequent_document_id,sd.title AS subsequent_document_title,
-              count(pf.fact_id) FILTER (WHERE pf.fiscal_period_id=be.primary_fiscal_period_id)::integer AS primary_fact_count,
-              count(pf.fact_id)::integer AS document_fact_count
+              count(pf.observation_id) FILTER (WHERE pf.fiscal_period_id=be.primary_fiscal_period_id)::integer AS primary_observation_count,
+              count(pf.observation_id)::integer AS document_observation_count
          FROM budget.budget_edition be
          JOIN budget.source_document d ON d.id=be.document_id
          JOIN budget.fiscal_period fp ON fp.id=be.primary_fiscal_period_id
          LEFT JOIN budget.source_document sd ON sd.id=be.subsequent_document_id
          JOIN budget.publication_snapshot ps ON ps.id=$1 AND be.document_id=ANY(ps.source_document_ids)
-         LEFT JOIN budget.v_published_facts pf ON pf.snapshot_id=ps.id AND pf.source_document_id=be.document_id
+         LEFT JOIN budget.v_published_financial_observations pf ON pf.snapshot_id=ps.id AND pf.source_document_id=be.document_id
         WHERE d.municipality_id=$2 AND be.review_status='approved'
         GROUP BY be.document_id,be.edition_label,d.title,d.sha256,fp.id,fp.label,fp.start_date,fp.end_date,
                  be.subsequent_document_id,sd.title
@@ -2566,18 +2634,18 @@ async function handleBudgetApi(request, response, url) {
     const documentId = budgetPositiveIntegerFilter(url, "document");
     const [departments, programs, projects, categories, statementKinds, amountTypes] = await Promise.all([
       pool.query(`SELECT DISTINCT effective_organization_unit_id AS id,effective_organization_unit_key AS key,effective_organization_unit_name AS name
-                    FROM budget.v_published_facts WHERE snapshot_id=$1 AND ($2::bigint IS NULL OR source_document_id=$2)
+                    FROM budget.v_published_financial_observations WHERE snapshot_id=$1 AND ($2::bigint IS NULL OR source_document_id=$2)
                      AND effective_organization_unit_id IS NOT NULL ORDER BY name,key`, [municipality.snapshot_id, documentId]),
-      pool.query(`SELECT DISTINCT program_key AS key,program_name AS name FROM budget.v_published_facts
+      pool.query(`SELECT DISTINCT program_key AS key,program_name AS name FROM budget.v_published_financial_observations
                    WHERE snapshot_id=$1 AND ($2::bigint IS NULL OR source_document_id=$2) AND program_key IS NOT NULL ORDER BY name,key`, [municipality.snapshot_id, documentId]),
-      pool.query(`SELECT DISTINCT project_key AS key,project_name AS name FROM budget.v_published_facts
+      pool.query(`SELECT DISTINCT project_key AS key,project_name AS name FROM budget.v_published_financial_observations
                    WHERE snapshot_id=$1 AND ($2::bigint IS NULL OR source_document_id=$2) AND project_key IS NOT NULL ORDER BY name,key`, [municipality.snapshot_id, documentId]),
       pool.query(`SELECT DISTINCT category_candidate_key AS key,category_candidate_domain AS domain,category_assignment_status AS status
-                    FROM budget.v_published_facts WHERE snapshot_id=$1 AND ($2::bigint IS NULL OR source_document_id=$2)
+                    FROM budget.v_published_financial_observations WHERE snapshot_id=$1 AND ($2::bigint IS NULL OR source_document_id=$2)
                      AND category_candidate_key IS NOT NULL ORDER BY domain,key,status`, [municipality.snapshot_id, documentId]),
-      pool.query(`SELECT DISTINCT statement_kind AS value FROM budget.v_published_facts
+      pool.query(`SELECT DISTINCT statement_kind AS value FROM budget.v_published_financial_observations
                    WHERE snapshot_id=$1 AND ($2::bigint IS NULL OR source_document_id=$2) ORDER BY value`, [municipality.snapshot_id, documentId]),
-      pool.query(`SELECT DISTINCT amount_type AS value FROM budget.v_published_facts
+      pool.query(`SELECT DISTINCT amount_type AS value FROM budget.v_published_financial_observations
                    WHERE snapshot_id=$1 AND ($2::bigint IS NULL OR source_document_id=$2) ORDER BY value`, [municipality.snapshot_id, documentId]),
     ]);
     await sendJson(response, budgetPayload({
@@ -2587,10 +2655,11 @@ async function handleBudgetApi(request, response, url) {
       provenance: { snapshot_id: municipality.snapshot_id, release_label: municipality.release_label, taxonomy_version: municipality.taxonomy_version },
     })); return true;
   }
-  if (url.pathname === "/api/budgets/facts") {
+  if (url.pathname === "/api/budgets/observations") {
     const documentId = budgetPositiveIntegerFilter(url, "document");
     const entity = budgetPositiveIntegerFilter(url, "entity");
     const period = budgetFilter(url, "period");
+    const section = budgetFilter(url, "section");
     const department = budgetFilter(url, "department");
     const program = budgetFilter(url, "program");
     const project = budgetFilter(url, "project");
@@ -2609,14 +2678,19 @@ async function handleBudgetApi(request, response, url) {
     }
     const { rows } = await pool.query(
       `SELECT pf.*,d.title AS source_document_title,
-              followup.id AS followup_fact_id,followup.value_numeric AS followup_value_numeric,
+              display_period.id AS document_period_id,display_period.raw_column_label,
+              display_period.column_order,display_period.period_role,display_line.source_row_id,
+              followup.id AS followup_observation_id,followup.value_numeric AS followup_value_numeric,
               followup.value_text AS followup_value_text,fat.code AS followup_amount_type,
               ffp.label AS followup_fiscal_period_label,ffo.observation_kind AS followup_observation_kind,
-              count(*) OVER()::integer AS filtered_fact_count
-         FROM budget.v_published_facts pf
+              count(*) OVER()::integer AS filtered_observation_count
+         FROM budget.v_published_financial_observations pf
          JOIN budget.source_document d ON d.id=pf.source_document_id
-         LEFT JOIN budget.fact_followup_observation ffo ON ffo.original_fact_id=pf.fact_id AND ffo.review_status='approved'
-         LEFT JOIN budget.fact followup ON followup.id=ffo.subsequent_observation_fact_id
+         JOIN budget.financial_observation display_observation ON display_observation.id=pf.observation_id
+         JOIN budget.line_item display_line ON display_line.id=display_observation.line_item_id
+         JOIN budget.document_period display_period ON display_period.id=display_observation.document_period_id
+         LEFT JOIN budget.financial_observation_followup ffo ON ffo.original_observation_id=pf.observation_id AND ffo.review_status='approved'
+         LEFT JOIN budget.financial_observation followup ON followup.id=ffo.subsequent_observation_id
          LEFT JOIN budget.amount_type fat ON fat.id=followup.amount_type_id
          LEFT JOIN budget.document_period fdp ON fdp.id=followup.document_period_id
          LEFT JOIN budget.fiscal_period ffp ON ffp.id=fdp.fiscal_period_id
@@ -2624,31 +2698,38 @@ async function handleBudgetApi(request, response, url) {
           AND ($2::bigint IS NULL OR pf.source_document_id=$2)
           AND ($3::text IS NULL OR pf.fiscal_period_label=$3)
           AND ($4::bigint IS NULL OR pf.reporting_entity_id=$4)
-          AND ($5::text IS NULL OR pf.effective_organization_unit_key=$5 OR pf.effective_organization_unit_id::text=$5)
-          AND ($6::text IS NULL OR pf.program_key=$6)
-          AND ($7::text IS NULL OR pf.project_key=$7)
-          AND ($8::text IS NULL OR pf.category_candidate_key=$8)
-          AND ($9::text IS NULL OR ($9='unassigned' AND pf.category_assignment_status IS NULL) OR pf.category_assignment_status=$9)
-          AND ($10::text IS NULL OR pf.statement_kind=$10)
-          AND ($11::text IS NULL OR pf.amount_type=$11)
-          AND ($12::text IS NULL OR pf.aggregation_role=$12)
-          AND ($13::text IS NULL OR coalesce(pf.display_label,pf.raw_label) ILIKE '%' || $13 || '%'
-               OR pf.statement_title ILIKE '%' || $13 || '%' OR coalesce(pf.project_name,'') ILIKE '%' || $13 || '%')
-        ORDER BY pf.source_document_id,pf.statement_id,pf.row_order,pf.amount_type,pf.fact_id LIMIT $14 OFFSET $15`,
-      [municipality.snapshot_id, documentId, period, entity, department, program, project, category, categoryStatus,
+          AND ($5::text IS NULL OR pf.document_section_id IN (
+            WITH RECURSIVE section_tree AS (
+              SELECT id FROM budget.document_section WHERE document_id=pf.source_document_id AND section_key=$5
+              UNION ALL
+              SELECT child.id FROM budget.document_section child JOIN section_tree parent ON child.parent_id=parent.id
+            ) SELECT id FROM section_tree
+          ))
+          AND ($6::text IS NULL OR pf.effective_organization_unit_key=$6 OR pf.effective_organization_unit_id::text=$6)
+          AND ($7::text IS NULL OR pf.program_key=$7)
+          AND ($8::text IS NULL OR pf.project_key=$8)
+          AND ($9::text IS NULL OR pf.category_candidate_key=$9)
+          AND ($10::text IS NULL OR ($10='unassigned' AND pf.category_assignment_status IS NULL) OR pf.category_assignment_status=$10)
+          AND ($11::text IS NULL OR pf.statement_kind=$11)
+          AND ($12::text IS NULL OR pf.amount_type=$12)
+          AND ($13::text IS NULL OR pf.aggregation_role=$13)
+          AND ($14::text IS NULL OR coalesce(pf.display_label,pf.raw_label) ILIKE '%' || $14 || '%'
+               OR pf.statement_title ILIKE '%' || $14 || '%' OR coalesce(pf.project_name,'') ILIKE '%' || $14 || '%')
+        ORDER BY pf.source_document_id,pf.statement_id,pf.row_order,pf.amount_type,pf.observation_id LIMIT $15 OFFSET $16`,
+      [municipality.snapshot_id, documentId, period, entity, section, department, program, project, category, categoryStatus,
         statementKind, amountType, aggregationRole, search, pagination.limit + 1, pagination.cursor],
     );
-    const filteredFactCount = rows[0]?.filtered_fact_count || 0;
-    const page = budgetPage(rows.map(({ filtered_fact_count, ...row }) => row), pagination);
-    const warnings = selectBudgetWarnings(await loadBudgetWarnings(municipality.snapshot_id), { factIds: page.data.map((row) => row.fact_id) });
+    const filteredObservationCount = rows[0]?.filtered_observation_count || 0;
+    const page = budgetPage(rows.map(({ filtered_observation_count, ...row }) => row), pagination);
+    const warnings = selectBudgetWarnings(await loadBudgetWarnings(municipality.snapshot_id), { observationIds: page.data.map((row) => row.observation_id) });
     await sendJson(response, budgetPayload(page.data, {
-      municipality: slug, ...(documentId ? { document: String(documentId) } : {}), ...(period ? { period } : {}),
+      municipality: slug, ...(documentId ? { document: String(documentId) } : {}), ...(period ? { period } : {}), ...(section ? { section } : {}),
       ...(department ? { department } : {}), ...(program ? { program } : {}), ...(project ? { project } : {}),
       ...(category ? { category } : {}), ...(categoryStatus ? { category_status: categoryStatus } : {}),
       ...(statementKind ? { statement_kind: statementKind } : {}), ...(amountType ? { amount_type: amountType } : {}),
       ...(aggregationRole ? { aggregation_role: aggregationRole } : {}), ...(search ? { q: search } : {}),
     }, warnings, page.pagination, {
-      coverage: { filtered_fact_count: filteredFactCount },
+      coverage: { filtered_observation_count: filteredObservationCount },
       provenance: { snapshot_id: municipality.snapshot_id, release_label: municipality.release_label, taxonomy_version: municipality.taxonomy_version },
     })); return true;
   }
@@ -2656,10 +2737,12 @@ async function handleBudgetApi(request, response, url) {
     const documentId = Number(sourcePageMatch[1]);
     const pageNumber = Number(sourcePageMatch[2]);
     const { rows } = await pool.query(
-      `SELECT d.id,d.title,d.local_path,d.sha256,d.page_count
-         FROM budget.publication_snapshot ps
-         JOIN budget.source_document d ON d.id=ANY(ps.source_document_ids)
-        WHERE ps.id=$1 AND d.id=$2`,
+      `SELECT DISTINCT d.id,d.title,d.local_path,d.sha256,d.page_count
+         FROM budget.publication_snapshot ps JOIN budget.source_document d ON d.id=$2
+        WHERE ps.id=$1 AND (d.id=ANY(ps.source_document_ids) OR EXISTS (
+          SELECT 1 FROM budget.fact f JOIN budget.document_section_fact dsf ON dsf.fact_id=f.id
+          JOIN budget.document_section ds ON ds.id=dsf.document_section_id
+          WHERE f.source_document_id=d.id AND ds.document_id=ANY(ps.source_document_ids)))`,
       [municipality.snapshot_id, documentId],
     );
     const document = rows[0];
@@ -2705,14 +2788,14 @@ async function handleBudgetApi(request, response, url) {
               max(pf.effective_organization_unit_key) AS department_key,
               max(pf.effective_organization_unit_name) AS department_name,
               array_agg(DISTINCT pf.program_key) FILTER (WHERE pf.program_key IS NOT NULL) AS program_keys,
-              count(DISTINCT pf.fact_id)::integer AS fact_count,
+              count(DISTINCT pf.observation_id)::integer AS observation_count,
               sum(pf.value_numeric) FILTER (WHERE pf.amount_type='gross') AS gross_amount,
               sum(pf.value_numeric) FILTER (WHERE pf.amount_type='funding_deduction') AS external_funding,
               sum(pf.value_numeric) FILTER (WHERE pf.amount_type='net') AS net_amount
          FROM budget.capital_project cp
          JOIN budget.reporting_entity re ON re.id=cp.reporting_entity_id
-         JOIN budget.capital_project_fact cpf ON cpf.capital_project_id=cp.id
-         JOIN budget.v_published_facts pf ON pf.fact_id=cpf.fact_id AND pf.snapshot_id=$1
+         JOIN budget.capital_project_observation cpf ON cpf.capital_project_id=cp.id
+         JOIN budget.v_published_financial_observations pf ON pf.observation_id=cpf.observation_id AND pf.snapshot_id=$1
         WHERE ($2::bigint IS NULL OR pf.source_document_id=$2)
           AND ($3::text IS NULL OR pf.fiscal_period_label=$3)
           AND ($4::text IS NULL OR pf.effective_organization_unit_key=$4 OR pf.effective_organization_unit_id::text=$4)
@@ -2736,23 +2819,29 @@ async function handleBudgetApi(request, response, url) {
          LEFT JOIN budget.project_organization_assignment poa ON poa.capital_project_id=cp.id AND poa.assignment_status='approved'
          LEFT JOIN budget.organization_unit ou ON ou.id=poa.organization_unit_id
         WHERE cp.municipality_id=$1 AND cp.project_key=$2
-          AND EXISTS (SELECT 1 FROM budget.capital_project_fact cpf JOIN budget.v_published_facts pf ON pf.fact_id=cpf.fact_id WHERE cpf.capital_project_id=cp.id AND pf.snapshot_id=$3)`,
+          AND EXISTS (SELECT 1 FROM budget.capital_project_observation cpf JOIN budget.v_published_financial_observations pf ON pf.observation_id=cpf.observation_id WHERE cpf.capital_project_id=cp.id AND pf.snapshot_id=$3)`,
       [municipality.id, projectKey, municipality.snapshot_id],
     );
     if (!rows[0]) { response.writeHead(404, { "content-type": "application/json; charset=utf-8" }); response.end(JSON.stringify({ error: "Published project not found." })); return true; }
     const project = rows[0];
-    const [factsResult, referencesResult, profilesResult] = await Promise.all([
-      pool.query(`SELECT pf.* FROM budget.capital_project_fact cpf JOIN budget.v_published_facts pf ON pf.fact_id=cpf.fact_id WHERE cpf.capital_project_id=$1 AND pf.snapshot_id=$2 ORDER BY pf.start_date,pf.fact_id`, [project.id, municipality.snapshot_id]),
+    const [observationsResult, referencesResult, factsResult] = await Promise.all([
+      pool.query(`SELECT pf.*,dp.id AS document_period_id,dp.raw_column_label,dp.column_order,dp.period_role
+                    FROM budget.capital_project_observation cpf
+                    JOIN budget.v_published_financial_observations pf ON pf.observation_id=cpf.observation_id
+                    JOIN budget.financial_observation display_observation ON display_observation.id=pf.observation_id
+                    JOIN budget.document_period dp ON dp.id=display_observation.document_period_id
+                   WHERE cpf.capital_project_id=$1 AND pf.snapshot_id=$2
+                   ORDER BY pf.start_date,dp.column_order,pf.observation_id`, [project.id, municipality.snapshot_id]),
       pool.query(`SELECT r.raw_label,r.reference_kind,r.document_adoption_state,r.identity_evidence,r.review_status,d.id AS document_id,d.title AS document_title FROM budget.capital_project_reference r JOIN budget.source_document d ON d.id=r.document_id JOIN budget.publication_snapshot ps ON ps.id=$2 AND r.document_id=ANY(ps.source_document_ids) WHERE r.capital_project_id=$1 AND r.review_status='approved' ORDER BY d.id,r.id`, [project.id, municipality.snapshot_id]),
-      pool.query(`SELECT p.field_key,p.raw_value,p.normalized_value,d.id AS document_id,d.title AS document_title,sp.pdf_page_number AS page_number FROM budget.capital_project_profile p JOIN budget.source_document d ON d.id=p.document_id LEFT JOIN budget.source_page sp ON sp.id=p.source_page_id JOIN budget.publication_snapshot ps ON ps.id=$2 AND p.document_id=ANY(ps.source_document_ids) WHERE p.capital_project_id=$1 AND p.review_status='approved' ORDER BY d.id,p.field_key`, [project.id, municipality.snapshot_id]),
+      pool.query(`SELECT * FROM budget.v_published_facts WHERE capital_project_id=$1 AND snapshot_id=$2 ORDER BY edition_document_id,fact_display_order,fact_id`, [project.id, municipality.snapshot_id]),
     ]);
     delete project.id;
-    await sendJson(response, budgetPayload({ ...project, facts: factsResult.rows, references: referencesResult.rows, profiles: profilesResult.rows }, { municipality: slug }, [], null)); return true;
+    await sendJson(response, budgetPayload({ ...project, facts: factsResult.rows, observations: observationsResult.rows, references: referencesResult.rows }, { municipality: slug }, [], null)); return true;
   }
   if (url.pathname === "/api/budgets/periods") {
     budgetQuery(url, ["municipality", "limit", "cursor"]);
     const pagination = budgetPagination(url);
-    const { rows } = await pool.query(`SELECT DISTINCT fiscal_period_label AS label,start_date,end_date,amount_type FROM budget.v_published_facts WHERE snapshot_id=$1 ORDER BY start_date,amount_type,label LIMIT $2 OFFSET $3`, [municipality.snapshot_id, pagination.limit + 1, pagination.cursor]);
+    const { rows } = await pool.query(`SELECT DISTINCT fiscal_period_label AS label,start_date,end_date,amount_type FROM budget.v_published_financial_observations WHERE snapshot_id=$1 ORDER BY start_date,amount_type,label LIMIT $2 OFFSET $3`, [municipality.snapshot_id, pagination.limit + 1, pagination.cursor]);
     const page = budgetPage(rows, pagination);
     await sendJson(response, budgetPayload(page.data, { municipality: slug }, [], page.pagination)); return true;
   }
@@ -2760,21 +2849,21 @@ async function handleBudgetApi(request, response, url) {
     budgetQuery(url, ["municipality", "period", "limit", "cursor"]);
     const period = budgetFilter(url, "period");
     const pagination = budgetPagination(url);
-    const { rows } = await pool.query(`SELECT d.id,d.title,d.sha256,count(pf.fact_id)::integer AS fact_count FROM budget.publication_snapshot ps JOIN unnest(ps.source_document_ids) source_id ON true JOIN budget.source_document d ON d.id=source_id LEFT JOIN budget.statement s ON s.document_id=d.id LEFT JOIN budget.line_item li ON li.statement_id=s.id LEFT JOIN budget.fact f ON f.line_item_id=li.id LEFT JOIN budget.publication_fact pf ON pf.snapshot_id=ps.id AND pf.fact_id=f.id WHERE ps.id=$1 AND ($2::text IS NULL OR EXISTS (SELECT 1 FROM budget.v_published_facts published_fact JOIN budget.statement published_statement ON published_statement.id=published_fact.statement_id WHERE published_fact.snapshot_id=ps.id AND published_statement.document_id=d.id AND published_fact.fiscal_period_label=$2)) GROUP BY d.id,d.title,d.sha256 ORDER BY d.id LIMIT $3 OFFSET $4`, [municipality.snapshot_id, period, pagination.limit + 1, pagination.cursor]);
+    const { rows } = await pool.query(`SELECT d.id,d.title,d.sha256,count(pf.observation_id)::integer AS observation_count FROM budget.publication_snapshot ps JOIN unnest(ps.source_document_ids) source_id ON true JOIN budget.source_document d ON d.id=source_id LEFT JOIN budget.statement s ON s.document_id=d.id LEFT JOIN budget.line_item li ON li.statement_id=s.id LEFT JOIN budget.financial_observation f ON f.line_item_id=li.id LEFT JOIN budget.publication_observation pf ON pf.snapshot_id=ps.id AND pf.observation_id=f.id WHERE ps.id=$1 AND ($2::text IS NULL OR EXISTS (SELECT 1 FROM budget.v_published_financial_observations published_observation JOIN budget.statement published_statement ON published_statement.id=published_observation.statement_id WHERE published_observation.snapshot_id=ps.id AND published_statement.document_id=d.id AND published_observation.fiscal_period_label=$2)) GROUP BY d.id,d.title,d.sha256 ORDER BY d.id LIMIT $3 OFFSET $4`, [municipality.snapshot_id, period, pagination.limit + 1, pagination.cursor]);
     const page = budgetPage(rows, pagination);
     const warnings = selectBudgetWarnings(await loadBudgetWarnings(municipality.snapshot_id), { documentIds: page.data.map((row) => row.id) });
     await sendJson(response, budgetPayload(page.data, { municipality: slug, ...(period ? { period } : {}) }, warnings, page.pagination)); return true;
   }
-  if (factMatch) {
+  if (observationMatch) {
     budgetQuery(url, ["municipality"]);
-    const { rows } = await pool.query(`SELECT * FROM budget.v_published_facts WHERE snapshot_id=$1 AND fact_id=$2`, [municipality.snapshot_id, Number(factMatch[1])]);
-    if (!rows[0]) { response.writeHead(404, { "content-type": "application/json; charset=utf-8" }); response.end(JSON.stringify({ error: "Budget fact not found." })); return true; }
-    const fact = rows[0];
+    const { rows } = await pool.query(`SELECT * FROM budget.v_published_financial_observations WHERE snapshot_id=$1 AND observation_id=$2`, [municipality.snapshot_id, Number(observationMatch[1])]);
+    if (!rows[0]) { response.writeHead(404, { "content-type": "application/json; charset=utf-8" }); response.end(JSON.stringify({ error: "Budget observation not found." })); return true; }
+    const observation = rows[0];
     const { rows: citations } = await pool.query(
       `SELECT fs.source_cell_id,fs.source_role,c.raw_text,c.bbox,r.row_key,r.row_index,t.id AS source_table_id,t.table_key,
               d.id AS document_id,d.title AS document_title,
               array_agg(DISTINCT sp.pdf_page_number ORDER BY sp.pdf_page_number) AS page_numbers
-         FROM budget.fact_source fs
+         FROM budget.financial_observation_source fs
          JOIN budget.source_table_cell c ON c.id=fs.source_cell_id
          JOIN budget.source_table_row r ON r.id=c.source_row_id
          JOIN budget.source_table t ON t.id=r.source_table_id
@@ -2782,15 +2871,15 @@ async function handleBudgetApi(request, response, url) {
          JOIN budget.publication_snapshot ps ON ps.id=$2 AND d.id=ANY(ps.source_document_ids)
          LEFT JOIN budget.source_table_page stp ON stp.source_table_id=t.id
          LEFT JOIN budget.source_page sp ON sp.id=stp.source_page_id
-        WHERE fs.fact_id=$1
+        WHERE fs.observation_id=$1
         GROUP BY fs.source_cell_id,fs.source_role,fs.source_order,c.raw_text,c.bbox,r.row_key,r.row_index,t.id,t.table_key,d.id,d.title
         ORDER BY fs.source_order,fs.source_cell_id`,
-      [fact.fact_id, municipality.snapshot_id],
+      [observation.observation_id, municipality.snapshot_id],
     );
-    const warnings = selectBudgetWarnings(await loadBudgetWarnings(municipality.snapshot_id), { factIds: [fact.fact_id] });
-    await sendJson(response, budgetPayload({ ...fact, citations }, { municipality: slug }, warnings, null, { provenance: { snapshot_id: municipality.snapshot_id, release_label: municipality.release_label, taxonomy_version: municipality.taxonomy_version } })); return true;
+    const warnings = selectBudgetWarnings(await loadBudgetWarnings(municipality.snapshot_id), { observationIds: [observation.observation_id] });
+    await sendJson(response, budgetPayload({ ...observation, citations }, { municipality: slug }, warnings, null, { provenance: { snapshot_id: municipality.snapshot_id, release_label: municipality.release_label, taxonomy_version: municipality.taxonomy_version } })); return true;
   }
-  if (url.pathname === "/api/budgets/download.csv") {
+  if (url.pathname === "/api/budgets/observations.csv") {
     const documentId = budgetPositiveIntegerFilter(url, "document");
     const period = budgetFilter(url, "period");
     const statementKind = budgetFilter(url, "statement_kind");
@@ -2800,22 +2889,22 @@ async function handleBudgetApi(request, response, url) {
     const program = budgetFilter(url, "program");
     const project = budgetFilter(url, "project");
     const pagination = budgetPagination(url);
-    const { rows } = await pool.query(`SELECT fact_id,source_document_id,fiscal_period_label,statement_kind,statement_title,
+    const { rows } = await pool.query(`SELECT observation_id,source_document_id,fiscal_period_label,statement_kind,statement_title,
         raw_label,display_label,amount_type,measure_unit,value_numeric,value_text,value_state,aggregation_role,
         effective_organization_unit_key AS department_key,program_key,project_key,category_candidate_key,category_assignment_status
-      FROM budget.v_published_facts WHERE snapshot_id=$1
+      FROM budget.v_published_financial_observations WHERE snapshot_id=$1
         AND ($2::bigint IS NULL OR source_document_id=$2) AND ($3::text IS NULL OR fiscal_period_label=$3)
         AND ($4::text IS NULL OR statement_kind=$4) AND ($5::text IS NULL OR amount_type=$5)
         AND ($6::text IS NULL OR measure_unit=$6)
         AND ($7::text IS NULL OR effective_organization_unit_key=$7 OR effective_organization_unit_id::text=$7)
         AND ($8::text IS NULL OR program_key=$8) AND ($9::text IS NULL OR project_key=$9)
-      ORDER BY source_document_id,statement_id,row_order,fact_id LIMIT $10 OFFSET $11`,
+      ORDER BY source_document_id,statement_id,row_order,observation_id LIMIT $10 OFFSET $11`,
       [municipality.snapshot_id, documentId, period, statementKind, amountType, measureUnit, department, program, project, pagination.limit + 1, pagination.cursor]);
     const page = budgetPage(rows, pagination);
-    const warnings = selectBudgetWarnings(await loadBudgetWarnings(municipality.snapshot_id), { factIds: page.data.map((row) => row.fact_id) });
-    const header = Object.keys(page.data[0] || { fact_id: "" });
+    const warnings = selectBudgetWarnings(await loadBudgetWarnings(municipality.snapshot_id), { observationIds: page.data.map((row) => row.observation_id) });
+    const header = Object.keys(page.data[0] || { observation_id: "" });
     const quote = (value) => `"${String(value ?? "").replaceAll('"', '""')}"`;
-    response.writeHead(200, { "content-type": "text/csv; charset=utf-8", "content-disposition": "attachment; filename=budget-facts.csv", "x-next-cursor": page.pagination.next_cursor || "", "x-budget-warnings": JSON.stringify(warnings) });
+    response.writeHead(200, { "content-type": "text/csv; charset=utf-8", "content-disposition": "attachment; filename=budget-financial-observations.csv", "x-next-cursor": page.pagination.next_cursor || "", "x-budget-warnings": JSON.stringify(warnings) });
     response.end([header.join(","), ...page.data.map((row) => header.map((key) => quote(row[key])).join(","))].join("\n")); return true;
   }
   if (url.pathname === "/api/budgets/compare") {
@@ -2840,50 +2929,50 @@ async function handleBudgetApi(request, response, url) {
       throw error;
     }
     const { rows } = await pool.query(
-      `SELECT current_fact.reporting_entity_name,current_fact.statement_key,current_fact.statement_title,
-              current_fact.line_key,current_fact.display_label,current_fact.raw_label,current_fact.category_key,
-              current_fact.amount_type,current_fact.measure_unit,
-              prior_fact.fact_id AS prior_fact_id,prior_fact.value_numeric AS prior_value,
-              current_fact.fact_id AS current_fact_id,current_fact.value_numeric AS current_value,
-              current_fact.value_numeric-prior_fact.value_numeric AS numeric_change,
-              CASE WHEN prior_fact.value_numeric=0 THEN NULL
-                   ELSE ((current_fact.value_numeric-prior_fact.value_numeric)/abs(prior_fact.value_numeric))*100 END AS percentage_change,
-              count(*) OVER()::integer AS matched_fact_count
-         FROM budget.v_published_facts current_fact
-         JOIN budget.v_published_facts prior_fact
-           ON prior_fact.snapshot_id=current_fact.snapshot_id
-          AND prior_fact.taxonomy_version=current_fact.taxonomy_version
-          AND prior_fact.municipality_id=current_fact.municipality_id
-          AND prior_fact.reporting_entity_id=current_fact.reporting_entity_id
-          AND prior_fact.statement_key=current_fact.statement_key
-          AND prior_fact.line_key=current_fact.line_key
-          AND prior_fact.amount_type=current_fact.amount_type
-          AND prior_fact.measure_unit=current_fact.measure_unit
-        WHERE current_fact.snapshot_id=$1
-          AND current_fact.fiscal_period_label=$2 AND prior_fact.fiscal_period_label=$3
-          AND current_fact.aggregation_role='detail' AND prior_fact.aggregation_role='detail'
-          AND current_fact.value_numeric IS NOT NULL AND prior_fact.value_numeric IS NOT NULL
-          AND ($4::bigint IS NULL OR current_fact.reporting_entity_id=$4)
-          AND ($5::text IS NULL OR current_fact.amount_type=$5)
-          AND ($6::text IS NULL OR current_fact.category_key=$6)
-        ORDER BY abs(current_fact.value_numeric-prior_fact.value_numeric) DESC,current_fact.fact_id
+      `SELECT current_observation.reporting_entity_name,current_observation.statement_key,current_observation.statement_title,
+              current_observation.line_key,current_observation.display_label,current_observation.raw_label,current_observation.category_key,
+              current_observation.amount_type,current_observation.measure_unit,
+              prior_observation.observation_id AS prior_observation_id,prior_observation.value_numeric AS prior_value,
+              current_observation.observation_id AS current_observation_id,current_observation.value_numeric AS current_value,
+              current_observation.value_numeric-prior_observation.value_numeric AS numeric_change,
+              CASE WHEN prior_observation.value_numeric=0 THEN NULL
+                   ELSE ((current_observation.value_numeric-prior_observation.value_numeric)/abs(prior_observation.value_numeric))*100 END AS percentage_change,
+              count(*) OVER()::integer AS matched_observation_count
+         FROM budget.v_published_financial_observations current_observation
+         JOIN budget.v_published_financial_observations prior_observation
+           ON prior_observation.snapshot_id=current_observation.snapshot_id
+          AND prior_observation.taxonomy_version=current_observation.taxonomy_version
+          AND prior_observation.municipality_id=current_observation.municipality_id
+          AND prior_observation.reporting_entity_id=current_observation.reporting_entity_id
+          AND prior_observation.statement_key=current_observation.statement_key
+          AND prior_observation.line_key=current_observation.line_key
+          AND prior_observation.amount_type=current_observation.amount_type
+          AND prior_observation.measure_unit=current_observation.measure_unit
+        WHERE current_observation.snapshot_id=$1
+          AND current_observation.fiscal_period_label=$2 AND prior_observation.fiscal_period_label=$3
+          AND current_observation.aggregation_role='detail' AND prior_observation.aggregation_role='detail'
+          AND current_observation.value_numeric IS NOT NULL AND prior_observation.value_numeric IS NOT NULL
+          AND ($4::bigint IS NULL OR current_observation.reporting_entity_id=$4)
+          AND ($5::text IS NULL OR current_observation.amount_type=$5)
+          AND ($6::text IS NULL OR current_observation.category_key=$6)
+        ORDER BY abs(current_observation.value_numeric-prior_observation.value_numeric) DESC,current_observation.observation_id
         LIMIT $7 OFFSET $8`,
       [municipality.snapshot_id, currentPeriod, priorPeriod, entity, metric, category, pagination.limit + 1, pagination.cursor],
     );
-    const matchedFactCount = rows[0]?.matched_fact_count || 0;
-    const page = budgetPage(rows.map(({ matched_fact_count, ...row }) => row), pagination);
+    const matchedObservationCount = rows[0]?.matched_observation_count || 0;
+    const page = budgetPage(rows.map(({ matched_observation_count, ...row }) => row), pagination);
     const [{ rows: coverageRows }] = await Promise.all([pool.query(
       `SELECT
          count(*) FILTER (WHERE fiscal_period_label=$2 AND aggregation_role='detail' AND value_numeric IS NOT NULL
-           AND ($4::bigint IS NULL OR reporting_entity_id=$4) AND ($5::text IS NULL OR amount_type=$5) AND ($6::text IS NULL OR category_key=$6))::integer AS current_fact_count,
+           AND ($4::bigint IS NULL OR reporting_entity_id=$4) AND ($5::text IS NULL OR amount_type=$5) AND ($6::text IS NULL OR category_key=$6))::integer AS current_observation_count,
          count(*) FILTER (WHERE fiscal_period_label=$3 AND aggregation_role='detail' AND value_numeric IS NOT NULL
-           AND ($4::bigint IS NULL OR reporting_entity_id=$4) AND ($5::text IS NULL OR amount_type=$5) AND ($6::text IS NULL OR category_key=$6))::integer AS prior_fact_count
-       FROM budget.v_published_facts WHERE snapshot_id=$1`, [municipality.snapshot_id, currentPeriod, priorPeriod, entity, metric, category],
+           AND ($4::bigint IS NULL OR reporting_entity_id=$4) AND ($5::text IS NULL OR amount_type=$5) AND ($6::text IS NULL OR category_key=$6))::integer AS prior_observation_count
+       FROM budget.v_published_financial_observations WHERE snapshot_id=$1`, [municipality.snapshot_id, currentPeriod, priorPeriod, entity, metric, category],
     )]);
     const filters = { municipality: slug, prior_period: priorPeriod, current_period: currentPeriod, basis, ...(entity ? { entity } : {}), ...(metric ? { metric } : {}), ...(category ? { category } : {}) };
-    await sendJson(response, budgetPayload(page.data, filters, ["exact_identity_matches_only", "unmatched_facts_are_not_zero"], page.pagination, {
+    await sendJson(response, budgetPayload(page.data, filters, ["exact_identity_matches_only", "unmatched_observations_are_not_zero"], page.pagination, {
       periods: [priorPeriod, currentPeriod], units: { basis: "nominal", percentage_change: "suppressed_when_prior_is_zero" },
-      coverage: { ...coverageRows[0], matched_fact_count: matchedFactCount },
+      coverage: { ...coverageRows[0], matched_observation_count: matchedObservationCount },
       provenance: { snapshot_id: municipality.snapshot_id, release_label: municipality.release_label, taxonomy_version: municipality.taxonomy_version },
     })); return true;
   }
@@ -2905,7 +2994,7 @@ async function handleBudgetApi(request, response, url) {
     const entityId = filters.entity ? budgetPositiveIntegerFilter(url, "entity") : null;
     const pagination = budgetPagination(url);
     const { rows } = await pool.query(
-      `SELECT * FROM budget.v_published_facts
+      `SELECT * FROM budget.v_published_financial_observations
         WHERE snapshot_id=$1 AND statement_kind=ANY($2)
           AND ($3::bigint IS NULL OR source_document_id=$3)
           AND ($4::text IS NULL OR fiscal_period_label=$4)
@@ -2915,14 +3004,14 @@ async function handleBudgetApi(request, response, url) {
           AND ($8::text IS NULL OR effective_organization_unit_key=$8 OR effective_organization_unit_id::text=$8)
           AND ($9::text IS NULL OR program_key=$9)
           AND ($10::text IS NULL OR project_key=$10)
-        ORDER BY source_document_id,statement_id,row_order,fact_id LIMIT $11 OFFSET $12`,
+        ORDER BY source_document_id,statement_id,row_order,observation_id LIMIT $11 OFFSET $12`,
       [municipality.snapshot_id, families[url.pathname], documentId, filters.period || null, entityId,
         filters.category || filters.revenue_category || filters.funding_category || null, filters.amount_type || null,
         filters.department || null, filters.program || null, filters.project || null, pagination.limit + 1, pagination.cursor],
     );
     const page = budgetPage(rows, pagination);
-    const warnings = selectBudgetWarnings(await loadBudgetWarnings(municipality.snapshot_id), { factIds: page.data.map((row) => row.fact_id) });
-    const unavailable = url.pathname === "/api/budgets/reserves" && !page.data.length ? ["no_published_reserve_facts"] : [];
+    const warnings = selectBudgetWarnings(await loadBudgetWarnings(municipality.snapshot_id), { observationIds: page.data.map((row) => row.observation_id) });
+    const unavailable = url.pathname === "/api/budgets/reserves" && !page.data.length ? ["no_published_reserve_observations"] : [];
     await sendJson(response, budgetPayload(page.data, { municipality: slug, ...filters }, [...warnings, ...unavailable], page.pagination)); return true;
   }
   if (url.pathname === "/api/budgets/summary") {
@@ -2931,8 +3020,8 @@ async function handleBudgetApi(request, response, url) {
     const entity = budgetPositiveIntegerFilter(url, "entity");
     const pagination = budgetPagination(url);
     const { rows } = await pool.query(
-      `SELECT statement_kind,amount_type,measure_unit,count(*)::integer AS input_fact_count,sum(value_numeric) AS value_numeric
-         FROM budget.v_published_facts
+      `SELECT statement_kind,amount_type,measure_unit,count(*)::integer AS input_observation_count,sum(value_numeric) AS value_numeric
+         FROM budget.v_published_financial_observations
         WHERE snapshot_id=$1 AND aggregation_role='detail' AND value_numeric IS NOT NULL
           AND ($2::bigint IS NULL OR source_document_id=$2)
           AND ($3::text IS NULL OR fiscal_period_label=$3) AND ($4::bigint IS NULL OR reporting_entity_id=$4)
@@ -2941,7 +3030,7 @@ async function handleBudgetApi(request, response, url) {
       [municipality.snapshot_id, documentId, period, entity, pagination.limit + 1, pagination.cursor],
     );
     const page = budgetPage(rows, pagination);
-    await sendJson(response, budgetPayload(page.data, { municipality: slug, ...(documentId ? { document: String(documentId) } : {}), ...(period ? { period } : {}), ...(entity ? { entity: String(entity) } : {}) }, ["summary_contains_non_duplicated_detail_facts_only"], page.pagination)); return true;
+    await sendJson(response, budgetPayload(page.data, { municipality: slug, ...(documentId ? { document: String(documentId) } : {}), ...(period ? { period } : {}), ...(entity ? { entity: String(entity) } : {}) }, ["summary_contains_non_duplicated_detail_observations_only"], page.pagination)); return true;
   }
   return false;
 }
@@ -5974,7 +6063,9 @@ function htmlWithBase(body, baseHref) {
 }
 
 async function serveStatic(response, requestPath) {
-  const routeEntrypoint = routeEntrypoints.get(requestPath);
+  const routeEntrypoint = routeEntrypoints.get(requestPath) || (requestPath.startsWith("/budgets/")
+    ? { file: "/ui_kits/budgets/index.html", baseHref: "/ui_kits/budgets/" }
+    : null);
   const safePath = routeEntrypoint?.file || (requestPath === "/" ? "/index.html" : requestPath);
   const absolute = path.resolve(publicDir, `.${safePath}`);
   if (!absolute.startsWith(publicDir)) {

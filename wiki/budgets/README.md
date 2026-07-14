@@ -21,7 +21,7 @@ Charlottetown is the prototype municipality. The initial source set is the three
 | Page | Purpose |
 | --- | --- |
 | [Requirements](./requirements.md) | Product scope, users, functional requirements, rules, edge cases, and acceptance criteria. |
-| [Database schema](./database-schema.md) | Proposed PostgreSQL `budget` schema, keys, fact model, provenance, and publication views. |
+| [Database schema](./database-schema.md) | Applied PostgreSQL `budget` schema, contextual-fact model, financial observations, provenance, and publication views. |
 | [API and UI contract](./api-and-ui-contract.md) | Website routes, read APIs, filters, visualizations, and response behavior. |
 | [Implementation and test plan](./implementation-plan.md) | Ordered eight-week prototype plan, gates, test strategy, and completion criteria. |
 | [Representative-table schema spike](./representative-table-schema-spike.md) | Source-pattern mapping, confirmed schema fits, blocking gaps, and migration gate status. |
@@ -50,14 +50,15 @@ Charlottetown is the prototype municipality. The initial source set is the three
 | [Normalized category taxonomy proposal](./normalized-category-taxonomy-proposal.md) | Reviewed Charlottetown vocabulary candidate, versioned assignment architecture, mapping cohorts, review register, and approval gates. |
 | [Dedicated budget page views plan](./dedicated-page-views-plan.md) | Review-gated year, department, project, and municipal-analysis route plan with data-contract prerequisites and QA gates. |
 | [Budget web and taxonomy implementation status](./budget-web-taxonomy-implementation-status.md) | Applied migration, snapshot revision, assignments, subsequent forecasts, filter enforcement, browser-review pages, counts, and known limits. |
+| [Budget content and observation redesign status](./content-and-observation-redesign-status.md) | Breaking fact/observation rename, canonical structure, contextual extraction, appendix recovery, UI redesign, counts, and verification. |
 
 ## Current Evidence
 
 The first pass of the 2026/2027 PDF found 154 pages, 114 table or project-profile candidates, 3,233 raw rows, and 2,420 detected value tokens. The document includes overview charts with source tables, operating summaries and detailed breakdowns, third-party facility budgets, capital schedules and project profiles, property and utility rates, assessment calculations, and debt schedules.
 
-The first Charlottetown publication snapshot is published with 6,256 approved facts from the three financial-plan documents. Raw discovery artifacts remain non-publication inputs; public APIs must read through `budget.v_published_facts`.
+The current Charlottetown publication snapshot contains 6,381 approved financial observations from the three financial-plan documents. Public financial APIs read through `budget.v_published_financial_observations`; contextual facts read through `budget.v_published_facts`.
 
-The public web implementation now scopes `/budgets` to one annual PDF, displays separate proposed revenue and expense tables, source totals, capital, tax/rate, debt, external-funding, and exact subsequent-forecast evidence, and provides `/budgets/facts` for assignment review. Department, program, and project filters are enforced. Dedicated cross-year department, project-detail, municipal-analysis, normalized-category comparison, and source-cell highlighting work remains deferred.
+The public web implementation uses the 2026/2027 table-of-contents pattern across all three editions. It separates operating, capital, and appendices; combines department facts with operating observations; combines project-profile facts with capital observations; standardizes strategic-plan facts from the standalone plan; and reserves `/budgets/facts` for contextual content. Numeric records use `/budgets/observations`.
 
 Week 1 profiling is complete for all 392 pages. See the [three-year Charlottetown source profile](../charlottetown/sources/budget-three-year-source-profile.md) for the source-pattern matrix and representative schema-spike tables.
 
@@ -73,6 +74,9 @@ The prior-year normalized imports and source-fidelity QA are complete. The [budg
 - Raw table, row, and value IDs use the contract `<municipality_key>_budget_<fiscal_period_slug>_pNNN`, with rows and values extending the same stem as `_rNNN` and `_vNN`. For Charlottetown the current municipality key is `ctown`, and fiscal-period slugs use underscores, for example `ctown_budget_2024_2025_p014`.
 - Budget extraction scripts that generate reusable raw artifacts must accept or derive the municipality key and fiscal period instead of hard-coding `ctown` or `2026_2027`. Document-specific 2026/2027 normalization, reconciliation, import, validation, and test scripts may retain `ctown_budget_2026_2027` controls until they are refactored behind approved mapping packages.
 - Reported values and derived values remain distinguishable.
+- `fact` exclusively means source-authored contextual narrative, attribute, or list content. Financial values are observations.
+- Universal budget explanations are editorial guides, not facts.
+- Operating, capital, and appendix sections remain separate in schema, API, and UI.
 - Cross-municipality comparisons require approved normalized categories and visible coverage differences.
 - Raw source labels, cells, table structure, and page coordinates remain available for audit.
 - The initial public release is read-only. Extraction review remains an internal validation workflow.

@@ -69,7 +69,7 @@ def main() -> int:
 
             cur.execute(
                 """SELECT count(*)
-                   FROM budget.fact f
+                   FROM budget.financial_observation f
                    JOIN budget.line_item li ON li.id=f.line_item_id
                    JOIN budget.statement s ON s.id=li.statement_id
                   WHERE s.document_id = ANY(%s) AND f.review_status='approved'""",
@@ -86,9 +86,9 @@ def main() -> int:
             )
             snapshot_id = int(cur.fetchone()[0])
             cur.execute(
-                """INSERT INTO budget.publication_fact(snapshot_id,fact_id)
+                """INSERT INTO budget.publication_observation(snapshot_id,observation_id)
                    SELECT %s,f.id
-                   FROM budget.fact f
+                   FROM budget.financial_observation f
                    JOIN budget.line_item li ON li.id=f.line_item_id
                    JOIN budget.statement s ON s.id=li.statement_id
                   WHERE s.document_id = ANY(%s) AND f.review_status='approved'""",
@@ -96,7 +96,7 @@ def main() -> int:
             )
             if cur.rowcount != expected_fact_count:
                 raise RuntimeError(f"Expected {expected_fact_count} publication facts, inserted {cur.rowcount}")
-            cur.execute("SELECT count(*) FROM budget.publication_fact WHERE snapshot_id=%s", (snapshot_id,))
+            cur.execute("SELECT count(*) FROM budget.publication_observation WHERE snapshot_id=%s", (snapshot_id,))
             membership_count = int(cur.fetchone()[0])
             if membership_count != expected_fact_count:
                 raise RuntimeError("Snapshot membership count verification failed")

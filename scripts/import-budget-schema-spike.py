@@ -177,7 +177,7 @@ def import_data(cur: psycopg.Cursor, manifest: dict, pages: list, rows: list, ce
           (document_id, period_ids[period["fiscal_period_key"]], column_id, period["period_role"], period["raw_column_label"], period["column_index"]))
         document_period_ids[period["key"]] = one(cur, "SELECT id FROM budget.document_period WHERE document_id=%s AND source_table_column_id=%s AND period_role=%s", (document_id, column_id, period["period_role"]))
 
-    fact_ids: dict[str, int] = {}
+    observation_ids: dict[str, int] = {}
     line_ids: dict[tuple[str, str], int] = {}
     for order, fact in enumerate(manifest["facts"], 1):
         line_key = (fact["case_key"], fact["line_key"])
@@ -190,20 +190,20 @@ def import_data(cur: psycopg.Cursor, manifest: dict, pages: list, rows: list, ce
             line_ids[line_key] = one(cur, "SELECT id FROM budget.line_item WHERE statement_id=%s AND line_key=%s", (statement_ids[fact["case_key"]], fact["line_key"]))
         amount_type_id = one(cur, "SELECT id FROM budget.amount_type WHERE code=%s", (fact["amount_type"],))
         unit_id = one(cur, "SELECT id FROM budget.measure_unit WHERE code=%s", (fact["measure_unit"],))
-        cur.execute("""INSERT INTO budget.fact
+        cur.execute("""INSERT INTO budget.financial_observation
           (line_item_id,document_period_id,amount_type_id,measure_unit_id,value_numeric,value_state,is_reported,review_status)
           VALUES(%s,%s,%s,%s,%s,%s,true,'approved')
           ON CONFLICT(line_item_id,document_period_id,amount_type_id,measure_unit_id) DO NOTHING""",
           (line_ids[line_key], document_period_ids[fact["document_period_key"]], amount_type_id, unit_id, fact.get("value_numeric"), fact["value_state"]))
-        fact_id = one(cur, """SELECT id FROM budget.fact WHERE line_item_id=%s AND document_period_id=%s AND amount_type_id=%s AND measure_unit_id=%s""",
+        observation_id = one(cur, """SELECT id FROM budget.financial_observation WHERE line_item_id=%s AND document_period_id=%s AND amount_type_id=%s AND measure_unit_id=%s""",
           (line_ids[line_key], document_period_ids[fact["document_period_key"]], amount_type_id, unit_id))
-        fact_ids[fact["key"]] = fact_id
+        observation_ids[fact["key"]] = observation_id
         roles = fact.get("source_roles", [fact.get("source_role", "reported_value")])
         if "reported_value" not in roles:
             roles = ["reported_value", *roles]
         for source_order, role in enumerate(roles):
-            cur.execute("""INSERT INTO budget.fact_source(fact_id,source_cell_id,source_role,source_order)
-              VALUES(%s,%s,%s,%s) ON CONFLICT DO NOTHING""", (fact_id, cell_ids[fact["source_cell_key"]], role, source_order))
+            cur.execute("""INSERT INTO budget.financial_observation_source(observation_id,source_cell_id,source_role,source_order)
+              VALUES(%s,%s,%s,%s) ON CONFLICT DO NOTHING""", (observation_id, cell_ids[fact["source_cell_key"]], role, source_order))
 
     reconciliation_ids: dict[str, int] = {}
     reconciliation_by_key = {item["check_key"]: item for item in reconciliations}
@@ -211,13 +211,13 @@ def import_data(cur: psycopg.Cursor, manifest: dict, pages: list, rows: list, ce
         item = reconciliation_by_key[check_key]
         first_fact = manifest["facts"][[x["key"] for x in manifest["facts"]].index(keys[0])]
         cur.execute("""INSERT INTO budget.reconciliation_result
-          (statement_id,fiscal_period_id,check_type,calculated_value,reported_value,difference,tolerance,passed,input_fact_ids)
+          (statement_id,fiscal_period_id,check_type,calculated_value,reported_value,difference,tolerance,passed,input_observation_ids)
           SELECT %s,dp.fiscal_period_id,%s,%s,%s,%s,%s,%s,%s FROM budget.document_period dp
           WHERE dp.id=%s AND NOT EXISTS (
             SELECT 1 FROM budget.reconciliation_result existing
             WHERE existing.statement_id=%s AND existing.fiscal_period_id=dp.fiscal_period_id AND existing.check_type=%s)
           RETURNING id""",
-          (statement_ids[first_fact["case_key"]], check_key, item["calculated_value"], item["reported_value"], item["difference"], item["tolerance"], item["passed"], [fact_ids[k] for k in keys], document_period_ids[first_fact["document_period_key"]], statement_ids[first_fact["case_key"]], check_key))
+          (statement_ids[first_fact["case_key"]], check_key, item["calculated_value"], item["reported_value"], item["difference"], item["tolerance"], item["passed"], [observation_ids[k] for k in keys], document_period_ids[first_fact["document_period_key"]], statement_ids[first_fact["case_key"]], check_key))
         inserted = cur.fetchone()
         if inserted:
             reconciliation_ids[check_key] = int(inserted[0])

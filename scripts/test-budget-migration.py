@@ -8,13 +8,19 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-MIGRATIONS = (
-    REPO_ROOT / "schema" / "sql" / "025_budget_schema.sql",
-    REPO_ROOT / "schema" / "sql" / "027_budget_web_taxonomy.sql",
-)
-REGRESSIONS = (
-    REPO_ROOT / "schema" / "tests" / "025_budget_schema_regression.sql",
-    REPO_ROOT / "schema" / "tests" / "027_budget_web_taxonomy_regression.sql",
+MIGRATION_STAGES = (
+    (
+        REPO_ROOT / "schema" / "sql" / "025_budget_schema.sql",
+        REPO_ROOT / "schema" / "tests" / "025_budget_schema_regression.sql",
+    ),
+    (
+        REPO_ROOT / "schema" / "sql" / "027_budget_web_taxonomy.sql",
+        REPO_ROOT / "schema" / "tests" / "027_budget_web_taxonomy_regression.sql",
+    ),
+    (
+        REPO_ROOT / "schema" / "sql" / "028_budget_content_and_observation_model.sql",
+        REPO_ROOT / "schema" / "tests" / "028_budget_content_and_observation_model_regression.sql",
+    ),
 )
 
 
@@ -23,7 +29,11 @@ def main() -> int:
     user = os.environ.get("PGUSER", "mdopendata")
     admin_database = os.environ.get("PGADMIN_DATABASE", "postgres")
     database = f"budget_migration_test_{uuid.uuid4().hex}"
-    sql = "\n".join(path.read_text(encoding="utf-8").rstrip() for path in (*MIGRATIONS, *REGRESSIONS)) + "\n"
+    sql = "\n".join(
+        path.read_text(encoding="utf-8").rstrip()
+        for stage in MIGRATION_STAGES
+        for path in stage
+    ) + "\n"
 
     def psql(target_database: str, input_sql: str | None = None, *args: str) -> subprocess.CompletedProcess[str]:
         return subprocess.run(

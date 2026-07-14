@@ -255,11 +255,11 @@ def apply(cur: psycopg.Cursor) -> dict[str, int]:
     cur.execute(
         """SELECT DISTINCT li.id,coalesce(li.display_label,li.raw_label),s.statement_kind,
                   cp.name AS project_name
-           FROM budget.publication_fact pf
-           JOIN budget.fact f ON f.id=pf.fact_id
+           FROM budget.publication_observation pf
+           JOIN budget.financial_observation f ON f.id=pf.observation_id
            JOIN budget.line_item li ON li.id=f.line_item_id
            JOIN budget.statement s ON s.id=li.statement_id
-           LEFT JOIN budget.capital_project_fact cpf ON cpf.fact_id=f.id
+           LEFT JOIN budget.capital_project_observation cpf ON cpf.observation_id=f.id
            LEFT JOIN budget.capital_project cp ON cp.id=cpf.capital_project_id
            WHERE pf.snapshot_id=1 AND li.aggregation_role='detail'"""
     )
@@ -287,19 +287,19 @@ def apply(cur: psycopg.Cursor) -> dict[str, int]:
         counts["proposed_line_categories"] += cur.rowcount
 
     cur.execute(
-        """SELECT DISTINCT f.id FROM budget.publication_fact pf
-           JOIN budget.fact f ON f.id=pf.fact_id
+        """SELECT DISTINCT f.id FROM budget.publication_observation pf
+           JOIN budget.financial_observation f ON f.id=pf.observation_id
            JOIN budget.amount_type at ON at.id=f.amount_type_id
-           JOIN budget.capital_project_fact cpf ON cpf.fact_id=f.id
+           JOIN budget.capital_project_observation cpf ON cpf.observation_id=f.id
            WHERE pf.snapshot_id=1 AND at.code='funding_deduction'"""
     )
-    for (fact_id,) in cur.fetchall():
+    for (observation_id,) in cur.fetchall():
         cur.execute(
             """INSERT INTO budget.capital_funding_category_assignment
-              (fact_id,normalized_category_id,taxonomy_version,assignment_status,mapping_basis,rationale)
+              (observation_id,normalized_category_id,taxonomy_version,assignment_status,mapping_basis,rationale)
               VALUES(%s,%s,%s,'proposed','structural',%s)
-              ON CONFLICT (fact_id,taxonomy_version,normalized_category_id) DO NOTHING""",
-            (fact_id, category_ids["funding.external_partner"], TAXONOMY,
+              ON CONFLICT (observation_id,taxonomy_version,normalized_category_id) DO NOTHING""",
+            (observation_id, category_ids["funding.external_partner"], TAXONOMY,
              "Published project funding-deduction candidate; exact funding-source subtype requires browser review."),
         )
         counts["proposed_funding_categories"] += cur.rowcount
@@ -390,61 +390,61 @@ def apply(cur: psycopg.Cursor) -> dict[str, int]:
              VALUES (7::bigint,8::bigint,'2024-2025-budget'::text,'2024-2025-forecast'::text),
                     (8::bigint,9::bigint,'2025-2026-budget'::text,'2025-2026-forecast'::text)
            ), original AS (
-             SELECT p.*,f.id AS original_fact_id,re.slug AS entity_slug,
+             SELECT p.*,f.id AS original_observation_id,re.slug AS entity_slug,
                CASE WHEN s.statement_kind IN ('operating','operating_detail','operating_statement','facility_operating_statement')
                     THEN 'operating' ELSE s.statement_kind END AS family,
                lower(regexp_replace(coalesce(li.display_label,li.raw_label),'[^a-zA-Z0-9]+','','g')) AS label_key,
                f.value_numeric,mu.code AS unit
              FROM pairs p JOIN budget.statement s ON s.document_id=p.original_document_id
              JOIN budget.reporting_entity re ON re.id=s.reporting_entity_id
-             JOIN budget.line_item li ON li.statement_id=s.id JOIN budget.fact f ON f.line_item_id=li.id
+             JOIN budget.line_item li ON li.statement_id=s.id JOIN budget.financial_observation f ON f.line_item_id=li.id
              JOIN budget.document_period dp ON dp.id=f.document_period_id
              JOIN budget.fiscal_period fp ON fp.id=dp.fiscal_period_id
              JOIN budget.amount_type at ON at.id=f.amount_type_id JOIN budget.measure_unit mu ON mu.id=f.measure_unit_id
              WHERE fp.label=p.period_label AND at.code='budget' AND f.value_numeric IS NOT NULL AND f.review_status='approved'
            ), later AS (
-             SELECT p.*,fb.id AS later_budget_fact_id,ff.id AS forecast_fact_id,re.slug AS entity_slug,
+             SELECT p.*,fb.id AS later_budget_observation_id,ff.id AS forecast_observation_id,re.slug AS entity_slug,
                CASE WHEN s.statement_kind IN ('operating','operating_detail','operating_statement','facility_operating_statement')
                     THEN 'operating' ELSE s.statement_kind END AS family,
                lower(regexp_replace(coalesce(li.display_label,li.raw_label),'[^a-zA-Z0-9]+','','g')) AS label_key,
                fb.value_numeric,mu.code AS unit
              FROM pairs p JOIN budget.statement s ON s.document_id=p.next_document_id
              JOIN budget.reporting_entity re ON re.id=s.reporting_entity_id
-             JOIN budget.line_item li ON li.statement_id=s.id JOIN budget.fact fb ON fb.line_item_id=li.id
+             JOIN budget.line_item li ON li.statement_id=s.id JOIN budget.financial_observation fb ON fb.line_item_id=li.id
              JOIN budget.document_period dpb ON dpb.id=fb.document_period_id
              JOIN budget.fiscal_period fpb ON fpb.id=dpb.fiscal_period_id
              JOIN budget.amount_type atb ON atb.id=fb.amount_type_id JOIN budget.measure_unit mu ON mu.id=fb.measure_unit_id
-             JOIN budget.fact ff ON ff.line_item_id=li.id JOIN budget.document_period dpf ON dpf.id=ff.document_period_id
+             JOIN budget.financial_observation ff ON ff.line_item_id=li.id JOIN budget.document_period dpf ON dpf.id=ff.document_period_id
              JOIN budget.fiscal_period fpf ON fpf.id=dpf.fiscal_period_id
              JOIN budget.amount_type atf ON atf.id=ff.amount_type_id
              WHERE fpb.label=p.period_label AND atb.code='budget' AND fpf.label=p.forecast_label AND atf.code='forecast'
                AND ff.measure_unit_id=fb.measure_unit_id AND fb.value_numeric IS NOT NULL AND ff.review_status='approved'
            ), candidates AS (
-             SELECT o.original_fact_id,l.later_budget_fact_id,l.forecast_fact_id,
-                    count(*) OVER(PARTITION BY o.original_fact_id) AS original_candidate_count,
-                    count(*) OVER(PARTITION BY l.forecast_fact_id) AS forecast_target_count
+             SELECT o.original_observation_id,l.later_budget_observation_id,l.forecast_observation_id,
+                    count(*) OVER(PARTITION BY o.original_observation_id) AS original_candidate_count,
+                    count(*) OVER(PARTITION BY l.forecast_observation_id) AS forecast_target_count
              FROM original o JOIN later l
              USING(original_document_id,next_document_id,period_label,forecast_label,entity_slug,family,label_key,unit,value_numeric)
            )
-           SELECT original_fact_id,later_budget_fact_id,forecast_fact_id
-           FROM candidates WHERE original_candidate_count=1 AND forecast_target_count=1 ORDER BY original_fact_id"""
+           SELECT original_observation_id,later_budget_observation_id,forecast_observation_id
+           FROM candidates WHERE original_candidate_count=1 AND forecast_target_count=1 ORDER BY original_observation_id"""
     )
     valid_followups = cur.fetchall()
     valid_original_ids = [int(row[0]) for row in valid_followups]
     cur.execute(
-        """DELETE FROM budget.fact_followup_observation
+        """DELETE FROM budget.financial_observation_followup_observation
            WHERE observation_kind='forecast' AND mapping_basis='exact_identity' AND review_status='approved'
-             AND NOT (original_fact_id=ANY(%s))""",
+             AND NOT (original_observation_id=ANY(%s))""",
         (valid_original_ids,),
     )
     counts["followup_forecasts_removed"] = cur.rowcount
-    for original_fact_id, later_budget_fact_id, forecast_fact_id in valid_followups:
+    for original_observation_id, later_budget_observation_id, forecast_observation_id in valid_followups:
         cur.execute(
-            """INSERT INTO budget.fact_followup_observation
-              (original_fact_id,subsequent_budget_fact_id,subsequent_observation_fact_id,observation_kind,mapping_basis,review_status)
+            """INSERT INTO budget.financial_observation_followup_observation
+              (original_observation_id,subsequent_budget_observation_id,subsequent_observation_observation_id,observation_kind,mapping_basis,review_status)
               VALUES(%s,%s,%s,'forecast','exact_identity','approved')
-              ON CONFLICT (original_fact_id,observation_kind) DO NOTHING""",
-            (original_fact_id, later_budget_fact_id, forecast_fact_id),
+              ON CONFLICT (original_observation_id,observation_kind) DO NOTHING""",
+            (original_observation_id, later_budget_observation_id, forecast_observation_id),
         )
         counts["followup_forecasts"] += cur.rowcount
 
@@ -457,11 +457,11 @@ def main() -> int:
     args = parser.parse_args()
     with psycopg.connect(db_url()) as connection, connection.cursor() as cur:
         counts = apply(cur)
-        cur.execute("SELECT count(*) FROM budget.publication_fact WHERE snapshot_id=1")
+        cur.execute("SELECT count(*) FROM budget.publication_observation WHERE snapshot_id=1")
         snapshot_fact_count = int(cur.fetchone()[0])
-        cur.execute("SELECT count(*) FROM budget.v_published_facts WHERE snapshot_id=1")
+        cur.execute("SELECT count(*) FROM budget.v_published_financial_observations WHERE snapshot_id=1")
         published_view_count = int(cur.fetchone()[0])
-        cur.execute("SELECT count(*) FROM budget.fact_followup_observation WHERE review_status='approved'")
+        cur.execute("SELECT count(*) FROM budget.financial_observation_followup_observation WHERE review_status='approved'")
         followup_total = int(cur.fetchone()[0])
         cur.execute("SELECT count(*) FROM budget.line_item_category_assignment WHERE taxonomy_version=%s AND assignment_status='proposed'", (TAXONOMY,))
         proposed_category_total = int(cur.fetchone()[0])

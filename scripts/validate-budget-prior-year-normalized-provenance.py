@@ -43,7 +43,7 @@ def main() -> int:
             facts = {item["key"]: item for item in manifest["facts"]}
             source_version = manifest["source_tables"][0]["key"].rsplit(":", 1)[1]
             mismatches = []
-            for link in manifest["fact_sources"]:
+            for link in manifest["observation_sources"]:
                 value = values.get(link["source_value_id"])
                 fact = facts.get(link["fact_key"])
                 row = rows.get(value["row_id"]) if value else None
@@ -71,16 +71,16 @@ def main() -> int:
             )
             database_cells = {(row_key, index): (raw_text, numeric) for row_key, index, raw_text, numeric in cursor.fetchall()}
             database_mismatches = []
-            for link in manifest["fact_sources"]:
+            for link in manifest["observation_sources"]:
                 value = values[link["source_value_id"]]
                 db_value = database_cells.get((value["row_id"], value["value_index"]))
                 if db_value is None or db_value[0] != value["raw_value"] or not equal_number(db_value[1], value["parsed_decimal"]):
                     database_mismatches.append(link["source_cell_key"])
 
             sha = manifest["source_documents"][0]["sha256"]
-            cursor.execute("""SELECT count(*) FROM budget.fact f JOIN budget.line_item li ON li.id=f.line_item_id JOIN budget.statement s ON s.id=li.statement_id JOIN budget.source_document d ON d.id=s.document_id WHERE d.sha256=%s""", (sha,))
+            cursor.execute("""SELECT count(*) FROM budget.financial_observation f JOIN budget.line_item li ON li.id=f.line_item_id JOIN budget.statement s ON s.id=li.statement_id JOIN budget.source_document d ON d.id=s.document_id WHERE d.sha256=%s""", (sha,))
             database_fact_count = int(cursor.fetchone()[0])
-            cursor.execute("""SELECT count(*) FROM budget.fact_source fs JOIN budget.fact f ON f.id=fs.fact_id JOIN budget.line_item li ON li.id=f.line_item_id JOIN budget.statement s ON s.id=li.statement_id JOIN budget.source_document d ON d.id=s.document_id WHERE d.sha256=%s""", (sha,))
+            cursor.execute("""SELECT count(*) FROM budget.financial_observation_source fs JOIN budget.financial_observation f ON f.id=fs.observation_id JOIN budget.line_item li ON li.id=f.line_item_id JOIN budget.statement s ON s.id=li.statement_id JOIN budget.source_document d ON d.id=s.document_id WHERE d.sha256=%s""", (sha,))
             database_source_count = int(cursor.fetchone()[0])
             cursor.execute("""SELECT count(*),count(*) FILTER (WHERE NOT rr.passed) FROM budget.reconciliation_result rr JOIN budget.statement s ON s.id=rr.statement_id JOIN budget.source_document d ON d.id=s.document_id WHERE d.sha256=%s""", (sha,))
             reconciliation_count, failed_reconciliations = map(int, cursor.fetchone())
@@ -89,14 +89,14 @@ def main() -> int:
             report = {
                 "document_key": document,
                 "manifest_fact_count": len(manifest["facts"]), "database_fact_count": database_fact_count,
-                "manifest_fact_source_count": len(manifest["fact_sources"]), "database_fact_source_count": database_source_count,
+                "manifest_fact_source_count": len(manifest["observation_sources"]), "database_fact_source_count": database_source_count,
                 "artifact_mismatch_count": len(mismatches), "database_source_mismatch_count": len(database_mismatches),
                 "reconciliation_count": reconciliation_count, "failed_reconciliation_count": failed_reconciliations,
                 "publication_snapshot_count": snapshots,
             }
             report["passed"] = (
                 database_fact_count == len(manifest["facts"])
-                and database_source_count == len(manifest["fact_sources"])
+                and database_source_count == len(manifest["observation_sources"])
                 and not mismatches and not database_mismatches and not failed_reconciliations and snapshots == 0
             )
             (root / "normalized-import-provenance-report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")

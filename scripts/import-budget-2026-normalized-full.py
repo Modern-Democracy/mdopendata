@@ -74,12 +74,12 @@ def all_counts(manifest: dict, reconciliations: dict) -> dict[str, int]:
         "statements": len(manifest["statements"]),
         "line_items": len(manifest["line_items"]),
         "facts": len(manifest["facts"]),
-        "fact_sources": len(manifest["fact_sources"]),
+        "observation_sources": len(manifest["observation_sources"]),
         "capital_projects": len(manifest["capital_projects"]),
         "capital_project_references": len(manifest.get("capital_project_references", [])),
         "capital_project_aliases": len(manifest["capital_project_aliases"]),
         "capital_project_profiles": len(manifest["capital_project_profiles"]),
-        "capital_project_facts": len(manifest["capital_project_facts"]),
+        "capital_project_observations": len(manifest["capital_project_observations"]),
         "debt_instruments": len(manifest["debt_instruments"]),
         "debt_facts": len(manifest["debt_facts"]),
         "reconciliations": len(reconciliations["records"]),
@@ -108,12 +108,12 @@ def validate_files(manifest: dict, reconciliations: dict, source_document: dict)
         raise SystemExit("Representative source hash mismatch")
     if not PdfReader(str(source_path)).pages:
         raise SystemExit("Source PDF has no pages")
-    for key in ["facts", "fact_sources", "line_items", "document_periods"]:
+    for key in ["facts", "observation_sources", "line_items", "document_periods"]:
         keys = [item["key"] for item in manifest[key]]
         if len(keys) != len(set(keys)):
             raise SystemExit(f"Duplicate manifest keys in {key}")
     fact_keys = {item["key"] for item in manifest["facts"]}
-    if any(item["fact_key"] not in fact_keys for item in manifest["fact_sources"]):
+    if any(item["fact_key"] not in fact_keys for item in manifest["observation_sources"]):
         raise SystemExit("Fact source references an unknown fact")
     for record in reconciliations["records"]:
         missing = [key for key in record["input_fact_keys"] + [record["reported_fact_key"]] if key not in fact_keys]
@@ -145,7 +145,7 @@ def fetch_raw_ids(cur: psycopg.Cursor, manifest: dict, document_sha: str) -> dic
             (table_id, period["source_column_index"]),
         )
     cell_ids: dict[str, int] = {}
-    for source in manifest["fact_sources"]:
+    for source in manifest["observation_sources"]:
         table_key, row_key, column_key = source["source_cell_key"].rsplit(":", 2)
         table_id = table_ids[table_key]
         column_index = int(column_key.removeprefix("column-"))
@@ -404,11 +404,11 @@ def import_normalized(cur: psycopg.Cursor, manifest: dict, reconciliations: dict
     measure_unit_ids = {code: one(cur, "SELECT id FROM budget.measure_unit WHERE code=%s", (code,))
                         for code in sorted({fact["measure_unit"] for fact in manifest["facts"]})}
 
-    fact_ids = {}
+    observation_ids = {}
     for fact in manifest["facts"]:
         cur.execute(
             """SELECT value_numeric::text,value_text,value_state,is_reported,review_status
-               FROM budget.fact
+               FROM budget.financial_observation
               WHERE line_item_id=%s AND document_period_id=%s AND amount_type_id=%s AND measure_unit_id=%s""",
             (line_ids[fact["line_key"]], document_period_ids[fact["document_period_key"]],
              amount_type_ids[fact["amount_type"]], measure_unit_ids[fact["measure_unit"]]),
@@ -423,13 +423,13 @@ def import_normalized(cur: psycopg.Cursor, manifest: dict, reconciliations: dict
                 {"value_numeric": existing_fact[0], "value_text": existing_fact[1], "value_state": existing_fact[2],
                  "is_reported": existing_fact[3], "review_status": existing_fact[4]},
             )
-        fact_ids[fact["key"]] = ensure_dimension(
+        observation_ids[fact["key"]] = ensure_dimension(
             cur, batch_id, "fact", fact["key"],
-            """SELECT id FROM budget.fact
+            """SELECT id FROM budget.financial_observation
                WHERE line_item_id=%s AND document_period_id=%s AND amount_type_id=%s AND measure_unit_id=%s""",
             (line_ids[fact["line_key"]], document_period_ids[fact["document_period_key"]],
              amount_type_ids[fact["amount_type"]], measure_unit_ids[fact["measure_unit"]]),
-            """INSERT INTO budget.fact
+            """INSERT INTO budget.financial_observation
                (line_item_id,document_period_id,amount_type_id,measure_unit_id,value_numeric,value_text,value_state,is_reported,review_status)
                VALUES(%s,%s,%s,%s,%s,%s,%s,true,'approved') RETURNING id""",
             (line_ids[fact["line_key"]], document_period_ids[fact["document_period_key"]],
@@ -438,18 +438,18 @@ def import_normalized(cur: psycopg.Cursor, manifest: dict, reconciliations: dict
             fact,
         )
 
-    for source in manifest["fact_sources"]:
+    for source in manifest["observation_sources"]:
         natural_key = source["key"]
         cur.execute(
-            """SELECT 1 FROM budget.fact_source
-               WHERE fact_id=%s AND source_cell_id=%s AND source_role=%s""",
-            (fact_ids[source["fact_key"]], raw["cells"][source["source_cell_key"]], source["source_role"]),
+            """SELECT 1 FROM budget.financial_observation_source
+               WHERE observation_id=%s AND source_cell_id=%s AND source_role=%s""",
+            (observation_ids[source["fact_key"]], raw["cells"][source["source_cell_key"]], source["source_role"]),
         )
         if cur.fetchone() is None:
             cur.execute(
-                """INSERT INTO budget.fact_source(fact_id,source_cell_id,source_role,source_order)
+                """INSERT INTO budget.financial_observation_source(observation_id,source_cell_id,source_role,source_order)
                    VALUES(%s,%s,%s,%s)""",
-                (fact_ids[source["fact_key"]], raw["cells"][source["source_cell_key"]],
+                (observation_ids[source["fact_key"]], raw["cells"][source["source_cell_key"]],
                  source["source_role"], source["source_order"]),
             )
             insert_event(cur, batch_id, "fact_source", natural_key, source, "added")
@@ -494,12 +494,12 @@ def import_normalized(cur: psycopg.Cursor, manifest: dict, reconciliations: dict
             (capital_project_ids[alias["project_key"]], document_id, alias["raw_label"]),
             alias,
         )
-    for link in manifest["capital_project_facts"]:
-        cur.execute("SELECT 1 FROM budget.capital_project_fact WHERE fact_id=%s", (fact_ids[link["fact_key"]],))
+    for link in manifest["capital_project_observations"]:
+        cur.execute("SELECT 1 FROM budget.capital_project_observation WHERE observation_id=%s", (observation_ids[link["fact_key"]],))
         if cur.fetchone() is None:
             cur.execute(
-                "INSERT INTO budget.capital_project_fact(fact_id,capital_project_id) VALUES(%s,%s)",
-                (fact_ids[link["fact_key"]], capital_project_ids[link["project_key"]]),
+                "INSERT INTO budget.capital_project_observation(observation_id,capital_project_id) VALUES(%s,%s)",
+                (observation_ids[link["fact_key"]], capital_project_ids[link["project_key"]]),
             )
             insert_event(cur, batch_id, "capital_project_fact", f"{link['project_key']}:{link['fact_key']}", link, "added")
         else:
@@ -566,11 +566,11 @@ def import_normalized(cur: psycopg.Cursor, manifest: dict, reconciliations: dict
     facts_by_key = {fact["key"]: fact for fact in manifest["facts"]}
     for link in manifest["debt_facts"]:
         debt_measure = facts_by_key[link["fact_key"]]["amount_type"]
-        cur.execute("SELECT 1 FROM budget.debt_fact WHERE fact_id=%s", (fact_ids[link["fact_key"]],))
+        cur.execute("SELECT 1 FROM budget.debt_observation WHERE observation_id=%s", (observation_ids[link["fact_key"]],))
         if cur.fetchone() is None:
             cur.execute(
-                "INSERT INTO budget.debt_fact(fact_id,debt_instrument_id,debt_measure) VALUES(%s,%s,%s)",
-                (fact_ids[link["fact_key"]], debt_instrument_ids[link["instrument_key"]], debt_measure),
+                "INSERT INTO budget.debt_observation(observation_id,debt_instrument_id,debt_measure) VALUES(%s,%s,%s)",
+                (observation_ids[link["fact_key"]], debt_instrument_ids[link["instrument_key"]], debt_measure),
             )
             insert_event(cur, batch_id, "debt_fact", f"{link['instrument_key']}:{link['fact_key']}", link, "added")
         else:
@@ -585,7 +585,7 @@ def import_normalized(cur: psycopg.Cursor, manifest: dict, reconciliations: dict
             "SELECT fiscal_period_id FROM budget.document_period WHERE id=%s",
             (document_period_ids[reported_fact["document_period_key"]],),
         )
-        input_ids = [fact_ids[key] for key in record["input_fact_keys"]]
+        input_ids = [observation_ids[key] for key in record["input_fact_keys"]]
         cur.execute(
             """SELECT id FROM budget.reconciliation_result
                WHERE statement_id=%s AND fiscal_period_id=%s AND check_type=%s""",
@@ -595,7 +595,7 @@ def import_normalized(cur: psycopg.Cursor, manifest: dict, reconciliations: dict
         if existing is None:
             cur.execute(
                 """INSERT INTO budget.reconciliation_result
-                   (statement_id,fiscal_period_id,check_type,calculated_value,reported_value,difference,tolerance,passed,input_fact_ids)
+                   (statement_id,fiscal_period_id,check_type,calculated_value,reported_value,difference,tolerance,passed,input_observation_ids)
                    VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING id""",
                 (statement_ids[statement_key], fiscal_period_id, record["check_key"],
                  record["calculated_value"], record["reported_value"], record["difference"],
@@ -606,7 +606,7 @@ def import_normalized(cur: psycopg.Cursor, manifest: dict, reconciliations: dict
         else:
             reconciliation_ids[record["check_key"]] = int(existing[0])
             cur.execute(
-                """SELECT calculated_value::text,reported_value::text,difference::text,tolerance::text,passed,input_fact_ids
+                """SELECT calculated_value::text,reported_value::text,difference::text,tolerance::text,passed,input_observation_ids
                    FROM budget.reconciliation_result WHERE id=%s""",
                 (reconciliation_ids[record["check_key"]],),
             )
@@ -618,10 +618,10 @@ def import_normalized(cur: psycopg.Cursor, manifest: dict, reconciliations: dict
                  "reported_value": db_numeric_text(record["reported_value"]),
                  "difference": db_numeric_text(record["difference"]),
                  "tolerance": db_numeric_text(record["tolerance"]),
-                 "passed": record["passed"], "input_fact_ids": input_ids},
+                 "passed": record["passed"], "input_observation_ids": input_ids},
                 {"calculated_value": existing_reconciliation[0], "reported_value": existing_reconciliation[1],
                  "difference": existing_reconciliation[2], "tolerance": existing_reconciliation[3],
-                 "passed": existing_reconciliation[4], "input_fact_ids": existing_reconciliation[5]},
+                 "passed": existing_reconciliation[4], "input_observation_ids": existing_reconciliation[5]},
             )
             insert_event(cur, batch_id, "reconciliation_result", record["check_key"], record, "unchanged")
 

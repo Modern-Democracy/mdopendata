@@ -47,12 +47,27 @@ const checks = [
   {
     name: "published budget visualization route",
     path: "/budgets",
-    expectText: ["Municipal budget by year", "Operating revenues and expenses", "/api/budgets/editions", "Capital programs and projects", "External funding and partner contributions"],
+    expectText: ["Budget contents", "Contextual facts", "Financial observations", "/api/budgets/structure", "FactContent", "observationColumnKey"],
   },
   {
-    name: "budget fact explorer route",
+    name: "operating overview route",
+    path: "/budgets/operating",
+    expectText: ["Operating overview", "City-wide operating statements", "periodHeading", "ObservationTable"],
+  },
+  {
+    name: "capital overview route",
+    path: "/budgets/capital",
+    expectText: ["Capital overview", "City and utility capital summaries", "capital-page-111-capital"],
+  },
+  {
+    name: "contextual fact explorer route",
     path: "/budgets/facts",
-    expectText: ["Budget fact explorer", "What is a fact", "Filter and iterate", "/api/budgets/facts"],
+    expectText: ["Contextual facts", "source wording and citations", "/api/budgets/facts"],
+  },
+  {
+    name: "financial observation explorer route",
+    path: "/budgets/observations",
+    expectText: ["Financial observations", "reported numeric or textual values", "/api/budgets/observations"],
   },
   {
     name: "lab tools route",
@@ -75,9 +90,9 @@ const checks = [
     expectJson: (payload) => Array.isArray(payload.data) && payload.pagination?.limit === 1 && payload.pagination?.cursor === "0",
   },
   {
-    name: "budget fact warning API contract",
-    path: "/api/budgets/facts/13067?municipality=charlottetown",
-    expectJson: (payload) => payload.data?.fact_id === "13067" && Array.isArray(payload.data?.citations) && payload.warnings?.some((warning) => warning.issue_key === "reconciliation:debt_total:balance"),
+    name: "budget observation warning API contract",
+    path: "/api/budgets/observations/13067?municipality=charlottetown",
+    expectJson: (payload) => payload.data?.observation_id === "13067" && Array.isArray(payload.data?.citations) && payload.warnings?.some((warning) => warning.issue_key === "reconciliation:debt_total:balance"),
   },
   {
     name: "budget editions API contract",
@@ -85,39 +100,68 @@ const checks = [
     expectJson: (payload) =>
       Array.isArray(payload.data) &&
       payload.data.length === 3 &&
-      payload.data.every((edition) => edition.document_id && edition.fiscal_period_label && edition.document_fact_count > 0),
+      payload.data.every((edition) => edition.document_id && edition.fiscal_period_label && edition.document_observation_count > 0),
   },
   {
-    name: "budget facts document filter contract",
+    name: "budget structure contract",
+    path: "/api/budgets/structure?municipality=charlottetown&document=9",
+    expectJson: (payload) =>
+      Array.isArray(payload.data) &&
+      payload.data.some((section) => section.section_key === "operating-budget") &&
+      payload.data.some((section) => section.section_key === "capital-budget") &&
+      payload.data.filter((section) => section.section_key.startsWith("appendix.")).length === 3,
+  },
+  {
+    name: "appendix descendant observation contract",
+    path: "/api/budgets/observations?municipality=charlottetown&document=9&section=appendices&limit=200",
+    expectJson: (payload) =>
+      Array.isArray(payload.data) &&
+      payload.data.length === 158 &&
+      payload.data.every((observation) => observation.section_key.startsWith("appendix.")),
+  },
+  {
+    name: "contextual facts document filter contract",
     path: "/api/budgets/facts?municipality=charlottetown&document=8&limit=20",
     expectJson: (payload) =>
       Array.isArray(payload.data) &&
       payload.data.length === 20 &&
-      payload.data.every((fact) => Number(fact.source_document_id) === 8),
+      payload.data.every((fact) => Number(fact.edition_document_id) === 8 && fact.title),
   },
   {
-    name: "budget department filter contract",
+    name: "structured contextual fact contract",
+    path: "/api/budgets/facts?municipality=charlottetown&document=9&q=Budgeting%20Process&limit=10",
+    expectJson: (payload) => {
+      const fact = payload.data?.find((row) => row.source_pages?.includes(9));
+      const blocks = fact?.content_json?.blocks || [];
+      return blocks.some((block) => block.type === "heading" && block.text === "The Budgeting Process") &&
+        blocks.some((block) => block.type === "unordered_list" && block.items?.length === 4) &&
+        blocks.some((block) => block.type === "ordered_list" && block.items?.length === 3) &&
+        blocks.filter((block) => block.type === "paragraph").every((block) => !block.text.includes("\n"));
+    },
+  },
+  {
+    name: "contextual department filter contract",
     path: "/api/budgets/facts?municipality=charlottetown&document=8&department=public-works&limit=100",
     expectJson: (payload) =>
       Array.isArray(payload.data) &&
       payload.data.length > 0 &&
-      payload.data.every((fact) => fact.effective_organization_unit_key === "public-works"),
+      payload.data.every((fact) => fact.organization_unit_key === "public-works"),
   },
   {
-    name: "budget program filter contract",
-    path: "/api/budgets/facts?municipality=charlottetown&document=8&program=public-works&limit=100",
+    name: "financial observation department filter contract",
+    path: "/api/budgets/observations?municipality=charlottetown&document=8&department=public-works&limit=100",
     expectJson: (payload) =>
       Array.isArray(payload.data) &&
       payload.data.length > 0 &&
-      payload.data.every((fact) => fact.program_key === "public-works"),
+      payload.data.every((observation) => observation.effective_organization_unit_key === "public-works"),
   },
   {
-    name: "budget project filter contract",
-    path: "/api/budgets/facts?municipality=charlottetown&document=8&project=street-resurfacing&limit=100",
+    name: "financial observation project filter contract",
+    path: "/api/budgets/observations?municipality=charlottetown&document=8&project=street-resurfacing&limit=100",
     expectJson: (payload) =>
       Array.isArray(payload.data) &&
       payload.data.length > 0 &&
-      payload.data.every((fact) => fact.project_key === "street-resurfacing"),
+      payload.data.every((observation) => observation.project_key === "street-resurfacing"),
   },
   {
     name: "budget unknown filter rejection",
@@ -140,10 +184,10 @@ const checks = [
     expectJson: (payload) =>
       Array.isArray(payload.data) &&
       payload.data.length === 2 &&
-      payload.data.every((row) => row.prior_fact_id && row.current_fact_id && row.numeric_change !== undefined) &&
+      payload.data.every((row) => row.prior_observation_id && row.current_observation_id && row.numeric_change !== undefined) &&
       payload.warnings?.includes("exact_identity_matches_only") &&
-      payload.coverage?.current_fact_count > 0 &&
-      payload.coverage?.matched_fact_count === 440,
+      payload.coverage?.current_observation_count > 0 &&
+      payload.coverage?.matched_observation_count === 440,
   },
   {
     name: "budget comparison invalid entity rejection",

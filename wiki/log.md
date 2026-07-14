@@ -673,3 +673,19 @@ Replaced `/budgets` with a source-document-scoped annual view and added `/budget
 ## [2026-07-13] qa | Budget web taxonomy and filtering
 
 Passed the isolated migration regression, Python compilation, idempotent zero-write rerun, server syntax validation, and all 30 web smoke checks. Data-quality review removed 265 ambiguous many-to-one forecast links and enforced unique targets for the remaining 333 exact matches. Browser QA confirmed that 2025/2026 loads 1,220 primary-period facts, fact 33415 renders its matched $155,000 subsequent forecast, project URL filtering returns one `street-resurfacing` fact, edition requests cannot overwrite a newer selection, and no browser console errors occur.
+
+## [2026-07-13] implementation | Budget content and financial observations
+
+Applied migration 028 as a breaking rename: numeric facts are now financial observations, while `fact` exclusively stores source-authored narrative, attribute, or list content. Added a reviewed 101-section hierarchy based on the 2026/2027 table of contents, extracted contextual content across all three editions, standardized eight Strategic Plan 2022 to 2026 facts from the standalone source, and added four separate editorial budget guides.
+
+Published snapshot 3 contains 6,381 financial observations with complete section mappings and 446 non-empty contextual facts. Recovered 125 previously omitted 2026/2027 property-tax and City debt observations. Replaced the budget interface with contents, overview, operating department, capital project, appendix, contextual-fact, and financial-observation views.
+
+## [2026-07-13] qa | Budget content redesign
+
+Passed clean isolated migration regressions, repeat content import, source-value controls, server and Python syntax checks, the full portal smoke suite, and browser checks. Verified department narrative-plus-number composition, three populated 2026/2027 appendices, and explicit absent-appendix placeholders for 2024/2025.
+
+## [2026-07-13] correction | Budget fact formatting and source-aligned tables
+
+Replaced plain-text fact bodies with semantic heading, paragraph, unordered-list, and ordered-list blocks while retaining searchable body text and page citations. Removed PDF hard line wrapping from normalized paragraph content and reconstructed wrapped department list items.
+
+Pivoted financial observations into source-aligned HTML rows with fiscal periods or measures as columns and per-cell evidence links. Added explicit operating and capital overview sections, and corrected property-tax and long-term-debt schedules to align their source values on one row with reviewed source-column labels.
