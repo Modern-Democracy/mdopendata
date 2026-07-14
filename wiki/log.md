@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use this heading format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-07-14] operations | Render and Supabase demonstration deployment
+
+Added the approved read-only demonstration deployment surface: Render Docker Blueprint configuration, tracked-data production image, Supabase connection support, health check, demo-mode write barrier, direct migration support, and a local-to-Supabase schema/data bootstrap script. Local ingestion remains outside the remote environment.
+
 ## [2026-07-12] implementation | Budget API pagination, validation, and warnings
 
 Added bounded cursor pagination, strict allowlisted query-filter validation, and accepted debt-balance discrepancy warning coverage to the first budget API slice. Updated the Bruno collection with paginated and filtered requests plus an unknown-filter rejection request, rebuilt the local Docker web service, and passed the expanded API smoke checks.

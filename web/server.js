@@ -14,6 +14,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = process.env.REPO_ROOT || path.resolve(__dirname, "..");
 const host = process.env.HOST || "127.0.0.1";
 const port = Number(process.env.PORT || 3000);
+const demoMode = /^(1|true|yes)$/i.test(process.env.DEMO_MODE || "false");
 const defaultGdalTranslatePath = process.platform === "win32"
   ? "C:\\Program Files\\GDAL\\gdal_translate.exe"
   : "gdal_translate";
@@ -76,13 +77,20 @@ const packageTraversalJobs = new Map();
 const packageTraversalErrors = new Map();
 
 const publicDir = path.join(__dirname, "public");
-const pool = new Pool({
-  host: process.env.PGHOST || "localhost",
-  port: Number(process.env.PGPORT || 55432),
-  database: process.env.PGDATABASE || "mdopendata",
-  user: process.env.PGUSER || "mdopendata",
-  password: process.env.PGPASSWORD || "mdopendata_dev",
-});
+const pool = new Pool(process.env.DATABASE_URL
+  ? {
+      connectionString: process.env.DATABASE_URL,
+      ssl: process.env.DATABASE_SSL === "false" ? false : { rejectUnauthorized: false },
+      max: Number(process.env.PGPOOL_MAX || 5),
+      ...(process.env.PGOPTIONS ? { options: process.env.PGOPTIONS } : {}),
+    }
+  : {
+      host: process.env.PGHOST || "localhost",
+      port: Number(process.env.PGPORT || 55432),
+      database: process.env.PGDATABASE || "mdopendata",
+      user: process.env.PGUSER || "mdopendata",
+      password: process.env.PGPASSWORD || "mdopendata_dev",
+    });
 
 function toStringValue(value) {
   return value === null || value === undefined ? "" : String(value);
@@ -2754,6 +2762,18 @@ async function handleBudgetApi(request, response, url) {
     const relativeSourcePath = path.relative(repoRoot, sourcePath);
     if (!document.local_path || relativeSourcePath.startsWith("..") || path.isAbsolute(relativeSourcePath) || path.extname(sourcePath).toLowerCase() !== ".pdf") {
       throw new Error("Published budget source path is invalid.");
+    }
+    try {
+      const sourceHandle = await open(sourcePath, "r");
+      await sourceHandle.close();
+    } catch {
+      response.writeHead(404, { "content-type": "application/json; charset=utf-8" });
+      response.end(JSON.stringify({
+        error: "Published budget source asset is unavailable in this deployment.",
+        documentId,
+        pageNumber,
+      }));
+      return true;
     }
     const { stdout } = await execFileAsync("pdftocairo", [
       "-f", String(pageNumber), "-l", String(pageNumber), "-singlefile", "-scale-to", "1600", "-png", sourcePath, "-",
@@ -6098,6 +6118,29 @@ async function serveStatic(response, requestPath) {
 const server = createServer(async (request, response) => {
   try {
     const url = new URL(request.url, `http://${request.headers.host}`);
+    if (url.pathname === "/healthz") {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      try {
+        await pool.query("SELECT 1");
+        await sendJson(response, { status: "ok", demoMode });
+      } catch (error) {
+        response.writeHead(503, { "content-type": "application/json; charset=utf-8" });
+        response.end(JSON.stringify({ status: "unavailable", error: error.message }));
+      }
+      return;
+    }
+    if (demoMode && request.method !== "GET" && (
+      url.pathname.startsWith("/api/document-ingestion/") ||
+      /^\/api\/section-equivalence\/\d+\/decision$/.test(url.pathname)
+    )) {
+      response.writeHead(403, { "content-type": "application/json; charset=utf-8" });
+      response.end(JSON.stringify({ error: "Write operations are disabled in demonstration mode." }));
+      return;
+    }
     if (url.pathname.startsWith("/api/budgets/") || url.pathname === "/api/projects" || url.pathname.startsWith("/api/projects/")) {
       if (await handleBudgetApi(request, response, url)) return;
     }

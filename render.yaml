@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: mdopendata-demo
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./web/Dockerfile.render
+    dockerContext: .
+    healthCheckPath: /healthz
+    autoDeployTrigger: commit
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: "10000"
+      - key: REPO_ROOT
+        value: /workspace
+      - key: DEMO_MODE
+        value: "true"
+      - key: DATABASE_SSL
+        value: "true"
+      - key: PGOPTIONS
+        value: "-c search_path=public,extensions"
+      - key: PGPOOL_MAX
+        value: "5"
+      - key: DATABASE_URL
+        sync: false

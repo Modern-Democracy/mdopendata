@@ -76,6 +76,31 @@ In pgAdmin, connect to the database with host `postgis`, port `5432`, and the `P
 
 Use read-only database inspection where possible. Load data through PostgreSQL tools or repository ingestion scripts.
 
+## Demonstration Deployment: Supabase and Render
+
+The approved remote target is a read-only demonstration environment. Ingestion, document uploads, extraction, and review writes remain local. Render runs the tracked Node application and connects server-side to a one-time Supabase database snapshot.
+
+Create a new Supabase project, enable the PostGIS extension, and obtain its PostgreSQL connection string. Use the session pooler connection when the direct endpoint is not reachable from the Render network. Do not commit the connection string.
+
+With the local PostGIS container running, bootstrap a new Supabase project from the local schema and data snapshot:
+
+```powershell
+$env:DATABASE_URL = "postgresql://..."
+.\scripts\supabase-bootstrap.ps1
+```
+
+Use `-SchemaOnly` to create only the schema. The bootstrap script targets a new project and does not drop or overwrite an existing database. It writes temporary dump files under `tmp/`.
+
+In Render, create a Blueprint from [render.yaml](/D:/opendata/mdopendata/render.yaml), provide `DATABASE_URL` as a secret, and use the generated service URL. The Blueprint sets `DEMO_MODE=true`, binds the application to Render's port, and exposes `/healthz` for health checks.
+
+For local schema changes against Supabase, set `DATABASE_URL` and run:
+
+```powershell
+.\scripts\python.ps1 .\scripts\run-migrations.py --base-schema
+```
+
+The canonical deployment notes are in [the Render and Supabase deployment page](wiki/implementation/render-supabase-deployment.md).
+
 ## Python Environment
 
 Environment, dependency, and deployment changes are governed by the DevOps role and require explicit user approval before mutation. See [the canonical project environment page](wiki/platform/project-environment.md).

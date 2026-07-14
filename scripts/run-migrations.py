@@ -7,6 +7,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import psycopg
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 MIGRATIONS_DIR = REPO_ROOT / "schema" / "sql"
@@ -38,7 +40,24 @@ def db_env() -> tuple[str, str, str]:
     )
 
 
+def direct_db_connection():
+    connect_kwargs = {}
+    if os.environ.get("DATABASE_SSL", "true").lower() != "false":
+        connect_kwargs["sslmode"] = "require"
+    if os.environ.get("PGOPTIONS"):
+        connect_kwargs["options"] = os.environ["PGOPTIONS"]
+    return psycopg.connect(os.environ["DATABASE_URL"], **connect_kwargs)
+
+
 def psql(sql: str, *, capture: bool = False) -> str:
+    if os.environ.get("DATABASE_URL"):
+        with direct_db_connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(sql)
+                if not capture:
+                    return ""
+                return "\n".join("\t".join(str(value) for value in row) for row in cursor.fetchall())
+
     container, database, user = db_env()
     (REPO_ROOT / ".docker-local").mkdir(exist_ok=True)
     env = os.environ.copy()
@@ -104,8 +123,15 @@ def apply_migration(path: Path) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Apply repository SQL migrations.")
     parser.add_argument("--list", action="store_true", help="List pending migrations.")
+    parser.add_argument(
+        "--base-schema",
+        action="store_true",
+        help="Apply schema/sql/postgis.sql before numbered migrations.",
+    )
     args = parser.parse_args()
 
+    if args.base_schema:
+        psql((MIGRATIONS_DIR / "postgis.sql").read_text(encoding="utf-8"))
     ensure_migration_table()
     applied = applied_migrations()
     migrations = discover_migrations()

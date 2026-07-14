@@ -5,7 +5,7 @@ tags:
   - python
   - dependencies
   - deployment
-updated: 2026-07-13
+updated: 2026-07-14
 ---
 
 This page records the canonical project runtime, dependency, and environment-management contract.
@@ -44,6 +44,7 @@ Historical `.python` paths and Codex bundled-runtime paths in generated manifest
 
 - Local services use Docker Compose through `docker-compose.yml`.
 - The documented remote deployment target is a single-host AWS EC2 Docker Compose deployment described in `wiki/implementation/aws-deployment.md`.
+- The approved demonstration deployment target is a Render Docker web service backed by a one-time Supabase PostGIS snapshot, described in `wiki/implementation/render-supabase-deployment.md`.
 - Adding or changing a deployment target requires DevOps review and explicit user approval.
 
 ## Budget Raw Import Versioning

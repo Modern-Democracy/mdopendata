@@ -1,0 +1,20 @@
+FROM node:22-alpine
+
+WORKDIR /app
+
+RUN apk add --no-cache gdal-tools proj poppler-utils
+
+COPY web/package.json web/package-lock.json ./
+RUN npm ci --omit=dev
+
+COPY web/server.js ./
+COPY web/public ./public
+COPY data /workspace/data
+
+ENV HOST=0.0.0.0
+ENV PORT=10000
+ENV REPO_ROOT=/workspace
+
+EXPOSE 10000
+
+CMD ["node", "server.js"]

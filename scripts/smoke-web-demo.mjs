@@ -2,6 +2,7 @@
 
 const baseUrl = process.env.WEB_SMOKE_BASE_URL || "http://localhost:3000";
 const samplePid = process.env.WEB_SMOKE_PID || "";
+const requireSourceAssets = process.env.WEB_SMOKE_REQUIRE_SOURCE_ASSETS !== "false";
 
 const checks = [
   {
@@ -196,11 +197,6 @@ const checks = [
     expectJson: (payload) => /positive integer/.test(payload.error || ""),
   },
   {
-    name: "published budget source page render",
-    path: "/api/budgets/sources/9/pages/1?municipality=charlottetown",
-    expectContentType: "image/png",
-  },
-  {
     name: "address API contract",
     path: "/api/addresses?q=university&limit=1",
     expectJson: (payload) => Array.isArray(payload.rows) && Boolean(payload.source),
@@ -257,6 +253,14 @@ if (samplePid) {
       expectJson: (payload) => payload.pid && Array.isArray(payload.rows) && payload.citations,
     },
   );
+}
+
+if (requireSourceAssets) {
+  checks.push({
+    name: "published budget source page render",
+    path: "/api/budgets/sources/9/pages/1?municipality=charlottetown",
+    expectContentType: "image/png",
+  });
 }
 
 checks.push({
