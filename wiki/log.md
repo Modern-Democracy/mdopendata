@@ -3,7 +3,7 @@ type: log
 tags:
   - wiki
   - log
-updated: 2026-07-13
+updated: 2026-07-14
 ---
 
 This page is the append-only chronological record for root wiki changes, ingests, substantive queries, and lint passes.
@@ -17,6 +17,10 @@ Append new entries in reverse chronological order. Use this heading format:
 ## [2026-07-14] operations | Render and Supabase demonstration deployment
 
 Added the approved read-only demonstration deployment surface: Render Docker Blueprint configuration, tracked-data production image, Supabase connection support, health check, demo-mode write barrier, direct migration support, and a local-to-Supabase schema/data bootstrap script. Local ingestion remains outside the remote environment.
+
+## [2026-07-14] operations | Canonical demonstration endpoint routing
+
+Recorded `https://mdopendata-demo.onrender.com` as the canonical user-facing Render demonstration endpoint. Updated the deployment and project-environment pages to distinguish Render demonstration reads from local ingestion writes, and added the same routing rule to the DevOps role skill.
 
 ## [2026-07-12] implementation | Budget API pagination, validation, and warnings
 

@@ -43,8 +43,9 @@ Historical `.python` paths and Codex bundled-runtime paths in generated manifest
 ## Current Deployment Surfaces
 
 - Local services use Docker Compose through `docker-compose.yml`.
-- The documented remote deployment target is a single-host AWS EC2 Docker Compose deployment described in `wiki/implementation/aws-deployment.md`.
-- The approved demonstration deployment target is a Render Docker web service backed by a one-time Supabase PostGIS snapshot, described in `wiki/implementation/render-supabase-deployment.md`.
+- The optional AWS deployment target is a single-host AWS EC2 Docker Compose deployment described in `wiki/implementation/aws-deployment.md`.
+- The canonical user-facing demonstration target is the Render Docker web service at `https://mdopendata-demo.onrender.com`, backed by a one-time Supabase PostGIS snapshot and described in `wiki/implementation/render-supabase-deployment.md`.
+- Requests to inspect or demonstrate the deployed application route to the Render endpoint; ingestion and other write workflows remain local.
 - Adding or changing a deployment target requires DevOps review and explicit user approval.
 
 ## Budget Raw Import Versioning

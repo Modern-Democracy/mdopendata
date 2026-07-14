@@ -40,15 +40,22 @@ For later repository migrations, set `DATABASE_URL` and run:
 
 ## Render configuration
 
-The demonstration service is deployed as the free Render web service `mdopendata-demo` at [mdopendata-demo.onrender.com](https://mdopendata-demo.onrender.com). The Render Blueprint flow in this workspace required payment information, so the service was created through the manual free-instance flow without adding payment details. [`render.yaml`](../../render.yaml) remains the reproducible configuration reference. Set `DATABASE_URL` to the Supabase PostgreSQL connection string as a secret. The service uses `HOST=0.0.0.0`, port `10000`, `REPO_ROOT=/workspace`, SSL, the `public,extensions` search path, and a five-connection application pool.
+The canonical demonstration endpoint is [https://mdopendata-demo.onrender.com](https://mdopendata-demo.onrender.com), provided by the free Render web service `mdopendata-demo`. The Render Blueprint flow in this workspace required payment information, so the service was created through the manual free-instance flow without adding payment details. [`render.yaml`](../../render.yaml) remains the reproducible configuration reference. Set `DATABASE_URL` to the Supabase PostgreSQL connection string as a secret. The service uses `HOST=0.0.0.0`, port `10000`, `REPO_ROOT=/workspace`, SSL, the `public,extensions` search path, and a five-connection application pool.
 
 The service health endpoint is `/healthz`. It requires a successful `SELECT 1` against Supabase. `DEMO_MODE=true` returns HTTP 403 for non-GET requests under `/api/document-ingestion/` and for section-equivalence decision writes.
+
+## Endpoint routing
+
+- Route user requests to inspect, demonstrate, or verify the deployed application to `https://mdopendata-demo.onrender.com`.
+- Verify service availability with `GET https://mdopendata-demo.onrender.com/healthz`.
+- Treat the endpoint as read-only demonstration infrastructure. Route ingestion, uploads, extraction, review writes, and other mutation workflows to the local environment.
+- Do not substitute the AWS deployment endpoint for demonstration requests. AWS remains a separate infrastructure workflow documented in [AWS deployment](./aws-deployment.md).
 
 ## Verification
 
 ```powershell
 docker build -f web/Dockerfile.render -t mdopendata-demo .
-$env:WEB_SMOKE_BASE_URL = "https://YOUR-SERVICE.onrender.com"
+$env:WEB_SMOKE_BASE_URL = "https://mdopendata-demo.onrender.com"
 npm run web:smoke
 ```
 

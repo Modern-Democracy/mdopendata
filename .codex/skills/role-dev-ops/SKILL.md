@@ -63,6 +63,16 @@ DevOps owns documentation of the current project setup. For every approved chang
 
 Documentation must describe the verified resulting state, setup commands, version source, execution wrapper, deployment targets, and known exceptions.
 
+## Deployment Endpoint Routing
+
+Use the verified deployment target that matches the requested workflow:
+
+- For requests to inspect, demonstrate, or verify the deployed application, route to `https://mdopendata-demo.onrender.com`.
+- Verify that target with `GET https://mdopendata-demo.onrender.com/healthz` before reporting it as available.
+- Treat the Render target as read-only demonstration infrastructure backed by the Supabase snapshot. Route ingestion, uploads, extraction, review writes, and other mutation workflows to the local environment.
+- Do not route demonstration requests to the separate AWS deployment workflow. Use `wiki/implementation/aws-deployment.md` only for explicitly requested AWS operations.
+- Keep the current endpoint and its read-only boundary synchronized with `wiki/implementation/render-supabase-deployment.md` and `wiki/platform/project-environment.md`.
+
 ## Handoff and QA
 
 Report the approved scope, executed commands, changed artifacts, resulting versions or targets, verification results, rollback readiness, documentation updates, and unresolved risks. Finish in `QA Reviewer` after mutation. Route failures with an unknown cause to `Debugger`; route architecture decisions beyond the approved operational scope to `Coding Architect`.
