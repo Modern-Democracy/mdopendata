@@ -2,7 +2,7 @@ services:
   - type: web
     name: mdopendata-demo
     runtime: docker
-    plan: starter
+       plan: free
     dockerfilePath: ./web/Dockerfile.render
     dockerContext: .
     healthCheckPath: /healthz
