@@ -40,7 +40,7 @@ For later repository migrations, set `DATABASE_URL` and run:
 
 ## Render configuration
 
-Create a Blueprint from [`render.yaml`](../../render.yaml). Set `DATABASE_URL` to the Supabase PostgreSQL connection string as a secret. The service uses `HOST=0.0.0.0`, port `10000`, `REPO_ROOT=/workspace`, SSL, the `public,extensions` search path, and a five-connection application pool.
+The demonstration service is deployed as the free Render web service `mdopendata-demo` at [mdopendata-demo.onrender.com](https://mdopendata-demo.onrender.com). The Render Blueprint flow in this workspace required payment information, so the service was created through the manual free-instance flow without adding payment details. [`render.yaml`](../../render.yaml) remains the reproducible configuration reference. Set `DATABASE_URL` to the Supabase PostgreSQL connection string as a secret. The service uses `HOST=0.0.0.0`, port `10000`, `REPO_ROOT=/workspace`, SSL, the `public,extensions` search path, and a five-connection application pool.
 
 The service health endpoint is `/healthz`. It requires a successful `SELECT 1` against Supabase. `DEMO_MODE=true` returns HTTP 403 for non-GET requests under `/api/document-ingestion/` and for section-equivalence decision writes.
 
