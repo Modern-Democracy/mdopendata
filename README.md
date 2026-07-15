@@ -101,6 +101,16 @@ For local schema changes against Supabase, set `DATABASE_URL` and run:
 
 The canonical deployment notes are in [the Render and Supabase deployment page](wiki/implementation/render-supabase-deployment.md).
 
+## Local PDF Inventory Review
+
+Start the staged PDF evidence and block-inventory reviewer on port 3217 with:
+
+```powershell
+.\scripts\start-staged-pdf-review.ps1
+```
+
+The launcher validates the Stage 0 source evidence and Stage 1 block inventory, enables schema-validated Stage 1 editing, and listens only on `127.0.0.1`. Each mutation appends a review decision. Private-LAN installation and phone/tablet support are deferred; the Render demonstration does not expose this route.
+
 ## Python Environment
 
 Environment, dependency, and deployment changes are governed by the DevOps role and require explicit user approval before mutation. See [the canonical project environment page](wiki/platform/project-environment.md).

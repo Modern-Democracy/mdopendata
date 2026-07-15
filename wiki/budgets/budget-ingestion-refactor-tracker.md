@@ -118,7 +118,7 @@ Completed prior-year evidence confirms that manifest counts must be generated fr
 | Item | Status | Notes |
 | --- | --- | --- |
 | Audit remaining hardcoded budget identifiers | Started | Current scan found expected 2026/2027 constants in document-specific normalization, reconciliation, validation, and test scripts; reusable raw artifact generation has been parameterized for municipality key and fiscal period. |
-| Define document mapping package schema | Deferred | Should wait for prior-year mapping artifacts. |
+| Define document mapping package schema | Structural schemas complete | The staged PDF contracts now define source evidence, blocks, groups, structural templates, document-specific applications, append-only review decisions, and parity reports. Existing semantic mapping packages remain separate. |
 | Extract raw parser module | Deferred | Low risk, but prior-year raw coverage should finish first. |
 | Convert manifest builder to config input | Deferred | Needs 25/26 and 24/25 manifest lessons. |
 | Convert importer to manifest-driven CLI | Deferred | Depends on final expected-count and coexistence behavior. |
@@ -128,6 +128,8 @@ Completed prior-year evidence confirms that manifest counts must be generated fr
 ## Sources
 
 - [Document extraction engineering](../implementation/document-extraction-engineering.md)
+- [Staged PDF inventory and extraction architecture](../implementation/staged-pdf-inventory-extraction-architecture.md)
+- [Staged PDF artifact JSON Schemas](../implementation/staged-pdf-artifact-json-schemas.md)
 - [Budget implementation and test plan](./implementation-plan.md)
 - [2026/2027 normalization status](./2026-normalization-status.md)
 - [Week 5 raw ingestion status](./week-5-raw-ingestion-status.md)

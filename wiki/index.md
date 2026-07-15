@@ -115,6 +115,10 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [Release help and MCP plan](./implementation/release-help-and-mcp-plan.md) | Implementation pattern for release-facing contextual help, the `help` schema, web help APIs, and the repo-local `mdopendata-mcp` package. |
 | [Agenda package ingestion contract](./implementation/agenda-package-ingestion-contract.md) | Package JSON, logical-document ordering, agenda-item binding, template discovery, and approval gates. |
 | [Document extraction engineering](./implementation/document-extraction-engineering.md) | Project-wide reuse, variation, exception, regeneration, and QA contract for maintainable document extraction. |
+| [Staged PDF inventory and extraction architecture](./implementation/staged-pdf-inventory-extraction-architecture.md) | Review-first page-block inventory, logical grouping, structural templates, shadow extraction, review UI, and published-data parity contract. |
+| [Staged PDF artifact JSON Schemas](./implementation/staged-pdf-artifact-json-schemas.md) | Draft 2020-12 contracts, semantic invariants, validation commands, and compatibility rules for staged PDF artifacts. |
+| [Charlottetown staged PDF shadow pilot](./implementation/staged-pdf-inventory-extraction-charlottetown-pilot.md) | Frozen baseline, Stage 0 evidence, Stage 1 block inventory, representative controls, and shadow-pilot acceptance criteria. |
+| [Staged PDF inventory review UI](./implementation/staged-pdf-inventory-review-ui-plan.md) | Loopback-only Stage 0 evidence and editable Stage 1 blocks, internal regions, content relationships, deferred LAN installation and mobile support, and verification gates. |
 
 ## Plans
 

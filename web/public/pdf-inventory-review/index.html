@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PDF inventory review | Modern Democracy</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/colors_and_type.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#page-canvas">Skip to source page</a>
+  <header class="app-header">
+    <div class="brand-lockup">
+      <img src="/assets/logo-mdopendata.svg" alt="Modern Democracy mdopendata">
+      <div><p class="eyebrow">Local extraction workspace</p><h1>PDF inventory review</h1></div>
+    </div>
+    <div class="header-status" aria-live="polite">
+      <span id="validation-status" class="status-badge pending">Validating evidence</span>
+      <span id="editing-status" class="status-badge pending">Editing disabled</span>
+      <span id="page-coverage" class="mono">Stage 1</span>
+    </div>
+  </header>
+
+  <section class="document-bar" aria-label="Document evidence summary">
+    <div><p id="document-title" class="document-title">Loading staged evidence</p><p id="source-path" class="source-path mono"></p></div>
+    <dl class="document-metrics">
+      <div><dt>Pages</dt><dd id="page-count">—</dd></div>
+      <div><dt>Blocks</dt><dd id="block-count">—</dd></div>
+      <div><dt>Financial</dt><dd id="financial-count">—</dd></div>
+      <div><dt>Review pages</dt><dd id="review-page-count">—</dd></div>
+      <div><dt>Stage 1 artifact</dt><dd id="artifact-hash" class="hash-value">—</dd></div>
+    </dl>
+  </section>
+
+  <main class="review-layout">
+    <aside class="thumbnail-panel" aria-label="PDF pages">
+      <div class="panel-heading">
+        <div><p class="eyebrow">Page inventory</p><h2>154 source pages</h2></div>
+        <label class="page-jump"><span>Go to</span><input id="page-input" type="number" min="1" max="154" value="1" inputmode="numeric"></label>
+      </div>
+      <nav id="representative-pages" class="representative-pages" aria-label="Representative controls"></nav>
+      <div id="thumbnail-list" class="thumbnail-list" aria-live="polite"></div>
+    </aside>
+
+    <section class="canvas-panel" aria-label="Source page viewer">
+      <div class="canvas-toolbar">
+        <div class="page-controls" aria-label="Page navigation">
+          <button id="previous-page" type="button">Previous</button><span id="active-page-label" class="mono">Page —</span><button id="next-page" type="button">Next</button>
+        </div>
+        <div class="view-controls" aria-label="Page display controls">
+          <button id="zoom-out" type="button" aria-label="Zoom out">−</button><span id="zoom-label" class="mono">100%</span><button id="zoom-in" type="button" aria-label="Zoom in">+</button><button id="fit-page" type="button">Fit</button>
+          <label class="toggle-control"><input id="blocks-toggle" type="checkbox" checked><span>Stage 1 blocks</span></label>
+          <label class="toggle-control"><input id="embedded-toggle" type="checkbox"><span>Embedded words</span></label>
+          <label class="toggle-control"><input id="ocr-toggle" type="checkbox"><span>OCR words</span></label>
+          <button id="draw-block" type="button">Draw new box</button>
+        </div>
+      </div>
+      <div id="page-canvas" class="page-canvas" tabindex="-1">
+        <div id="canvas-status" class="canvas-status">Loading staged evidence</div>
+        <div id="page-sheet" class="page-sheet" hidden>
+          <img id="page-image" alt="">
+          <div id="blocks-overlay" class="blocks-overlay"></div>
+          <div id="embedded-overlay" class="word-overlay embedded-overlay" aria-hidden="true"></div>
+          <div id="ocr-overlay" class="word-overlay ocr-overlay" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="inspector-panel" aria-label="Evidence inspector">
+      <div class="panel-heading inspector-heading">
+        <div><p class="eyebrow">Evidence inspector</p><h2 id="inspector-title">Page —</h2></div>
+        <span id="page-disposition" class="status-badge pending">Loading</span>
+      </div>
+      <section class="inspector-section">
+        <h3>Page evidence</h3>
+        <dl class="detail-list">
+          <div><dt>Page key</dt><dd id="page-key" class="mono">—</dd></div><div><dt>Dimensions</dt><dd id="page-dimensions" class="mono">—</dd></div><div><dt>Rotation</dt><dd id="page-rotation" class="mono">—</dd></div><div><dt>Embedded words</dt><dd id="embedded-count" class="mono">—</dd></div><div><dt>OCR</dt><dd id="ocr-status" class="mono">—</dd></div><div><dt>Stage 0 review</dt><dd id="review-status" class="mono">—</dd></div>
+        </dl>
+      </section>
+      <section id="ocr-notice" class="evidence-notice" hidden><h3>OCR fallback used</h3><p id="ocr-notice-copy"></p></section>
+      <section class="inspector-section">
+        <h3>Stage 1 block inventory</h3>
+        <p id="block-summary" class="block-summary">—</p><div id="block-list" class="block-list"></div>
+        <dl id="block-detail" class="detail-list" hidden>
+          <div><dt>Block key</dt><dd id="block-key" class="mono">—</dd></div><div><dt>Type</dt><dd id="block-type" class="mono">—</dd></div><div><dt>Table family</dt><dd id="block-family" class="mono">—</dd></div><div><dt>Reading order</dt><dd id="block-order" class="mono">—</dd></div><div><dt>Confidence</dt><dd id="block-confidence" class="mono">—</dd></div><div><dt>Review</dt><dd id="block-review" class="mono">—</dd></div><div><dt>Evidence</dt><dd id="block-excerpt">—</dd></div>
+        </dl>
+        <div id="block-editor" class="block-editor" hidden>
+          <label><span>Box type</span><select id="block-type-select"></select></label>
+          <label class="financial-control"><input id="block-financial" type="checkbox"><span>Financial candidate</span></label>
+          <button id="save-block-type" type="button">Save classification</button>
+          <button id="edit-internal" type="button" hidden>Edit internal structure</button>
+          <button id="delete-block" class="danger-button" type="button">Delete selected box</button>
+        </div>
+        <div id="region-editor" class="region-editor" hidden>
+          <div class="editor-row"><strong>Internal structure</strong><button id="exit-internal" type="button">Exit internal edit</button></div>
+          <p id="region-summary" class="block-summary"></p>
+          <div id="region-list" class="block-list"></div>
+          <label><span>Region type</span><select id="region-type-select"></select></label>
+          <div class="editor-row"><button id="save-region-type" type="button">Save region type</button><button id="draw-region" type="button">Draw region</button></div>
+          <button id="delete-region" class="danger-button" type="button">Delete selected region</button>
+        </div>
+        <div class="draw-settings">
+          <label><span>New box type</span><select id="new-block-type"></select></label>
+          <label class="financial-control"><input id="new-block-financial" type="checkbox"><span>Financial candidate</span></label>
+        </div>
+        <label class="reason-control"><span>Review reason</span><input id="edit-reason" type="text" value="Manual Stage 1 inventory correction" maxlength="240"></label>
+        <p class="editor-help">Select a box to expose resize handles. For tables, enable word evidence and include the complete column header, row-label region, and table body.</p>
+      </section>
+      <section class="inspector-section">
+        <h3>Content associations</h3>
+        <label class="relationship-control"><span>Relationship</span><select id="relationship-type"><option value="graph_source_table">Graph/chart to source table</option><option value="table_continuation">Multi-page table continuation</option><option value="overview_detail">Overview row to detail table</option></select></label>
+        <p id="link-source-status" class="block-summary">No link source selected.</p>
+        <div class="editor-row"><button id="set-link-source" type="button">Use selection as source</button><button id="save-link" type="button" disabled>Link to selection</button></div>
+        <div id="relationship-list" class="relationship-list"></div>
+      </section>
+      <section class="inspector-section">
+        <h3>Recorded Stage 0 hashes</h3>
+        <dl class="hash-list"><div><dt>Render</dt><dd id="render-hash">—</dd></div><div><dt>Thumbnail</dt><dd id="thumbnail-hash">—</dd></div><div><dt>Embedded text</dt><dd id="embedded-hash">—</dd></div><div><dt>OCR evidence</dt><dd id="ocr-hash">Not applicable</dd></div></dl>
+      </section>
+      <section class="inspector-section"><h3>Source citation</h3><a id="source-citation" class="citation" href="#">—</a></section>
+      <section class="keyboard-help"><h3>Keyboard controls</h3><p><kbd>←</kbd> <kbd>→</kbd> pages · <kbd>+</kbd> <kbd>−</kbd> zoom · <kbd>B</kbd> blocks · <kbd>E</kbd> embedded · <kbd>O</kbd> OCR</p></section>
+    </aside>
+  </main>
+  <div id="error-banner" class="error-banner" role="alert" hidden></div>
+  <script src="app.js" defer></script>
+</body>
+</html>

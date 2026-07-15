@@ -1,0 +1,223 @@
+#!/usr/bin/env node
+
+import { spawn } from "node:child_process";
+import net from "node:net";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const webRoot = path.join(root, "web");
+
+function assert(condition, message) {
+  if (!condition) throw new Error(message);
+}
+
+async function availablePort() {
+  return new Promise((resolve, reject) => {
+    const server = net.createServer();
+    server.once("error", reject);
+    server.listen(0, "127.0.0.1", () => {
+      const address = server.address();
+      server.close(() => resolve(address.port));
+    });
+  });
+}
+
+async function waitForServer(baseUrl, child) {
+  for (let attempt = 0; attempt < 80; attempt += 1) {
+    if (child.exitCode !== null) throw new Error(`Review server exited with ${child.exitCode}.`);
+    try {
+      await fetch(`${baseUrl}/internal/pdf-inventory-review`);
+      return;
+    } catch {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+  }
+  throw new Error("Review server did not start.");
+}
+
+async function stopServer(child) {
+  if (child.exitCode !== null) return;
+  child.kill();
+  await Promise.race([
+    new Promise((resolve) => child.once("exit", resolve)),
+    new Promise((resolve) => setTimeout(resolve, 3000)),
+  ]);
+}
+
+async function withServer(environment, checks) {
+  const port = await availablePort();
+  const child = spawn(process.execPath, ["server.js"], {
+    cwd: webRoot,
+    env: {
+      ...process.env,
+      REPO_ROOT: root,
+      HOST: "127.0.0.1",
+      PORT: String(port),
+      PDF_INVENTORY_REVIEW_ENABLED: "0",
+      PDF_INVENTORY_REVIEW_WRITE_ENABLED: "0",
+      DEMO_MODE: "0",
+      ...environment,
+    },
+    stdio: ["ignore", "pipe", "pipe"],
+    windowsHide: true,
+  });
+  let diagnostics = "";
+  child.stdout.on("data", (chunk) => { diagnostics += chunk.toString(); });
+  child.stderr.on("data", (chunk) => { diagnostics += chunk.toString(); });
+  const baseUrl = `http://127.0.0.1:${port}`;
+  try {
+    await waitForServer(baseUrl, child);
+    await checks(baseUrl);
+  } catch (error) {
+    error.message = `${error.message}\n${diagnostics}`;
+    throw error;
+  } finally {
+    await stopServer(child);
+  }
+}
+
+async function expectStatus(baseUrl, requestPath, status, options) {
+  const response = await fetch(`${baseUrl}${requestPath}`, options);
+  assert(response.status === status, `${requestPath} returned ${response.status}; expected ${status}.`);
+  return response;
+}
+
+await withServer({}, async (baseUrl) => {
+  const portal = await expectStatus(baseUrl, "/", 200);
+  assert((await portal.text()).includes("Municipal portal"), "Existing portal route regressed.");
+  const context = await expectStatus(baseUrl, "/api/portal/context?role=staff&route=/documents", 200);
+  assert((await context.json()).rolePreset === "staff", "Existing portal context API regressed.");
+  await expectStatus(baseUrl, "/internal/pdf-inventory-review", 404);
+  await expectStatus(baseUrl, "/pdf-inventory-review/app.js", 404);
+  await expectStatus(baseUrl, "/api/internal/pdf-inventory-review/documents", 404);
+  console.log("ok - disabled routes are unavailable");
+});
+
+await withServer({
+  PDF_INVENTORY_REVIEW_ENABLED: "1",
+  DEMO_MODE: "1",
+  HOST: "0.0.0.0",
+}, async (baseUrl) => {
+  await expectStatus(baseUrl, "/internal/pdf-inventory-review", 404);
+  await expectStatus(baseUrl, "/api/internal/pdf-inventory-review/documents", 404);
+  console.log("ok - demo mode denies review routes");
+});
+
+await withServer({ PDF_INVENTORY_REVIEW_ENABLED: "1", HOST: "0.0.0.0" }, async (baseUrl) => {
+  await expectStatus(baseUrl, "/internal/pdf-inventory-review", 404);
+  await expectStatus(baseUrl, "/api/internal/pdf-inventory-review/documents", 404);
+  console.log("ok - non-loopback bind denies review routes");
+});
+
+await withServer({ PDF_INVENTORY_REVIEW_ENABLED: "1" }, async (baseUrl) => {
+  const shell = await expectStatus(baseUrl, "/internal/pdf-inventory-review?page=24", 200);
+  const shellText = await shell.text();
+  assert(shellText.includes("PDF inventory review"), "Review shell title is missing.");
+  assert(shellText.includes("app.js"), "Review shell script is missing.");
+  assert(shellText.includes("Draw new box"), "Stage 1 edit controls are missing.");
+  assert(shellText.includes("Content associations"), "Stage 1 relationship controls are missing.");
+  assert(shellText.includes("Edit internal structure"), "Internal-region controls are missing.");
+  const appScript = await (await expectStatus(baseUrl, "/pdf-inventory-review/app.js", 200)).text();
+  const expectedTypeOrder = ['["title", "Title"]', '["formatted_text", "Formatted Text"]', '["table", "Table"]', '["chart", "Graph/Chart"]', '["other_visual", "Diagram/Other Visual"]', '["map", "Map"]', '["table_of_contents", "Table of Contents"]', '["header", "Header"]', '["footer", "Footer"]', '["page_number", "Page Number"]', '["divider", "Divider"]', '["signature", "Signature"]'];
+  let priorTypePosition = -1;
+  for (const typeText of expectedTypeOrder) {
+    const position = appScript.indexOf(typeText);
+    assert(position > priorTypePosition, `Block type is missing or out of order: ${typeText}`);
+    priorTypePosition = position;
+  }
+
+  const documentsResponse = await expectStatus(baseUrl, "/api/internal/pdf-inventory-review/documents", 200);
+  assert(documentsResponse.headers.get("cache-control") === "no-store", "Document API must use no-store.");
+  const documents = await documentsResponse.json();
+  const document = documents.documents?.[0];
+  assert(document?.document_key === "ctown-budget-2026-2027", "Pilot document key is incorrect.");
+  assert(document?.page_count === 154, "Pilot page count is incorrect.");
+  assert(document?.complete_page_count === 154, "Complete page count is incorrect.");
+  assert(document?.blocked_page_count === 0, "Blocked page count is incorrect.");
+  assert(document?.ocr_page_count === 1, "OCR page count is incorrect.");
+  assert(document?.block_count === 440, "Stage 1 block count is incorrect.");
+  assert(document?.financial_block_count === 101, "Stage 1 financial candidate count is incorrect.");
+  assert(document?.block_review_page_count === 1, "Stage 1 review-page count is incorrect.");
+  assert(document?.relationship_count === 0, "Unexpected initial Stage 1 relationships found.");
+  assert(document?.validation?.status === "valid", "Canonical validation did not pass.");
+
+  const artifactResponse = await expectStatus(
+    baseUrl,
+    "/api/internal/pdf-inventory-review/documents/ctown-budget-2026-2027/artifacts",
+    200,
+  );
+  const artifact = await artifactResponse.json();
+  assert(artifact.artifact?.artifact_type === "source_evidence", "Artifact type is incorrect.");
+  assert(artifact.artifact?.source?.page_count === 154, "Artifact source page count is incorrect.");
+  assert(artifact.block_artifact?.artifact_type === "block_inventory", "Stage 1 artifact type is incorrect.");
+  assert(artifact.block_artifact?.block_count === 440, "Stage 1 artifact block count is incorrect.");
+
+  const pagesResponse = await expectStatus(
+    baseUrl,
+    "/api/internal/pdf-inventory-review/documents/ctown-budget-2026-2027/pages",
+    200,
+  );
+  const pages = await pagesResponse.json();
+  assert(pages.pages?.length === 154, "Page inventory does not contain 154 pages.");
+  const page24 = pages.pages.find((page) => page.page_number === 24);
+  assert(page24?.embedded_word_count === 4, "Page 24 embedded-word count is incorrect.");
+  assert(page24?.ocr_status === "completed", "Page 24 OCR fallback is missing.");
+  assert(page24?.ocr_word_count > 4, "Page 24 OCR evidence count is missing.");
+  assert(page24?.block_count > 0, "Page 24 Stage 1 blocks are missing.");
+  assert(page24?.block_inventory_status === "needs_review", "Page 24 Stage 1 status is incorrect.");
+  assert(pages.pages.filter((page) => page.ocr_status === "completed").length === 1, "Unexpected OCR pages found.");
+
+  const detailResponse = await expectStatus(
+    baseUrl,
+    "/api/internal/pdf-inventory-review/documents/ctown-budget-2026-2027/pages/24",
+    200,
+  );
+  const detail = await detailResponse.json();
+  assert(detail.page?.page_key === "ctown-budget-2026-2027:p024", "Page 24 key is incorrect.");
+  assert(detail.evidence?.ocr?.status === "completed", "Page 24 OCR detail is incorrect.");
+  assert(detail.block_inventory?.blocks?.length === page24.block_count, "Page 24 block detail is inconsistent.");
+  assert(Array.isArray(detail.block_inventory?.relationships), "Stage 1 page relationships are missing.");
+
+  const page10 = await (await expectStatus(baseUrl, "/api/internal/pdf-inventory-review/documents/ctown-budget-2026-2027/pages/10", 200)).json();
+  const page10Text = page10.block_inventory.blocks.find((block) => block.block_type === "formatted_text");
+  assert(page10Text?.regions?.length > 0, "Formatted-text internal regions are missing on page 10.");
+
+  const renderResponse = await expectStatus(
+    baseUrl,
+    "/api/internal/pdf-inventory-review/documents/ctown-budget-2026-2027/assets/render/24",
+    200,
+  );
+  assert(renderResponse.headers.get("content-type") === "image/png", "Render content type is incorrect.");
+  assert(renderResponse.headers.get("x-content-sha256") === detail.evidence.render.sha256, "Render hash header is incorrect.");
+  assert((await renderResponse.arrayBuffer()).byteLength > 10000, "Render asset is empty.");
+
+  const embeddedResponse = await expectStatus(
+    baseUrl,
+    "/api/internal/pdf-inventory-review/documents/ctown-budget-2026-2027/assets/embedded-words/24",
+    200,
+  );
+  const embedded = await embeddedResponse.json();
+  assert(embedded.word_count === 4 && embedded.words?.length === 4, "Embedded-word evidence is incorrect.");
+
+  const ocrResponse = await expectStatus(
+    baseUrl,
+    "/api/internal/pdf-inventory-review/documents/ctown-budget-2026-2027/assets/ocr-words/24",
+    200,
+  );
+  const ocr = await ocrResponse.json();
+  assert(ocr.word_count === page24.ocr_word_count, "OCR-word evidence count is inconsistent.");
+
+  await expectStatus(baseUrl, "/api/internal/pdf-inventory-review/documents/unknown/pages/24", 404);
+  await expectStatus(baseUrl, "/api/internal/pdf-inventory-review/documents/ctown-budget-2026-2027/pages/0", 404);
+  await expectStatus(baseUrl, "/api/internal/pdf-inventory-review/documents/ctown-budget-2026-2027/assets/file/24", 404);
+  await expectStatus(baseUrl, "/api/internal/pdf-inventory-review/documents?path=../docs", 400);
+  await expectStatus(baseUrl, "/api/internal/pdf-inventory-review/documents", 405, { method: "POST" });
+  await expectStatus(
+    baseUrl,
+    "/api/internal/pdf-inventory-review/documents/ctown-budget-2026-2027/commands",
+    403,
+    { method: "POST", headers: { "content-type": "application/json" }, body: "{}" },
+  );
+  console.log("ok - enabled Stage 0 and Stage 1 read APIs");
+});

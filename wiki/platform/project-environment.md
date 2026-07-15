@@ -48,6 +48,10 @@ Historical `.python` paths and Codex bundled-runtime paths in generated manifest
 - Requests to inspect or demonstrate the deployed application route to the Render endpoint; ingestion and other write workflows remain local.
 - Adding or changing a deployment target requires DevOps review and explicit user approval.
 
+The staged PDF review surface is a temporary host process started with `scripts/start-staged-pdf-review.ps1`. It binds only `127.0.0.1:3217`, requires `PDF_INVENTORY_REVIEW_ENABLED=1`, enables the local Stage 1 writer, and forces `DEMO_MODE=0`. Docker and Render do not enable this route.
+
+The obsolete Windows rule `mdopendata PDF review 3217 iPad` has been removed. Private-LAN access remains deferred to an installer-managed implementation with explicit authentication, interface selection, firewall lifecycle, discovery, and stop controls.
+
 ## Budget Raw Import Versioning
 
 Budget raw tables are append-only. When reviewed extraction artifacts change after import, do not update or delete existing raw rows or cells. Use `scripts/sync-budget-2026-raw-content.py` to append a versioned raw namespace after explicit approval. The Charlottetown 2026/2027 normalized manifest targets `full-2`; the two prior-year manifests target corrected `full-3` namespaces. Earlier imports remain immutable historical extraction evidence.
@@ -78,6 +82,8 @@ Migration 027 and `scripts/apply-budget-web-taxonomy.py` implement the authorize
 
 The local `web` service was rebuilt from the existing Docker Compose definition after the server and static UI changes. No dependency, lockfile, runtime, secret, port, or deployment-target change was made.
 
+The local staged PDF reviewer uses `PDF_INVENTORY_REVIEW_ENABLED=1` and `PDF_INVENTORY_REVIEW_WRITE_ENABLED=1` through `scripts/start-staged-pdf-review.ps1`. The write command invokes repository Python only through `scripts/python.ps1`.
+
 ## Required Documentation for Changes
 
 Every environment or deployment change must record:
@@ -95,6 +101,7 @@ Every environment or deployment change must record:
 - [Python project configuration](../../pyproject.toml)
 - [Locked Python dependencies](../../requirements.lock.txt)
 - [Python wrapper](../../scripts/python.ps1)
+- [Staged PDF review launcher](../../scripts/start-staged-pdf-review.ps1)
 - [Budget migration regression test](../../scripts/test-budget-migration.py)
 - [QGIS MCP launcher](../../scripts/start-qgis-mcp.ps1)
 - [AWS deployment](../implementation/aws-deployment.md)

@@ -86,10 +86,13 @@ The Charlottetown 2026/2027 budget workflow demonstrates this contract:
 
 These implementations are examples, not universal assumptions. New document families must prove template fit before reuse.
 
+The [staged PDF inventory and extraction architecture](./staged-pdf-inventory-extraction-architecture.md) defines the planned review-first extension of this contract. It moves approved page blocks, multi-page logical grouping, and structural template fit ahead of raw financial row extraction while retaining these reuse, exception, provenance, and QA requirements.
+
 ## Sources
 
 - [Wiki schema](../AGENTS.md)
 - [Budget normalization status](../budgets/2026-normalization-status.md)
 - [Budget normalized mapping contract](../budgets/representative-spike-normalized-mapping.md)
+- [Staged PDF inventory and extraction architecture](./staged-pdf-inventory-extraction-architecture.md)
 - `scripts/extract-charlottetown-budget-raw-rows.py`
 - `scripts/build-budget-2026-normalization-artifacts.py`

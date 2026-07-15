@@ -53,6 +53,10 @@ Charlottetown is the prototype municipality. The initial source set is the three
 | [Prior-year normalized import completion status](./prior-year-normalized-import-completion-status.md) | Completed manifests, reconciliations, controlled imports, idempotence, project references, and source-fidelity QA for both prior years. |
 | [Capital project lifecycle and references](./capital-project-lifecycle.md) | Source-limited lifecycle rules and municipality-scoped project identity with document-owned references. |
 | [Budget ingestion refactor tracker](./budget-ingestion-refactor-tracker.md) | Deferred refactor tracker for separating reusable budget ingestion code from document-specific mappings after prior-year completion. |
+| [Staged PDF inventory and extraction architecture](../implementation/staged-pdf-inventory-extraction-architecture.md) | Review-first architecture for page blocks, multi-page logical groups, structural templates, shadow extraction, review UI, and published-data parity. |
+| [Staged PDF artifact JSON Schemas](../implementation/staged-pdf-artifact-json-schemas.md) | Version 1 source-evidence, block, group, template, review-decision, and parity-report contracts and validators. |
+| [Charlottetown staged PDF shadow pilot](../implementation/staged-pdf-inventory-extraction-charlottetown-pilot.md) | Frozen controls, Stage 0 evidence, Stage 1 block inventory, representative pages, and parity criteria. |
+| [Staged PDF inventory review UI plan](../implementation/staged-pdf-inventory-review-ui-plan.md) | Local-only Stage 0 and Stage 1 review runtime, command boundary, rollout slices, and QA gates. |
 | [Three-year publication snapshot](./three-year-publication-snapshot-proposal.md) | Creation, publication status, source documents, fact counts, and acceptance checks for the first Charlottetown three-year snapshot. |
 | [Public budget API implementation scope](./public-api-implementation-scope.md) | First read-only published-snapshot API slice, response behavior, exclusions, and acceptance criteria. |
 | [Normalized category taxonomy proposal](./normalized-category-taxonomy-proposal.md) | Reviewed Charlottetown vocabulary candidate, versioned assignment architecture, mapping cohorts, review register, and approval gates. |
@@ -63,6 +67,12 @@ Charlottetown is the prototype municipality. The initial source set is the three
 ## Current Evidence
 
 The first pass of the 2026/2027 PDF found 154 pages, 114 table or project-profile candidates, 3,233 raw rows, and 2,420 detected value tokens. The document includes overview charts with source tables, operating summaries and detailed breakdowns, third-party facility budgets, capital schedules and project profiles, property and utility rates, assessment calculations, and debt schedules.
+
+The staged workflow now has a deterministic Stage 0 package for all 154 pages: 154 renders, 154 thumbnails, 154 embedded-word files, one targeted OCR fallback on PDF page 24, zero blocked pages, and an identical clean rerun. These artifacts remain shadow-only and do not change the database or publication snapshot.
+
+The disabled-by-default local inventory-review route now displays the complete Stage 0 package with lazy thumbnails, page renders, embedded and OCR word overlays, representative controls, hashes, validation state, and exact source citations. It has no write endpoint, database query, public route, or demo-mode exposure.
+
+Stage 1 now adds 440 proposed block candidates across all 154 pages, 101 conservative financial candidates, 709 formatted-text internal regions, one OCR-derived review page, editable overlays, and reviewed graph/table, continuation, and overview/detail relationships. No candidate is approved by generation.
 
 The current Charlottetown publication snapshot contains 6,381 approved financial observations from the three financial-plan documents. Public financial APIs read through `budget.v_published_financial_observations`; contextual facts read through `budget.v_published_facts`.
 

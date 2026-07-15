@@ -1,5 +1,5 @@
 import { createServer } from "node:http";
-import { mkdir, open, readFile, readdir, rename, unlink } from "node:fs/promises";
+import { mkdir, open, readFile, readdir, rename, stat, unlink, writeFile } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import { createHash, randomUUID } from "node:crypto";
 import path from "node:path";
@@ -15,6 +15,44 @@ const repoRoot = process.env.REPO_ROOT || path.resolve(__dirname, "..");
 const host = process.env.HOST || "127.0.0.1";
 const port = Number(process.env.PORT || 3000);
 const demoMode = /^(1|true|yes)$/i.test(process.env.DEMO_MODE || "false");
+const pdfInventoryReviewRequested = /^(1|true|yes)$/i.test(
+  process.env.PDF_INVENTORY_REVIEW_ENABLED || "false",
+);
+const pdfInventoryReviewWriteRequested = /^(1|true|yes)$/i.test(
+  process.env.PDF_INVENTORY_REVIEW_WRITE_ENABLED || "false",
+);
+const pdfInventoryReviewLoopbackBind = ["127.0.0.1", "::1", "localhost"].includes(
+  host.toLowerCase(),
+);
+const pdfInventoryReviewEnabled = pdfInventoryReviewRequested && !demoMode && pdfInventoryReviewLoopbackBind;
+const pdfInventoryReviewDocumentKey = "ctown-budget-2026-2027";
+const pdfInventoryReviewArtifactPath = path.join(
+  repoRoot,
+  "data",
+  "budget",
+  "charlottetown",
+  "2026-2027",
+  "staged-pdf",
+  "v1",
+  "stage-0",
+  "source-evidence.json",
+);
+const pdfInventoryReviewBlockArtifactPath = path.join(
+  repoRoot,
+  "data",
+  "budget",
+  "charlottetown",
+  "2026-2027",
+  "staged-pdf",
+  "v1",
+  "stage-1",
+  "block-inventory.json",
+);
+const stagedPdfValidatorPath = path.join(repoRoot, "scripts", "validate-staged-pdf-artifacts.py");
+const stagedPdfBlockWriterPath = path.join(repoRoot, "scripts", "update-staged-pdf-block-inventory.py");
+let pdfInventoryReviewArtifactCache = null;
+let pdfInventoryReviewArtifactLoad = null;
+let pdfInventoryReviewCommandQueue = Promise.resolve();
 const defaultGdalTranslatePath = process.platform === "win32"
   ? "C:\\Program Files\\GDAL\\gdal_translate.exe"
   : "gdal_translate";
@@ -443,6 +481,421 @@ function summarizeRows(rows) {
 async function sendJson(response, payload) {
   response.writeHead(200, { "content-type": "application/json; charset=utf-8" });
   response.end(JSON.stringify(payload));
+}
+
+function sendPdfInventoryReviewJson(response, payload, statusCode = 200) {
+  response.writeHead(statusCode, {
+    "cache-control": "no-store",
+    "content-type": "application/json; charset=utf-8",
+  });
+  response.end(JSON.stringify(payload));
+}
+
+function stagedPdfReviewError(message, statusCode) {
+  const error = new Error(message);
+  error.statusCode = statusCode;
+  return error;
+}
+
+function sha256Buffer(value) {
+  return createHash("sha256").update(value).digest("hex");
+}
+
+function resolveRecordedRepoPath(repoRelpath) {
+  if (typeof repoRelpath !== "string" || path.isAbsolute(repoRelpath)) {
+    throw stagedPdfReviewError("Recorded Stage 0 asset path is invalid.", 409);
+  }
+  const absolute = path.resolve(repoRoot, ...repoRelpath.split("/"));
+  const relative = path.relative(path.resolve(repoRoot), absolute);
+  if (!relative || relative.startsWith("..") || path.isAbsolute(relative)) {
+    throw stagedPdfReviewError("Recorded Stage 0 asset path is outside the repository.", 409);
+  }
+  return absolute;
+}
+
+async function validatePdfInventoryReviewArtifact() {
+  const powershell = process.platform === "win32" ? "powershell.exe" : "pwsh";
+  const wrapper = path.join(repoRoot, "scripts", "python.ps1");
+  try {
+    await execFileAsync(
+      powershell,
+      [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        wrapper,
+        stagedPdfValidatorPath,
+        pdfInventoryReviewArtifactPath,
+        pdfInventoryReviewBlockArtifactPath,
+      ],
+      { cwd: repoRoot, timeout: 120000, windowsHide: true, maxBuffer: 1024 * 1024 },
+    );
+  } catch (cause) {
+    const error = stagedPdfReviewError("Staged PDF evidence did not pass canonical validation.", 503);
+    error.cause = cause;
+    throw error;
+  }
+}
+
+async function loadPdfInventoryReviewArtifact() {
+  let artifactStat;
+  let blockArtifactStat;
+  try {
+    artifactStat = await stat(pdfInventoryReviewArtifactPath);
+    blockArtifactStat = await stat(pdfInventoryReviewBlockArtifactPath);
+  } catch {
+    throw stagedPdfReviewError("Stage 0 or Stage 1 inventory evidence is unavailable.", 503);
+  }
+  const cacheKey = `${artifactStat.size}:${artifactStat.mtimeMs}:${blockArtifactStat.size}:${blockArtifactStat.mtimeMs}`;
+  if (pdfInventoryReviewArtifactCache?.cacheKey === cacheKey) {
+    return pdfInventoryReviewArtifactCache;
+  }
+  if (pdfInventoryReviewArtifactLoad?.cacheKey === cacheKey) {
+    return pdfInventoryReviewArtifactLoad.promise;
+  }
+
+  const promise = loadPdfInventoryReviewArtifactUncached(cacheKey);
+  pdfInventoryReviewArtifactLoad = { cacheKey, promise };
+  try {
+    return await promise;
+  } finally {
+    if (pdfInventoryReviewArtifactLoad?.promise === promise) {
+      pdfInventoryReviewArtifactLoad = null;
+    }
+  }
+}
+
+async function loadPdfInventoryReviewArtifactUncached(cacheKey) {
+  await validatePdfInventoryReviewArtifact();
+  const raw = await readFile(pdfInventoryReviewArtifactPath);
+  const blockRaw = await readFile(pdfInventoryReviewBlockArtifactPath);
+  let artifact;
+  let blockArtifact;
+  try {
+    artifact = JSON.parse(raw.toString("utf8"));
+    blockArtifact = JSON.parse(blockRaw.toString("utf8"));
+  } catch {
+    throw stagedPdfReviewError("Stage 0 or Stage 1 evidence is not valid JSON.", 503);
+  }
+  if (
+    artifact.artifact_type !== "source_evidence" ||
+    artifact.document_key !== pdfInventoryReviewDocumentKey ||
+    artifact.source?.page_count !== artifact.pages?.length
+  ) {
+    throw stagedPdfReviewError("Stage 0 source evidence identity is invalid.", 409);
+  }
+  if (
+    blockArtifact.artifact_type !== "block_inventory" ||
+    blockArtifact.document_key !== pdfInventoryReviewDocumentKey ||
+    blockArtifact.source_sha256 !== artifact.source_sha256
+  ) {
+    throw stagedPdfReviewError("Stage 1 block inventory identity is invalid.", 409);
+  }
+  const blocksByPage = new Map();
+  for (const page of blockArtifact.page_dispositions) {
+    blocksByPage.set(page.page_number, { disposition: page, blocks: [], relationships: [] });
+  }
+  const blockByKey = new Map();
+  for (const block of blockArtifact.records) {
+    blocksByPage.get(block.page_number)?.blocks.push(block);
+    blockByKey.set(block.block_key, block);
+  }
+  for (const relationship of blockArtifact.relationships) {
+    const pages = new Set([
+      blockByKey.get(relationship.source.block_key)?.page_number,
+      blockByKey.get(relationship.target.block_key)?.page_number,
+    ]);
+    for (const pageNumber of pages) {
+      if (pageNumber) blocksByPage.get(pageNumber)?.relationships.push(relationship);
+    }
+  }
+  const ocrWordCounts = {};
+  for (const page of artifact.pages.filter((candidate) => candidate.ocr.status === "completed")) {
+    const evidencePath = resolveRecordedRepoPath(page.ocr.evidence_relpath);
+    const evidence = JSON.parse((await readFile(evidencePath)).toString("utf8"));
+    ocrWordCounts[page.page_number] = evidence.word_count;
+  }
+  const value = {
+    artifact,
+    artifactSha256: sha256Buffer(raw),
+    blockArtifact,
+    blockArtifactSha256: sha256Buffer(blockRaw),
+    blocksByPage,
+    cacheKey,
+    ocrWordCounts,
+    validation: {
+      status: "valid",
+      validator: "scripts/validate-staged-pdf-artifacts.py",
+    },
+  };
+  pdfInventoryReviewArtifactCache = value;
+  return value;
+}
+
+function pdfInventoryReviewAssetDescriptor(page, assetType) {
+  if (assetType === "render") {
+    return { record: page.render, contentType: "image/png" };
+  }
+  if (assetType === "thumbnail") {
+    return { record: page.thumbnail, contentType: "image/png" };
+  }
+  if (assetType === "embedded-words") {
+    return {
+      record: {
+        repo_relpath: page.embedded_text.evidence_relpath,
+        sha256: page.embedded_text.sha256,
+      },
+      contentType: "application/json; charset=utf-8",
+    };
+  }
+  if (assetType === "ocr-words" && page.ocr.evidence_relpath && page.ocr.sha256) {
+    return {
+      record: { repo_relpath: page.ocr.evidence_relpath, sha256: page.ocr.sha256 },
+      contentType: "application/json; charset=utf-8",
+    };
+  }
+  return null;
+}
+
+function pdfInventoryReviewPageSummary(page, ocrWordCounts, blockPage) {
+  const assetRoot = `/api/internal/pdf-inventory-review/documents/${pdfInventoryReviewDocumentKey}/assets`;
+  return {
+    page_key: page.page_key,
+    page_number: page.page_number,
+    width_pt: page.width_pt,
+    height_pt: page.height_pt,
+    rotation: page.rotation,
+    embedded_word_count: page.embedded_text.word_count,
+    ocr_status: page.ocr.status,
+    ocr_word_count: page.ocr.status === "completed" ? ocrWordCounts[page.page_number] : null,
+    ocr_mean_confidence: page.ocr.mean_confidence,
+    evidence_disposition: page.evidence_disposition,
+    review: page.review,
+    block_count: blockPage?.blocks.length || 0,
+    financial_block_count: blockPage?.blocks.filter((block) => block.financial_candidate).length || 0,
+    block_inventory_status: blockPage?.disposition.status || "blocked",
+    assets: {
+      render: `${assetRoot}/render/${page.page_number}`,
+      thumbnail: `${assetRoot}/thumbnail/${page.page_number}`,
+      embedded_words: `${assetRoot}/embedded-words/${page.page_number}`,
+      ocr_words: page.ocr.status === "completed"
+        ? `${assetRoot}/ocr-words/${page.page_number}`
+        : null,
+    },
+  };
+}
+
+async function readPdfInventoryReviewCommand(request) {
+  const contentType = toStringValue(request.headers["content-type"]).split(";", 1)[0].trim();
+  if (contentType !== "application/json") {
+    throw stagedPdfReviewError("Stage 1 commands require application/json.", 415);
+  }
+  const maximum = 64 * 1024;
+  const declared = Number(request.headers["content-length"] || 0);
+  if (declared > maximum) {
+    throw stagedPdfReviewError("Stage 1 command exceeds 64 KiB.", 413);
+  }
+  const chunks = [];
+  let size = 0;
+  for await (const chunk of request) {
+    size += chunk.length;
+    if (size > maximum) {
+      throw stagedPdfReviewError("Stage 1 command exceeds 64 KiB.", 413);
+    }
+    chunks.push(chunk);
+  }
+  try {
+    return JSON.parse(Buffer.concat(chunks).toString("utf8"));
+  } catch {
+    throw stagedPdfReviewError("Stage 1 command is not valid JSON.", 400);
+  }
+}
+
+async function executePdfInventoryReviewCommand(command) {
+  const commandRoot = path.join(repoRoot, "tmp", "staged-pdf-review-commands");
+  await mkdir(commandRoot, { recursive: true });
+  const commandPath = path.join(commandRoot, `${randomUUID()}.json`);
+  await writeFile(commandPath, JSON.stringify(command), { encoding: "utf8", flag: "wx" });
+  const powershell = process.platform === "win32" ? "powershell.exe" : "pwsh";
+  const wrapper = path.join(repoRoot, "scripts", "python.ps1");
+  try {
+    const { stdout } = await execFileAsync(
+      powershell,
+      ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", wrapper, stagedPdfBlockWriterPath, "--command", commandPath],
+      { cwd: repoRoot, timeout: 120000, windowsHide: true, maxBuffer: 1024 * 1024 },
+    );
+    pdfInventoryReviewArtifactCache = null;
+    return JSON.parse(stdout.trim());
+  } catch (cause) {
+    let detail = null;
+    try {
+      detail = JSON.parse(toStringValue(cause.stdout).trim());
+    } catch {
+      detail = null;
+    }
+    const statusCode = detail?.kind === "conflict" ? 409 : detail?.kind === "invalid" ? 400 : 503;
+    throw stagedPdfReviewError(detail?.error || "Stage 1 command failed canonical validation.", statusCode);
+  } finally {
+    await unlink(commandPath).catch(() => {});
+  }
+}
+
+async function queuePdfInventoryReviewCommand(command) {
+  const execution = pdfInventoryReviewCommandQueue.then(() => executePdfInventoryReviewCommand(command));
+  pdfInventoryReviewCommandQueue = execution.catch(() => {});
+  return execution;
+}
+
+async function handlePdfInventoryReviewApi(request, response, url) {
+  const commandPath = `/api/internal/pdf-inventory-review/documents/${pdfInventoryReviewDocumentKey}/commands`;
+  if (url.pathname === commandPath && request.method === "POST") {
+    if (!pdfInventoryReviewWriteRequested) {
+      throw stagedPdfReviewError("Stage 1 review writes are disabled.", 403);
+    }
+    if (url.searchParams.size) {
+      throw stagedPdfReviewError("Query parameters are not supported by the Stage 1 command endpoint.", 400);
+    }
+    const command = await readPdfInventoryReviewCommand(request);
+    const result = await queuePdfInventoryReviewCommand(command);
+    sendPdfInventoryReviewJson(response, result, 200);
+    return true;
+  }
+  if (request.method !== "GET") {
+    sendPdfInventoryReviewJson(response, { error: "Method not allowed." }, 405);
+    return true;
+  }
+  if (url.searchParams.size) {
+    throw stagedPdfReviewError("Query parameters are not supported by this Stage 0 endpoint.", 400);
+  }
+  const loaded = await loadPdfInventoryReviewArtifact();
+  const {
+    artifact,
+    artifactSha256,
+    blockArtifact,
+    blockArtifactSha256,
+    blocksByPage,
+    ocrWordCounts,
+    validation,
+  } = loaded;
+  const apiRoot = "/api/internal/pdf-inventory-review";
+  const documentRoot = `${apiRoot}/documents/${pdfInventoryReviewDocumentKey}`;
+
+  if (url.pathname === `${apiRoot}/documents`) {
+    sendPdfInventoryReviewJson(response, {
+      documents: [{
+        document_key: artifact.document_key,
+        title: artifact.source.title,
+        municipality_key: artifact.source.municipality_key,
+        document_kind: artifact.source.document_kind,
+        source_sha256: artifact.source_sha256,
+        artifact_sha256: artifactSha256,
+        block_artifact_sha256: blockArtifactSha256,
+        page_count: artifact.source.page_count,
+        complete_page_count: artifact.pages.filter((page) => page.evidence_disposition === "complete").length,
+        blocked_page_count: artifact.pages.filter((page) => page.evidence_disposition === "blocked").length,
+        ocr_page_count: artifact.pages.filter((page) => page.ocr.status === "completed").length,
+        block_count: blockArtifact.records.length,
+        relationship_count: blockArtifact.relationships.length,
+        financial_block_count: blockArtifact.records.filter((block) => block.financial_candidate).length,
+        block_review_page_count: blockArtifact.page_dispositions.filter((page) => page.status === "needs_review").length,
+        write_enabled: pdfInventoryReviewWriteRequested,
+        validation,
+      }],
+    });
+    return true;
+  }
+  if (url.pathname === `${documentRoot}/artifacts`) {
+    sendPdfInventoryReviewJson(response, {
+      document_key: artifact.document_key,
+      artifact: {
+        artifact_type: artifact.artifact_type,
+        artifact_key: artifact.artifact_key,
+        artifact_sha256: artifactSha256,
+        source_sha256: artifact.source_sha256,
+        generator: artifact.generator,
+        upstream_artifacts: artifact.upstream_artifacts,
+        source: artifact.source,
+        render_policy: artifact.render_policy,
+        ocr_policy: artifact.ocr_policy,
+      },
+      block_artifact: {
+        artifact_type: blockArtifact.artifact_type,
+        artifact_key: blockArtifact.artifact_key,
+        artifact_sha256: blockArtifactSha256,
+        source_sha256: blockArtifact.source_sha256,
+        generator: blockArtifact.generator,
+        upstream_artifacts: blockArtifact.upstream_artifacts,
+        page_disposition_count: blockArtifact.page_dispositions.length,
+        block_count: blockArtifact.records.length,
+        relationship_count: blockArtifact.relationships.length,
+      },
+      validation,
+    });
+    return true;
+  }
+  if (url.pathname === `${documentRoot}/pages`) {
+    sendPdfInventoryReviewJson(response, {
+      document_key: artifact.document_key,
+      page_count: artifact.pages.length,
+      pages: artifact.pages.map((page) => pdfInventoryReviewPageSummary(page, ocrWordCounts, blocksByPage.get(page.page_number))),
+      validation,
+    });
+    return true;
+  }
+
+  const pageMatch = url.pathname.match(
+    /^\/api\/internal\/pdf-inventory-review\/documents\/([^/]+)\/pages\/(\d+)$/,
+  );
+  if (pageMatch) {
+    if (pageMatch[1] !== pdfInventoryReviewDocumentKey) {
+      throw stagedPdfReviewError("Stage 0 review document was not found.", 404);
+    }
+    const pageNumber = Number(pageMatch[2]);
+    const page = artifact.pages.find((candidate) => candidate.page_number === pageNumber);
+    if (!page) {
+      throw stagedPdfReviewError("Stage 0 review page was not found.", 404);
+    }
+    sendPdfInventoryReviewJson(response, {
+      document_key: artifact.document_key,
+      artifact_sha256: artifactSha256,
+      page: pdfInventoryReviewPageSummary(page, ocrWordCounts, blocksByPage.get(pageNumber)),
+      evidence: page,
+      block_inventory: blocksByPage.get(pageNumber),
+      validation,
+    });
+    return true;
+  }
+
+  const assetMatch = url.pathname.match(
+    /^\/api\/internal\/pdf-inventory-review\/documents\/([^/]+)\/assets\/([^/]+)\/(\d+)$/,
+  );
+  if (assetMatch) {
+    if (assetMatch[1] !== pdfInventoryReviewDocumentKey) {
+      throw stagedPdfReviewError("Stage 0 review document was not found.", 404);
+    }
+    const pageNumber = Number(assetMatch[3]);
+    const page = artifact.pages.find((candidate) => candidate.page_number === pageNumber);
+    const descriptor = page ? pdfInventoryReviewAssetDescriptor(page, assetMatch[2]) : null;
+    if (!page || !descriptor) {
+      throw stagedPdfReviewError("Stage 0 review asset was not found.", 404);
+    }
+    const absolute = resolveRecordedRepoPath(descriptor.record.repo_relpath);
+    const body = await readFile(absolute);
+    if (sha256Buffer(body) !== descriptor.record.sha256) {
+      throw stagedPdfReviewError("Stage 0 review asset hash does not match its artifact record.", 409);
+    }
+    response.writeHead(200, {
+      "cache-control": "no-store",
+      "content-type": descriptor.contentType,
+      "x-content-sha256": descriptor.record.sha256,
+    });
+    response.end(body);
+    return true;
+  }
+
+  sendPdfInventoryReviewJson(response, { error: "Staged PDF review endpoint was not found." }, 404);
+  return true;
 }
 
 async function sendGeoJson(response, payload) {
@@ -6016,6 +6469,8 @@ async function loadParcelAtPoint(lon, lat) {
 }
 
 const routeEntrypoints = new Map([
+  ["/internal/pdf-inventory-review", { file: "/pdf-inventory-review/index.html", baseHref: "/pdf-inventory-review/" }],
+  ["/internal/pdf-inventory-review/", { file: "/pdf-inventory-review/index.html", baseHref: "/pdf-inventory-review/" }],
   ["/", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
   ["/portal", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
   ["/portal/", { file: "/ui_kits/portal/index.html", baseHref: "/ui_kits/portal/" }],
@@ -6131,6 +6586,28 @@ const server = createServer(async (request, response) => {
         response.writeHead(503, { "content-type": "application/json; charset=utf-8" });
         response.end(JSON.stringify({ status: "unavailable", error: error.message }));
       }
+      return;
+    }
+    const pdfInventoryReviewRequest =
+      url.pathname === "/internal/pdf-inventory-review" ||
+      url.pathname === "/internal/pdf-inventory-review/" ||
+      url.pathname.startsWith("/pdf-inventory-review/") ||
+      url.pathname.startsWith("/api/internal/pdf-inventory-review/");
+    if (pdfInventoryReviewRequest && !pdfInventoryReviewEnabled) {
+      response.writeHead(404, {
+        "cache-control": "no-store",
+        "content-type": "application/json; charset=utf-8",
+      });
+      response.end(JSON.stringify({ error: "Not found." }));
+      return;
+    }
+    if (url.pathname.startsWith("/api/internal/pdf-inventory-review/")) {
+      await handlePdfInventoryReviewApi(request, response, url);
+      return;
+    }
+    if (pdfInventoryReviewRequest && request.method !== "GET") {
+      response.writeHead(405, { "cache-control": "no-store" });
+      response.end("Method not allowed");
       return;
     }
     if (demoMode && request.method !== "GET" && (

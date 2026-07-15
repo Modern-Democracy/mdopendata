@@ -3,7 +3,7 @@ type: log
 tags:
   - wiki
   - log
-updated: 2026-07-14
+updated: 2026-07-15
 ---
 
 This page is the append-only chronological record for root wiki changes, ingests, substantive queries, and lint passes.
@@ -13,6 +13,14 @@ Append new entries in reverse chronological order. Use this heading format:
 ```text
 ## [YYYY-MM-DD] type | Short title
 ```
+
+## [2026-07-15] implementation | Stage 1 taxonomy, internal regions, and relationships
+
+Reverted the staged PDF reviewer to loopback-only operation, removed the iPad firewall rule, and deferred installer-managed LAN access plus phone/tablet support. Replaced the candidate vocabulary with the reviewed ordered block types, regenerated the 440-block pilot with 143 titles and 709 formatted-text internal regions, added table/text internal edit contracts, and added graph-source, cross-page-table, and overview-detail relationships.
+
+## [2026-07-15] implementation | Editable Stage 1 PDF inventory review
+
+Added schema-validated Stage 1 block creation, resize handles, reclassification, financial-candidate editing, deletion, and drawing to the local Charlottetown reviewer. Mutations use optimistic artifact hashes, the canonical Python runtime, and append-only review decisions. Verified the Node listener on `0.0.0.0:3217`, the iPad-restricted firewall rule for `192.168.2.43`, and the host neighbour entry; the unresolved iPad timeout now requires an elevated packet-arrival capture during a retry.
 
 ## [2026-07-14] operations | Render and Supabase demonstration deployment
 
@@ -773,3 +781,35 @@ Applied all 139 approved Batch 04 table-context decisions to deterministic contr
 ## [2026-07-15] implementation | Financial statements Gate 6 semantic columns
 
 Audited all 551 Gate 5 OCR group columns and found 345 mixed text/year/value columns plus 258 columns spanning more than 25 percent of page width. Implemented migration 031 with reviewed semantic columns, multi-fragment raw-cell assignments, semantic document-period links, exact-fragment and same-table controls, and legacy raw-column compatibility. Isolated full-chain regressions passed without changing the active database or raw records.
+
+## [2026-07-15] architecture | Staged PDF inventory and extraction
+
+Specified a review-first PDF workflow that inventories bounded page blocks, assembles multi-page logical content groups, applies versioned structural templates, and gates raw extraction on approved structure. Defined a local review UI contract, append-only decisions, deterministic shadow artifacts, material template-mismatch stops, and source-linked parity testing against the published Charlottetown 2026/2027 financial plan: source hash `d926634427e80aa2b06b6425bdbb117424fe53567ae344980cd10791f8e39bac`, 154 pages, and 2,290 distinct observations in published snapshot 3. No code, schema, database, dependency, or publication changes were made.
+
+## [2026-07-15] implementation | Staged PDF artifact JSON Schemas
+
+Implemented one JSON Schema Draft 2020-12 discriminated union with seven closed artifact contracts: source evidence, block inventory, logical content groups, structural templates, template applications, append-only review decisions, and baseline parity reports. Added semantic and cross-artifact validation for geometry, page and block accounting, logical ownership, reference integrity, template mismatch handling, review event chains, deterministic reruns, database-write controls, and parity counts. Ten regression tests passed. No extractor, UI, dependency, database, or publication changes were made.
+
+## [2026-07-15] implementation | Charlottetown staged PDF source evidence
+
+Generated the deterministic Stage 0 evidence package for all 154 pages of the Charlottetown 2026/2027 financial plan: 154 renders, 154 thumbnails, 154 embedded-word files, and one Tesseract fallback on PDF page 24. The 464-file, 43,550,929-byte package validates against the staged artifact contract and reproduced unchanged on a second run with artifact SHA-256 `d24885a23ebf33a63d9e09273a5335cdbef45fd727dcf93d6c23b5bbe9c3eb2e`. Three generator regressions and ten schema regressions passed; representative pages 24, 87, 149, and 153 passed visual review. No database, dependency, public UI, or publication state changed.
+
+## [2026-07-15] plan | Staged PDF inventory review UI
+
+Planned a disabled-by-default, local-only extension of the existing Node web runtime with a read-only Stage 0 first slice, allowlisted artifact and asset APIs, schema-mapped page, block, group, template, decision, and parity panels, and a separately gated canonical Python writer for atomic artifact plus review-chain updates. The plan defines optimistic concurrency, demo-route denial, dependency invalidation, rollout slices, and verification gates. No UI code, route, writer, dependency, database, or publication change was made.
+
+## [2026-07-15] implementation | Staged PDF inventory review UI Stage 0
+
+Implemented the disabled-by-default local Stage 0 inventory reviewer for the Charlottetown 2026/2027 financial plan. The Node service now exposes one allowlisted artifact through canonical pre-serve validation and per-request asset hash checks; the static interface provides 154 lazy thumbnails, page renders, embedded and OCR overlays, representative controls, URL and keyboard navigation, evidence counts, hashes, review state, and source citations. Targeted smoke checks passed disabled, demo-denied, non-loopback-denied, invalid-path, invalid-method, full inventory, page 24 OCR, and evidence-asset cases. Browser QA passed desktop and 700-pixel layouts, 4 embedded plus 6 OCR page 24 boxes, page 149 navigation, and zero console warnings or errors. No write endpoint, dependency, database query, public route, or publication change was introduced.
+
+## [2026-07-15] operations | Staged PDF reviewer private-LAN access
+
+Added explicitly gated private-LAN access for the read-only staged PDF reviewer. `scripts/start-staged-pdf-review.ps1` resolves the active private IPv4 address, binds the host Node runtime to port 3217, enables review and network flags, forces demo mode off, and preserves the canonical Windows Python validator. Non-loopback access still fails without the network flag, demo mode overrides both flags, and Docker and Render remain disabled by default. The endpoint is unauthenticated and restricted operationally to trusted private networks.
+
+## [2026-07-15] operations | Restricted iPad firewall access
+
+Added the approved Windows inbound rule `mdopendata PDF review 3217 iPad`, restricted to TCP port 3217, Public profile, the Node executable, and remote IPv4 address `192.168.2.43`. Verified the listener on `0.0.0.0:3217` and an HTTP 200 response through host address `192.168.2.52`. No other firewall scope or deployment surface changed.
+
+## [2026-07-15] implementation | Staged PDF block inventory and overlays
+
+Implemented the deterministic Stage 1 candidate block generator and generated 440 fully accounted blocks across 154 pages, including 101 conservative financial candidates and one OCR-derived review page. The read-only UI now validates Stage 0 and Stage 1 together, displays selectable normalized block overlays and exact block evidence, and reports page-level inventory status. Schema, generator, server-gate, API, asset, and responsive browser checks passed; the 820-pixel iPad layout has no horizontal overflow or console warnings. No approvals, write endpoints, database queries, normalization, or publication changes were introduced.

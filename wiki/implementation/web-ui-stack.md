@@ -34,6 +34,8 @@ Keep the current React/Babel page pattern while the municipal portal 1.0 shell a
 
 Use the Node service as the boundary for database access. Browser code should not connect directly to PostGIS.
 
+The staged PDF inventory reviewer also uses this Node/static boundary, but it reads allowlisted repository artifacts without querying PostgreSQL. Its route is disabled by default, denied in demo mode, and restricted to loopback. The host launcher uses port 3217 so the canonical Windows Python validator remains available.
+
 ## Sources
 
 - [Root README](../../README.md)
@@ -42,3 +44,4 @@ Use the Node service as the boundary for database access. Browser code should no
 - [Section-equivalence review export](../../data/zoning/charlottetown-draft/review/section-equivalence-review.csv)
 - [Charlottetown unified zoning ingestion plan](../charlottetown/topics/unified-zoning-ingestion-plan.md)
 - [Municipal portal UI architecture](../product/municipal-portal-ui-architecture.md)
+- [Staged PDF inventory review UI](./staged-pdf-inventory-review-ui-plan.md)
