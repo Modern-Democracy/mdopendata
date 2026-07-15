@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "financial_statement_gate_2_low_confidence_page_review",
+  "reviewed_on": "2026-07-14",
+  "status": "complete",
+  "review_method": [
+    "Visual inspection of both source PDF pages rendered at 220 DPI",
+    "Additional visual inspection of the 2025 source page rendered at 400 DPI",
+    "Tesseract psm 4 used only as a transcription aid; rendered source pages control all decisions",
+    "Arithmetic checks applied to source-presented subtotal and reconciliation controls"
+  ],
+  "common_decision": {
+    "source_section": "Note 15 - Budget Figures",
+    "table_family": "budget_reconciliation_note",
+    "columns": [
+      "raw line label",
+      "Per Budget Document",
+      "Net Adjustments",
+      "Consolidated Budget"
+    ],
+    "purpose": "Reconcile the fiscal operating budget prepared by Council to the budget figures disclosed in the consolidated financial statements.",
+    "assurance_limit": "The source states that budget columns on the statements of operations, changes in net debt, and attached schedules were not subject to audit or review by the external auditor.",
+    "gate_3_rule": "Preserve all three source columns independently. Do not treat Per Budget Document and Consolidated Budget as equivalent observations without a later reviewed relationship."
+  },
+  "page_reviews": [
+    {
+      "page_key": "ctown_fs_city_2024_03_31_audited_p028",
+      "source_pdf_page": 28,
+      "visible_source_page": "23",
+      "reporting_date": "2024-03-31",
+      "source_heading": "15. Budget Figures",
+      "classification": "budget_reconciliation_note",
+      "visual_legibility": "legible",
+      "ocr_mean_confidence": 69.41,
+      "control_rows": [
+        {
+          "raw_label": "Total Revenues",
+          "per_budget_document": "84,355,608",
+          "net_adjustments": "2,952,737",
+          "consolidated_budget": "87,308,345"
+        },
+        {
+          "raw_label": "Total Expenditures",
+          "per_budget_document": "90,654,247",
+          "net_adjustments": "5,645,777",
+          "consolidated_budget": "96,300,024"
+        },
+        {
+          "raw_label": "Operating Surplus (Deficit)",
+          "per_budget_document": "(6,298,639)",
+          "net_adjustments": "(2,693,040)",
+          "consolidated_budget": "(8,991,679)"
+        },
+        {
+          "raw_label": "Annual Surplus",
+          "per_budget_document": "$53,874,414",
+          "net_adjustments": "$(9,267,225)",
+          "consolidated_budget": "$44,607,189"
+        }
+      ],
+      "source_format_control": {
+        "raw_label": "Protective services",
+        "raw_net_adjustment": "(-1,318,502)",
+        "decision": "Preserve the redundant source negative notation verbatim; Gate 3 may propose numeric -1318502 only with the raw token retained."
+      },
+      "review_status": "approved_for_gate_3"
+    },
+    {
+      "page_key": "ctown_fs_city_2025_03_31_audited_p028",
+      "source_pdf_page": 28,
+      "visible_source_page": "26",
+      "reporting_date": "2025-03-31",
+      "source_heading": "15. Budget Figures",
+      "classification": "budget_reconciliation_note",
+      "visual_legibility": "legible",
+      "ocr_mean_confidence": 68.9,
+      "control_rows": [
+        {
+          "raw_label": "Total Revenues",
+          "per_budget_document": "93,029,572",
+          "net_adjustments": "4,391,875",
+          "consolidated_budget": "97,421,447"
+        },
+        {
+          "raw_label": "Total Expenditures",
+          "per_budget_document": "100,734,109",
+          "net_adjustments": "4,791,836",
+          "consolidated_budget": "105,525,945"
+        },
+        {
+          "raw_label": "Operating Surplus (Deficit)",
+          "per_budget_document": "(7,704,537)",
+          "net_adjustments": "(399,961)",
+          "consolidated_budget": "(8,104,498)"
+        },
+        {
+          "raw_label": "Annual Surplus",
+          "per_budget_document": "$142,004",
+          "net_adjustments": "$22,680,451",
+          "consolidated_budget": "$22,822,455"
+        }
+      ],
+      "source_format_control": {
+        "raw_label": "Government transfers for Capital",
+        "per_budget_document": "-",
+        "net_adjustments": "28,526,953",
+        "consolidated_budget": "28,526,953",
+        "decision": "The line immediately following the net-adjustment amount is an underline, not a trailing negative sign. Preserve the Per Budget Document dash separately."
+      },
+      "review_status": "approved_for_gate_3"
+    }
+  ],
+  "gate_result": {
+    "review_controls_resolved": 2,
+    "unresolved_low_confidence_pages": 0,
+    "gate_3_blockers": 0,
+    "approved_next_work": "Gate 3 representative schema spike only",
+    "publication_approved": false
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "financial_statement_reporting_entity_relationship_review",
+  "gate": 5,
+  "status": "needs_review",
+  "counts": {
+    "records": 3,
+    "approved": 0,
+    "needs_review": 3
+  },
+  "records": [
+    {
+      "parent_reporting_entity_key": "city_of_charlottetown",
+      "child_reporting_entity_key": "charlottetown_water_and_sewer_corporation",
+      "proposed_relationship_type": "consolidated_component",
+      "source_document_keys": [
+        "ctown_fs_city_2024_03_31_audited",
+        "ctown_fs_city_2025_03_31_audited"
+      ],
+      "decision": null,
+      "review_status": "needs_review"
+    },
+    {
+      "parent_reporting_entity_key": "city_of_charlottetown",
+      "child_reporting_entity_key": "city_of_charlottetown_superannuation_plan",
+      "proposed_relationship_type": "related_pension_plan",
+      "source_document_keys": [
+        "ctown_fs_city_sa_2023_12_31_audited",
+        "ctown_fs_city_sa_2024_12_31_audited"
+      ],
+      "decision": null,
+      "review_status": "needs_review"
+    },
+    {
+      "parent_reporting_entity_key": "charlottetown_water_and_sewer_corporation",
+      "child_reporting_entity_key": "charlottetown_water_and_sewer_corporation_superannuation_plan",
+      "proposed_relationship_type": "related_pension_plan",
+      "source_document_keys": [
+        "ctown_fs_ws_sa_2023_12_31_audited",
+        "ctown_fs_ws_sa_2024_12_31_audited"
+      ],
+      "decision": null,
+      "review_status": "needs_review"
+    }
+  ]
+}

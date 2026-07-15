@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "financial_statement_gate_5_qa_report",
+  "gate": 5,
+  "reviewed_on": "2026-07-15",
+  "status": "passed",
+  "quality_claim": "All controlled raw artifacts are imported with exact scoped database counts, immutable conflict detection, and a zero-insert idempotent rerun; normalized and publication records remain unchanged.",
+  "raw_artifact_counts": {
+    "documents": 8,
+    "registered_pdf_pages": 188,
+    "extracted_table_pages": 139,
+    "source_columns": 551,
+    "source_rows": 4852,
+    "source_cells": 10085,
+    "value_candidate_cells": 4017,
+    "low_confidence_rows": 140,
+    "low_confidence_cells": 405,
+    "rotated_table_pages": 8
+  },
+  "controlled_review_counts": {
+    "mapping_rows": 1331,
+    "period_records": 139,
+    "statement_class_records": 139,
+    "hierarchy_records": 1331,
+    "entity_scope_records": 139,
+    "dash_sign_records": 1160,
+    "reporting_entity_relationship_candidates": 3,
+    "comparative_relationship_candidates": 299,
+    "budget_equivalence_candidates": 121,
+    "taxonomy_records": 121,
+    "approved_records": 0
+  },
+  "visual_source_controls": [
+    {
+      "source": "ctown_fs_city_2025_03_31_audited PDF page 6, visible page 4",
+      "pattern": "financial_position",
+      "confirmed_raw_values": ["15,694,380", "258,646,355"],
+      "status": "pass"
+    },
+    {
+      "source": "ctown_fs_city_2025_03_31_audited PDF page 7, visible page 5",
+      "pattern": "budget_actual_operations",
+      "confirmed_raw_values": ["46,068,402", "47,287,806", "43,892,492"],
+      "status": "pass"
+    },
+    {
+      "source": "ctown_fs_city_2025_03_31_audited PDF page 28, visible page 26",
+      "pattern": "budget_reconciliation_note",
+      "confirmed_raw_values": ["46,068,402", "(1,910,624)", "22,822,455"],
+      "status": "pass"
+    },
+    {
+      "source": "ctown_fs_city_2025_03_31_audited PDF page 32, visible page 30",
+      "pattern": "rotated_tangible_capital_asset_schedule",
+      "confirmed_raw_values": ["15,063,038", "255,118,797"],
+      "status": "pass"
+    },
+    {
+      "source": "ctown_fs_city_sa_2024_12_31_audited PDF page 6, visible page 4",
+      "pattern": "pension_financial_position",
+      "confirmed_raw_values": ["131,900,688", "116,066,585", "15,834,103"],
+      "status": "pass"
+    }
+  ],
+  "negative_controls": {
+    "narrative_years_classified_as_value_candidates": 0,
+    "missing_table_pages": 0,
+    "duplicate_row_keys": 0,
+    "duplicate_cell_keys": 0,
+    "approved_review_records": 0,
+    "normalized_records_created": 0,
+    "raw_database_records_imported": 15970,
+    "idempotent_rerun_inserted_records": 0,
+    "publication_changes": 0
+  },
+  "regression_test": {
+    "command": "scripts/python.ps1 scripts/test-financial-statements-extraction.py",
+    "tests_run": 9,
+    "failures": 0,
+    "errors": 0
+  },
+  "deterministic_rerun": {
+    "files_compared": 51,
+    "sha256_differences": 0,
+    "result": "passed"
+  },
+  "raw_database_import": {
+    "status": "committed",
+    "artifact_sha256": "b1c9151e44aabfdcd44c9faf52f0ddaaf41186dd9adeb758a88cb18f4bd22c0f",
+    "scoped_counts": {
+      "source_document": 8,
+      "source_page": 188,
+      "source_table": 139,
+      "source_table_page": 139,
+      "source_table_column": 551,
+      "source_table_row": 4852,
+      "source_table_cell": 10085,
+      "import_batch": 8
+    },
+    "active_totals": {
+      "source_document": 12,
+      "source_page": 595,
+      "source_table": 718,
+      "source_table_page": 723,
+      "source_table_column": 6291,
+      "source_table_row": 22126,
+      "source_table_cell": 45622,
+      "import_batch": 28
+    },
+    "protected_counts": {
+      "financial_observation": 6381,
+      "publication_observation": 12637,
+      "publication_snapshot": 2
+    },
+    "database_regression_tests": 6,
+    "database_regression_failures": 0
+  },
+  "gate_result": {
+    "requested_artifact_scope": "complete",
+    "formal_gate_5_status": "complete",
+    "raw_database_imported": true,
+    "approved_next_work": "Gate 6 controlled normalization review and import planning"
+  }
+}

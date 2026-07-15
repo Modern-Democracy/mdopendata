@@ -32,6 +32,8 @@ This page defines the applied PostgreSQL `budget` schema for source extraction, 
 | `budget.source_table_column` | `id`, `source_table_id`, `column_key`, `column_index`, `raw_header`, `column_role`, `bbox`, `review_status`; unique `(source_table_id, column_key)` and `(source_table_id, column_index)`. |
 | `budget.source_table_row` | `id`, `source_table_id`, `row_key`, `row_index`, `raw_text`, `raw_label`, `indent_level`, `row_style`, `bbox`, `parser_confidence`; unique `(source_table_id, row_key)`. |
 | `budget.source_table_cell` | `id`, `source_row_id`, `source_table_column_id`, `raw_text`, `bbox`, `parsed_numeric`, `parsed_text`, `parse_status`, `parser_confidence`; unique `(source_row_id, source_table_column_id)`. |
+| `budget.semantic_table_column` | Reviewed table-level semantic columns with stable key, order, raw header, role, optional bbox, normalization decision, review state, and rationale. |
+| `budget.source_cell_semantic_assignment` | Reviewed exact or transcribed fragments connecting one raw cell to one or more semantic columns without rewriting raw evidence. |
 | `budget.import_batch` | `id`, `document_id`, `source_sha256`, `extractor_version`, `started_at`, `completed_at`, `status`, `metrics_json`, `error_json`. |
 | `budget.import_record_event` | `id`, `batch_id`, `record_type`, `natural_key`, `content_hash`, `event_type`, `review_reason`. |
 
@@ -47,13 +49,13 @@ Coordinates should use normalized page coordinates so the UI can highlight a sou
 | `budget.reporting_entity` | `id`, `municipality_id`, `parent_entity_id`, `slug`, `display_name`, `entity_type`, effective dates; unique by municipality, slug, and effective start. |
 | `budget.organization_unit` | `id`, `reporting_entity_id`, `parent_id`, `unit_key`, `display_name`, `unit_type`, effective dates. |
 | `budget.fiscal_period` | `id`, `municipality_id`, `label`, `start_date`, `end_date`, `period_kind`; unique by municipality, dates, and kind. |
-| `budget.document_period` | `id`, `document_id`, `fiscal_period_id`, `source_table_column_id`, `period_role`, `raw_column_label`, `column_order`, `review_status`; unique `(document_id, source_table_column_id, period_role)`. |
+| `budget.document_period` | `id`, `document_id`, `fiscal_period_id`, exactly one of `source_table_column_id` or `semantic_column_id`, `period_role`, `raw_column_label`, `column_order`, `review_status`; unique by document, selected column, and period role. |
 | `budget.fund` | `id`, `reporting_entity_id`, `parent_id`, `fund_key`, `display_name`, `fund_type`, effective dates. |
 | `budget.measure_unit` | `id`, `code` unique, `display_name`, `unit_kind`, `currency_code`, `scale`, `denominator_text`. |
 | `budget.amount_type` | `id`, `code` unique, `display_name`; examples include `budget`, `forecast`, `actual`, `balance`, `principal`, `interest`, `gross`, `funding_deduction`, and `net`. |
 | `budget.normalized_category` | `id`, `taxonomy_version`, `category_key`, `parent_id`, `domain`, `display_name`; unique by version and key. |
 
-`document_period` is required because the 2026/2027 document reports prior budgets and forecasts. A prior-period value in this document is a separate reported observation from the value in the 2025/2026 document. The source-column link preserves raw label variants and permits repeated labels in separate tables without treating raw text as identity.
+`document_period` is required because the 2026/2027 document reports prior budgets and forecasts. A prior-period value in this document is a separate reported observation from the value in the 2025/2026 document. Legacy aligned tables use raw source columns. Financial-statement OCR tables use reviewed semantic columns because row-relative OCR group ordinals are not stable period identities.
 
 ## Statement And Financial Observation Core
 

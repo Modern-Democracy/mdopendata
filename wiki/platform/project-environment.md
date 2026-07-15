@@ -70,7 +70,7 @@ Migration `026_budget_capital_project_reference.sql` restores the approved docum
 
 ## Isolated Budget Migration Regression Test
 
-`scripts/test-budget-migration.py` creates a uniquely named empty PostgreSQL database from `template0` in `mdopendata-postgis`, applies migrations 025 and 027 with their regression controls, then drops the temporary database. It never applies DDL to the active `mdopendata` database. The test uses `PGCONTAINER`, `PGUSER`, and optional `PGADMIN_DATABASE` environment variables; the configured database role must have `CREATEDB` permission.
+`scripts/test-budget-migration.py` creates a uniquely named empty PostgreSQL database from `template0` in `mdopendata-postgis`, applies migrations 025 and 027 through 031 with their regression controls, then drops the temporary database. It never applies DDL to the active `mdopendata` database. The test uses `PGCONTAINER`, `PGUSER`, and optional `PGADMIN_DATABASE` environment variables; the configured database role must have `CREATEDB` permission.
 
 ## Budget Web Taxonomy Migration
 

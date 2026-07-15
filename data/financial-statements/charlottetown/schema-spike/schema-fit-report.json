@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "financial_statement_schema_fit_report",
+  "gate": 3,
+  "status": "ready_for_migration_029",
+  "controls_reviewed": 7,
+  "findings": [
+    {
+      "finding_key": "raw_source_and_hierarchy_fit",
+      "status": "fits_existing_schema",
+      "evidence": "Source pages, tables, columns, rows, cells, line-item parents, aggregation roles, and observation provenance retain the representative source structure."
+    },
+    {
+      "finding_key": "budget_actual_period_role_fit",
+      "status": "fits_existing_schema",
+      "evidence": "document_period plus amount_type separates current budget, current actual, and comparative actual columns without fixed fiscal-year fields."
+    },
+    {
+      "finding_key": "accounting_context_gap",
+      "status": "resolved_by_planned_migration_029",
+      "required_object": "budget.document_accounting_context",
+      "evidence": "Reporting framework, reporting date, assurance, opinion, consolidation scope, and authority cannot be represented together on source_document."
+    },
+    {
+      "finding_key": "controlled_statement_class_gap",
+      "status": "resolved_by_planned_migration_029",
+      "required_object": "budget.statement_class",
+      "evidence": "Free-text statement_kind cannot enforce financial position, operations, cash flow, pension movement, and schedule classes."
+    },
+    {
+      "finding_key": "reporting_entity_scope_relationship_gap",
+      "status": "resolved_by_planned_migration_029",
+      "required_object": "budget.reporting_entity_relationship",
+      "evidence": "Consolidated component and related non-additive pension relationships require effective, reviewed relation types rather than parent_entity_id."
+    },
+    {
+      "finding_key": "comparative_relationship_gap",
+      "status": "resolved_by_planned_migration_029",
+      "required_object": "budget.financial_observation_relationship",
+      "evidence": "The two document-owned 2024 cash values differ by one dollar and require a reviewed relationship without overwriting either observation."
+    }
+  ],
+  "counts": {
+    "fits_existing_schema": 2,
+    "resolved_by_planned_migration_029": 4,
+    "unsupported_patterns": 0,
+    "unplanned_schema_gaps": 0
+  },
+  "architecture_decision": "Migrations 029 and 030 may proceed as planned. Gate 3 found no additional table family, identity protocol, or schema object requirement.",
+  "prohibitions": [
+    "Do not overwrite document-owned comparative values.",
+    "Do not sum City consolidated, Water and Sewer component, or pension-plan scopes.",
+    "Do not create a December 21 fiscal period from the Water and Sewer pension filename.",
+    "Do not publish or import these spike projections as normalized observations."
+  ]
+}

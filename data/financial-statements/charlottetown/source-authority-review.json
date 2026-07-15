@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "financial_statement_source_authority_review",
+  "reviewed_on": "2026-07-14",
+  "registry_path": "data/financial-statements/charlottetown/source-document-registry.json",
+  "status": "gate_1_complete",
+  "review_method": [
+    "SHA-256 and page-count verification against each repository PDF",
+    "Visual review of PDF cover, independent auditor report, report signature date, and first statement page",
+    "OCR used as a reading aid; visual source pages remain authoritative"
+  ],
+  "global_decisions": [
+    {
+      "decision_key": "source_page_precedence",
+      "status": "approved",
+      "decision": "Source cover, auditor report, and statement pages control title, reporting date, framework, and assurance classification. Filename text and PDF metadata never override visible source content."
+    },
+    {
+      "decision_key": "assurance_classification",
+      "status": "approved",
+      "decision": "All eight documents are classified as audited because each contains an independent auditor report stating that the source was audited and presenting an unmodified present-fairly opinion."
+    },
+    {
+      "decision_key": "publication_status_limit",
+      "status": "approved",
+      "decision": "The PDFs do not establish municipal publication, adoption, or final-release status. All eight records remain publication_or_adoption_status=unknown and are blocked from publication until a later gate supplies authority."
+    },
+    {
+      "decision_key": "comparative_authority_limit",
+      "status": "approved",
+      "decision": "Gate 1 does not select one document's comparative value over another. Every comparative remains document-owned until exact observation relationships are reviewed."
+    }
+  ],
+  "counts": {
+    "documents_reviewed": 8,
+    "approved_for_gate_2": 8,
+    "gate_1_blockers": 0,
+    "filename_conflicts": 6,
+    "publication_limitations": 8
+  },
+  "document_reviews": [
+    {
+      "document_key": "ctown_fs_city_2024_03_31_audited",
+      "title_status": "approved",
+      "reporting_date_status": "approved",
+      "assurance_status": "approved_audited_unmodified",
+      "framework_status": "approved_public_sector",
+      "filename_alignment": "conflict",
+      "conflict": {
+        "issue_code": "filename_draft_label_vs_audited_content",
+        "source_location": "filename; auditor report PDF pages 4-5",
+        "observed": "The filename begins with Draft, while the PDF contains a signed independent auditor report dated October 8, 2024 with an unmodified opinion.",
+        "decision": "Retain the filename verbatim, classify assurance as audited, and leave publication/adoption status unknown.",
+        "downstream_effect": "Allowed into Gate 2 profiling; blocked from publication."
+      },
+      "review_status": "approved_for_gate_2"
+    },
+    {
+      "document_key": "ctown_fs_city_2025_03_31_audited",
+      "title_status": "approved",
+      "reporting_date_status": "approved",
+      "assurance_status": "approved_audited_unmodified",
+      "framework_status": "approved_public_sector",
+      "filename_alignment": "aligned",
+      "conflict": null,
+      "review_status": "approved_for_gate_2"
+    },
+    {
+      "document_key": "ctown_fs_ws_2024_03_31_audited",
+      "title_status": "approved",
+      "reporting_date_status": "approved",
+      "assurance_status": "approved_audited_unmodified",
+      "framework_status": "approved_public_sector",
+      "filename_alignment": "conflict",
+      "conflict": {
+        "issue_code": "filename_draft_label_vs_audited_content",
+        "source_location": "filename; auditor report PDF pages 4-5",
+        "observed": "The filename begins with Draft, while the PDF contains a signed independent auditor report dated October 8, 2024 with an unmodified opinion.",
+        "decision": "Retain the filename verbatim, classify assurance as audited, and leave publication/adoption status unknown.",
+        "downstream_effect": "Allowed into Gate 2 profiling; blocked from publication."
+      },
+      "review_status": "approved_for_gate_2"
+    },
+    {
+      "document_key": "ctown_fs_ws_2025_03_31_audited",
+      "title_status": "approved",
+      "reporting_date_status": "approved",
+      "assurance_status": "approved_audited_unmodified",
+      "framework_status": "approved_public_sector",
+      "filename_alignment": "aligned",
+      "conflict": null,
+      "review_status": "approved_for_gate_2"
+    },
+    {
+      "document_key": "ctown_fs_city_sa_2023_12_31_audited",
+      "title_status": "approved",
+      "reporting_date_status": "approved",
+      "assurance_status": "approved_audited_unmodified",
+      "framework_status": "approved_pension_plan",
+      "filename_alignment": "conflict",
+      "conflict": {
+        "issue_code": "filename_year_vs_reporting_date",
+        "source_location": "filename; cover PDF page 1; auditor report PDF pages 4-5",
+        "observed": "The filename begins with 2024, while the cover and auditor report identify December 31, 2023.",
+        "decision": "Use reporting date 2023-12-31 and retain 2024 only as part of the raw filename.",
+        "downstream_effect": "No 2024 fiscal identity may be inferred from the filename."
+      },
+      "review_status": "approved_for_gate_2"
+    },
+    {
+      "document_key": "ctown_fs_city_sa_2024_12_31_audited",
+      "title_status": "approved",
+      "reporting_date_status": "approved",
+      "assurance_status": "approved_audited_unmodified",
+      "framework_status": "approved_pension_plan",
+      "filename_alignment": "conflict",
+      "conflict": {
+        "issue_code": "filename_title_spelling_error",
+        "source_location": "filename; cover PDF page 1",
+        "observed": "The filename spells Supperannuation, while the source title spells Superannuation.",
+        "decision": "Preserve the raw filename and use the source-page spelling in normalized title and entity fields.",
+        "downstream_effect": "The filename spelling must not create a separate entity identity."
+      },
+      "review_status": "approved_for_gate_2"
+    },
+    {
+      "document_key": "ctown_fs_ws_sa_2023_12_31_audited",
+      "title_status": "approved",
+      "reporting_date_status": "approved",
+      "assurance_status": "approved_audited_unmodified",
+      "framework_status": "approved_pension_plan",
+      "filename_alignment": "conflict",
+      "conflict": {
+        "issue_code": "filename_year_vs_reporting_date",
+        "source_location": "filename; cover PDF page 1; auditor report PDF pages 4-5",
+        "observed": "The filename begins with 2024, while the cover and auditor report identify December 31, 2023.",
+        "decision": "Use reporting date 2023-12-31 and retain 2024 only as part of the raw filename.",
+        "downstream_effect": "No 2024 fiscal identity may be inferred from the filename."
+      },
+      "review_status": "approved_for_gate_2"
+    },
+    {
+      "document_key": "ctown_fs_ws_sa_2024_12_31_audited",
+      "title_status": "approved",
+      "reporting_date_status": "approved",
+      "assurance_status": "approved_audited_unmodified",
+      "framework_status": "approved_pension_plan",
+      "filename_alignment": "conflict",
+      "conflict": {
+        "issue_code": "filename_reporting_date_conflict",
+        "source_location": "filename; cover PDF page 1; auditor report PDF pages 4-5; statement of financial position PDF page 6",
+        "observed": "The filename states December 21, 2024, while the cover, auditor report, and first statement consistently state December 31, 2024.",
+        "decision": "Use reporting date 2024-12-31 and preserve December 21 only in the raw filename.",
+        "downstream_effect": "No December 21 period may be created."
+      },
+      "review_status": "approved_for_gate_2"
+    }
+  ],
+  "gate_result": {
+    "gate": 1,
+    "status": "complete",
+    "approved_next_work": "Gate 2 full-document profiling only",
+    "prohibited_next_work": [
+      "publication",
+      "comparative supersession",
+      "budget-equivalence mapping",
+      "schema migration",
+      "database import"
+    ]
+  }
+}

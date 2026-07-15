@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "financial_statement_source_profile",
+  "gate": 2,
+  "document_key": "ctown_fs_ws_sa_2023_12_31_audited",
+  "source_file": "docs/charlottetown/financial-statements/2024 W&S SA Plan.pdf",
+  "sha256": "ae7f8e6c7353dea8c2cae8d2902fdd7aca45dcd34b20e3e4bbcf4a9605f8bcb0",
+  "reporting_entity_key": "charlottetown_water_and_sewer_corporation_superannuation_plan",
+  "reporting_date": "2023-12-31",
+  "metadata": {
+    "page_count": 18,
+    "page_size": "792 x 612 pts (letter)",
+    "producer": "RICOH IM C4500",
+    "tagged": "no",
+    "encrypted": "no"
+  },
+  "profiling_method": {
+    "embedded_text": "pdftotext -layout retained as raw diagnostic evidence",
+    "ocr": "all pages rendered at 180 DPI and read with Tesseract psm 6 TSV",
+    "rendered_pages_retained": false,
+    "semantic_limit": "candidate classification only; no normalized row or observation semantics"
+  },
+  "counts": {
+    "pages": 18,
+    "pages_with_disposition": 18,
+    "table_candidates": 13,
+    "unclassified_financial_tables": 0,
+    "continuation_candidates": 9,
+    "review_pages": 0,
+    "pages_by_content_type": {
+      "auditor_report": 2,
+      "cover": 1,
+      "financial_statement": 3,
+      "index": 1,
+      "management_responsibility": 1,
+      "notes": 10
+    },
+    "pages_by_disposition": {
+      "administrative_front_matter": 5,
+      "financial_table_candidate": 13
+    },
+    "tables_by_family": {
+      "changes_in_net_assets_available_for_benefits": 1,
+      "changes_in_pension_obligations": 1,
+      "financial_position": 1,
+      "note_disclosure_table": 10
+    },
+    "statements_by_class": {
+      "changes_in_net_assets_available_for_benefits": 1,
+      "changes_in_pension_obligations": 1,
+      "financial_position": 1
+    }
+  },
+  "gate_checks": {
+    "registry_hash_match": true,
+    "registry_page_count_match": true,
+    "every_page_has_disposition": true,
+    "unclassified_financial_table_count": 0
+  }
+}

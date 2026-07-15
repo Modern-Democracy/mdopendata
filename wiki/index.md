@@ -3,7 +3,7 @@ type: index
 tags:
   - wiki
   - catalog
-updated: 2026-07-14
+updated: 2026-07-15
 ---
 
 This page catalogs the root wiki structure and links to active project wiki areas.
@@ -86,6 +86,14 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [Charlottetown terrain DEM pipeline](./implementation/charlottetown-terrain-dem-pipeline.md) | First repeatable PDAL/GDAL pipeline design for producing a bare-earth DEM from PEI COPC LIDAR tiles. |
 | [Storm surge demo plan](./implementation/storm-surge-demo-plan.md) | Demo-only Charlottetown tidal and storm-surge visualization scope, controls, source assumptions, limits, and upgrade path. |
 | [Municipal budget data model](./implementation/municipal-budget-data-model.md) | Initial scalable schema design for raw and normalized municipal operating, capital, rate, tax, debt, reserve, and funding data. |
+| [Charlottetown financial statements ingestion plan](./budgets/financial-statements-ingestion-implementation-plan.md) | Gated schema, OCR, normalization, import, budget-actual linkage, publication, and test plan for eight financial-statement PDFs. |
+| [Charlottetown financial statements schema spike](./budgets/financial-statements-schema-spike.md) | Gate 3 representative source evidence, schema-fit decision, migration requirements, and QA limits. |
+| [Charlottetown financial statements migration status](./budgets/financial-statements-migration-status.md) | Migrations 029 through 031, scope-safe publication views, reviewed semantic columns, isolated regressions, and active-database boundary. |
+| [Charlottetown financial statements raw extraction status](./budgets/financial-statements-raw-extraction-status.md) | Gate 5 raw table artifacts, controlled-review queues, count-verified database import, and deterministic rerun evidence. |
+| [Charlottetown financial statements review batch 01](./budgets/financial-statements-review-batch-01.md) | Approved low-confidence primary-statement decisions and their controlled derived application. |
+| [Charlottetown financial statements review batch 02](./budgets/financial-statements-review-batch-02.md) | Approved and controlled-derived application of 111 low-confidence note-disclosure and schedule rows, grouped by 67 exact source pages. |
+| [Charlottetown financial statements review batch 03](./budgets/financial-statements-review-batch-03.md) | Approved and controlled-derived application of 228 remaining low-confidence cells across 77 exact source pages. |
+| [Charlottetown financial statements review batch 04](./budgets/financial-statements-review-batch-04.md) | Approved and controlled-derived table contexts for all 139 financial-statement tables and source pages. |
 | [Budget representative-table schema spike](./budgets/representative-table-schema-spike.md) | Source-pattern validation, blocking schema gaps, and migration-gate evidence for municipal budgets. |
 | [Budget representative-spike normalized mapping](./budgets/representative-spike-normalized-mapping.md) | Reviewed mapping contract and import gate for representative raw and normalized budget records. |
 | [2026/2027 budget normalization status](./budgets/2026-normalization-status.md) | Full-document raw import and canonical normalization-review status. |

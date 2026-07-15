@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "financial_statement_source_profile",
+  "gate": 2,
+  "document_key": "ctown_fs_city_2025_03_31_audited",
+  "source_file": "docs/charlottetown/financial-statements/City of Charlottetown Consolidated Financial Statements - March 31, 2025.pdf",
+  "sha256": "d0731a2df257d9a57979541300e7fd2f3de1f1895307f7b16461676b972bf809",
+  "reporting_entity_key": "city_of_charlottetown",
+  "reporting_date": "2025-03-31",
+  "metadata": {
+    "page_count": 37,
+    "page_size": "792 x 612 pts (letter)",
+    "producer": "iLovePDF",
+    "tagged": "no",
+    "encrypted": "no"
+  },
+  "profiling_method": {
+    "embedded_text": "pdftotext -layout retained as raw diagnostic evidence",
+    "ocr": "all pages rendered at 180 DPI and read with Tesseract psm 6 TSV",
+    "rendered_pages_retained": false,
+    "semantic_limit": "candidate classification only; no normalized row or observation semantics"
+  },
+  "counts": {
+    "pages": 37,
+    "pages_with_disposition": 37,
+    "table_candidates": 29,
+    "unclassified_financial_tables": 0,
+    "continuation_candidates": 19,
+    "review_pages": 1,
+    "pages_by_content_type": {
+      "auditor_report": 2,
+      "cover": 1,
+      "financial_statement": 4,
+      "index": 1,
+      "management_responsibility": 1,
+      "notes": 22,
+      "schedule": 6
+    },
+    "pages_by_disposition": {
+      "administrative_front_matter": 5,
+      "financial_note_narrative": 3,
+      "financial_table_candidate": 29
+    },
+    "tables_by_family": {
+      "budget_reconciliation_note": 1,
+      "cash_flow": 1,
+      "changes_in_net_debt": 1,
+      "financial_position": 1,
+      "note_disclosure_table": 18,
+      "operations": 1,
+      "segmented_disclosure_schedule": 2,
+      "tangible_capital_assets_schedule": 4
+    },
+    "statements_by_class": {
+      "cash_flow": 1,
+      "changes_in_net_debt": 1,
+      "financial_position": 1,
+      "operations": 1
+    }
+  },
+  "gate_checks": {
+    "registry_hash_match": true,
+    "registry_page_count_match": true,
+    "every_page_has_disposition": true,
+    "unclassified_financial_table_count": 0
+  }
+}

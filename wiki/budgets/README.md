@@ -3,7 +3,7 @@ type: index
 tags:
   - budget
   - municipal-portal
-updated: 2026-07-13
+updated: 2026-07-15
 ---
 
 This section defines the municipal budget ingestion, data, API, user-interface, and delivery contracts.
@@ -24,6 +24,14 @@ Charlottetown is the prototype municipality. The initial source set is the three
 | [Database schema](./database-schema.md) | Applied PostgreSQL `budget` schema, contextual-fact model, financial observations, provenance, and publication views. |
 | [API and UI contract](./api-and-ui-contract.md) | Website routes, read APIs, filters, visualizations, and response behavior. |
 | [Implementation and test plan](./implementation-plan.md) | Ordered eight-week prototype plan, gates, test strategy, and completion criteria. |
+| [Financial statements ingestion implementation plan](./financial-statements-ingestion-implementation-plan.md) | Gated migrations, scripts, artifacts, schema spike, import workflow, publication work, and tests for the eight Charlottetown financial-statement PDFs. |
+| [Financial statements representative schema spike](./financial-statements-schema-spike.md) | Gate 3 source controls, materialized raw evidence, schema-fit findings, migration decision, and QA limits. |
+| [Financial statements migration status](./financial-statements-migration-status.md) | Migrations 029 through 031, publication controls, reviewed semantic columns, isolated regression evidence, and active-database boundary. |
+| [Financial statements raw extraction status](./financial-statements-raw-extraction-status.md) | Gate 5 full raw rows/cells, controlled review queues, deterministic evidence, and database-import boundary. |
+| [Financial statements review batch 01](./financial-statements-review-batch-01.md) | Approved low-confidence primary-statement decisions and their controlled derived application. |
+| [Financial statements review batch 02](./financial-statements-review-batch-02.md) | Exact approved and controlled-derived Gate 5 application for all low-confidence note-disclosure and schedule rows. |
+| [Financial statements review batch 03](./financial-statements-review-batch-03.md) | Exact approved and controlled-derived Gate 5 application for all remaining low-confidence financial-statement cells. |
+| [Financial statements review batch 04](./financial-statements-review-batch-04.md) | Exact approved and controlled-derived Gate 5 table contexts for period evidence, statement class, and entity scope. |
 | [Representative-table schema spike](./representative-table-schema-spike.md) | Source-pattern mapping, confirmed schema fits, blocking gaps, and migration gate status. |
 | [Representative-spike normalized mapping](./representative-spike-normalized-mapping.md) | Reviewed raw and normalized import identities, manifest contract, sequencing, and stop conditions. |
 | [2026/2027 normalization status](./2026-normalization-status.md) | Full raw import, canonical dispositions, continuation decisions, coverage, and blocked normalization review queue. |
@@ -67,6 +75,16 @@ Week 5 raw ingestion has appended the 2025/2026 and 2024/2025 source pages, tabl
 Week 5 normalized mapping review has classified 114 profile candidates for 2025/2026 and 58 profile candidates for 2024/2025. See the [Week 5 normalized mapping review](./week-5-normalized-mapping-review.md). Normalized import remains blocked by document-specific mapping approvals.
 
 The prior-year normalized imports and source-fidelity QA are complete. The [budget ingestion refactor tracker](./budget-ingestion-refactor-tracker.md) records deferred generalization work after the three-year normalization and publication process.
+
+Financial-statements ingestion Gates 1 and 2 are complete for eight image-only PDFs and 188 pages. The [implementation plan](./financial-statements-ingestion-implementation-plan.md) links the reviewed source registry, authority decisions, and full-document profile: 139 financial-table candidates are classified with zero unclassified financial tables, every page has a disposition, and visual review resolved the two low-confidence City page 28 controls as budget-reconciliation notes. All documents remain blocked from publication because municipal publication/adoption status is not established by the source copies.
+
+Financial-statements Gate 3 is complete. The [representative schema spike](./financial-statements-schema-spike.md) materializes seven source controls as 247 raw rows and 612 raw cells. Gate 6 later identified that the full-document extractor's row-relative OCR groups cannot serve as stable semantic period columns; migration 031 addresses that full-corpus pattern without changing raw evidence.
+
+Financial-statements Gate 4 is complete. [Migrations 029 and 030](./financial-statements-migration-status.md) implement reviewed accounting context, statement classes, entity and observation relationships, category assignments, publication gates, and six finance views. Two isolated clean builds passed; the active database remains unchanged and does not contain either migration.
+
+Financial-statements Gate 5 is complete. The [raw extraction status](./financial-statements-raw-extraction-status.md) records 139 table pages, 4,852 raw rows, 10,085 raw cells, exact database-count agreement, and a zero-insert idempotent rerun. The 140 low-confidence rows and all 228 remaining low-confidence cells have approved controlled-derived treatment.
+
+Financial-statements Gate 6 is active. Migration 031 adds reviewed semantic columns and multi-fragment cell assignments after the readiness audit found 345 mixed-role OCR columns and 258 geometrically unstable columns. Isolated regression passes; no normalized records or active-database schema changes have occurred.
 
 ## Decisions
 

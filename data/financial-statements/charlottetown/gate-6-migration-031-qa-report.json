@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "financial_statement_gate_6_migration_031_qa_report",
+  "gate": 6,
+  "reviewed_on": "2026-07-15",
+  "status": "passed",
+  "source_column_audit": {
+    "raw_ordinal_columns": 551,
+    "mixed_text_year_value_columns": 345,
+    "columns_with_center_span_over_0_25": 258,
+    "conclusion": "Raw OCR group ordinals cannot safely represent stable financial-statement period columns."
+  },
+  "migration_objects": {
+    "tables": ["budget.semantic_table_column", "budget.source_cell_semantic_assignment"],
+    "document_period_column": "budget.document_period.semantic_column_id",
+    "legacy_raw_column_periods_preserved": true,
+    "raw_source_records_mutated": false
+  },
+  "positive_controls": [
+    "one merged raw cell maps to three reviewed semantic fragments",
+    "semantic period columns create three distinct document periods",
+    "legacy raw-column document periods remain valid"
+  ],
+  "negative_controls": [
+    "approved semantic column without a normalization decision is rejected",
+    "approved semantic assignment without a normalization decision is rejected",
+    "cross-table cell assignment is rejected",
+    "non-source fragment without manual-transcription basis is rejected",
+    "document period with both raw and semantic columns is rejected",
+    "document period using a non-period semantic column is rejected",
+    "document period using another document's semantic column is rejected"
+  ],
+  "verification": {
+    "command": "scripts/python.ps1 scripts/test-budget-migration.py",
+    "clean_database_runs": 2,
+    "temporary_databases_remaining": 0,
+    "active_database_changed": false,
+    "active_database_contains_migration_031": false
+  },
+  "next_boundary": "Generate exact source-page semantic-column and cell-fragment proposals before any Gate 6 normalization approval."
+}

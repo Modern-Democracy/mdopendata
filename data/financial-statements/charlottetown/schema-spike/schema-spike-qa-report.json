@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "financial_statement_schema_spike_qa_report",
+  "gate": 3,
+  "reviewed_on": "2026-07-14",
+  "status": "passed",
+  "source_review_method": [
+    "Visual review of all seven unique source PDF pages",
+    "Tesseract psm 4 word-TSV extraction at 220 DPI for raw coordinate evidence",
+    "Exact positive controls for headings, periods, reporting entities, signs, and representative values",
+    "Negative controls for filename dates, document-owned comparatives, non-additive entity scopes, and database writes"
+  ],
+  "positive_controls": [
+    {
+      "control_key": "city_2025_financial_position",
+      "source": "ctown_fs_city_2025_03_31_audited PDF page 6, visible page 4",
+      "observed": "Current cash is a dash, comparative cash is 15,694,380, and accumulated surplus is 258,646,355.",
+      "status": "pass"
+    },
+    {
+      "control_key": "city_2025_budget_actual_operations",
+      "source": "ctown_fs_city_2025_03_31_audited PDF page 7, visible page 5",
+      "observed": "Property taxes retain Budget 2025 46,068,402, Actual 2025 47,287,806, and Actual 2024 43,892,492.",
+      "status": "pass"
+    },
+    {
+      "control_key": "city_2025_cash_flow",
+      "source": "ctown_fs_city_2025_03_31_audited PDF page 9, visible page 7",
+      "observed": "Operating, capital, investing, and financing sections remain separate; 2025 capital cash flow is (50,843,942) and financing cash flow is 3,811,233.",
+      "status": "pass"
+    },
+    {
+      "control_key": "water_sewer_2025_operations",
+      "source": "ctown_fs_ws_2025_03_31_audited PDF page 7, visible page 5",
+      "observed": "Metered sales retain Budget 2025 12,430,885, Actual 2025 12,792,726, and Actual 2024 12,478,489 under the separate corporation scope.",
+      "status": "pass"
+    },
+    {
+      "control_key": "city_superannuation_2024_position",
+      "source": "ctown_fs_city_sa_2024_12_31_audited PDF page 6, visible page 4",
+      "observed": "Net assets available for benefits are 131,900,688, accrued pension obligations are 116,066,585, and net surplus is 15,834,103 at December 31, 2024.",
+      "status": "pass"
+    },
+    {
+      "control_key": "city_2024_comparative_difference",
+      "source": "ctown_fs_city_2024_03_31_audited and ctown_fs_city_2025_03_31_audited PDF page 6",
+      "observed": "The earlier document reports 2024 cash of 15,694,379; the later document reports its 2024 comparative cash as 15,694,380.",
+      "status": "pass"
+    },
+    {
+      "control_key": "water_sewer_superannuation_2024_date",
+      "source": "ctown_fs_ws_sa_2024_12_31_audited PDF page 6, visible page 4",
+      "observed": "The source date is December 31, 2024; net assets are 10,663,117, obligations are 9,808,500, and net surplus is 854,617.",
+      "status": "pass"
+    }
+  ],
+  "raw_materialization": {
+    "unique_pages": 7,
+    "rows": 247,
+    "cells": 612,
+    "null_row_bboxes": 0,
+    "null_cell_bboxes": 0,
+    "low_confidence_rows": 16,
+    "low_confidence_cells": 42,
+    "decision": "Low-confidence raw records remain flagged for Gate 5 extraction review. Visual controls establish Gate 3 schema fit but do not approve those records for normalized import."
+  },
+  "schema_fit": {
+    "existing_schema_fits": 2,
+    "planned_migration_029_resolutions": 4,
+    "unsupported_patterns": 0,
+    "unplanned_schema_gaps": 0,
+    "required_planned_objects": [
+      "budget.document_accounting_context",
+      "budget.statement_class",
+      "budget.reporting_entity_relationship",
+      "budget.financial_observation_relationship"
+    ]
+  },
+  "negative_controls": {
+    "comparative_values_overwritten": 0,
+    "december_21_periods_created": 0,
+    "cross_scope_additive_relationships_approved": 0,
+    "normalized_observations_created": 0,
+    "database_writes": 0,
+    "publication_changes": 0
+  },
+  "regression_test": {
+    "command": "scripts/python.ps1 scripts/test-financial-statements-schema-spike.py",
+    "tests_run": 7,
+    "failures": 0,
+    "errors": 0
+  },
+  "deterministic_rerun": {
+    "files_compared": 8,
+    "sha256_differences": 0,
+    "result": "passed"
+  },
+  "gate_result": {
+    "gate_3_status": "complete",
+    "gate_3_blockers": 0,
+    "approved_next_work": "Gate 4 migration implementation only",
+    "migration_029_design_status": "approved_for_implementation",
+    "migration_030_design_status": "approved_for_implementation_with_gate_4_regression_controls",
+    "publication_approved": false
+  }
+}

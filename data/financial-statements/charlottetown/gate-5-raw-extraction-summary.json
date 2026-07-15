@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "financial_statement_raw_extraction_summary",
+  "gate": 5,
+  "status": "complete",
+  "extractor_version": "tesseract v5.4.0.20240606",
+  "render_dpi": 220,
+  "extractor_psm": 4,
+  "counts": {
+    "documents": 8,
+    "registered_pdf_pages": 188,
+    "extracted_table_pages": 139,
+    "source_columns": 551,
+    "source_rows": 4852,
+    "source_cells": 10085,
+    "value_candidate_cells": 4017,
+    "low_confidence_rows": 140,
+    "low_confidence_cells": 405,
+    "rotated_table_pages": 8,
+    "database_writes": 0
+  },
+  "documents": [
+    {
+      "document_key": "ctown_fs_city_2024_03_31_audited",
+      "table_pages": 28,
+      "rows": 1033,
+      "cells": 2682
+    },
+    {
+      "document_key": "ctown_fs_city_2025_03_31_audited",
+      "table_pages": 29,
+      "rows": 1039,
+      "cells": 2491
+    },
+    {
+      "document_key": "ctown_fs_ws_2024_03_31_audited",
+      "table_pages": 15,
+      "rows": 520,
+      "cells": 1061
+    },
+    {
+      "document_key": "ctown_fs_ws_2025_03_31_audited",
+      "table_pages": 15,
+      "rows": 529,
+      "cells": 1064
+    },
+    {
+      "document_key": "ctown_fs_city_sa_2023_12_31_audited",
+      "table_pages": 13,
+      "rows": 430,
+      "cells": 680
+    },
+    {
+      "document_key": "ctown_fs_city_sa_2024_12_31_audited",
+      "table_pages": 13,
+      "rows": 435,
+      "cells": 700
+    },
+    {
+      "document_key": "ctown_fs_ws_sa_2023_12_31_audited",
+      "table_pages": 13,
+      "rows": 431,
+      "cells": 697
+    },
+    {
+      "document_key": "ctown_fs_ws_sa_2024_12_31_audited",
+      "table_pages": 13,
+      "rows": 435,
+      "cells": 710
+    }
+  ],
+  "operational_boundary": {
+    "raw_database_imported": true,
+    "raw_database_records_imported": 15970,
+    "database_count_verification": "passed",
+    "idempotent_rerun_inserted_records": 0,
+    "normalized_records_created": 0,
+    "publication_changes": 0
+  }
+}

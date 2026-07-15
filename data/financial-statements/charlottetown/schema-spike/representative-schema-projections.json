@@ -1,0 +1,411 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "control_key": "city_2025_financial_position",
+      "pattern": "consolidated_financial_position",
+      "source_pages": [
+        "ctown_fs_city_2025_03_31_audited_p006"
+      ],
+      "source_table_key": "ctown_fs_city_2025_03_31_audited_p006_t01",
+      "statement": {
+        "statement_key": "ctown_fs_city_2025_03_31_audited_financial_position",
+        "statement_kind": "financial_statement",
+        "statement_class": "financial_position",
+        "reporting_entity_key": "city_of_charlottetown"
+      },
+      "source_columns": [
+        {
+          "column_key": "label",
+          "raw_header": null,
+          "column_role": "line_label"
+        },
+        {
+          "column_key": "actual_current",
+          "period_role": "current",
+          "amount_type": "actual"
+        },
+        {
+          "column_key": "actual_prior",
+          "period_role": "comparative",
+          "amount_type": "actual"
+        }
+      ],
+      "existing_schema_records": [
+        "source_document",
+        "source_page",
+        "source_table",
+        "source_table_column",
+        "source_table_row",
+        "source_table_cell",
+        "reporting_entity",
+        "document_period",
+        "statement",
+        "line_item",
+        "financial_observation",
+        "financial_observation_source"
+      ],
+      "planned_migration_objects": [
+        "document_accounting_context",
+        "financial_observation_relationship",
+        "reporting_entity_relationship",
+        "statement_class"
+      ],
+      "assertions": [
+        "Assets, liabilities, net debt, non-financial assets, and accumulated surplus retain hierarchy.",
+        "Current and comparative actual columns remain separate document periods.",
+        "A reported dash remains dash_unresolved rather than numeric zero."
+      ],
+      "fit_status": "fits_with_planned_migration_029"
+    },
+    {
+      "control_key": "city_2025_budget_actual_operations",
+      "pattern": "budget_to_actual_operations",
+      "source_pages": [
+        "ctown_fs_city_2025_03_31_audited_p007"
+      ],
+      "source_table_key": "ctown_fs_city_2025_03_31_audited_p007_t01",
+      "statement": {
+        "statement_key": "ctown_fs_city_2025_03_31_audited_operations",
+        "statement_kind": "financial_statement",
+        "statement_class": "operations",
+        "reporting_entity_key": "city_of_charlottetown"
+      },
+      "source_columns": [
+        {
+          "column_key": "label",
+          "raw_header": null,
+          "column_role": "line_label"
+        },
+        {
+          "column_key": "budget_current",
+          "raw_header": "Budget 2025",
+          "period_role": "current",
+          "amount_type": "budget"
+        },
+        {
+          "column_key": "actual_current",
+          "raw_header": "Actual 2025",
+          "period_role": "current",
+          "amount_type": "actual"
+        },
+        {
+          "column_key": "actual_prior",
+          "raw_header": "Actual 2024",
+          "period_role": "comparative",
+          "amount_type": "actual"
+        }
+      ],
+      "existing_schema_records": [
+        "source_document",
+        "source_page",
+        "source_table",
+        "source_table_column",
+        "source_table_row",
+        "source_table_cell",
+        "reporting_entity",
+        "document_period",
+        "statement",
+        "line_item",
+        "financial_observation",
+        "financial_observation_source"
+      ],
+      "planned_migration_objects": [
+        "document_accounting_context",
+        "financial_observation_relationship",
+        "reporting_entity_relationship",
+        "statement_class"
+      ],
+      "assertions": [
+        "Budget 2025, actual 2025, and actual 2024 are distinct source columns.",
+        "Budget and actual are amount types; period identity remains document-owned.",
+        "Reported totals remain non-additive reconciliation controls."
+      ],
+      "fit_status": "fits_with_planned_migration_029"
+    },
+    {
+      "control_key": "city_2025_cash_flow",
+      "pattern": "cash_flow_sections",
+      "source_pages": [
+        "ctown_fs_city_2025_03_31_audited_p009"
+      ],
+      "source_table_key": "ctown_fs_city_2025_03_31_audited_p009_t01",
+      "statement": {
+        "statement_key": "ctown_fs_city_2025_03_31_audited_cash_flow",
+        "statement_kind": "financial_statement",
+        "statement_class": "cash_flow",
+        "reporting_entity_key": "city_of_charlottetown"
+      },
+      "source_columns": [
+        {
+          "column_key": "label",
+          "raw_header": null,
+          "column_role": "line_label"
+        },
+        {
+          "column_key": "actual_current",
+          "period_role": "current",
+          "amount_type": "actual"
+        },
+        {
+          "column_key": "actual_prior",
+          "period_role": "comparative",
+          "amount_type": "actual"
+        }
+      ],
+      "existing_schema_records": [
+        "source_document",
+        "source_page",
+        "source_table",
+        "source_table_column",
+        "source_table_row",
+        "source_table_cell",
+        "reporting_entity",
+        "document_period",
+        "statement",
+        "line_item",
+        "financial_observation",
+        "financial_observation_source"
+      ],
+      "planned_migration_objects": [
+        "document_accounting_context",
+        "financial_observation_relationship",
+        "reporting_entity_relationship",
+        "statement_class"
+      ],
+      "assertions": [
+        "Operating, capital, investing, and financing sections retain separate hierarchy.",
+        "Section totals are not additive with their detail rows.",
+        "Parenthesized cash movements remain negative reported values."
+      ],
+      "fit_status": "fits_with_planned_migration_029"
+    },
+    {
+      "control_key": "water_sewer_2025_operations",
+      "pattern": "component_operations",
+      "source_pages": [
+        "ctown_fs_ws_2025_03_31_audited_p007"
+      ],
+      "source_table_key": "ctown_fs_ws_2025_03_31_audited_p007_t01",
+      "statement": {
+        "statement_key": "ctown_fs_ws_2025_03_31_audited_operations",
+        "statement_kind": "financial_statement",
+        "statement_class": "operations",
+        "reporting_entity_key": "charlottetown_water_and_sewer_corporation"
+      },
+      "source_columns": [
+        {
+          "column_key": "label",
+          "raw_header": null,
+          "column_role": "line_label"
+        },
+        {
+          "column_key": "budget_current",
+          "raw_header": "Budget 2025",
+          "period_role": "current",
+          "amount_type": "budget"
+        },
+        {
+          "column_key": "actual_current",
+          "raw_header": "Actual 2025",
+          "period_role": "current",
+          "amount_type": "actual"
+        },
+        {
+          "column_key": "actual_prior",
+          "raw_header": "Actual 2024",
+          "period_role": "comparative",
+          "amount_type": "actual"
+        }
+      ],
+      "existing_schema_records": [
+        "source_document",
+        "source_page",
+        "source_table",
+        "source_table_column",
+        "source_table_row",
+        "source_table_cell",
+        "reporting_entity",
+        "document_period",
+        "statement",
+        "line_item",
+        "financial_observation",
+        "financial_observation_source"
+      ],
+      "planned_migration_objects": [
+        "document_accounting_context",
+        "financial_observation_relationship",
+        "reporting_entity_relationship",
+        "statement_class"
+      ],
+      "assertions": [
+        "The Water and Sewer Corporation remains a separate reporting entity.",
+        "Its values may link to City consolidated scope but must not be added to that scope.",
+        "Budget and both actual columns retain document-specific identities."
+      ],
+      "fit_status": "fits_with_planned_migration_029"
+    },
+    {
+      "control_key": "city_superannuation_2024_position",
+      "pattern": "pension_position",
+      "source_pages": [
+        "ctown_fs_city_sa_2024_12_31_audited_p006"
+      ],
+      "source_table_key": "ctown_fs_city_sa_2024_12_31_audited_p006_t01",
+      "statement": {
+        "statement_key": "ctown_fs_city_sa_2024_12_31_audited_financial_position",
+        "statement_kind": "financial_statement",
+        "statement_class": "financial_position",
+        "reporting_entity_key": "city_of_charlottetown_superannuation_plan"
+      },
+      "source_columns": [
+        {
+          "column_key": "label",
+          "raw_header": null,
+          "column_role": "line_label"
+        },
+        {
+          "column_key": "actual_current",
+          "period_role": "current",
+          "amount_type": "actual"
+        },
+        {
+          "column_key": "actual_prior",
+          "period_role": "comparative",
+          "amount_type": "actual"
+        }
+      ],
+      "existing_schema_records": [
+        "source_document",
+        "source_page",
+        "source_table",
+        "source_table_column",
+        "source_table_row",
+        "source_table_cell",
+        "reporting_entity",
+        "document_period",
+        "statement",
+        "line_item",
+        "financial_observation",
+        "financial_observation_source"
+      ],
+      "planned_migration_objects": [
+        "document_accounting_context",
+        "financial_observation_relationship",
+        "reporting_entity_relationship",
+        "statement_class"
+      ],
+      "assertions": [
+        "Plan assets, pension obligations, and net surplus retain pension-plan scope.",
+        "December 31 periods cannot be joined to March 31 municipal periods by year label.",
+        "The plan is related to the City but non-additive to City consolidated totals."
+      ],
+      "fit_status": "fits_with_planned_migration_029"
+    },
+    {
+      "control_key": "city_2024_comparative_difference",
+      "pattern": "draft_audited_comparative_difference",
+      "source_pages": [
+        "ctown_fs_city_2024_03_31_audited_p006",
+        "ctown_fs_city_2025_03_31_audited_p006"
+      ],
+      "source_table_key": "ctown_fs_city_2024_03_31_audited_p006_t01",
+      "statement": {
+        "statement_key": "ctown_fs_city_2024_03_31_audited_financial_position",
+        "statement_kind": "financial_statement",
+        "statement_class": "financial_position",
+        "reporting_entity_key": "city_of_charlottetown"
+      },
+      "source_columns": [
+        {
+          "column_key": "document_owned_actual",
+          "period_role": "current_or_comparative",
+          "amount_type": "actual"
+        }
+      ],
+      "existing_schema_records": [
+        "source_document",
+        "source_page",
+        "source_table",
+        "source_table_column",
+        "source_table_row",
+        "source_table_cell",
+        "reporting_entity",
+        "document_period",
+        "statement",
+        "line_item",
+        "financial_observation",
+        "financial_observation_source"
+      ],
+      "planned_migration_objects": [
+        "document_accounting_context",
+        "financial_observation_relationship",
+        "reporting_entity_relationship",
+        "statement_class"
+      ],
+      "assertions": [
+        "The 2024 cash value remains document-owned in both source documents.",
+        "The one-dollar difference is not overwritten or silently reconciled.",
+        "Any comparative_of or restates relationship requires a reviewed observation relationship."
+      ],
+      "fit_status": "fits_with_planned_migration_029"
+    },
+    {
+      "control_key": "water_sewer_superannuation_2024_date",
+      "pattern": "filename_reporting_date_conflict",
+      "source_pages": [
+        "ctown_fs_ws_sa_2024_12_31_audited_p006"
+      ],
+      "source_table_key": "ctown_fs_ws_sa_2024_12_31_audited_p006_t01",
+      "statement": {
+        "statement_key": "ctown_fs_ws_sa_2024_12_31_audited_financial_position",
+        "statement_kind": "financial_statement",
+        "statement_class": "financial_position",
+        "reporting_entity_key": "charlottetown_water_and_sewer_corporation_superannuation_plan"
+      },
+      "source_columns": [
+        {
+          "column_key": "label",
+          "raw_header": null,
+          "column_role": "line_label"
+        },
+        {
+          "column_key": "actual_current",
+          "period_role": "current",
+          "amount_type": "actual"
+        },
+        {
+          "column_key": "actual_prior",
+          "period_role": "comparative",
+          "amount_type": "actual"
+        }
+      ],
+      "existing_schema_records": [
+        "source_document",
+        "source_page",
+        "source_table",
+        "source_table_column",
+        "source_table_row",
+        "source_table_cell",
+        "reporting_entity",
+        "document_period",
+        "statement",
+        "line_item",
+        "financial_observation",
+        "financial_observation_source"
+      ],
+      "planned_migration_objects": [
+        "document_accounting_context",
+        "financial_observation_relationship",
+        "reporting_entity_relationship",
+        "statement_class"
+      ],
+      "assertions": [
+        "The visible December 31, 2024 reporting date controls period identity.",
+        "The filename's December 21 text remains source metadata and creates no fiscal period.",
+        "The related pension plan remains non-additive to Water and Sewer or City totals."
+      ],
+      "fit_status": "fits_with_planned_migration_029"
+    }
+  ]
+}

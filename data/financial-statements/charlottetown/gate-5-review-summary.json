@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "financial_statement_controlled_review_summary",
+  "gate": 5,
+  "status": "complete_with_review_queue",
+  "counts": {
+    "documents": 8,
+    "mapping_rows": 1331,
+    "period_records": 139,
+    "statement_class_records": 139,
+    "hierarchy_records": 1331,
+    "entity_scope_records": 139,
+    "dash_sign_records": 1160,
+    "reporting_entity_relationship_candidates": 3,
+    "comparative_relationship_candidates": 299,
+    "budget_equivalence_candidates": 121,
+    "taxonomy_records": 121,
+    "approved_records": 0,
+    "database_writes": 0
+  },
+  "records_by_table_family": {
+    "budget_reconciliation_note": 73,
+    "cash_flow": 82,
+    "changes_in_net_assets_available_for_benefits": 57,
+    "changes_in_net_debt": 30,
+    "changes_in_pension_obligations": 27,
+    "financial_position": 105,
+    "note_disclosure_table": 601,
+    "operations": 122,
+    "segmented_disclosure_schedule": 73,
+    "tangible_capital_assets_schedule": 161
+  },
+  "controls": {
+    "all_rows_have_exact_source_locators": true,
+    "all_candidates_remain_unapproved": true,
+    "source_authority_review_reused": "source-authority-review.json",
+    "publication_authorized": false
+  },
+  "outputs": [
+    "budget-equivalence-review.json",
+    "comparative-relationship-review.json",
+    "dash-sign-review.json",
+    "entity-scope-review.json",
+    "hierarchy-review.json",
+    "period-review.json",
+    "reporting-entity-relationship-review.json",
+    "statement-class-review.json",
+    "taxonomy-review.json"
+  ]
+}

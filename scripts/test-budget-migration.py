@@ -21,6 +21,18 @@ MIGRATION_STAGES = (
         REPO_ROOT / "schema" / "sql" / "028_budget_content_and_observation_model.sql",
         REPO_ROOT / "schema" / "tests" / "028_budget_content_and_observation_model_regression.sql",
     ),
+    (
+        REPO_ROOT / "schema" / "sql" / "029_budget_financial_statement_context.sql",
+        REPO_ROOT / "schema" / "tests" / "029_budget_financial_statement_context_regression.sql",
+    ),
+    (
+        REPO_ROOT / "schema" / "sql" / "030_budget_financial_statement_publication.sql",
+        REPO_ROOT / "schema" / "tests" / "030_budget_financial_statement_publication_regression.sql",
+    ),
+    (
+        REPO_ROOT / "schema" / "sql" / "031_budget_financial_statement_semantic_columns.sql",
+        REPO_ROOT / "schema" / "tests" / "031_budget_financial_statement_semantic_columns_regression.sql",
+    ),
 )
 
 

@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "financial_statement_migration_qa_report",
+  "gate": 4,
+  "reviewed_on": "2026-07-14",
+  "status": "passed",
+  "scope": {
+    "migration_files": [
+      "schema/sql/029_budget_financial_statement_context.sql",
+      "schema/sql/030_budget_financial_statement_publication.sql"
+    ],
+    "regression_files": [
+      "schema/tests/029_budget_financial_statement_context_regression.sql",
+      "schema/tests/030_budget_financial_statement_publication_regression.sql"
+    ],
+    "harness": "scripts/test-budget-migration.py"
+  },
+  "migration_029": {
+    "tables_added": [
+      "budget.document_accounting_context",
+      "budget.statement_class",
+      "budget.reporting_entity_relationship",
+      "budget.financial_observation_relationship"
+    ],
+    "columns_added": [
+      "budget.statement.statement_class_id"
+    ],
+    "statement_classes_seeded": 9,
+    "review_issue_codes_added": 5,
+    "allowed_review_decisions_seeded": 12,
+    "compatibility_controls": [
+      "reporting-entity relationships remain municipality-scoped and document-compatible",
+      "approved reporting-entity relationships require a normalization decision",
+      "financial-observation relationships remain municipality-scoped",
+      "approved financial-observation relationships require a normalization decision",
+      "budget-equivalent links require matching entity, period, unit, operations class, and budget-to-actual roles",
+      "legacy statements may retain a null statement class"
+    ]
+  },
+  "migration_030": {
+    "tables_added": [
+      "budget.financial_statement_line_category_assignment"
+    ],
+    "views_added": [
+      "budget.v_published_financial_statement_observations",
+      "budget.v_budget_actual_comparison",
+      "budget.v_financial_position",
+      "budget.v_cash_flow",
+      "budget.v_pension_position",
+      "budget.v_holistic_finance_coverage"
+    ],
+    "publication_controls": [
+      "existing budget-only publication snapshots remain compatible",
+      "financial-statement documents require an accounting-context row, approved review, and publication authority before publication",
+      "financial-statement observations require a statement class and approved review before publication",
+      "financial-statement budget category assignments are restricted to operations flow statements",
+      "published financial-statement accounting context cannot be weakened",
+      "category assignments require taxonomy-compatible statement classes and an approved normalization decision"
+    ],
+    "scope_warning_controls": [
+      "consolidated-component relationships are exposed without additive aggregation",
+      "related pension plans are exposed without addition to City consolidated totals"
+    ]
+  },
+  "isolated_regression": {
+    "command": "scripts/python.ps1 scripts/test-budget-migration.py",
+    "clean_runs": 2,
+    "failures": 0,
+    "temporary_database_source": "template0",
+    "temporary_databases_remaining": 0,
+    "result": "passed"
+  },
+  "upstream_negative_controls": {
+    "profile_tests": {
+      "command": "scripts/python.ps1 scripts/test-financial-statements-profile.py",
+      "tests_run": 6,
+      "failures": 0,
+      "errors": 0
+    },
+    "schema_spike_tests": {
+      "command": "scripts/python.ps1 scripts/test-financial-statements-schema-spike.py",
+      "tests_run": 7,
+      "failures": 0,
+      "errors": 0
+    }
+  },
+  "active_database_negative_control": {
+    "database": "mdopendata",
+    "publication_snapshots": 2,
+    "publication_observation_memberships": 12637,
+    "published_snapshots": 2,
+    "migration_029_present": false,
+    "migration_030_present": false,
+    "active_database_mutated": false
+  },
+  "operational_boundary": {
+    "database_backup_required": false,
+    "reason": "Only uniquely named temporary databases were mutated and dropped; no DDL was applied to the active database.",
+    "active_database_application_authorized": false,
+    "normalized_import_authorized": false,
+    "publication_authorized": false
+  },
+  "gate_result": {
+    "gate_4_status": "complete",
+    "gate_4_blockers": 0,
+    "approved_next_work": "Gate 5 full raw extraction and controlled raw review artifacts only"
+  }
+}

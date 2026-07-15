@@ -697,3 +697,79 @@ Passed clean isolated migration regressions, repeat content import, source-value
 Replaced plain-text fact bodies with semantic heading, paragraph, unordered-list, and ordered-list blocks while retaining searchable body text and page citations. Removed PDF hard line wrapping from normalized paragraph content and reconstructed wrapped department list items.
 
 Pivoted financial observations into source-aligned HTML rows with fiscal periods or measures as columns and per-cell evidence links. Added explicit operating and capital overview sections, and corrected property-tax and long-term-debt schedules to align their source values on one row with reviewed source-column labels.
+
+## [2026-07-14] plan | Charlottetown financial statements ingestion
+
+Prepared a gated repository implementation plan for the eight image-only Charlottetown financial-statement PDFs. The plan defines migrations 029 and 030, twelve ETL and publication scripts, deterministic raw and normalized artifacts, representative source controls, eleven approval gates, API and browser scope, and nine named regression or smoke-test files. It preserves draft and audited comparatives, prevents consolidated/component and pension double counting, and requires reviewed budget-equivalence relationships before budget-to-actual publication.
+
+## [2026-07-14] ingest | Financial statements Gate 1 source authority
+
+Registered eight Charlottetown financial-statement PDFs with SHA-256 hashes, 188 total pages, source-page titles and reporting dates, reporting scopes, accounting frameworks, and independent-auditor evidence. Resolved six filename conflicts for ingestion identity, including two `Draft` labels on audited source copies, two 2024 filenames containing 2023 pension statements, one title spelling error, and the Water and Sewer pension December 21 filename versus repeated December 31 source content. All eight documents are approved for Gate 2 profiling and remain blocked from publication because municipal publication/adoption status is unknown.
+
+## [2026-07-14] ingest | Financial statements Gate 2 full profile
+
+Profiled all eight registered financial-statement PDFs and all 188 pages with full-page OCR, page dispositions, source profiles, page inventories, and table manifests. Classified 139 candidates comprising 28 primary statements, 14 schedules, and 97 note-disclosure tables with zero unclassified financial tables. Recovered eight sideways schedule pages through recorded rotation, retained two low-confidence City note pages as exact visual-review controls, passed five profile regressions, and confirmed a 417-file deterministic rerun with zero hash differences. No schema, database, normalized mapping, or publication changes were made.
+
+## [2026-07-14] review | Financial statements Gate 2 low-confidence pages
+
+Visually reviewed PDF page 28 in both City consolidated-statement editions. Both are legible Note 15 budget-reconciliation tables with `Per Budget Document`, `Net Adjustments`, and `Consolidated Budget` columns; reclassified them from generic note disclosures to `budget_reconciliation_note`. Recorded four source control rows per page, the unaudited budget-column limitation, the 2024 redundant negative notation on Protective services, and the 2025 underlined capital-transfer adjustment that OCR can misread as a trailing minus. Both controls are approved for Gate 3 with zero remaining low-confidence review blockers.
+
+## [2026-07-14] implementation | Financial statements Gate 3 schema spike
+
+Materialized seven representative financial-statement controls across seven unique PDF pages as 247 raw OCR rows and 612 cells with stable identities, normalized coordinates, confidence, and source hashes. Verified consolidated position, budget-to-actual operations, cash-flow sections, component operations, pension position, a one-dollar document-owned comparative difference, and the Water and Sewer pension filename-date conflict. All patterns fit the existing schema plus the four objects already planned for migration 029, with zero unsupported patterns and zero unplanned gaps. Seven regression tests passed; no migration, database write, normalized observation, snapshot, or publication change occurred.
+
+## [2026-07-14] implementation | Financial statements Gate 4 migrations
+
+Implemented migrations 029 and 030 with accounting context, nine statement classes, reviewed entity and observation relationships, financial-statement category assignments, publication gates, and six scope-safe finance views. Added isolated SQL regressions and extended the unique-database migration harness. Two clean builds passed together with Gate 2 and Gate 3 negative controls; no temporary databases remain. The active database remains unchanged at 2 snapshots, 12,637 observation memberships, and 2 published snapshots, and neither migration was applied to it.
+
+## [2026-07-14] ingest | Financial statements Gate 5 raw extraction
+
+Extracted all 139 profiled financial-table pages across eight documents as 4,852 raw coordinate rows and 10,085 raw cells, applying eight reviewed schedule rotations. Generated 1,331 exact row-mapping reviews and controlled period, statement-class, hierarchy, entity-scope, dash/sign, reporting-entity, comparative, budget-equivalence, and taxonomy registers with zero approvals. Nine regressions passed, five representative pages passed visual source review, and 51 generated files reproduced with zero SHA-256 differences. Raw-database import was not authorized or performed; no normalized record or publication state changed.
+
+## [2026-07-14] review | Financial statements Gate 5 batch 01
+
+Produced the complete 29-row review batch for parser-confidence-below-80 rows in primary statements across all eight documents and 17 source pages. Visual source review yielded seven retain proposals, nine source-verified transcription proposals, and 13 non-financial layout-artifact exclusions; every exact row remains unapproved. Added deterministic generation and source-locator regressions without applying raw corrections, normalization, database writes, or publication changes.
+
+## [2026-07-14] decision | Financial statements Gate 5 batch 01
+
+Reviewed all 29 Batch 01 rows against 17 exact PDF page renders. Approved 28 proposals as written and revised City 2025 operations record 10 from retention to source-verified transcription because its total-revenue raw text contains `97,421,447`, `100,740,160`, and `101,452,953` while its parsed value list is empty. Final extraction decisions are six retentions, ten transcriptions, and 13 layout-artifact exclusions; hierarchy, normalization, database import, and publication remain unchanged.
+
+## [2026-07-14] apply | Financial statements Gate 5 batch 01 and batch 02
+
+Applied all 29 Batch 01 extraction decisions to a deterministic controlled derived artifact, materializing 16 source-verified financial rows and recording 13 exclusions without mutating raw evidence. Produced Batch 02 with every remaining sub-80-confidence note or schedule row: 111 rows across 67 pages, comprising 82 note rows, 29 schedule rows, 26 value-bearing rows, and 85 rows without parsed values. Four family-stratified PDF controls confirmed locator alignment; Batch 02 retains zero approvals and makes no normalization, database, or publication change.
+
+## [2026-07-14] review | Financial statements Gate 5 batch 02 decisions
+
+Reviewed all 111 Batch 02 rows against exact PDF pages and row bounding boxes rendered at 180 DPI. Revised and approved 57 source-verified financial transcriptions, 7 context transcriptions, and 47 non-financial layout-artifact exclusions in 67 source-page groups. The decisions preserve raw evidence and do not yet apply controlled derived corrections, approve normalization, write the database, or change publication.
+
+## [2026-07-14] apply | Financial statements Gate 5 batch 02
+
+Applied all 111 approved Batch 02 decisions to deterministic controlled-derived artifacts, materializing 57 source-verified financial rows and 7 context records and recording 47 exclusions. Exact decision-to-raw round trips, source-fidelity controls, 111 unique row keys, and 10 raw and Batch 01 negative controls passed with zero changes. Raw evidence, hierarchy, normalization, the database, and publication remain unchanged.
+
+## [2026-07-14] ingest | Financial statements Gate 5 batch 03
+
+Produced an unsampled review batch for all 228 remaining sub-80-confidence cells across 191 unresolved parent rows, 77 PDF pages, and all eight documents. The queue contains 102 text cells, 51 amount candidates, 69 dash candidates, and 6 signed-amount candidates; 177 other low-confidence cells are excluded because approved Batch 01 or Batch 02 whole-row treatments supersede separate cell review. No visual decision, raw correction, value-state approval, normalization, database write, or publication change occurred.
+
+## [2026-07-14] review | Financial statements Gate 5 batch 03 decisions
+
+Reviewed all 228 Batch 03 cells against exact PDF pages and cell bounding boxes rendered at 180 DPI, including recorded schedule rotations. Revised and approved 117 source-verified financial transcriptions, 7 context transcriptions, 86 source dash placeholders, and 18 non-financial layout-artifact exclusions. Source controls corrected `(792,142)`, `(742,585)`, `35,377,973`, `73,115`, and `- %`; controlled-derived application, normalization, database writes, and publication remain unchanged.
+
+## [2026-07-14] apply | Financial statements Gate 5 batch 03
+
+Applied all 228 approved Batch 03 cell decisions to deterministic controlled-derived artifacts, materializing 117 source-verified financial cells, 7 context cells, and 86 source dash states while recording 18 exclusions. Exact decision-to-raw cell round trips and source-fidelity controls passed. Raw evidence, approved row decisions, hierarchy, normalization, the database, and publication remain unchanged.
+
+## [2026-07-14] ingest | Financial statements Gate 5 batch 04
+
+Produced the complete 139-table context review queue by exact table-key joins across the period, statement-class, and entity-scope registers. The queue spans all eight documents and 139 source pages, identifies 133 current-year candidates, 109 comparative-year candidates, and 34 tables with other detected years, and retains zero approvals. Source-column roles remain explicitly deferred; normalization, database writes, and publication remain unchanged.
+
+## [2026-07-15] review | Financial statements Gate 5 batch 04 decisions
+
+Reviewed all 139 Batch 04 table contexts against exact source pages. Approved 134 proposals as written and revised five period-evidence records: City 2024 page 19 adds an OCR-omitted 2023 assumptions heading, and City and Water and Sewer debt pages 26 or 17 classify future principal-repayment years as financial schedule evidence. Table-level reporting dates, statement classes, and entity scopes are approved; source-column roles, normalization, database writes, and publication remain unchanged.
+
+## [2026-07-15] apply | Financial statements Gate 5 batch 04
+
+Applied all 139 approved Batch 04 table-context decisions to deterministic controlled-derived artifacts. Materialized table-level reporting dates, financial and contextual years, statement classes, entity scopes, and the cross-entity non-addition rule while retaining zero source-column roles. Raw evidence, source registers, normalization, the database, and publication remain unchanged.
+
+## [2026-07-15] implementation | Financial statements Gate 6 semantic columns
+
+Audited all 551 Gate 5 OCR group columns and found 345 mixed text/year/value columns plus 258 columns spanning more than 25 percent of page width. Implemented migration 031 with reviewed semantic columns, multi-fragment raw-cell assignments, semantic document-period links, exact-fragment and same-table controls, and legacy raw-column compatibility. Isolated full-chain regressions passed without changing the active database or raw records.

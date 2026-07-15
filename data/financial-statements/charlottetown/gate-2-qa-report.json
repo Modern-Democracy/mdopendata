@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "financial_statement_gate_2_qa_report",
+  "gate": 2,
+  "reviewed_on": "2026-07-14",
+  "status": "passed",
+  "profile_summary_path": "data/financial-statements/charlottetown/gate-2-profile-summary.json",
+  "checks": {
+    "registered_documents": 8,
+    "registered_pages": 188,
+    "pages_with_disposition": 188,
+    "financial_table_candidates": 139,
+    "unclassified_financial_tables": 0,
+    "primary_statement_pages": 28,
+    "schedule_pages": 14,
+    "note_disclosure_table_pages": 95,
+    "budget_reconciliation_note_pages": 2,
+    "source_hash_mismatches": 0,
+    "source_page_count_mismatches": 0,
+    "database_writes": 0,
+    "normalized_observations_created": 0
+  },
+  "orientation_recovery": {
+    "pages_rotated_for_ocr": 8,
+    "selected_rotation_degrees": 270,
+    "result": "all eight sideways schedule pages classified"
+  },
+  "resolved_review_controls": [
+    {
+      "page_key": "ctown_fs_city_2024_03_31_audited_p028",
+      "source_pdf_page": 28,
+      "content_type": "notes",
+      "table_family": "note_disclosure_table",
+      "ocr_mean_confidence": 69.41,
+      "review_artifact": "data/financial-statements/charlottetown/gate-2-low-confidence-page-review.json",
+      "review_status": "approved_for_gate_3"
+    },
+    {
+      "page_key": "ctown_fs_city_2025_03_31_audited_p028",
+      "source_pdf_page": 28,
+      "content_type": "notes",
+      "table_family": "note_disclosure_table",
+      "ocr_mean_confidence": 68.9,
+      "review_artifact": "data/financial-statements/charlottetown/gate-2-low-confidence-page-review.json",
+      "review_status": "approved_for_gate_3"
+    }
+  ],
+  "regression_test": {
+    "command": "scripts/python.ps1 scripts/test-financial-statements-profile.py",
+    "tests_run": 6,
+    "failures": 0,
+    "errors": 0
+  },
+  "deterministic_rerun": {
+    "generated_files_compared": 419,
+    "sha256_differences": 0,
+    "result": "passed"
+  },
+  "gate_result": {
+    "gate_2_status": "complete",
+    "gate_2_blockers": 0,
+    "approved_next_work": "Gate 3 representative schema spike only",
+    "publication_approved": false
+  }
+}

@@ -1,0 +1,330 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "financial_statement_source_document_registry",
+  "municipality_key": "ctown",
+  "source_root": "docs/charlottetown/financial-statements",
+  "reviewed_on": "2026-07-14",
+  "status": "gate_1_complete_with_publication_limitations",
+  "identity_contract": {
+    "document_key_pattern": "ctown_fs_<entity>_<reporting_date>_<assurance_status>",
+    "reporting_date_format": "YYYY_MM_DD",
+    "authority_rule": "Use the source cover, auditor report, and first statement page; filenames are locators and never override source-page evidence.",
+    "comparative_rule": "Every document remains a separate source record; repeated comparative values are document-owned and are not overwritten or ranked at Gate 1."
+  },
+  "counts": {
+    "documents": 8,
+    "pdf_pages": 188,
+    "audited_documents": 8,
+    "public_sector_documents": 4,
+    "pension_plan_documents": 4,
+    "filename_conflicts": 6,
+    "approved_for_gate_2": 8,
+    "approved_for_publication": 0
+  },
+  "documents": [
+    {
+      "document_key": "ctown_fs_city_2024_03_31_audited",
+      "series_key": "city_consolidated",
+      "series_sequence": 1,
+      "source_file": "docs/charlottetown/financial-statements/Draft 2024 CoC Consolidated Financial Statements (1).pdf",
+      "sha256": "223cba05a08fe0f9af4980022b5473c7ce8bc282cb03dcd5452943ab5c95fdde",
+      "file_size_bytes": 24075127,
+      "page_count": 37,
+      "pdf_metadata": {
+        "page_size": "792 x 612 pts (letter)",
+        "producer": "RICOH IM C4500",
+        "creation_date_raw": "Fri Oct 18 09:07:52 2024 Atlantic Daylight Time",
+        "modification_date_raw": "Fri Oct 18 09:06:42 2024 Atlantic Daylight Time"
+      },
+      "source_title": "City of Charlottetown Consolidated Financial Statements",
+      "reporting_entity_key": "city_of_charlottetown",
+      "reporting_entity_name": "City of Charlottetown",
+      "entity_type": "municipality",
+      "consolidation_scope": "consolidated",
+      "reporting_date": "2024-03-31",
+      "accounting_basis": "full_accrual",
+      "reporting_framework": "canadian_accounting_standards_for_the_public_sector",
+      "assurance": {
+        "status": "audited",
+        "opinion_type": "unmodified",
+        "auditor": "MRSB Chartered Professional Accountants Inc.",
+        "auditor_report_date": "2024-10-08"
+      },
+      "source_evidence": {
+        "cover_pdf_page": 1,
+        "index_pdf_page": 2,
+        "auditor_report_pdf_pages": [4, 5],
+        "first_statement_pdf_page": 6
+      },
+      "filename_alignment": "conflict",
+      "publication_or_adoption_status": "unknown",
+      "review_status": "approved_for_gate_2_not_publication"
+    },
+    {
+      "document_key": "ctown_fs_city_2025_03_31_audited",
+      "series_key": "city_consolidated",
+      "series_sequence": 2,
+      "source_file": "docs/charlottetown/financial-statements/City of Charlottetown Consolidated Financial Statements - March 31, 2025.pdf",
+      "sha256": "d0731a2df257d9a57979541300e7fd2f3de1f1895307f7b16461676b972bf809",
+      "file_size_bytes": 13136117,
+      "page_count": 37,
+      "pdf_metadata": {
+        "page_size": "792 x 612 pts (letter)",
+        "producer": "iLovePDF",
+        "creation_date_raw": null,
+        "modification_date_raw": "Fri Jan 16 14:05:05 2026 Atlantic Standard Time"
+      },
+      "source_title": "City of Charlottetown Consolidated Financial Statements",
+      "reporting_entity_key": "city_of_charlottetown",
+      "reporting_entity_name": "City of Charlottetown",
+      "entity_type": "municipality",
+      "consolidation_scope": "consolidated",
+      "reporting_date": "2025-03-31",
+      "accounting_basis": "full_accrual",
+      "reporting_framework": "canadian_accounting_standards_for_the_public_sector",
+      "assurance": {
+        "status": "audited",
+        "opinion_type": "unmodified",
+        "auditor": "MRSB Chartered Professional Accountants Inc.",
+        "auditor_report_date": "2025-12-12"
+      },
+      "source_evidence": {
+        "cover_pdf_page": 1,
+        "index_pdf_page": 2,
+        "auditor_report_pdf_pages": [4, 5],
+        "first_statement_pdf_page": 6
+      },
+      "filename_alignment": "aligned",
+      "publication_or_adoption_status": "unknown",
+      "review_status": "approved_for_gate_2_not_publication"
+    },
+    {
+      "document_key": "ctown_fs_ws_2024_03_31_audited",
+      "series_key": "water_sewer_corporation",
+      "series_sequence": 1,
+      "source_file": "docs/charlottetown/financial-statements/Draft 2024 W&S.pdf",
+      "sha256": "b78c8495953929fe54b613e2247957a9d76f152fce77794c35e38204042e28ee",
+      "file_size_bytes": 13129237,
+      "page_count": 21,
+      "pdf_metadata": {
+        "page_size": "792 x 612 pts (letter)",
+        "producer": "RICOH IM C4500",
+        "creation_date_raw": "Fri Oct 18 09:09:10 2024 Atlantic Daylight Time",
+        "modification_date_raw": "Fri Oct 18 09:09:10 2024 Atlantic Daylight Time"
+      },
+      "source_title": "Charlottetown Water and Sewer Corporation Financial Statements",
+      "reporting_entity_key": "charlottetown_water_and_sewer_corporation",
+      "reporting_entity_name": "Charlottetown Water and Sewer Corporation",
+      "entity_type": "utility_corporation",
+      "consolidation_scope": "separate_component_statement",
+      "reporting_date": "2024-03-31",
+      "accounting_basis": "full_accrual",
+      "reporting_framework": "canadian_accounting_standards_for_the_public_sector",
+      "assurance": {
+        "status": "audited",
+        "opinion_type": "unmodified",
+        "auditor": "MRSB Chartered Professional Accountants Inc.",
+        "auditor_report_date": "2024-10-08"
+      },
+      "source_evidence": {
+        "cover_pdf_page": 1,
+        "index_pdf_page": 2,
+        "auditor_report_pdf_pages": [4, 5],
+        "first_statement_pdf_page": 6
+      },
+      "filename_alignment": "conflict",
+      "publication_or_adoption_status": "unknown",
+      "review_status": "approved_for_gate_2_not_publication"
+    },
+    {
+      "document_key": "ctown_fs_ws_2025_03_31_audited",
+      "series_key": "water_sewer_corporation",
+      "series_sequence": 2,
+      "source_file": "docs/charlottetown/financial-statements/Charlottetown Water and Sewer Corporation Financial Statements - March 31, 2025.pdf",
+      "sha256": "685606daf9d8d5bc0dc7298d999c38c811bc71fe82c949a512bf16101911f257",
+      "file_size_bytes": 7239349,
+      "page_count": 21,
+      "pdf_metadata": {
+        "page_size": "792 x 612 pts (letter)",
+        "producer": "RICOH IM C4500",
+        "creation_date_raw": "Mon Jan 19 15:11:01 2026 Atlantic Standard Time",
+        "modification_date_raw": "Mon Jan 19 15:11:01 2026 Atlantic Standard Time"
+      },
+      "source_title": "Charlottetown Water and Sewer Corporation Financial Statements",
+      "reporting_entity_key": "charlottetown_water_and_sewer_corporation",
+      "reporting_entity_name": "Charlottetown Water and Sewer Corporation",
+      "entity_type": "utility_corporation",
+      "consolidation_scope": "separate_component_statement",
+      "reporting_date": "2025-03-31",
+      "accounting_basis": "full_accrual",
+      "reporting_framework": "canadian_accounting_standards_for_the_public_sector",
+      "assurance": {
+        "status": "audited",
+        "opinion_type": "unmodified",
+        "auditor": "MRSB Chartered Professional Accountants Inc.",
+        "auditor_report_date": "2025-12-12"
+      },
+      "source_evidence": {
+        "cover_pdf_page": 1,
+        "index_pdf_page": 2,
+        "auditor_report_pdf_pages": [4, 5],
+        "first_statement_pdf_page": 6
+      },
+      "filename_alignment": "aligned",
+      "publication_or_adoption_status": "unknown",
+      "review_status": "approved_for_gate_2_not_publication"
+    },
+    {
+      "document_key": "ctown_fs_city_sa_2023_12_31_audited",
+      "series_key": "city_superannuation_plan",
+      "series_sequence": 1,
+      "source_file": "docs/charlottetown/financial-statements/2024 COC SA Plan.pdf",
+      "sha256": "040ab5d10eca67ae783022e31a6935ab1f34df3a10e167d3d634108a988bd284",
+      "file_size_bytes": 11508437,
+      "page_count": 18,
+      "pdf_metadata": {
+        "page_size": "792 x 612 pts (letter)",
+        "producer": "RICOH IM C4500",
+        "creation_date_raw": "Tue Oct 22 15:13:19 2024 Atlantic Daylight Time",
+        "modification_date_raw": "Tue Oct 22 15:13:19 2024 Atlantic Daylight Time"
+      },
+      "source_title": "City of Charlottetown Superannuation Plan Financial Statements",
+      "reporting_entity_key": "city_of_charlottetown_superannuation_plan",
+      "reporting_entity_name": "City of Charlottetown Superannuation Plan",
+      "entity_type": "pension_plan",
+      "consolidation_scope": "related_non_additive_plan",
+      "reporting_date": "2023-12-31",
+      "accounting_basis": "full_accrual",
+      "reporting_framework": "canadian_accounting_standards_for_pension_plans",
+      "assurance": {
+        "status": "audited",
+        "opinion_type": "unmodified",
+        "auditor": "MRSB Chartered Professional Accountants Inc.",
+        "auditor_report_date": "2024-10-08"
+      },
+      "source_evidence": {
+        "cover_pdf_page": 1,
+        "index_pdf_page": 2,
+        "auditor_report_pdf_pages": [4, 5],
+        "first_statement_pdf_page": 6
+      },
+      "filename_alignment": "conflict",
+      "publication_or_adoption_status": "unknown",
+      "review_status": "approved_for_gate_2_not_publication"
+    },
+    {
+      "document_key": "ctown_fs_city_sa_2024_12_31_audited",
+      "series_key": "city_superannuation_plan",
+      "series_sequence": 2,
+      "source_file": "docs/charlottetown/financial-statements/City of Charlottetown Supperannuation Plan Financial Statements - December 31, 2024.pdf",
+      "sha256": "b85da028b0ccd2289217d2ab248dbf4aa2b6577343bd20f706278f3ed6620357",
+      "file_size_bytes": 6693916,
+      "page_count": 18,
+      "pdf_metadata": {
+        "page_size": "792 x 612 pts (letter)",
+        "producer": "RICOH IM C4500",
+        "creation_date_raw": "Mon Jan 19 15:13:19 2026 Atlantic Standard Time",
+        "modification_date_raw": "Tue Jan 20 09:43:45 2026 Atlantic Standard Time"
+      },
+      "source_title": "City of Charlottetown Superannuation Plan Financial Statements",
+      "reporting_entity_key": "city_of_charlottetown_superannuation_plan",
+      "reporting_entity_name": "City of Charlottetown Superannuation Plan",
+      "entity_type": "pension_plan",
+      "consolidation_scope": "related_non_additive_plan",
+      "reporting_date": "2024-12-31",
+      "accounting_basis": "full_accrual",
+      "reporting_framework": "canadian_accounting_standards_for_pension_plans",
+      "assurance": {
+        "status": "audited",
+        "opinion_type": "unmodified",
+        "auditor": "MRSB Chartered Professional Accountants Inc.",
+        "auditor_report_date": "2025-12-12"
+      },
+      "source_evidence": {
+        "cover_pdf_page": 1,
+        "index_pdf_page": 2,
+        "auditor_report_pdf_pages": [4, 5],
+        "first_statement_pdf_page": 6
+      },
+      "filename_alignment": "conflict",
+      "publication_or_adoption_status": "unknown",
+      "review_status": "approved_for_gate_2_not_publication"
+    },
+    {
+      "document_key": "ctown_fs_ws_sa_2023_12_31_audited",
+      "series_key": "water_sewer_superannuation_plan",
+      "series_sequence": 1,
+      "source_file": "docs/charlottetown/financial-statements/2024 W&S SA Plan.pdf",
+      "sha256": "ae7f8e6c7353dea8c2cae8d2902fdd7aca45dcd34b20e3e4bbcf4a9605f8bcb0",
+      "file_size_bytes": 11422860,
+      "page_count": 18,
+      "pdf_metadata": {
+        "page_size": "792 x 612 pts (letter)",
+        "producer": "RICOH IM C4500",
+        "creation_date_raw": "Tue Oct 22 15:13:37 2024 Atlantic Daylight Time",
+        "modification_date_raw": "Tue Oct 22 15:13:37 2024 Atlantic Daylight Time"
+      },
+      "source_title": "Charlottetown Water and Sewer Corporation Superannuation Plan Financial Statements",
+      "reporting_entity_key": "charlottetown_water_and_sewer_corporation_superannuation_plan",
+      "reporting_entity_name": "Charlottetown Water and Sewer Corporation Superannuation Plan",
+      "entity_type": "pension_plan",
+      "consolidation_scope": "related_non_additive_plan",
+      "reporting_date": "2023-12-31",
+      "accounting_basis": "full_accrual",
+      "reporting_framework": "canadian_accounting_standards_for_pension_plans",
+      "assurance": {
+        "status": "audited",
+        "opinion_type": "unmodified",
+        "auditor": "MRSB Chartered Professional Accountants Inc.",
+        "auditor_report_date": "2024-10-08"
+      },
+      "source_evidence": {
+        "cover_pdf_page": 1,
+        "index_pdf_page": 2,
+        "auditor_report_pdf_pages": [4, 5],
+        "first_statement_pdf_page": 6
+      },
+      "filename_alignment": "conflict",
+      "publication_or_adoption_status": "unknown",
+      "review_status": "approved_for_gate_2_not_publication"
+    },
+    {
+      "document_key": "ctown_fs_ws_sa_2024_12_31_audited",
+      "series_key": "water_sewer_superannuation_plan",
+      "series_sequence": 2,
+      "source_file": "docs/charlottetown/financial-statements/Charlottetown Water and Sewer Superannuation Plan Financial Statements - December 21, 2024.pdf",
+      "sha256": "7beae397d817936701c62417b94b6e68d71efa8b28783ab93ed90fc949bf18a6",
+      "file_size_bytes": 6681246,
+      "page_count": 18,
+      "pdf_metadata": {
+        "page_size": "792 x 612 pts (letter)",
+        "producer": "RICOH IM C4500",
+        "creation_date_raw": "Mon Jan 19 15:11:37 2026 Atlantic Standard Time",
+        "modification_date_raw": "Mon Jan 19 15:11:37 2026 Atlantic Standard Time"
+      },
+      "source_title": "Charlottetown Water and Sewer Corporation Superannuation Plan Financial Statements",
+      "reporting_entity_key": "charlottetown_water_and_sewer_corporation_superannuation_plan",
+      "reporting_entity_name": "Charlottetown Water and Sewer Corporation Superannuation Plan",
+      "entity_type": "pension_plan",
+      "consolidation_scope": "related_non_additive_plan",
+      "reporting_date": "2024-12-31",
+      "accounting_basis": "full_accrual",
+      "reporting_framework": "canadian_accounting_standards_for_pension_plans",
+      "assurance": {
+        "status": "audited",
+        "opinion_type": "unmodified",
+        "auditor": "MRSB Chartered Professional Accountants Inc.",
+        "auditor_report_date": "2025-12-12"
+      },
+      "source_evidence": {
+        "cover_pdf_page": 1,
+        "index_pdf_page": 2,
+        "auditor_report_pdf_pages": [4, 5],
+        "first_statement_pdf_page": 6
+      },
+      "filename_alignment": "conflict",
+      "publication_or_adoption_status": "unknown",
+      "review_status": "approved_for_gate_2_not_publication"
+    }
+  ]
+}

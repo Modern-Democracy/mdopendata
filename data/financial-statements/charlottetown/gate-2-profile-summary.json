@@ -1,0 +1,378 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "financial_statement_gate_2_profile_summary",
+  "gate": 2,
+  "status": "complete",
+  "registry_path": "data/financial-statements/charlottetown/source-document-registry.json",
+  "counts": {
+    "documents": 8,
+    "pages": 188,
+    "pages_with_disposition": 188,
+    "table_candidates": 139,
+    "unclassified_financial_tables": 0,
+    "review_pages": 2
+  },
+  "documents": [
+    {
+      "document_key": "ctown_fs_city_2024_03_31_audited",
+      "sha256": "223cba05a08fe0f9af4980022b5473c7ce8bc282cb03dcd5452943ab5c95fdde",
+      "counts": {
+        "pages": 37,
+        "pages_with_disposition": 37,
+        "table_candidates": 28,
+        "unclassified_financial_tables": 0,
+        "continuation_candidates": 18,
+        "review_pages": 1,
+        "pages_by_content_type": {
+          "auditor_report": 2,
+          "cover": 1,
+          "financial_statement": 4,
+          "index": 1,
+          "management_responsibility": 1,
+          "notes": 22,
+          "schedule": 6
+        },
+        "pages_by_disposition": {
+          "administrative_front_matter": 5,
+          "financial_note_narrative": 4,
+          "financial_table_candidate": 28
+        },
+        "tables_by_family": {
+          "budget_reconciliation_note": 1,
+          "cash_flow": 1,
+          "changes_in_net_debt": 1,
+          "financial_position": 1,
+          "note_disclosure_table": 17,
+          "operations": 1,
+          "segmented_disclosure_schedule": 2,
+          "tangible_capital_assets_schedule": 4
+        },
+        "statements_by_class": {
+          "cash_flow": 1,
+          "changes_in_net_debt": 1,
+          "financial_position": 1,
+          "operations": 1
+        }
+      },
+      "gate_checks": {
+        "registry_hash_match": true,
+        "registry_page_count_match": true,
+        "every_page_has_disposition": true,
+        "unclassified_financial_table_count": 0
+      }
+    },
+    {
+      "document_key": "ctown_fs_city_2025_03_31_audited",
+      "sha256": "d0731a2df257d9a57979541300e7fd2f3de1f1895307f7b16461676b972bf809",
+      "counts": {
+        "pages": 37,
+        "pages_with_disposition": 37,
+        "table_candidates": 29,
+        "unclassified_financial_tables": 0,
+        "continuation_candidates": 19,
+        "review_pages": 1,
+        "pages_by_content_type": {
+          "auditor_report": 2,
+          "cover": 1,
+          "financial_statement": 4,
+          "index": 1,
+          "management_responsibility": 1,
+          "notes": 22,
+          "schedule": 6
+        },
+        "pages_by_disposition": {
+          "administrative_front_matter": 5,
+          "financial_note_narrative": 3,
+          "financial_table_candidate": 29
+        },
+        "tables_by_family": {
+          "budget_reconciliation_note": 1,
+          "cash_flow": 1,
+          "changes_in_net_debt": 1,
+          "financial_position": 1,
+          "note_disclosure_table": 18,
+          "operations": 1,
+          "segmented_disclosure_schedule": 2,
+          "tangible_capital_assets_schedule": 4
+        },
+        "statements_by_class": {
+          "cash_flow": 1,
+          "changes_in_net_debt": 1,
+          "financial_position": 1,
+          "operations": 1
+        }
+      },
+      "gate_checks": {
+        "registry_hash_match": true,
+        "registry_page_count_match": true,
+        "every_page_has_disposition": true,
+        "unclassified_financial_table_count": 0
+      }
+    },
+    {
+      "document_key": "ctown_fs_ws_2024_03_31_audited",
+      "sha256": "b78c8495953929fe54b613e2247957a9d76f152fce77794c35e38204042e28ee",
+      "counts": {
+        "pages": 21,
+        "pages_with_disposition": 21,
+        "table_candidates": 15,
+        "unclassified_financial_tables": 0,
+        "continuation_candidates": 7,
+        "review_pages": 0,
+        "pages_by_content_type": {
+          "auditor_report": 2,
+          "cover": 1,
+          "financial_statement": 4,
+          "index": 1,
+          "management_responsibility": 1,
+          "notes": 11,
+          "schedule": 1
+        },
+        "pages_by_disposition": {
+          "administrative_front_matter": 5,
+          "financial_note_narrative": 1,
+          "financial_table_candidate": 15
+        },
+        "tables_by_family": {
+          "budget_reconciliation_note": 1,
+          "cash_flow": 1,
+          "changes_in_net_debt": 1,
+          "financial_position": 1,
+          "note_disclosure_table": 9,
+          "operations": 1,
+          "tangible_capital_assets_schedule": 1
+        },
+        "statements_by_class": {
+          "cash_flow": 1,
+          "changes_in_net_debt": 1,
+          "financial_position": 1,
+          "operations": 1
+        }
+      },
+      "gate_checks": {
+        "registry_hash_match": true,
+        "registry_page_count_match": true,
+        "every_page_has_disposition": true,
+        "unclassified_financial_table_count": 0
+      }
+    },
+    {
+      "document_key": "ctown_fs_ws_2025_03_31_audited",
+      "sha256": "685606daf9d8d5bc0dc7298d999c38c811bc71fe82c949a512bf16101911f257",
+      "counts": {
+        "pages": 21,
+        "pages_with_disposition": 21,
+        "table_candidates": 15,
+        "unclassified_financial_tables": 0,
+        "continuation_candidates": 7,
+        "review_pages": 0,
+        "pages_by_content_type": {
+          "auditor_report": 2,
+          "cover": 1,
+          "financial_statement": 4,
+          "index": 1,
+          "management_responsibility": 1,
+          "notes": 11,
+          "schedule": 1
+        },
+        "pages_by_disposition": {
+          "administrative_front_matter": 5,
+          "financial_note_narrative": 1,
+          "financial_table_candidate": 15
+        },
+        "tables_by_family": {
+          "budget_reconciliation_note": 1,
+          "cash_flow": 1,
+          "changes_in_net_debt": 1,
+          "financial_position": 1,
+          "note_disclosure_table": 9,
+          "operations": 1,
+          "tangible_capital_assets_schedule": 1
+        },
+        "statements_by_class": {
+          "cash_flow": 1,
+          "changes_in_net_debt": 1,
+          "financial_position": 1,
+          "operations": 1
+        }
+      },
+      "gate_checks": {
+        "registry_hash_match": true,
+        "registry_page_count_match": true,
+        "every_page_has_disposition": true,
+        "unclassified_financial_table_count": 0
+      }
+    },
+    {
+      "document_key": "ctown_fs_city_sa_2023_12_31_audited",
+      "sha256": "040ab5d10eca67ae783022e31a6935ab1f34df3a10e167d3d634108a988bd284",
+      "counts": {
+        "pages": 18,
+        "pages_with_disposition": 18,
+        "table_candidates": 13,
+        "unclassified_financial_tables": 0,
+        "continuation_candidates": 9,
+        "review_pages": 0,
+        "pages_by_content_type": {
+          "auditor_report": 2,
+          "cover": 1,
+          "financial_statement": 3,
+          "index": 1,
+          "management_responsibility": 1,
+          "notes": 10
+        },
+        "pages_by_disposition": {
+          "administrative_front_matter": 5,
+          "financial_table_candidate": 13
+        },
+        "tables_by_family": {
+          "changes_in_net_assets_available_for_benefits": 1,
+          "changes_in_pension_obligations": 1,
+          "financial_position": 1,
+          "note_disclosure_table": 10
+        },
+        "statements_by_class": {
+          "changes_in_net_assets_available_for_benefits": 1,
+          "changes_in_pension_obligations": 1,
+          "financial_position": 1
+        }
+      },
+      "gate_checks": {
+        "registry_hash_match": true,
+        "registry_page_count_match": true,
+        "every_page_has_disposition": true,
+        "unclassified_financial_table_count": 0
+      }
+    },
+    {
+      "document_key": "ctown_fs_city_sa_2024_12_31_audited",
+      "sha256": "b85da028b0ccd2289217d2ab248dbf4aa2b6577343bd20f706278f3ed6620357",
+      "counts": {
+        "pages": 18,
+        "pages_with_disposition": 18,
+        "table_candidates": 13,
+        "unclassified_financial_tables": 0,
+        "continuation_candidates": 9,
+        "review_pages": 0,
+        "pages_by_content_type": {
+          "auditor_report": 2,
+          "cover": 1,
+          "financial_statement": 3,
+          "index": 1,
+          "management_responsibility": 1,
+          "notes": 10
+        },
+        "pages_by_disposition": {
+          "administrative_front_matter": 5,
+          "financial_table_candidate": 13
+        },
+        "tables_by_family": {
+          "changes_in_net_assets_available_for_benefits": 1,
+          "changes_in_pension_obligations": 1,
+          "financial_position": 1,
+          "note_disclosure_table": 10
+        },
+        "statements_by_class": {
+          "changes_in_net_assets_available_for_benefits": 1,
+          "changes_in_pension_obligations": 1,
+          "financial_position": 1
+        }
+      },
+      "gate_checks": {
+        "registry_hash_match": true,
+        "registry_page_count_match": true,
+        "every_page_has_disposition": true,
+        "unclassified_financial_table_count": 0
+      }
+    },
+    {
+      "document_key": "ctown_fs_ws_sa_2023_12_31_audited",
+      "sha256": "ae7f8e6c7353dea8c2cae8d2902fdd7aca45dcd34b20e3e4bbcf4a9605f8bcb0",
+      "counts": {
+        "pages": 18,
+        "pages_with_disposition": 18,
+        "table_candidates": 13,
+        "unclassified_financial_tables": 0,
+        "continuation_candidates": 9,
+        "review_pages": 0,
+        "pages_by_content_type": {
+          "auditor_report": 2,
+          "cover": 1,
+          "financial_statement": 3,
+          "index": 1,
+          "management_responsibility": 1,
+          "notes": 10
+        },
+        "pages_by_disposition": {
+          "administrative_front_matter": 5,
+          "financial_table_candidate": 13
+        },
+        "tables_by_family": {
+          "changes_in_net_assets_available_for_benefits": 1,
+          "changes_in_pension_obligations": 1,
+          "financial_position": 1,
+          "note_disclosure_table": 10
+        },
+        "statements_by_class": {
+          "changes_in_net_assets_available_for_benefits": 1,
+          "changes_in_pension_obligations": 1,
+          "financial_position": 1
+        }
+      },
+      "gate_checks": {
+        "registry_hash_match": true,
+        "registry_page_count_match": true,
+        "every_page_has_disposition": true,
+        "unclassified_financial_table_count": 0
+      }
+    },
+    {
+      "document_key": "ctown_fs_ws_sa_2024_12_31_audited",
+      "sha256": "7beae397d817936701c62417b94b6e68d71efa8b28783ab93ed90fc949bf18a6",
+      "counts": {
+        "pages": 18,
+        "pages_with_disposition": 18,
+        "table_candidates": 13,
+        "unclassified_financial_tables": 0,
+        "continuation_candidates": 9,
+        "review_pages": 0,
+        "pages_by_content_type": {
+          "auditor_report": 2,
+          "cover": 1,
+          "financial_statement": 3,
+          "index": 1,
+          "management_responsibility": 1,
+          "notes": 10
+        },
+        "pages_by_disposition": {
+          "administrative_front_matter": 5,
+          "financial_table_candidate": 13
+        },
+        "tables_by_family": {
+          "changes_in_net_assets_available_for_benefits": 1,
+          "changes_in_pension_obligations": 1,
+          "financial_position": 1,
+          "note_disclosure_table": 10
+        },
+        "statements_by_class": {
+          "changes_in_net_assets_available_for_benefits": 1,
+          "changes_in_pension_obligations": 1,
+          "financial_position": 1
+        }
+      },
+      "gate_checks": {
+        "registry_hash_match": true,
+        "registry_page_count_match": true,
+        "every_page_has_disposition": true,
+        "unclassified_financial_table_count": 0
+      }
+    }
+  ],
+  "gate_checks": {
+    "all_registry_documents_profiled": true,
+    "all_registry_pages_profiled": true,
+    "every_page_has_disposition": true,
+    "unclassified_financial_table_count": 0,
+    "database_writes": 0
+  }
+}
