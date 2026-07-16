@@ -6,7 +6,7 @@ tags:
   - json-schema
   - architecture
   - quality-assurance
-updated: 2026-07-15
+updated: 2026-07-16
 ---
 
 This page defines the version 1 JSON Schema contracts and semantic validation rules for staged PDF inventory artifacts.
@@ -24,7 +24,7 @@ The schema document is a discriminated union. Every artifact uses the same `$sch
 | `artifact_type` | Stage | Primary contents |
 | --- | --- | --- |
 | `source_evidence` | 0 | Immutable source identity, render and OCR policies, and complete page evidence. |
-| `block_inventory` | 1 | Page dispositions, bounded material blocks, internal formatted-text/table regions, reviewed block relationships, evidence, confidence, exclusions, and review state. |
+| `block_inventory` | 1 | Page dispositions, bounded material blocks, formatted-text regions, table grids, reviewed block relationships, evidence, confidence, exclusions, and review state. |
 | `content_groups` | 2 | Ordered multi-page logical groups, continuation edges, inherited headers, candidates, and group relationships. |
 | `structural_template` | 3 | Immutable template version, reuse scope, anchors, block and column rules, boundaries, and regression controls. |
 | `template_applications` | 3 | Document-specific template bindings, anchor matches, geometry deltas, mismatches, one-off exceptions, and review state. |
@@ -98,11 +98,13 @@ Reusable review objects contain:
 - stable reason codes
 - decision IDs
 
-Review decisions are separate append-only events. Each event records sequence, timestamp, reviewer, action, reason, prior and resulting artifact hashes, previous event hash, event hash, affected keys, source locators, and field-level changes. Stage 1 permits block create, resize, type change, and delete; internal-region create, resize, type change, and delete; and relationship link and unlink actions.
+Review decisions are separate append-only events. Each event records sequence, timestamp, reviewer, action, reason, prior and resulting artifact hashes, previous event hash, event hash, affected keys, source locators, and field-level changes. Stage 1 permits block create, resize, type change, and delete; formatted-text region create, resize, type change, and delete; table-grid redetection, divider movement, row and column split or merge, and cell typing; and relationship link and unlink actions. Automatically detected grids retain the invoking decision ID but use `needs_review` status.
 
-The Stage 1 block vocabulary is `title`, `formatted_text`, `table`, `chart`, `other_visual`, `map`, `table_of_contents`, `header`, `footer`, `page_number`, `divider`, and `signature`. Formatted-text blocks can contain paragraph, bullet-list, and sorted-list regions. Tables can contain table-header, column-label, row-label, cell, subtotal, and total regions. Internal coordinates remain page-normalized and must be contained by the parent block.
+The Stage 1 block vocabulary is `title`, `formatted_text`, `table`, `chart`, `other_visual`, `map`, `table_of_contents`, `header`, `footer`, `page_number`, `divider`, and `signature`. Formatted-text blocks can contain paragraph, bullet-list, and sorted-list regions. Each table requires a `table_grid` with page-normalized outer and internal row and column boundaries plus a complete row-major cell matrix. Cells use `table_header`, `column_label`, `row_label`, `cell`, `subtotal`, or `total`. Non-table blocks require `table_grid: null`.
 
-Block relationships use whole-block or internal-region endpoints. Version 1 permits `graph_source_table`, `table_continuation`, and `overview_detail`; semantic validation enforces chart-to-table, cross-page table-to-table, and overview table-region-to-detail-table endpoint rules.
+Row and column boundaries are strictly increasing, their outer values equal the parent table box, and the cell matrix must cover every row-column coordinate exactly once. Moving a divider cannot cross its neighbours. Splitting duplicates each source cell type into both result cells. Merging retains a type only when all source cells at that merged coordinate match; otherwise the result resets to `cell`. Structural changes are rejected when an affected cell is referenced by a relationship, preventing silent endpoint loss.
+
+Block relationships use whole-block, formatted-text region, or table-cell endpoints. Version 1 permits `graph_source_table`, `table_continuation`, and `overview_detail`. Semantic validation requires a whole chart linked to a whole table, whole table fragments on different pages, or a typed `row_label` cell linked to a different whole detail table, respectively.
 
 The schema requires event fields. The validator additionally enforces consecutive sequence numbers and the previous-event hash chain.
 

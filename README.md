@@ -109,7 +109,7 @@ Start the staged PDF evidence and block-inventory reviewer on port 3217 with:
 .\scripts\start-staged-pdf-review.ps1
 ```
 
-The launcher validates the Stage 0 source evidence and Stage 1 block inventory, enables schema-validated Stage 1 editing, and listens only on `127.0.0.1`. Each mutation appends a review decision. Private-LAN installation and phone/tablet support are deferred; the Render demonstration does not expose this route.
+The launcher validates the Stage 0 source evidence and Stage 1 block inventory, enables schema-validated Stage 1 editing, and listens only on `127.0.0.1`. Each mutation appends a review decision. Table internal-edit mode presents a spreadsheet grid with draggable row and column dividers, cell typing, contiguous row or column selection, split and merge controls, and optional automatic redetection when a table box is resized. Private-LAN installation and phone/tablet support are deferred; the Render demonstration does not expose this route.
 
 ## Python Environment
 

@@ -43,6 +43,25 @@ def load_validator() -> Draft202012Validator:
     return Draft202012Validator(schema, format_checker=FormatChecker())
 
 
+def load_component_validator(definition: str) -> Draft202012Validator:
+    return load_component_validators([definition])[definition]
+
+
+def load_component_validators(definitions: Iterable[str]) -> dict[str, Draft202012Validator]:
+    schema = read_json(SCHEMA_PATH)
+    validators: dict[str, Draft202012Validator] = {}
+    for definition in definitions:
+        if definition not in schema["$defs"]:
+            raise ValueError(f"Unknown schema definition: {definition}")
+        component_schema = {
+            "$schema": schema["$schema"],
+            "$defs": schema["$defs"],
+            "$ref": f"#/$defs/{definition}",
+        }
+        validators[definition] = Draft202012Validator(component_schema, format_checker=FormatChecker())
+    return validators
+
+
 def location(parts: Iterable[object]) -> str:
     values = [str(part) for part in parts]
     return "$" if not values else "$." + ".".join(values)
@@ -152,6 +171,7 @@ def check_block_inventory(payload: dict[str, Any], errors: list[str]) -> None:
     known_blocks = set(block_keys)
     blocks_by_key = {record["block_key"]: record for record in records}
     region_owners: dict[str, str] = {}
+    internal_items: dict[str, dict[str, Any]] = {}
     listed_blocks: list[str] = []
     page_key_set = set(page_keys)
     for index, page in enumerate(pages):
@@ -167,13 +187,13 @@ def check_block_inventory(payload: dict[str, Any], errors: list[str]) -> None:
         check_box(record["bbox"], f"$.records.{index}.bbox", errors)
         allowed_regions = {
             "formatted_text": {"paragraph", "bullet_list", "sorted_list"},
-            "table": {"table_header", "column_label", "row_label", "cell", "subtotal", "total"},
         }.get(record["block_type"], set())
         for region_index, region in enumerate(record["regions"]):
             region_key = region["region_key"]
             if region_key in region_owners:
                 errors.append(f"$.records.{index}.regions.{region_index}.region_key: duplicate region key")
             region_owners[region_key] = record["block_key"]
+            internal_items[region_key] = region
             check_box(region["bbox"], f"$.records.{index}.regions.{region_index}.bbox", errors)
             if region["region_type"] not in allowed_regions:
                 errors.append(
@@ -186,6 +206,39 @@ def check_block_inventory(payload: dict[str, Any], errors: list[str]) -> None:
                 and block_box["y0"] <= region_box["y0"] < region_box["y1"] <= block_box["y1"]
             ):
                 errors.append(f"$.records.{index}.regions.{region_index}.bbox: must be inside parent block")
+        grid = record["table_grid"]
+        if record["block_type"] == "table" and grid is None:
+            errors.append(f"$.records.{index}.table_grid: table blocks require a grid")
+        elif record["block_type"] != "table" and grid is not None:
+            errors.append(f"$.records.{index}.table_grid: only table blocks can have a grid")
+        elif grid is not None:
+            columns = grid["column_boundaries"]
+            rows = grid["row_boundaries"]
+            if any(left >= right for left, right in zip(columns, columns[1:])):
+                errors.append(f"$.records.{index}.table_grid.column_boundaries: must be strictly increasing")
+            if any(top >= bottom for top, bottom in zip(rows, rows[1:])):
+                errors.append(f"$.records.{index}.table_grid.row_boundaries: must be strictly increasing")
+            block_box = record["bbox"]
+            if columns[0] != block_box["x0"] or columns[-1] != block_box["x1"]:
+                errors.append(f"$.records.{index}.table_grid.column_boundaries: outer boundaries must equal block bbox")
+            if rows[0] != block_box["y0"] or rows[-1] != block_box["y1"]:
+                errors.append(f"$.records.{index}.table_grid.row_boundaries: outer boundaries must equal block bbox")
+            expected_coordinates = {
+                (row, column)
+                for row in range(len(rows) - 1)
+                for column in range(len(columns) - 1)
+            }
+            actual_coordinates = {(cell["row_index"], cell["column_index"]) for cell in grid["cells"]}
+            if actual_coordinates != expected_coordinates or len(grid["cells"]) != len(expected_coordinates):
+                errors.append(f"$.records.{index}.table_grid.cells: must contain one cell for every row and column")
+            cell_keys = [cell["cell_key"] for cell in grid["cells"]]
+            if duplicates(cell_keys):
+                errors.append(f"$.records.{index}.table_grid.cells: duplicate cell keys")
+            for cell in grid["cells"]:
+                if cell["cell_key"] in region_owners:
+                    errors.append(f"$.records.{index}.table_grid.cells: duplicate internal key")
+                region_owners[cell["cell_key"]] = record["block_key"]
+                internal_items[cell["cell_key"]] = cell
         for anchor_index, anchor in enumerate(record["anchors"]):
             check_box(anchor["bbox"], f"$.records.{index}.anchors.{anchor_index}.bbox", errors)
     relationship_keys = [relationship["relationship_key"] for relationship in payload["relationships"]]
@@ -207,19 +260,23 @@ def check_block_inventory(payload: dict[str, Any], errors: list[str]) -> None:
             continue
         relation_type = relationship["relationship_type"]
         if relation_type == "graph_source_table" and not (
-            source[1]["block_type"] == "chart" and target[1]["block_type"] == "table"
+            source[1]["block_type"] == "chart" and source[0]["region_key"] is None
+            and target[1]["block_type"] == "table" and target[0]["region_key"] is None
         ):
-            errors.append(f"$.relationships.{index}: graph source relationships require chart to table")
+            errors.append(f"$.relationships.{index}: graph source relationships require a whole chart linked to a whole table")
         elif relation_type == "table_continuation" and not (
             source[1]["block_type"] == "table" and target[1]["block_type"] == "table"
+            and source[0]["region_key"] is None and target[0]["region_key"] is None
             and source[1]["page_number"] != target[1]["page_number"]
         ):
-            errors.append(f"$.relationships.{index}: table continuation requires tables on different pages")
+            errors.append(f"$.relationships.{index}: table continuation requires whole tables on different pages")
         elif relation_type == "overview_detail" and not (
             source[1]["block_type"] == "table" and source[0]["region_key"] is not None
-            and target[1]["block_type"] == "table"
+            and internal_items.get(source[0]["region_key"], {}).get("cell_type") == "row_label"
+            and target[1]["block_type"] == "table" and target[0]["region_key"] is None
+            and source[0]["block_key"] != target[0]["block_key"]
         ):
-            errors.append(f"$.relationships.{index}: overview detail requires a table region linked to a table")
+            errors.append(f"$.relationships.{index}: overview detail requires a row-label cell linked to a different whole detail table")
 
 
 def check_content_groups(payload: dict[str, Any], errors: list[str]) -> None:
@@ -382,6 +439,16 @@ def validate_payload(
     if not errors and artifact_type in SEMANTIC_CHECKS:
         SEMANTIC_CHECKS[artifact_type](payload, errors)
     return errors
+
+
+def validate_component(
+    payload: Any, definition: str, validator: Draft202012Validator | None = None
+) -> list[str]:
+    validator = validator or load_component_validator(definition)
+    return [
+        f"{location(error.absolute_path)}: {error.message}"
+        for error in sorted(validator.iter_errors(payload), key=lambda item: list(item.absolute_path))
+    ]
 
 
 def validate_artifact_set(payloads: list[dict[str, Any]]) -> list[str]:

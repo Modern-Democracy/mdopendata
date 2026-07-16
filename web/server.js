@@ -555,7 +555,7 @@ async function loadPdfInventoryReviewArtifact() {
     return pdfInventoryReviewArtifactLoad.promise;
   }
 
-  const promise = loadPdfInventoryReviewArtifactUncached(cacheKey);
+  const promise = loadPdfInventoryReviewArtifactUncached(cacheKey, true);
   pdfInventoryReviewArtifactLoad = { cacheKey, promise };
   try {
     return await promise;
@@ -566,8 +566,10 @@ async function loadPdfInventoryReviewArtifact() {
   }
 }
 
-async function loadPdfInventoryReviewArtifactUncached(cacheKey) {
-  await validatePdfInventoryReviewArtifact();
+async function loadPdfInventoryReviewArtifactUncached(cacheKey, validateCanonical) {
+  if (validateCanonical) {
+    await validatePdfInventoryReviewArtifact();
+  }
   const raw = await readFile(pdfInventoryReviewArtifactPath);
   const blockRaw = await readFile(pdfInventoryReviewBlockArtifactPath);
   let artifact;
@@ -627,10 +629,21 @@ async function loadPdfInventoryReviewArtifactUncached(cacheKey) {
     validation: {
       status: "valid",
       validator: "scripts/validate-staged-pdf-artifacts.py",
+      mode: validateCanonical ? "canonical" : "incremental-after-validated-base",
     },
   };
   pdfInventoryReviewArtifactCache = value;
   return value;
+}
+
+async function refreshPdfInventoryReviewArtifactAfterWrite() {
+  const [artifactStat, blockArtifactStat] = await Promise.all([
+    stat(pdfInventoryReviewArtifactPath),
+    stat(pdfInventoryReviewBlockArtifactPath),
+  ]);
+  const cacheKey = `${artifactStat.size}:${artifactStat.mtimeMs}:${blockArtifactStat.size}:${blockArtifactStat.mtimeMs}`;
+  pdfInventoryReviewArtifactLoad = null;
+  return loadPdfInventoryReviewArtifactUncached(cacheKey, false);
 }
 
 function pdfInventoryReviewAssetDescriptor(page, assetType) {
@@ -686,6 +699,38 @@ function pdfInventoryReviewPageSummary(page, ocrWordCounts, blockPage) {
   };
 }
 
+function pdfInventoryReviewDocumentSummary(loaded) {
+  const { artifact, artifactSha256, blockArtifact, blockArtifactSha256, validation } = loaded;
+  return {
+    document_key: artifact.document_key,
+    title: artifact.source.title,
+    municipality_key: artifact.source.municipality_key,
+    document_kind: artifact.source.document_kind,
+    source_sha256: artifact.source_sha256,
+    artifact_sha256: artifactSha256,
+    block_artifact_sha256: blockArtifactSha256,
+    page_count: artifact.source.page_count,
+    complete_page_count: artifact.pages.filter((page) => page.evidence_disposition === "complete").length,
+    blocked_page_count: artifact.pages.filter((page) => page.evidence_disposition === "blocked").length,
+    ocr_page_count: artifact.pages.filter((page) => page.ocr.status === "completed").length,
+    block_count: blockArtifact.records.length,
+    relationship_count: blockArtifact.relationships.length,
+    financial_block_count: blockArtifact.records.filter((block) => block.financial_candidate).length,
+    block_review_page_count: blockArtifact.page_dispositions.filter((page) => page.status === "needs_review").length,
+    write_enabled: pdfInventoryReviewWriteRequested,
+    validation,
+  };
+}
+
+function pdfInventoryReviewPageUpdate(loaded, pageNumber) {
+  const page = loaded.artifact.pages.find((candidate) => candidate.page_number === pageNumber);
+  if (!page) return null;
+  return {
+    page: pdfInventoryReviewPageSummary(page, loaded.ocrWordCounts, loaded.blocksByPage.get(pageNumber)),
+    block_inventory: loaded.blocksByPage.get(pageNumber),
+  };
+}
+
 async function readPdfInventoryReviewCommand(request) {
   const contentType = toStringValue(request.headers["content-type"]).split(";", 1)[0].trim();
   if (contentType !== "application/json") {
@@ -725,8 +770,15 @@ async function executePdfInventoryReviewCommand(command) {
       ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", wrapper, stagedPdfBlockWriterPath, "--command", commandPath],
       { cwd: repoRoot, timeout: 120000, windowsHide: true, maxBuffer: 1024 * 1024 },
     );
-    pdfInventoryReviewArtifactCache = null;
-    return JSON.parse(stdout.trim());
+    const result = JSON.parse(stdout.trim());
+    const loaded = await refreshPdfInventoryReviewArtifactAfterWrite();
+    return {
+      ...result,
+      document: pdfInventoryReviewDocumentSummary(loaded),
+      page_updates: result.affected_page_numbers
+        .map((pageNumber) => pdfInventoryReviewPageUpdate(loaded, pageNumber))
+        .filter(Boolean),
+    };
   } catch (cause) {
     let detail = null;
     try {
@@ -783,25 +835,7 @@ async function handlePdfInventoryReviewApi(request, response, url) {
 
   if (url.pathname === `${apiRoot}/documents`) {
     sendPdfInventoryReviewJson(response, {
-      documents: [{
-        document_key: artifact.document_key,
-        title: artifact.source.title,
-        municipality_key: artifact.source.municipality_key,
-        document_kind: artifact.source.document_kind,
-        source_sha256: artifact.source_sha256,
-        artifact_sha256: artifactSha256,
-        block_artifact_sha256: blockArtifactSha256,
-        page_count: artifact.source.page_count,
-        complete_page_count: artifact.pages.filter((page) => page.evidence_disposition === "complete").length,
-        blocked_page_count: artifact.pages.filter((page) => page.evidence_disposition === "blocked").length,
-        ocr_page_count: artifact.pages.filter((page) => page.ocr.status === "completed").length,
-        block_count: blockArtifact.records.length,
-        relationship_count: blockArtifact.relationships.length,
-        financial_block_count: blockArtifact.records.filter((block) => block.financial_candidate).length,
-        block_review_page_count: blockArtifact.page_dispositions.filter((page) => page.status === "needs_review").length,
-        write_enabled: pdfInventoryReviewWriteRequested,
-        validation,
-      }],
+      documents: [pdfInventoryReviewDocumentSummary(loaded)],
     });
     return true;
   }

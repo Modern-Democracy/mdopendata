@@ -30,7 +30,7 @@ DEFAULT_SOURCE = (
 DEFAULT_OUT = DEFAULT_SOURCE.parents[1] / "stage-1"
 VALIDATOR_PATH = ROOT / "scripts" / "validate-staged-pdf-artifacts.py"
 GENERATOR_NAME = "staged-pdf-block-inventory"
-GENERATOR_VERSION = "2"
+GENERATOR_VERSION = "4"
 CONFIG = {
     "generator_version": GENERATOR_VERSION,
     "body_top": 0.18,
@@ -38,11 +38,21 @@ CONFIG = {
     "sparse_page_word_limit": 15,
     "financial_numeric_minimum": 8,
     "geometry_source": "stage-0-word-evidence",
+    "table_row_tolerance_factor": 0.65,
+    "table_minimum_row_tolerance": 0.004,
+    "table_cell_gap": 0.008,
 }
 
 NUMBER_RE = re.compile(r"(?:[$%]?[-+]?\d[\d,]*(?:\.\d+)?|\d{4}/\d{2,4})")
 FINANCIAL_RE = re.compile(
     r"\b(?:budget|revenue|expense|expenditure|forecast|variance|assessment|rate|tax|debt|capital|operating|principal|interest)\b",
+    re.IGNORECASE,
+)
+TABLE_NUMBER_RE = re.compile(r"^(?:[$€£]?\(?[-+]?\d[\d,]*(?:\.\d+)?\)?%?|[$€£]|[-—])$")
+SUBTOTAL_RE = re.compile(r"\bsub[ -]?total\b", re.IGNORECASE)
+TOTAL_RE = re.compile(r"\b(?:grand\s+)?total\b", re.IGNORECASE)
+HEADER_CUE_RE = re.compile(
+    r"\b(?:account|actual|approved|budget|category|department|description|forecast|project|variance|year)\b",
     re.IGNORECASE,
 )
 
@@ -144,6 +154,180 @@ def classify_body(text: str, word_count: int, page_text: str = "") -> tuple[str,
     return "formatted_text", False, None, ["prose-density"]
 
 
+def table_word_rows(words: list[dict[str, Any]], table_bbox: dict[str, float]) -> list[list[dict[str, Any]]]:
+    contained = [
+        word for word in words
+        if table_bbox["x0"] <= (word["bbox"]["x0"] + word["bbox"]["x1"]) / 2 <= table_bbox["x1"]
+        and table_bbox["y0"] <= (word["bbox"]["y0"] + word["bbox"]["y1"]) / 2 <= table_bbox["y1"]
+        and str(word.get("text", "")).strip()
+    ]
+    if not contained:
+        return []
+    heights = sorted(word["bbox"]["y1"] - word["bbox"]["y0"] for word in contained)
+    tolerance = max(
+        heights[len(heights) // 2] * CONFIG["table_row_tolerance_factor"],
+        CONFIG["table_minimum_row_tolerance"],
+    )
+    rows: list[list[dict[str, Any]]] = []
+    row_centres: list[float] = []
+    for word in sorted(contained, key=lambda item: (
+        (item["bbox"]["y0"] + item["bbox"]["y1"]) / 2,
+        item["bbox"]["x0"],
+    )):
+        centre = (word["bbox"]["y0"] + word["bbox"]["y1"]) / 2
+        if not rows or abs(centre - row_centres[-1]) > tolerance:
+            rows.append([word])
+            row_centres.append(centre)
+        else:
+            rows[-1].append(word)
+            row_centres[-1] = sum(
+                (item["bbox"]["y0"] + item["bbox"]["y1"]) / 2 for item in rows[-1]
+            ) / len(rows[-1])
+    return [sorted(row, key=lambda item: item["bbox"]["x0"]) for row in rows]
+
+
+def is_table_number(word: dict[str, Any]) -> bool:
+    return bool(TABLE_NUMBER_RE.fullmatch(str(word.get("text", "")).strip()))
+
+
+def split_header_cells(words: list[dict[str, Any]]) -> list[list[dict[str, Any]]]:
+    if not words:
+        return []
+    cells = [[words[0]]]
+    widths = sorted(word["bbox"]["x1"] - word["bbox"]["x0"] for word in words)
+    gap_threshold = max(CONFIG["table_cell_gap"], widths[len(widths) // 2] * 1.25)
+    for word in words[1:]:
+        if word["bbox"]["x0"] - cells[-1][-1]["bbox"]["x1"] > gap_threshold:
+            cells.append([word])
+        else:
+            cells[-1].append(word)
+    return cells
+
+
+def split_data_cells(words: list[dict[str, Any]]) -> list[list[dict[str, Any]]]:
+    if not words:
+        return []
+    heights = sorted(word["bbox"]["y1"] - word["bbox"]["y0"] for word in words)
+    gap_threshold = max(CONFIG["table_cell_gap"], heights[len(heights) // 2] * 1.25)
+    cells = [[words[0]]]
+    for word in words[1:]:
+        if word["bbox"]["x0"] - cells[-1][-1]["bbox"]["x1"] > gap_threshold:
+            cells.append([word])
+        else:
+            cells[-1].append(word)
+    return cells
+
+
+def cluster_positions(values: list[float], tolerance: float = 0.035) -> list[float]:
+    clusters: list[list[float]] = []
+    for value in sorted(values):
+        if not clusters or value - sum(clusters[-1]) / len(clusters[-1]) > tolerance:
+            clusters.append([value])
+        else:
+            clusters[-1].append(value)
+    return [sum(cluster) / len(cluster) for cluster in clusters]
+
+
+def table_grid(
+    block_key: str,
+    words: list[dict[str, Any]],
+    table_bbox: dict[str, float],
+    *,
+    key_prefix: str = "cell",
+    review: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    rows = table_word_rows(words, table_bbox)
+    grid_review = review or {
+        "status": "proposed",
+        "reason_codes": ["automated-table-grid"],
+        "decision_ids": [],
+    }
+    if not rows:
+        return {
+            "column_boundaries": [table_bbox["x0"], table_bbox["x1"]],
+            "row_boundaries": [table_bbox["y0"], table_bbox["y1"]],
+            "cells": [{
+                "cell_key": f"{block_key}:{key_prefix}-r001-c001",
+                "row_index": 0,
+                "column_index": 0,
+                "cell_type": "cell",
+                "text_excerpt": None,
+                "review": copy_review(grid_review),
+            }],
+            "review": copy_review(grid_review),
+        }
+    first_data_row = 0
+    for row in rows:
+        row_text = ordered_text(row)
+        if not any(is_table_number(word) for word in row) or HEADER_CUE_RE.search(row_text):
+            first_data_row += 1
+        else:
+            break
+    value_starts: list[float] = []
+    for row in rows[first_data_row:]:
+        numeric_indexes = [index for index, word in enumerate(row) if is_table_number(word)]
+        if numeric_indexes:
+            value_starts.extend(group[0]["bbox"]["x0"] for group in split_data_cells(row[numeric_indexes[0]:]))
+    if not value_starts:
+        value_starts.extend(
+            group[0]["bbox"]["x0"] for row in rows[:first_data_row] for group in split_header_cells(row)[1:]
+        )
+    starts = [value for value in cluster_positions(value_starts) if table_bbox["x0"] + .02 < value < table_bbox["x1"] - .02]
+    column_centres = [table_bbox["x0"], *starts]
+    column_boundaries = [table_bbox["x0"]]
+    column_boundaries.extend(bounded((left + right) / 2) for left, right in zip(column_centres, column_centres[1:]))
+    column_boundaries.append(table_bbox["x1"])
+    row_boundaries = [table_bbox["y0"]]
+    row_boundaries.extend(
+        bounded((max(word["bbox"]["y1"] for word in upper) + min(word["bbox"]["y0"] for word in lower)) / 2)
+        for upper, lower in zip(rows, rows[1:])
+    )
+    row_boundaries.append(table_bbox["y1"])
+    cells: list[dict[str, Any]] = []
+    column_count = len(column_boundaries) - 1
+    for row_index, row in enumerate(rows):
+        row_text = ordered_text(row)
+        if row_index < first_data_row:
+            cell_type = "table_header" if first_data_row > 1 and row_index == 0 else "column_label"
+        elif SUBTOTAL_RE.search(row_text):
+            cell_type = "subtotal"
+        elif TOTAL_RE.search(row_text):
+            cell_type = "total"
+        else:
+            cell_type = "cell"
+        for column_index in range(column_count):
+            cell_words = [
+                word for word in row
+                if column_boundaries[column_index]
+                <= (word["bbox"]["x0"] + word["bbox"]["x1"]) / 2
+                <= column_boundaries[column_index + 1]
+            ]
+            resolved_type = "row_label" if cell_type == "cell" and column_index == 0 else cell_type
+            excerpt = ordered_text(cell_words)[:240] or None
+            cells.append({
+                "cell_key": f"{block_key}:{key_prefix}-r{row_index + 1:03d}-c{column_index + 1:03d}",
+                "row_index": row_index,
+                "column_index": column_index,
+                "cell_type": resolved_type,
+                "text_excerpt": excerpt,
+                "review": copy_review(grid_review),
+            })
+    return {
+        "column_boundaries": column_boundaries,
+        "row_boundaries": row_boundaries,
+        "cells": cells,
+        "review": copy_review(grid_review),
+    }
+
+
+def copy_review(review: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "status": review["status"],
+        "reason_codes": list(review["reason_codes"]),
+        "decision_ids": list(review["decision_ids"]),
+    }
+
+
 def internal_regions(block_key: str, block_type: str, words: list[dict[str, Any]]) -> list[dict[str, Any]]:
     if block_type != "formatted_text":
         return []
@@ -215,6 +399,7 @@ def record(
         "text_source": text_source,
         "financial_candidate": financial,
         "regions": internal_regions(block_key, block_type, words),
+        "table_grid": table_grid(block_key, words, box) if block_type == "table" else None,
         "anchors": [],
         "confidence": {
             "level": confidence_level,

@@ -88,6 +88,7 @@
         <div id="block-editor" class="block-editor" hidden>
           <label><span>Box type</span><select id="block-type-select"></select></label>
           <label class="financial-control"><input id="block-financial" type="checkbox"><span>Financial candidate</span></label>
+          <label id="redetect-on-resize-control" class="financial-control" hidden><input id="redetect-on-resize" type="checkbox"><span>Redetect table grid after resize</span></label>
           <button id="save-block-type" type="button">Save classification</button>
           <button id="edit-internal" type="button" hidden>Edit internal structure</button>
           <button id="delete-block" class="danger-button" type="button">Delete selected box</button>
@@ -100,6 +101,20 @@
           <div class="editor-row"><button id="save-region-type" type="button">Save region type</button><button id="draw-region" type="button">Draw region</button></div>
           <button id="delete-region" class="danger-button" type="button">Delete selected region</button>
         </div>
+        <div id="table-grid-editor" class="table-grid-editor" hidden>
+          <div class="editor-row"><strong>Table grid</strong><button id="exit-table-grid" type="button">Exit grid edit</button></div>
+          <p id="table-grid-summary" class="block-summary"></p>
+          <div class="selection-mode" role="group" aria-label="Table selection mode">
+            <button id="select-cells" type="button" aria-pressed="true">Cell</button>
+            <button id="select-rows" type="button" aria-pressed="false">Row</button>
+            <button id="select-columns" type="button" aria-pressed="false">Column</button>
+          </div>
+          <label><span>Cell type</span><select id="table-cell-type"></select></label>
+          <button id="save-table-cell-type" type="button">Save cell type</button>
+          <div class="editor-row"><button id="split-table-selection" type="button">Split</button><button id="merge-table-selection" type="button">Merge</button></div>
+          <button id="redetect-table-grid" type="button">Redetect table grid</button>
+          <p class="editor-help">Drag internal grid lines to reposition them. Hold Shift while selecting rows or columns to extend one adjacent range.</p>
+        </div>
         <div class="draw-settings">
           <label><span>New box type</span><select id="new-block-type"></select></label>
           <label class="financial-control"><input id="new-block-financial" type="checkbox"><span>Financial candidate</span></label>
@@ -110,8 +125,10 @@
       <section class="inspector-section">
         <h3>Content associations</h3>
         <label class="relationship-control"><span>Relationship</span><select id="relationship-type"><option value="graph_source_table">Graph/chart to source table</option><option value="table_continuation">Multi-page table continuation</option><option value="overview_detail">Overview row to detail table</option></select></label>
-        <p id="link-source-status" class="block-summary">No link source selected.</p>
-        <div class="editor-row"><button id="set-link-source" type="button">Use selection as source</button><button id="save-link" type="button" disabled>Link to selection</button></div>
+        <p id="association-help" class="editor-help"></p>
+        <p id="link-source-status" class="block-summary association-status">No link source selected.</p>
+        <p id="link-target-status" class="block-summary association-status">Select a valid source first.</p>
+        <div class="editor-row"><button id="set-link-source" type="button">Use selection as source</button><button id="cancel-link-source" type="button" hidden>Cancel source</button><button id="save-link" type="button" disabled>Link to selection</button></div>
         <div id="relationship-list" class="relationship-list"></div>
       </section>
       <section class="inspector-section">

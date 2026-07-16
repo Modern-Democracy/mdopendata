@@ -3,7 +3,7 @@ type: log
 tags:
   - wiki
   - log
-updated: 2026-07-15
+updated: 2026-07-16
 ---
 
 This page is the append-only chronological record for root wiki changes, ingests, substantive queries, and lint passes.
@@ -13,6 +13,22 @@ Append new entries in reverse chronological order. Use this heading format:
 ```text
 ## [YYYY-MM-DD] type | Short title
 ```
+
+## [2026-07-16] implementation | Cross-page content association workflow
+
+Repaired the source-first Stage 1 association workflow for same-page chart sources and cross-page table continuations and overview-detail links. Association state now records and displays the source page and label, persists across page navigation, validates relationship-specific source and target roles, supports explicit cancellation, and remains selected after a failed write. Overview row selection resolves to its typed row-label cell; semantic validation requires whole chart/table endpoints, cross-page whole tables for continuations, and row-label-to-different-detail-table endpoints.
+
+## [2026-07-16] implementation | Incremental Stage 1 review writes
+
+Removed duplicate full-artifact validation and client reinitialization from routine Stage 1 edits. The writer now validates affected component schemas plus complete semantic and cross-artifact invariants, returns affected page numbers, and preserves full canonical validation for startup, tests, explicit checks, and handoff. The server refreshes its trusted cache after an atomic write and returns updated page payloads for in-place browser patching; the global save lock remains unchanged. A representative temporary-workspace resize completed in 0.338 seconds.
+
+## [2026-07-16] implementation | Spreadsheet table-grid editing
+
+Replaced table cell-region overlays with complete spreadsheet grids for all 77 Charlottetown pilot tables. Added draggable dividers, Cell/Row/Column selection modes, contiguous Shift selection, cell typing, deterministic row and column split or merge, resize redetection, schema validation, and append-only migration decision 39. Split operations duplicate source types; merge operations retain a type only when every source matches and otherwise reset the result to `cell`.
+
+## [2026-07-15] implementation | Automatic table-region detection
+
+Added deterministic Stage 1 table-region proposals from Stage 0 word geometry. The generator and reviewed writer now detect table headers, column labels, row labels, numeric cells, subtotals, and totals. The local reviewer can replace a table's internal regions explicitly or atomically while resizing its outer box; all replacement regions remain `needs_review`. Added generator, writer, schema, smoke, and UI regression coverage.
 
 ## [2026-07-15] implementation | Stage 1 taxonomy, internal regions, and relationships
 

@@ -6,7 +6,7 @@ tags:
   - review-ui
   - architecture
   - charlottetown
-updated: 2026-07-15
+updated: 2026-07-16
 ---
 
 This page defines the local-only inventory-review UI implementation plan for the version 1 staged PDF artifact schemas.
@@ -138,11 +138,15 @@ The Python writer:
 3. Apply an allowlisted action with schema-specific rules.
 4. Marks the changed block reviewed and approved by the recorded decision.
 5. Canonically serializes the result to temporary files.
-6. Validates JSON Schema, semantic invariants, and loaded cross-artifact references.
+6. Validates changed blocks, page dispositions, relationships, and the new review event against their component schemas, then checks complete-artifact semantic and cross-artifact invariants.
 7. Constructs the next review event and event hash.
-8. Validates the proposed artifact and complete review chain together.
+8. Preserves full canonical validation as the startup, explicit validation, test, and artifact-handoff gate.
 9. Replaces the artifact pair and restores the prior block artifact if review publication fails.
-10. Returns resulting hashes and affected keys.
+10. Returns resulting hashes, affected keys, and affected page numbers.
+
+After a successful write, the Node service reparses the atomically published artifacts into its in-memory cache without repeating canonical validation because the writer has already validated the update against a canonically validated base. The response includes refreshed document totals and affected page payloads. The browser patches those pages in place rather than rerunning initialization or reloading the page render. The existing global save lock remains in effect while the command is pending.
+
+This separation reduced a representative temporary-workspace resize from two approximately six-second full validation passes to a 0.338-second writer operation. Full validation remains authoritative and must pass before the service starts and before artifacts are handed off.
 
 ## Schema-To-UI Mapping
 
@@ -216,11 +220,17 @@ The ordered block vocabulary is `title`, `formatted_text`, `table`, `chart`, `ot
 
 The UI displays normalized Stage 1 boxes over each source render, reading-order and type labels, block selection, financial flags, table-family candidates, confidence, review status, exact keys, and evidence excerpts. A reviewer can select, resize, reclassify, delete, or draw a typed block. Selected and hovered boxes remain transparent.
 
-`formatted_text` and `table` blocks support internal edit mode. The parent remains visible but cannot be selected or resized while its page-normalized internal regions are edited. Formatted-text region types are paragraph, bullet list, and sorted list. Table region types are table header, column label, row label, cell, subtotal, and total. Stage 1 relationships link graphs to source tables, table fragments across pages, and overview table regions to detail tables.
+`formatted_text` and `table` blocks support internal edit mode. The parent remains visible but cannot be selected or resized. Formatted-text regions remain individually boxed as paragraph, bullet list, or sorted list. Tables instead render a spreadsheet grid whose horizontal and vertical dividers can be dragged.
+
+Table selection modes are mutually exclusive and ordered Cell, Row, Column; Cell is the default. Cell selection permits `table_header`, `column_label`, `row_label`, `cell`, `subtotal`, or `total` assignment. Row and Column modes select one index or a contiguous Shift-extended range. Split divides every selected row or column in half and duplicates source cell types. Merge removes the intervening dividers; each merged coordinate retains a shared type only when all source cells match and otherwise becomes `cell`.
+
+The Stage 1 generator clusters Stage 0 words geometrically into table rows and value-start columns. It proposes a complete grid and cell types from header, label, numeric, subtotal, and total cues. `Redetect table grid` replaces the selected grid using its current box. Reviewers can opt into the same replacement atomically when resizing the outer table box.
+
+Stage 1 association mode is source-first. The reviewer selects a relationship type and valid source, stores it with its page and descriptive label, optionally navigates to another page, selects a valid target, and creates the link. The source persists until the write succeeds or the reviewer cancels it; failed writes retain the source and show the error. Chart links require a whole chart and whole table. Continuations require whole table blocks on different pages. Overview-detail links accept one selected overview row or any cell in that row, resolve it to the row's typed `row_label` cell, and link it to a different whole detail table.
 
 Each completed mutation uses optimistic artifact-hash concurrency, validates the resulting artifact set, and appends one event to `review/review-decisions.json`. Table review must include the complete column-header region, row-label region, and table body; repeated headers are not assumed on continuation pages.
 
-The Charlottetown artifact contains 440 candidates across all 154 pages, including 101 conservative financial candidates, 709 formatted-text internal regions, and one review page. Its SHA-256 is `a57783102867efc69beff296a64f3affaf67b9f504fef900c081f3ad10f00c41`.
+The deterministic Charlottetown generation baseline contains 440 candidates across all 154 pages, including 101 conservative financial candidates, 709 formatted-text internal regions, and one review page. Migration decision 39 produced the table-grid checkpoint with 441 blocks, 77 grids, 10,063 cells, and SHA-256 `f880de6838c16cf9fa5ef5f82a4633ad26c9613a9ca55b9a1074260e2eabe8c2`. Subsequent reviewer edits intentionally change the live artifact hash and cell count and remain traceable through the append-only review chain.
 
 ## Later Slices
 
@@ -236,7 +246,7 @@ Each slice remains shadow-only until its schema, semantic, deterministic-rerun, 
 ## Deferred Work
 
 1. Add private-LAN access through the local installation rather than the temporary launcher. Define authentication or session-token handling, interface selection, firewall creation and removal, discovery, and stop controls before enabling non-loopback binds.
-2. Add supported phone and tablet layouts and interactions. Cover touch-sized resize handles, pointer capture, drawers, orientation changes, canvas pan/zoom, internal-region editing, association creation across pages, and device-browser regression tests.
+2. Add supported phone and tablet layouts and interactions. Cover touch-sized resize handles, pointer capture, drawers, orientation changes, canvas pan/zoom, internal-structure editing, association creation across pages, and device-browser regression tests.
 
 ## Failure And Security Controls
 
@@ -267,7 +277,7 @@ Each slice remains shadow-only until its schema, semantic, deterministic-rerun, 
 
 - Gate A: approved for the loopback-only local route on port 3217; private-LAN installation is deferred.
 - Gate B: approved for the Stage 1 validator-command adapter in the actual Node runtime.
-- Gate C: approved for Stage 1 `create`, `resize`, `set_type`, and `delete`; later actions require separate review.
+- Gate C: approved for Stage 1 block and formatted-text-region editing, relationship editing, and table-grid editing; later actions require separate review.
 - Gate D: Stage 1 generator and mutation UI are enabled; Stage 2 remains pending.
 - Gate E: approve any template promotion outside the Charlottetown document scope.
 

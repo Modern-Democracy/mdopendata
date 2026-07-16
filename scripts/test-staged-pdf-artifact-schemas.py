@@ -158,15 +158,16 @@ def block_inventory() -> dict:
                     "table_family_candidate": "operating_statement",
                     "text_source": "embedded",
                     "financial_candidate": True,
-                    "regions": [
-                        {
-                            "region_key": "document:p001:b001:region-001",
-                            "region_type": "table_header",
-                            "bbox": {"x0": 0.1, "y0": 0.1, "x1": 0.9, "y1": 0.2},
-                            "text_excerpt": "Operating Budget",
-                            "review": review(),
-                        }
-                    ],
+                    "regions": [],
+                    "table_grid": {
+                        "column_boundaries": [0.1, 0.5, 0.9],
+                        "row_boundaries": [0.1, 0.2, 0.9],
+                        "cells": [
+                            {"cell_key": f"document:p001:b001:cell-{row}-{column}", "row_index": row, "column_index": column, "cell_type": "column_label" if row == 0 else ("row_label" if column == 0 else "cell"), "text_excerpt": None, "review": review()}
+                            for row in range(2) for column in range(2)
+                        ],
+                        "review": review(),
+                    },
                     "anchors": [
                         {
                             "anchor_key": "operating-heading",
@@ -461,14 +462,25 @@ class StagedPdfArtifactSchemaTests(unittest.TestCase):
         errors = VALIDATOR_MODULE.validate_payload(payload, self.validator)
         self.assertTrue(any("x0 must be less than x1" in error for error in errors))
 
-    def test_internal_region_must_fit_parent_and_type(self) -> None:
+    def test_table_grid_must_match_parent_and_cover_each_coordinate(self) -> None:
         payload = block_inventory()
-        region = payload["records"][0]["regions"][0]
-        region["bbox"]["x0"] = 0.01
-        region["region_type"] = "paragraph"
+        grid = payload["records"][0]["table_grid"]
+        grid["column_boundaries"][0] = 0.01
+        grid["cells"].pop()
         errors = VALIDATOR_MODULE.validate_payload(payload, self.validator)
-        self.assertTrue(any("not allowed for table" in error for error in errors))
-        self.assertTrue(any("inside parent block" in error for error in errors))
+        self.assertTrue(any("outer boundaries" in error for error in errors))
+        self.assertTrue(any("one cell for every row and column" in error for error in errors))
+
+    def test_component_validator_rejects_invalid_changed_block(self) -> None:
+        record = block_inventory()["records"][0]
+        component_validator = VALIDATOR_MODULE.load_component_validator("block_record")
+        self.assertEqual(
+            VALIDATOR_MODULE.validate_component(record, "block_record", component_validator),
+            [],
+        )
+        record["unexpected"] = True
+        errors = VALIDATOR_MODULE.validate_component(record, "block_record", component_validator)
+        self.assertTrue(any("Additional properties" in error for error in errors))
 
     def test_relationship_endpoint_types_are_enforced(self) -> None:
         payload = block_inventory()
@@ -480,7 +492,19 @@ class StagedPdfArtifactSchemaTests(unittest.TestCase):
             "review": review(),
         }]
         errors = VALIDATOR_MODULE.validate_payload(payload, self.validator)
-        self.assertTrue(any("chart to table" in error for error in errors))
+        self.assertTrue(any("whole chart" in error for error in errors))
+
+    def test_overview_relationship_requires_row_label_cell(self) -> None:
+        payload = block_inventory()
+        payload["relationships"] = [{
+            "relationship_key": "document:relationship:1",
+            "relationship_type": "overview_detail",
+            "source": {"block_key": "document:p001:b001", "region_key": None},
+            "target": {"block_key": "document:p001:b001", "region_key": None},
+            "review": review(),
+        }]
+        errors = VALIDATOR_MODULE.validate_payload(payload, self.validator)
+        self.assertTrue(any("row-label cell" in error for error in errors))
 
     def test_group_duplicate_primary_ownership_fails(self) -> None:
         payload = content_groups()

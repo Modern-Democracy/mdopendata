@@ -439,6 +439,7 @@
         "text_source",
         "financial_candidate",
         "regions",
+        "table_grid",
         "anchors",
         "confidence",
         "evidence",
@@ -485,6 +486,9 @@
         "regions": {
           "type": "array",
           "items": { "$ref": "#/$defs/internal_region" }
+        },
+        "table_grid": {
+          "oneOf": [{ "$ref": "#/$defs/table_grid" }, { "type": "null" }]
         },
         "anchors": {
           "type": "array",
@@ -542,6 +546,44 @@
           ]
         },
         "bbox": { "$ref": "#/$defs/normalized_box" },
+        "text_excerpt": { "type": ["string", "null"] },
+        "review": { "$ref": "#/$defs/review" }
+      }
+    },
+    "table_grid": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["column_boundaries", "row_boundaries", "cells", "review"],
+      "properties": {
+        "column_boundaries": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "type": "number", "minimum": 0, "maximum": 1 }
+        },
+        "row_boundaries": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "type": "number", "minimum": 0, "maximum": 1 }
+        },
+        "cells": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/table_cell" }
+        },
+        "review": { "$ref": "#/$defs/review" }
+      }
+    },
+    "table_cell": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cell_key", "row_index", "column_index", "cell_type", "text_excerpt", "review"],
+      "properties": {
+        "cell_key": { "$ref": "#/$defs/key" },
+        "row_index": { "type": "integer", "minimum": 0 },
+        "column_index": { "type": "integer", "minimum": 0 },
+        "cell_type": {
+          "enum": ["table_header", "column_label", "row_label", "cell", "subtotal", "total"]
+        },
         "text_excerpt": { "type": ["string", "null"] },
         "review": { "$ref": "#/$defs/review" }
       }
@@ -1046,7 +1088,7 @@
           }
         },
         "action": {
-          "enum": ["approve", "reject", "correct", "supersede", "create", "delete", "split", "merge", "resize", "reorder", "link", "unlink", "set_type", "create_region", "delete_region", "resize_region", "set_region_type", "apply_template"]
+          "enum": ["approve", "reject", "correct", "supersede", "create", "delete", "split", "merge", "resize", "reorder", "link", "unlink", "set_type", "create_region", "delete_region", "resize_region", "set_region_type", "redetect_regions", "redetect_table_grid", "move_table_divider", "split_table_rows", "merge_table_rows", "split_table_columns", "merge_table_columns", "set_table_cell_type", "migrate_table_grids", "apply_template"]
         },
         "reason": { "type": "string", "minLength": 1 },
         "prior_artifact_sha256": {

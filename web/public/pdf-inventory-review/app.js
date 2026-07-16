@@ -12,12 +12,18 @@ const regionTypes = {
   table: [["table_header", "Table Header"], ["column_label", "Column Label"], ["row_label", "Row Label"], ["cell", "Cell"], ["subtotal", "Sub-Total"], ["total", "Total"]],
 };
 const relationshipLabels = { graph_source_table: "Graph/chart source", table_continuation: "Table continuation", overview_detail: "Overview to detail" };
+const relationshipHelp = {
+  graph_source_table: "Select a chart as the source, then select its source table on this or another page.",
+  table_continuation: "Select the first table fragment as the source, navigate to another page, then select the continuing table.",
+  overview_detail: "Open an overview table grid and select one row or any cell in that row, set it as the source, then navigate to and select the detail table.",
+};
 
 const state = {
   document: null, artifact: null, pages: [], activePage: 1, pageEvidence: null,
   blockPage: null, selectedBlockKey: null, zoom: 1, embeddedWords: null, ocrWords: null,
   saving: false, drawMode: false, drawTarget: "block", pointerEdit: null, pendingBlockKey: null,
   internalBlockKey: null, selectedRegionKey: null, linkSource: null,
+  gridSelectionMode: "cell", selectedCellKey: null, selectedGridRange: null, gridSelectionAnchor: null,
 };
 
 const ids = [
@@ -33,8 +39,11 @@ const ids = [
   "block-editor", "block-type-select", "block-financial", "save-block-type", "delete-block",
   "new-block-type", "new-block-financial", "edit-reason", "edit-internal", "region-editor",
   "exit-internal", "region-summary", "region-list", "region-type-select", "save-region-type",
-  "draw-region", "delete-region", "relationship-type", "link-source-status", "set-link-source",
-  "save-link", "relationship-list",
+  "draw-region", "delete-region", "redetect-on-resize", "redetect-on-resize-control",
+  "table-grid-editor", "exit-table-grid", "table-grid-summary", "select-cells", "select-rows", "select-columns",
+  "table-cell-type", "save-table-cell-type", "split-table-selection", "merge-table-selection", "redetect-table-grid",
+  "relationship-type", "association-help", "link-source-status", "link-target-status", "set-link-source",
+  "cancel-link-source", "save-link", "relationship-list",
   "render-hash", "thumbnail-hash", "embedded-hash", "ocr-hash", "source-citation", "error-banner",
 ];
 const elements = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
@@ -66,12 +75,35 @@ async function sendCommand(command) {
     if (!response.ok) throw new Error(payload.error || `Command failed with HTTP ${response.status}.`);
     state.pendingBlockKey = command.action === "delete" ? null : payload.affected_keys?.find((key) => key.includes(":p")) || state.selectedBlockKey;
     state.selectedRegionKey = command.action === "delete_region" ? null : payload.affected_keys?.find((key) => key.includes("region-")) || state.selectedRegionKey;
-    await initialize();
+    if (command.action !== "set_table_cell_type" && command.action !== "move_table_divider") {
+      state.selectedCellKey = null; state.selectedGridRange = null; state.gridSelectionAnchor = null;
+    }
+    state.document = payload.document;
+    for (const update of payload.page_updates || []) {
+      const pageIndex = state.pages.findIndex((page) => page.page_number === update.page.page_number);
+      if (pageIndex >= 0) state.pages[pageIndex] = update.page;
+      if (update.page.page_number === state.activePage) {
+        state.blockPage = update.block_inventory;
+        renderInspector(update.page, state.pageEvidence);
+      }
+    }
+    renderDocumentSummary(); renderThumbnails(); renderBlockInventory(); updateSelectedThumbnail();
+    return payload;
   } catch (error) {
     showError(error.message); renderBlockInventory();
+    return null;
   } finally {
     state.saving = false; document.body.classList.remove("saving");
   }
+}
+
+function renderDocumentSummary() {
+  elements["page-coverage"].textContent = `Stage 1 · ${state.document.page_count - state.document.block_review_page_count}/${state.document.page_count} pages inventoried`;
+  elements["block-count"].textContent = String(state.document.block_count);
+  elements["financial-count"].textContent = String(state.document.financial_block_count);
+  elements["review-page-count"].textContent = String(state.document.block_review_page_count);
+  elements["artifact-hash"].textContent = formatHash(state.document.block_artifact_sha256);
+  elements["artifact-hash"].title = state.document.block_artifact_sha256;
 }
 function populateTypeOptions(select) {
   select.replaceChildren(...blockTypes.map(([value, label]) => {
@@ -133,13 +165,17 @@ function positionRegionBox(node, bbox, parent) {
 
 function currentBlock() { return state.blockPage?.blocks.find((block) => block.block_key === state.selectedBlockKey) || null; }
 function currentRegion() { return currentBlock()?.regions.find((region) => region.region_key === state.selectedRegionKey) || null; }
+function currentGridCell() { return currentBlock()?.table_grid?.cells.find((cell) => cell.cell_key === state.selectedCellKey) || null; }
 
 function selectBlock(blockKey) {
   state.selectedBlockKey = blockKey;
   const block = state.blockPage?.blocks.find((candidate) => candidate.block_key === blockKey);
   if (!block?.regions.some((region) => region.region_key === state.selectedRegionKey)) state.selectedRegionKey = null;
+  if (!block?.table_grid?.cells.some((cell) => cell.cell_key === state.selectedCellKey)) {
+    state.selectedCellKey = null; state.selectedGridRange = null; state.gridSelectionAnchor = null;
+  }
   for (const node of document.querySelectorAll("[data-block-key]")) node.classList.toggle("selected", node.dataset.blockKey === blockKey);
-  if (!block) { elements["block-detail"].hidden = true; elements["block-editor"].hidden = true; elements["region-editor"].hidden = true; renderRelationships(); return; }
+  if (!block) { elements["block-detail"].hidden = true; elements["block-editor"].hidden = true; elements["region-editor"].hidden = true; elements["table-grid-editor"].hidden = true; renderRelationships(); return; }
   elements["block-detail"].hidden = false;
   elements["block-key"].textContent = block.block_key; elements["block-type"].textContent = human(block.block_type);
   elements["block-family"].textContent = human(block.table_family_candidate); elements["block-order"].textContent = String(block.reading_order);
@@ -147,11 +183,14 @@ function selectBlock(blockKey) {
   elements["block-review"].textContent = human(block.review.status); elements["block-excerpt"].textContent = block.evidence[0]?.text_excerpt || "No text evidence";
   const internal = state.internalBlockKey === block.block_key;
   elements["block-editor"].hidden = !state.document?.write_enabled || internal;
-  elements["region-editor"].hidden = !internal;
+  elements["region-editor"].hidden = !internal || block.block_type !== "formatted_text";
+  elements["table-grid-editor"].hidden = !internal || block.block_type !== "table";
   elements["edit-internal"].hidden = !regionTypes[block.block_type];
+  elements["redetect-on-resize-control"].hidden = block.block_type !== "table";
   elements["block-type-select"].value = block.block_type;
   elements["block-financial"].checked = block.financial_candidate;
-  if (internal) renderRegions(block);
+  if (internal && block.block_type === "formatted_text") renderRegions(block);
+  if (internal && block.block_type === "table") renderTableGridEditor(block);
   renderRelationships();
 }
 
@@ -185,14 +224,121 @@ function renderRegions(block) {
   selectRegion(selected);
 }
 
-function selectedEndpoint() {
-  return state.selectedBlockKey ? { block_key: state.selectedBlockKey, region_key: state.selectedRegionKey || null } : null;
+function tableGridDimensions(block) {
+  return {
+    rows: Math.max(0, (block.table_grid?.row_boundaries.length || 1) - 1),
+    columns: Math.max(0, (block.table_grid?.column_boundaries.length || 1) - 1),
+  };
+}
+
+function updateGridSelectionClasses() {
+  const mode = state.gridSelectionMode; const range = state.selectedGridRange;
+  for (const node of document.querySelectorAll(".table-grid-cell")) {
+    const row = Number(node.dataset.rowIndex); const column = Number(node.dataset.columnIndex);
+    const selected = mode === "cell" ? node.dataset.cellKey === state.selectedCellKey
+      : range && (mode === "row" ? range.start <= row && row <= range.end : range.start <= column && column <= range.end);
+    node.classList.toggle("selected", Boolean(selected));
+  }
+}
+
+function selectGridCell(cell, event) {
+  if (state.gridSelectionMode === "cell") {
+    state.selectedCellKey = cell.cell_key; state.selectedGridRange = null; state.gridSelectionAnchor = null;
+    elements["table-cell-type"].value = cell.cell_type;
+  } else {
+    const index = state.gridSelectionMode === "row" ? cell.row_index : cell.column_index;
+    if (event.shiftKey && state.gridSelectionAnchor !== null) {
+      state.selectedGridRange = { start: Math.min(state.gridSelectionAnchor, index), end: Math.max(state.gridSelectionAnchor, index) };
+    } else {
+      state.gridSelectionAnchor = index; state.selectedGridRange = { start: index, end: index };
+    }
+    state.selectedCellKey = null;
+  }
+  updateGridSelectionClasses(); renderTableGridEditor(currentBlock()); renderRelationships();
+}
+
+function setGridSelectionMode(mode) {
+  state.gridSelectionMode = mode; state.selectedCellKey = null; state.selectedGridRange = null; state.gridSelectionAnchor = null;
+  for (const [candidate, id] of [["cell", "select-cells"], ["row", "select-rows"], ["column", "select-columns"]]) {
+    elements[id].setAttribute("aria-pressed", String(candidate === mode));
+  }
+  updateGridSelectionClasses(); renderTableGridEditor(currentBlock()); renderRelationships();
+}
+
+function renderTableGridEditor(block) {
+  if (!block?.table_grid) return;
+  const dimensions = tableGridDimensions(block); const range = state.selectedGridRange;
+  elements["table-grid-summary"].textContent = `${dimensions.rows} rows × ${dimensions.columns} columns · ${state.gridSelectionMode} selection`;
+  const cell = currentGridCell();
+  elements["table-cell-type"].disabled = state.gridSelectionMode !== "cell" || !cell;
+  elements["save-table-cell-type"].disabled = state.gridSelectionMode !== "cell" || !cell;
+  if (cell) elements["table-cell-type"].value = cell.cell_type;
+  elements["split-table-selection"].disabled = state.gridSelectionMode === "cell" || !range;
+  elements["merge-table-selection"].disabled = state.gridSelectionMode === "cell" || !range || range.start === range.end;
+}
+
+function associationSelection(role) {
+  const relationshipType = elements["relationship-type"].value; const block = currentBlock();
+  if (!block) return { valid: false, message: "Select a block." };
+  const wholeBlock = { block_key: block.block_key, region_key: null };
+  if (relationshipType === "graph_source_table") {
+    const requiredType = role === "source" ? "chart" : "table";
+    return block.block_type === requiredType
+      ? { valid: true, endpoint: wholeBlock, label: `Page ${block.page_number} · ${human(block.block_type)} · ${block.block_key}` }
+      : { valid: false, message: role === "source" ? "Select a chart." : "Select a source table." };
+  }
+  if (relationshipType === "table_continuation") {
+    if (block.block_type !== "table") return { valid: false, message: "Select a table." };
+    if (role === "target" && state.linkSource?.page_number === block.page_number) {
+      return { valid: false, message: "Select the continuing table on a different page." };
+    }
+    return { valid: true, endpoint: wholeBlock, label: `Page ${block.page_number} · table · ${block.block_key}` };
+  }
+  if (role === "target") {
+    if (state.linkSource?.endpoint.block_key === block.block_key) {
+      return { valid: false, message: "Select a different detail table." };
+    }
+    return block.block_type === "table"
+      ? { valid: true, endpoint: wholeBlock, label: `Page ${block.page_number} · detail table · ${block.block_key}` }
+      : { valid: false, message: "Select the detail table." };
+  }
+  if (block.block_type !== "table" || state.internalBlockKey !== block.block_key) {
+    return { valid: false, message: "Open the overview table grid and select one row or a cell in that row." };
+  }
+  let rowIndex = currentGridCell()?.row_index;
+  if (state.gridSelectionMode === "row") {
+    if (!state.selectedGridRange || state.selectedGridRange.start !== state.selectedGridRange.end) {
+      return { valid: false, message: "Select exactly one overview row." };
+    }
+    rowIndex = state.selectedGridRange.start;
+  }
+  if (!Number.isInteger(rowIndex)) return { valid: false, message: "Select one overview row or a cell in that row." };
+  const rowCells = block.table_grid.cells.filter((cell) => cell.row_index === rowIndex);
+  const anchor = rowCells.find((cell) => cell.cell_type === "row_label");
+  if (!anchor) return { valid: false, message: "The selected row has no stable row-label cell." };
+  const excerpt = anchor.text_excerpt ? ` · ${anchor.text_excerpt}` : "";
+  return {
+    valid: true,
+    endpoint: { block_key: block.block_key, region_key: anchor.cell_key },
+    label: `Page ${block.page_number} · overview row ${rowIndex + 1}${excerpt}`,
+  };
 }
 
 function renderRelationships() {
-  const selected = selectedEndpoint();
-  elements["link-source-status"].textContent = state.linkSource ? `Source: ${state.linkSource.region_key || state.linkSource.block_key}` : "No link source selected.";
-  elements["save-link"].disabled = !state.linkSource || !selected || (state.linkSource.block_key === selected.block_key && state.linkSource.region_key === selected.region_key);
+  const relationshipType = elements["relationship-type"].value;
+  const sourceCandidate = associationSelection("source"); const targetCandidate = associationSelection("target");
+  elements["association-help"].textContent = relationshipHelp[relationshipType];
+  elements["set-link-source"].disabled = Boolean(state.linkSource) || !sourceCandidate.valid;
+  elements["link-source-status"].textContent = state.linkSource
+    ? `Source: ${state.linkSource.label}`
+    : sourceCandidate.valid ? `Ready source: ${sourceCandidate.label}` : `Source: ${sourceCandidate.message}`;
+  elements["cancel-link-source"].hidden = !state.linkSource;
+  elements["link-target-status"].textContent = state.linkSource ? `Target: ${targetCandidate.valid ? targetCandidate.label : targetCandidate.message}` : "Target: Select a valid source first.";
+  const sameEndpoint = state.linkSource && targetCandidate.valid
+    && state.linkSource.endpoint.block_key === targetCandidate.endpoint.block_key
+    && state.linkSource.endpoint.region_key === targetCandidate.endpoint.region_key;
+  elements["save-link"].disabled = !state.linkSource || state.linkSource.relationship_type !== relationshipType || !targetCandidate.valid || sameEndpoint;
+  const selected = targetCandidate.valid ? targetCandidate.endpoint : null;
   const fragment = document.createDocumentFragment();
   for (const relationship of state.blockPage?.relationships || []) {
     if (selected && relationship.source.block_key !== selected.block_key && relationship.target.block_key !== selected.block_key) continue;
@@ -203,6 +349,34 @@ function renderRelationships() {
     row.append(text, remove); fragment.append(row);
   }
   elements["relationship-list"].replaceChildren(fragment);
+}
+
+function tableGridSurface(block) {
+  const grid = block.table_grid; const surface = document.createElement("div"); surface.className = "table-grid-surface";
+  if (!grid) return surface;
+  const width = block.bbox.x1 - block.bbox.x0; const height = block.bbox.y1 - block.bbox.y0;
+  for (const cell of grid.cells) {
+    const node = document.createElement("button"); node.type = "button"; node.className = `table-grid-cell cell-${cell.cell_type}`;
+    node.dataset.cellKey = cell.cell_key; node.dataset.rowIndex = String(cell.row_index); node.dataset.columnIndex = String(cell.column_index);
+    const left = grid.column_boundaries[cell.column_index]; const right = grid.column_boundaries[cell.column_index + 1];
+    const top = grid.row_boundaries[cell.row_index]; const bottom = grid.row_boundaries[cell.row_index + 1];
+    node.style.left = `${((left - block.bbox.x0) / width) * 100}%`; node.style.width = `${((right - left) / width) * 100}%`;
+    node.style.top = `${((top - block.bbox.y0) / height) * 100}%`; node.style.height = `${((bottom - top) / height) * 100}%`;
+    node.title = `${human(cell.cell_type)} · row ${cell.row_index + 1}, column ${cell.column_index + 1}${cell.text_excerpt ? ` · ${cell.text_excerpt}` : ""}`;
+    node.setAttribute("aria-label", node.title);
+    node.addEventListener("click", (event) => { event.stopPropagation(); selectGridCell(cell, event); }); surface.append(node);
+  }
+  for (let index = 1; index < grid.column_boundaries.length - 1; index += 1) {
+    const divider = document.createElement("i"); divider.className = "table-grid-divider vertical"; divider.dataset.axis = "column"; divider.dataset.dividerIndex = String(index);
+    divider.style.left = `${((grid.column_boundaries[index] - block.bbox.x0) / width) * 100}%`;
+    divider.addEventListener("pointerdown", (event) => startGridDivider(event, block)); surface.append(divider);
+  }
+  for (let index = 1; index < grid.row_boundaries.length - 1; index += 1) {
+    const divider = document.createElement("i"); divider.className = "table-grid-divider horizontal"; divider.dataset.axis = "row"; divider.dataset.dividerIndex = String(index);
+    divider.style.top = `${((grid.row_boundaries[index] - block.bbox.y0) / height) * 100}%`;
+    divider.addEventListener("pointerdown", (event) => startGridDivider(event, block)); surface.append(divider);
+  }
+  return surface;
 }
 
 function renderBlockInventory() {
@@ -221,7 +395,9 @@ function renderBlockInventory() {
         handle.addEventListener("pointerdown", (event) => startResize(event, block)); overlay.append(handle);
       }
     }
-    if (internal) {
+    if (internal && block.block_type === "table") {
+      overlay.append(tableGridSurface(block));
+    } else if (internal) {
       const surface = document.createElement("div"); surface.className = "internal-edit-surface"; surface.addEventListener("pointerdown", (event) => beginRegionDraw(event, block));
       for (const region of block.regions) {
         const regionBox = document.createElement("button"); regionBox.type = "button"; regionBox.className = "region-box"; regionBox.dataset.regionKey = region.region_key; positionRegionBox(regionBox, region.bbox, block.bbox);
@@ -242,7 +418,7 @@ function renderBlockInventory() {
   const target = state.pendingBlockKey && blocks.some((block) => block.block_key === state.pendingBlockKey)
     ? state.pendingBlockKey : state.selectedBlockKey && blocks.some((block) => block.block_key === state.selectedBlockKey)
       ? state.selectedBlockKey : blocks[0]?.block_key || null;
-  state.pendingBlockKey = null; selectBlock(target);
+  state.pendingBlockKey = null; selectBlock(target); updateGridSelectionClasses();
 }
 
 function pointerPosition(event) {
@@ -256,7 +432,22 @@ function pointerPosition(event) {
 function startResize(event, block) {
   if (!state.document?.write_enabled || state.saving) return;
   event.preventDefault(); event.stopPropagation(); selectBlock(block.block_key);
-  state.pointerEdit = { mode: "resize", edge: event.currentTarget.dataset.edge, blockKey: block.block_key, bbox: { ...block.bbox } };
+  state.pointerEdit = {
+    mode: "resize", edge: event.currentTarget.dataset.edge, blockKey: block.block_key,
+    bbox: { ...block.bbox }, redetectTableGrid: block.block_type === "table" && elements["redetect-on-resize"].checked,
+  };
+}
+
+function startGridDivider(event, block) {
+  if (!state.document?.write_enabled || state.saving) return;
+  event.preventDefault(); event.stopPropagation();
+  const axis = event.currentTarget.dataset.axis; const dividerIndex = Number(event.currentTarget.dataset.dividerIndex);
+  const boundaries = block.table_grid[axis === "row" ? "row_boundaries" : "column_boundaries"];
+  state.pointerEdit = {
+    mode: "grid_divider", axis, dividerIndex, blockKey: block.block_key,
+    minimum: boundaries[dividerIndex - 1] + .005, maximum: boundaries[dividerIndex + 1] - .005,
+    position: boundaries[dividerIndex], node: event.currentTarget, parent: { ...block.bbox },
+  };
 }
 
 function startRegionResize(event, block, region) {
@@ -282,6 +473,12 @@ function beginDraw(event) {
 function movePointerEdit(event) {
   if (!state.pointerEdit) return;
   event.preventDefault(); const point = pointerPosition(event); const edit = state.pointerEdit;
+  if (edit.mode === "grid_divider") {
+    const value = edit.axis === "row" ? point.y : point.x; edit.next = Math.min(edit.maximum, Math.max(edit.minimum, value));
+    const span = edit.axis === "row" ? edit.parent.y1 - edit.parent.y0 : edit.parent.x1 - edit.parent.x0;
+    const offset = edit.axis === "row" ? edit.parent.y0 : edit.parent.x0;
+    edit.node.style[edit.axis === "row" ? "top" : "left"] = `${((edit.next - offset) / span) * 100}%`; return;
+  }
   if (edit.mode === "draw" || edit.mode === "region_draw") {
     if (edit.parent) {
       point.x = Math.min(edit.parent.x1, Math.max(edit.parent.x0, point.x));
@@ -310,7 +507,17 @@ function movePointerEdit(event) {
 async function finishPointerEdit() {
   const edit = state.pointerEdit; if (!edit) return; state.pointerEdit = null;
   if (edit.mode === "resize") {
-    if (edit.next && JSON.stringify(edit.next) !== JSON.stringify(edit.bbox)) await sendCommand({ action: "resize", block_key: edit.blockKey, bbox: edit.next });
+    if (edit.next && JSON.stringify(edit.next) !== JSON.stringify(edit.bbox)) await sendCommand({
+      action: "resize", block_key: edit.blockKey, bbox: edit.next,
+      redetect_table_grid: edit.redetectTableGrid,
+    });
+    return;
+  }
+  if (edit.mode === "grid_divider") {
+    if (typeof edit.next === "number" && edit.next !== edit.position) await sendCommand({
+      action: "move_table_divider", block_key: edit.blockKey, axis: edit.axis,
+      divider_index: edit.dividerIndex, position: edit.next,
+    });
     return;
   }
   if (edit.mode === "region_resize") {
@@ -379,7 +586,10 @@ function renderInspector(page, evidence) {
 async function selectPage(pageNumber) {
   if (!state.pages.length) return;
   const bounded = Math.min(state.pages.length, Math.max(1, Number(pageNumber) || 1));
-  if (bounded !== state.activePage) { state.internalBlockKey = null; state.selectedRegionKey = null; }
+  if (bounded !== state.activePage) {
+    state.internalBlockKey = null; state.selectedRegionKey = null; state.selectedCellKey = null;
+    state.selectedGridRange = null; state.gridSelectionAnchor = null;
+  }
   state.activePage = bounded; state.embeddedWords = null; state.ocrWords = null; state.blockPage = null; state.selectedBlockKey = null; toggleDrawMode(false); clearError(); setUrlPage(bounded); updateSelectedThumbnail();
   elements["page-input"].value = String(bounded); elements["active-page-label"].textContent = `Page ${bounded} of ${state.pages.length}`;
   elements["previous-page"].disabled = bounded === 1; elements["next-page"].disabled = bounded === state.pages.length;
@@ -402,11 +612,8 @@ async function initialize() {
     elements["editing-status"].textContent = state.document.write_enabled ? "Editing enabled" : "Editing disabled";
     elements["editing-status"].className = `status-badge ${state.document.write_enabled ? "valid" : "pending"}`;
     elements["draw-block"].hidden = !state.document.write_enabled;
-    elements["page-coverage"].textContent = `Stage 1 · ${state.document.page_count - state.document.block_review_page_count}/${state.document.page_count} pages inventoried`;
     elements["document-title"].textContent = state.document.title; elements["source-path"].textContent = state.artifact.source.repo_relpath;
-    elements["page-count"].textContent = String(state.document.page_count); elements["block-count"].textContent = String(state.document.block_count);
-    elements["financial-count"].textContent = String(state.document.financial_block_count); elements["review-page-count"].textContent = String(state.document.block_review_page_count);
-    elements["artifact-hash"].textContent = formatHash(state.document.block_artifact_sha256); elements["artifact-hash"].title = state.document.block_artifact_sha256;
+    elements["page-count"].textContent = String(state.document.page_count); renderDocumentSummary();
     renderRepresentativePages(); renderThumbnails(); const requested = Number(new URL(location.href).searchParams.get("page")); await selectPage(Number.isInteger(requested) && requested > 0 ? requested : 1);
   } catch (error) { elements["validation-status"].textContent = "Evidence unavailable"; elements["validation-status"].className = "status-badge error"; elements["canvas-status"].textContent = "Staged evidence could not be loaded."; showError(error.message); }
 }
@@ -431,10 +638,18 @@ elements["delete-block"].addEventListener("click", () => {
 });
 elements["edit-internal"].addEventListener("click", () => {
   const block = currentBlock(); if (!block || !regionTypes[block.block_type]) return;
-  state.internalBlockKey = block.block_key; state.selectedRegionKey = block.regions[0]?.region_key || null; toggleDrawMode(false); renderBlockInventory();
+  state.internalBlockKey = block.block_key; state.selectedRegionKey = block.regions[0]?.region_key || null;
+  state.gridSelectionMode = "cell"; state.selectedCellKey = null; state.selectedGridRange = null; state.gridSelectionAnchor = null;
+  for (const [mode, id] of [["cell", "select-cells"], ["row", "select-rows"], ["column", "select-columns"]]) {
+    elements[id].setAttribute("aria-pressed", String(mode === "cell"));
+  }
+  toggleDrawMode(false); renderBlockInventory();
 });
 elements["exit-internal"].addEventListener("click", () => {
   state.internalBlockKey = null; state.selectedRegionKey = null; toggleDrawMode(false); renderBlockInventory();
+});
+elements["exit-table-grid"].addEventListener("click", () => {
+  state.internalBlockKey = null; state.selectedCellKey = null; state.selectedGridRange = null; state.gridSelectionAnchor = null; renderBlockInventory();
 });
 elements["draw-region"].addEventListener("click", () => toggleDrawMode(undefined, "region"));
 elements["save-region-type"].addEventListener("click", () => {
@@ -445,10 +660,52 @@ elements["delete-region"].addEventListener("click", () => {
   const block = currentBlock(); const region = currentRegion(); if (!block || !region) return;
   if (window.confirm("Delete the selected internal region?")) sendCommand({ action: "delete_region", block_key: block.block_key, region_key: region.region_key });
 });
-elements["set-link-source"].addEventListener("click", () => { state.linkSource = selectedEndpoint(); renderRelationships(); });
-elements["save-link"].addEventListener("click", () => {
-  const target = selectedEndpoint(); if (!state.linkSource || !target) return;
-  sendCommand({ action: "link", relationship_type: elements["relationship-type"].value, source: state.linkSource, target }).then(() => { state.linkSource = null; renderRelationships(); });
+elements["redetect-table-grid"].addEventListener("click", () => {
+  const block = currentBlock(); if (!block || block.block_type !== "table") return;
+  if (window.confirm("Replace the current table grid with a new automatic grid inside the table box?")) {
+    sendCommand({ action: "redetect_table_grid", block_key: block.block_key });
+  }
+});
+elements["select-cells"].addEventListener("click", () => setGridSelectionMode("cell"));
+elements["select-rows"].addEventListener("click", () => setGridSelectionMode("row"));
+elements["select-columns"].addEventListener("click", () => setGridSelectionMode("column"));
+elements["save-table-cell-type"].addEventListener("click", () => {
+  const block = currentBlock(); const cell = currentGridCell(); if (!block || !cell) return;
+  sendCommand({ action: "set_table_cell_type", block_key: block.block_key, cell_key: cell.cell_key, cell_type: elements["table-cell-type"].value });
+});
+elements["split-table-selection"].addEventListener("click", () => {
+  const block = currentBlock(); const range = state.selectedGridRange; if (!block || !range || state.gridSelectionMode === "cell") return;
+  sendCommand({
+    action: state.gridSelectionMode === "row" ? "split_table_rows" : "split_table_columns",
+    block_key: block.block_key, start_index: range.start, end_index: range.end,
+  });
+});
+elements["merge-table-selection"].addEventListener("click", () => {
+  const block = currentBlock(); const range = state.selectedGridRange; if (!block || !range || range.start === range.end || state.gridSelectionMode === "cell") return;
+  sendCommand({
+    action: state.gridSelectionMode === "row" ? "merge_table_rows" : "merge_table_columns",
+    block_key: block.block_key, start_index: range.start, end_index: range.end,
+  });
+});
+elements["relationship-type"].addEventListener("change", () => { state.linkSource = null; renderRelationships(); });
+elements["set-link-source"].addEventListener("click", () => {
+  const source = associationSelection("source"); if (!source.valid) return;
+  state.linkSource = {
+    relationship_type: elements["relationship-type"].value,
+    endpoint: source.endpoint,
+    label: source.label,
+    page_number: currentBlock().page_number,
+  };
+  renderRelationships();
+});
+elements["cancel-link-source"].addEventListener("click", () => { state.linkSource = null; renderRelationships(); });
+elements["save-link"].addEventListener("click", async () => {
+  const target = associationSelection("target"); if (!state.linkSource || !target.valid) return;
+  const result = await sendCommand({
+    action: "link", relationship_type: elements["relationship-type"].value,
+    source: state.linkSource.endpoint, target: target.endpoint,
+  });
+  if (result) { state.linkSource = null; renderRelationships(); }
 });
 elements["new-block-type"].addEventListener("change", () => {
   elements["new-block-financial"].checked = elements["new-block-type"].value === "table";
@@ -461,5 +718,8 @@ document.addEventListener("keydown", (event) => {
   else if (event.key.toLowerCase() === "o" && !elements["ocr-toggle"].disabled) elements["ocr-toggle"].click();
 });
 populateTypeOptions(elements["block-type-select"]); populateTypeOptions(elements["new-block-type"]);
+elements["table-cell-type"].replaceChildren(...regionTypes.table.map(([value, label]) => {
+  const option = document.createElement("option"); option.value = value; option.textContent = label; return option;
+}));
 elements["new-block-type"].value = "title"; elements["new-block-financial"].checked = false;
 updateZoom(0, true); initialize();

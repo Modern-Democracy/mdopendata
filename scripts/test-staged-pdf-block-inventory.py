@@ -76,6 +76,31 @@ class BlockInventoryGeneratorTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "Stage 1 content conflict"):
             self.generate()
 
+    def test_detects_table_grid_headers_labels_cells_subtotals_and_totals(self) -> None:
+        def word(text: str, x0: float, y0: float, x1: float, y1: float) -> dict:
+            return {"text": text, "bbox": {"x0": x0, "y0": y0, "x1": x1, "y1": y1}}
+
+        words = [
+            word("Operating", .10, .06, .20, .08), word("Budget", .21, .06, .29, .08),
+            word("Department", .10, .10, .24, .12), word("2026", .55, .10, .61, .12),
+            word("Budget", .62, .10, .70, .12), word("2027", .78, .10, .84, .12),
+            word("Parks", .10, .20, .18, .22), word("1,250", .56, .20, .63, .22), word("1,500", .79, .20, .86, .22),
+            word("Sub-Total", .10, .30, .22, .32), word("1,250", .56, .30, .63, .32), word("1,500", .79, .30, .86, .32),
+            word("Total", .10, .40, .17, .42), word("1,250", .56, .40, .63, .42), word("1,500", .79, .40, .86, .42),
+        ]
+        grid = self.stage1.table_grid(
+            "test-budget:p001:body", words, {"x0": .05, "y0": .05, "x1": .90, "y1": .45},
+        )
+        types = [cell["cell_type"] for cell in grid["cells"]]
+        self.assertIn("table_header", types)
+        self.assertIn("column_label", types)
+        self.assertIn("row_label", types)
+        self.assertGreaterEqual(types.count("cell"), 2)
+        self.assertIn("subtotal", types)
+        self.assertIn("total", types)
+        self.assertEqual(len(grid["cells"]), (len(grid["row_boundaries"]) - 1) * (len(grid["column_boundaries"]) - 1))
+        self.assertTrue(all(cell["review"]["status"] == "proposed" for cell in grid["cells"]))
+
 
 if __name__ == "__main__":
     unittest.main()

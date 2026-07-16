@@ -6,7 +6,7 @@ tags:
   - charlottetown
   - budget
   - quality-assurance
-updated: 2026-07-15
+updated: 2026-07-16
 ---
 
 This page defines the frozen baseline, representative source controls, implementation sequence, and acceptance criteria for the first staged PDF inventory and extraction shadow pilot.
@@ -86,10 +86,10 @@ Stage 1 block inventory is complete under `data/budget/charlottetown/2026-2027/s
 
 | Control | Result |
 | --- | --- |
-| Canonical artifact | `block-inventory.json`; SHA-256 `a57783102867efc69beff296a64f3affaf67b9f504fef900c081f3ad10f00c41`. |
-| Coverage | 154 page dispositions and 440 candidate blocks, accounted for exactly once. |
+| Canonical artifact | Mutable reviewed `block-inventory.json`; table-grid migration checkpoint SHA-256 `f880de6838c16cf9fa5ef5f82a4633ad26c9613a9ca55b9a1074260e2eabe8c2` at decision 39. Later hashes are recorded by review events. |
+| Coverage | 154 page dispositions, 440 generated candidates, and one reviewer-added chart block, accounted for exactly once. |
 | Candidate types | 143 titles, 135 page numbers, 77 tables, 67 formatted-text blocks, 2 tables of contents, 8 dividers, and 8 footers. No automated block is classified as a repeating header. |
-| Internal regions | 709 proposed paragraph, bullet-list, or sorted-list regions within formatted-text blocks; table internals remain reviewer-defined. |
+| Internal structure | 709 proposed formatted-text regions; 77 table grids containing 10,063 typed cells inferred from Stage 0 word geometry. |
 | Financial candidates | 101 conservative candidates; all remain proposed and require later structural review. |
 | Review queue | PDF page 24 is `needs_review` because its block geometry comes from OCR; the other 153 pages are inventoried. |
 | Regression controls | Page 10 remains formatted text and non-financial; pages 18 and 19 retain financial table candidates; page 112 retains formatted-text profile content with financial-candidate context. |
