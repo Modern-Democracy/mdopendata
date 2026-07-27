@@ -50,6 +50,13 @@
   .page-info p { margin: 0; color: var(--fg-3); font: 11px/1.45 var(--font-mono); display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
   .classification-summary { display: none; margin-bottom: 14px; padding: 12px 14px; border-left: 4px solid var(--brick); background: var(--paper-3); font: 13px/1.45 var(--font-ui); }
   .classification-summary.visible { display: block; }
+  .reuse-section { display: none; margin-top: 28px; }
+  .reuse-section.visible { display: block; }
+  .reuse-summary { margin: 12px 0; padding: 12px 14px; border-left: 4px solid var(--forest); background: var(--paper-3); font: 13px/1.45 var(--font-ui); }
+  .reuse-summary.blocked { border-color: var(--brick); }
+  .reuse-documents { display: grid; gap: 10px; }
+  .reuse-document { border: 1px solid var(--border-hair); border-radius: 6px; background: var(--paper-2); padding: 13px; font: 12px/1.5 var(--font-mono); }
+  .reuse-document b { font-family: var(--font-ui); }
   .template-tag { display: inline-block; margin-left: 7px; border-radius: 3px; padding: 3px 6px; background: var(--forest); color: var(--paper); font: 700 10px var(--font-mono); vertical-align: middle; }
   .template-tag.unknown { background: var(--brick); }
   .drafts-section { display: none; margin-top: 28px; }
@@ -139,6 +146,12 @@
     <div id="classification-summary" class="classification-summary"></div>
     <div id="page-grid" class="page-grid"></div>
   </section>
+  <section id="reuse-section" class="reuse-section" aria-labelledby="reuse-heading">
+    <div class="pages-head"><div><h2 id="reuse-heading">Municipal package reuse preview</h2><span class="page-count">Read-only structural classification</span></div><button id="run-reuse-preview" class="primary" type="button">Preview approved profile</button></div>
+    <p class="notice">Tests the configured, approved municipal-source profile without changing page classifications, document assembly, or publication state.</p>
+    <div id="reuse-summary" class="reuse-summary">Preview has not run.</div>
+    <div id="reuse-documents" class="reuse-documents"></div>
+  </section>
   <section id="drafts-section" class="drafts-section" aria-labelledby="drafts-heading">
     <div class="pages-head"><h2 id="drafts-heading">Template approval</h2><button id="generate-drafts" class="primary" type="button">Generate draft templates</button></div>
     <div id="draft-list" class="draft-list"></div>
@@ -180,6 +193,10 @@
   const pageGrid = document.getElementById("page-grid");
   const classifyButton = document.getElementById("classify");
   const classificationSummary = document.getElementById("classification-summary");
+  const reuseSection = document.getElementById("reuse-section");
+  const runReusePreviewButton = document.getElementById("run-reuse-preview");
+  const reuseSummary = document.getElementById("reuse-summary");
+  const reuseDocuments = document.getElementById("reuse-documents");
   const draftsSection = document.getElementById("drafts-section");
   const draftList = document.getElementById("draft-list");
   const generateDraftsButton = document.getElementById("generate-drafts");
@@ -213,7 +230,10 @@
     assemblyEditor.value = "";
     extractionResult.textContent = "Extraction has not run.";
     classificationSummary.classList.remove("visible");
-    for (const section of [pagesSection, draftsSection, assemblySection, extractionSection]) section.classList.remove("visible");
+    reuseSummary.textContent = "Preview has not run.";
+    reuseSummary.className = "reuse-summary";
+    reuseDocuments.replaceChildren();
+    for (const section of [pagesSection, reuseSection, draftsSection, assemblySection, extractionSection]) section.classList.remove("visible");
     for (const id of ["stage-register", "stage-discover", "stage-approve", "stage-assemble", "stage-extract"]) document.getElementById(id).classList.remove("current");
     document.getElementById("stage-register").classList.add("current");
   }
@@ -266,9 +286,46 @@
       return card;
     }));
     pagesSection.classList.add("visible");
+    reuseSection.classList.add("visible");
     document.getElementById("stage-register").classList.remove("current");
     document.getElementById("stage-discover").classList.add("current");
     classifyButton.dataset.packageKey = payload.packageKey;
+  }
+
+  function showReusePreview(payload) {
+    const coverage = payload.coverage;
+    reuseSummary.className = `reuse-summary ${payload.status === "blocked" ? "blocked" : ""}`.trim();
+    reuseSummary.textContent = `${payload.status.replaceAll("_", " ")} | ${payload.documents.length} document${payload.documents.length === 1 ? "" : "s"} | ${coverage.assigned_pages}/${coverage.total_pages} pages assigned | ${coverage.unknown_pages} unknown | ${coverage.conflicting_pages} conflicting`;
+    reuseDocuments.replaceChildren(...payload.documents.map((match) => {
+      const card = document.createElement("article");
+      card.className = "reuse-document";
+      const heading = document.createElement("b");
+      heading.textContent = `${match.source_order}. ${match.document_family} | pages ${match.page_start}-${match.page_end}`;
+      const details = document.createElement("div");
+      details.textContent = `${match.fit_class.replaceAll("_", " ")} | confidence ${match.confidence.toFixed(3)} | ${match.policy_evaluation.outcome.replaceAll("_", " ")}`;
+      const evidence = document.createElement("div");
+      evidence.textContent = `Boundary evidence: ${match.boundary_evidence.length}; unresolved evidence: ${match.unresolved_evidence.length}`;
+      card.append(heading, details, evidence);
+      return card;
+    }));
+  }
+
+  async function runReusePreview() {
+    const packageKey = classifyButton.dataset.packageKey;
+    if (!packageKey) return;
+    runReusePreviewButton.disabled = true;
+    reuseSummary.textContent = "Running approved municipal-source profile.";
+    try {
+      const response = await fetch(`/api/document-ingestion/packages/${encodeURIComponent(packageKey)}/reuse-preview`, { method: "POST" });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "Reuse preview failed.");
+      showReusePreview(payload);
+    } catch (error) {
+      reuseSummary.className = "reuse-summary blocked";
+      reuseSummary.textContent = error.message;
+    } finally {
+      runReusePreviewButton.disabled = false;
+    }
   }
 
   function showClassifications(payload) {
@@ -714,6 +771,7 @@
     const packageKey = classifyButton.dataset.packageKey;
     if (packageKey) runClassification(packageKey);
   });
+  runReusePreviewButton.addEventListener("click", runReusePreview);
 
   generateDraftsButton.addEventListener("click", async () => {
     const packageKey = classifyButton.dataset.packageKey;

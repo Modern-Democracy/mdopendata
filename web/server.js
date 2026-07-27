@@ -142,6 +142,16 @@ const currentCouncilMeetingKey = "charlottetown-2026-05-12-regular-council";
 const documentIngestionRoot = path.join(repoRoot, "data", "document-ingestion");
 const packageUploadRoot = path.join(documentIngestionRoot, "uploads");
 const packageArtifactRoot = path.join(documentIngestionRoot, "packages");
+const agendaPackageReusePreviewPath = path.join(
+  repoRoot,
+  "scripts",
+  "preview-agenda-package-reuse.py",
+);
+const agendaPackageReuseProfilePath = compactText(
+  process.env.AGENDA_PACKAGE_REUSE_PROFILE,
+)
+  ? path.resolve(repoRoot, process.env.AGENDA_PACKAGE_REUSE_PROFILE)
+  : null;
 const maxPackageUploadBytes = Number(process.env.DOCUMENT_UPLOAD_MAX_BYTES || 500 * 1024 * 1024);
 const packageRenderDpi = Number(process.env.DOCUMENT_RENDER_DPI || 120);
 const packageTraversalJobs = new Map();
@@ -3890,7 +3900,11 @@ async function registerPackageUpload(upload) {
       packageKey,
       upload.originalFilename,
       repoRelpath,
-      JSON.stringify({ original_filename: upload.originalFilename, upload_bytes: upload.size }),
+      JSON.stringify({
+        original_filename: upload.originalFilename,
+        upload_bytes: upload.size,
+        source_family: "charlottetown-council",
+      }),
       naturalDocumentKey,
     ]);
     await client.query("COMMIT");
@@ -3968,7 +3982,8 @@ async function loadAdminTemplates() {
 async function packageSourceRecord(packageKey) {
   const { rows } = await pool.query(`
     SELECT source_document_id, source_document_key, repo_relpath,
-           source_file_hash, page_count
+           source_file_hash, page_count, jurisdiction_key,
+           document_family_key, metadata
     FROM documents.source_document
     WHERE source_document_key = $1 AND is_active
     LIMIT 1
@@ -3979,6 +3994,108 @@ async function packageSourceRecord(packageKey) {
     throw error;
   }
   return rows[0];
+}
+
+function requireAgendaPackageReuseProfilePath() {
+  if (!agendaPackageReuseProfilePath) {
+    throw stagedPdfReviewError(
+      "Agenda-package reuse preview requires AGENDA_PACKAGE_REUSE_PROFILE.",
+      409,
+    );
+  }
+  const relative = path.relative(path.resolve(repoRoot), agendaPackageReuseProfilePath);
+  if (!relative || relative.startsWith("..") || path.isAbsolute(relative)) {
+    throw stagedPdfReviewError(
+      "AGENDA_PACKAGE_REUSE_PROFILE must resolve to a repository file.",
+      409,
+    );
+  }
+  return agendaPackageReuseProfilePath;
+}
+
+async function loadAgendaPackageReuseInput(packageKey) {
+  const source = await packageSourceRecord(packageKey);
+  const sourceFamily = compactText(source.metadata?.source_family);
+  if (
+    !compactText(source.jurisdiction_key)
+    || !sourceFamily
+    || !compactText(source.document_family_key)
+  ) {
+    throw stagedPdfReviewError(
+      "Package source identity is incomplete; jurisdiction, source family, and document family are required.",
+      409,
+    );
+  }
+  const { rows } = await pool.query(`
+    SELECT page_number, text_raw, text_extraction_status
+    FROM documents.source_page
+    WHERE source_document_id = $1 AND is_active
+    ORDER BY page_number
+  `, [source.source_document_id]);
+  if (
+    !Number.isInteger(source.page_count)
+    || source.page_count < 1
+    || rows.length !== source.page_count
+    || rows.some((row, index) => row.page_number !== index + 1)
+  ) {
+    throw stagedPdfReviewError(
+      "Package traversal must be complete before reuse preview.",
+      409,
+    );
+  }
+  return {
+    package_key: source.source_document_key,
+    source_sha256: source.source_file_hash,
+    jurisdiction_key: source.jurisdiction_key,
+    source_family: sourceFamily,
+    document_family: source.document_family_key,
+    pages: rows.map((row) => ({
+      page_number: row.page_number,
+      text_source: compactText(row.text_raw) ? "embedded" : "visual_only",
+      text: row.text_raw || "",
+    })),
+  };
+}
+
+async function executeAgendaPackageReusePreview(packageKey) {
+  const profilePath = requireAgendaPackageReuseProfilePath();
+  const commandRoot = path.join(repoRoot, "tmp", "agenda-package-reuse-preview");
+  await mkdir(commandRoot, { recursive: true });
+  const packagePath = path.join(commandRoot, `${randomUUID()}.json`);
+  await writeFile(
+    packagePath,
+    JSON.stringify(await loadAgendaPackageReuseInput(packageKey)),
+    { encoding: "utf8", flag: "wx" },
+  );
+  const powershell = process.platform === "win32" ? "powershell.exe" : "pwsh";
+  const wrapper = path.join(repoRoot, "scripts", "python.ps1");
+  try {
+    const { stdout } = await execFileAsync(
+      powershell,
+      [
+        "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", wrapper,
+        agendaPackageReusePreviewPath,
+        "--profile", profilePath,
+        "--package", packagePath,
+      ],
+      { cwd: repoRoot, timeout: 120000, windowsHide: true, maxBuffer: 8 * 1024 * 1024 },
+    );
+    return JSON.parse(stdout.trim());
+  } catch (cause) {
+    let detail = null;
+    try {
+      detail = JSON.parse(toStringValue(cause.stdout).trim());
+    } catch {
+      detail = null;
+    }
+    const statusCode = detail?.kind === "invalid" ? 400 : 503;
+    throw stagedPdfReviewError(
+      detail?.error || "Agenda-package reuse preview failed.",
+      statusCode,
+    );
+  } finally {
+    await unlink(packagePath).catch(() => {});
+  }
 }
 
 function parsePdfPageCount(pdfInfoOutput) {
@@ -6930,6 +7047,20 @@ const server = createServer(async (request, response) => {
       }
       const packageKey = decodeURIComponent(packageClassifyMatch[1]).trim();
       await sendJson(response, await classifyPackagePages(packageKey));
+      return;
+    }
+
+    const packageReusePreviewMatch = url.pathname.match(
+      /^\/api\/document-ingestion\/packages\/([^/]+)\/reuse-preview$/,
+    );
+    if (packageReusePreviewMatch) {
+      if (request.method !== "POST") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const packageKey = decodeURIComponent(packageReusePreviewMatch[1]).trim();
+      await sendJson(response, await executeAgendaPackageReusePreview(packageKey));
       return;
     }
 

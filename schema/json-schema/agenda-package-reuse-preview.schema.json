@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/mdopendata/agenda-package-reuse-preview.schema.json",
+  "title": "Agenda Package Reuse Preview",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "package_key",
+    "source_sha256",
+    "profile_ref",
+    "matcher",
+    "status",
+    "documents",
+    "unknown_pages",
+    "conflicts",
+    "coverage"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "pattern": "agenda-package-reuse-preview\\.schema\\.json$" },
+    "schema_version": { "const": 1 },
+    "package_key": { "$ref": "#/$defs/key" },
+    "source_sha256": { "$ref": "#/$defs/sha256" },
+    "profile_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile_key", "profile_version", "sha256"],
+      "properties": {
+        "profile_key": { "$ref": "#/$defs/key" },
+        "profile_version": { "$ref": "#/$defs/semver" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "matcher": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "config_sha256"],
+      "properties": {
+        "name": { "$ref": "#/$defs/key" },
+        "version": { "type": "string", "minLength": 1 },
+        "config_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "status": { "enum": ["matched", "needs_review", "blocked"] },
+    "documents": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/document_match" }
+    },
+    "unknown_pages": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "integer", "minimum": 1 }
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["page_number", "reason", "candidate_template_keys"],
+        "properties": {
+          "page_number": { "type": "integer", "minimum": 1 },
+          "reason": { "$ref": "#/$defs/key" },
+          "candidate_template_keys": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "$ref": "#/$defs/key" }
+          }
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total_pages", "assigned_pages", "unknown_pages", "conflicting_pages", "omitted_pages"],
+      "properties": {
+        "total_pages": { "type": "integer", "minimum": 1 },
+        "assigned_pages": { "type": "integer", "minimum": 0 },
+        "unknown_pages": { "type": "integer", "minimum": 0 },
+        "conflicting_pages": { "type": "integer", "minimum": 0 },
+        "omitted_pages": { "type": "integer", "minimum": 0 }
+      }
+    }
+  },
+  "$defs": {
+    "key": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]*$" },
+    "semver": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "page_match": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["page_number", "page_role", "page_template_key", "anchor_matches"],
+      "properties": {
+        "page_number": { "type": "integer", "minimum": 1 },
+        "page_role": { "enum": ["single_page", "document_start", "document_continuation", "document_end"] },
+        "page_template_key": { "$ref": "#/$defs/key" },
+        "anchor_matches": { "type": "array", "items": { "type": "object" } }
+      }
+    },
+    "policy_evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy_ref", "outcome", "selected_for_sample", "reason_codes"],
+      "properties": {
+        "policy_ref": { "type": "object" },
+        "outcome": { "enum": ["review_required", "selected_for_sample", "auto_approved", "blocked"] },
+        "selected_for_sample": { "type": "boolean" },
+        "reason_codes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/key" }
+        }
+      }
+    },
+    "document_match": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "document_key",
+        "source_order",
+        "document_family",
+        "page_start",
+        "page_end",
+        "page_count",
+        "fit_class",
+        "confidence",
+        "template_ref",
+        "boundary_evidence",
+        "unresolved_evidence",
+        "page_sequence",
+        "policy_evaluation"
+      ],
+      "properties": {
+        "document_key": { "$ref": "#/$defs/key" },
+        "source_order": { "type": "integer", "minimum": 1 },
+        "document_family": { "$ref": "#/$defs/key" },
+        "page_start": { "type": "integer", "minimum": 1 },
+        "page_end": { "type": "integer", "minimum": 1 },
+        "page_count": { "type": "integer", "minimum": 1 },
+        "fit_class": { "enum": ["exact", "light_variation", "material_variation"] },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "template_ref": { "type": "object" },
+        "boundary_evidence": { "type": "array", "items": { "type": "object" } },
+        "unresolved_evidence": { "type": "array", "items": { "type": "object" } },
+        "page_sequence": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/page_match" }
+        },
+        "policy_evaluation": { "$ref": "#/$defs/policy_evaluation" }
+      }
+    }
+  }
+}

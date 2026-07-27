@@ -30,6 +30,8 @@ Version 1 stays operational and immutable while version 2 is built and validated
 - Phase 3 completed on 2026-07-27. Parallel version 2 generator and writer entry points resolve omitted spans as `1`, propose evidence-supported formatted-text and table titles, support logical-cell merge, split, and explicit spans, protect relationship endpoints, and append valid version 2 review events. The frozen version 1 generator and writer remain byte-identical.
 - The reviewer retains version 1 as its default workspace. Explicit `PDF_INVENTORY_REVIEW_SCHEMA_VERSION=2` selection enables the parallel version 2 source and block artifacts, effective-span rendering, table-title choices, numeric span controls, logical-cell split and merge, and span-aware selection.
 - Phase 4 completed on 2026-07-27. Approved table and formatted-text blocks can produce deterministic, read-only current-document candidate previews with exact, light, material, and one-off classifications. Selected eligible candidates apply atomically; reviewer rejections append document-scoped negative controls to the existing review chain.
+- Phase 5 completed on 2026-07-27. Human-approved structures can be promoted into immutable document-scoped templates with immutable review policies, deterministic sampling, fail-closed automation gates, suspension, and exact audit provenance.
+- Phase 6 is in progress. The profile and preview contracts, deterministic embedded-document classifier, exact page-accounting controls, and read-only reviewer preview are implemented. Promotion of a real municipal-source profile remains blocked until exact approved structural-template and review-policy references plus positive and nearest-negative agenda-package controls are available.
 
 ## Phase 0: Freeze Baseline And Controls
 
@@ -146,6 +148,14 @@ Gate passed. Human actions create immutable, semantic-versioned `structural_temp
 
 ## Phase 6: Agenda-Package Reuse
 
+### Status
+
+In progress on 2026-07-27. `schema/json-schema/agenda-package-reuse-profile.schema.json` separates immutable municipal-source scope, package grammar, document-template boundaries, exact structural-template and review-policy references, controls, and approval. `schema/json-schema/agenda-package-reuse-preview.schema.json` records ordered document matches, page roles, boundary evidence, fit, policy outcomes, unknown pages, conflicts, and exact coverage.
+
+`scripts/preview-agenda-package-reuse.py` is deterministic and read-only. It requires exact jurisdiction, source-family, and document-family scope; segments documents from approved start anchors; checks continuation and end anchors, page limits, first-document rules, and allowed transitions; evaluates review policies; and reports every package page exactly once as assigned, unknown, or conflicting. The ingestion UI exposes this through `POST /api/document-ingestion/packages/{packageKey}/reuse-preview` only when `AGENDA_PACKAGE_REUSE_PROFILE` names a repository profile. The endpoint does not change classifications, assemblies, extraction records, databases, or publication state.
+
+No canonical municipal-source profile has been created. The Phase 5 registry contains no promoted agenda-package structural template or policy, so inventing exact references or approving a source profile would violate the Phase 5 and Phase 6 gates. Existing package rows without explicit `metadata.source_family` fail closed; new Charlottetown package registrations record `charlottetown-council`.
+
 ### Work
 
 - bind templates to municipal source and document-family profiles
@@ -157,6 +167,8 @@ Gate passed. Human actions create immutable, semantic-versioned `structural_temp
 ### Gate
 
 Single-page and multi-page positive controls are detected with exact source order. Nearest-negative documents remain unmatched or blocked. No package page is silently omitted or assigned to conflicting embedded documents.
+
+The isolated synthetic gate passes. Remaining gate work is to promote exact agenda-package structures and policies, create and approve the Charlottetown source profile from reviewed real packages, backfill explicit source-family metadata where authorized, and execute the same controls against the representative single-page and multi-page package corpus.
 
 ## Phase 7: Parity And Handoff
 

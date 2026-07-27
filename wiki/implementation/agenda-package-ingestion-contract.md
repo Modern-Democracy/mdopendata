@@ -4,7 +4,7 @@ tags:
   - council-meetings
   - document-ingestion
   - agenda-packages
-updated: 2026-07-06
+updated: 2026-07-27
 ---
 
 This page defines the approved package-level extraction contract and template-discovery gate for agenda package PDFs.
@@ -76,7 +76,11 @@ Each visual field mapping can optionally define a page region. The picker displa
 
 During extraction, Poppler `-bbox-layout` word coordinates are normalized to the source page dimensions. Words whose centers fall inside the approved rectangle become the input text for that field's deterministic strategy. Full-page extraction remains the default when a mapping has no region. Invalid or out-of-page rectangles are rejected before persistence.
 
-Remaining work is council-domain import resolution.
+Phase 6 adds a separate read-only municipal-package reuse preview. An immutable approved profile binds one jurisdiction, source family, and document family to package grammar, ordered embedded-document templates, exact structural-template and review-policy hashes, and positive and nearest-negative controls. The deterministic preview identifies start, continuation, and end boundaries; preserves source order; evaluates fit and review policy; and accounts for every page as assigned, unknown, or conflicting.
+
+`POST /api/document-ingestion/packages/{packageKey}/reuse-preview` runs only when `AGENDA_PACKAGE_REUSE_PROFILE` resolves to a repository file and the registered source has explicit jurisdiction, source-family, document-family, and complete page traversal evidence. It performs no database or artifact writes. The browser displays package status, coverage, ordered document ranges, fit, policy outcomes, and boundary/unresolved evidence counts.
+
+No canonical profile is currently approved because no agenda-package structural template and review policy have been promoted into the Phase 5 registry. Remaining work is real-package control approval, authorized source-family backfill for older uploads, optional approved-preview handoff to document assembly, and council-domain import resolution.
 
 ## Sources
 
@@ -85,6 +89,9 @@ Remaining work is council-domain import resolution.
 - [Root wiki index](../index.md)
 - `plan/document_pipeline_design.md`
 - `schema/json-schema/agenda-package-extraction.schema.json`
+- `schema/json-schema/agenda-package-reuse-profile.schema.json`
+- `schema/json-schema/agenda-package-reuse-preview.schema.json`
+- `scripts/preview-agenda-package-reuse.py`
 - `schema/sql/022_agenda_package_extraction.sql`
 - `schema/sql/023_page_template_drafts.sql`
 - `schema/sql/024_package_document_assembly.sql`

@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/mdopendata/agenda-package-reuse-profile.schema.json",
+  "title": "Agenda Package Reuse Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "profile_key",
+    "profile_version",
+    "status",
+    "scope",
+    "package_grammar",
+    "document_templates",
+    "positive_controls",
+    "negative_controls",
+    "approval"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "pattern": "agenda-package-reuse-profile\\.schema\\.json$" },
+    "schema_version": { "const": 1 },
+    "profile_key": { "$ref": "#/$defs/key" },
+    "profile_version": { "$ref": "#/$defs/semver" },
+    "status": { "enum": ["draft", "approved", "retired"] },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["jurisdiction_key", "source_family", "document_family", "reuse_scope"],
+      "properties": {
+        "jurisdiction_key": { "$ref": "#/$defs/key" },
+        "source_family": { "$ref": "#/$defs/key" },
+        "document_family": { "$ref": "#/$defs/key" },
+        "reuse_scope": { "enum": ["same_edition_family", "cross_edition_family"] }
+      }
+    },
+    "package_grammar": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["first_document_family", "allowed_transitions", "require_complete_coverage"],
+      "properties": {
+        "first_document_family": { "$ref": "#/$defs/key" },
+        "allowed_transitions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["from", "to"],
+            "properties": {
+              "from": { "$ref": "#/$defs/key" },
+              "to": { "$ref": "#/$defs/key" }
+            }
+          }
+        },
+        "require_complete_coverage": { "const": true }
+      }
+    },
+    "document_templates": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/document_template" }
+    },
+    "positive_controls": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/control" }
+    },
+    "negative_controls": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/control" }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "decision_id"],
+      "properties": {
+        "status": { "enum": ["needs_review", "approved", "rejected"] },
+        "decision_id": { "type": ["string", "null"] }
+      }
+    }
+  },
+  "allOf": [{
+    "if": { "properties": { "status": { "const": "approved" } }, "required": ["status"] },
+    "then": {
+      "properties": {
+        "approval": {
+          "properties": {
+            "status": { "const": "approved" },
+            "decision_id": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    }
+  }],
+  "$defs": {
+    "key": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]*$" },
+    "semver": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "artifact_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_type", "artifact_key", "schema_version", "sha256"],
+      "properties": {
+        "artifact_type": { "enum": ["structural_template", "template_review_policy"] },
+        "artifact_key": { "$ref": "#/$defs/key" },
+        "schema_version": { "const": 2 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "anchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["anchor_key", "match_type", "value", "required"],
+      "properties": {
+        "anchor_key": { "$ref": "#/$defs/key" },
+        "match_type": { "enum": ["normalized_text", "regex"] },
+        "value": { "type": "string", "minLength": 1 },
+        "required": { "type": "boolean" }
+      }
+    },
+    "document_template": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "document_template_key",
+        "document_family",
+        "priority",
+        "template_ref",
+        "policy_ref",
+        "policy_mode",
+        "sample_rate",
+        "start_anchors",
+        "continuation_anchors",
+        "end_anchors",
+        "minimum_pages",
+        "maximum_pages",
+        "allow_visual_only_continuation"
+      ],
+      "properties": {
+        "document_template_key": { "$ref": "#/$defs/key" },
+        "document_family": { "$ref": "#/$defs/key" },
+        "priority": { "type": "integer", "minimum": 0 },
+        "template_ref": {
+          "allOf": [
+            { "$ref": "#/$defs/artifact_ref" },
+            { "properties": { "artifact_type": { "const": "structural_template" } } }
+          ]
+        },
+        "policy_ref": {
+          "allOf": [
+            { "$ref": "#/$defs/artifact_ref" },
+            { "properties": { "artifact_type": { "const": "template_review_policy" } } }
+          ]
+        },
+        "policy_mode": { "enum": ["review_required", "sample_review", "auto_approve"] },
+        "sample_rate": { "type": "number", "minimum": 0, "maximum": 1 },
+        "start_anchors": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/anchor" }
+        },
+        "continuation_anchors": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/anchor" }
+        },
+        "end_anchors": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/anchor" }
+        },
+        "minimum_pages": { "type": "integer", "minimum": 1 },
+        "maximum_pages": { "type": "integer", "minimum": 1 },
+        "allow_visual_only_continuation": { "type": "boolean" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "policy_mode": { "const": "review_required" } }, "required": ["policy_mode"] },
+          "then": { "properties": { "sample_rate": { "const": 1 } } }
+        },
+        {
+          "if": { "properties": { "policy_mode": { "const": "sample_review" } }, "required": ["policy_mode"] },
+          "then": { "properties": { "sample_rate": { "exclusiveMinimum": 0, "exclusiveMaximum": 1 } } }
+        },
+        {
+          "if": { "properties": { "policy_mode": { "const": "auto_approve" } }, "required": ["policy_mode"] },
+          "then": { "properties": { "sample_rate": { "const": 0 } } }
+        }
+      ]
+    },
+    "control": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["control_key", "package_key", "page_numbers", "expected_result"],
+      "properties": {
+        "control_key": { "$ref": "#/$defs/key" },
+        "package_key": { "$ref": "#/$defs/key" },
+        "page_numbers": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "integer", "minimum": 1 }
+        },
+        "expected_result": { "enum": ["matched", "blocked", "unknown"] }
+      }
+    }
+  }
+}
