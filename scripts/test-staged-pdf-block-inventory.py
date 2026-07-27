@@ -29,6 +29,10 @@ class BlockInventoryGeneratorTests(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.stage0 = load("stage0_generator", ROOT / "scripts" / "generate-staged-pdf-source-evidence.py")
         cls.stage1 = load("stage1_generator", ROOT / "scripts" / "generate-staged-pdf-block-inventory.py")
+        cls.stage1_v2 = load(
+            "stage1_generator_v2",
+            ROOT / "scripts" / "generate-staged-pdf-block-inventory-v2.py",
+        )
 
     def setUp(self) -> None:
         (ROOT / "tmp").mkdir(exist_ok=True)
@@ -100,6 +104,97 @@ class BlockInventoryGeneratorTests(unittest.TestCase):
         self.assertIn("total", types)
         self.assertEqual(len(grid["cells"]), (len(grid["row_boundaries"]) - 1) * (len(grid["column_boundaries"]) - 1))
         self.assertTrue(all(cell["review"]["status"] == "proposed" for cell in grid["cells"]))
+
+    def test_version_2_proposes_spanning_table_and_formatted_text_titles(self) -> None:
+        def word(
+            text: str,
+            x0: float,
+            y0: float,
+            x1: float,
+            y1: float,
+            *,
+            block_number: int = 0,
+        ) -> dict:
+            return {
+                "text": text,
+                "block_number": block_number,
+                "bbox": {"x0": x0, "y0": y0, "x1": x1, "y1": y1},
+            }
+
+        table_words = [
+            word("Operating", .10, .06, .20, .08),
+            word("Budget", .21, .06, .29, .08),
+            word("Department", .10, .10, .24, .12),
+            word("2026", .55, .10, .61, .12),
+            word("2027", .78, .10, .84, .12),
+            word("Parks", .10, .20, .18, .22),
+            word("1,250", .56, .20, .63, .22),
+            word("1,500", .79, .20, .86, .22),
+        ]
+        grid = self.stage1_v2.table_grid(
+            "test-budget:p001:body",
+            table_words,
+            {"x0": .05, "y0": .05, "x1": .90, "y1": .25},
+            schema_version=2,
+        )
+        title = next(cell for cell in grid["cells"] if cell["cell_type"] == "table_title")
+        self.assertEqual(title["column_index"], 0)
+        self.assertEqual(title["column_span"], len(grid["column_boundaries"]) - 1)
+        self.assertNotIn("row_span", title)
+        self.assertEqual(
+            self.stage1_v2.load_validator().validate_component(
+                grid,
+                "table_grid",
+                self.stage1_v2.load_validator().load_component_validator("table_grid", 2),
+            ),
+            [],
+        )
+
+        wrapped_words = [
+            word("Long-Term", .10, .06, .20, .08),
+            word("Capital", .10, .09, .18, .11),
+            word("Plan", .19, .09, .24, .11),
+            word("Department", .10, .14, .24, .16),
+            word("2026", .55, .14, .61, .16),
+            word("2027", .78, .14, .84, .16),
+            word("Parks", .10, .20, .18, .22),
+            word("1,250", .56, .20, .63, .22),
+            word("1,500", .79, .20, .86, .22),
+        ]
+        wrapped = self.stage1_v2.table_grid(
+            "test-budget:p002:body",
+            wrapped_words,
+            {"x0": .05, "y0": .05, "x1": .90, "y1": .25},
+            schema_version=2,
+        )
+        wrapped_title = next(
+            cell for cell in wrapped["cells"] if cell["cell_type"] == "table_title"
+        )
+        self.assertEqual(wrapped_title["row_span"], 2)
+        self.assertEqual(
+            wrapped_title["column_span"], len(wrapped["column_boundaries"]) - 1
+        )
+
+        region_words = [
+            word("Project", .10, .10, .18, .12, block_number=0),
+            word("Summary", .19, .10, .28, .12, block_number=0),
+            word("Work", .10, .16, .16, .18, block_number=1),
+            word("continues.", .17, .16, .28, .18, block_number=1),
+        ]
+        regions = self.stage1_v2.internal_regions(
+            "test-budget:p001:body",
+            "formatted_text",
+            region_words,
+            schema_version=2,
+        )
+        self.assertEqual([region["region_type"] for region in regions], ["title", "paragraph"])
+        v1_regions = self.stage1_v2.internal_regions(
+            "test-budget:p001:body",
+            "formatted_text",
+            region_words,
+            schema_version=1,
+        )
+        self.assertEqual(v1_regions[0]["region_type"], "paragraph")
 
 
 if __name__ == "__main__":

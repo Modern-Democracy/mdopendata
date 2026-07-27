@@ -119,9 +119,9 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [Staged PDF artifact JSON Schemas](./implementation/staged-pdf-artifact-json-schemas.md) | Draft 2020-12 contracts, semantic invariants, validation commands, and compatibility rules for staged PDF artifacts. |
 | [Staged PDF reviewer propagation requirements](./implementation/staged-pdf-reviewer-propagation-requirements.md) | Approved priorities and acceptance criteria for structural propagation, spanning cells, review reduction, and agenda-package reuse. |
 | [Staged PDF artifact version 2 schema design](./implementation/staged-pdf-artifact-v2-schema-design.md) | Implemented parallel version 2 contract for internal titles, optional row and column spans, table titles, template review policies, and policy audit provenance. |
-| [Staged PDF artifact version 2 implementation plan](./implementation/staged-pdf-artifact-v2-implementation-plan.md) | Gated implementation sequence with Phase 0 baseline controls, Phase 1 schema and validator, and Phase 2 deterministic parallel migration complete; reviewer and propagation phases remain pending. |
+| [Staged PDF artifact version 2 implementation plan](./implementation/staged-pdf-artifact-v2-implementation-plan.md) | Gated implementation sequence with Phase 0 baseline controls, Phase 1 schema and validator, Phase 2 deterministic parallel migration, and Phase 3 span and title editing complete. |
 | [Charlottetown staged PDF shadow pilot](./implementation/staged-pdf-inventory-extraction-charlottetown-pilot.md) | Frozen baseline, Stage 0 evidence, Stage 1 block inventory, representative controls, and shadow-pilot acceptance criteria. |
-| [Staged PDF inventory review UI](./implementation/staged-pdf-inventory-review-ui-plan.md) | Loopback-only Stage 0 evidence and editable Stage 1 blocks, internal regions, content relationships, deferred LAN installation and mobile support, and verification gates. |
+| [Staged PDF inventory review UI](./implementation/staged-pdf-inventory-review-ui-plan.md) | Loopback-only version 1 and explicit version 2 Stage 1 review, including internal regions, effective spans, table titles, relationships, and verification gates. |
 
 ## Plans
 

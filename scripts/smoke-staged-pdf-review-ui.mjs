@@ -121,6 +121,9 @@ await withServer({ PDF_INVENTORY_REVIEW_ENABLED: "1" }, async (baseUrl) => {
   assert(shellText.includes("Edit internal structure"), "Internal-region controls are missing.");
   assert(shellText.includes("Redetect table grid"), "Table grid redetection control is missing.");
   assert(shellText.includes("Redetect table grid after resize"), "Resize grid-redetection option is missing.");
+  assert(shellText.includes("Apply cell span"), "Version 2 cell-span control is missing.");
+  assert(shellText.includes("Row span"), "Row-span input is missing.");
+  assert(shellText.includes("Column span"), "Column-span input is missing.");
   for (const selectionLabel of ["Cell", "Row", "Column"]) {
     assert(shellText.includes(`>${selectionLabel}</button>`), `${selectionLabel} selection control is missing.`);
   }
@@ -129,6 +132,12 @@ await withServer({ PDF_INVENTORY_REVIEW_ENABLED: "1" }, async (baseUrl) => {
   assert(!appScript.includes("await initialize();"), "The client still performs a full reload after every write.");
   assert(appScript.includes("associationSelection"), "Relationship-aware endpoint selection is missing.");
   assert(appScript.includes("if (result) { state.linkSource = null"), "Failed links would incorrectly clear the source selection.");
+  assert(appScript.includes("effectiveSpan"), "Effective span rendering is missing.");
+  assert(appScript.includes('"merge_table_cells"'), "Logical-cell merge command is missing.");
+  assert(appScript.includes('"split_table_cell"'), "Logical-cell split command is missing.");
+  assert(appScript.includes('"set_table_cell_span"'), "Explicit span command is missing.");
+  assert(appScript.includes('["table_title", "Table Title"]'), "Table-title cell control is missing.");
+  assert(appScript.includes('["title", "Title"]'), "Formatted-text title control is missing.");
   const expectedTypeOrder = ['["title", "Title"]', '["formatted_text", "Formatted Text"]', '["table", "Table"]', '["chart", "Graph/Chart"]', '["other_visual", "Diagram/Other Visual"]', '["map", "Map"]', '["table_of_contents", "Table of Contents"]', '["header", "Header"]', '["footer", "Footer"]', '["page_number", "Page Number"]', '["divider", "Divider"]', '["signature", "Signature"]'];
   let priorTypePosition = -1;
   for (const typeText of expectedTypeOrder) {
@@ -142,6 +151,7 @@ await withServer({ PDF_INVENTORY_REVIEW_ENABLED: "1" }, async (baseUrl) => {
   const documents = await documentsResponse.json();
   const document = documents.documents?.[0];
   assert(document?.document_key === "ctown-budget-2026-2027", "Pilot document key is incorrect.");
+  assert(document?.schema_version === 1, "Default reviewer must remain on schema version 1.");
   assert(document?.page_count === 154, "Pilot page count is incorrect.");
   assert(document?.complete_page_count === 154, "Complete page count is incorrect.");
   assert(document?.blocked_page_count === 0, "Blocked page count is incorrect.");
@@ -232,4 +242,26 @@ await withServer({ PDF_INVENTORY_REVIEW_ENABLED: "1" }, async (baseUrl) => {
     { method: "POST", headers: { "content-type": "application/json" }, body: "{}" },
   );
   console.log("ok - enabled Stage 0 and Stage 1 read APIs");
+});
+
+await withServer({
+  PDF_INVENTORY_REVIEW_ENABLED: "1",
+  PDF_INVENTORY_REVIEW_SCHEMA_VERSION: "2",
+}, async (baseUrl) => {
+  const documents = await (
+    await expectStatus(baseUrl, "/api/internal/pdf-inventory-review/documents", 200)
+  ).json();
+  const document = documents.documents?.[0];
+  assert(document?.schema_version === 2, "Explicit version 2 reviewer did not load the shadow workspace.");
+  assert(document?.page_count === 154, "Version 2 reviewer page count is incorrect.");
+  const artifacts = await (
+    await expectStatus(
+      baseUrl,
+      "/api/internal/pdf-inventory-review/documents/ctown-budget-2026-2027/artifacts",
+      200,
+    )
+  ).json();
+  assert(artifacts.artifact?.schema_version === 2, "Version 2 source artifact is not active.");
+  assert(artifacts.block_artifact?.schema_version === 2, "Version 2 block artifact is not active.");
+  console.log("ok - explicit version 2 shadow workspace is readable");
 });

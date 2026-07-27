@@ -21,6 +21,12 @@ const pdfInventoryReviewRequested = /^(1|true|yes)$/i.test(
 const pdfInventoryReviewWriteRequested = /^(1|true|yes)$/i.test(
   process.env.PDF_INVENTORY_REVIEW_WRITE_ENABLED || "false",
 );
+const pdfInventoryReviewSchemaVersion = Number(
+  process.env.PDF_INVENTORY_REVIEW_SCHEMA_VERSION || "1",
+);
+if (![1, 2].includes(pdfInventoryReviewSchemaVersion)) {
+  throw new Error("PDF_INVENTORY_REVIEW_SCHEMA_VERSION must be 1 or 2.");
+}
 const pdfInventoryReviewLoopbackBind = ["127.0.0.1", "::1", "localhost"].includes(
   host.toLowerCase(),
 );
@@ -33,7 +39,7 @@ const pdfInventoryReviewArtifactPath = path.join(
   "charlottetown",
   "2026-2027",
   "staged-pdf",
-  "v1",
+  `v${pdfInventoryReviewSchemaVersion}`,
   "stage-0",
   "source-evidence.json",
 );
@@ -44,12 +50,18 @@ const pdfInventoryReviewBlockArtifactPath = path.join(
   "charlottetown",
   "2026-2027",
   "staged-pdf",
-  "v1",
+  `v${pdfInventoryReviewSchemaVersion}`,
   "stage-1",
   "block-inventory.json",
 );
 const stagedPdfValidatorPath = path.join(repoRoot, "scripts", "validate-staged-pdf-artifacts.py");
-const stagedPdfBlockWriterPath = path.join(repoRoot, "scripts", "update-staged-pdf-block-inventory.py");
+const stagedPdfBlockWriterPath = path.join(
+  repoRoot,
+  "scripts",
+  pdfInventoryReviewSchemaVersion === 2
+    ? "update-staged-pdf-block-inventory-v2.py"
+    : "update-staged-pdf-block-inventory.py",
+);
 let pdfInventoryReviewArtifactCache = null;
 let pdfInventoryReviewArtifactLoad = null;
 let pdfInventoryReviewCommandQueue = Promise.resolve();
@@ -718,6 +730,7 @@ function pdfInventoryReviewDocumentSummary(loaded) {
     financial_block_count: blockArtifact.records.filter((block) => block.financial_candidate).length,
     block_review_page_count: blockArtifact.page_dispositions.filter((page) => page.status === "needs_review").length,
     write_enabled: pdfInventoryReviewWriteRequested,
+    schema_version: blockArtifact.schema_version,
     validation,
   };
 }
@@ -764,10 +777,17 @@ async function executePdfInventoryReviewCommand(command) {
   await writeFile(commandPath, JSON.stringify(command), { encoding: "utf8", flag: "wx" });
   const powershell = process.platform === "win32" ? "powershell.exe" : "pwsh";
   const wrapper = path.join(repoRoot, "scripts", "python.ps1");
+  const writerArguments = [
+    "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", wrapper,
+    stagedPdfBlockWriterPath, "--command", commandPath,
+  ];
+  if (pdfInventoryReviewSchemaVersion === 2) {
+    writerArguments.push("--workspace-version", "2");
+  }
   try {
     const { stdout } = await execFileAsync(
       powershell,
-      ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", wrapper, stagedPdfBlockWriterPath, "--command", commandPath],
+      writerArguments,
       { cwd: repoRoot, timeout: 120000, windowsHide: true, maxBuffer: 1024 * 1024 },
     );
     const result = JSON.parse(stdout.trim());
@@ -845,6 +865,7 @@ async function handlePdfInventoryReviewApi(request, response, url) {
       artifact: {
         artifact_type: artifact.artifact_type,
         artifact_key: artifact.artifact_key,
+        schema_version: artifact.schema_version,
         artifact_sha256: artifactSha256,
         source_sha256: artifact.source_sha256,
         generator: artifact.generator,
@@ -856,6 +877,7 @@ async function handlePdfInventoryReviewApi(request, response, url) {
       block_artifact: {
         artifact_type: blockArtifact.artifact_type,
         artifact_key: blockArtifact.artifact_key,
+        schema_version: blockArtifact.schema_version,
         artifact_sha256: blockArtifactSha256,
         source_sha256: blockArtifact.source_sha256,
         generator: blockArtifact.generator,

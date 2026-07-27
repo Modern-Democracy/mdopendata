@@ -1,13 +1,16 @@
 param(
   [ValidateRange(1, 65535)]
-  [int]$Port = 3217
+  [int]$Port = 3217,
+
+  [ValidateSet(1, 2)]
+  [int]$SchemaVersion = 1
 )
 
 $ErrorActionPreference = 'Stop'
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $serverPath = Join-Path $repoRoot 'web\server.js'
-$artifactPath = Join-Path $repoRoot 'data\budget\charlottetown\2026-2027\staged-pdf\v1\stage-0\source-evidence.json'
-$blockArtifactPath = Join-Path $repoRoot 'data\budget\charlottetown\2026-2027\staged-pdf\v1\stage-1\block-inventory.json'
+$artifactPath = Join-Path $repoRoot "data\budget\charlottetown\2026-2027\staged-pdf\v$SchemaVersion\stage-0\source-evidence.json"
+$blockArtifactPath = Join-Path $repoRoot "data\budget\charlottetown\2026-2027\staged-pdf\v$SchemaVersion\stage-1\block-inventory.json"
 
 if (-not (Test-Path -LiteralPath $serverPath -PathType Leaf)) {
   throw "Web server not found: $serverPath"
@@ -31,6 +34,7 @@ $previous = @{
   REPO_ROOT = $env:REPO_ROOT
   PDF_INVENTORY_REVIEW_ENABLED = $env:PDF_INVENTORY_REVIEW_ENABLED
   PDF_INVENTORY_REVIEW_WRITE_ENABLED = $env:PDF_INVENTORY_REVIEW_WRITE_ENABLED
+  PDF_INVENTORY_REVIEW_SCHEMA_VERSION = $env:PDF_INVENTORY_REVIEW_SCHEMA_VERSION
   DEMO_MODE = $env:DEMO_MODE
 }
 
@@ -40,9 +44,10 @@ try {
   $env:REPO_ROOT = $repoRoot
   $env:PDF_INVENTORY_REVIEW_ENABLED = '1'
   $env:PDF_INVENTORY_REVIEW_WRITE_ENABLED = '1'
+  $env:PDF_INVENTORY_REVIEW_SCHEMA_VERSION = [string]$SchemaVersion
   $env:DEMO_MODE = '0'
 
-  Write-Host "Local review: http://127.0.0.1:$Port/internal/pdf-inventory-review"
+  Write-Host "Local review v$SchemaVersion: http://127.0.0.1:$Port/internal/pdf-inventory-review"
   Write-Host 'Press Ctrl+C to stop the review server.'
 
   Push-Location $repoRoot

@@ -8,8 +8,8 @@ const blockTypes = [
   ["page_number", "Page Number"], ["divider", "Divider"], ["signature", "Signature"],
 ];
 const regionTypes = {
-  formatted_text: [["paragraph", "Paragraph"], ["bullet_list", "Bullet List"], ["sorted_list", "Sorted List"]],
-  table: [["table_header", "Table Header"], ["column_label", "Column Label"], ["row_label", "Row Label"], ["cell", "Cell"], ["subtotal", "Sub-Total"], ["total", "Total"]],
+  formatted_text: [["title", "Title"], ["paragraph", "Paragraph"], ["bullet_list", "Bullet List"], ["sorted_list", "Sorted List"]],
+  table: [["table_title", "Table Title"], ["table_header", "Table Header"], ["column_label", "Column Label"], ["row_label", "Row Label"], ["cell", "Cell"], ["subtotal", "Sub-Total"], ["total", "Total"]],
 };
 const relationshipLabels = { graph_source_table: "Graph/chart source", table_continuation: "Table continuation", overview_detail: "Overview to detail" };
 const relationshipHelp = {
@@ -23,7 +23,7 @@ const state = {
   blockPage: null, selectedBlockKey: null, zoom: 1, embeddedWords: null, ocrWords: null,
   saving: false, drawMode: false, drawTarget: "block", pointerEdit: null, pendingBlockKey: null,
   internalBlockKey: null, selectedRegionKey: null, linkSource: null,
-  gridSelectionMode: "cell", selectedCellKey: null, selectedGridRange: null, gridSelectionAnchor: null,
+  gridSelectionMode: "cell", selectedCellKey: null, selectedCellKeys: [], selectedGridRange: null, gridSelectionAnchor: null,
 };
 
 const ids = [
@@ -42,6 +42,7 @@ const ids = [
   "draw-region", "delete-region", "redetect-on-resize", "redetect-on-resize-control",
   "table-grid-editor", "exit-table-grid", "table-grid-summary", "select-cells", "select-rows", "select-columns",
   "table-cell-type", "save-table-cell-type", "split-table-selection", "merge-table-selection", "redetect-table-grid",
+  "cell-span-controls", "table-row-span", "table-column-span", "save-table-cell-span",
   "relationship-type", "association-help", "link-source-status", "link-target-status", "set-link-source",
   "cancel-link-source", "save-link", "relationship-list",
   "render-hash", "thumbnail-hash", "embedded-hash", "ocr-hash", "source-citation", "error-banner",
@@ -76,7 +77,7 @@ async function sendCommand(command) {
     state.pendingBlockKey = command.action === "delete" ? null : payload.affected_keys?.find((key) => key.includes(":p")) || state.selectedBlockKey;
     state.selectedRegionKey = command.action === "delete_region" ? null : payload.affected_keys?.find((key) => key.includes("region-")) || state.selectedRegionKey;
     if (command.action !== "set_table_cell_type" && command.action !== "move_table_divider") {
-      state.selectedCellKey = null; state.selectedGridRange = null; state.gridSelectionAnchor = null;
+      state.selectedCellKey = null; state.selectedCellKeys = []; state.selectedGridRange = null; state.gridSelectionAnchor = null;
     }
     state.document = payload.document;
     for (const update of payload.page_updates || []) {
@@ -166,13 +167,21 @@ function positionRegionBox(node, bbox, parent) {
 function currentBlock() { return state.blockPage?.blocks.find((block) => block.block_key === state.selectedBlockKey) || null; }
 function currentRegion() { return currentBlock()?.regions.find((region) => region.region_key === state.selectedRegionKey) || null; }
 function currentGridCell() { return currentBlock()?.table_grid?.cells.find((cell) => cell.cell_key === state.selectedCellKey) || null; }
+function effectiveSpan(cell, axis) { return Number(cell?.[`${axis}_span`] || 1); }
+function cellCovers(cell, row, column) {
+  return cell.row_index <= row && row < cell.row_index + effectiveSpan(cell, "row")
+    && cell.column_index <= column && column < cell.column_index + effectiveSpan(cell, "column");
+}
 
 function selectBlock(blockKey) {
   state.selectedBlockKey = blockKey;
   const block = state.blockPage?.blocks.find((candidate) => candidate.block_key === blockKey);
   if (!block?.regions.some((region) => region.region_key === state.selectedRegionKey)) state.selectedRegionKey = null;
+  state.selectedCellKeys = state.selectedCellKeys.filter((key) =>
+    block?.table_grid?.cells.some((cell) => cell.cell_key === key)
+  );
   if (!block?.table_grid?.cells.some((cell) => cell.cell_key === state.selectedCellKey)) {
-    state.selectedCellKey = null; state.selectedGridRange = null; state.gridSelectionAnchor = null;
+    state.selectedCellKey = null; state.selectedCellKeys = []; state.selectedGridRange = null; state.gridSelectionAnchor = null;
   }
   for (const node of document.querySelectorAll("[data-block-key]")) node.classList.toggle("selected", node.dataset.blockKey === blockKey);
   if (!block) { elements["block-detail"].hidden = true; elements["block-editor"].hidden = true; elements["region-editor"].hidden = true; elements["table-grid-editor"].hidden = true; renderRelationships(); return; }
@@ -205,7 +214,10 @@ function selectRegion(regionKey) {
 }
 
 function populateRegionOptions(block) {
-  elements["region-type-select"].replaceChildren(...(regionTypes[block.block_type] || []).map(([value, label]) => {
+  const choices = (regionTypes[block.block_type] || []).filter(([value]) =>
+    state.document?.schema_version === 2 || value !== "title"
+  );
+  elements["region-type-select"].replaceChildren(...choices.map(([value, label]) => {
     const option = document.createElement("option"); option.value = value; option.textContent = label; return option;
   }));
 }
@@ -233,18 +245,67 @@ function tableGridDimensions(block) {
 
 function updateGridSelectionClasses() {
   const mode = state.gridSelectionMode; const range = state.selectedGridRange;
+  const grid = currentBlock()?.table_grid;
   for (const node of document.querySelectorAll(".table-grid-cell")) {
-    const row = Number(node.dataset.rowIndex); const column = Number(node.dataset.columnIndex);
-    const selected = mode === "cell" ? node.dataset.cellKey === state.selectedCellKey
-      : range && (mode === "row" ? range.start <= row && row <= range.end : range.start <= column && column <= range.end);
+    const cell = grid?.cells.find((item) => item.cell_key === node.dataset.cellKey);
+    const selected = mode === "cell" ? state.selectedCellKeys.includes(node.dataset.cellKey)
+      : range && cell && (mode === "row"
+        ? cell.row_index <= range.end && cell.row_index + effectiveSpan(cell, "row") - 1 >= range.start
+        : cell.column_index <= range.end && cell.column_index + effectiveSpan(cell, "column") - 1 >= range.start);
     node.classList.toggle("selected", Boolean(selected));
   }
 }
 
+function rectangularCellKeys(grid, first, last) {
+  let minRow = Math.min(first.row_index, last.row_index);
+  let maxRow = Math.max(
+    first.row_index + effectiveSpan(first, "row") - 1,
+    last.row_index + effectiveSpan(last, "row") - 1,
+  );
+  let minColumn = Math.min(first.column_index, last.column_index);
+  let maxColumn = Math.max(
+    first.column_index + effectiveSpan(first, "column") - 1,
+    last.column_index + effectiveSpan(last, "column") - 1,
+  );
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const cell of grid.cells) {
+      const cellMaxRow = cell.row_index + effectiveSpan(cell, "row") - 1;
+      const cellMaxColumn = cell.column_index + effectiveSpan(cell, "column") - 1;
+      const intersects = cell.row_index <= maxRow && cellMaxRow >= minRow
+        && cell.column_index <= maxColumn && cellMaxColumn >= minColumn;
+      if (!intersects) continue;
+      const next = [
+        Math.min(minRow, cell.row_index), Math.max(maxRow, cellMaxRow),
+        Math.min(minColumn, cell.column_index), Math.max(maxColumn, cellMaxColumn),
+      ];
+      if (next[0] !== minRow || next[1] !== maxRow || next[2] !== minColumn || next[3] !== maxColumn) {
+        [minRow, maxRow, minColumn, maxColumn] = next; changed = true;
+      }
+    }
+  }
+  return grid.cells
+    .filter((cell) =>
+      minRow <= cell.row_index
+      && cell.row_index + effectiveSpan(cell, "row") - 1 <= maxRow
+      && minColumn <= cell.column_index
+      && cell.column_index + effectiveSpan(cell, "column") - 1 <= maxColumn
+    )
+    .map((cell) => cell.cell_key);
+}
+
 function selectGridCell(cell, event) {
   if (state.gridSelectionMode === "cell") {
-    state.selectedCellKey = cell.cell_key; state.selectedGridRange = null; state.gridSelectionAnchor = null;
-    elements["table-cell-type"].value = cell.cell_type;
+    const grid = currentBlock()?.table_grid;
+    const anchor = grid?.cells.find((item) => item.cell_key === state.gridSelectionAnchor);
+    state.selectedCellKeys = event.shiftKey && anchor
+      ? rectangularCellKeys(grid, anchor, cell)
+      : [cell.cell_key];
+    state.gridSelectionAnchor = event.shiftKey && anchor ? anchor.cell_key : cell.cell_key;
+    state.selectedCellKey = state.selectedCellKeys.length === 1 ? state.selectedCellKeys[0] : null;
+    state.selectedGridRange = null;
+    if (state.selectedCellKey) elements["table-cell-type"].value = cell.cell_type;
   } else {
     const index = state.gridSelectionMode === "row" ? cell.row_index : cell.column_index;
     if (event.shiftKey && state.gridSelectionAnchor !== null) {
@@ -252,13 +313,13 @@ function selectGridCell(cell, event) {
     } else {
       state.gridSelectionAnchor = index; state.selectedGridRange = { start: index, end: index };
     }
-    state.selectedCellKey = null;
+    state.selectedCellKey = null; state.selectedCellKeys = [];
   }
   updateGridSelectionClasses(); renderTableGridEditor(currentBlock()); renderRelationships();
 }
 
 function setGridSelectionMode(mode) {
-  state.gridSelectionMode = mode; state.selectedCellKey = null; state.selectedGridRange = null; state.gridSelectionAnchor = null;
+  state.gridSelectionMode = mode; state.selectedCellKey = null; state.selectedCellKeys = []; state.selectedGridRange = null; state.gridSelectionAnchor = null;
   for (const [candidate, id] of [["cell", "select-cells"], ["row", "select-rows"], ["column", "select-columns"]]) {
     elements[id].setAttribute("aria-pressed", String(candidate === mode));
   }
@@ -273,8 +334,20 @@ function renderTableGridEditor(block) {
   elements["table-cell-type"].disabled = state.gridSelectionMode !== "cell" || !cell;
   elements["save-table-cell-type"].disabled = state.gridSelectionMode !== "cell" || !cell;
   if (cell) elements["table-cell-type"].value = cell.cell_type;
-  elements["split-table-selection"].disabled = state.gridSelectionMode === "cell" || !range;
-  elements["merge-table-selection"].disabled = state.gridSelectionMode === "cell" || !range || range.start === range.end;
+  const spans = cell ? {
+    row: effectiveSpan(cell, "row"),
+    column: effectiveSpan(cell, "column"),
+  } : null;
+  elements["cell-span-controls"].hidden = state.document?.schema_version !== 2 || state.gridSelectionMode !== "cell" || !cell;
+  elements["table-row-span"].value = String(spans?.row || 1);
+  elements["table-column-span"].value = String(spans?.column || 1);
+  elements["save-table-cell-span"].disabled = !cell;
+  elements["split-table-selection"].disabled = state.gridSelectionMode === "cell"
+    ? !cell || (spans.row === 1 && spans.column === 1)
+    : !range;
+  elements["merge-table-selection"].disabled = state.gridSelectionMode === "cell"
+    ? state.selectedCellKeys.length < 2
+    : !range || range.start === range.end;
 }
 
 function associationSelection(role) {
@@ -313,8 +386,11 @@ function associationSelection(role) {
     rowIndex = state.selectedGridRange.start;
   }
   if (!Number.isInteger(rowIndex)) return { valid: false, message: "Select one overview row or a cell in that row." };
-  const rowCells = block.table_grid.cells.filter((cell) => cell.row_index === rowIndex);
-  const anchor = rowCells.find((cell) => cell.cell_type === "row_label");
+  const anchor = block.table_grid.cells.find((cell) =>
+    cell.cell_type === "row_label"
+    && cell.row_index <= rowIndex
+    && rowIndex < cell.row_index + effectiveSpan(cell, "row")
+  );
   if (!anchor) return { valid: false, message: "The selected row has no stable row-label cell." };
   const excerpt = anchor.text_excerpt ? ` · ${anchor.text_excerpt}` : "";
   return {
@@ -358,11 +434,12 @@ function tableGridSurface(block) {
   for (const cell of grid.cells) {
     const node = document.createElement("button"); node.type = "button"; node.className = `table-grid-cell cell-${cell.cell_type}`;
     node.dataset.cellKey = cell.cell_key; node.dataset.rowIndex = String(cell.row_index); node.dataset.columnIndex = String(cell.column_index);
-    const left = grid.column_boundaries[cell.column_index]; const right = grid.column_boundaries[cell.column_index + 1];
-    const top = grid.row_boundaries[cell.row_index]; const bottom = grid.row_boundaries[cell.row_index + 1];
+    const rowSpan = effectiveSpan(cell, "row"); const columnSpan = effectiveSpan(cell, "column");
+    const left = grid.column_boundaries[cell.column_index]; const right = grid.column_boundaries[cell.column_index + columnSpan];
+    const top = grid.row_boundaries[cell.row_index]; const bottom = grid.row_boundaries[cell.row_index + rowSpan];
     node.style.left = `${((left - block.bbox.x0) / width) * 100}%`; node.style.width = `${((right - left) / width) * 100}%`;
     node.style.top = `${((top - block.bbox.y0) / height) * 100}%`; node.style.height = `${((bottom - top) / height) * 100}%`;
-    node.title = `${human(cell.cell_type)} · row ${cell.row_index + 1}, column ${cell.column_index + 1}${cell.text_excerpt ? ` · ${cell.text_excerpt}` : ""}`;
+    node.title = `${human(cell.cell_type)} · row ${cell.row_index + 1}, column ${cell.column_index + 1} · ${rowSpan}×${columnSpan} span${cell.text_excerpt ? ` · ${cell.text_excerpt}` : ""}`;
     node.setAttribute("aria-label", node.title);
     node.addEventListener("click", (event) => { event.stopPropagation(); selectGridCell(cell, event); }); surface.append(node);
   }
@@ -587,7 +664,7 @@ async function selectPage(pageNumber) {
   if (!state.pages.length) return;
   const bounded = Math.min(state.pages.length, Math.max(1, Number(pageNumber) || 1));
   if (bounded !== state.activePage) {
-    state.internalBlockKey = null; state.selectedRegionKey = null; state.selectedCellKey = null;
+    state.internalBlockKey = null; state.selectedRegionKey = null; state.selectedCellKey = null; state.selectedCellKeys = [];
     state.selectedGridRange = null; state.gridSelectionAnchor = null;
   }
   state.activePage = bounded; state.embeddedWords = null; state.ocrWords = null; state.blockPage = null; state.selectedBlockKey = null; toggleDrawMode(false); clearError(); setUrlPage(bounded); updateSelectedThumbnail();
@@ -607,7 +684,7 @@ async function selectPage(pageNumber) {
 async function initialize() {
   try {
     const [documentsPayload, artifactPayload, pagesPayload] = await Promise.all([fetchJson("/api/internal/pdf-inventory-review/documents"), fetchJson(`${apiRoot}/artifacts`), fetchJson(`${apiRoot}/pages`)]);
-    state.document = documentsPayload.documents[0]; state.artifact = artifactPayload.artifact; state.pages = pagesPayload.pages;
+    state.document = documentsPayload.documents[0]; state.artifact = artifactPayload.artifact; state.pages = pagesPayload.pages; populateTableCellTypes();
     elements["validation-status"].textContent = "Stages 0–1 validated"; elements["validation-status"].className = "status-badge valid";
     elements["editing-status"].textContent = state.document.write_enabled ? "Editing enabled" : "Editing disabled";
     elements["editing-status"].className = `status-badge ${state.document.write_enabled ? "valid" : "pending"}`;
@@ -639,7 +716,7 @@ elements["delete-block"].addEventListener("click", () => {
 elements["edit-internal"].addEventListener("click", () => {
   const block = currentBlock(); if (!block || !regionTypes[block.block_type]) return;
   state.internalBlockKey = block.block_key; state.selectedRegionKey = block.regions[0]?.region_key || null;
-  state.gridSelectionMode = "cell"; state.selectedCellKey = null; state.selectedGridRange = null; state.gridSelectionAnchor = null;
+  state.gridSelectionMode = "cell"; state.selectedCellKey = null; state.selectedCellKeys = []; state.selectedGridRange = null; state.gridSelectionAnchor = null;
   for (const [mode, id] of [["cell", "select-cells"], ["row", "select-rows"], ["column", "select-columns"]]) {
     elements[id].setAttribute("aria-pressed", String(mode === "cell"));
   }
@@ -649,7 +726,7 @@ elements["exit-internal"].addEventListener("click", () => {
   state.internalBlockKey = null; state.selectedRegionKey = null; toggleDrawMode(false); renderBlockInventory();
 });
 elements["exit-table-grid"].addEventListener("click", () => {
-  state.internalBlockKey = null; state.selectedCellKey = null; state.selectedGridRange = null; state.gridSelectionAnchor = null; renderBlockInventory();
+  state.internalBlockKey = null; state.selectedCellKey = null; state.selectedCellKeys = []; state.selectedGridRange = null; state.gridSelectionAnchor = null; renderBlockInventory();
 });
 elements["draw-region"].addEventListener("click", () => toggleDrawMode(undefined, "region"));
 elements["save-region-type"].addEventListener("click", () => {
@@ -673,15 +750,35 @@ elements["save-table-cell-type"].addEventListener("click", () => {
   const block = currentBlock(); const cell = currentGridCell(); if (!block || !cell) return;
   sendCommand({ action: "set_table_cell_type", block_key: block.block_key, cell_key: cell.cell_key, cell_type: elements["table-cell-type"].value });
 });
+elements["save-table-cell-span"].addEventListener("click", () => {
+  const block = currentBlock(); const cell = currentGridCell(); if (!block || !cell) return;
+  sendCommand({
+    action: "set_table_cell_span", block_key: block.block_key, cell_key: cell.cell_key,
+    row_span: Number(elements["table-row-span"].value),
+    column_span: Number(elements["table-column-span"].value),
+  });
+});
 elements["split-table-selection"].addEventListener("click", () => {
-  const block = currentBlock(); const range = state.selectedGridRange; if (!block || !range || state.gridSelectionMode === "cell") return;
+  const block = currentBlock(); const range = state.selectedGridRange; if (!block) return;
+  if (state.gridSelectionMode === "cell") {
+    const cell = currentGridCell(); if (!cell) return;
+    sendCommand({ action: "split_table_cell", block_key: block.block_key, cell_key: cell.cell_key });
+    return;
+  }
+  if (!range) return;
   sendCommand({
     action: state.gridSelectionMode === "row" ? "split_table_rows" : "split_table_columns",
     block_key: block.block_key, start_index: range.start, end_index: range.end,
   });
 });
 elements["merge-table-selection"].addEventListener("click", () => {
-  const block = currentBlock(); const range = state.selectedGridRange; if (!block || !range || range.start === range.end || state.gridSelectionMode === "cell") return;
+  const block = currentBlock(); const range = state.selectedGridRange; if (!block) return;
+  if (state.gridSelectionMode === "cell") {
+    if (state.selectedCellKeys.length < 2) return;
+    sendCommand({ action: "merge_table_cells", block_key: block.block_key, cell_keys: state.selectedCellKeys });
+    return;
+  }
+  if (!range || range.start === range.end) return;
   sendCommand({
     action: state.gridSelectionMode === "row" ? "merge_table_rows" : "merge_table_columns",
     block_key: block.block_key, start_index: range.start, end_index: range.end,
@@ -718,8 +815,13 @@ document.addEventListener("keydown", (event) => {
   else if (event.key.toLowerCase() === "o" && !elements["ocr-toggle"].disabled) elements["ocr-toggle"].click();
 });
 populateTypeOptions(elements["block-type-select"]); populateTypeOptions(elements["new-block-type"]);
-elements["table-cell-type"].replaceChildren(...regionTypes.table.map(([value, label]) => {
-  const option = document.createElement("option"); option.value = value; option.textContent = label; return option;
-}));
+function populateTableCellTypes() {
+  const choices = regionTypes.table.filter(([value]) =>
+    state.document?.schema_version === 2 || value !== "table_title"
+  );
+  elements["table-cell-type"].replaceChildren(...choices.map(([value, label]) => {
+    const option = document.createElement("option"); option.value = value; option.textContent = label; return option;
+  }));
+}
 elements["new-block-type"].value = "title"; elements["new-block-financial"].checked = false;
 updateZoom(0, true); initialize();

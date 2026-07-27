@@ -27,6 +27,8 @@ Version 1 stays operational and immutable while version 2 is built and validated
 - The migration retained 154 source pages, 442 block records, one relationship, all omitted unit spans, stable record keys, and all 104 historical event hashes. It appended decision `ctown-budget-2026-2027:decision:000105` with action `migrate_schema`.
 - The pilot contains no structural-template artifacts, so zero `review_required` policies were eligible or seeded. No automatic-approval policy was created.
 - A clean rerun produced zero writes and four byte-identical outputs. Version 1 hashes remained frozen, the three-artifact version 2 set validated, and database and publication write counts remained zero.
+- Phase 3 completed on 2026-07-27. Parallel version 2 generator and writer entry points resolve omitted spans as `1`, propose evidence-supported formatted-text and table titles, support logical-cell merge, split, and explicit spans, protect relationship endpoints, and append valid version 2 review events. The frozen version 1 generator and writer remain byte-identical.
+- The reviewer retains version 1 as its default workspace. Explicit `PDF_INVENTORY_REVIEW_SCHEMA_VERSION=2` selection enables the parallel version 2 source and block artifacts, effective-span rendering, table-title choices, numeric span controls, logical-cell split and merge, and span-aware selection.
 
 ## Phase 0: Freeze Baseline And Controls
 
@@ -80,6 +82,10 @@ Gate passed. `scripts/test-staged-pdf-artifact-v2-migration.py` covers frozen in
 
 ## Phase 3: Stage 1 Span And Title Editing
 
+### Status
+
+Completed on 2026-07-27. No generated version 2 pilot artifact was replaced: generation was exercised in temporary clean-run controls, and writer mutations were exercised against temporary copies.
+
 ### Work
 
 - update grid readers to resolve effective spans
@@ -93,6 +99,8 @@ Gate passed. `scripts/test-staged-pdf-artifact-v2-migration.py` covers frozen in
 ### Gate
 
 Create, reclassify, merge, split, resize, relationship, stale-hash, and audit tests pass. Browser tests cover horizontal, vertical, and two-dimensional spans plus top and bottom titles at desktop and narrow layouts.
+
+Gate passed. Version 1 generator and writer hashes and regressions remain valid. The parallel version 2 entry points are `scripts/generate-staged-pdf-block-inventory-v2.py` and `scripts/update-staged-pdf-block-inventory-v2.py`. Version 2 tests cover omitted and explicit unit spans, horizontal and two-dimensional spans, logical merge and split round trips, top and bottom table titles, formatted-text titles, relationship protection, append-only audit events, and the migrated 105-event pilot review chain. The 154-page version 2 generator reproduced byte-identically on a clean rerun. Static, smoke, desktop browser, and 700-pixel browser checks passed with zero console warnings, errors, or horizontal overflow.
 
 ## Phase 4: Document-Scoped Structural Propagation
 

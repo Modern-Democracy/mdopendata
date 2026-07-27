@@ -111,9 +111,14 @@
           </div>
           <label><span>Cell type</span><select id="table-cell-type"></select></label>
           <button id="save-table-cell-type" type="button">Save cell type</button>
+          <div id="cell-span-controls" class="cell-span-controls" hidden>
+            <label><span>Row span</span><input id="table-row-span" type="number" min="1" step="1" value="1" inputmode="numeric"></label>
+            <label><span>Column span</span><input id="table-column-span" type="number" min="1" step="1" value="1" inputmode="numeric"></label>
+            <button id="save-table-cell-span" type="button">Apply cell span</button>
+          </div>
           <div class="editor-row"><button id="split-table-selection" type="button">Split</button><button id="merge-table-selection" type="button">Merge</button></div>
           <button id="redetect-table-grid" type="button">Redetect table grid</button>
-          <p class="editor-help">Drag internal grid lines to reposition them. Hold Shift while selecting rows or columns to extend one adjacent range.</p>
+          <p class="editor-help">Drag internal grid lines to reposition them. Hold Shift to select an adjacent row, column, or rectangular cell range. Version 2 spans use omitted values as 1.</p>
         </div>
         <div class="draw-settings">
           <label><span>New box type</span><select id="new-block-type"></select></label>

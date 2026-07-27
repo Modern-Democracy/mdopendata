@@ -6,10 +6,10 @@ tags:
   - review-ui
   - architecture
   - charlottetown
-updated: 2026-07-16
+updated: 2026-07-27
 ---
 
-This page defines the local-only inventory-review UI implementation plan for the version 1 staged PDF artifact schemas.
+This page defines the local-only inventory-review UI implementation plan for the staged PDF version 1 and parallel version 2 artifact schemas.
 
 # Staged PDF Inventory Review UI Plan
 
@@ -19,6 +19,12 @@ The read-only Stage 0 evidence slice and editable Stage 1 block slice are comple
 
 ```powershell
 ./scripts/start-staged-pdf-review.ps1
+```
+
+Version 1 remains the default. The parallel version 2 shadow workspace is selected explicitly:
+
+```powershell
+./scripts/start-staged-pdf-review.ps1 -SchemaVersion 2
 ```
 
 The launcher binds port 3217 to `127.0.0.1`, enables the Stage 1 command adapter, and runs the server in the foreground until Ctrl+C. The canonical Python validator validates Stage 0 and Stage 1 together before either artifact is cached; every requested Stage 0 evidence asset is re-hashed before it is returned.
@@ -52,7 +58,8 @@ The deployed demonstration must return `404` for all review routes even if revie
 | `web/public/pdf-inventory-review/app.js` | State, API calls, keyboard commands, and rendering. |
 | `web/public/pdf-inventory-review/styles.css` | Accessible three-pane layout and overlays. |
 | `web/server.js` | Feature gates, allowlisted read API, and Stage 1 command adapter. |
-| `scripts/update-staged-pdf-block-inventory.py` | Validate a Stage 1 mutation, append its review event, and atomically publish both artifacts. |
+| `scripts/update-staged-pdf-block-inventory.py` | Preserve the frozen version 1 mutation workflow. |
+| `scripts/update-staged-pdf-block-inventory-v2.py` | Validate a version 2 Stage 1 mutation, append its review event, and atomically publish both version 2 artifacts. |
 | `scripts/test-staged-pdf-block-inventory-writes.py` | Create, resize, reclassify, delete, audit, and stale-hash regressions. |
 | `scripts/smoke-staged-pdf-review-ui.mjs` | Disabled-route, safe-read, traversal, evidence-integrity, and API-contract smoke checks. |
 
@@ -214,7 +221,7 @@ The implemented client loads the 154 page summaries once, lazy-loads thumbnails,
 
 Status: complete on 2026-07-15.
 
-`scripts/generate-staged-pdf-block-inventory.py` deterministically converts Stage 0 word geometry into proposed title, body, and footer candidates. It uses conservative cues for formatted text, table of contents, divider, table, financial-candidate, and table-family classification. OCR-derived geometry remains `needs_review`; the generator does not create approvals or consume the legacy published inventory as an input.
+`scripts/generate-staged-pdf-block-inventory.py` remains the frozen version 1 generator. `scripts/generate-staged-pdf-block-inventory-v2.py` deterministically converts version 2 Stage 0 word geometry into proposed title, body, and footer candidates, including conservative formatted-text and table-title proposals. It uses conservative cues for formatted text, table of contents, divider, table, financial-candidate, and table-family classification. OCR-derived geometry remains `needs_review`; the generator does not create approvals or consume the legacy published inventory as an input.
 
 The ordered block vocabulary is `title`, `formatted_text`, `table`, `chart`, `other_visual`, `map`, `table_of_contents`, `header`, `footer`, `page_number`, `divider`, and `signature`. Automated top-of-content headings are `title`; `header` and `footer` are reserved for repeating document-level material.
 
@@ -231,6 +238,26 @@ Stage 1 association mode is source-first. The reviewer selects a relationship ty
 Each completed mutation uses optimistic artifact-hash concurrency, validates the resulting artifact set, and appends one event to `review/review-decisions.json`. Table review must include the complete column-header region, row-label region, and table body; repeated headers are not assumed on continuation pages.
 
 The deterministic Charlottetown generation baseline contains 440 candidates across all 154 pages, including 101 conservative financial candidates, 709 formatted-text internal regions, and one review page. Migration decision 39 produced the table-grid checkpoint with 441 blocks, 77 grids, 10,063 cells, and SHA-256 `f880de6838c16cf9fa5ef5f82a4633ad26c9613a9ca55b9a1074260e2eabe8c2`. Subsequent reviewer edits intentionally change the live artifact hash and cell count and remain traceable through the append-only review chain.
+
+## Version 2 Span And Title Slice
+
+Status: complete on 2026-07-27.
+
+The generator selects its output schema from the source-evidence artifact. Version 2 generation may propose a short leading formatted-text region as `title` and may combine short contiguous title rows into one full-width `table_title` cell when later rows provide table-column evidence. All proposals remain proposed or `needs_review`; generation does not approve them.
+
+The writer and reviewer resolve omitted `row_span` and `column_span` values as `1`. Version 2 adds:
+
+- full effective-span rendering and accessible row, column, and span labels
+- single-cell numeric row-span and column-span controls
+- Shift-extended rectangular logical-cell selection
+- logical-cell merge and split commands with deterministic keys
+- top or bottom full-width `table_title` classification
+- `title` classification for formatted-text regions
+- rejection when a consumed cell is a relationship endpoint
+- rejection of global row or column split or merge while spanning cells remain
+- version 2 human actor, decision basis, exact artifact-reference, and event-chain fields
+
+The version 1 workspace remains the default and does not expose version 2-only title or span values. The selector changes only the local shadow artifact directory; it does not change database, publication, deployment, or active downstream extraction inputs.
 
 ## Later Slices
 
