@@ -1287,7 +1287,7 @@
         "decision_basis": { "enum": ["reviewer", "template_policy"] },
         "policy_ref": { "oneOf": [{ "$ref": "#/$defs/artifact_ref" }, { "type": "null" }] },
         "action": {
-          "enum": ["approve", "reject", "correct", "supersede", "create", "delete", "split", "merge", "resize", "reorder", "link", "unlink", "set_type", "create_region", "delete_region", "resize_region", "set_region_type", "redetect_regions", "redetect_table_grid", "move_table_divider", "split_table_rows", "merge_table_rows", "split_table_columns", "merge_table_columns", "merge_table_cells", "split_table_cell", "set_table_cell_span", "set_table_cell_type", "migrate_table_grids", "apply_template", "auto_approve", "promote_policy", "demote_policy", "suspend_policy"]
+          "enum": ["approve", "reject", "correct", "supersede", "create", "delete", "split", "merge", "resize", "reorder", "link", "unlink", "set_type", "create_region", "delete_region", "resize_region", "set_region_type", "redetect_regions", "redetect_table_grid", "move_table_divider", "split_table_rows", "merge_table_rows", "split_table_columns", "merge_table_columns", "merge_table_cells", "split_table_cell", "set_table_cell_span", "set_table_cell_type", "migrate_table_grids", "migrate_schema", "apply_template", "auto_approve", "promote_policy", "demote_policy", "suspend_policy"]
         },
         "reason": { "type": "string", "minLength": 1 },
         "prior_artifact_sha256": {

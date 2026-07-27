@@ -1,0 +1,72 @@
+{
+  "controls": {
+    "database_write_count": 0,
+    "publication_write_count": 0
+  },
+  "counts": {
+    "block_records": 442,
+    "historical_review_events": 104,
+    "migration_review_events": 1,
+    "relationships": 1,
+    "source_pages": 154
+  },
+  "inputs": {
+    "block_inventory": {
+      "artifact_key": "ctown-budget-2026-2027:block-inventory:v1",
+      "artifact_type": "block_inventory",
+      "schema_version": 1,
+      "sha256": "9a70aa68ac5956794a46f3e1f640bea1fdc222637858e7aa823aed20b5874f52"
+    },
+    "review_decisions": {
+      "artifact_key": "ctown-budget-2026-2027:review-decisions:v1",
+      "artifact_type": "review_decisions",
+      "schema_version": 1,
+      "sha256": "28d1f69f921fc17839a4e3844a8efd5951d894191e4d3f90626e2833334f5402"
+    },
+    "source_evidence": {
+      "artifact_key": "ctown-budget-2026-2027:source-evidence:v1",
+      "artifact_type": "source_evidence",
+      "schema_version": 1,
+      "sha256": "d24885a23ebf33a63d9e09273a5335cdbef45fd727dcf93d6c23b5bbe9c3eb2e"
+    }
+  },
+  "migration_key": "ctown-budget-2026-2027:staged-pdf:v1-to-v2",
+  "migration_version": "1",
+  "occurred_at": "2026-07-27T00:00:00Z",
+  "outputs": {
+    "block_inventory": {
+      "artifact_key": "ctown-budget-2026-2027:block-inventory:v2",
+      "artifact_type": "block_inventory",
+      "schema_version": 2,
+      "sha256": "bbd1a0ed5175a4d3186630c3ad2f3bf285b9bd7f327b78beece71372e1df6d34"
+    },
+    "review_decisions": {
+      "artifact_key": "ctown-budget-2026-2027:review-decisions:v2",
+      "artifact_type": "review_decisions",
+      "schema_version": 2,
+      "sha256": "9fcfd1fe5285fc80711cfd0d4a2326f87865b1ba86b14b2c03a0eccf75f34df0"
+    },
+    "source_evidence": {
+      "artifact_key": "ctown-budget-2026-2027:source-evidence:v2",
+      "artifact_type": "source_evidence",
+      "schema_version": 2,
+      "sha256": "bd19d84b90bd5eb30bfc46e7e6c3bac76ed8f31241ce87960f84ab765eacc8cd"
+    }
+  },
+  "preservation": {
+    "historical_review_event_hashes": true,
+    "omitted_unit_spans": true,
+    "stable_record_keys": true,
+    "version_1_bytes_unchanged": true
+  },
+  "review_policies": {
+    "automatic_approval_policy_count": 0,
+    "eligible_approved_template_count": 0,
+    "reason": "The frozen version 1 pilot contains no structural-template artifacts.",
+    "seeded_review_required_policy_count": 0
+  },
+  "schema": {
+    "repo_relpath": "schema/json-schema/staged-pdf-artifacts-v2.schema.json",
+    "sha256": "9d0b8031b811c244f0bfb5b9c0324f7cb12e2c8fb6bb9b547fc71c76764a517f"
+  }
+}

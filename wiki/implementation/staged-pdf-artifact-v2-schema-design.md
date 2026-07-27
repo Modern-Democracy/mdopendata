@@ -6,7 +6,7 @@ tags:
   - json-schema
   - review-ui
   - templates
-updated: 2026-07-16
+updated: 2026-07-27
 ---
 
 This page defines the approved version 2 staged PDF artifact design for internal titles, spanning table cells, template policies, and policy-governed approval.
@@ -15,11 +15,11 @@ This page defines the approved version 2 staged PDF artifact design for internal
 
 ## Status And Compatibility Decision
 
-The design is approved and its Phase 1 schema and validator changes were implemented on 2026-07-17. Version 1 remains frozen in `schema/json-schema/staged-pdf-artifacts.schema.json`; version 2 is implemented separately in `schema/json-schema/staged-pdf-artifacts-v2.schema.json` before any active-workspace transition.
+The design is approved. Phase 1 schema and validator changes were implemented on 2026-07-17, and the Phase 2 parallel migration completed on 2026-07-27. Version 1 remains frozen in `schema/json-schema/staged-pdf-artifacts.schema.json`; version 2 remains separate in `schema/json-schema/staged-pdf-artifacts-v2.schema.json` with no active-workspace transition.
 
 Version 2 is required by the new template-review-policy artifact, application-policy provenance, and automated review-event semantics. Optional span fields alone would not require rewriting version 1 instances, but they are implemented only in version 2 to preserve the closed version 1 contract.
 
-The Phase 0 baseline and controls are stored in `data/budget/charlottetown/2026-2027/staged-pdf/v2/phase-0/baseline-and-controls.json`. `scripts/test-staged-pdf-v2-phase0.py` protects the recorded version 1 schema, artifact, generator, and writer hashes. `scripts/test-staged-pdf-artifact-schemas-v2.py` exercises version 2 positive, negative, conditional, audit, and cross-artifact controls.
+The Phase 0 baseline and controls are stored in `data/budget/charlottetown/2026-2027/staged-pdf/v2/phase-0/baseline-and-controls.json`. `scripts/test-staged-pdf-v2-phase0.py` protects the recorded version 1 schema, artifact, generator, and writer hashes. `scripts/test-staged-pdf-artifact-schemas-v2.py` exercises version 2 positive, negative, conditional, audit, and cross-artifact controls. `scripts/test-staged-pdf-artifact-v2-migration.py` protects deterministic migration, preservation, exact references, and atomic conflict behavior.
 
 ## Schema Location And References
 
@@ -197,6 +197,7 @@ Add actions:
 - `promote_policy`
 - `demote_policy`
 - `suspend_policy`
+- `migrate_schema`
 
 An automated approval requires a system actor, `decision_basis: template_policy`, and an exact non-null policy reference. Policy promotion requires a human actor.
 
@@ -212,6 +213,15 @@ An automated approval requires a system actor, `decision_basis: template_policy`
 8. Record version 1 input hashes and version 2 output hashes in an append-only migration decision.
 9. Revalidate relationships, templates, applications, and dependent approvals against version 2.
 10. Retain zero database and publication writes throughout shadow migration.
+
+The implemented migration command is:
+
+```powershell
+& scripts/python.ps1 scripts/migrate-staged-pdf-artifacts-v1-to-v2.py `
+  --occurred-at 2026-07-27T00:00:00Z
+```
+
+It writes only the parallel `v2/stage-0`, `v2/stage-1`, `v2/review`, and `v2/phase-2` outputs. Existing identical outputs are unchanged; any conflicting output stops the run before writes. The pilot had no version 1 structural-template artifact, so the eligible and seeded `review_required` policy counts are both zero.
 
 ## Affected Implementation Surfaces
 

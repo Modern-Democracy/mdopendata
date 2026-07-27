@@ -6,7 +6,7 @@ tags:
   - implementation-plan
   - review-ui
   - templates
-updated: 2026-07-16
+updated: 2026-07-27
 ---
 
 This page defines the approved implementation sequence for version 2 staged PDF artifacts, structural propagation, and policy-governed review reduction.
@@ -23,7 +23,10 @@ Version 1 stays operational and immutable while version 2 is built and validated
 
 - Phase 0 completed on 2026-07-17 with frozen version 1 hashes, inventory counts, review head, and positive and negative control catalogues in `data/budget/charlottetown/2026-2027/staged-pdf/v2/phase-0/baseline-and-controls.json`.
 - Phase 1 completed on 2026-07-17 with the parallel version 2 schema, version-aware validation, expanded span coverage, title constraints, review-policy contracts, application-policy provenance, and automated-decision actor rules.
-- Phase 2 has not started. No version 2 migration artifact, active-workspace change, database write, or publication change has occurred.
+- Phase 2 completed on 2026-07-27. The deterministic migration command generated a parallel source-evidence artifact, block inventory, review-decision chain, and migration report under `data/budget/charlottetown/2026-2027/staged-pdf/v2/`.
+- The migration retained 154 source pages, 442 block records, one relationship, all omitted unit spans, stable record keys, and all 104 historical event hashes. It appended decision `ctown-budget-2026-2027:decision:000105` with action `migrate_schema`.
+- The pilot contains no structural-template artifacts, so zero `review_required` policies were eligible or seeded. No automatic-approval policy was created.
+- A clean rerun produced zero writes and four byte-identical outputs. Version 1 hashes remained frozen, the three-artifact version 2 set validated, and database and publication write counts remained zero.
 
 ## Phase 0: Freeze Baseline And Controls
 
@@ -56,6 +59,10 @@ Schema self-validation and positive, negative, conditional, and cross-artifact r
 
 ## Phase 2: Parallel Migration
 
+### Status
+
+Completed on 2026-07-27 by `scripts/migrate-staged-pdf-artifacts-v1-to-v2.py`. The command requires an explicit ISO 8601 migration timestamp so identical inputs and arguments serialize identically.
+
 ### Work
 
 - implement a deterministic version 1 to version 2 migration command through `scripts/python.ps1`
@@ -68,6 +75,8 @@ Schema self-validation and positive, negative, conditional, and cross-artifact r
 ### Gate
 
 Two clean migrations are canonically identical except required timestamps. Version 1 files are unchanged, version 2 validates as a set, relationships resolve, and database and publication write counts remain zero.
+
+Gate passed. `scripts/test-staged-pdf-artifact-v2-migration.py` covers frozen input hashes, deterministic canonical output, key and span preservation, historical review-chain preservation, exact output hashes, set validation, and atomic conflict rejection. The generated evidence is recorded in `data/budget/charlottetown/2026-2027/staged-pdf/v2/phase-2/migration-report.json`.
 
 ## Phase 3: Stage 1 Span And Title Editing
 

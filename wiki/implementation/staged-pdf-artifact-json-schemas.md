@@ -6,7 +6,7 @@ tags:
   - json-schema
   - architecture
   - quality-assurance
-updated: 2026-07-16
+updated: 2026-07-27
 ---
 
 This page defines the version 1 JSON Schema contracts and semantic validation rules for staged PDF inventory artifacts.
@@ -19,7 +19,7 @@ The version 1 contracts are implemented in `schema/json-schema/staged-pdf-artifa
 
 Version 1 remains closed and unchanged. Phase 1 of the approved version 2 work was implemented separately on 2026-07-17 in `schema/json-schema/staged-pdf-artifacts-v2.schema.json`. The shared validator selects the contract from `schema_version` and validates both schemas under `--schema-only`.
 
-Version 2 adds optional `column_span` and `row_span` properties with effective defaults of `1`, formatted-text `title` regions, `table_title` cells, internal-region and table-title template rules, immutable template review-policy artifacts, application policy evaluations, and human versus system review-event provenance. Version 2 migration remains deferred to Phase 2.
+Version 2 adds optional `column_span` and `row_span` properties with effective defaults of `1`, formatted-text `title` regions, `table_title` cells, internal-region and table-title template rules, immutable template review-policy artifacts, application policy evaluations, and human versus system review-event provenance. The Phase 2 parallel migration completed on 2026-07-27 without changing version 1, database, publication, or active-review state.
 
 The schema document is a discriminated union. Every artifact uses the same `$schema` target and selects exactly one closed contract through `artifact_type`. Undeclared properties are rejected.
 
