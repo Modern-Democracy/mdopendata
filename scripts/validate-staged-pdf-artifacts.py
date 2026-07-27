@@ -14,7 +14,10 @@ from jsonschema import Draft202012Validator, FormatChecker
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCHEMA_PATH = ROOT / "schema" / "json-schema" / "staged-pdf-artifacts.schema.json"
+SCHEMA_PATHS = {
+    1: ROOT / "schema" / "json-schema" / "staged-pdf-artifacts.schema.json",
+    2: ROOT / "schema" / "json-schema" / "staged-pdf-artifacts-v2.schema.json",
+}
 DOCUMENT_ARTIFACT_TYPES = {
     "source_evidence",
     "block_inventory",
@@ -37,18 +40,29 @@ def sha256_path(path: Path) -> str:
     return digest.hexdigest()
 
 
-def load_validator() -> Draft202012Validator:
-    schema = read_json(SCHEMA_PATH)
+def schema_path(schema_version: int) -> Path:
+    try:
+        return SCHEMA_PATHS[schema_version]
+    except KeyError as error:
+        raise ValueError(f"Unsupported staged PDF schema version: {schema_version}") from error
+
+
+def load_validator(schema_version: int = 1) -> Draft202012Validator:
+    schema = read_json(schema_path(schema_version))
     Draft202012Validator.check_schema(schema)
     return Draft202012Validator(schema, format_checker=FormatChecker())
 
 
-def load_component_validator(definition: str) -> Draft202012Validator:
-    return load_component_validators([definition])[definition]
+def load_component_validator(
+    definition: str, schema_version: int = 1
+) -> Draft202012Validator:
+    return load_component_validators([definition], schema_version)[definition]
 
 
-def load_component_validators(definitions: Iterable[str]) -> dict[str, Draft202012Validator]:
-    schema = read_json(SCHEMA_PATH)
+def load_component_validators(
+    definitions: Iterable[str], schema_version: int = 1
+) -> dict[str, Draft202012Validator]:
+    schema = read_json(schema_path(schema_version))
     validators: dict[str, Draft202012Validator] = {}
     for definition in definitions:
         if definition not in schema["$defs"]:
@@ -77,6 +91,10 @@ def check_box(box: dict[str, Any], path: str, errors: list[str]) -> None:
         errors.append(f"{path}: x0 must be less than x1")
     if box["y0"] >= box["y1"]:
         errors.append(f"{path}: y0 must be less than y1")
+
+
+def effective_span(cell: dict[str, Any], axis: str) -> int:
+    return int(cell.get(f"{axis}_span", 1))
 
 
 def check_source_evidence(payload: dict[str, Any], errors: list[str]) -> None:
@@ -185,8 +203,11 @@ def check_block_inventory(payload: dict[str, Any], errors: list[str]) -> None:
         if record["page_key"] not in page_key_set:
             errors.append(f"$.records.{index}.page_key: unknown page key")
         check_box(record["bbox"], f"$.records.{index}.bbox", errors)
+        formatted_regions = {"paragraph", "bullet_list", "sorted_list"}
+        if payload.get("schema_version") == 2:
+            formatted_regions.add("title")
         allowed_regions = {
-            "formatted_text": {"paragraph", "bullet_list", "sorted_list"},
+            "formatted_text": formatted_regions,
         }.get(record["block_type"], set())
         for region_index, region in enumerate(record["regions"]):
             region_key = region["region_key"]
@@ -228,9 +249,41 @@ def check_block_inventory(payload: dict[str, Any], errors: list[str]) -> None:
                 for row in range(len(rows) - 1)
                 for column in range(len(columns) - 1)
             }
-            actual_coordinates = {(cell["row_index"], cell["column_index"]) for cell in grid["cells"]}
-            if actual_coordinates != expected_coordinates or len(grid["cells"]) != len(expected_coordinates):
-                errors.append(f"$.records.{index}.table_grid.cells: must contain one cell for every row and column")
+            if payload.get("schema_version") == 2:
+                covered_coordinates: list[tuple[int, int]] = []
+                table_titles: list[dict[str, Any]] = []
+                for cell in grid["cells"]:
+                    row_start = cell["row_index"]
+                    column_start = cell["column_index"]
+                    row_span = effective_span(cell, "row")
+                    column_span = effective_span(cell, "column")
+                    covered_coordinates.extend(
+                        (row, column)
+                        for row in range(row_start, row_start + row_span)
+                        for column in range(column_start, column_start + column_span)
+                    )
+                    if cell["cell_type"] == "table_title":
+                        table_titles.append(cell)
+                actual_coordinates = set(covered_coordinates)
+                if (
+                    actual_coordinates != expected_coordinates
+                    or len(covered_coordinates) != len(actual_coordinates)
+                ):
+                    errors.append(
+                        f"$.records.{index}.table_grid.cells: effective spans must cover every row and column exactly once"
+                    )
+                if len(table_titles) > 1:
+                    errors.append(f"$.records.{index}.table_grid.cells: table requires at most one table_title")
+                for title in table_titles:
+                    row_end = title["row_index"] + effective_span(title, "row")
+                    if title["column_index"] != 0 or effective_span(title, "column") != len(columns) - 1:
+                        errors.append(f"$.records.{index}.table_grid.cells: table_title must span the complete table width")
+                    if title["row_index"] != 0 and row_end != len(rows) - 1:
+                        errors.append(f"$.records.{index}.table_grid.cells: table_title must be at the top or bottom boundary")
+            else:
+                actual_coordinates = {(cell["row_index"], cell["column_index"]) for cell in grid["cells"]}
+                if actual_coordinates != expected_coordinates or len(grid["cells"]) != len(expected_coordinates):
+                    errors.append(f"$.records.{index}.table_grid.cells: must contain one cell for every row and column")
             cell_keys = [cell["cell_key"] for cell in grid["cells"]]
             if duplicates(cell_keys):
                 errors.append(f"$.records.{index}.table_grid.cells: duplicate cell keys")
@@ -241,6 +294,22 @@ def check_block_inventory(payload: dict[str, Any], errors: list[str]) -> None:
                 internal_items[cell["cell_key"]] = cell
         for anchor_index, anchor in enumerate(record["anchors"]):
             check_box(anchor["bbox"], f"$.records.{index}.anchors.{anchor_index}.bbox", errors)
+    if payload.get("schema_version") == 2:
+        sibling_titles = {
+            (record["page_key"], tuple(record["bbox"][key] for key in ("x0", "y0", "x1", "y1")))
+            for record in records
+            if record["block_type"] == "title"
+        }
+        for record_index, record in enumerate(records):
+            for region_index, region in enumerate(record["regions"]):
+                identity = (
+                    record["page_key"],
+                    tuple(region["bbox"][key] for key in ("x0", "y0", "x1", "y1")),
+                )
+                if region["region_type"] == "title" and identity in sibling_titles:
+                    errors.append(
+                        f"$.records.{record_index}.regions.{region_index}: internal title duplicates sibling title geometry"
+                    )
     relationship_keys = [relationship["relationship_key"] for relationship in payload["relationships"]]
     found = duplicates(relationship_keys)
     if found:
@@ -336,6 +405,11 @@ def check_structural_template(payload: dict[str, Any], errors: list[str]) -> Non
         "negative_controls": ("control_key", payload["negative_controls"]),
         "regression_controls": ("control_key", payload["regression_controls"]),
     }
+    if payload.get("schema_version") == 2:
+        unique_fields["internal_region_rules"] = (
+            "rule_key",
+            payload["internal_region_rules"],
+        )
     for path, (field, records) in unique_fields.items():
         found = duplicates(record[field] for record in records)
         if found:
@@ -348,6 +422,27 @@ def check_structural_template(payload: dict[str, Any], errors: list[str]) -> Non
         maximum = rule["maximum_count"]
         if maximum is not None and rule["minimum_count"] > maximum:
             errors.append(f"$.block_rules.{index}: minimum_count must not exceed maximum_count")
+    if payload.get("schema_version") == 2:
+        for index, rule in enumerate(payload["internal_region_rules"]):
+            maximum = rule["maximum_count"]
+            if maximum is not None and rule["minimum_count"] > maximum:
+                errors.append(
+                    f"$.internal_region_rules.{index}: minimum_count must not exceed maximum_count"
+                )
+        title_policy = payload["table_title_policy"]
+        unknown_title_anchors = sorted(set(title_policy["anchor_keys"]) - anchor_keys)
+        if unknown_title_anchors:
+            errors.append(
+                f"$.table_title_policy.anchor_keys: unknown anchors: {unknown_title_anchors}"
+            )
+        if title_policy["mode"] == "absent" and title_policy["allowed_positions"]:
+            errors.append(
+                "$.table_title_policy.allowed_positions: must be empty when mode is absent"
+            )
+        if title_policy["mode"] != "absent" and not title_policy["allowed_positions"]:
+            errors.append(
+                "$.table_title_policy.allowed_positions: must identify top or bottom when title is allowed"
+            )
     for index, column in enumerate(payload["column_bands"]):
         if column["x0"] >= column["x1"]:
             errors.append(f"$.column_bands.{index}: x0 must be less than x1")
@@ -371,6 +466,74 @@ def check_template_applications(payload: dict[str, Any], errors: list[str]) -> N
             errors.append(
                 f"$.records.{index}.mismatches: accepted fit classes cannot contain material mismatches"
             )
+        if payload.get("schema_version") == 2:
+            evaluation = record["policy_evaluation"]
+            if evaluation["policy_ref"] is not None and evaluation["policy_ref"]["schema_version"] != 2:
+                errors.append(
+                    f"$.records.{index}.policy_evaluation.policy_ref: must reference version 2 policy"
+                )
+            if record["fit_class"] == "material_variation" and evaluation["outcome"] not in {
+                "review_required",
+                "blocked",
+            }:
+                errors.append(
+                    f"$.records.{index}.policy_evaluation.outcome: material variation cannot be automatically approved"
+                )
+            if evaluation["outcome"] == "auto_approved":
+                if evaluation["policy_ref"] is None:
+                    errors.append(
+                        f"$.records.{index}.policy_evaluation.policy_ref: automatic approval requires a policy"
+                    )
+                if not evaluation["fit_eligible"]:
+                    errors.append(
+                        f"$.records.{index}.policy_evaluation.fit_eligible: automatic approval requires eligible fit"
+                    )
+                if record["review"]["status"] != "approved" or not record["review"]["decision_ids"]:
+                    errors.append(
+                        f"$.records.{index}.review: automatic approval requires approved status and a decision"
+                    )
+            if evaluation["outcome"] == "selected_for_sample" and record["review"]["status"] != "needs_review":
+                errors.append(
+                    f"$.records.{index}.review.status: sampled application must need review"
+                )
+
+
+def check_template_review_policy(payload: dict[str, Any], errors: list[str]) -> None:
+    binding = payload["template_binding"]
+    if binding["artifact_ref"]["artifact_type"] != "structural_template":
+        errors.append("$.template_binding.artifact_ref: must reference structural_template")
+    if binding["artifact_ref"]["schema_version"] != 2:
+        errors.append("$.template_binding.artifact_ref: policy requires a version 2 template")
+    supersedes = payload["supersedes_policy_ref"]
+    if supersedes is not None and supersedes["artifact_type"] != "template_review_policy":
+        errors.append("$.supersedes_policy_ref: must reference template_review_policy")
+    evidence = payload["promotion_evidence"]
+    reviewed = evidence["reviewed_application_count"]
+    accepted = evidence["accepted_application_count"]
+    rejected = evidence["rejected_application_count"]
+    if accepted + rejected != reviewed:
+        errors.append(
+            "$.promotion_evidence: accepted and rejected counts must equal reviewed application count"
+        )
+    expected_precision = accepted / reviewed if reviewed else None
+    observed_precision = evidence["observed_precision"]
+    if expected_precision is None:
+        if observed_precision is not None:
+            errors.append("$.promotion_evidence.observed_precision: must be null with no reviewed applications")
+    elif observed_precision is None or abs(observed_precision - expected_precision) > 1e-9:
+        errors.append("$.promotion_evidence.observed_precision: must equal accepted divided by reviewed")
+    if payload["status"] == "approved" and payload["mode"] != "review_required":
+        gates = payload["promotion_gates"]
+        checks = [
+            (len(evidence["positive_application_keys"]) >= gates["minimum_positive_examples"], "positive examples"),
+            (len(evidence["negative_control_keys"]) >= gates["minimum_negative_controls"], "negative controls"),
+            (reviewed >= gates["minimum_reviewed_applications"], "reviewed applications"),
+            (observed_precision is not None and observed_precision >= gates["minimum_observed_precision"], "observed precision"),
+            (evidence["false_approval_count"] <= gates["maximum_false_approvals"], "false approvals"),
+        ]
+        for passed, label in checks:
+            if not passed:
+                errors.append(f"$.promotion_evidence: approved policy does not meet {label} gate")
 
 
 def check_review_decisions(payload: dict[str, Any], errors: list[str]) -> None:
@@ -387,6 +550,21 @@ def check_review_decisions(payload: dict[str, Any], errors: list[str]) -> None:
                 f"$.events.{index}.previous_event_sha256: does not match prior event hash"
             )
         previous_hash = event["event_sha256"]
+        if payload.get("schema_version") == 2:
+            policy_ref = event["policy_ref"]
+            if policy_ref is not None and policy_ref["artifact_type"] != "template_review_policy":
+                errors.append(f"$.events.{index}.policy_ref: must reference template_review_policy")
+            if policy_ref is not None and policy_ref["schema_version"] != 2:
+                errors.append(f"$.events.{index}.policy_ref: must reference version 2 policy")
+            if event["decision_basis"] == "template_policy":
+                if policy_ref is None:
+                    errors.append(f"$.events.{index}.policy_ref: template policy decision requires a policy")
+                if event["reviewer"]["actor_type"] != "system":
+                    errors.append(f"$.events.{index}.reviewer.actor_type: template policy decision requires system actor")
+            if event["action"] == "auto_approve" and event["decision_basis"] != "template_policy":
+                errors.append(f"$.events.{index}.decision_basis: automatic approval requires template policy")
+            if event["action"] == "promote_policy" and event["reviewer"]["actor_type"] != "human":
+                errors.append(f"$.events.{index}.reviewer.actor_type: policy promotion requires human actor")
 
 
 def check_parity_report(payload: dict[str, Any], errors: list[str]) -> None:
@@ -421,6 +599,7 @@ SEMANTIC_CHECKS = {
     "block_inventory": check_block_inventory,
     "content_groups": check_content_groups,
     "structural_template": check_structural_template,
+    "template_review_policy": check_template_review_policy,
     "template_applications": check_template_applications,
     "review_decisions": check_review_decisions,
     "parity_report": check_parity_report,
@@ -430,7 +609,7 @@ SEMANTIC_CHECKS = {
 def validate_payload(
     payload: dict[str, Any], validator: Draft202012Validator | None = None
 ) -> list[str]:
-    validator = validator or load_validator()
+    validator = validator or load_validator(int(payload.get("schema_version", 1)))
     errors = [
         f"{location(error.absolute_path)}: {error.message}"
         for error in sorted(validator.iter_errors(payload), key=lambda item: list(item.absolute_path))
@@ -479,6 +658,7 @@ def validate_artifact_set(payloads: list[dict[str, Any]]) -> list[str]:
     applications = single("template_applications")
     parity = single("parity_report")
     templates = by_type.get("structural_template", [])
+    policies = by_type.get("template_review_policy", [])
 
     if source and blocks:
         source_pages = {page["page_key"] for page in source["pages"]}
@@ -514,6 +694,66 @@ def validate_artifact_set(payloads: list[dict[str, Any]]) -> list[str]:
         )
         if wrong:
             errors.append(f"artifact set: applications reference unknown templates: {wrong}")
+    if templates and policies:
+        templates_by_key = {
+            (template["artifact_key"], template["template_key"], template["template_version"])
+            for template in templates
+        }
+        wrong = sorted(
+            policy["policy_key"]
+            for policy in policies
+            if (
+                policy["template_binding"]["artifact_ref"]["artifact_key"],
+                policy["template_binding"]["template_key"],
+                policy["template_binding"]["template_version"],
+            ) not in templates_by_key
+        )
+        if wrong:
+            errors.append(f"artifact set: policies reference unknown templates: {wrong}")
+    if policies and applications:
+        policies_by_artifact = {policy["artifact_key"]: policy for policy in policies}
+        for record in applications["records"]:
+            evaluation = record.get("policy_evaluation")
+            if not evaluation or evaluation["policy_ref"] is None:
+                continue
+            policy_ref = evaluation["policy_ref"]
+            policy = policies_by_artifact.get(policy_ref["artifact_key"])
+            if policy is None:
+                errors.append(
+                    f"artifact set: application {record['application_key']} references unknown policy"
+                )
+                continue
+            binding = policy["template_binding"]
+            if (
+                record["template_key"] != binding["template_key"]
+                or record["template_version"] != binding["template_version"]
+                or record["template_artifact_sha256"] != binding["artifact_ref"]["sha256"]
+            ):
+                errors.append(
+                    f"artifact set: application {record['application_key']} policy binds a different template"
+                )
+            if evaluation["matcher_config_sha256"] != policy["matcher"]["config_sha256"]:
+                errors.append(
+                    f"artifact set: application {record['application_key']} matcher configuration differs from policy"
+                )
+            if evaluation["outcome"] == "auto_approved":
+                if policy["status"] != "approved" or policy["mode"] not in {"sample_review", "auto_approve"}:
+                    errors.append(
+                        f"artifact set: application {record['application_key']} automatic approval uses ineligible policy"
+                    )
+                if record["fit_class"] not in policy["eligible_fit_classes"]:
+                    errors.append(
+                        f"artifact set: application {record['application_key']} fit is not policy-eligible"
+                    )
+                light_categories = {
+                    mismatch["category"]
+                    for mismatch in record["mismatches"]
+                    if mismatch["severity"] == "light"
+                }
+                if not light_categories.issubset(set(policy["allowed_light_mismatch_categories"])):
+                    errors.append(
+                        f"artifact set: application {record['application_key']} has non-allowlisted light mismatch"
+                    )
     if source and parity and parity["baseline"]["source_sha256"] != source["source_sha256"]:
         errors.append("artifact set: parity baseline source hash differs from source evidence")
     return errors
@@ -535,9 +775,10 @@ def main() -> int:
     parser.add_argument("--schema-only", action="store_true")
     args = parser.parse_args()
 
-    validator = load_validator()
     if args.schema_only:
-        print(f"Valid Draft 2020-12 schema: {SCHEMA_PATH.relative_to(ROOT)}")
+        for version, path in sorted(SCHEMA_PATHS.items()):
+            load_validator(version)
+            print(f"Valid Draft 2020-12 schema v{version}: {path.relative_to(ROOT)}")
         return 0
     if not args.paths:
         parser.error("provide one or more artifact files or directories, or use --schema-only")
@@ -546,7 +787,7 @@ def main() -> int:
     payloads: list[dict[str, Any]] = []
     for path in expand_paths(args.paths):
         payload = read_json(path)
-        payload_errors = validate_payload(payload, validator)
+        payload_errors = validate_payload(payload)
         for error in payload_errors:
             failures.append(f"{path}: {error}")
         if not payload_errors:

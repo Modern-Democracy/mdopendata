@@ -1,0 +1,70 @@
+{
+  "baseline_key": "ctown-budget-2026-2027:staged-pdf-v2:phase-0",
+  "baseline_date": "2026-07-17",
+  "document_key": "ctown-budget-2026-2027",
+  "source_sha256": "d926634427e80aa2b06b6425bdbb117424fe53567ae344980cd10791f8e39bac",
+  "version_1": {
+    "schema": {
+      "repo_relpath": "schema/json-schema/staged-pdf-artifacts.schema.json",
+      "sha256": "3cf74cd69e55869e3793da3dcc4fa5a3299ac7e6a699c521326adb888393db79"
+    },
+    "source_evidence": {
+      "artifact_key": "ctown-budget-2026-2027:source-evidence:v1",
+      "repo_relpath": "data/budget/charlottetown/2026-2027/staged-pdf/v1/stage-0/source-evidence.json",
+      "sha256": "d24885a23ebf33a63d9e09273a5335cdbef45fd727dcf93d6c23b5bbe9c3eb2e"
+    },
+    "block_inventory": {
+      "artifact_key": "ctown-budget-2026-2027:block-inventory:v1",
+      "repo_relpath": "data/budget/charlottetown/2026-2027/staged-pdf/v1/stage-1/block-inventory.json",
+      "sha256": "9a70aa68ac5956794a46f3e1f640bea1fdc222637858e7aa823aed20b5874f52"
+    },
+    "review_decisions": {
+      "artifact_key": "ctown-budget-2026-2027:review-decisions:v1",
+      "repo_relpath": "data/budget/charlottetown/2026-2027/staged-pdf/v1/review/review-decisions.json",
+      "sha256": "28d1f69f921fc17839a4e3844a8efd5951d894191e4d3f90626e2833334f5402",
+      "review_head_sha256": "95d4c7add5ddacfa9bacf503a1ccc7e2b4196db2dfaa60b618d521ad7b89da29"
+    },
+    "implementation": {
+      "generator_sha256": "51d08d90f40a2544482a92050c658a382d33b6c2b9e39e79ca04a4bac0f38c73",
+      "writer_sha256": "c8500cc350cec51481d95e057fce78046dce6cee8a00e972173bce3ac954bd77",
+      "validator_before_phase_1_sha256": "5b3d6ce1d565fc39e492e82d24e5821f06cd3c3f7a4c936ada1c9955103649e8"
+    },
+    "inventory": {
+      "pages": 154,
+      "blocks": 442,
+      "tables": 77,
+      "cells": 9638,
+      "formatted_text_regions": 709,
+      "relationships": 1,
+      "review_events": 104
+    }
+  },
+  "positive_controls": [
+    "omitted-unit-spans",
+    "explicit-unit-spans",
+    "horizontal-span",
+    "vertical-span",
+    "two-dimensional-span",
+    "top-table-title",
+    "bottom-table-title",
+    "formatted-text-title",
+    "review-required-policy",
+    "sample-review-policy",
+    "automatic-approval-policy"
+  ],
+  "negative_controls": [
+    "overlapping-spans",
+    "incomplete-span-coverage",
+    "out-of-range-span",
+    "duplicate-table-title",
+    "partial-width-table-title",
+    "internal-table-title",
+    "duplicate-formatted-title",
+    "material-variation-auto-approval",
+    "non-allowlisted-light-variation",
+    "unknown-template-policy-reference",
+    "policy-drift",
+    "system-policy-promotion",
+    "human-automatic-approval"
+  ]
+}

@@ -17,6 +17,10 @@ This page defines the version 1 JSON Schema contracts and semantic validation ru
 
 The version 1 contracts are implemented in `schema/json-schema/staged-pdf-artifacts.schema.json` using JSON Schema Draft 2020-12.
 
+Version 1 remains closed and unchanged. Phase 1 of the approved version 2 work was implemented separately on 2026-07-17 in `schema/json-schema/staged-pdf-artifacts-v2.schema.json`. The shared validator selects the contract from `schema_version` and validates both schemas under `--schema-only`.
+
+Version 2 adds optional `column_span` and `row_span` properties with effective defaults of `1`, formatted-text `title` regions, `table_title` cells, internal-region and table-title template rules, immutable template review-policy artifacts, application policy evaluations, and human versus system review-event provenance. Version 2 migration remains deferred to Phase 2.
+
 The schema document is a discriminated union. Every artifact uses the same `$schema` target and selects exactly one closed contract through `artifact_type`. Undeclared properties are rejected.
 
 ## Artifact Contracts
@@ -193,7 +197,10 @@ No compatibility aliases are defined. Producers must emit the current approved f
 - [Document extraction engineering](./document-extraction-engineering.md)
 - [Municipal budget requirements](../budgets/requirements.md)
 - `schema/json-schema/staged-pdf-artifacts.schema.json`
+- `schema/json-schema/staged-pdf-artifacts-v2.schema.json`
 - `scripts/validate-staged-pdf-artifacts.py`
 - `scripts/test-staged-pdf-artifact-schemas.py`
+- `scripts/test-staged-pdf-artifact-schemas-v2.py`
+- `scripts/test-staged-pdf-v2-phase0.py`
 - `scripts/generate-staged-pdf-source-evidence.py`
 - `scripts/test-staged-pdf-source-evidence.py`
