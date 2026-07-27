@@ -109,6 +109,12 @@ The generator consumes the validated Stage 0 artifact and its recorded word side
 8. Propose any importer or database changes only after shadow parity passes.
 9. Test a non-Charlottetown document before promoting any template to cross-municipality scope.
 
+## Phase 7 Structural Parity Result
+
+The version 2 Phase 7 core compares 154 source-page records, 154 page dispositions, 442 blocks, one relationship, and 105 shadow review events against the frozen version 1 artifacts. The 856-record report has 751 exact matches, zero missing records, zero changed records, 104 approved provenance-only review shifts, and one explicit schema-migration event.
+
+Structural parity does not satisfy the published-observation gate. Stage 2 logical groups and a shadow observation export do not exist, so the pipeline cannot yet compare stable semantic and provenance keys against all 2,290 observations in published snapshot 3. The report remains blocked and the active workspace remains version 1.
+
 ## Required Evidence Package
 
 - frozen source, artifact, database, and publication baseline hashes

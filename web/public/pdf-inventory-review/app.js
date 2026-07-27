@@ -25,6 +25,7 @@ const state = {
   internalBlockKey: null, selectedRegionKey: null, linkSource: null,
   gridSelectionMode: "cell", selectedCellKey: null, selectedCellKeys: [], selectedGridRange: null, gridSelectionAnchor: null,
   propagation: null, propagationSelected: [], propagationFocusKey: null,
+  parity: null,
 };
 
 const ids = [
@@ -49,6 +50,8 @@ const ids = [
   "template-policy-panel", "template-policy-summary", "promote-template",
   "create-review-policy", "promote-sample-policy", "promote-auto-policy",
   "apply-automatic", "demote-policy", "suspend-policy",
+  "parity-panel", "parity-summary", "parity-matched", "parity-missing",
+  "parity-extra", "parity-changed", "parity-provenance", "parity-blockers",
   "relationship-type", "association-help", "link-source-status", "link-target-status", "set-link-source",
   "cancel-link-source", "save-link", "relationship-list",
   "render-hash", "thumbnail-hash", "embedded-hash", "ocr-hash", "source-citation", "error-banner",
@@ -116,6 +119,24 @@ function renderDocumentSummary() {
   elements["review-page-count"].textContent = String(state.document.block_review_page_count);
   elements["artifact-hash"].textContent = formatHash(state.document.block_artifact_sha256);
   elements["artifact-hash"].title = state.document.block_artifact_sha256;
+}
+function renderParity() {
+  const report = state.parity;
+  elements["parity-panel"].hidden = !report;
+  if (!report) return;
+  elements["parity-summary"].textContent = report.passed
+    ? `Passed · ${report.summary.total} comparison records · handoff eligible`
+    : `Blocked · ${report.summary.total} comparison records · ${report.blockers.length} unresolved gates`;
+  for (const [id, field] of [
+    ["parity-matched", "matched"], ["parity-missing", "missing"],
+    ["parity-extra", "extra"], ["parity-changed", "changed"],
+    ["parity-provenance", "provenance_shifted"],
+  ]) elements[id].textContent = String(report.summary[field]);
+  elements["parity-blockers"].replaceChildren(...report.blockers.map((blocker) => {
+    const item = document.createElement("li");
+    item.textContent = `${human(blocker.category)}: ${blocker.message}`;
+    return item;
+  }));
 }
 function populateTypeOptions(select) {
   select.replaceChildren(...blockTypes.map(([value, label]) => {
@@ -858,6 +879,11 @@ async function initialize() {
   try {
     const [documentsPayload, artifactPayload, pagesPayload] = await Promise.all([fetchJson("/api/internal/pdf-inventory-review/documents"), fetchJson(`${apiRoot}/artifacts`), fetchJson(`${apiRoot}/pages`)]);
     state.document = documentsPayload.documents[0]; state.artifact = artifactPayload.artifact; state.pages = pagesPayload.pages; populateTableCellTypes();
+    if (state.document.schema_version === 2) {
+      fetchJson(`${apiRoot}/parity`).then((report) => {
+        state.parity = report; renderParity();
+      }).catch((error) => showError(error.message));
+    }
     elements["validation-status"].textContent = "Stages 0–1 validated"; elements["validation-status"].className = "status-badge valid";
     elements["editing-status"].textContent = state.document.write_enabled ? "Editing enabled" : "Editing disabled";
     elements["editing-status"].className = `status-badge ${state.document.write_enabled ? "valid" : "pending"}`;

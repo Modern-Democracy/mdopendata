@@ -275,6 +275,18 @@ await withServer({
   assert(artifacts.artifact?.schema_version === 2, "Version 2 source artifact is not active.");
   assert(artifacts.block_artifact?.schema_version === 2, "Version 2 block artifact is not active.");
   assert(artifacts.review_artifact?.schema_version === 2, "Version 2 review artifact is not active.");
+  const parity = await (
+    await expectStatus(
+      baseUrl,
+      "/api/internal/pdf-inventory-review/documents/ctown-budget-2026-2027/parity",
+      200,
+    )
+  ).json();
+  assert(parity.artifact_type === "parity_report", "Phase 7 parity artifact is not active.");
+  assert(parity.summary?.matched === 751, "Phase 7 matched count is incorrect.");
+  assert(parity.summary?.missing === 0 && parity.summary?.changed === 0, "Phase 7 contains structural loss or change.");
+  assert(parity.summary?.provenance_shifted === 104, "Phase 7 provenance-shift count is incorrect.");
+  assert(parity.passed === false && parity.blockers?.length === 4, "Phase 7 handoff blockers are incomplete.");
   const beforeBlockHash = document.block_artifact_sha256;
   const beforeReviewHash = document.review_artifact_sha256;
   const preview = await (

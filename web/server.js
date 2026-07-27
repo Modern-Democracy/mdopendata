@@ -65,6 +65,17 @@ const pdfInventoryReviewDecisionArtifactPath = path.join(
   "review",
   "review-decisions.json",
 );
+const pdfInventoryReviewParityArtifactPath = path.join(
+  repoRoot,
+  "data",
+  "budget",
+  "charlottetown",
+  "2026-2027",
+  "staged-pdf",
+  "v2",
+  "phase-7",
+  "parity-report.json",
+);
 const stagedPdfValidatorPath = path.join(repoRoot, "scripts", "validate-staged-pdf-artifacts.py");
 const stagedPdfPropagationPreviewPath = path.join(
   repoRoot,
@@ -941,6 +952,53 @@ async function executePdfInventoryTemplatePolicy(command = null) {
   }
 }
 
+async function loadPdfInventoryParityReport() {
+  if (pdfInventoryReviewSchemaVersion !== 2) {
+    throw stagedPdfReviewError("Phase 7 parity requires version 2.", 400);
+  }
+  let raw;
+  try {
+    raw = await readFile(pdfInventoryReviewParityArtifactPath);
+  } catch {
+    throw stagedPdfReviewError("Phase 7 parity report is unavailable.", 503);
+  }
+  const powershell = process.platform === "win32" ? "powershell.exe" : "pwsh";
+  const wrapper = path.join(repoRoot, "scripts", "python.ps1");
+  try {
+    await execFileAsync(
+      powershell,
+      [
+        "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", wrapper,
+        stagedPdfValidatorPath, pdfInventoryReviewParityArtifactPath,
+      ],
+      { cwd: repoRoot, timeout: 120000, windowsHide: true, maxBuffer: 1024 * 1024 },
+    );
+  } catch (cause) {
+    const error = stagedPdfReviewError(
+      "Phase 7 parity report did not pass canonical validation.",
+      503,
+    );
+    error.cause = cause;
+    throw error;
+  }
+  let report;
+  try {
+    report = JSON.parse(raw.toString("utf8"));
+  } catch {
+    throw stagedPdfReviewError("Phase 7 parity report is not valid JSON.", 503);
+  }
+  if (
+    report.artifact_type !== "parity_report"
+    || report.document_key !== pdfInventoryReviewDocumentKey
+  ) {
+    throw stagedPdfReviewError("Phase 7 parity identity is invalid.", 409);
+  }
+  return {
+    ...report,
+    artifact_sha256: sha256Buffer(raw),
+  };
+}
+
 async function queuePdfInventoryReviewCommand(
   command,
   executor = executePdfInventoryReviewCommand,
@@ -954,6 +1012,7 @@ async function handlePdfInventoryReviewApi(request, response, url) {
   const commandPath = `/api/internal/pdf-inventory-review/documents/${pdfInventoryReviewDocumentKey}/commands`;
   const propagationPreviewPath = `/api/internal/pdf-inventory-review/documents/${pdfInventoryReviewDocumentKey}/propagation-preview`;
   const templatePolicyPath = `/api/internal/pdf-inventory-review/documents/${pdfInventoryReviewDocumentKey}/template-policy`;
+  const parityPath = `/api/internal/pdf-inventory-review/documents/${pdfInventoryReviewDocumentKey}/parity`;
   if (url.pathname === propagationPreviewPath && request.method === "POST") {
     if (pdfInventoryReviewSchemaVersion !== 2) {
       throw stagedPdfReviewError("Structural propagation requires version 2.", 400);
@@ -1020,6 +1079,10 @@ async function handlePdfInventoryReviewApi(request, response, url) {
       throw stagedPdfReviewError("Template policies require version 2.", 400);
     }
     sendPdfInventoryReviewJson(response, await executePdfInventoryTemplatePolicy(), 200);
+    return true;
+  }
+  if (url.pathname === parityPath) {
+    sendPdfInventoryReviewJson(response, await loadPdfInventoryParityReport(), 200);
     return true;
   }
 

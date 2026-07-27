@@ -282,6 +282,8 @@ Template and policy promotion require a human review reason, current block and r
 5. Stage 5 adds raw preview aligned to approved blocks and groups without normalization approval.
 6. Stage 7 adds record-level baseline parity and discrepancy decisions.
 
+Phase 7 structural parity is now visible read-only in the explicit version 2 workspace. The panel reports matched, missing, extra, changed, and provenance-shifted counts plus every handoff blocker. It does not expose a transition control; switching the active workspace or downstream extraction input remains separately gated.
+
 Each slice remains shadow-only until its schema, semantic, deterministic-rerun, traversal, and browser tests pass.
 
 ## Deferred Work

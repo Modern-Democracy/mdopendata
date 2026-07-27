@@ -32,6 +32,7 @@ Version 1 stays operational and immutable while version 2 is built and validated
 - Phase 4 completed on 2026-07-27. Approved table and formatted-text blocks can produce deterministic, read-only current-document candidate previews with exact, light, material, and one-off classifications. Selected eligible candidates apply atomically; reviewer rejections append document-scoped negative controls to the existing review chain.
 - Phase 5 completed on 2026-07-27. Human-approved structures can be promoted into immutable document-scoped templates with immutable review policies, deterministic sampling, fail-closed automation gates, suspension, and exact audit provenance.
 - Phase 6 is in progress. The profile and preview contracts, deterministic embedded-document classifier, exact page-accounting controls, and read-only reviewer preview are implemented. Promotion of a real municipal-source profile remains blocked until exact approved structural-template and review-policy references plus positive and nearest-negative agenda-package controls are available.
+- Phase 7 core is in progress. Deterministic structural parity confirms 751 exact matches, 104 approved provenance-only shifts, one explicit migration event, and zero missing or changed structural records. Active handoff remains blocked by absent logical groups, absent shadow observations for all 2,290 published snapshot 3 records, unverified live publication state, and missing transition approval.
 
 ## Phase 0: Freeze Baseline And Controls
 
@@ -172,6 +173,14 @@ The isolated synthetic gate passes. Remaining gate work is to promote exact agen
 
 ## Phase 7: Parity And Handoff
 
+### Status
+
+In progress on 2026-07-27. `scripts/generate-staged-pdf-v2-parity-report.py` compares the frozen version 1 and shadow version 2 source-page evidence, page dispositions, blocks, relationships, and review history by stable keys. Matched records retain canonical fingerprints; discrepancies retain exact changed paths, old and new values, source locators, and dispositions. The generated version 2 parity artifact is stored at `data/budget/charlottetown/2026-2027/staged-pdf/v2/phase-7/parity-report.json`.
+
+The current report contains 856 records: 751 matched, zero missing, one extra migration event, zero changed, and 104 provenance-shifted review events. The provenance shifts are limited to version 2 `decision_basis`, nullable `policy_ref`, and human `actor_type` fields and are disposed by migration decision `ctown-budget-2026-2027:decision:000105`. Two clean generations are byte-identical with artifact SHA-256 `dd2cbdcbe6dc7b0b3a7e15d1029fd2680a3b3611352a722eba115aad386ac2cf`.
+
+The report is intentionally `passed: false`. Four blockers prevent handoff: Stage 2 logical groups are absent, no shadow observation export exists for all 2,290 published snapshot 3 observations, live publication state was not queried, and no active-workspace transition is approved. The version 2 local reviewer exposes the validated report and blockers read-only. Generation performs no database or publication writes and refuses to replace a differing existing report.
+
 ### Work
 
 - compare version 2 structure and extracted source coverage with the frozen version 1 and published baselines
@@ -182,6 +191,8 @@ The isolated synthetic gate passes. Remaining gate work is to promote exact agen
 ### Gate
 
 Every discrepancy has exact source evidence and a disposition. No source fragment is lost or duplicated. Database and publication outputs remain unchanged until a later explicitly approved transition.
+
+Structural parity passes, including complete page and block key coverage. Full Phase 7 parity and handoff do not pass until the four recorded blockers are resolved.
 
 ## Implementation Order By File
 
