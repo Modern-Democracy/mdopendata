@@ -18,6 +18,7 @@ SOURCE_PATH = WORKSPACE_ROOT / "v2/stage-0/source-evidence.json"
 BLOCK_PATH = WORKSPACE_ROOT / "v2/stage-1/block-inventory.json"
 REVIEW_PATH = WORKSPACE_ROOT / "v2/review/review-decisions.json"
 GENERATOR_PATH = ROOT / "scripts/generate-staged-pdf-block-inventory-v2.py"
+POLICY_MANAGER_PATH = ROOT / "scripts/manage-staged-pdf-template-policy-v2.py"
 MATCHER_NAME = "document-structural-propagation"
 MATCHER_VERSION = "1"
 MATCHER_CONFIG = {
@@ -62,6 +63,17 @@ def load_generator() -> Any:
     spec = importlib.util.spec_from_file_location("propagation_generator", GENERATOR_PATH)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Could not load generator: {GENERATOR_PATH}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def load_policy_manager() -> Any:
+    spec = importlib.util.spec_from_file_location(
+        "template_policy_manager", POLICY_MANAGER_PATH
+    )
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"Could not load policy manager: {POLICY_MANAGER_PATH}")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -465,7 +477,7 @@ def generate_preview(
             }
         )
     candidates.sort(key=lambda item: (item["page_number"], item["target_block_key"]))
-    return {
+    result = {
         "scope": "current_document",
         "source_block_key": source_block_key,
         "pattern_sha256": pattern_hash,
@@ -476,6 +488,11 @@ def generate_preview(
         },
         "candidates": candidates,
     }
+    policy_manager = load_policy_manager()
+    policy_manager.configure_workspace(BLOCK_PATH.parents[1])
+    return policy_manager.evaluate_preview(
+        result, artifact["document_key"], review
+    )
 
 
 def preview_command(command: dict[str, Any]) -> dict[str, Any]:

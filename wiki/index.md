@@ -119,9 +119,9 @@ This page catalogs the root wiki structure and links to active project wiki area
 | [Staged PDF artifact JSON Schemas](./implementation/staged-pdf-artifact-json-schemas.md) | Draft 2020-12 contracts, semantic invariants, validation commands, and compatibility rules for staged PDF artifacts. |
 | [Staged PDF reviewer propagation requirements](./implementation/staged-pdf-reviewer-propagation-requirements.md) | Approved priorities and acceptance criteria for structural propagation, spanning cells, review reduction, and agenda-package reuse. |
 | [Staged PDF artifact version 2 schema design](./implementation/staged-pdf-artifact-v2-schema-design.md) | Implemented parallel version 2 contract for internal titles, optional row and column spans, table titles, template review policies, and policy audit provenance. |
-| [Staged PDF artifact version 2 implementation plan](./implementation/staged-pdf-artifact-v2-implementation-plan.md) | Gated implementation sequence with Phase 0 baseline controls through Phase 4 document-scoped structural propagation complete. |
+| [Staged PDF artifact version 2 implementation plan](./implementation/staged-pdf-artifact-v2-implementation-plan.md) | Gated implementation sequence with Phase 0 baseline controls through Phase 5 immutable document-scoped templates and review policies complete. |
 | [Charlottetown staged PDF shadow pilot](./implementation/staged-pdf-inventory-extraction-charlottetown-pilot.md) | Frozen baseline, Stage 0 evidence, Stage 1 block inventory, representative controls, and shadow-pilot acceptance criteria. |
-| [Staged PDF inventory review UI](./implementation/staged-pdf-inventory-review-ui-plan.md) | Loopback-only version 1 and explicit version 2 Stage 1 review, including internal regions, effective spans, table titles, relationships, document-scoped propagation, and verification gates. |
+| [Staged PDF inventory review UI](./implementation/staged-pdf-inventory-review-ui-plan.md) | Loopback-only version 1 and explicit version 2 Stage 1 review, including spans, table titles, propagation, immutable templates, review policies, and verification gates. |
 
 ## Plans
 

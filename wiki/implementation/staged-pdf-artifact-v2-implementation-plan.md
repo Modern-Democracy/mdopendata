@@ -125,6 +125,10 @@ Gate passed. The matcher processes target evidence page by page, recalculates ta
 
 ## Phase 5: Structural Templates And Review Policies
 
+### Status
+
+Completed on 2026-07-27. Phase 5 remains restricted to the current document; municipal-source and agenda-package reuse remains Phase 6 work.
+
 ### Work
 
 - promote reviewed structures into immutable template versions
@@ -137,6 +141,8 @@ Gate passed. The matcher processes target evidence page by page, recalculates ta
 ### Gate
 
 No template self-promotes. Material variation never auto-approves. Sample selection is deterministic. Every automatic approval resolves exact source, template, policy, matcher, prior, result, and event hashes. Suspension prevents subsequent automatic approvals.
+
+Gate passed. Human actions create immutable, semantic-versioned `structural_template` and `template_review_policy` artifacts bound to the recomputed source-pattern hash and exact upstream artifact hashes. Policies begin with `review_required`; `sample_review` and `auto_approve` fail closed until schema-validated positive, negative, reviewed-application, precision, and false-approval gates pass. Sampling is deterministic from the policy hash and target key. Material, non-allowlisted light, negative-control, matcher-drift, sample-rejection, and suspended-policy conditions block automatic application. Automatic writes recompute the preview and append a system-actor `auto_approve` event containing the exact policy and automation context. Isolated tests cover immutability, promotion gates, deterministic sampling, material blocking, suspension supersession, runtime sample-rejection suspension, and automatic audit hashes; server smoke tests confirm the canonical registry remains empty until a reviewer promotes a pattern. Desktop and 700-pixel browser checks show the policy panel, one eligible pilot candidate, disabled write controls in read-only mode, zero horizontal overflow, and zero console warnings or errors.
 
 ## Phase 6: Agenda-Package Reuse
 

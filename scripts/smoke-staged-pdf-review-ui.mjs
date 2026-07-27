@@ -127,6 +127,10 @@ await withServer({ PDF_INVENTORY_REVIEW_ENABLED: "1" }, async (baseUrl) => {
   assert(shellText.includes("Find similar"), "Document propagation discovery control is missing.");
   assert(shellText.includes("Apply selected"), "Document propagation apply control is missing.");
   assert(shellText.includes("Reject selected"), "Document propagation rejection control is missing.");
+  assert(shellText.includes("Promote template"), "Immutable-template promotion control is missing.");
+  assert(shellText.includes("Sample review"), "Sample-review policy control is missing.");
+  assert(shellText.includes("Auto approve"), "Automatic-approval policy control is missing.");
+  assert(shellText.includes("Suspend policy"), "Policy suspension control is missing.");
   for (const selectionLabel of ["Cell", "Row", "Column"]) {
     assert(shellText.includes(`>${selectionLabel}</button>`), `${selectionLabel} selection control is missing.`);
   }
@@ -143,6 +147,8 @@ await withServer({ PDF_INVENTORY_REVIEW_ENABLED: "1" }, async (baseUrl) => {
   assert(appScript.includes('["title", "Title"]'), "Formatted-text title control is missing.");
   assert(appScript.includes("propagation-preview"), "Propagation preview API integration is missing.");
   assert(appScript.includes('"apply_template"'), "Atomic propagation command is missing.");
+  assert(appScript.includes('"auto_approve"'), "Policy-governed automatic command is missing.");
+  assert(appScript.includes("template-policy"), "Template-policy API integration is missing.");
   const expectedTypeOrder = ['["title", "Title"]', '["formatted_text", "Formatted Text"]', '["table", "Table"]', '["chart", "Graph/Chart"]', '["other_visual", "Diagram/Other Visual"]', '["map", "Map"]', '["table_of_contents", "Table of Contents"]', '["header", "Header"]', '["footer", "Footer"]', '["page_number", "Page Number"]', '["divider", "Divider"]', '["signature", "Signature"]'];
   let priorTypePosition = -1;
   for (const typeText of expectedTypeOrder) {
@@ -291,6 +297,23 @@ await withServer({
   assert(preview.scope === "current_document", "Propagation preview escaped document scope.");
   assert(preview.candidates.some((candidate) => candidate.applicable), "Propagation preview found no positive control.");
   assert(preview.candidates.some((candidate) => candidate.fit_class === "material_variation"), "Propagation preview found no material negative control.");
+  assert(preview.candidates.every((candidate) => candidate.policy_evaluation?.outcome === "review_required"), "Unregistered patterns must require review.");
+  assert(preview.registry?.template === null && preview.registry?.policy === null, "Canonical pilot unexpectedly contains promoted template policy artifacts.");
+  const registry = await (
+    await expectStatus(
+      baseUrl,
+      "/api/internal/pdf-inventory-review/documents/ctown-budget-2026-2027/template-policy",
+      200,
+    )
+  ).json();
+  assert(Array.isArray(registry.templates) && registry.templates.length === 0, "Canonical template registry is not empty.");
+  assert(Array.isArray(registry.policies) && registry.policies.length === 0, "Canonical policy registry is not empty.");
+  await expectStatus(
+    baseUrl,
+    "/api/internal/pdf-inventory-review/documents/ctown-budget-2026-2027/template-policy",
+    403,
+    { method: "POST", headers: { "content-type": "application/json" }, body: "{}" },
+  );
   const after = (await (await expectStatus(baseUrl, "/api/internal/pdf-inventory-review/documents", 200)).json()).documents[0];
   assert(after.block_artifact_sha256 === beforeBlockHash, "Propagation preview changed the block artifact.");
   assert(after.review_artifact_sha256 === beforeReviewHash, "Propagation preview changed the review artifact.");

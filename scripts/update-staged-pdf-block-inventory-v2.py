@@ -36,7 +36,7 @@ ALLOWED_ACTIONS = {
     "split_table_rows", "merge_table_rows", "split_table_columns", "merge_table_columns",
     "merge_table_cells", "split_table_cell", "set_table_cell_span",
     "set_table_cell_type", "migrate_table_grids", "link", "unlink",
-    "apply_template", "reject",
+    "apply_template", "auto_approve", "reject",
 }
 CONFIG_HASH = hashlib.sha256(b"staged-pdf-block-review-writer-v4\n").hexdigest()
 
@@ -465,7 +465,7 @@ def apply_command(
             })
         return target_keys, locators, changes
 
-    if action == "apply_template":
+    if action in {"apply_template", "auto_approve"}:
         source_block_key = command.get("source_block_key")
         pattern_hash = command.get("pattern_sha256")
         candidates = command.get("_verified_propagation_candidates")
@@ -479,6 +479,15 @@ def apply_command(
         _, source_block = locate_block(artifact, source_block_key)
         locators.append(source_locator(source_block))
         affected: list[str] = []
+        propagated_review = (
+            {
+                "status": "approved",
+                "reason_codes": ["template-policy-approval"],
+                "decision_ids": [decision_id],
+            }
+            if action == "auto_approve"
+            else review_state(decision_id)
+        )
         for candidate in candidates:
             target_key = candidate["target_block_key"]
             _, target = locate_block(artifact, target_key)
@@ -499,14 +508,14 @@ def apply_command(
             )
             ensure_removed_regions_unreferenced(artifact, old_keys - new_keys)
             if field == "table_grid":
-                proposal["review"] = review_state(decision_id)
+                proposal["review"] = copy.deepcopy(propagated_review)
                 for cell in proposal["cells"]:
-                    cell["review"] = review_state(decision_id)
+                    cell["review"] = copy.deepcopy(propagated_review)
             else:
                 for region in proposal:
-                    region["review"] = review_state(decision_id)
+                    region["review"] = copy.deepcopy(propagated_review)
             target[field] = proposal
-            target["review"] = review_state(decision_id)
+            target["review"] = copy.deepcopy(propagated_review)
             target["confidence"] = {
                 "level": "reviewed",
                 "score": candidate["confidence"],
@@ -517,6 +526,19 @@ def apply_command(
                 "prior_value": prior,
                 "new_value": copy.deepcopy(proposal),
             })
+            if action == "auto_approve":
+                changes.append({
+                    "field_path": f"/policy_evaluations/{target_key}",
+                    "prior_value": None,
+                    "new_value": {
+                        "policy_evaluation": copy.deepcopy(
+                            candidate["policy_evaluation"]
+                        ),
+                        "automation_context": copy.deepcopy(
+                            candidate["automation_context"]
+                        ),
+                    },
+                })
             locators.append(source_locator(target))
             affected.append(target_key)
         return affected, locators, changes
@@ -1076,7 +1098,7 @@ def update(command_path: Path) -> dict[str, Any]:
     if not reason:
         raise ValueError("reason is required")
     review = read_json(REVIEW_PATH) if REVIEW_PATH.exists() else initial_review_artifact(block)
-    if command.get("action") in {"apply_template", "reject"}:
+    if command.get("action") in {"apply_template", "auto_approve", "reject"}:
         expected_review_hash = command.get("expected_review_artifact_sha256")
         current_review_hash = digest_path(REVIEW_PATH)
         if expected_review_hash != current_review_hash:
@@ -1094,7 +1116,7 @@ def update(command_path: Path) -> dict[str, Any]:
             candidate["target_block_key"]: candidate
             for candidate in preview["candidates"]
         }
-        if command["action"] == "apply_template":
+        if command["action"] in {"apply_template", "auto_approve"}:
             requested = command.get("targets")
             if (
                 not isinstance(requested, list)
@@ -1121,8 +1143,28 @@ def update(command_path: Path) -> dict[str, Any]:
                     raise RuntimeError(
                         f"stale or ineligible propagation target: {item['target_block_key']}"
                     )
+                if (
+                    command["action"] == "auto_approve"
+                    and candidate["policy_evaluation"]["outcome"] != "auto_approved"
+                ):
+                    raise RuntimeError(
+                        f"policy does not authorize automatic approval: {item['target_block_key']}"
+                    )
                 verified.append(candidate)
             command["_verified_propagation_candidates"] = verified
+            if command["action"] == "auto_approve":
+                policy_refs = {
+                    canonical_bytes(candidate["policy_evaluation"]["policy_ref"])
+                    for candidate in verified
+                }
+                if len(policy_refs) != 1 or any(
+                    candidate["policy_evaluation"]["policy_ref"] is None
+                    for candidate in verified
+                ):
+                    raise RuntimeError("automatic approvals require one exact policy")
+                command["_verified_policy_ref"] = copy.deepcopy(
+                    verified[0]["policy_evaluation"]["policy_ref"]
+                )
         else:
             target_keys = command.get("target_block_keys")
             if (
@@ -1137,19 +1179,34 @@ def update(command_path: Path) -> dict[str, Any]:
     block_bytes = canonical_bytes(block)
     result_hash = digest_bytes(block_bytes)
     previous_hash = review["events"][-1]["event_sha256"] if review["events"] else None
+    automatic = command["action"] == "auto_approve"
     event = {
         "decision_id": decision_id, "sequence": sequence,
         "occurred_at": datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z"),
-        "reviewer": {"reviewer_id": "local-reviewer", "display_name": "Local reviewer", "role": "data-reviewer"},
+        "reviewer": (
+            {
+                "reviewer_id": "staged-pdf-policy-evaluator",
+                "display_name": "Staged PDF policy evaluator",
+                "role": "automation",
+            }
+            if automatic
+            else {
+                "reviewer_id": "local-reviewer",
+                "display_name": "Local reviewer",
+                "role": "data-reviewer",
+            }
+        ),
         "action": command["action"], "reason": reason,
         "prior_artifact_sha256": prior_hash, "result_artifact_sha256": result_hash,
         "previous_event_sha256": previous_hash, "event_sha256": "0" * 64,
         "affected_keys": affected, "source_locators": locators, "changes": changes,
     }
     if block.get("schema_version") == 2:
-        event["reviewer"]["actor_type"] = "human"
-        event["decision_basis"] = "reviewer"
-        event["policy_ref"] = None
+        event["reviewer"]["actor_type"] = "system" if automatic else "human"
+        event["decision_basis"] = "template_policy" if automatic else "reviewer"
+        event["policy_ref"] = (
+            copy.deepcopy(command["_verified_policy_ref"]) if automatic else None
+        )
     event_hash_payload = copy.deepcopy(event); event_hash_payload.pop("event_sha256")
     event["event_sha256"] = digest_bytes(canonical_bytes(event_hash_payload))
     target_ref = {

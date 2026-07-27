@@ -265,11 +265,19 @@ Phase 4 adds `Find similar` for approved table and formatted-text blocks. `scrip
 
 Preview is read-only and bound to both the block-artifact hash and review-artifact hash. The reviewer can compare current and proposed overlays, exclude candidates, cancel without a write, atomically apply selected exact or light candidates, or append a `reject` event. Rejection records a document-scoped negative control in the review event and changes the same candidate to `one_off` on later previews. Material candidates never enter an apply command.
 
+## Version 2 Structural Templates And Review Policies
+
+Status: complete on 2026-07-27.
+
+After `Find similar`, the reviewer can promote the approved source structure into an immutable document-scoped template and create a versioned review policy. The policy panel reports exact template and policy versions, current mode, runtime suspension, and each candidate's policy outcome. Controls support `review_required`, gated deterministic `sample_review`, gated `auto_approve`, demotion, suspension, and application of only the candidates that the server recomputes as automatically approved.
+
+Template and policy promotion require a human review reason, current block and review hashes, an approved source block, and the recomputed pattern hash. The server never promotes a template from preview alone. Automatic application uses a system audit actor, exact policy reference, matcher hash, fit classification, matching and mismatch evidence, source and target locators, prior and result artifact hashes, and chained event hash. Material or non-allowlisted fits remain blocked. Configured material drift, matcher change, negative-control failure, sample rejection, explicit suspension, and demotion prevent further automatic approvals.
+
 ## Later Slices
 
 1. Extend Stage 1 mutation with split, merge, reorder, page-disposition changes, and command preview.
 2. Stage 2 adds group membership, continuation linking, inherited headers, stop boundaries, and group relationship review.
-3. Phase 5 promotes reviewed document patterns into immutable templates and adds policy-governed anchors, tolerances, and broader negative controls.
+3. Phase 5 is complete for immutable document-scoped templates and policy-governed review reduction.
 4. Stage 4 extends append-only decisions to later-stage artifacts.
 5. Stage 5 adds raw preview aligned to approved blocks and groups without normalization approval.
 6. Stage 7 adds record-level baseline parity and discrepancy decisions.

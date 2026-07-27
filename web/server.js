@@ -71,6 +71,11 @@ const stagedPdfPropagationPreviewPath = path.join(
   "scripts",
   "preview-staged-pdf-structural-propagation.py",
 );
+const stagedPdfTemplatePolicyManagerPath = path.join(
+  repoRoot,
+  "scripts",
+  "manage-staged-pdf-template-policy-v2.py",
+);
 const stagedPdfBlockWriterPath = path.join(
   repoRoot,
   "scripts",
@@ -883,8 +888,54 @@ async function executePdfInventoryPropagationPreview(command) {
   }
 }
 
-async function queuePdfInventoryReviewCommand(command) {
-  const execution = pdfInventoryReviewCommandQueue.then(() => executePdfInventoryReviewCommand(command));
+async function executePdfInventoryTemplatePolicy(command = null) {
+  const commandRoot = path.join(repoRoot, "tmp", "staged-pdf-review-commands");
+  await mkdir(commandRoot, { recursive: true });
+  const commandPath = command
+    ? path.join(commandRoot, `${randomUUID()}.json`)
+    : null;
+  if (commandPath) {
+    await writeFile(commandPath, JSON.stringify(command), { encoding: "utf8", flag: "wx" });
+  }
+  const powershell = process.platform === "win32" ? "powershell.exe" : "pwsh";
+  const wrapper = path.join(repoRoot, "scripts", "python.ps1");
+  const argumentsList = [
+    "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", wrapper,
+    stagedPdfTemplatePolicyManagerPath,
+    ...(commandPath ? ["--command", commandPath] : ["--list"]),
+  ];
+  try {
+    const { stdout } = await execFileAsync(
+      powershell,
+      argumentsList,
+      { cwd: repoRoot, timeout: 120000, windowsHide: true, maxBuffer: 8 * 1024 * 1024 },
+    );
+    const result = JSON.parse(stdout.trim());
+    if (!command) return result;
+    const loaded = await refreshPdfInventoryReviewArtifactAfterWrite();
+    return { ...result, document: pdfInventoryReviewDocumentSummary(loaded) };
+  } catch (cause) {
+    let detail = null;
+    try {
+      detail = JSON.parse(toStringValue(cause.stdout).trim());
+    } catch {
+      detail = null;
+    }
+    const statusCode = detail?.kind === "conflict" ? 409 : detail?.kind === "invalid" ? 400 : 503;
+    throw stagedPdfReviewError(
+      detail?.error || "Template policy operation failed.",
+      statusCode,
+    );
+  } finally {
+    if (commandPath) await unlink(commandPath).catch(() => {});
+  }
+}
+
+async function queuePdfInventoryReviewCommand(
+  command,
+  executor = executePdfInventoryReviewCommand,
+) {
+  const execution = pdfInventoryReviewCommandQueue.then(() => executor(command));
   pdfInventoryReviewCommandQueue = execution.catch(() => {});
   return execution;
 }
@@ -892,6 +943,7 @@ async function queuePdfInventoryReviewCommand(command) {
 async function handlePdfInventoryReviewApi(request, response, url) {
   const commandPath = `/api/internal/pdf-inventory-review/documents/${pdfInventoryReviewDocumentKey}/commands`;
   const propagationPreviewPath = `/api/internal/pdf-inventory-review/documents/${pdfInventoryReviewDocumentKey}/propagation-preview`;
+  const templatePolicyPath = `/api/internal/pdf-inventory-review/documents/${pdfInventoryReviewDocumentKey}/template-policy`;
   if (url.pathname === propagationPreviewPath && request.method === "POST") {
     if (pdfInventoryReviewSchemaVersion !== 2) {
       throw stagedPdfReviewError("Structural propagation requires version 2.", 400);
@@ -916,6 +968,21 @@ async function handlePdfInventoryReviewApi(request, response, url) {
     sendPdfInventoryReviewJson(response, result, 200);
     return true;
   }
+  if (url.pathname === templatePolicyPath && request.method === "POST") {
+    if (pdfInventoryReviewSchemaVersion !== 2) {
+      throw stagedPdfReviewError("Template policies require version 2.", 400);
+    }
+    if (!pdfInventoryReviewWriteRequested) {
+      throw stagedPdfReviewError("Stage 1 review writes are disabled.", 403);
+    }
+    if (url.searchParams.size) {
+      throw stagedPdfReviewError("Query parameters are not supported by the template policy endpoint.", 400);
+    }
+    const command = await readPdfInventoryReviewCommand(request);
+    const result = await queuePdfInventoryReviewCommand(command, executePdfInventoryTemplatePolicy);
+    sendPdfInventoryReviewJson(response, result, 200);
+    return true;
+  }
   if (request.method !== "GET") {
     sendPdfInventoryReviewJson(response, { error: "Method not allowed." }, 405);
     return true;
@@ -937,6 +1004,14 @@ async function handlePdfInventoryReviewApi(request, response, url) {
   } = loaded;
   const apiRoot = "/api/internal/pdf-inventory-review";
   const documentRoot = `${apiRoot}/documents/${pdfInventoryReviewDocumentKey}`;
+
+  if (url.pathname === templatePolicyPath) {
+    if (pdfInventoryReviewSchemaVersion !== 2) {
+      throw stagedPdfReviewError("Template policies require version 2.", 400);
+    }
+    sendPdfInventoryReviewJson(response, await executePdfInventoryTemplatePolicy(), 200);
+    return true;
+  }
 
   if (url.pathname === `${apiRoot}/documents`) {
     sendPdfInventoryReviewJson(response, {

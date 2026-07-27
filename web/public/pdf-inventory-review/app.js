@@ -46,6 +46,9 @@ const ids = [
   "cell-span-controls", "table-row-span", "table-column-span", "save-table-cell-span",
   "propagation-editor", "find-similar", "propagation-summary", "propagation-list",
   "propagation-actions", "cancel-propagation", "reject-propagation", "apply-propagation",
+  "template-policy-panel", "template-policy-summary", "promote-template",
+  "create-review-policy", "promote-sample-policy", "promote-auto-policy",
+  "apply-automatic", "demote-policy", "suspend-policy",
   "relationship-type", "association-help", "link-source-status", "link-target-status", "set-link-source",
   "cancel-link-source", "save-link", "relationship-list",
   "render-hash", "thumbnail-hash", "embedded-hash", "ocr-hash", "source-citation", "error-banner",
@@ -85,7 +88,7 @@ async function sendCommand(command) {
       state.selectedCellKey = null; state.selectedCellKeys = []; state.selectedGridRange = null; state.gridSelectionAnchor = null;
     }
     state.document = payload.document;
-    if (["apply_template", "reject"].includes(command.action)) {
+    if (["apply_template", "auto_approve", "reject"].includes(command.action)) {
       state.propagation = null; state.propagationSelected = []; state.propagationFocusKey = null;
     }
     for (const update of payload.page_updates || []) {
@@ -548,6 +551,7 @@ function renderPropagationOverlay() {
 function renderPropagation() {
   const active = Boolean(state.propagation);
   elements["propagation-actions"].hidden = !active;
+  elements["template-policy-panel"].hidden = !active;
   if (!active) {
     elements["propagation-summary"].textContent = "Use this approved structure as a document-scoped source pattern.";
     elements["propagation-list"].replaceChildren();
@@ -569,7 +573,8 @@ function renderPropagation() {
     });
     const text = document.createElement("span");
     const mismatch = candidate.mismatch_evidence.map((item) => item.message).join(" ");
-    text.textContent = `Page ${candidate.page_number} · ${human(candidate.fit_class)} · ${Math.round(candidate.confidence * 100)}% · ${candidate.target_block_key}${mismatch ? ` · ${mismatch}` : ""}`;
+    const policyOutcome = candidate.policy_evaluation?.outcome || "review_required";
+    text.textContent = `Page ${candidate.page_number} · ${human(candidate.fit_class)} · ${Math.round(candidate.confidence * 100)}% · ${human(policyOutcome)} · ${candidate.target_block_key}${mismatch ? ` · ${mismatch}` : ""}`;
     const view = document.createElement("button"); view.type = "button"; view.textContent = "Compare overlays";
     view.disabled = !candidate.proposal;
     view.addEventListener("click", (event) => {
@@ -581,6 +586,30 @@ function renderPropagation() {
   elements["propagation-list"].replaceChildren(fragment);
   elements["apply-propagation"].disabled = !state.propagationSelected.some((key) => propagationCandidate(key)?.applicable);
   elements["reject-propagation"].disabled = state.propagationSelected.length === 0;
+  const templateEntry = state.propagation.registry?.template;
+  const policyEntry = state.propagation.registry?.policy;
+  const policy = policyEntry?.artifact;
+  elements["template-policy-summary"].textContent = !templateEntry
+    ? "No immutable template is registered for this pattern."
+    : !policy
+      ? `Template ${templateEntry.artifact.template_version} · ${formatHash(templateEntry.sha256)} · no policy`
+      : `Template ${templateEntry.artifact.template_version} · policy ${policy.policy_version} · ${human(policy.mode)}${state.propagation.registry.runtime_suspended ? " · runtime suspended" : ""}`;
+  elements["promote-template"].hidden = Boolean(templateEntry);
+  elements["create-review-policy"].hidden = !templateEntry || policy?.mode === "review_required";
+  elements["promote-sample-policy"].hidden = !templateEntry;
+  elements["promote-auto-policy"].hidden = !templateEntry;
+  elements["demote-policy"].hidden = !policy || policy.mode === "review_required";
+  elements["suspend-policy"].hidden = !policy;
+  const automatic = state.propagation.candidates.filter(
+    (candidate) => candidate.policy_evaluation?.outcome === "auto_approved",
+  );
+  elements["apply-automatic"].hidden = automatic.length === 0;
+  for (const id of [
+    "promote-template", "create-review-policy", "promote-sample-policy",
+    "promote-auto-policy", "demote-policy", "suspend-policy", "apply-automatic",
+  ]) {
+    elements[id].disabled = !state.document?.write_enabled || state.saving;
+  }
 }
 
 async function findSimilar() {
@@ -605,6 +634,40 @@ async function findSimilar() {
     showError(error.message);
   } finally {
     elements["find-similar"].disabled = false;
+  }
+}
+
+async function sendTemplatePolicyCommand(action, extra = {}) {
+  if (!state.propagation || !state.document?.write_enabled || state.saving) return null;
+  const reason = elements["edit-reason"].value.trim();
+  if (!reason) { showError("A review reason is required."); return null; }
+  state.saving = true; document.body.classList.add("saving"); clearError();
+  try {
+    const response = await fetch(`${apiRoot}/template-policy`, {
+      method: "POST", cache: "no-store", headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        action,
+        ...extra,
+        document_key: documentKey,
+        source_block_key: state.propagation.source_block_key,
+        pattern_sha256: state.propagation.pattern_sha256,
+        expected_artifact_sha256: state.document.block_artifact_sha256,
+        expected_review_artifact_sha256: state.document.review_artifact_sha256,
+        reason,
+      }),
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(payload.error || `Template policy command failed with HTTP ${response.status}.`);
+    state.document = payload.document;
+    state.saving = false;
+    await findSimilar();
+    renderDocumentSummary();
+    return payload;
+  } catch (error) {
+    showError(error.message);
+    return null;
+  } finally {
+    state.saving = false; document.body.classList.remove("saving"); renderPropagation();
   }
 }
 
@@ -852,6 +915,28 @@ elements["reject-propagation"].addEventListener("click", () => {
     source_block_key: state.propagation.source_block_key,
     pattern_sha256: state.propagation.pattern_sha256,
     target_block_keys: state.propagationSelected,
+  });
+});
+elements["promote-template"].addEventListener("click", () => sendTemplatePolicyCommand("promote_template"));
+elements["create-review-policy"].addEventListener("click", () => sendTemplatePolicyCommand("promote_policy", { mode: "review_required" }));
+elements["promote-sample-policy"].addEventListener("click", () => sendTemplatePolicyCommand("promote_policy", { mode: "sample_review" }));
+elements["promote-auto-policy"].addEventListener("click", () => sendTemplatePolicyCommand("promote_policy", { mode: "auto_approve" }));
+elements["demote-policy"].addEventListener("click", () => sendTemplatePolicyCommand("demote_policy"));
+elements["suspend-policy"].addEventListener("click", () => sendTemplatePolicyCommand("suspend_policy"));
+elements["apply-automatic"].addEventListener("click", () => {
+  if (!state.propagation) return;
+  const targets = state.propagation.candidates
+    .filter((candidate) => candidate.policy_evaluation?.outcome === "auto_approved")
+    .map((candidate) => ({
+      target_block_key: candidate.target_block_key,
+      proposal_sha256: candidate.proposal_sha256,
+    }));
+  if (!targets.length) return;
+  sendCommand({
+    action: "auto_approve",
+    source_block_key: state.propagation.source_block_key,
+    pattern_sha256: state.propagation.pattern_sha256,
+    targets,
   });
 });
 elements["edit-internal"].addEventListener("click", () => {
