@@ -93,6 +93,17 @@
           <button id="edit-internal" type="button" hidden>Edit internal structure</button>
           <button id="delete-block" class="danger-button" type="button">Delete selected box</button>
         </div>
+        <div id="propagation-editor" class="propagation-editor" hidden>
+          <div class="editor-row"><strong>Document propagation</strong><button id="find-similar" type="button">Find similar</button></div>
+          <p id="propagation-summary" class="block-summary">Use an approved table or formatted-text structure as the source pattern.</p>
+          <div id="propagation-list" class="propagation-list"></div>
+          <div id="propagation-actions" class="editor-row" hidden>
+            <button id="cancel-propagation" type="button">Cancel preview</button>
+            <button id="reject-propagation" class="danger-button" type="button">Reject selected</button>
+            <button id="apply-propagation" type="button">Apply selected</button>
+          </div>
+          <p class="editor-help">Preview is read-only. Exact and light variations may be selected; material variations are blocked. Rejections become document-scoped negative controls.</p>
+        </div>
         <div id="region-editor" class="region-editor" hidden>
           <div class="editor-row"><strong>Internal structure</strong><button id="exit-internal" type="button">Exit internal edit</button></div>
           <p id="region-summary" class="block-summary"></p>

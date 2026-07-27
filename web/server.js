@@ -54,7 +54,23 @@ const pdfInventoryReviewBlockArtifactPath = path.join(
   "stage-1",
   "block-inventory.json",
 );
+const pdfInventoryReviewDecisionArtifactPath = path.join(
+  repoRoot,
+  "data",
+  "budget",
+  "charlottetown",
+  "2026-2027",
+  "staged-pdf",
+  `v${pdfInventoryReviewSchemaVersion}`,
+  "review",
+  "review-decisions.json",
+);
 const stagedPdfValidatorPath = path.join(repoRoot, "scripts", "validate-staged-pdf-artifacts.py");
+const stagedPdfPropagationPreviewPath = path.join(
+  repoRoot,
+  "scripts",
+  "preview-staged-pdf-structural-propagation.py",
+);
 const stagedPdfBlockWriterPath = path.join(
   repoRoot,
   "scripts",
@@ -540,6 +556,7 @@ async function validatePdfInventoryReviewArtifact() {
         stagedPdfValidatorPath,
         pdfInventoryReviewArtifactPath,
         pdfInventoryReviewBlockArtifactPath,
+        pdfInventoryReviewDecisionArtifactPath,
       ],
       { cwd: repoRoot, timeout: 120000, windowsHide: true, maxBuffer: 1024 * 1024 },
     );
@@ -553,13 +570,15 @@ async function validatePdfInventoryReviewArtifact() {
 async function loadPdfInventoryReviewArtifact() {
   let artifactStat;
   let blockArtifactStat;
+  let reviewArtifactStat;
   try {
     artifactStat = await stat(pdfInventoryReviewArtifactPath);
     blockArtifactStat = await stat(pdfInventoryReviewBlockArtifactPath);
+    reviewArtifactStat = await stat(pdfInventoryReviewDecisionArtifactPath);
   } catch {
     throw stagedPdfReviewError("Stage 0 or Stage 1 inventory evidence is unavailable.", 503);
   }
-  const cacheKey = `${artifactStat.size}:${artifactStat.mtimeMs}:${blockArtifactStat.size}:${blockArtifactStat.mtimeMs}`;
+  const cacheKey = `${artifactStat.size}:${artifactStat.mtimeMs}:${blockArtifactStat.size}:${blockArtifactStat.mtimeMs}:${reviewArtifactStat.size}:${reviewArtifactStat.mtimeMs}`;
   if (pdfInventoryReviewArtifactCache?.cacheKey === cacheKey) {
     return pdfInventoryReviewArtifactCache;
   }
@@ -584,11 +603,14 @@ async function loadPdfInventoryReviewArtifactUncached(cacheKey, validateCanonica
   }
   const raw = await readFile(pdfInventoryReviewArtifactPath);
   const blockRaw = await readFile(pdfInventoryReviewBlockArtifactPath);
+  const reviewRaw = await readFile(pdfInventoryReviewDecisionArtifactPath);
   let artifact;
   let blockArtifact;
+  let reviewArtifact;
   try {
     artifact = JSON.parse(raw.toString("utf8"));
     blockArtifact = JSON.parse(blockRaw.toString("utf8"));
+    reviewArtifact = JSON.parse(reviewRaw.toString("utf8"));
   } catch {
     throw stagedPdfReviewError("Stage 0 or Stage 1 evidence is not valid JSON.", 503);
   }
@@ -605,6 +627,13 @@ async function loadPdfInventoryReviewArtifactUncached(cacheKey, validateCanonica
     blockArtifact.source_sha256 !== artifact.source_sha256
   ) {
     throw stagedPdfReviewError("Stage 1 block inventory identity is invalid.", 409);
+  }
+  if (
+    reviewArtifact.artifact_type !== "review_decisions" ||
+    reviewArtifact.document_key !== pdfInventoryReviewDocumentKey ||
+    reviewArtifact.source_sha256 !== artifact.source_sha256
+  ) {
+    throw stagedPdfReviewError("Stage 1 review history identity is invalid.", 409);
   }
   const blocksByPage = new Map();
   for (const page of blockArtifact.page_dispositions) {
@@ -635,6 +664,8 @@ async function loadPdfInventoryReviewArtifactUncached(cacheKey, validateCanonica
     artifactSha256: sha256Buffer(raw),
     blockArtifact,
     blockArtifactSha256: sha256Buffer(blockRaw),
+    reviewArtifact,
+    reviewArtifactSha256: sha256Buffer(reviewRaw),
     blocksByPage,
     cacheKey,
     ocrWordCounts,
@@ -649,11 +680,12 @@ async function loadPdfInventoryReviewArtifactUncached(cacheKey, validateCanonica
 }
 
 async function refreshPdfInventoryReviewArtifactAfterWrite() {
-  const [artifactStat, blockArtifactStat] = await Promise.all([
+  const [artifactStat, blockArtifactStat, reviewArtifactStat] = await Promise.all([
     stat(pdfInventoryReviewArtifactPath),
     stat(pdfInventoryReviewBlockArtifactPath),
+    stat(pdfInventoryReviewDecisionArtifactPath),
   ]);
-  const cacheKey = `${artifactStat.size}:${artifactStat.mtimeMs}:${blockArtifactStat.size}:${blockArtifactStat.mtimeMs}`;
+  const cacheKey = `${artifactStat.size}:${artifactStat.mtimeMs}:${blockArtifactStat.size}:${blockArtifactStat.mtimeMs}:${reviewArtifactStat.size}:${reviewArtifactStat.mtimeMs}`;
   pdfInventoryReviewArtifactLoad = null;
   return loadPdfInventoryReviewArtifactUncached(cacheKey, false);
 }
@@ -712,7 +744,10 @@ function pdfInventoryReviewPageSummary(page, ocrWordCounts, blockPage) {
 }
 
 function pdfInventoryReviewDocumentSummary(loaded) {
-  const { artifact, artifactSha256, blockArtifact, blockArtifactSha256, validation } = loaded;
+  const {
+    artifact, artifactSha256, blockArtifact, blockArtifactSha256,
+    reviewArtifactSha256, validation,
+  } = loaded;
   return {
     document_key: artifact.document_key,
     title: artifact.source.title,
@@ -721,6 +756,7 @@ function pdfInventoryReviewDocumentSummary(loaded) {
     source_sha256: artifact.source_sha256,
     artifact_sha256: artifactSha256,
     block_artifact_sha256: blockArtifactSha256,
+    review_artifact_sha256: reviewArtifactSha256,
     page_count: artifact.source.page_count,
     complete_page_count: artifact.pages.filter((page) => page.evidence_disposition === "complete").length,
     blocked_page_count: artifact.pages.filter((page) => page.evidence_disposition === "blocked").length,
@@ -813,6 +849,40 @@ async function executePdfInventoryReviewCommand(command) {
   }
 }
 
+async function executePdfInventoryPropagationPreview(command) {
+  const commandRoot = path.join(repoRoot, "tmp", "staged-pdf-review-commands");
+  await mkdir(commandRoot, { recursive: true });
+  const commandPath = path.join(commandRoot, `${randomUUID()}.json`);
+  await writeFile(commandPath, JSON.stringify(command), { encoding: "utf8", flag: "wx" });
+  const powershell = process.platform === "win32" ? "powershell.exe" : "pwsh";
+  const wrapper = path.join(repoRoot, "scripts", "python.ps1");
+  try {
+    const { stdout } = await execFileAsync(
+      powershell,
+      [
+        "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", wrapper,
+        stagedPdfPropagationPreviewPath, "--command", commandPath,
+      ],
+      { cwd: repoRoot, timeout: 120000, windowsHide: true, maxBuffer: 8 * 1024 * 1024 },
+    );
+    return JSON.parse(stdout.trim());
+  } catch (cause) {
+    let detail = null;
+    try {
+      detail = JSON.parse(toStringValue(cause.stdout).trim());
+    } catch {
+      detail = null;
+    }
+    const statusCode = detail?.kind === "conflict" ? 409 : detail?.kind === "invalid" ? 400 : 503;
+    throw stagedPdfReviewError(
+      detail?.error || "Structural propagation preview failed.",
+      statusCode,
+    );
+  } finally {
+    await unlink(commandPath).catch(() => {});
+  }
+}
+
 async function queuePdfInventoryReviewCommand(command) {
   const execution = pdfInventoryReviewCommandQueue.then(() => executePdfInventoryReviewCommand(command));
   pdfInventoryReviewCommandQueue = execution.catch(() => {});
@@ -821,6 +891,19 @@ async function queuePdfInventoryReviewCommand(command) {
 
 async function handlePdfInventoryReviewApi(request, response, url) {
   const commandPath = `/api/internal/pdf-inventory-review/documents/${pdfInventoryReviewDocumentKey}/commands`;
+  const propagationPreviewPath = `/api/internal/pdf-inventory-review/documents/${pdfInventoryReviewDocumentKey}/propagation-preview`;
+  if (url.pathname === propagationPreviewPath && request.method === "POST") {
+    if (pdfInventoryReviewSchemaVersion !== 2) {
+      throw stagedPdfReviewError("Structural propagation requires version 2.", 400);
+    }
+    if (url.searchParams.size) {
+      throw stagedPdfReviewError("Query parameters are not supported by propagation preview.", 400);
+    }
+    const command = await readPdfInventoryReviewCommand(request);
+    const result = await executePdfInventoryPropagationPreview(command);
+    sendPdfInventoryReviewJson(response, result, 200);
+    return true;
+  }
   if (url.pathname === commandPath && request.method === "POST") {
     if (!pdfInventoryReviewWriteRequested) {
       throw stagedPdfReviewError("Stage 1 review writes are disabled.", 403);
@@ -846,6 +929,8 @@ async function handlePdfInventoryReviewApi(request, response, url) {
     artifactSha256,
     blockArtifact,
     blockArtifactSha256,
+    reviewArtifact,
+    reviewArtifactSha256,
     blocksByPage,
     ocrWordCounts,
     validation,
@@ -885,6 +970,13 @@ async function handlePdfInventoryReviewApi(request, response, url) {
         page_disposition_count: blockArtifact.page_dispositions.length,
         block_count: blockArtifact.records.length,
         relationship_count: blockArtifact.relationships.length,
+      },
+      review_artifact: {
+        artifact_type: reviewArtifact.artifact_type,
+        artifact_key: reviewArtifact.artifact_key,
+        schema_version: reviewArtifact.schema_version,
+        artifact_sha256: reviewArtifactSha256,
+        event_count: reviewArtifact.events.length,
       },
       validation,
     });

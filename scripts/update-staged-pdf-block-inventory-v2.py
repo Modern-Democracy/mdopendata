@@ -22,6 +22,7 @@ REVIEW_PATH = WORKSPACE_ROOT / "v1/review/review-decisions.json"
 SOURCE_PATH = WORKSPACE_ROOT / "v1/stage-0/source-evidence.json"
 VALIDATOR_PATH = ROOT / "scripts/validate-staged-pdf-artifacts.py"
 GENERATOR_PATH = ROOT / "scripts/generate-staged-pdf-block-inventory-v2.py"
+PROPAGATION_PATH = ROOT / "scripts/preview-staged-pdf-structural-propagation.py"
 ALLOWED_TYPES = {
     "title", "formatted_text", "table", "chart", "other_visual", "map",
     "table_of_contents", "header", "footer", "page_number", "divider", "signature",
@@ -35,6 +36,7 @@ ALLOWED_ACTIONS = {
     "split_table_rows", "merge_table_rows", "split_table_columns", "merge_table_columns",
     "merge_table_cells", "split_table_cell", "set_table_cell_span",
     "set_table_cell_type", "migrate_table_grids", "link", "unlink",
+    "apply_template", "reject",
 }
 CONFIG_HASH = hashlib.sha256(b"staged-pdf-block-review-writer-v4\n").hexdigest()
 
@@ -78,6 +80,17 @@ def load_generator() -> Any:
     spec = importlib.util.spec_from_file_location("staged_pdf_block_generator", GENERATOR_PATH)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Could not load generator: {GENERATOR_PATH}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def load_propagation_matcher() -> Any:
+    spec = importlib.util.spec_from_file_location(
+        "staged_pdf_propagation", PROPAGATION_PATH
+    )
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"Could not load propagation matcher: {PROPAGATION_PATH}")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -399,6 +412,19 @@ def ensure_cells_unreferenced(artifact: dict[str, Any], cells: list[dict[str, An
         raise ValueError("Grid structure cannot change while selected cells are used by relationships")
 
 
+def ensure_removed_regions_unreferenced(
+    artifact: dict[str, Any], removed_keys: set[str]
+) -> None:
+    if any(
+        endpoint["region_key"] in removed_keys
+        for relationship in artifact["relationships"]
+        for endpoint in (relationship["source"], relationship["target"])
+    ):
+        raise ValueError(
+            "Propagated structure cannot remove a relationship endpoint"
+        )
+
+
 def apply_command(
     artifact: dict[str, Any], command: dict[str, Any], decision_id: str, sequence: int
 ) -> tuple[list[str], list[dict[str, Any]], list[dict[str, Any]]]:
@@ -407,6 +433,93 @@ def apply_command(
         raise ValueError(f"Unsupported action: {action}")
     changes: list[dict[str, Any]] = []
     locators: list[dict[str, Any]] = []
+
+    if action == "reject":
+        source_block_key = command.get("source_block_key")
+        pattern_hash = command.get("pattern_sha256")
+        target_keys = command.get("target_block_keys")
+        if (
+            not isinstance(source_block_key, str)
+            or not isinstance(pattern_hash, str)
+            or not isinstance(target_keys, list)
+            or not target_keys
+            or len(set(target_keys)) != len(target_keys)
+            or not all(isinstance(key, str) for key in target_keys)
+        ):
+            raise ValueError("Propagation rejection requires source, pattern, and unique targets")
+        _, source_block = locate_block(artifact, source_block_key)
+        locators.append(source_locator(source_block))
+        for target_key in target_keys:
+            _, target = locate_block(artifact, target_key)
+            locators.append(source_locator(target))
+            changes.append({
+                "field_path": (
+                    f"/propagation_negative_controls/{pattern_hash}/{target_key}"
+                ),
+                "prior_value": None,
+                "new_value": {
+                    "pattern_sha256": pattern_hash,
+                    "source_block_key": source_block_key,
+                    "target_block_key": target_key,
+                },
+            })
+        return target_keys, locators, changes
+
+    if action == "apply_template":
+        source_block_key = command.get("source_block_key")
+        pattern_hash = command.get("pattern_sha256")
+        candidates = command.get("_verified_propagation_candidates")
+        if (
+            not isinstance(source_block_key, str)
+            or not isinstance(pattern_hash, str)
+            or not isinstance(candidates, list)
+            or not candidates
+        ):
+            raise ValueError("Verified propagation candidates are required")
+        _, source_block = locate_block(artifact, source_block_key)
+        locators.append(source_locator(source_block))
+        affected: list[str] = []
+        for candidate in candidates:
+            target_key = candidate["target_block_key"]
+            _, target = locate_block(artifact, target_key)
+            field = candidate["proposal_field"]
+            if field not in {"regions", "table_grid"}:
+                raise ValueError("Unsupported propagation proposal field")
+            prior = copy.deepcopy(target[field])
+            proposal = copy.deepcopy(candidate["proposal"])
+            old_keys = (
+                {cell["cell_key"] for cell in prior["cells"]}
+                if field == "table_grid"
+                else {region["region_key"] for region in prior}
+            )
+            new_keys = (
+                {cell["cell_key"] for cell in proposal["cells"]}
+                if field == "table_grid"
+                else {region["region_key"] for region in proposal}
+            )
+            ensure_removed_regions_unreferenced(artifact, old_keys - new_keys)
+            if field == "table_grid":
+                proposal["review"] = review_state(decision_id)
+                for cell in proposal["cells"]:
+                    cell["review"] = review_state(decision_id)
+            else:
+                for region in proposal:
+                    region["review"] = review_state(decision_id)
+            target[field] = proposal
+            target["review"] = review_state(decision_id)
+            target["confidence"] = {
+                "level": "reviewed",
+                "score": candidate["confidence"],
+                "reason_codes": ["document-structural-propagation"],
+            }
+            changes.append({
+                "field_path": f"/records/{target_key}/{field}",
+                "prior_value": prior,
+                "new_value": copy.deepcopy(proposal),
+            })
+            locators.append(source_locator(target))
+            affected.append(target_key)
+        return affected, locators, changes
 
     if action == "migrate_table_grids":
         affected = []
@@ -963,6 +1076,61 @@ def update(command_path: Path) -> dict[str, Any]:
     if not reason:
         raise ValueError("reason is required")
     review = read_json(REVIEW_PATH) if REVIEW_PATH.exists() else initial_review_artifact(block)
+    if command.get("action") in {"apply_template", "reject"}:
+        expected_review_hash = command.get("expected_review_artifact_sha256")
+        current_review_hash = digest_path(REVIEW_PATH)
+        if expected_review_hash != current_review_hash:
+            raise RuntimeError(
+                f"stale review head: expected {expected_review_hash}, current {current_review_hash}"
+            )
+        matcher = load_propagation_matcher()
+        source = read_json(SOURCE_PATH)
+        preview = matcher.generate_preview(
+            block, source, review, command.get("source_block_key")
+        )
+        if command.get("pattern_sha256") != preview["pattern_sha256"]:
+            raise RuntimeError("stale propagation pattern")
+        by_target = {
+            candidate["target_block_key"]: candidate
+            for candidate in preview["candidates"]
+        }
+        if command["action"] == "apply_template":
+            requested = command.get("targets")
+            if (
+                not isinstance(requested, list)
+                or not requested
+                or len({
+                    item.get("target_block_key")
+                    for item in requested
+                    if isinstance(item, dict)
+                }) != len(requested)
+            ):
+                raise ValueError("Propagation targets must be a non-empty unique list")
+            verified = []
+            for item in requested:
+                if not isinstance(item, dict) or set(item) != {
+                    "target_block_key", "proposal_sha256"
+                }:
+                    raise ValueError("Each propagation target requires key and proposal hash")
+                candidate = by_target.get(item["target_block_key"])
+                if (
+                    candidate is None
+                    or not candidate["applicable"]
+                    or candidate["proposal_sha256"] != item["proposal_sha256"]
+                ):
+                    raise RuntimeError(
+                        f"stale or ineligible propagation target: {item['target_block_key']}"
+                    )
+                verified.append(candidate)
+            command["_verified_propagation_candidates"] = verified
+        else:
+            target_keys = command.get("target_block_keys")
+            if (
+                not isinstance(target_keys, list)
+                or not target_keys
+                or any(key not in by_target for key in target_keys)
+            ):
+                raise ValueError("Propagation rejection targets are invalid")
     sequence = len(review["events"]) + 1
     decision_id = f'{block["document_key"]}:decision:{sequence:06d}'
     affected, locators, changes = apply_command(block, command, decision_id, sequence)
@@ -1018,7 +1186,11 @@ def main() -> int:
         print(json.dumps(update(args.command), separators=(",", ":")))
         return 0
     except RuntimeError as error:
-        print(json.dumps({"error": str(error), "kind": "conflict" if "stale artifact hash" in str(error) else "validation"}, separators=(",", ":")))
+        conflict = any(
+            marker in str(error)
+            for marker in ("stale artifact hash", "stale review head", "stale propagation")
+        )
+        print(json.dumps({"error": str(error), "kind": "conflict" if conflict else "validation"}, separators=(",", ":")))
         return 2
     except (ValueError, KeyError, TypeError, json.JSONDecodeError) as error:
         print(json.dumps({"error": str(error), "kind": "invalid"}, separators=(",", ":")))

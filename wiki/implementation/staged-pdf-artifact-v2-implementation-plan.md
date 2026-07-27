@@ -29,6 +29,7 @@ Version 1 stays operational and immutable while version 2 is built and validated
 - A clean rerun produced zero writes and four byte-identical outputs. Version 1 hashes remained frozen, the three-artifact version 2 set validated, and database and publication write counts remained zero.
 - Phase 3 completed on 2026-07-27. Parallel version 2 generator and writer entry points resolve omitted spans as `1`, propose evidence-supported formatted-text and table titles, support logical-cell merge, split, and explicit spans, protect relationship endpoints, and append valid version 2 review events. The frozen version 1 generator and writer remain byte-identical.
 - The reviewer retains version 1 as its default workspace. Explicit `PDF_INVENTORY_REVIEW_SCHEMA_VERSION=2` selection enables the parallel version 2 source and block artifacts, effective-span rendering, table-title choices, numeric span controls, logical-cell split and merge, and span-aware selection.
+- Phase 4 completed on 2026-07-27. Approved table and formatted-text blocks can produce deterministic, read-only current-document candidate previews with exact, light, material, and one-off classifications. Selected eligible candidates apply atomically; reviewer rejections append document-scoped negative controls to the existing review chain.
 
 ## Phase 0: Freeze Baseline And Controls
 
@@ -104,6 +105,10 @@ Gate passed. Version 1 generator and writer hashes and regressions remain valid.
 
 ## Phase 4: Document-Scoped Structural Propagation
 
+### Status
+
+Completed on 2026-07-27. Document-scoped patterns remain ephemeral and hash-bound; no structural-template or policy artifact is promoted before Phase 5.
+
 ### Work
 
 - add `Find similar` for reviewed table-grid and formatted-text structures
@@ -115,6 +120,8 @@ Gate passed. Version 1 generator and writer hashes and regressions remain valid.
 ### Gate
 
 No preview writes occur. Atomic apply, cancellation, stale-hash rejection, deterministic rerun, negative-control exclusion, material-mismatch blocking, and exact affected-key audit checks pass.
+
+Gate passed. The matcher processes target evidence page by page, recalculates target table grids and formatted-text regions, reports matching and mismatch evidence, and blocks material candidates. Pilot controls find one eligible repeated table pattern from page 18 and retain 75 material controls. Regression tests cover byte-identical previews, zero preview writes, atomic application, stale review-head rejection, exact audit keys, and persisted rejection as a later `one_off` negative control. Server smoke coverage verifies the live version 2 preview endpoint leaves both artifact hashes unchanged.
 
 ## Phase 5: Structural Templates And Review Policies
 

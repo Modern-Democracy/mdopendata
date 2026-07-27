@@ -259,11 +259,17 @@ The writer and reviewer resolve omitted `row_span` and `column_span` values as `
 
 The version 1 workspace remains the default and does not expose version 2-only title or span values. The selector changes only the local shadow artifact directory; it does not change database, publication, deployment, or active downstream extraction inputs.
 
+## Version 2 Document-Scoped Propagation
+
+Phase 4 adds `Find similar` for approved table and formatted-text blocks. `scripts/preview-staged-pdf-structural-propagation.py` creates an ephemeral, deterministic source-pattern hash, recalculates candidate structure from target word evidence, and returns page, target key, confidence, matching evidence, mismatch evidence, current/proposed structure, and `exact`, `light_variation`, `material_variation`, or `one_off` fit.
+
+Preview is read-only and bound to both the block-artifact hash and review-artifact hash. The reviewer can compare current and proposed overlays, exclude candidates, cancel without a write, atomically apply selected exact or light candidates, or append a `reject` event. Rejection records a document-scoped negative control in the review event and changes the same candidate to `one_off` on later previews. Material candidates never enter an apply command.
+
 ## Later Slices
 
 1. Extend Stage 1 mutation with split, merge, reorder, page-disposition changes, and command preview.
 2. Stage 2 adds group membership, continuation linking, inherited headers, stop boundaries, and group relationship review.
-3. Stage 3 adds template anchors, geometry deltas, negative controls, mismatch blocking, and exception allowlists.
+3. Phase 5 promotes reviewed document patterns into immutable templates and adds policy-governed anchors, tolerances, and broader negative controls.
 4. Stage 4 extends append-only decisions to later-stage artifacts.
 5. Stage 5 adds raw preview aligned to approved blocks and groups without normalization approval.
 6. Stage 7 adds record-level baseline parity and discrepancy decisions.

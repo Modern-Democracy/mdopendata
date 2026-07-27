@@ -124,6 +124,9 @@ await withServer({ PDF_INVENTORY_REVIEW_ENABLED: "1" }, async (baseUrl) => {
   assert(shellText.includes("Apply cell span"), "Version 2 cell-span control is missing.");
   assert(shellText.includes("Row span"), "Row-span input is missing.");
   assert(shellText.includes("Column span"), "Column-span input is missing.");
+  assert(shellText.includes("Find similar"), "Document propagation discovery control is missing.");
+  assert(shellText.includes("Apply selected"), "Document propagation apply control is missing.");
+  assert(shellText.includes("Reject selected"), "Document propagation rejection control is missing.");
   for (const selectionLabel of ["Cell", "Row", "Column"]) {
     assert(shellText.includes(`>${selectionLabel}</button>`), `${selectionLabel} selection control is missing.`);
   }
@@ -138,6 +141,8 @@ await withServer({ PDF_INVENTORY_REVIEW_ENABLED: "1" }, async (baseUrl) => {
   assert(appScript.includes('"set_table_cell_span"'), "Explicit span command is missing.");
   assert(appScript.includes('["table_title", "Table Title"]'), "Table-title cell control is missing.");
   assert(appScript.includes('["title", "Title"]'), "Formatted-text title control is missing.");
+  assert(appScript.includes("propagation-preview"), "Propagation preview API integration is missing.");
+  assert(appScript.includes('"apply_template"'), "Atomic propagation command is missing.");
   const expectedTypeOrder = ['["title", "Title"]', '["formatted_text", "Formatted Text"]', '["table", "Table"]', '["chart", "Graph/Chart"]', '["other_visual", "Diagram/Other Visual"]', '["map", "Map"]', '["table_of_contents", "Table of Contents"]', '["header", "Header"]', '["footer", "Footer"]', '["page_number", "Page Number"]', '["divider", "Divider"]', '["signature", "Signature"]'];
   let priorTypePosition = -1;
   for (const typeText of expectedTypeOrder) {
@@ -263,5 +268,31 @@ await withServer({
   ).json();
   assert(artifacts.artifact?.schema_version === 2, "Version 2 source artifact is not active.");
   assert(artifacts.block_artifact?.schema_version === 2, "Version 2 block artifact is not active.");
+  assert(artifacts.review_artifact?.schema_version === 2, "Version 2 review artifact is not active.");
+  const beforeBlockHash = document.block_artifact_sha256;
+  const beforeReviewHash = document.review_artifact_sha256;
+  const preview = await (
+    await expectStatus(
+      baseUrl,
+      "/api/internal/pdf-inventory-review/documents/ctown-budget-2026-2027/propagation-preview",
+      200,
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          document_key: "ctown-budget-2026-2027",
+          source_block_key: "ctown-budget-2026-2027:p018:body",
+          expected_artifact_sha256: beforeBlockHash,
+          expected_review_artifact_sha256: beforeReviewHash,
+        }),
+      },
+    )
+  ).json();
+  assert(preview.scope === "current_document", "Propagation preview escaped document scope.");
+  assert(preview.candidates.some((candidate) => candidate.applicable), "Propagation preview found no positive control.");
+  assert(preview.candidates.some((candidate) => candidate.fit_class === "material_variation"), "Propagation preview found no material negative control.");
+  const after = (await (await expectStatus(baseUrl, "/api/internal/pdf-inventory-review/documents", 200)).json()).documents[0];
+  assert(after.block_artifact_sha256 === beforeBlockHash, "Propagation preview changed the block artifact.");
+  assert(after.review_artifact_sha256 === beforeReviewHash, "Propagation preview changed the review artifact.");
   console.log("ok - explicit version 2 shadow workspace is readable");
 });

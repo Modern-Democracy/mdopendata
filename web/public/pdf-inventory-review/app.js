@@ -24,6 +24,7 @@ const state = {
   saving: false, drawMode: false, drawTarget: "block", pointerEdit: null, pendingBlockKey: null,
   internalBlockKey: null, selectedRegionKey: null, linkSource: null,
   gridSelectionMode: "cell", selectedCellKey: null, selectedCellKeys: [], selectedGridRange: null, gridSelectionAnchor: null,
+  propagation: null, propagationSelected: [], propagationFocusKey: null,
 };
 
 const ids = [
@@ -43,6 +44,8 @@ const ids = [
   "table-grid-editor", "exit-table-grid", "table-grid-summary", "select-cells", "select-rows", "select-columns",
   "table-cell-type", "save-table-cell-type", "split-table-selection", "merge-table-selection", "redetect-table-grid",
   "cell-span-controls", "table-row-span", "table-column-span", "save-table-cell-span",
+  "propagation-editor", "find-similar", "propagation-summary", "propagation-list",
+  "propagation-actions", "cancel-propagation", "reject-propagation", "apply-propagation",
   "relationship-type", "association-help", "link-source-status", "link-target-status", "set-link-source",
   "cancel-link-source", "save-link", "relationship-list",
   "render-hash", "thumbnail-hash", "embedded-hash", "ocr-hash", "source-citation", "error-banner",
@@ -69,7 +72,9 @@ async function sendCommand(command) {
       method: "POST", cache: "no-store", headers: { "content-type": "application/json" },
       body: JSON.stringify({
         ...command, document_key: documentKey,
-        expected_artifact_sha256: state.document.block_artifact_sha256, reason,
+        expected_artifact_sha256: state.document.block_artifact_sha256,
+        expected_review_artifact_sha256: state.document.review_artifact_sha256,
+        reason,
       }),
     });
     const payload = await response.json().catch(() => ({}));
@@ -80,6 +85,9 @@ async function sendCommand(command) {
       state.selectedCellKey = null; state.selectedCellKeys = []; state.selectedGridRange = null; state.gridSelectionAnchor = null;
     }
     state.document = payload.document;
+    if (["apply_template", "reject"].includes(command.action)) {
+      state.propagation = null; state.propagationSelected = []; state.propagationFocusKey = null;
+    }
     for (const update of payload.page_updates || []) {
       const pageIndex = state.pages.findIndex((page) => page.page_number === update.page.page_number);
       if (pageIndex >= 0) state.pages[pageIndex] = update.page;
@@ -184,7 +192,7 @@ function selectBlock(blockKey) {
     state.selectedCellKey = null; state.selectedCellKeys = []; state.selectedGridRange = null; state.gridSelectionAnchor = null;
   }
   for (const node of document.querySelectorAll("[data-block-key]")) node.classList.toggle("selected", node.dataset.blockKey === blockKey);
-  if (!block) { elements["block-detail"].hidden = true; elements["block-editor"].hidden = true; elements["region-editor"].hidden = true; elements["table-grid-editor"].hidden = true; renderRelationships(); return; }
+  if (!block) { elements["block-detail"].hidden = true; elements["block-editor"].hidden = true; elements["region-editor"].hidden = true; elements["table-grid-editor"].hidden = true; elements["propagation-editor"].hidden = true; renderRelationships(); return; }
   elements["block-detail"].hidden = false;
   elements["block-key"].textContent = block.block_key; elements["block-type"].textContent = human(block.block_type);
   elements["block-family"].textContent = human(block.table_family_candidate); elements["block-order"].textContent = String(block.reading_order);
@@ -192,6 +200,15 @@ function selectBlock(blockKey) {
   elements["block-review"].textContent = human(block.review.status); elements["block-excerpt"].textContent = block.evidence[0]?.text_excerpt || "No text evidence";
   const internal = state.internalBlockKey === block.block_key;
   elements["block-editor"].hidden = !state.document?.write_enabled || internal;
+  const propagationEligible = !internal && (
+    Boolean(state.propagation)
+    || (
+      state.document?.schema_version === 2
+      && ["table", "formatted_text"].includes(block.block_type)
+      && block.review.status === "approved"
+    )
+  );
+  elements["propagation-editor"].hidden = !propagationEligible;
   elements["region-editor"].hidden = !internal || block.block_type !== "formatted_text";
   elements["table-grid-editor"].hidden = !internal || block.block_type !== "table";
   elements["edit-internal"].hidden = !regionTypes[block.block_type];
@@ -200,6 +217,7 @@ function selectBlock(blockKey) {
   elements["block-financial"].checked = block.financial_candidate;
   if (internal && block.block_type === "formatted_text") renderRegions(block);
   if (internal && block.block_type === "table") renderTableGridEditor(block);
+  if (propagationEligible) renderPropagation();
   renderRelationships();
 }
 
@@ -491,11 +509,103 @@ function renderBlockInventory() {
     item.textContent = `${block.reading_order}. ${human(block.block_type)}${block.financial_candidate ? " · financial" : ""}`; item.addEventListener("click", () => selectBlock(block.block_key)); listFragment.append(item);
   }
   elements["blocks-overlay"].replaceChildren(overlayFragment); elements["block-list"].replaceChildren(listFragment);
+  renderPropagationOverlay();
   elements["blocks-overlay"].hidden = !elements["blocks-toggle"].checked;
   const target = state.pendingBlockKey && blocks.some((block) => block.block_key === state.pendingBlockKey)
     ? state.pendingBlockKey : state.selectedBlockKey && blocks.some((block) => block.block_key === state.selectedBlockKey)
       ? state.selectedBlockKey : blocks[0]?.block_key || null;
   state.pendingBlockKey = null; selectBlock(target); updateGridSelectionClasses();
+}
+
+function propagationCandidate(key) {
+  return state.propagation?.candidates.find((candidate) => candidate.target_block_key === key) || null;
+}
+
+function renderPropagationOverlay() {
+  const candidate = propagationCandidate(state.propagationFocusKey);
+  const block = state.blockPage?.blocks.find((item) => item.block_key === candidate?.target_block_key);
+  if (!candidate?.proposal || !block || block.page_number !== state.activePage) return;
+  const boxes = [];
+  if (candidate.proposal_field === "regions") {
+    boxes.push(...candidate.proposal.map((region) => region.bbox));
+  } else {
+    for (const cell of candidate.proposal.cells) {
+      const rowSpan = effectiveSpan(cell, "row"); const columnSpan = effectiveSpan(cell, "column");
+      boxes.push({
+        x0: candidate.proposal.column_boundaries[cell.column_index],
+        x1: candidate.proposal.column_boundaries[cell.column_index + columnSpan],
+        y0: candidate.proposal.row_boundaries[cell.row_index],
+        y1: candidate.proposal.row_boundaries[cell.row_index + rowSpan],
+      });
+    }
+  }
+  for (const bbox of boxes) {
+    const node = document.createElement("div"); node.className = "propagation-preview-box";
+    positionBox(node, bbox); elements["blocks-overlay"].append(node);
+  }
+}
+
+function renderPropagation() {
+  const active = Boolean(state.propagation);
+  elements["propagation-actions"].hidden = !active;
+  if (!active) {
+    elements["propagation-summary"].textContent = "Use this approved structure as a document-scoped source pattern.";
+    elements["propagation-list"].replaceChildren();
+    return;
+  }
+  const applicable = state.propagation.candidates.filter((candidate) => candidate.applicable).length;
+  elements["propagation-summary"].textContent = `${state.propagation.candidates.length} candidates · ${applicable} applicable · preview only`;
+  const fragment = document.createDocumentFragment();
+  for (const candidate of state.propagation.candidates) {
+    const row = document.createElement("label");
+    row.className = `propagation-candidate ${candidate.fit_class}`;
+    const input = document.createElement("input"); input.type = "checkbox";
+    input.checked = state.propagationSelected.includes(candidate.target_block_key);
+    input.addEventListener("change", () => {
+      state.propagationSelected = input.checked
+        ? [...new Set([...state.propagationSelected, candidate.target_block_key])]
+        : state.propagationSelected.filter((key) => key !== candidate.target_block_key);
+      renderPropagation();
+    });
+    const text = document.createElement("span");
+    const mismatch = candidate.mismatch_evidence.map((item) => item.message).join(" ");
+    text.textContent = `Page ${candidate.page_number} · ${human(candidate.fit_class)} · ${Math.round(candidate.confidence * 100)}% · ${candidate.target_block_key}${mismatch ? ` · ${mismatch}` : ""}`;
+    const view = document.createElement("button"); view.type = "button"; view.textContent = "Compare overlays";
+    view.disabled = !candidate.proposal;
+    view.addEventListener("click", (event) => {
+      event.preventDefault(); state.propagationFocusKey = candidate.target_block_key;
+      selectPage(candidate.page_number);
+    });
+    row.append(input, text, view); fragment.append(row);
+  }
+  elements["propagation-list"].replaceChildren(fragment);
+  elements["apply-propagation"].disabled = !state.propagationSelected.some((key) => propagationCandidate(key)?.applicable);
+  elements["reject-propagation"].disabled = state.propagationSelected.length === 0;
+}
+
+async function findSimilar() {
+  const block = currentBlock(); if (!block || state.saving) return;
+  clearError(); elements["find-similar"].disabled = true;
+  try {
+    const response = await fetch(`${apiRoot}/propagation-preview`, {
+      method: "POST", cache: "no-store", headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        document_key: documentKey,
+        source_block_key: block.block_key,
+        expected_artifact_sha256: state.document.block_artifact_sha256,
+        expected_review_artifact_sha256: state.document.review_artifact_sha256,
+      }),
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(payload.error || `Preview failed with HTTP ${response.status}.`);
+    state.propagation = payload;
+    state.propagationSelected = payload.candidates.filter((candidate) => candidate.applicable).map((candidate) => candidate.target_block_key);
+    state.propagationFocusKey = null; renderPropagation(); renderBlockInventory();
+  } catch (error) {
+    showError(error.message);
+  } finally {
+    elements["find-similar"].disabled = false;
+  }
 }
 
 function pointerPosition(event) {
@@ -712,6 +822,37 @@ elements["save-block-type"].addEventListener("click", () => {
 elements["delete-block"].addEventListener("click", () => {
   if (!state.selectedBlockKey) return;
   if (window.confirm("Delete the selected Stage 1 box? The review event will remain in the audit history.")) sendCommand({ action: "delete", block_key: state.selectedBlockKey });
+});
+elements["find-similar"].addEventListener("click", () => findSimilar());
+elements["cancel-propagation"].addEventListener("click", () => {
+  state.propagation = null; state.propagationSelected = []; state.propagationFocusKey = null;
+  renderBlockInventory();
+});
+elements["apply-propagation"].addEventListener("click", () => {
+  if (!state.propagation) return;
+  const targets = state.propagationSelected
+    .map((key) => propagationCandidate(key))
+    .filter((candidate) => candidate?.applicable)
+    .map((candidate) => ({
+      target_block_key: candidate.target_block_key,
+      proposal_sha256: candidate.proposal_sha256,
+    }));
+  if (!targets.length) return;
+  sendCommand({
+    action: "apply_template",
+    source_block_key: state.propagation.source_block_key,
+    pattern_sha256: state.propagation.pattern_sha256,
+    targets,
+  });
+});
+elements["reject-propagation"].addEventListener("click", () => {
+  if (!state.propagation || !state.propagationSelected.length) return;
+  sendCommand({
+    action: "reject",
+    source_block_key: state.propagation.source_block_key,
+    pattern_sha256: state.propagation.pattern_sha256,
+    target_block_keys: state.propagationSelected,
+  });
 });
 elements["edit-internal"].addEventListener("click", () => {
   const block = currentBlock(); if (!block || !regionTypes[block.block_type]) return;
