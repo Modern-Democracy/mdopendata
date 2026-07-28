@@ -4,7 +4,7 @@ tags:
   - council-meetings
   - committee-meetings
   - workflows
-updated: 2026-05-14
+updated: 2026-07-28
 ---
 
 This page defines the council and committee meeting wiki area for converting zoning and civic-process data into preparation, observation, and follow-up workflows.
@@ -53,6 +53,8 @@ The copied endpoints are `/rezoning-parcel-lookup`, `/rezoning-zoning-comparison
 
 The `/document-import` route uses the same endpoint payload for package review. Its document panel groups package documents into agenda-item panels and exposes editable document title, type, category, page range, agenda item binding, and item-of-business binding fields. It also exposes an agenda hierarchy view with linked documents, a business-item hierarchy view with meeting-local agenda/document appearances, and a candidate-link queue with reviewer accept/reject decisions captured in exported QA feedback.
 
+The general `/agenda-package-ingestion` route can import a completed package into this domain after explicit resolution. Its council-import preview lists active meetings from the same jurisdiction and requires every supporting-document `primary_agenda_item_key` to resolve exactly within the selected existing meeting. The agenda remains unbound, and a supporting document inherits a business-item link only from its resolved agenda item. The import does not create meetings, perform fuzzy matching, infer business-item identity, or publish records.
+
 ## Schema Notes
 
 Meeting JSON separates:
@@ -69,6 +71,8 @@ Meeting JSON separates:
 - review flags
 
 The `council` database schema follows the existing Charlottetown zoning natural-key, content-hash, supersession, and import-batch conventions. The current database importer is `scripts/import-council-meeting.py`; it imports the May 12 package into normalized council tables while preserving current API payload parity in meeting metadata until endpoint-specific database queries are expanded. Package-level document bindings are stored in `council.package_document`, linked where available to `council.agenda_item` and `council.business_item`.
+
+Generic agenda-package ingestion exposes a read-only binding preview and an explicit transactional import at `GET` and `POST /api/document-ingestion/packages/{packageKey}/council-import`. The import resolves the source by jurisdiction and hash, versions package-document changes, and records import-batch and record-event audit history. Unchanged reruns preserve active package-document IDs.
 
 Durable business-item identity now separates the underlying civic matter from meeting-local appearances. Region-agnostic storage lives in `council.business_item`, `council.business_item_evidence`, `council.business_item_relationship`, `council.business_item_candidate_link`, and `council.business_item_event`; Charlottetown-specific identifier extraction and conservative matching thresholds live in `data/council-meetings/charlottetown/business-item-identity-config.json`. `scripts/build-business-item-identity.py` derives evidence, confirmed same-as links from shared official identifiers, and pending candidate links from weaker property overlap without rewriting issued item IDs.
 

@@ -34,6 +34,7 @@ Version 1 stays immutable and available as an explicit rollback workspace. Versi
 - Phase 6 completed on 2026-07-27. The deterministic promotion command materializes the approved Charlottetown public-meeting profile from six accepted page classifications and five approved assembly rows. Five immutable same-edition structural templates and five `review_required` policies cover four single-page documents and one two-page document. A real six-page regular-council slice remains wholly unknown and blocked as the nearest negative control.
 - The Phase 6 approved-preview handoff was implemented on 2026-07-28. An explicit reviewer action reruns the preview, accepts complete non-material page assignments with exact profile provenance, resolves matching template gaps, and creates a draft assembly without approving agenda-item bindings, extraction, council import, or publication.
 - Live handoff verification passed on 2026-07-28 with six accepted page assignments, five source-ordered draft documents, zero extracted documents, an idempotent no-write rerun, both blocking controls intact, exact permanent-control fingerprints unchanged, and complete ephemeral cleanup.
+- Council-domain import resolution was implemented and live-verified on 2026-07-28. It requires an explicit existing same-jurisdiction meeting and exact meeting-scoped agenda-item keys, leaves the agenda unbound, inherits business-item identity only through resolved agenda items, imports five source-ordered package documents transactionally, and preserves active IDs on an unchanged rerun. Missing keys return `409` before writes.
 - Phase 7 completed on 2026-07-27. Deterministic parity confirms 753 exact matches, 104 approved provenance-only shifts, one explicit migration event, and zero missing or changed records. Stage 2 supplies 77 logical groups and 2,290 unique observations. Read-only live verification confirms that published Snapshot 3 contains the same 2,290 document-9 semantic records and source links. The explicit transition approval activates version 2 with zero handoff blockers.
 
 ## Phase 0: Freeze Baseline And Controls
@@ -163,6 +164,8 @@ The positive source is the six-page February 3, 2026 public-meeting package, whi
 
 Historical source-document IDs 2 and 3 now carry explicit `metadata.source_family = charlottetown-council`. The transactional backfill was restricted by exact source IDs and SHA-256 values. It changed two metadata objects and changed no page classifications, package assemblies, extraction results, source files, or publication state. A repeat run reports zero pending metadata rows and byte-identical profile outputs.
 
+The remaining post-extraction handoff now resolves the generic package into the council domain through an explicit existing meeting. Exact active agenda-item keys bind supporting documents within that meeting; the agenda remains unbound and business-item IDs are inherited only through those exact relationships. The transaction writes audited, versioned `council.package_document` rows and is idempotent for unchanged inputs.
+
 ### Work
 
 - bind templates to municipal source and document-family profiles
@@ -175,7 +178,7 @@ Historical source-document IDs 2 and 3 now carry explicit `metadata.source_famil
 
 Single-page and multi-page positive controls are detected with exact source order. Nearest-negative documents remain unmatched or blocked. No package page is silently omitted or assigned to conflicting embedded documents.
 
-Gate passed. The synthetic controls remain green, the reviewed real package supplies exact single-page and multi-page positive controls, and the nearest real negative remains unmatched and blocked with complete page accounting. Every policy remains `review_required`. Approved-preview handoff now creates a reviewer-controlled draft assembly; council-domain import resolution remains a separate later workflow change.
+Gate passed. The synthetic controls remain green, the reviewed real package supplies exact single-page and multi-page positive controls, and the nearest real negative remains unmatched and blocked with complete page accounting. Every policy remains `review_required`. Approved-preview handoff creates a reviewer-controlled draft assembly. Completed extraction can now be imported through explicit meeting-scoped council binding; missing agenda-item keys remain a zero-write blocker.
 
 ## Phase 7: Parity And Handoff
 

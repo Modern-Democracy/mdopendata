@@ -77,6 +77,13 @@
   .assembly-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
   .extraction-section { display: none; margin-top: 28px; }
   .extraction-section.visible { display: block; }
+  .council-import-section { display: none; margin-top: 28px; }
+  .council-import-section.visible { display: block; }
+  .council-import-controls { display: grid; grid-template-columns: minmax(240px, 1fr) auto; gap: 10px; align-items: end; }
+  .council-import-controls label { display: grid; gap: 5px; color: var(--fg-3); font: 700 11px var(--font-ui); text-transform: uppercase; }
+  .council-import-controls select { width: 100%; box-sizing: border-box; border: 1px solid var(--border-hair); border-radius: 4px; padding: 9px; background: var(--paper-2); color: var(--ink); font: 12px var(--font-mono); }
+  .council-binding-list { display: grid; gap: 7px; margin-top: 12px; }
+  .council-binding { border: 1px solid var(--border-hair); border-radius: 5px; padding: 10px; background: var(--paper-2); font: 12px/1.45 var(--font-mono); }
   .json-result { max-height: 620px; overflow: auto; border: 1px solid var(--border-hair); border-radius: 5px; background: var(--ink); color: var(--paper); padding: 16px; white-space: pre-wrap; overflow-wrap: anywhere; font: 11px/1.5 var(--font-mono); }
   .mapping-editor { border-top: 1px solid var(--border-hair); padding-top: 14px; }
   .mapping-editor h4 { margin: 0 0 4px; font: 700 15px var(--font-ui); }
@@ -166,6 +173,15 @@
     <div class="pages-head"><div><h2 id="extraction-heading">Extracted package JSON</h2><span id="extraction-status" class="page-count">Ready</span></div><button id="run-extraction" class="primary" type="button">Run deterministic extraction</button></div>
     <pre id="extraction-result" class="json-result">Extraction has not run.</pre>
   </section>
+  <section id="council-import-section" class="council-import-section" aria-labelledby="council-import-heading">
+    <div class="pages-head"><div><h2 id="council-import-heading">Council-domain import</h2><span id="council-import-status" class="page-count">Meeting required</span></div></div>
+    <p class="notice">Select an existing meeting. Supporting-document keys must resolve exactly to active agenda items in that meeting. The agenda remains unbound; business-item links are inherited only from resolved agenda items.</p>
+    <div class="council-import-controls">
+      <label>Target meeting<select id="council-meeting"><option value="">Select a meeting</option></select></label>
+      <button id="run-council-import" class="primary" type="button" disabled>Import into council domain</button>
+    </div>
+    <div id="council-binding-list" class="council-binding-list"></div>
+  </section>
   <dialog id="region-dialog" class="region-dialog">
     <h3>Select extraction region</h3>
     <div class="draft-meta">Drag over the rendered page or enter normalized coordinates from 0 to 1.</div>
@@ -211,6 +227,11 @@
   const extractionStatus = document.getElementById("extraction-status");
   const extractionResult = document.getElementById("extraction-result");
   const runExtractionButton = document.getElementById("run-extraction");
+  const councilImportSection = document.getElementById("council-import-section");
+  const councilImportStatus = document.getElementById("council-import-status");
+  const councilMeetingSelect = document.getElementById("council-meeting");
+  const councilBindingList = document.getElementById("council-binding-list");
+  const runCouncilImportButton = document.getElementById("run-council-import");
   const regionDialog = document.getElementById("region-dialog");
   const regionImageWrap = document.getElementById("region-image-wrap");
   const regionImage = document.getElementById("region-image");
@@ -229,6 +250,10 @@
     pageGrid.replaceChildren();
     draftList.replaceChildren();
     assemblyEditor.value = "";
+    councilImportSection.classList.remove("visible");
+    councilMeetingSelect.replaceChildren(new Option("Select a meeting", ""));
+    councilBindingList.replaceChildren();
+    runCouncilImportButton.disabled = true;
     extractionResult.textContent = "Extraction has not run.";
     classificationSummary.classList.remove("visible");
     reuseSummary.textContent = "Preview has not run.";
@@ -409,6 +434,69 @@
     extractionResult.textContent = completed ? JSON.stringify(payload.result, null, 2) : "Extraction has not run.";
     runExtractionButton.textContent = completed ? "Extraction completed" : "Run deterministic extraction";
     runExtractionButton.disabled = completed;
+    if (completed) loadCouncilImport(classifyButton.dataset.packageKey);
+  }
+
+  function showCouncilImport(payload) {
+    councilImportSection.classList.add("visible");
+    const selected = payload.selectedMeetingKey || councilMeetingSelect.value;
+    councilMeetingSelect.replaceChildren(
+      new Option("Select a meeting", ""),
+      ...payload.meetings.map((meeting) => new Option(
+        `${String(meeting.meetingDate).slice(0, 10)} | ${meeting.title}`,
+        meeting.meetingKey,
+      )),
+    );
+    councilMeetingSelect.value = selected;
+    councilImportStatus.textContent = payload.importStatus === "completed"
+      ? payload.importBatchId
+        ? `Imported | batch ${payload.importBatchId}`
+        : "Imported"
+      : payload.ready
+        ? `${payload.documents.length} documents ready`
+        : payload.reasonCodes.join(", ").replaceAll("-", " ");
+    councilBindingList.replaceChildren(...payload.documents.map((binding) => {
+      const row = document.createElement("div");
+      row.className = "council-binding";
+      row.textContent = binding.documentRole === "agenda"
+        ? `${binding.sourceOrder}. ${binding.title} | agenda | unbound`
+        : `${binding.sourceOrder}. ${binding.title} | ${binding.primaryAgendaItemKey} → ${binding.resolvedAgendaItemTitle || "unresolved"}`;
+      return row;
+    }));
+    runCouncilImportButton.textContent = payload.importStatus === "completed"
+      ? "Re-import into council domain"
+      : "Import into council domain";
+    runCouncilImportButton.disabled = !payload.ready;
+  }
+
+  async function loadCouncilImport(packageKey, meetingKey = "") {
+    if (!packageKey) return;
+    const query = meetingKey ? `?meetingKey=${encodeURIComponent(meetingKey)}` : "";
+    const response = await fetch(`/api/document-ingestion/packages/${encodeURIComponent(packageKey)}/council-import${query}`);
+    const payload = await response.json();
+    if (response.ok) showCouncilImport(payload);
+  }
+
+  async function runCouncilImport() {
+    const packageKey = classifyButton.dataset.packageKey;
+    const meetingKey = councilMeetingSelect.value;
+    if (!packageKey || !meetingKey) return;
+    runCouncilImportButton.disabled = true;
+    setStatus("Resolving agenda-item bindings and importing council package documents.", "active");
+    try {
+      const response = await fetch(`/api/document-ingestion/packages/${encodeURIComponent(packageKey)}/council-import`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ meetingKey }),
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "Council import failed.");
+      showCouncilImport(payload);
+      setStatus(`Council import completed. ${payload.documents.length} package documents resolved.`, "active");
+    } catch (error) {
+      setStatus(error.message, "error");
+      runCouncilImportButton.disabled = false;
+    }
   }
 
   async function loadExtractionResult(packageKey) {
@@ -828,6 +916,11 @@
   saveAssemblyButton.addEventListener("click", () => persistAssembly(false));
   approveAssemblyButton.addEventListener("click", () => persistAssembly(true));
   runExtractionButton.addEventListener("click", runExtraction);
+  councilMeetingSelect.addEventListener("change", () => loadCouncilImport(
+    classifyButton.dataset.packageKey,
+    councilMeetingSelect.value,
+  ));
+  runCouncilImportButton.addEventListener("click", runCouncilImport);
   regionPage.addEventListener("change", loadRegionPreview);
   Object.values(regionInputs).forEach((input) => input.addEventListener("input", renderRegionBox));
   regionImageWrap.addEventListener("pointerdown", (event) => {

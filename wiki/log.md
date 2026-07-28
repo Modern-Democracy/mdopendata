@@ -14,6 +14,14 @@ Append new entries in reverse chronological order. Use this heading format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-07-28] operations | Local council-import web refresh
+
+Rebuilt `mdopendata-web:latest` from the committed council agenda-package import implementation and force-recreated only the local web container. The running image is `sha256:5c1e625acb825f0203c3b4af4ee1b88159546b53ea657f9e531312434df0cb0f`; embedded server and ingestion UI hashes match the workspace exactly. Local health returned `ok`, the council-import preview returned the explicit `meeting-required` gate with five documents, and the existing PostGIS and pgAdmin containers were not recreated.
+
+## [2026-07-28] implementation | Council agenda-package binding and import
+
+Implemented and live-verified the post-extraction council-domain handoff. A completed package now requires an explicit existing same-jurisdiction meeting and exact meeting-scoped agenda-item keys before one transaction imports its source and package-document records. The agenda remains unbound; all four supporting documents bind to the exact agenda item and inherit only its business-item relationship. The six-page control imported five documents at ranges `1`, `2`, `3`, `4`, and `5-6`; a missing-key control returned `409` with zero writes, and an unchanged rerun preserved all active IDs. Permanent council rows were fingerprint-identical before and after ephemeral verification.
+
 ## [2026-07-28] implementation | Agenda-package reuse-preview assembly handoff
 
 Implemented and live-verified the explicit approved agenda-package reuse-preview handoff. Complete, conflict-free, non-material previews can now bind structural page roles to accepted active positive-control extraction templates, supersede page classifications with reviewer-accepted profile evidence, and create an editable draft assembly transactionally. The ephemeral positive control produced six classifications and five draft documents, reran without writes, and was removed completely. Approved assemblies, blocked previews, missing or inconsistent templates, extraction, council import, publication, and permanent control rows remained protected.

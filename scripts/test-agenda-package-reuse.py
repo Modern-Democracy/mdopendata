@@ -358,6 +358,38 @@ class AgendaPackageReuseTests(unittest.TestCase):
             ui,
         )
 
+    def test_council_import_requires_exact_meeting_scoped_bindings(self) -> None:
+        server = (ROOT / "web/server.js").read_text(encoding="utf-8")
+        ui = (
+            ROOT
+            / "web/public/ui_kits/agenda-package-ingestion/index.html"
+        ).read_text(encoding="utf-8")
+        self.assertIn(
+            "loadCouncilImportBindings(packageKey", server
+        )
+        self.assertIn(
+            "agenda-item-resolution-incomplete", server
+        )
+        self.assertIn(
+            "lower(j.name_raw) = lower($1)", server
+        )
+        self.assertIn(
+            "Council import is blocked:", server
+        )
+        self.assertIn(
+            "approved_package_document_assembly", server
+        )
+        self.assertIn(
+            "Council-domain import", ui
+        )
+        self.assertIn(
+            "Supporting-document keys must resolve exactly", ui
+        )
+        self.assertIn(
+            "business-item links are inherited only from resolved agenda items",
+            ui,
+        )
+
     def test_canonical_real_package_profile_and_controls(self) -> None:
         profile = json.loads(
             (CANONICAL_ROOT / "profile.json").read_text(encoding="utf-8")

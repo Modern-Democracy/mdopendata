@@ -3985,6 +3985,7 @@ async function registerPackageUpload(upload) {
 async function loadPackageExtraction(packageKey) {
   const { rows } = await pool.query(`
     SELECT sd.source_document_id, sd.source_document_key, sd.title_raw,
+           sd.jurisdiction_name_raw,
            sd.source_file_hash, sd.page_count, pe.package_extraction_id,
            pe.extraction_status, pe.unresolved_template_count,
            pe.pipeline_version, pe.created_at
@@ -5586,6 +5587,472 @@ async function loadPackageExtractionResult(packageKey) {
     LIMIT 1
   `, [packageKey]);
   return { ...extraction, result: rows[0]?.result_json || null };
+}
+
+async function loadCouncilImportBindings(packageKey, meetingKey = null) {
+  const { rows: packageRows } = await pool.query(`
+    SELECT sd.source_document_id, sd.source_document_key, sd.title_raw,
+           sd.jurisdiction_name_raw,
+           sd.repo_relpath, sd.source_url, sd.mime_type, sd.page_count,
+           sd.source_file_hash, sd.published_date, sd.metadata,
+           pe.package_extraction_id, pe.extraction_status, pe.result_json
+    FROM documents.source_document sd
+    JOIN documents.package_extraction pe
+      ON pe.source_document_id = sd.source_document_id AND pe.is_active
+    WHERE sd.source_document_key = $1 AND sd.is_active
+    LIMIT 1
+  `, [packageKey]);
+  const packageRow = packageRows[0];
+  if (!packageRow) throw stagedPdfReviewError("Agenda package not found.", 404);
+
+  const [{ rows: meetings }, { rows: assembly }, { rows: extracted }] = await Promise.all([
+    pool.query(`
+      SELECT m.meeting_id, m.meeting_key, m.title_raw, m.meeting_date,
+             j.jurisdiction_id, j.jurisdiction_key, b.name_raw AS body_name
+      FROM council.meeting m
+      JOIN council.jurisdiction j ON j.jurisdiction_id = m.jurisdiction_id AND j.is_active
+      JOIN council.body b ON b.body_id = m.body_id AND b.is_active
+      WHERE m.is_active AND lower(j.name_raw) = lower($1)
+      ORDER BY m.meeting_date DESC, m.meeting_key
+    `, [packageRow.jurisdiction_name_raw]),
+    pool.query(`
+      SELECT document_key, document_order, title, page_start, page_end,
+             is_agenda, primary_agenda_item_key, page_template_keys, status
+      FROM documents.package_document_assembly
+      WHERE source_document_id = $1 AND is_active
+      ORDER BY document_order
+    `, [packageRow.source_document_id]),
+    pool.query(`
+      SELECT package_extracted_document_id, document_key, document_role,
+             source_order, primary_agenda_item_key, document_type_key,
+             title_raw, page_numbers, page_template_keys, content_json,
+             provenance, content_hash
+      FROM documents.package_extracted_document
+      WHERE package_extraction_id = $1 AND is_active
+      ORDER BY source_order
+    `, [packageRow.package_extraction_id]),
+  ]);
+  const meetingOptions = meetings.map((meeting) => ({
+    meetingKey: meeting.meeting_key,
+    title: meeting.title_raw,
+    meetingDate: meeting.meeting_date,
+    bodyName: meeting.body_name,
+  }));
+  const base = {
+    packageKey,
+    extractionStatus: packageRow.extraction_status,
+    meetings: meetingOptions,
+    selectedMeetingKey: meetingKey,
+    ready: false,
+    reasonCodes: [],
+    documents: [],
+    missingAgendaItemKeys: [],
+  };
+  if (packageRow.extraction_status !== "completed" || !packageRow.result_json) {
+    return { ...base, reasonCodes: ["package-not-completed"], _package: packageRow };
+  }
+  const assemblyMismatchDocumentKeys = assembly
+    .filter((document, index) => (
+      !extracted[index]
+      || !(
+      document.status === "approved"
+      && document.document_key === extracted[index].document_key
+      && document.document_order === extracted[index].source_order
+      && document.is_agenda === (extracted[index].document_role === "agenda")
+      && document.primary_agenda_item_key === extracted[index].primary_agenda_item_key
+      && Number(document.page_start) === Math.min(...extracted[index].page_numbers.map(Number))
+      && Number(document.page_end) === Math.max(...extracted[index].page_numbers.map(Number))
+      && JSON.stringify((document.page_template_keys || []).map(String))
+        === JSON.stringify((extracted[index].page_template_keys || []).map(String))
+      )
+    ))
+    .map((document) => document.document_key);
+  const assemblyValid = (
+    assembly.length === extracted.length
+    && assembly.length > 0
+    && assemblyMismatchDocumentKeys.length === 0
+  );
+  if (!assemblyValid) {
+    return {
+      ...base,
+      reasonCodes: ["approved-assembly-extraction-mismatch"],
+      assemblyMismatchDocumentKeys,
+      _package: packageRow,
+    };
+  }
+  if (!meetingKey) {
+    return {
+      ...base,
+      reasonCodes: ["meeting-required"],
+      documents: extracted.map((document) => ({
+        documentKey: document.document_key,
+        sourceOrder: document.source_order,
+        title: document.title_raw,
+        documentRole: document.document_role,
+        primaryAgendaItemKey: document.primary_agenda_item_key,
+        pageNumbers: document.page_numbers,
+      })),
+      _package: packageRow,
+    };
+  }
+  const selectedMeetings = meetings.filter((meeting) => meeting.meeting_key === meetingKey);
+  if (selectedMeetings.length !== 1) {
+    throw stagedPdfReviewError("Selected council meeting was not found or is ambiguous.", 409);
+  }
+  const meeting = selectedMeetings[0];
+  const requiredKeys = [...new Set(
+    extracted
+      .filter((document) => document.document_role !== "agenda")
+      .map((document) => compactText(document.primary_agenda_item_key))
+      .filter(Boolean),
+  )];
+  const missingAgendaItemDocumentKeys = extracted
+    .filter((document) => (
+      document.document_role !== "agenda"
+      && !compactText(document.primary_agenda_item_key)
+    ))
+    .map((document) => document.document_key);
+  const { rows: agendaItems } = requiredKeys.length
+    ? await pool.query(`
+        SELECT agenda_item_id, agenda_item_key, title_raw, business_item_id
+        FROM council.agenda_item
+        WHERE meeting_id = $1 AND agenda_item_key = ANY($2::text[]) AND is_active
+        ORDER BY agenda_item_key, agenda_item_id
+      `, [meeting.meeting_id, requiredKeys])
+    : { rows: [] };
+  const agendaItemsByKey = new Map();
+  for (const item of agendaItems) {
+    if (!agendaItemsByKey.has(item.agenda_item_key)) agendaItemsByKey.set(item.agenda_item_key, []);
+    agendaItemsByKey.get(item.agenda_item_key).push(item);
+  }
+  const missingAgendaItemKeys = requiredKeys.filter(
+    (key) => (agendaItemsByKey.get(key) || []).length !== 1,
+  );
+  const documents = extracted.map((document) => {
+    const matches = document.primary_agenda_item_key
+      ? agendaItemsByKey.get(document.primary_agenda_item_key) || []
+      : [];
+    const agendaItem = matches.length === 1 ? matches[0] : null;
+    return {
+      documentKey: document.document_key,
+      sourceOrder: document.source_order,
+      title: document.title_raw,
+      documentRole: document.document_role,
+      primaryAgendaItemKey: document.primary_agenda_item_key,
+      resolvedAgendaItemId: agendaItem ? toStringValue(agendaItem.agenda_item_id) : null,
+      resolvedAgendaItemTitle: agendaItem?.title_raw || null,
+      inheritedBusinessItemId: agendaItem?.business_item_id
+        ? toStringValue(agendaItem.business_item_id)
+        : null,
+      pageNumbers: document.page_numbers,
+    };
+  });
+  const { rows: importedRows } = await pool.query(`
+    SELECT
+      (SELECT count(*)::integer
+       FROM council.package_document
+       WHERE meeting_id = $1 AND is_active
+         AND metadata->>'documents_source_document_key' = $2) AS document_count,
+      (SELECT import_batch_id
+       FROM council.import_batch
+       WHERE status = 'completed'
+         AND diagnostics->>'package_key' = $2
+         AND diagnostics->>'meeting_key' = $3
+       ORDER BY import_batch_id DESC
+       LIMIT 1) AS import_batch_id
+  `, [meeting.meeting_id, packageKey, meetingKey]);
+  const importedDocumentCount = importedRows[0].document_count;
+  return {
+    ...base,
+    ready: missingAgendaItemKeys.length === 0 && missingAgendaItemDocumentKeys.length === 0,
+    reasonCodes: missingAgendaItemKeys.length || missingAgendaItemDocumentKeys.length
+      ? ["agenda-item-resolution-incomplete"]
+      : [],
+    missingAgendaItemKeys,
+    missingAgendaItemDocumentKeys,
+    documents,
+    importStatus: importedDocumentCount === extracted.length
+      ? "completed"
+      : importedDocumentCount > 0
+        ? "partial"
+        : "not_imported",
+    importBatchId: importedRows[0].import_batch_id
+      ? toStringValue(importedRows[0].import_batch_id)
+      : null,
+    importedDocumentCount,
+    selectedMeeting: {
+      meetingId: toStringValue(meeting.meeting_id),
+      meetingKey: meeting.meeting_key,
+      title: meeting.title_raw,
+      meetingDate: meeting.meeting_date,
+      jurisdictionId: toStringValue(meeting.jurisdiction_id),
+      jurisdictionKey: meeting.jurisdiction_key,
+    },
+    _package: packageRow,
+    _meeting: meeting,
+    _extracted: extracted,
+    _agendaItemsByKey: agendaItemsByKey,
+  };
+}
+
+function publicCouncilImportBindings(bindings) {
+  const {
+    _package, _meeting, _extracted, _agendaItemsByKey,
+    ...payload
+  } = bindings;
+  return payload;
+}
+
+async function importPackageToCouncil(packageKey, meetingKey) {
+  const bindings = await loadCouncilImportBindings(packageKey, compactText(meetingKey));
+  if (!bindings.ready) {
+    throw stagedPdfReviewError(
+      `Council import is blocked: ${bindings.reasonCodes.join(", ")}.`,
+      409,
+    );
+  }
+  const packageRow = bindings._package;
+  const meeting = bindings._meeting;
+  const extracted = bindings._extracted;
+  const client = await pool.connect();
+  let batchId = null;
+  try {
+    await client.query("BEGIN");
+    const { rows: lockedExtraction } = await client.query(`
+      SELECT package_extraction_id, extraction_status
+      FROM documents.package_extraction
+      WHERE package_extraction_id = $1 AND is_active
+      FOR UPDATE
+    `, [packageRow.package_extraction_id]);
+    if (lockedExtraction[0]?.extraction_status !== "completed") {
+      throw stagedPdfReviewError("Package extraction changed before council import.", 409);
+    }
+    const { rows: lockedMeeting } = await client.query(`
+      SELECT meeting_id
+      FROM council.meeting
+      WHERE meeting_id = $1 AND is_active
+      FOR SHARE
+    `, [meeting.meeting_id]);
+    if (lockedMeeting.length !== 1) {
+      throw stagedPdfReviewError("Selected council meeting changed before import.", 409);
+    }
+    const agendaItemIds = bindings.documents
+      .map((document) => document.resolvedAgendaItemId)
+      .filter(Boolean);
+    if (agendaItemIds.length) {
+      const { rows: lockedAgendaItems } = await client.query(`
+        SELECT agenda_item_id
+        FROM council.agenda_item
+        WHERE meeting_id = $1 AND agenda_item_id = ANY($2::bigint[]) AND is_active
+        FOR SHARE
+      `, [meeting.meeting_id, agendaItemIds]);
+      if (lockedAgendaItems.length !== new Set(agendaItemIds).size) {
+        throw stagedPdfReviewError("Agenda-item bindings changed before council import.", 409);
+      }
+    }
+    const { rows: batchRows } = await client.query(`
+      INSERT INTO council.import_batch (
+        document_family, source_root, importer_name, importer_version,
+        status, diagnostics
+      ) VALUES (
+        'agenda-package', $1, 'web-agenda-package-council-import', '1',
+        'running', $2::jsonb
+      )
+      RETURNING import_batch_id
+    `, [
+      packageRow.repo_relpath,
+      JSON.stringify({ package_key: packageKey, meeting_key: meetingKey }),
+    ]);
+    batchId = batchRows[0].import_batch_id;
+    const recordEvent = async (family, naturalKey, priorHash, contentHash, status, table, id) => {
+      await client.query(`
+        INSERT INTO council.import_record_event (
+          import_batch_id, record_family, natural_key, prior_content_hash,
+          content_hash, change_status, active_record_table, active_record_id
+        ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+      `, [batchId, family, naturalKey, priorHash, contentHash, status, table, id]);
+    };
+
+    const sourceNaturalKey = `council:source_document:${meeting.jurisdiction_key}:agenda-package:${packageRow.source_file_hash}`;
+    const sourcePayload = {
+      jurisdiction_id: toStringValue(meeting.jurisdiction_id),
+      source_document_key: packageKey,
+      document_type: "agenda_package",
+      title_raw: packageRow.title_raw,
+      repo_relpath: packageRow.repo_relpath,
+      source_url: packageRow.source_url,
+      mime_type: packageRow.mime_type,
+      page_count: packageRow.page_count,
+      source_file_hash: packageRow.source_file_hash,
+      published_date: packageRow.published_date,
+      documents_source_document_id: toStringValue(packageRow.source_document_id),
+    };
+    const sourceContentHash = classificationHash(sourcePayload);
+    const { rows: councilSources } = await client.query(`
+      SELECT source_document_id, natural_key, content_hash
+      FROM council.source_document
+      WHERE jurisdiction_id = $1 AND source_file_hash = $2 AND is_active
+      ORDER BY source_document_id
+      FOR UPDATE
+    `, [meeting.jurisdiction_id, packageRow.source_file_hash]);
+    if (councilSources.length > 1) {
+      throw stagedPdfReviewError("Council source-document resolution is ambiguous.", 409);
+    }
+    let councilSourceDocumentId;
+    if (councilSources.length === 1) {
+      councilSourceDocumentId = councilSources[0].source_document_id;
+      await recordEvent(
+        "source_document", councilSources[0].natural_key, councilSources[0].content_hash,
+        councilSources[0].content_hash, "unchanged", "source_document",
+        councilSourceDocumentId,
+      );
+    } else {
+      const { rows: insertedSource } = await client.query(`
+        INSERT INTO council.source_document (
+          jurisdiction_id, import_batch_id, source_document_key, document_type,
+          title_raw, repo_relpath, source_url, mime_type, page_count,
+          source_file_hash, published_date, metadata, natural_key, content_hash
+        ) VALUES ($1,$2,$3,'agenda_package',$4,$5,$6,$7,$8,$9,$10,$11::jsonb,$12,$13)
+        RETURNING source_document_id
+      `, [
+        meeting.jurisdiction_id, batchId, packageKey, packageRow.title_raw,
+        packageRow.repo_relpath, packageRow.source_url, packageRow.mime_type,
+        packageRow.page_count, packageRow.source_file_hash, packageRow.published_date,
+        JSON.stringify({
+          documents_source_document_id: toStringValue(packageRow.source_document_id),
+          documents_package_extraction_id: toStringValue(packageRow.package_extraction_id),
+          verification_scope: packageRow.metadata?.verification_scope,
+        }),
+        sourceNaturalKey, sourceContentHash,
+      ]);
+      councilSourceDocumentId = insertedSource[0].source_document_id;
+      await recordEvent(
+        "source_document", sourceNaturalKey, null, sourceContentHash,
+        "added", "source_document", councilSourceDocumentId,
+      );
+    }
+
+    const diagnostics = { added: 0, changed: 0, unchanged: 0, documents: extracted.length };
+    for (const [index, document] of extracted.entries()) {
+      const publicBinding = bindings.documents[index];
+      const naturalKey = `council:package_document:${meetingKey}:${document.document_key}`;
+      const pageStart = Math.min(...document.page_numbers);
+      const pageEnd = Math.max(...document.page_numbers);
+      const payload = {
+        meeting_id: toStringValue(meeting.meeting_id),
+        source_document_id: toStringValue(councilSourceDocumentId),
+        agenda_item_id: publicBinding.resolvedAgendaItemId,
+        business_item_id: publicBinding.inheritedBusinessItemId,
+        package_document_key: document.document_key,
+        title_raw: document.title_raw || document.document_key,
+        document_type: document.document_type_key,
+        document_category: document.document_role === "agenda" ? "agenda" : "agenda_item_support",
+        page_start: pageStart,
+        page_end: pageEnd,
+        page_numbers: document.page_numbers,
+        page_count: document.page_numbers.length,
+        boundary_basis: "approved_package_document_assembly",
+        source_order: document.source_order,
+        documents_package_extracted_document_id: toStringValue(document.package_extracted_document_id),
+      };
+      const contentHash = classificationHash(payload);
+      const { rows: existingRows } = await client.query(`
+        SELECT package_document_id, content_hash
+        FROM council.package_document
+        WHERE natural_key = $1 AND is_active
+        FOR UPDATE
+      `, [naturalKey]);
+      if (existingRows.length > 1) {
+        throw stagedPdfReviewError(`Council package document is ambiguous: ${document.document_key}.`, 409);
+      }
+      if (existingRows[0]?.content_hash === contentHash) {
+        diagnostics.unchanged += 1;
+        await recordEvent(
+          "package_document", naturalKey, contentHash, contentHash,
+          "unchanged", "package_document", existingRows[0].package_document_id,
+        );
+        continue;
+      }
+      let priorId = null;
+      let priorHash = null;
+      if (existingRows[0]) {
+        priorId = existingRows[0].package_document_id;
+        priorHash = existingRows[0].content_hash;
+        await client.query(`
+          UPDATE council.package_document SET is_active = false
+          WHERE package_document_id = $1
+        `, [priorId]);
+      }
+      const { rows: insertedRows } = await client.query(`
+        INSERT INTO council.package_document (
+          meeting_id, source_document_id, agenda_item_id, business_item_id,
+          package_document_key, title_raw, document_type, document_category,
+          page_start, page_end, page_numbers, page_count, boundary_basis,
+          source_order, metadata, natural_key, content_hash
+        ) VALUES (
+          $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11::integer[],$12,$13,$14,$15::jsonb,$16,$17
+        )
+        RETURNING package_document_id
+      `, [
+        meeting.meeting_id, councilSourceDocumentId,
+        publicBinding.resolvedAgendaItemId, publicBinding.inheritedBusinessItemId,
+        document.document_key, payload.title_raw, document.document_type_key,
+        payload.document_category, pageStart, pageEnd, document.page_numbers,
+        document.page_numbers.length, payload.boundary_basis, document.source_order,
+        JSON.stringify({
+          documents_source_document_key: packageKey,
+          documents_package_extraction_id: toStringValue(packageRow.package_extraction_id),
+          documents_package_extracted_document_id: toStringValue(document.package_extracted_document_id),
+          provenance: document.provenance,
+        }),
+        naturalKey, contentHash,
+      ]);
+      const packageDocumentId = insertedRows[0].package_document_id;
+      if (priorId) {
+        diagnostics.changed += 1;
+        await client.query(`
+          UPDATE council.package_document
+          SET superseded_by_id = $2
+          WHERE package_document_id = $1
+        `, [priorId, packageDocumentId]);
+      } else {
+        diagnostics.added += 1;
+      }
+      await recordEvent(
+        "package_document", naturalKey, priorHash, contentHash,
+        priorId ? "changed" : "added", "package_document", packageDocumentId,
+      );
+    }
+    await client.query(`
+      UPDATE council.import_batch
+      SET status = 'completed', completed_at = now(), diagnostics = diagnostics || $2::jsonb
+      WHERE import_batch_id = $1
+    `, [batchId, JSON.stringify(diagnostics)]);
+    await client.query(`
+      UPDATE documents.package_extraction
+      SET diagnostics = diagnostics || jsonb_build_object(
+        'council_import', jsonb_build_object(
+          'status', 'completed',
+          'meeting_key', $2::text,
+          'import_batch_id', $3::bigint,
+          'document_count', $4::integer,
+          'completed_at', now()))
+      WHERE package_extraction_id = $1
+    `, [packageRow.package_extraction_id, meetingKey, batchId, extracted.length]);
+    await client.query("COMMIT");
+    return {
+      ...publicCouncilImportBindings(bindings),
+      importStatus: "completed",
+      importBatchId: toStringValue(batchId),
+      councilSourceDocumentId: toStringValue(councilSourceDocumentId),
+      diagnostics,
+    };
+  } catch (error) {
+    await client.query("ROLLBACK").catch(() => {});
+    throw error;
+  } finally {
+    client.release();
+  }
 }
 
 async function extractAgendaPackage(packageKey) {
@@ -7604,6 +8071,29 @@ const server = createServer(async (request, response) => {
       }
       const packageKey = decodeURIComponent(packageExtractionRunMatch[1]).trim();
       await sendJson(response, await extractAgendaPackage(packageKey));
+      return;
+    }
+
+    const packageCouncilImportMatch = url.pathname.match(/^\/api\/document-ingestion\/packages\/([^/]+)\/council-import$/);
+    if (packageCouncilImportMatch) {
+      const packageKey = decodeURIComponent(packageCouncilImportMatch[1]).trim();
+      if (request.method === "GET") {
+        await sendJson(
+          response,
+          publicCouncilImportBindings(await loadCouncilImportBindings(
+            packageKey,
+            compactText(url.searchParams.get("meetingKey")),
+          )),
+        );
+        return;
+      }
+      if (request.method === "POST") {
+        const input = await readRequestJson(request);
+        await sendJson(response, await importPackageToCouncil(packageKey, input.meetingKey));
+        return;
+      }
+      response.writeHead(405);
+      response.end("Method not allowed");
       return;
     }
 
