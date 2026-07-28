@@ -36,7 +36,7 @@ class StagedPdfV2ParityTests(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.parity = load()
 
-    def test_pilot_structure_is_exact_and_handoff_remains_blocked(self) -> None:
+    def test_pilot_structure_is_exact_and_handoff_passes(self) -> None:
         report = self.parity.build_report(self.parity.DEFAULT_PATHS)
         self.assertEqual(report["summary"], {
             "total": 858,
@@ -46,13 +46,8 @@ class StagedPdfV2ParityTests(unittest.TestCase):
             "changed": 0,
             "provenance_shifted": 104,
         })
-        self.assertFalse(report["passed"])
-        self.assertEqual(
-            {item["blocker_key"] for item in report["blockers"]},
-            {
-                "phase-7:active-handoff-unapproved",
-            },
-        )
+        self.assertTrue(report["passed"])
+        self.assertEqual(report["blockers"], [])
         self.assertEqual(
             self.parity.load_validator().validate_payload(report), []
         )
@@ -108,6 +103,15 @@ class StagedPdfV2ParityTests(unittest.TestCase):
         self.assertEqual(record["status"], "changed")
         self.assertEqual(record["changed_fields"], ["/block_type"])
         self.assertEqual(record["disposition"], "blocked_review")
+        self.assertFalse(report["passed"])
+        self.assertEqual(
+            report["blockers"][0]["blocker_key"],
+            "phase-7:unresolved-parity-discrepancies",
+        )
+        self.assertIn(
+            record["comparison_key"],
+            report["blockers"][0]["affected_comparison_keys"],
+        )
         self.assertEqual(
             record["source_locators"][0]["page_number"],
             target["page_number"],
@@ -160,6 +164,18 @@ class StagedPdfV2ParityTests(unittest.TestCase):
         self.assertIn(
             "fetchJson(`${apiRoot}/parity`).then", app
         )
+
+    def test_version_two_is_default_with_version_one_rollback(self) -> None:
+        server = (ROOT / "web/server.js").read_text(encoding="utf-8")
+        launcher = (
+            ROOT / "scripts/start-staged-pdf-review.ps1"
+        ).read_text(encoding="utf-8")
+        self.assertIn(
+            'process.env.PDF_INVENTORY_REVIEW_SCHEMA_VERSION || "2"',
+            server,
+        )
+        self.assertIn("[int]$SchemaVersion = 2", launcher)
+        self.assertIn("[ValidateSet(1, 2)]", launcher)
 
 
 if __name__ == "__main__":

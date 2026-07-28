@@ -9,7 +9,7 @@ tags:
 updated: 2026-07-27
 ---
 
-This page defines the local-only inventory-review UI implementation plan for the staged PDF version 1 and parallel version 2 artifact schemas.
+This page defines the local-only inventory-review UI implementation plan for the active staged PDF version 2 schema and frozen version 1 rollback.
 
 # Staged PDF Inventory Review UI Plan
 
@@ -21,10 +21,10 @@ The read-only Stage 0 evidence slice and editable Stage 1 block slice are comple
 ./scripts/start-staged-pdf-review.ps1
 ```
 
-Version 1 remains the default. The parallel version 2 shadow workspace is selected explicitly:
+Version 2 is the default. Select the frozen version 1 rollback workspace explicitly:
 
 ```powershell
-./scripts/start-staged-pdf-review.ps1 -SchemaVersion 2
+./scripts/start-staged-pdf-review.ps1 -SchemaVersion 1
 ```
 
 The launcher binds port 3217 to `127.0.0.1`, enables the Stage 1 command adapter, and runs the server in the foreground until Ctrl+C. The canonical Python validator validates Stage 0 and Stage 1 together before either artifact is cached; every requested Stage 0 evidence asset is re-hashed before it is returned.
@@ -257,7 +257,7 @@ The writer and reviewer resolve omitted `row_span` and `column_span` values as `
 - rejection of global row or column split or merge while spanning cells remain
 - version 2 human actor, decision basis, exact artifact-reference, and event-chain fields
 
-The version 1 workspace remains the default and does not expose version 2-only title or span values. The selector changes only the local shadow artifact directory; it does not change database, publication, deployment, or active downstream extraction inputs.
+The version 2 workspace is the default and exposes title, span, propagation, policy, and parity behavior. `PDF_INVENTORY_REVIEW_SCHEMA_VERSION=1` or launcher `-SchemaVersion 1` selects the frozen version 1 rollback workspace. The selector remains local and does not change database, publication, or deployment state.
 
 ## Version 2 Document-Scoped Propagation
 
@@ -282,7 +282,7 @@ Template and policy promotion require a human review reason, current block and r
 5. Stage 5 adds raw preview aligned to approved blocks and groups without normalization approval.
 6. Stage 7 adds record-level baseline parity and discrepancy decisions.
 
-Phase 7 structural parity is now visible read-only in the explicit version 2 workspace. The panel reports matched, missing, extra, changed, and provenance-shifted counts plus every handoff blocker. It does not expose a transition control; switching the active workspace or downstream extraction input remains separately gated.
+Phase 7 structural parity is visible read-only in the active version 2 workspace. The panel reports matched, missing, extra, changed, and provenance-shifted counts plus every handoff blocker. The approved final report passes with zero blockers; transition remains an operational configuration change rather than a browser control.
 
 Each slice remains shadow-only until its schema, semantic, deterministic-rerun, traversal, and browser tests pass.
 

@@ -162,7 +162,7 @@ await withServer({ PDF_INVENTORY_REVIEW_ENABLED: "1" }, async (baseUrl) => {
   const documents = await documentsResponse.json();
   const document = documents.documents?.[0];
   assert(document?.document_key === "ctown-budget-2026-2027", "Pilot document key is incorrect.");
-  assert(document?.schema_version === 1, "Default reviewer must remain on schema version 1.");
+  assert(document?.schema_version === 2, "Default reviewer must load schema version 2.");
   assert(document?.page_count === 154, "Pilot page count is incorrect.");
   assert(document?.complete_page_count === 154, "Complete page count is incorrect.");
   assert(document?.blocked_page_count === 0, "Blocked page count is incorrect.");
@@ -257,13 +257,27 @@ await withServer({ PDF_INVENTORY_REVIEW_ENABLED: "1" }, async (baseUrl) => {
 
 await withServer({
   PDF_INVENTORY_REVIEW_ENABLED: "1",
+  PDF_INVENTORY_REVIEW_SCHEMA_VERSION: "1",
+}, async (baseUrl) => {
+  const documents = await (
+    await expectStatus(baseUrl, "/api/internal/pdf-inventory-review/documents", 200)
+  ).json();
+  assert(
+    documents.documents?.[0]?.schema_version === 1,
+    "Explicit version 1 rollback did not load the frozen workspace.",
+  );
+  console.log("ok - explicit version 1 rollback workspace");
+});
+
+await withServer({
+  PDF_INVENTORY_REVIEW_ENABLED: "1",
   PDF_INVENTORY_REVIEW_SCHEMA_VERSION: "2",
 }, async (baseUrl) => {
   const documents = await (
     await expectStatus(baseUrl, "/api/internal/pdf-inventory-review/documents", 200)
   ).json();
   const document = documents.documents?.[0];
-  assert(document?.schema_version === 2, "Explicit version 2 reviewer did not load the shadow workspace.");
+  assert(document?.schema_version === 2, "Explicit version 2 reviewer did not load the active workspace.");
   assert(document?.page_count === 154, "Version 2 reviewer page count is incorrect.");
   const artifacts = await (
     await expectStatus(
@@ -283,10 +297,10 @@ await withServer({
     )
   ).json();
   assert(parity.artifact_type === "parity_report", "Phase 7 parity artifact is not active.");
-  assert(parity.summary?.matched === 751, "Phase 7 matched count is incorrect.");
+  assert(parity.summary?.matched === 753, "Phase 7 matched count is incorrect.");
   assert(parity.summary?.missing === 0 && parity.summary?.changed === 0, "Phase 7 contains structural loss or change.");
   assert(parity.summary?.provenance_shifted === 104, "Phase 7 provenance-shift count is incorrect.");
-  assert(parity.passed === false && parity.blockers?.length === 4, "Phase 7 handoff blockers are incomplete.");
+  assert(parity.passed === true && parity.blockers?.length === 0, "Phase 7 handoff did not pass.");
   const beforeBlockHash = document.block_artifact_sha256;
   const beforeReviewHash = document.review_artifact_sha256;
   const preview = await (
@@ -329,5 +343,5 @@ await withServer({
   const after = (await (await expectStatus(baseUrl, "/api/internal/pdf-inventory-review/documents", 200)).json()).documents[0];
   assert(after.block_artifact_sha256 === beforeBlockHash, "Propagation preview changed the block artifact.");
   assert(after.review_artifact_sha256 === beforeReviewHash, "Propagation preview changed the review artifact.");
-  console.log("ok - explicit version 2 shadow workspace is readable");
+  console.log("ok - explicit version 2 active workspace is readable");
 });

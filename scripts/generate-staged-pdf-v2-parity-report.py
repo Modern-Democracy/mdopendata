@@ -56,6 +56,11 @@ GENERATOR_CONFIG = {
     "max_peak_memory_bytes": MAX_PEAK_MEMORY_BYTES,
     "published_snapshot_id": 3,
     "published_observation_count": 2290,
+    "active_workspace_schema_version": 2,
+    "active_downstream_inputs": [
+        "content_groups",
+        "shadow_observations",
+    ],
 }
 GENERATOR = {
     "name": "staged-pdf-v2-parity",
@@ -476,17 +481,22 @@ def build_report(paths: dict[str, Path]) -> dict[str, Any]:
     records.sort(key=lambda item: item["comparison_key"])
 
     counts = Counter(record["status"] for record in records)
-    blockers = [
-        {
-            "blocker_key": "phase-7:active-handoff-unapproved",
-            "category": "handoff",
-            "message": (
-                "The version 2 workspace and downstream extraction input "
-                "remain inactive pending explicit approval after full parity."
-            ),
-            "affected_comparison_keys": [],
-        },
+    blocked_keys = [
+        record["comparison_key"]
+        for record in records
+        if record["disposition"] == "blocked_review"
     ]
+    blockers = []
+    if blocked_keys:
+        blockers.append({
+            "blocker_key": "phase-7:unresolved-parity-discrepancies",
+            "category": "parity",
+            "message": (
+                "One or more parity discrepancies require an exact "
+                "source-linked disposition before handoff."
+            ),
+            "affected_comparison_keys": blocked_keys,
+        })
     comparison = {
         "summary": {
             "total": len(records),
@@ -539,7 +549,7 @@ def build_report(paths: dict[str, Path]) -> dict[str, Any]:
             "publication_snapshot_count_before": 1,
             "publication_snapshot_count_after": 1,
         },
-        "passed": False,
+        "passed": not blockers,
     }
     errors = load_validator().validate_payload(report)
     if errors:

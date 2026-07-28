@@ -3,7 +3,7 @@ type: log
 tags:
   - wiki
   - log
-updated: 2026-07-16
+updated: 2026-07-27
 ---
 
 This page is the append-only chronological record for root wiki changes, ingests, substantive queries, and lint passes.
@@ -13,6 +13,10 @@ Append new entries in reverse chronological order. Use this heading format:
 ```text
 ## [YYYY-MM-DD] type | Short title
 ```
+
+## [2026-07-27] implementation | Version 2 active-workspace handoff
+
+Approved and completed the Phase 7 transition after full structural, observation-set, and live Snapshot 3 parity. The loopback reviewer and launcher now default to version 2; explicit schema version 1 selection remains the frozen rollback. The final 858-record parity report has 753 matches, one approved migration event, 104 approved provenance shifts, zero missing or changed records, zero blockers, and `passed: true` at SHA-256 `526ad87dbb9b2ddf91c33c5b83f6b8e47ae4e20c9351050e9cf83d5f731e733b`. Version 2 Stage 2 groups and 2,290 observations are the approved downstream structural-extraction inputs. Database, publication, deployment, dependency, and version 1 artifacts remain unchanged.
 
 ## [2026-07-16] implementation | Cross-page content association workflow
 

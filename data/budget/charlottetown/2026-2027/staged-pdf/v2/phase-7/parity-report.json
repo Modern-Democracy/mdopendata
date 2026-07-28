@@ -29,21 +29,14 @@
     "source_document_id": 9,
     "source_sha256": "d926634427e80aa2b06b6425bdbb117424fe53567ae344980cd10791f8e39bac"
   },
-  "blockers": [
-    {
-      "affected_comparison_keys": [],
-      "blocker_key": "phase-7:active-handoff-unapproved",
-      "category": "handoff",
-      "message": "The version 2 workspace and downstream extraction input remain inactive pending explicit approval after full parity."
-    }
-  ],
+  "blockers": [],
   "document_key": "ctown-budget-2026-2027",
   "generator": {
-    "config_sha256": "9f38d2f8685f825f904673f74d8dadfb1874044cd19fbdab0f2f27db31c570bb",
+    "config_sha256": "b293f95eff30c9dcb53c90aa017581c6ae893416fa47e994320c795bfeddf15d",
     "name": "staged-pdf-v2-parity",
     "version": "1"
   },
-  "passed": false,
+  "passed": true,
   "records": [
     {
       "baseline_record": {
@@ -24681,10 +24674,10 @@
   ],
   "run_controls": {
     "database_write_count": 0,
-    "first_run_canonical_sha256": "42ffc193526e68b5109ea40a765bb06312fe2d00a8ddf2bfa84577e68ee168e3",
+    "first_run_canonical_sha256": "bf9d62a7dc993a8c8acaef842255d3c87a77efacca59c4ee116b9af561f1ef28",
     "publication_snapshot_count_after": 1,
     "publication_snapshot_count_before": 1,
-    "second_run_canonical_sha256": "42ffc193526e68b5109ea40a765bb06312fe2d00a8ddf2bfa84577e68ee168e3"
+    "second_run_canonical_sha256": "bf9d62a7dc993a8c8acaef842255d3c87a77efacca59c4ee116b9af561f1ef28"
   },
   "schema_version": 2,
   "source_sha256": "d926634427e80aa2b06b6425bdbb117424fe53567ae344980cd10791f8e39bac",

@@ -15,7 +15,7 @@ This page defines the approved version 2 staged PDF artifact design for internal
 
 ## Status And Compatibility Decision
 
-The design is approved. Phase 1 schema and validator changes were implemented on 2026-07-17, and the Phase 2 parallel migration completed on 2026-07-27. Version 1 remains frozen in `schema/json-schema/staged-pdf-artifacts.schema.json`; version 2 remains separate in `schema/json-schema/staged-pdf-artifacts-v2.schema.json` with no active-workspace transition.
+The design is approved. Phase 1 schema and validator changes were implemented on 2026-07-17, the Phase 2 parallel migration completed on 2026-07-27, and the Phase 7 active-workspace transition completed on 2026-07-27. Version 1 remains frozen in `schema/json-schema/staged-pdf-artifacts.schema.json` and explicitly selectable for rollback; version 2 remains separate in `schema/json-schema/staged-pdf-artifacts-v2.schema.json` and is the active local reviewer contract.
 
 Version 2 is required by the new template-review-policy artifact, application-policy provenance, and automated review-event semantics. Optional span fields alone would not require rewriting version 1 instances, but they are implemented only in version 2 to preserve the closed version 1 contract.
 

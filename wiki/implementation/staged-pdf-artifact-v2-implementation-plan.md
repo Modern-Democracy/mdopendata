@@ -17,7 +17,7 @@ This page defines the approved implementation sequence for version 2 staged PDF 
 
 The requirements and schema design are approved. This plan does not itself authorize code, generated-artifact, dependency, database, deployment, or publication changes. Each implementation phase remains separately gated.
 
-Version 1 stays operational and immutable while version 2 is built and validated in parallel. The pilot remains the Charlottetown 2026/2027 financial plan, and all work remains shadow-only until parity and approval gates pass.
+Version 1 stays immutable and available as an explicit rollback workspace. Version 2 is the active local review workspace and approved downstream structural-extraction input after Phase 7 parity and transition approval. The pilot remains the Charlottetown 2026/2027 financial plan.
 
 ## Implementation Status
 
@@ -28,11 +28,11 @@ Version 1 stays operational and immutable while version 2 is built and validated
 - The pilot contains no structural-template artifacts, so zero `review_required` policies were eligible or seeded. No automatic-approval policy was created.
 - A clean rerun produced zero writes and four byte-identical outputs. Version 1 hashes remained frozen, the three-artifact version 2 set validated, and database and publication write counts remained zero.
 - Phase 3 completed on 2026-07-27. Parallel version 2 generator and writer entry points resolve omitted spans as `1`, propose evidence-supported formatted-text and table titles, support logical-cell merge, split, and explicit spans, protect relationship endpoints, and append valid version 2 review events. The frozen version 1 generator and writer remain byte-identical.
-- The reviewer retains version 1 as its default workspace. Explicit `PDF_INVENTORY_REVIEW_SCHEMA_VERSION=2` selection enables the parallel version 2 source and block artifacts, effective-span rendering, table-title choices, numeric span controls, logical-cell split and merge, and span-aware selection.
+- The reviewer defaults to version 2. Explicit `PDF_INVENTORY_REVIEW_SCHEMA_VERSION=1` or launcher `-SchemaVersion 1` selection retains the frozen version 1 rollback workspace.
 - Phase 4 completed on 2026-07-27. Approved table and formatted-text blocks can produce deterministic, read-only current-document candidate previews with exact, light, material, and one-off classifications. Selected eligible candidates apply atomically; reviewer rejections append document-scoped negative controls to the existing review chain.
 - Phase 5 completed on 2026-07-27. Human-approved structures can be promoted into immutable document-scoped templates with immutable review policies, deterministic sampling, fail-closed automation gates, suspension, and exact audit provenance.
 - Phase 6 is in progress. The profile and preview contracts, deterministic embedded-document classifier, exact page-accounting controls, and read-only reviewer preview are implemented. Promotion of a real municipal-source profile remains blocked until exact approved structural-template and review-policy references plus positive and nearest-negative agenda-package controls are available.
-- Phase 7 verification is complete. Deterministic parity confirms 753 exact matches, 104 approved provenance-only shifts, one explicit migration event, and zero missing or changed records. Stage 2 supplies 77 logical groups and 2,290 unique shadow observations. Read-only live verification confirms that published Snapshot 3 contains the same 2,290 document-9 semantic records and source links. Active handoff remains blocked only by explicit transition approval.
+- Phase 7 completed on 2026-07-27. Deterministic parity confirms 753 exact matches, 104 approved provenance-only shifts, one explicit migration event, and zero missing or changed records. Stage 2 supplies 77 logical groups and 2,290 unique observations. Read-only live verification confirms that published Snapshot 3 contains the same 2,290 document-9 semantic records and source links. The explicit transition approval activates version 2 with zero handoff blockers.
 
 ## Phase 0: Freeze Baseline And Controls
 
@@ -175,11 +175,11 @@ The isolated synthetic gate passes. Remaining gate work is to promote exact agen
 
 ### Status
 
-In progress on 2026-07-27. `scripts/generate-staged-pdf-v2-parity-report.py` compares the frozen version 1 and shadow version 2 source-page evidence, page dispositions, blocks, relationships, review history, and the complete shadow observation-set digest by stable keys. Matched records retain canonical fingerprints; discrepancies retain exact changed paths, old and new values, source locators, and dispositions. The generated version 2 parity artifact is stored at `data/budget/charlottetown/2026-2027/staged-pdf/v2/phase-7/parity-report.json`.
+Completed on 2026-07-27. `scripts/generate-staged-pdf-v2-parity-report.py` compares the frozen version 1 and version 2 source-page evidence, page dispositions, blocks, relationships, review history, and the complete observation-set digest by stable keys. Matched records retain canonical fingerprints; discrepancies retain exact changed paths, old and new values, source locators, and dispositions. The generated version 2 parity artifact is stored at `data/budget/charlottetown/2026-2027/staged-pdf/v2/phase-7/parity-report.json`.
 
-The current report contains 858 records: 753 matched, zero missing, one extra migration event, zero changed, and 104 provenance-shifted review events. The two additional exact matches represent the complete 2,290-observation repository set digest and the live Snapshot 3 document-9 comparison. The provenance shifts remain limited to version 2 `decision_basis`, nullable `policy_ref`, and human `actor_type` fields and are disposed by migration decision `ctown-budget-2026-2027:decision:000105`. Two clean generations are byte-identical with artifact SHA-256 `77c7718f207b0f81e83a50cb68d1fab22935d0b0a26babe7a63f605972cf6b33`.
+The final report contains 858 records: 753 matched, zero missing, one extra migration event, zero changed, and 104 provenance-shifted review events. The two additional exact matches represent the complete 2,290-observation repository set digest and the live Snapshot 3 document-9 comparison. The provenance shifts remain limited to version 2 `decision_basis`, nullable `policy_ref`, and human `actor_type` fields and are disposed by migration decision `ctown-budget-2026-2027:decision:000105`. Two clean generations are byte-identical with artifact SHA-256 `526ad87dbb9b2ddf91c33c5b83f6b8e47ae4e20c9351050e9cf83d5f731e733b`.
 
-The report is intentionally `passed: false`. Stage 2 resolves the logical-group and shadow-observation blockers, and read-only live verification resolves the publication-state blocker. One blocker remains: no active-workspace transition is approved. The version 2 local reviewer exposes the validated report and blocker read-only. Generation performs no database or publication writes and refuses to replace a differing existing report.
+The report is `passed: true` with zero blockers. The local reviewer defaults to version 2, while an explicit version 1 selection remains the rollback path. Version 2 Stage 2 groups and observations are the approved downstream structural-extraction inputs. Generation performs no database or publication writes, refuses to replace a differing existing report, and recreates a blocker when an unresolved source-linked discrepancy is introduced.
 
 `scripts/generate-staged-pdf-v2-stage-2.py` derives 77 logical groups from approved normalized statement identities, canonical table dispositions, the two reviewed Snapshot 3 appendix recoveries, the page 152 divider, and three narrative false-positive exclusions. Every Stage 1 financial candidate block has exactly one primary owner. Continuation edges and inherited-header links preserve source page order, and the 12 reviewed summary/detail statement relationships are represented bidirectionally.
 
@@ -198,7 +198,7 @@ The Stage 2 shadow export contains 2,165 approved manifest observations, 76 rege
 
 Every discrepancy has exact source evidence and a disposition. No source fragment is lost or duplicated. Database and publication outputs remain unchanged until a later explicitly approved transition.
 
-Structural, repository-baseline observation, and live Snapshot 3 parity pass, including complete page, block, group, semantic-record, and source-link coverage. Full Phase 7 handoff does not pass until the remaining transition-approval blocker is resolved.
+Gate passed. Structural, repository-baseline observation, and live Snapshot 3 parity pass, including complete page, block, group, semantic-record, and source-link coverage. The active workspace and downstream structural-extraction inputs now use version 2; version 1 remains immutable and explicitly selectable for rollback.
 
 ## Implementation Order By File
 

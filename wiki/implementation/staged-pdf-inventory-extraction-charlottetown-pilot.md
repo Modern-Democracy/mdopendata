@@ -115,7 +115,7 @@ The version 2 Phase 7 core compares 154 source-page records, 154 page dispositio
 
 Stage 2 now contains 77 logical groups with exact primary ownership for every financial candidate block. Its write-free shadow export contains 2,165 approved manifest observations plus 76 property-tax and 49 City-debt observations regenerated from reviewed page 149 and page 151 raw rows. All 2,290 records have unique natural keys and logical-group mappings.
 
-Repository-baseline observation parity passes by a canonical full-set digest. Live published Snapshot 3 contains 6,381 observations across documents 7, 8, and 9; its document-9 subset contains exactly 2,290 unique semantic records, 2,290 unique source links, and zero missing links. Its canonical semantic and source digests exactly match Stage 2. Live verification is complete with zero database writes. Explicit active-workspace transition approval is the only remaining blocker, and the active workspace remains version 1.
+Repository-baseline observation parity passes by a canonical full-set digest. Live published Snapshot 3 contains 6,381 observations across documents 7, 8, and 9; its document-9 subset contains exactly 2,290 unique semantic records, 2,290 unique source links, and zero missing links. Its canonical semantic and source digests exactly match Stage 2. Live verification is complete with zero database writes. The active-workspace transition is approved, version 2 is the local reviewer default and downstream structural-extraction input, the final parity report passes with zero blockers, and version 1 remains an explicit rollback.
 
 ## Required Evidence Package
 

@@ -22,7 +22,7 @@ const pdfInventoryReviewWriteRequested = /^(1|true|yes)$/i.test(
   process.env.PDF_INVENTORY_REVIEW_WRITE_ENABLED || "false",
 );
 const pdfInventoryReviewSchemaVersion = Number(
-  process.env.PDF_INVENTORY_REVIEW_SCHEMA_VERSION || "1",
+  process.env.PDF_INVENTORY_REVIEW_SCHEMA_VERSION || "2",
 );
 if (![1, 2].includes(pdfInventoryReviewSchemaVersion)) {
   throw new Error("PDF_INVENTORY_REVIEW_SCHEMA_VERSION must be 1 or 2.");

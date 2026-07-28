@@ -3,7 +3,7 @@ param(
   [int]$Port = 3217,
 
   [ValidateSet(1, 2)]
-  [int]$SchemaVersion = 1
+  [int]$SchemaVersion = 2
 )
 
 $ErrorActionPreference = 'Stop'

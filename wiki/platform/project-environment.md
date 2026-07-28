@@ -5,7 +5,7 @@ tags:
   - python
   - dependencies
   - deployment
-updated: 2026-07-14
+updated: 2026-07-27
 ---
 
 This page records the canonical project runtime, dependency, and environment-management contract.
@@ -48,7 +48,7 @@ Historical `.python` paths and Codex bundled-runtime paths in generated manifest
 - Requests to inspect or demonstrate the deployed application route to the Render endpoint; ingestion and other write workflows remain local.
 - Adding or changing a deployment target requires DevOps review and explicit user approval.
 
-The staged PDF review surface is a temporary host process started with `scripts/start-staged-pdf-review.ps1`. It binds only `127.0.0.1:3217`, requires `PDF_INVENTORY_REVIEW_ENABLED=1`, enables the local Stage 1 writer, and forces `DEMO_MODE=0`. Docker and Render do not enable this route.
+The staged PDF review surface is a temporary host process started with `scripts/start-staged-pdf-review.ps1`. It binds only `127.0.0.1:3217`, requires `PDF_INVENTORY_REVIEW_ENABLED=1`, enables the local Stage 1 writer, and forces `DEMO_MODE=0`. Version 2 is the launcher and server default. Use `-SchemaVersion 1` or `PDF_INVENTORY_REVIEW_SCHEMA_VERSION=1` for the frozen version 1 rollback workspace. Docker and Render do not enable this route.
 
 The obsolete Windows rule `mdopendata PDF review 3217 iPad` has been removed. Private-LAN access remains deferred to an installer-managed implementation with explicit authentication, interface selection, firewall lifecycle, discovery, and stop controls.
 
