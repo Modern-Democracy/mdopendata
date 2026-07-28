@@ -6,7 +6,7 @@ tags:
   - deployment
   - demo
   - postgis
-updated: 2026-07-14
+updated: 2026-07-28
 ---
 
 This page documents the read-only demonstration deployment of the mdopendata web application on Render with a one-time PostGIS snapshot in Supabase.
@@ -38,6 +38,13 @@ For later repository migrations, set `DATABASE_URL` and run:
 .\scripts\python.ps1 .\scripts\run-migrations.py --base-schema
 ```
 
+Migration `032_enable_demo_row_level_security.sql` enables row-level security
+on every ordinary table in `public`, `zoning`, `budget`, `council`, and `help`.
+It creates no policies, so Supabase `anon` and `authenticated` roles receive
+default-deny table access. Render continues to query through the server-side
+database owner connection, which bypasses RLS. Do not replace that connection
+with an anonymous or authenticated Supabase client credential.
+
 ## Render configuration
 
 The canonical demonstration endpoint is [https://mdopendata-demo.onrender.com](https://mdopendata-demo.onrender.com), provided by the free Render web service `mdopendata-demo`. The Render Blueprint flow in this workspace required payment information, so the service was created through the manual free-instance flow without adding payment details. [`render.yaml`](../../render.yaml) remains the reproducible configuration reference. Set `DATABASE_URL` to the Supabase PostgreSQL connection string as a secret. The service uses `HOST=0.0.0.0`, port `10000`, `REPO_ROOT=/workspace`, SSL, the `public,extensions` search path, and a five-connection application pool.
@@ -60,6 +67,29 @@ npm run web:smoke
 ```
 
 Verify Supabase with table counts for `zoning.section`, `budget.financial_observation`, `council.meeting`, and `help.term`. Verify `/healthz` before running the full smoke suite.
+
+Verify RLS coverage with:
+
+```sql
+SELECT n.nspname, c.relname
+FROM pg_class c
+JOIN pg_namespace n ON n.oid = c.relnamespace
+WHERE n.nspname IN ('public', 'zoning', 'budget', 'council', 'help')
+  AND c.relkind IN ('r', 'p')
+  AND NOT c.relrowsecurity;
+```
+
+The query must return zero rows. If Render cannot read after the migration,
+disable RLS only as a temporary rollback while restoring its database owner
+connection.
+
+Migration 032 was applied to the demo Supabase project on 2026-07-28. The
+remote verification covered 145 tables: `budget` 58, `council` 29, `help` 6,
+`public` 28, and `zoning` 24, with every table reporting RLS enabled. Supabase
+Advisor reported no remaining issues, Render `/healthz` returned HTTP 200, and
+35 read-only smoke checks passed. The separate published-budget source-page
+check for source 9 returned HTTP 404 and remains an unrelated packaged-source
+artifact exception.
 
 ## Rollback and limits
 

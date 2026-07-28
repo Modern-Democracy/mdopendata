@@ -99,6 +99,12 @@ For local schema changes against Supabase, set `DATABASE_URL` and run:
 .\scripts\python.ps1 .\scripts\run-migrations.py --base-schema
 ```
 
+Migration `032_enable_demo_row_level_security.sql` enables row-level security on
+all ordinary tables in the demo schemas without adding client policies.
+Supabase `anon` and `authenticated` access is therefore denied by default;
+the Render service must continue to use its server-side database owner
+connection.
+
 The canonical deployment notes are in [the Render and Supabase deployment page](wiki/implementation/render-supabase-deployment.md).
 
 ## Local PDF Inventory Review

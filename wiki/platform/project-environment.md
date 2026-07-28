@@ -45,6 +45,7 @@ Historical `.python` paths and Codex bundled-runtime paths in generated manifest
 - Local services use Docker Compose through `docker-compose.yml`.
 - The optional AWS deployment target is a single-host AWS EC2 Docker Compose deployment described in `wiki/implementation/aws-deployment.md`.
 - The canonical user-facing demonstration target is the Render Docker web service at `https://mdopendata-demo.onrender.com`, backed by a one-time Supabase PostGIS snapshot and described in `wiki/implementation/render-supabase-deployment.md`.
+- Supabase demo tables use RLS with no client policies. The Render service reads through its server-side database owner connection; anonymous and authenticated Supabase client roles are denied by default.
 - Requests to inspect or demonstrate the deployed application route to the Render endpoint; ingestion and other write workflows remain local.
 - Adding or changing a deployment target requires DevOps review and explicit user approval.
 

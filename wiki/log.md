@@ -18,6 +18,10 @@ Append new entries in reverse chronological order. Use this heading format:
 
 Rebuilt `mdopendata-web:latest` from the committed council agenda-package import implementation and force-recreated only the local web container. The running image is `sha256:5c1e625acb825f0203c3b4af4ee1b88159546b53ea657f9e531312434df0cb0f`; embedded server and ingestion UI hashes match the workspace exactly. Local health returned `ok`, the council-import preview returned the explicit `meeting-required` gate with five documents, and the existing PostGIS and pgAdmin containers were not recreated.
 
+## [2026-07-28] platform | Supabase demo row-level security
+
+Added and deployed migration 032 to enable row-level security on all 145 ordinary tables in the remote `public`, `zoning`, `budget`, `council`, and `help` demo schemas. No client policies are created, so Supabase anonymous and authenticated access is denied by default while the server-side Render database owner connection retains read access. Supabase Advisor reported no remaining issues, Render health returned HTTP 200, and 35 read-only smoke checks passed; the separate packaged source-page check for budget source 9 remains HTTP 404.
+
 ## [2026-07-28] implementation | Council agenda-package binding and import
 
 Implemented and live-verified the post-extraction council-domain handoff. A completed package now requires an explicit existing same-jurisdiction meeting and exact meeting-scoped agenda-item keys before one transaction imports its source and package-document records. The agenda remains unbound; all four supporting documents bind to the exact agenda item and inherit only its business-item relationship. The six-page control imported five documents at ranges `1`, `2`, `3`, `4`, and `5-6`; a missing-key control returned `409` with zero writes, and an unchanged rerun preserved all active IDs. Permanent council rows were fingerprint-identical before and after ephemeral verification.
