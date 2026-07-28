@@ -147,8 +147,8 @@
     <div id="page-grid" class="page-grid"></div>
   </section>
   <section id="reuse-section" class="reuse-section" aria-labelledby="reuse-heading">
-    <div class="pages-head"><div><h2 id="reuse-heading">Municipal package reuse preview</h2><span class="page-count">Read-only structural classification</span></div><button id="run-reuse-preview" class="primary" type="button">Preview approved profile</button></div>
-    <p class="notice">Tests the configured, approved municipal-source profile without changing page classifications, document assembly, or publication state.</p>
+    <div class="pages-head"><div><h2 id="reuse-heading">Municipal package reuse preview</h2><span class="page-count">Review before assembly</span></div><div><button id="run-reuse-preview" class="secondary" type="button">Preview approved profile</button> <button id="apply-reuse-preview" class="primary" type="button" disabled>Approve and create assembly draft</button></div></div>
+    <p class="notice">Preview is read-only. Approval reruns the profile, accepts its page assignments, and creates an editable assembly draft. It does not approve the assembly, bind agenda items, extract data, or publish records.</p>
     <div id="reuse-summary" class="reuse-summary">Preview has not run.</div>
     <div id="reuse-documents" class="reuse-documents"></div>
   </section>
@@ -195,6 +195,7 @@
   const classificationSummary = document.getElementById("classification-summary");
   const reuseSection = document.getElementById("reuse-section");
   const runReusePreviewButton = document.getElementById("run-reuse-preview");
+  const applyReusePreviewButton = document.getElementById("apply-reuse-preview");
   const reuseSummary = document.getElementById("reuse-summary");
   const reuseDocuments = document.getElementById("reuse-documents");
   const draftsSection = document.getElementById("drafts-section");
@@ -296,6 +297,11 @@
     const coverage = payload.coverage;
     reuseSummary.className = `reuse-summary ${payload.status === "blocked" ? "blocked" : ""}`.trim();
     reuseSummary.textContent = `${payload.status.replaceAll("_", " ")} | ${payload.documents.length} document${payload.documents.length === 1 ? "" : "s"} | ${coverage.assigned_pages}/${coverage.total_pages} pages assigned | ${coverage.unknown_pages} unknown | ${coverage.conflicting_pages} conflicting`;
+    applyReusePreviewButton.disabled = payload.status === "blocked"
+      || coverage.assigned_pages !== coverage.total_pages
+      || coverage.unknown_pages !== 0
+      || coverage.conflicting_pages !== 0
+      || coverage.omitted_pages !== 0;
     reuseDocuments.replaceChildren(...payload.documents.map((match) => {
       const card = document.createElement("article");
       card.className = "reuse-document";
@@ -314,6 +320,7 @@
     const packageKey = classifyButton.dataset.packageKey;
     if (!packageKey) return;
     runReusePreviewButton.disabled = true;
+    applyReusePreviewButton.disabled = true;
     reuseSummary.textContent = "Running approved municipal-source profile.";
     try {
       const response = await fetch(`/api/document-ingestion/packages/${encodeURIComponent(packageKey)}/reuse-preview`, { method: "POST" });
@@ -325,6 +332,25 @@
       reuseSummary.textContent = error.message;
     } finally {
       runReusePreviewButton.disabled = false;
+    }
+  }
+
+  async function applyReusePreview() {
+    const packageKey = classifyButton.dataset.packageKey;
+    if (!packageKey) return;
+    applyReusePreviewButton.disabled = true;
+    setStatus("Approving the reuse preview and creating an assembly draft.", "active");
+    try {
+      const response = await fetch(`/api/document-ingestion/packages/${encodeURIComponent(packageKey)}/reuse-preview/assembly-plan`, { method: "POST" });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "Reuse-preview handoff failed.");
+      showAssembly(payload);
+      classificationSummary.textContent = "Approved reuse profile assignments accepted. Review agenda-item bindings before assembly approval.";
+      classificationSummary.classList.add("visible");
+      setStatus(payload.reuseHandoff?.reused ? "Existing reuse assembly draft loaded." : "Reuse assembly draft created.", "active");
+    } catch (error) {
+      setStatus(error.message, "error");
+      applyReusePreviewButton.disabled = false;
     }
   }
 
@@ -772,6 +798,7 @@
     if (packageKey) runClassification(packageKey);
   });
   runReusePreviewButton.addEventListener("click", runReusePreview);
+  applyReusePreviewButton.addEventListener("click", applyReusePreview);
 
   generateDraftsButton.addEventListener("click", async () => {
     const packageKey = classifyButton.dataset.packageKey;

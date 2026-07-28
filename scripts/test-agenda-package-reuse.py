@@ -320,7 +320,42 @@ class AgendaPackageReuseTests(unittest.TestCase):
             "Municipal package reuse preview", ui
         )
         self.assertIn(
-            "without changing page classifications", ui
+            "Preview is read-only.", ui
+        )
+
+    def test_approved_preview_handoff_is_explicit_and_fail_closed(self) -> None:
+        server = (ROOT / "web/server.js").read_text(encoding="utf-8")
+        ui = (
+            ROOT
+            / "web/public/ui_kits/agenda-package-ingestion/index.html"
+        ).read_text(encoding="utf-8")
+        self.assertIn(
+            "handoffAgendaPackageReusePreview(packageKey)", server
+        )
+        self.assertIn(
+            "Reuse-preview handoff requires complete, conflict-free package coverage.",
+            server,
+        )
+        self.assertIn(
+            "document.fit_class === \"material_variation\"", server
+        )
+        self.assertIn(
+            "Reuse-preview handoff cannot replace an extracting or completed package.",
+            server,
+        )
+        self.assertIn(
+            "classification_source,\n          confidence, review_status",
+            server,
+        )
+        self.assertIn(
+            "'reviewer', $3, 'accepted'", server
+        )
+        self.assertIn(
+            "Approve and create assembly draft", ui
+        )
+        self.assertIn(
+            "It does not approve the assembly, bind agenda items, extract data, or publish records.",
+            ui,
         )
 
     def test_canonical_real_package_profile_and_controls(self) -> None:

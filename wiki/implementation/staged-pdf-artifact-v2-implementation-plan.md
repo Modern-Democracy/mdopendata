@@ -6,7 +6,7 @@ tags:
   - implementation-plan
   - review-ui
   - templates
-updated: 2026-07-27
+updated: 2026-07-28
 ---
 
 This page defines the approved implementation sequence for version 2 staged PDF artifacts, structural propagation, and policy-governed review reduction.
@@ -32,6 +32,8 @@ Version 1 stays immutable and available as an explicit rollback workspace. Versi
 - Phase 4 completed on 2026-07-27. Approved table and formatted-text blocks can produce deterministic, read-only current-document candidate previews with exact, light, material, and one-off classifications. Selected eligible candidates apply atomically; reviewer rejections append document-scoped negative controls to the existing review chain.
 - Phase 5 completed on 2026-07-27. Human-approved structures can be promoted into immutable document-scoped templates with immutable review policies, deterministic sampling, fail-closed automation gates, suspension, and exact audit provenance.
 - Phase 6 completed on 2026-07-27. The deterministic promotion command materializes the approved Charlottetown public-meeting profile from six accepted page classifications and five approved assembly rows. Five immutable same-edition structural templates and five `review_required` policies cover four single-page documents and one two-page document. A real six-page regular-council slice remains wholly unknown and blocked as the nearest negative control.
+- The Phase 6 approved-preview handoff was implemented on 2026-07-28. An explicit reviewer action reruns the preview, accepts complete non-material page assignments with exact profile provenance, resolves matching template gaps, and creates a draft assembly without approving agenda-item bindings, extraction, council import, or publication.
+- Live handoff verification passed on 2026-07-28 with six accepted page assignments, five source-ordered draft documents, zero extracted documents, an idempotent no-write rerun, both blocking controls intact, exact permanent-control fingerprints unchanged, and complete ephemeral cleanup.
 - Phase 7 completed on 2026-07-27. Deterministic parity confirms 753 exact matches, 104 approved provenance-only shifts, one explicit migration event, and zero missing or changed records. Stage 2 supplies 77 logical groups and 2,290 unique observations. Read-only live verification confirms that published Snapshot 3 contains the same 2,290 document-9 semantic records and source links. The explicit transition approval activates version 2 with zero handoff blockers.
 
 ## Phase 0: Freeze Baseline And Controls
@@ -173,7 +175,7 @@ Historical source-document IDs 2 and 3 now carry explicit `metadata.source_famil
 
 Single-page and multi-page positive controls are detected with exact source order. Nearest-negative documents remain unmatched or blocked. No package page is silently omitted or assigned to conflicting embedded documents.
 
-Gate passed. The synthetic controls remain green, the reviewed real package supplies exact single-page and multi-page positive controls, and the nearest real negative remains unmatched and blocked with complete page accounting. Every policy remains `review_required`. Approved-preview handoff to package assembly and council-domain import resolution remain separate later workflow changes.
+Gate passed. The synthetic controls remain green, the reviewed real package supplies exact single-page and multi-page positive controls, and the nearest real negative remains unmatched and blocked with complete page accounting. Every policy remains `review_required`. Approved-preview handoff now creates a reviewer-controlled draft assembly; council-domain import resolution remains a separate later workflow change.
 
 ## Phase 7: Parity And Handoff
 

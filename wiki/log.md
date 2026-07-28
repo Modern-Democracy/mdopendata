@@ -3,7 +3,7 @@ type: log
 tags:
   - wiki
   - log
-updated: 2026-07-27
+updated: 2026-07-28
 ---
 
 This page is the append-only chronological record for root wiki changes, ingests, substantive queries, and lint passes.
@@ -13,6 +13,10 @@ Append new entries in reverse chronological order. Use this heading format:
 ```text
 ## [YYYY-MM-DD] type | Short title
 ```
+
+## [2026-07-28] implementation | Agenda-package reuse-preview assembly handoff
+
+Implemented and live-verified the explicit approved agenda-package reuse-preview handoff. Complete, conflict-free, non-material previews can now bind structural page roles to accepted active positive-control extraction templates, supersede page classifications with reviewer-accepted profile evidence, and create an editable draft assembly transactionally. The ephemeral positive control produced six classifications and five draft documents, reran without writes, and was removed completely. Approved assemblies, blocked previews, missing or inconsistent templates, extraction, council import, publication, and permanent control rows remained protected.
 
 ## [2026-07-27] implementation | Charlottetown agenda-package reuse profile
 

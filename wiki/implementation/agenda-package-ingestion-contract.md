@@ -4,7 +4,7 @@ tags:
   - council-meetings
   - document-ingestion
   - agenda-packages
-updated: 2026-07-27
+updated: 2026-07-28
 ---
 
 This page defines the approved package-level extraction contract and template-discovery gate for agenda package PDFs.
@@ -80,7 +80,17 @@ Phase 6 adds a separate read-only municipal-package reuse preview. An immutable 
 
 `POST /api/document-ingestion/packages/{packageKey}/reuse-preview` runs only when `AGENDA_PACKAGE_REUSE_PROFILE` resolves to a repository file and the registered source has explicit jurisdiction, source-family, document-family, and complete page traversal evidence. The canonical Charlottetown public-meeting value is `data/document-ingestion/profiles/charlottetown-council-public-meeting/v1/profile.json`. The endpoint performs no database or artifact writes. The browser displays package status, coverage, ordered document ranges, fit, policy outcomes, and boundary/unresolved evidence counts.
 
-The canonical profile is approved from the reviewed six-page February 3, 2026 package. It references five immutable same-edition structural templates and five `review_required` policies. Its positive control resolves five source-ordered documents with exact six-page coverage, including the two-page mailed notice and map. Its stored nearest-negative control uses the first six pages of the unreviewed January 13 regular-council package; all six remain unknown and blocked. Live endpoint verification against all 453 pages also returns zero documents, 453 unknown pages, zero conflicts, and zero omissions. Historical package rows 2 and 3 have explicit `charlottetown-council` source-family metadata. Remaining work outside the Phase 6 profile gate is optional approved-preview handoff to document assembly and council-domain import resolution.
+`POST /api/document-ingestion/packages/{packageKey}/reuse-preview/assembly-plan` is the explicit human-approved handoff. It reruns the configured preview and fails closed unless every page is assigned exactly once, no unknown, conflicting, omitted, material, policy-blocked, or unresolved evidence remains, the source hash is unchanged, and every referenced page template is active. It also refuses to replace an approved assembly.
+
+Structural page-role keys in a reuse preview are not extraction page-template keys. Before writing, the handoff reruns the profile's matched positive control and binds each structural role to that control page's accepted, active PostgreSQL page template. Missing, inactive, incomplete, or inconsistent positive-control bindings block the handoff. Template activity is rechecked under the write transaction.
+
+Within one database transaction, the handoff supersedes prior active page classifications with reviewer-accepted profile assignments, records exact profile, matcher, policy, structural-template, page-role, and boundary evidence, resolves corresponding page-template gaps, and creates an editable draft assembly. The first matched document becomes the agenda; later documents retain null agenda-item bindings until manual assignment. The package moves to `awaiting_document_assembly`, not `ready_for_extraction`.
+
+The handoff does not approve the assembly, infer agenda-item bindings, run extraction, import council-domain relationships, or publish records. A repeated handoff against the same active draft and profile hash returns the existing draft without new writes.
+
+Live verification on 2026-07-28 cloned the reviewed six-page positive source into an ephemeral package, then removed it by cascade. The handoff created six reviewer-accepted classifications and five draft assembly rows with exact ranges `1`, `2`, `3`, `4`, and `5-6`; it created zero extracted documents. The repeated handoff created no additional classification or assembly IDs. The 453-page negative remained blocked, the reviewed positive's approved assembly remained protected, permanent positive and negative control rows were byte-for-byte equal as PostgreSQL JSON before and after, the global council package-document count did not change, and zero ephemeral source rows remained.
+
+The canonical profile is approved from the reviewed six-page February 3, 2026 package. It references five immutable same-edition structural templates and five `review_required` policies. Its positive control resolves five source-ordered documents with exact six-page coverage, including the two-page mailed notice and map. Its stored nearest-negative control uses the first six pages of the unreviewed January 13 regular-council package; all six remain unknown and blocked. Live endpoint verification against all 453 pages also returns zero documents, 453 unknown pages, zero conflicts, and zero omissions. Historical package rows 2 and 3 have explicit `charlottetown-council` source-family metadata. Approved-preview handoff to a draft assembly is implemented; council-domain import resolution remains separate.
 
 ## Sources
 

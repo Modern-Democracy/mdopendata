@@ -4161,6 +4161,397 @@ async function executeAgendaPackageReusePreview(packageKey) {
   }
 }
 
+async function loadAgendaPackageReuseTemplateBindings() {
+  const profilePath = requireAgendaPackageReuseProfilePath();
+  const profile = JSON.parse(await readFile(profilePath, "utf8"));
+  const positiveControl = profile.positive_controls?.find(
+    (control) => control.expected_result === "matched",
+  );
+  if (!positiveControl?.package_key) {
+    throw stagedPdfReviewError(
+      "Reuse profile requires a matched positive control for assembly handoff.",
+      409,
+    );
+  }
+  const controlPreview = await executeAgendaPackageReusePreview(positiveControl.package_key);
+  validateAgendaPackageReuseHandoff(controlPreview);
+  const controlSource = await packageSourceRecord(positiveControl.package_key);
+  const { rows } = await pool.query(`
+    SELECT sp.page_number, pc.review_status,
+           pt.page_template_id, pt.page_template_key, pt.status
+    FROM documents.source_page sp
+    JOIN documents.page_classification pc
+      ON pc.source_page_id = sp.source_page_id AND pc.is_active
+    JOIN documents.page_template pt
+      ON pt.page_template_id = pc.page_template_id AND pt.is_active
+    WHERE sp.source_document_id = $1 AND sp.is_active
+    ORDER BY sp.page_number
+  `, [controlSource.source_document_id]);
+  const controlAssignments = controlPreview.documents.flatMap(
+    (document) => document.page_sequence,
+  );
+  if (
+    rows.length !== controlAssignments.length
+    || rows.some((row, index) => (
+      row.page_number !== controlAssignments[index].page_number
+      || row.review_status !== "accepted"
+      || row.status !== "active"
+    ))
+  ) {
+    throw stagedPdfReviewError(
+      "Reuse profile positive-control page templates are incomplete or inactive.",
+      409,
+    );
+  }
+  const bindings = new Map();
+  for (const [index, assignment] of controlAssignments.entries()) {
+    const row = rows[index];
+    const existing = bindings.get(assignment.page_template_key);
+    if (existing && existing.pageTemplateId !== row.page_template_id) {
+      throw stagedPdfReviewError(
+        `Reuse structural role has inconsistent positive-control page templates: ${assignment.page_template_key}.`,
+        409,
+      );
+    }
+    bindings.set(assignment.page_template_key, {
+      pageTemplateId: row.page_template_id,
+      pageTemplateKey: row.page_template_key,
+    });
+  }
+  return bindings;
+}
+
+function reuseAssemblyTitle(documentFamily) {
+  return documentFamily
+    .split("-")
+    .filter(Boolean)
+    .map((word) => word[0].toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+function validateAgendaPackageReuseHandoff(preview) {
+  const coverage = preview?.coverage || {};
+  if (
+    preview?.status === "blocked"
+    || !Array.isArray(preview?.documents)
+    || preview.documents.length < 1
+    || coverage.total_pages < 1
+    || coverage.assigned_pages !== coverage.total_pages
+    || coverage.unknown_pages !== 0
+    || coverage.conflicting_pages !== 0
+    || coverage.omitted_pages !== 0
+  ) {
+    throw stagedPdfReviewError(
+      "Reuse-preview handoff requires complete, conflict-free package coverage.",
+      409,
+    );
+  }
+  if (preview.documents.some((document) => (
+    document.fit_class === "material_variation"
+    || document.policy_evaluation?.outcome === "blocked"
+    || document.unresolved_evidence?.length
+  ))) {
+    throw stagedPdfReviewError(
+      "Reuse-preview handoff is blocked by material or unresolved document evidence.",
+      409,
+    );
+  }
+  const pageNumbers = preview.documents
+    .flatMap((document) => document.page_sequence.map((page) => page.page_number));
+  if (
+    pageNumbers.length !== coverage.total_pages
+    || new Set(pageNumbers).size !== coverage.total_pages
+    || pageNumbers.some((pageNumber, index) => pageNumber !== index + 1)
+  ) {
+    throw stagedPdfReviewError(
+      "Reuse-preview page assignments must cover every package page exactly once in source order.",
+      409,
+    );
+  }
+}
+
+async function handoffAgendaPackageReusePreview(packageKey) {
+  const preview = await executeAgendaPackageReusePreview(packageKey);
+  validateAgendaPackageReuseHandoff(preview);
+  const source = await packageSourceRecord(packageKey);
+  if (preview.source_sha256 !== source.source_file_hash) {
+    throw stagedPdfReviewError("Reuse preview does not match the registered source file.", 409);
+  }
+
+  const existing = await loadPackageAssembly(packageKey);
+  if (existing.status === "approved") {
+    throw stagedPdfReviewError("An approved package assembly already exists.", 409);
+  }
+  const profileHash = preview.profile_ref.sha256;
+  const pageAssignments = preview.documents.flatMap((document) => (
+    document.page_sequence.map((page) => ({
+      ...page,
+      documentKey: document.document_key,
+      documentFamily: document.document_family,
+      fitClass: document.fit_class,
+      confidence: document.confidence,
+      policyEvaluation: document.policy_evaluation,
+      templateRef: document.template_ref,
+      boundaryEvidence: document.boundary_evidence,
+    }))
+  ));
+  const templateBindings = await loadAgendaPackageReuseTemplateBindings();
+  const missingTemplateKeys = [...new Set(
+    pageAssignments
+      .filter((page) => !templateBindings.has(page.page_template_key))
+      .map((page) => page.page_template_key),
+  )];
+  if (missingTemplateKeys.length) {
+    throw stagedPdfReviewError(
+      `Reuse-preview handoff lacks positive-control page-template bindings: ${missingTemplateKeys.join(", ")}.`,
+      409,
+    );
+  }
+  for (const assignment of pageAssignments) {
+    const binding = templateBindings.get(assignment.page_template_key);
+    assignment.structuralPageTemplateKey = assignment.page_template_key;
+    assignment.extractionPageTemplateId = binding.pageTemplateId;
+    assignment.extractionPageTemplateKey = binding.pageTemplateKey;
+  }
+  const extractionTemplateIds = [...new Set(
+    pageAssignments.map((page) => page.extractionPageTemplateId),
+  )];
+
+  const { rows: sourcePages } = await pool.query(`
+    SELECT source_page_id, page_number
+    FROM documents.source_page
+    WHERE source_document_id = $1 AND is_active
+    ORDER BY page_number
+  `, [source.source_document_id]);
+  if (sourcePages.length !== preview.coverage.total_pages) {
+    throw stagedPdfReviewError("Package traversal changed after reuse preview.", 409);
+  }
+  const existingMatchesPreview = (
+    existing.status === "draft"
+    && existing.documents.length === preview.documents.length
+    && existing.documents.every((document, index) => (
+      document.pageStart === preview.documents[index].page_start
+      && document.pageEnd === preview.documents[index].page_end
+      && document.assemblyRule?.reuse_profile_sha256 === profileHash
+    ))
+  );
+  if (existingMatchesPreview) {
+    const { rows: existingClassifications } = await pool.query(`
+      SELECT sp.page_number, pc.classification_source, pc.review_status,
+             pt.page_template_key,
+             pc.metadata->>'approved_profile_sha256' AS approved_profile_sha256
+      FROM documents.source_page sp
+      LEFT JOIN documents.page_classification pc
+        ON pc.source_page_id = sp.source_page_id AND pc.is_active
+      LEFT JOIN documents.page_template pt
+        ON pt.page_template_id = pc.page_template_id AND pt.is_active
+      WHERE sp.source_document_id = $1 AND sp.is_active
+      ORDER BY sp.page_number
+    `, [source.source_document_id]);
+    const classificationsMatchPreview = existingClassifications.length === pageAssignments.length
+      && existingClassifications.every((classification, index) => (
+        classification.page_number === pageAssignments[index].page_number
+        && classification.classification_source === "reviewer"
+        && classification.review_status === "accepted"
+        && classification.page_template_key === pageAssignments[index].extractionPageTemplateKey
+        && classification.approved_profile_sha256 === profileHash
+      ));
+    if (classificationsMatchPreview) {
+      return { ...existing, reuseHandoff: { reused: true, previewStatus: preview.status, profileRef: preview.profile_ref } };
+    }
+  }
+  const sourcePageIds = new Map(sourcePages.map((row) => [row.page_number, row.source_page_id]));
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN");
+    const { rows: lockedExtractions } = await client.query(`
+      SELECT package_extraction_id, extraction_status
+      FROM documents.package_extraction
+      WHERE source_document_id = $1 AND is_active
+      FOR UPDATE
+    `, [source.source_document_id]);
+    if (lockedExtractions.length !== 1) {
+      throw stagedPdfReviewError("Active package extraction is unavailable.", 409);
+    }
+    if (["extracting", "completed"].includes(lockedExtractions[0].extraction_status)) {
+      throw stagedPdfReviewError(
+        "Reuse-preview handoff cannot replace an extracting or completed package.",
+        409,
+      );
+    }
+    const { rows: lockedTemplates } = await client.query(`
+      SELECT page_template_id
+      FROM documents.page_template
+      WHERE page_template_id = ANY($1::bigint[]) AND status = 'active' AND is_active
+      FOR SHARE
+    `, [extractionTemplateIds]);
+    if (lockedTemplates.length !== extractionTemplateIds.length) {
+      throw stagedPdfReviewError(
+        "Reuse-preview handoff requires active positive-control page templates.",
+        409,
+      );
+    }
+    const { rows: approvedAssembly } = await client.query(`
+      SELECT 1
+      FROM documents.package_document_assembly
+      WHERE source_document_id = $1 AND is_active AND status = 'approved'
+      LIMIT 1
+    `, [source.source_document_id]);
+    if (approvedAssembly.length) {
+      throw stagedPdfReviewError("An approved package assembly already exists.", 409);
+    }
+
+    for (const assignment of pageAssignments) {
+      const sourcePageId = sourcePageIds.get(assignment.page_number);
+      const evidence = {
+        reason: "approved_reuse_preview_handoff",
+        profile_ref: preview.profile_ref,
+        matcher: preview.matcher,
+        document_key: assignment.documentKey,
+        document_family: assignment.documentFamily,
+        page_role: assignment.page_role,
+        fit_class: assignment.fitClass,
+        anchor_matches: assignment.anchor_matches,
+        boundary_evidence: assignment.boundaryEvidence,
+        structural_page_template_key: assignment.structuralPageTemplateKey,
+        extraction_page_template_key: assignment.extractionPageTemplateKey,
+        policy_evaluation: assignment.policyEvaluation,
+        structural_template_ref: assignment.templateRef,
+      };
+      const payload = {
+        page: assignment.page_number,
+        template: assignment.extractionPageTemplateKey,
+        evidence,
+      };
+      const { rows: priorRows } = await client.query(`
+        UPDATE documents.page_classification
+        SET is_active = false
+        WHERE source_page_id = $1 AND is_active
+        RETURNING page_classification_id
+      `, [sourcePageId]);
+      const naturalKey = `documents:page-classification:${packageKey}:${assignment.page_number}:reuse:${profileHash.slice(0, 16)}`;
+      const { rows: insertedRows } = await client.query(`
+        INSERT INTO documents.page_classification (
+          source_page_id, page_template_id, classification_source,
+          confidence, review_status, evidence, metadata, natural_key, content_hash
+        ) VALUES ($1, $2, 'reviewer', $3, 'accepted', $4::jsonb, $5::jsonb, $6, $7)
+        RETURNING page_classification_id
+      `, [
+        sourcePageId,
+        assignment.extractionPageTemplateId,
+        assignment.confidence,
+        JSON.stringify(evidence),
+        JSON.stringify({
+          approved_action: "reuse_preview_handoff",
+          approved_profile_sha256: profileHash,
+        }),
+        naturalKey,
+        classificationHash(payload),
+      ]);
+      if (priorRows.length) {
+        await client.query(`
+          UPDATE documents.page_classification
+          SET superseded_by_id = $2
+          WHERE page_classification_id = ANY($1::bigint[])
+        `, [priorRows.map((row) => row.page_classification_id), insertedRows[0].page_classification_id]);
+      }
+      await client.query(`
+        UPDATE documents.model_gap
+        SET status = 'resolved', is_active = false,
+            metadata = metadata || jsonb_build_object(
+              'resolution', 'approved_reuse_preview_handoff',
+              'profile_sha256', $3::text)
+        WHERE source_document_id = $1 AND source_page_id = $2
+          AND gap_type = 'new_page_template' AND is_active
+      `, [source.source_document_id, sourcePageId, profileHash]);
+    }
+
+    await client.query(`
+      UPDATE documents.package_document_assembly
+      SET is_active = false, updated_at = now()
+      WHERE source_document_id = $1 AND is_active
+    `, [source.source_document_id]);
+    for (const [index, document] of preview.documents.entries()) {
+      const isAgenda = index === 0;
+      const documentKey = isAgenda
+        ? `${packageKey}-agenda`
+        : `${packageKey}-document-${String(index + 1).padStart(4, "0")}`;
+      const documentTemplateKeys = [...new Set(
+        pageAssignments
+          .filter((page) => page.documentKey === document.document_key)
+          .map((page) => page.extractionPageTemplateKey),
+      )];
+      const assemblyRule = {
+        mode: document.page_count === 1 ? "single_page" : "contiguous_page_range",
+        start_page_role: isAgenda ? "agenda_start" : "document_start",
+        continuation_page_role: document.page_count === 1 ? null : "document_continuation",
+        end_page_role: document.page_count === 1 ? null : "document_end",
+        source: "approved_reuse_preview",
+        reuse_profile_sha256: profileHash,
+        reuse_document_key: document.document_key,
+        document_family: document.document_family,
+        policy_outcome: document.policy_evaluation.outcome,
+      };
+      const payload = {
+        documentKey,
+        documentOrder: index + 1,
+        pageStart: document.page_start,
+        pageEnd: document.page_end,
+        isAgenda,
+        templateKeys: documentTemplateKeys,
+        assemblyRule,
+        status: "draft",
+      };
+      await client.query(`
+        INSERT INTO documents.package_document_assembly (
+          source_document_id, document_key, document_order, title, page_start, page_end,
+          is_agenda, primary_agenda_item_key, page_template_keys, assembly_rule,
+          status, natural_key, content_hash
+        ) VALUES ($1,$2,$3,$4,$5,$6,$7,NULL,$8::text[],$9::jsonb,'draft',$10,$11)
+      `, [
+        source.source_document_id,
+        documentKey,
+        index + 1,
+        reuseAssemblyTitle(document.document_family),
+        document.page_start,
+        document.page_end,
+        isAgenda,
+        documentTemplateKeys,
+        JSON.stringify(assemblyRule),
+        `documents:package-assembly:${packageKey}:reuse:${profileHash.slice(0, 16)}:${index + 1}`,
+        classificationHash(payload),
+      ]);
+    }
+    await client.query(`
+      UPDATE documents.package_extraction
+      SET extraction_status = 'awaiting_document_assembly',
+          unresolved_template_count = 0,
+          diagnostics = diagnostics || jsonb_build_object(
+            'reuse_handoff_status', 'draft_created',
+            'reuse_profile_ref', $2::jsonb,
+            'reuse_preview_status', $3::text,
+            'reuse_logical_document_count', $4::integer,
+            'reuse_handoff_at', now())
+      WHERE source_document_id = $1 AND is_active
+    `, [
+      source.source_document_id,
+      JSON.stringify(preview.profile_ref),
+      preview.status,
+      preview.documents.length,
+    ]);
+    await client.query("COMMIT");
+  } catch (error) {
+    await client.query("ROLLBACK").catch(() => {});
+    throw error;
+  } finally {
+    client.release();
+  }
+  return {
+    ...(await loadPackageAssembly(packageKey)),
+    reuseHandoff: { reused: false, previewStatus: preview.status, profileRef: preview.profile_ref },
+  };
+}
+
 function parsePdfPageCount(pdfInfoOutput) {
   const match = pdfInfoOutput.match(/^Pages:\s+(\d+)\s*$/mi);
   const pageCount = Number(match?.[1]);
@@ -7189,6 +7580,18 @@ const server = createServer(async (request, response) => {
       }
       response.writeHead(405);
       response.end("Method not allowed");
+      return;
+    }
+
+    const packageReuseHandoffMatch = url.pathname.match(/^\/api\/document-ingestion\/packages\/([^/]+)\/reuse-preview\/assembly-plan$/);
+    if (packageReuseHandoffMatch) {
+      if (request.method !== "POST") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const packageKey = decodeURIComponent(packageReuseHandoffMatch[1]).trim();
+      await sendJson(response, await handoffAgendaPackageReusePreview(packageKey));
       return;
     }
 
