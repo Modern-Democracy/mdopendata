@@ -32,24 +32,6 @@
   "blockers": [
     {
       "affected_comparison_keys": [],
-      "blocker_key": "phase-7:logical-groups-unavailable",
-      "category": "shadow-extraction",
-      "message": "Stage 2 logical content groups and group-driven raw extraction artifacts do not exist."
-    },
-    {
-      "affected_comparison_keys": [],
-      "blocker_key": "phase-7:published-observation-parity-unavailable",
-      "category": "published-baseline",
-      "message": "No shadow observation export exists for natural-key comparison with all 2,290 observations in published snapshot 3."
-    },
-    {
-      "affected_comparison_keys": [],
-      "blocker_key": "phase-7:publication-state-unverified",
-      "category": "database-read",
-      "message": "Publication snapshot counts were not queried; this shadow generator performs no database access."
-    },
-    {
-      "affected_comparison_keys": [],
       "blocker_key": "phase-7:active-handoff-unapproved",
       "category": "handoff",
       "message": "The version 2 workspace and downstream extraction input remain inactive pending explicit approval after full parity."
@@ -57,7 +39,7 @@
   ],
   "document_key": "ctown-budget-2026-2027",
   "generator": {
-    "config_sha256": "b713bad008322f046f1383b7d2a0e23b4e3c6faba33733ae19f135c7de158ed0",
+    "config_sha256": "9f38d2f8685f825f904673f74d8dadfb1874044cd19fbdab0f2f27db31c570bb",
     "name": "staged-pdf-v2-parity",
     "version": "1"
   },
@@ -11999,6 +11981,20 @@
     },
     {
       "baseline_record": {
+        "canonical_sha256": "d4b6bcd5a71dc36c2fd1650a6df147e944f3a3026cd27dd47328b60de219df7c"
+      },
+      "changed_fields": [],
+      "comparison_key": "observation-set:published-snapshot-3",
+      "decision_id": null,
+      "disposition": null,
+      "shadow_record": {
+        "canonical_sha256": "d4b6bcd5a71dc36c2fd1650a6df147e944f3a3026cd27dd47328b60de219df7c"
+      },
+      "source_locators": [],
+      "status": "matched"
+    },
+    {
+      "baseline_record": {
         "canonical_sha256": "1e0a0ce81d0f8de07dd1f276ba6c90d935f8ea660398d284cf66af12700dc9d8"
       },
       "changed_fields": [],
@@ -15383,6 +15379,20 @@
           "text_excerpt": null
         }
       ],
+      "status": "matched"
+    },
+    {
+      "baseline_record": {
+        "canonical_sha256": "8b5049485a4cd2a00cabd50f3f5c42136595776ba265071b1fd5d19041ac1483"
+      },
+      "changed_fields": [],
+      "comparison_key": "publication-state:snapshot-3:document-9",
+      "decision_id": null,
+      "disposition": null,
+      "shadow_record": {
+        "canonical_sha256": "8b5049485a4cd2a00cabd50f3f5c42136595776ba265071b1fd5d19041ac1483"
+      },
+      "source_locators": [],
       "status": "matched"
     },
     {
@@ -24671,20 +24681,20 @@
   ],
   "run_controls": {
     "database_write_count": 0,
-    "first_run_canonical_sha256": "19235cfe313d25cde57a1de838e15453dea469ff566c26aa66faf5da6a7a33c0",
-    "publication_snapshot_count_after": 0,
-    "publication_snapshot_count_before": 0,
-    "second_run_canonical_sha256": "19235cfe313d25cde57a1de838e15453dea469ff566c26aa66faf5da6a7a33c0"
+    "first_run_canonical_sha256": "42ffc193526e68b5109ea40a765bb06312fe2d00a8ddf2bfa84577e68ee168e3",
+    "publication_snapshot_count_after": 1,
+    "publication_snapshot_count_before": 1,
+    "second_run_canonical_sha256": "42ffc193526e68b5109ea40a765bb06312fe2d00a8ddf2bfa84577e68ee168e3"
   },
   "schema_version": 2,
   "source_sha256": "d926634427e80aa2b06b6425bdbb117424fe53567ae344980cd10791f8e39bac",
   "summary": {
     "changed": 0,
     "extra": 1,
-    "matched": 751,
+    "matched": 753,
     "missing": 0,
     "provenance_shifted": 104,
-    "total": 856
+    "total": 858
   },
   "upstream_artifacts": [
     {
@@ -24704,6 +24714,12 @@
       "artifact_type": "review_decisions",
       "schema_version": 2,
       "sha256": "9fcfd1fe5285fc80711cfd0d4a2326f87865b1ba86b14b2c03a0eccf75f34df0"
+    },
+    {
+      "artifact_key": "ctown-budget-2026-2027:content-groups:v2",
+      "artifact_type": "content_groups",
+      "schema_version": 2,
+      "sha256": "658d459dc0e72f1a18adbc2b226b03bcc4e7d4d82627f52a774e146395bc0496"
     }
   ]
 }

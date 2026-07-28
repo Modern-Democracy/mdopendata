@@ -39,8 +39,8 @@ class StagedPdfV2ParityTests(unittest.TestCase):
     def test_pilot_structure_is_exact_and_handoff_remains_blocked(self) -> None:
         report = self.parity.build_report(self.parity.DEFAULT_PATHS)
         self.assertEqual(report["summary"], {
-            "total": 856,
-            "matched": 751,
+            "total": 858,
+            "matched": 753,
             "missing": 0,
             "extra": 1,
             "changed": 0,
@@ -50,9 +50,6 @@ class StagedPdfV2ParityTests(unittest.TestCase):
         self.assertEqual(
             {item["blocker_key"] for item in report["blockers"]},
             {
-                "phase-7:logical-groups-unavailable",
-                "phase-7:published-observation-parity-unavailable",
-                "phase-7:publication-state-unverified",
                 "phase-7:active-handoff-unapproved",
             },
         )

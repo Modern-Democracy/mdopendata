@@ -35,7 +35,15 @@ The schema document is a discriminated union. Every artifact uses the same `$sch
 | `review_decisions` | All reviewed stages | Append-only reviewer actions, affected keys, source locations, field changes, and event hash chain. |
 | `parity_report` | 7 | Baseline identity, record-level comparison, aggregate counts, rerun controls, blockers, and pass state. |
 
-The existing raw extraction and normalized financial-observation contracts remain separate. They can be referenced through `artifact_ref` values but are not redefined by this schema.
+The existing raw extraction and normalized financial-observation contracts remain separate. They can be referenced through `artifact_ref` values but are not redefined by this schema. The Stage 2 pilot therefore stores its complete write-free normalized comparison set in `stage-2/shadow-observations.json`, outside the staged structural artifact union.
+
+## Stage 2 Pilot Materialization
+
+The Charlottetown pilot materializes `content-groups.json` as the version 2 `content_groups` artifact and validates it with the shared schema and semantic validator. Group boundaries use approved normalized statement identities, reviewed canonical table dispositions, and explicit appendix and divider controls. Every Stage 1 financial candidate block has exactly one primary group owner.
+
+`shadow-observations.json` retains stable semantic natural keys, values, value states, review status, source table, row, value identifiers, page, logical-group key, and baseline origin. Its controls require 2,165 approved manifest observations, 76 property-tax recoveries, 49 City-debt recoveries, 2,290 total unique records, zero unmapped groups, and zero database or publication writes.
+
+`phase-7/live-publication-verification.json` remains outside the staged structural union. It records the read-only Snapshot 3 and document-9 scope, expected and actual counts, canonical semantic and source-link digests, individual pass controls, and a zero-write assertion. Phase 7 consumes this immutable result without adding database access to the shadow parity generator.
 
 ## Common Artifact Envelope
 

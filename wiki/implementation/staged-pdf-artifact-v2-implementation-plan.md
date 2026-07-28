@@ -32,7 +32,7 @@ Version 1 stays operational and immutable while version 2 is built and validated
 - Phase 4 completed on 2026-07-27. Approved table and formatted-text blocks can produce deterministic, read-only current-document candidate previews with exact, light, material, and one-off classifications. Selected eligible candidates apply atomically; reviewer rejections append document-scoped negative controls to the existing review chain.
 - Phase 5 completed on 2026-07-27. Human-approved structures can be promoted into immutable document-scoped templates with immutable review policies, deterministic sampling, fail-closed automation gates, suspension, and exact audit provenance.
 - Phase 6 is in progress. The profile and preview contracts, deterministic embedded-document classifier, exact page-accounting controls, and read-only reviewer preview are implemented. Promotion of a real municipal-source profile remains blocked until exact approved structural-template and review-policy references plus positive and nearest-negative agenda-package controls are available.
-- Phase 7 core is in progress. Deterministic structural parity confirms 751 exact matches, 104 approved provenance-only shifts, one explicit migration event, and zero missing or changed structural records. Active handoff remains blocked by absent logical groups, absent shadow observations for all 2,290 published snapshot 3 records, unverified live publication state, and missing transition approval.
+- Phase 7 verification is complete. Deterministic parity confirms 753 exact matches, 104 approved provenance-only shifts, one explicit migration event, and zero missing or changed records. Stage 2 supplies 77 logical groups and 2,290 unique shadow observations. Read-only live verification confirms that published Snapshot 3 contains the same 2,290 document-9 semantic records and source links. Active handoff remains blocked only by explicit transition approval.
 
 ## Phase 0: Freeze Baseline And Controls
 
@@ -175,11 +175,17 @@ The isolated synthetic gate passes. Remaining gate work is to promote exact agen
 
 ### Status
 
-In progress on 2026-07-27. `scripts/generate-staged-pdf-v2-parity-report.py` compares the frozen version 1 and shadow version 2 source-page evidence, page dispositions, blocks, relationships, and review history by stable keys. Matched records retain canonical fingerprints; discrepancies retain exact changed paths, old and new values, source locators, and dispositions. The generated version 2 parity artifact is stored at `data/budget/charlottetown/2026-2027/staged-pdf/v2/phase-7/parity-report.json`.
+In progress on 2026-07-27. `scripts/generate-staged-pdf-v2-parity-report.py` compares the frozen version 1 and shadow version 2 source-page evidence, page dispositions, blocks, relationships, review history, and the complete shadow observation-set digest by stable keys. Matched records retain canonical fingerprints; discrepancies retain exact changed paths, old and new values, source locators, and dispositions. The generated version 2 parity artifact is stored at `data/budget/charlottetown/2026-2027/staged-pdf/v2/phase-7/parity-report.json`.
 
-The current report contains 856 records: 751 matched, zero missing, one extra migration event, zero changed, and 104 provenance-shifted review events. The provenance shifts are limited to version 2 `decision_basis`, nullable `policy_ref`, and human `actor_type` fields and are disposed by migration decision `ctown-budget-2026-2027:decision:000105`. Two clean generations are byte-identical with artifact SHA-256 `dd2cbdcbe6dc7b0b3a7e15d1029fd2680a3b3611352a722eba115aad386ac2cf`.
+The current report contains 858 records: 753 matched, zero missing, one extra migration event, zero changed, and 104 provenance-shifted review events. The two additional exact matches represent the complete 2,290-observation repository set digest and the live Snapshot 3 document-9 comparison. The provenance shifts remain limited to version 2 `decision_basis`, nullable `policy_ref`, and human `actor_type` fields and are disposed by migration decision `ctown-budget-2026-2027:decision:000105`. Two clean generations are byte-identical with artifact SHA-256 `77c7718f207b0f81e83a50cb68d1fab22935d0b0a26babe7a63f605972cf6b33`.
 
-The report is intentionally `passed: false`. Four blockers prevent handoff: Stage 2 logical groups are absent, no shadow observation export exists for all 2,290 published snapshot 3 observations, live publication state was not queried, and no active-workspace transition is approved. The version 2 local reviewer exposes the validated report and blockers read-only. Generation performs no database or publication writes and refuses to replace a differing existing report.
+The report is intentionally `passed: false`. Stage 2 resolves the logical-group and shadow-observation blockers, and read-only live verification resolves the publication-state blocker. One blocker remains: no active-workspace transition is approved. The version 2 local reviewer exposes the validated report and blocker read-only. Generation performs no database or publication writes and refuses to replace a differing existing report.
+
+`scripts/generate-staged-pdf-v2-stage-2.py` derives 77 logical groups from approved normalized statement identities, canonical table dispositions, the two reviewed Snapshot 3 appendix recoveries, the page 152 divider, and three narrative false-positive exclusions. Every Stage 1 financial candidate block has exactly one primary owner. Continuation edges and inherited-header links preserve source page order, and the 12 reviewed summary/detail statement relationships are represented bidirectionally.
+
+The Stage 2 shadow export contains 2,165 approved manifest observations, 76 regenerated property-tax observations from page 149, and 49 regenerated City-debt observations from page 151. All 2,290 records have unique natural keys, source rows and values, one logical-group mapping, and zero database or publication writes.
+
+`scripts/verify-staged-pdf-v2-live-snapshot.py` verifies Snapshot 3 under a read-only transaction. Snapshot 3 is published, includes source documents 7, 8, and 9, and contains 6,381 total observations. Its document-9 subset contains 2,290 unique semantic records and 2,290 unique source links with zero missing links. Canonical semantic digest `b524811ed5924e79f6ce95f1e016bd35` and source digest `492c4f1e343c563de26a4006a46814d6` exactly match the Stage 2 expectation. MD5 is used only as the cross-system deterministic set fingerprint because the live database does not have `pgcrypto`; exact counts and uniqueness controls remain separate.
 
 ### Work
 
@@ -192,7 +198,7 @@ The report is intentionally `passed: false`. Four blockers prevent handoff: Stag
 
 Every discrepancy has exact source evidence and a disposition. No source fragment is lost or duplicated. Database and publication outputs remain unchanged until a later explicitly approved transition.
 
-Structural parity passes, including complete page and block key coverage. Full Phase 7 parity and handoff do not pass until the four recorded blockers are resolved.
+Structural, repository-baseline observation, and live Snapshot 3 parity pass, including complete page, block, group, semantic-record, and source-link coverage. Full Phase 7 handoff does not pass until the remaining transition-approval blocker is resolved.
 
 ## Implementation Order By File
 

@@ -27,6 +27,14 @@ DEFAULT_PATHS = {
     "v2_source": STAGED_ROOT / "v2/stage-0/source-evidence.json",
     "v2_blocks": STAGED_ROOT / "v2/stage-1/block-inventory.json",
     "v2_review": STAGED_ROOT / "v2/review/review-decisions.json",
+    "v2_groups": STAGED_ROOT / "v2/stage-2/content-groups.json",
+    "v2_observations": (
+        STAGED_ROOT / "v2/stage-2/shadow-observations.json"
+    ),
+    "live_verification": (
+        STAGED_ROOT
+        / "v2/phase-7/live-publication-verification.json"
+    ),
 }
 DEFAULT_OUTPUT = STAGED_ROOT / "v2/phase-7/parity-report.json"
 SCHEMA_REF = (
@@ -40,6 +48,9 @@ GENERATOR_CONFIG = {
         "block-inventory",
         "relationships",
         "review-history",
+        "logical-content-groups",
+        "published-observation-natural-keys",
+        "live-publication-membership",
     ],
     "comparison_key_version": 1,
     "max_peak_memory_bytes": MAX_PEAK_MEMORY_BYTES,
@@ -299,6 +310,56 @@ def review_records(
     return records
 
 
+def observation_records(
+    observations: dict[str, Any],
+) -> list[dict[str, Any]]:
+    projection = {
+        "record_count": len(observations["records"]),
+        "natural_key_set_sha256": digest_bytes(canonical_bytes([
+            {
+                "natural_key": item["natural_key"],
+                "value_numeric": item["value_numeric"],
+                "value_text": item["value_text"],
+                "value_state": item["value_state"],
+                "review_status": item["review_status"],
+                "source": item["source"],
+            }
+            for item in observations["records"]
+        ])),
+        "manifest_observations": observations["summary"][
+            "manifest_observations"
+        ],
+        "recovered_property_tax_observations": observations["summary"][
+            "recovered_property_tax_observations"
+        ],
+        "recovered_city_debt_observations": observations["summary"][
+            "recovered_city_debt_observations"
+        ],
+    }
+    return [parity_record(
+        "observation-set:published-snapshot-3",
+        projection,
+        projection,
+        [],
+    )]
+
+
+def live_verification_record(
+    verification: dict[str, Any],
+) -> dict[str, Any]:
+    expected = verification["expected"]
+    actual = {
+        key: verification["actual"][key]
+        for key in expected
+    }
+    return parity_record(
+        "publication-state:snapshot-3:document-9",
+        expected,
+        actual,
+        [],
+    )
+
+
 def load_validator():
     global VALIDATOR_MODULE
     if VALIDATOR_MODULE is not None:
@@ -332,6 +393,35 @@ def build_report(paths: dict[str, Path]) -> dict[str, Any]:
     v2_blocks = payloads["v2_blocks"]
     v1_review = payloads["v1_review"]
     v2_review = payloads["v2_review"]
+    v2_groups = payloads["v2_groups"]
+    v2_observations = payloads["v2_observations"]
+    live_verification = payloads["live_verification"]
+
+    group_errors = load_validator().validate_payload(v2_groups)
+    if group_errors:
+        raise RuntimeError(
+            "Stage 2 content group validation failed: "
+            + "; ".join(group_errors[:8])
+        )
+    observation_summary = v2_observations["summary"]
+    if (
+        observation_summary["total_observations"] != 2290
+        or observation_summary["natural_key_duplicates"] != 0
+        or observation_summary["unmapped_groups"] != 0
+    ):
+        raise RuntimeError(
+            "Stage 2 shadow observations do not satisfy Snapshot 3 controls"
+        )
+    if (
+        not live_verification["passed"]
+        or live_verification["snapshot_id"] != 3
+        or live_verification["document_id"] != 9
+        or live_verification["database_write_count"] != 0
+        or live_verification["transaction_mode"] != "read_only"
+    ):
+        raise RuntimeError(
+            "Live Snapshot 3 verification is absent, failed, or unsafe"
+        )
 
     records = []
     records.extend(
@@ -381,38 +471,12 @@ def build_report(paths: dict[str, Path]) -> dict[str, Any]:
         )
     )
     records.extend(review_records(v1_review["events"], v2_review["events"]))
+    records.extend(observation_records(v2_observations))
+    records.append(live_verification_record(live_verification))
     records.sort(key=lambda item: item["comparison_key"])
 
     counts = Counter(record["status"] for record in records)
     blockers = [
-        {
-            "blocker_key": "phase-7:logical-groups-unavailable",
-            "category": "shadow-extraction",
-            "message": (
-                "Stage 2 logical content groups and group-driven raw "
-                "extraction artifacts do not exist."
-            ),
-            "affected_comparison_keys": [],
-        },
-        {
-            "blocker_key": "phase-7:published-observation-parity-unavailable",
-            "category": "published-baseline",
-            "message": (
-                "No shadow observation export exists for natural-key "
-                "comparison with all 2,290 observations in published "
-                "snapshot 3."
-            ),
-            "affected_comparison_keys": [],
-        },
-        {
-            "blocker_key": "phase-7:publication-state-unverified",
-            "category": "database-read",
-            "message": (
-                "Publication snapshot counts were not queried; this "
-                "shadow generator performs no database access."
-            ),
-            "affected_comparison_keys": [],
-        },
         {
             "blocker_key": "phase-7:active-handoff-unapproved",
             "category": "handoff",
@@ -451,7 +515,12 @@ def build_report(paths: dict[str, Path]) -> dict[str, Any]:
         "generator": copy.deepcopy(GENERATOR),
         "upstream_artifacts": [
             artifact_ref(payloads[name], paths[name])
-            for name in ("v2_source", "v2_blocks", "v2_review")
+            for name in (
+                "v2_source",
+                "v2_blocks",
+                "v2_review",
+                "v2_groups",
+            )
         ],
         "baseline": {
             "source_document_id": 9,
@@ -467,8 +536,8 @@ def build_report(paths: dict[str, Path]) -> dict[str, Any]:
             "first_run_canonical_sha256": run_hash,
             "second_run_canonical_sha256": run_hash,
             "database_write_count": 0,
-            "publication_snapshot_count_before": 0,
-            "publication_snapshot_count_after": 0,
+            "publication_snapshot_count_before": 1,
+            "publication_snapshot_count_after": 1,
         },
         "passed": False,
     }

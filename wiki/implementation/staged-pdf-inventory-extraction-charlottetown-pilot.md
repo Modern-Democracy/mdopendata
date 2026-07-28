@@ -103,17 +103,19 @@ The generator consumes the validated Stage 0 artifact and its recorded word side
 2. Completed: build and validate the deterministic Stage 0 source-evidence generator using embedded text and targeted OCR fallback.
 3. Completed: generate Stage 1 candidate blocks and expose selectable, resizable, reclassifiable, deletable, and drawable overlays in the [local inventory-review UI](./staged-pdf-inventory-review-ui-plan.md). Each change is validated and recorded in the append-only review artifact.
 4. Review Stage 1 bounds, including complete table column headers and row-label regions, without assuming every continuation page has a header.
-5. Add and review Stage 2 logical groups, then add group-driven adapters around existing raw extraction logic.
-6. Export the current document baseline and implement natural-key parity comparison.
+5. Completed: add 77 Stage 2 logical groups and group-driven adapters around the reviewed raw and normalized extraction logic.
+6. Completed: export 2,290 shadow observations, compare a canonical natural-key, value, state, review, and source-provenance set digest, and verify the same semantic and source-link sets against live published Snapshot 3 under a read-only transaction.
 7. Run and resolve the representative controls, then the complete 154-page corpus.
 8. Propose any importer or database changes only after shadow parity passes.
 9. Test a non-Charlottetown document before promoting any template to cross-municipality scope.
 
 ## Phase 7 Structural Parity Result
 
-The version 2 Phase 7 core compares 154 source-page records, 154 page dispositions, 442 blocks, one relationship, and 105 shadow review events against the frozen version 1 artifacts. The 856-record report has 751 exact matches, zero missing records, zero changed records, 104 approved provenance-only review shifts, and one explicit schema-migration event.
+The version 2 Phase 7 core compares 154 source-page records, 154 page dispositions, 442 blocks, one relationship, 105 shadow review events, one complete repository observation-set digest, and one live publication-state comparison. The 858-record report has 753 exact matches, zero missing records, zero changed records, 104 approved provenance-only review shifts, and one explicit schema-migration event.
 
-Structural parity does not satisfy the published-observation gate. Stage 2 logical groups and a shadow observation export do not exist, so the pipeline cannot yet compare stable semantic and provenance keys against all 2,290 observations in published snapshot 3. The report remains blocked and the active workspace remains version 1.
+Stage 2 now contains 77 logical groups with exact primary ownership for every financial candidate block. Its write-free shadow export contains 2,165 approved manifest observations plus 76 property-tax and 49 City-debt observations regenerated from reviewed page 149 and page 151 raw rows. All 2,290 records have unique natural keys and logical-group mappings.
+
+Repository-baseline observation parity passes by a canonical full-set digest. Live published Snapshot 3 contains 6,381 observations across documents 7, 8, and 9; its document-9 subset contains exactly 2,290 unique semantic records, 2,290 unique source links, and zero missing links. Its canonical semantic and source digests exactly match Stage 2. Live verification is complete with zero database writes. Explicit active-workspace transition approval is the only remaining blocker, and the active workspace remains version 1.
 
 ## Required Evidence Package
 
