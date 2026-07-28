@@ -84,6 +84,20 @@ The local `web` service was rebuilt from the existing Docker Compose definition 
 
 The local staged PDF reviewer uses `PDF_INVENTORY_REVIEW_ENABLED=1` and `PDF_INVENTORY_REVIEW_WRITE_ENABLED=1` through `scripts/start-staged-pdf-review.ps1`. The write command invokes repository Python only through `scripts/python.ps1`.
 
+The canonical agenda-package reuse profile is enabled for a local web process by setting:
+
+```text
+AGENDA_PACKAGE_REUSE_PROFILE=data/document-ingestion/profiles/charlottetown-council-public-meeting/v1/profile.json
+```
+
+Regenerate its database-backed evidence and verify the allowlisted historical source-family metadata through:
+
+```powershell
+.\scripts\python.ps1 .\scripts\generate-charlottetown-agenda-reuse-profile.py
+```
+
+The default command is read-only when metadata backfill is pending and creates no outputs. `--apply-source-family` is restricted to source-document IDs 2 and 3 with exact source hashes. After the approved backfill, repeat runs perform zero database writes and return only `unchanged` outputs.
+
 ## Required Documentation for Changes
 
 Every environment or deployment change must record:

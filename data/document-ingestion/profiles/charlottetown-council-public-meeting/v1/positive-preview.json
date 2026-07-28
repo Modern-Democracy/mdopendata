@@ -1,0 +1,337 @@
+{
+  "$schema": "agenda-package-reuse-preview.schema.json",
+  "conflicts": [],
+  "coverage": {
+    "assigned_pages": 6,
+    "conflicting_pages": 0,
+    "omitted_pages": 0,
+    "total_pages": 6,
+    "unknown_pages": 0
+  },
+  "documents": [
+    {
+      "boundary_evidence": [
+        {
+          "anchor_matches": [
+            {
+              "anchor_key": "public-meeting-heading",
+              "match_type": "regex",
+              "matched": true,
+              "required": true
+            }
+          ],
+          "boundary": "start",
+          "page_number": 1
+        },
+        {
+          "anchor_matches": [],
+          "basis": "next-document-start-or-package-end",
+          "boundary": "end",
+          "page_number": 1
+        }
+      ],
+      "confidence": 1.0,
+      "document_family": "public-meeting-agenda",
+      "document_key": "agenda-package-73d48c77694d443e5351089c:document:0001",
+      "fit_class": "exact",
+      "page_count": 1,
+      "page_end": 1,
+      "page_sequence": [
+        {
+          "anchor_matches": [],
+          "page_number": 1,
+          "page_role": "single_page",
+          "page_template_key": "charlottetown-public-meeting:public-meeting-agenda:single_page"
+        }
+      ],
+      "page_start": 1,
+      "policy_evaluation": {
+        "outcome": "review_required",
+        "policy_ref": {
+          "artifact_key": "charlottetown-public-meeting:public-meeting-agenda:review-policy:1.0.0",
+          "artifact_type": "template_review_policy",
+          "schema_version": 2,
+          "sha256": "22bc0e56325e9e84f1724698d178d58bc1ee4ac1e8a4bf138c9a661588c438c5"
+        },
+        "reason_codes": [
+          "policy-review-required"
+        ],
+        "selected_for_sample": false
+      },
+      "source_order": 1,
+      "template_ref": {
+        "artifact_key": "charlottetown-public-meeting:public-meeting-agenda:1.0.0",
+        "artifact_type": "structural_template",
+        "schema_version": 2,
+        "sha256": "3e6918f01c6a747f06907fbd0fbebb747d00f5a49555501ebed1c1ac5ef2c222"
+      },
+      "unresolved_evidence": []
+    },
+    {
+      "boundary_evidence": [
+        {
+          "anchor_matches": [
+            {
+              "anchor_key": "information-sheet-heading",
+              "match_type": "normalized_text",
+              "matched": true,
+              "required": true
+            }
+          ],
+          "boundary": "start",
+          "page_number": 2
+        },
+        {
+          "anchor_matches": [],
+          "basis": "next-document-start-or-package-end",
+          "boundary": "end",
+          "page_number": 2
+        }
+      ],
+      "confidence": 1.0,
+      "document_family": "public-meeting-information-sheet",
+      "document_key": "agenda-package-73d48c77694d443e5351089c:document:0002",
+      "fit_class": "exact",
+      "page_count": 1,
+      "page_end": 2,
+      "page_sequence": [
+        {
+          "anchor_matches": [],
+          "page_number": 2,
+          "page_role": "single_page",
+          "page_template_key": "charlottetown-public-meeting:public-meeting-information-sheet:single_page"
+        }
+      ],
+      "page_start": 2,
+      "policy_evaluation": {
+        "outcome": "review_required",
+        "policy_ref": {
+          "artifact_key": "charlottetown-public-meeting:public-meeting-information-sheet:review-policy:1.0.0",
+          "artifact_type": "template_review_policy",
+          "schema_version": 2,
+          "sha256": "ee98a81a49d21ef5d785e67332d7c4d2036d20d34eec06dcdd12172130579c0e"
+        },
+        "reason_codes": [
+          "policy-review-required"
+        ],
+        "selected_for_sample": false
+      },
+      "source_order": 2,
+      "template_ref": {
+        "artifact_key": "charlottetown-public-meeting:public-meeting-information-sheet:1.0.0",
+        "artifact_type": "structural_template",
+        "schema_version": 2,
+        "sha256": "7f63dee6f6e049c7327f01e8204629525644200c3c345eef0b87e4cf5bf2dff5"
+      },
+      "unresolved_evidence": []
+    },
+    {
+      "boundary_evidence": [
+        {
+          "anchor_matches": [
+            {
+              "anchor_key": "facebook-notice-heading",
+              "match_type": "regex",
+              "matched": true,
+              "required": true
+            }
+          ],
+          "boundary": "start",
+          "page_number": 3
+        },
+        {
+          "anchor_matches": [],
+          "basis": "next-document-start-or-package-end",
+          "boundary": "end",
+          "page_number": 3
+        }
+      ],
+      "confidence": 1.0,
+      "document_family": "public-meeting-facebook-notice",
+      "document_key": "agenda-package-73d48c77694d443e5351089c:document:0003",
+      "fit_class": "exact",
+      "page_count": 1,
+      "page_end": 3,
+      "page_sequence": [
+        {
+          "anchor_matches": [],
+          "page_number": 3,
+          "page_role": "single_page",
+          "page_template_key": "charlottetown-public-meeting:public-meeting-facebook-notice:single_page"
+        }
+      ],
+      "page_start": 3,
+      "policy_evaluation": {
+        "outcome": "review_required",
+        "policy_ref": {
+          "artifact_key": "charlottetown-public-meeting:public-meeting-facebook-notice:review-policy:1.0.0",
+          "artifact_type": "template_review_policy",
+          "schema_version": 2,
+          "sha256": "d6f1182506da8874f7a823f26f5a7843d293ea3ba5c06c1d11010942a22e152b"
+        },
+        "reason_codes": [
+          "policy-review-required"
+        ],
+        "selected_for_sample": false
+      },
+      "source_order": 3,
+      "template_ref": {
+        "artifact_key": "charlottetown-public-meeting:public-meeting-facebook-notice:1.0.0",
+        "artifact_type": "structural_template",
+        "schema_version": 2,
+        "sha256": "e0555b20de694c9210beb4e6b0fc84132ac2c35e95f737993f12ec63b7b8581e"
+      },
+      "unresolved_evidence": []
+    },
+    {
+      "boundary_evidence": [
+        {
+          "anchor_matches": [
+            {
+              "anchor_key": "website-notice-heading",
+              "match_type": "regex",
+              "matched": true,
+              "required": true
+            }
+          ],
+          "boundary": "start",
+          "page_number": 4
+        },
+        {
+          "anchor_matches": [],
+          "basis": "next-document-start-or-package-end",
+          "boundary": "end",
+          "page_number": 4
+        }
+      ],
+      "confidence": 1.0,
+      "document_family": "public-meeting-website-notice",
+      "document_key": "agenda-package-73d48c77694d443e5351089c:document:0004",
+      "fit_class": "exact",
+      "page_count": 1,
+      "page_end": 4,
+      "page_sequence": [
+        {
+          "anchor_matches": [],
+          "page_number": 4,
+          "page_role": "single_page",
+          "page_template_key": "charlottetown-public-meeting:public-meeting-website-notice:single_page"
+        }
+      ],
+      "page_start": 4,
+      "policy_evaluation": {
+        "outcome": "review_required",
+        "policy_ref": {
+          "artifact_key": "charlottetown-public-meeting:public-meeting-website-notice:review-policy:1.0.0",
+          "artifact_type": "template_review_policy",
+          "schema_version": 2,
+          "sha256": "902a75d693102582ab267838532b480c96b679137c2142c833d154b918e8dd81"
+        },
+        "reason_codes": [
+          "policy-review-required"
+        ],
+        "selected_for_sample": false
+      },
+      "source_order": 4,
+      "template_ref": {
+        "artifact_key": "charlottetown-public-meeting:public-meeting-website-notice:1.0.0",
+        "artifact_type": "structural_template",
+        "schema_version": 2,
+        "sha256": "db0e035f7c84ad6b2fe1ddabbe627effa0160208a385b5be98f39c62b499e80b"
+      },
+      "unresolved_evidence": []
+    },
+    {
+      "boundary_evidence": [
+        {
+          "anchor_matches": [
+            {
+              "anchor_key": "mailed-notice-heading",
+              "match_type": "normalized_text",
+              "matched": true,
+              "required": true
+            }
+          ],
+          "boundary": "start",
+          "page_number": 5
+        },
+        {
+          "anchor_matches": [
+            {
+              "anchor_key": "bia-map-end",
+              "match_type": "normalized_text",
+              "matched": true,
+              "required": true
+            }
+          ],
+          "boundary": "end",
+          "page_number": 6
+        }
+      ],
+      "confidence": 1.0,
+      "document_family": "public-meeting-mailed-notice-map",
+      "document_key": "agenda-package-73d48c77694d443e5351089c:document:0005",
+      "fit_class": "exact",
+      "page_count": 2,
+      "page_end": 6,
+      "page_sequence": [
+        {
+          "anchor_matches": [],
+          "page_number": 5,
+          "page_role": "document_start",
+          "page_template_key": "charlottetown-public-meeting:public-meeting-mailed-notice-map:document_start"
+        },
+        {
+          "anchor_matches": [
+            {
+              "anchor_key": "bia-map-heading",
+              "match_type": "normalized_text",
+              "matched": true,
+              "required": true
+            }
+          ],
+          "page_number": 6,
+          "page_role": "document_end",
+          "page_template_key": "charlottetown-public-meeting:public-meeting-mailed-notice-map:document_end"
+        }
+      ],
+      "page_start": 5,
+      "policy_evaluation": {
+        "outcome": "review_required",
+        "policy_ref": {
+          "artifact_key": "charlottetown-public-meeting:public-meeting-mailed-notice-map:review-policy:1.0.0",
+          "artifact_type": "template_review_policy",
+          "schema_version": 2,
+          "sha256": "0e65e30cedd9b2ebf2418b3e66e2bf538942494aed48bfacfc9174b44ae82873"
+        },
+        "reason_codes": [
+          "policy-review-required"
+        ],
+        "selected_for_sample": false
+      },
+      "source_order": 5,
+      "template_ref": {
+        "artifact_key": "charlottetown-public-meeting:public-meeting-mailed-notice-map:1.0.0",
+        "artifact_type": "structural_template",
+        "schema_version": 2,
+        "sha256": "62677aaab12d37bc872327254bdf3b4be93d434ec6918ddb5e025d8cd58d8b09"
+      },
+      "unresolved_evidence": []
+    }
+  ],
+  "matcher": {
+    "config_sha256": "fb477a450c2132804383e17f77b36933d273a8ca840823913e165671cb8f7b14",
+    "name": "agenda-package-reuse",
+    "version": "1"
+  },
+  "package_key": "agenda-package-73d48c77694d443e5351089c",
+  "profile_ref": {
+    "profile_key": "charlottetown:council-public-meeting-package",
+    "profile_version": "1.0.0",
+    "sha256": "6612a438953bfd41702aa12239bbb7658670115b6fe1f64c8dde0e16ae26376e"
+  },
+  "schema_version": 1,
+  "source_sha256": "73d48c77694d443e5351089c19864ce58958c17cb3c96c3d412f1182d08f2636",
+  "status": "needs_review",
+  "unknown_pages": []
+}

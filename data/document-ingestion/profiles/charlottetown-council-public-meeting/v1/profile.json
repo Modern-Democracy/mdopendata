@@ -1,0 +1,245 @@
+{
+  "$schema": "agenda-package-reuse-profile.schema.json",
+  "approval": {
+    "decision_id": "decision:phase-6:charlottetown-public-meeting-profile:2026-07-27",
+    "status": "approved"
+  },
+  "document_templates": [
+    {
+      "allow_visual_only_continuation": false,
+      "continuation_anchors": [],
+      "document_family": "public-meeting-agenda",
+      "document_template_key": "charlottetown-public-meeting:public-meeting-agenda",
+      "end_anchors": [],
+      "maximum_pages": 1,
+      "minimum_pages": 1,
+      "policy_mode": "review_required",
+      "policy_ref": {
+        "artifact_key": "charlottetown-public-meeting:public-meeting-agenda:review-policy:1.0.0",
+        "artifact_type": "template_review_policy",
+        "schema_version": 2,
+        "sha256": "22bc0e56325e9e84f1724698d178d58bc1ee4ac1e8a4bf138c9a661588c438c5"
+      },
+      "priority": 100,
+      "sample_rate": 1,
+      "start_anchors": [
+        {
+          "anchor_key": "public-meeting-heading",
+          "match_type": "regex",
+          "required": true,
+          "value": "CITY OF CHARLOTTETOWN\\s+PUBLIC MEETING OF COUNCIL"
+        }
+      ],
+      "template_ref": {
+        "artifact_key": "charlottetown-public-meeting:public-meeting-agenda:1.0.0",
+        "artifact_type": "structural_template",
+        "schema_version": 2,
+        "sha256": "3e6918f01c6a747f06907fbd0fbebb747d00f5a49555501ebed1c1ac5ef2c222"
+      }
+    },
+    {
+      "allow_visual_only_continuation": false,
+      "continuation_anchors": [],
+      "document_family": "public-meeting-information-sheet",
+      "document_template_key": "charlottetown-public-meeting:public-meeting-information-sheet",
+      "end_anchors": [],
+      "maximum_pages": 1,
+      "minimum_pages": 1,
+      "policy_mode": "review_required",
+      "policy_ref": {
+        "artifact_key": "charlottetown-public-meeting:public-meeting-information-sheet:review-policy:1.0.0",
+        "artifact_type": "template_review_policy",
+        "schema_version": 2,
+        "sha256": "ee98a81a49d21ef5d785e67332d7c4d2036d20d34eec06dcdd12172130579c0e"
+      },
+      "priority": 90,
+      "sample_rate": 1,
+      "start_anchors": [
+        {
+          "anchor_key": "information-sheet-heading",
+          "match_type": "normalized_text",
+          "required": true,
+          "value": "Information Sheet for Public Meeting of Council"
+        }
+      ],
+      "template_ref": {
+        "artifact_key": "charlottetown-public-meeting:public-meeting-information-sheet:1.0.0",
+        "artifact_type": "structural_template",
+        "schema_version": 2,
+        "sha256": "7f63dee6f6e049c7327f01e8204629525644200c3c345eef0b87e4cf5bf2dff5"
+      }
+    },
+    {
+      "allow_visual_only_continuation": false,
+      "continuation_anchors": [],
+      "document_family": "public-meeting-facebook-notice",
+      "document_template_key": "charlottetown-public-meeting:public-meeting-facebook-notice",
+      "end_anchors": [],
+      "maximum_pages": 1,
+      "minimum_pages": 1,
+      "policy_mode": "review_required",
+      "policy_ref": {
+        "artifact_key": "charlottetown-public-meeting:public-meeting-facebook-notice:review-policy:1.0.0",
+        "artifact_type": "template_review_policy",
+        "schema_version": 2,
+        "sha256": "d6f1182506da8874f7a823f26f5a7843d293ea3ba5c06c1d11010942a22e152b"
+      },
+      "priority": 80,
+      "sample_rate": 1,
+      "start_anchors": [
+        {
+          "anchor_key": "facebook-notice-heading",
+          "match_type": "regex",
+          "required": true,
+          "value": "Facebook notification posted [A-Z][a-z]+ \\d{1,2}, \\d{4}"
+        }
+      ],
+      "template_ref": {
+        "artifact_key": "charlottetown-public-meeting:public-meeting-facebook-notice:1.0.0",
+        "artifact_type": "structural_template",
+        "schema_version": 2,
+        "sha256": "e0555b20de694c9210beb4e6b0fc84132ac2c35e95f737993f12ec63b7b8581e"
+      }
+    },
+    {
+      "allow_visual_only_continuation": false,
+      "continuation_anchors": [],
+      "document_family": "public-meeting-website-notice",
+      "document_template_key": "charlottetown-public-meeting:public-meeting-website-notice",
+      "end_anchors": [],
+      "maximum_pages": 1,
+      "minimum_pages": 1,
+      "policy_mode": "review_required",
+      "policy_ref": {
+        "artifact_key": "charlottetown-public-meeting:public-meeting-website-notice:review-policy:1.0.0",
+        "artifact_type": "template_review_policy",
+        "schema_version": 2,
+        "sha256": "902a75d693102582ab267838532b480c96b679137c2142c833d154b918e8dd81"
+      },
+      "priority": 70,
+      "sample_rate": 1,
+      "start_anchors": [
+        {
+          "anchor_key": "website-notice-heading",
+          "match_type": "regex",
+          "required": true,
+          "value": "City.s Website posted [A-Z][a-z]+ \\d{1,2}, \\d{4}"
+        }
+      ],
+      "template_ref": {
+        "artifact_key": "charlottetown-public-meeting:public-meeting-website-notice:1.0.0",
+        "artifact_type": "structural_template",
+        "schema_version": 2,
+        "sha256": "db0e035f7c84ad6b2fe1ddabbe627effa0160208a385b5be98f39c62b499e80b"
+      }
+    },
+    {
+      "allow_visual_only_continuation": false,
+      "continuation_anchors": [
+        {
+          "anchor_key": "bia-map-heading",
+          "match_type": "normalized_text",
+          "required": true,
+          "value": "Proposed Geographical Business Improvement Area (BIA)"
+        }
+      ],
+      "document_family": "public-meeting-mailed-notice-map",
+      "document_template_key": "charlottetown-public-meeting:public-meeting-mailed-notice-map",
+      "end_anchors": [
+        {
+          "anchor_key": "bia-map-end",
+          "match_type": "normalized_text",
+          "required": true,
+          "value": "West Royalty Business & BioScience Inc. (WRBB)"
+        }
+      ],
+      "maximum_pages": 2,
+      "minimum_pages": 2,
+      "policy_mode": "review_required",
+      "policy_ref": {
+        "artifact_key": "charlottetown-public-meeting:public-meeting-mailed-notice-map:review-policy:1.0.0",
+        "artifact_type": "template_review_policy",
+        "schema_version": 2,
+        "sha256": "0e65e30cedd9b2ebf2418b3e66e2bf538942494aed48bfacfc9174b44ae82873"
+      },
+      "priority": 60,
+      "sample_rate": 1,
+      "start_anchors": [
+        {
+          "anchor_key": "mailed-notice-heading",
+          "match_type": "normalized_text",
+          "required": true,
+          "value": "NOTICE OF PUBLIC MEETING"
+        }
+      ],
+      "template_ref": {
+        "artifact_key": "charlottetown-public-meeting:public-meeting-mailed-notice-map:1.0.0",
+        "artifact_type": "structural_template",
+        "schema_version": 2,
+        "sha256": "62677aaab12d37bc872327254bdf3b4be93d434ec6918ddb5e025d8cd58d8b09"
+      }
+    }
+  ],
+  "negative_controls": [
+    {
+      "control_key": "negative:regular-council-first-six-pages",
+      "expected_result": "unknown",
+      "package_key": "agenda-package-d529b04147218eaf379ab063:control:first-six",
+      "page_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    }
+  ],
+  "package_grammar": {
+    "allowed_transitions": [
+      {
+        "from": "public-meeting-agenda",
+        "to": "public-meeting-information-sheet"
+      },
+      {
+        "from": "public-meeting-information-sheet",
+        "to": "public-meeting-facebook-notice"
+      },
+      {
+        "from": "public-meeting-facebook-notice",
+        "to": "public-meeting-website-notice"
+      },
+      {
+        "from": "public-meeting-website-notice",
+        "to": "public-meeting-mailed-notice-map"
+      }
+    ],
+    "first_document_family": "public-meeting-agenda",
+    "require_complete_coverage": true
+  },
+  "positive_controls": [
+    {
+      "control_key": "positive:public-meeting-single-and-multipage",
+      "expected_result": "matched",
+      "package_key": "agenda-package-73d48c77694d443e5351089c",
+      "page_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    }
+  ],
+  "profile_key": "charlottetown:council-public-meeting-package",
+  "profile_version": "1.0.0",
+  "schema_version": 1,
+  "scope": {
+    "document_family": "agenda-package",
+    "jurisdiction_key": "charlottetown-pe",
+    "reuse_scope": "same_edition_family",
+    "source_family": "charlottetown-council"
+  },
+  "status": "approved"
+}

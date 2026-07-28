@@ -1,0 +1,95 @@
+{
+  "$schema": "staged-pdf-artifacts-v2.schema.json",
+  "allowed_light_mismatch_categories": [],
+  "approval": {
+    "decision_ids": [
+      "documents:page-classification:5",
+      "documents:page-classification:6",
+      "documents:package-document-assembly:16",
+      "decision:phase-6:charlottetown-public-meeting-profile:2026-07-27"
+    ],
+    "reason_codes": [
+      "approved-page-template",
+      "approved-package-assembly",
+      "phase-6-profile-approval"
+    ],
+    "status": "approved"
+  },
+  "artifact_key": "charlottetown-public-meeting:public-meeting-mailed-notice-map:review-policy:1.0.0",
+  "artifact_type": "template_review_policy",
+  "eligible_fit_classes": [
+    "exact",
+    "light_variation"
+  ],
+  "generator": {
+    "config_sha256": "e39085c910efbeecbe88de31f4cd8d68727145c8b0297f670b14d81463972db6",
+    "name": "agenda-package-profile-promotion",
+    "version": "1"
+  },
+  "matcher": {
+    "config_sha256": "fb477a450c2132804383e17f77b36933d273a8ca840823913e165671cb8f7b14",
+    "name": "agenda-package-reuse",
+    "version": "1"
+  },
+  "mode": "review_required",
+  "policy_key": "charlottetown-public-meeting:public-meeting-mailed-notice-map:review-policy",
+  "policy_version": "1.0.0",
+  "promotion_evidence": {
+    "accepted_application_count": 1,
+    "false_approval_count": 0,
+    "negative_control_keys": [
+      "negative:public-meeting-mailed-notice-map:regular-council-p0001"
+    ],
+    "observed_precision": 1,
+    "positive_application_keys": [
+      "positive:public-meeting-mailed-notice-map:agenda-package-73d48c77694d443e5351089c"
+    ],
+    "rejected_application_count": 0,
+    "reviewed_application_count": 1,
+    "validation_run_keys": [
+      "validation:charlottetown-public-meeting:public-meeting-mailed-notice-map:1.0.0"
+    ]
+  },
+  "promotion_gates": {
+    "maximum_false_approvals": 0,
+    "minimum_negative_controls": 0,
+    "minimum_observed_precision": 0,
+    "minimum_positive_examples": 0,
+    "minimum_reviewed_applications": 0
+  },
+  "sample_rate": 1,
+  "schema_version": 2,
+  "scope": {
+    "document_family": "public-meeting-mailed-notice-map",
+    "jurisdiction_key": "charlottetown-pe",
+    "reuse_scope": "same_edition_family",
+    "source_family": "charlottetown-council"
+  },
+  "status": "approved",
+  "supersedes_policy_ref": null,
+  "suspension_rules": {
+    "matcher_change": true,
+    "material_mismatch": true,
+    "negative_control_failure": true,
+    "sample_rejection": true,
+    "source_profile_change": true
+  },
+  "template_binding": {
+    "artifact_ref": {
+      "artifact_key": "charlottetown-public-meeting:public-meeting-mailed-notice-map:1.0.0",
+      "artifact_type": "structural_template",
+      "schema_version": 2,
+      "sha256": "62677aaab12d37bc872327254bdf3b4be93d434ec6918ddb5e025d8cd58d8b09"
+    },
+    "template_key": "charlottetown-public-meeting:public-meeting-mailed-notice-map",
+    "template_version": "1.0.0"
+  },
+  "upstream_artifacts": [
+    {
+      "artifact_key": "charlottetown-public-meeting:public-meeting-mailed-notice-map:1.0.0",
+      "artifact_type": "structural_template",
+      "schema_version": 2,
+      "sha256": "62677aaab12d37bc872327254bdf3b4be93d434ec6918ddb5e025d8cd58d8b09"
+    }
+  ]
+}

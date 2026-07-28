@@ -1,0 +1,110 @@
+{
+  "$schema": "staged-pdf-artifacts-v2.schema.json",
+  "anchors": [
+    {
+      "anchor_key": "website-notice-heading",
+      "geometry_tolerance": 1,
+      "match_type": "regex",
+      "region": {
+        "x0": 0,
+        "x1": 1,
+        "y0": 0,
+        "y1": 1
+      },
+      "required": true,
+      "value": "City.s Website posted [A-Z][a-z]+ \\d{1,2}, \\d{4}"
+    }
+  ],
+  "approval": {
+    "decision_ids": [
+      "documents:page-classification:4",
+      "documents:package-document-assembly:15",
+      "decision:phase-6:charlottetown-public-meeting-profile:2026-07-27"
+    ],
+    "reason_codes": [
+      "approved-page-template",
+      "approved-package-assembly",
+      "phase-6-profile-approval"
+    ],
+    "status": "approved"
+  },
+  "artifact_key": "charlottetown-public-meeting:public-meeting-website-notice:1.0.0",
+  "artifact_type": "structural_template",
+  "block_rules": [
+    {
+      "block_type": "formatted_text",
+      "maximum_count": null,
+      "minimum_count": 1,
+      "reading_order": 1,
+      "required": true,
+      "rule_key": "block:formatted-text"
+    }
+  ],
+  "column_bands": [],
+  "continuation_rules": [],
+  "generator": {
+    "config_sha256": "e39085c910efbeecbe88de31f4cd8d68727145c8b0297f670b14d81463972db6",
+    "name": "agenda-package-profile-promotion",
+    "version": "1"
+  },
+  "header_policy": {
+    "allow_optional_repetition": false,
+    "mode": "absent",
+    "source_anchor_keys": []
+  },
+  "internal_region_rules": [],
+  "negative_controls": [
+    {
+      "control_key": "negative:public-meeting-website-notice:regular-council-p0001",
+      "control_type": "negative",
+      "expected_result": "Regular-council package page remains unmatched.",
+      "source_locator": {
+        "bbox": null,
+        "block_key": null,
+        "page_key": "agenda-package-d529b04147218eaf379ab063:control:first-six:p0001",
+        "page_number": 1,
+        "text_excerpt": "CITY OF CHARLOTTETOWN REGULAR MONTHLY MEETING OF COUNCIL COUNCIL CHAMBERS, CITY HALL, 199 QUEEN STREET TUESDAY, JANUARY 13, 2026, at 5:00 PM Live Stream Available @ www.charlottetown.ca/video Meeting Package posted to the City’s website by "
+      }
+    }
+  ],
+  "regression_controls": [
+    {
+      "control_key": "positive:public-meeting-website-notice:p0004",
+      "control_type": "positive",
+      "expected_result": "Reviewed source page matches the approved document family.",
+      "source_locator": {
+        "bbox": null,
+        "block_key": null,
+        "page_key": "agenda-package-73d48c77694d443e5351089c:p0004",
+        "page_number": 4,
+        "text_excerpt": "Notiﬁciation on City’s Website posted January 16, 2026"
+      }
+    }
+  ],
+  "reuse_scope": "same_edition_family",
+  "schema_version": 2,
+  "source_family": "charlottetown-council",
+  "status": "approved",
+  "supported_text_sources": [
+    "embedded"
+  ],
+  "table_title_policy": {
+    "allowed_positions": [],
+    "anchor_keys": [],
+    "mode": "absent"
+  },
+  "template_key": "charlottetown-public-meeting:public-meeting-website-notice",
+  "template_version": "1.0.0",
+  "termination_rules": [
+    {
+      "parameters": {
+        "maximum_pages": 1,
+        "minimum_pages": 1
+      },
+      "required": true,
+      "rule_key": "approved-document-boundary",
+      "rule_type": "next-document-start-or-package-end"
+    }
+  ],
+  "upstream_artifacts": []
+}

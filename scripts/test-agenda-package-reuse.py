@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import importlib.util
 import json
 import unittest
@@ -14,17 +15,26 @@ from jsonschema import Draft202012Validator
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT_PATH = ROOT / "scripts/preview-agenda-package-reuse.py"
+CANONICAL_ROOT = (
+    ROOT
+    / "data/document-ingestion/profiles/"
+    "charlottetown-council-public-meeting/v1"
+)
 
 
-def load():
+def load_module(path: Path, name: str):
     spec = importlib.util.spec_from_file_location(
-        "agenda_package_reuse", SCRIPT_PATH
+        name, path
     )
     if spec is None or spec.loader is None:
-        raise RuntimeError(SCRIPT_PATH)
+        raise RuntimeError(path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+def load():
+    return load_module(SCRIPT_PATH, "agenda_package_reuse")
 
 
 def artifact_ref(artifact_type: str, key: str, character: str) -> dict:
@@ -304,11 +314,102 @@ class AgendaPackageReuseTests(unittest.TestCase):
             "preview-agenda-package-reuse.py", server
         )
         self.assertIn(
+            "document_family: source.document_type_key", server
+        )
+        self.assertIn(
             "Municipal package reuse preview", ui
         )
         self.assertIn(
             "without changing page classifications", ui
         )
+
+    def test_canonical_real_package_profile_and_controls(self) -> None:
+        profile = json.loads(
+            (CANONICAL_ROOT / "profile.json").read_text(encoding="utf-8")
+        )
+        positive_package = json.loads(
+            (CANONICAL_ROOT / "positive-package.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        negative_package = json.loads(
+            (CANONICAL_ROOT / "negative-package.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        source_control = json.loads(
+            (CANONICAL_ROOT / "source-control.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual(
+            self.matcher.validate(self.matcher.PROFILE_SCHEMA_PATH, profile),
+            [],
+        )
+        self.assertEqual(profile["status"], "approved")
+        self.assertEqual(
+            {item["policy_mode"] for item in profile["document_templates"]},
+            {"review_required"},
+        )
+        validator = load_module(
+            ROOT / "scripts/validate-staged-pdf-artifacts.py",
+            "agenda_package_artifact_validator",
+        )
+        for item in profile["document_templates"]:
+            family = item["document_family"]
+            template_path = (
+                CANONICAL_ROOT / family / "structural-template.json"
+            )
+            policy_path = (
+                CANONICAL_ROOT / family / "template-review-policy.json"
+            )
+            template = json.loads(template_path.read_text(encoding="utf-8"))
+            policy = json.loads(policy_path.read_text(encoding="utf-8"))
+            self.assertEqual(validator.validate_payload(template), [])
+            self.assertEqual(validator.validate_payload(policy), [])
+            self.assertEqual(
+                hashlib.sha256(template_path.read_bytes()).hexdigest(),
+                item["template_ref"]["sha256"],
+            )
+            self.assertEqual(
+                hashlib.sha256(policy_path.read_bytes()).hexdigest(),
+                item["policy_ref"]["sha256"],
+            )
+        self.assertEqual(
+            source_control["positive_source"]["page_classification_ids"],
+            [1, 2, 3, 4, 5, 6],
+        )
+        self.assertEqual(
+            source_control["positive_source"]["assembly_ids"],
+            [12, 13, 14, 15, 16],
+        )
+        positive = self.matcher.preview(profile, positive_package)
+        self.assertEqual(positive["status"], "needs_review")
+        self.assertEqual(
+            [
+                (item["page_start"], item["page_end"], item["fit_class"])
+                for item in positive["documents"]
+            ],
+            [
+                (1, 1, "exact"),
+                (2, 2, "exact"),
+                (3, 3, "exact"),
+                (4, 4, "exact"),
+                (5, 6, "exact"),
+            ],
+        )
+        self.assertEqual(positive["coverage"], {
+            "total_pages": 6,
+            "assigned_pages": 6,
+            "unknown_pages": 0,
+            "conflicting_pages": 0,
+            "omitted_pages": 0,
+        })
+        negative = self.matcher.preview(profile, negative_package)
+        self.assertEqual(negative["status"], "blocked")
+        self.assertEqual(negative["documents"], [])
+        self.assertEqual(negative["unknown_pages"], [1, 2, 3, 4, 5, 6])
+        self.assertEqual(negative["coverage"]["omitted_pages"], 0)
 
 
 if __name__ == "__main__":

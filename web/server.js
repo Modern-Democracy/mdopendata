@@ -4046,7 +4046,7 @@ async function packageSourceRecord(packageKey) {
   const { rows } = await pool.query(`
     SELECT source_document_id, source_document_key, repo_relpath,
            source_file_hash, page_count, jurisdiction_key,
-           document_family_key, metadata
+           document_family_key, document_type_key, metadata
     FROM documents.source_document
     WHERE source_document_key = $1 AND is_active
     LIMIT 1
@@ -4082,7 +4082,7 @@ async function loadAgendaPackageReuseInput(packageKey) {
   if (
     !compactText(source.jurisdiction_key)
     || !sourceFamily
-    || !compactText(source.document_family_key)
+    || !compactText(source.document_type_key)
   ) {
     throw stagedPdfReviewError(
       "Package source identity is incomplete; jurisdiction, source family, and document family are required.",
@@ -4111,7 +4111,7 @@ async function loadAgendaPackageReuseInput(packageKey) {
     source_sha256: source.source_file_hash,
     jurisdiction_key: source.jurisdiction_key,
     source_family: sourceFamily,
-    document_family: source.document_family_key,
+    document_family: source.document_type_key,
     pages: rows.map((row) => ({
       page_number: row.page_number,
       text_source: compactText(row.text_raw) ? "embedded" : "visual_only",

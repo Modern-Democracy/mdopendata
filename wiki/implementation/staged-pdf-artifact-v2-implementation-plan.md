@@ -31,7 +31,7 @@ Version 1 stays immutable and available as an explicit rollback workspace. Versi
 - The reviewer defaults to version 2. Explicit `PDF_INVENTORY_REVIEW_SCHEMA_VERSION=1` or launcher `-SchemaVersion 1` selection retains the frozen version 1 rollback workspace.
 - Phase 4 completed on 2026-07-27. Approved table and formatted-text blocks can produce deterministic, read-only current-document candidate previews with exact, light, material, and one-off classifications. Selected eligible candidates apply atomically; reviewer rejections append document-scoped negative controls to the existing review chain.
 - Phase 5 completed on 2026-07-27. Human-approved structures can be promoted into immutable document-scoped templates with immutable review policies, deterministic sampling, fail-closed automation gates, suspension, and exact audit provenance.
-- Phase 6 is in progress. The profile and preview contracts, deterministic embedded-document classifier, exact page-accounting controls, and read-only reviewer preview are implemented. Promotion of a real municipal-source profile remains blocked until exact approved structural-template and review-policy references plus positive and nearest-negative agenda-package controls are available.
+- Phase 6 completed on 2026-07-27. The deterministic promotion command materializes the approved Charlottetown public-meeting profile from six accepted page classifications and five approved assembly rows. Five immutable same-edition structural templates and five `review_required` policies cover four single-page documents and one two-page document. A real six-page regular-council slice remains wholly unknown and blocked as the nearest negative control.
 - Phase 7 completed on 2026-07-27. Deterministic parity confirms 753 exact matches, 104 approved provenance-only shifts, one explicit migration event, and zero missing or changed records. Stage 2 supplies 77 logical groups and 2,290 unique observations. Read-only live verification confirms that published Snapshot 3 contains the same 2,290 document-9 semantic records and source links. The explicit transition approval activates version 2 with zero handoff blockers.
 
 ## Phase 0: Freeze Baseline And Controls
@@ -151,11 +151,15 @@ Gate passed. Human actions create immutable, semantic-versioned `structural_temp
 
 ### Status
 
-In progress on 2026-07-27. `schema/json-schema/agenda-package-reuse-profile.schema.json` separates immutable municipal-source scope, package grammar, document-template boundaries, exact structural-template and review-policy references, controls, and approval. `schema/json-schema/agenda-package-reuse-preview.schema.json` records ordered document matches, page roles, boundary evidence, fit, policy outcomes, unknown pages, conflicts, and exact coverage.
+Completed on 2026-07-27. `schema/json-schema/agenda-package-reuse-profile.schema.json` separates immutable municipal-source scope, package grammar, document-template boundaries, exact structural-template and review-policy references, controls, and approval. `schema/json-schema/agenda-package-reuse-preview.schema.json` records ordered document matches, page roles, boundary evidence, fit, policy outcomes, unknown pages, conflicts, and exact coverage.
 
 `scripts/preview-agenda-package-reuse.py` is deterministic and read-only. It requires exact jurisdiction, source-family, and document-family scope; segments documents from approved start anchors; checks continuation and end anchors, page limits, first-document rules, and allowed transitions; evaluates review policies; and reports every package page exactly once as assigned, unknown, or conflicting. The ingestion UI exposes this through `POST /api/document-ingestion/packages/{packageKey}/reuse-preview` only when `AGENDA_PACKAGE_REUSE_PROFILE` names a repository profile. The endpoint does not change classifications, assemblies, extraction records, databases, or publication state.
 
-No canonical municipal-source profile has been created. The Phase 5 registry contains no promoted agenda-package structural template or policy, so inventing exact references or approving a source profile would violate the Phase 5 and Phase 6 gates. Existing package rows without explicit `metadata.source_family` fail closed; new Charlottetown package registrations record `charlottetown-council`.
+The canonical profile is `data/document-ingestion/profiles/charlottetown-council-public-meeting/v1/profile.json`. `scripts/generate-charlottetown-agenda-reuse-profile.py` verifies source-document hashes, accepted page classifications, active approved page patterns, and approved package assembly before writing any artifact. It promotes five exact structural templates and five `review_required` policies; one reviewed package is insufficient evidence for sampling or automatic approval.
+
+The positive source is the six-page February 3, 2026 public-meeting package, which contains four approved single-page supporting documents and one approved two-page mailed notice and map. Every page is assigned exactly once to five exact document matches with zero unknown, conflicting, or omitted pages. The stored nearest-negative control is pages 1 through 6 of the unreviewed 453-page January 13 regular-council package. All six remain unknown and blocked. Live endpoint verification against the complete negative package likewise produces zero documents, 453 unknown pages, zero conflicts, and zero omissions.
+
+Historical source-document IDs 2 and 3 now carry explicit `metadata.source_family = charlottetown-council`. The transactional backfill was restricted by exact source IDs and SHA-256 values. It changed two metadata objects and changed no page classifications, package assemblies, extraction results, source files, or publication state. A repeat run reports zero pending metadata rows and byte-identical profile outputs.
 
 ### Work
 
@@ -169,7 +173,7 @@ No canonical municipal-source profile has been created. The Phase 5 registry con
 
 Single-page and multi-page positive controls are detected with exact source order. Nearest-negative documents remain unmatched or blocked. No package page is silently omitted or assigned to conflicting embedded documents.
 
-The isolated synthetic gate passes. Remaining gate work is to promote exact agenda-package structures and policies, create and approve the Charlottetown source profile from reviewed real packages, backfill explicit source-family metadata where authorized, and execute the same controls against the representative single-page and multi-page package corpus.
+Gate passed. The synthetic controls remain green, the reviewed real package supplies exact single-page and multi-page positive controls, and the nearest real negative remains unmatched and blocked with complete page accounting. Every policy remains `review_required`. Approved-preview handoff to package assembly and council-domain import resolution remain separate later workflow changes.
 
 ## Phase 7: Parity And Handoff
 
