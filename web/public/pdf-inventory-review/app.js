@@ -41,7 +41,7 @@ const ids = [
   "block-editor", "block-type-select", "block-financial", "save-block-type", "delete-block",
   "new-block-type", "new-block-financial", "edit-reason", "edit-internal", "region-editor",
   "exit-internal", "region-summary", "region-list", "region-type-select", "save-region-type",
-  "draw-region", "delete-region", "redetect-on-resize", "redetect-on-resize-control",
+  "draw-region", "delete-region", "redetect-formatted-regions", "redetect-on-resize", "redetect-on-resize-control",
   "table-grid-editor", "exit-table-grid", "table-grid-summary", "select-cells", "select-rows", "select-columns",
   "table-cell-type", "save-table-cell-type", "split-table-selection", "merge-table-selection", "redetect-table-grid",
   "cell-span-controls", "table-row-span", "table-column-span", "save-table-cell-span",
@@ -988,6 +988,12 @@ elements["save-region-type"].addEventListener("click", () => {
 elements["delete-region"].addEventListener("click", () => {
   const block = currentBlock(); const region = currentRegion(); if (!block || !region) return;
   if (window.confirm("Delete the selected internal region?")) sendCommand({ action: "delete_region", block_key: block.block_key, region_key: region.region_key });
+});
+elements["redetect-formatted-regions"].addEventListener("click", () => {
+  const block = currentBlock(); if (!block || block.block_type !== "formatted_text") return;
+  if (window.confirm("Replace the current internal structure with newly calculated regions inside the formatted-text box?")) {
+    sendCommand({ action: "redetect_regions", block_key: block.block_key });
+  }
 });
 elements["redetect-table-grid"].addEventListener("click", () => {
   const block = currentBlock(); if (!block || block.block_type !== "table") return;

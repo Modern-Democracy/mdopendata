@@ -120,6 +120,7 @@ await withServer({ PDF_INVENTORY_REVIEW_ENABLED: "1" }, async (baseUrl) => {
   assert(shellText.includes("Cancel source"), "Association source cancellation is missing.");
   assert(shellText.includes("Edit internal structure"), "Internal-region controls are missing.");
   assert(shellText.includes("Redetect table grid"), "Table grid redetection control is missing.");
+  assert(shellText.includes("Recalculate Formatted Region"), "Formatted-region recalculation control is missing.");
   assert(shellText.includes("Redetect table grid after resize"), "Resize grid-redetection option is missing.");
   assert(shellText.includes("Apply cell span"), "Version 2 cell-span control is missing.");
   assert(shellText.includes("Row span"), "Row-span input is missing.");

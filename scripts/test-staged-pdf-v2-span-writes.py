@@ -55,6 +55,26 @@ class Version2SpanWriteTests(unittest.TestCase):
     def block(self) -> dict:
         return self.writer.read_json(self.writer.BLOCK_PATH)["records"][0]
 
+    def test_formatted_text_parent_resize_scales_internal_regions(self) -> None:
+        block = self.artifact["records"][0]
+        block["block_type"] = "formatted_text"
+        block["table_grid"] = None
+        block["regions"] = [{
+            "region_key": f'{block["block_key"]}:region-001',
+            "region_type": "paragraph",
+            "bbox": copy.deepcopy(block["bbox"]),
+            "text_excerpt": "Formatted text",
+            "review": {"status": "proposed", "reason_codes": ["test"], "decision_ids": []},
+        }]
+        self.writer.BLOCK_PATH.write_bytes(self.writer.canonical_bytes(self.artifact))
+        resized_bbox = {**block["bbox"], "y0": round(block["bbox"]["y0"] + 0.05, 6)}
+
+        self.apply({"action": "resize", "block_key": block["block_key"], "bbox": resized_bbox})
+
+        after = self.block()
+        self.assertEqual(after["bbox"], resized_bbox)
+        self.assertEqual(after["regions"][0]["bbox"], resized_bbox)
+
     def test_merge_title_split_and_explicit_span_round_trip(self) -> None:
         block_key = "document:p001:b001"
         top = [
@@ -235,6 +255,32 @@ class Version2SpanWriteTests(unittest.TestCase):
         )
         self.assertEqual(region["region_type"], "title")
         self.assertEqual(self.writer.load_validator().validate_payload(self.block_artifact()), [])
+
+    def test_version_2_recalculates_formatted_regions_from_source_evidence(self) -> None:
+        pilot_root = ROOT / "data/budget/charlottetown/2026-2027/staged-pdf/v2"
+        artifact = self.writer.read_json(pilot_root / "stage-1/block-inventory.json")
+        self.writer.SOURCE_PATH = pilot_root / "stage-0/source-evidence.json"
+        block = next(
+            item for item in artifact["records"]
+            if item["block_key"] == "ctown-budget-2026-2027:p034:body"
+        )
+
+        affected, _, changes = self.writer.apply_command(
+            artifact,
+            {"action": "redetect_regions", "block_key": block["block_key"]},
+            "ctown-budget-2026-2027:decision:999999",
+            999999,
+        )
+
+        self.assertTrue(block["regions"])
+        self.assertIn(block["block_key"], affected)
+        self.assertEqual(changes[0]["field_path"], f'/records/{block["block_key"]}/regions')
+        self.assertTrue(all(
+            region["region_type"] in {"title", "paragraph", "bullet_list", "sorted_list"}
+            and region["review"]["status"] == "needs_review"
+            and region["region_key"] in affected
+            for region in block["regions"]
+        ))
 
 
 class MigratedPilotCompatibilityTests(unittest.TestCase):

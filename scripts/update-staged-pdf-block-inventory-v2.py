@@ -32,7 +32,7 @@ CELL_TYPES = {"table_header", "column_label", "row_label", "cell", "subtotal", "
 RELATIONSHIP_TYPES = {"graph_source_table", "table_continuation", "overview_detail"}
 ALLOWED_ACTIONS = {
     "resize", "set_type", "delete", "create", "create_region", "resize_region",
-    "set_region_type", "delete_region", "redetect_table_grid", "move_table_divider",
+    "set_region_type", "delete_region", "redetect_regions", "redetect_table_grid", "move_table_divider",
     "split_table_rows", "merge_table_rows", "split_table_columns", "merge_table_columns",
     "merge_table_cells", "split_table_cell", "set_table_cell_span",
     "set_table_cell_type", "migrate_table_grids", "link", "unlink",
@@ -177,6 +177,39 @@ def detect_table_grid(
         },
         schema_version=int(artifact.get("schema_version", 1)),
     )
+
+
+def detect_formatted_regions(
+    artifact: dict[str, Any], block: dict[str, Any], decision_id: str, sequence: int
+) -> list[dict[str, Any]]:
+    if block["block_type"] != "formatted_text":
+        raise ValueError("Formatted-region detection requires a formatted_text block")
+    source = read_json(SOURCE_PATH)
+    if source.get("document_key") != artifact["document_key"] or source.get("source_sha256") != artifact["source_sha256"]:
+        raise RuntimeError("Stage 0 source evidence does not match the Stage 1 artifact")
+    page = next((item for item in source["pages"] if item["page_number"] == block["page_number"]), None)
+    if page is None:
+        raise RuntimeError(f"Stage 0 source evidence has no page {block['page_number']}")
+    use_ocr = page["ocr"]["status"] == "completed"
+    evidence_relpath = page["ocr"]["evidence_relpath"] if use_ocr else page["embedded_text"]["evidence_relpath"]
+    evidence = read_json(ROOT / evidence_relpath)
+    words = [
+        word for word in evidence.get("words", [])
+        if block["bbox"]["x0"] <= (word["bbox"]["x0"] + word["bbox"]["x1"]) / 2 <= block["bbox"]["x1"]
+        and block["bbox"]["y0"] <= (word["bbox"]["y0"] + word["bbox"]["y1"]) / 2 <= block["bbox"]["y1"]
+    ]
+    regions = load_generator().internal_regions(
+        block["block_key"], "formatted_text", words,
+        schema_version=int(artifact.get("schema_version", 1)),
+    )
+    for index, region in enumerate(regions, start=1):
+        region["region_key"] = f'{block["block_key"]}:redetect-{sequence:06d}-{index:03d}'
+        region["review"] = {
+            "status": "needs_review",
+            "reason_codes": ["automated-formatted-region-detection"],
+            "decision_ids": [decision_id],
+        }
+    return regions
 
 
 def replace_detected_grid(
@@ -658,6 +691,27 @@ def apply_command(
         locators.append(source_locator(block))
         return [block_key, *affected_cells], locators, changes
 
+    if action == "redetect_regions":
+        prior_regions = copy.deepcopy(block["regions"])
+        block["regions"] = detect_formatted_regions(artifact, block, decision_id, sequence)
+        changes.append({
+            "field_path": f"/records/{block_key}/regions",
+            "prior_value": prior_regions,
+            "new_value": copy.deepcopy(block["regions"]),
+        })
+        block["confidence"] = {
+            "level": "medium", "score": 0.7,
+            "reason_codes": ["automated-formatted-region-detection"],
+        }
+        block["review"] = {
+            "status": "needs_review",
+            "reason_codes": ["automated-formatted-region-detection"],
+            "decision_ids": [decision_id],
+        }
+        block["evidence"] = [source_locator(block)]
+        locators.append(source_locator(block))
+        return [block_key, *(region["region_key"] for region in block["regions"])], locators, changes
+
     grid_actions = {
         "move_table_divider", "split_table_rows", "merge_table_rows",
         "split_table_columns", "merge_table_columns", "merge_table_cells",
@@ -942,6 +996,24 @@ def apply_command(
         prior = copy.deepcopy(block["bbox"])
         block["bbox"] = normalized_box(command.get("bbox"))
         changes.append({"field_path": f"/records/{block_key}/bbox", "prior_value": prior, "new_value": copy.deepcopy(block["bbox"])})
+        if block["block_type"] == "formatted_text" and block["regions"]:
+            prior_regions = copy.deepcopy(block["regions"])
+            old_width = prior["x1"] - prior["x0"]
+            old_height = prior["y1"] - prior["y0"]
+            new_width = block["bbox"]["x1"] - block["bbox"]["x0"]
+            new_height = block["bbox"]["y1"] - block["bbox"]["y0"]
+            for region in block["regions"]:
+                region["bbox"] = {
+                    "x0": round(block["bbox"]["x0"] + ((region["bbox"]["x0"] - prior["x0"]) / old_width) * new_width, 6),
+                    "y0": round(block["bbox"]["y0"] + ((region["bbox"]["y0"] - prior["y0"]) / old_height) * new_height, 6),
+                    "x1": round(block["bbox"]["x0"] + ((region["bbox"]["x1"] - prior["x0"]) / old_width) * new_width, 6),
+                    "y1": round(block["bbox"]["y0"] + ((region["bbox"]["y1"] - prior["y0"]) / old_height) * new_height, 6),
+                }
+            changes.append({
+                "field_path": f"/records/{block_key}/regions",
+                "prior_value": prior_regions,
+                "new_value": copy.deepcopy(block["regions"]),
+            })
         if command.get("redetect_table_grid") is True:
             affected_cells, change = replace_detected_grid(artifact, block, decision_id, sequence)
             changes.append(change)

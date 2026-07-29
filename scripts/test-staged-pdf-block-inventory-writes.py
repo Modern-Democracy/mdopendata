@@ -120,6 +120,46 @@ class BlockInventoryWriteTests(unittest.TestCase):
         self.assertEqual(self.writer.BLOCK_PATH.read_bytes(), before)
         self.assertFalse(self.writer.REVIEW_PATH.exists())
 
+    def test_formatted_text_parent_resize_scales_internal_regions(self) -> None:
+        block_key = "ctown-budget-2026-2027:p034:body"
+        before = next(
+            item for item in self.writer.read_json(self.writer.BLOCK_PATH)["records"]
+            if item["block_key"] == block_key
+        )
+        resized_bbox = {**before["bbox"], "y0": round(before["bbox"]["y0"] + 0.05, 6)}
+
+        self.apply({"action": "resize", "block_key": block_key, "bbox": resized_bbox})
+
+        after = next(
+            item for item in self.writer.read_json(self.writer.BLOCK_PATH)["records"]
+            if item["block_key"] == block_key
+        )
+        self.assertEqual(after["bbox"], resized_bbox)
+        self.assertEqual(after["regions"][0]["bbox"]["y0"], resized_bbox["y0"])
+        self.assertTrue(all(
+            resized_bbox["y0"] <= region["bbox"]["y0"] < region["bbox"]["y1"] <= resized_bbox["y1"]
+            for region in after["regions"]
+        ))
+
+    def test_recalculate_formatted_regions_replaces_internal_structure(self) -> None:
+        block_key = "ctown-budget-2026-2027:p034:body"
+
+        result = self.apply({"action": "redetect_regions", "block_key": block_key})
+
+        block = next(
+            item for item in self.writer.read_json(self.writer.BLOCK_PATH)["records"]
+            if item["block_key"] == block_key
+        )
+        self.assertTrue(block["regions"])
+        self.assertEqual(block["review"]["status"], "needs_review")
+        self.assertTrue(all(
+            region["region_key"] in result["affected_keys"]
+            and region["review"]["status"] == "needs_review"
+            and block["bbox"]["x0"] <= region["bbox"]["x0"] < region["bbox"]["x1"] <= block["bbox"]["x1"]
+            and block["bbox"]["y0"] <= region["bbox"]["y0"] < region["bbox"]["y1"] <= block["bbox"]["y1"]
+            for region in block["regions"]
+        ))
+
     def test_table_grid_redetect_dividers_types_split_merge_and_resize(self) -> None:
         block_key = "ctown-budget-2026-2027:p018:body"
         first = self.apply({"action": "redetect_table_grid", "block_key": block_key})
