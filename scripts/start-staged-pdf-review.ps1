@@ -47,7 +47,7 @@ try {
   $env:PDF_INVENTORY_REVIEW_SCHEMA_VERSION = [string]$SchemaVersion
   $env:DEMO_MODE = '0'
 
-  Write-Host "Local review v$SchemaVersion: http://127.0.0.1:$Port/internal/pdf-inventory-review"
+  Write-Host "Local review v${SchemaVersion}: http://127.0.0.1:$Port/internal/pdf-inventory-review"
   Write-Host 'Press Ctrl+C to stop the review server.'
 
   Push-Location $repoRoot

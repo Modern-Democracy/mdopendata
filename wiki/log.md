@@ -14,6 +14,10 @@ Append new entries in reverse chronological order. Use this heading format:
 ## [YYYY-MM-DD] type | Short title
 ```
 
+## [2026-07-28] fix | Staged PDF reviewer launcher
+
+Corrected the PowerShell variable delimiter in `scripts/start-staged-pdf-review.ps1` so the version 2 loopback reviewer can start without a parser error. Verified HTTP 200 at the local review route, canonical validation of the three active artifacts, schema version 2, write mode enabled, 154 pages, 442 blocks, and the Docker application remaining healthy on port 3000.
+
 ## [2026-07-28] operations | Local council-import web refresh
 
 Rebuilt `mdopendata-web:latest` from the committed council agenda-package import implementation and force-recreated only the local web container. The running image is `sha256:5c1e625acb825f0203c3b4af4ee1b88159546b53ea657f9e531312434df0cb0f`; embedded server and ingestion UI hashes match the workspace exactly. Local health returned `ok`, the council-import preview returned the explicit `meeting-required` gate with five documents, and the existing PostGIS and pgAdmin containers were not recreated.
