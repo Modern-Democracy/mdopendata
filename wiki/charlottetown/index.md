@@ -24,6 +24,8 @@ This index catalogs the Charlottetown LLM Wiki pages and source families. Update
 | [sources](sources/.gitkeep) | Future source-summary pages for approved Charlottetown source artifacts. |
 | [Budget 2026/2027 first pass](sources/budget-2026-2027-first-pass.md) | First-pass page inventory and table manifest notes for the current proposed budget PDF. |
 | [Three-year budget source profile](sources/budget-three-year-source-profile.md) | Page, table-family, columns, entities, periods, continuation, variation, and representative-table inventory for all three financial plans. |
+| [Draft zoning July 2026](sources/draft-zoning-july-2026.md) | Extracted PDF, normalized output, staged review artifacts, and municipal-fit map QA for the July 30, 2026 draft. |
+| [Ward map](sources/wards-map.md) | Vector extraction of Charlottetown polling divisions and dissolved electoral wards from `maps/Chtown_All_Wards.pdf`. |
 | [Municipal budget contracts](../budgets/README.md) | Cross-municipality requirements, schema, API/UI contract, and Charlottetown prototype plan. |
 | [entities](entities/.gitkeep) | Future pages for zones, bylaws, maps, schedules, parcels, streets, and neighbourhoods. |
 | [topics](topics/.gitkeep) | Future pages for zoning concepts, provisions, definitions, and review themes. |

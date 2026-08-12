@@ -146,26 +146,26 @@
   </elevation>
   <renderer-v2 attr="zone_code" enableorderby="0" forceraster="0" referencescale="-1" symbollevels="0" type="categorizedSymbol">
     <categories>
-      <category label="RN - Neighbourhood" render="true" symbol="0" type="string" uuid="{ddc10511-7979-4822-a4a6-7017d8f32c3c}" value="RN"/>
-      <category label="RM - Medium Density Residential" render="true" symbol="1" type="string" uuid="{af7516e6-e9bb-46b3-8a31-958b3451bc0c}" value="RM"/>
-      <category label="RH - High Order Residential" render="true" symbol="2" type="string" uuid="{f429b02d-ecb7-49c9-a724-c3f9e89bbde3}" value="RH"/>
-      <category label="DC - Downtown Core" render="true" symbol="3" type="string" uuid="{c1c19f79-b21e-42f1-a40e-3c939a949811}" value="DC"/>
-      <category label="DMS - Downtown Main Street" render="true" symbol="4" type="string" uuid="{cd99f1b7-3520-47da-b5fd-b9407a3bec51}" value="DMS"/>
-      <category label="DMU - Downtown Mixed Use" render="true" symbol="5" type="string" uuid="{d41426e4-1061-40e5-8b07-8372ae3b36e8}" value="DMU"/>
-      <category label="DN - Downtown Neighbourhood" render="true" symbol="6" type="string" uuid="{0243b967-dde0-4b84-ae62-7194d10e2e71}" value="DN"/>
-      <category label="DW - Downtown Waterfront" render="true" symbol="7" type="string" uuid="{593aee8e-405e-4efa-8b71-b15f2d84ab94}" value="DW"/>
-      <category label="BP - Business Park" render="true" symbol="8" type="string" uuid="{191913f4-5560-4d77-a416-61dfa33a2b15}" value="BP"/>
-      <category label="AP - Airport Periphery" render="true" symbol="9" type="string" uuid="{6188945c-c7f7-455f-8132-a9af0dad190d}" value="AP"/>
-      <category label="H - Heavy Industrial" render="true" symbol="10" type="string" uuid="{4bb347a0-36e8-4c57-9d64-1287c3bf10dc}" value="H"/>
-      <category label="P - Port" render="true" symbol="11" type="string" uuid="{3006ff8e-8048-438f-9bf1-e497d7db0f92}" value="P"/>
-      <category label="GC - Growth Corridor" render="true" symbol="12" type="string" uuid="{e5d3a2a7-bbec-451c-851c-b3d970651096}" value="GC"/>
-      <category label="GN - Growth Node" render="true" symbol="13" type="string" uuid="{148ab4b0-7658-4e39-9d36-cb70c45d01f7}" value="GN"/>
-      <category label="I - Institutional" render="true" symbol="14" type="string" uuid="{7ad9fc67-dabe-4b10-9c0f-700e2b40277f}" value="I"/>
-      <category label="PPS - Parks and Public Spaces" render="true" symbol="15" type="string" uuid="{03f7dbd8-76cd-4584-954a-b2dfedf3d6e1}" value="PPS"/>
-      <category label="POS - Privately-owned Open Spaces" render="true" symbol="16" type="string" uuid="{cdfe2063-66f2-4ea4-b1bb-08362ffb5162}" value="POS"/>
+      <category label="Neighbourhood (RN)" render="true" symbol="0" type="string" uuid="{ddc10511-7979-4822-a4a6-7017d8f32c3c}" value="RN"/>
+      <category label="Medium Density Residential (RM)" render="true" symbol="1" type="string" uuid="{af7516e6-e9bb-46b3-8a31-958b3451bc0c}" value="RM"/>
+      <category label="High Order Residential (RH)" render="true" symbol="2" type="string" uuid="{f429b02d-ecb7-49c9-a724-c3f9e89bbde3}" value="RH"/>
+      <category label="Downtown Core (DC)" render="true" symbol="3" type="string" uuid="{c1c19f79-b21e-42f1-a40e-3c939a949811}" value="DC"/>
+      <category label="Downtown Main Street (DMS)" render="true" symbol="4" type="string" uuid="{cd99f1b7-3520-47da-b5fd-b9407a3bec51}" value="DMS"/>
+      <category label="Downtown Mixed Use (DMU)" render="true" symbol="5" type="string" uuid="{d41426e4-1061-40e5-8b07-8372ae3b36e8}" value="DMU"/>
+      <category label="Downtown Neighbourhood (DN)" render="true" symbol="6" type="string" uuid="{0243b967-dde0-4b84-ae62-7194d10e2e71}" value="DN"/>
+      <category label="Downtown Waterfront (DW)" render="true" symbol="7" type="string" uuid="{593aee8e-405e-4efa-8b71-b15f2d84ab94}" value="DW"/>
+      <category label="Business Park (BP)" render="true" symbol="8" type="string" uuid="{191913f4-5560-4d77-a416-61dfa33a2b15}" value="BP"/>
+      <category label="Airport Periphery (AP)" render="true" symbol="9" type="string" uuid="{6188945c-c7f7-455f-8132-a9af0dad190d}" value="AP"/>
+      <category label="Heavy Industrial (HI)" render="true" symbol="10" type="string" uuid="{4bb347a0-36e8-4c57-9d64-1287c3bf10dc}" value="HI"/>
+      <category label="Port (P)" render="true" symbol="11" type="string" uuid="{3006ff8e-8048-438f-9bf1-e497d7db0f92}" value="P"/>
+      <category label="Growth Corridor (GC)" render="true" symbol="12" type="string" uuid="{e5d3a2a7-bbec-451c-851c-b3d970651096}" value="GC"/>
+      <category label="Growth Node (GN)" render="true" symbol="13" type="string" uuid="{148ab4b0-7658-4e39-9d36-cb70c45d01f7}" value="GN"/>
+      <category label="Institutional (I)" render="true" symbol="14" type="string" uuid="{7ad9fc67-dabe-4b10-9c0f-700e2b40277f}" value="I"/>
+      <category label="Parks and Public Spaces (PPS)" render="true" symbol="15" type="string" uuid="{03f7dbd8-76cd-4584-954a-b2dfedf3d6e1}" value="PPS"/>
+      <category label="Privately-owned Open Spaces (POS)" render="true" symbol="16" type="string" uuid="{cdfe2063-66f2-4ea4-b1bb-08362ffb5162}" value="POS"/>
       <category label="C - Conservation" render="true" symbol="17" type="string" uuid="{cc10c1e6-8ae2-49d8-8e89-50353ea68edf}" value="C"/>
       <category label="EG - Eastern Gateway" render="true" symbol="18" type="string" uuid="{53a08d36-2087-44d5-8e3c-bd4d728dde1b}" value="EG"/>
-      <category label="UE - Urban Expansion" render="true" symbol="19" type="string" uuid="{236589a3-0f7a-4f86-9c9e-52bd01fe6867}" value="UE"/>
+      <category label="Urban Expansion (UE)" render="true" symbol="19" type="string" uuid="{236589a3-0f7a-4f86-9c9e-52bd01fe6867}" value="UE"/>
     </categories>
     <symbols>
       <symbol alpha="0.82" clip_to_extent="1" force_rhr="0" frame_rate="10" is_animated="0" name="0" type="fill">
@@ -179,7 +179,7 @@
         <layer class="SimpleFill" enabled="1" id="{18473801-008a-4a0c-8070-ea6f3802f1f6}" locked="0" pass="0">
           <Option type="Map">
             <Option name="border_width_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
-            <Option name="color" type="QString" value="251,248,191,255,rgb:0.9843137,0.972549,0.7490196,1"/>
+            <Option name="color" type="QString" value="250,248,190,255,rgb:0.9803922,0.972549,0.745098,1"/>
             <Option name="joinstyle" type="QString" value="bevel"/>
             <Option name="offset" type="QString" value="0,0"/>
             <Option name="offset_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
@@ -210,7 +210,7 @@
         <layer class="SimpleFill" enabled="1" id="{781ea40e-dc7f-4a95-bd23-412ba24d4580}" locked="0" pass="0">
           <Option type="Map">
             <Option name="border_width_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
-            <Option name="color" type="QString" value="242,220,127,255,rgb:0.9490196,0.8627451,0.4980392,1"/>
+            <Option name="color" type="QString" value="242,220,126,255,rgb:0.9490196,0.8627451,0.4941176,1"/>
             <Option name="joinstyle" type="QString" value="bevel"/>
             <Option name="offset" type="QString" value="0,0"/>
             <Option name="offset_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
@@ -272,7 +272,7 @@
         <layer class="SimpleFill" enabled="1" id="{10bee425-49f6-43c8-8a74-3754ea293f23}" locked="0" pass="0">
           <Option type="Map">
             <Option name="border_width_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
-            <Option name="color" type="QString" value="120,80,139,255,rgb:0.4705882,0.3137255,0.5450981,1"/>
+            <Option name="color" type="QString" value="119,79,139,255,rgb:0.4666667,0.3098039,0.5450981,1"/>
             <Option name="joinstyle" type="QString" value="bevel"/>
             <Option name="offset" type="QString" value="0,0"/>
             <Option name="offset_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
@@ -303,7 +303,7 @@
         <layer class="SimpleFill" enabled="1" id="{66ebb6c5-efcc-4465-9566-a1c1094e9159}" locked="0" pass="0">
           <Option type="Map">
             <Option name="border_width_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
-            <Option name="color" type="QString" value="241,180,161,255,rgb:0.945098,0.7058824,0.6313726,1"/>
+            <Option name="color" type="QString" value="240,180,160,255,rgb:0.9411765,0.7058824,0.627451,1"/>
             <Option name="joinstyle" type="QString" value="bevel"/>
             <Option name="offset" type="QString" value="0,0"/>
             <Option name="offset_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
@@ -365,7 +365,7 @@
         <layer class="SimpleFill" enabled="1" id="{1513226e-ef85-42dc-9a33-171b8111c442}" locked="0" pass="0">
           <Option type="Map">
             <Option name="border_width_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
-            <Option name="color" type="QString" value="70,140,159,255,rgb:0.2745098,0.5490196,0.6235294,1"/>
+            <Option name="color" type="QString" value="70,139,159,255,rgb:0.2745098,0.5450981,0.6235294,1"/>
             <Option name="joinstyle" type="QString" value="bevel"/>
             <Option name="offset" type="QString" value="0,0"/>
             <Option name="offset_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
@@ -396,7 +396,7 @@
         <layer class="SimpleFill" enabled="1" id="{4b0f7570-c19d-41f4-8cba-ad960bb4dd73}" locked="0" pass="0">
           <Option type="Map">
             <Option name="border_width_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
-            <Option name="color" type="QString" value="109,165,123,255,rgb:0.427451,0.6470588,0.4823529,1"/>
+            <Option name="color" type="QString" value="108,164,122,255,rgb:0.4235294,0.6431373,0.4784314,1"/>
             <Option name="joinstyle" type="QString" value="bevel"/>
             <Option name="offset" type="QString" value="0,0"/>
             <Option name="offset_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
@@ -427,7 +427,7 @@
         <layer class="SimpleFill" enabled="1" id="{c7f8590a-0f74-49a6-b225-e3601c39a84f}" locked="0" pass="0">
           <Option type="Map">
             <Option name="border_width_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
-            <Option name="color" type="QString" value="138,206,145,255,rgb:0.5411765,0.8078431,0.5686275,1"/>
+            <Option name="color" type="QString" value="137,205,145,255,rgb:0.5372549,0.8039216,0.5686275,1"/>
             <Option name="joinstyle" type="QString" value="bevel"/>
             <Option name="offset" type="QString" value="0,0"/>
             <Option name="offset_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
@@ -551,7 +551,7 @@
         <layer class="SimpleFill" enabled="1" id="{8cca1592-c310-4d05-a707-249aa1c30ee3}" locked="0" pass="0">
           <Option type="Map">
             <Option name="border_width_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
-            <Option name="color" type="QString" value="236,192,0,255,rgb:0.9254902,0.7529412,0,1"/>
+            <Option name="color" type="QString" value="235,192,0,255,rgb:0.9215686,0.7529412,0,1"/>
             <Option name="joinstyle" type="QString" value="bevel"/>
             <Option name="offset" type="QString" value="0,0"/>
             <Option name="offset_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
@@ -582,7 +582,7 @@
         <layer class="SimpleFill" enabled="1" id="{573654d3-62f5-4b66-b5df-3edf8827c292}" locked="0" pass="0">
           <Option type="Map">
             <Option name="border_width_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
-            <Option name="color" type="QString" value="112,15,16,255,rgb:0.4392157,0.0588235,0.0627451,1"/>
+            <Option name="color" type="QString" value="111,15,16,255,rgb:0.4352941,0.0588235,0.0627451,1"/>
             <Option name="joinstyle" type="QString" value="bevel"/>
             <Option name="offset" type="QString" value="0,0"/>
             <Option name="offset_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
@@ -613,7 +613,7 @@
         <layer class="SimpleFill" enabled="1" id="{733b2458-7c9a-46ea-bf34-4291031e3cea}" locked="0" pass="0">
           <Option type="Map">
             <Option name="border_width_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
-            <Option name="color" type="QString" value="250,118,118,255,rgb:0.9803922,0.4627451,0.4627451,1"/>
+            <Option name="color" type="QString" value="249,118,118,255,rgb:0.9764706,0.4627451,0.4627451,1"/>
             <Option name="joinstyle" type="QString" value="bevel"/>
             <Option name="offset" type="QString" value="0,0"/>
             <Option name="offset_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
@@ -644,7 +644,7 @@
         <layer class="SimpleFill" enabled="1" id="{3bd1afab-0db2-4895-aa8a-cca347212b4c}" locked="0" pass="0">
           <Option type="Map">
             <Option name="border_width_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
-            <Option name="color" type="QString" value="171,30,34,255,rgb:0.6705883,0.1176471,0.1333333,1"/>
+            <Option name="color" type="QString" value="171,30,33,255,rgb:0.6705883,0.1176471,0.1294118,1"/>
             <Option name="joinstyle" type="QString" value="bevel"/>
             <Option name="offset" type="QString" value="0,0"/>
             <Option name="offset_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
@@ -675,7 +675,7 @@
         <layer class="SimpleFill" enabled="1" id="{8904fc8c-8bf6-495f-b9dd-66ffe1ebec8e}" locked="0" pass="0">
           <Option type="Map">
             <Option name="border_width_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
-            <Option name="color" type="QString" value="225,79,32,255,rgb:0.8823529,0.3098039,0.1254902,1"/>
+            <Option name="color" type="QString" value="224,79,32,255,rgb:0.8784314,0.3098039,0.1254902,1"/>
             <Option name="joinstyle" type="QString" value="bevel"/>
             <Option name="offset" type="QString" value="0,0"/>
             <Option name="offset_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
@@ -706,7 +706,7 @@
         <layer class="SimpleFill" enabled="1" id="{3248c499-8f90-4e83-8177-e9f2efd24ee2}" locked="0" pass="0">
           <Option type="Map">
             <Option name="border_width_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
-            <Option name="color" type="QString" value="223,93,114,255,rgb:0.8745098,0.3647059,0.4470588,1"/>
+            <Option name="color" type="QString" value="223,93,113,255,rgb:0.8745098,0.3647059,0.4431373,1"/>
             <Option name="joinstyle" type="QString" value="bevel"/>
             <Option name="offset" type="QString" value="0,0"/>
             <Option name="offset_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
@@ -737,7 +737,7 @@
         <layer class="SimpleFill" enabled="1" id="{1492d6c1-ce36-4a19-9c7a-881ea88eec62}" locked="0" pass="0">
           <Option type="Map">
             <Option name="border_width_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
-            <Option name="color" type="QString" value="182,151,197,255,rgb:0.7137255,0.5921569,0.772549,1"/>
+            <Option name="color" type="QString" value="182,150,197,255,rgb:0.7137255,0.5882353,0.772549,1"/>
             <Option name="joinstyle" type="QString" value="bevel"/>
             <Option name="offset" type="QString" value="0,0"/>
             <Option name="offset_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
@@ -768,7 +768,7 @@
         <layer class="SimpleFill" enabled="1" id="{98d81a5e-21b3-4bc9-8938-5ee703117140}" locked="0" pass="0">
           <Option type="Map">
             <Option name="border_width_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>
-            <Option name="color" type="QString" value="226,206,236,255,rgb:0.8862745,0.8078431,0.9254902,1"/>
+            <Option name="color" type="QString" value="226,205,236,255,rgb:0.8862745,0.8039216,0.9254902,1"/>
             <Option name="joinstyle" type="QString" value="bevel"/>
             <Option name="offset" type="QString" value="0,0"/>
             <Option name="offset_map_unit_scale" type="QString" value="3x:0,0,0,0,0,0"/>

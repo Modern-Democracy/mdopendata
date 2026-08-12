@@ -1,0 +1,236 @@
+{
+  "output": "data/spatial/charlottetown/charlottetown-wards-municipal-fit-topology-corrected.gpkg",
+  "source_pdf": "maps/Chtown_All_Wards.pdf",
+  "source_layer": "Map_Information_Tool_Specific_Calculation_Edit_ElectoralDistricts",
+  "source_crs": "EPSG:2961",
+  "target_crs": "EPSG:2954",
+  "municipal_boundary": "maps/pei/CHTWN_Municipal_Boundary.geojson",
+  "feature_counts": {
+    "polling_divisions": 69,
+    "electoral_wards": 10
+  },
+  "ward_polling_division_counts": {
+    "1": 7,
+    "2": 6,
+    "3": 7,
+    "4": 7,
+    "5": 7,
+    "6": 7,
+    "7": 7,
+    "8": 7,
+    "9": 7,
+    "10": 7
+  },
+  "geometry_qa": {
+    "polling_division_invalid_count": 0,
+    "electoral_ward_invalid_count": 0,
+    "polling_division_empty_count": 0,
+    "electoral_ward_empty_count": 0,
+    "area_union_m2": 43984450.40157542,
+    "municipal_boundary_m2": 44947400.85874355,
+    "union_boundary_difference_m2": 962950.4571679614,
+    "max_label_match_distance_m": 67.8116905943417,
+    "label_match_review_count_over_5m": 5
+  },
+  "polling_division_topology": {
+    "overlap_pair_count_over_0_01m2": 0,
+    "total_overlap_m2_over_0_01m2": 0.0,
+    "max_overlap_m2_over_0_01m2": 0.0,
+    "polling_division_outside_owning_ward_m2": 0.0,
+    "electoral_ward_area_sum_delta_m2": 4.44706529378891e-08,
+    "electoral_ward_domain_difference_m2": 1143.0165779938486,
+    "global_domain_difference_m2": 7.525844936938375e-09,
+    "electoral_wards_with_partition_faces": 10
+  },
+  "electoral_ward_topology": {
+    "1": {
+      "source_area_sum_m2": 1778955.3057985925,
+      "source_union_area_m2": 1778913.182077468,
+      "corrected_area_sum_m2": 1778738.318587457,
+      "corrected_union_area_m2": 1778738.3185874594,
+      "domain_area_m2": 1778913.1820774751,
+      "domain_difference_m2": 174.86349001831348,
+      "overlap_excess_m2": 42.123721124604344,
+      "gap_fill_m2": 7.2177499532699585e-09
+    },
+    "10": {
+      "source_area_sum_m2": 4551331.693680377,
+      "source_union_area_m2": 4551320.195240811,
+      "corrected_area_sum_m2": 4551256.50251509,
+      "corrected_union_area_m2": 4551256.502515099,
+      "domain_area_m2": 4551365.468126049,
+      "domain_difference_m2": 108.96561096573765,
+      "overlap_excess_m2": 11.498439565300941,
+      "gap_fill_m2": 45.27288523782045
+    },
+    "2": {
+      "source_area_sum_m2": 2899729.2577592763,
+      "source_union_area_m2": 2899729.2577592796,
+      "corrected_area_sum_m2": 2899669.714911858,
+      "corrected_union_area_m2": 2899669.7149118544,
+      "domain_area_m2": 2899729.257759274,
+      "domain_difference_m2": 59.54284742131521,
+      "overlap_excess_m2": -3.259629011154175e-09,
+      "gap_fill_m2": -5.587935447692871e-09
+    },
+    "3": {
+      "source_area_sum_m2": 1810591.7143117485,
+      "source_union_area_m2": 1810591.7143117497,
+      "corrected_area_sum_m2": 1810278.2339611652,
+      "corrected_union_area_m2": 1810278.233961165,
+      "domain_area_m2": 1810621.8292175555,
+      "domain_difference_m2": 343.59525639712905,
+      "overlap_excess_m2": -1.1641532182693481e-09,
+      "gap_fill_m2": 30.11490580579266
+    },
+    "4": {
+      "source_area_sum_m2": 3099853.298169001,
+      "source_union_area_m2": 3099817.5708237845,
+      "corrected_area_sum_m2": 3099648.4349725693,
+      "corrected_union_area_m2": 3099648.4349725703,
+      "domain_area_m2": 3099828.6922433036,
+      "domain_difference_m2": 180.2572707304652,
+      "overlap_excess_m2": 35.72734521655366,
+      "gap_fill_m2": 11.12141951918602
+    },
+    "5": {
+      "source_area_sum_m2": 2270616.935237601,
+      "source_union_area_m2": 2270535.8402069146,
+      "corrected_area_sum_m2": 2270599.4185120226,
+      "corrected_union_area_m2": 2270599.418512022,
+      "domain_area_m2": 2270630.5122049768,
+      "domain_difference_m2": 31.093692960879718,
+      "overlap_excess_m2": 81.0950306863524,
+      "gap_fill_m2": 94.67199806217104
+    },
+    "6": {
+      "source_area_sum_m2": 2217152.2826274754,
+      "source_union_area_m2": 2217152.282627476,
+      "corrected_area_sum_m2": 2216932.371476749,
+      "corrected_union_area_m2": 2216932.3714767494,
+      "domain_area_m2": 2217152.2826274764,
+      "domain_difference_m2": 219.91115072725435,
+      "overlap_excess_m2": -4.656612873077393e-10,
+      "gap_fill_m2": 4.656612873077393e-10
+    },
+    "7": {
+      "source_area_sum_m2": 5498610.364910053,
+      "source_union_area_m2": 5498610.364910039,
+      "corrected_area_sum_m2": 5498610.364910055,
+      "corrected_union_area_m2": 5498610.364910041,
+      "domain_area_m2": 5498610.364910036,
+      "domain_difference_m2": 0.0,
+      "overlap_excess_m2": 1.3969838619232178e-08,
+      "gap_fill_m2": -2.7939677238464355e-09
+    },
+    "8": {
+      "source_area_sum_m2": 9718358.630252728,
+      "source_union_area_m2": 9718351.595726773,
+      "corrected_area_sum_m2": 9718384.883925134,
+      "corrected_union_area_m2": 9718384.883925147,
+      "domain_area_m2": 9718409.671183903,
+      "domain_difference_m2": 24.78725876645399,
+      "overlap_excess_m2": 7.034525955095887,
+      "gap_fill_m2": 58.075457129627466
+    },
+    "9": {
+      "source_area_sum_m2": 10140247.113856155,
+      "source_union_area_m2": 10140150.925021129,
+      "corrected_area_sum_m2": 10140332.157803312,
+      "corrected_union_area_m2": 10140332.157803312,
+      "domain_area_m2": 10140332.15780332,
+      "domain_difference_m2": 6.299853504411978e-09,
+      "overlap_excess_m2": 96.18883502669632,
+      "gap_fill_m2": 181.2327821906656
+    }
+  },
+  "electoral_ward_hole_cleanup": {
+    "min_retained_hole_area_m2": 1000.0,
+    "per_ward": {
+      "1": {
+        "removed_hole_count": 1,
+        "removed_hole_area_m2": 6.5418693194982944e-09,
+        "retained_hole_count": 0,
+        "retained_hole_area_m2": 0.0
+      },
+      "10": {
+        "removed_hole_count": 3,
+        "removed_hole_area_m2": 45.27288525256063,
+        "retained_hole_count": 0,
+        "retained_hole_area_m2": 0.0
+      },
+      "2": {
+        "removed_hole_count": 0,
+        "removed_hole_area_m2": 0.0,
+        "retained_hole_count": 1,
+        "retained_hole_area_m2": 86122.18807006616
+      },
+      "3": {
+        "removed_hole_count": 3,
+        "removed_hole_area_m2": 30.114905807750546,
+        "retained_hole_count": 0,
+        "retained_hole_area_m2": 0.0
+      },
+      "4": {
+        "removed_hole_count": 3,
+        "removed_hole_area_m2": 11.121419517827647,
+        "retained_hole_count": 0,
+        "retained_hole_area_m2": 0.0
+      },
+      "5": {
+        "removed_hole_count": 17,
+        "removed_hole_area_m2": 94.67199806568934,
+        "retained_hole_count": 1,
+        "retained_hole_area_m2": 6457.176759548906
+      },
+      "6": {
+        "removed_hole_count": 0,
+        "removed_hole_area_m2": 0.0,
+        "retained_hole_count": 0,
+        "retained_hole_area_m2": 0.0
+      },
+      "7": {
+        "removed_hole_count": 0,
+        "removed_hole_area_m2": 0.0,
+        "retained_hole_count": 0,
+        "retained_hole_area_m2": 0.0
+      },
+      "8": {
+        "removed_hole_count": 2,
+        "removed_hole_area_m2": 58.075457123005094,
+        "retained_hole_count": 0,
+        "retained_hole_area_m2": 0.0
+      },
+      "9": {
+        "removed_hole_count": 6,
+        "removed_hole_area_m2": 181.2327822107137,
+        "retained_hole_count": 0,
+        "retained_hole_area_m2": 0.0
+      }
+    },
+    "removed_hole_count": 35,
+    "removed_hole_area_m2": 420.4894479840888,
+    "retained_hole_count": 2,
+    "retained_hole_area_m2": 92579.36482961506
+  },
+  "fill_rgb_by_ward": {
+    "1": "#97DBF2",
+    "2": "#CEFCB3",
+    "3": "#FCB6EA",
+    "4": "#D2FCD9",
+    "5": "#FCC0C3",
+    "6": "#FCD2F0",
+    "7": "#CFE6FC",
+    "8": "#B3FCDA",
+    "9": "#D8C2FC",
+    "10": "#FCB6D2"
+  },
+  "notes": [
+    "The PDF is an Esri ArcMap vector export and was read through the GDAL PDF driver.",
+    "The 69 printed labels use ward-division codes such as 1-1 and 10-7; the first component is the electoral ward and the second is the polling division.",
+    "Electoral wards are dissolved from polling divisions and both layers are clipped to maps/pei/CHTWN_Municipal_Boundary.geojson.",
+    "Electoral-ward interior rings below the configured area threshold are removed to clean source slivers; larger map-derived open-water holes are retained.",
+    "All polling-division and electoral-ward boundaries are polygonized into one global partition; each face is assigned to exactly one polling division and electoral wards are regenerated as exact unions of those corrected areas.",
+    "Small label-to-polygon distances occur where PDF text placement overlaps a shared boundary; source feature and match distance are retained for audit."
+  ]
+}

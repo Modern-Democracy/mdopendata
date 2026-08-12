@@ -3,7 +3,7 @@ type: log
 tags:
   - charlottetown
   - log
-updated: 2026-07-07
+updated: 2026-08-12
 ---
 
 Append new entries in reverse chronological order. Use headings in this format:
@@ -13,6 +13,47 @@ Append new entries in reverse chronological order. Use headings in this format:
 ```text
 ## [YYYY-MM-DD] type | Short title
 ```
+
+## [2026-08-07] data-quality | Zone-pair use and PID report
+
+Created `data/spatial/charlottetown/charlottetown-zoning-review-zone-pair-use-pid-summary.csv`
+from `properties_original_vs_updated_draft_review`. The report contains 72
+distinct original-to-updated zone pairs and includes affected-property counts,
+distinct PID lists, exact permitted-use additions and removals, shared-use
+counts, and source paths. QA confirmed that CSV counts reconcile to 1,554
+source features, all 72 source pairs are represented, every PID set matches
+the source grouping, and no pair row contains duplicate PIDs.
+
+## [2026-08-06] spatial | Civic-address zoning comparison views
+
+Created `data/spatial/charlottetown/charlottetown-zoning-comparison-views.gpkg`
+from the original `public."CHTWN_Zoning_Boundaries"` layer, the April draft
+`CHTWN_Draft_Zoning_Boundaries`, the July updated draft
+`CHTWN_Draft_Zoning_Boundaries_Update`, and 14,676 civic-address points.
+The `properties_original_vs_updated_draft_review` layer contains 1,554 points
+selected for missing original or updated-draft point overlap or a mismatch in
+broad intended-use groups. The
+`properties_first_vs_second_draft_zone_changes` layer contains 936 points
+where the raw first- and second-draft zone codes differ, including missing
+point overlap. Both layers are EPSG:4326 point layers and were added to the
+active QGIS project under `Zoning comparison views`; QA found 0 empty or
+invalid geometries, 0 duplicate address IDs, and 0 rule violations.
+
+## [2026-08-06] spatial | Ward voting-area and district layers
+
+Added `scripts/extract-charlottetown-wards.py` and generated
+`data/spatial/charlottetown/charlottetown-wards-municipal-fit.gpkg` from
+`maps/Chtown_All_Wards.pdf`. The output retains 69 printed voting areas in
+`voting_areas_municipal_fit` and 10 dissolved voting districts in
+`voting_districts_municipal_fit`, transformed to EPSG:2954 and clipped to the
+official Charlottetown municipal boundary. Added
+`schema/sql/036_charlottetown_wards.sql`, loaded
+`public."CHTWN_Voting_Areas"` and `public."CHTWN_Voting_Districts"`, and
+created indexed GIS-facing views
+`zoning.v_charlottetown_voting_areas` and
+`zoning.v_charlottetown_voting_districts`. QA found 0 invalid or empty
+features; the source map's unassigned municipal residual area is retained as a
+documented map-coverage limit.
 
 ## [2026-05-06] spatial | Parcel LiDAR metrics implemented
 
@@ -380,3 +421,44 @@ Linked the Charlottetown budget source area to the new cross-municipality budget
 ## [2026-07-07] budget | Three-year source profiling
 
 Profiled all 392 pages in the 2024/2025, 2025/2026, and 2026/2027 financial plans. Added raw page text, JSON/CSV page and table inventories, OCR fallback for rasterized 2024/2025 facility tables, a source-variation matrix, unresolved continuation queues, and representative tables for the schema spike.
+
+## [2026-08-05] zoning | July 2026 draft extraction and map fit
+
+Added the July 30, 2026 draft bylaw source-summary page. Extracted agenda pages 5-204 into a 200-page PDF, generated a matching normalized output family under `data/zoning/charlottetown-draft-2026-07-30`, validated v2 staged-PDF artifacts, started the local review server on port 3220, and generated municipal-boundary-fit Schedule A and Schedule C layers under `data/spatial/charlottetown`. The source-summary page records the exact retained review rows and the unresolved absence of C and EG Schedule A polygons.
+
+Corrected the staged PDF reviewer client to derive its document key from `/api/internal/pdf-inventory-review/documents` instead of the budget-pilot default. The July 2026 draft artifact, page-list, page-detail, and render-asset endpoints now return 200 through the local review UI.
+
+Added PostGIS comparison SQL for the original and updated draft parcel and zoning layers. The parcel comparison uses dissolved coverage because `parcel_candidate_id` is not stable across extractions; the zoning views retain raw H-to-HI normalization separately from substantive code changes and expose 1000 m² screening views plus QA metrics.
+
+Refined the zoning comparison to use updated-map shapes as the output geometry, exclude original Conservancy (`C`) shapes, and group intersections by updated feature and original zone code. Multiple original shapes with the same code now dissolve into one output row; different original codes remain separate.
+
+## [2026-08-05] zoning | Updated layer publication and comparison defaults
+
+Imported `data/zoning/charlottetown-draft-2026-07-30` as draft revision 13 with review markers retained under an explicit importer allow-review mode. Applied `schema/sql/035_charlottetown_updated_layers_and_revision.sql`: the registered parcel view now loads `CHTWN_Parcel_Map_Update`, the updated draft map is registered as a separate spatial layer and materialized view, the April draft map has an original-layer alias, and parcel zone assignment uses the updated map. Rebuilt the web image because the container serves its baked `/app/server.js`; zoning map endpoints now expose updated and original draft layers, and comparison endpoints/pages default to original bylaw versus updated draft with an original-draft versus updated-draft toggle.
+
+## [2026-08-06] spatial | Ward district topology cleanup
+
+Updated `scripts/extract-charlottetown-wards.py` to remove dissolved district interior rings below 1,000 m2 while retaining the two larger map-derived holes in districts 2 and 5. The clean output removes 35 source sliver holes totaling approximately 420.49 m2, retains 2 holes totaling approximately 92,579.36 m2, and preserves 10 valid district features and 69 unchanged voting-area features. Added `schema/sql/037_charlottetown_wards_topology_cleanup.sql`, refreshed `public."CHTWN_Voting_Districts"` and `zoning.v_charlottetown_voting_districts`, and documented the clean GeoPackage and QA summary in the ward-map source page.
+
+Applied a global polygonized coverage partition to the ward areas. The final 69 voting areas have zero pairwise overlap above 0.01 m2, zero area outside their owning district, and districts regenerated as exact unions of their corrected areas. Cross-district overlap faces were assigned deterministically to one area; only the two retained water holes remain. Added `schema/sql/038_charlottetown_wards_global_coverage.sql`, loaded the topology-corrected GeoPackage into both public ward tables, refreshed both GIS-facing views, and recorded the final QA summary.
+
+Applied the terminology correction: voting districts are now electoral wards, and voting areas are now polling divisions. Renamed the canonical GeoPackage layers, public tables, `zoning.spatial_layer` keys, GIS-facing materialized views, primary key fields, and generated summary labels. Added `schema/sql/039_charlottetown_ward_terminology.sql` and refreshed the PostGIS registrations.
+
+## [2026-08-07] zoning | Northern Heavy Industrial parcel review retracted
+
+Reviewed the apparent northern Heavy Industrial gaps and created temporary correction outputs, then removed those derived outputs after confirming the source update geometry was present and the issue was a missing QML category for `zone_code = 'HI'`. Source layers were preserved.
+
+## [2026-08-07] zoning | Comparison no-zone diagnosis
+
+The two GeoPackage comparison layers use civic-address points for point-in-polygon assignment. In PostGIS, the source CRS differs: civic addresses are EPSG:4326, while the zoning and parcel layers are EPSG:2954; any rebuild must transform address geometry to EPSG:2954. Across all 14,676 address points, direct transformed point joins produce 9 no-overlap original points, 95 no-overlap first-draft points, and 61 no-overlap updated-draft points. Most are boundary-placement effects: the nearest zoning boundary is within 1 m for 4/9 original, 71/95 first-draft, and 48/61 updated-draft points.
+
+`CHTWN_Parcel_Map_Update` still contains a semantically corrupted `fid=14`: valid geometry with approximately 5,435,748 m2, 33,234 vertices, and an extent spanning most of the zoning coverage. It is the nearest parcel for 52 of the 61 updated-draft no-overlap points and intersects all 18 updated-draft zoning features, so it must be excluded or repaired before parcel-based fallback assignment. Excluding fid 14, the nearest parcel intersects a zoning feature for all 9 original no-overlap points, 93/95 first-draft no-overlap points, and all 61 updated-draft no-overlap points. The two remaining first-draft gaps are PIDs 1046077 (440 ST PETERS RD) and 192187 (419 ST PETERS RD).
+
+## [2026-08-07] zoning | Safe parcel-fallback comparison rebuild
+
+Rebuilt `data/spatial/charlottetown/charlottetown-zoning-comparison-views.gpkg` using EPSG:4326-to-EPSG:2954 address transformation, direct point intersection first, and parcel fallback with `CHTWN_Parcel_Map_Update` fid 14 excluded. Added assignment-method, fallback parcel, and nearest-boundary diagnostic fields. The rebuilt `properties_original_vs_updated_draft_review` contains 1,488 records with no unresolved original or updated zones. The rebuilt `properties_first_vs_second_draft_zone_changes` contains 874 records; two first-draft zones remain unresolved because the source draft does not intersect the parcels for PIDs 1046077 and 192187. All output geometries are valid, address IDs are unique, and no fallback assigned fid 14. Refreshed both layers in the active QGIS project under `Zoning comparison views`.
+## [2026-08-07] zoning | First-draft unresolved property QA CSV
+
+Created `data/spatial/charlottetown/charlottetown-first-draft-unresolved-properties-qa.csv` with the two unresolved first-draft properties: PID 1046077 at 440 ST PETERS RD and PID 192187 at 419 ST PETERS RD. The report preserves comparison-layer assignment diagnostics and identifies both records for manual/source review.
+
+Added the user-supplied original-bylaw zoning values to the QA CSV as reported: `R-1L` for PID 1046077 and `MIXED-USE CORRIDOR ZONE` for PID 192187.

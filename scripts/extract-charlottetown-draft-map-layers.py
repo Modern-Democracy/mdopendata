@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import subprocess
+import argparse
 from collections import defaultdict
 from pathlib import Path
 
@@ -20,9 +21,12 @@ PDF_PATH = ROOT / "docs" / "charlottetown" / "charlottetown-zoning-bylaw-draft_2
 OUT_DIR = ROOT / "data" / "spatial" / "charlottetown"
 OUT_GPKG = OUT_DIR / "charlottetown-draft-map-layers-2026-04-09-municipal-fit.gpkg"
 SUMMARY_PATH = OUT_DIR / "charlottetown-draft-map-layers-2026-04-09-municipal-fit.summary.json"
+BOUNDARY_PATH: Path | None = None
 
 SCHEDULE_A_PAGE_INDEX = 196
 SCHEDULE_C_PAGE_INDEX = 198
+SCHEDULE_A_PAGE_NUMBER = SCHEDULE_A_PAGE_INDEX + 1
+SCHEDULE_C_PAGE_NUMBER = SCHEDULE_C_PAGE_INDEX + 1
 TARGET_CRS = "EPSG:2954"
 
 # Bboxes of the municipal map envelopes in PDF drawing coordinates. Each
@@ -35,6 +39,8 @@ SCHEDULE_C_TO_A_PDF_AFFINE = {
     "tx": 0.019,
     "ty": 1.235,
 }
+MAP_SCALE_X = 1.0
+MAP_SCALE_Y = 1.0
 
 ZONE_LEGEND = [
     ("RN", "Neighbourhood", (251, 248, 191)),
@@ -65,6 +71,24 @@ WETLAND_RGB = (225, 225, 225)
 
 
 def fetch_municipal_boundary() -> gpd.GeoDataFrame:
+    if BOUNDARY_PATH is not None:
+        boundary = gpd.read_file(BOUNDARY_PATH)
+        if boundary.empty:
+            raise RuntimeError(f"Municipal boundary file is empty: {BOUNDARY_PATH}")
+        if boundary.crs is None:
+            boundary = boundary.set_crs("EPSG:4326")
+        boundary = boundary.to_crs("EPSG:4326")
+        geometry = unary_union(boundary.geometry)
+        return gpd.GeoDataFrame(
+            [{
+                "source_layer": BOUNDARY_PATH.name,
+                "municipal_attribute": "municipal_name",
+                "municipal_name": "City of Charlottetown",
+                "geometry": geometry,
+            }],
+            geometry="geometry",
+            crs="EPSG:4326",
+        ).to_crs(TARGET_CRS)
     sql = """
 select st_asgeojson(geom, 9)
 from public."PEI_Municipal_Zones"
@@ -228,7 +252,7 @@ def transform_geom(geom, project_point):
 
 
 def in_map_area(rect) -> bool:
-    return rect is not None and rect.x0 < 946.5 and rect.x1 > 0 and rect.y0 < 775.8 and rect.y1 > 18.0
+    return rect is not None and rect.x0 < 946.5 * MAP_SCALE_X and rect.x1 > 0 and rect.y0 < 775.8 * MAP_SCALE_Y and rect.y1 > 18.0 * MAP_SCALE_Y
 
 
 def extract_zone_areas(page, project_point, boundary_geom) -> gpd.GeoDataFrame:
@@ -259,8 +283,13 @@ def extract_zone_areas(page, project_point, boundary_geom) -> gpd.GeoDataFrame:
                 "zone_name": name,
                 "legend_rgb": "#{:02x}{:02x}{:02x}".format(*legend_rgb),
                 "source_pdf": str(PDF_PATH.relative_to(ROOT)).replace("\\", "/"),
-                "source_page": 197,
-                "registration": "PDF Schedule A zoning colour envelope fitted to City of Charlottetown municipal boundary from PEI_Municipal_Zones.MUNICIPAL1",
+                "source_page": SCHEDULE_A_PAGE_NUMBER,
+                "registration": (
+                    "PDF Schedule A zoning colour envelope fitted to City of Charlottetown "
+                    f"municipal boundary from {BOUNDARY_PATH.name}.municipal_name"
+                    if BOUNDARY_PATH is not None
+                    else "PDF Schedule A zoning colour envelope fitted to City of Charlottetown municipal boundary from PEI_Municipal_Zones.MUNICIPAL1"
+                ),
                 "method": "direct extraction of filled PDF vector paths; clipped to official municipal boundary; draft QA required",
                 "area_m2": float(geom.area),
                 "geometry": geom,
@@ -285,13 +314,13 @@ def extract_wetlands(page, project_point, boundary_geom) -> gpd.GeoDataFrame:
                 rows.append(
                     {
                         "feature_type": "wetland_or_waterbody_cartographic_fill",
-                        "source_page": 197,
+                        "source_page": SCHEDULE_A_PAGE_NUMBER,
                         "method": "light grey non-angular fill extracted from Schedule A; excluded from parcel candidate polygonization",
                         "area_m2": float(clipped.area),
                         "geometry": clipped,
                     }
                 )
-    return gpd.GeoDataFrame(pd.DataFrame(rows), geometry="geometry", crs=TARGET_CRS)
+    return gpd.GeoDataFrame(rows, geometry="geometry", crs=TARGET_CRS) if rows else gpd.GeoDataFrame({"geometry": []}, geometry="geometry", crs=TARGET_CRS)
 
 
 def extract_linework(page, project_point, boundary_geom, source_page: int) -> gpd.GeoDataFrame:
@@ -313,7 +342,7 @@ def extract_linework(page, project_point, boundary_geom, source_page: int) -> gp
         rect = drawing.get("rect")
         if rgb(drawing.get("color")) != (0, 0, 0) or not in_map_area(rect):
             continue
-        if round(float(drawing.get("width") or 0), 3) not in {0.1, 0.25}:
+        if round(float(drawing.get("width") or 0), 3) not in {round(value * MAP_SCALE_X, 3) for value in (0.1, 0.25)}:
             continue
         for path in drawing_paths(drawing["items"]):
             if len(path) < 2:
@@ -337,7 +366,7 @@ def extract_linework(page, project_point, boundary_geom, source_page: int) -> gp
                             "geometry": part,
                         }
                     )
-    return gpd.GeoDataFrame(pd.DataFrame(rows), geometry="geometry", crs=TARGET_CRS)
+    return gpd.GeoDataFrame(rows, geometry="geometry", crs=TARGET_CRS) if rows else gpd.GeoDataFrame({"geometry": []}, geometry="geometry", crs=TARGET_CRS)
 
 
 def parcel_candidates(
@@ -395,7 +424,7 @@ def parcel_candidates(
                 "geometry": geom,
             }
         )
-    return gpd.GeoDataFrame(pd.DataFrame(rows), geometry="geometry", crs=TARGET_CRS)
+    return gpd.GeoDataFrame(rows, geometry="geometry", crs=TARGET_CRS) if rows else gpd.GeoDataFrame({"geometry": []}, geometry="geometry", crs=TARGET_CRS)
 
 
 def write_layer(gdf: gpd.GeoDataFrame, layer: str, append: bool = True) -> None:
@@ -410,10 +439,50 @@ def write_layer(gdf: gpd.GeoDataFrame, layer: str, append: bool = True) -> None:
 
 
 def main() -> None:
+    global BOUNDARY_PATH, MAP_SCALE_X, MAP_SCALE_Y, PDF_PATH, OUT_DIR, OUT_GPKG, SUMMARY_PATH, SCHEDULE_A_MAP_FIT_BOUNDS, SCHEDULE_C_TO_A_PDF_AFFINE, SCHEDULE_A_PAGE_NUMBER, SCHEDULE_C_PAGE_NUMBER
+    parser = argparse.ArgumentParser(description="Extract Charlottetown draft zoning map layers.")
+    parser.add_argument("--pdf", type=Path, default=PDF_PATH)
+    parser.add_argument("--out-gpkg", type=Path, default=OUT_GPKG)
+    parser.add_argument("--summary", type=Path, default=SUMMARY_PATH)
+    parser.add_argument("--boundary", type=Path, help="Optional municipal boundary GeoJSON; otherwise query PostGIS.")
+    args = parser.parse_args()
+    PDF_PATH = args.pdf.resolve()
+    OUT_GPKG = args.out_gpkg.resolve()
+    SUMMARY_PATH = args.summary.resolve()
+    BOUNDARY_PATH = args.boundary.resolve() if args.boundary else None
+    OUT_DIR = OUT_GPKG.parent
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     if OUT_GPKG.exists():
         OUT_GPKG.unlink()
 
+    doc = fitz.open(PDF_PATH)
+
+    schedule_a_index = next(
+        index for index, page in enumerate(doc)
+        if "SCHEDULE A" in (page.get_text() or "").upper()
+        and "DRAFT ZONING" in (page.get_text() or "").upper()
+    )
+    schedule_c_index = next(
+        index for index, page in enumerate(doc)
+        if "SCHEDULE C" in (page.get_text() or "").upper()
+        and "STREET HIERARCHY" in (page.get_text() or "").upper()
+    )
+    SCHEDULE_A_PAGE_NUMBER = schedule_a_index + 1
+    SCHEDULE_C_PAGE_NUMBER = schedule_c_index + 1
+    schedule_a = doc[schedule_a_index]
+    schedule_c = doc[schedule_c_index]
+
+    MAP_SCALE_X = schedule_a.rect.width / 1224.0
+    MAP_SCALE_Y = schedule_a.rect.height / 792.0
+    SCHEDULE_A_MAP_FIT_BOUNDS = tuple(
+        value * (MAP_SCALE_X if index % 2 == 0 else MAP_SCALE_Y)
+        for index, value in enumerate(SCHEDULE_A_MAP_FIT_BOUNDS)
+    )
+    SCHEDULE_C_TO_A_PDF_AFFINE = {
+        **SCHEDULE_C_TO_A_PDF_AFFINE,
+        "tx": SCHEDULE_C_TO_A_PDF_AFFINE["tx"] * MAP_SCALE_X,
+        "ty": SCHEDULE_C_TO_A_PDF_AFFINE["ty"] * MAP_SCALE_Y,
+    }
     boundary = fetch_municipal_boundary()
     boundary_geom = boundary.geometry.iloc[0]
     project_schedule_a_point = build_transform(boundary, SCHEDULE_A_MAP_FIT_BOUNDS)
@@ -421,15 +490,11 @@ def main() -> None:
         schedule_c_to_schedule_a_pdf_point,
         project_schedule_a_point,
     )
-    doc = fitz.open(PDF_PATH)
-
-    schedule_a = doc[SCHEDULE_A_PAGE_INDEX]
-    schedule_c = doc[SCHEDULE_C_PAGE_INDEX]
 
     zones = extract_zone_areas(schedule_a, project_schedule_a_point, boundary_geom)
     wetlands = extract_wetlands(schedule_a, project_schedule_a_point, boundary_geom)
-    linework_a = extract_linework(schedule_a, project_schedule_a_point, boundary_geom, 197)
-    linework_c = extract_linework(schedule_c, project_schedule_c_point, boundary_geom, 199)
+    linework_a = extract_linework(schedule_a, project_schedule_a_point, boundary_geom, SCHEDULE_A_PAGE_NUMBER)
+    linework_c = extract_linework(schedule_c, project_schedule_c_point, boundary_geom, SCHEDULE_C_PAGE_NUMBER)
     parcels_a = parcel_candidates(linework_a, boundary, zones, "schedule_a_zoning")
     parcels_c = parcel_candidates(linework_c, boundary, None, "schedule_c_street_hierarchy")
 
@@ -439,14 +504,16 @@ def main() -> None:
     write_layer(parcels_c, "schedule_c_parcel_candidates_municipal_fit")
     write_layer(linework_c, "schedule_c_linework_municipal_fit")
     write_layer(wetlands, "schedule_a_wetlands_excluded_from_parcels")
-    write_layer(boundary, "municipal_boundary_reference")
+    write_layer(boundary, "municipal_boundary_reference", append=False)
 
+    boundary_layer_name = BOUNDARY_PATH.name if BOUNDARY_PATH is not None else "PEI_Municipal_Zones"
+    boundary_attribute = "municipal_name" if BOUNDARY_PATH is not None else "MUNICIPAL1"
     summary = {
         "output": str(OUT_GPKG.relative_to(ROOT)).replace("\\", "/"),
         "target_crs": TARGET_CRS,
         "source_pdf": str(PDF_PATH.relative_to(ROOT)).replace("\\", "/"),
-        "municipal_boundary_layer": "PEI_Municipal_Zones",
-        "municipal_boundary_attribute": "MUNICIPAL1",
+        "municipal_boundary_layer": boundary_layer_name,
+        "municipal_boundary_attribute": boundary_attribute,
         "municipal_boundary_value": "City of Charlottetown",
         "map_fit_bounds_pdf": {
             "schedule_a": SCHEDULE_A_MAP_FIT_BOUNDS,

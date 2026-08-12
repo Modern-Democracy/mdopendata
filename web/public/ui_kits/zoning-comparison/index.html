@@ -322,12 +322,12 @@ function CitationList({ title, sections }) {
   );
 }
 
-function ComparisonRows({ rows }) {
+function ComparisonRows({ rows, leftLabel = 'Original bylaw', rightLabel = 'Updated draft bylaw' }) {
   return (
     <div className="compare-grid">
-      <div className="col-head current"><span className="dot" style={{background:'var(--brick)'}}></span><span className="name">Current bylaw</span><span className="sub">in force</span></div>
+      <div className="col-head current"><span className="dot" style={{background:'var(--brick)'}}></span><span className="name">{leftLabel}</span><span className="sub">comparison source</span></div>
       <div className="col-head label"><span className="name">Field</span></div>
-      <div className="col-head draft"><span className="dot" style={{background:'var(--ochre)'}}></span><span className="name">Draft bylaw</span><span className="sub">2026 draft</span></div>
+      <div className="col-head draft"><span className="dot" style={{background:'var(--ochre)'}}></span><span className="name">{rightLabel}</span><span className="sub">July 30 2026 update</span></div>
       {rows.map((row, index) => (
         <React.Fragment key={`${row.label}-${index}`}>
           <div className={`diff-cell current ${row.current == null ? 'empty' : ''} ${row.numericChanged ? 'numeric-changed' : ''}`} data-label={row.label}>
@@ -370,6 +370,7 @@ function App() {
   const [comparison, setComparison] = useState(null);
   const [status, setStatus] = useState(pid ? 'Loading zoning comparison.' : 'No PID was supplied. Start from parcel lookup or city view.');
   const [viewMode, setViewMode] = useState('raw');
+  const [comparisonMode, setComparisonMode] = useState('current-updated');
 
   useEffect(() => { lucide.createIcons(); });
 
@@ -378,7 +379,7 @@ function App() {
     let cancelled = false;
     async function loadComparison() {
       try {
-        const response = await fetch(`/api/zoning-comparison/${encodeURIComponent(pid)}`);
+        const response = await fetch(`/api/zoning-comparison/${encodeURIComponent(pid)}?mode=${encodeURIComponent(comparisonMode)}`);
         if (!response.ok) {
           throw new Error(`Zoning comparison failed with HTTP ${response.status}.`);
         }
@@ -395,7 +396,7 @@ function App() {
     }
     loadComparison();
     return () => { cancelled = true; };
-  }, [pid]);
+  }, [pid, comparisonMode]);
 
   const counts = useMemo(() => {
     const rows = comparison?.rows || [];
@@ -448,14 +449,18 @@ function App() {
                   <button type="button" className={viewMode === 'raw' ? 'active' : ''} onClick={() => setViewMode('raw')}>Raw bylaw</button>
                   <button type="button" className={viewMode === 'structured' ? 'active' : ''} onClick={() => setViewMode('structured')}>Structured data</button>
                 </div>
+                <div className="view-toggle" aria-label="Bylaw pair">
+                  <button type="button" className={comparisonMode === 'current-updated' ? 'active' : ''} onClick={() => setComparisonMode('current-updated')}>Original bylaw vs updated draft</button>
+                  <button type="button" className={comparisonMode === 'original-updated' ? 'active' : ''} onClick={() => setComparisonMode('original-updated')}>Original draft vs updated draft</button>
+                </div>
                 <div style={{fontFamily:'var(--font-mono)', fontSize:12, color:'var(--fg-3)'}}>Resolution: {comparison.resolution?.status || 'pending'}</div>
               </div>
             </div>
-            <ComparisonRows rows={comparison.rows} />
+            <ComparisonRows rows={comparison.rows} leftLabel={comparison.comparison?.left} rightLabel={comparison.comparison?.right} />
             {viewMode === 'raw' && (
               <div className="citation-grid">
-                <CitationList title="Current citations" sections={comparison.citations?.current || []} />
-                <CitationList title="Draft citations" sections={comparison.citations?.draft || []} />
+                <CitationList title={comparison.comparison?.left || 'Original bylaw'} sections={comparison.citations?.current || []} />
+                <CitationList title={comparison.comparison?.right || 'Updated draft bylaw'} sections={comparison.citations?.draft || []} />
               </div>
             )}
             {viewMode === 'structured' && <StructuredView structuredData={comparison.structuredData} />}

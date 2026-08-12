@@ -222,6 +222,7 @@ function App() {
   const [status, setStatus] = useState('Loading provisions comparison.');
   const [selectedPartId, setSelectedPartId] = useState(null);
   const [viewMode, setViewMode] = useState('raw');
+  const [comparisonMode, setComparisonMode] = useState('current-updated');
 
   useEffect(() => { lucide.createIcons(); });
 
@@ -229,7 +230,7 @@ function App() {
     let cancelled = false;
     async function loadComparison() {
       try {
-        const response = await fetch('/api/provisions-comparison');
+        const response = await fetch(`/api/provisions-comparison?mode=${encodeURIComponent(comparisonMode)}`);
         if (!response.ok) throw new Error(`Provisions comparison failed with HTTP ${response.status}.`);
         const nextPayload = await response.json();
         if (!cancelled) {
@@ -243,7 +244,7 @@ function App() {
     }
     loadComparison();
     return () => { cancelled = true; };
-  }, []);
+  }, [comparisonMode]);
 
   const parts = payload?.parts || [];
   const selectedPart = useMemo(() => parts.find((part) => part.partId === selectedPartId) || parts[0], [parts, selectedPartId]);
@@ -261,6 +262,10 @@ function App() {
           <div className="view-toggle" aria-label="Comparison view">
             <button type="button" className={viewMode === 'raw' ? 'active' : ''} onClick={() => setViewMode('raw')}>Raw bylaw</button>
             <button type="button" className={viewMode === 'structured' ? 'active' : ''} onClick={() => setViewMode('structured')}>Structured data</button>
+          </div>
+          <div className="view-toggle" aria-label="Bylaw pair">
+            <button type="button" className={comparisonMode === 'current-updated' ? 'active' : ''} onClick={() => setComparisonMode('current-updated')}>Original bylaw vs updated draft</button>
+            <button type="button" className={comparisonMode === 'original-updated' ? 'active' : ''} onClick={() => setComparisonMode('original-updated')}>Original draft vs updated draft</button>
           </div>
         </div>
         {!payload && <div className="status-card">{status}</div>}

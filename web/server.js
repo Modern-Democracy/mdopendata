@@ -31,48 +31,32 @@ const pdfInventoryReviewLoopbackBind = ["127.0.0.1", "::1", "localhost"].include
   host.toLowerCase(),
 );
 const pdfInventoryReviewEnabled = pdfInventoryReviewRequested && !demoMode && pdfInventoryReviewLoopbackBind;
-const pdfInventoryReviewDocumentKey = "ctown-budget-2026-2027";
-const pdfInventoryReviewArtifactPath = path.join(
+const pdfInventoryReviewDocumentKey = process.env.PDF_INVENTORY_REVIEW_DOCUMENT_KEY || "ctown-budget-2026-2027";
+const pdfInventoryReviewArtifactRoot = path.resolve(
   repoRoot,
-  "data",
-  "budget",
-  "charlottetown",
-  "2026-2027",
-  "staged-pdf",
+  process.env.PDF_INVENTORY_REVIEW_ARTIFACT_ROOT || "data/budget/charlottetown/2026-2027/staged-pdf",
+);
+const pdfInventoryReviewWorkspace = path.join(
+  pdfInventoryReviewArtifactRoot,
   `v${pdfInventoryReviewSchemaVersion}`,
+);
+const pdfInventoryReviewArtifactPath = path.join(
+  pdfInventoryReviewWorkspace,
   "stage-0",
   "source-evidence.json",
 );
 const pdfInventoryReviewBlockArtifactPath = path.join(
-  repoRoot,
-  "data",
-  "budget",
-  "charlottetown",
-  "2026-2027",
-  "staged-pdf",
-  `v${pdfInventoryReviewSchemaVersion}`,
+  pdfInventoryReviewWorkspace,
   "stage-1",
   "block-inventory.json",
 );
 const pdfInventoryReviewDecisionArtifactPath = path.join(
-  repoRoot,
-  "data",
-  "budget",
-  "charlottetown",
-  "2026-2027",
-  "staged-pdf",
-  `v${pdfInventoryReviewSchemaVersion}`,
+  pdfInventoryReviewWorkspace,
   "review",
   "review-decisions.json",
 );
 const pdfInventoryReviewParityArtifactPath = path.join(
-  repoRoot,
-  "data",
-  "budget",
-  "charlottetown",
-  "2026-2027",
-  "staged-pdf",
-  "v2",
+  pdfInventoryReviewWorkspace,
   "phase-7",
   "parity-report.json",
 );
@@ -183,6 +167,22 @@ const pool = new Pool(process.env.DATABASE_URL
       user: process.env.PGUSER || "mdopendata",
       password: process.env.PGPASSWORD || "mdopendata_dev",
     });
+
+const zoningParcelView = "zoning.v_charlottetown_parcel_map";
+const currentZoningView = "zoning.v_charlottetown_current_zoning_boundaries";
+const updatedDraftZoningView = "zoning.v_charlottetown_draft_zoning_boundaries_update";
+const originalDraftZoningView = "zoning.v_charlottetown_draft_zoning_boundaries_original";
+const currentZoningRoot = "data/zoning/charlottetown/";
+const originalDraftZoningRoot = "data/zoning/charlottetown-draft/";
+const updatedDraftZoningRoot = "data/zoning/charlottetown-draft-2026-07-30/";
+
+function draftVariant(value) {
+  return String(value || "updated").toLowerCase() === "original" ? "original" : "updated";
+}
+
+function draftViewForVariant(value) {
+  return draftVariant(value) === "original" ? originalDraftZoningView : updatedDraftZoningView;
+}
 
 function toStringValue(value) {
   return value === null || value === undefined ? "" : String(value);
@@ -1839,9 +1839,11 @@ async function loadZoneSections(zoneCode, sourceKind) {
   if (!zoneCode) {
     return [];
   }
-  const sourcePathPattern = sourceKind === "draft"
-    ? "data/zoning/charlottetown-draft/%"
-    : "data/zoning/charlottetown/%";
+  const sourcePathPattern = sourceKind === "draft-original"
+    ? `${originalDraftZoningRoot}%`
+    : sourceKind === "draft"
+      ? `${updatedDraftZoningRoot}%`
+      : `${currentZoningRoot}%`;
   const { rows } = await pool.query(
     `
     SELECT
@@ -2709,9 +2711,11 @@ async function loadZoneStructuredFacts(zoneCode, sourceKind, visitedZoneCodes = 
   }
   const nextVisitedZoneCodes = new Set(visitedZoneCodes);
   nextVisitedZoneCodes.add(`${sourceKind}:${zoneCode}`);
-  const zonePath = sourceKind === "draft"
-    ? `data/zoning/charlottetown-draft/zones/${zoneCode.toLowerCase()}.json`
-    : `data/zoning/charlottetown/zones/${zoneCode.toLowerCase()}.json`;
+  const zonePath = sourceKind === "draft-original"
+    ? `${originalDraftZoningRoot}zones/${zoneCode.toLowerCase()}.json`
+    : sourceKind === "draft"
+      ? `${updatedDraftZoningRoot}zones/${zoneCode.toLowerCase()}.json`
+      : `${currentZoningRoot}zones/${zoneCode.toLowerCase()}.json`;
 
   const [factsResult, clausesResult] = await Promise.all([
     pool.query(
@@ -2851,31 +2855,38 @@ function humanizeKey(value) {
     .replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
-async function loadZoningComparisonByPid(pid) {
+async function loadZoningComparisonByPid(pid, mode = "current-updated") {
   const parcel = await loadParcelByPid(pid);
   if (!parcel) {
     return null;
   }
 
-  const currentZone = parcel.zones.current;
+  const compareDrafts = String(mode || "").toLowerCase() === "original-updated";
+  const currentZone = compareDrafts ? parcel.zones.draftOriginal : parcel.zones.current;
   const draftZone = parcel.zones.draft;
+  const currentSourceKind = compareDrafts ? "draft-original" : "current";
   const currentLookupCode = currentZone?.bylawZoneCode || currentZone?.normalizedCode || currentZone?.code;
   const draftLookupCode = draftZone?.bylawZoneCode || draftZone?.normalizedCode || draftZone?.code;
   let [currentSections, draftSections] = await Promise.all([
-    loadZoneSections(currentLookupCode, "current"),
+    loadZoneSections(currentLookupCode, currentSourceKind),
     loadZoneSections(draftLookupCode, "draft"),
   ]);
   [currentSections, draftSections] = await Promise.all([
-    attachReferencedSections(currentSections, currentLookupCode, "current"),
+    attachReferencedSections(currentSections, currentLookupCode, currentSourceKind),
     attachReferencedSections(draftSections, draftLookupCode, "draft"),
   ]);
   const [currentStructured, draftStructured] = await Promise.all([
-    loadZoneStructuredFacts(currentLookupCode, "current"),
+    loadZoneStructuredFacts(currentLookupCode, currentSourceKind),
     loadZoneStructuredFacts(draftLookupCode, "draft"),
   ]);
 
   return {
     pid,
+    comparison: {
+      mode: compareDrafts ? "original-updated" : "current-updated",
+      left: compareDrafts ? "Original draft bylaw" : "Original bylaw",
+      right: "Updated draft bylaw",
+    },
     address: parcel.address,
     parcel: parcel.parcel,
     zones: parcel.zones,
@@ -2899,7 +2910,7 @@ async function loadZoningComparisonByPid(pid) {
       draft: draftSections,
       status: currentSections.length || draftSections.length ? "available" : "pending",
       note: currentSections.length || draftSections.length
-        ? "Zone section citations are linked by matched zone code."
+        ? `Zone section citations are linked by matched zone code (${compareDrafts ? "original draft to updated draft" : "original bylaw to updated draft"}).`
         : "Rule-level comparison is pending because no zone-section citations matched the parcel zones.",
     },
     structuredData: buildStructuredComparison(currentStructured, draftStructured),
@@ -3095,19 +3106,22 @@ async function loadParcelRestrictionBuffers(pid) {
   };
 }
 
-async function loadProvisionsComparison() {
+async function loadProvisionsComparison(variant = "updated") {
+  const selectedVariant = draftVariant(variant);
+  const draftRoot = updatedDraftZoningRoot;
+  const leftRoot = selectedVariant === "original" ? originalDraftZoningRoot : currentZoningRoot;
   const { rows: partRows } = await pool.query(`
     WITH part_order(repo_relpath, part_number, display_title, display_order) AS (
       VALUES
-        ('data/zoning/charlottetown-draft/administration.json', 'PART 1', 'Administration & Operation', 1),
-        ('data/zoning/charlottetown-draft/permit-applications-processes.json', 'PART 2', 'Permit Applications & Processes', 2),
-        ('data/zoning/charlottetown-draft/general-provisions-buildings-structures.json', 'PART 3', 'General Provisions for Buildings & Structures', 3),
-        ('data/zoning/charlottetown-draft/general-provisions-land-use.json', 'PART 4', 'General Provisions for Land Use', 4),
-        ('data/zoning/charlottetown-draft/general-provisions-lots-site-design.json', 'PART 5', 'General Provisions for Lots & Site Design', 5),
-        ('data/zoning/charlottetown-draft/design-standards-500-lot-area.json', 'PART 6', 'Design Standards for 500 Lot Area', 6),
-        ('data/zoning/charlottetown-draft/general-provisions-subdividing-land.json', 'PART 7', 'General Provisions Subdividing Land', 7),
-        ('data/zoning/charlottetown-draft/general-provisions-parking.json', 'PART 8', 'General Provisions for Parking', 8),
-        ('data/zoning/charlottetown-draft/general-provisions-signage.json', 'PART 9', 'General Provisions For Signage', 9)
+        ('${draftRoot}administration.json', 'PART 1', 'Administration & Operation', 1),
+        ('${draftRoot}permit-applications-processes.json', 'PART 2', 'Permit Applications & Processes', 2),
+        ('${draftRoot}general-provisions-buildings-structures.json', 'PART 3', 'General Provisions for Buildings & Structures', 3),
+        ('${draftRoot}general-provisions-land-use.json', 'PART 4', 'General Provisions for Land Use', 4),
+        ('${draftRoot}general-provisions-lots-site-design.json', 'PART 5', 'General Provisions for Lots & Site Design', 5),
+        ('${draftRoot}design-standards-500-lot-area.json', 'PART 6', 'Design Standards for 500 Lot Area', 6),
+        ('${draftRoot}general-provisions-subdividing-land.json', 'PART 7', 'General Provisions Subdividing Land', 7),
+        ('${draftRoot}general-provisions-parking.json', 'PART 8', 'General Provisions for Parking', 8),
+        ('${draftRoot}general-provisions-signage.json', 'PART 9', 'General Provisions For Signage', 9)
     )
     SELECT
       bp.bylaw_part_id,
@@ -3128,15 +3142,20 @@ async function loadProvisionsComparison() {
     ORDER BY po.display_order
   `);
 
-  const parts = await Promise.all(partRows.map(loadProvisionsPartComparison));
+  const parts = await Promise.all(partRows.map((partRow) => loadProvisionsPartComparison(partRow, leftRoot)));
   const pairCount = parts.reduce((total, part) => total + part.structuredPairs.length, 0);
   const changedCount = parts.reduce(
     (total, part) => total + part.structuredPairs.filter((pair) => pair.rows.some((row) => row.status === "changed")).length,
     0,
   );
   return {
-    source: "zoning.bylaw_part, zoning.section, zoning.section_equivalence",
-    scope: "draft non-zone parts 1 through 9 with matched current sections",
+    source: "zoning.bylaw_part, zoning.section, source_file",
+    comparison: {
+      mode: selectedVariant === "original" ? "original-updated" : "current-updated",
+      left: selectedVariant === "original" ? "Original draft bylaw" : "Original bylaw",
+      right: "Updated draft bylaw",
+    },
+    scope: "non-zone parts 1 through 9 paired by document type and source order",
     generatedAt: new Date().toISOString(),
     summary: {
       parts: parts.length,
@@ -6450,15 +6469,33 @@ async function loadHelpContext(contextKey) {
   }
 }
 
-async function loadProvisionsPartComparison(partRow) {
+async function loadProvisionsPartComparison(partRow, leftRoot = currentZoningRoot) {
   const draftSections = await loadSectionsByPartId(partRow.bylaw_part_id);
+  const currentPath = `${leftRoot}${partRow.repo_relpath.split("/").at(-1)}`;
   const { rows: pairRows } = await pool.query(`
+    WITH current_sections AS (
+      SELECT s.*, row_number() OVER (
+        PARTITION BY COALESCE(s.document_type, '') ORDER BY s.source_order, s.section_id
+      ) AS section_rank
+      FROM zoning.section s
+      JOIN zoning.source_file sf ON sf.source_file_id = s.source_file_id
+      WHERE s.is_active AND sf.is_active AND sf.repo_relpath = $1
+        AND COALESCE(s.document_type, '') <> 'zone'
+    ), draft_sections AS (
+      SELECT s.*, row_number() OVER (
+        PARTITION BY COALESCE(s.document_type, '') ORDER BY s.source_order, s.section_id
+      ) AS section_rank
+      FROM zoning.section s
+      JOIN zoning.source_file sf ON sf.source_file_id = s.source_file_id
+      WHERE s.is_active AND sf.is_active AND sf.repo_relpath = $2
+        AND COALESCE(s.document_type, '') <> 'zone'
+    )
     SELECT
-      se.section_equivalence_id,
-      se.equivalence_type,
-      se.assigned_topic,
-      se.title_similarity,
-      se.text_similarity,
+      NULL::bigint AS section_equivalence_id,
+      NULL::text AS equivalence_type,
+      NULL::text AS assigned_topic,
+      NULL::numeric AS title_similarity,
+      NULL::numeric AS text_similarity,
       cs.section_id AS current_section_id,
       cs.section_label_raw AS current_section_label,
       cs.section_title_raw AS current_section_title,
@@ -6468,21 +6505,16 @@ async function loadProvisionsPartComparison(partRow) {
       ds.section_label_raw AS draft_section_label,
       ds.section_title_raw AS draft_section_title,
       ds.document_type AS draft_document_type,
-      ds.source_order AS draft_source_order
-    FROM zoning.section_equivalence se
-    JOIN zoning.section cs
-      ON cs.section_id = se.current_section_id
-    JOIN zoning.section ds
-      ON ds.section_id = se.draft_section_id
-    WHERE se.review_status = 'accepted'
-      AND cs.is_active
-      AND ds.is_active
-      AND COALESCE(ds.document_type, '') <> 'zone'
-      AND ds.bylaw_part_id = $1
-    ORDER BY ds.source_order, cs.source_order, se.section_equivalence_id
-  `, [partRow.bylaw_part_id]);
+      ds.source_order AS draft_source_order,
+      COALESCE(cs.section_rank, ds.section_rank) AS pair_rank
+    FROM current_sections cs
+    FULL JOIN draft_sections ds
+      ON ds.document_type IS NOT DISTINCT FROM cs.document_type
+     AND ds.section_rank = cs.section_rank
+    ORDER BY pair_rank, current_source_order NULLS LAST, draft_source_order NULLS LAST
+  `, [currentPath, partRow.repo_relpath]);
 
-  const pairs = await Promise.all(pairRows.map(async (row) => {
+  const pairs = await Promise.all(pairRows.map(async (row, index) => {
     const [currentSection, draftSection] = await Promise.all([
       loadSection(row.current_section_id),
       loadSection(row.draft_section_id),
@@ -6490,7 +6522,7 @@ async function loadProvisionsPartComparison(partRow) {
     const currentText = sectionComparableText(currentSection);
     const draftText = sectionComparableText(draftSection);
     return {
-      sectionEquivalenceId: Number(row.section_equivalence_id),
+      sectionEquivalenceId: `${partRow.bylaw_part_id}-${index + 1}`,
       topic: compactText(row.assigned_topic),
       equivalenceType: compactText(row.equivalence_type),
       titleSimilarity: row.title_similarity === null ? null : Number(row.title_similarity),
@@ -6751,6 +6783,7 @@ async function loadCurrentZoningGeoJson(bbox, limit, filters = {}) {
 }
 
 async function loadDraftZoningGeoJson(bbox, limit, filters = {}) {
+  const draftView = draftViewForVariant(filters.variant);
   const params = [limit];
   const where = [];
   if (bbox) {
@@ -6784,7 +6817,7 @@ async function loadDraftZoningGeoJson(bbox, limit, filters = {}) {
         z.validation_reason,
         ST_Area(z.geom) AS area_m2,
         ${geomExpression} AS geom
-      FROM zoning.v_charlottetown_draft_zoning_boundaries z
+      FROM ${draftView} z
       ${whereClause}
       ORDER BY z.spatial_feature_id
       LIMIT $1
@@ -6804,7 +6837,7 @@ async function loadDraftZoningGeoJson(bbox, limit, filters = {}) {
           'areaM2', area_m2,
           'attributes', attributes,
           'source', jsonb_build_object(
-            'table', 'zoning.v_charlottetown_draft_zoning_boundaries',
+            'table', '${draftView}',
             'spatialFeatureId', spatial_feature_id,
             'featureKey', feature_key,
             'isValid', is_valid,
@@ -6824,14 +6857,14 @@ async function loadDraftZoningGeoJson(bbox, limit, filters = {}) {
     type: "FeatureCollection",
     features: rows[0].features,
     metadata: {
-      source: "zoning.v_charlottetown_draft_zoning_boundaries",
+      source: draftView,
       bbox,
       limit,
       count: rows[0].features.length,
       geometrySrid: 4326,
       sourceSrid: 2954,
       detail: filters.detail || "detail",
-      filters: { zone: filters.zone || null },
+      filters: { zone: filters.zone || null, variant: draftVariant(filters.variant) },
     },
   };
 }
@@ -7472,7 +7505,7 @@ async function loadParcelByPid(pid) {
     ),
     draft_zone AS (
       SELECT
-        'zoning.v_charlottetown_draft_zoning_boundaries' AS source_table,
+        '${updatedDraftZoningView}' AS source_table,
         z.spatial_feature_id,
         z.feature_key,
         COALESCE(z.bylaw_zone_code, z.zone_code_normalized, z.zone_code_raw, z.zone_code) AS zone_code,
@@ -7484,7 +7517,26 @@ async function loadParcelByPid(pid) {
         z.validation_reason,
         ST_Area(ST_Intersection(z.geom, p.geom)) AS overlap_area_m2
       FROM selected_parcel p
-      JOIN zoning.v_charlottetown_draft_zoning_boundaries z
+      JOIN ${updatedDraftZoningView} z
+        ON ST_Intersects(z.geom, p.geom)
+      ORDER BY overlap_area_m2 DESC NULLS LAST, z.spatial_feature_id
+      LIMIT 1
+    ),
+    original_draft_zone AS (
+      SELECT
+        '${originalDraftZoningView}' AS source_table,
+        z.spatial_feature_id,
+        z.feature_key,
+        COALESCE(z.bylaw_zone_code, z.zone_code_normalized, z.zone_code_raw, z.zone_code) AS zone_code,
+        z.zone_name,
+        z.zone_code_normalized,
+        z.bylaw_zone_code,
+        z.match_method,
+        z.is_valid,
+        z.validation_reason,
+        ST_Area(ST_Intersection(z.geom, p.geom)) AS overlap_area_m2
+      FROM selected_parcel p
+      JOIN ${originalDraftZoningView} z
         ON ST_Intersects(z.geom, p.geom)
       ORDER BY overlap_area_m2 DESC NULLS LAST, z.spatial_feature_id
       LIMIT 1
@@ -7536,7 +7588,8 @@ async function loadParcelByPid(pid) {
           FROM selected_parcel
         ),
         'current_zone', (SELECT to_jsonb(current_zone) FROM current_zone),
-        'draft_zone', (SELECT to_jsonb(draft_zone) FROM draft_zone)
+        'draft_zone', (SELECT to_jsonb(draft_zone) FROM draft_zone),
+        'original_draft_zone', (SELECT to_jsonb(original_draft_zone) FROM original_draft_zone)
       ) AS payload
     `,
     [pid],
@@ -7575,6 +7628,7 @@ async function loadParcelByPid(pid) {
         return zone;
       })(),
       draft: mapZoneRow(payload.draft_zone),
+      draftOriginal: mapZoneRow(payload.original_draft_zone),
     },
     resolution: {
       method: payload.parcel ? "address_pid_to_point_in_parcel" : "address_pid_only",
@@ -7584,9 +7638,10 @@ async function loadParcelByPid(pid) {
     source: {
       freshness: "database",
       addressTable: "zoning.v_charlottetown_civic_addresses",
-      parcelTable: "zoning.v_charlottetown_parcel_map",
-      currentZoningTable: "zoning.v_charlottetown_current_zoning_boundaries",
-      draftZoningTable: "zoning.v_charlottetown_draft_zoning_boundaries",
+      parcelTable: zoningParcelView,
+      currentZoningTable: currentZoningView,
+      draftZoningTable: updatedDraftZoningView,
+      originalDraftZoningTable: originalDraftZoningView,
     },
   };
 }
@@ -8278,6 +8333,23 @@ const server = createServer(async (request, response) => {
       await sendGeoJson(response, await loadDraftZoningGeoJson(bbox, limit, {
         zone: normalizeZoneFilter(url.searchParams.get("zone")),
         detail: normalizeDetail(url.searchParams.get("detail")),
+        variant: draftVariant(url.searchParams.get("variant")),
+      }));
+      return;
+    }
+
+    if (url.pathname === "/api/zoning/draft-original.geojson") {
+      if (request.method !== "GET") {
+        response.writeHead(405);
+        response.end("Method not allowed");
+        return;
+      }
+      const bbox = parseBbox(url.searchParams.get("bbox"));
+      const limit = normalizeLimit(url.searchParams.get("limit"), 1000, 50000);
+      await sendGeoJson(response, await loadDraftZoningGeoJson(bbox, limit, {
+        zone: normalizeZoneFilter(url.searchParams.get("zone")),
+        detail: normalizeDetail(url.searchParams.get("detail")),
+        variant: "original",
       }));
       return;
     }
@@ -8335,7 +8407,10 @@ const server = createServer(async (request, response) => {
         return;
       }
       const pid = decodeURIComponent(comparisonMatch[1]).trim();
-      const comparison = await loadZoningComparisonByPid(pid);
+      const mode = url.searchParams.get("mode") === "original-updated"
+        ? "original-updated"
+        : "current-updated";
+      const comparison = await loadZoningComparisonByPid(pid, mode);
       if (!comparison) {
         response.writeHead(404, { "content-type": "application/json; charset=utf-8" });
         response.end(JSON.stringify({ error: "Parcel PID not found.", pid }));
@@ -8351,7 +8426,8 @@ const server = createServer(async (request, response) => {
         response.end("Method not allowed");
         return;
       }
-      await sendJson(response, await loadProvisionsComparison());
+      const provisionMode = url.searchParams.get("mode") === "original-updated" ? "original" : "updated";
+      await sendJson(response, await loadProvisionsComparison(provisionMode));
       return;
     }
 

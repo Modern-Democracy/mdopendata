@@ -4,6 +4,7 @@ import importlib.util
 import json
 import re
 import shutil
+import argparse
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
@@ -480,6 +481,19 @@ def run_raw_extraction() -> None:
 
 
 def main() -> None:
+    global OUT, SOURCE_REL
+    parser = argparse.ArgumentParser(description="Regenerate normalized Charlottetown draft zoning outputs.")
+    parser.add_argument("--source", type=Path, default=ROOT / SOURCE_REL)
+    parser.add_argument("--out", type=Path, default=OUT)
+    parser.add_argument("--draft-date", default="April 7, 2026")
+    args = parser.parse_args()
+    OUT = args.out.resolve()
+    source = args.source.resolve()
+    SOURCE_REL = source.relative_to(ROOT).as_posix()
+    draft_raw.SOURCE = source
+    draft_raw.OUT = OUT
+    draft_raw.ZONES_OUT = OUT / "zones"
+    draft_raw.DRAFT_DATE_RAW = args.draft_date
     run_raw_extraction()
 
     generated_paths: list[Path] = []

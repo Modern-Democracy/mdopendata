@@ -1,5 +1,5 @@
-const documentKey = "ctown-budget-2026-2027";
-const apiRoot = `/api/internal/pdf-inventory-review/documents/${documentKey}`;
+let documentKey = null;
+let apiRoot = "";
 const representativePages = [10, 18, 19, 20, 21, 22, 23, 24, 87, 88, 89, 90, 91, 92, 105, 110, 111, 112, 149, 151, 152, 153];
 const blockTypes = [
   ["title", "Title"], ["formatted_text", "Formatted Text"], ["table", "Table"],
@@ -877,8 +877,13 @@ async function selectPage(pageNumber) {
 
 async function initialize() {
   try {
-    const [documentsPayload, artifactPayload, pagesPayload] = await Promise.all([fetchJson("/api/internal/pdf-inventory-review/documents"), fetchJson(`${apiRoot}/artifacts`), fetchJson(`${apiRoot}/pages`)]);
-    state.document = documentsPayload.documents[0]; state.artifact = artifactPayload.artifact; state.pages = pagesPayload.pages; populateTableCellTypes();
+    const documentsPayload = await fetchJson("/api/internal/pdf-inventory-review/documents");
+    state.document = documentsPayload.documents?.[0] || null;
+    if (!state.document?.document_key) throw new Error("No staged PDF review document is configured.");
+    documentKey = state.document.document_key;
+    apiRoot = `/api/internal/pdf-inventory-review/documents/${encodeURIComponent(documentKey)}`;
+    const [artifactPayload, pagesPayload] = await Promise.all([fetchJson(`${apiRoot}/artifacts`), fetchJson(`${apiRoot}/pages`)]);
+    state.artifact = artifactPayload.artifact; state.pages = pagesPayload.pages; populateTableCellTypes();
     if (state.document.schema_version === 2) {
       fetchJson(`${apiRoot}/parity`).then((report) => {
         state.parity = report; renderParity();

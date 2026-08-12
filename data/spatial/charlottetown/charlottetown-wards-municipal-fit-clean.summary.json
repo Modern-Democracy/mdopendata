@@ -1,0 +1,123 @@
+{
+  "output": "data/spatial/charlottetown/charlottetown-wards-municipal-fit-clean.gpkg",
+  "source_pdf": "maps/Chtown_All_Wards.pdf",
+  "source_layer": "Map_Information_Tool_Specific_Calculation_Edit_ElectoralDistricts",
+  "source_crs": "EPSG:2961",
+  "target_crs": "EPSG:2954",
+  "municipal_boundary": "maps/pei/CHTWN_Municipal_Boundary.geojson",
+  "feature_counts": {
+    "voting_areas": 69,
+    "voting_districts": 10
+  },
+  "district_area_counts": {
+    "1": 7,
+    "2": 6,
+    "3": 7,
+    "4": 7,
+    "5": 7,
+    "6": 7,
+    "7": 7,
+    "8": 7,
+    "9": 7,
+    "10": 7
+  },
+  "geometry_qa": {
+    "voting_area_invalid_count": 0,
+    "voting_district_invalid_count": 0,
+    "voting_area_empty_count": 0,
+    "voting_district_empty_count": 0,
+    "area_union_m2": 43984029.91212751,
+    "municipal_boundary_m2": 44947400.85874355,
+    "union_boundary_difference_m2": 963370.9466159461,
+    "max_label_match_distance_m": 67.8116905943417,
+    "label_match_review_count_over_5m": 5
+  },
+  "district_hole_cleanup": {
+    "min_retained_hole_area_m2": 1000.0,
+    "per_district": {
+      "1": {
+        "removed_hole_count": 1,
+        "removed_hole_area_m2": 6.5418693194982944e-09,
+        "retained_hole_count": 0,
+        "retained_hole_area_m2": 0.0
+      },
+      "10": {
+        "removed_hole_count": 3,
+        "removed_hole_area_m2": 45.27288525256063,
+        "retained_hole_count": 0,
+        "retained_hole_area_m2": 0.0
+      },
+      "2": {
+        "removed_hole_count": 0,
+        "removed_hole_area_m2": 0.0,
+        "retained_hole_count": 1,
+        "retained_hole_area_m2": 86122.18807006616
+      },
+      "3": {
+        "removed_hole_count": 3,
+        "removed_hole_area_m2": 30.114905807750546,
+        "retained_hole_count": 0,
+        "retained_hole_area_m2": 0.0
+      },
+      "4": {
+        "removed_hole_count": 3,
+        "removed_hole_area_m2": 11.121419517827647,
+        "retained_hole_count": 0,
+        "retained_hole_area_m2": 0.0
+      },
+      "5": {
+        "removed_hole_count": 17,
+        "removed_hole_area_m2": 94.67199806568934,
+        "retained_hole_count": 1,
+        "retained_hole_area_m2": 6457.176759548906
+      },
+      "6": {
+        "removed_hole_count": 0,
+        "removed_hole_area_m2": 0.0,
+        "retained_hole_count": 0,
+        "retained_hole_area_m2": 0.0
+      },
+      "7": {
+        "removed_hole_count": 0,
+        "removed_hole_area_m2": 0.0,
+        "retained_hole_count": 0,
+        "retained_hole_area_m2": 0.0
+      },
+      "8": {
+        "removed_hole_count": 2,
+        "removed_hole_area_m2": 58.075457123005094,
+        "retained_hole_count": 0,
+        "retained_hole_area_m2": 0.0
+      },
+      "9": {
+        "removed_hole_count": 6,
+        "removed_hole_area_m2": 181.2327822107137,
+        "retained_hole_count": 0,
+        "retained_hole_area_m2": 0.0
+      }
+    },
+    "removed_hole_count": 35,
+    "removed_hole_area_m2": 420.4894479840888,
+    "retained_hole_count": 2,
+    "retained_hole_area_m2": 92579.36482961506
+  },
+  "fill_rgb_by_district": {
+    "1": "#97DBF2",
+    "2": "#CEFCB3",
+    "3": "#FCB6EA",
+    "4": "#D2FCD9",
+    "5": "#FCC0C3",
+    "6": "#FCD2F0",
+    "7": "#CFE6FC",
+    "8": "#B3FCDA",
+    "9": "#D8C2FC",
+    "10": "#FCB6D2"
+  },
+  "notes": [
+    "The PDF is an Esri ArcMap vector export and was read through the GDAL PDF driver.",
+    "The 69 printed labels use district-area codes such as 1-1 and 10-7; the first component is the voting district and the second is the voting area.",
+    "Voting districts are dissolved from voting areas and both layers are clipped to maps/pei/CHTWN_Municipal_Boundary.geojson.",
+    "District interior rings below the configured area threshold are removed to clean source slivers; larger map-derived open-water holes are retained.",
+    "Small label-to-polygon distances occur where PDF text placement overlaps a shared boundary; source feature and match distance are retained for audit."
+  ]
+}

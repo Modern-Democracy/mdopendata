@@ -75,8 +75,12 @@ def repo_relpath(path: Path) -> str:
     return resolved.relative_to(root).as_posix()
 
 
-def schema_reference(output: Path) -> str:
-    schema = ROOT / "schema" / "json-schema" / "staged-pdf-artifacts.schema.json"
+def schema_reference(output: Path, schema_version: int) -> str:
+    schema = ROOT / "schema" / "json-schema" / (
+        "staged-pdf-artifacts-v2.schema.json"
+        if schema_version == 2
+        else "staged-pdf-artifacts.schema.json"
+    )
     return Path(os.path.relpath(schema, output)).as_posix()
 
 
@@ -303,6 +307,7 @@ def generate(
     render_dpi: int,
     thumbnail_dpi: int,
     minimum_embedded_word_count: int,
+    schema_version: int,
 ) -> tuple[dict[str, Any], str, str]:
     pdf = pdf.resolve()
     output = output.resolve()
@@ -314,6 +319,8 @@ def generate(
         raise ValueError("Render and thumbnail DPI must be at least 72")
     if minimum_embedded_word_count < 0:
         raise ValueError("Minimum embedded word count must not be negative")
+    if schema_version not in {1, 2}:
+        raise ValueError("Schema version must be 1 or 2")
 
     source_hash = sha256_path(pdf)
     tesseract = find_tesseract()
@@ -476,10 +483,10 @@ def generate(
                 )
 
             artifact = {
-                "$schema": schema_reference(output),
-                "schema_version": 1,
+                "$schema": schema_reference(output, schema_version),
+                "schema_version": schema_version,
                 "artifact_type": "source_evidence",
-                "artifact_key": f"{document_key}:source-evidence:v1",
+                "artifact_key": f"{document_key}:source-evidence:v{schema_version}",
                 "document_key": document_key,
                 "source_sha256": source_hash,
                 "generator": {
@@ -548,6 +555,7 @@ def main() -> int:
     parser.add_argument("--render-dpi", type=int, default=144)
     parser.add_argument("--thumbnail-dpi", type=int, default=72)
     parser.add_argument("--minimum-embedded-word-count", type=int, default=5)
+    parser.add_argument("--schema-version", type=int, choices=[1, 2], default=1)
     args = parser.parse_args()
 
     artifact, artifact_hash, output_state = generate(
@@ -561,6 +569,7 @@ def main() -> int:
         render_dpi=args.render_dpi,
         thumbnail_dpi=args.thumbnail_dpi,
         minimum_embedded_word_count=args.minimum_embedded_word_count,
+        schema_version=args.schema_version,
     )
     pages = artifact["pages"]
     ocr_pages = sum(page["ocr"]["status"] == "completed" for page in pages)

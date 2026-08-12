@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+import argparse
 from datetime import datetime
 from pathlib import Path
 
@@ -17,6 +18,11 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "docs" / "charlottetown" / "charlottetown-zoning-bylaw-draft_2026-04-09.pdf"
 OUT = ROOT / "data" / "zoning" / "charlottetown-draft"
 ZONES_OUT = OUT / "zones"
+DRAFT_DATE_RAW = "April 7, 2026"
+
+
+def source_document_path() -> str:
+    return SOURCE.relative_to(ROOT).as_posix()
 
 APPROVED_HIERARCHY_EXAMPLES = [
     "21(e)",
@@ -811,9 +817,9 @@ def build_supporting_part_doc(reader: PdfReader, part: dict) -> dict:
         "document_metadata": {
             "jurisdiction": "City of Charlottetown",
             "bylaw_name": "Draft Zoning & Development Bylaw",
-            "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+            "source_document_path": source_document_path(),
             "document_type": part["document_type"],
-            "draft_date_raw": "April 7, 2026",
+            "draft_date_raw": DRAFT_DATE_RAW,
         },
         "source_section": source_section_for_part(part),
         "normalization_policy": {
@@ -873,9 +879,9 @@ def build_definitions_doc(reader: PdfReader) -> dict:
         "document_metadata": {
             "jurisdiction": "City of Charlottetown",
             "bylaw_name": "Draft Zoning & Development Bylaw",
-            "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+            "source_document_path": source_document_path(),
             "document_type": "definitions",
-            "draft_date_raw": "April 7, 2026",
+            "draft_date_raw": DRAFT_DATE_RAW,
         },
         "source_section": {
             "section_range_raw": "PART 30",
@@ -907,10 +913,10 @@ def build_schedule_doc(reader: PdfReader, schedule: dict) -> dict:
         "document_metadata": {
             "jurisdiction": "City of Charlottetown",
             "bylaw_name": "Draft Zoning & Development Bylaw",
-            "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+            "source_document_path": source_document_path(),
             "document_type": "schedule",
             "schedule_label_raw": schedule["label"],
-            "draft_date_raw": "April 7, 2026",
+            "draft_date_raw": DRAFT_DATE_RAW,
         },
         "source_section": {
             "section_label_raw": schedule["label"],
@@ -944,7 +950,7 @@ def build_maps_doc() -> dict:
         )
     return {
         "document_name": "Draft Zoning & Development Bylaw",
-        "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+        "source_document_path": source_document_path(),
         "references": references,
     }
 
@@ -1019,12 +1025,12 @@ def build_zone_doc(reader: PdfReader, zone: dict, next_bylaw_start: int | None) 
         "document_metadata": {
             "jurisdiction": "City of Charlottetown",
             "bylaw_name": "Draft Zoning & Development Bylaw",
-            "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+            "source_document_path": source_document_path(),
             "zone_code": zone["code"],
             "zone_name": zone["name"],
             "part_label_raw": f"PART {zone['part']}",
             "chapter_heading_raw": f"PART {zone['part']} {zone['code']} - {zone['name']}",
-            "draft_date_raw": "April 7, 2026",
+            "draft_date_raw": DRAFT_DATE_RAW,
         },
         "normalization_policy": {
             "clause_labels_preserved_raw": True,
@@ -1044,9 +1050,9 @@ def build_zone_doc(reader: PdfReader, zone: dict, next_bylaw_start: int | None) 
 def write_readme(manifest: dict) -> None:
     readme = f"""# Charlottetown Draft Zoning & Development Bylaw extraction
 
-Source: `docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf`.
+Source: `{source_document_path()}`.
 
-This folder contains a non-normalized source extraction for the City of Charlottetown draft Zoning & Development Bylaw dated April 7, 2026. The extraction is intended for a later normalization pass. It preserves raw provision labels, raw legal text, citations, and review issues.
+This folder contains a non-normalized source extraction for the City of Charlottetown draft Zoning & Development Bylaw dated {DRAFT_DATE_RAW}. The extraction is intended for a later normalization pass. It preserves raw provision labels, raw legal text, citations, and review issues.
 
 ## Organization
 
@@ -1100,7 +1106,17 @@ QA checks recommended before normalization:
     (OUT / "extraction-notes.md").write_text(notes, encoding="utf-8")
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
+    global SOURCE, OUT, ZONES_OUT, DRAFT_DATE_RAW
+    parser = argparse.ArgumentParser(description="Extract Charlottetown draft zoning bylaw JSON.")
+    parser.add_argument("--source", type=Path, default=SOURCE)
+    parser.add_argument("--out", type=Path, default=OUT)
+    parser.add_argument("--draft-date", default=DRAFT_DATE_RAW)
+    args = parser.parse_args(argv)
+    SOURCE = args.source.resolve()
+    OUT = args.out.resolve()
+    ZONES_OUT = OUT / "zones"
+    DRAFT_DATE_RAW = args.draft_date
     reader = PdfReader(str(SOURCE))
     ZONES_OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "schedules").mkdir(parents=True, exist_ok=True)
@@ -1182,12 +1198,12 @@ def main() -> None:
     (OUT / "maps.json").write_text(json.dumps(build_maps_doc(), indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
     manifest = {
-        "source_document_path": "docs/charlottetown/charlottetown-zoning-bylaw-draft_2026-04-09.pdf",
+        "source_document_path": source_document_path(),
         "extracted_at_local": datetime.now().replace(microsecond=0).isoformat(),
         "extractor": "scripts/extract-charlottetown-draft-zoning-bylaw.py",
         "bylaw_name": "Draft Zoning & Development Bylaw",
         "jurisdiction": "City of Charlottetown",
-        "draft_date_raw": "April 7, 2026",
+        "draft_date_raw": DRAFT_DATE_RAW,
         "source_page_count": len(reader.pages),
         "zone_count": len(zone_entries),
         "zones": zone_entries,

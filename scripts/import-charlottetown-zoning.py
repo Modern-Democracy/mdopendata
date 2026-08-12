@@ -126,7 +126,7 @@ def citations_of(value: dict[str, Any]) -> dict[str, Any]:
 def document_family(root: Path) -> str:
     if root == CURRENT_ROOT:
         return "current"
-    if root == DRAFT_ROOT:
+    if root == DRAFT_ROOT or root.name.startswith("charlottetown-draft"):
         return "draft"
     raise ValueError(f"unsupported source root: {root}")
 
@@ -167,7 +167,7 @@ def load_json(path: Path) -> dict[str, Any]:
     return payload
 
 
-def validate_payload(path: Path, payload: dict[str, Any]) -> tuple[int, int]:
+def validate_payload(path: Path, payload: dict[str, Any], allow_review: bool = False) -> tuple[int, int]:
     raw_keys = set((payload.get("raw_data") or {}).keys())
     structured_keys = set((payload.get("structured_data") or {}).keys())
     unknown_raw = raw_keys - ALLOWED_RAW
@@ -178,7 +178,7 @@ def validate_payload(path: Path, payload: dict[str, Any]) -> tuple[int, int]:
         )
     review_flags = payload.get("review_flags") or []
     needs_review = count_needs_review(payload)
-    if review_flags or needs_review:
+    if (review_flags or needs_review) and not allow_review:
         raise ValueError(
             f"{relpath(path)} has non-empty review_flags or confidence needs_review values"
         )
@@ -1008,7 +1008,7 @@ def finish_batch(conn: psycopg.Connection, batch_id: int, status: str, diagnosti
         )
 
 
-def load_root(root: Path, dry_run: bool) -> dict[str, Any]:
+def load_root(root: Path, dry_run: bool, allow_review: bool = False) -> dict[str, Any]:
     family = document_family(root)
     manifest_path = root / "source-manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else None
@@ -1027,7 +1027,7 @@ def load_root(root: Path, dry_run: bool) -> dict[str, Any]:
     doc_revision_key = f"{family}|{revision_label(root, manifest)}"
     for path in paths:
         payload = load_json(path)
-        review_count, confidence_count = validate_payload(path, payload)
+        review_count, confidence_count = validate_payload(path, payload, allow_review=allow_review)
         diagnostics["review_flags"] += review_count
         diagnostics["needs_review_confidence"] += confidence_count
         records = collect_records(path, payload, family, doc_revision_key)
@@ -1064,13 +1064,13 @@ def load_root(root: Path, dry_run: bool) -> dict[str, Any]:
                 id_maps.setdefault(record.table, {})[record.natural_key] = new_id
                 insert_event(conn, batch_id, record, status, prior_hash, new_id)
 
-            mark_removed_records(conn, batch_id, family, seen_keys)
+            mark_removed_records(conn, batch_id, doc_revision_key, seen_keys)
             diagnostics["batch_id"] = batch_id
             finish_batch(conn, batch_id, "completed", diagnostics)
     return diagnostics
 
 
-def mark_removed_records(conn: psycopg.Connection, batch_id: int, family: str, seen_keys: set[str]) -> None:
+def mark_removed_records(conn: psycopg.Connection, batch_id: int, doc_revision_key: str, seen_keys: set[str]) -> None:
     tables = [
         "source_file",
         "bylaw_part",
@@ -1093,7 +1093,7 @@ def mark_removed_records(conn: psycopg.Connection, batch_id: int, family: str, s
                 FROM zoning.{table}
                 WHERE is_active AND natural_key LIKE %s
                 """,
-                (f"{family}|%",),
+                (f"{doc_revision_key}|%",),
             )
             for record_id, natural_key, hash_value in cur.fetchall():
                 if natural_key in seen_keys:
@@ -1113,6 +1113,17 @@ def mark_removed_records(conn: psycopg.Connection, batch_id: int, family: str, s
 def main() -> int:
     parser = argparse.ArgumentParser(description="Import Charlottetown current and draft zoning JSON into zoning schema.")
     parser.add_argument("--family", choices=("current", "draft", "both"), default="both")
+    parser.add_argument(
+        "--draft-root",
+        type=Path,
+        default=DRAFT_ROOT,
+        help="Draft normalized JSON root. The root is imported as a separate draft document revision.",
+    )
+    parser.add_argument(
+        "--allow-review",
+        action="store_true",
+        help="Import records that retain source review_flags or needs_review confidence values.",
+    )
     parser.add_argument("--dry-run", action="store_true", help="Validate and count records without database writes.")
     args = parser.parse_args()
 
@@ -1120,10 +1131,10 @@ def main() -> int:
     if args.family in ("current", "both"):
         roots.append(CURRENT_ROOT)
     if args.family in ("draft", "both"):
-        roots.append(DRAFT_ROOT)
+        roots.append(args.draft_root.resolve())
 
     try:
-        summaries = {document_family(root): load_root(root, args.dry_run) for root in roots}
+        summaries = {document_family(root): load_root(root, args.dry_run, args.allow_review) for root in roots}
     except Exception as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1

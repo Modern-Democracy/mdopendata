@@ -194,6 +194,7 @@ function MapView({ pid, parcel, layers, onLayerCounts, onStatus }) {
   const selectedLayerRef = useRef(null);
   const currentLayerRef = useRef(null);
   const draftLayerRef = useRef(null);
+  const draftOriginalLayerRef = useRef(null);
   const buildingsLayerRef = useRef(null);
   const parcelLayerRef = useRef(null);
   const overlayGroupRef = useRef(null);
@@ -258,16 +259,18 @@ function MapView({ pid, parcel, layers, onLayerCounts, onStatus }) {
         if (layers.buildings) requests.push(['buildings', fetch(`/api/buildings/osm.geojson?bbox=${bbox}&limit=2500`).then((r) => r.json())]);
         if (layers.current) requests.push(['current', fetch(`/api/zoning/current.geojson?bbox=${bbox}&limit=1000`).then((r) => r.json())]);
         if (layers.draft) requests.push(['draft', fetch(`/api/zoning/draft.geojson?bbox=${bbox}&limit=1000`).then((r) => r.json())]);
+        if (layers.draftOriginal) requests.push(['draftOriginal', fetch(`/api/zoning/draft-original.geojson?bbox=${bbox}&limit=1000`).then((r) => r.json())]);
         if (layers.parcels) requests.push(['parcels', fetch(`/api/parcels.geojson?bbox=${bbox}&limit=1500`).then((r) => r.json())]);
         const results = await Promise.all(requests.map(async ([key, promise]) => [key, await promise]));
         if (cancelled) return;
 
         if (currentLayerRef.current) currentLayerRef.current.remove();
         if (draftLayerRef.current) draftLayerRef.current.remove();
+        if (draftOriginalLayerRef.current) draftOriginalLayerRef.current.remove();
         if (buildingsLayerRef.current) buildingsLayerRef.current.remove();
         if (parcelLayerRef.current) parcelLayerRef.current.remove();
 
-        const counts = { current: 0, draft: 0, buildings: 0, parcels: 0 };
+        const counts = { current: 0, draft: 0, draftOriginal: 0, buildings: 0, parcels: 0 };
         for (const [key, geojson] of results) {
           counts[key] = geojson.features?.length || 0;
           if (key === 'buildings') {
@@ -288,6 +291,12 @@ function MapView({ pid, parcel, layers, onLayerCounts, onStatus }) {
               style: (feature) => polygonStyle(zoneColor(feature.properties?.zoneCode), 1.4, 0.16),
             }).addTo(map);
           }
+          if (key === 'draftOriginal') {
+            draftOriginalLayerRef.current = L.geoJSON(geojson, {
+              pane: 'zonesPane',
+              style: (feature) => polygonStyle(zoneColor(feature.properties?.zoneCode), 1.1, 0.1),
+            }).addTo(map);
+          }
           if (key === 'parcels') {
             parcelLayerRef.current = L.geoJSON(geojson, {
               style: { color: 'rgba(26,22,18,0.35)', weight: 0.6, fillOpacity: 0 },
@@ -298,7 +307,7 @@ function MapView({ pid, parcel, layers, onLayerCounts, onStatus }) {
           selectedLayerRef.current.bringToFront();
         }
         onLayerCounts(counts);
-        onStatus(`Loaded ${counts.current + counts.draft + counts.buildings + counts.parcels} visible features.`);
+        onStatus(`Loaded ${counts.current + counts.draft + counts.draftOriginal + counts.buildings + counts.parcels} visible features.`);
       } catch (error) {
         if (!cancelled) {
           onStatus(error.message || 'Map layer loading failed.');
@@ -317,7 +326,7 @@ function MapView({ pid, parcel, layers, onLayerCounts, onStatus }) {
       window.clearTimeout(timer);
       map.off('moveend zoomend', scheduleLoad);
     };
-  }, [layers.current, layers.draft, layers.buildings, layers.parcels]);
+  }, [layers.current, layers.draft, layers.draftOriginal, layers.buildings, layers.parcels]);
 
   return (
     <div className="map-canvas">
@@ -327,7 +336,7 @@ function MapView({ pid, parcel, layers, onLayerCounts, onStatus }) {
         <input value={pid || ''} readOnly aria-label="Selected PID" />
       </div>
       <div className="legend">
-        <h4>Draft zoning</h4>
+        <h4>Updated draft zoning</h4>
         {DRAFT_ZONE_LEGEND.map(([code, label]) => (
           <div className="row" key={code}>
             <span className="sw" style={{background: zoneColor(code)}}></span>
@@ -356,7 +365,7 @@ function SelectedParcel({ pid, parcel }) {
         <span className="zchip" style={{background: zoneColor(current?.code)}}>{current?.code || 'Current pending'}</span>
         <span className="zchip" style={{background: zoneColor(draft?.code)}}>{draft?.code || 'Draft pending'}</span>
         <div className="zone-line">Current: {current?.name || current?.code || 'pending'}</div>
-        <div className="zone-line">Draft: {draft?.name || draft?.code || 'pending'}</div>
+        <div className="zone-line">Updated draft: {draft?.name || draft?.code || 'pending'}</div>
         <div className="mini-rules">
           <div className="k">Resolution</div><div className="v">{parcel.resolution?.status || 'pending'}</div>
           <div className="k">Current overlap</div><div className="v">{formatArea(current?.overlapAreaM2)}</div>
@@ -380,8 +389,8 @@ function App() {
   const pid = params.get('pid') || '';
   const [parcel, setParcel] = useState(null);
   const [status, setStatus] = useState(pid ? 'Loading selected parcel.' : 'No selected parcel.');
-  const [counts, setCounts] = useState({ current: 0, draft: 0, buildings: 0, parcels: 0 });
-  const [layers, setLayers] = useState({ current: true, draft: true, buildings: true, parcels: true });
+  const [counts, setCounts] = useState({ current: 0, draft: 0, draftOriginal: 0, buildings: 0, parcels: 0 });
+  const [layers, setLayers] = useState({ current: true, draft: true, draftOriginal: false, buildings: true, parcels: true });
 
   useEffect(() => { lucide.createIcons(); });
 
@@ -416,7 +425,8 @@ function App() {
         <aside className="map-panel">
           <h3 className="panel-title">Layers</h3>
           <LayerToggle checked={layers.current} color="var(--brick)" name="Current zoning" count={counts.current} onChange={(value)=>setLayers({...layers, current:value})} />
-          <LayerToggle checked={layers.draft} color="var(--ochre)" name="Draft zoning" count={counts.draft} onChange={(value)=>setLayers({...layers, draft:value})} />
+          <LayerToggle checked={layers.draft} color="var(--ochre)" name="Updated draft zoning" count={counts.draft} onChange={(value)=>setLayers({...layers, draft:value})} />
+          <LayerToggle checked={layers.draftOriginal} color="#9c8c72" name="Original draft zoning" count={counts.draftOriginal} onChange={(value)=>setLayers({...layers, draftOriginal:value})} />
           <LayerToggle checked={layers.buildings} color="#d8c3a2" name="Buildings" count={counts.buildings} onChange={(value)=>setLayers({...layers, buildings:value})} />
           <LayerToggle checked={layers.parcels} color="var(--paper-2)" name="Parcel outlines" count={counts.parcels} onChange={(value)=>setLayers({...layers, parcels:value})} />
 
@@ -427,7 +437,7 @@ function App() {
           <div className="source-list">
             <div className="item"><div className="label">Parcel</div><div>{parcel?.source?.parcelTable || 'zoning.v_charlottetown_parcel_map'}</div></div>
             <div className="item"><div className="label">Current zoning</div><div>{parcel?.source?.currentZoningTable || 'zoning.v_charlottetown_current_zoning_boundaries'}</div></div>
-            <div className="item"><div className="label">Draft zoning</div><div>{parcel?.source?.draftZoningTable || 'zoning.v_charlottetown_draft_zoning_boundaries'}</div></div>
+            <div className="item"><div className="label">Updated draft zoning</div><div>{parcel?.source?.draftZoningTable || 'zoning.v_charlottetown_draft_zoning_boundaries_update'}</div></div>
             <div className="item"><div className="label">Buildings</div><div>zoning.v_charlottetown_buildings</div></div>
           </div>
         </aside>

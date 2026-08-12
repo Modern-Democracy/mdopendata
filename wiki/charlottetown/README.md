@@ -3,7 +3,7 @@ type: project
 tags:
   - charlottetown
   - wiki
-updated: 2026-04-28
+updated: 2026-08-05
 ---
 
 This wiki is the LLM-maintained working knowledge layer for the Charlottetown current and draft zoning workstream. It is documentation-only and does not replace the source PDFs, extracted JSON, maps, spatial files, plans, schemas, scripts, or database imports.

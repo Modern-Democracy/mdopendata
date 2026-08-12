@@ -80,7 +80,8 @@
     <aside class="map-panel">
       <h3 class="panel-title">Layers</h3>
       <label class="layer"><input type="checkbox" checked id="l-current"><span class="sw" style="background: var(--brick)"></span><span class="name">Current zoning</span><span class="count" id="c-current">0</span></label>
-      <label class="layer"><input type="checkbox" checked id="l-draft"><span class="sw" style="background: var(--ochre)"></span><span class="name">Draft zoning</span><span class="count" id="c-draft">0</span></label>
+      <label class="layer"><input type="checkbox" checked id="l-draft"><span class="sw" style="background: var(--ochre)"></span><span class="name">Updated draft zoning</span><span class="count" id="c-draft">0</span></label>
+      <label class="layer"><input type="checkbox" id="l-draft-original"><span class="sw" style="background: #9c8c72"></span><span class="name">Original draft zoning</span><span class="count" id="c-draft-original">0</span></label>
       <label class="layer"><input type="checkbox" checked id="l-buildings"><span class="sw" style="background: #d8c3a2"></span><span class="name">Buildings</span><span class="count" id="c-buildings">0</span></label>
       <label class="layer"><input type="checkbox" checked id="l-parcels"><span class="sw" style="background: var(--paper-2); border-color: var(--ink-3)"></span><span class="name">Parcel outlines</span><span class="count" id="c-parcels">0</span></label>
 
@@ -261,10 +262,11 @@ const DRAFT_ZONE_LEGEND = [
 ];
 
 const state = {
-  layers: { current: true, draft: true, buildings: true, parcels: true },
+  layers: { current: true, draft: true, draftOriginal: false, buildings: true, parcels: true },
   filters: { currentZone: '', draftZone: '' },
   currentLayer: null,
   draftLayer: null,
+  draftOriginalLayer: null,
   buildingsLayer: null,
   parcelLayer: null,
   selectedLayer: null,
@@ -314,9 +316,9 @@ function layerMode() {
 
 function layerLimit(key) {
   if (layerMode() === 'detail') {
-    return { buildings: 2500, current: 1000, draft: 1000, parcels: 1500 }[key];
+    return { buildings: 2500, current: 1000, draft: 1000, draftOriginal: 1000, parcels: 1500 }[key];
   }
-  return { buildings: 50000, current: 50000, draft: 50000, parcels: 50000 }[key];
+  return { buildings: 50000, current: 50000, draft: 50000, draftOriginal: 50000, parcels: 50000 }[key];
 }
 
 function filterParams() {
@@ -472,6 +474,7 @@ async function loadViewport() {
   if (state.layers.buildings) requests.push(['buildings', fetchJson(`/api/buildings/osm.geojson?bbox=${bbox}&limit=${layerLimit('buildings')}&detail=${detail}`)]);
   if (state.layers.current) requests.push(['current', fetchJson(`/api/zoning/current.geojson?bbox=${bbox}&limit=${layerLimit('current')}&detail=${detail}${zoneFilterParam(state.filters.currentZone)}`)]);
   if (state.layers.draft) requests.push(['draft', fetchJson(`/api/zoning/draft.geojson?bbox=${bbox}&limit=${layerLimit('draft')}&detail=${detail}${zoneFilterParam(state.filters.draftZone)}`)]);
+  if (state.layers.draftOriginal) requests.push(['draft-original', fetchJson(`/api/zoning/draft-original.geojson?bbox=${bbox}&limit=${layerLimit('draftOriginal')}&detail=${detail}${zoneFilterParam(state.filters.draftZone)}`)]);
   if (state.layers.parcels) requests.push(['parcels', fetchJson(`/api/parcels.geojson?bbox=${bbox}&limit=${layerLimit('parcels')}&detail=${detail}${parcelFilterSuffix}`)]);
 
   try {
@@ -480,10 +483,12 @@ async function loadViewport() {
 
     clearLayer('currentLayer');
     clearLayer('draftLayer');
+    clearLayer('draftOriginalLayer');
     clearLayer('buildingsLayer');
     clearLayer('parcelLayer');
     setCount('current', 0);
     setCount('draft', 0);
+    setCount('draft-original', 0);
     setCount('buildings', 0);
     setCount('parcels', 0);
 
@@ -508,6 +513,13 @@ async function loadViewport() {
         state.draftLayer = L.geoJSON(geojson, {
           pane: 'zonesPane',
           style: (feature) => draftPolygonStyle(zoneColor(feature.properties?.zoneCode)),
+          interactive: false,
+        }).addTo(map);
+      }
+      if (key === 'draft-original') {
+        state.draftOriginalLayer = L.geoJSON(geojson, {
+          pane: 'zonesPane',
+          style: (feature) => ({ ...draftPolygonStyle(zoneColor(feature.properties?.zoneCode)), fillOpacity: 0.32, color: '#6d5b43', weight: 1.1 }),
           interactive: false,
         }).addTo(map);
       }
@@ -539,6 +551,10 @@ document.getElementById('l-current').addEventListener('change', (event) => {
 });
 document.getElementById('l-draft').addEventListener('change', (event) => {
   state.layers.draft = event.target.checked;
+  scheduleLoad();
+});
+document.getElementById('l-draft-original').addEventListener('change', (event) => {
+  state.layers.draftOriginal = event.target.checked;
   scheduleLoad();
 });
 document.getElementById('l-buildings').addEventListener('change', (event) => {
